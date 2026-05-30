@@ -1,0 +1,1 @@
+powershell /c New-ItemProperty -Path HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\IEharden -n"am"e I"EH"arden -v"al"ue "0"

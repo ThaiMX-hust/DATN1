@@ -1,0 +1,1 @@
+findstr -S -I cpassword \\ComputerName\sysvol\ComputerName\p"olici"es\*.xml

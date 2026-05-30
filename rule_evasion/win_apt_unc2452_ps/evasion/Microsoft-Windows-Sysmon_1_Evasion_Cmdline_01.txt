@@ -1,0 +1,1 @@
+powershell -c "Invoke-WMIMethod -Path win32_process -name create -argumentlist 'rundll32 c:\windows\system32\shell32.dll Control_RunDLL'"

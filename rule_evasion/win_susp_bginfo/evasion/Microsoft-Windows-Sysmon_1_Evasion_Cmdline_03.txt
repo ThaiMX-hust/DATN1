@@ -1,0 +1,1 @@
+"C:\Users\Administrator\BGInfo.exe" "C:\Users\Administrator\bginfo.bgi" -NOLICPROMPT -POPUP

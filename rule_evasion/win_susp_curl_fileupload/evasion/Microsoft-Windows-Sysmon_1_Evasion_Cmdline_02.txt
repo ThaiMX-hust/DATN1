@@ -1,0 +1,1 @@
+curl.exe -""F file=C:\\upload\\this\\file.txt http://remote/server"

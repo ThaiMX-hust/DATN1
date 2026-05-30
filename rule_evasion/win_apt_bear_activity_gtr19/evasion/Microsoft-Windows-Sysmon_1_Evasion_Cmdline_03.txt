@@ -1,0 +1,1 @@
+C:\Program Files\AdExplorer\adexplorer.exe /snapshot "" c:\users\sigma\test.snp

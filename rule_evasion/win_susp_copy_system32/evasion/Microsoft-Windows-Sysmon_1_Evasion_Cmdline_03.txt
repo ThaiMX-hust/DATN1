@@ -1,0 +1,1 @@
+cmd.exe /c xcopy C:\Windows\S""ystem32\certutil.exe C:\

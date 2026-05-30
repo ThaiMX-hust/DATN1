@@ -1,0 +1,1 @@
+powershell /C Cl"ear"-EventLog System

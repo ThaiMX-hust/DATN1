@@ -1,0 +1,1 @@
+reg.exe "add" HKLM\SYSTEM\CurrentControlSet\Ser"vice"s\VSS\D"ia"g\Volsnap /ve /f /d Disabled

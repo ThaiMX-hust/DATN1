@@ -1,0 +1,1 @@
+rundll32 C:\Users\user\AppData\myLib.dll, MyStart

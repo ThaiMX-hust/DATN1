@@ -1,0 +1,1 @@
+wmic "path" "AntiVirusProduct" "get" /format:list

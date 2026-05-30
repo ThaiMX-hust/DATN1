@@ -1,0 +1,1 @@
+powershell.exe /noP -sta /w 1 -enc C0D3D

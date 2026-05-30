@@ -1,0 +1,1 @@
+C:\Program Files\AdFind.exe -b DC=Contoso,DC=com -f "object"category=person" displayName -sl

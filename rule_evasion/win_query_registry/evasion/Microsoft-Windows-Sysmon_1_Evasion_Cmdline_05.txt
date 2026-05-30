@@ -1,0 +1,1 @@
+reg s"av"e HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell"Service"ObjectDelayLoad ssodl.reg

@@ -1,0 +1,1 @@
+r"e"g add "HKCU\Software\Microsoft\Windows\CurrentVersion\"Control Panel"\CPLs" /v spotless /d "C:\some\other\malicious\lib.cpl" /f

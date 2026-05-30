@@ -1,0 +1,1 @@
+fsutil file createnew C:\Windows\Sys"tem32"\Tasks\anothernewfile 1000

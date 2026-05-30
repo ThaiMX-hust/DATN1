@@ -1,0 +1,1 @@
+reg add HKLM\softw"are\Micros"oft\Windows\CurrentVersion\Ru"nServicesOn"ce

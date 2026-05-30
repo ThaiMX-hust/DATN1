@@ -1,0 +1,1 @@
+C:\Windows\System32\certutil.exe -verify""ctl -f -split http://7-zip.org/a/7z1604-x64.exe 7zip.exe

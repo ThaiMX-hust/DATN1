@@ -1,0 +1,1 @@
+powershell.exe -C [System.Text.Encoding]::Unicode.GetString([Convert]::From"Base"64"St"ring('Y21k')))

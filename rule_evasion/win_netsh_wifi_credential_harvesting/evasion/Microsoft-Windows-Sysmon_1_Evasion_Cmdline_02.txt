@@ -1,0 +1,1 @@
+net"sh" "w"lan show profile name=WLAN-XYZ432 key="clear"

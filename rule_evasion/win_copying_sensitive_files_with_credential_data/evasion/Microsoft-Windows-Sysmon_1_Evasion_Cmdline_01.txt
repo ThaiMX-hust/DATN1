@@ -1,0 +1,1 @@
+esentutl.exe /"y" C:\Users\<user>\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.dat /v"s"srec V01 . /"d" c:\exports\webcachev01.dat

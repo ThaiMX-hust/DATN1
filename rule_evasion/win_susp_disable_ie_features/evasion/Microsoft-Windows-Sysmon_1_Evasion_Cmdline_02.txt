@@ -1,0 +1,1 @@
+powershell /c New-ItemProperty -Path HKLM\Software\Policies\Microsoft\Internet Explorer\Main!DEPOff  -n"am"e D"E"POff -va"l"ue "1"

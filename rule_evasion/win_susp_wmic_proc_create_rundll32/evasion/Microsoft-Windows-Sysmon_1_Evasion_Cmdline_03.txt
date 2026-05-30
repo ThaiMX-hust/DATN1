@@ -1,0 +1,1 @@
+wmic "process" "call" "create" "rundll32 C:\And\Another\Path\To\yetanother.dll", StartW

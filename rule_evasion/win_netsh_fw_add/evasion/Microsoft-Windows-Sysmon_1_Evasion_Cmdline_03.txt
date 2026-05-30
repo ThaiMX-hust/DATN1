@@ -1,0 +1,1 @@
+n"ets"h.exe advfirewall fi"rewa"ll   a"d"d rule action=allow protocol=TCP localport=4242 dir=in name=nicerule

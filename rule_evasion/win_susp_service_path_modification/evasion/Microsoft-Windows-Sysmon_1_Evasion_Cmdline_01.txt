@@ -1,0 +1,1 @@
+sc co"nfig" servicename binPath=powershell.exe

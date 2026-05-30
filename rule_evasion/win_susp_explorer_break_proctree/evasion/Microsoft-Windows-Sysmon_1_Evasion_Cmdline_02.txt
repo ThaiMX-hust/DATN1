@@ -1,0 +1,1 @@
+C:\Windows\expl"ore"r."exe" /r"oo"t, "C:\Windows\System32\notepad.exe"

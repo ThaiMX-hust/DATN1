@@ -1,0 +1,1 @@
+adfind -subnets -f (o"b"j"e"c"t"C"a"t"e"g"o"r"y=subnet)

@@ -1,0 +1,1 @@
+fsutil.exe usn cre"ate"jour""nal C:

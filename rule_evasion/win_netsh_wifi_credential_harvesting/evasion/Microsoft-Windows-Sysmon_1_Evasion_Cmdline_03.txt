@@ -1,0 +1,1 @@
+net"sh"   w"la"n    show  profile name=WLAN-0B1W4N key  =   c"le"ar

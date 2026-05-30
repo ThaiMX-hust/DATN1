@@ -1,0 +1,1 @@
+C:\Program Files\WinRAR\WinRAR.exe" a -"m"5 -r -inul -"hp"<drowssap> notmalicious.rar thisisfine.exe

@@ -1,0 +1,1 @@
+powershell -noni -nop -w 1 -enc SQBFAFgAIABjAGEAbABjAC4AZQB4AGUA

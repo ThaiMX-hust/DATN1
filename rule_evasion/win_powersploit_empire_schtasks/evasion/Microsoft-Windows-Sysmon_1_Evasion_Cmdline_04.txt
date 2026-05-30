@@ -1,0 +1,1 @@
+"C:\Windows\system32\schtasks.exe" /create -sc updater /tn updatertask -tr powershell.exe

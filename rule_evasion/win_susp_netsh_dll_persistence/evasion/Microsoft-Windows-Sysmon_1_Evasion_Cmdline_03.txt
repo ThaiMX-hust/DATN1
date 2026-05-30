@@ -1,0 +1,1 @@
+C:\Windows\System32\netsh.exe a"d"d h"elp"er C:\Users\username\sus.dll

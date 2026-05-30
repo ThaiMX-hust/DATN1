@@ -1,0 +1,1 @@
+wscript.exe C:\Dir\AnotherDir\myfile"."vbe

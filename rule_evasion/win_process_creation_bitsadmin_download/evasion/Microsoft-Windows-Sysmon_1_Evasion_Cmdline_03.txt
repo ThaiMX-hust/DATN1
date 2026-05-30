@@ -1,0 +1,1 @@
+cmd /c copy System32\bitsadmin.exe C:\Destination\bitsadmin.exe

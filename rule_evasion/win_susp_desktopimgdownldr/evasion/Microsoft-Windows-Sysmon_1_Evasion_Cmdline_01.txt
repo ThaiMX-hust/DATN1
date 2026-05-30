@@ -1,0 +1,1 @@
+set "SYSTEMROOT=C:\Windows\Temp" && cmd /c desktopimgdownldr.exe /lock""sc"reen"url:https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/C/Coronavirus/Verordnungen/CoronaImpfV_BAnz_AT_08.02.2021_V1.pdf /eventName:desktopimgdownldr

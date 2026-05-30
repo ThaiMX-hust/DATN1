@@ -1,0 +1,1 @@
+wevtutil s""et-l"o"g -"e":f"als"e Microsoft-Windows-WMI-Actitivy/Trace

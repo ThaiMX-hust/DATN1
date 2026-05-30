@@ -1,0 +1,1 @@
+C:\Users\vki\Appdata\Local\Discord\Update.exe /createShortcut C:\Path\To\File.exe -l Desktop

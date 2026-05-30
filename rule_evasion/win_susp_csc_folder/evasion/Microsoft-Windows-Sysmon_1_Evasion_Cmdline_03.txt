@@ -1,0 +1,1 @@
+csc /noconfig /fullpaths @"C:\Users\john\App"Data\Local\Temp\foo"

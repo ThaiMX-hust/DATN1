@@ -1,0 +1,1 @@
+powershell -executionPolicy bypass -encodedCommand JgAg > rs.txt

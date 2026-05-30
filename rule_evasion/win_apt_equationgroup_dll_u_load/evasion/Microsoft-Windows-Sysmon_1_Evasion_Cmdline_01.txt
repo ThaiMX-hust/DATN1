@@ -1,0 +1,1 @@
+"C:\Windows\System32\rundll32.exe" C:\Users\DefaultUser\AppData\SomeLib.dll, dll_u

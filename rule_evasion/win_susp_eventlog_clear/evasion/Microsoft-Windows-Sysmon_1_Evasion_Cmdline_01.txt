@@ -1,0 +1,1 @@
+wevtutil.exe cl"ear-l"og System

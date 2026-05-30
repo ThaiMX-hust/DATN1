@@ -1,0 +1,1 @@
+C:\Windows\System32\inetsrv\"APP"CMD.exe in"sta"ll m"odu"le /"name":ModuleName /image:C:\Path\To\image.dll /add:true

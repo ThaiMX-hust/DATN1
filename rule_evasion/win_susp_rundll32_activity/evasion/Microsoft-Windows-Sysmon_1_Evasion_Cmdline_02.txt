@@ -1,0 +1,1 @@
+C:\Windows\system32\rundll32.exe url.dll , OpenURLA file://c:\windows\system32\calc.exe

@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe" /"o" "C:\Windows\System32\ping.exe" /"cf" evilscript

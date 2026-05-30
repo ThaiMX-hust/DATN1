@@ -1,0 +1,1 @@
+fsutil f"ile" creat"ene"w C:\Windows\Sys"WOW"64\Tasks\newSysWOWfile 1000

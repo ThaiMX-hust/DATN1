@@ -1,0 +1,1 @@
+wmic /node:"" process  call  create  "rundll32.exe c:\windows\system32\shell32.dll, Control_RunDLL"

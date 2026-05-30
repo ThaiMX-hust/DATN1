@@ -1,0 +1,1 @@
+wmic "path" "FirewallProduct" "get" /format:list

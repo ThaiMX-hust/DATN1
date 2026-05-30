@@ -1,0 +1,1 @@
+cmd.exe /c taskkill.exe /im cmd.exe

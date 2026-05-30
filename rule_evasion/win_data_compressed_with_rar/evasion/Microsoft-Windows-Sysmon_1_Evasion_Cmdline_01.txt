@@ -1,0 +1,1 @@
+rar "a" C:\Temp\myarchive.rar C:\Users\Mal\Desktop\data

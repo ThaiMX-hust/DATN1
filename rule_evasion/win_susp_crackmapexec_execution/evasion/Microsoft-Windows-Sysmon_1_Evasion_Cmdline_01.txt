@@ -1,0 +1,1 @@
+powershell.exe -w 1 -nop -noni -exec bypass -C "echo foo"

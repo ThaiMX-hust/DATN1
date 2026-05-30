@@ -1,0 +1,1 @@
+APPCMD.exe install module /name:HTTPParser /image:C:\Windows\System32\inetsrv\HTTPParser.dll /add:true

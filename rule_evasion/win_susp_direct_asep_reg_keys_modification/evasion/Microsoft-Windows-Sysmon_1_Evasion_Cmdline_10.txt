@@ -1,0 +1,1 @@
+reg add HKLM\system\CurrentControlSet\Control\SafeB"oot\Alter"nateShell

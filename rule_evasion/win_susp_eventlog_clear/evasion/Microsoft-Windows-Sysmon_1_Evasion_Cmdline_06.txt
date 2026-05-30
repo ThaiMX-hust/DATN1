@@ -1,0 +1,1 @@
+powershell /C L"imi"t-Ev"ent"Log System -MaximumSize 64KB

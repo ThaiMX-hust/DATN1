@@ -1,0 +1,1 @@
+"C:\Windows\system32\schtasks.exe" -create /tn updatertask -sc onidle /tr powershell.exe

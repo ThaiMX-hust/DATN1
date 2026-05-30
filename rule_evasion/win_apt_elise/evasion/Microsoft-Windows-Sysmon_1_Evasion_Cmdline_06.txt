@@ -1,0 +1,1 @@
+"C:\Windows\system32\rundll32.exe" C:\Users\admin\AppData\Roaming\MICROS\~1\Windows\Caches\Nav""ShExt.dll,Setting

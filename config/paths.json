@@ -1,0 +1,12 @@
+{
+  "base_dir": "..",
+  "input_config": "input/test_case_sample.json",
+  "output_dir": "output/target_commandline_tests",
+  "rules_dir": "rules",
+  "zircolite": {
+    "path": "C:\\Tools\\Zircolite\\zircolite.py",
+    "python_exe":  "C:\\Tools\\Zircolite\\.venv\\Scripts\\python.exe",
+    "ruleset": "C:\\Tools\\Zircolite\\rules_sysmon.json",
+    "config": "C:\\Tools\\Zircolite\\config\\config.yaml"
+  }
+}

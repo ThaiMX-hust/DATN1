@@ -1,0 +1,1 @@
+C:\Program Files\Wireshark\tshark.exe --"inter"face "Local Area Connection* 7"

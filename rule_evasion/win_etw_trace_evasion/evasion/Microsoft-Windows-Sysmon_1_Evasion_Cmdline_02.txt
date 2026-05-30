@@ -1,0 +1,1 @@
+wevtutil c"le"ar-l""og Microsoft-Windows-WMI-Activity/Tr""ace

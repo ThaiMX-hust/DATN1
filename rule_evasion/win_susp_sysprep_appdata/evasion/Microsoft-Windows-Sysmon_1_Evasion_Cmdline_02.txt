@@ -1,0 +1,1 @@
+"sysprep.exe" C:\Users\admin\AppData\Local\Temp\gupdate.exe

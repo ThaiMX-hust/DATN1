@@ -1,0 +1,1 @@
+netsh.exe advf fi add rule acti=allow protoc=TCP localp=3389 dir=in name=RDP

@@ -1,0 +1,1 @@
+reg exp"or"t HKLM\Software\Microsoft\Windows\CurrentVersion\R"un"Once exp.reg

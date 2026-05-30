@@ -1,0 +1,12 @@
+# Python/cache files
+__pycache__/
+*.py[cod]
+
+# Local temporary files
+temp/
+
+# Output artifacts: commit only JSON and CSV results.
+output/**
+!output/**/
+!output/**/*.json
+!output/**/*.csv

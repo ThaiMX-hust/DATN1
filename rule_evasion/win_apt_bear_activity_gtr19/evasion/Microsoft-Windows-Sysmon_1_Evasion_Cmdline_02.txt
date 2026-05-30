@@ -1,0 +1,1 @@
+C:\Windows\System32\xcopy.exe /E /S /C /Q /H \client\"Default User"\  C:\Users\"Default User"\

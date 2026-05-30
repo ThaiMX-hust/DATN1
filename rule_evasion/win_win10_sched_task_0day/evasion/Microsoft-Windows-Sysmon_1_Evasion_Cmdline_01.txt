@@ -1,0 +1,1 @@
+schtasks /change /TN taskname /RP password /RU user

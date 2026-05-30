@@ -1,0 +1,1 @@
+certutil.exe  -f -encode C:\Users\Administrator\Downloads\a.tmp C:\Users\Administrator\Downloads\b.tmp

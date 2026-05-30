@@ -1,0 +1,1 @@
+adfind -h 172.16.0.2:389 -f "object"category=organizationalUnit

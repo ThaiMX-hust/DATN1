@@ -1,0 +1,1 @@
+C:\Windows\System32\powershell.exe "-noni" "-nop" "-w" 1 "-enc" JAB0ACAAPQAgACcAZABpAHIAJwA7AA0ACgAmACAAKAAnAEkAbgB2AG8AawBlACcAKwAnAC0ARQB4AHAAcgBlAHMAcwBpAG8AbgAnACkAIAAkAHQA

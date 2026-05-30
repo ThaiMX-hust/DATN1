@@ -1,0 +1,1 @@
+powershell.exe -NoP /NonI /W Hidden -Enc ENC0D3DC0MM4ND

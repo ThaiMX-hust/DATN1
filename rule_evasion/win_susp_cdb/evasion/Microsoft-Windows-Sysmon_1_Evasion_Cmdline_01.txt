@@ -1,0 +1,1 @@
+cdb /cf foo /o notepad.exe

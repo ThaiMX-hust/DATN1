@@ -1,0 +1,1 @@
+wmic "process" call create "rundll32 C:\PathTo\my.dll", StartW

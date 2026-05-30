@@ -1,0 +1,1 @@
+C:\Program Files\WinRAR\WinRAR.exe" a /"m5" /r /inul /"hp"<mylittlesecret> normal.rar justa.txt

@@ -1,0 +1,1 @@
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -c "New-ItemProperty -Path hkcu:\Software\Microsoft\Windows\CurrentVersion\'Internet Settings'\ZoneMap -name 'IEHarden' -Property DWORD -value 0 -Force"

@@ -1,0 +1,1 @@
+fsutil file cre"ate"new C:\Windows\System32\Tasks\newfile 1000

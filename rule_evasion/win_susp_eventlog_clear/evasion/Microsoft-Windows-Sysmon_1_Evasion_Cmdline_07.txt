@@ -1,0 +1,1 @@
+wmic nteventlog where filename="application" "cleareventlog"

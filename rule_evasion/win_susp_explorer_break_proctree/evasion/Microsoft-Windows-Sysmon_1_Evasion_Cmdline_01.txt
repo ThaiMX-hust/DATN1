@@ -1,0 +1,1 @@
+explorer root, "C:\Windows\System32\cmd.exe"

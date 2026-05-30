@@ -1,0 +1,1 @@
+powershell.exe -C [System.Text.Encoding]::Unicode.GetString([Convert]::F"rom"Base64"String"('Y21k')))

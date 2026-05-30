@@ -1,0 +1,1 @@
+cmd /c "mklink /d c:\tmp\vssstore \\?\GLOBALROOT\Device\Harddisk""VolumeShadowCopy1\"

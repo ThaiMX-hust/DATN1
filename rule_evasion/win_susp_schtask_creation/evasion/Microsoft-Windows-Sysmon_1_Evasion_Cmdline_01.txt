@@ -1,0 +1,1 @@
+schtasks -create /sc daily /tn <name> /tr cmd.exe

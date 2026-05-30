@@ -1,0 +1,1 @@
+c"m"d /c assoc .txt=txtfile

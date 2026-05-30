@@ -1,0 +1,1 @@
+netsh advfirewall firewall    add rule action=allow protocol=UDP localport=1337 dir=in name=rulename

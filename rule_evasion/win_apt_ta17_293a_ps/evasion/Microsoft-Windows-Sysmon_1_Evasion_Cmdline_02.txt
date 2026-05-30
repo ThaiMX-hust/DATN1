@@ -1,0 +1,1 @@
+ps.exe -accepteula \%ws -u %user% -p %pass% -s cmd /c netstat

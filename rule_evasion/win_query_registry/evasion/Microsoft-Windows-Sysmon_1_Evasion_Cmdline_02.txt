@@ -1,0 +1,1 @@
+reg s"av"e HKLM\Software\Microsoft\Windows\CurrentVer""sion\RunSer"vic"esOnce C:\Temp\regsave.txt

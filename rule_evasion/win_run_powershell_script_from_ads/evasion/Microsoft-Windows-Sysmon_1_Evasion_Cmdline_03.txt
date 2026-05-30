@@ -1,0 +1,1 @@
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -c "G""et-C""on""tent C:\BREACH\userbe""havio""r.log -S""tr""eam ''"

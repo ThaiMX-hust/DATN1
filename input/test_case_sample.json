@@ -1,0 +1,35 @@
+[
+  {
+    "test_id": "t1027_001",
+    "target_commandline": "powershell.exe -Command \"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\"",
+    "target_rule": "proc_creation_win_powershell_frombase64string",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "base64"
+  },
+  {
+    "test_id": "t1027_002",
+    "target_commandline": "powershell.exe -Command \"Write-Host ([char]65 + [char]66)\"",
+    "target_rule": "proc_creation_win_powershell_obfuscation_via_utf8",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "utf8"
+  },
+  {
+    "test_id": "t1027_003",
+    "target_commandline": "powershell.exe -Command \"Write-Host ([char] 0x41)\"",
+    "target_rule": "proc_creation_win_powershell_obfuscation_via_utf8",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "utf8"
+  },
+  {
+      "test_id":  "t1562.001_001",
+      "target_commandline":  "w\"mi\"c product where name=\"Antivirus\" call uninstall /nointeractive",
+      "target_rule":  "proc_creation_win_wmic_uninstall_security_products",
+      "technique_id":  "t1562.001",
+      "shell":  "cmd.exe",
+      "mutation":  "quote_insertion"
+  }
+
+]

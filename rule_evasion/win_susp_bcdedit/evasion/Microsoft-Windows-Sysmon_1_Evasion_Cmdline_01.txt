@@ -1,0 +1,1 @@
+bcdedit /del"ete" {5cb10d44-20ee-11ea-85c6-e6e1f64324aa}

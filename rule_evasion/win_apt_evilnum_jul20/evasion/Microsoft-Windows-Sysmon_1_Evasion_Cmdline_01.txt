@@ -1,0 +1,1 @@
+"C:\Windows\system32\regsvr32.exe" -s -i C:\Users\admin\AppData\Roaming\Microsoft\46593.ocx

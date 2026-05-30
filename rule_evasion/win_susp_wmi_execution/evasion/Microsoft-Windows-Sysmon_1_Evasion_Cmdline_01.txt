@@ -1,0 +1,1 @@
+wmic /node:<remote-ip> /user:<username> "process" "call" "create" "C:\Windows\Temp\Setup.exe <-n process name> <-l port >"
