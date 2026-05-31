@@ -1,6 +1,6 @@
 {
   "base_dir": "..",
-  "input_config": "input/test_case_sample.json",
+  "input_config": "input/cmdline_bypass_with_LLM.json",
   "output_dir": "output/target_commandline_tests",
   "rules_dir": "rules",
   "zircolite": {

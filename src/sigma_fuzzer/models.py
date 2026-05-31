@@ -19,6 +19,10 @@ SUMMARY_FIELDS = [
     "shell",
     "can_execute",
     "execution_status",
+    "launch_commandline",
+    "shell_wrapped",
+    "payload_observed",
+    "payload_validation_status",
     "execution_error",
     "evtx_path",
     "root_process_guid",
@@ -90,6 +94,10 @@ class ExecutionResult:
     stderr: str = ""
     status: str = "NOT_RUN"
     note: str = ""
+    launch_commandline: str = ""
+    shell_wrapped: bool = False
+    payload_observed: bool = False
+    payload_validation_status: str = ""
 
 
 

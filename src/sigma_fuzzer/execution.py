@@ -10,6 +10,30 @@ from datetime import datetime
 from .models import ExecutionResult, TargetCase
 
 
+ACCEPTED_NONZERO_PATTERNS = (
+    "the system cannot find the file specified",
+    "the system cannot find the path specified",
+    "cannot find path",
+    "could not find file",
+    "no such file or directory",
+    "file not found",
+    "path not found",
+)
+
+FAILED_COMMAND_PATTERNS = (
+    "is not recognized as an internal or external command",
+    "is not recognized as the name of a cmdlet",
+    "was not found",
+    "commandnotfoundexception",
+    "the syntax of the command is incorrect",
+    "parsererror",
+    "missing expression after",
+    "unexpected token",
+    "missing closing",
+    "incomplete string",
+)
+
+
 def build_shell_command(case: TargetCase) -> list[str]:
     """Build the shell invocation used to run one target case."""
     commandline = case.target_commandline
@@ -20,6 +44,43 @@ def build_shell_command(case: TargetCase) -> list[str]:
     if case.shell == "pwsh.exe":
         return ["pwsh.exe", "-NoProfile", "-Command", commandline]
     raise ValueError(f"Unsupported shell: {case.shell}")
+
+
+def execution_text(result: ExecutionResult) -> str:
+    """Return normalized process output used for execution classification."""
+    return "\n".join(part for part in (result.stdout, result.stderr, result.note) if part).lower()
+
+
+def has_any_pattern(text: str, patterns: tuple[str, ...]) -> bool:
+    """Return whether text contains any known classification pattern."""
+    return any(pattern in text for pattern in patterns)
+
+
+def command_execution_accepted(result: ExecutionResult) -> bool:
+    """Return whether a command execution is accepted for Sysmon collection."""
+    if not result.started:
+        return False
+    if result.timed_out:
+        return True
+    if result.exit_code == 0:
+        return True
+
+    text = execution_text(result)
+    if has_any_pattern(text, FAILED_COMMAND_PATTERNS):
+        return False
+    if has_any_pattern(text, ACCEPTED_NONZERO_PATTERNS):
+        return True
+    return True
+
+
+def command_execution_failure_reason(result: ExecutionResult) -> str:
+    """Return the reason a command execution is not accepted."""
+    if not result.started:
+        return result.note or "process was not started"
+    text = execution_text(result)
+    if has_any_pattern(text, FAILED_COMMAND_PATTERNS):
+        return "command failed before useful execution: missing binary or syntax error"
+    return "command execution was not accepted for Sysmon collection"
 
 
 def kill_process_tree(pid: int) -> str:

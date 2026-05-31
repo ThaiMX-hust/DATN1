@@ -49,7 +49,7 @@
   },
   {
     "test_id": "t1003.001_007",
-    "target_commandline": "C:\\Windows\\system32\\Werfault.exe -u -p 744 -ip 1112 -s 244 (Executed via PPID Spoofing)",
+    "target_commandline": "C:\\Windows\\system32\\Werfault.exe -u -p 744 -ip 1112 -s 244",
     "target_rule": "proc_creation_win_werfault_lsass_shtinkering",
     "technique_id": "t1003.001",
     "shell": "cmd.exe",

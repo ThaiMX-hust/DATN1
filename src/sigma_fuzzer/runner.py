@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .cases import group_by_technique, load_cases, select_cases, technique_dir_map
 from .detection import classify_results, run_zircolite_for_technique
-from .execution import execute_command
+from .execution import command_execution_accepted, command_execution_failure_reason, execute_command
 from .log_collection import collect_process_tree, export_evtx_by_process_tree, latest_sysmon_record_id
 from .models import CaseResult, RunnerConfig, SYSMON_EVENT_ID, SYSMON_LOG_NAME, TargetCase, ZircoliteRun
 from .reports import (
@@ -42,6 +42,11 @@ def run_case(case: TargetCase, evtx_path: Path, config: RunnerConfig) -> CaseRes
     result.execution = execute_command(case, timeout_seconds)
     if not result.execution.started:
         result.note = result.execution.note or "runner failed to launch executor"
+        result.zircolite_status = "NOT_EXECUTED"
+        result.final_status = "execution_failed"
+        return result
+    if not command_execution_accepted(result.execution):
+        result.note = command_execution_failure_reason(result.execution)
         result.zircolite_status = "NOT_EXECUTED"
         result.final_status = "execution_failed"
         return result
