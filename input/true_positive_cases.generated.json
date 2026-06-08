@@ -20568,54 +20568,6 @@
     "mutation": "true_positive"
   },
   {
-    "test_id": "unknown_128",
-    "target_commandline": "shutdown.exe -r -t 0",
-    "target_rule": "proc_creation_win_shutdown_execution",
-    "technique_id": "unknown",
-    "shell": "cmd.exe",
-    "mutation": "true_positive"
-  },
-  {
-    "test_id": "unknown_129",
-    "target_commandline": "shutdown.exe /r/f /t 0",
-    "target_rule": "proc_creation_win_shutdown_execution",
-    "technique_id": "unknown",
-    "shell": "cmd.exe",
-    "mutation": "true_positive"
-  },
-  {
-    "test_id": "unknown_130",
-    "target_commandline": "shutdown.exe /s",
-    "target_rule": "proc_creation_win_shutdown_execution",
-    "technique_id": "unknown",
-    "shell": "cmd.exe",
-    "mutation": "true_positive"
-  },
-  {
-    "test_id": "unknown_131",
-    "target_commandline": "logoff.exe",
-    "target_rule": "proc_creation_win_shutdown_logoff",
-    "technique_id": "unknown",
-    "shell": "cmd.exe",
-    "mutation": "true_positive"
-  },
-  {
-    "test_id": "unknown_132",
-    "target_commandline": "shutdown.exe \"/l\"",
-    "target_rule": "proc_creation_win_shutdown_logoff",
-    "technique_id": "unknown",
-    "shell": "cmd.exe",
-    "mutation": "true_positive"
-  },
-  {
-    "test_id": "unknown_133",
-    "target_commandline": "shutdown.exe -l",
-    "target_rule": "proc_creation_win_shutdown_logoff",
-    "technique_id": "unknown",
-    "shell": "cmd.exe",
-    "mutation": "true_positive"
-  },
-  {
     "test_id": "t1123_006",
     "target_commandline": "SoundRecorder.exe \"/FILE\" C:\\Users\\Public\\Music\\capture.out",
     "target_rule": "proc_creation_win_soundrecorder_audio_capture",
