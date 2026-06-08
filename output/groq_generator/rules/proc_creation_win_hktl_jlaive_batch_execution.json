@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c script.bat && xcopy powershell.exe script.bat.exe*",
+    "explanation": "This command matches the original Sigma rule's detection criteria by using xcopy to copy powershell.exe as a .bat.exe file, following a batch script execution. It is a direct match for selection1."
+  },
+  {
+    "output": "cmd.exe /c script.bat && xcopy pwsh.exe script.bat.exe*",
+    "explanation": "This command uses 'pwsh.exe' instead of 'powershell.exe' to match the second selection condition (selection2) in the Sigma rule. The rest of the command structure remains unchanged."
+  },
+  {
+    "output": "cmd.exe /c script.cmd && attrib +s +h script.cmd.exe && xcopy powershell.exe script.cmd.exe*",
+    "explanation": "This command includes the 'attrib' command with '+s' and '+h' flags to match selection3 in the Sigma rule. It also uses 'xcopy' to copy 'powershell.exe' as a .cmd.exe file, fulfilling multiple detection conditions."
+  },
+  {
+    "output": "cmd.exe /c script.bat && copy powershell.exe script.bat.exe",
+    "explanation": "This command matches the original Sigma rule's detection criteria by using 'copy' instead of 'xcopy' to copy powershell.exe as a .bat.exe file, following a batch script execution. It is a direct match for selection1."
+  }
+]

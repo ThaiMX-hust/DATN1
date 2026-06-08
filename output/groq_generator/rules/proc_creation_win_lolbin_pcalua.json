@@ -1,0 +1,6 @@
+[
+  {
+    "output": "pcalua.exe -a calc.exe",
+    "explanation": "This is a direct match to the Sigma rule and serves as a baseline true positive."
+  }
+]

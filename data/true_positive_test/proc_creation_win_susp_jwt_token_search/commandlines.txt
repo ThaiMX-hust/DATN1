@@ -1,0 +1,2 @@
+cmd.exe /c findstr /S /M /I "eyJ^0eX" %LOCALAPPDATA%\*.log
+powershell.exe -Command "Select-String -Path $env:APPDATA\* -Pattern ('eyJ0'+'eXAiOi')"

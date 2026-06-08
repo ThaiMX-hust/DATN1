@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \\\"{1}{0}\\\" -f 'st','Te' & %LAUNCH%\"",
+    "explanation": "This command uses string formatting with {0} and {1} and includes &&set and cmd /c, which aligns with the Sigma rule's detection criteria. It is a true positive and not a bypass."
+  },
+  {
+    "output": "cmd.exe /c \"set VAR=Invoke-Expression 'Write-Host Safe' &&set RUN=powershell.exe -c (\\'Te\\'+\\'st\\') && %RUN%\"",
+    "explanation": "This command includes &&set, string concatenation, and cmd /c, matching the Sigma rule's detection criteria. It is also a true positive and not a bypass."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

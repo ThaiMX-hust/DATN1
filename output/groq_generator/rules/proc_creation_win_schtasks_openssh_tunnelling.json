@@ -1,0 +1,10 @@
+[
+  {
+    "output": "schtasks.exe /CREATE /SC ONLOGON /TN \"SSHD\" /TR \"sshd.exe -D\" /F",
+    "explanation": "This is the original true positive command that matches the Sigma rule. It creates a scheduled task using schtasks.exe that executes sshd.exe with the -D flag, which aligns with the detection criteria."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated. The Sigma rule is designed to detect specific command-line arguments and executable names that are essential to the malicious behavior. Altering the command line using safe mutation techniques (e.g., reordering, substitution, or encoding) would not avoid detection without breaking the intended malicious functionality."
+  }
+]

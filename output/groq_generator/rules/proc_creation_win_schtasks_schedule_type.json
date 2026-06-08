@@ -1,0 +1,22 @@
+[
+  {
+    "output": "s c h t a s k s   / C r e a t e   / S C   O N L O G O N   / T N   s p a w n   / T R   C : \\ w i n d o w s \\ s y s t e m 3 2 \\ c m d . e x e",
+    "explanation": "Recoded the command line by splitting characters of the executable and arguments to bypass simple string-based detection. This is a safe mutation technique for testing purposes."
+  },
+  {
+    "output": "SCHTASKS  /Create /SC ONLOGON /TN spawn /TR C:\\windows\\system32\\cmd.exe",
+    "explanation": "Used uppercase for the executable name and inserted an extra space between '/SC' and 'ONLOGON' to test insertion and case variation techniques."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnLogon\" /sc onlogon /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Used double quotes around the task name and command to test quote insertion and ensure correct parsing while evading string-based detection."
+  },
+  {
+    "output": "schtasks /create /tn \"Updater HIGHEST\" /tr \"cmd.exe /c payload.exe\" /sc ONLOGON",
+    "explanation": "Reordered the command-line arguments and used consistent spacing to test reordering and spacing techniques."
+  },
+  {
+    "output": "schtasks /create /tn \"Updater\" /tr \"cmd.exe /c payload.exe\" /sc ONLOGON",
+    "explanation": "Used consistent spacing and lowercase for the schedule type to test spacing and case variation techniques."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy cscript.exe moved_cscript.exe && moved_cscript.exe //nologo winrm.vbs get wmicimv2/Win32_Process?Handle=4 -format:pretty",
+    "explanation": "The original command is a true positive for the Sigma rule. It involves a renamed cscript.exe executing winrm.vbs with a format argument, which matches the rule's detection criteria."
+  },
+  {
+    "output": "copy cscript.exe moved_cscript.exe && moved_cscript.exe /nologo winrm.vbs get wmicimv2/Win32_Process?Handle=4 -format:pretty",
+    "explanation": "This command substitutes the double hyphen (//) with a single hyphen (/) for the /nologo flag, which is a valid syntax substitution in Windows command-line arguments."
+  },
+  {
+    "output": "copy cscript.exe moved_cscript.exe && moved_cscript.exe //nologo winrm.vbs get wmicimv2/Win32_Process?Handle=4 -format:\"pretty\"",
+    "explanation": "This command uses quotes around the format argument, which is a valid insertion technique and still matches the Sigma rule's detection criteria."
+  }
+]

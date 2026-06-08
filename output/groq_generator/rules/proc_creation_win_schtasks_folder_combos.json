@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"UpdateTask\" /tr \"malware.exe\" /sc onlogon /ru SYSTEM",
+    "explanation": "The original command is already a valid true positive for the Sigma rule. No mutation is needed to trigger the rule."
+  }
+]

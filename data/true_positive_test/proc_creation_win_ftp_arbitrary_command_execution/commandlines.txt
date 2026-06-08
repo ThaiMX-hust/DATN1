@@ -1,0 +1,2 @@
+echo !calc.exe > script.txt && ftp -A < script.txt
+cmd.exe /c "copy ftp.exe updater.exe & echo !calc.exe | updater.exe -n"

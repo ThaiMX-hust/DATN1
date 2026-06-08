@@ -1,0 +1,22 @@
+[
+  {
+    "output": "regedit.exe /s\\t malicious.reg",
+    "explanation": "The /s flag is used to silently import a registry file. Adding an escaped tab character (\\t) between the flag and the filename is a safe mutation that may bypass detection by altering the string without changing functionality."
+  },
+  {
+    "output": "regedit.exe /S .\\malicious.reg",
+    "explanation": "The /S flag is used for silent import. Using a relative path (.) with a backslash is a safe mutation that changes the string representation but maintains the same behavior."
+  },
+  {
+    "output": "regedit.exe /s\"malicious.reg\"",
+    "explanation": "Enclosing the filename in quotes is a safe insertion that may bypass detection by altering the string format while preserving the command's functionality."
+  },
+  {
+    "output": "regedit.exe /s malicious.REG",
+    "explanation": "Changing the file extension to uppercase (.REG) is a safe mutation that may bypass detection by altering the string without changing the command's behavior."
+  },
+  {
+    "output": "regedit.exe /s C:\\malicious.reg",
+    "explanation": "Using double backslashes in the path is a safe mutation that may bypass detection by altering the string format while preserving the command's functionality."
+  }
+]

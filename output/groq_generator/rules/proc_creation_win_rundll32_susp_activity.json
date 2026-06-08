@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\windows\\System32\\comsvcs.dll MiniDump 204 C:\\Users\\thaim\\AppData\\Local\\Temp\\svchost-exe.dmp full",
+    "explanation": "The command is already a true positive and matches the Sigma rule. No mutation is needed for testing."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\windows\\System32\\comsvcs.dll,MiniDump 204 C:\\Users\\thaim\\AppData\\Local\\Temp\\svchost-exe.dmp full",
+    "explanation": "Added quotes around the executable path and used a comma instead of space to separate the DLL and function, which is a valid syntax substitution."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\windows\\System32\\comsvcs.dll,MiniDump 204 C:\\Users\\thaim\\AppData\\Local\\Temp\\svchost-exe.dmp full",
+    "explanation": "Used a comma instead of space to separate the DLL and function, which is a valid syntax substitution."
+  }
+]

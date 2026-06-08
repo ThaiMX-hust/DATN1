@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal\\ Server /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "This command adds an extra space between 'Terminal' and 'Server' to test if the Sigma rule can be bypassed by splitting a key path element with a space. The command is still valid and should be parsed correctly by reg.exe."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "This command uses double quotes around the registry key path to test if the Sigma rule can be bypassed by inserting quotes. The command is still valid and should be parsed correctly by reg.exe."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "This command uses the short form of the registry hive (HKLM) and omits the quotes around the registry key path to test if the Sigma rule can be bypassed by substitution and omission. The command is still valid and should be parsed correctly by reg.exe."
+  }
+]

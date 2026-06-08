@@ -1,0 +1,34 @@
+[
+  {
+    "output": "explorer.exe \"shell:mycomputerfolder\"",
+    "explanation": "Inserted quotes around the argument to test if the Sigma rule can detect the command line with additional formatting."
+  },
+  {
+    "output": "explorer.exe shell:mycomputerfolder",
+    "explanation": "Original command line with no mutation applied for baseline comparison."
+  },
+  {
+    "output": "explorer.exe  shell:mycomputerfolder",
+    "explanation": "Inserted extra space before the argument to test parsing robustness of the Sigma rule."
+  },
+  {
+    "output": "explorer.exe shell:mycomputerfolder::",
+    "explanation": "Appended redundant characters after the argument to test if the Sigma rule can distinguish between valid and invalid input."
+  },
+  {
+    "output": "explorer.exe ::{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+    "explanation": "Used an alternative representation of the 'My Computer' folder using its CLSID, which is functionally equivalent to 'shell:mycomputerfolder'."
+  },
+  {
+    "output": "cmd.exe /c explorer.exe shell:mycomputerfolder",
+    "explanation": "Invoked explorer.exe through cmd.exe using the /c switch to test if the Sigma rule detects the parent-child relationship correctly."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process explorer.exe -ArgumentList 'shell:mycomputerfolder'\"",
+    "explanation": "Used PowerShell to start explorer.exe with the specified argument to test if the Sigma rule detects execution via PowerShell."
+  },
+  {
+    "output": "pwsh.exe -c \"Start-Process explorer.exe -ArgumentList 'shell:mycomputerfolder'\"",
+    "explanation": "Used PowerShell Core (pwsh) to start explorer.exe with the specified argument to test if the Sigma rule detects execution via PowerShell Core."
+  }
+]

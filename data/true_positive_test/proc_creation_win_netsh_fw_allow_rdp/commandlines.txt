@@ -1,0 +1,4 @@
+netsh advfirewall firewall add rule name="RDP-In" dir=in action=allow protocol=TCP localport="338""9"
+netsh advfirewall firewall add rule name="RDP-In" dir=in action=allow protocol=TCP localport=0x0D3D
+netsh advfirewall firewall add rule name="RDP-In" dir=in action=allow protocol=TCP localport=3380-3390
+netsh.exe advf"irewall" fire"wall" add rule name="Allow RDP" dir=in action=allow protocol=6 localport=3389

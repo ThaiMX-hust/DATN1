@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"cd /d C:\\Windows\\System32\\ && cscript.exe //nologo manage-bde.wsf\"",
+    "explanation": "The original command is already a valid test case. No mutation is needed for this case."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\manage-bde.wsf C:\\Users\\Public\\m.txt && cscript.exe //e:jscript C:\\Users\\Public\\m.txt",
+    "explanation": "The original command is already a valid test case. No mutation is needed for this case."
+  },
+  {
+    "output": "cmd.exe /c \"cd /d C:\\\\Windows\\\\System32\\\\ && cscript.exe //nologo manage-bde.wsf\"",
+    "explanation": "Inserted double backslashes for path normalization and added quotes for safe parsing. The command remains functionally equivalent."
+  },
+  {
+    "output": "cmd.exe /c ^\"cd /d C:\\Windows\\System32\\ ^&^& cscript.exe //nologo manage-bde.wsf^\"",
+    "explanation": "Used escape characters (^) to bypass simple string-based detection. The command remains functionally equivalent."
+  }
+]

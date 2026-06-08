@@ -1,0 +1,3 @@
+CertMgr.exe -add CertificateFileName.cer /s /r localMachine root /all
+certutil.exe -addstore root CertificateFileName.cer
+powershell -Command "Import-Certificate -FilePath '.\CertificateFileName.cer' -CertStoreLocation 'Cert:\LocalMachine\Root'"

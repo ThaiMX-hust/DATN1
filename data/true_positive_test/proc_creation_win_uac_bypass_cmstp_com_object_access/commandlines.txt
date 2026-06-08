@@ -1,0 +1,1 @@
+Rename-Item -Path "dllhost.exe" -NewName "not_dllhost.exe"; & "not_dllhost.exe" /Processid:{3E5FC7F9-9A51-4367-9063-A120244FBEC7}

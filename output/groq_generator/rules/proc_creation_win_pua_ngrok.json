@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ngrok.exe tcp 22",
+    "explanation": "This is a true positive command that matches the Sigma rule. It executes ngrok with a 'tcp' argument, which is detected by selection3 in the rule."
+  },
+  {
+    "output": "ngrok.exe start --all --config config.yml",
+    "explanation": "This command matches selection2 in the Sigma rule by including 'start', '--all', '--config', and a '.yml' file. It is a valid test command for the rule."
+  },
+  {
+    "output": "ngrok.exe -tcp 22",
+    "explanation": "This command uses a substitution technique by replacing 'tcp' with '-tcp' as a short option. It still matches the rule's detection logic for 'tcp' in the command line."
+  },
+  {
+    "output": "ngrok.exe start --all --config=C:\\path\\to\\config.yml",
+    "explanation": "This command uses path normalization and equivalent syntax for the '--config' argument. It still matches selection2 in the Sigma rule."
+  },
+  {
+    "output": "ngrok.exe start --config config.yml --all",
+    "explanation": "This command reorders the arguments but still satisfies selection2 in the Sigma rule by including all required elements."
+  }
+]

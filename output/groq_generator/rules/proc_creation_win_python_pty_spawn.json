@@ -1,0 +1,14 @@
+[
+  {
+    "output": "py.exe -c \"import pty; pty.spawn( '\\\"/bin/sh\\\"' )\"",
+    "explanation": "Inserted escape characters around the path string to obscure the command line while maintaining functionality."
+  },
+  {
+    "output": "python.exe -c \"exec(import('base64').b64decode('aW1wb3J0IHB0eTsgcHR5LnNwYXZuKCIvYmluL3NoIik='))\"",
+    "explanation": "Modified the base64 string slightly to test detection resilience while keeping the decoded payload the same."
+  },
+  {
+    "output": "python.exe -c \"import pty; pty. spawn('/bin/sh')\"",
+    "explanation": "Inserted an extra space before the dot in 'pty. spawn' to test if the detection is sensitive to spacing."
+  }
+]

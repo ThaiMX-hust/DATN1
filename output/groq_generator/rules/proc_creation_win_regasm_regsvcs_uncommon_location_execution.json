@@ -1,0 +1,26 @@
+[
+  {
+    "output": "\"C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regsvcs.exe\" C:\\Users\\thaim\\AppData\\Local\\Temp\\T1218.009.dll",
+    "explanation": "This is the original true positive command with no mutation applied. It executes regsvcs.exe from a known location with a DLL from the Temp directory, matching the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regasm.exe /U C:\\Users\\thaim\\AppData\\Local\\Temp\\T1218.009.dll",
+    "explanation": "This is the original true positive command with no mutation applied. It executes regasm.exe with the /U flag from a known location with a DLL from the Temp directory, matching the Sigma rule."
+  },
+  {
+    "output": "regasm.exe payload.dll",
+    "explanation": "This command omits the full path to regasm.exe and uses a shorter command line. It still executes regasm.exe with a DLL, but the path to the utility is not suspicious, so it does not match the Sigma rule."
+  },
+  {
+    "output": "regsvcs.exe payload.dll",
+    "explanation": "This command omits the full path to regsvcs.exe and uses a shorter command line. It still executes regsvcs.exe with a DLL, but the path to the utility is not suspicious, so it does not match the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regasm.exe  /U C:\\Users\\thaim\\AppData\\Local\\Temp\\T1218.009.dll",
+    "explanation": "This command is identical to the second true positive command but includes an extra space before the /U flag. The space is a safe mutation that does not affect detection by the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regasm.exe -U C:\\Users\\thaim\\AppData\\Local\\Temp\\T1218.009.dll",
+    "explanation": "This command substitutes the /U flag with the equivalent -U flag. The substitution is a safe mutation that does not affect detection by the Sigma rule."
+  }
+]

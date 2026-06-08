@@ -1,0 +1,1 @@
+copy "Mouse Lock_2.0.exe" "sys_util.exe" && "sys_util.exe"

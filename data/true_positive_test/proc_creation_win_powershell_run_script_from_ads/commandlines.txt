@@ -1,0 +1,4 @@
+"powershell.exe" & {Add-Content -Path $env:TEMP\NTFS_ADS.txt -Value 'Write-Host \""Stream Data Executed\""' -Stream 'streamCommand' $streamcommand = Get-Content -Path $env:TEMP\NTFS_ADS.txt -Stream 'streamcommand' Invoke-Expression $streamcommand}
+powershell.exe -Command "$s = [System.IO.File]::Open('file.txt:secret.ps1', 'Open'); $r = New-Object System.IO.StreamReader($s); IEX $r.ReadToEnd(); $r.Close()"
+powershell.exe -Command "Invoke-Expression (gc 'C:\test.txt' -Str 'secret.ps1')"
+type file.txt:secret.ps1 | powershell.exe -

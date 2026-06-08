@@ -1,0 +1,26 @@
+[
+  {
+    "output": "AdvancedRun.exe /EXEFilename cmd.exe /Run",
+    "explanation": "This command uses minimal syntax and omits optional parameters while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename \"cmd.exe\" /RunAs 4 /WindowState 0 /Run",
+    "explanation": "This command includes optional parameters explicitly, which aligns with the Sigma rule's detection logic and is a valid test case."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename \"cmd.exe\" /RunAs 4 /Run",
+    "explanation": "This command omits the /WindowState parameter, which is optional, but still meets the required criteria for detection."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename cmd.exe /RunAs 8 /Run",
+    "explanation": "This command uses a different /RunAs value but still satisfies the Sigma rule's detection conditions."
+  },
+  {
+    "output": "\"C:\\Users\\SwachchhandaP\\Downloads\\advancedrun-x64\\AdvancedRun.exe\" /EXEFilename \"cmd.exe\" /Run",
+    "explanation": "This command uses full path notation and quotes for the executable, which is a common variation and still matches the Sigma rule."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

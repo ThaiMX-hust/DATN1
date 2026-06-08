@@ -1,0 +1,4 @@
+expand  "C:\Users\thaim\AppData\Local\Temp\art-expand-test.cab" -F:* .
+copy expand.exe not_expand.exe && not_expand.exe -f:* C:\path\to\malicious.cab C:\Windows\System32\Drivers\
+expand.exe /f:* C:\malicious.cab C:\Users\Administrator\Documents\
+expand.exe /F:* C:\malicious.cab C:\Windows\System32\

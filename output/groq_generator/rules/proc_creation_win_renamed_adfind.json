@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ren AdFind.exe AdFind2.exe && AdFind2.exe -domainlist -subnets -f",
+    "explanation": "The Sigma rule detects renamed AdFind.exe by checking for specific command-line arguments. This command renames the executable and uses equivalent arguments to trigger the rule while staying syntactically valid."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Tools\\AdFind.exe\" -f (objectcategory=computer) > NUL",
+    "explanation": "This command uses a full path to AdFind.exe with a common argument and suppresses output. It avoids suspicious command-line patterns while still matching the rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"& 'C:\\Tools\\AdFind.exe' -f (objectcategory=computer)\"",
+    "explanation": "This PowerShell command invokes AdFind.exe using a full path and standard arguments. It avoids obfuscation while still matching the rule's detection criteria."
+  },
+  {
+    "output": "AdFind.exe -f (objectcategory=computer) 2>&1 | Out-Null",
+    "explanation": "This command runs AdFind.exe with a standard argument and suppresses output. It maintains the same behavior as the original command while avoiding suspicious command-line patterns."
+  },
+  {
+    "output": "cmd.exe /c start-process -FilePath 'C:\\Tools\\AdFind.exe' -ArgumentList '-f (objectcategory=computer)' -NoNewWindow -Wait",
+    "explanation": "This command uses PowerShell's Start-Process cmdlet to launch AdFind.exe with standard arguments. It avoids direct command-line execution patterns while still matching the rule's detection criteria."
+  }
+]

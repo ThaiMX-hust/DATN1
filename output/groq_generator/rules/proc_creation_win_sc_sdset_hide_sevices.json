@@ -1,0 +1,18 @@
+[
+  {
+    "output": "sc sdset AtomicService \"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)\"",
+    "explanation": "This is the original true positive command and is not a bypass."
+  },
+  {
+    "output": "sc.exe sdset \"MyHiddenService\" D:(D;;DCLCWPDTSD;;;IU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)",
+    "explanation": "This is the original true positive command and is not a bypass."
+  },
+  {
+    "output": "sc.exe sdset \"MyHiddenService\" D:(D;;DC;;;IU)(D;;LC;;;IU)(D;;WP;;;IU)(D;;DT;;;IU)(D;;SD;;;IU)",
+    "explanation": "This is the original true positive command and is not a bypass."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

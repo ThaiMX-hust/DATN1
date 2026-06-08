@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe export \"HKCU\\Software\\SimonTatham\\PuTTY\\Sessions\" C:\\temp\\p.reg",
+    "explanation": "This command uses standard syntax and matches the Sigma rule by exporting a registry path associated with PuTTY. It is a direct test case for the rule."
+  },
+  {
+    "output": "reg export HKCU\\Software\\SimonTatham\\PuTTY\\Sessions C:\\temp\\p.reg",
+    "explanation": "This command omits quotes around the registry path, which is still valid in many Windows environments. It tests whether the rule is sensitive to quoted vs. unquoted paths."
+  },
+  {
+    "output": "reg.exe  export  HKCU\\Software\\SimonTatham\\PuTTY\\Sessions  C:\\temp\\p.reg",
+    "explanation": "This command adds extra spaces between arguments to test whether the rule is sensitive to spacing variations in the command line."
+  },
+  {
+    "output": "reg.exe /v export HKCU\\Software\\SimonTatham\\PuTTY\\Sessions C:\\temp\\p.reg",
+    "explanation": "This command adds an unnecessary /v flag (common in other Windows tools) to test whether the rule is sensitive to irrelevant flags in the command line."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software\\SimonTatham\\PuTTY\\Sessions C:\\temp\\p.reg",
+    "explanation": "This command uses the most standard and minimal form of the command to test the baseline detection capability of the Sigma rule."
+  }
+]

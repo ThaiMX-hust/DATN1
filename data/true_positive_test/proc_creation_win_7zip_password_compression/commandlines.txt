@@ -1,0 +1,1 @@
+copy 7z.exe svchost.exe && svchost.exe a -password123 archive.7z C:\data\*

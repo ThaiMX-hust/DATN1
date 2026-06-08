@@ -1,0 +1,2 @@
+msedge.exe --headless=old
+set "FLAG=--headless" && msedge.exe %FLAG%

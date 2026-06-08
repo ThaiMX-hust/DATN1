@@ -1,0 +1,26 @@
+[
+  {
+    "output": "sc config Fax binPath= \"C:\\windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe\" -noexit -c \"write-host 'T1543.003 Test'\"",
+    "explanation": "The original command uses quotes and spaces in a way that can be mutated by reordering and omitting unnecessary elements while maintaining the same behavior. This bypasses the Sigma rule by avoiding the explicit inclusion of all required substrings."
+  },
+  {
+    "output": "sc config Fax binPath= C:\\windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe -noexit -c write-host 'T1543.003 Test'",
+    "explanation": "By removing quotes and reordering the command, the Sigma rule's detection based on specific substrings is evaded. The command still performs the same action but avoids the exact string patterns."
+  },
+  {
+    "output": "sc config Fax binPath= C:\\windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe -c write-host 'T1543.003 Test'",
+    "explanation": "The command omits the -noexit flag, which is optional in this context. This mutation reduces the command's length and avoids detection by the Sigma rule's string-based detection."
+  },
+  {
+    "output": "reg add HKLM\\System\\CurrentControlSet\\Control\\BootVerificationProgram /v ImagePath /t REG_SZ /d C:\\Program\\ Files\\Internet\\ Explorer\\iexplore.exe",
+    "explanation": "By removing quotes around the file path and using spaces differently, the command remains functionally equivalent but avoids the exact string patterns the Sigma rule is looking for."
+  },
+  {
+    "output": "reg.exe add HKLM\\SYSTEM\\CurrentControlSet\\Services\\ExampleService /v ImagePath /t REG_EXPAND_SZ /d C:\\Windows\\Temp\\backdoor /f",
+    "explanation": "The command removes quotes around the registry path and executable path, making it shorter and avoiding the exact string patterns the Sigma rule is designed to detect."
+  },
+  {
+    "output": "sc.exe config ExampleService binPath= calc.exe",
+    "explanation": "This command removes quotes and shortens the path, making it more concise and avoiding the exact string patterns the Sigma rule is looking for."
+  }
+]

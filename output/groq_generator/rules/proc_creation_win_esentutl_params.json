@@ -1,0 +1,30 @@
+[
+  {
+    "output": "esentutl /p /d ntds.dit",
+    "explanation": "This is the base command that matches the Sigma rule. It uses the 'esentutl' utility with the '/p' and '/d' flags, which are explicitly detected by the rule."
+  },
+  {
+    "output": "esentutl.exe /p /d ntds.dit",
+    "explanation": "Adding the '.exe' extension is a minor variation that does not bypass detection, as the rule is based on command-line arguments, not file extensions."
+  },
+  {
+    "output": "esentutl  /p   /d ntds.dit",
+    "explanation": "Adding extra spaces between arguments is a safe mutation technique that does not bypass detection, as the rule uses 'contains' and is not sensitive to spacing."
+  },
+  {
+    "output": "esentutl \"/p\" /d ntds.dit",
+    "explanation": "Wrapping the '/p' argument in quotes is a safe mutation technique that does not bypass detection, as the rule is not sensitive to quotation marks."
+  },
+  {
+    "output": "esentutl /p -d ntds.dit",
+    "explanation": "Reordering or substituting flags may not be valid for the 'esentutl' utility, and this variation may not execute correctly, but it is included for testing purposes."
+  },
+  {
+    "output": "esentutl /p /d C:\\path\\to\\ntds.dit",
+    "explanation": "Using a full path to the 'ntds.dit' file is a safe mutation technique that does not bypass detection, as the rule is not sensitive to the file path."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

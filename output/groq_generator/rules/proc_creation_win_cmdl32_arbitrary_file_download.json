@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmdl32.exe \"/vpn\" \"/lan\" C:\\path\\to\\config.txt",
+    "explanation": "The command uses insertion of quotes around the flags to test if the Sigma rule is sensitive to such formatting changes."
+  },
+  {
+    "output": "cmdl32.exe -vpn -lan C:\\path\\to\\config.txt",
+    "explanation": "The command substitutes the '/' flag syntax with '-', testing if the Sigma rule is sensitive to flag syntax variations."
+  },
+  {
+    "output": "cmdl32.exe /lan /vpn C:\\path\\to\\config.txt",
+    "explanation": "The command reorders the flags to test if the Sigma rule is sensitive to the order of command-line arguments."
+  },
+  {
+    "output": "cmdl32.exe /vpn /lan C:\\path\\to\\config.txt",
+    "explanation": "The command is unchanged but included to confirm the baseline detection behavior of the Sigma rule."
+  },
+  {
+    "output": "copy cmdl32.exe not_an_exploit.exe && not_an_exploit.exe /vpn /lan C:\\path\\to\\config.txt",
+    "explanation": "The command renames the binary to test if the Sigma rule is sensitive to binary name obfuscation techniques."
+  }
+]

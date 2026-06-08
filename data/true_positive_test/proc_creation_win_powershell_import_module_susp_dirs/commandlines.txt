@@ -1,0 +1,4 @@
+powershell.exe -Command "&('Im'+'port-Module') \"$Env:Temp\suspicious_module.psm1\""
+powershell.exe -Command "Import-Module $Env:Temp\\suspicious_module.psm1"
+powershell.exe -Command "Import-Module $Env:TMP\suspicious_module.psm1"
+powershell.exe -Command "Import-Module ('{0}\suspicious_module.psm1' -f $Env:Temp)"

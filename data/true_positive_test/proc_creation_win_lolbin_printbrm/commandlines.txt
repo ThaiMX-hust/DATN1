@@ -1,0 +1,5 @@
+PrintBrm.exe  -f  \\127.0.0.1\share\backup.tmp  -b
+PrintBrm.exe -fC:\path\to\archive.zip -b
+copy PrintBrm.exe not_print.exe && not_print.exe -f C:\Users\Public\data.zip -b
+PrintBrm.exe -f C:\Users\Public\data.7z
+PrintBrm.exe -f:C:\Users\Public\data.zip

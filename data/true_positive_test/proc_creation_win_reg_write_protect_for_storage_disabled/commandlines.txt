@@ -1,0 +1,1 @@
+cmd.exe /c reg add "HKLM\System\CurrentControlSet\Control\StorageDevicePolicies" /v W^riteProtect /t REG_DWORD /d 0 /f

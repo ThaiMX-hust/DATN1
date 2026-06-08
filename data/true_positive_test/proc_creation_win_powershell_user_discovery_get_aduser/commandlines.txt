@@ -1,0 +1,2 @@
+powershell.exe -Command "Get-ADUser -f * | Export-Csv C:\temp\users.csv"
+pwsh.exe -c "Get-ADUser -Filter {Enabled -eq $true} | Out-String | Out-File users.txt"

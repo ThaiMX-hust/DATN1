@@ -1,0 +1,2 @@
+odbcconf.exe /a {REGSVR "fake.dll.dir\payload.bin"}
+odbcconf.exe /a {REGSVR "malicious.dll"}

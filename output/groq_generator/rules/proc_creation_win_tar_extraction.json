@@ -1,0 +1,14 @@
+[
+  {
+    "output": "not_tar.exe -x -f archive.zip",
+    "explanation": "The command uses a renamed tar.exe (not_tar.exe) with short-form flags (-x for extract, -f for file) instead of long-form flags. This mutation preserves the original behavior while altering the command structure."
+  },
+  {
+    "output": "not_tar.exe -xf archive.tar.gz",
+    "explanation": "The command uses a renamed tar.exe (not_tar.exe) with a compressed archive (.tar.gz) and short-form flags (-x for extract, -f for file). This variation tests the rule's ability to detect different archive types."
+  },
+  {
+    "output": "not_tar.exe --extract --file=archive.tar.bz2",
+    "explanation": "The command uses a renamed tar.exe (not_tar.exe) with long-form flags (--extract and --file) and a different archive type (.tar.bz2). This tests the rule's detection capability with various archive formats."
+  }
+]

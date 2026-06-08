@@ -1,0 +1,4 @@
+diskshadow.exe -S C:\temp\payload.txt
+diskshadow.exe -sC:\path\to\script.txt
+diskshadow.exe /s C:\path\to\malicious_script.txt
+diskshadow.exe /S C:\Windows\Temp\script.txt

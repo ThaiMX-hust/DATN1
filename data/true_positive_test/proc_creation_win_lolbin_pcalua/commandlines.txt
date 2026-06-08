@@ -1,0 +1,5 @@
+pcalua.exe  -a C:\Windows\System32\calc.exe
+pcalua.exe  -a calc.exe
+pcalua.exe "-a" calc.exe
+pcalua.exe -acalc.exe
+pcalua.exe /a calc.exe

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "dllhost.exe",
+    "explanation": "The original command line is already a valid test case for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "\"dllhost.exe\"",
+    "explanation": "Inserting quotes around the executable name is a safe mutation technique that does not change the behavior but may bypass simplistic detection patterns."
+  },
+  {
+    "output": "d l l h o s t . e x e",
+    "explanation": "Splitting the executable name into individual characters with spaces is a safe mutation technique that may bypass simplistic string-based detection."
+  },
+  {
+    "output": "cmd.exe /c dllhost.exe",
+    "explanation": "Invoking the target process via cmd.exe with the /c flag is a safe mutation that may bypass detection while preserving the test behavior."
+  }
+]

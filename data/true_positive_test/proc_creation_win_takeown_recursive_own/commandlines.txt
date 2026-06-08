@@ -1,0 +1,1 @@
+takeown.exe  /f C:\Users\thaim\AppData\Local\Temp\T1222.001_takeown_folder /r

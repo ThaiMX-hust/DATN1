@@ -1,0 +1,5 @@
+powershell.exe -Command "$a = 'j'; $b = 'o'; $c = 'i'; $d = 'n'; $e = 's'; $f = 'p'; $g = 'l'; $h = 'i'; $i = 't'; $cmd = $a+$b+$c+$d+' '+$e+$f+$g+$h+$i; Invoke-Expression ('Write-Host ' + $cmd)"
+powershell.exe -Command "$p = $env:Public; $char1 = $p[13]; $char2 = $p[5]; $exec = $char1 + $char2 + 'y'; Invoke-Expression $exec"
+powershell.exe -EncodedCommand JABzID0gJ2pvaW4nOyAkcyArPSAnc3BsaXQnOyBXcml0ZS1Ib3N0ICRz
+powershell.exe -Command "$a = 'jo'; $b = 'in'; $c = 'spl'; $d = 'it'; Invoke-Expression ($a + $b + '-' + $c + $d)"
+powershell.exe -Command "[char[]](106,111,105,110) -join ''"

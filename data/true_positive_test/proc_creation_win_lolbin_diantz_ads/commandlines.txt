@@ -1,0 +1,1 @@
+copy diantz.exe d.exe && d.exe C:\path\to\input.txt C:\path\to\target.txt:output.cab

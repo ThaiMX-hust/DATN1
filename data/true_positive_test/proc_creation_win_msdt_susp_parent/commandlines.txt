@@ -1,0 +1,3 @@
+copy msdt.exe not_msdt.exe && not_msdt.exe
+Start-ScheduledTask -TaskName "LegitTask"
+svchost.exe

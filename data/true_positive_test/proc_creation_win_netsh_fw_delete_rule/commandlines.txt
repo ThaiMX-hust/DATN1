@@ -1,0 +1,2 @@
+netsh advfirewall firewall del rule name="Allow Port 80"
+netsh.exe advfirewall firewall delete	rule name="All"

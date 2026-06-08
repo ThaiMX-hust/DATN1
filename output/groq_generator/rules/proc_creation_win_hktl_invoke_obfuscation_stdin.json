@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | powershell.exe -noprofile -command -\"",
+    "explanation": "Original command matches the Sigma rule. No mutation needed for testing."
+  },
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | powershell.exe -noprofile -c -\"",
+    "explanation": "Substitution of '-command' with its short form '-c' is a valid mutation that preserves the original behavior."
+  },
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | powershell -noprofile -command -\"",
+    "explanation": "Omission of '.exe' extension and reordering of arguments are safe mutations that preserve the original behavior."
+  }
+]

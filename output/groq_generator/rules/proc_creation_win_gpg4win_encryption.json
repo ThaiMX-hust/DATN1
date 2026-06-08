@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" -c --passphrase 'SomeParaphraseBlah' --batch --yes \"C:\\Users\\thaim\\AppData\\Local\\Temp\\test.txt\"",
+    "explanation": "Reordered the command-line arguments and used standard syntax. The encryption command remains functionally identical but appears different, demonstrating a potential bypass."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" -c --passphrase='SomeParaphraseBlah' --batch --yes \"C:\\Users\\thaim\\AppData\\Local\\Temp\\test.txt\"",
+    "explanation": "Used equals sign (=) instead of space to separate --passphrase and its value. This is a valid syntax variation that may evade detection based on space-separated string matching."
+  }
+]

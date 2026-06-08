@@ -1,0 +1,3 @@
+"cmd.exe" /c ipconfig /all & net config workstation & net view /all /domain & nltest /domain_trusts
+"cmd.exe" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config
+"cmd.exe" /c arp -a

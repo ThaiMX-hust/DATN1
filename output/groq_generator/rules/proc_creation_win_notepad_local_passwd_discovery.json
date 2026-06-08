@@ -1,0 +1,18 @@
+[
+  {
+    "output": "notepad.exe C:\\Users\\admin\\Documents\\passwords.txt",
+    "explanation": "This command directly matches the Sigma rule by launching notepad.exe with a file containing 'password' in its name and a supported extension (.txt)."
+  },
+  {
+    "output": "notepad.exe \"C:\\\\Data\\\\passwords.csv\"",
+    "explanation": "The command uses quotes to handle the file path and matches the rule by opening a CSV file with 'password' in the filename."
+  },
+  {
+    "output": "notepad.exe C:\\secure\\passwords.bak",
+    "explanation": "This command opens a file with 'password' in the name and a supported extension (.bak), matching the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"notepad C:\\\\backup\\\\passwords.log\"",
+    "explanation": "This command uses PowerShell to invoke Notepad with a file containing 'password' in the name and a supported extension (.log), matching the rule."
+  }
+]

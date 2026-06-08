@@ -1,0 +1,1 @@
+rh.exe -open nircmd.exe -save fake_svchost.exe -action delete -mask VERSIONINFO,1,1033 && fake_svchost.exe

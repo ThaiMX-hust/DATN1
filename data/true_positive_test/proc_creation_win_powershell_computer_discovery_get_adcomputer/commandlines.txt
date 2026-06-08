@@ -1,0 +1,4 @@
+powershell.exe -Command "G`et-ADCo`mputer -Filter * | Out-File computers.txt"
+powershell.exe -Command "Get-ADComputer -Filter * | Export-Csv -Path C:\temp\ad_computers.csv"
+powershell.exe -Command "Get-ADComputer -Filter * | Tee-Object -FilePath computers.txt"
+powershell.exe -Command "Get-ADComputer -LDAPFilter '(objectClass=computer)' > C:\temp\computers.txt"

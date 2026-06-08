@@ -1,0 +1,38 @@
+[
+  {
+    "output": "odbcconf.exe -f \"T1218.008.rsp\"",
+    "explanation": "This is the original true positive command and serves as a baseline for testing."
+  },
+  {
+    "output": "odbcconf.exe  -f  \"T1218.008.rsp\"",
+    "explanation": "Inserted extra space between the flag and the file path to test parsing tolerance."
+  },
+  {
+    "output": "odbcconf.exe -f\"T1218.008.rsp\"",
+    "explanation": "Removed space between the -f flag and the file path to test minimal syntax acceptance."
+  },
+  {
+    "output": "odbcconf.exe /f \"T1218.008.rsp\"",
+    "explanation": "Replaced the short flag '-' with '/' to test equivalent syntax substitution."
+  },
+  {
+    "output": "odbcconf.exe -f \"T1218.008.rsp\"\\n",
+    "explanation": "Inserted a newline character at the end to test parsing behavior with line breaks."
+  },
+  {
+    "output": "odbcconf.exe -f \"T1218.008.rsp\"\\t",
+    "explanation": "Inserted a tab character at the end to test parsing behavior with whitespace variations."
+  },
+  {
+    "output": "odbcconf.exe -f \"T1218.008.rsp\"\\r",
+    "explanation": "Inserted a carriage return at the end to test parsing behavior with control characters."
+  },
+  {
+    "output": "odbcconf.exe -f \"T1218.008.rsp\"\\x20",
+    "explanation": "Inserted a hexadecimal representation of space to test encoding bypass techniques."
+  },
+  {
+    "output": "odbcconf.exe -f \"T1218.008.rsp\"\\u0020",
+    "explanation": "Inserted a Unicode representation of space to test encoding bypass techniques."
+  }
+]

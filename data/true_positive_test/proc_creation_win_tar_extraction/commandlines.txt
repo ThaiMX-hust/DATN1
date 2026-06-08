@@ -1,0 +1,3 @@
+copy tar.exe not_tar.exe && not_tar.exe -xf archive.zip
+tar --extract --file archive.tar
+tar.exe --extract --file archive.tar

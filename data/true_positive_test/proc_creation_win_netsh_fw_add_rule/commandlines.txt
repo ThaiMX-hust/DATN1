@@ -1,0 +1,8 @@
+netsh  advfirewall firewall add rule name="RDPPORTLatest-TCP-In" dir=in action=allow protocol=TCP localport=4489
+"C:\WINDOWS\SysWOW64\netsh" firewall add allowedprogram "C:\Program Files\uvnc bvba\UltraVNC\vncviewer.exe" "vncviewer.exe" ENABLE ALL
+"C:\WINDOWS\SysWOW64\netsh" firewall add allowedprogram "C:\Program Files\uvnc bvba\UltraVNC\winvnc.exe" "winvnc.exe" ENABLE ALL
+"C:\WINDOWS\SysWOW64\netsh" firewall add portopening TCP 5800 vnc5800
+"C:\WINDOWS\SysWOW64\netsh" firewall add portopening TCP 5900 vnc5900
+copy netsh.exe not_netsh.exe && not_netsh.exe advfirewall firewall add rule name='Allow In' dir=in action=allow protocol=TCP localport=8080
+netsh advfirewall firewall add rule name=Dropbox dir=in action=allow "program=malware.exe" enable=yes profile=Any
+netsh.exe advfirewall firewall set rule group='remote desktop' new enable=Yes

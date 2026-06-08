@@ -1,0 +1,1 @@
+MpCmdRun.exe /RemoveDefinitions /All

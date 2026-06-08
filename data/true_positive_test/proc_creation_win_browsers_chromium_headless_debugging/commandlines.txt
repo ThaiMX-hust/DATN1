@@ -1,0 +1,6 @@
+chrome.exe --remote-debugging-pipe --user-data-dir="C:\Users\Victim\AppData\Local\Google\Chrome\User Data" --incognito
+copy "chrome.exe" "not_chrome.exe" && "not_chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\Public" --headless
+msedge.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\Admin\AppData\Local\Microsoft\Edge\User Data" --run-all-compositor-stages-before-draw --disable-gpu
+C:\Program Files\Google\Chrome\Application\chrome.exe --remote-debugging-port=9222 --headless --incognito
+C:\Program Files\Google\Chrome\Application\chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\Admin\AppData\Local\Google\Chrome\User Data"
+copy cmd.exe chrome.exe && chrome.exe /c "msedge.exe --remote-debugging-port=9222 --headless --user-data-dir='C:\Temp'"

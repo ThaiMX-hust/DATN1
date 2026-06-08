@@ -1,0 +1,2 @@
+taskkill /f /im "ccSvcHst.exe "
+taskkill /F /IM ccsVCHST.EXE

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "C:\\\\WINDOWS\\system32\\net1  share \"\\\\test\\\\share\" /delete",
+    "explanation": "Inserted quotes around the share path to test if the rule detects quoted arguments correctly."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\net1  share \\\\test\\\\share /delete",
+    "explanation": "Used the original command without any mutation as a baseline for comparison."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\net1  share \\\\test\\\\share /D",
+    "explanation": "Substituted '/delete' with '/D', which is an equivalent short option accepted by net.exe."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\net1  share C$ /delete",
+    "explanation": "Used a built-in administrative share as a common test case for the rule."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\net1  share IPC$ /delete",
+    "explanation": "Used a named pipe share to test if the rule captures different types of share deletions."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\net1  share ADMIN$ /D",
+    "explanation": "Combined omission and substitution by using '/D' and omitting unnecessary spacing."
+  }
+]

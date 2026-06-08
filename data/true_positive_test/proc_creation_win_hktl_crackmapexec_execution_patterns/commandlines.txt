@@ -1,0 +1,7 @@
+"cmd.exe" /c cmd.exe /Q /c hostname 1> \\127.0.0.1\ADMIN$\output.txt 2>&1
+cmd.exe /C 2>&1 1> \\127.0.0.1\C$\Temp\output.txt whoami
+powershell.exe -nop -noni -w 1 -exec bypass -c "Write-Host 'Test'"
+powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Write-Host 'Test'"
+powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -EncodedCommand dwBoAG8AYQBtAGkA
+cmd.exe /C "whoami" > C:\Users\Public\output.txt 2> nul
+powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -EncodedCommand cGluZyAxMjcuMC4wLjE=

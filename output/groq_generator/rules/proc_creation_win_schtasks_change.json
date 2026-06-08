@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks.exe /C /TN \"UpdateTask\" /TR \"notepad.exe\"",
+    "explanation": "The /Change flag is substituted with its equivalent short form /C. This is a safe mutation technique that maintains the same functionality while altering the command line."
+  },
+  {
+    "output": "schtasks.exe /Change /TN\"UpdateTask\" /TR\"notepad.exe\"",
+    "explanation": "Spaces after /TN and /TR are omitted, as they are optional in command-line syntax for schtasks.exe. This mutation preserves functionality while changing the appearance."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"UpdateTask\" /TR \"C:\\Windows\\System32\\notepad.exe\"",
+    "explanation": "The path to notepad.exe is fully qualified and uses escaped backslashes. This is a safe mutation technique involving path normalization and string representation."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"UpdateTask\" /TR \"%windir%\\System32\\notepad.exe\"",
+    "explanation": "The path to notepad.exe is replaced with an environment variable (%windir%) for path normalization. This is a safe mutation technique that maintains the same behavior."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"UpdateTask\" /TR \"notepad.exe\" /F",
+    "explanation": "The optional /F (force) flag is added, which is allowed by schtasks.exe and does not affect the core detection logic. This is a safe mutation technique involving addition of optional parameters."
+  }
+]

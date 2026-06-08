@@ -1,0 +1,50 @@
+[
+  {
+    "output": "reg  query \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"",
+    "explanation": "The command uses standard spacing and quotes, which are allowed in the detection rule. It matches the original command structure."
+  },
+  {
+    "output": "reg  query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Windows\"",
+    "explanation": "The command uses uppercase 'SOFTWARE' and standard spacing, which are allowed in the detection rule. It matches the original command structure."
+  },
+  {
+    "output": "reg  query \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"",
+    "explanation": "The command uses double backslashes in the registry path, which are still parsed correctly by Windows and match the original command structure."
+  },
+  {
+    "output": "reg  query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify\"",
+    "explanation": "The command uses uppercase 'SOFTWARE' and standard spacing, which are allowed in the detection rule. It matches the original command structure."
+  },
+  {
+    "output": "reg  query \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit\"",
+    "explanation": "The command uses standard spacing and quotes, which are allowed in the detection rule. It matches the original command structure."
+  },
+  {
+    "output": "reg  query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+    "explanation": "The command omits quotes around the registry path, which is still valid in some contexts and matches the original command structure."
+  },
+  {
+    "output": "reg  query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "explanation": "The command omits quotes around the registry path, which is still valid in some contexts and matches the original command structure."
+  },
+  {
+    "output": "reg  query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+    "explanation": "The command omits quotes around the registry path, which is still valid in some contexts and matches the original command structure."
+  },
+  {
+    "output": "reg  query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServices",
+    "explanation": "The command omits quotes around the registry path, which is still valid in some contexts and matches the original command structure."
+  },
+  {
+    "output": "reg  query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServicesOnce",
+    "explanation": "The command omits quotes around the registry path, which is still valid in some contexts and matches the original command structure."
+  },
+  {
+    "output": "reg  query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+    "explanation": "The command omits quotes around the registry path, which is still valid in some contexts and matches the original command structure."
+  },
+  {
+    "output": "reg  query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+    "explanation": "The command omits quotes around the registry path, which is still valid in some contexts and matches the original command structure."
+  }
+]

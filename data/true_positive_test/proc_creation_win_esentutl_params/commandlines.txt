@@ -1,0 +1,2 @@
+copy esentutl.exe not_suspicious.exe && not_suspicious.exe /p /d ntds.dit
+esentutl.exe "/p" /d ntds.dit

@@ -1,0 +1,2 @@
+where  /R C:\Users\ Bookmarks
+where  /R C:\Users\ places.sqlite

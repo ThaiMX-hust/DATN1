@@ -1,0 +1,4 @@
+"powershell.exe" & {ls -R C:\Users\*\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt | Select-String \""password\"", \""-p\"", \""key\"", \""pwd\"", \""pass\""}
+copy-item $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\C*nsoleH*st*ry.txt C:\temp\log.txt
+Get-Content (Join-Path $env:APPDATA 'Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt')
+type $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history*

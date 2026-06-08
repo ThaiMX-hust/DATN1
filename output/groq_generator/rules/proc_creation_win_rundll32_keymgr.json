@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\rundll32.exe keymgr,KRShowKeyMgr",
+    "explanation": "Removed quotes around the executable path. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe keymgr,KRShowKeyMgr",
+    "explanation": "Shortened the full path to just the executable name, assuming it is in the system's PATH. This is a valid simplification and should still trigger the rule."
+  },
+  {
+    "output": "copy keymgr.dll misc.dll & rundll32.exe misc.dll,KRShowKeyMgr",
+    "explanation": "The original second test command is valid and should trigger the Sigma rule. It uses a renamed DLL and is a safe mutation for testing."
+  },
+  {
+    "output": "copy keymgr.dll misc.dll && rundll32.exe misc.dll,KRShowKeyMgr",
+    "explanation": "Replaced the ampersand with a logical AND operator, which is equivalent in command-line context for chaining commands. This is a safe mutation for testing."
+  }
+]

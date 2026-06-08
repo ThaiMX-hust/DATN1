@@ -1,0 +1,10 @@
+[
+  {
+    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dll,StartNodeRelay",
+    "explanation": "This command replaces the .dat file extension with .dll while keeping the same file path and function name, which still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dll, StartNodeRelay",
+    "explanation": "Adding a space between the comma and the function name is a safe mutation that does not affect execution and still matches the rule."
+  }
+]

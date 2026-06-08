@@ -1,0 +1,5 @@
+npc.exe -config=custom.conf -server=192.168.1.1 -vkey=testkey
+npc.exe -s=192.168.1.1 -v=secret -p=password
+npc.exe -server=10.0.0.1:443 -vkey=key123 -password=pass123 -config=myconfig.ini
+npc.exe server=10.0.0.1 vkey=mykey pass=mypass
+npctest.exe -server=192.168.1.100:8080 -vkey=secret123 -password=admin123

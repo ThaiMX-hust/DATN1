@@ -1,0 +1,3 @@
+p^ester.bat "calc.exe; h^elp"
+Pester.bat "calc.exe; Get-Process"
+Pester.bat "calc.exe; Write-Output 1"

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "explorer.exe \"/root,calc.exe\"",
+    "explanation": "Inserts quotes around the argument to test how the rule handles quoted command lines."
+  },
+  {
+    "output": "explorer.exe /root,calc.exe",
+    "explanation": "Uses the original format without quotes to test basic detection."
+  },
+  {
+    "output": "explorer.exe /root\\,calc.exe",
+    "explanation": "Escapes the comma to test if the rule is sensitive to escape characters."
+  }
+]

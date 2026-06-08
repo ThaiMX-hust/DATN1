@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"set EXT=.SettingContent-ms && copy mymalware%EXT% %TEMP%\\temp.xml && control.exe %TEMP%\\temp.xml\"",
+    "explanation": "This command simulates the execution of a .SettingContent-ms file by copying it to a temporary location and invoking it with control.exe. It aligns with the Sigma rule's detection logic by including '.SettingContent-ms' in the command line."
+  },
+  {
+    "output": "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"$p = 'C:\\path\\to\\payload.settingcontent-ms'; $c = Get-Content $p -Raw; Invoke-Expression ($c.ToString().Replace('.SettingContent-ms', ''))\"",
+    "explanation": "This PowerShell command simulates the execution of a .SettingContent-ms file by reading its content and executing it. It includes the '.SettingContent-ms' string in the command line, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "ren payload.txt payload.settingcontent-ms && explorer.exe payload.settingcontent-ms",
+    "explanation": "This command renames a file to have a .SettingContent-ms extension and opens it with explorer.exe. It includes the '.SettingContent-ms' string in the command line, which matches the Sigma rule's detection logic."
+  }
+]

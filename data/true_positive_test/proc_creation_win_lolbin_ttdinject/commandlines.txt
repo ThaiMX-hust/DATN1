@@ -1,0 +1,1 @@
+copy TTDInject.exe NotMalicious.exe && NotMalicious.exe /ttd 1234 /out C:\Logs

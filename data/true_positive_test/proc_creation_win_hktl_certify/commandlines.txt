@@ -1,0 +1,2 @@
+Certify.exe -find -vulnerable -domain:internal.corp
+copy Certify.exe NOT_HACK_TOOL.exe && .\NOT_HACK_TOOL.exe find /vulnerable /domain:internal.corp

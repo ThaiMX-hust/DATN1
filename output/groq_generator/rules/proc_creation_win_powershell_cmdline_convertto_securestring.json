@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"& {function C2SS { ConvertTo-SecureString -String 'MySecret' -AsPlainText -Force }; C2SS }\"",
+    "explanation": "This command uses a function to encapsulate the ConvertTo-SecureString call, which may evade detection by altering the direct appearance of the cmdlet in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $cmd = 'ConvertTo-SecureString'; & $cmd -String 'MySecret' -AsPlainText -Force }\"",
+    "explanation": "This command stores the cmdlet name in a variable and invokes it dynamically, which may bypass detection by not directly showing the full cmdlet name in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $s = 'MySecret'; ConvertTo-SecureString -String $s -AsPlainText -Force }\"",
+    "explanation": "This command uses a variable to store the string input, which may avoid direct detection by not showing the plain text password or the full cmdlet in a single line."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $cmd = 'ConvertTo-'; $cmd += 'SecureString'; & $cmd -String 'MySecret' -AsPlainText -Force }\"",
+    "explanation": "This command concatenates the cmdlet name in parts, which may evade detection by not showing the full cmdlet name in the command line."
+  }
+]

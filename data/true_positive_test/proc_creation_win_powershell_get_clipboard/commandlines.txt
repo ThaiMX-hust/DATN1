@@ -1,0 +1,6 @@
+"powershell.exe" & {echo Get-Process | clip Get-Clipboard | iex}
+powershell.exe -Command "[powershell]::Create().AddCommand('Get-Clipboard').Invoke()"
+powershell.exe -Command "Get-Clip`board"
+powershell.exe -Command "IEX ('Get-' + 'Clipboard')"
+powershell.exe -Command "Set-Alias gc-alt Get-Clipboard; gc-alt"
+powershell.exe -EncodedCommand R2V0LUNsaXBib2FyZA==

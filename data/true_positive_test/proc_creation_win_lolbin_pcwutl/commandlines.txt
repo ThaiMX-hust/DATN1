@@ -1,0 +1,3 @@
+rundll32.exe  pcwutl.dll,LaunchApplication C:\WINDOWS\System32\notepad.exe
+copy pcwutl.dll renamed.dll & rundll32.exe renamed.dll,LaunchApplication calc.exe
+rundll32.exe "pcwutl.dll" LaunchApplication calc.exe

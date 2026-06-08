@@ -1,0 +1,42 @@
+[
+  {
+    "output": "reg export \"HKLM\\sam\" C:\\Users\\thaim\\AppData\\Local\\Temp\\sam",
+    "explanation": "This command uses standard syntax and does not attempt to bypass the Sigma rule. It is a direct representation of the rule's detection criteria."
+  },
+  {
+    "output": "reg export HKLM\\sam C:\\Users\\thaim\\AppData\\Local\\Temp\\sam",
+    "explanation": "This command omits quotes around the registry path, which is still valid and does not bypass the Sigma rule."
+  },
+  {
+    "output": "reg save HKLM\\system C:\\Users\\thaim\\AppData\\Local\\Temp\\system",
+    "explanation": "This command uses the 'save' flag instead of 'export', which is another valid syntax for the same operation and does not bypass the Sigma rule."
+  },
+  {
+    "output": "reg save HKLM\\SYSTEM C:\\Windows\\Temp\\SYSTEM_HIVE",
+    "explanation": "This command uses the uppercase 'SYSTEM' registry key, which is still valid and does not bypass the Sigma rule."
+  },
+  {
+    "output": "\"reg\" save HKLM\\security\\policy\\secrets C:\\Users\\thaim\\AppData\\Local\\Temp\\secrets /y",
+    "explanation": "This command uses quotes around the executable name and includes the '/y' flag, which is still valid and does not bypass the Sigma rule."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\reg.exe\" export \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\" C:\\AtomicRedTeam\\atomics\\T1547.001\\src\\SessionManagerBackup.reg /y",
+    "explanation": "This command uses full path and quotes around the executable and registry path, which is still valid and does not bypass the Sigma rule."
+  },
+  {
+    "output": "reg export HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\ C:\\AtomicRedTeam\\atomics\\T1556.002\\lsa_backup.reg",
+    "explanation": "This command omits quotes around the executable and includes a trailing backslash in the registry path, which is still valid and does not bypass the Sigma rule."
+  },
+  {
+    "output": "reg  export HKLM\\sam C:\\Users\\thaim\\AppData\\Local\\Temp\\sam",
+    "explanation": "This command includes extra spaces between 'reg' and 'export', which is still valid and does not bypass the Sigma rule."
+  },
+  {
+    "output": "reg  save HKLM\\security C:\\Users\\thaim\\AppData\\Local\\Temp\\security",
+    "explanation": "This command includes extra spaces between 'reg' and 'save', which is still valid and does not bypass the Sigma rule."
+  },
+  {
+    "output": "reg  save HKLM\\SYSTEM C:\\Windows\\Temp\\SYSTEM_HIVE",
+    "explanation": "This command includes extra spaces between 'reg' and 'save', which is still valid and does not bypass the Sigma rule."
+  }
+]

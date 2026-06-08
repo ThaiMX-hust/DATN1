@@ -1,0 +1,1 @@
+powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -EncodedCommand W0NvbnNvbGVdOjpPdXRwdXRFbmNvZGluZz1bVGV4dC5VVEY4RW5jb2RpbmddOjpVVEY4

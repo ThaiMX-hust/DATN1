@@ -1,0 +1,14 @@
+[
+  {
+    "output": "extrac32.exe /C \\\\127.0.0.1\\share\\archive.zip C:\\path\\to\\extract\\file.txt",
+    "explanation": "Replaced single quotes with double backslashes for escaping, and preserved the original command structure to maintain detection triggers."
+  },
+  {
+    "output": "extrac32.exe /c C:\\path\\to\\source.cab C:\\path\\to\\destination.txt",
+    "explanation": "Used double backslashes for path normalization and preserved the core command structure to maintain detection triggers."
+  },
+  {
+    "output": "extrac32.exe /E /A \\\\127.0.0.1\\share\\archive.cab C:\\path\\to\\extract\\",
+    "explanation": "Replaced single quotes with double backslashes for escaping, and preserved the original command structure to maintain detection triggers."
+  }
+]

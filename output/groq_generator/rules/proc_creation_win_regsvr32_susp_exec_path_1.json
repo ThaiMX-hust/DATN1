@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe  /s \"C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg\"",
+    "explanation": "This command uses standard syntax and a suspicious path as defined in the Sigma rule. It is a valid test case for triggering the rule."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\\\ProgramData && regsvr32.exe payload.dll\"",
+    "explanation": "This command uses a command shell to change directory and execute regsvr32 from a suspicious location. It is a valid test case for triggering the rule."
+  },
+  {
+    "output": "regsvr32.exe \"C:\\\\ProgramData\"\\payload.dll",
+    "explanation": "This command uses quotes to handle the path and executes regsvr32 from a suspicious location. It is a valid test case for triggering the rule."
+  },
+  {
+    "output": "regsvr32.exe payload.dll",
+    "explanation": "This command does not include a suspicious path and will not trigger the Sigma rule. It is not a valid test case for this rule."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "regini.exe \"C:\\path\\to\\folder\\ :script.txt\"",
+    "explanation": "The original command uses an alternate data stream (ADS) indicated by the colon (':') in the file path. This mutation preserves the ADS syntax while using quotes to safely encapsulate the path, which is a valid and safe mutation technique for testing."
+  },
+  {
+    "output": "regini.exe C:\\path\\to\\folder\\ :script.txt",
+    "explanation": "The original command uses an alternate data stream (ADS) indicated by the colon (':') in the file path. This mutation preserves the ADS syntax while using quotes to safely encapsulate the path, which is a valid and safe mutation technique for testing."
+  }
+]

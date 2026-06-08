@@ -1,0 +1,3 @@
+copy runonce.exe not_runonce.exe && not_runonce.exe /AlternateShellStartup
+runonce.exe /AlternateShellStartup
+runonce.exe /Config

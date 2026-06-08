@@ -1,0 +1,2 @@
+copy tar.exe not_tar.exe && not_tar.exe --create --file=archive.tar C:\SensitiveData
+tar --create --file=backup.tar C:\Users\Public\Logs

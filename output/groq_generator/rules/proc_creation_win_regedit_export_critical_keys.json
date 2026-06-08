@@ -1,0 +1,18 @@
+[
+  {
+    "output": "regedit.exe /E C:\\temp\\sam.reg HKLM\\SAM",
+    "explanation": "This command uses the /E flag instead of -E, omits quotes around the registry key, and maintains the same functionality as the original command. It should still be detected by the Sigma rule."
+  },
+  {
+    "output": "regedit.exe -E C:\\temp\\system.reg \"HKLM\\SYSTEM\"",
+    "explanation": "This command substitutes the /E flag with -E and adds quotes around the registry key. It maintains the same functionality and should still be detected by the Sigma rule."
+  },
+  {
+    "output": "regedit.exe /E C:\\temp\\security.reg HKLM\\SECURITY",
+    "explanation": "This command omits quotes around the registry key and uses a different critical registry key (SECURITY). It maintains the same functionality and should still be detected by the Sigma rule."
+  },
+  {
+    "output": "reg.exe save HKLM\\SYSTEM C:\\temp\\system.save",
+    "explanation": "This command uses the 'reg.exe save' command instead of 'regedit.exe /E' to export a critical registry key. It maintains the same functionality and should still be detected by the Sigma rule."
+  }
+]

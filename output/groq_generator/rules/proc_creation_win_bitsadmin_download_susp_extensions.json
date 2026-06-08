@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

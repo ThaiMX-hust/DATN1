@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks.exe /Create /SC ONLOGON /TN '{123e4567-e89b-12d3-a456-426614174000}' /TR \"cmd.exe\" /F",
+    "explanation": "Inserted quotes around the task name to simulate a common variation in scheduled task naming while still matching the Sigma rule's detection logic."
+  },
+  {
+    "output": "schtasks.exe /Create /SC ONLOGON /TN \"{123e4567-e89b-12d3-a456-426614174000}\" /TR \"cmd.exe\" /F",
+    "explanation": "Used double quotes around the task name to test how the detection rule handles different quotation styles."
+  },
+  {
+    "output": "schtasks.exe /Create /SC ONCE /TN 123e4567-e89b-12d3-a456-426614174000 /TR \"cmd.exe\" /F",
+    "explanation": "Omitted the braces around the GUID in the task name to test if the detection rule is overly dependent on brace inclusion."
+  },
+  {
+    "output": "schtasks.exe /Create /SC ONLOGON /TN 123e4567-e89b-12d3-a456-426614174000 /TR \"cmd.exe\" /F",
+    "explanation": "Used a minimal command line without braces or quotes to test if the detection rule can still identify GUID-like names without additional formatting."
+  }
+]

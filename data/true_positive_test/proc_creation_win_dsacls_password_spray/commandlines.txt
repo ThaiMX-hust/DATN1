@@ -1,0 +1,3 @@
+copy dsacls.exe not_dsacls.exe && not_dsacls.exe /U:admin /P:Password123
+dsacls.exe "/user:domain\user" "/pass""wd:password123"
+set P=/passwd: && dsacls.exe /user:admin %P%Password123

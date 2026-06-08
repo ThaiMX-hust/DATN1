@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v Shell /t REG_SZ /d \"explorer.exe\" /f",
+    "explanation": "The command modifies a registry key in a suspicious path but uses a legitimate value (explorer.exe), which is a common legitimate use case. This could be a safe mutation to test detection boundaries."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"LegitimateApp\" /t REG_SZ /d \"legit_app.exe\" /f",
+    "explanation": "This command uses a legitimate registry location (Run key) and a benign executable name. It tests whether the Sigma rule triggers on benign activity in a suspicious path."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 1 /f",
+    "explanation": "This command modifies a registry key in a suspicious path but sets a legitimate value (TamperProtection=1), which is a known Windows Defender configuration. It tests detection specificity."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\OOBE\" /v \"BypassNRO\" /t REG_DWORD /d 1 /f",
+    "explanation": "This command modifies a registry key in a suspicious path with a known legitimate Windows OOBE configuration. It tests whether the rule falsely triggers on valid system configuration."
+  },
+  {
+    "output": "reg add \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v Shell /t REG_SZ /d \"explorer.exe\" /f",
+    "explanation": "This command modifies a suspicious registry path with a legitimate Shell value. It tests whether the rule can distinguish between benign and malicious activity in the same location."
+  }
+]

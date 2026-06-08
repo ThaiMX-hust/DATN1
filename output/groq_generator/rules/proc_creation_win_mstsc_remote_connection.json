@@ -1,0 +1,38 @@
+[
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe /v:THAIMX",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\mstsc.exe\" /v:THAIMX",
+    "explanation": "Added quotes around the executable path to test insertion techniques while still being parsed correctly by the system."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe -v:THAIMX",
+    "explanation": "Replaced the '/' with '-', a common substitution in command-line syntax, to test if the Sigma rule is sensitive to flag syntax variations."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe /v:THAIMX /f",
+    "explanation": "Added an optional flag '/f' to test if the Sigma rule is sensitive to additional flags while still detecting the core behavior."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe /v:THAIMX /f /span",
+    "explanation": "Added multiple optional flags to test if the Sigma rule is sensitive to additional flags while still detecting the core behavior."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe /v:THAIMX /f /span /w:1024 /h:768",
+    "explanation": "Added additional optional flags with values to test if the Sigma rule is sensitive to additional arguments while still detecting the core behavior."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe /v:THAIMX /f /span /w:1024 /h:768 /public",
+    "explanation": "Added more optional flags to test if the Sigma rule is sensitive to additional arguments while still detecting the core behavior."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe /v:THAIMX /f /span /w:1024 /h:768 /public /admin",
+    "explanation": "Added more optional flags to test if the Sigma rule is sensitive to additional arguments while still detecting the core behavior."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\mstsc.exe /v:THAIMX /f /span /w:1024 /h:768 /public /admin /noconnect",
+    "explanation": "Added more optional flags to test if the Sigma rule is sensitive to additional arguments while still detecting the core behavior."
+  }
+]

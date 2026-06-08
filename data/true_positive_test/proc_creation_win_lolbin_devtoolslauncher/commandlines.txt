@@ -1,0 +1,2 @@
+copy devtoolslauncher.exe not_a_dev_tool.exe && not_a_dev_tool.exe LaunchForDeploy calc.exe
+devtoolslauncher.exe "LaunchFor""Deploy" calc.exe

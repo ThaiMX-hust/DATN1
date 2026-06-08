@@ -1,0 +1,5 @@
+findstr /s /i "payload" "C:\temp\malicious.lnk"
+findstr /V /C:"search_string" payload.lnk & rem evasion_string
+findstr "search_string" C:	emp\malicious.lnk
+findstr "search_string" C:	emp\malicious.lnk > NUL
+findstr "search_string" C:	emp\malicious.lnk C:\Windows\win.ini

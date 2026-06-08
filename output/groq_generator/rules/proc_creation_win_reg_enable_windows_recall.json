@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\" add HKEY_CURRENT_USER\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\WindowsAI /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\" delete HKEY_CURRENT_USER\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\WindowsAI /v DisableAIDataAnalysis /f",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  }
+]

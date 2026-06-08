@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::ASCII); $r.ReadToEnd()\"",
+    "explanation": "This is the original true positive command and not a bypass. It is included for reference."
+  },
+  {
+    "output": "powershell.exe -c \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::ASCII); $r.ReadToEnd()\"",
+    "explanation": "Substituted '-Command' with '-c' (short option). This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::GetEncoding('ASCII')); $r.ReadToEnd()\"",
+    "explanation": "Replaced [System.Text.Encoding]::ASCII with [System.Text.Encoding]::GetEncoding('ASCII'), which is functionally equivalent but syntactically different. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"$d = [System.IO.Compression.DeflateStream]::new($s, 0); $r = [System.IO.StreamReader]::new($d, [System.Text.Encoding]::ASCII); $r.ReadToEnd()\"",
+    "explanation": "Replaced 'New-Object' with the type accelerator syntax '::new()' for the same classes. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::ASCII); & { $r.ReadToEnd() }\"",
+    "explanation": "Wrapped the final method call in a script block and executed it with the call operator '&'. This is a safe mutation that preserves the original behavior."
+  }
+]

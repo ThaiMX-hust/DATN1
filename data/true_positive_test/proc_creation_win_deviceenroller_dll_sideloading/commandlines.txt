@@ -1,0 +1,3 @@
+copy deviceenroller.exe not_an_enroller.exe && not_an_enroller.exe /PhoneDeepLink
+deviceenroller.exe -PhoneDeepLink
+deviceenroller.exe /Phone""DeepLink

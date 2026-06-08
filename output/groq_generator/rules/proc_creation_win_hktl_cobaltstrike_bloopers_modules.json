@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"Invoke-UserHunter\"",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the detection."
+  },
+  {
+    "output": "cmd.exe /c \"invoke-userhunter\"",
+    "explanation": "Lowercase substitution of the command name (substitution technique). The rule uses case-insensitive matching, so this should still trigger the detection."
+  },
+  {
+    "output": "cmd.exe /c \"Invoke-UserHunter\"  # Test comment",
+    "explanation": "Appending a comment after the command (insertion technique). The command remains valid and should still trigger the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /C \"set VAR=Write-Output ''Execution Simulated'' && powershell.exe -Command $env:VAR\"",
+    "explanation": "This command uses a standard environment variable assignment and execution method that avoids obfuscation techniques detected by the Sigma rule. It uses a straightforward 'set' command and does not involve string concatenation or obfuscated syntax."
+  },
+  {
+    "output": "powershell.exe -Command \"$env:TEST='Write-Output ''Execution Simulated'''; Invoke-Expression $env:TEST\"",
+    "explanation": "This command uses a standard PowerShell command to set an environment variable and execute its value. It avoids obfuscation and string formatting techniques that would trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /C \"set TEST=Write-Output ''Execution Simulated'' && powershell.exe -Command $env:TEST\"",
+    "explanation": "This command uses a standard CMD command to set an environment variable and then executes it in PowerShell. It avoids the obfuscated string formatting and concatenation techniques that the Sigma rule is designed to detect."
+  }
+]

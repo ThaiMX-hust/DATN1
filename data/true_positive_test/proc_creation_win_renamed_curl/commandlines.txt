@@ -1,0 +1,1 @@
+ResourceHacker.exe -open curl.exe -save svchost.exe -action modify -res version.res -mask VERSIONINFO,1,1033

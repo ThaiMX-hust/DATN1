@@ -1,0 +1,4 @@
+AdvancedRun.exe /EXEFilename "cmd.exe" "/RunAs" "8" /Run
+AdvancedRun.exe /EXEFilename "cmd.exe" /RunAs  8 /Run
+AdvancedRun.exe /RunConfig "C:\temp\advrun_config.cfg"
+AdvancedRun.exe  /EXEFilename "C:\Windows\System32\sc.exe" /WindowState 0 /CommandLine "stop WinDefend" /StartDirectory "" /RunAs 8 /Run

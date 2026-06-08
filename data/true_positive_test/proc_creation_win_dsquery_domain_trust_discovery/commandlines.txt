@@ -1,0 +1,1 @@
+dsquery  * -filter "(objectClass=trustedDomain)" -attr *

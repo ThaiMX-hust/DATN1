@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command\" /d \"test\" /f",
+    "explanation": "This command modifies the registry by adding a value to the specified key. It uses insertion of quotes and short options to bypass the Sigma rule while maintaining the same behavior for testing purposes."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command /d test /f",
+    "explanation": "This command adds a value to the registry key without unnecessary parameters. It uses omission and reordering to simplify the command while still triggering the same behavior."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command -d test -f",
+    "explanation": "This command uses substitution of long options with short options (-d instead of /d, -f instead of /f) to alter the command structure while preserving its functionality."
+  }
+]

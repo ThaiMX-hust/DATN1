@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks.exe /change /disable /tn \"\\Windows\\SystemRestore\\SR\"",
+    "explanation": "Reordered the command-line arguments and used double quotes around the task name. This is a safe mutation that preserves the original behavior for testing purposes."
+  },
+  {
+    "output": "schtasks.exe /C \"/change /disable /tn \\Windows\\SystemRestore\\SR\"",
+    "explanation": "Wrapped the command line in quotes to simulate execution via a script or environment variable. This is a safe mutation technique for testing."
+  },
+  {
+    "output": "schtasks.exe /change /disable /tn \"\\Windows\\SystemRestore\\SR\" ^>nul",
+    "explanation": "Appended redirection to null to suppress output. This is a safe mutation technique for testing purposes."
+  },
+  {
+    "output": "schtasks.exe /change /disable /tn \"\\Windows\\SystemRestore\\SR\" 2^>^&1 ^>nul",
+    "explanation": "Added standard error redirection to null. This is a safe mutation technique for testing purposes."
+  }
+]

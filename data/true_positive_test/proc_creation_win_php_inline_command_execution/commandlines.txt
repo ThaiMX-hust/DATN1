@@ -1,0 +1,4 @@
+copy php.exe notphp.exe && notphp.exe -r "system('whoami');"
+php --run "system('whoami');"
+php -R "system('whoami');"
+php\t-r "system('whoami');"

@@ -1,0 +1,42 @@
+[
+  {
+    "output": "powershell.exe -Command Set-MpPreference -DisableBehaviorMonitoring $true",
+    "explanation": "This command uses the -Command parameter to execute the same PowerShell command as the original, but it is structured differently. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring 1",
+    "explanation": "This command uses the numeric value '1' instead of the boolean '$true' for the same parameter. It is functionally equivalent and still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "pwsh.exe Set-MpPreference -DisableBehaviorMonitoring $true",
+    "explanation": "This command uses 'pwsh.exe' instead of 'powershell.exe', which is a valid alternative PowerShell executable. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe -c Set-MpPreference -DisableBehaviorMonitoring $true",
+    "explanation": "This command uses the shorthand '-c' for '-Command', which is an equivalent substitution. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true -DisableRuntimeMonitoring $true",
+    "explanation": "This command includes both '-DisableBehaviorMonitoring' and '-DisableRuntimeMonitoring' parameters. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true | Out-Null",
+    "explanation": "This command appends '| Out-Null' to suppress output, but the core command remains unchanged. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true -WarningAction SilentlyContinue",
+    "explanation": "This command adds a '-WarningAction SilentlyContinue' parameter to suppress warnings, but the core command remains unchanged. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true -ErrorAction SilentlyContinue",
+    "explanation": "This command adds a '-ErrorAction SilentlyContinue' parameter to suppress errors, but the core command remains unchanged. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true -Verbose",
+    "explanation": "This command adds a '-Verbose' parameter to enable verbose output, but the core command remains unchanged. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true -Debug",
+    "explanation": "This command adds a '-Debug' parameter to enable debug output, but the core command remains unchanged. It is still detected by the Sigma rule because it contains '-DisableBehaviorMonitoring $true'."
+  }
+]

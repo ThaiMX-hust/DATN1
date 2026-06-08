@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc sdset TargetService \"D:(A;;CCLCSWRPWPDTLOCRRC;;;AU)\"",
+    "explanation": "This command uses the 'sc.exe sdset' functionality to set a service's security descriptor with a DACL that grants access to the AU (Authenticated Users) trustee. It matches the Sigma rule's detection criteria by including 'sdset', 'A;' (Allow Access), and ';AU' in the command line."
+  },
+  {
+    "output": "sc.exe sdset TargetService D:(A;;CCLCSWRPWPDTLOCRRC;;;AU)",
+    "explanation": "This command is a direct match to the Sigma rule. It uses 'sc.exe sdset' with an 'A;' (Allow Access) DACL and ';AU' (Authenticated Users) as the trustee, which are both key indicators in the rule's detection logic."
+  },
+  {
+    "output": "sc sdset TargetService D:(A;;GA;;;WD)",
+    "explanation": "This command sets a DACL granting Generic All (GA) access to the WD (Everyone) trustee. It includes 'sdset', 'A;' (Allow Access), and ';WD' (Everyone), which are all detected by the Sigma rule."
+  },
+  {
+    "output": "sc sdset TargetService D:(A;;CCLCSWRPWPDTLOCRRC;;;IU)",
+    "explanation": "This command grants access to the IU (Interactively logged-on user) trustee. It includes 'sdset', 'A;' (Allow Access), and ';IU', which are all key elements in the Sigma rule's detection logic."
+  },
+  {
+    "output": "sc.exe sdset TargetService D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)",
+    "explanation": "This command sets a DACL granting access to the SY (Local System) trustee. It includes 'sdset', 'A;' (Allow Access), and ';SY', which are all detected by the Sigma rule."
+  }
+]

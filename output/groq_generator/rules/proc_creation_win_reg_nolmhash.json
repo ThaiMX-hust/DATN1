@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v \"NoLMHash\" /t REG_DWORD /d \"0\" /f",
+    "explanation": "This is the original command and serves as a baseline for testing."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa /v NoLMHash /t REG_DWORD /d 0 /f",
+    "explanation": "Removed quotes from the registry key and value names since they are optional in this context and the command still functions correctly."
+  },
+  {
+    "output": "reg add \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Lsa\" /v \"NoLMHash\" /t REG_DWORD /d 0x0 /f",
+    "explanation": "Used hexadecimal representation for the value (0x0) and escaped backslashes for path normalization, which is a valid alternative syntax."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v NoLMHash /t REG_DWORD /d 0 /f",
+    "explanation": "Removed quotes from the value name (NoLMHash) while keeping quotes around the registry path, which is still valid in this context."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v \"NoLMHash\" /t REG_DWORD /d 0 /f",
+    "explanation": "Used consistent quoting for both the registry path and value name, ensuring valid command structure."
+  }
+]

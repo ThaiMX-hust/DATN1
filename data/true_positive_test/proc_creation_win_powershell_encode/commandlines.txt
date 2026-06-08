@@ -1,0 +1,10 @@
+"powershell.exe" & {rpcping -s 127.0.0.1 -e 1234 -a privacy -u NTLM 1>$Null}
+"C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe" -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACIASABlAHkALAAgAEEAdABvAG0AaQBjACEAIgA=
+"powershell.exe" & {$OriginalCommand = 'Write-Host \""Hey, Atomic!\""' $Bytes = [System.Text.Encoding]::Unicode.GetBytes($OriginalCommand) $EncodedCommand =[Convert]::ToBase64String($Bytes) $EncodedCommand powershell.exe -EncodedCommand $EncodedCommand}
+powershell  -exec bypass -e SQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AUABhAHQAaAAgAHcAaQBuADMAMgBfAHAAcgBvAGMAZQBzAHMAIAAtAE4AYQBtAGUAIABjAHIAZQBhAHQAZQAgAC0AQQByAGcAdQBtAGUAbgB0AEwAaQBzAHQAIABuAG8AdABlAHAAYQBkAC4AZQB4AGUA
+"powershell.exe" & {Out-ATHPowerShellCommandLineParameter -CommandLineSwitchType Hyphen -CommandParamVariation C -UseEncodedArguments -EncodedArgumentsParamVariation EA -Execute -ErrorAction Stop}
+"powershell.exe" & {Out-ATHPowerShellCommandLineParameter -CommandLineSwitchType Hyphen -EncodedCommandParamVariation E -Execute -ErrorAction Stop}
+"powershell.exe" & {Out-ATHPowerShellCommandLineParameter -CommandLineSwitchType Hyphen -EncodedCommandParamVariation E -UseEncodedArguments -EncodedArgumentsParamVariation EncodedArguments -Execute -ErrorAction Stop}
+powershell.exe  -e  JgAgACgAZwBjAG0AIAAoACcAaQBlAHsAMAB9ACcAIAAtAGYAIAAnAHgAJwApACkAIAAoACIAVwByACIAKwAiAGkAdAAiACsAIgBlAC0ASAAiACsAIgBvAHMAdAAgACcASAAiACsAIgBlAGwAIgArACIAbABvACwAIABmAHIAIgArACIAbwBtACAAUAAiACsAIgBvAHcAIgArACIAZQByAFMAIgArACIAaAAiACsAIgBlAGwAbAAhACcAIgApAA==
+powershell  -encodedCommand YwBtAGQAIAAvAGMAIAAiAEMAOgBcAEEAdABvAG0AaQBjAFIAZQBkAFQAZQBhAG0AXABhAHQAbwBtAGkAYwBzAFwALgAuAFwARQB4AHQAZQByAG4AYQBsAFAAYQB5AGwAbwBhAGQAcwBcAHQAbwByAFwAVABvAHIAXAB0AG8AcgAuAGUAeABlACIA -inputFormat xml -outputFormat text
+"powershell.exe" & {rpcping -s 127.0.0.1 -e 9997 /a connect /u NTLM 1>$Null}

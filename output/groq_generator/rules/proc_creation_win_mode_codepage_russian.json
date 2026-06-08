@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mode con cp select=1251",
+    "explanation": "This is the original command that matches the Sigma rule. It sets the code page to 1251 (ANSI Cyrillic) using the MODE.COM utility."
+  },
+  {
+    "output": "mode con cp select=\\1251",
+    "explanation": "The equals sign is followed by an escaped number using double backslashes, which may be parsed correctly by the command interpreter while still matching the rule."
+  },
+  {
+    "output": "mode con cp select= 1251",
+    "explanation": "A space is inserted between the equals sign and the value. This is a safe insertion that may evade detection if the rule is not robust to spacing variations."
+  }
+]

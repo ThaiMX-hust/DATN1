@@ -1,0 +1,1 @@
+"powershell.exe" & {Invoke-ATHRemoteFXvGPUDisablementCommand -ModuleName foo -ModulePath $PWD}

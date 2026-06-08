@@ -1,0 +1,22 @@
+[
+  {
+    "output": "findstr \"search_string\" C:\\temp\\malicious.lnk",
+    "explanation": "This command uses standard syntax with a .lnk file as the input, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "findstr /I \"search_string\" \"C:\\temp\\malicious.lnk\"",
+    "explanation": "The command includes the /I flag for case-insensitive search and uses quotes around the .lnk file path, which is still detected by the Sigma rule."
+  },
+  {
+    "output": "findstr \"search_string\" C:\\temp\\malicious.lnk > NUL",
+    "explanation": "This command redirects output to NUL, but the .lnk file is still present in the command line and matches the Sigma rule."
+  },
+  {
+    "output": "findstr \"search_string\" C:\\temp\\malicious.lnk C:\\Windows\\win.ini",
+    "explanation": "The command includes an additional file, but the presence of the .lnk file still triggers the Sigma rule."
+  },
+  {
+    "output": "findstr /V /C:\"search_string\" C:\\temp\\malicious.lnk & rem evasion_string",
+    "explanation": "This command uses advanced options and a comment, but the .lnk file is still present and matches the Sigma rule."
+  }
+]

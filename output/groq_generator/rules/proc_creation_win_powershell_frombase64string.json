@@ -1,0 +1,30 @@
+[
+  {
+    "output": "powershell.exe -Command \"[Convert]::FromBase64String('SGVsbG8gV29ybGQ=')\"",
+    "explanation": "The original Sigma rule detects the use of 'FromBase64String' directly. This command uses the same function in a straightforward manner and would be flagged by the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Convert]::FromBase64String( 'SGVsbG8gV29ybGQ=' )\"",
+    "explanation": "This command uses the fully qualified namespace [System.Convert] and adds extra spaces around the string argument. The rule still detects the 'FromBase64String' function, so this is not a bypass."
+  },
+  {
+    "output": "powershell.exe -Command \"$method = 'FromBase' + '64String'; [Convert]::$method('SGVsbG8gV29ybGQ=')\"",
+    "explanation": "This command uses string concatenation to construct the method name 'FromBase64String'. The rule detects the presence of 'FromBase64String' in the command line, so this is not a bypass."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX ([Text.Encoding]::UNICODE.GetString([Convert]::FromBase64String((gp HKCU:Software\\Microsoft\\Windows\\CurrentVersion Debug).Debug)))\"",
+    "explanation": "This command uses the 'FromBase64String' function as part of a more complex command. The rule detects the presence of 'FromBase64String', so this is not a bypass."
+  },
+  {
+    "output": "powershell.exe -Command \"[Convert]::FromBase64String([System.Text.Encoding]::ASCII.GetBytes('SGVsbG8gV29ybGQ='))\"",
+    "explanation": "This command attempts to obfuscate the base64 string by using GetBytes, but the 'FromBase64String' function is still present and detectable by the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"[Convert]::FromBase64String([System.Text.Encoding]::ASCII.GetString([System.Text.Encoding]::ASCII.GetBytes('SGVsbG8gV29ybGQ=')))\"",
+    "explanation": "This command adds an extra layer of obfuscation by converting the base64 string to bytes and back to a string. However, the 'FromBase64String' function is still present and detectable by the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"[Convert]::FromBase64String([System.Text.Encoding]::ASCII.GetString([System.Text.Encoding]::ASCII.GetBytes([System.Text.Encoding]::ASCII.GetBytes('SGVsbG8gV29ybGQ='))))\"",
+    "explanation": "This command adds multiple layers of obfuscation by converting the base64 string to bytes multiple times. However, the 'FromBase64String' function is still present and detectable by the rule."
+  }
+]

@@ -1,0 +1,6 @@
+schtasks  /Create /TN "CompMgmtBypass" /TR "compmgmt.msc" /SC ONLOGON /RL HIGHEST /F
+schtasks  /Create /TN "EventViewerBypass" /TR "eventvwr.msc" /SC ONLOGON /RL HIGHEST /F
+schtasks  /create /tn "T1053_005_OnStartup" /sc onstart /ru system /tr "cmd.exe /c calc.exe"
+schtasks /Create /TN "TestTask" /TR "calc.exe" /RU SYSTEM /SC ONLOGON
+schtasks /Create /TN "TestTask" /TR "calc.exe" /SC "ONLOGON" /RU "SYSTEM"
+schtasks /Create /TN "TestTask" /TR "calc.exe" /SC\tONSTART\t/RU\tSYSTEM

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"BypassTask\" /tr \"C:\\Users\\Public\\malicious.bat\"",
+    "explanation": "The Sigma rule detects scheduled task creation pointing to suspicious paths like 'C:\\Users\\Public'. This command uses the 'Public' directory, which is flagged by the rule, making it a true positive."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"BypassTask\" /tr \"%Public%\\malicious.bat\"",
+    "explanation": "The Sigma rule includes environment variables like '%Public%' in its detection logic. This command uses '%Public%' to reference the same directory, which is flagged by the rule, making it a true positive."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"BypassTask\" /tr \"C:\\Windows\\Temp\\malicious.bat\"",
+    "explanation": "The Sigma rule detects scheduled task creation pointing to suspicious paths like 'C:\\Windows\\Temp'. This command uses the 'Windows\\Temp' directory, which is flagged by the rule, making it a true positive."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"BypassTask\" /tr \"C:\\Users\\Default\\malicious.bat\"",
+    "explanation": "The Sigma rule includes the 'Default' user directory in its detection logic. This command uses 'C:\\Users\\Default', which is flagged by the rule, making it a true positive."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"BypassTask\" /tr \"C:\\Users\\AppData\\Roaming\\malicious.bat\"",
+    "explanation": "The Sigma rule includes the 'AppData\\Roaming' directory in its detection logic. This command uses 'C:\\Users\\AppData\\Roaming', which is flagged by the rule, making it a true positive."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated without triggering the Sigma rule's detection logic, as the rule covers multiple common paths and environment variables used in scheduled task creation."
+  }
+]

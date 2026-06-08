@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy diantz.exe d.exe && d.exe C:\\path\\to\\input.txt C:\\path\\to\\target.txt:output.cab",
+    "explanation": "The original command is already a valid representation of the Sigma rule's detection criteria. No mutation is needed for this baseline test."
+  },
+  {
+    "output": "copy diantz.exe d.exe && d.exe C:\\path\\to\\input.txt C:\\path\\to\\target.txt\\:output.cab",
+    "explanation": "Inserted an extra backslash before the colon to test parsing behavior while still matching the rule's regex for ADS detection."
+  }
+]

@@ -1,0 +1,3 @@
+cmd /c "set X=m& set Y=d& c%X%%Y% /c calc.exe"
+cmd.exe /c "FOR /F "tokens=1" %A IN ('echo set') DO %A MYVAR=value"
+cmd.exe /c "s"e"t OBJ=calc.exe && %O%B%J%"

@@ -1,0 +1,2 @@
+"C:\Users\Public\Temp\PsExec.exe" -i -s cmd -accepteula
+"powershell.exe" & {cd C:\Users\Public\Temp\  .\PsExec.exe -i -s cmd  -accepteula}

@@ -1,0 +1,1 @@
+cleanmgr.exe /d C:\PROGRA~1\

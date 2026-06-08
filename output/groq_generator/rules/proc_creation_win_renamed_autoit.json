@@ -1,0 +1,26 @@
+[
+  {
+    "output": "updater.exe /AutoIt3ExecuteScript script.au3",
+    "explanation": "This command adds an explicit /AutoIt3ExecuteScript flag to the original command, which is a known trigger in the Sigma rule. It simulates a renamed AutoIt3.exe execution and is a valid test for the detection rule."
+  },
+  {
+    "output": "updater.exe -AutoIt3ExecuteScript script.au3",
+    "explanation": "This command substitutes the / flag with a - flag, which is a valid syntax variation in some Windows command-line tools. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "updater.exe script.au3 /ErrorStdOut",
+    "explanation": "This command adds the /ErrorStdOut flag, which is another known trigger in the Sigma rule. It simulates a renamed AutoIt3.exe execution with additional flags."
+  },
+  {
+    "output": "updater.exe script.au3 /AutoIt3ExecuteScript /ErrorStdOut",
+    "explanation": "This command includes both /AutoIt3ExecuteScript and /ErrorStdOut flags, which are both triggers in the Sigma rule. It provides a more comprehensive test of the detection logic."
+  },
+  {
+    "output": "updater.exe script.au3 -AutoIt3ExecuteScript -ErrorStdOut",
+    "explanation": "This command uses - instead of / for both flags, which is a valid syntax substitution in some Windows command-line tools. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "updater.exe script.au3 /AutoIt3ExecuteScript",
+    "explanation": "This command adds the /AutoIt3ExecuteScript flag to the original command, which is a known trigger in the Sigma rule. It simulates a renamed AutoIt3.exe execution and is a valid test for the detection rule."
+  }
+]

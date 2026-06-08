@@ -1,0 +1,7 @@
+cdb.exe "-cf" script.txt
+cdb.exe -C "!shell calc.exe"
+copy cdb.exe not_a_debugger.exe && not_a_debugger.exe -cf script.txt
+cdb.exe -lines 10 -cfC:\path\to\script.txt calc.exe
+copy cdb.exe not_cdb.exe && not_cdb.exe -c
+cdb.exe -command "!shell calc.exe"
+cdb.exe -lines -c:"!shell calc.exe"

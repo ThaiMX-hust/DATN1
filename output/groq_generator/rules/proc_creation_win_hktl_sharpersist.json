@@ -1,0 +1,22 @@
+[
+  {
+    "output": "update.exe -c \"cmd /c calc.exe\" -t schtask",
+    "explanation": "The original command is already a valid test command for the Sigma rule. No mutation is needed for the controlled test environment."
+  },
+  {
+    "output": "update.exe -c cmd //c calc.exe -t schtask",
+    "explanation": "Replaced the double slash (//) as an alternative to the single slash (/) in the 'cmd /c' syntax. This is a safe substitution technique."
+  },
+  {
+    "output": "\"update.exe\" -c \"cmd /c calc.exe\" -t schtask",
+    "explanation": "Inserted quotes around the executable name to test how the detection rule handles quoted paths, a common insertion technique."
+  },
+  {
+    "output": "update.exe -t schtask -c \"cmd /c calc.exe\"",
+    "explanation": "Reordered the command-line arguments to test if the detection rule is sensitive to argument order, a safe reordering technique."
+  },
+  {
+    "output": "update.exe -c \"cmd /c calc.exe\" -t sch\\task",
+    "explanation": "Used an escaped backslash in the '-t sch\\task' argument to test path normalization and parsing behavior, a safe recoding technique."
+  }
+]

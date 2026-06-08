@@ -1,0 +1,2 @@
+copy Sysmon64.exe not_sysmon.exe && not_sysmon.exe -u
+Sysmon64.exe /u

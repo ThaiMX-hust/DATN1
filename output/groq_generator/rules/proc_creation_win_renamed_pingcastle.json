@@ -1,0 +1,10 @@
+[
+  {
+    "output": "pc_renamed.exe --scanner aclcheck --healthcheck --level Full --no-enum-limit --server localhost",
+    "explanation": "This command simulates a renamed PingCastle binary execution with valid command-line arguments that match the Sigma rule's detection criteria. It includes required flags like --healthcheck, --level Full, --no-enum-limit, and --server to ensure it aligns with the rule's logic."
+  },
+  {
+    "output": "PingCastle.exe --scanner aclcheck --healthcheck --level Full --no-enum-limit --server localhost",
+    "explanation": "This command uses the original PingCastle binary name but includes the same command-line arguments as the Sigma rule expects. It is a true positive for testing the rule and confirms detection accuracy."
+  }
+]

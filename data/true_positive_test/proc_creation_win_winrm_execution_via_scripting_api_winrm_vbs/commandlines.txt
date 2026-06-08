@@ -1,0 +1,1 @@
+copy cscript.exe not_cscript.exe && not_cscript.exe winrm.vbs invoke Create wmicimv2/Win32_Process -r:https://remote-host @{CommandLine="calc.exe"}

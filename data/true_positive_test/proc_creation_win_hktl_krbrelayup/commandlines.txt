@@ -1,0 +1,1 @@
+UpdateService.exe "relay" "-Domain" contoso.local "-ComputerName" target-host$

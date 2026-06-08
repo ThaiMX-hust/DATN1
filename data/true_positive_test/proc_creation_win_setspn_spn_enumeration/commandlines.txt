@@ -1,0 +1,2 @@
+"C:\WINDOWS\system32\setspn.exe" -T %%USERDNSDOMAIN%% -Q */*
+setspn  -T %%USERDNSDOMAIN%% -Q */*

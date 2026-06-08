@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "This is the original command and serves as a baseline for comparison. It uses the full path to bitsadmin.exe and includes all required flags and parameters."
+  },
+  {
+    "output": "bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Removed the full path to bitsadmin.exe since it is commonly found in system directories. This is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt \"%temp%\\Atomic-license.txt\"",
+    "explanation": "Replaced the explicit path with the %temp% environment variable. This is a safe mutation technique and still matches the Sigma rule."
+  }
+]

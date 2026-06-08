@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\hashcat6\\hashcat-6.1.1\\hashcat.exe -a 0 -m 1000 -r .\\rules\\Incisive-leetspeak.rule C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\sam.txt C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\password.lst",
+    "explanation": "The original command is modified by omitting the unnecessary 'cmd.exe /c cd ...' part and using a direct path to hashcat.exe. This preserves the same behavior and should still trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\hashcat6\\hashcat-6.1.1\\hashcat.exe -a0 -m1000 -r .\\rules\\Incisive-leetspeak.rule C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\sam.txt C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\password.lst",
+    "explanation": "The command is modified by removing spaces between flags and their values (e.g., '-a 0' becomes '-a0'). This is a valid syntax for hashcat and should still trigger the Sigma rule."
+  }
+]

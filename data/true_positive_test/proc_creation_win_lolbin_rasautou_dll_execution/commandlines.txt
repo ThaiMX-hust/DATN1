@@ -1,0 +1,2 @@
+copy rasautou.exe not_ras.exe && not_ras.exe -d "malicious.dll" -p "ExportName"
+rasautou.exe  -d:"test.dll"  -p:"DllMain"

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v http /t REG_DWORD /d 0 /F & reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v https /t REG_DWORD /d 0 /F",
+    "explanation": "The original command is split into two separate `reg add` commands joined by an ampersand. This is a valid mutation technique (reordering and omission) that preserves the behavior while slightly altering the structure."
+  },
+  {
+    "output": "reg add HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults /v http /t REG_DWORD /d 0 /F & reg add HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults /v https /t REG_DWORD /d 0 /F",
+    "explanation": "Quotes around the registry path are omitted since they are not strictly required in this context. This is a safe mutation technique (omission) that maintains the same functionality."
+  },
+  {
+    "output": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v http /t REG_DWORD /d 0 /F && reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v https /t REG_DWORD /d 0 /F",
+    "explanation": "The ampersand is replaced with a double ampersand (`&&`), which is a valid equivalent in Windows command-line syntax for chaining commands. This is a safe substitution technique."
+  }
+]

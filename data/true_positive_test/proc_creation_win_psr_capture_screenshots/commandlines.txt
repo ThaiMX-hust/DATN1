@@ -1,0 +1,4 @@
+"C:\WINDOWS\system32\psr.exe"  /start /output c:\temp\T1113_desktop.zip /sc 1 /gui 0 /stopevent 12
+psr.exe  /start /output c:\temp\T1113_desktop.zip /sc 1 /gui 0 /stopevent 12
+copy psr.exe not_psr.exe && not_psr.exe /start /output C:\Users\Public\capture.zip /sc 1 /maxsize 10
+psr.exe /sc 1 /output C:\Users\Public\report.zip /maxsize 5 /gui 0

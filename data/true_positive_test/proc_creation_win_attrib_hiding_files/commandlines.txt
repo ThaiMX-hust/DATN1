@@ -1,0 +1,5 @@
+attrib.exe  +h C:\Users\thaim\AppData\Local\Temp\T1222.001_attrib_2\T1222.001_attrib1.txt
+attrib.exe  +h C:\Users\thaim\AppData\Local\Temp\T1222.001_attrib_2\T1222.001_attrib2.txt
+attrib.exe  +h C:\Users\thaim\AppData\Local\Temp\T1564.001.txt
+attrib +h "malware.exe"
+copy attrib.exe not_attrib.exe && not_attrib.exe +h malware.exe

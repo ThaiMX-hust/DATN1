@@ -1,0 +1,3 @@
+copy cmd.exe not_cmd.exe && mshta.exe javascript:a=new ActiveXObject("WScript.Shell");a.Run("not_cmd.exe");window.close()
+mshta.exe C:\path\to\malicious.hta
+mshta.exe javascript:a=new ActiveXObject("WScript.Shell");a.Run("rundll32.exe shell32.dll,Control_RunDLL",1,true);window.close()

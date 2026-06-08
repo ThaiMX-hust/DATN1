@@ -1,0 +1,1 @@
+Microsoft.NodejsTools.PressAnyKey.exe calc.exe

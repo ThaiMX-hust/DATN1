@@ -1,0 +1,38 @@
+[
+  {
+    "output": "certoc.exe -loaddll malicious.dll",
+    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+  },
+  {
+    "output": "certoc.exe -LoadDLL malicious.dll",
+    "explanation": "The command uses the original flag with capitalization variation, which is still valid and detected by the Sigma rule."
+  },
+  {
+    "output": "certoc.exe -loaddll\" malicious.dll",
+    "explanation": "Inserts a quote after the flag, which is still parsed correctly by the command-line parser and should be detected."
+  },
+  {
+    "output": "certoc.exe -loaddll  malicious.dll",
+    "explanation": "Adds extra space between the flag and the argument, which is still valid and should be detected."
+  },
+  {
+    "output": "certoc.exe ^-loaddll malicious.dll",
+    "explanation": "Uses an escape character (^) before the flag, which is still parsed correctly and should be detected."
+  },
+  {
+    "output": "certoc.exe -loaddll .\\malicious.dll",
+    "explanation": "Uses a relative path for the DLL, which is valid and should be detected."
+  },
+  {
+    "output": "certoc.exe -loaddll C:\\Windows\\System32\\malicious.dll",
+    "explanation": "Uses an absolute path for the DLL, which is valid and should be detected."
+  },
+  {
+    "output": "certoc.exe -loaddll malicious",
+    "explanation": "Omits the .dll extension, which may be accepted depending on the system configuration and should still be detected."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

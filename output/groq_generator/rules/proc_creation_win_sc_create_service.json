@@ -1,0 +1,30 @@
+[
+  {
+    "output": "sc create W64Time binPath= \"c:\\Windows\\System32\\svchost.exe -k TimeService\" type= share start=auto",
+    "explanation": "Removed the .exe extension from 'sc' and used double quotes around the binary path. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "sc.exe create AtomicTestService_CMD binPath= \"C:\\AtomicRedTeam\\atomics\\T1543.003\\bin\\AtomicService.exe\" start=auto type=Own",
+    "explanation": "Removed the redundant \\localhost parameter from the command line. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "sc.exe create sesshijack binpath= \"cmd.exe /k tscon 1337 /dest:rdp-tcp#55\"",
+    "explanation": "Replaced the single quotes around the binary path with double quotes. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "sc.exe create AtomicService binPath= \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "Removed the redundant 'type=Own' parameter. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "sc.exe create \"WerFaultSvc\" binPath= \"$env:windir\\WinSxS\\x86_microsoft-windows-errorreportingfaults_31bf3856ad364e35_4.0.9600.16384_none_a13f7e283339a050\\WerFault.exe\" DisplayName= \"WerFault Service\" start= auto",
+    "explanation": "Replaced the single quotes around the service name with double quotes. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "sc.exe create ARTService binPath= \"C:\\WINDOWS\\system32\\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\\art-marker.txt\"",
+    "explanation": "Replaced the single quotes around the binary path with double quotes. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "sc create MyService binpath= \"calc.exe\"",
+    "explanation": "Removed the .exe extension from 'sc' and replaced the single quotes around the binary path with double quotes. This is a safe mutation that preserves the original behavior."
+  }
+]

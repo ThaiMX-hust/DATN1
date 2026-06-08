@@ -1,0 +1,2 @@
+copy "SimpleService.exe" "not_simple.exe" && "not_simple.exe"
+reg add "HKLM\System\CurrentControlSet\Services\NotSimple" /v ImagePath /t REG_EXPAND_SZ /d "Svc.exe" /f

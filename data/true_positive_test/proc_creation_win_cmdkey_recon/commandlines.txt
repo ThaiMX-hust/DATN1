@@ -1,0 +1,3 @@
+cmdkey  /list
+"C:\WINDOWS\system32\cmdkey.exe" /list
+cmdkey.exe  /list

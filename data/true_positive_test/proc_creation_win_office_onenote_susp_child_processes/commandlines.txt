@@ -1,0 +1,5 @@
+copy powershell.exe trusted_updater.exe && "ONENOTE.EXE" /hyperlink trusted_updater.exe
+explorer.exe "C:\Users\Public\Documents\payload.lnk"
+"ONENOTE.EXE" /hyperlink "calc.exe"
+"ONENOTE.EXE" /hyperlink "explorer.exe" "payload.exe"
+copy powershell.exe not_a_backdoor.exe && "ONENOTE.EXE" /hyperlink not_a_backdoor.exe

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "conhost.exe conhost.exe \"..\\..\\..\\..\\windows\\system32\\calc.exe\"",
+    "explanation": "The command uses path traversal and is wrapped in quotes to simulate a bypass using insertion and recoding techniques."
+  },
+  {
+    "output": "conhost.exe conhost.exe ..\\..\\..\\..\\windows\\system32\\calc.exe",
+    "explanation": "The command omits quotes and uses standard path traversal syntax, simulating a minimal bypass using omission and reordering techniques."
+  },
+  {
+    "output": "conhost.exe \"conhost.exe\" \"..\\..\\..\\..\\windows\\system32\\calc.exe\"",
+    "explanation": "The command inserts quotes around arguments to test if the Sigma rule detects quoted path traversal, using insertion and recoding techniques."
+  }
+]

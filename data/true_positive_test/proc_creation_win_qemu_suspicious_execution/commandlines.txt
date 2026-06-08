@@ -1,0 +1,6 @@
+cmd.exe /c "qemu-system-i386.exe -m 1M -netdev user,id=n1,restrict=off,connect=10.0.0.5:80 -nographic & REM  -cdrom "
+qemu-system-x86_64.exe -m 1M -netdev user,id=lan,restrict=off -netdev socket,id=sock,connect=192.168.1.10:443 -nographic -cdrom NUL
+qemu-system-x86_64.exe -m 1M -netdev user,id=n0,restrict=off,connect=192.168.1.100:443 -nographic -blockdev driver=null,node-name=dummy
+qemu-system-x86_64.exe -m 4M -netdev user,id=n0,restrict=off,connect=192.168.1.100:443 -nographic
+qemu-system-x86_64.exe -m 4M -netdev user,id=net0,restrict=n,connect=127.0.0.1:4444 -display none -cdrom dummy.iso
+qemu-system-x86_64.exe -m 512K -netdev "user,id=vlan0,restrict=o""ff,connect=10.0.0.5:8080" -nographic

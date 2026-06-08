@@ -1,0 +1,2 @@
+pwsh.exe -Command "Set-Service` -Name 'SuspiciousService' -SecurityDescriptorSddl` 'D;;DCLC;;;BA'"
+pwsh.exe -Command "spsv -Name 'SuspiciousService' -Sec 'D;;DCLC;;;BA'"

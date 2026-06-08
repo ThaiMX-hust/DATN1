@@ -1,0 +1,3 @@
+copy dism.exe sys_update.exe && sys_update.exe /Online /Disable-Feature /FeatureName:Windows-Defender
+dism.exe -Online -Disable-Feature -FeatureName:Windows-Defender /Quiet /NoRestart
+Dism  /online /Disable-Feature /FeatureName:Windows-Defender /Remove /NoRestart /quiet

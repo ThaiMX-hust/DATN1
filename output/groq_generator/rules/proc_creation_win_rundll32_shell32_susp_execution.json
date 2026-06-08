@@ -1,0 +1,18 @@
+[
+  {
+    "output": "rundll32.exe \"shell32,Control_RunDLL\" payload.dll",
+    "explanation": "Inserted quotes around the command-line argument to test how the rule handles quoted strings, which is a safe mutation technique."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,Control_RunDLL payload.dll",
+    "explanation": "Used the full name 'shell32.dll' instead of the short name 'shell32' to test if the rule detects both variations."
+  },
+  {
+    "output": "rundll32.exe shell32,Control_RunDLL payload.dll",
+    "explanation": "Omitted the .dll extension from 'shell32.dll' to test if the rule still identifies the command as malicious."
+  },
+  {
+    "output": "rundll32.exe Control_RunDLL,shell32 payload.dll",
+    "explanation": "Reordered the command-line arguments to test if the rule is sensitive to argument order."
+  }
+]

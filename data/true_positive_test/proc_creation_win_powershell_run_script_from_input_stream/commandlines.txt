@@ -1,0 +1,3 @@
+copy powershell.exe ps.exe && ps.exe - < script.ps1
+powershell.exe "-" < script.ps1
+type script.ps1 | powershell.exe -

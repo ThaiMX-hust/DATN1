@@ -1,0 +1,5 @@
+"C:\WINDOWS\system32\rundll32.exe" C:\Users\thaim\Downloads\calc.png StartW
+cd C:\test\ && copy malicious.dll photo.jpg && rundll32.exe .\photo.jpg,DllMain
+copy calc.dll calc.dat && rundll32.exe calc.dat,DllMain
+rundll32.exe "C:\path\to\malicious_image.jpg " ,DllMain
+rundll32.exe shell32.dll,Control_RunDLL C:\Users\Public\malicious.png

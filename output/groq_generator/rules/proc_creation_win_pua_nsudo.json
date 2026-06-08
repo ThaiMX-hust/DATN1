@@ -1,0 +1,22 @@
+[
+  {
+    "output": "NSudo.exe -U:S -P:E whoami",
+    "explanation": "This command matches the Sigma rule as it uses NSudo.exe with the '-U:S' and '-P:E' flags, which are explicitly detected."
+  },
+  {
+    "output": "NSudo.exe -u:s -p:e whoami",
+    "explanation": "This command uses lowercase flags '-u:s' and '-p:e', which are equivalent to '-U:S' and '-P:E' and are still detected by the Sigma rule."
+  },
+  {
+    "output": "ren NSudo.exe not_suspicious.exe && .\\not_suspicious.exe -U:S -P:E whoami",
+    "explanation": "This command renames NSudo.exe to avoid direct detection by file name, but the Sigma rule still detects it due to the '-U:S' and '-P:E' flags in the command line."
+  },
+  {
+    "output": "NSudo.exe -ShowWindowMode:Hide -U:S -P:E whoami",
+    "explanation": "This command adds the '-ShowWindowMode:Hide' flag, which is also included in the Sigma rule's detection logic, ensuring it is flagged."
+  },
+  {
+    "output": "NSudo.exe -M:H -U:E whoami",
+    "explanation": "This command uses '-M:H' and '-U:E', both of which are covered by the Sigma rule's detection of NSudo command-line arguments."
+  }
+]

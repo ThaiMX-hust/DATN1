@@ -1,0 +1,2 @@
+ren runexehelper.exe legit_tool.exe && legit_tool.exe some_payload.exe
+runexehelper.exe . . . && copy calc.exe not_calc.exe && not_calc.exe

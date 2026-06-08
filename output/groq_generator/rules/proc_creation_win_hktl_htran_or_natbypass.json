@@ -1,0 +1,6 @@
+[
+  {
+    "output": "htran.exe -tran -c 127.0.0.1 -p 8080",
+    "explanation": "Removed quotes around the IP address and command-line arguments, which may bypass detection if the Sigma rule relies on quoted strings."
+  }
+]

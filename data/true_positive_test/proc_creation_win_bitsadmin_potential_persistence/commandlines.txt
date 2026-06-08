@@ -1,0 +1,5 @@
+bitsadmin.exe  /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\Users\thaim\AppData\Local\Temp\bitsadmin3_flag.ps1
+bitsadmin.exe /Addfile myjob payload.exe payload.exe
+bitsadmin.exe /SetNotifyCmdLine myjob
+bitsadmin.exe /SetNotifyCmdLine myjob powershell.exe
+Start-BitsTransfer -Source httpayload.exe -Destination payload.exe

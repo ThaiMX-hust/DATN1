@@ -1,0 +1,18 @@
+[
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile \"C:\\Users\\Public\\Downloads\\example.udl\"",
+    "explanation": "The command uses quotes around the UDL file path to safely handle spaces or special characters. This is a valid test command that matches the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe oledb32.dll,OpenDSLFile C:\\Users\\user\\Downloads\\test.udl",
+    "explanation": "This command uses the CMD shell to execute rundll32.exe, which is a common method for testing process execution. It matches the Sigma rule and is valid for testing."
+  },
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile \"C:\\Users\\admin\\Downloads\\test.udl\"",
+    "explanation": "This command uses quotes around the UDL file path to safely handle spaces or special characters. It is a valid test command that matches the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile C:\\ProgramData\\test.udl",
+    "explanation": "This command uses a path without quotes since the path does not contain spaces or special characters. It is a valid test command that matches the Sigma rule."
+  }
+]

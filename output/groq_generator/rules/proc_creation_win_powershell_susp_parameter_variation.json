@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"Write-Host 'Testing Rule Scope'\"",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria for '-WindowStyle Hidden' and '-ExecutionPolicy Bypass'."
+  },
+  {
+    "output": "powershell.exe -win h -exec bypass -c \"Write-Host 'Testing Rule Scope'\"",
+    "explanation": "This command uses short parameter names and abbreviations that match the Sigma rule's detection criteria for '-WindowStyle Hidden' and '-ExecutionPolicy Bypass'."
+  },
+  {
+    "output": "powershell.exe -win h -exec bypass -Command \"Write-Host 'Testing Rule Scope'\"",
+    "explanation": "This command uses a space between the parameter and value, which is still detected by the Sigma rule's substring-based detection."
+  },
+  {
+    "output": "powershell.exe -win h -exec bypass -Command \"Write-Host 'Testing Rule Scope'\" -noprofile",
+    "explanation": "This command adds an additional parameter (-noprofile) but still includes the substrings that match the Sigma rule's detection."
+  },
+  {
+    "output": "powershell.exe -WindowStyle h -ExecutionPolicy bypass -Command \"Write-Host 'Testing Rule Scope'\"",
+    "explanation": "This command uses full parameter names but still includes substrings that match the Sigma rule's detection criteria."
+  }
+]

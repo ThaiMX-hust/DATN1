@@ -1,0 +1,34 @@
+[
+  {
+    "output": "python.exe -c \"import os; os.system('whoami')\"",
+    "explanation": "This is the direct command that matches the Sigma rule and is used for testing detection accuracy."
+  },
+  {
+    "output": "python.exe -c'import os; os.system(\"whoami\")'",
+    "explanation": "Single quotes are used instead of double quotes to enclose the command string, which is a valid syntax substitution."
+  },
+  {
+    "output": "python.exe -c\"import os; os.system('whoami')\"",
+    "explanation": "Quotes are directly appended to the -c flag without a space, which is still valid syntax in some command-line interpreters."
+  },
+  {
+    "output": "python.exe -c \"import os; os.system('whoami')\" # test comment",
+    "explanation": "A comment is appended to the command line, which is allowed in some shells and does not affect execution."
+  },
+  {
+    "output": "python.exe -c \"import os; os.system('whoami')\"\\n",
+    "explanation": "A newline character is appended to the command line, which is allowed in some shells and does not affect execution."
+  },
+  {
+    "output": "python.exe -c \"import os; os.system('whoami')\"\\t",
+    "explanation": "A tab character is appended to the command line, which is allowed in some shells and does not affect execution."
+  },
+  {
+    "output": "python.exe -c \"import os; os.system('whoami')\"\\r",
+    "explanation": "A carriage return character is appended to the command line, which is allowed in some shells and does not affect execution."
+  },
+  {
+    "output": "python.exe -c \"import os; os.system('whoami')\"\\x20",
+    "explanation": "A hex-encoded space character is appended to the command line, which is allowed in some shells and does not affect execution."
+  }
+]

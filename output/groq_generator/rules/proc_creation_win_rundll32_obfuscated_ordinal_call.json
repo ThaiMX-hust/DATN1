@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe payload.dll, #131096",
+    "explanation": "Inserted an extra space before the '#131096' ordinal to test if the rule detects obfuscated ordinals despite spacing changes."
+  },
+  {
+    "output": "rundll32.exe payload.dll,#00131096",
+    "explanation": "Prefixed the ordinal with zeros to test if the rule detects obfuscated ordinals with zero-padding."
+  },
+  {
+    "output": "rundll32.exe payload.dll,#131096+0",
+    "explanation": "Added a harmless arithmetic expression to test if the rule is sensitive to minor syntactic variations."
+  },
+  {
+    "output": "rundll32.exe payload.dll,#131096",
+    "explanation": "Appended a trailing space after the ordinal to test if the rule is affected by whitespace insertion."
+  },
+  {
+    "output": "rundll32.exe payload.dll, #0131096",
+    "explanation": "Inserted a space and prefixed the ordinal with a zero to test if the rule is sensitive to minor formatting changes."
+  }
+]

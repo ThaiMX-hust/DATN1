@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:\"Execute(RegRead('...')); window.close;\"",
+    "explanation": "The original command is preserved with quotes escaped using backslashes, which is a safe mutation technique for testing purposes."
+  },
+  {
+    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:Execute(RegRead('...')); window.close;",
+    "explanation": "Quotes are omitted where not strictly necessary, and the command remains functionally equivalent for testing purposes."
+  },
+  {
+    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:Execute(RegRead(\"...\")); window.close;",
+    "explanation": "Double quotes are used instead of single quotes around the RegRead argument, which is a valid syntax substitution."
+  },
+  {
+    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:Execute(RegRead('...'));window.close;",
+    "explanation": "Whitespace is removed between the semicolon and window.close, which is a safe reordering/omission technique."
+  }
+]

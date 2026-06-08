@@ -1,0 +1,1 @@
+cmd.exe /c "echo wlan show profile name=SSID key=clear | netsh.exe"

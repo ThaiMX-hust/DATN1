@@ -1,0 +1,1 @@
+copy "Microsoft.NodejsTools.PressAnyKey.exe" "renamed_tool.exe" && "renamed_tool.exe" cmd.exe

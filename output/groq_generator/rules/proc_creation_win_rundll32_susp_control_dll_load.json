@@ -1,0 +1,18 @@
+[
+  {
+    "output": "rundll32.exe payload.dll,DllMain \"Shell32.dll\"",
+    "explanation": "The original command is modified by adding quotes around the 'Shell32.dll' argument, which is a safe insertion technique. This demonstrates how the command might be altered while still being parsed correctly."
+  },
+  {
+    "output": "rundll32.exe payload.dll,DllMain Shell32.dll",
+    "explanation": "The original command is slightly altered by removing quotes around 'Shell32.dll'. This demonstrates omission while preserving the command's behavior."
+  },
+  {
+    "output": "RUNDLL32.EXE payload.dll,DllMain Shell32.dll",
+    "explanation": "The command is modified by using the capitalized version of rundll32.exe, which is a substitution technique. This is allowed as long as the program accepts it."
+  },
+  {
+    "output": "rundll32.exe payload.dll,DllMain C:\\Windows\\System32\\Shell32.dll",
+    "explanation": "The command is modified by using the full path to Shell32.dll. This is a recoding technique and demonstrates how the command might be altered in a test environment."
+  }
+]

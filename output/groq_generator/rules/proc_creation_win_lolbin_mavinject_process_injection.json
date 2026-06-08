@@ -1,0 +1,10 @@
+[
+  {
+    "output": "mavinject.exe 1234 /INJECTRUNNING\\\\tevil.dll",
+    "explanation": "Reordering and insertion of an extra backslash before the 't' in '/INJECTRUNNING' to test if the detection rule can be bypassed by altering the command line structure."
+  },
+  {
+    "output": "mavinject.exe 1234 /INJECTRUNNING\\\"tevil.dll\"",
+    "explanation": "Insertion of quotes around the DLL path to test if the detection rule can be bypassed by using quotes in the command line."
+  }
+]

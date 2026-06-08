@@ -1,0 +1,1 @@
+"C:\AtomicRedTeam\ExternalPayloads\Sdelete\sdelete.exe" -accepteula C:\AtomicRedTeam\atomics\..\ExternalPayloads\T1485.txt

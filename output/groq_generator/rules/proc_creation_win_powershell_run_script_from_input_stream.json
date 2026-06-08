@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe - < script.ps1",
+    "explanation": "This command uses the input stream redirect technique as described in the Sigma rule. It is a simplified version of the original test command and maintains the same behavior."
+  },
+  {
+    "output": "pwsh.exe - < script.ps1",
+    "explanation": "This command uses the alternative name for PowerShell (pwsh.exe) and maintains the input stream redirect technique. It is functionally equivalent to the original command."
+  },
+  {
+    "output": "powershell.exe -Command - < script.ps1",
+    "explanation": "This command adds the -Command flag explicitly, which is optional in the original command. It still uses the input stream redirect technique and is valid for testing."
+  },
+  {
+    "output": "powershell.exe -noprofile - < script.ps1",
+    "explanation": "This command adds the -noprofile flag, which is optional but does not affect the input stream redirect technique. It is still valid for testing."
+  },
+  {
+    "output": "powershell.exe -Command -noprofile - < script.ps1",
+    "explanation": "This command combines multiple optional flags (-Command and -noprofile) with the input stream redirect technique. It is still valid for testing."
+  }
+]

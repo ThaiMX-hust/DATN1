@@ -1,0 +1,3 @@
+AddInUtil.exe "-AddInRoot:C:\Program Files (x86)\Common Files\Microsoft Shared\VSTA\..\..\..\..\Users\Public\Payload"
+AddInUtil.exe /AddInRoot:C:\Users\Public\Payload\
+copy AddInUtil.exe NotAddIn.exe && NotAddIn.exe -AddInRoot:C:\Users\Public\Payload\

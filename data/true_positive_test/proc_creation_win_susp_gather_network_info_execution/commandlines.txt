@@ -1,0 +1,4 @@
+"cmd.exe" /c wscript.exe C:\Windows\System32\gatherNetworkInfo.vbs
+cmd.exe /c copy gatherNetworkInfo.vbs gni_recon.vbs & cscript.exe gni_recon.vbs
+copy gatherNetworkInfo.vbs info.vbs && cscript.exe info.vbs
+powershell.exe -Command "Get-Content gatherNetworkInfo.vbs | Invoke-Expression"

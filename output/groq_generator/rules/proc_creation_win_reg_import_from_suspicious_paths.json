@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe import C:\\Windows\\Temp\\payload.reg",
+    "explanation": "This command matches the Sigma rule by using 'reg.exe' with the 'import' command and a suspicious path (C:\\Windows\\Temp\\). It is a direct match to the detection criteria."
+  },
+  {
+    "output": "reg import C:\\Users\\User\\AppData\\Local\\Temp\\settings.reg",
+    "explanation": "This command uses the 'reg' executable without the '.exe' extension, which is equivalent. The 'import' command is used with a suspicious path (AppData\\Local\\Temp\\), matching the Sigma rule's criteria."
+  },
+  {
+    "output": "reg.exe  import  \"C:\\ProgramData\\malicious.reg\"",
+    "explanation": "This command uses quotes around the path and includes extra spaces between 'reg.exe' and 'import'. The path 'C:\\ProgramData\\' is considered suspicious by the Sigma rule, making it a true positive."
+  },
+  {
+    "output": "reg.exe\" import \"C:\\Windows\\Temp\\registry_settings.reg\"",
+    "explanation": "This command uses quotes around the executable name and the path, and includes extra spaces. The path 'C:\\Windows\\Temp\\' is flagged as suspicious, matching the Sigma rule's criteria."
+  }
+]

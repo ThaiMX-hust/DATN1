@@ -1,0 +1,6 @@
+[
+  {
+    "output": "RegAsm.exe /nologo",
+    "explanation": "This is the original true positive command and is not modified."
+  }
+]

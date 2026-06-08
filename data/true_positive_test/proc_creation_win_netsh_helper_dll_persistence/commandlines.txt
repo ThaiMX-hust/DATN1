@@ -1,0 +1,4 @@
+netsh.exe  add helper "C:\AtomicRedTeam\atomics\T1546.007\bin\NetshHelper.dll"
+copy netsh.exe not_netsh.exe && not_netsh.exe add helper evil.dll
+netsh add	helper evil.dll
+netsh.exe "a""d""d" "h""e""l""p""e""r" evil.dll

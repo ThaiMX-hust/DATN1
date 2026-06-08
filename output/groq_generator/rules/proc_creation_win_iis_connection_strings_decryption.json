@@ -1,0 +1,14 @@
+[
+  {
+    "output": "aspnet_regiis.exe  -pdf   \"connectionStrings\"   C:\\inetpub\\wwwroot",
+    "explanation": "This command uses insertion of extra spaces and quotes to obfuscate the command line while maintaining the same functionality. The Sigma rule should still detect it as it contains the required elements."
+  },
+  {
+    "output": "aspnet_regiis.exe -pdf connectionStrings C:\\inetpub\\wwwroot",
+    "explanation": "This command removes unnecessary spaces and uses standard syntax. It is a direct match to the Sigma rule and should be detected."
+  },
+  {
+    "output": "aspnet_regiis.exe -pdf \"connectionStrings\" C:\\inetpub\\wwwroot",
+    "explanation": "This command uses quotes around the argument 'connectionStrings' to test if the Sigma rule can detect quoted strings. The rule should still match as it contains the required keywords."
+  }
+]

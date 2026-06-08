@@ -1,0 +1,4 @@
+C:\WINDOWS\system32\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\art-marker.txt
+InstallUtil.exe /logfile= /LogToConsole=false /U CustomPowerShellRunspace.dll
+schtasks /create /tn "TaskBypass" /tr "powershell.exe -ExecutionPolicy Bypass -Command Write-Host 'Bypassed'" /sc once /st 00:00 /f && schtasks /run /tn "TaskBypass"
+wmic process call create "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command ping 127.0.0.1"

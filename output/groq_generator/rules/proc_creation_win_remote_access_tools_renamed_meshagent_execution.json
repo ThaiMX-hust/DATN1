@@ -1,0 +1,38 @@
+[
+  {
+    "output": "meshagent.exe --meshServiceName",
+    "explanation": "The Sigma rule detects execution of a renamed MeshAgent with the '--meshServiceName' argument. This command directly matches the detection criteria and is a true positive."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName -arg1 -arg2",
+    "explanation": "Additional arguments are appended to the command line. This demonstrates that optional arguments can be added without affecting detection, as the rule only checks for the presence of '--meshServiceName'."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName\"\"",
+    "explanation": "The '--meshServiceName' argument is modified with an empty quoted string appended. This uses insertion to test if the rule is resilient to minor syntactic variations."
+  },
+  {
+    "output": "meshagent.exe -meshServiceName",
+    "explanation": "The '--meshServiceName' argument is shortened to '-meshServiceName'. This tests if the rule is sensitive to shortening of the argument syntax."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName`",
+    "explanation": "The '--meshServiceName' argument is appended with a backtick. This tests if the rule is resilient to injection of special characters that may be used in evasion techniques."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName^",
+    "explanation": "The '--meshServiceName' argument is appended with an escape character (^). This tests if the rule is resilient to escape character insertion."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName`echo",
+    "explanation": "The '--meshServiceName' argument is appended with a backtick and a command (echo). This tests if the rule is resilient to command injection attempts."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName\\",
+    "explanation": "The '--meshServiceName' argument is appended with a backslash. This tests if the rule is resilient to insertion of path-like characters."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName`echo`",
+    "explanation": "The '--meshServiceName' argument is appended with a backtick and a command (echo) and another backtick. This tests if the rule is resilient to command injection attempts with backticks."
+  }
+]

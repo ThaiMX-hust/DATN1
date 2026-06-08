@@ -1,0 +1,2 @@
+copy pcwrun.exe not_pcw.exe && not_pcw.exe calc.exe
+pcwrun.exe "calc.exe"

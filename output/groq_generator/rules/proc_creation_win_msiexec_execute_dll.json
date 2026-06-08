@@ -1,0 +1,26 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /y \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "This is the original true positive command and is not mutated."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe  /y \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Inserted an extra space between msiexec.exe and /y to test if the Sigma rule detects the command despite whitespace variation."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe -y \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Replaced /y with -y to test if the Sigma rule detects the command despite substitution of equivalent syntax."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe/y \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Removed space between msiexec.exe and /y to test if the Sigma rule detects the command despite omission of optional whitespace."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /y \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\" \"\"",
+    "explanation": "Added an empty quoted string at the end to test if the Sigma rule detects the command despite insertion of benign extra arguments."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /y C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll",
+    "explanation": "Removed quotes around the DLL path to test if the Sigma rule detects the command despite omission of optional quotes."
+  }
+]

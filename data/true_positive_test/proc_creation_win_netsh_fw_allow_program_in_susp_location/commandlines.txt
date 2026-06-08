@@ -1,0 +1,4 @@
+copy netsh.exe not_netsh.exe && not_netsh.exe advfirewall firewall add rule name="Test" dir=in action=allow program="payload.exe"
+netsh advfirewall firewall add rule name="Bypass" dir=in action=allow program="evil.exe"
+netsh advfirewall firewall add rule name="Hidden" dir=in action=allow program="agent.exe"
+netsh advfirewall firewall add rule name="MaliciousRule" dir=in action=allow program="malware.exe"

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring 1\"",
+    "explanation": "This is the original command and is not a bypass. It is included for reference."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\windows\\system32\\wbem\\mofcomp.exe\" C:\\Windows\\Temp\\evasion.mof",
+    "explanation": "This command uses a path that matches the rule's suspicious path criteria (\\Windows\\Temp\\) and executes mofcomp.exe, which should trigger the Sigma rule."
+  },
+  {
+    "output": "mofcomp.exe -N:root\\subscription \"C:\\Users\\Public\\malicious.mof\"",
+    "explanation": "This command uses a suspicious path (\\Users\\Public\\) and executes mofcomp.exe with a namespace flag, which should trigger the Sigma rule."
+  },
+  {
+    "output": "Start-Process mofcomp.exe -ArgumentList \"C:\\Windows\\TEMP\\evasion.mof\"",
+    "explanation": "This PowerShell command executes mofcomp.exe with a suspicious path (\\Windows\\TEMP\\), which should trigger the Sigma rule."
+  },
+  {
+    "output": "copy mofcomp.exe not_mof.exe && not_mof.exe C:\\Windows\\Tasks\\malicious.mof",
+    "explanation": "This command renames mofcomp.exe and executes it with a suspicious path (\\Windows\\Tasks\\), which should trigger the Sigma rule."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

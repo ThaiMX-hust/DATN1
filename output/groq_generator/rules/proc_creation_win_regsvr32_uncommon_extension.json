@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "This is a direct replication of the first true positive command. It uses a common technique where regsvr32 is executed with an uncommon extension (`.jpg`) to bypass detection based on file extension filtering."
+  },
+  {
+    "output": "copy regsvr32.exe not_regsvr.exe && not_regsvr.exe /s C:\\Tools\\calc.ext",
+    "explanation": "This is a direct replication of the second true positive command. It renames `regsvr32.exe` to evade signature-based detection and executes it with an uncommon extension (`.ext`)."
+  },
+  {
+    "output": "regsvr32.exe /s \"payload.dll;not_an_ext\"",
+    "explanation": "This is a direct replication of the third true positive command. It uses a semicolon to append an uncommon extension (`not_an_ext`) to a legitimate `.dll` file, which may bypass detection based on file extension filtering."
+  },
+  {
+    "output": "regsvr32.exe /s /u malicious_file.dll.txt",
+    "explanation": "This is a direct replication of the fourth true positive command. It uses a `.txt` extension appended to a `.dll` file to evade detection based on file extension filtering."
+  }
+]

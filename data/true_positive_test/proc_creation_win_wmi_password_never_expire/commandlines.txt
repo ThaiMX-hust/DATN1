@@ -1,0 +1,1 @@
+wmic path Win32_UserAccount where name='guest' set passwordexpires=false

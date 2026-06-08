@@ -1,0 +1,3 @@
+powershell.exe -Command "Set-NetFirewallP`rofile -Profile Private -Ena`bled False"
+powershell.exe -Command "Set-NetFirewallProfile -Profile Domain -Enabled:0"
+powershell.exe -Command "Set-NetFirewallProfile -Profile Public -Enabled $false"

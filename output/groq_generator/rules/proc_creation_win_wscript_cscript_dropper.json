@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\System32\\\\WScript.exe\" \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\T1036.007_masquerading.png.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is included for testing purposes."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\System32\\\\WScript.exe\" \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\T1036.007_masquerading.xls.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is included for testing purposes."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\System32\\\\WScript.exe\" \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\T1036.007_masquerading.xlsx.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is included for testing purposes."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\System32\\\\WScript.exe\" \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\AtomicTest.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is included for testing purposes."
+  },
+  {
+    "output": "cscript  //E:Jscript C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\OSTapGet.js",
+    "explanation": "This command is a direct match to the Sigma rule and is included for testing purposes."
+  }
+]

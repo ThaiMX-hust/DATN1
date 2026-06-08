@@ -1,0 +1,2 @@
+chcp
+cmd.exe /v /c "set a=chcp&& !a!"

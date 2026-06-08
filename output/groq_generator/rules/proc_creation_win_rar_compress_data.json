@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy \"rar.exe\" archiver.exe && archiver.exe a C:\\Temp\\archive.rar C:\\SensitiveData\\*",
+    "explanation": "The original command is already a valid test command. No mutation is needed to trigger the Sigma rule."
+  }
+]

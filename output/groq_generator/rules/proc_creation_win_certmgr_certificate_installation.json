@@ -1,0 +1,10 @@
+[
+  {
+    "output": "CertMgr.exe -add CertificateFileName.cer /s /r localMachine root /all",
+    "explanation": "This is the original true positive command and cannot be considered a bypass."
+  },
+  {
+    "output": "CertMgr.exe -add CertificateFileName.cer /s /r localMachine root",
+    "explanation": "Omission of the '/all' flag may still trigger the detection if the 'add' and 'root' parameters are present."
+  }
+]

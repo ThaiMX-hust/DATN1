@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"gps lsass | Out-Minidump\"",
+    "explanation": "The original command uses 'Get-Process', which can be substituted with its alias 'gps'. This substitution is a safe mutation technique and would still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process -Name lsass | Out-Minidump\"",
+    "explanation": "Adding the '-Name' parameter is an optional element that does not change the behavior of the command. This is a safe mutation technique and would still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process lsass | Out-Minidump\"",
+    "explanation": "This is the original command and is included to show that no mutation is needed to trigger the Sigma rule."
+  }
+]

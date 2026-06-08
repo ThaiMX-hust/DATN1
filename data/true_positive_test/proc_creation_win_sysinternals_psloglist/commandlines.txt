@@ -1,0 +1,3 @@
+psloglist.exe -d 1 -i Security
+psloglist64.exe security -d 1
+copy psloglist.exe evtlogr.exe && evtlogr.exe -d 1 security

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\windows\\system32\\cmd.exe /C echo Uuup! > \\\\.\\pipe\\HighPriv",
+    "explanation": "This command matches the Sigma rule's detection criteria for getsystem Meterpreter/Cobalt Strike activity. It uses cmd.exe with /C, 'echo', and a pipe path, which aligns with the rule's 'selection_technique_1'."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /C start C:\\WINDOWS\\system32\\cmd.exe /C \"timeout /t 3 >nul&&echo TestSVC > \\\\.\\pipe\\TestSVC\"",
+    "explanation": "This command matches the Sigma rule's detection criteria. It uses nested cmd.exe with /C, 'echo', and a pipe path, which aligns with the rule's 'selection_technique_1'."
+  },
+  {
+    "output": "%COMSPEC% /c e^cho 559891bb017 > \\\\.\\pipe\\5e120a",
+    "explanation": "This command matches the Sigma rule's detection criteria. It uses %COMSPEC% with /c, 'echo', and a pipe path, which aligns with the rule's 'selection_technique_1'."
+  },
+  {
+    "output": "rundll32.exe payload.dll, a /p:tmexsn",
+    "explanation": "This command matches the Sigma rule's detection criteria for getsystem Meterpreter/Cobalt Strike activity. It uses rundll32.exe with a .dll and /p: argument, which aligns with the rule's 'selection_technique_2'."
+  },
+  {
+    "output": "C:\\windows\\system32\\cmd.exe /C \"echo Uuup! > \\\\.\\pipe\\HighPriv\"",
+    "explanation": "This command uses insertion of quotes around the command, which is a safe mutation technique. It still matches the Sigma rule's detection criteria."
+  }
+]

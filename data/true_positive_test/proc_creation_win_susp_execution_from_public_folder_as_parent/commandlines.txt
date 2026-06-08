@@ -1,0 +1,5 @@
+custom_parent.exe -launch cmd.exe /c echo test
+loader.exe -execute renamed_ps.exe -c "Write-Host 'Execution'"
+copy cmd.exe not_a_shell.exe && YourMaliciousParent.exe
+Parent.exe
+Parent.exe -arg "powershell"

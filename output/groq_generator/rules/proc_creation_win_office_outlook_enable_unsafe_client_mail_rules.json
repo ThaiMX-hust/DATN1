@@ -1,0 +1,10 @@
+[
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Outlook\\Security\" /v EnableUnsafeClientMailRules /t REG_DWORD /d 1 /f",
+    "explanation": "The original command is already a valid test case and does not require mutation for this rule."
+  },
+  {
+    "output": "set \"p1=EnableUnsafe\" && set \"p2=ClientMailRules\" && reg add \"HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Outlook\\Security\" /v %p1%%p2% /t REG_DWORD /d 1 /f",
+    "explanation": "This is the original test command using environment variables to obscure the registry key name. It is already a valid mutation for testing purposes."
+  }
+]

@@ -1,0 +1,3 @@
+AgentExecutor.exe -powershell script.ps1 C:\out.txt C:\err.txt C:\timeout.txt 60000 C:\Windows\System32\WindowsPowerShell\v1.0\ 0 0
+copy powershell.exe AgentExecutor.exe && AgentExecutor.exe -Command "Write-Output 'Bypassed'"
+powershell.exe -ExecutionPolicy Bypass -File malicious.ps1

@@ -1,0 +1,1 @@
+ADExplorer.exe -snapshot -noexit

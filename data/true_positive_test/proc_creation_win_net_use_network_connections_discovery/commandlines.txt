@@ -1,0 +1,14 @@
+net  use \\Target\C$ P@ssw0rd1 /u:DOMAIN\Administrator
+C:\WINDOWS\system32\net1  sessions
+net  sessions
+net  use
+net  use c: \\test\share
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "1q2w3e4r "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "ChangeMe! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password1 "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Spring2022 "
+"C:\WINDOWS\system32\net.exe" USE * \\example.com\sales /TRANSPORT:QUIC /SKIPCERTCHECK
+cmd.exe /c "net.exe u^s^e"
+net.exe "use"
+powershell.exe -Command "Get-SmbConnection"

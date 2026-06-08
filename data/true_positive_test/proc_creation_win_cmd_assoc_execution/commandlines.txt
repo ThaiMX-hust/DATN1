@@ -1,0 +1,5 @@
+"cmd.exe" /c assoc .hta=txtfile
+cmd  /c assoc
+copy cmd.exe not_cmd.exe && not_cmd.exe /c assoc .txt=exefile
+powershell.exe -Command "Start-Process 'cmd.exe' -ArgumentList '/c ", [char]97+[char]115+[char]115+[char]111+[char]99, " .txt=txtfile'"
+reg add "HKEY_CLASSES_ROOT\.txt" /t REG_SZ /d "exefile" /f

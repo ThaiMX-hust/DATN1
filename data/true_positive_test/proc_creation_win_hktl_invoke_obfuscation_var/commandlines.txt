@@ -1,0 +1,1 @@
+powershell.exe -Command "$env:TEST_VAR = 'Write-Output ''Execution Simulated'''; Invoke-Expression $env:TEST_VAR"

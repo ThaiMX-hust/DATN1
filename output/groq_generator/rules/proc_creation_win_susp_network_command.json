@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"cmd.exe\" /c ipconfig /all ^& net config workstation ^& net view /all /domain ^& nltest /domain_trusts",
+    "explanation": "Used escape character (^) to bypass the Sigma rule detection while maintaining the same behavior of the original command."
+  },
+  {
+    "output": "\"cmd.exe\" /c ipconfig /all ^& netsh interface show interface ^& arp -a ^& nbtstat -n ^& net config",
+    "explanation": "Used escape character (^) to bypass the Sigma rule detection while maintaining the same behavior of the original command."
+  },
+  {
+    "output": "\"cmd.exe\" /c arp -a",
+    "explanation": "This command is already part of the Sigma rule detection and cannot be safely mutated without triggering the rule."
+  }
+]

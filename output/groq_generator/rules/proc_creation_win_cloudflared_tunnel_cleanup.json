@@ -1,0 +1,38 @@
+[
+  {
+    "output": "cloudflared tunnel cleanup --config C:\\temp\\config.yml",
+    "explanation": "Original command line as a baseline for comparison."
+  },
+  {
+    "output": "cloudflared tunnel cleanup --config=\"C:\\temp\\config.yml\"",
+    "explanation": "Inserted quotes around the config file path to test parsing behavior."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup -config C:\\temp\\config.yml",
+    "explanation": "Replaced 'cloudflared' with 'cloudflared.exe' and used short flag '-config' instead of '--config'."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup -config=C:\\temp\\config.yml",
+    "explanation": "Used equals sign (=) to assign the config path directly after the flag."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123",
+    "explanation": "Added an additional flag '--connector-id' to simulate a more complex command line."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=\"ABC-123-DEF\"",
+    "explanation": "Inserted quotes around the connector ID to test parsing behavior."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123 --",
+    "explanation": "Added a trailing '--' to test if the command line parser stops processing flags."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123 -v",
+    "explanation": "Added a verbose flag '-v' to test if optional flags are ignored by the detection rule."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123 --log-level=debug",
+    "explanation": "Added a debug logging flag to test if additional flags are ignored by the detection rule."
+  }
+]

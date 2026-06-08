@@ -1,0 +1,3 @@
+aspnet_regiis.exe -pdf "connectionStrings" C:\inetpub\wwwroot
+powershell.exe -nop -exec bypass -c "& { [System.Reflection.Assembly]::LoadFrom('aspnet_regiis.exe'); [YourNamespace.YourClass]::DecryptConnectionStrings('connectionStrings', 'C:\inetpub\wwwroot') }"
+rundll32.exe aspnet_regiis.exe,Control_RunDLL -pdf connectionStrings C:\inetpub\wwwroot

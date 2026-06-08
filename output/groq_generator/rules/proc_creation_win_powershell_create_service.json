@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-Service -Name 'TestService' -BinaryPathName 'cmd.exe' -StartupType Manual\"",
+    "explanation": "This command uses the same structure as the Sigma rule but omits unnecessary elements and uses standard syntax. It is a direct match for the detection rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-Service -BinaryPathName 'cmd.exe' -Name 'TestService' -StartupType Manual\"",
+    "explanation": "Reorders the arguments of the New-Service command. The order of parameters does not affect the functionality or detection by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-Service -Name 'TestService' -bin 'cmd.exe' -StartupType Manual\"",
+    "explanation": "Substitutes '-BinaryPathName' with its short form '-bin', which is functionally equivalent and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"N`ew-Service -Name 'TestService' -BinaryPathName 'cmd.exe' -StartupType Manual\"",
+    "explanation": "Uses an escaped character (`) to split 'New-Service' into 'N`ew-Service', which is still parsed correctly and matches the Sigma rule."
+  }
+]

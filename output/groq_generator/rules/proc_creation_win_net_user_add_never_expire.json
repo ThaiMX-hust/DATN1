@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1.exe  USER AtomicOperator$ At0micRedTeam! /ADD /expires:never",
+    "explanation": "This command uses the renamed executable 'net1.exe' and includes all required parameters to match the Sigma rule. It is a direct representation of the rule's detection logic."
+  },
+  {
+    "output": "NET  USER AtomicOperator$ At0micRedTeam! /ADD /expires:never",
+    "explanation": "This command uses the standard 'NET' command with the correct parameters to create a user with the 'never expire' option, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "net us^er testuser P@ssw0rd123! /ad^d /expi^res:never",
+    "explanation": "This command uses escaped characters (^) to obfuscate the command line, which may bypass detection if the SIEM does not properly normalize such input. It still performs the same action as the original command."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net.exe user testuser P@ssw0rd123! /ADD /expires:never\",\n    \"output\": \"C:\\WINDOWS\\system32\\net.exe user testuser P@ssw0rd123! /ADD /expires:never",
+    "explanation": "This command uses the standard 'net.exe' executable and includes the required parameters to match the Sigma rule. It is a direct representation of the rule's detection logic."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net.exe user testuser P@ssw0rd123! /ADD /expires:never",
+    "explanation": "This command uses the standard 'net.exe' executable and includes the required parameters to match the Sigma rule. It is a direct representation of the rule's detection logic."
+  }
+]

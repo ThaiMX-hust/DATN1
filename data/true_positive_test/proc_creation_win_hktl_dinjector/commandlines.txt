@@ -1,0 +1,2 @@
+DInjector.exe /am^51 /pass^word:secret
+DInjector.exe/am51 /password:secret

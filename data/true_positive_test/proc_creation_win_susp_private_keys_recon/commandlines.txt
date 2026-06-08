@@ -1,0 +1,4 @@
+"cmd.exe" /c dir c:\ /b /s .key | findstr /e .key
+C:\WINDOWS\system32\cmd.exe  /S /D /c" dir c:\ /b /s .key "
+findstr  /e .key
+powershell.exe -c "Get-ChildItem -Path C:\ -Recurse -Include *.$('p'+'em')"

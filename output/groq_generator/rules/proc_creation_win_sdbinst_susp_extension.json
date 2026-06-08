@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sdbinst.exe \"C:\\temp\\hidden.sdb_folder\\malicious_shim.bin\"",
+    "explanation": "Inserted quotes around the file path to test if the rule is sensitive to quoted command-line arguments."
+  },
+  {
+    "output": "sdbinst.exe C:\\temp\\hidden.sdb_folder\\malicious_shim.bin",
+    "explanation": "Reordered whitespace and used double backslashes to test if the rule is sensitive to path normalization or encoding."
+  },
+  {
+    "output": "sdbinst.exe C:/temp/hidden.sdb_folder/malicious_shim.bin",
+    "explanation": "Replaced backslashes with forward slashes to test if the rule is sensitive to path format variations."
+  }
+]

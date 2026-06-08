@@ -1,0 +1,5 @@
+fsutil  behavior 	set SymlinkEvaluation R2L:1
+fsutil  behavior set 	SymlinkEvaluation R2R:1
+copy fsutil.exe not_harmful.exe && not_harmful.exe behavior set SymlinkEvaluation L2L:1 R2R:1
+reg add "HKLM\System\CurrentControlSet\Control\FileSystem" /v "SymlinkRemoteToLocalEvaluation" /t REG_DWORD /d 1 /f
+set-alias -name "fs" -value "fsutil.exe"; fs "behavior" "set" "SymlinkEvaluation" "L2L:1"

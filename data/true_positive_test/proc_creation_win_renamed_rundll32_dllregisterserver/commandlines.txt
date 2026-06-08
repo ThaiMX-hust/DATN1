@@ -1,0 +1,1 @@
+powershell.exe -nop -Command Write-Host DllRegisterServer export executed me; exit

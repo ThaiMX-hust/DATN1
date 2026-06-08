@@ -8,8 +8,8 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from sigma_fuzzer.execution import build_shell_invocation, execute_command, validate_payload_execution
-from sigma_fuzzer.models import ExecutionResult, SysmonProcessEvent, TargetCase
+from sigma_rule_evaluator.execution import build_shell_invocation, execute_command, validate_payload_execution
+from sigma_rule_evaluator.models import ExecutionResult, SysmonProcessEvent, TargetCase
 
 
 def make_case(commandline: str, shell: str = "cmd.exe") -> TargetCase:
@@ -219,8 +219,8 @@ class ExecuteCommandTests(unittest.TestCase):
                 self.killed = True
 
         fake_process = FakeProcess()
-        with patch("sigma_fuzzer.execution.subprocess.Popen", return_value=fake_process) as popen:
-            with patch("sigma_fuzzer.execution.kill_process_tree", return_value="killed") as kill_tree:
+        with patch("sigma_rule_evaluator.execution.subprocess.Popen", return_value=fake_process) as popen:
+            with patch("sigma_rule_evaluator.execution.kill_process_tree", return_value="killed") as kill_tree:
                 result = execute_command(make_case("whoami"), timeout_seconds=1)
 
         self.assertTrue(result.timed_out)

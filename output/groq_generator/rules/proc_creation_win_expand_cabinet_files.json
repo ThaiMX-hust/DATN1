@@ -1,0 +1,18 @@
+[
+  {
+    "output": "expand.exe /F:* C:\\Users\\Public\\test.cab C:\\Windows\\Temp\\",
+    "explanation": "This command uses a valid folder path from the Sigma rule's selection_folders_1 and substitutes '-F:' with '/F:' as an equivalent syntax. It also uses a benign test CAB file and destination folder for safe testing."
+  },
+  {
+    "output": "expand.exe -F:* C:\\Windows\\Temp\\test.cab C:\\Users\\Administrator\\AppData\\Local\\Temp\\",
+    "explanation": "This command uses a valid folder path from the Sigma rule's selection_folders_1 and applies standard syntax. It uses a benign test CAB file and destination folder for safe testing."
+  },
+  {
+    "output": "expand.exe /F:* C:\\AppData\\Roaming\\test.cab C:\\Windows\\System32\\",
+    "explanation": "This command uses a valid folder path from the Sigma rule's selection_folders_1 and substitutes '-F:' with '/F:' as an equivalent syntax. It uses a benign test CAB file and destination folder for safe testing."
+  },
+  {
+    "output": "expand.exe -F:* C:\\C$\\test.cab C:\\Windows\\Temp\\",
+    "explanation": "This command uses a valid folder path from the Sigma rule's selection_folders_1 and applies standard syntax. It uses a benign test CAB file and destination folder for safe testing."
+  }
+]

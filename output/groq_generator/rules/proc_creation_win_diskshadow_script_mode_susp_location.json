@@ -1,0 +1,30 @@
+[
+  {
+    "output": "diskshadow.exe /s C:\\Users\\Public\\script.txt",
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing detection accuracy."
+  },
+  {
+    "output": "diskshadow.exe -s C:\\Users\\Public\\script.txt",
+    "explanation": "Substituted the long option '/s' with the equivalent short option '-s', which is valid in Diskshadow and may test detection resilience to syntax variation."
+  },
+  {
+    "output": "diskshadow.exe /s C:\\Users\\Public\\..\\Public\\script.txt",
+    "explanation": "Used path normalization (..\\) to represent the same file path. This tests whether the detection is sensitive to path obfuscation techniques."
+  },
+  {
+    "output": "diskshadow.exe /s \"C:\\Users\\Public\\script.txt\"",
+    "explanation": "Inserted quotes around the script path to test detection resilience to safe insertion techniques."
+  },
+  {
+    "output": "set SCRIPT_PATH=C:\\Users\\Public\\script.txt && diskshadow.exe /s %SCRIPT_PATH%",
+    "explanation": "Used an environment variable to represent the script path. This tests whether the detection is sensitive to recoding techniques."
+  },
+  {
+    "output": "diskshadow.exe /s C:\\Users\\Public\\script.txt && echo dummy",
+    "explanation": "Appended a harmless command after the target command to test detection resilience to command chaining."
+  },
+  {
+    "output": "diskshadow.exe /s C:\\Users\\Public\\script.txt | findstr /v \"\"",
+    "explanation": "Used a pipe to pass output to findstr with no filtering effect. This tests detection resilience to safe reordering and appending techniques."
+  }
+]

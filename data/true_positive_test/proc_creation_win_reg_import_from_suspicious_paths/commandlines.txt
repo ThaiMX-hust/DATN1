@@ -1,0 +1,4 @@
+copy reg.exe not_reg.exe && not_reg.exe import C:\Windows\Temp\payload.reg
+reg import C:\Tools\malicious.reg
+reg.exe "im""port" C:\Windows\Temp\settings.reg
+reg.exe load HKLM\TempHive C:\Windows\Temp\registry_backup.hiv

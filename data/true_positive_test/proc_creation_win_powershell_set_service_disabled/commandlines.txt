@@ -1,0 +1,4 @@
+powershell -Command "Invoke-Expression ('Set-Ser' + 'vice ' + '-Servicename wuauserv -StartupT' + 'ype Dis' + 'abled')"
+powershell -Command "Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\wuauserv' -Name 'Start' -Value 4"
+powershell -ExecutionPolicy Bypass -Command "sc.exe config 'TermService' start= disabled"
+pwsh.exe -Command "Set-Service -Name 'Spooler' -StartupType 'Disabled'"

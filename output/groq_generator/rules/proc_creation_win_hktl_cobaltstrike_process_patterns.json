@@ -1,0 +1,18 @@
+[
+  {
+    "output": "conhost.exe 0xffffffff -ForceV1",
+    "explanation": "This command omits the full path and uses a direct execution of conhost.exe with the same arguments. It matches the 'selection_conhost_1' and 'selection_conhost_2' conditions in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /C whoami",
+    "explanation": "This command uses the same syntax as the true positive test command but omits the /k switch and uses /C instead. It matches the 'selection_generic_1' and 'selection_conhost_2' conditions in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /C echo test > \\\\.\\pipe\\testpipe",
+    "explanation": "This command uses the same syntax as the true positive test command but changes the output to a named pipe. It matches the 'selection_generic_2' condition in the Sigma rule."
+  },
+  {
+    "output": "\"cmd.exe\" /C whoami",
+    "explanation": "This command adds quotes around the executable name, which is a safe mutation technique. It matches the 'selection_generic_1' and 'selection_conhost_2' conditions in the Sigma rule."
+  }
+]

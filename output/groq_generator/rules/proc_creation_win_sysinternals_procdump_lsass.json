@@ -1,0 +1,18 @@
+[
+  {
+    "output": "procdump.exe  -ma   lsass.exe",
+    "explanation": "Added extra spaces between the command and arguments to test if the Sigma rule detects the '-ma' and 'lsass' regardless of spacing."
+  },
+  {
+    "output": "procdump.exe -ma lsass.exe",
+    "explanation": "Original command line used as a baseline for comparison."
+  },
+  {
+    "output": "procdump.exe -ma lsass",
+    "explanation": "Omitted the .exe extension from 'lsass.exe' to test if the rule still detects the process name abbreviation."
+  },
+  {
+    "output": "procdump.exe -ma \"lsass.exe\"",
+    "explanation": "Wrapped the 'lsass.exe' argument in quotes to test if the Sigma rule handles quoted strings correctly."
+  }
+]

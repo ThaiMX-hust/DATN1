@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\windows\\System32\\comsvcs.dll MiniDump 204 \"C:\\Users\\thaim\\AppData\\Local\\Temp\\svchost-exe.dmp\" full",
+    "explanation": "The original command is already a valid detection trigger for the Sigma rule. No mutation is needed to confirm detection."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\windows\\System32\\comsvcs.dll,MiniDump 204 \"C:\\Users\\thaim\\AppData\\Local\\Temp\\svchost-exe.dmp\" full",
+    "explanation": "Removed space between 'comsvcs.dll' and 'MiniDump' to test if the rule detects the command without a space."
+  }
+]

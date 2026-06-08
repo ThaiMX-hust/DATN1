@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f",
+    "explanation": "This command matches the Sigma rule exactly and serves as the baseline for testing."
+  },
+  {
+    "output": "reg   add   \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Lsa\"   /v   RunAsPPL   /d   0   /f",
+    "explanation": "Extra spaces between arguments and command parts are inserted, which is a safe mutation technique and still parsed correctly by reg.exe."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0x0 /f",
+    "explanation": "The decimal value '0' is replaced with its hexadecimal equivalent '0x0', which is functionally equivalent in this context."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /f /v RunAsPPL /d 0",
+    "explanation": "The order of the arguments is changed, but reg.exe accepts reordered flags as long as the required parameters are present."
+  }
+]

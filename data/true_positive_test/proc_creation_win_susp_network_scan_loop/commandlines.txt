@@ -1,0 +1,2 @@
+"cmd.exe" /c for /l %%i in (1,1,254) do ping -n 1 -w 100 192.168.1.%%i
+"powershell.exe" & {$localip = ((ipconfig | findstr [0-9].\.)[0]).Split()[-1] $pieces = $localip.split(\"".\"") $firstOctet = $pieces[0] $secondOctet = $pieces[1] $thirdOctet = $pieces[2] foreach ($ip in 1..255 | %% { \""$firstOctet.$secondOctet.$thirdOctet.$_\"" } ) {cmd.exe /c nslookup $ip}}

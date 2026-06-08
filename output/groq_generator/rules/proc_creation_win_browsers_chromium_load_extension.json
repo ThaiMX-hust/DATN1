@@ -1,0 +1,22 @@
+[
+  {
+    "output": "chrome.exe --load-extension=\"C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr\"",
+    "explanation": "This command uses the original flag format and a valid path, but normalizes the path and uses escaped quotes to test the Sigma rule detection."
+  },
+  {
+    "output": "chrome.exe --load-extension=C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr",
+    "explanation": "This command omits quotes around the path, which is still valid in many command-line contexts and tests if the rule detects the flag without additional syntax."
+  },
+  {
+    "output": "chrome.exe --load-extension=\\?\\C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr",
+    "explanation": "This command uses the long path prefix (\\?), which is a valid Windows path normalization technique and tests if the rule handles extended path syntax."
+  },
+  {
+    "output": "chrome.exe --load-extension=\"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\HHe2lr\"",
+    "explanation": "This command uses escaped backslashes and quotes, which are still parsed correctly by the command line and test the Sigma rule's parsing robustness."
+  },
+  {
+    "output": "chrome.exe --load-extension=$env:TEMP\\HHe2lr",
+    "explanation": "This command uses an environment variable to represent part of the path, testing if the rule can detect the flag when paths are dynamically resolved."
+  }
+]

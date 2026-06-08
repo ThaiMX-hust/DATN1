@@ -1,0 +1,6 @@
+[
+  {
+    "output": "forfiles.exe /p C:\\Windows\\System32 /m * /c \"cmd /c echo \\\"Hello from bypass\\\"\"",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  }
+]

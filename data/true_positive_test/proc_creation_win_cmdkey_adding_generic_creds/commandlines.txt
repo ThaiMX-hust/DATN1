@@ -1,0 +1,1 @@
+"C:\WINDOWS\system32\cmdkey.exe" /generic:TERMSRV/THAIMX /user:THAIMX\thaim /pass:1password2!

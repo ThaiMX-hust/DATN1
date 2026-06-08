@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -WindowStyle Hidden -EncodedCommand \"QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==\"",
+    "explanation": "Inserted quotes around the encoded command to test if the rule is affected by string quoting."
+  },
+  {
+    "output": "powershell.exe -w hidden -EncodedCommand QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
+    "explanation": "Substituted '-WindowStyle' with its short form '-w' to test if the rule is affected by option abbreviation."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg== -WindowStyle Hidden",
+    "explanation": "Reordered the command-line arguments to test if the rule is affected by argument order."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
+    "explanation": "Omitted the '-WindowStyle Hidden' parameter to test if the rule is affected by the absence of this parameter."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand $env:EncodedCmd",
+    "explanation": "Replaced the encoded command with an environment variable to test if the rule is affected by variable substitution."
+  }
+]

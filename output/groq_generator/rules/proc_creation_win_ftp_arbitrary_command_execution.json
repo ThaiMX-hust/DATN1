@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ftp -s:script.txt",
+    "explanation": "The Sigma rule detects the use of the '-s' or '/s' flag with ftp.exe. This command uses the '-s' flag as specified in the rule, making it a true positive."
+  },
+  {
+    "output": "ftp /s:script.txt",
+    "explanation": "The '/s' flag is an equivalent syntax to '-s' in Windows command-line tools. This command uses the '/s' flag, which is explicitly covered by the Sigma rule's detection logic."
+  },
+  {
+    "output": "ftp -s script.txt",
+    "explanation": "This command omits the colon after the '-s' flag, which is still valid in some Windows command-line tools. It matches the Sigma rule's detection criteria."
+  }
+]

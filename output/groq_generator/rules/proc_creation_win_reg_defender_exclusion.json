@@ -1,0 +1,26 @@
+[
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /v \"C:\\\\Evil\" /t REG_DWORD /d 0 /f",
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" ^/v \"C:\\\\Evil\" ^/t REG_DWORD ^/d 0 ^/f",
+    "explanation": "Escape characters (^) are inserted before each flag to test parsing flexibility while maintaining the same behavior."
+  },
+  {
+    "output": "reg.exe ADD HKLM\\SOFTWARE\\Microsoft\\Windows\\Defender\\Exclusions\\Paths /v C:\\\\Evil /t REG_DWORD /d 0 /f",
+    "explanation": "Quotes are removed from the registry path and value, and 'Windows Defender' is slightly altered to 'Windows\\Defender' to test path normalization and parsing behavior."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Microsoft Antimalware\\Exclusions\\Paths\" /v \"C:\\\\Evil\" /t REG_DWORD /d 0 /f",
+    "explanation": "The registry path is changed to the alternate Defender path specified in the Sigma rule to test detection coverage."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /v C:\\\\Evil /t REG_DWORD /d 0 /f",
+    "explanation": "Quotes are removed from the value path to test if the Sigma rule detects the command without them."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /v \"C:\\\\Evil\" /t REG_DWORD /d 00 /f",
+    "explanation": "The decimal value '0' is changed to '00' to test if the Sigma rule detects variations in numeric input."
+  }
+]

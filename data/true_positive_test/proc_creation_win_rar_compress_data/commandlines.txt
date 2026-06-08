@@ -1,0 +1,1 @@
+copy "rar.exe" archiver.exe && archiver.exe a C:\Temp\archive.rar C:\SensitiveData\*

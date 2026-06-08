@@ -1,0 +1,18 @@
+[
+  {
+    "output": "mshta vbscript:CreateObject(\"WScript.Shell\").Run(\"calc.exe\",0)(window.close)",
+    "explanation": "This is the original true positive command and matches the Sigma rule exactly."
+  },
+  {
+    "output": "set a=calc.exe & mshta vbscript:CreateObject(\"WScript.Shell\").Exec(\"%a%\")(window.close)",
+    "explanation": "Replaces .Run with .Exec and uses environment variable substitution, but still matches the rule due to presence of 'set', 'mshta', 'vbscript:createobject', and '.run' (via .Exec)."
+  },
+  {
+    "output": "set a=calc.exe && mshta javascript:a=new ActiveXObject(\"WScript.Shell\");a.Run(\"%a%\"),window.close();",
+    "explanation": "Uses 'javascript:' instead of 'vbscript:', but still matches the rule due to presence of 'set', '&&', 'mshta', and 'window.close'."
+  },
+  {
+    "output": "set a=1 && m^shta vbscript:createobject(\"WScript.Shell\").run(\"calc.exe\")(window.close)",
+    "explanation": "Uses an escape character (^) to obfuscate 'mshta', but still matches the rule due to presence of 'set', '&&', 'mshta', 'vbscript:createobject', and '.run'."
+  }
+]

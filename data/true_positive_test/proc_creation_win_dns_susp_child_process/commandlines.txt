@@ -1,0 +1,3 @@
+copy powershell.exe not_powershell.exe && not_powershell.exe -Command "whoami"
+powershell.exe -Command "whoami"
+pwsh.exe -Command "whoami"

@@ -1,0 +1,4 @@
+RunXCmd.exe /account="system" /exec="cmd.exe"
+RunXCmd.exe /account=ti	/exec=cmd.exe
+RunXCmd.exe /exec=calc.exe /account=system
+RunXCmd.exe /exec=notepad.exe /account:system

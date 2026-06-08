@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
+    "explanation": "This command uses the same syntax as the Sigma rule's detection criteria but is a valid use case for encoding a known system file (calc.exe) to base64. It is a safe mutation of the original command and would be flagged by the rule."
+  },
+  {
+    "output": "certutil.exe -encode \"C:\\Windows\\System32\\calc.exe\" \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt\"",
+    "explanation": "This command uses quotes around the file paths to handle potential spaces, a safe mutation technique. It is functionally identical to the original command and would still be detected by the Sigma rule."
+  }
+]

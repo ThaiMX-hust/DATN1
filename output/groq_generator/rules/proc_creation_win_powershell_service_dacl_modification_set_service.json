@@ -1,0 +1,22 @@
+[
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -SecurityDescriptorSddl 'D;;DCLC;;;BA'\"",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria, using the full parameter name '-SecurityDescriptorSddl' and the SDDL string 'D;;DCLC;;;BA'."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -sd 'D;;DCLC;;;BA'\"",
+    "explanation": "This command uses the short form '-sd' instead of '-SecurityDescriptorSddl', which is an equivalent substitution and still matches the rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -SecurityDescriptorSddl 'D;;DCLC;;;BA'\" -WindowStyle Hidden",
+    "explanation": "This command adds an optional parameter '-WindowStyle Hidden' to obscure the PowerShell window, but the core command remains unchanged and matches the rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"spsv -Name 'SuspiciousService' -Sec 'D;;DCLC;;;BA'\"",
+    "explanation": "This command uses the alias 'spsv' for 'Set-Service' and the short form '-Sec' for '-SecurityDescriptorSddl', which are both valid substitutions and still match the rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -SecurityDescriptorSddl 'D;;DCLC;;;BA'\" -Command \"\"",
+    "explanation": "This command appends an empty '-Command \"\"' to the command line, which is an insertion technique that does not affect the execution and still matches the rule."
+  }
+]

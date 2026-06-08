@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -WindowStyle Hidden -ep Bypass -noni -Command \"Get-Variable -Name PSVersionTable\"",
+    "explanation": "This is the original true positive command and matches the Sigma rule as written."
+  },
+  {
+    "output": "powershell.exe -w hidden -ep bypass -noni -Command \"Get-Variable -Name PSVersionTable\"",
+    "explanation": "Substituted '-WindowStyle' with '-w' and '-ep Bypass' with '-ep bypass' to test equivalent syntax."
+  },
+  {
+    "output": "powershell.exe -w hidden -ep bypass -noni -Command Get-Variable -Name PSVersionTable",
+    "explanation": "Removed quotes around the command to test if the rule still detects the command without them."
+  },
+  {
+    "output": "powershell.exe -windowstyle hidden -ep bypass -Command \"Get-Variable -Name PSVersionTable\" -noni",
+    "explanation": "Reordered '-noni' to the end of the command line to test reordering detection."
+  },
+  {
+    "output": "powershell.exe -w hidden -ep bypass -Command Get-Variable -Name PSVersionTable",
+    "explanation": "Omitted '-noni' since it is optional and the command still achieves similar behavior."
+  }
+]

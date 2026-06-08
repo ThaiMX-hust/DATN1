@@ -1,0 +1,1 @@
+rundll32.exe payload.dll,DllMain "Shell32.dll"

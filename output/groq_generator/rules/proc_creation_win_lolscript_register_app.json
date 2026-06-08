@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\vss\\vsssampleprovider\\register_app.vbs %TEMP%\\legit.txt && cscript //e:vbscript %TEMP%\\legit.txt -register \"malicious.dll\" \"MaliciousProvider\"",
+    "explanation": "The original command is modified by omitting the typo in the source file path (\"egister_app.vbs\" to \"register_app.vbs\") and using standard spacing and syntax. This remains functionally equivalent and would still trigger the Sigma rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\vss\\vsssampleprovider\\register_app.vbs %TEMP%\\legit.txt && cscript //e:vbscript %TEMP%\\legit.txt -register malicious.dll MaliciousProvider",
+    "explanation": "Quotes around the arguments are omitted, but the command remains valid and functionally equivalent. This is a safe mutation that could still trigger the Sigma rule."
+  }
+]

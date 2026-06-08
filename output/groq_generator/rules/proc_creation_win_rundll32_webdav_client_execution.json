@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie",
+    "explanation": "This command omits the server and path arguments while retaining the core structure of the malicious command line. It is still parsed correctly by rundll32.exe and matches the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe \"C:\\\\windows\\\\system32\\\\davclnt.dll\",DavSetCookie",
+    "explanation": "This command uses quotes and double backslashes for path normalization, which is a safe mutation technique. It retains the same behavior and matches the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe C:\\\\windows\\system32\\davclnt.dll,DavSetCookie",
+    "explanation": "This command uses a mix of single and double backslashes for path normalization, which is still parsed correctly by rundll32.exe and matches the Sigma rule."
+  }
+]

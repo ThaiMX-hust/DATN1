@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmstp.exe /s C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003_uacbypass.inf /au",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria and is a true positive for testing."
+  },
+  {
+    "output": "cmstp.exe /s C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003.inf",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria and is a true positive for testing."
+  },
+  {
+    "output": "cmstp.exe -s -ni C:\\Path\\To\\Malicious.inf",
+    "explanation": "This command uses substitution of '/' with '-' for the flags, which is still valid syntax for cmstp.exe and matches the Sigma rule."
+  },
+  {
+    "output": "copy cmstp.exe not_cmstp.exe && not_cmstp.exe /S /AU C:\\Users\\Public\\Downloads\\payload.inf",
+    "explanation": "This command renames cmstp.exe to avoid direct detection but still executes it with the same flags. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmstp.exe -s \"C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003_uacbypass.inf\" -au",
+    "explanation": "This command uses substitution of '/' with '-' for the flags and quotes the file path, which is valid syntax and matches the Sigma rule."
+  }
+]

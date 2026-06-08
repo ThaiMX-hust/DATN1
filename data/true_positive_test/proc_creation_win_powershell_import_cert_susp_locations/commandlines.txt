@@ -1,0 +1,3 @@
+certutil.exe -addstore Root C:\Windows\TEMP\malicious.cer
+powershell.exe -c "Import-Certificate -f C:\Windows\TEMP\malicious.cer -CertStoreLocation Cert:\LocalMachine\Root"
+powershell.exe -c "Import-Certificate -FilePath C:\ProgramData\malicious.cer -CertStoreLocation Cert:\LocalMachine\Root"

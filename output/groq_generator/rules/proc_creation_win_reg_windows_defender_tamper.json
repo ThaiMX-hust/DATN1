@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\Defender\\Features /v TamperProtection /t REG_DWORD /d 0 /f",
+    "explanation": "Replaced 'Defender' with 'Defender' (typo-like variation) and omitted quotes around the value name. This is a safe mutation that may still trigger the rule if the program accepts the path variation."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v TamperProtection /t REG_DWORD /d 00 /f",
+    "explanation": "Changed '0' to '00' as an equivalent numeric representation. This is a safe mutation that may still trigger the rule if the program accepts the value."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features /v TamperProtection /t REG_DWORD /d 0 /f",
+    "explanation": "Removed quotes from the registry path. This is a safe mutation that may still trigger the rule if the program accepts the path without quotes."
+  }
+]

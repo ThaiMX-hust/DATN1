@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c findstr /S /M /I \"eyJ0eX\" %LOCALAPPDATA%\\*.log",
+    "explanation": "The original command is modified by omitting the escape character (^) before the 0 in 'eyJ^0eX', but since the original Sigma rule includes 'eyJ0eX' as a search term, this variation still matches the rule."
+  },
+  {
+    "output": "cmd.exe /c findstr /S /M /I \"eyJ0eXAiOi\" %LOCALAPPDATA%\\*.log",
+    "explanation": "The full JWT header 'eyJ0eXAiOi' is used directly as the search pattern. This matches one of the exact strings in the Sigma rule and is a valid variation."
+  },
+  {
+    "output": "powershell.exe -Command \"Select-String -Path $env:LOCALAPPDATA\\* -Pattern 'eyJhbGciOi'\"",
+    "explanation": "This command uses the alternative JWT header 'eyJhbGciOi' as the search pattern, which is explicitly included in the Sigma rule's detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Select-String -Path $env:LOCALAPPDATA\\* -Pattern ('eyJ0' + 'eX')\"",
+    "explanation": "The JWT header is split into two parts and concatenated, which is a safe mutation technique. The combined string 'eyJ0eX' is still detected by the Sigma rule."
+  }
+]

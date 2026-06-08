@@ -1,0 +1,4 @@
+"rundll32.exe" "msado15.dll,OpenDSLFile" "C:\Users\Public\Downloads\example.udl"
+cmd.exe /c rundll32.exe oledb32.dll,OpenDSLFile C:\Users\user\Downloads\test.udl
+rundll32.exe oledb32.dll,OpenDSLFile "C:\Users\admin\Downloads\test.udl"
+rundll32.exe oledb32.dll,OpenDSLFile C:\ProgramData\test.udl

@@ -1,0 +1,4 @@
+REG  QUERY HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography /v MachineGuid
+cmd /c reg query "HKLM\SOFTWARE\Microsoft\Cryptography"
+powershell -NoProfile -Command "[Microsoft.Win32.Registry]::LocalMachine.OpenSubKey('SOFTWARE\Microsoft\Cryptography').GetValue('MachineGuid')"
+powershell -NoProfile -Command "Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Cryptography' | Select-Object -ExpandProperty MachineGuid"

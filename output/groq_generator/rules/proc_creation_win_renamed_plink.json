@@ -1,0 +1,14 @@
+[
+  {
+    "output": "plink.exe -l forward -P 22 -R 127.0.0.1:8080:localhost:80",
+    "explanation": "This is the original true positive command and cannot be considered a bypass."
+  },
+  {
+    "output": "plink.exe -l forward -P22 -R127.0.0.1:8080:localhost:80",
+    "explanation": "Omission of spaces between flags and values. The command is still valid and may evade detection if the Sigma rule relies on space-separated parsing."
+  },
+  {
+    "output": "plink.exe -lforward -P 22 -R 127.0.0.1:8080:localhost:80",
+    "explanation": "Omission of space between -l and 'forward'. This may bypass detection if the Sigma rule relies on specific spacing patterns."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "The command line is unchanged as it already represents a valid test case for the Sigma rule."
+  }
+]

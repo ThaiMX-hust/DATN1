@@ -1,0 +1,4 @@
+C:\Windows\system32\regsvr32.exe  /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg
+cmd.exe /c "cd C:\ProgramData && regsvr32.exe payload.dll"
+regsvr32.exe "C:\ProgramData"\payload.dll
+regsvr32.exe payload.dll

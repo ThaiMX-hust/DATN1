@@ -1,0 +1,42 @@
+[
+  {
+    "output": "powershell -Command \"Set-Service -Name 'Spooler' -StartupType 'Disabled'\"",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria and serves as a baseline for testing."
+  },
+  {
+    "output": "powershell -Command \"Set-Service -Name Spooler -StartupType Disabled\"",
+    "explanation": "Omission of quotes around the service name and startup type where not strictly necessary, but still valid in PowerShell."
+  },
+  {
+    "output": "powershell -Command \"Set-Service Spooler -StartupType Disabled\"",
+    "explanation": "Omission of the '-Name' parameter, which is optional in PowerShell for positional parameters."
+  },
+  {
+    "output": "powershell -Command \"& {Set-Service -Name 'Spooler' -StartupType 'Disabled'}\"",
+    "explanation": "Wrapped the command in a script block using '&' to test parsing behavior while maintaining the same logic."
+  },
+  {
+    "output": "powershell -Command \"Set-Service -Name Spooler -StartupType Manual\"",
+    "explanation": "Changed the startup type from 'Disabled' to 'Manual' to test if the rule detects both values."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'Spooler' -StartupType 'Disabled'\"",
+    "explanation": "Used 'pwsh.exe' instead of 'powershell.exe' to test if the rule is specific to the executable name."
+  },
+  {
+    "output": "powershell -Command \"Set-Service -StartupType 'Disabled' -Name Spooler\"",
+    "explanation": "Reordered the parameters to test if the rule is sensitive to argument order."
+  },
+  {
+    "output": "powershell -Command \"Set-Service -Name Spooler -StartupType 'Dis'+'abled\"",
+    "explanation": "Split the string 'Disabled' into two parts and concatenated them to test if the rule's string detection is affected."
+  },
+  {
+    "output": "powershell -Command \"Set-Service -Name Spooler -StartupType [char]68+[char]105+[char]115+[char]97+[char]98+[char]108+[char]101+[char]100\"",
+    "explanation": "Encoded 'Disabled' using ASCII character representation to test if the rule's detection is affected by obfuscation."
+  },
+  {
+    "output": "powershell -Command \"Set-Service -Name Spooler -StartupType $env:StartupTypeValue\" --% -StartupTypeValue Disabled",
+    "explanation": "Used an environment variable to pass the startup type value, testing if the rule can detect dynamic values."
+  }
+]

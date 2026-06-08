@@ -1,0 +1,3 @@
+C:\Users\thaim\AppData\Local\Temp\tcm.tmp  -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt
+certutil.exe -encode payload.bin encoded_payload.txt
+cmd.exe /c "certutil.exe -encode payload.b^at encoded_payload.txt"

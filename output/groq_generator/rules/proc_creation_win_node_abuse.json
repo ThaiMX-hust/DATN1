@@ -1,0 +1,14 @@
+[
+  {
+    "output": "node.exe -e \"require('child_process').exec('cmd /c echo test > C:\\\\Windows\\\\Temp\\\\test.txt');\"",
+    "explanation": "This command uses node.exe with the -e flag to execute a JavaScript snippet that spawns a command shell to create a test file. It matches the Sigma rule's detection criteria by including ' -e ' and 'child_process', simulating a potential arbitrary code execution scenario."
+  },
+  {
+    "output": "node.exe --eval \"require('child_process').exec('powershell -Command ' + [char]34 + 'Write-Output \"bypass\" | Out-File C:\\\\Windows\\\\Temp\\\\bypass.txt' + [char]34);\"",
+    "explanation": "This command uses node.exe with the --eval flag (equivalent to -e) to execute a JavaScript snippet that uses PowerShell to write a test file. It matches the Sigma rule by including ' --eval ' and 'child_process', simulating a potential arbitrary code execution scenario."
+  },
+  {
+    "output": "node.exe -e \"require('net').Socket().connect(1337, '127.0.0.1', () => { console.log('Connected'); });\"",
+    "explanation": "This command uses node.exe with the -e flag to execute a JavaScript snippet that creates a net socket and connects to a local port. It matches the Sigma rule by including ' -e ' and 'net.socket', simulating a potential reverse shell scenario."
+  }
+]

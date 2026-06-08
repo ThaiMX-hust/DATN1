@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc create TestService binPath= \"C:\\\\Windows\\\\System32\\\\cmd.exe /C echo BypassTest > \\\\\\\\.\\$$pipe\\\\TestPipe\" type= own start= demand",
+    "explanation": "This command uses the 'sc' utility to create a new service with a benign command that writes to a named pipe. It mimics the structure of the Sigma rule's detection criteria but avoids suspicious binaries or paths."
+  },
+  {
+    "output": "powershell.exe -Command \"New-Service -Name TestService -BinaryPathName 'C:\\\\Windows\\\\System32\\\\notepad.exe' -StartupType Manual\"",
+    "explanation": "This command uses PowerShell to create a new service with a legitimate binary (notepad.exe) and avoids any suspicious paths or execution patterns, making it safe for testing."
+  },
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\\\Windows\\\\System32\\\\svchost.exe -k NetworkService\" type= share start= auto",
+    "explanation": "This command uses 'sc.exe' to create a new service with a standard Windows binary (svchost.exe) and a common argument. It avoids any suspicious paths or execution patterns."
+  },
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\\\Windows\\\\System32\\\\cmd.exe /C echo Test > C:\\\\Windows\\\\Temp\\\\test.txt\" type= own start= auto",
+    "explanation": "This command uses 'sc.exe' to create a new service with a benign command that writes to a system temporary directory. It avoids any suspicious binaries or paths."
+  },
+  {
+    "output": "powershell.exe -Command \"New-Service -Name TestService -BinaryPathName 'C:\\\\Windows\\\\System32\\\\calc.exe' -StartupType Automatic\"",
+    "explanation": "This command uses PowerShell to create a new service with a legitimate binary (calc.exe) and avoids any suspicious paths or execution patterns, making it safe for testing."
+  }
+]

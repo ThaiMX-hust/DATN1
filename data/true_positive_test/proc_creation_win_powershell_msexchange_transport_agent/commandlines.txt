@@ -1,0 +1,1 @@
+"powershell.exe" & {Install-TransportAgent -Name Security Interop Agent -TransportAgentFactory Microsoft.Exchange.Security.Interop.SecurityInteropAgentFactory -AssemblyPath c:\program files\microsoft\Exchange Server\v15\bin\Microsoft.Exchange.Security.Interop.dll Enable-TransportAgent Security Interop Agent Get-TransportAgent | Format-List Name,Enabled}

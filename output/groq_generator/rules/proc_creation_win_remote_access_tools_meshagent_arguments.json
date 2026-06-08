@@ -1,0 +1,42 @@
+[
+  {
+    "output": "meshagent.exe --meshServiceName",
+    "explanation": "The command includes the '--meshServiceName' argument, which is the key detection point in the Sigma rule. This is a direct match and will be flagged by the rule."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName MyService",
+    "explanation": "Adding a service name argument after '--meshServiceName' is a common usage pattern and will still match the Sigma rule's detection condition."
+  },
+  {
+    "output": "meshagent.exe -meshServiceName MyService",
+    "explanation": "Substituting '--meshServiceName' with '-meshServiceName' is not a valid substitution for this argument in most command-line tools, but it is included here for testing purposes."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName=MyService",
+    "explanation": "Using an equals sign to assign the service name is a valid syntax variation and will still match the Sigma rule."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName MyService --otherArg",
+    "explanation": "Adding additional arguments after the '--meshServiceName' flag does not affect the detection condition and will still match the Sigma rule."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName MyService --meshServiceName AnotherService",
+    "explanation": "Including the '--meshServiceName' flag multiple times is not typical but is included here to test detection robustness."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName MyService --meshServiceName AnotherService --meshServiceName FinalService",
+    "explanation": "Repeating the '--meshServiceName' flag multiple times with different values is included here for testing purposes."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName MyService --meshServiceName AnotherService --meshServiceName FinalService --otherArg",
+    "explanation": "Combining multiple '--meshServiceName' flags with other arguments is included here for testing purposes."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName MyService --meshServiceName AnotherService --meshServiceName FinalService --otherArg --yetAnotherArg",
+    "explanation": "Adding multiple arguments after the '--meshServiceName' flag is included here for testing purposes."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName MyService --meshServiceName AnotherService --meshServiceName FinalService --otherArg --yetAnotherArg --moreArgs",
+    "explanation": "Including multiple '--meshServiceName' flags and other arguments is included here for testing purposes."
+  }
+]

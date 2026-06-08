@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Compress-Archive -Path 'C:\\AtomicRedTeam\\atomics\\T1074.001\\bin\\Folder_to_zip' -DestinationPath $env:TEMP\\Folder_to_zip.zip -Force\"",
+    "explanation": "This command uses a simplified version of the original command by omitting unnecessary elements like the script block and quotes around the command. It retains the core functionality of compressing a folder to a temporary destination."
+  },
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command Compress-Archive -Path C:\\SensitiveData\\* -DestinationPath C:\\Users\\Public\\Documents\\archive.zip",
+    "explanation": "This command removes the outer quotes around the command string since PowerShell can still parse the command correctly without them. The command structure remains the same, making it a valid test case."
+  }
+]

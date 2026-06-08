@@ -1,0 +1,4 @@
+cmd.exe /c w^hoami&echo [S]
+cmd.exe /c "&dir&&echo [E]"
+w3wp.exe -command "&ipconfig&echo"
+w3wp.exe -s "&whoami&echo"

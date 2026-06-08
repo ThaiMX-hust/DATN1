@@ -1,0 +1,18 @@
+[
+  {
+    "output": "proxy_service.exe -c \"C:\\Windows\\Temp\\config.conf\"",
+    "explanation": "Inserted quotes around the file path to test how the detection rule handles quoted paths, a common safe mutation technique."
+  },
+  {
+    "output": "proxy_service.exe --config C:\\Windows\\Temp\\config.conf",
+    "explanation": "Substituted the short option '-c' with the long option '--config', which is functionally equivalent and a safe mutation technique."
+  },
+  {
+    "output": "proxy_service.exe -c C:/Windows/Temp/config.conf",
+    "explanation": "Replaced backslashes with forward slashes in the file path, a safe mutation technique that may test path normalization handling."
+  },
+  {
+    "output": "proxy_service.exe -c C:\\Windows\\Temp\\config.conf",
+    "explanation": "Preserved the original command line with no mutation for baseline testing purposes."
+  }
+]

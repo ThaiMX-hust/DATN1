@@ -1,0 +1,18 @@
+[
+  {
+    "output": "regsvr32.exe /i:payload.sct scrobj.dll",
+    "explanation": "The Sigma rule detects the use of the '/i' flag without the '/n' flag. This command omits the '/n' flag while including the '/i' flag, which matches the rule's detection condition."
+  },
+  {
+    "output": "regsvr32.exe -i:payload.sct scrobj.dll",
+    "explanation": "The '-i' flag is equivalent to '/i' in regsvr32.exe. This substitution maintains the same behavior and still triggers the Sigma rule by omitting the '/n' flag."
+  },
+  {
+    "output": "regsvr32.exe/i:payload.sct scrobj.dll",
+    "explanation": "Removing the space between the executable and the '/i' flag is a valid mutation technique. This format still omits the '/n' flag and matches the Sigma rule's detection condition."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /i:payload.sct scrobj.dll",
+    "explanation": "Using the full path to regsvr32.exe and maintaining the '/i' flag without '/n' still satisfies the Sigma rule's condition for detection."
+  }
+]

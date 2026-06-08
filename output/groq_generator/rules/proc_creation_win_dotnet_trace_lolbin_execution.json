@@ -1,0 +1,6 @@
+[
+  {
+    "output": "dotnet-trace collect -- calc.exe",
+    "explanation": "This is the base command that matches the Sigma rule and is used as a reference for testing."
+  }
+]

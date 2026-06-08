@@ -1,0 +1,10 @@
+[
+  {
+    "output": "not_tar.exe -c -f archive.tar C:\\SensitiveData",
+    "explanation": "The command uses substitution by replacing '--create' with '-c' and omits the executable name from the detection by renaming 'tar.exe' to 'not_tar.exe'. This demonstrates a safe mutation technique for testing bypasses."
+  },
+  {
+    "output": "tar -cf backup.tar C:\\Users\\Public\\Logs",
+    "explanation": "The command uses substitution by replacing '--create' with '-c' and '--file' with '-f', which are equivalent short options. This is a valid mutation that preserves the original behavior while testing for detection evasion."
+  }
+]

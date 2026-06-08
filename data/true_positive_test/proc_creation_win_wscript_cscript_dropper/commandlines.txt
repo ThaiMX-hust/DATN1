@@ -1,0 +1,5 @@
+"C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.png.vbs"
+"C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.xls.vbs"
+"C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.xlsx.vbs"
+"C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\AtomicTest.vbs"
+cscript  //E:Jscript C:\Users\thaim\AppData\Local\Temp\OSTapGet.js

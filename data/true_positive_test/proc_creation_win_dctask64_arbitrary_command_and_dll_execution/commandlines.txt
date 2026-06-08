@@ -1,0 +1,3 @@
+copy dctask64.exe not_suspicious.exe && not_suspicious.exe -executecmd64 "whoami"
+dctask64.exe -"execute""cmd64" "whoami"
+dctask64.exe -executecmd64:"whoami"

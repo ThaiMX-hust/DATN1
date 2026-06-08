@@ -1,0 +1,3 @@
+copy explorer.exe file_manager.exe && file_manager.exe shell:mycomputerfolder
+explorer.exe ::{20D04FE0-3AEA-1069-A2D8-08002B30309D}
+wmic process call create "explorer.exe shell:mycomputerfolder"

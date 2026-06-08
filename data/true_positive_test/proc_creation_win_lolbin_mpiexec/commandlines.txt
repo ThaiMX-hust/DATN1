@@ -1,0 +1,3 @@
+copy mpiexec.exe not_mpiexec.exe && not_mpiexec.exe -n 1 calc.exe
+mpiexec.exe -n 2 calc.exe
+mpiexec.exe -n+1 calc.exe

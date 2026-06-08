@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"powershell.exe\" & {Invoke-ATHRemoteFXvGPUDisableme -ModuleName foo -ModulePath $PWD}",
+    "explanation": "The command substitutes 'Invoke-ATHRemoteFXvGPUDisablementCommand' with 'Invoke-ATHRemoteFXvGPUDisableme' by omitting the last 'nt', which is a partial match of the Sigma rule's detection pattern. This is a safe mutation technique for testing bypasses."
+  },
+  {
+    "output": "\"powershell.exe\" & {Invoke-ATHRemoteFXvGPUDisablementCommand -Module foo -ModulePath $PWD}",
+    "explanation": "The command omits the 'Name' part of '-ModuleName' to '-Module', which is a valid shorthand in some PowerShell contexts. This is a safe mutation technique that preserves the test behavior."
+  },
+  {
+    "output": "\"powershell.exe\" & {Invoke-ATHRemoteFXvGPUDisablementCommand -ModuleName foo -ModulePath $env:PWD}",
+    "explanation": "The command replaces $PWD with $env:PWD, using an environment variable as an alternative string representation. This is a safe recoding technique for testing bypasses."
+  },
+  {
+    "output": "\"powershell.exe\" & { Invoke-ATHRemoteFXvGPUDisablementCommand -ModuleName foo -ModulePath $PWD }",
+    "explanation": "The command adds extra spaces around the command and arguments, which is a safe insertion technique that does not affect execution but alters the log appearance."
+  },
+  {
+    "output": "\"powershell.exe\" & {Invoke-ATHRemoteFXvGPUDisablementCommand -ModulePath $PWD -ModuleName foo}",
+    "explanation": "The command reorders the '-ModuleName' and '-ModulePath' arguments. Since PowerShell accepts arguments in any order, this is a safe reordering technique for testing bypasses."
+  }
+]

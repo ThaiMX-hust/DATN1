@@ -1,0 +1,42 @@
+[
+  {
+    "output": "SharpHound.exe -CollectionMethod All",
+    "explanation": "This command uses the same collection method as the rule but may be bypassed by reordering or omitting optional parameters."
+  },
+  {
+    "output": "SharpHound.exe --CollectionMethods All",
+    "explanation": "This command uses an equivalent long-form flag for the same collection method, which may bypass detection if the rule does not account for flag substitution."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp",
+    "explanation": "This command adds an optional parameter not in the original rule, which may bypass detection if the rule does not account for additional arguments."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache",
+    "explanation": "This command adds another optional parameter, which may bypass detection if the rule does not account for additional arguments."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp",
+    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip",
+    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000",
+    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000 -Loop",
+    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000 -Loop -Loopduration 60",
+    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
+  },
+  {
+    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000 -Loop -Loopduration 60 -DCOnly",
+    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
+  }
+]

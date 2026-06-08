@@ -1,0 +1,3 @@
+NSudo.exe "-U:S" "-P:E" whoami
+NSudo.exe -u:s -p:e whoami
+ren NSudo.exe not_suspicious.exe && .\not_suspicious.exe -U:S -P:E whoami

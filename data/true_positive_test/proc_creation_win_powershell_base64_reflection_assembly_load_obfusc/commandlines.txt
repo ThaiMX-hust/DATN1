@@ -1,0 +1,5 @@
+powershell.exe -Command "$m = 'Load'; [Reflection.Assembly]::$m.Invoke($data)"
+powershell.exe -Command "[Reflection.Assembly]::('L'+'o'+'ad').Invoke($data)"
+powershell.exe -Command "[Reflection.Assembly]::(\"{1}{0}\" -f 'oad','L').Invoke($data)"
+powershell.exe -EncodedCommand WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6ACgAIgBMACIAKwAiAG8AYQBkACIAKQA=
+powershell.exe -EncodedCommand OgA6ACgAIgBMACIAKwAiAG8AIgArACIAYQBkACIAKQ==

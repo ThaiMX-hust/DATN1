@@ -1,0 +1,18 @@
+[
+  {
+    "output": "curl file:///C:\\Users\\xodih\\AppData\\Local\\Temp\\calc.dll",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It uses 'curl.exe' with the 'file:///' protocol to read a local file."
+  },
+  {
+    "output": "curl -k \"file:///C:\\\\Users\\\\xodih\\\\AppData\\\\Local\\\\Temp\\\\calc.dll\"",
+    "explanation": "This command uses quotes to enclose the URL and includes the -k (insecure) flag, which is allowed by curl and does not affect the 'file:///' protocol. The Sigma rule still matches because the 'file:///' protocol is present."
+  },
+  {
+    "output": "curl file:///C:/Users/xodih/AppData/Local/Temp/calc.dll",
+    "explanation": "This command uses forward slashes instead of backslashes in the file path, which is a valid syntax for Windows in many contexts. The Sigma rule still matches because the 'file:///' protocol is present."
+  },
+  {
+    "output": "curl.exe file:///C:\\Users\\xodih\\AppData\\Local\\Temp\\calc.dll",
+    "explanation": "This command explicitly uses 'curl.exe' instead of just 'curl', which matches the 'Image' condition in the Sigma rule. The 'file:///' protocol is still present."
+  }
+]

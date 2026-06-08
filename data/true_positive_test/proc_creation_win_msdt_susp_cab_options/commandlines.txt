@@ -1,0 +1,1 @@
+copy msdt.exe diagnostic_tool.exe && diagnostic_tool.exe -cab C:\Temp\Suspicious.diagcab

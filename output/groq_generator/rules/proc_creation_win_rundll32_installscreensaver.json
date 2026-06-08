@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver test.scr",
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing."
+  },
+  {
+    "output": "rundll32.exe  desk.cpl,InstallScreenSaver test.scr",
+    "explanation": "Insertion of an extra space before the first argument to test if the rule is sensitive to spacing."
+  },
+  {
+    "output": "rundll32.exe\" desk.cpl,InstallScreenSaver test.scr",
+    "explanation": "Insertion of a quote after rundll32.exe to test if the rule is sensitive to quote placement."
+  }
+]

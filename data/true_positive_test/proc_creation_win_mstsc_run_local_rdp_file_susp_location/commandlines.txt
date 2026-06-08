@@ -1,0 +1,3 @@
+mstsc.exe "C:\Users\Public\connection.rdp"
+mstsc.exe %TEMP%\rogue.rdp
+mstsc.exe C:\Windows\Temp\payload.rdp /f

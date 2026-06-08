@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -enc dwBoAG8AYQBtAGkA",
+    "explanation": "The '-enc' flag is a valid substitution for '-EncodedCommand'. This mutation preserves the behavior while using a shorter flag, which is allowed under safe command-line mutation techniques."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand\"dwBoAG8AYQBtAGkA\"",
+    "explanation": "Adding quotes around the base64 string is a safe insertion technique. It ensures proper parsing in some environments and does not alter the behavior of the command."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand dwBoAG8AYQBtAGkA",
+    "explanation": "No mutation is required as the original command already matches the Sigma rule. This is included to confirm the baseline behavior."
+  }
+]

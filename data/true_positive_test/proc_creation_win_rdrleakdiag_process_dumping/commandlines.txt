@@ -1,0 +1,1 @@
+"C:\WINDOWS\System32\rdrleakdiag.exe" /p 788 /o C:\Users\thaim\AppData\Local\Temp\t1003.001-13-rdrleakdiag /fullmemdmp /wait 1

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /create /tn \"TestUACBypass\" /tr \"explorer.exe /NOUACCHECK\" /sc once /st 12:00",
+    "explanation": "The original command is already a valid test case. No mutation is needed for this baseline."
+  },
+  {
+    "output": "schtasks /create /tr \"explorer.exe /NOUACCHECK\" /sc once /st 12:00 /tn \"TestUACBypass\"",
+    "explanation": "Reordered the arguments of the command while maintaining the same functionality."
+  },
+  {
+    "output": "schtasks /create /tn \"TestUACBypass\" /tr \"explorer.exe /NOUACCHECK\" /st 12:00 /sc once",
+    "explanation": "Reordered the /st and /sc arguments while maintaining the same functionality."
+  }
+]

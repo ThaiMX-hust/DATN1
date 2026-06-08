@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN \"SystemTask1\" /TR \"cmd.exe\" /SC ONSTART /RU \"S-1-5-18\"",
+    "explanation": "This command uses the equivalent security identifier (S-1-5-18) for SYSTEM, which is a valid alternative representation. It also uses uppercase flags and quotes around arguments, which are allowed mutations."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "This command uses lowercase flags and includes a quoted command line with an embedded command. It is a valid mutation that preserves the original behavior."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"SystemTask3\" /tr \"cmd.exe\" /sc daily /ru SYSTEM",
+    "explanation": "This command uses the direct SYSTEM keyword and omits optional elements while preserving the core behavior. It is a valid mutation for testing."
+  }
+]

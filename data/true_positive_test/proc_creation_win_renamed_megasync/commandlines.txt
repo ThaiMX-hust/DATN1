@@ -1,0 +1,2 @@
+copy megasync.exe megasync.exe && megasync.exe
+ResourceHacker.exe -open megasync.exe -save svchost.exe -action modify -res custom_version.res -mask VERSIONINFO,1,1033 && svchost.exe

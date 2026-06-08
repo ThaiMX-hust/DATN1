@@ -1,0 +1,1 @@
+SoundRecorder.exe "/FILE" C:\Users\Public\Music\capture.out

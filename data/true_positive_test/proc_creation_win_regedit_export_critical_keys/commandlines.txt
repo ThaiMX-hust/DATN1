@@ -1,0 +1,3 @@
+reg.exe save HKLM\SAM C:\temp\sam.save
+regedit.exe /E C:\temp\sam.reg "HKLM\SAM"
+regedit.exe /E C:\temp\system.reg HKLM\SYSTEM

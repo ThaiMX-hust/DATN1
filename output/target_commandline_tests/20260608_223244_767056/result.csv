@@ -1,0 +1,2 @@
+﻿Technical	Rule_name	Title	Rule_id	Command_match_rule	Commandline_evasion	Excutable	Bypass target rule	Bypass all rule	Trigger rule
+t1560.001	proc_creation_win_7zip_password_compression	Compress Data and Lock With Password for Exfiltration With 7-ZIP	9fbf5927-5261-4284-a71d-f681029ea574		copy 7z.exe svchost.exe && svchost.exe a -password123 archive.7z C:\data\*	FALSE	FALSE	FALSE	

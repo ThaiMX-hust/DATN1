@@ -1,0 +1,18 @@
+[
+  {
+    "output": "CATClean.exe --uninstall",
+    "explanation": "The command uses the long option '--uninstall' instead of the short option '-uninstall', which is an allowed substitution technique."
+  },
+  {
+    "output": "not_an_installer.exe",
+    "explanation": "The command renames the executable file and executes it under a different name, which is a safe reordering and recoding technique."
+  },
+  {
+    "output": "NetInstaller.exe -r",
+    "explanation": "The command uses the short option '-r' instead of the long option '/r', which is an allowed substitution technique."
+  },
+  {
+    "output": "WFPUnins.exe /uninstall /enterprise",
+    "explanation": "The command reorders the arguments while preserving the same functionality, which is an allowed reordering technique."
+  }
+]

@@ -1,0 +1,4 @@
+cmd.exe /c "type script.ps1 | powershell.exe -noprofile -"
+powershell.exe -Command "& 'script.ps1'"
+powershell.exe -ep bypass -f "C:\Users""\Public\script.ps1"
+powershell.exe -file "script.ps1"

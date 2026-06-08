@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\akew4mzz\\akew4mzz.cmdline\"",
+    "explanation": "The original command is already a valid test command. No mutation is needed to simulate a legitimate execution that matches the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /fullpaths /noconfig @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\akew4mzz\\akew4mzz.cmdline\"",
+    "explanation": "Reordered the command-line arguments to test if argument order affects detection. This is a safe mutation technique for testing."
+  }
+]

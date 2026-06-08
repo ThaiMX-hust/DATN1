@@ -1,0 +1,3 @@
+"cmd.exe" /c reg query HKCU\Software\SimonTatham\PuTTY\Sessions /t REG_SZ /s
+reg  query HKCU\Software\SimonTatham\PuTTY\Sessions /t REG_SZ /s
+reg query "HKCU\Software\SimonTatham\PuTTY\Sessions" /v "Password"

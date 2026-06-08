@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"& {Stop-Service -Name 'wuauserv'}\"",
+    "explanation": "This command uses a script block to invoke Stop-Service, which is a safe mutation technique. It preserves the original intent of stopping a service but uses a slightly different syntax."
+  },
+  {
+    "output": "powershell.exe -Command \"Stop-Service -Name wuauserv -Force\"",
+    "explanation": "This command adds the -Force flag, which is optional but still valid. It is a safe mutation technique involving the addition of an optional parameter."
+  },
+  {
+    "output": "powershell.exe -Command \"Stop-Service -Name 'wuauserv'\"",
+    "explanation": "This command removes the -Force flag, which is optional, and uses quotes around the service name. It is a safe mutation technique involving omission and insertion."
+  },
+  {
+    "output": "powershell.exe -Command \"StOp-SeRvIcE -NaMe wUaUsErV\"",
+    "explanation": "This command uses case variation in the command name and parameter names, which is a safe mutation technique as PowerShell is case-insensitive."
+  },
+  {
+    "output": "powershell.exe -Command \"& {StOp-SeRvIcE -NaMe wUaUsErV -FoRcE}\"",
+    "explanation": "This command uses a script block and case variation in the command and parameter names. It is a safe mutation technique involving reordering and case variation."
+  }
+]

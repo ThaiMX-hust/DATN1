@@ -1,0 +1,3 @@
+powershell.exe -c "Copy-Item cmd.exe -Destination update.exe; update.exe /c whoami"
+powershell.exe -NoProfile -Command "Get-Date"
+wscript.exe malicious.vbs

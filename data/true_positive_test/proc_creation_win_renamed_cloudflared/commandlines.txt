@@ -1,0 +1,1 @@
+"cloudflared.exe" tunnel run --config C:\temp\myconfig.yml --token abcdef123456

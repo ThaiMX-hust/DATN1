@@ -1,0 +1,2 @@
+copy DefaultPack.exe NotDefault.exe && NotDefault.exe /P "cmd.exe"
+DefaultPack.exe /P "powershell.exe -Command Start-Job -ScriptBlock { Start-Process calc.exe }"

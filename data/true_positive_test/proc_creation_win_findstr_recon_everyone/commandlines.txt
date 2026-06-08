@@ -1,0 +1,6 @@
+cacls "C:\Program Files\*" 2>nul | findstr Everyone
+icacls "C:\Program Files\*" 2>nul | findstr "BUILTIN"
+icacls "C:\Program Files\*" 2>nul | Select-String -Pattern "Everyone"
+icacls  "C:\Program Files\*"
+findstr  "(M)"
+findstr  "Everyone"

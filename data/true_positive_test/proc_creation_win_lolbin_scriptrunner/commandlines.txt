@@ -1,0 +1,2 @@
+copy ScriptRunner.exe not_scriptrunner.exe && not_scriptrunner.exe -appvscript calc.exe
+ScriptRunner.exe /appvscript calc.exe

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "python -h",
+    "explanation": "The original command is already a valid test case. No mutation is needed to simulate the behavior described in the Sigma rule."
+  }
+]

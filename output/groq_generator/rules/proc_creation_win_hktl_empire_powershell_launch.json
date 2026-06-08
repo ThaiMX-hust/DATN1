@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -sta -NoP -NonI -W Hidden -Enc JAB0AGUAcwB0AD0AMQA=",
+    "explanation": "This command uses the exact parameter sequence matched by the Sigma rule, making it a true positive."
+  },
+  {
+    "output": "powershell.exe -NoP -sta -NonI -W1 -Enc JAB0AGUAcwB0AD0AMQA=",
+    "explanation": "Replaces 'Hidden' with its shorthand '1' for the -W parameter, which is a valid substitution and still matches the rule."
+  },
+  {
+    "output": "powershell.exe -NoP -sta -NonI -WindowStyle Hidden -Enc JAB0AGUAcwB0AD0AMQA=",
+    "explanation": "Uses the full parameter name '-WindowStyle' instead of '-W', which is a valid substitution and still matches the rule."
+  },
+  {
+    "output": "powershell.exe -NoP -sta -NonI -W Hidden -Enc JAB0AGUAcwB0AD0AMQA= -Command \"Write-Host 'Test'\"",
+    "explanation": "Adds an additional command argument that does not affect the detection logic, preserving the match with the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -sta -NoProfile -NonInteractive -WindowStyle Hidden -EncodedCommand JAB0AGUAcwB0AD0AMQA=",
+    "explanation": "Uses full parameter names instead of short forms (-NoProfile instead of -NoP, -NonInteractive instead of -NonI), which is a valid substitution and still matches the rule."
+  }
+]

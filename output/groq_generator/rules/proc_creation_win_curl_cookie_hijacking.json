@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe --cookie-jar cookie http://example.com",
+    "explanation": "Removed unnecessary quotes around the URL while preserving the command's behavior."
+  },
+  {
+    "output": "curl.exe -c cookie \"http://example.com\"",
+    "explanation": "Replaced '--cookie-jar' with its short flag '-c' and added quotes around the URL for safe testing."
+  },
+  {
+    "output": "curl.exe --cookie-jar=cookie http://example.com",
+    "explanation": "Used an equals sign (=) instead of space to separate the flag and value, which is an equivalent syntax."
+  }
+]

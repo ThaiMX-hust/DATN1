@@ -1,0 +1,3 @@
+cmd.exe /c powershell.exe -nop -ep bypass
+MSBuild.exe C:\path\to\malicious.xml
+rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();

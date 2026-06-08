@@ -1,0 +1,2 @@
+copy dotnet-trace.exe not_a_trace.exe && not_a_trace.exe collect -- calc.exe
+dotnet-trace collect --"" calc.exe

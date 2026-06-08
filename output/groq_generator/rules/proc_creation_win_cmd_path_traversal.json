@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"..\\..\\Windows\\System32\\calc.exe\"",
+    "explanation": "Inserted quotes around the path to test if the Sigma rule detects the traversal pattern regardless of quoting."
+  },
+  {
+    "output": "cmd.exe /c ..\\..\\Windows\\System32\\calc.exe",
+    "explanation": "Removed quotes to test if the Sigma rule detects the traversal pattern without them."
+  },
+  {
+    "output": "cmd.exe /c \"./.././../Windows/System32/calc.exe\"",
+    "explanation": "Used a more complex traversal path with mixed slashes and dots to test if the Sigma rule generalizes well."
+  },
+  {
+    "output": "cmd.exe /c \"\\Windows\\System32\\calc.exe\"",
+    "explanation": "Removed traversal components to test if the Sigma rule is sensitive only to traversal patterns and not absolute paths."
+  }
+]

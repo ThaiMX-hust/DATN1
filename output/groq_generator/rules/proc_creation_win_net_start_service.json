@@ -1,0 +1,6 @@
+[
+  {
+    "output": "net start sesshijack",
+    "explanation": "The Sigma rule detects the presence of a space between 'net' and 'start' followed by a service name. This command omits the space between 'net' and 'start', which may not match the rule's detection logic."
+  }
+]

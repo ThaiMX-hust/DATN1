@@ -1,0 +1,3 @@
+logoff.exe
+shutdown.exe "/l"
+shutdown.exe -l

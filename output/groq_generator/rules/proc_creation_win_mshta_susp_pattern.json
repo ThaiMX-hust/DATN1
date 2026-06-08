@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy mshta.exe DirectX.exe && DirectX.exe javascript:a=(new ActiveXObject('WScript.Shell')).Run('calc.exe');window.close();",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to simulate suspicious mshta.exe execution."
+  }
+]

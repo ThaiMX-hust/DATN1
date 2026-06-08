@@ -1,0 +1,18 @@
+[
+  {
+    "output": "rundll32.exe dummy\\.\\sys,EntryPoint",
+    "explanation": "This command uses path normalization (double backslash escaping) to bypass the Sigma rule that detects '.sys' followed by a comma or space. The rule may not capture this variation due to the escaped path syntax."
+  },
+  {
+    "output": "rundll32.exe dummy.sys\\.,EntryPoint",
+    "explanation": "This command uses path normalization with a trailing backslash and a dot (\\.) to obfuscate the .sys file extension. This may bypass the rule by altering the string pattern while maintaining valid Windows path syntax."
+  },
+  {
+    "output": "rundll32.exe dummy.sys\",EntryPoint",
+    "explanation": "This command uses an insertion of a quote after the .sys file to alter the string pattern. The Sigma rule may not detect this variation if it does not account for quote placement around the file name."
+  },
+  {
+    "output": "rundll32.exe dummy.sys,EntryPoint",
+    "explanation": "This is the original true positive command. It is included to show the baseline for comparison with the mutated versions."
+  }
+]

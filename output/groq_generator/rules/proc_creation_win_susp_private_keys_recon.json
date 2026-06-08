@@ -1,0 +1,42 @@
+[
+  {
+    "output": "cmd.exe /c dir c:\\ /b /s .key | findstr /e .key",
+    "explanation": "This command uses standard syntax to search for .key files recursively and filter results with findstr. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /c dir c:\\ /b /s .key | findstr \".key$\"",
+    "explanation": "This command uses quotes around the findstr pattern to avoid potential issues with special characters. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /c dir c:\\ /b /s .key | findstr /e \".key\"",
+    "explanation": "This command uses explicit quotes around the findstr pattern. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path C:\\ -Recurse -Include *.key\"",
+    "explanation": "This command uses PowerShell to recursively search for .key files. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -c \"Get-ChildItem -Path C:\\ -Recurse -Include *.key\"",
+    "explanation": "This command uses a shorter syntax for PowerShell to achieve the same result. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "findstr /e .key",
+    "explanation": "This command uses findstr to filter results ending with .key. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /c dir c:\\ /b /s .pem | findstr /e .pem",
+    "explanation": "This command searches for .pem files instead of .key files. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /c dir c:\\ /b /s .pem | findstr \".pem$\"",
+    "explanation": "This command uses quotes around the findstr pattern to avoid potential issues with special characters. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -c \"Get-ChildItem -Path C:\\ -Recurse -Include *.$('p'+'em')\"",
+    "explanation": "This command uses string concatenation to obfuscate the file extension slightly. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path C:\\ -Recurse -Include *.pem\"",
+    "explanation": "This command searches for .pem files using PowerShell. It matches the Sigma rule's detection criteria."
+  }
+]

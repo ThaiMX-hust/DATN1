@@ -1,0 +1,18 @@
+[
+  {
+    "output": "deviceenroller.exe /PhoneDeepLink",
+    "explanation": "This command directly matches the Sigma rule's detection criteria by using the '/PhoneDeepLink' parameter with the 'deviceenroller.exe' executable."
+  },
+  {
+    "output": "deviceenroller.exe -PhoneDeepLink",
+    "explanation": "This command uses the '-PhoneDeepLink' parameter instead of '/PhoneDeepLink', which is a substitution of equivalent syntax and still triggers the Sigma rule."
+  },
+  {
+    "output": "deviceenroller.exe /Phone\"\"DeepLink",
+    "explanation": "This command uses insertion of quotes in the '/PhoneDeepLink' parameter, which is still parsed correctly and matches the Sigma rule."
+  },
+  {
+    "output": "copy deviceenroller.exe not_an_enroller.exe && not_an_enroller.exe /PhoneDeepLink",
+    "explanation": "This command renames 'deviceenroller.exe' and executes it under a different name, but the original file name is preserved in the 'OriginalFileName' field, which is detected by the Sigma rule."
+  }
+]

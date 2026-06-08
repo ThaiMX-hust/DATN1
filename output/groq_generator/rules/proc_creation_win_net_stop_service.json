@@ -1,0 +1,34 @@
+[
+  {
+    "output": "net stop UltraViewService",
+    "explanation": "This is the original command and serves as a baseline for testing."
+  },
+  {
+    "output": "net1 stop UltraViewService",
+    "explanation": "Uses an alternate name for net.exe (net1.exe) as specified in the Sigma rule."
+  },
+  {
+    "output": "net1  stop spooler",
+    "explanation": "Adds extra space between 'net1' and 'stop' to test insertion mutation."
+  },
+  {
+    "output": "net.exe  stop spooler",
+    "explanation": "Uses the full executable name with extra space after the executable."
+  },
+  {
+    "output": "net.exe\tstop\t\"ServiceName\"",
+    "explanation": "Uses tabs instead of spaces and quotes around the service name to test insertion and formatting."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net.exe stop UltraViewService",
+    "explanation": "Uses the full path to the executable to test path normalization and bypass detection based on file name only."
+  },
+  {
+    "output": "net stop /name:UltraViewService",
+    "explanation": "Tests substitution of 'UltraViewService' with a named parameter if supported by the target program."
+  },
+  {
+    "output": "net stop UltraViewService > NUL",
+    "explanation": "Adds redirection to suppress output, testing omission of unnecessary elements."
+  }
+]

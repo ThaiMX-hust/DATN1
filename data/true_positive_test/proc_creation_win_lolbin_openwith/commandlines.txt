@@ -1,0 +1,2 @@
+copy OpenWith.exe NotOpenWith.exe && NotOpenWith.exe /c calc.exe
+OpenWith.exe -override /c calc.exe

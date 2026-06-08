@@ -1,0 +1,42 @@
+[
+  {
+    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
+    "explanation": "This is the original command and serves as a baseline for testing."
+  },
+  {
+    "output": "powershell.exe -c \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
+    "explanation": "Substituted '-Command' with '-c', which is an equivalent short option in PowerShell."
+  },
+  {
+    "output": "powershell.exe -Command \"Remove-Item 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
+    "explanation": "Replaced 'rm' with its full form 'Remove-Item', which is functionally equivalent."
+  },
+  {
+    "output": "powershell.exe -Command \"rm HKCR:\\*\\shellex\\ContextMenuHandlers\\EPP\"",
+    "explanation": "Removed quotes around the registry path, which are not required in this context."
+  },
+  {
+    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -WindowStyle Hidden",
+    "explanation": "Added an optional '-WindowStyle Hidden' parameter, which does not affect the core behavior of the command."
+  },
+  {
+    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -ExecutionPolicy Bypass",
+    "explanation": "Added an optional '-ExecutionPolicy Bypass' parameter, which does not affect the core behavior of the command."
+  },
+  {
+    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -NonInteractive",
+    "explanation": "Added an optional '-NonInteractive' parameter, which does not affect the core behavior of the command."
+  },
+  {
+    "output": "pwsh -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
+    "explanation": "Replaced 'powershell.exe' with 'pwsh', the modern PowerShell executable, which is functionally equivalent."
+  },
+  {
+    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" | Out-Null",
+    "explanation": "Appended '| Out-Null' to suppress output, which does not affect the core behavior of the command."
+  },
+  {
+    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -Verb RunAs",
+    "explanation": "Added '-Verb RunAs' to simulate execution with elevated privileges, which does not alter the core action of the command."
+  }
+]

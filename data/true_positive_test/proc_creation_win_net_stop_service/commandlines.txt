@@ -1,0 +1,5 @@
+"net" stop UltraViewService
+C:\WINDOWS\system32\net1 stop UltraViewService
+C:\WINDOWS\system32\net1  stop spooler
+net.exe  stop spooler
+net.exe	stop	"ServiceName"

@@ -1,0 +1,2 @@
+netsh  trace start capture=yes tracefile=C:\Users\thaim\AppData\Local\Temp\trace.etl maxsize=10
+netsh tr st capture=yes

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "reg add HKLM\\\"SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v EnableSmartScreen /t REG_DWORD /d 0 /f",
+    "explanation": "Inserted quotes and escaped backslashes to test if the Sigma rule detects the command despite syntactic variations."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v GroupPolicyRefreshTime /t REG_DWORD /d 0 /f",
+    "explanation": "Used standard syntax with no extra escaping or substitution to confirm baseline detection."
+  },
+  {
+    "output": "reg add \"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\System\" /v GroupPolicyRefreshTimeDC /t REG_DWORD /d 0 /f",
+    "explanation": "Used double quotes and escaped backslashes to test if the Sigma rule is resilient to insertion techniques."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v GroupPolicyRefreshTimeOffset /t REG_DWORD /d 0 /f",
+    "explanation": "Used standard command syntax to ensure the Sigma rule captures typical command-line input."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v ShellSmartScreenLevel /t REG_SZ /d Block /f",
+    "explanation": "Used standard command syntax to test detection of the ShellSmartScreenLevel key modification."
+  },
+  {
+    "output": "reg.exe add HKLM\\S^OFTWARE\\Policies\\Microsoft\\Windows\\System /v GroupPolicyRefreshTime /t REG_DWORD /d 10 /f",
+    "explanation": "Used caret escape character to test if the Sigma rule is resilient to path normalization and encoding techniques."
+  }
+]

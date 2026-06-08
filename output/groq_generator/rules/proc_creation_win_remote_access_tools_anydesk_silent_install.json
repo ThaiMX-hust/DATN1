@@ -1,0 +1,10 @@
+[
+  {
+    "output": "anydesk.exe --install C:\\ProgramData\\AnyDesk --start-with-win --silent",
+    "explanation": "The command is a direct match to the Sigma rule's detection criteria. It includes all required flags (--install, --start-with-win, --silent) and is formatted without unnecessary mutations."
+  },
+  {
+    "output": "anydesk.exe --install C:\\ProgramData\\AnyDesk --silent --start-with-win",
+    "explanation": "Reordering the arguments (--install, --silent, --start-with-win) does not affect the detection since the rule checks for the presence of all three flags regardless of order."
+  }
+]

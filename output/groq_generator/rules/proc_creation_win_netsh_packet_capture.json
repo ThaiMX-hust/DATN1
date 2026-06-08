@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh trace start capture=yes tracefile=C:\\Users\\thaim\\AppData\\Local\\Temp\\trace.etl maxsize=10",
+    "explanation": "This is the original command and serves as a baseline for testing detection accuracy."
+  },
+  {
+    "output": "netsh tr st capture=yes",
+    "explanation": "This command uses short-form flags ('tr' for 'trace', 'st' for 'start') and omits optional parameters, which is still valid and should be detected."
+  },
+  {
+    "output": "netsh   trace    start   capture=yes tracefile=C:\\Users\\thaim\\AppData\\Local\\Temp\\trace.etl maxsize=10",
+    "explanation": "This command adds extra spaces between arguments and keywords, which should still be parsed correctly and detected."
+  }
+]

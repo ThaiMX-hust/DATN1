@@ -1,0 +1,14 @@
+[
+  {
+    "output": "code.exe tunnel --accept-server-license-terms",
+    "explanation": "This is the original command and serves as a baseline for testing."
+  },
+  {
+    "output": "code.exe  tunnel   --accept-server-license-terms",
+    "explanation": "This uses the insertion technique by adding extra spaces between arguments."
+  },
+  {
+    "output": "\"code.exe\" tunnel --accept-server-license-terms",
+    "explanation": "This uses the insertion technique by adding quotes around the executable name."
+  }
+]

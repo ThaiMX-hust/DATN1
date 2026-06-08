@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regini.exe  script.txt :\\",
+    "explanation": "This command adds extra space after 'regini.exe' and uses double backslash in the path, which are safe mutations that do not change the behavior but may evade the Sigma rule's detection logic."
+  },
+  {
+    "output": "\"regini.exe\" script.txt :/",
+    "explanation": "Enclosing the executable name in quotes and using a single slash for the path are safe mutations that preserve functionality while potentially evading detection."
+  },
+  {
+    "output": "regini.exe script.txt :`\\",
+    "explanation": "Inserting an escape character before the backslash is a safe mutation that may bypass the Sigma rule's string-based detection."
+  }
+]

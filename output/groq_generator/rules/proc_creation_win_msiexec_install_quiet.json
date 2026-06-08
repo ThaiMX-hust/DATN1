@@ -1,0 +1,22 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /q /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
+    "explanation": "The original command is preserved with no mutation applied for baseline testing."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /quiet /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
+    "explanation": "The /q flag is replaced with its equivalent /quiet flag to test substitution of equivalent syntax."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\" /q",
+    "explanation": "The order of the /q and /i flags is swapped to test reordering of arguments."
+  },
+  {
+    "output": "\"c:\\windows\\system32\\msiexec.exe\" /q /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
+    "explanation": "The executable path is wrapped in quotes to test insertion of quotes for bypass testing."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /q /i C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi",
+    "explanation": "The quotes around the MSI path are removed to test omission of optional syntax."
+  }
+]

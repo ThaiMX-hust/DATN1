@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::($Env:Load).Invoke($data)\"",
+    "explanation": "Uses an environment variable to represent the 'Load' keyword, which is a safe mutation technique to bypass the Sigma rule's detection of encoded or obfuscated 'Load'."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::( [char]76 + [char]111 + [char]97 + [char]100 ).Invoke($data)\"",
+    "explanation": "Replaces the string 'Load' with its ASCII character representation, which is a safe mutation technique to avoid direct string matching by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::( [string]::Concat('L','o','a','d') ).Invoke($data)\"",
+    "explanation": "Uses the [string]::Concat method to construct the 'Load' keyword, which is a safe mutation technique that avoids direct string concatenation patterns."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::( 'L' + 'oad' ).Invoke($data)\"",
+    "explanation": "Splits the 'Load' keyword into 'L' and 'oad' to avoid matching the encoded or obfuscated patterns detected by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::( [System.String]::Format( '{0}{1}', 'Lo', 'ad' ) ).Invoke($data)\"",
+    "explanation": "Uses [System.String]::Format to concatenate 'Lo' and 'ad', which is a safe mutation technique to avoid direct string concatenation patterns."
+  }
+]

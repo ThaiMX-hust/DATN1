@@ -1,0 +1,2 @@
+"C:\WINDOWS\system32\fsutil.exe" file setZeroData offset=0 length=10 C:\AtomicRedTeam\atomics\..\ExternalPayloads\T1070-2.txt
+fsutil  usn deletejournal /D C:

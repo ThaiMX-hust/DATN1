@@ -1,0 +1,4 @@
+cmd.exe /c "echo Write-Host 'Test' | c^l^i^p.exe && powershell -c \"IEX ([System.Windows.Forms.Clipboard]::GetText())\""
+cmd.exe /c "echo Write-Host 'Test' | clip & powershell -c \"IEX ([System.Windows.Forms.Clipboard]::GetText())\""
+powershell.exe -Command "Set-Clipboard -Value 'Write-Host test'; Invoke-Expression (Get-Clipboard)"
+cmd.exe /c echo Write-Host 'Bypass Test' | clip & powershell -c IEX([Windows.Forms.Clipboard]::GetText())

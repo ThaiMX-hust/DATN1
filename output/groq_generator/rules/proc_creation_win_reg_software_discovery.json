@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\\ Explorer\" /v svcVersion",
+    "explanation": "Inserted extra space after 'Internet' to simulate a benign variation. The command remains valid and functionally equivalent."
+  },
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion",
+    "explanation": "Used short syntax for the registry path with proper escaping. The command is still valid and functionally equivalent."
+  },
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\software\\microsoft\\internet explorer\" /v svcVersion",
+    "explanation": "Lowercased the registry path to test case-insensitive parsing. The command is still valid and functionally equivalent."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\\\Software\\\\Microsoft\\\\Internet\\ Explorer /v svcVersion",
+    "explanation": "Used double backslashes for path normalization and inserted a space in 'Internet Explorer' for safe mutation. The command is still valid and functionally equivalent."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer /v svcVersion",
+    "explanation": "Omitted quotes around the registry path where not strictly necessary. The command is still valid and functionally equivalent."
+  }
+]

@@ -1,0 +1,46 @@
+[
+  {
+    "output": "reg.exe export HKCU\\Software C:\\temp\\export.reg",
+    "explanation": "This is the original true positive command and will be detected by the Sigma rule."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software C:\\temp\\export.reg /y",
+    "explanation": "Adding the /y flag (which is optional and accepted by reg.exe) does not bypass the Sigma rule, as it is still detected due to the presence of the export action."
+  },
+  {
+    "output": "regedit.exe /e C:\\temp\\export.reg HKEY_CURRENT_USER\\Software",
+    "explanation": "Removing the quotes around the arguments is a safe mutation and still valid, but it remains detectable by the Sigma rule."
+  },
+  {
+    "output": "regedit.exe /e C:\\temp\\export.reg HKEY_CURRENT_USER\\\\Software",
+    "explanation": "Using double backslashes instead of single backslashes is a safe mutation and still valid, but it remains detectable by the Sigma rule."
+  },
+  {
+    "output": "regedit.exe /e C:\\temp\\export.reg HKEY_CURRENT_USER/Software",
+    "explanation": "Using forward slashes instead of backslashes in the registry path is not valid in Windows registry syntax, so this command will not execute correctly and cannot be used to bypass the Sigma rule."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software C:\\temp\\export.reg > NUL",
+    "explanation": "Appending output redirection to NUL is a safe mutation but does not bypass the Sigma rule, as the command line still contains the export action."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software C:\\temp\\export.reg 2>&1 | findstr /v \"error\"",
+    "explanation": "Adding output filtering does not bypass the Sigma rule, as the command line still contains the export action."
+  },
+  {
+    "output": "set REG_PATH=HKCU\\Software && reg.exe export %REG_PATH% C:\\temp\\export.reg",
+    "explanation": "Using an environment variable to store the registry path is a safe mutation and still valid, but it remains detectable by the Sigma rule."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software C:\\temp\\export.reg | findstr /v \"error\"",
+    "explanation": "Piping the output to findstr is a safe mutation but does not bypass the Sigma rule, as the command line still contains the export action."
+  },
+  {
+    "output": "regedit.exe /e C:\\temp\\export.reg HKEY_CURRENT_USER\\Software /y",
+    "explanation": "Adding the /y flag (which is optional and accepted by regedit.exe) does not bypass the Sigma rule, as it is still detected due to the presence of the export action."
+  },
+  {
+    "output": "regedit.exe /e C:\\temp\\export.reg HKEY_CURRENT_USER\\Software > NUL",
+    "explanation": "Appending output redirection to NUL is a safe mutation but does not bypass the Sigma rule, as the command line still contains the export action."
+  }
+]

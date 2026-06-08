@@ -1,0 +1,5 @@
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"  -c New-Service -Name svcHighPriv -BinaryPathName 'C:\windows\system32\cmd.exe /C echo Uuup! > \\.\pipe\HighPriv' -StartupType Manual
+"powershell.exe" & {New-Service -Name \""AtomicTestService_PowerShell\"" -BinaryPathName \""C:\AtomicRedTeam\atomics\T1543.003\bin\AtomicService.exe\"" Start-Service -Name \""AtomicTestService_PowerShell\""}
+powershell.exe -Command "$cmd = 'New-Se'+'rvice'; & $cmd -Name 'TestService' -BinaryPathName 'cmd.exe'"
+powershell.exe -Command "N`ew-Service -BinaryPathName 'cmd.exe' -Name 'TestService'"
+powershell.exe -Command "New-Service -Name 'TestService' -bin 'cmd.exe'"

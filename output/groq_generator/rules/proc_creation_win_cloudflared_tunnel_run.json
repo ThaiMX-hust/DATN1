@@ -1,0 +1,30 @@
+[
+  {
+    "output": "cloudflared.exe tunnel run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+  },
+  {
+    "output": "cloudflared.exe tunnel run --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "Removed the equals sign (=) after --token, which is optional in some command-line interfaces and still accepted by cloudflared."
+  },
+  {
+    "output": "cloudflared.exe^ tunnel^ run^ --token^ eyJhbGciOiJIUZI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "Inserted escape characters (^) before spaces, a common Windows CMD technique to bypass simple string-based detection."
+  },
+  {
+    "output": "cloudflared.exe tunnel run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... --log-level=info",
+    "explanation": "Added an optional argument (--log-level=info) to increase the command length and complexity without changing the core behavior."
+  },
+  {
+    "output": "set TUNNEL_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... && cloudflared.exe tunnel run --token=%TUNNEL_TOKEN%",
+    "explanation": "Used an environment variable to store the token, which is a safe mutation technique to obscure the token in the command line."
+  },
+  {
+    "output": "cloudflared.exe -tunnel -run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "Replaced long options with short options if available (hypothetical; this depends on cloudflared's actual CLI syntax)."
+  },
+  {
+    "output": "cloudflared.exe tunnel run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... --config=C:\\\\path\\\\to\\\\config.json",
+    "explanation": "Added an optional --config flag with a valid path, which does not affect the core behavior but increases command complexity."
+  }
+]

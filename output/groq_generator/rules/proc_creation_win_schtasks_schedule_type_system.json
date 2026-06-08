@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /SC ONLOGON /RU SYSTEM",
+    "explanation": "This command uses the same suspicious schedule type (ONLOGON) and high privileges (SYSTEM) as the Sigma rule detects. It is a direct representation of the rule's detection criteria."
+  },
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /SC ONSTART /RU SYSTEM",
+    "explanation": "This command uses a different suspicious schedule type (ONSTART) but still includes high privileges (SYSTEM), aligning with the Sigma rule's detection logic."
+  },
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /SC\tONLOGON\t/RU\tSYSTEM",
+    "explanation": "This command uses tab characters for spacing, which is a safe mutation technique, while still containing the suspicious schedule type (ONLOGON) and high privileges (SYSTEM)."
+  },
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /SC ONCE /RL HIGHEST /F",
+    "explanation": "This command uses a different suspicious schedule type (ONCE) and high privileges (HIGHEST), which aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /SC ONIDLE /RU SYSTEM",
+    "explanation": "This command uses a different suspicious schedule type (ONIDLE) and high privileges (SYSTEM), which matches the Sigma rule's detection logic."
+  }
+]

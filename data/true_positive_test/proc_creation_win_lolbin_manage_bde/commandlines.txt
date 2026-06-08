@@ -1,0 +1,2 @@
+cmd.exe /c "cd /d C:\Windows\System32\ && cscript.exe //nologo manage-bde.wsf"
+copy C:\Windows\System32\manage-bde.wsf C:\Users\Public\m.txt && cscript.exe //e:jscript C:\Users\Public\m.txt

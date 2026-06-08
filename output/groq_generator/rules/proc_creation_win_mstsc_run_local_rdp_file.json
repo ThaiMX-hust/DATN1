@@ -1,0 +1,18 @@
+[
+  {
+    "output": "mstsc.exe C:\\Temp\\hidden.rdp",
+    "explanation": "Removed quotes around the .rdp file path, which may still be parsed correctly depending on the context."
+  },
+  {
+    "output": "mstsc.exe C:\\Users\\Public\\malicious.rdp -f",
+    "explanation": "Replaced the '/' with a '-', which is an equivalent syntax for command-line flags in some Windows utilities."
+  },
+  {
+    "output": "mstsc.exe \"C:\\Temp\\hidden.rdp\"",
+    "explanation": "Inserted escape characters before quotes to test if the command still executes as expected."
+  },
+  {
+    "output": "mstsc.exe C:\\Users\\Public\\malicious.rdp /f",
+    "explanation": "Reordered the command line to test if the execution behavior remains unchanged."
+  }
+]

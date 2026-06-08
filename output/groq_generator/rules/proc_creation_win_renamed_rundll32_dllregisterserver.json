@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -nop -Command Write-Host DllRegisterServer export executed me; exit",
+    "explanation": "The original command is a true positive for the Sigma rule. No bypass is needed for testing purposes."
+  },
+  {
+    "output": "powershell.exe -noprofile -Command Write-Host DllRegisterServer export executed me; exit",
+    "explanation": "The '-nop' flag is substituted with its equivalent '-noprofile' for testing purposes."
+  },
+  {
+    "output": "powershell.exe -nop -c Write-Host DllRegisterServer export executed me; exit",
+    "explanation": "The '-Command' flag is substituted with its short form '-c' to test equivalent syntax."
+  },
+  {
+    "output": "powershell.exe -nop -Command \"Write-Host DllRegisterServer export executed me; exit\"",
+    "explanation": "Quotes are added around the command to test safe insertion of syntax elements."
+  }
+]

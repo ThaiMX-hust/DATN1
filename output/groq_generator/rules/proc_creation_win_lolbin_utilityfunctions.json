@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy UtilityFunctions.ps1 NotSuspicious.ps1; powershell.exe -ExecutionPolicy Bypass -File NotSuspicious.ps1 RegSnapin -DLLPath malicious.dll",
+    "explanation": "The original command is a true positive for the Sigma rule. It cannot be bypassed by safe mutation techniques without changing the behavior or violating the rule's detection logic."
+  }
+]

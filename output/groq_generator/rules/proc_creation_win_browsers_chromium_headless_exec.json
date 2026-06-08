@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy msedge.exe not_a_browser.exe && not_a_browser.exe --headless",
+    "explanation": "This command renames msedge.exe to a non-browser-like name and executes it with the --headless flag, mimicking the behavior of the Sigma rule without triggering it due to the renamed executable."
+  },
+  {
+    "output": "msedge.exe --headless=old",
+    "explanation": "This command uses an alternative syntax for the --headless flag, which is still valid but may not be directly matched by the Sigma rule's simple 'contains' logic."
+  },
+  {
+    "output": "set \"FLAG=--headless\" && msedge.exe %FLAG%",
+    "explanation": "This command uses an environment variable to pass the --headless flag indirectly, which may not be captured by the Sigma rule if it does not account for variable expansion."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v \"DisableRestrictedAdmin\" /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is already a valid test command. No mutation is needed for this case."
+  }
+]

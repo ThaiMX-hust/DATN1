@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c rmdir /s /q \"%temp%\\deleteme_T1551.004\"",
+    "explanation": "Inserted quotes around the path and used environment variable expansion to simulate a safe mutation while preserving the original behavior."
+  },
+  {
+    "output": "cmd.exe /c rd /s /q C:\\temp\\malicious_folder",
+    "explanation": "Replaced 'rmdir' with its equivalent 'rd' command and used double backslashes for path normalization, preserving the original behavior."
+  },
+  {
+    "output": "cmd.exe /c rmdir /q /s %temp%\\deleteme_T1551.004",
+    "explanation": "Reordered the '/s' and '/q' flags, which are accepted in any order by the 'rmdir' command, while keeping the same functionality."
+  }
+]

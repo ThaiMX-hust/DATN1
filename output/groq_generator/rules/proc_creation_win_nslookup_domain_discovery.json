@@ -1,0 +1,22 @@
+[
+  {
+    "output": "nslookup -querytype:ALL -timeout=10 _ldap._tcp.dc._msdcs.DomainName",
+    "explanation": "Substituted the equals sign (=) in '-querytype=ALL' with a colon (:) as an equivalent syntax for command-line arguments in some contexts."
+  },
+  {
+    "output": "nslookup -querytype=ALL --timeout=10 _ldap._tcp.dc._msdcs.DomainName",
+    "explanation": "Replaced the single hyphen '-timeout' with a double hyphen '--timeout' to test for long-form flag substitution."
+  },
+  {
+    "output": "nslookup -timeout=10 -querytype=ALL _ldap._tcp.dc._msdcs.DomainName",
+    "explanation": "Reordered the '-timeout' and '-querytype' arguments to test for argument order flexibility."
+  },
+  {
+    "output": "nslookup -querytype=ALL -timeout=10 \"_ldap._tcp.dc._msdcs.DomainName\"",
+    "explanation": "Inserted quotes around the final domain name argument to test for safe string parsing variations."
+  },
+  {
+    "output": "nslookup -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.DomainName",
+    "explanation": "Used the original command as a baseline for comparison in testing."
+  }
+]

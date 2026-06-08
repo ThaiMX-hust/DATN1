@@ -1,0 +1,4 @@
+pwsh.exe -Command "$s='DCLCWPDTSD'; Set-Service -Name 'MyService' -SecurityDescriptorSddl $s"
+pwsh.exe -Command "Set-Service -Name 'MyService' -SecurityDescriptorSddl ('DCLCW'+'PDTSD')"
+pwsh.exe -Command "Set-Service -Name 'MyService' -SecurityDescriptorSddl (([char[]]'DSTDPWCLCD' | ForEach-Object { $_ }) -join '' -replace 'DSTDPWCLCD','DCLCWPDTSD')"
+sc.exe sdset MyService D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)

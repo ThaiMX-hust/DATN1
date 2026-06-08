@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"cloudflared.exe\" tunnel run -config C:\\temp\\myconfig.yml --token abcdef123456",
+    "explanation": "The command uses a short option (-config) instead of the long option (--config), which is an allowed substitution technique. This maintains the same behavior but alters the syntax to test for potential bypasses."
+  },
+  {
+    "output": "\"cloudflared.exe\" tunnel run --config C:\\temp\\myconfig.yml -token abcdef123456",
+    "explanation": "The command substitutes the long option (--token) with the short option (-token), which is an allowed substitution technique. This maintains the same behavior but alters the syntax to test for potential bypasses."
+  },
+  {
+    "output": "\"cloudflared.exe\" tunnel run --config C:\\temp\\myconfig.yml --token abcdef123456",
+    "explanation": "The command is unchanged, but it is included to confirm that the rule detects the original command as expected."
+  }
+]

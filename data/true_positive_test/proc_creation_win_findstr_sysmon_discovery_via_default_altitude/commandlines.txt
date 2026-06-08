@@ -1,0 +1,3 @@
+findstr.exe  385201
+fltmc.exe | findstr /R "38520[1]"
+fltmc.exe | Select-String "385201"

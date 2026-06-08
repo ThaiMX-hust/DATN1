@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1.exe  \" time\" \\localhost",
+    "explanation": "Inserted quotes around the ' time' argument to test if the rule detects the command despite whitespace mutation."
+  },
+  {
+    "output": "net.exe  time /? \\localhost",
+    "explanation": "Substituted 'time' with 'time /?' to test if the rule detects the command despite the addition of a help flag."
+  },
+  {
+    "output": "w32tm.exe  /query /tz",
+    "explanation": "Reordered and expanded the command to use full syntax for 'tz' as '/query /tz', testing if the rule detects the command despite reordering and substitution."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net.exe time \\\\localhost",
+    "explanation": "Used full path and preserved the original command structure to test if the rule detects the command despite using the original binary."
+  }
+]

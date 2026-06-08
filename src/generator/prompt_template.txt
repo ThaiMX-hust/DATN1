@@ -1,0 +1,48 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Please check whether the sigma rule can be bypass or not. If yes, generate a simulated request/command that bypasses this rule.
+Your output should follow the JSON schema:
+```json
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["output", "explanation"],
+    "additionalProperties": false,
+    "properties": {
+      "output": {
+        "type": "string",
+        "description": "A generated request or command"
+      },
+      "explanation": {
+        "type": "string",
+        "description": "Human-readable explanation of the output or why it was produced (can be empty)."
+      }
+    }
+  }
+}
+
+Example: " filter: 'process.executable: \"*\\powershell.exe\" AND process.parent.executable: \"*\\excel.exe\" AND process.command_line: \"*DataExchange.dll*\"' pre_detector: case_condition: directly id: 36222790-0d43-4fe8-86e4-674b27809543 mitre: - attack.command_and_control - attack.t1071 - attack.t1071.004 severity: critical title: DNS Tunnel Technique from MuddyWater sigma_fields: true description: Detecting DNS tunnel activity for Muddywater actor. 
+Example commands to bypass this rule: \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" Start-Process rundll32.exe C:\\ProgramData\\DataExchange,Start
+
+
+[ALLOWED_MUTATION_TECHNIQUES]
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly (quotes, spaces, escape characters).
+2. Substitution: Replace syntax with equivalent syntax (short/long option, /flag to -flag).
+3. Omission: Remove optional/unnecessary elements while preserving behavior.
+4. Reordering: Reorder arguments if accepted by the target program.
+5. Recoding / Encoding: Environment variables, path normalization, alternative string representation.
+6. Other techniques.
+
+Now, generate commandline to bypass the following this SIGMA rule:
+[INPUT DATA]
+Sigma Rule:
+```yaml
+{{SIGMA_RULE}}
+True positive test command:
+
+```text
+{{TRUE_POSITIVE_TEST_COMMAND}}
+```
+
+Required JSON format output

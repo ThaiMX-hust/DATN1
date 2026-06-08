@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\\\Program Files\\\\dotnet\\\\shared\\\\Microsoft.NETCore.App\\\\5.0.17\\\\createdump.exe\" -u -f C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\dotnet-lsass.dmp 788",
+    "explanation": "This is the original command line and serves as a baseline for testing the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\dotnet\\\\shared\\\\Microsoft.NETCore.App\\\\5.0.17\\\\createdump.exe\" -u --name C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\dotnet-lsass.dmp 788",
+    "explanation": "Substituted '-f' with its long-form equivalent '--name' to test if the Sigma rule can detect both short and long options."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\dotnet\\\\shared\\\\Microsoft.NETCore.App\\\\5.0.17\\\\createdump.exe\" --full -f C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\dotnet-lsass.dmp 788",
+    "explanation": "Substituted '-u' with its long-form equivalent '--full' to test if the Sigma rule can detect both short and long options."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\dotnet\\\\shared\\\\Microsoft.NETCore.App\\\\5.0.17\\\\createdump.exe\" --full --name C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\dotnet-lsass.dmp 788",
+    "explanation": "Used long-form options for both '-u' and '-f' to test if the Sigma rule can detect both short and long options."
+  }
+]

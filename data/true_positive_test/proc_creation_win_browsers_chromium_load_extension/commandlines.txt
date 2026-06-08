@@ -1,0 +1,2 @@
+cmd.exe /c copy "chrome.exe" "custom_browser.exe" && "custom_browser.exe" --load-extension="C:\path\to\custom_extension"
+"C:\Program Files\Google\Chrome\Application\chrome.exe"  --load-extension="C:\Users\user\AppData\Local\Temp\HHe2lr"

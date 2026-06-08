@@ -1,0 +1,2 @@
+"bginfo.exe" config.bgi /popup /nolicprompt
+copy rundll32.exe rundll32_alt.exe && bginfo.exe C:\path\to\config.bgi /popup /nolicprompt

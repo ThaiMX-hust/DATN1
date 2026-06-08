@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe \"file.txt:malicious.dll\",DllMain",
+    "explanation": "The command uses quotes around the ADS path, which is a valid and safe mutation technique. It mirrors the original structure and should trigger the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe file.txt:malicious.dll,DllMain",
+    "explanation": "This omits quotes around the ADS path, which is still valid in some contexts and may bypass detection if the rule relies on quoted strings. It preserves the malicious behavior and should test detection robustness."
+  },
+  {
+    "output": "rundll32.exe \"file.txt:malicious.dll\", DllMain",
+    "explanation": "Inserts a space before the function name, which is a safe mutation that may test detection resilience to spacing variations while maintaining the same behavior."
+  },
+  {
+    "output": "rundll32.exe \"..\\..\\file.txt:malicious.dll\",DllMain",
+    "explanation": "Uses relative path traversal in the ADS path, which is a valid mutation and may test detection against path normalization or traversal attempts."
+  },
+  {
+    "output": "rundll32.exe $env:TEMP\\file.txt:malicious.dll,DllMain",
+    "explanation": "Uses an environment variable to reference the ADS path, which is a safe mutation technique and tests detection against dynamic path resolution."
+  }
+]

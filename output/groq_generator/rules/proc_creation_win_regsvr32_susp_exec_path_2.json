@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe /s \"C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\"",
+    "explanation": "This command is a direct representation of the true positive test case and is not a bypass."
+  },
+  {
+    "output": "cd /d \"C:\\PerfLogs\\\" && regsvr32.exe payload.dll",
+    "explanation": "This command uses a directory change to a suspicious location before invoking regsvr32, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "regsvr32.exe payload.dll",
+    "explanation": "This command does not include a suspicious path in the command line and would not trigger the Sigma rule."
+  },
+  {
+    "output": "regsvr32.exe \"payload.dll\"",
+    "explanation": "This command uses quotes around the DLL path but does not include a suspicious location, so it would not trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe /s C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll",
+    "explanation": "This command omits quotes around the DLL path but still includes the suspicious path, matching the Sigma rule's criteria."
+  }
+]

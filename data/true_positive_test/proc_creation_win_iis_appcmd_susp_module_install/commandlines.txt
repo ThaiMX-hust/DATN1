@@ -1,0 +1,2 @@
+cmd.exe /c echo ^<globalModules^>^<add name="MyModule" image="MyModule.dll" /^>^</globalModules^> >> C:\Windows\System32\inetsrv\config\applicationHost.config
+powershell.exe -Command "Import-Module WebAdministration; New-WebGlobalModule -Name 'MyModule' -Image 'MyModule.dll'"

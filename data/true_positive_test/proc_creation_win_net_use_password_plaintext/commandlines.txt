@@ -1,0 +1,1 @@
+"net.exe" user DOMAIN\\user password123 /add

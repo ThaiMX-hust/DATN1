@@ -1,0 +1,4 @@
+advanced_ip_scanner.exe
+cmd.exe /c "copy advanced_ip_scanner.exe audit.exe & audit.exe"
+net_tool.exe /portable
+network_audit.exe

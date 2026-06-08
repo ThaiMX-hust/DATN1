@@ -1,0 +1,18 @@
+[
+  {
+    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp",
+    "explanation": "This is the original command line and serves as a baseline for testing the Sigma rule."
+  },
+  {
+    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp\\",
+    "explanation": "Appending a trailing backslash to the path is a safe mutation that does not affect the behavior of the command."
+  },
+  {
+    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp\\.",
+    "explanation": "Appending \".\" to the path is a safe mutation that does not affect the behavior of the command."
+  },
+  {
+    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp\\..\\Windows\\Temp",
+    "explanation": "Using relative path normalization to reference the same directory is a safe mutation."
+  }
+]

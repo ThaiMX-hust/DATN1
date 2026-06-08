@@ -1,0 +1,14 @@
+[
+  {
+    "output": "AddInUtil.exe -AddInRoot:C:\\\\Users\\\\Public\\\\Payload",
+    "explanation": "This command uses a common flag format (-AddInRoot) and a valid path. It omits quotes and uses a straightforward path format, which is not uncommon but still triggers the Sigma rule because it does not match the filtered benign paths."
+  },
+  {
+    "output": "AddInUtil.exe /AddInRoot:C:\\\\Users\\\\Public\\\\Payload",
+    "explanation": "This command substitutes the '-' flag with '/' which is an equivalent syntax in Windows command-line tools. It does not use quotes and uses a straightforward path, which is not uncommon but still triggers the Sigma rule."
+  },
+  {
+    "output": "AddInUtil.exe -AddInRoot:C:\\\\Users\\\\Public\\\\Payload\\",
+    "explanation": "This command adds a trailing backslash to the path, which is a minor variation but still valid. It uses the standard flag format and path structure, which is not uncommon but still triggers the Sigma rule."
+  }
+]

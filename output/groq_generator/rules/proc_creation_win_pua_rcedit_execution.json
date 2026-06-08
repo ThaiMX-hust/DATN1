@@ -1,0 +1,6 @@
+[
+  {
+    "output": "rcedit-x64.exe payload.exe --set-version-string OriginalFileName svchost.exe",
+    "explanation": "Omission of quotes around the value 'svchost.exe' where they are not strictly necessary, and using the unquoted string is still valid in the context of the command line."
+  }
+]

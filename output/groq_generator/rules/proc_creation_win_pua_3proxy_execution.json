@@ -1,0 +1,22 @@
+[
+  {
+    "output": "copy 3proxy.exe svchost_proxy.exe && svchost_proxy.exe -i 127.0.0.1 -p 8080",
+    "explanation": "The command substitutes the long option '--interface' with the short option '-i' and '--port' with '-p', which are equivalent in many command-line tools. This is a valid mutation under substitution rules."
+  },
+  {
+    "output": "copy 3proxy.exe svchost_proxy.exe && svchost_proxy.exe -i127.0.0.1 -p8080",
+    "explanation": "The command removes the space between the flag and its value, which is a common way to pass arguments in command-line interfaces. This is a valid mutation under omission rules."
+  },
+  {
+    "output": "copy 3proxy.exe svchost_proxy.exe && svchost_proxy.exe --interface=127.0.0.1 --port=8080",
+    "explanation": "The command uses the equals sign (=) to separate the option and its value, which is a valid syntax in many command-line tools. This is a valid mutation under substitution rules."
+  },
+  {
+    "output": "copy 3proxy.exe svchost_proxy.exe && svchost_proxy.exe -p 8080 -i 127.0.0.1",
+    "explanation": "The command reorders the arguments '-i' and '-p'. If the program accepts arguments in any order, this is a valid mutation under reordering rules."
+  },
+  {
+    "output": "copy 3proxy.exe svchost_proxy.exe && svchost_proxy.exe -i \"127.0.0.1\" -p \"8080\"",
+    "explanation": "The command adds quotes around the values, which is a valid way to pass arguments in command-line interfaces. This is a valid mutation under insertion rules."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "fsutil fsinfo drives",
+    "explanation": "This is the standard command that matches the Sigma rule and is used as a baseline for testing."
+  },
+  {
+    "output": "fsutil  fsinfo  drives",
+    "explanation": "Extra spaces between command parts are inserted, which is still parsed correctly by the command-line interpreter."
+  },
+  {
+    "output": "fsutil\" fsinfo drives",
+    "explanation": "Quotes are inserted around the command, which is still parsed correctly by the command-line interpreter."
+  },
+  {
+    "output": "copy fsutil.exe not_fsutil.exe && not_fsutil.exe fsinfo drives",
+    "explanation": "The command is renamed using copy, then executed with the new name. This simulates evasion by renaming the executable."
+  },
+  {
+    "output": "cmd.exe /c fsutil fsinfo drives",
+    "explanation": "The command is executed via cmd.exe with the /c flag, which is a common technique to invoke commands indirectly."
+  },
+  {
+    "output": "powershell.exe -Command \"fsutil fsinfo drives\"",
+    "explanation": "The command is executed via PowerShell, which is a common technique to invoke commands indirectly."
+  }
+]

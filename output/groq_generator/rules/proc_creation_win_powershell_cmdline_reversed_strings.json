@@ -1,0 +1,38 @@
+[
+  {
+    "output": "powershell.exe -Command \"$s = 'tpircS'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "This is the original true positive command and matches the Sigma rule because it reverses the string 'tpircS' (which is 'Script') and executes it."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'hctac'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'hctac' is a reversed version of 'catch', which is a bypass candidate. This command matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'kaerb'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'kaerb' is a reversed version of 'break', which is a bypass candidate. This command matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'dnammoc'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'dnammoc' is a reversed version of 'command', which is a bypass candidate. This command matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'ekovn'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'ekovn' is a reversed version of 'novke', which is a bypass candidate. This command matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'eliFd'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'eliFd' is a reversed version of 'dFile', which is a bypass candidate. This command matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'rahc'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'rahc' is a reversed version of 'char', which is a bypass candidate. This command matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'etirw'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'etirw' is a reversed version of 'write', which is a bypass candidate. This command matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"'$s' = 'golon'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The string 'golon' is a reversed version of 'nolog', which is a bypass candidate. This command matches the Sigma rule."
+  }
+]

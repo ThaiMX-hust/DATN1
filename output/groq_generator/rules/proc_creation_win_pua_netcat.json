@@ -1,0 +1,42 @@
+[
+  {
+    "output": "nc.exe -lvp 4444",
+    "explanation": "This command simulates a typical Netcat listener configuration that would trigger the Sigma rule. It uses the standard syntax for launching a listening session on port 4444."
+  },
+  {
+    "output": "ncat.exe -l -v -p 4444",
+    "explanation": "This command is a variation using 'ncat.exe' and reorders the flags while maintaining the same functionality as the original command. It should also trigger the Sigma rule."
+  },
+  {
+    "output": "netcat.exe -lvp 4444",
+    "explanation": "This command uses 'netcat.exe' instead of 'nc.exe' or 'ncat.exe' and maintains the same command-line structure. It is a valid alternative that should trigger the Sigma rule."
+  },
+  {
+    "output": "nc.exe -lvp 4444 --sh-exec cmd.exe",
+    "explanation": "This command adds an additional flag to execute a shell, which is a common malicious use case for Netcat. It should trigger the Sigma rule due to the inclusion of the '--sh-exec' parameter."
+  },
+  {
+    "output": "nc.exe -lvp 4444 -e cmd.exe",
+    "explanation": "This command uses the '-e' flag to execute a command shell, which is a common method for establishing a reverse shell. It should trigger the Sigma rule due to the inclusion of the '-e' parameter."
+  },
+  {
+    "output": "nc.exe -lvp 4444 -vnl -e cmd.exe",
+    "explanation": "This command combines multiple flags to create a verbose listener and execute a command shell. It should trigger the Sigma rule due to the inclusion of the '-vnl' and '-e' parameters."
+  },
+  {
+    "output": "nc.exe -lvp 4444 -vnl --exec cmd.exe",
+    "explanation": "This command uses the '--exec' flag to execute a command shell, which is a common method for establishing a reverse shell. It should trigger the Sigma rule due to the inclusion of the '--exec' parameter."
+  },
+  {
+    "output": "nc.exe -lvp 4444 -l -v -p 4444 -e cmd.exe",
+    "explanation": "This command uses a reordering of the flags while maintaining the same functionality. It should trigger the Sigma rule due to the inclusion of the '-e' parameter."
+  },
+  {
+    "output": "nc.exe -lvp 4444 -l -v -p 4444 --sh-exec cmd.exe",
+    "explanation": "This command uses a reordering of the flags and includes the '--sh-exec' parameter to execute a shell. It should trigger the Sigma rule due to the inclusion of the '--sh-exec' parameter."
+  },
+  {
+    "output": "nc.exe -lvp 4444 -l -v -p 4444 -vnl -e cmd.exe",
+    "explanation": "This command combines multiple flags to create a verbose listener and execute a command shell. It should trigger the Sigma rule due to the inclusion of the '-vnl' and '-e' parameters."
+  }
+]

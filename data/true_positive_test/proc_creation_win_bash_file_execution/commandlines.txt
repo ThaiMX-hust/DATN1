@@ -1,0 +1,3 @@
+bash.exe -- script.sh
+bash.exe -l script.sh
+bash.exe script.sh # bash -

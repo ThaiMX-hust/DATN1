@@ -1,0 +1,18 @@
+[
+  {
+    "output": "net use \"\\\\Target\\C$\" P@ssw0rd1 /u:DOMAIN\\Administrator",
+    "explanation": "Inserted quotes around the UNC path to test if the rule is sensitive to spacing or quotation changes."
+  },
+  {
+    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN/Administrator",
+    "explanation": "Replaced backslashes in the username with forward slashes to test if the rule is sensitive to path normalization or syntax substitution."
+  },
+  {
+    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
+    "explanation": "Removed extra spaces in the command line to test if the rule is sensitive to spacing variations."
+  },
+  {
+    "output": "net use \\\\Target\\C$ P@ssw0rd1 /user:DOMAIN\\Administrator",
+    "explanation": "Replaced the short option '/u' with the long option '/user' to test if the rule is sensitive to option substitution."
+  }
+]

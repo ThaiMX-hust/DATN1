@@ -1,0 +1,3 @@
+copy regedit.exe NOT_REGEDIT.exe && .\NOT_REGEDIT.exe /s malicious.reg
+reg.exe import "C:\path\to\malicious.reg"
+regedit.exe /S malicious.reg

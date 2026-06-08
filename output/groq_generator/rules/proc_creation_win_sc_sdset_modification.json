@@ -1,0 +1,18 @@
+[
+  {
+    "output": "sc sdset VSS D:(D;;GA;;;NU)(D;;GA;;;WD)(D;;GA;;;AN)S:(AU;FA;GA;;;WD)(AU;OIIOFA;GA;;;WD)",
+    "explanation": "This command uses the sc.exe utility to set a service's security descriptor. It is a direct match to the Sigma rule's detection criteria, as it includes 'sdset' in the command line and is executed by sc.exe."
+  },
+  {
+    "output": "sc sdset AtomicService \"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)\"",
+    "explanation": "This command sets the security descriptor for a service named 'AtomicService' using sc.exe. It includes the 'sdset' keyword and is executed by sc.exe, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sc.exe sdset scmanager D:(A;;KA;;;WD)",
+    "explanation": "This command uses sc.exe to set the security descriptor for the service manager. It includes the 'sdset' keyword and is executed by sc.exe, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "copy sc.exe update.exe && update.exe sdset TargetService D:(D;;DCLCWPDTSD;;;IU)(A;;CCLCSWLOCRRC;;;AU)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)",
+    "explanation": "This command copies sc.exe to update.exe and then executes update.exe to set the security descriptor for a service named 'TargetService'. It includes the 'sdset' keyword and is executed by a renamed sc.exe, matching the Sigma rule's detection criteria."
+  }
+]

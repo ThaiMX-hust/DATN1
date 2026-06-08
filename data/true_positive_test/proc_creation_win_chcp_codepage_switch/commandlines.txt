@@ -1,0 +1,2 @@
+chcp.com 936
+chcp  936

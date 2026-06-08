@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"set P1=UWhRCA && set P2=BAAAA && echo Simulated payload execution using %P1% %P2%\"",
+    "explanation": "The command uses environment variables to store the suspicious strings and then references them in the command line. This is a safe mutation technique that avoids directly embedding the full pattern in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"$part1 = 'UWh' + 'RCA'; $part2 = 'BAA' + 'AA'; Write-Output 'Simulated execution of payload'\"",
+    "explanation": "The command uses string concatenation to form the suspicious strings, which is a safe mutation technique that avoids direct inclusion of the full pattern in the command line."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File marshaled_cred_payload.ps1",
+    "explanation": "The command uses a script file to execute the payload, which is a safe mutation technique that avoids embedding the suspicious strings directly in the command line."
+  }
+]

@@ -1,0 +1,1 @@
+schtasks.exe /RUN /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"

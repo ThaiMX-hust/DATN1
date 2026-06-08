@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn\"",
+    "explanation": "This command uses the -Command parameter instead of -EncodedCommand and omits encoding to test if the detection rule can be bypassed by using a more readable command line."
+  },
+  {
+    "output": "powershell.exe -c Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn",
+    "explanation": "This command uses the short form of the -Command parameter (-c) and omits quotes to test if the detection rule can be bypassed by using minimal syntax."
+  },
+  {
+    "output": "powershell.exe -Command Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn",
+    "explanation": "This command uses the -Command parameter without quotes or encoding to test if the detection rule can be bypassed by using a simple, unencoded command line."
+  },
+  {
+    "output": "pwsh.exe -Command Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn",
+    "explanation": "This command uses the alternative PowerShell executable (pwsh.exe) and the -Command parameter to test if the detection rule can be bypassed by using a different executable name."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange.Powershell.Snapin\"",
+    "explanation": "This command uses the alternative module name (Microsoft.Exchange.Powershell.Snapin) to test if the detection rule can be bypassed by using a different module name."
+  }
+]

@@ -1,0 +1,2 @@
+﻿Technical	Rule_name	Title	Rule_id	Command_match_rule	Commandline_evasion	Excutable	Bypass target rule	Bypass all rule	Trigger rule
+t1560.001	proc_creation_win_7zip_exfil_dmp_files	7Zip Compressing Dump Files	ec570e53-4c76-45a9-804d-dc3f355ff7a7		7z a archive.zip lsass.dmp	FALSE	FALSE	FALSE	

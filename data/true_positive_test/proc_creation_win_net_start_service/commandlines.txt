@@ -1,0 +1,6 @@
+C:\WINDOWS\system32\net1  start
+net.exe  start
+C:\WINDOWS\system32\net1  start sesshijack
+net  start sesshijack
+copy net.exe not_net.exe && not_net.exe start Service_Name
+net.exe start

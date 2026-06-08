@@ -1,0 +1,1 @@
+"cmd.exe" /c cd C:\AtomicRedTeam\atomics\..\ExternalPayloads\hashcat6\hashcat-6.1.1\hashcat.exe\.. & C:\AtomicRedTeam\atomics\..\ExternalPayloads\hashcat6\hashcat-6.1.1\hashcat.exe -a 0 -m 1000 -r .\rules\Incisive-leetspeak.rule C:\AtomicRedTeam\atomics\T1110.002\src\sam.txt C:\AtomicRedTeam\atomics\T1110.002\src\password.lst

@@ -1,0 +1,4 @@
+rundll32  2.dll, StartW
+rundll32.exe "payload.dll", StartW
+rundll32.exe C:\temp\payload.txt,StartW
+rundll32.exe payload.dll,StartW

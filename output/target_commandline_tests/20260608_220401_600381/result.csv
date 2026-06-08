@@ -1,0 +1,2 @@
+﻿Technical	Rule_name	Title	Rule_id	Command_match_rule	Commandline_evasion	Excutable	Bypass target rule	Bypass all rule	Trigger rule
+t1003.001	proc_creation_win_hktl_dumpert	HackTool - Dumpert Process Dumper Execution	2704ab9e-afe2-4854-a3b1-0c0706d03578		rundll32.exe C:\Temp\custom_dump.dll,Dump	FALSE	FALSE	FALSE	
