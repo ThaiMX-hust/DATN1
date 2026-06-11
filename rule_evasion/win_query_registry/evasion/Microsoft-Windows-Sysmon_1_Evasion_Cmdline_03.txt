@@ -1,1 +1,0 @@
-reg e"xp"ort HKLM\Software\Microsoft\Windows\Cur"rent"Version\Run""Services myexport.reg

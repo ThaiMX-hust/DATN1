@@ -1,1 +1,0 @@
-netsh advfirewall firewall add rule name=powershell action=allow protocol=tcp dir=in  localport=47000 | out-null

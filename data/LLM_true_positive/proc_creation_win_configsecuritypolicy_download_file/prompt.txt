@@ -1,0 +1,40 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Arbitrary File Download Via ConfigSecurityPolicy.EXE
+id: 1f0f6176-6482-4027-b151-00071af39d7e
+status: test
+description: |
+    Detects the execution of "ConfigSecurityPolicy.EXE", a binary part of Windows Defender used to manage settings in Windows Defender.
+    Users can configure different pilot collections for each of the co-management workloads.
+    It can be abused by attackers in order to upload or download files.
+references:
+    - https://lolbas-project.github.io/lolbas/Binaries/ConfigSecurityPolicy/
+author: frack113
+date: 2021-11-26
+modified: 2022-05-16
+tags:
+    - attack.exfiltration
+    - attack.t1567
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - CommandLine|contains: ConfigSecurityPolicy.exe
+        - Image|endswith: '\ConfigSecurityPolicy.exe'
+        - OriginalFileName: 'ConfigSecurityPolicy.exe'
+    selection_url:
+        CommandLine|contains:
+            - 'ftp://'
+            - 'http://'
+            - 'https://'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

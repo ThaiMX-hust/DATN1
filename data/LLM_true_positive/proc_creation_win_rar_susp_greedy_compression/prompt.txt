@@ -1,0 +1,50 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Suspicious Greedy Compression Using Rar.EXE
+id: afe52666-401e-4a02-b4ff-5d128990b8cb
+status: test
+description: Detects RAR usage that creates an archive from a suspicious folder, either a system folder or one of the folders often used by attackers for staging purposes
+references:
+    - https://decoded.avast.io/martinchlumecky/png-steganography
+author: X__Junior (Nextron Systems), Florian Roth (Nextron Systems)
+date: 2022-12-15
+modified: 2024-01-02
+tags:
+    - attack.execution
+    - attack.t1059
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    # Example : rar.exe a -m5 -r -y -ta20210204000000 -hp1qazxcde32ws -v2560k Asia1Dpt-PC-c.rar c:\\*.doc c:\\*.docx c:\\*.xls c:\\*.xlsx c:\\*.pdf c:\\*.ppt c:\\*.pptx c:\\*.jpg c:\\*.txt >nul
+    selection_opt_1:
+        - Image|endswith: '\rar.exe'
+        - Description: 'Command line RAR'
+    selection_opt_2:
+        CommandLine|contains:
+            - '.exe a '
+            - ' a -m'
+    selection_cli_flags:
+        CommandLine|contains|all:
+            - ' -hp' # password
+            - ' -r ' # recursive
+    selection_cli_folders:
+        CommandLine|contains:
+            - ' ?:\\\*.'
+            - ' ?:\\\\\*.'
+            - ' ?:\$Recycle.bin\'
+            - ' ?:\PerfLogs\'
+            - ' ?:\Temp'
+            - ' ?:\Users\Public\'
+            - ' ?:\Windows\'
+            - ' %public%'
+    condition: 1 of selection_opt_* and all of selection_cli_*
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

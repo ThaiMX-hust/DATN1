@@ -1,0 +1,31 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Suspicious GrpConv Execution
+id: f14e169e-9978-4c69-acb3-1cff8200bc36
+status: test
+description: Detects the suspicious execution of a utility to convert Windows 3.x .grp files or for persistence purposes by malicious software or actors
+references:
+    - https://twitter.com/0gtweet/status/1526833181831200770
+author: Florian Roth (Nextron Systems)
+date: 2022-05-19
+tags:
+    - attack.persistence
+    - attack.t1547
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains:
+            - 'grpconv.exe -o'
+            - 'grpconv -o'
+    condition: selection
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

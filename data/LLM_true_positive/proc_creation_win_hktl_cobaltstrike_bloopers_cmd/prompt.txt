@@ -1,0 +1,52 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Operator Bloopers Cobalt Strike Commands
+id: 647c7b9e-d784-4fda-b9a0-45c565a7b729
+related:
+    - id: 4f154fb6-27d1-4813-a759-78b93e0b9c48
+      type: similar
+status: test
+description: Detects use of Cobalt Strike commands accidentally entered in the CMD shell
+references:
+    - https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/cobalt-4-5-user-guide.pdf
+    - https://thedfirreport.com/2021/10/04/bazarloader-and-the-conti-leaks/
+    - https://thedfirreport.com/2022/06/16/sans-ransomware-summit-2022-can-you-detect-this/
+author: _pete_0, TheDFIRReport
+date: 2022-05-06
+modified: 2023-01-30
+tags:
+    - attack.execution
+    - attack.t1059.003
+    - stp.1u
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - OriginalFileName: 'Cmd.Exe'
+        - Image|endswith: '\cmd.exe'
+    selection_cli:
+        CommandLine|startswith:
+            - 'cmd '
+            - 'cmd.exe'
+            - 'c:\windows\system32\cmd.exe'
+        CommandLine|contains:
+            - 'psinject'
+            - 'spawnas'
+            - 'make_token'
+            - 'remote-exec'
+            - 'rev2self'
+            - 'dcsync'
+            - 'logonpasswords'
+            - 'execute-assembly'
+            - 'getsystem'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

@@ -1,0 +1,43 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: HackTool - Covenant PowerShell Launcher
+id: c260b6db-48ba-4b4a-a76f-2f67644e99d2
+status: test
+description: Detects suspicious command lines used in Covenant luanchers
+references:
+    - https://posts.specterops.io/covenant-v0-5-eee0507b85ba
+author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, oscd.community
+date: 2020-06-04
+modified: 2023-02-21
+tags:
+    - attack.execution
+    - attack.defense-evasion
+    - attack.t1059.001
+    - attack.t1564.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_1:
+        CommandLine|contains|all:
+            - '-Sta'
+            - '-Nop'
+            - '-Window'
+            - 'Hidden'
+        CommandLine|contains:
+            - '-Command'
+            - '-EncodedCommand'
+    selection_2:
+        CommandLine|contains:
+            - 'sv o (New-Object IO.MemorySteam);sv d '
+            - 'mshta file.hta'
+            - 'GruntHTTP'
+            - '-EncodedCommand cwB2ACAAbwAgA'
+    condition: 1 of selection_*
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

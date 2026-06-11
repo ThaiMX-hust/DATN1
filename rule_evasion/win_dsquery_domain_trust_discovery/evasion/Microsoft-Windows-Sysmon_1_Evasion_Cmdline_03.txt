@@ -1,1 +1,0 @@
-nltest.exe /domain_t"rus"ts

@@ -1,1 +1,0 @@
-fsutil usn del"ete"jo""urnal /D C:

@@ -1,1 +1,0 @@
-shutdown.exe    /r    /f    /t    00

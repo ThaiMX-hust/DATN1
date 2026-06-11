@@ -1,1 +1,0 @@
-net "ti"me \hostname

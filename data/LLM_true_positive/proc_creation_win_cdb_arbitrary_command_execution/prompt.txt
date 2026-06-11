@@ -1,0 +1,40 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Potential Binary Proxy Execution Via Cdb.EXE
+id: b5c7395f-e501-4a08-94d4-57fe7a9da9d2
+status: test
+description: Detects usage of "cdb.exe" to launch arbitrary processes or commands from a debugger script file
+references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Cdb/
+    - https://web.archive.org/web/20170715043507/http://www.exploit-monday.com/2016/08/windbg-cdb-shellcode-runner.html
+    - https://twitter.com/nas_bench/status/1534957360032120833
+author: Beyu Denis, oscd.community, Nasreddine Bencherchali (Nextron Systems)
+date: 2019-10-26
+modified: 2024-04-22
+tags:
+    - attack.execution
+    - attack.t1106
+    - attack.defense-evasion
+    - attack.t1218
+    - attack.t1127
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\cdb.exe'
+        - OriginalFileName: 'CDB.Exe'
+    selection_cli:
+        CommandLine|contains:
+            - ' -c ' # Using a debugger script
+            - ' -cf '
+    condition: all of selection*
+falsepositives:
+    - Legitimate use of debugging tools
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

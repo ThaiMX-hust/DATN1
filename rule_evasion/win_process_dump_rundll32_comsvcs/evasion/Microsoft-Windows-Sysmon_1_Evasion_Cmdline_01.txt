@@ -1,1 +1,0 @@
-rundll32.exe comsvcs.dll,   Minidump 600 dumpfile.dmp full

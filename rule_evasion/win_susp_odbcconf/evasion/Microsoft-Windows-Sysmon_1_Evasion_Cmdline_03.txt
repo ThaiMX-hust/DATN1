@@ -1,1 +1,0 @@
-odbcconf.exe /f nicefile.rsp

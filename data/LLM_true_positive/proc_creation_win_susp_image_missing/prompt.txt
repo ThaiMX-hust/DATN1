@@ -1,0 +1,45 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Execution Of Non-Existing File
+id: 71158e3f-df67-472b-930e-7d287acaa3e1
+status: test
+description: Checks whether the image specified in a process creation event is not a full, absolute path (caused by process ghosting or other unorthodox methods to start a process)
+references:
+    - https://pentestlaboratories.com/2021/12/08/process-ghosting/
+author: Max Altgelt (Nextron Systems)
+date: 2021-12-09
+modified: 2022-12-14
+tags:
+    - attack.defense-evasion
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    image_absolute_path:
+        Image|contains: '\'
+    filter_null:
+        Image: null
+    filter_empty:
+        Image:
+            - '-'
+            - ''
+    filter_4688:
+        - Image:
+              - 'System'
+              - 'Registry'
+              - 'MemCompression'
+              - 'vmmem'
+        - CommandLine:
+              - 'Registry'
+              - 'MemCompression'
+              - 'vmmem'
+    condition: not image_absolute_path and not 1 of filter*
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

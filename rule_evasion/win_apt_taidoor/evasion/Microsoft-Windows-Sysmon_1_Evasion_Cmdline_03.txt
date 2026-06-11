@@ -1,1 +1,0 @@
-"C:\Windows\System32\rundll32.exe" "C:\Users\user\AppData\myLib",MyStart

@@ -1,1 +1,0 @@
-C:\Windows\System32\ping.exe   0x7f000001

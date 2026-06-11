@@ -1,1 +1,0 @@
-schtasks.exe -"create" /sc daily /tn mytask /tr powershell.exe

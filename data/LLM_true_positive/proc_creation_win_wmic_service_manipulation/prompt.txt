@@ -1,0 +1,38 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Service Started/Stopped Via Wmic.EXE
+id: 0b7163dc-7eee-4960-af17-c0cd517f92da
+status: test
+description: Detects usage of wmic to start or stop a service
+references:
+    - https://sushant747.gitbooks.io/total-oscp-guide/content/privilege_escalation_windows.html
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-06-20
+modified: 2023-02-14
+tags:
+    - attack.execution
+    - attack.t1047
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - OriginalFileName: 'wmic.exe'
+        - Image|endswith: '\WMIC.exe'
+    selection_cli:
+        CommandLine|contains|all:
+            - ' service '
+            - ' call '
+        CommandLine|contains:
+            - 'stopservice'
+            - 'startservice'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

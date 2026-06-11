@@ -1,1 +1,0 @@
-cmd /c "m"k"l"i"n"k /D c:\foobar \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\"

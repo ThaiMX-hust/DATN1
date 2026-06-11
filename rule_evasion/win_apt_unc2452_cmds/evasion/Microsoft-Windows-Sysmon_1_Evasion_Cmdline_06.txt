@@ -1,1 +1,0 @@
-rundll32.exe "C:\Windows\folder2\teardrop.dll",Tk_fakeexport

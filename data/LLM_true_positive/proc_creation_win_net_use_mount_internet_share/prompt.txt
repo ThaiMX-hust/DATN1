@@ -1,0 +1,39 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Windows Internet Hosted WebDav Share Mount Via Net.EXE
+id: 7e6237fe-3ddb-438f-9381-9bf9de5af8d0
+status: test
+description: Detects when an internet hosted webdav share is mounted using the "net.exe" utility
+references:
+    - https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2023-02-21
+modified: 2023-07-25
+tags:
+    - attack.lateral-movement
+    - attack.t1021.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith:
+              - '\net.exe'
+              - '\net1.exe'
+        - OriginalFileName:
+              - 'net.exe'
+              - 'net1.exe'
+    selection_cli:
+        CommandLine|contains|all:
+            - ' use '
+            - ' http'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

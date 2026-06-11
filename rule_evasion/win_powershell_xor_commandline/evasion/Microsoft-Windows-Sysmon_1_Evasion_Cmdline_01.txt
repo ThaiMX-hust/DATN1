@@ -1,1 +1,0 @@
-powershell -C 3 -b"xo"r 1

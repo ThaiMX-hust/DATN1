@@ -1,1 +1,0 @@
-cscript C:\Another\Path\To\AnotherFile."j"s

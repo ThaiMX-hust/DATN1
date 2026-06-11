@@ -1,0 +1,33 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Suspicious Diantz Alternate Data Stream Execution
+id: 6b369ced-4b1d-48f1-b427-fdc0de0790bd
+status: test
+description: Compress target file into a cab file stored in the Alternate Data Stream (ADS) of the target file.
+references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Diantz/
+author: frack113
+date: 2021-11-26
+modified: 2022-12-31
+tags:
+    - attack.defense-evasion
+    - attack.t1564.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains|all:
+            - diantz.exe
+            - .cab
+        CommandLine|re: ':[^\\]'
+    condition: selection
+falsepositives:
+    - Very Possible
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

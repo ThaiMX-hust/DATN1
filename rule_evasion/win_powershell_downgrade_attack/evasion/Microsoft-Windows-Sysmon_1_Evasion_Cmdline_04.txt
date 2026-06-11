@@ -1,1 +1,0 @@
-powershell -v 2 -Command Get-Date

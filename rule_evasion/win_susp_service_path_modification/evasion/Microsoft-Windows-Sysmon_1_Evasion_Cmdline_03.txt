@@ -1,1 +1,0 @@
-sc.exe co"nf"ig servicename "bin"Path=cmd.exe

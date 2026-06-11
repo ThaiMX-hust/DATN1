@@ -1,1 +1,0 @@
-C:\Windows\System32\findstr.exe findme "*."lnk

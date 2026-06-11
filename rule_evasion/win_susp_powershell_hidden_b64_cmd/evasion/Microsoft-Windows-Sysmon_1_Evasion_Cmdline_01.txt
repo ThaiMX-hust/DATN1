@@ -1,1 +1,0 @@
-powershell -WindowStyle hi"dd"en  -nop -encodedcommand somethingRjaHVua19zaXplencoded

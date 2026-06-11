@@ -1,1 +1,0 @@
-powershell -c invoke-webrequest -uri h^t^tp://www.google.de -outfile foo

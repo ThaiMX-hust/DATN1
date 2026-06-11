@@ -1,1 +1,0 @@
-powershell "-versi"   2 -Command Get-Host

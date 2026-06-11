@@ -1,0 +1,3 @@
+C:\AtomicRedTeam\ExternalPayloads\7z\7z.exe a archive.7z lsass.dmp
+C:\AtomicRedTeam\ExternalPayloads\7z\7z.exe a archive.7z memory.dump
+C:\AtomicRedTeam\ExternalPayloads\7z\7z.exe a archive.7z process.hdmp

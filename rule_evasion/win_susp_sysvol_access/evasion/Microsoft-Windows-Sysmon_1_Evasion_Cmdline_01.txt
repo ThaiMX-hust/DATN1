@@ -1,1 +1,0 @@
-findstr /S /I cpassword \\ComputerName\s"ysv"ol\ComputerName\po"lici"es\*.xml

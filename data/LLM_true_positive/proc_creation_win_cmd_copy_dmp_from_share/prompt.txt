@@ -1,0 +1,39 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Copy .DMP/.DUMP Files From Remote Share Via Cmd.EXE
+id: 044ba588-dff4-4918-9808-3f95e8160606
+status: test
+description: Detects usage of the copy builtin cmd command to copy files with the ".dmp"/".dump" extension from a remote share
+references:
+    - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-09-27
+modified: 2023-09-12
+tags:
+    - attack.credential-access
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    # Example: copy \\<host>\\<folder>\\process.dmp C:\Users\process.dmp
+    selection_img:
+        - Image|endswith: '\cmd.exe'
+        - OriginalFileName: 'Cmd.Exe'
+    selection_cli:
+        CommandLine|contains|all:
+            - 'copy '
+            - ' \\\\'
+        CommandLine|contains:
+            - '.dmp'
+            - '.dump'
+            - '.hdmp'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

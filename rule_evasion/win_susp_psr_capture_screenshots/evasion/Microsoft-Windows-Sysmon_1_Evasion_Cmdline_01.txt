@@ -1,1 +1,0 @@
-psr.exe -start /gui 0 /output C:\Users\User\out.zip

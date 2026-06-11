@@ -1,1 +1,0 @@
-tshark -"i" Ethernet

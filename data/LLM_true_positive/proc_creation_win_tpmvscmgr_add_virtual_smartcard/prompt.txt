@@ -1,0 +1,31 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: New Virtual Smart Card Created Via TpmVscMgr.EXE
+id: c633622e-cab9-4eaa-bb13-66a1d68b3e47
+status: test
+description: Detects execution of "Tpmvscmgr.exe" to create a new virtual smart card.
+references:
+    - https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-tpmvscmgr
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2023-06-15
+tags:
+    - attack.execution
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\tpmvscmgr.exe'
+        OriginalFileName: 'TpmVscMgr.exe'
+    selection_cli:
+        CommandLine|contains: 'create'
+    condition: all of selection_*
+falsepositives:
+    - Legitimate usage by an administrator
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

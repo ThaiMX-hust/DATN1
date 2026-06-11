@@ -1,0 +1,36 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Potential Rundll32 Execution With DLL Stored In ADS
+id: 9248c7e1-2bf3-4661-a22c-600a8040b446
+status: test
+description: Detects execution of rundll32 where the DLL being called is stored in an Alternate Data Stream (ADS).
+references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Rundll32
+author: Harjot Singh, '@cyb3rjy0t'
+date: 2023-01-21
+modified: 2023-02-08
+tags:
+    - attack.defense-evasion
+    - attack.t1564.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\rundll32.exe'
+        - OriginalFileName: 'RUNDLL32.EXE'
+    selection_cli:
+        # Example:
+        #   rundll32 "C:\ads\file.txt:ADSDLL.dll",DllMain
+        # Note: This doesn't cover the use case where a full path for the DLL isn't used. As it requires a more expensive regex
+        CommandLine|re: '[Rr][Uu][Nn][Dd][Ll][Ll]32(\.[Ee][Xx][Ee])? \S+?\w:\S+?:'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

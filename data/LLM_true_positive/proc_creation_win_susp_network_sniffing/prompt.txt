@@ -1,0 +1,37 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Potential Network Sniffing Activity Using Network Tools
+id: ba1f7802-adc7-48b4-9ecb-81e227fddfd5
+status: test
+description: |
+    Detects potential network sniffing via use of network tools such as "tshark", "windump".
+    Network sniffing refers to using the network interface on a system to monitor or capture information sent over a wired or wireless connection.
+    An adversary may place a network interface into promiscuous mode to passively access data in transit over the network, or use span ports to capture a larger amount of data.
+references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1040/T1040.md
+author: Timur Zinniatullin, oscd.community, Nasreddine Bencherchali (Nextron Systems)
+date: 2019-10-21
+modified: 2023-02-20
+tags:
+    - attack.credential-access
+    - attack.discovery
+    - attack.t1040
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tshark:
+        Image|endswith: '\tshark.exe'
+        CommandLine|contains: '-i'
+    selection_windump:
+        Image|endswith: '\windump.exe'
+    condition: 1 of selection_*
+falsepositives:
+    - Legitimate administration activity to troubleshoot network issues
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

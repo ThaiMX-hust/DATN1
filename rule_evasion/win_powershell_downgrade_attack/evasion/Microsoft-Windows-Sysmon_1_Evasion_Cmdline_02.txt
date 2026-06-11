@@ -1,1 +1,0 @@
-powershell -ve"rs"io 2 -Command Get-Date

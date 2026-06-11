@@ -1,1 +1,0 @@
-C:\Windows\System32\certutil -encode -f %TEMP%\input output

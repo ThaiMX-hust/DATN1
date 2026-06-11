@@ -1,0 +1,31 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Logged-On User Password Change Via Ksetup.EXE
+id: c9783e20-4793-4164-ba96-d9ee483992c4
+status: test
+description: Detects password change for the logged-on user's via "ksetup.exe"
+references:
+    - https://learn.microsoft.com/en-gb/windows-server/administration/windows-commands/ksetup
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2023-04-06
+tags:
+    - attack.execution
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\ksetup.exe'
+        - OriginalFileName: 'ksetup.exe'
+    selection_cli:
+        CommandLine|contains: ' /ChangePassword '
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

@@ -1,1 +1,0 @@
-powershell /c New-ItemProperty -Path HKCU\Software\Microsoft\Internet Explorer\Main\DisableFirstRunCustomize  -name   DisableFirstRunCustomize    -value    2

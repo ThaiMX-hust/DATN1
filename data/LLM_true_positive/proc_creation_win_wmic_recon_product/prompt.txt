@@ -1,0 +1,34 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Potential Product Reconnaissance Via Wmic.EXE
+id: 15434e33-5027-4914-88d5-3d4145ec25a9
+status: test
+description: Detects the execution of WMIC in order to get a list of firewall and antivirus products
+references:
+    - https://thedfirreport.com/2023/03/06/2022-year-in-review/
+    - https://www.yeahhub.com/list-installed-programs-version-path-windows/
+    - https://learn.microsoft.com/en-us/answers/questions/253555/software-list-inventory-wmic-product
+author: Nasreddine Bencherchali
+date: 2023-02-14
+tags:
+    - attack.execution
+    - attack.t1047
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\wmic.exe'
+        - OriginalFileName: 'wmic.exe'
+    selection_cli:
+        CommandLine|contains: 'Product'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

@@ -1,0 +1,41 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: HackTool - Inveigh Execution
+id: b99a1518-1ad5-4f65-bc95-1ffff97a8fd0
+status: test
+description: Detects the use of Inveigh a cross-platform .NET IPv4/IPv6 machine-in-the-middle tool
+references:
+    - https://github.com/Kevin-Robertson/Inveigh
+    - https://thedfirreport.com/2020/11/23/pysa-mespinoza-ransomware/
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-10-24
+modified: 2023-02-04
+tags:
+    - attack.credential-access
+    - attack.t1003.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        - Image|endswith: '\Inveigh.exe'
+        - OriginalFileName:
+              - '\Inveigh.exe'
+              - '\Inveigh.dll'
+        - Description: 'Inveigh'
+        - CommandLine|contains:
+              - ' -SpooferIP'
+              - ' -ReplyToIPs '
+              - ' -ReplyToDomains '
+              - ' -ReplyToMACs '
+              - ' -SnifferIP'
+    condition: selection
+falsepositives:
+    - Very unlikely
+level: critical
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

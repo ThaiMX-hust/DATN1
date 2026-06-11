@@ -1,1 +1,0 @@
-rundll32.exe "comsvcs.dll", Minidump 136 my.dmp full

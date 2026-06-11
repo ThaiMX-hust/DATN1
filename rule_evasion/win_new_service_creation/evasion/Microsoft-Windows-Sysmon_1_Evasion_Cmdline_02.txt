@@ -1,1 +1,0 @@
-sc.exe create niceservice b""in"Pa"th=C:\Path\To\Binary.exe

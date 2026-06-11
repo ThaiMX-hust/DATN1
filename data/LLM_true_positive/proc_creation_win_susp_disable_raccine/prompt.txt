@@ -1,0 +1,42 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Raccine Uninstall
+id: a31eeaed-3fd5-478e-a8ba-e62c6b3f9ecc
+status: test
+description: Detects commands that indicate a Raccine removal from an end system. Raccine is a free ransomware protection tool.
+references:
+    - https://github.com/Neo23x0/Raccine
+author: Florian Roth (Nextron Systems)
+date: 2021-01-21
+modified: 2022-10-09
+tags:
+    - attack.defense-evasion
+    - attack.t1562.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection1:
+        CommandLine|contains|all:
+            - 'taskkill '
+            - 'RaccineSettings.exe'
+    selection2:
+        CommandLine|contains|all:
+            - 'reg.exe'
+            - 'delete'
+            - 'Raccine Tray'
+    selection3:
+        CommandLine|contains|all:
+            - 'schtasks'
+            - '/DELETE'
+            - 'Raccine Rules Updater'
+    condition: 1 of selection*
+falsepositives:
+    - Legitimate deinstallation by administrative staff
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

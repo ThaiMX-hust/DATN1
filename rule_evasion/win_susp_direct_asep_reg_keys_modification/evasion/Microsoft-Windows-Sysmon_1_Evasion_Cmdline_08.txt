@@ -1,1 +1,0 @@
-reg a"d"d HKLM\software\Microsoft\Windows NT\Curren"tVersion\Win"dows

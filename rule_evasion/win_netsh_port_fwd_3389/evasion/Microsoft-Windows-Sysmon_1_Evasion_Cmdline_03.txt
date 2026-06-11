@@ -1,1 +1,0 @@
-netsh interface portproxy add connectaddress=127.0.0.1 connectport=4711 listenport=3389

@@ -1,1 +1,0 @@
-cdb.exe -"o" calc.exe -"cf" %TEMP%\malicious_script

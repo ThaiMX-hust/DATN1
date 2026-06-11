@@ -1,1 +1,0 @@
-r""eg add HKLM\SYSTEM\CurrentControlSet\Services\VSS\Diag\Volsnap /ve /f /d Dis"able"d

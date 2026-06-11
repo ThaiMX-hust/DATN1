@@ -1,0 +1,49 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: User Discovery And Export Via Get-ADUser Cmdlet
+id: 1114e048-b69c-4f41-bc20-657245ae6e3f
+related:
+    - id: c2993223-6da8-4b1a-88ee-668b8bf315e9
+      type: similar
+status: test
+description: Detects usage of the Get-ADUser cmdlet to collect user information and output it to a file
+references:
+    - http://blog.talosintelligence.com/2022/09/lazarus-three-rats.html
+    - https://www.microsoft.com/en-us/security/blog/2022/10/18/defenders-beware-a-case-for-post-ransomware-investigations/
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-09-09
+modified: 2022-11-17
+tags:
+    - attack.discovery
+    - attack.t1033
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith:
+              - '\powershell.exe'
+              - '\pwsh.exe'
+        - OriginalFileName:
+              - 'PowerShell.EXE'
+              - 'pwsh.dll'
+    selection_cli:
+        CommandLine|contains|all:
+            - 'Get-ADUser '
+            - ' -Filter \*'
+        CommandLine|contains:
+            - ' > '
+            - ' | Select '
+            - 'Out-File'
+            - 'Set-Content'
+            - 'Add-Content'
+    condition: all of selection_*
+falsepositives:
+    - Legitimate admin scripts may use the same technique, it's better to exclude specific computers or users who execute these commands or scripts often
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

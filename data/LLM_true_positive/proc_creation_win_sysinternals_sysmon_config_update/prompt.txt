@@ -1,0 +1,35 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Sysmon Configuration Update
+id: 87911521-7098-470b-a459-9a57fc80bdfd
+status: test
+description: Detects updates to Sysmon's configuration. Attackers might update or replace the Sysmon configuration with a bare bone one to avoid monitoring without shutting down the service completely
+references:
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2023-03-09
+modified: 2024-03-13
+tags:
+    - attack.defense-evasion
+    - attack.t1562.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_pe:
+        - Image|endswith:
+              - \Sysmon64.exe
+              - \Sysmon.exe
+        - Description: 'System activity monitor'
+    selection_cli:
+        CommandLine|contains|windash: '-c'
+    condition: all of selection_*
+falsepositives:
+    - Legitimate administrators might use this command to update Sysmon configuration.
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

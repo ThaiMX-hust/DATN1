@@ -1,0 +1,40 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Disabled IE Security Features
+id: fb50eb7a-5ab1-43ae-bcc9-091818cb8424
+status: test
+description: Detects command lines that indicate unwanted modifications to registry keys that disable important Internet Explorer security features
+references:
+    - https://unit42.paloaltonetworks.com/operation-ke3chang-resurfaces-with-new-tidepool-malware/
+author: Florian Roth (Nextron Systems)
+date: 2020-06-19
+modified: 2021-11-27
+tags:
+    - attack.defense-evasion
+    - attack.t1562.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection1:
+        CommandLine|contains|all:
+            - ' -name IEHarden '
+            - ' -value 0 '
+    selection2:
+        CommandLine|contains|all:
+            - ' -name DEPOff '
+            - ' -value 1 '
+    selection3:
+        CommandLine|contains|all:
+            - ' -name DisableFirstRunCustomize '
+            - ' -value 2 '
+    condition: 1 of selection*
+falsepositives:
+    - Unknown
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

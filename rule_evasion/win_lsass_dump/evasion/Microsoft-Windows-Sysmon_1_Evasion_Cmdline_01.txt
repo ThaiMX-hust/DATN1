@@ -1,1 +1,0 @@
-procdump.exe ls""ass -o l"sa"ss."dmp"

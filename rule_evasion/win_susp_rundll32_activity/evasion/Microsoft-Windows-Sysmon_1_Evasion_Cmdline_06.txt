@@ -1,1 +1,0 @@
-rundll32 "javascript":"\..\mshtml,RunHTMLApplication ";alert("foo");

@@ -1,0 +1,34 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Suspicious Execution of InstallUtil Without Log
+id: d042284c-a296-4988-9be5-f424fadcc28c
+status: test
+description: Uses the .NET InstallUtil.exe application in order to execute image without log
+references:
+    - https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/
+    - https://learn.microsoft.com/en-us/dotnet/framework/tools/installutil-exe-installer-tool
+author: frack113
+date: 2022-01-23
+modified: 2022-02-04
+tags:
+    - attack.defense-evasion
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith: '\InstallUtil.exe'
+        Image|contains: 'Microsoft.NET\Framework'
+        CommandLine|contains|all:
+            - '/logfile= '
+            - '/LogToConsole=false'
+    condition: selection
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

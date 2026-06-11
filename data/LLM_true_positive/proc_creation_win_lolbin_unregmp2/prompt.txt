@@ -1,0 +1,33 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Lolbin Unregmp2.exe Use As Proxy
+id: 727454c0-d851-48b0-8b89-385611ab0704
+status: test
+description: Detect usage of the "unregmp2.exe" binary as a proxy to launch a custom version of "wmpnscfg.exe"
+references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Unregmp2/
+author: frack113
+date: 2022-12-29
+modified: 2024-06-04
+tags:
+    - attack.defense-evasion
+    - attack.t1218
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\unregmp2.exe'
+        - OriginalFileName: 'unregmp2.exe'
+    selection_cmd:
+        CommandLine|contains|windash: ' /HideWMP'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

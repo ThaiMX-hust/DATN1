@@ -1,1 +1,0 @@
-bcdedit.exe /del""etevalue {default} safeboot

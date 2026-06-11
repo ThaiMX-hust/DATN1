@@ -1,1 +1,0 @@
-powershell -ve   2 -Command Get-Host

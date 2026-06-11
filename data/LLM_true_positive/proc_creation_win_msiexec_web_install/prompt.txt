@@ -1,0 +1,37 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: MsiExec Web Install
+id: f7b5f842-a6af-4da5-9e95-e32478f3cd2f
+related:
+    - id: 8150732a-0c9d-4a99-82b9-9efb9b90c40c
+      type: similar
+status: test
+description: Detects suspicious msiexec process starts with web addresses as parameter
+references:
+    - https://blog.trendmicro.com/trendlabs-security-intelligence/attack-using-windows-installer-msiexec-exe-leads-lokibot/
+author: Florian Roth (Nextron Systems)
+date: 2018-02-09
+modified: 2022-01-07
+tags:
+    - attack.defense-evasion
+    - attack.t1218.007
+    - attack.command-and-control
+    - attack.t1105
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains|all:
+            - ' msiexec'
+            - '://'
+    condition: selection
+falsepositives:
+    - False positives depend on scripts and administrative tools used in the monitored environment
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

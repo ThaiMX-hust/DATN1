@@ -1,0 +1,33 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Suspicious Diantz Download and Compress Into a CAB File
+id: 185d7418-f250-42d0-b72e-0c8b70661e93
+status: test
+description: Download and compress a remote file and store it in a cab file on local machine.
+references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Diantz/
+author: frack113
+date: 2021-11-26
+modified: 2022-08-13
+tags:
+    - attack.command-and-control
+    - attack.t1105
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains|all:
+            - diantz.exe
+            - ' \\\\'
+            - '.cab'
+    condition: selection
+falsepositives:
+    - Unknown
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

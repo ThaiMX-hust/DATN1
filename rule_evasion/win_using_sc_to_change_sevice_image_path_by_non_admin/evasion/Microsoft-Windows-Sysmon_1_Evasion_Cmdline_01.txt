@@ -1,1 +1,0 @@
-sc c^onf"g servicename bin"Path=calc.exe

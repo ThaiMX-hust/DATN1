@@ -1,4 +1,5 @@
-Please write a simple but meaningful command for the attacker to trigger
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
 this SIEM rule, easy to evade
 title: 7Zip Compressing Dump Files
 id: ec570e53-4c76-45a9-804d-dc3f355ff7a7
@@ -38,3 +39,6 @@ falsepositives:
     - Legitimate use of 7z with a command line in which ".dmp" or ".dump" appears accidentally
     - Legitimate use of 7z to compress WER ".dmp" files for troubleshooting
 level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

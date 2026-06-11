@@ -1,0 +1,31 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Execute Pcwrun.EXE To Leverage Follina
+id: 6004abd0-afa4-4557-ba90-49d172e0a299
+status: test
+description: Detects indirect command execution via Program Compatibility Assistant "pcwrun.exe" leveraging the follina (CVE-2022-30190) vulnerability
+references:
+    - https://twitter.com/nas_bench/status/1535663791362519040
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-06-13
+tags:
+    - attack.defense-evasion
+    - attack.t1218
+    - attack.execution
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith: '\pcwrun.exe'
+        CommandLine|contains: '../'
+    condition: selection
+falsepositives:
+    - Unlikely
+level: high
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

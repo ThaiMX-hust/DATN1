@@ -1,1 +1,0 @@
-C:\Windows\System32\net1 us""er /a"d"d srvcusr usrpsswrd123

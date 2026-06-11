@@ -1,1 +1,0 @@
-sc config servicename b"in"Path=cmd.exe

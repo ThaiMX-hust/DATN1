@@ -1,1 +1,0 @@
-netsh advfirewall   firewall   add   rule action=allow protocol=TCP localport=3389 dir=in name=allowRDP

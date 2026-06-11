@@ -1,0 +1,32 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+Please write down all instances of the commands. but meaningful command for the attacker to trigger
+this SIEM rule, easy to evade
+
+Sigma_rule:
+title: Potential ShellDispatch.DLL Functionality Abuse
+id: 82343930-652f-43f5-ab70-2ee9fdd6d5e9
+status: test
+description: Detects potential "ShellDispatch.dll" functionality abuse to execute arbitrary binaries via "ShellExecute"
+references:
+    - https://www.hexacorn.com/blog/2023/06/07/this-lolbin-doesnt-exist/
+author: X__Junior (Nextron Systems)
+date: 2023-06-20
+tags:
+    - attack.execution
+    - attack.defense-evasion
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\rundll32.exe'
+        - OriginalFileName: 'RUNDLL32.EXE'
+    selection_cli:
+        CommandLine|contains: 'RunDll_ShellExecuteW'
+    condition: all of selection_*
+falsepositives:
+    - Unlikely
+level: medium
+
+Please note that the binaries are not available on Windows. You can use the default paths of the Atomic Red Team tool.
+The output only displays the command lines; it doesn't generate anything else.

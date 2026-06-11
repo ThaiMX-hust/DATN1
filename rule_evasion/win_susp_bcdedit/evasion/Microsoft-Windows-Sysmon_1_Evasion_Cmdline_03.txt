@@ -1,1 +1,0 @@
-"C:\Windows\System32\bcdedit.exe" /i""m""p""o""r""t %TEMP%\default.bcd
