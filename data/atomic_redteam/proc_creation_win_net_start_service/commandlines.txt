@@ -1,0 +1,4 @@
+C:\WINDOWS\system32\net1  start
+net.exe  start
+C:\WINDOWS\system32\net1  start sesshijack
+net  start sesshijack

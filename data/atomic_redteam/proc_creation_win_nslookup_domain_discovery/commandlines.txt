@@ -1,0 +1,4 @@
+"cmd.exe" /c nslookup -querytype=ALL -timeout=12 _ldap._tcp.dc._msdcs.%%USERDNSDOMAIN%%
+nslookup  -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.DomainName
+nslookup  -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.WORKGROUP
+nslookup  -querytype=ALL -timeout=12 _ldap._tcp.dc._msdcs.%%USERDNSDOMAIN%%

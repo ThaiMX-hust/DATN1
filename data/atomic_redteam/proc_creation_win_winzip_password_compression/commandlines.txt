@@ -1,0 +1,1 @@
+"cmd.exe" /c path=%%path%%;"C:\Program Files (x86)\winzip" & mkdir .\tmp\victim-files & cd .\tmp\victim-files & echo "This file will be encrypted" > .\encrypted_file.txt & "%%ProgramFiles%%\WinZip\winzip64.exe" -min -a -s"hello" archive.zip * & dir

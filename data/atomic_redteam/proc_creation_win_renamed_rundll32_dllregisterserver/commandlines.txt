@@ -1,0 +1,7 @@
+C:\Users\thaim\AppData\Roaming\notepad.exe  /B
+C:\Users\thaim\AppData\Roaming\svchost.exe  "C:\AtomicRedTeam\atomics\..\ExternalPayloads\T1036.003\src\T1036.003_masquerading.vbs"
+C:\Users\thaim\AppData\Roaming\taskhostw.exe
+C:\Users\thaim\AppData\Local\Temp\tcm.tmp  -decode C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt C:\Users\thaim\AppData\Local\Temp\T1140_calc2_decoded.exe
+C:\Users\thaim\AppData\Local\Temp\tcm.tmp  -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt
+C:\Users\thaim\AppData\Roaming\updater.exe  -Command exit
+powershell.exe -nop -Command Write-Host DllRegisterServer export executed me; exit

@@ -1,0 +1,1 @@
+"powershell.exe" & {$mic = Get-AudioDevice -Recording Set-AudioDevice -ID $mic.ID Start-Sleep -Seconds 5}

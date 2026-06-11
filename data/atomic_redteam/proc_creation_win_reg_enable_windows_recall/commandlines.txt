@@ -1,0 +1,2 @@
+"C:\WINDOWS\system32\reg.exe" add HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f
+"C:\WINDOWS\system32\reg.exe" delete HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI /v DisableAIDataAnalysis /f

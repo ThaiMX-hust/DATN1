@@ -1,0 +1,1 @@
+"powershell.exe" & {Get-ADReplAccount -All -Server $ENV:logonserver.TrimStart(\""\\"")}

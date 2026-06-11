@@ -1,0 +1,1 @@
+"C:\WINDOWS\system32\certutil.exe" -addstore my C:\Users\thaim\AppData\Local\Temp\rootCA2.cer

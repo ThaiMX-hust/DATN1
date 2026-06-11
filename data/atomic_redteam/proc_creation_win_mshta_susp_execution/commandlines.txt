@@ -1,0 +1,2 @@
+mshta  vbscript:Execute("CreateObject(""Wscript.Shell"").Run ""powershell -noexit -file C:\AtomicRedTeam\atomics\T1218.005\src\powershell.ps1"":close")
+mshta.exe  "about:<hta:application><script language="VBScript">Close(Execute("CreateObject(""Wscript.Shell"").Run%%20""powershell.exe%%20-nop%%20-Command%%20Write-Host%%20Hello,%%20MSHTA!;Start-Sleep%%20-Seconds%%205"""))</script>'"

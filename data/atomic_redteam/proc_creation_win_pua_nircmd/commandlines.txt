@@ -1,0 +1,1 @@
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\nircmd.exe  win child class Shell_TrayWnd hide class TrayClockWClass

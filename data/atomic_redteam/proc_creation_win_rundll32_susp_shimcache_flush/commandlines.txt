@@ -1,0 +1,2 @@
+"cmd.exe" /c Rundll32.exe apphelp.dll,ShimFlushCache
+Rundll32.exe  apphelp.dll,ShimFlushCache

@@ -1,0 +1,2 @@
+fsutil  behavior 	set SymlinkEvaluation R2L:1
+fsutil  behavior set 	SymlinkEvaluation R2R:1

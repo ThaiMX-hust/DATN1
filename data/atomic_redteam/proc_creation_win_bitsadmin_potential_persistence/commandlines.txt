@@ -1,0 +1,1 @@
+bitsadmin.exe  /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\Users\thaim\AppData\Local\Temp\bitsadmin3_flag.ps1

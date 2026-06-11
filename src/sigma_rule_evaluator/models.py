@@ -45,6 +45,7 @@ class RunnerConfig:
     base_dir: Path
     path_config_path: Path | None = None
     rules_dir: Path | None = None
+    resume_from_batch: Path | None = None
     offset: int = 0
     limit: int | None = None
     execute: bool = False

@@ -331,7 +331,7 @@ def collect_triggered_rules_for_case(detections: list[Any], result: CaseResult) 
         for event in detection_events(detection):
             if not result.evtx_name or not original_logfile_matches(event, result.evtx_name):
                 continue
-            if not event_in_process_tree(event, result):
+            if result.process_tree_events and not event_in_process_tree(event, result):
                 continue
             alert = rule_info_for_event(rule, event)
             key = alert_key(alert)

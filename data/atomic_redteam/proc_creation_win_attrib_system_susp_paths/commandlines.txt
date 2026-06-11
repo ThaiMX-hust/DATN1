@@ -1,0 +1,1 @@
+attrib.exe  +s C:\Users\thaim\AppData\Local\Temp\T1564.001.txt

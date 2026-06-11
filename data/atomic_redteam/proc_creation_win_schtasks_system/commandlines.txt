@@ -1,0 +1,1 @@
+schtasks  /create /tn "T1053_005_OnStartup" /sc onstart /ru system /tr "cmd.exe /c calc.exe"

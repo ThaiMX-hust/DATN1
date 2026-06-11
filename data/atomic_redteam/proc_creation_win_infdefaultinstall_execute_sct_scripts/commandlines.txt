@@ -1,0 +1,2 @@
+"cmd.exe" /c InfDefaultInstall.exe "C:\AtomicRedTeam\atomics\T1218\src\Infdefaultinstall.inf"
+InfDefaultInstall.exe  "C:\AtomicRedTeam\atomics\T1218\src\Infdefaultinstall.inf"

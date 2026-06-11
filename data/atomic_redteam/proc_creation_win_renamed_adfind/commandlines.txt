@@ -1,0 +1,11 @@
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=subnet)
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=computer)
+"powershell.exe" & {([adsisearcher]\""objectcategory=computer\"").FindAll(); ([adsisearcher]\""objectcategory=computer\"").FindOne()}
+"powershell.exe" & {$DirectorySearcher = New-Object System.DirectoryServices.DirectorySearcher(\""(ObjectCategory=Computer)\"") $DirectorySearcher.PropertiesToLoad.Add(\""Name\"") $Computers = $DirectorySearcher.findall() foreach ($Computer in $Computers) { $Computer = $Computer.Properties.name if (!$Computer) { Continue } Write-Host $Computer}}
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=group)
+"powershell.exe" & {([adsisearcher]\""objectcategory=group\"").FindAll(); ([adsisearcher]\""objectcategory=group\"").FindOne()}
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=person)
+"powershell.exe" & {(([adsisearcher]'(objectcategory=organizationalunit)').FindAll()).Path | %%{if(([ADSI]\""$_\"").gPlink){Write-Host \""[+] OU Path:\""([ADSI]\""$_\"").Path;$a=((([ADSI]\""$_\"").gplink) -replace \""[[;]\"" -split \""]\"");for($i=0;$i -lt $a.length;$i++){if($a[$i]){Write-Host \""Policy Path[$i]:\""([ADSI]($a[$i]).Substring(0,$a[$i].length-1)).Path;Write-Host \""Policy Name[$i]:\""([ADSI]($a[$i]).Substring(0,$a[$i].length-1)).DisplayName} };Write-Output \""`n\"" }}}
+"powershell.exe" & {([adsisearcher]\""objectcategory=user\"").FindAll(); ([adsisearcher]\""objectcategory=user\"").FindOne()}
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe"  -gcb -sc trustdmp
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=organizationalUnit)

@@ -1,0 +1,1 @@
+"C:\windows\system32\wbem\mofcomp.exe" C:\AtomicRedTeam\atomics\T1546.003\src\T1546.003.mof

@@ -1,0 +1,1 @@
+C:\Windows\syswow64\regsvr32.exe  /s C:\AtomicRedTeam\atomics\T1218.010\bin\AllTheThingsx86.dll

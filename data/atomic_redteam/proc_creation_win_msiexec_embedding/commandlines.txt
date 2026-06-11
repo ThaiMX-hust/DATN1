@@ -1,0 +1,3 @@
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -nop -Command Write-Host JScript executed me!; exit
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -nop -Command Write-Host VBScript executed me!; exit
+powershell.exe -nop -Command Write-Host CustomAction export executed me; exit

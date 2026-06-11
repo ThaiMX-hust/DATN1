@@ -1,0 +1,2 @@
+whoami  /all
+"C:\WINDOWS\system32\whoami.exe" /all

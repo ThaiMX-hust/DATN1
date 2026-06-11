@@ -1,0 +1,4 @@
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"  -c New-Service -Name svcHighPriv -BinaryPathName 'C:\windows\system32\cmd.exe /C echo Uuup! > \\.\pipe\HighPriv' -StartupType Manual
+C:\windows\system32\cmd.exe /C echo Uuup! > \\.\pipe\HighPriv
+C:\WINDOWS\system32\cmd.exe  /C "timeout /t 3 >nul&&echo TestSVC > \\.\pipe\TestSVC"
+C:\WINDOWS\system32\cmd.exe /C start C:\WINDOWS\system32\cmd.exe /C "timeout /t 3 >nul&&echo TestSVC > \\.\pipe\TestSVC"

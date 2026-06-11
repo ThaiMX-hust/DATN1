@@ -1,0 +1,1 @@
+"cmd.exe" /c C:\windows\system32\SyncAppvPublishingServer.vbs "\n;Start-Process calc"

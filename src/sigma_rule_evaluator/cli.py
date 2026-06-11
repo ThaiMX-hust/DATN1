@@ -19,6 +19,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--config", help="Input JSON file. Overrides input_config in the path config.")
     parser.add_argument("--output-dir", help="Output folder. Overrides output_dir in the path config.")
     parser.add_argument("--base-dir", default=None, help="Base folder for CLI relative paths.")
+    parser.add_argument(
+        "--resume-from-batch",
+        help="Existing target_commandline_tests batch folder; run cases after the newest matching EVTX.",
+    )
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--execute", action="store_true", help="Run command lines. Without this, only dry-run.")
@@ -76,6 +80,7 @@ def config_from_args(args: argparse.Namespace) -> RunnerConfig:
             base_dir,
             "--rules-dir",
         ),
+        resume_from_batch=resolve_path(args.resume_from_batch, base_dir),
         offset=args.offset,
         limit=args.limit,
         execute=args.execute,

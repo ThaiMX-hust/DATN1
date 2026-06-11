@@ -1,0 +1,2 @@
+C:\WINDOWS\system32\cmd.exe /c ""C:\Users\thaim\Desktop\evil_batchâ€®fdp.bat" "
+C:\WINDOWS\system32\cmd.exe /c ""C:\Users\thaim\Downloads\evil_batchâ€®fdp.bat" "

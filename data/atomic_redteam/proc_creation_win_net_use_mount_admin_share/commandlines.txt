@@ -1,0 +1,14 @@
+net  use \\Target\C$ P@ssw0rd1 /u:DOMAIN\Administrator
+net  use
+C:\WINDOWS\system32\net1  share \\test\share /delete
+net  share \\test\share /delete
+net  use c: \\test\share
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "1q2w3e4r "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "ChangeMe! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password1 "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Spring2022 "
+C:\WINDOWS\system32\net1  time \\localhost
+net  time \\localhost
+net  view \\localhost
+"C:\WINDOWS\system32\net.exe" USE * \\example.com\sales /TRANSPORT:QUIC /SKIPCERTCHECK

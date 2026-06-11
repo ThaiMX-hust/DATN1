@@ -1,0 +1,2 @@
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\regsvcs.exe" C:\Users\thaim\AppData\Local\Temp\T1218.009.dll
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\regasm.exe  /U C:\Users\thaim\AppData\Local\Temp\T1218.009.dll

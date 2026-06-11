@@ -1,0 +1,1 @@
+odbcconf.exe  -f "T1218.008.rsp"

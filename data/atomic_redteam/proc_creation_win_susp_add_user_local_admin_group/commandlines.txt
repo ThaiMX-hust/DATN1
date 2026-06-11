@@ -1,0 +1,3 @@
+"cmd.exe" /c net user /add "T1136.001_Admin" "T1136_pass" & net localgroup administrators "T1136.001_Admin" /add
+C:\WINDOWS\system32\net1  localgroup administrators "T1136.001_Admin" /add
+net  localgroup administrators "T1136.001_Admin" /add

@@ -1,0 +1,1 @@
+wuauclt.exe  /UpdateDeploymentProvider "C:\AtomicRedTeam\atomics\T1218\bin\calc.dll" /RunHandlerComServer

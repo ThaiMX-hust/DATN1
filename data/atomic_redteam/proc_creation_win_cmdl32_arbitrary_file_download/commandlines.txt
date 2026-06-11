@@ -1,0 +1,1 @@
+cmdl32  /vpn /lan C:\Users\thaim\AppData\Local\Temp\T1105\setting.txt

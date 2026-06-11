@@ -1,0 +1,3 @@
+rundll32.exe C:\WINDOWS\system32\davclnt.dll,DavSetCookie localhost http://localhost/ADMIN%%24/
+rundll32.exe C:\WINDOWS\system32\davclnt.dll,DavSetCookie THAIMX http://thaimx/admin%%24/
+rundll32.exe C:\WINDOWS\system32\davclnt.dll,DavSetCookie example.com http://example.com/sales

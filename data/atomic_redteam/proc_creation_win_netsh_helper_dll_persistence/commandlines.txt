@@ -1,0 +1,1 @@
+netsh.exe  add helper "C:\AtomicRedTeam\atomics\T1546.007\bin\NetshHelper.dll"

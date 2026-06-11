@@ -1,0 +1,3 @@
+nltest  /domain_trusts
+nltest.exe  /dclist:%%userdnsdomain%%
+nltest  /trusted_domains

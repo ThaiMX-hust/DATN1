@@ -1,0 +1,25 @@
+"C:\WINDOWS\system32\whoami.exe"
+cmdkey  /list
+whoami  /all
+"C:\WINDOWS\system32\whoami.exe" /all
+C:\WINDOWS\system32\net1  users
+net  users
+whoami
+"cmd.exe" /c dir /s c:\ >> %%temp%%\T1083Test1.txt & dir /s "c:\Documents and Settings" >> %%temp%%\T1083Test1.txt & dir /s "c:\Program Files\" >> %%temp%%\T1083Test1.txt & dir "%%systemdrive%%\Users\*.*" >> %%temp%%\T1083Test1.txt & dir "%%userprofile%%\AppData\Roaming\Microsoft\Windows\Recent\*.*" >> %%temp%%\T1083Test1.txt & dir "%%userprofile%%\Desktop\*.*" >> %%temp%%\T1083Test1.txt & tree /F >> %%temp%%\T1083Test1.txt
+"C:\WINDOWS\system32\cmdkey.exe" /list
+"C:\WINDOWS\system32\net.exe" user
+"cmd.exe" /c net user & dir c:\Users\ & cmdkey.exe /list & net localgroup "Users" & net localgroup
+C:\WINDOWS\system32\net1  localgroup "Users"
+C:\WINDOWS\system32\net1  user
+C:\WINDOWS\system32\net1 user
+cmdkey.exe  /list
+net  localgroup "Users"
+net  user
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "1q2w3e4r "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "ChangeMe! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password! "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Password1 "
+net  use \\THAIMX\IPC$ /user:"THAIMX\thaim" "Spring2022 "
+"C:\WINDOWS\system32\net.exe" user NewLocalUser
+C:\WINDOWS\system32\net1 user NewLocalUser
+"cmd.exe" /c dir /a:h C:\Users\%%USERNAME%%\AppData\Local\Microsoft\Credentials\ & dir /a:h C:\Users\%%USERNAME%%\AppData\Roaming\Microsoft\Credentials\

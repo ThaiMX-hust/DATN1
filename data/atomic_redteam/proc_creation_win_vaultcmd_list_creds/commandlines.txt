@@ -1,0 +1,3 @@
+"C:\WINDOWS\system32\VaultCmd.exe" "/listcreds:Web Credentials" /all
+"C:\WINDOWS\system32\VaultCmd.exe" "/listcreds:Windows Credentials" /all
+vaultcmd  /listcreds:"Windows Credentials"

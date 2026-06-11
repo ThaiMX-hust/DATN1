@@ -1,0 +1,6 @@
+net  view /all
+net  view /all /domain
+net  view
+net  view /domain
+"net" stop UltraViewService
+C:\WINDOWS\system32\net1 stop UltraViewService

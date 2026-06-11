@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import time
+from dataclasses import dataclass
 from pathlib import Path
 
 from .cases import group_by_technique, load_cases, select_cases, technique_dir_map
@@ -23,6 +24,111 @@ from .reports import (
     write_result_json,
 )
 from .utils import iso_now, join_notes, now_batch_id, safe_name, write_json
+
+
+@dataclass(frozen=True)
+class ResumeFromEvtx:
+    """Selection details when continuing after the newest matching EVTX."""
+
+    batch_dir: Path
+    last_evtx_path: Path | None
+    last_case: TargetCase | None
+    skipped_count: int
+    ignored_evtx_count: int = 0
+    evtx_paths_by_name: dict[str, Path] | None = None
+
+
+def execution_order(cases: list[TargetCase]) -> list[TargetCase]:
+    """Return the exact case order used by the runner."""
+    grouped = group_by_technique(cases)
+    return [case for technique_cases in grouped.values() for case in technique_cases]
+
+
+def evtx_name_for_case(case: TargetCase, dir_map: dict[str, str]) -> str:
+    """Return the EVTX filename used by the runner for one case."""
+    return f"{dir_map[case.technique_id]}__{safe_name(case.test_id)}.evtx"
+
+
+def select_cases_after_last_evtx(
+    cases: list[TargetCase],
+    resume_batch_dir: Path,
+    dir_map: dict[str, str],
+) -> tuple[list[TargetCase], ResumeFromEvtx]:
+    """Return cases after the newest EVTX that maps to the current execution order."""
+    if not resume_batch_dir.exists() or not resume_batch_dir.is_dir():
+        raise ValueError(f"--resume-from-batch must be an existing batch folder: {resume_batch_dir}")
+
+    ordered_cases = execution_order(cases)
+    filename_to_position: dict[str, int] = {}
+    for position, case in enumerate(ordered_cases):
+        filename = evtx_name_for_case(case, dir_map).lower()
+        if filename in filename_to_position:
+            raise ValueError(
+                "Cannot resume safely because multiple cases map to the same EVTX filename: "
+                f"{evtx_name_for_case(case, dir_map)!r}"
+            )
+        filename_to_position[filename] = position
+
+    evtx_dir = resume_batch_dir / "evtx"
+    evtx_paths = sorted(
+        evtx_dir.glob("*.evtx") if evtx_dir.exists() else [],
+        key=lambda path: (path.stat().st_mtime_ns, path.name.lower()),
+    )
+
+    last_match: tuple[int, Path] | None = None
+    ignored_evtx_count = 0
+    evtx_paths_by_name: dict[str, Path] = {}
+    for evtx_path in evtx_paths:
+        filename = evtx_path.name.lower()
+        position = filename_to_position.get(filename)
+        if position is None:
+            ignored_evtx_count += 1
+            continue
+        evtx_paths_by_name[filename] = evtx_path
+        last_match = (position, evtx_path)
+
+    if last_match is None:
+        return cases, ResumeFromEvtx(
+            batch_dir=resume_batch_dir,
+            last_evtx_path=None,
+            last_case=None,
+            skipped_count=0,
+            ignored_evtx_count=ignored_evtx_count,
+            evtx_paths_by_name=evtx_paths_by_name,
+        )
+
+    last_position, last_evtx_path = last_match
+    remaining_cases = ordered_cases[last_position + 1 :]
+    return remaining_cases, ResumeFromEvtx(
+        batch_dir=resume_batch_dir,
+        last_evtx_path=last_evtx_path,
+        last_case=ordered_cases[last_position],
+        skipped_count=last_position + 1,
+        ignored_evtx_count=ignored_evtx_count,
+        evtx_paths_by_name=evtx_paths_by_name,
+    )
+
+
+def restored_result_for_case(
+    case: TargetCase,
+    evtx_path: Path | None,
+    resume_batch_dir: Path,
+) -> CaseResult:
+    """Build a case result from an existing resume EVTX, or fail when it is missing."""
+    result = CaseResult(case=case)
+    if evtx_path is None:
+        result.execution.status = "MISSING_RESUME_EVTX"
+        result.zircolite_status = "NOT_EXECUTED"
+        result.final_status = "execution_failed"
+        result.note = f"no EVTX found for prior resume case in {resume_batch_dir / 'evtx'}"
+        return result
+
+    result.execution.status = "RESTORED_EVTX"
+    result.can_execute = True
+    result.evtx_path = str(evtx_path)
+    result.evtx_name = evtx_path.name
+    result.note = "restored from existing EVTX; execution was not rerun"
+    return result
 
 
 def run_case(case: TargetCase, evtx_path: Path, config: RunnerConfig) -> CaseResult:
@@ -114,9 +220,26 @@ def run_case(case: TargetCase, evtx_path: Path, config: RunnerConfig) -> CaseRes
 
 def run_target_batch(config: RunnerConfig) -> int:
     """Run the selected cases and write the batch result JSON."""
-    cases = select_cases(load_cases(config.config_path), config.offset, config.limit)
-    grouped = group_by_technique(cases)
-    dir_map = technique_dir_map(list(grouped))
+    selected_cases = select_cases(load_cases(config.config_path), config.offset, config.limit)
+    full_grouped = group_by_technique(selected_cases)
+    dir_map = technique_dir_map(list(full_grouped))
+    resume_from_evtx: ResumeFromEvtx | None = None
+    cases_to_run = selected_cases
+    restored_results_by_technique: dict[str, list[CaseResult]] = {}
+    if config.resume_from_batch:
+        cases_to_run, resume_from_evtx = select_cases_after_last_evtx(
+            selected_cases,
+            config.resume_from_batch,
+            dir_map,
+        )
+        if resume_from_evtx.last_case:
+            restored_cases = execution_order(selected_cases)[: resume_from_evtx.skipped_count]
+            evtx_paths_by_name = resume_from_evtx.evtx_paths_by_name or {}
+            for case in restored_cases:
+                evtx_path = evtx_paths_by_name.get(evtx_name_for_case(case, dir_map).lower())
+                result = restored_result_for_case(case, evtx_path, resume_from_evtx.batch_dir)
+                restored_results_by_technique.setdefault(case.technique_id, []).append(result)
+    grouped_to_run = group_by_technique(cases_to_run)
 
     batch_id = now_batch_id()
     batch_dir = config.output_dir / batch_id
@@ -126,7 +249,9 @@ def run_target_batch(config: RunnerConfig) -> int:
         "created_at": iso_now(),
         "config": str(config.config_path),
         "path_config": str(config.path_config_path) if config.path_config_path else None,
-        "selected_count": len(cases),
+        "selected_count": len(selected_cases),
+        "execute_count": len(cases_to_run),
+        "restored_count": sum(len(results) for results in restored_results_by_technique.values()),
         "execute": config.execute,
         "sysmon_log_name": SYSMON_LOG_NAME,
         "sysmon_event_id": SYSMON_EVENT_ID,
@@ -138,18 +263,57 @@ def run_target_batch(config: RunnerConfig) -> int:
         "base_dir": str(config.base_dir),
         "zircolite_jsononly": config.zircolite_jsononly,
         "save_debug_artifacts": config.save_debug_artifacts,
+        "resume_from_batch": str(config.resume_from_batch) if config.resume_from_batch else None,
+        "resume_after_evtx": (
+            str(resume_from_evtx.last_evtx_path)
+            if resume_from_evtx and resume_from_evtx.last_evtx_path
+            else None
+        ),
+        "resume_after_test_id": (
+            resume_from_evtx.last_case.test_id
+            if resume_from_evtx and resume_from_evtx.last_case
+            else None
+        ),
+        "resume_skipped_count": resume_from_evtx.skipped_count if resume_from_evtx else 0,
+        "resume_ignored_evtx_count": resume_from_evtx.ignored_evtx_count if resume_from_evtx else 0,
     }
 
-    print(f"[+] Loaded {len(cases)} case(s) in {len(grouped)} technique group(s)")
+    if resume_from_evtx:
+        if resume_from_evtx.last_case and resume_from_evtx.last_evtx_path:
+            print(
+                "[+] Resume from "
+                f"{resume_from_evtx.batch_dir}: last EVTX={resume_from_evtx.last_evtx_path.name} "
+                f"-> [{resume_from_evtx.last_case.index}] {resume_from_evtx.last_case.test_id}; "
+                f"restoring {resume_from_evtx.skipped_count} prior case(s)"
+            )
+        else:
+            print(f"[+] Resume from {resume_from_evtx.batch_dir}: no matching EVTX found; running all selected cases")
+        if resume_from_evtx.ignored_evtx_count:
+            print(f"[+] Ignored {resume_from_evtx.ignored_evtx_count} EVTX file(s) that do not match this config")
+
+    print(
+        f"[+] Loaded {len(selected_cases)} selected case(s) in {len(full_grouped)} technique group(s); "
+        f"executing {len(cases_to_run)} case(s)"
+    )
     print(f"[+] Output: {batch_dir}")
 
     all_rows: list[dict[str, object]] = []
     all_results: list[CaseResult] = []
     technique_summaries: list[dict[str, object]] = []
-    for technique_id, technique_cases in grouped.items():
-        print(f"\n[{technique_id}] cases={len(technique_cases)}")
+    for technique_id in full_grouped:
+        restored_results = restored_results_by_technique.get(technique_id, [])
+        technique_cases = grouped_to_run.get(technique_id, [])
+        print(
+            f"\n[{technique_id}] cases={len(restored_results) + len(technique_cases)} "
+            f"(restored={len(restored_results)}, execute={len(technique_cases)})"
+        )
 
-        results: list[CaseResult] = []
+        results: list[CaseResult] = list(restored_results)
+        for result in restored_results:
+            evtx_name = Path(result.evtx_path).name if result.evtx_path else "<missing>"
+            print(f"  [{result.case.index}] {result.case.test_id}: restored evtx={evtx_name}")
+            if result.note:
+                print(f"    note={result.note}")
         for case in technique_cases:
             test_stem = safe_name(case.test_id)
             print(f"  [{case.index}] {case.test_id}: {case.target_commandline}")

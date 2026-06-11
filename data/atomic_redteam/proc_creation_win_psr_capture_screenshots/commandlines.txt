@@ -1,0 +1,2 @@
+"C:\WINDOWS\system32\psr.exe"  /start /output c:\temp\T1113_desktop.zip /sc 1 /gui 0 /stopevent 12
+psr.exe  /start /output c:\temp\T1113_desktop.zip /sc 1 /gui 0 /stopevent 12
