@@ -1,1 +1,1 @@
-"cloudflared.exe" --url http://example.com
+C:\Tools\cloudflared.exe tunnel -url http://localhost:22

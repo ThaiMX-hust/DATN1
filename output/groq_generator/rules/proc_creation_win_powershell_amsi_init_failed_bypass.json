@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)\"",
+    "explanation": "This command uses .NET reflection to set the 'amsiInitFailed' field to true, which disables AMSI scanning. It matches the Sigma rule's detection criteria by including all required elements in the command line."
+  },
+  {
+    "output": "powershell.exe -c \"[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)\"",
+    "explanation": "This is a substitution of the long option '-Command' with its short form '-c', which is functionally equivalent and still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)\" -WindowStyle Hidden",
+    "explanation": "This command adds an optional argument '-WindowStyle Hidden' to obscure the PowerShell window. The core command remains unchanged and still matches the Sigma rule's detection criteria."
+  }
+]

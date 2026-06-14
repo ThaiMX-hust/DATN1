@@ -1,0 +1,18 @@
+[
+  {
+    "output": "Update.exe \"--processStart\" calc.exe",
+    "explanation": "Insertion technique: Wrapped the action flag '--processStart' inside double quotes. Malleable argument parsing flags inside Windows handle quotes dynamically, allowing safe execution of benign binaries while disrupting continuous literal token evaluations like '--processStart' in selection_exec."
+  },
+  {
+    "output": "Update.exe --processStart\tcalc.exe",
+    "explanation": "Insertion technique: Replaced the standard space delimiter with a horizontal tab character (\\t) between the switch and the application value. Windows parses parameter arrays via tabs natively, maintaining programmatic equivalency while breaking index lookups that rely on regular spaces."
+  },
+  {
+    "output": "cmd.exe /c Update.exe --proc^essStart calc.exe",
+    "explanation": "Insertion technique: Injected a caret (^) escape character into the middle of the option string ('--proc^essStart') within a cmd shell context. The processor expands and strips the caret prior to process handoff, but process creation events log the literal character string, evading selection_exec entirely."
+  },
+  {
+    "output": "Update.exe --PROCESSSTART calc.exe",
+    "explanation": "Substitution / Case modification technique: Adjusted lowercase argument flags into uppercase variants ('--PROCESSSTART'). This ensures proper target process spawning via Squirrel's argument model, but bypasses string engines configured with strict case-sensitive validation matrices."
+  }
+]

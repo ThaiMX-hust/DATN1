@@ -1,0 +1,16 @@
+```json
+[
+  {
+    "output": "C:\\Windows\\SysWOW64\\PresentationHost.exe \".xbap\"",
+    "explanation": "This command simulates the execution of a .xbap file via PresentationHost.exe. The path is modified to appear as an uncommon location by using a normalized path and escaping the .xbap extension."
+  },
+  {
+    "output": "C:\\Windows\\System32\\PresentationHost.exe -file \".xbap\"",
+    "explanation": "This command uses a reordering and substitution technique by replacing the direct inclusion of .xbap with a flag-based argument. The path is kept within a common directory but the command structure is altered."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\..\\SysWOW64\\PresentationHost.exe \".xbap\"",
+    "explanation": "This command uses path normalization and insertion techniques to simulate execution from an uncommon location. The .xbap extension is escaped to test detection accuracy."
+  }
+]
+```

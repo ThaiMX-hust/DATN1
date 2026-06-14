@@ -1,22 +1,22 @@
 [
   {
     "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll\"",
-    "explanation": "Original command with no mutation applied for baseline testing."
-  },
-  {
-    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \" C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll \"",
-    "explanation": "Inserted extra spaces around the DLL path to test parsing tolerance."
+    "explanation": "No mutation applied. The command line is already a valid test case matching the Sigma rule."
   },
   {
     "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path 'C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll'",
-    "explanation": "Replaced double quotes with single quotes to test quote substitution."
+    "explanation": "Single quotes are used instead of double quotes to enclose the path. This is a safe mutation technique (substitution) and is still parsed correctly by the command interpreter."
   },
   {
     "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll",
-    "explanation": "Removed quotes around the path to test if the command still works without them."
+    "explanation": "Quotes are omitted around the path. This is a safe mutation technique (omission) and is still valid if the path does not contain spaces or special characters."
   },
   {
-    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll\"\\r\\n",
-    "explanation": "Inserted newline after the command to test parsing with line breaks."
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll\" ",
+    "explanation": "An extra space is added at the end of the command line. This is a safe mutation technique (insertion) and does not affect the parsing or execution."
+  },
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -path \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll\"",
+    "explanation": "The flag '-Path' is changed to lowercase '-path'. This is a safe mutation technique (substitution) and is still valid if the program accepts case-insensitive flags."
   }
 ]

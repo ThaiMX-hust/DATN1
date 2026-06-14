@@ -1,4 +1,0 @@
-copy cmd.exe not_suspicious.exe && not_suspicious.exe
-powershell -Command "Start-Job -ScriptBlock { Start-Process 'cmd.exe' }"
-Schtasks /Create /SC ONCE /TN "Update" /TR "cmd.exe" /ST 12:00 && Schtasks /Run /TN "Update"
-wmic process call create "calc.exe"

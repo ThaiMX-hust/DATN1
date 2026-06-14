@@ -1,42 +1,14 @@
 [
   {
-    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
-    "explanation": "This is the original command and serves as a baseline for testing."
+    "output": "reg.exe delete \"HKCR\\shellex\\ContextMenuHandlers\\EPP\" /f",
+    "explanation": "This command uses reg.exe to delete the Windows Defender context menu handler registry key, which matches the Sigma rule's detection criteria. It includes quotes for safe parsing and uses standard syntax."
   },
   {
-    "output": "powershell.exe -c \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
-    "explanation": "Substituted '-Command' with '-c', which is an equivalent short option in PowerShell."
+    "output": "powershell.exe -Command \"Remove-Item -Path 'HKCR:\\shellex\\ContextMenuHandlers\\EPP' -Force\"",
+    "explanation": "This PowerShell command removes the registry key using the Remove-Item cmdlet, which aligns with the Sigma rule's detection of 'Remove-Item'. It is formatted with quotes for safe parsing."
   },
   {
-    "output": "powershell.exe -Command \"Remove-Item 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
-    "explanation": "Replaced 'rm' with its full form 'Remove-Item', which is functionally equivalent."
-  },
-  {
-    "output": "powershell.exe -Command \"rm HKCR:\\*\\shellex\\ContextMenuHandlers\\EPP\"",
-    "explanation": "Removed quotes around the registry path, which are not required in this context."
-  },
-  {
-    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -WindowStyle Hidden",
-    "explanation": "Added an optional '-WindowStyle Hidden' parameter, which does not affect the core behavior of the command."
-  },
-  {
-    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -ExecutionPolicy Bypass",
-    "explanation": "Added an optional '-ExecutionPolicy Bypass' parameter, which does not affect the core behavior of the command."
-  },
-  {
-    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -NonInteractive",
-    "explanation": "Added an optional '-NonInteractive' parameter, which does not affect the core behavior of the command."
-  },
-  {
-    "output": "pwsh -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
-    "explanation": "Replaced 'powershell.exe' with 'pwsh', the modern PowerShell executable, which is functionally equivalent."
-  },
-  {
-    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" | Out-Null",
-    "explanation": "Appended '| Out-Null' to suppress output, which does not affect the core behavior of the command."
-  },
-  {
-    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\" -Verb RunAs",
-    "explanation": "Added '-Verb RunAs' to simulate execution with elevated privileges, which does not alter the core action of the command."
+    "output": "pwsh -c \"del HKCR:\\shellex\\ContextMenuHandlers\\EPP -Force\"",
+    "explanation": "This command uses PowerShell Core (pwsh) with the 'del' alias for Remove-Item to delete the registry key. It matches the Sigma rule's detection of 'del' and includes safe parsing with quotes."
   }
 ]

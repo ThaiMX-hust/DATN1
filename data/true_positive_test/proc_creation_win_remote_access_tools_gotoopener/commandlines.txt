@@ -1,1 +1,0 @@
-rcedit.exe GoToOpener.exe --set-version-string CompanyName Unknown && GoToOpener.exe

@@ -1,0 +1,16 @@
+```json
+[
+  {
+    "output": "java.exe -jar someapp.jar && cmd.exe /c echo bypass",
+    "explanation": "This command simulates a Java process spawning a shell (cmd.exe), which matches the Sigma rule's detection criteria. The command is structured to avoid triggering the 'build' exclusion filter."
+  },
+  {
+    "output": "java.exe -jar myapp.jar && powershell.exe -Command \"Write-Output 'test'\"",
+    "explanation": "This command simulates a Java process spawning PowerShell, which is detected by the Sigma rule. It avoids the 'build' exclusion filter and uses a simple command to maintain test safety."
+  },
+  {
+    "output": "java.exe -jar tool.jar && bash.exe -c 'echo bypass'",
+    "explanation": "This command simulates a Java process spawning Bash, which is detected by the Sigma rule. It avoids the 'build' exclusion filter and uses a minimal command for test safety."
+  }
+]
+```

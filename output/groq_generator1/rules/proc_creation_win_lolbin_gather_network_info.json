@@ -1,0 +1,22 @@
+[
+  {
+    "output": "wscript.exe \"C:\\Windows\\System32\\gatherNetworkInfo.vbs\"",
+    "explanation": "Inserted quotes around the file path to test if the rule is sensitive to quoted paths."
+  },
+  {
+    "output": "cmd.exe /c copy gatherNetworkInfo.vbs network_check.vbs & cscript.exe network_check.vbs",
+    "explanation": "Used short command syntax and preserved the original behavior to test if the rule detects renamed or copied files."
+  },
+  {
+    "output": "cscript.exe GATHER~1.VBS",
+    "explanation": "Used the short 8.3 filename format to test if the rule is sensitive to filename normalization."
+  },
+  {
+    "output": "copy gatherNetworkInfo.vbs C:\\Users\\Public\\discovery.txt && cscript.exe C:\\Users\\Public\\discovery.txt",
+    "explanation": "Used path normalization and renamed the file to test if the rule detects renamed or moved files."
+  },
+  {
+    "output": "cscript //e:vbs gatherNetworkInfo.vbs",
+    "explanation": "Used alternative syntax for specifying the script engine to test if the rule is sensitive to command-line flags."
+  }
+]

@@ -1,14 +1,24 @@
+```json
 [
   {
-    "output": "runonce.exe /AlternateShellStartup",
-    "explanation": "This command matches the Sigma rule's detection criteria by using the '/AlternateShellStartup' argument, which is explicitly checked in the rule."
-  },
-  {
     "output": "runonce.exe /AlternateShellStartup /r",
-    "explanation": "This command includes both '/AlternateShellStartup' and '/r', which are both part of the detection criteria in the Sigma rule."
+    "explanation": "This command matches the Sigma rule's detection criteria by including '/AlternateShellStartup' and ending with '/r', which are both specified in the rule."
   },
   {
-    "output": "runonce.exe /Config",
-    "explanation": "This command matches the Sigma rule's detection criteria by using the '/Config' argument, which is explicitly checked in the rule."
+    "output": "runonce.exe /AlternateShellStartup /r ",
+    "explanation": "Adding a trailing space after '/r' is a safe mutation technique (insertion) that does not change the command's functionality but may evade simple pattern-based detection."
+  },
+  {
+    "output": "runonce.exe /AlternateShellStartup /r  ",
+    "explanation": "Adding multiple trailing spaces is another safe mutation technique (insertion) that preserves the command's behavior while potentially altering its signature."
+  },
+  {
+    "output": "\"runonce.exe\" /AlternateShellStartup /r",
+    "explanation": "Enclosing the executable in quotes is a safe mutation technique (insertion) that may alter the command's appearance without changing its execution behavior."
+  },
+  {
+    "output": "runonce.exe /r /AlternateShellStartup",
+    "explanation": "Reordering the command-line arguments is a safe mutation technique (reordering) that may evade detection based on argument order."
   }
 ]
+```

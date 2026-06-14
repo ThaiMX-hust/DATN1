@@ -1,34 +1,16 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"Export-PfxCertificate -Cert Cert:\\LocalMachine\\My\\ABCDEF1234567890 -FilePath C:\\temp\\cert.pfx\"",
-    "explanation": "This command directly uses the `Export-PfxCertificate` cmdlet as detected by the Sigma rule. It is a true positive and not a bypass."
+    "output": "\"powershell.exe\" & {Export-Certificate -Cert (Get-ChildItem Cert:\\CurrentUser\\My)[0] -FilePath \"$env:PUBLIC\\T1649\\cert.cer\"}",
+    "explanation": "This command uses `Export-Certificate` with minimal arguments and environment variables for path normalization, avoiding explicit strings that might trigger the Sigma rule. It omits unnecessary variables and uses direct indexing to select a certificate."
   },
   {
-    "output": "powershell.exe -Command \"& 'Export-PfxCertificate' -Cert Cert:\\LocalMachine\\My\\ABCDEF1234567890 -FilePath C:\\temp\\cert.pfx\"",
-    "explanation": "This command uses string invocation to call `Export-PfxCertificate`, which is a safe mutation technique and still matches the Sigma rule."
+    "output": "\"powershell.exe\" & {Export-PfxCertificate -Cert (Get-ChildItem Cert:\\LocalMachine\\My)[0] -FilePath $env:Temp\\cert.pfx -Password (ConvertTo-SecureString -String \"pass\" -Force -AsPlainText)}",
+    "explanation": "This command uses `Export-PfxCertificate` with minimal syntax and environment variables. It avoids complex variable assignments and uses direct indexing to select a certificate, making it less detectable while maintaining the same behavior."
   },
   {
-    "output": "powershell.exe -Command \"& Export-PfxCertificate -Cert Cert:\\LocalMachine\\My\\ABCDEF1234567890 -FilePath C:\\temp\\cert.pfx\"",
-    "explanation": "This command uses the call operator `&` with the cmdlet name directly. It is still detectable by the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificate -FilePath C:\\temp\\cert.pfx\"",
-    "explanation": "This command uses a pipeline to pass the certificate to `Export-PfxCertificate`, which is still detectable by the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"Set-Alias epfx Export-PfxCertificate; epfx -Cert Cert:\\LocalMachine\\My\\ABCDEF1234567890 -FilePath C:\\temp\\cert.pfx\"",
-    "explanation": "This command uses an alias to invoke `Export-PfxCertificate`, which is a safe mutation technique and still matches the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"Export-Certificate -Cert Cert:\\LocalMachine\\My\\ABCDEF1234567890 -FilePath C:\\temp\\cert.cer\"",
-    "explanation": "This command uses `Export-Certificate` instead of `Export-PfxCertificate`, which is a different cmdlet and does not match the Sigma rule. It is not a bypass."
-  },
-  {
-    "output": "powershell.exe -Command \"Export-Certificate -Type CERT -Cert Cert:\\LocalMachine\\My\\ABCDEF1234567890 -FilePath C:\\temp\\cert.cer\"",
-    "explanation": "This command uses `Export-Certificate` with the `-Type CERT` parameter, which is a different cmdlet and does not match the Sigma rule. It is not a bypass."
-  },
-  {
-    "output": "powershell.exe -Command \"Export-PfxCertificate -Cert Cert:\\LocalMachine\\My\\ABCDEF1234567890 -FilePath C:\\temp\\cert.pfx -Password (ConvertTo-SecureString -String 'P@ssw0rd' -AsPlainText -Force)\"",
-    "explanation": "This command includes a password parameter, but it still uses `Export-PfxCertificate`, which is detectable by the Sigma rule."
+    "output": "\"powershell.exe\" & {Export-Certificate -Cert Cert:\\CurrentUser\\My\\$(Get-ChildItem Cert:\\CurrentUser\\My | Select-Object -First 1).Thumbprint -FilePath \"$env:USERPROFILE\\Documents\\cert.cer\"}",
+    "explanation": "This command uses `Export-Certificate` with dynamic path construction and environment variables. It avoids explicit certificate names and uses pipeline commands to select a certificate, reducing the likelihood of detection."
   }
 ]
+```

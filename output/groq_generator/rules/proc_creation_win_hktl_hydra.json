@@ -1,0 +1,22 @@
+[
+  {
+    "output": "hydra -u ^USER^ -p ^PASS^ example.com http-post-form \"/login.php:username=^USER^&password=^PASS^:F=error\" -V",
+    "explanation": "This command uses the required -u and -p flags with ^USER^ and ^PASS^ as specified in the Sigma rule. It is a typical Hydra command for HTTP brute-forcing."
+  },
+  {
+    "output": "hydra -u \"^USER^\" -p \"^PASS^\" example.com http-post-form \"/login.php:username=\\^USER^&password=\\^PASS^:F=error\" -V",
+    "explanation": "This command uses quotes and escape characters to bypass simple string-based detection while maintaining the same functionality as the original command."
+  },
+  {
+    "output": "hydra -u ^USER^ -p ^PASS^ example.com http-post-form \"/login.php:username=^USER^&password=^PASS^:F=error\" -V -f",
+    "explanation": "This command adds the -f flag (stop after first valid login) which is optional but does not affect the Sigma rule's detection criteria."
+  },
+  {
+    "output": "hydra -u ^USER^ -p ^PASS^ example.com http-post-form \"/login.php:username=^USER^&password=^PASS^:F=error\" -V -s 80",
+    "explanation": "This command explicitly specifies the default port (-s 80) to test whether the rule is sensitive to such optional parameters."
+  },
+  {
+    "output": "hydra -u ^USER^ -p ^PASS^ example.com http-post-form \"/login.php:username=^USER^&password=^PASS^:F=error\" -V --disable-logout",
+    "explanation": "This command adds the --disable-logout flag, which is optional and does not interfere with the Sigma rule's detection logic."
+  }
+]

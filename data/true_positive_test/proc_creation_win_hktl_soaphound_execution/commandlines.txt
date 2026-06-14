@@ -1,5 +1,4 @@
-"C:\AtomicRedTeam\atomics\T1059.001\bin\SOAPHound.exe" --user thaim  THAIMX --password P@ssword1 --dc 10.0.1.14 --buildcache --cachefilename c:\temp\cache.txt
 "C:\AtomicRedTeam\atomics\T1059.001\bin\SOAPHound.exe" --user thaim --password P@ssword1 --domain THAIMX --dc 10.0.1.14 --bhdump --cachefilename c:\temp\cache.txt --outputdirectory c:\temp\test2
+"C:\AtomicRedTeam\atomics\T1059.001\bin\SOAPHound.exe" --user thaim THAIMX --password P@ssword1 --dc 10.0.1.14 --buildcache --cachefilename c:\temp\cache.txt
 "powershell.exe" & {C:\AtomicRedTeam\atomics\T1059.001\bin\SOAPHound.exe --user $($env:USERNAME)@$($env:USERDOMAIN) --password P@ssword1 --dc 10.0.1.14 --buildcache --cachefilename c:\temp\cache.txt}
 "powershell.exe" & {C:\AtomicRedTeam\atomics\T1059.001\bin\SOAPHound.exe --user $env:USERNAME --password P@ssword1 --domain $env:USERDOMAIN --dc 10.0.1.14 --bhdump --cachefilename c:\temp\cache.txt --outputdirectory c:\temp\test2}
-SOAPHound.exe --dnsdump

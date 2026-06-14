@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Import-Module CL_LoadAssembly.ps1; Get-Item -Path function:LoadAssemblyFromPath | Select-Object -ExpandProperty ScriptBlock | . -args 'malicious.dll' , 'Namespace' , 'Class'\"",
+    "explanation": "This command uses insertion of additional spaces between arguments and encloses the command in quotes to simulate a bypass attempt while maintaining the original behavior. It is safe for testing."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File CL_LoadAssembly.ps1; $func = 'LoadAssembly'+'FromNS'; & $func 'malicious.dll' 'Target.Namespace' 'Target.Class'",
+    "explanation": "This command uses string concatenation to obfuscate the function name and reorders the arguments slightly for testing purposes. It remains functionally equivalent to the original."
+  }
+]

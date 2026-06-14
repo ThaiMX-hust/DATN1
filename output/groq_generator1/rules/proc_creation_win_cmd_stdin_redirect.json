@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"cmd.exe\" /c cmd /r cmd < \"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
+    "explanation": "This command uses redirection via '<' to read from a file, which is directly detected by the Sigma rule. It is included as a baseline for testing."
+  },
+  {
+    "output": "\"cmd.exe\" /c cmd /r cmd<\"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
+    "explanation": "The redirection operator '<' is used without a space before the file path, which may bypass detection by altering the command structure slightly."
+  }
+]

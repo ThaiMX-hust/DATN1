@@ -1,0 +1,16 @@
+```json
+[
+  {
+    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange; Get-Recipient -Identity user@example.com | Select-Object -ExpandProperty EmailAddresses | Where-Object { $_.SmtpAddress } | Format-Table -HideTableHeaders\"",
+    "explanation": "This command simulates the malicious behavior described in the Sigma rule by using PowerShell to load the Exchange snap-in, retrieve recipient email addresses, and hide table headers. It uses safe mutation techniques like reordering and omission to avoid triggering the rule."
+  },
+  {
+    "output": "pwsh -c \"Add-PSSnapin Microsoft.Exchange; Get-Recipient -Identity user@example.com | Select-Object -ExpandProperty EmailAddresses | Where-Object { $_.SmtpAddress } | Format-Table -HideTableHeaders\"",
+    "explanation": "This command uses pwsh (PowerShell Core) instead of powershell.exe and applies equivalent syntax to the original command. It demonstrates safe mutation via substitution and reordering while maintaining the same behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange; Get-Recipient -Identity user@example.com | Select-Object -ExpandProperty EmailAddresses | Where-Object { $_.SmtpAddress } | Format-Table -HideTableHeaders\" -WindowStyle Hidden",
+    "explanation": "This command adds the -WindowStyle Hidden flag to simulate stealthy execution, which is a common tactic in malicious PowerShell scripts. It uses safe mutation techniques like insertion and substitution."
+  }
+]
+```

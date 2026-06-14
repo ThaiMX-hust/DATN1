@@ -1,2 +1,0 @@
-diskshadow.exe /S C:\Users\Public\script.txt
-mkdir C:\Windows\System32\Drivers\ms_scripts && copy C:\Users\Public\malicious.txt C:\Windows\System32\Drivers\ms_scripts\script.txt && diskshadow.exe /s C:\Windows\System32\Drivers\ms_scripts\script.txt

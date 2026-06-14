@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cscript.exe register_app.vbs /register AppName DllPath",
+    "explanation": "Substitution technique. Replaces the hyphen-prefixed argument `-register ` with a forward slash `/register`. Because Windows script host utilities accept both slashes and hyphens for custom script parameters depending on how they process `Wscript.Arguments`, this entirely evades the strict `.vbs -register ` substring pattern while maintaining functionality."
+  },
+  {
+    "output": "cscript.exe \"register_app.vbs\" -register AppName DllPath",
+    "explanation": "Insertion technique. Encloses the script name inside quotation marks (`\"register_app.vbs\"`). This breaks the rigid literal check for `.vbs -register ` (which relies on the exact boundary transition from the extension to the space and hyphen) because the closing quote gets positioned right between `.vbs` and the trailing space."
+  },
+  {
+    "output": "cscript.exe register_app.vbs\t-register AppName DllPath",
+    "explanation": "Substitution technique. Replaces the regular blank space character separating the file extension and the parameter with a horizontal tab (`\t`) character. The command-line interpreter treats the tab as a standard token delimiter, but the rule's basic static string match `.vbs -register ` fails to trigger."
+  },
+  {
+    "output": "cscript.exe register_app.vbs -register:AppName DllPath",
+    "explanation": "Substitution technique. Appends a colon directly to the flag to modify parameter pairing syntax (`-register:`). This breaks the rule condition requiring a strict trailing space (`-register `) while still allowing the VBScript runtime or target script logic to consume the argument token successfully."
+  },
+  {
+    "output": "cscript.exe register_app.vbs   -register AppName DllPath",
+    "explanation": "Insertion technique. Expands the single space separating the script name and the argument switch into multiple consecutive spaces. This disrupts the exact string pattern `.vbs -register ` specified in the selection logic without altering the execution environment's capability to parse the script and its switches."
+  }
+]

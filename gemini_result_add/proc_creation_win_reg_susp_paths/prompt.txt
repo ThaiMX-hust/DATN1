@@ -1,0 +1,93 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Reg Add Suspicious Paths
+id: b7e2a8d4-74bb-4b78-adc9-3f92af2d4829
+status: test
+description: Detects when an adversary uses the reg.exe utility to add or modify new keys or subkeys
+references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1112/T1112.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1562.001/T1562.001.md
+    - https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/
+author: frack113, Nasreddine Bencherchali (Nextron Systems)
+date: 2022-08-19
+modified: 2022-10-10
+tags:
+    - attack.defense-evasion
+    - attack.t1112
+    - attack.t1562.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_reg:
+        - Image|endswith: '\reg.exe'
+        - OriginalFileName: 'reg.exe'
+    selection_path:
+        CommandLine|contains:
+            # Add more suspicious registry locations below
+            - '\AppDataLow\Software\Microsoft\'
+            - '\Policies\Microsoft\Windows\OOBE'
+            - '\Policies\Microsoft\Windows NT\CurrentVersion\Winlogon'
+            - '\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon'
+            - '\CurrentControlSet\Control\SecurityProviders\WDigest'
+            - '\Microsoft\Windows Defender\'
+    condition: all of selection_*
+falsepositives:
+    - Rare legitimate add to registry via cli (to these locations)
+level: high
+```
+
+True positive test command:
+
+```text
+reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d 0 /f
+REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist" /v AtomicOperator$ /t REG_DWORD /d 0
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\UX Configuration" /v Notification_Suppress /t REG_DWORD /d 1 /f
+reg add HKCU\Software\AppDataLow\Software\Microsoft\3A861D62-51E0-15700F2219A4 /v comsxRes /t REG_BINARY /d 72656463616e617279 /f
+reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f
+reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f
+reg add HKLM64\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f
+reg query "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\\Shell"
+reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\\Shell"
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify"
+reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit"
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

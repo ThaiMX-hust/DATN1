@@ -1,0 +1,22 @@
+[
+  {
+    "output": "net view",
+    "explanation": "This command omits optional flags while preserving the core behavior of share and session enumeration, which aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "net view /d",
+    "explanation": "The '/d' flag is a short form of '/domain', which is a valid substitution and still triggers the rule due to the presence of 'view'."
+  },
+  {
+    "output": "net view \\\\127.0.0.1",
+    "explanation": "This command includes a target IP address but is still detected by the Sigma rule because it contains 'view' and does not include the filter condition of double backslashes in the command line."
+  },
+  {
+    "output": "net view ^v^i^e^w",
+    "explanation": "The insertion of escape characters (^) does not change the command's functionality and is still parsed as 'net view', triggering the rule."
+  },
+  {
+    "output": "net view --all",
+    "explanation": "This is not a valid substitution for the 'net.exe' command-line syntax and would not execute as expected, making it an invalid bypass attempt."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msdeploy.exe -verb:sync -source:RunCommand=\"cmd /c calc.exe\" -dest:runCommand",
+    "explanation": "This command simulates a malicious use of msdeploy.exe by executing calc.exe via the RunCommand source. The command is structured to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "msdeploy.exe -verb:sync -source:RunCommand='cmd /c notepad.exe' -dest:runCommand",
+    "explanation": "This command uses single quotes instead of double quotes for the source command, which is a valid mutation technique. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "msdeploy.exe -verb:sync -source:RunCommand=cmd /c powershell.exe -dest:runCommand",
+    "execution": "Omission of quotes around the source command is allowed in some contexts and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "msdeploy.exe -verb:sync -dest:runCommand -source:RunCommand=\"cmd /c echo bypass\"",
+    "explanation": "Reordering the '-dest:runCommand' and '-source:RunCommand' arguments is valid in msdeploy.exe and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "msdeploy.exe -verb:sync -source:RunCommand=\"cmd /c \\.\C:\\Windows\\System32\\calc.exe\" -dest:runCommand",
+    "explanation": "This command uses path normalization (\\.\C:\) to represent the executable path, which is a safe mutation technique and still matches the Sigma rule."
+  }
+]

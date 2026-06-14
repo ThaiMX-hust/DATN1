@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c reg add HKLM\\System\\CurrentControlSet\\Control\\StorageDevicePolicies /v WriteProtect /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is modified by removing the caret (^) escape character since it's unnecessary in this context. The quotes are also omitted for the registry path as it's still valid without them. This mutation preserves the original intent and should still trigger the Sigma rule."
+  },
+  {
+    "output": "cmd /c reg add \"HKLM\\System\\CurrentControlSet\\Control\\StorageDevicePolicies\" /v WriteProtect /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is modified by replacing the single quotes with double quotes and using double backslashes for path normalization. The /c flag is shortened from /c (no change), and the caret (^) is removed as it's not required here. This mutation should still trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c reg add HKLM\\System\\CurrentControlSet\\Control\\StorageDevicePolicies /v WriteProtect /d 0 /t REG_DWORD /f",
+    "explanation": "The order of the /t and /d flags is swapped, which is acceptable for the reg add command. The caret (^) is removed as it's not necessary in this context. The quotes are also omitted for the registry path. This mutation should still trigger the Sigma rule."
+  }
+]

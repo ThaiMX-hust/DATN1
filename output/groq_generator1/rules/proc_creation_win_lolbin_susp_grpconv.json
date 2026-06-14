@@ -1,0 +1,26 @@
+[
+  {
+    "output": "grpconv.exe -o",
+    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+  },
+  {
+    "output": "grpconv.exe - o",
+    "explanation": "The '-o' argument is split into '- o' using space insertion. Some programs may still interpret this as '-o' depending on parsing logic, making it a potential bypass."
+  },
+  {
+    "output": "grpconv.exe --option=o",
+    "explanation": "The '-o' flag is replaced with '--option=o' using substitution of long-form syntax. This may bypass detection if the Sigma rule does not account for long-form options."
+  },
+  {
+    "output": "grpconv.exe -o`n",
+    "explanation": "The '-o' flag is followed by an escaped newline character. This uses insertion and encoding techniques to obfuscate the command line while maintaining functionality."
+  },
+  {
+    "output": "grpconv.exe -o\"",
+    "explanation": "The '-o' flag is followed by a quote, which may be parsed as part of the flag in some contexts. This uses insertion to potentially bypass detection."
+  },
+  {
+    "output": "grpconv.exe -o'\\''",
+    "explanation": "The '-o' flag is followed by an escaped single quote. This uses recoding techniques to obfuscate the command line."
+  }
+]

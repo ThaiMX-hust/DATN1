@@ -1,22 +1,18 @@
 [
   {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -SecurityDescriptorSddl 'D;;DCLC;;;BA'\"",
-    "explanation": "This command is a direct match to the Sigma rule's detection criteria, using the full parameter name '-SecurityDescriptorSddl' and the SDDL string 'D;;DCLC;;;BA'."
+    "output": "pwsh.exe -Command \"Set-Service -Name 'TestService' -SecurityDescriptorSddl 'D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)'\"",
+    "explanation": "This command uses the Set-Service cmdlet with the -SecurityDescriptorSddl flag to modify a service's DACL, matching the Sigma rule's detection criteria. It is a valid test command for evaluating the rule."
   },
   {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -sd 'D;;DCLC;;;BA'\"",
-    "explanation": "This command uses the short form '-sd' instead of '-SecurityDescriptorSddl', which is an equivalent substitution and still matches the rule."
+    "output": "pwsh.exe -Command Set-Service -Name TestService -sd 'D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)'",
+    "explanation": "This command uses the short form '-sd' instead of '-SecurityDescriptorSddl', which is an equivalent substitution technique. It still matches the Sigma rule's detection criteria."
   },
   {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -SecurityDescriptorSddl 'D;;DCLC;;;BA'\" -WindowStyle Hidden",
-    "explanation": "This command adds an optional parameter '-WindowStyle Hidden' to obscure the PowerShell window, but the core command remains unchanged and matches the rule."
+    "output": "pwsh.exe -Command \"Set-Service -sd 'D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)' -Name TestService\"",
+    "explanation": "This command reorders the arguments to the Set-Service cmdlet. The order of parameters is changed, but the behavior remains the same and still matches the Sigma rule."
   },
   {
-    "output": "pwsh.exe -Command \"spsv -Name 'SuspiciousService' -Sec 'D;;DCLC;;;BA'\"",
-    "explanation": "This command uses the alias 'spsv' for 'Set-Service' and the short form '-Sec' for '-SecurityDescriptorSddl', which are both valid substitutions and still match the rule."
-  },
-  {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'SuspiciousService' -SecurityDescriptorSddl 'D;;DCLC;;;BA'\" -Command \"\"",
-    "explanation": "This command appends an empty '-Command \"\"' to the command line, which is an insertion technique that does not affect the execution and still matches the rule."
+    "output": "pwsh.exe -Command \"Set-Service -Name TestService -SecurityDescriptorSddl 'D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)'\"",
+    "explanation": "This command uses quotes around the command line to simulate different parsing behavior while still matching the Sigma rule's detection criteria."
   }
 ]

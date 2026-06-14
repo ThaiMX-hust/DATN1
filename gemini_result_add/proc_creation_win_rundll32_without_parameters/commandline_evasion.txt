@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe ",
+    "explanation": "Insertion technique: Appending a single trailing whitespace character to the end of the executable path avoids the exact match constraints specified in the rule's selection logic. The Sigma rule checks for exact equality with the literal choices 'rundll32.exe' or 'rundll32'. Adding a trailing space breaks this strict equality check, yet Windows handles the trailing space correctly during process creation, keeping the argument-less behavior functionally identical."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\rundll32\".exe",
+    "explanation": "Insertion technique: Placing double quotes around the file name stem while leaving the extension ('.exe') outside the quotes modifies the raw CommandLine string structure tracked in telemetry logs. This successfully circumvents the literal list options in the selection block, but the Windows CreateProcess API normalizes the inline quoting, executing the intended binary smoothly without parameters."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe .\\",
+    "explanation": "Omission / Other technique: Appending a completely benign and inert argument like a relative path reference ('.\\') explicitly populates the command line with a parameter to evade the exact parameterless lookup constraints. While the rule's selection block relies on a full exact match of the single target binary token to catch automated script structures, adding a harmless trailing argument prevents a match while ensuring the environment remains completely safe."
+  }
+]

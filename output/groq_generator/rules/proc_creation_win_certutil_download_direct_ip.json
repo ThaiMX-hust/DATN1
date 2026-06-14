@@ -1,10 +1,22 @@
 [
   {
-    "output": "certutil.exe -urlcache -split -f \"http://192.0.2.1/example.txt\" \"C:\\temp\\example.txt\"",
-    "explanation": "This command uses the same flags and structure as the original but omits the -f flag's space after the URL and uses double quotes to encapsulate arguments. It is a safe mutation for testing purposes."
+    "output": "certutil -urlcache -split -f https://1.1.1.1/LICENSE.txt output.txt",
+    "explanation": "This command uses a direct IP address (1.1.1.1) in the URL, which matches the Sigma rule's detection of URLs with IPs. It uses the same flags (-urlcache, -split, -f) as the original command, making it a valid test case."
   },
   {
-    "output": "certutil.exe -urlcache -split -f http://192.0.2.1/example.txt C:\\temp\\example.txt",
-    "explanation": "This command replaces the tab character with a standard backslash path separator and removes unnecessary whitespace, making it a safe variation for testing."
+    "output": "certutil -verifyctl -split -f http://192.0.2.1/LICENSE.txt",
+    "explanation": "This command uses the -verifyctl flag and a direct IP address (192.0.2.1), which is a reserved IP for documentation and testing. It aligns with the Sigma rule's detection criteria for certutil being used with direct IPs."
+  },
+  {
+    "output": "certutil -urlcache -split -f http://198.51.100.1/LICENSE.txt output.txt",
+    "explanation": "This command uses the -urlcache flag and a direct IP address (198.51.100.1), which is reserved for documentation and testing. It matches the Sigma rule's detection of certutil being used with direct IPs."
+  },
+  {
+    "output": "certutil -verifyctl -split -f http://203.0.113.45/LICENSE.txt",
+    "explanation": "This command uses the -verifyctl flag and a direct IP address (203.0.113.45), which is reserved for documentation and testing. It aligns with the Sigma rule's detection criteria for certutil being used with direct IPs."
+  },
+  {
+    "output": "certutil -urlcache -split -f http://192.0.2.1/LICENSE.txt output.txt",
+    "explanation": "This command uses the -urlcache flag and a direct IP address (192.0.2.1), which is reserved for documentation and testing. It matches the Sigma rule's detection of certutil being used with direct IPs."
   }
 ]

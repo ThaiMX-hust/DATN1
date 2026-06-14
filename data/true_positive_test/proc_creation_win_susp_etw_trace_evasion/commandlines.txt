@@ -1,0 +1,1 @@
+wevtutil.exe set-log TEST-HOST /e:false

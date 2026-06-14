@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -enc SQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AUABhAHQAaAAgAHcAaQBuADMAMgBfAHAAcgBvAGMAZQBzAHMAIAAtAE4AYQBtAGUAIABjAHIAZQBhAHQAZQAgAC0AQQByAGcAdQBtAGUAbgB0AEwAaQBzAHQAIABuAG8AdABlAHAAYQBkAC4AZQB4AGUA",
+    "explanation": "The command uses the short form of the EncodedCommand parameter (-enc) instead of the long form (-EncodedCommand). This is a valid substitution technique that bypasses the Sigma rule's detection of specific command-line strings like ' -enc '."
+  },
+  {
+    "output": "powershell.exe -e SQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AUABhAHQAaAAgAHcAaQBuADMAMgBfAHAAcgBvAGMAZQBzAHMAIAAtAE4AYQBtAGUAIABjAHIAZQBhAHQAZQAgAC0AQQByAGcAdQBtAGUAbgB0AEwAaQBzAHQAIABuAG8AdABlAHAAYQBkAC4AZQB4AGUA",
+    "explanation": "The command uses the shortest valid form of the EncodedCommand parameter (-e) instead of the longer forms like ' -enc ' or ' -EncodedCommand '. This is a valid substitution technique that evades the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powershell.exe -enc SQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AUABhAHQAaAAgAHcAaQBuADMAMgBfAHAAcgBvAGMAZQBzAHMAIAAtAE4AYQBtAGUAIABjAHIAZQBhAHQAZQAgAC0AQQByAGcAdQBtAGUAbgB0AEwAaQBzAHQAIABuAG8AdABlAHAAYQBkAC4AZQB4AGUA -inputFormat xml -outputFormat text",
+    "explanation": "The command uses the short form of the EncodedCommand parameter (-enc) and includes additional arguments that are valid but not part of the original detection logic. This is a valid reordering and substitution technique that evades the Sigma rule."
+  }
+]

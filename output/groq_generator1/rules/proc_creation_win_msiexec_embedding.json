@@ -1,0 +1,14 @@
+[
+  {
+    "output": "MsiExec.exe -Embedding 12345 /I fake.msi & powershell.exe -nop -Command Write-Host 'Bypassed'",
+    "explanation": "This command uses reordering and omission techniques to bypass the Sigma rule. The '-Embedding' flag is retained, but the command structure avoids triggering the specific filters by omitting unnecessary elements and using a clean PowerShell command."
+  },
+  {
+    "output": "MsiExec.exe -Embedding 12345 /I fake.msi & pwsh -nop -Command Write-Host 'Bypassed'",
+    "explanation": "This command uses substitution (pwsh instead of powershell.exe) and omission to bypass the Sigma rule. The '-Embedding' flag is retained, and the PowerShell command is simplified to avoid triggering the rule's filters."
+  },
+  {
+    "output": "MsiExec.exe -Embedding 12345 /I fake.msi & powershell.exe -Command Write-Host 'Bypassed'",
+    "explanation": "This command uses omission to bypass the Sigma rule. The '-nop' flag is removed, and the command remains functional while avoiding the specific detection pattern in the rule."
+  }
+]

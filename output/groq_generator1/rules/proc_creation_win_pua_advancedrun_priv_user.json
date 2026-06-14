@@ -1,0 +1,6 @@
+[
+  {
+    "output": "AdvancedRun.exe /EXEFilename cmd.exe /RunAs 8 /Run",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria and is provided as a true positive test command."
+  }
+]

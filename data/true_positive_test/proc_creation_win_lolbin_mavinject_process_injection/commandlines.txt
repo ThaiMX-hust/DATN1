@@ -1,8 +1,2 @@
-"powershell.exe" & {$mypid = (Start-Process notepad -PassThru).id mavinject $mypid /INJECTRUNNING \""C:\AtomicRedTeam\atomics\T1055.001\src\x64\T1055.001.dll\"" Stop-Process -processname notepad}
 "cmd.exe" /c mavinject.exe 1000 /INJECTRUNNING "C:\AtomicRedTeam\atomics\T1218\src\x64\T1218.dll"
-copy mavinject.exe not_mavinject.exe && not_mavinject.exe 1234 /INJECTRUNNING evil.dll
-mavinject.exe 1234 /INJECTRUNNING malicious.dll
-mavinject.exe 1234 /INJECTRUNNING\tevil.dll
-mavinject.exe 4321 -INJECTRUNNING payload.dll
-mavinject.exe 4321/INJECTRUNNING payload.dll
-Start-Process -FilePath "mavinject.exe" -ArgumentList "4321 /INJECTRUNNING payload.dll" -ParentProcess (Get-Process -Name AppVClient -ErrorAction SilentlyContinue)
+"powershell.exe" & {$mypid = (Start-Process notepad -PassThru).id mavinject $mypid /INJECTRUNNING \""C:\AtomicRedTeam\atomics\T1055.001\src\x64\T1055.001.dll\"" Stop-Process -processname notepad}

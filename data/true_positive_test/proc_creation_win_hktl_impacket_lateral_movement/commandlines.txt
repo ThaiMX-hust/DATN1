@@ -1,1 +1,0 @@
-powershell.exe -NoProfile -WindowStyle Hidden -Command "Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\127.0.0.2\ADMIN$\output.txt' -ComputerName 10.0.0.5"

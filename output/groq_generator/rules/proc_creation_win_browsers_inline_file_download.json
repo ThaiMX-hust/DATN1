@@ -1,6 +1,22 @@
 [
   {
-    "output": "msedge.exe http://example.com/payload.exe --window-size=800,600",
-    "explanation": "This command is already a valid test case for the Sigma rule. It uses a browser process with a URL argument pointing to a file with an executable extension (.exe)."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --minimized http://example.com/app.hta",
+    "explanation": "The original command is already a valid detection trigger for the Sigma rule. No mutation is needed to confirm detection."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" -minimized http://example.com/app.hta",
+    "explanation": "Substituted '--minimized' with '-minimized' as a valid short option equivalent for testing detection resilience."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --minimized http://example.com/app.HTA",
+    "explanation": "Modified the file extension to uppercase '.HTA' to test case-insensitive detection behavior."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --minimized http://example.com/app.hta .\\app.hta",
+    "explanation": "Added an additional local file argument to test whether the detection logic focuses solely on the URL argument."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --minimized http://example.com/app.hta --user-data-dir=\"C:\\Users\\Test\\AppData\\Local\\Chrome\\User Data\"",
+    "explanation": "Added an optional argument to test whether the detection logic is resilient to additional command-line parameters."
   }
 ]

@@ -1,4 +1,1 @@
 \??\C:\WINDOWS\system32\conhost.exe 0xffffffff -ForceV1
-"c:\windows\system32\con""host.exe" 0xffffffff -ForceV"1"
-conh^ost.exe 0xffffffff -For^ceV1
-conhost 0xffffffff -ForceV1

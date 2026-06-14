@@ -1,0 +1,26 @@
+[
+  {
+    "output": "chcp",
+    "explanation": "The command 'chcp' directly matches the Sigma rule's detection criteria for the 'CommandLine' field. It is a true positive and not a bypass."
+  },
+  {
+    "output": "cmd.exe /c \"chcp\"",
+    "explanation": "Adding the '/c' flag to 'cmd.exe' and wrapping the command in quotes is an equivalent execution method that still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "cmd.exe /c \"chcp   \"",
+    "explanation": "Appending extra spaces to the end of 'chcp' is a safe mutation that still matches the 'CommandLine|endswith' condition in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"copy chcp.com bypass.exe && bypass.exe\"",
+    "explanation": "Copying 'chcp.com' to a new executable and running it is a safe mutation that still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "cmd.exe /v /c \"set a=chcp&& !a!\"",
+    "explanation": "Using environment variable substitution to execute 'chcp' is a safe mutation that still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"& {chcp}\"",
+    "explanation": "Executing 'chcp' via PowerShell is a valid test case and matches the Sigma rule's detection logic."
+  }
+]

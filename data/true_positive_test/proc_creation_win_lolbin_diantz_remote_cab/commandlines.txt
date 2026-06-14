@@ -1,4 +1,0 @@
-copy diantz.exe not_diantz.exe && not_diantz.exe file.exe C:\path\to\output.cab
-diantz.exe file.exe C:\path\to\output.tmp
-diantz.exe payload.exe C:\Windows\Tasks\archive.cab.txt
-diantz.exe payload.exe C:\Windows\Tasks\archive.zip

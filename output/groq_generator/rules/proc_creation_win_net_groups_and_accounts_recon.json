@@ -1,66 +1,22 @@
 [
   {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net1  group \"Domain\\ Computers\" /domain",
-    "explanation": "Insertion of quotes and spaces around the group name and domain flag to test parsing behavior."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net1.exe group \"Domain Admins\" /do",
+    "explanation": "Replaces ' /domain' with ' /do' (substitution) and shortens the path by omitting unnecessary elements (omission)."
   },
   {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net1  group /domain \"Domain\\ controllers\"",
-    "explanation": "Reordering and insertion of quotes to test if the Sigma rule detects the command regardless of argument order."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net.exe accounts /do",
+    "explanation": "Replaces ' /domain' with ' /do' (substitution) and uses 'net.exe' instead of 'net1.exe' (substitution)."
   },
   {
-    "output": "net  group \"Domain\\ Computers\" /domain",
-    "explanation": "Shortening the path and using quotes to test if the rule is sensitive to executable path variations."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net.exe group \"Domain Admins\" /do",
+    "explanation": "Replaces ' /domain' with ' /do' (substitution) and uses 'net.exe' instead of 'net1.exe' (substitution)."
   },
   {
-    "output": "net  group /domain \"Domain\\ controllers\"",
-    "explanation": "Reordering and using quotes to test if the rule is sensitive to argument order and string representation."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net1.exe group /do \"Domain controllers\"",
+    "explanation": "Replaces ' /domain' with ' /do' (substitution) and reorders the command line (reordering)."
   },
   {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net1  group \"BUILTIN\\\\Backup\\ Operators\" /domain",
-    "explanation": "Insertion of escape characters and spaces to test parsing behavior and detection sensitivity."
-  },
-  {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net1  group \"Domain\\ Admins\" /domain",
-    "explanation": "Substitution of group name with a slightly different spelling to test detection robustness."
-  },
-  {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net1  group \"enterprise\\ admins\" /domain",
-    "explanation": "Insertion of space and substitution of group name to test detection sensitivity."
-  },
-  {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net1  group /domain",
-    "explanation": "Omission of group name to test if the rule still triggers on the presence of the /domain flag."
-  },
-  {
-    "output": "net  group \"BUILTIN\\\\Backup\\ Operators\" /domain",
-    "explanation": "Shortening the path and using escape characters to test detection sensitivity."
-  },
-  {
-    "output": "net  group \"Domain\\ Admins\" /domain",
-    "explanation": "Substitution of group name and insertion of escape characters to test detection robustness."
-  },
-  {
-    "output": "net  group \"enterprise\\ admins\" /domain",
-    "explanation": "Insertion of escape characters and substitution of group name to test detection sensitivity."
-  },
-  {
-    "output": "net  group /domain",
-    "explanation": "Omission of group name to test if the rule still triggers on the presence of the /domain flag."
-  },
-  {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net1  accounts /domain",
-    "explanation": "Testing the accounts flag with the /domain parameter to ensure detection of account reconnaissance."
-  },
-  {
-    "output": "net  accounts /domain",
-    "explanation": "Shortening the path to test if the rule is sensitive to executable path variations."
-  },
-  {
-    "output": "Get-ADGroupMember -Identity \"Domain\\ Admins\"",
-    "explanation": "Using PowerShell to test if the rule is sensitive to alternative reconnaissance methods."
-  },
-  {
-    "output": "net group \"domain\\ admins\" /do /add /delete",
-    "explanation": "Testing the inclusion of multiple flags to see if the rule still triggers despite the /add and /delete flags."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net.exe group /do \"enterprise admins\"",
+    "explanation": "Replaces ' /domain' with ' /do' (substitution) and uses 'net.exe' instead of 'net1.exe' (substitution)."
   }
 ]

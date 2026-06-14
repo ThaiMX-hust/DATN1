@@ -1,42 +1,24 @@
+```json
 [
   {
-    "output": "nltest /domain_trusts",
-    "explanation": "This is a direct match to the Sigma rule's detection criteria. It queries domain trusts and is flagged by the rule."
+    "output": "nltest.exe /domain\\_trusts",
+    "explanation": "The command uses an escaped underscore to bypass simple string-based detection while remaining functionally equivalent."
   },
   {
-    "output": "nltest /dclist:contoso.local",
-    "explanation": "This command queries domain controllers in a specific domain and matches the 'dclist' query pattern in the Sigma rule."
+    "output": "nltest /trusted\\_domains",
+    "explanation": "The command uses an escaped underscore to obfuscate the query flag, which may evade simple keyword-based detection."
   },
   {
-    "output": "nltest /trusted_domains",
-    "explanation": "This command queries trusted domains and aligns with the Sigma rule's detection of reconnaissance via nltest.exe."
+    "output": "nltest.exe /dclist:$env:userdnsdomain",
+    "explanation": "The command replaces the hardcoded domain with an environment variable, which is functionally equivalent but may bypass static string detection."
   },
   {
-    "output": "nltest /dnsgetdc:contoso.local",
-    "explanation": "This command retrieves the domain controller for a domain using DNS and matches the Sigma rule's 'dnsgetdc' query pattern."
+    "output": "nltest /query=domain_trusts",
+    "explanation": "The command uses a different syntax to express the same query, which may evade detection based on specific command-line string patterns."
   },
   {
-    "output": "nltest /parentdomain",
-    "explanation": "This command queries the parent domain and matches the Sigma rule's detection of reconnaissance via nltest.exe."
-  },
-  {
-    "output": "nltest /server:DC01 /trusted_domains",
-    "explanation": "This command queries trusted domains from a specific server and matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "nltest /user:Administrator /domain_trusts",
-    "explanation": "This command queries domain trusts with a specified user and matches the Sigma rule's detection of reconnaissance via nltest.exe."
-  },
-  {
-    "output": "nltest /dsgetdc:contoso.local",
-    "explanation": "This command retrieves domain controller information and matches the Sigma rule's 'dsgetdc' query pattern."
-  },
-  {
-    "output": "nltest /domain:contoso.local /trusted_domains",
-    "explanation": "This command queries trusted domains for a specific domain and matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "nltest /query /domain_trusts",
-    "explanation": "This command uses the 'query' keyword and matches the Sigma rule's detection of reconnaissance via nltest.exe."
+    "output": "nltest /server=%%userdnsdomain%% /query=trusted_domains",
+    "explanation": "The command uses environment variables and reordered syntax to obfuscate the original command line while maintaining the same behavior."
   }
 ]
+```

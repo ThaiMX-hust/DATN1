@@ -1,46 +1,22 @@
 [
   {
-    "output": "netsh advfirewall firewall add rule name=\"Bypass\" dir=in action=allow program=\"evil.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
+    "output": "netsh advfirewall firewall add rule name=\"Test Allow\" action=allow program=\"C:\\Windows\\Temp\\malicious.exe\" dir=in enable=yes",
+    "explanation": "This command attempts to whitelist a program located in a suspicious path (C:\\Windows\\Temp\\) using the netsh.exe command. It matches the Sigma rule's detection criteria by including 'advfirewall', 'firewall', 'add', 'rule', 'action=allow', and 'program=' in the command line, and the program path falls under the suspicious location list."
   },
   {
-    "output": "netsh advfirewall firewall add rule name=\"Hidden\" dir=in action=allow program=\"agent.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
+    "output": "netsh firewall add allowedprogram program=\"C:\\Windows\\Temp\\malicious.exe\" name=\"Test Allow\" mode=notify",
+    "explanation": "This command uses the legacy 'firewall' syntax and includes a suspicious program path (C:\\Windows\\Temp\\). It matches the Sigma rule's detection by containing 'firewall', 'add', and 'allowedprogram', and the program path is in a suspicious location."
   },
   {
-    "output": "netsh advfirewall firewall add rule name=\"MaliciousRule\" dir=in action=allow program=\"malware.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
+    "output": "netsh advfirewall firewall add rule name=TestAllow action=allow program=\"%TEMP%\\malicious.exe\" dir=in enable=yes",
+    "explanation": "This command uses the environment variable %TEMP% to reference a suspicious path and includes the required keywords for the Sigma rule. It is a valid test case for the rule."
   },
   {
-    "output": "netsh advfirewall firewall add rule name=\"Bypass\" dir=in action=allow program=\"C:\\Temp\\evil.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
+    "output": "netsh advfirewall firewall add rule name=TestAllow action=allow program=\"C:\\Windows\\System32\\Tasks\\malicious.exe\" dir=in enable=yes",
+    "explanation": "This command uses a path that matches the suspicious location list (C:\\Windows\\System32\\Tasks\\) and includes the required keywords for the Sigma rule. It is a valid test case for the rule."
   },
   {
-    "output": "netsh advfirewall firewall add rule name=\"Hidden\" dir=in action=allow program=\"C:\\Users\\Public\\agent.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
-  },
-  {
-    "output": "netsh advfirewall firewall add rule name=\"MaliciousRule\" dir=in action=allow program=\"C:\\Windows\\Temp\\malware.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
-  },
-  {
-    "output": "netsh advfirewall firewall add rule name=\"Bypass\" dir=in action=allow program=\"C:\\$Recycle.Bin\\evil.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
-  },
-  {
-    "output": "netsh advfirewall firewall add rule name=\"Hidden\" dir=in action=allow program=\"C:\\Users\\Default\\agent.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
-  },
-  {
-    "output": "netsh advfirewall firewall add rule name=\"MaliciousRule\" dir=in action=allow program=\"C:\\Windows\\SystemVolumeInformation\\malware.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
-  },
-  {
-    "output": "netsh advfirewall firewall add rule name=\"Bypass\" dir=in action=allow program=\"C:\\Users\\Public\\Downloads\\evil.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
-  },
-  {
-    "output": "netsh advfirewall firewall add rule name=\"Hidden\" dir=in action=allow program=\"C:\\Users\\Public\\Local Settings\\Temporary Internet Files\\agent.exe\"",
-    "explanation": "This command matches the Sigma rule as it uses netsh.exe to add a firewall rule for an executable in a suspicious location."
+    "output": "netsh advfirewall firewall add rule name=TestAllow action=allow program=\"C:\\Users\\Public\\malicious.exe\" dir=in enable=yes",
+    "explanation": "This command uses a path that matches the suspicious location list (C:\\Users\\Public\\) and includes the required keywords for the Sigma rule. It is a valid test case for the rule."
   }
 ]

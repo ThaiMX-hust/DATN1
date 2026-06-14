@@ -1,14 +1,28 @@
+```json
 [
   {
-    "output": "impersonate.exe exec cmd.exe",
-    "explanation": "This command uses the 'exec' option directly without quotes, which is a simplified form of the original command and still matches the Sigma rule."
+    "output": "impersonate.exe list",
+    "explanation": "This command uses the 'list' option of the Impersonate tool, which is directly detected by the Sigma rule. It is included for testing the detection accuracy."
   },
   {
-    "output": "ren impersonate.exe sysupdate.exe && sysupdate.exe exec cmd.exe",
-    "explanation": "This command renames the executable and executes it with the 'exec' option, which is equivalent to the original command and matches the Sigma rule."
+    "output": "\"impersonate.exe\" list",
+    "explanation": "Adding quotes around the executable name is a safe mutation technique that does not change the behavior but tests if the detection is resilient to such formatting."
   },
   {
-    "output": "sysupdate.exe list",
-    "explanation": "This command uses the renamed executable and the 'list' option, which is equivalent to the original command and matches the Sigma rule."
+    "output": "impersonate.exe  list  ",
+    "explanation": "Adding extra spaces around the 'list' argument tests if the detection is resilient to whitespace variations."
+  },
+  {
+    "output": "impersonate.exe exec -u Administrator -p Password123 -c cmd.exe",
+    "explanation": "This command uses the 'exec' option with common arguments, which is directly detected by the Sigma rule. It is included for testing the detection accuracy."
+  },
+  {
+    "output": "impersonate.exe adduser -u NewUser -p Password123",
+    "explanation": "This command uses the 'adduser' option, which is directly detected by the Sigma rule. It is included for testing the detection accuracy."
+  },
+  {
+    "output": "impersonate.exe list",
+    "explanation": "Repetition of the same command to test consistency in detection."
   }
 ]
+```

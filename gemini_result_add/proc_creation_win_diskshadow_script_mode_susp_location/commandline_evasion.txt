@@ -1,0 +1,22 @@
+[
+  {
+    "output": "diskshadow.exe /s C:\\Temp\\script.txt",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks traditionally treat forward slashes ('/') interchangeably with hyphens ('-') as switch prefixes. Substituting '-s ' with '/s ' completely breaks the literal character sequence check within 'selection_cli' (which uses the 'windash' modifier to track explicit dashes), while the underlying script execution functionality remains completely unchanged."
+  },
+  {
+    "output": "diskshadow.exe \"-s\" C:\\Temp\\script.txt",
+    "explanation": "Insertion technique: Enclosing the core action switch argument in double quotes ('\"-s\"') disrupts the continuous string matching logic of the SIEM engine. The standard Windows command line parser transparently strips the outer quote boundaries during process tokenization, fulfilling the operational requirements of the test scenario while evading the 'selection_cli' rule check."
+  },
+  {
+    "output": "cmd.exe /c diskshadow.exe -s^  C:\\Temp\\script.txt",
+    "explanation": "Insertion technique: Spawning the execution through cmd.exe permits the insertion of a command shell caret escape character ('^') right into the switch whitespace token chain. The parent console subsystem filters this token out entirely prior to initiating the child context, logging '-s^ ' in process creation event streams and successfully subverting the 'selection_cli' logic."
+  },
+  {
+    "output": "diskshadow.exe\t-s\tC:\\Temp\\script.txt",
+    "explanation": "Substitution technique: Replacing the required single space character boundaries flanking the '-s' switch with horizontal tab characters ('\\t'). The native Windows execution environment tokenizes horizontal tabs as valid whitespace parameter separators, bypassing strict space-padded string checks like '-s '."
+  },
+  {
+    "output": "diskshadow.exe -s C:\\Temp\\..\\Temp\\script.txt",
+    "explanation": "Recoding / Encoding technique: Injecting path traversal normalization structures ('\\..\\') into the destination script location string. The native Win32 file subsystem resolves and flattens directory tracking hooks transparently upon file access initialization, ensuring precise target resource load behaviors while breaking the continuous string check for ':\\Temp\\' in 'selection_paths'."
+  }
+]

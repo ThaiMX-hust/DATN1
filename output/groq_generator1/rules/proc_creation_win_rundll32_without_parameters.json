@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe",
+    "explanation": "The original command is already a valid test case for the Sigma rule."
+  },
+  {
+    "output": "rundll32",
+    "explanation": "Omission of the .exe extension is allowed on Windows and still refers to the same executable."
+  },
+  {
+    "output": "rundll32.exe #",
+    "explanation": "Appending a comment character (#) is a safe mutation that does not alter the execution behavior."
+  },
+  {
+    "output": "copy rundll32.exe not_rundll.exe && not_rundll.exe",
+    "explanation": "Copying the executable and renaming it is a safe mutation that still executes the same binary."
+  },
+  {
+    "output": "copy rundll32.exe not_rundll32.exe && not_rundll32.exe",
+    "explanation": "Similar to the previous case, this is a safe mutation that executes the same binary under a different name."
+  }
+]

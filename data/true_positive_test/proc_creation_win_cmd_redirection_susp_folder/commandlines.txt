@@ -1,0 +1,3 @@
+doskey /history
+sc query type=service
+tree C:\AtomicRedTeam\atomics

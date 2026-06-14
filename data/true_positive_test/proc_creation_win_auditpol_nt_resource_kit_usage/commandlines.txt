@@ -1,3 +1,1 @@
-auditpol.exe /set /subcategory:"Logon" /success:disable /failure:disable
-copy auditpol.exe ap.exe && ap.exe /remove /all
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v "ProcessCreationIncludeCmdLine_Enabled" /t REG_DWORD /d 0 /f
+auditpol /set /subcategory:"Logon" /success:disable /failure:disable

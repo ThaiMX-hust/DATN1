@@ -1,1 +1,0 @@
-C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Remote Debugger\x64\VSDiagnostics.exe /start:123 /launch:"calc.exe"

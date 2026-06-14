@@ -1,0 +1,42 @@
+[
+  {
+    "output": "powershell.exe -Command \"Import-Module Microsoft.ActiveDirectory.Management.dll\"",
+    "explanation": "This command attempts to load the specified DLL using PowerShell. It mirrors the Sigma rule's detection criteria for 'Import-Module' and the DLL name."
+  },
+  {
+    "output": "pwsh.exe -c \"ipmo Microsoft.ActiveDirectory.Management.dll\"",
+    "explanation": "This command uses the shorthand 'ipmo' for 'Import-Module' and targets pwsh.exe, which is also covered by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module 'Microsoft.ActiveDirectory.Management.dll'\"",
+    "explanation": "This command uses single quotes around the DLL name, a safe mutation technique that should still be detected by the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -c Import-Module\\x20Microsoft.ActiveDirectory.Management.dll",
+    "explanation": "This command uses an encoded space character (\\x20) between the cmdlet and the DLL name, a safe mutation technique that may bypass detection if the rule does not account for such encoding."
+  },
+  {
+    "output": "powershell.exe -Command Import-Module\\x20Microsoft.ActiveDirectory.Management.dll",
+    "explanation": "This command uses URL-encoded space (\\x20) to separate the cmdlet and the DLL name, a safe mutation technique that may bypass detection if the rule does not account for such encoding."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module .\\Microsoft.ActiveDirectory.Management.dll\"",
+    "explanation": "This command uses a relative path to the DLL, a safe mutation technique that may bypass detection if the rule does not account for path variations."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module C:\\Temp\\Microsoft.ActiveDirectory.Management.dll\"",
+    "explanation": "This command uses an absolute path to the DLL, a safe mutation technique that may bypass detection if the rule does not account for path variations."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module Microsoft.ActiveDirectory.Management.dll -Force\"",
+    "explanation": "This command adds the '-Force' flag, which is optional but does not change the core detection logic of the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module -Name Microsoft.ActiveDirectory.Management.dll\"",
+    "explanation": "This command uses the full parameter name '-Name' instead of the implicit parameter, a safe mutation technique that should still be detected by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module Microsoft.ActiveDirectory.Management.dll; Get-ADUser -Filter *\"",
+    "explanation": "This command appends a benign command after the import, a safe mutation technique that may bypass detection if the rule does not account for additional commands."
+  }
+]

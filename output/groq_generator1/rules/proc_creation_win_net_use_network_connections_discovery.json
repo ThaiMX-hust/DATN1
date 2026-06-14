@@ -1,0 +1,34 @@
+[
+  {
+    "output": "net  use \\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
+    "explanation": "Original command with no mutation applied."
+  },
+  {
+    "output": "net use \"\\Target\\C$\" P@ssw0rd1 /u:DOMAIN\\Administrator",
+    "explanation": "Inserted quotes around UNC path for safe command-line mutation."
+  },
+  {
+    "output": "net  use  \\\\Target\\\\C$  P@ssw0rd1  /u:DOMAIN\\\\Administrator",
+    "explanation": "Inserted additional backslashes for path normalization and spacing."
+  },
+  {
+    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
+    "explanation": "Replaced double backslashes with single backslashes for path normalization."
+  },
+  {
+    "output": "net.exe use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
+    "explanation": "Used .exe extension explicitly for testing."
+  },
+  {
+    "output": "net  use  \\\\Target\\C$  P@ssw0rd1  /u:DOMAIN\\Administrator",
+    "explanation": "Inserted additional spaces for safe command-line mutation."
+  },
+  {
+    "output": "cmd.exe /c net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
+    "explanation": "Wrapped command in cmd.exe for safe execution in test environment."
+  },
+  {
+    "output": "powershell.exe -Command \"net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator\"",
+    "explanation": "Wrapped command in PowerShell for safe execution in test environment."
+  }
+]

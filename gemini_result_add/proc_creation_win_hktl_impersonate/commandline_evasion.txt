@@ -1,0 +1,22 @@
+[
+  {
+    "output": "impersonate list ",
+    "explanation": "Omission technique: Removing the explicit '.exe' extension when invoking the utility. Windows automatically processes and resolves 'impersonate' to 'impersonate.exe' via standard executable path extension checking, completely evading 'selection_commandline_exe' which searches specifically for the string 'impersonate.exe'."
+  },
+  {
+    "output": "impersonate.exe\tlist\t",
+    "explanation": "Substitution technique: Replacing the structural single-space padding surrounding the action keywords (' list ') with horizontal tab characters ('\\t'). The Windows command-line tokenizer natively handles horizontal tabs as valid whitespace parameter boundaries, ensuring equivalent application parsing logic while entirely subverting 'selection_commandline_opt'."
+  },
+  {
+    "output": "impersonate.exe \"list\"",
+    "explanation": "Insertion technique: Enclosing the core sub-command string inside double quotes ('\"list\"'). The native command-line parser unquotes process parameters automatically during startup tokenization, fulfilling the execution requirement while breaking the continuous space-padded string format check (' list ')."
+  },
+  {
+    "output": "cmd.exe /c impersonate.exe li^st",
+    "explanation": "Insertion technique: Utilizing a cmd.exe environment to inject a shell caret escape modifier ('^') directly into the command switch name ('li^st'). The console interpreter strips this character out prior to child context initialization, passing 'list' to the program while leaving a recorded event log sequence that blinds the literal keyword filter."
+  },
+  {
+    "output": "impersonate.exe  list  ",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces around the argument parameters. The Win32 argument processing runtime condenses duplicate whitespaces into unified parameter delimiters, maintaining execution consistency while breaking the strict single-space padded signature rules."
+  }
+]

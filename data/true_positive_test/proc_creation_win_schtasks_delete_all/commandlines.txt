@@ -1,3 +1,0 @@
-schtasks.exe -delete -tn * -f
-schtasks.exe /delete /tn "*" /f
-schtasks.exe/delete /tn * /f

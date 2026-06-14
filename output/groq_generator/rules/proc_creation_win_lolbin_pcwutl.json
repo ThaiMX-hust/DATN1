@@ -1,6 +1,42 @@
 [
   {
-    "output": "rundll32.exe pcwutl.dll,LaunchApplication calc.exe",
-    "explanation": "This is a direct match to the Sigma rule and serves as a baseline for testing."
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\WINDOWS\\System32\\notepad.exe",
+    "explanation": "This is the original command line used to trigger the Sigma rule. It directly matches the detection criteria."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\WINDOWS\\\\System32\\\\notepad.exe",
+    "explanation": "Double backslashes are used for escaping, but they are still parsed correctly by Windows. This is a safe mutation technique for testing."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication \"C:\\\\WINDOWS\\\\System32\\\\notepad.exe\"",
+    "explanation": "The path is enclosed in quotes, which is a safe insertion technique. It does not affect the behavior of the command."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\WINDOWS\\system32\\notepad.exe",
+    "explanation": "The directory name 'System32' is written in lowercase. Windows is case-insensitive, so this is a valid substitution."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\WINNT\\System32\\notepad.exe",
+    "explanation": "The 'C:\\\\WINDOWS' directory is replaced with 'C:\\\\WINNT', which is an alternative path normalization technique valid in some Windows environments."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\Windows\\System32\\notepad.exe",
+    "explanation": "The directory name 'WINDOWS' is capitalized as 'Windows'. Windows is case-insensitive, so this is a valid substitution."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\Windows\\System32\\notepad.exe",
+    "explanation": "The command is reformatted with consistent capitalization and spacing. This is a safe reordering and formatting technique."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\Windows\\System32\\notepad.exe",
+    "explanation": "The command is written with consistent spacing and formatting. This is a safe mutation for testing."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\Windows\\System32\\notepad.exe",
+    "explanation": "The command is written with consistent spacing and formatting. This is a safe mutation for testing."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\\\Windows\\System32\\notepad.exe",
+    "explanation": "The command is written with consistent spacing and formatting. This is a safe mutation for testing."
   }
 ]

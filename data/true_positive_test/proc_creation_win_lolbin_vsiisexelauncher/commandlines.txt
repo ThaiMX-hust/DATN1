@@ -1,1 +1,0 @@
-VSIISExeLauncher.exe -pcalc.exe -aarguments

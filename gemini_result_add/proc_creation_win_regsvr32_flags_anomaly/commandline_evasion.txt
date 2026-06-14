@@ -1,0 +1,14 @@
+[
+{
+"output": "C:\Windows\system32\regsvr32.exe /s /u /i:"C:\AtomicRedTeam\atomics\T1218.010\src\RegSvr32.sct" /n scrobj.dll",
+"explanation": "Insertion / Optimization technique: Explicitly inserts an unmonitored or functionally minimal operational flag sequence (' /n ') into the parameters. The Sigma rule checks for an anomaly where ' -i:' (or '/i:') is supplied, but explicitly cancels out alerts via 'filter_main_flag' if a ' -n ' or '/n ' string is discovered elsewhere within the string literal. Since adding '/n' suppresses the DllRegisterServer call but keeps the object parameter sequence intact for components that primarily execute within DllInstall, testing execution remains stable while completely neutralising the rule's final match logic."
+},
+{
+"output": "C:\Windows\system32\regsvr32.exe /s /u "/i":"C:\AtomicRedTeam\atomics\T1218.010\src\RegSvr32.sct" scrobj.dll",
+"explanation": "Insertion technique: Surrounds the execution control switch '/i' in double quotes, altering the logged parameter text signature to '"/i":'. The Sigma rule relies on direct substring checks using standard spacing patterns (' -i:' or '/i:'). Because the native Windows standard argument analyzer automatically ignores and strips enclosing switch quotation parameters before delivering options directly to regsvr32.exe, application logic treats the call identical to a regular instantiation."
+},
+{
+"output": "cmd.exe /c "C:\Windows\system32\regsvr32.exe /s /u /^i:"C:\AtomicRedTeam\atomics\T1218.010\src\RegSvr32.sct" scrobj.dll"",
+"explanation": "Insertion technique: Injects the command interpreter's caret escape indicator ('^') into the core identifier component block ('/^i:'). Spawning this variant under a shell wrapper means the parent console removes the escape token before the parameter string is evaluated by the secondary process. Because log generation captures the initial command string verbatim, it breaks matching for the explicit signature constraint."
+}
+]

@@ -1,5 +1,1 @@
-findstr  /S cpassword \\THAIMX\sysvol\*.xml
-findstr  /S cpassword \\AR-WIN-DC\sysvol\*.xml
-cmd.exe /c net use Z: \\%USERDNSDOMAIN%\sysvol && findstr /s /i cpassword Z:\*.xml
-findstr /s /i "cpass""word" \\%USERDNSDOMAIN%\sysvol\*.xml
-powershell.exe -Command "Get-ChildItem -Path \\$env:USERDNSDOMAIN\sysvol\*.xml -Recurse | Select-String -Pattern 'cpassword'"
+findstr /S cpassword \\THAIMX\sysvol\*.xml

@@ -1,0 +1,16 @@
+```json
+[
+  {
+    "output": "WINWORD.EXE \"C:\\Users\\User\\AppData\\Roaming\\Microsoft\\Templates\\MaliciousDocument.docm\"",
+    "explanation": "This command simulates the execution of WINWORD.EXE with a document path that matches a trusted location (AppData\\Roaming\\Microsoft\\Templates). The use of quotes around the path and uppercase extension is a safe mutation technique."
+  },
+  {
+    "output": "excel.exe C:\\Users\\User\\AppData\\Roaming\\Microsoft\\Word\\Startup\\MaliciousFile.xlsm",
+    "explanation": "This command simulates the execution of Excel.exe with a document path that matches a trusted location (AppData\\Roaming\\Microsoft\\Word\\Startup). The command omits quotes and uses lowercase for the executable and path, which is a safe mutation technique."
+  },
+  {
+    "output": "POWERPNT.EXE \"C:\\Program Files\\Microsoft Office\\root\\Templates\\Presentation.potx\"",
+    "explanation": "This command simulates the execution of POWERPNT.EXE with a document path that matches a trusted location (Microsoft Office\\root\\Templates). The use of quotes and uppercase extension is a safe mutation technique."
+  }
+]
+```

@@ -1,6 +1,30 @@
 [
   {
-    "output": "copy msdt.exe diagnostic_tool.exe && diagnostic_tool.exe -cab C:\\Temp\\Suspicious.diagcab",
-    "explanation": "The original command is already a valid test case and cannot be meaningfully mutated without changing its observable behavior or triggering the Sigma rule."
+    "output": "msdt.exe -cab \"C:\\Temp\\test.cab\"",
+    "explanation": "Inserted quotes around the file path to test if the Sigma rule detects the command with additional syntax."
+  },
+  {
+    "output": "msdt.exe -cab C:/Temp/test.cab",
+    "explanation": "Replaced backslashes with forward slashes in the file path to test path normalization bypass scenarios."
+  },
+  {
+    "output": "msdt.exe -cab C:\\Temp\\test.cab",
+    "explanation": "Used standard syntax as a baseline for comparison with mutated versions."
+  },
+  {
+    "output": "msdt.exe --cab C:\\Temp\\test.cab",
+    "explanation": "Substituted the short option '-cab' with '--cab' to test if the Sigma rule accounts for long-form flags."
+  },
+  {
+    "output": "msdt.exe -cab C:\\Temp\\test.cab -someOtherFlag",
+    "explanation": "Added an additional flag to test if the Sigma rule is affected by the presence of other command-line arguments."
+  },
+  {
+    "output": "msdt.exe -cab C:\\Temp\\test.cab   ",
+    "explanation": "Inserted extra spaces after the command line to test parsing robustness of the Sigma rule."
+  },
+  {
+    "output": "msdt.exe -cab C:\\Temp\\test.cab",
+    "explanation": "Original command line for reference and comparison."
   }
 ]

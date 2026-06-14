@@ -1,0 +1,10 @@
+[
+  {
+    "output": "odbcconf.exe /a {REGSVR \"payload.bin\"}",
+    "explanation": "The command omits the .dll extension in the filename, aligning with the Sigma rule's detection condition. This simulates a potential evasion technique by using a non-standard file extension while still using the REGSVR action."
+  },
+  {
+    "output": "odbcconf.exe -a {REGSVR \"malware.bin\"}",
+    "explanation": "The command substitutes the long option '/a' with the short option '-a' and uses a filename without the .dll extension. This demonstrates safe command-line mutation techniques while maintaining the same behavior as the original command."
+  }
+]

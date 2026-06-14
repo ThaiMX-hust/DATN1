@@ -1,0 +1,26 @@
+[
+  {
+    "output": "gpresult.exe -z",
+    "explanation": "Substitution technique: Built-in Microsoft utilities like gpresult.exe natively handle hyphens ('-') interchangeably with forward slashes ('/') for argument switches. Substituting '/z' with '-z' completely breaks the literal string checks defined in 'CommandLine|contains', while executing identical Resultant Set of Policy (RSoP) data collection."
+  },
+  {
+    "output": "gpresult.exe \"/z\"",
+    "explanation": "Insertion technique: Wrapping the target argument switch inside double quotes ('\"/z\"') disrupts the raw continuous string checking layer of the SIEM engine. The standard Win32 command-line tokenization layer strips away the quotation marks transparently before passing the parameter to the binary's entry point, keeping the execution identical."
+  },
+  {
+    "output": "cmd.exe /c gpresult.exe /z^ ",
+    "explanation": "Insertion technique: Invoking the command through a cmd.exe shell wrapper permits the injection of a caret escape character ('^') directly into the whitespace buffer immediately trailing the flag indicator. The command interpreter strips the escape character upon process creation initialization, creating a log signature of '/z^ ' which successfully bypasses the literal matching rules."
+  },
+  {
+    "output": "gpresult.exe\t/z",
+    "explanation": "Substitution technique: Replacing the structural single space parameter boundary with a horizontal tab character ('\\t'). The Windows kernel processes horizontal tabs natively as valid whitespace separators during process tokenization, safely fulfilling the rule evasion requirements while generating equivalent verbose group policy output."
+  },
+  {
+    "output": "gpresult.exe /Z",
+    "explanation": "Other techniques (Case Variation Strategy): Capitalizing the parameter argument switch to uppercase ('/Z'). While standard Sigma logic engines translate string matches to be case-insensitive, many raw SIEM indexing systems, localized regular expression definitions, or custom rule translations operate case-sensitively on specific command-line metrics."
+  },
+  {
+    "output": "gpresult.exe /h",
+    "explanation": "Omission/Substitution technique: Swapping out the verbose '/z' configuration switch for an alternative diagnostic switch option like '/h' (HTML report output). This allows an administrator or tester to extract identical policy metadata structures while shifting the parameters completely away from the monitored '/z' or '/v' literal string conditions."
+  }
+]

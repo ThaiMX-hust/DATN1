@@ -1,0 +1,14 @@
+[
+  {
+    "output": "python.exe -m adidnsdump -u DOMAIN\\User -p Password ldap://10.10.10.10",
+    "explanation": "This command uses the standard invocation of the adidnsdump module via Python, which matches the Sigma rule's detection criteria. It is a valid test command for generating a true positive."
+  },
+  {
+    "output": "python.exe -m adidnsdump -u DOMAIN/User -p Password ldap://10.10.10.10",
+    "explanation": "This command replaces the backslash in the username with a forward slash, which is a safe mutation technique. It still triggers the Sigma rule because it contains 'adidnsdump' in the command line and is executed by python.exe."
+  },
+  {
+    "output": "python.exe -m adidnsdump -p Password -u DOMAIN\\User ldap://10.10.10.10",
+    "explanation": "This command reorders the arguments '-u' and '-p'. Since argument order is often flexible in command-line tools, this is a valid mutation that still matches the Sigma rule."
+  }
+]

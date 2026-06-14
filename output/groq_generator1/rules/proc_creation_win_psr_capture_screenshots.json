@@ -1,0 +1,18 @@
+[
+  {
+    "output": "psr.exe -start /output C:\\Users\\Public\\capture.zip /sc 1",
+    "explanation": "The command substitutes '/start' with '-start' (equivalent syntax) and omits optional flags like '/gui' and '/stopevent' while preserving the core behavior of initiating screen capture."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\psr.exe\" /start /output C:\\\\temp\\\\T1113_desktop.zip /sc 1",
+    "explanation": "The command uses insertion of quotes and double backslashes for path normalization, which is a safe mutation technique that does not alter the behavior of the original command."
+  },
+  {
+    "output": "not_psr.exe /start /output C:\\\\Users\\\\Public\\\\capture.zip /sc 1",
+    "explanation": "The command renames 'psr.exe' to 'not_psr.exe' and executes it with the same flags, preserving the test behavior while using recoding techniques."
+  },
+  {
+    "output": "psr.exe /sc 1 /output C:\\\\Users\\\\Public\\\\report.zip",
+    "explanation": "The command omits optional flags like '/maxsize' and '/gui' while retaining the essential functionality of screen capture."
+  }
+]

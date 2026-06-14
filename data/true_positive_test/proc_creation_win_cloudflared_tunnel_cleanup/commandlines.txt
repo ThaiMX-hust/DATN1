@@ -1,12 +1,1 @@
-cloudflared tunnel cleanup --config C:\temp\config.yml
-cloudflared tunnel cleanup --connector-id ABC123
-cloudflared tunnel cleanup --connector-id="ABC-123-DEF"
-cloudflared.exe "tunnel" "cleanup" -config C:\Windows\Temp\config.yml
-cloudflared.exe -config C:\tunnel.yml "tunnel" "cleanup"
-cloudflared.exe -config C:\tunnel.yml tunnel cleanup
-cloudflared.exe tunnel cleanup --config C:\tunnel.yml
-cloudflared.exe tunnel cleanup -config=C:\tunnel.yml
-cloudflared.exe tunnel cleanup -config=C:\Windows\Temp\config.yml
-cloudflared.exe tunnel --config=C:\temp\config.yaml cleanup-connections
-cloudflared.exe tunnel cleanup --connector-id=12345
-copy cloudflared.exe cf.exe && cf.exe tunnel cleanup --config C:\config.yaml
+C:\Tools\cloudflared.exe tunnel cleanup -connector-id 99999999-8888-7777-6666-555555555555

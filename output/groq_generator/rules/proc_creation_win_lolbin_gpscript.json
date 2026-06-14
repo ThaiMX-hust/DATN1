@@ -1,22 +1,42 @@
 [
   {
-    "output": "gpscript.exe /LOGON /startup",
-    "explanation": "Reordered the command-line arguments from '/LOGON /STARTUP' to '/LOGON /startup' to test case sensitivity and reordering as a safe mutation technique."
+    "output": "C:\\Windows\\System32\\gpscript.exe /logon",
+    "explanation": "This command triggers the Sigma rule by executing gpscript.exe with the /logon flag, which is explicitly detected by the rule."
   },
   {
-    "output": "gpscript.exe /logon\" \" /startup",
-    "explanation": "Inserted quotes and spaces around the /logon and /startup flags to test parsing behavior while maintaining the same functionality."
+    "output": "C:\\\\Windows\\\\System32\\\\gpscript.exe \"/logon\"",
+    "explanation": "This command uses insertion of double quotes and escaped backslashes, but still executes gpscript.exe with the /logon flag, triggering the Sigma rule."
   },
   {
-    "output": "gpscript.exe -logon -startup",
-    "explanation": "Substituted '/' with '-' for the command-line flags to test if the binary accepts alternative syntax for the same behavior."
+    "output": "C:\\Windows\\System32\\gpscript.exe /startup",
+    "explanation": "This command executes gpscript.exe with the /startup flag, which is also explicitly detected by the Sigma rule."
   },
   {
-    "output": "gpscript.exe /logon",
-    "explanation": "Omitted the '/startup' flag to test if the detection relies on both flags and if partial command lines can bypass it."
+    "output": "C:\\Windows\\System32\\gpscript.exe \"/startup\"",
+    "explanation": "This command uses insertion of quotes around the /startup flag, but still executes gpscript.exe with the /startup flag, triggering the Sigma rule."
   },
   {
-    "output": "gpscript.exe /logon /startup",
-    "explanation": "Original command line used as a baseline for comparison in the test environment."
+    "output": "C:\\Windows\\System32\\gpscript.exe /lOGON",
+    "explanation": "This command uses case variation in the /logon flag, which is still detected by the Sigma rule due to case-insensitive matching."
+  },
+  {
+    "output": "C:\\Windows\\System32\\gpscript.exe /logon /startup",
+    "explanation": "This command includes both /logon and /startup flags, which are both explicitly detected by the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\gpscript.exe /logon\"\"",
+    "explanation": "This command uses insertion of quotes after the /logon flag, but still executes gpscript.exe with the /logon flag, triggering the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\gpscript.exe /logon\" \"",
+    "explanation": "This command uses insertion of quotes and a space after the /logon flag, but still executes gpscript.exe with the /logon flag, triggering the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\gpscript.exe /logon\"\"",
+    "explanation": "This command uses insertion of quotes after the /logon flag, but still executes gpscript.exe with the /logon flag, triggering the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\gpscript.exe /logon\" \"",
+    "explanation": "This command uses insertion of quotes and a space after the /logon flag, but still executes gpscript.exe with the /logon flag, triggering the Sigma rule."
   }
 ]

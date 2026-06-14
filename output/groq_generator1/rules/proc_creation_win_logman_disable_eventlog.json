@@ -1,0 +1,22 @@
+[
+  {
+    "output": "logman.exe stop  \"Circular Kernel Context Logger\"",
+    "explanation": "This command uses the 'stop' action on a known ETW session, matching the Sigma rule's detection criteria. The quotes around the session name simulate safe mutation via insertion."
+  },
+  {
+    "output": "logman.exe delete EventLog-System",
+    "explanation": "This command uses the 'delete' action on a session name starting with 'EventLog-', matching the Sigma rule's detection criteria. The command is unaltered but demonstrates a legitimate test case."
+  },
+  {
+    "output": "logman.exe -stop \"SYSMON TRACE\"",
+    "explanation": "This command uses the short flag '-stop' instead of the long form 'stop' and includes quotes around the session name, simulating substitution and insertion techniques."
+  },
+  {
+    "output": "logman.exe delete SysmonDnsEtwSession",
+    "explanation": "This command uses the 'delete' action on a session name matching the Sigma rule's criteria. The command is unmodified but serves as a direct test case."
+  },
+  {
+    "output": "logman.exe stop EventLog-Application",
+    "explanation": "This command uses the 'stop' action on a session name starting with 'EventLog-', matching the Sigma rule's criteria. No mutation is applied, but it serves as a valid test case."
+  }
+]

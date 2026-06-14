@@ -1,22 +1,12 @@
+```json
 [
   {
-    "output": "DXCap.exe -c calc.exe",
-    "explanation": "This is the base command that matches the Sigma rule and is used as a true positive test case."
+    "output": "DXCap.exe -c notepad.exe",
+    "explanation": "This command triggers the Sigma rule by launching DXCap.exe with the '-c' flag followed by an executable, which is the behavior the rule is designed to detect."
   },
   {
-    "output": "DXCap.exe -c calc .exe",
-    "explanation": "Inserts a space between 'calc' and '.exe' to test if the Sigma rule's ' -c ' contains logic is bypassed."
-  },
-  {
-    "output": "DXCap.exe -c calc.exe -v",
-    "explanation": "Reorders the '-v' flag after the '-c' argument to test if the Sigma rule's parsing is affected."
-  },
-  {
-    "output": "DXCap.exe -c calc.exe -",
-    "explanation": "Adds an extra '-' at the end to test if the Sigma rule's parsing is affected by additional flags."
-  },
-  {
-    "output": "DXCap.exe -c calc.exe -v -c notepad.exe",
-    "explanation": "Duplicates the '-c' flag with a different argument to test if the Sigma rule's contains logic is affected."
+    "output": "DXCap.exe -c notepad.exe",
+    "explanation": "No safe bypass command can be generated. The Sigma rule is based on the presence of the '-c' flag in the command line, which is essential for triggering the evasion behavior. Any mutation that preserves the '-c' flag will still be detected."
   }
 ]
+```

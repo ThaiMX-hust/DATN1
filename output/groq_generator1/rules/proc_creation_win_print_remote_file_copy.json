@@ -1,0 +1,18 @@
+[
+  {
+    "output": "print /D:destination.exe source.exe",
+    "explanation": "This is the original true positive command and is not a bypass, but it is included as a baseline for testing."
+  },
+  {
+    "output": "print.exe /D:destination.exe source.exe",
+    "explanation": "The full executable name 'print.exe' is used, which is explicitly detected by the Sigma rule. This is not a bypass."
+  },
+  {
+    "output": "print /D:C:\\Temp\\destination.txt source.exe",
+    "explanation": "The destination file is changed to a text file, but the command still includes the '/D' and '.exe' keywords, which are part of the detection criteria."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated without violating the detection criteria (e.g., removing '/D' or '.exe' would break the test behavior)."
+  }
+]

@@ -1,0 +1,106 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Potential SMB Relay Attack Tool Execution
+id: 5589ab4f-a767-433c-961d-c91f3f704db1
+status: test
+description: Detects different hacktools used for relay attacks on Windows for privilege escalation
+references:
+    - https://foxglovesecurity.com/2016/09/26/rotten-potato-privilege-escalation-from-service-accounts-to-system/
+    - https://pentestlab.blog/2017/04/13/hot-potato/
+    - https://github.com/ohpe/juicy-potato
+    - https://hunter2.gitbook.io/darthsidious/other/war-stories/domain-admin-in-30-minutes
+    - https://hunter2.gitbook.io/darthsidious/execution/responder-with-ntlm-relay-and-empire
+    - https://www.localpotato.com/
+author: Florian Roth (Nextron Systems)
+date: 2021-07-24
+modified: 2023-02-14
+tags:
+    - attack.execution
+    - attack.credential-access
+    - attack.t1557.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_pe:
+        Image|contains:
+            - 'PetitPotam'
+            - 'RottenPotato'
+            - 'HotPotato'
+            - 'JuicyPotato'
+            - '\just_dce_'
+            - 'Juicy Potato'
+            - '\temp\rot.exe'
+            - '\Potato.exe'
+            - '\SpoolSample.exe'
+            - '\Responder.exe'
+            - '\smbrelayx'
+            - '\ntlmrelayx'
+            - '\LocalPotato'
+    selection_script:
+        CommandLine|contains:
+            - 'Invoke-Tater'
+            - ' smbrelay'
+            - ' ntlmrelay'
+            - 'cme smb '
+            - ' /ntlm:NTLMhash '
+            - 'Invoke-PetitPotam'
+            - '.exe -t * -p '  # JuicyPotatoNG pattern https://github.com/antonioCoco/JuicyPotatoNG
+    selection_juicypotato_enum:  # appears when JuicyPotatoNG is used with -b
+        CommandLine|contains: '.exe -c "{'
+        CommandLine|endswith: '}" -z'
+    filter_hotpotatoes:  # known goodware https://hotpot.uvic.ca/
+        Image|contains:
+            - 'HotPotatoes6'
+            - 'HotPotatoes7'
+            - 'HotPotatoes ' # Covers the following: 'HotPotatoes 6', 'HotPotatoes 7', 'HotPotatoes Help', 'HotPotatoes Tutorial'
+    condition: 1 of selection_* and not 1 of filter_*
+falsepositives:
+    - Legitimate files with these rare hacktool names
+level: critical
+```
+
+True positive test command:
+
+```text
+
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

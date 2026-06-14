@@ -1,6 +1,22 @@
 [
   {
-    "output": "AdvancedRun.exe /EXEFilename cmd.exe /RunAs 8 /Run",
-    "explanation": "This is a direct match to the Sigma rule's detection criteria and is provided as a true positive test command."
+    "output": "AdvancedRun.exe /EXEFilename notepad.exe /CommandLine \"notepad.exe\" /RunAs 8",
+    "explanation": "This command includes the required keywords '/EXEFilename', '/CommandLine', and '/RunAs 8' as per the Sigma rule. It simulates a benign use case where AdvancedRun is used to execute notepad.exe as SYSTEM."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename calc.exe /CommandLine \"calc.exe\" /RunAs 4",
+    "explanation": "This command includes the required keywords '/EXEFilename', '/CommandLine', and '/RunAs 4' as per the Sigma rule. It simulates a benign use case where AdvancedRun is used to execute calc.exe as SYSTEM."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename cmd.exe /CommandLine \"cmd.exe\" /RunAs 10",
+    "explanation": "This command includes the required keywords '/EXEFilename', '/CommandLine', and '/RunAs 10' as per the Sigma rule. It simulates a benign use case where AdvancedRun is used to execute cmd.exe as SYSTEM."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename powershell.exe /CommandLine \"powershell.exe\" /RunAs 11",
+    "explanation": "This command includes the required keywords '/EXEFilename', '/CommandLine', and '/RunAs 11' as per the Sigma rule. It simulates a benign use case where AdvancedRun is used to execute powershell.exe as SYSTEM."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename explorer.exe /CommandLine \"explorer.exe\" /RunAs 8",
+    "explanation": "This command includes the required keywords '/EXEFilename', '/CommandLine', and '/RunAs 8' as per the Sigma rule. It simulates a benign use case where AdvancedRun is used to execute explorer.exe as SYSTEM."
   }
 ]

@@ -1,3 +1,0 @@
-wmic /NAMESPACE:\\root\DEFAULT PATH StdRegProv CALL CreateKey sSubKeyName="Software\\Policies\\DeleteMe"
-wmic /namespace:\\root\default path StdRegProv call SetDWORDValue hDefKey=2147483650 sSubKeyName="Software\\Classes\\CLSID\\{CLSID_GUID}" sValueName="InprocServer32" uValue=1
-wmic.exe /node:localhost /namespace:\\root\cimv2 path StdRegProv call GetStringValue hDefKey=2147483649 sSubKeyName="Software\\Microsoft\\Windows\\CurrentVersion\\Run" sValueName="Updater"

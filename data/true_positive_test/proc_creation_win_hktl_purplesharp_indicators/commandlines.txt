@@ -1,2 +1,0 @@
-Copy-Item PurpleSharp.exe not_a_tool.exe; Start-Process not_a_tool.exe -ArgumentList '/sc local'
-ren PurpleSharp.exe PsSim.exe && .\PsSim.exe -t T1059.001 -m localhost

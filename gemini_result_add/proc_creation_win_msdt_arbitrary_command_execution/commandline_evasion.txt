@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile =echo TEST-HOST\"",
+    "explanation": "Insertion technique. Introduces a space character right before the equal sign (`IT_BrowseForFile =`). This safely evades the exact string matching logic `CommandLine|contains: 'IT_BrowseForFile='`, while the target application or shell framework parses the underlying parameter token equivalently during execution."
+  },
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param \"\\\"IT_BrowseForFile=\\\"echo TEST-HOST\"",
+    "explanation": "Insertion technique. Injects escaped quotation marks inside the parameter block. While this variation still technically contains the explicit substring pattern, altering the inner quoting semantics breaks fragile downstream string parsing filters that look for clean unquoted argument values."
+  },
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param IT_BrowseForFile=echo\tTEST-HOST",
+    "explanation": "Substitution technique. Replaces the standard blank space following the command argument with a horizontal tab (`\t`) character. It bypasses any strict whitespace correlation signatures built into the logic sequence while keeping the executable's structural arguments valid."
+  },
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param \"it_browseforfile=echo TEST-HOST\"",
+    "explanation": "Substitution technique. Mutates the letter casing of the parameters to completely lowercase. While modern Windows systems and Sigma's standard string matches are case-insensitive, variations in string casing can bypass legacy SIEM implementations or custom strict regex fields that do not enforce case insensitivity explicitly."
+  },
+  {
+    "output": "",
+    "explanation": "Omission / Other technique note: Bypassing the rule via alternative answer-file flags (e.g., `-af`) requires structural modification of the underlying attack vector mechanics rather than mere command-line mutation, as the targeted `IT_BrowseForFile=` key is an absolute constraint for this specific diagnostics utility exploit vector."
+  }
+]

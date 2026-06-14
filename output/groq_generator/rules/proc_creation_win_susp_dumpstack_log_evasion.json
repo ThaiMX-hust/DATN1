@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c start-process -FilePath 'DumpStack.log' -ArgumentList '-o', 'DumpStack.log'",
+    "explanation": "This command simulates a process creation event where the filename and command line match the Sigma rule's detection criteria. It includes the filename ending with 'DumpStack.log' and the command line containing ' -o DumpStack.log'."
+  },
+  {
+    "output": "powershell.exe Start-Process -FilePath 'DumpStack.log' -ArgumentList '-o DumpStack.log'",
+    "explanation": "This command simulates a PowerShell-based process creation event that matches the Sigma rule's detection criteria. It includes the filename ending with 'DumpStack.log' and the command line containing ' -o DumpStack.log'."
+  }
+]

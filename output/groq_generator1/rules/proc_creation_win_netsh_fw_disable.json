@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh advfirewall set allprofiles state off",
+    "explanation": "This is the original true positive command and matches the Sigma rule."
+  },
+  {
+    "output": "netsh advfirewall set allprofiles state o f f",
+    "explanation": "The command 'off' is split into 'o f f' using spaces, which is a safe mutation technique. The command still evaluates to 'off' and matches the Sigma rule."
+  },
+  {
+    "output": "netsh advfirewall set allprofiles state o^f^f",
+    "explanation": "The command 'off' is split into 'o^f^f' using escape characters, which is a safe mutation technique. The command still evaluates to 'off' and matches the Sigma rule."
+  },
+  {
+    "output": "netsh advfirewall set allprofiles state o``f``f",
+    "explanation": "The command 'off' is split into 'o``f``f' using backticks, which is a safe mutation technique. The command still evaluates to 'off' and matches the Sigma rule."
+  },
+  {
+    "output": "netsh advfirewall set allprofiles state $env:OFF",
+    "explanation": "The command 'off' is replaced with an environment variable $env:OFF, which is a safe mutation technique. The command still evaluates to 'off' if the environment variable is set and matches the Sigma rule."
+  }
+]

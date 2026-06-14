@@ -1,3 +1,1 @@
-forfiles  /p c:\windows\system32 /m notepad.exe /c calc.exe
-copy forfiles.exe not_forfiles.exe && not_forfiles.exe /p c:\windows\system32 /m notepad.exe /c "calc.exe"
-forfiles /p c:\windows\system32 /m notepad.exe /C"calc.exe"
+forfiles /p c:\windows\system32 /m notepad.exe /c calc.exe

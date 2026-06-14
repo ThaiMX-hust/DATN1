@@ -1,0 +1,6 @@
+[
+  {
+    "output": "MpCmdRun.exe -DownloadFile -url https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -path C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "The original command is already a valid test command. No mutation is needed to trigger the Sigma rule."
+  }
+]

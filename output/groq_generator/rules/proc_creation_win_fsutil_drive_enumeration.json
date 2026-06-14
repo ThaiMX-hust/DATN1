@@ -1,26 +1,42 @@
 [
   {
-    "output": "fsutil fsinfo drives",
-    "explanation": "This is the standard command that matches the Sigma rule and is used as a baseline for testing."
+    "output": "fsutil   fsinfo  drives",
+    "explanation": "Added extra spaces between command and arguments to test detection resilience against spacing variations."
   },
   {
-    "output": "fsutil  fsinfo  drives",
-    "explanation": "Extra spaces between command parts are inserted, which is still parsed correctly by the command-line interpreter."
+    "output": "fsutil fsinfo drives",
+    "explanation": "Original command with no mutation for baseline comparison."
   },
   {
     "output": "fsutil\" fsinfo drives",
-    "explanation": "Quotes are inserted around the command, which is still parsed correctly by the command-line interpreter."
+    "explanation": "Inserted a quote after 'fsutil' to test detection resilience against quote insertion."
   },
   {
-    "output": "copy fsutil.exe not_fsutil.exe && not_fsutil.exe fsinfo drives",
-    "explanation": "The command is renamed using copy, then executed with the new name. This simulates evasion by renaming the executable."
+    "output": "fsutil fsinfo\" drives",
+    "explanation": "Inserted a quote before 'drives' to test detection resilience against quote insertion."
   },
   {
-    "output": "cmd.exe /c fsutil fsinfo drives",
-    "explanation": "The command is executed via cmd.exe with the /c flag, which is a common technique to invoke commands indirectly."
+    "output": "fsutil fsinfo^ drives",
+    "explanation": "Inserted an escape character (^) before 'drives' to test detection resilience against escape character insertion."
   },
   {
-    "output": "powershell.exe -Command \"fsutil fsinfo drives\"",
-    "explanation": "The command is executed via PowerShell, which is a common technique to invoke commands indirectly."
+    "output": "fsutil fsinfo ``drives",
+    "explanation": "Used backticks as an alternative string representation for 'drives' to test detection resilience against recoding techniques."
+  },
+  {
+    "output": "fsutil fsinfo `drives`",
+    "explanation": "Wrapped 'drives' in backticks to test detection resilience against alternative string representation."
+  },
+  {
+    "output": "fsutil fsinfo \"drives\"",
+    "explanation": "Wrapped 'drives' in quotes to test detection resilience against quote insertion."
+  },
+  {
+    "output": "fsutil fsinfo 'drives'",
+    "explanation": "Wrapped 'drives' in single quotes to test detection resilience against quote insertion."
+  },
+  {
+    "output": "fsutil fsinfo DRIVES",
+    "explanation": "Used uppercase for 'drives' to test detection resilience against case variation."
   }
 ]

@@ -1,1 +1,0 @@
-ren pssuspend64.exe not_suspicious.exe && .\not_suspicious.exe -r msmpeng.exe

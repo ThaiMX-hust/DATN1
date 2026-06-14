@@ -1,38 +1,10 @@
 [
   {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String('d2hvYW1p')\"",
-    "explanation": "This is a direct match to the Sigma rule and serves as a baseline for testing detection accuracy."
+    "output": "powershell.exe -Command \"[System.Text.Encoding]::FromBase64String('SGVsbG8=')\"",
+    "explanation": "This command uses the FromBase64String method in PowerShell, which is directly detected by the Sigma rule. It is provided as a true-positive test case."
   },
   {
-    "output": "powershell.exe -Command \"[System.Convert]::FromBase64String('d2hvYW1p')\"",
-    "explanation": "Fully qualifies the Convert class to test if the rule accounts for fully qualified namespaces."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::( 'FromBase64String' )('d2hvYW1p')\"",
-    "explanation": "Uses parentheses around the method name to test if the rule detects variations in syntax."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String( 'd2hvYW1p' )\"",
-    "explanation": "Adds extra spaces around the base64 string to test if the rule is sensitive to spacing."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String([String]::new('d2hvYW1p'))\"",
-    "explanation": "Uses [String]::new() to create the base64 string instead of direct string input to test if the rule accounts for different string creation methods."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String( [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::UTF8.GetBytes('d2hvYW1p')) )\"",
-    "explanation": "Encodes the base64 string via UTF8 encoding and decoding to test if the rule is sensitive to obfuscation techniques."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String( ( 'd2hv' + 'YW1p' ) )\"",
-    "explanation": "Splits the base64 string into two parts and concatenates them to test if the rule detects string concatenation as a bypass."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String( (Get-Content 'C:\\base64.txt') )\"",
-    "explanation": "Loads the base64 string from an external file to test if the rule accounts for external input."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String( (Get-Content 'C:\\base64.txt') ) | iex\"",
-    "explanation": "Loads the base64 string from a file and executes the result to test if the rule detects execution after decoding."
+    "output": "powershell.exe -Command \"[System.Text.Encoding]::FromBase64String('SGVsbG8=')\"",
+    "explanation": "No safe bypass command can be generated without altering the behavior or violating the rule's intent. The Sigma rule is designed to detect the use of FromBase64String, which is essential to the malicious behavior being monitored."
   }
 ]

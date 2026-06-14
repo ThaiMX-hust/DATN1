@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll\"",
+    "explanation": "Original command with no mutation applied for baseline testing."
+  },
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \" C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll \"",
+    "explanation": "Inserted extra spaces around the DLL path to test parsing tolerance."
+  },
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path 'C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll'",
+    "explanation": "Replaced double quotes with single quotes to test quote substitution."
+  },
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll",
+    "explanation": "Removed quotes around the path to test if the command still works without them."
+  },
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\Win32\\T1218-2.dll\"\\r\\n",
+    "explanation": "Inserted newline after the command to test parsing with line breaks."
+  }
+]

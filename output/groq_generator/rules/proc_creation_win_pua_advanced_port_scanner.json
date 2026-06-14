@@ -1,18 +1,22 @@
 [
   {
-    "output": "\"C:\\\\Users\\\\SWACHC~1\\\\AppData\\\\Local\\\\Temp\\\\2\\\\Advanced Port Scanner 2\\\\advanced_port_scanner.exe\" /portable \"C:/Users/SwachchhandaP/Downloads/\" /lng en_us",
-    "explanation": "The command line is a direct representation of the true positive test command with no mutation applied. It matches the Sigma rule's detection criteria."
+    "output": "advanced_port_scanner_console.exe /portable /lng=eng",
+    "explanation": "This command simulates the execution of Advanced Port Scanner with the '/portable' and '/lng' flags, which are part of the Sigma rule's detection criteria. The command is formatted to match the expected process name and command-line parameters."
   },
   {
-    "output": "\"C:\\\\Users\\\\SWACHC~1\\\\AppData\\\\Local\\\\Temp\\\\2\\\\Advanced Port Scanner 2\\\\advanced_port_scanner.exe\" /portable C:/Users/SwachchhandaP/Downloads/ /lng:en_us",
-    "explanation": "The command line uses a colon (\":\") instead of a space for the /lng parameter, which is a valid syntax substitution. It still matches the Sigma rule's detection criteria."
+    "output": "\"advanced_port_scanner_console.exe\" /portable /lng:eng",
+    "explanation": "This command uses quotes around the executable name and substitutes the equals sign (=) with a colon (:) for the '/lng' parameter. This is a valid syntax variation that may bypass detection if the SIEM does not normalize command-line arguments."
   },
   {
-    "output": "\"C:\\\\Users\\\\SWACHC~1\\\\AppData\\\\Local\\\\Temp\\\\2\\\\Advanced Port Scanner 2\\\\advanced_port_scanner.exe\" /portable C:/Users/SwachchhandaP/Downloads/ /lng en_us",
-    "explanation": "The command line uses short spacing and no quotes around the /lng parameter, which is still valid and matches the Sigma rule's detection criteria."
+    "output": "advanced_port_scanner_console.exe /PORTABLE /LNG=eng",
+    "explanation": "This command uses uppercase flags, which are functionally equivalent to lowercase flags in many command-line interfaces. This variation tests whether the SIEM is case-sensitive in its detection logic."
   },
   {
-    "output": "",
-    "explanation": "No safe bypass command can be generated without removing critical detection elements like '/portable' and '/lng', which are required for the Sigma rule to trigger."
+    "output": "advanced_port_scanner_console.exe /portable /lng=eng --",
+    "explanation": "This command appends a '--' to indicate the end of command-line options, which may prevent the SIEM from detecting the '/lng' parameter if it stops parsing after this marker. This is a safe test-only technique."
+  },
+  {
+    "output": "advanced_port_scanner_console.exe /portable /lng=eng",
+    "explanation": "This command is the base form of the test command, using the exact parameters specified in the Sigma rule. It is included for completeness and to ensure the detection rule is valid."
   }
 ]

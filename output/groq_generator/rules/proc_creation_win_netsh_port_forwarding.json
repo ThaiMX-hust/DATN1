@@ -1,10 +1,6 @@
 [
   {
-    "output": "netsh interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=127.0.0.1",
-    "explanation": "This is the original true positive command and cannot be considered a bypass since it matches the Sigma rule exactly."
-  },
-  {
-    "output": "netsh -c interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=8080 connectaddress=10.0.0.5 connectport=80",
-    "explanation": "This is the second true positive command and also matches the Sigma rule exactly and cannot be considered a bypass."
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\netsh.exe\" interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=127.0.0.1",
+    "explanation": "The original command is already a valid test case and cannot be meaningfully altered without changing its behavior or triggering the Sigma rule. No safe bypass command can be generated without altering the test behavior."
   }
 ]

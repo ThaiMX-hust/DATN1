@@ -1,0 +1,18 @@
+[
+  {
+    "output": "forfiles /p c:\\windows\\system32 /m notepad.exe -c calc.exe",
+    "explanation": "The original command uses '/c', but the rule detects ' -c ' with spaces. By removing the space before '-c', the command remains functionally equivalent but may bypass the detection rule."
+  },
+  {
+    "output": "forfiles /p c:\\windows\\system32 /m notepad.exe /c^ calc.exe",
+    "explanation": "An escape character (^) is inserted before the space to obfuscate the command line. This may bypass the rule's detection of ' -c ' by altering the spacing without changing the command's behavior."
+  },
+  {
+    "output": "forfiles /p c:\\windows\\system32 /m notepad.exe /c\"calc.exe\"",
+    "explanation": "Quotes are added around the command argument. This reordering and insertion of quotes may change the way the command line is parsed, potentially evading the rule's string-based detection."
+  },
+  {
+    "output": "forfiles /p c:\\windows\\system32 /m notepad.exe /c calc.exe",
+    "explanation": "The command is unchanged but included as a baseline. It matches the Sigma rule and is not a bypass."
+  }
+]

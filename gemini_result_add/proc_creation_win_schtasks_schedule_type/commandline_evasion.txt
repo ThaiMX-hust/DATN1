@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnLogon\" /sc \"onlogon\" /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Insertion technique: Wrapped the schedule type value 'onlogon' inside double quotes. The Windows schtasks utility accepts and strips these quotes natively, but it prevents a match against the strict literal string ' ONLOGON ' (which mandates a leading and trailing space), thus bypassing selection_time."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnLogon\" /sc\tonlogon\t/tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Insertion technique: Replaced standard whitespace characters around the schedule type with horizontal tab characters (\\t). The native Windows command-line parser handles tabs as standard option delimiters, while the SIEM rule fails because it expects literal spaces surrounding the pattern (' ONLOGON ')."
+  },
+  {
+    "output": "cmd.exe /c schtasks /create /tn \"T1053_005_OnLogon\" /sc o^nl^og^on /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Insertion technique: Injected caret (^) escape characters into the schedule type token ('o^nl^og^on') while executing through the Windows command processor (cmd.exe). The shell strips the carets before handing the string argument over to schtasks, ensuring equivalent test behavior while breaking the literal keyword lookups in selection_time."
+  },
+  {
+    "output": "schtasks -create -tn \"T1053_005_OnLogon\" -sc onlogon/ -tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Insertion/Substitution technique: Substituted forward slashes with hyphens for the options, and inserted a trailing slash directly onto the schedule type value ('onlogon/'). The schtasks argument parser ignores trailing slashes on literal schedule keyword parameters, but this modification alters the trailing space footprint required by the rule."
+  }
+]

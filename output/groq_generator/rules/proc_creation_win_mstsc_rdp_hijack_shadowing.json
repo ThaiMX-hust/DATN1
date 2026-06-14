@@ -1,0 +1,26 @@
+[
+  {
+    "output": "mstsc.exe /v:192.168.1.100 shadow:1 noconsentprompt",
+    "explanation": "This command simulates MSTSC shadowing activity with the required parameters 'shadow:' and 'noconsentprompt' as per the Sigma rule. It uses standard syntax and no obfuscation."
+  },
+  {
+    "output": "mstsc.exe /v:192.168.1.100 shadow:1 \"noconsentprompt\"",
+    "explanation": "This command uses quotes to wrap the 'noconsentprompt' parameter, which is a safe mutation technique (insertion). The behavior remains unchanged, and it still matches the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe /v:192.168.1.100 shadow:1 -noconsentprompt",
+    "explanation": "This command substitutes the long option format 'noconsentprompt' with a short format '-noconsentprompt' (substitution). The command is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe shadow:1 /v:192.168.1.100 noconsentprompt",
+    "explanation": "This command reorders the arguments (reordering). The sequence of the command-line parameters is changed, but the behavior remains the same and matches the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe /v:192.168.1.100 shadow:1 noconsentprompt",
+    "explanation": "This command omits optional whitespace or formatting (omission) and uses standard syntax. It is a direct match to the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe /v:192.168.1.100 shadow:1 $(echo noconsentprompt)",
+    "explanation": "This command uses command substitution to recode the 'noconsentprompt' parameter (recoding/encoding). The command remains valid and matches the Sigma rule."
+  }
+]

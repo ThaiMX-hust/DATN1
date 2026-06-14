@@ -1,0 +1,22 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /y:\"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Substitution technique. Modifies the space delimiter between the flag and its argument to a colon character (`/y:`). The `|windash` modifier on ` -y` expects structural variants of a space-prefixed switch, but removing the whitespace gap between the flag and the path argument breaks fragile substring alignments while the Windows Installer engine natively continues to parse the target payload correctly."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe \"/y\" \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Insertion technique. Encloses the option flag switch in quotation marks (`\"/y\"`). The Windows underlying execution layer seamlessly extracts, strips, and routes unquoted arguments to the internal processes during tokenization, but the raw `CommandLine` field string structure is altered, effectively breaking the literal ` -y` search pattern."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe\t/y\t\"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Substitution technique. Substitutes standard space boundaries with horizontal tabs (`\t`). The `|windash` modifier accounts for typical space-padded dashes, so changing to a tab character as an argument separator bypasses static regex patterns or strict space character index matches while remaining syntactically functional for the OS."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe    /y    \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Insertion technique. Extends the whitespace padding around the target flag into multiple contiguous space characters. If a parser relies on rigid space tokenization or strict token distances without full string normalization at the ingestion layer, variations in space density can slip past the exact pattern constraint."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /y \"C:\\Windows\\CCM\\..\\..\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
+    "explanation": "Other technique (Filter Abuse / Path Traversal). Leverages relative path traversal (`..\\`) starting inside the excluded `C:\\Windows\\CCM\\` directory hierarchy. This tricks the SIEM into matching the exclusion logic defined in `filter_apple`, thereby dropping the true positive alert entirely, while the OS securely resolves the actual traversal link to execute the arbitrary target DLL payload."
+  }
+]

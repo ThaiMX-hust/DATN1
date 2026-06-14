@@ -1,2 +1,1 @@
 "C:\WINDOWS\system32\rundll32.exe" keymgr,KRShowKeyMgr
-copy keymgr.dll misc.dll & rundll32.exe misc.dll,KRShowKeyMgr

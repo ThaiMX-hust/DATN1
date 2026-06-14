@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -NoP -NoL -sta -NonI -W Hidden -Exec Bypass -Enc \"base64_encoded_command\"",
+    "explanation": "This command matches the Sigma rule's detection criteria by including the exact sequence of PowerShell flags. It is a direct representation of the rule's logic for testing purposes."
+  },
+  {
+    "output": "powershell.exe -NoP -NoL -sta -NonI -W hidden -ExecutionPolicy Bypass -EncodedCommand \"base64_encoded_command\"",
+    "explanation": "This command uses lowercase 'hidden' and the full form '-ExecutionPolicy' instead of '-Exec' as a substitution, which is still valid and matches the rule's intent."
+  },
+  {
+    "output": "powershell.exe -NoP -NoL -sta -NonI -W Hidden -Exec Bypass -Enc \"base64_encoded_command\" -Command \"\"",
+    "explanation": "This command adds an extra optional parameter '-Command \"\"' which is omitted in the original rule, but does not affect detection since it still contains the required flag sequence."
+  },
+  {
+    "output": "powershell.exe -NonI -sta -NoL -NoP -Exec Bypass -W Hidden -Enc \"base64_encoded_command\"",
+    "explanation": "This command reorders the flags while preserving the required sequence for detection. The order of flags is often flexible in PowerShell."
+  },
+  {
+    "output": "powershell.exe -NoP -NoL -sta -NonI -W Hidden -Exec Bypass -Enc $env:EncodedCmd",
+    "explanation": "This command uses an environment variable to represent the encoded command, which is a safe recoding technique and still matches the Sigma rule."
+  }
+]

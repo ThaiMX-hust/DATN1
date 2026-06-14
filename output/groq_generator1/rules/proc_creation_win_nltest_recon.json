@@ -1,0 +1,42 @@
+[
+  {
+    "output": "nltest /domain_trusts",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria. It queries domain trusts and is flagged by the rule."
+  },
+  {
+    "output": "nltest /dclist:contoso.local",
+    "explanation": "This command queries domain controllers in a specific domain and matches the 'dclist' query pattern in the Sigma rule."
+  },
+  {
+    "output": "nltest /trusted_domains",
+    "explanation": "This command queries trusted domains and aligns with the Sigma rule's detection of reconnaissance via nltest.exe."
+  },
+  {
+    "output": "nltest /dnsgetdc:contoso.local",
+    "explanation": "This command retrieves the domain controller for a domain using DNS and matches the Sigma rule's 'dnsgetdc' query pattern."
+  },
+  {
+    "output": "nltest /parentdomain",
+    "explanation": "This command queries the parent domain and matches the Sigma rule's detection of reconnaissance via nltest.exe."
+  },
+  {
+    "output": "nltest /server:DC01 /trusted_domains",
+    "explanation": "This command queries trusted domains from a specific server and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "nltest /user:Administrator /domain_trusts",
+    "explanation": "This command queries domain trusts with a specified user and matches the Sigma rule's detection of reconnaissance via nltest.exe."
+  },
+  {
+    "output": "nltest /dsgetdc:contoso.local",
+    "explanation": "This command retrieves domain controller information and matches the Sigma rule's 'dsgetdc' query pattern."
+  },
+  {
+    "output": "nltest /domain:contoso.local /trusted_domains",
+    "explanation": "This command queries trusted domains for a specific domain and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "nltest /query /domain_trusts",
+    "explanation": "This command uses the 'query' keyword and matches the Sigma rule's detection of reconnaissance via nltest.exe."
+  }
+]

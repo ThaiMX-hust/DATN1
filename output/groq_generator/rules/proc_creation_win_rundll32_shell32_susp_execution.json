@@ -1,18 +1,22 @@
 [
   {
-    "output": "rundll32.exe \"shell32,Control_RunDLL\" payload.dll",
-    "explanation": "Inserted quotes around the command-line argument to test how the rule handles quoted strings, which is a safe mutation technique."
+    "output": "rundll32.exe shell32.dll,Control_RunDLL \"%Temp%\\example.dll\"",
+    "explanation": "This command simulates a malicious use of rundll32.exe with shell32.dll and Control_RunDLL, targeting a DLL in the %Temp% directory, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "rundll32.exe shell32.dll,Control_RunDLL payload.dll",
-    "explanation": "Used the full name 'shell32.dll' instead of the short name 'shell32' to test if the rule detects both variations."
+    "output": "rundll32.exe shell32.dll,Control_RunDLL \"%LocalAppData%\\example.dll\"",
+    "explanation": "This command uses rundll32.exe with shell32.dll and Control_RunDLL to execute a DLL in the %LocalAppData% directory, which aligns with the Sigma rule's focus on suspicious directories."
   },
   {
-    "output": "rundll32.exe shell32,Control_RunDLL payload.dll",
-    "explanation": "Omitted the .dll extension from 'shell32.dll' to test if the rule still identifies the command as malicious."
+    "output": "rundll32.exe shell32.dll,Control_RunDLL \"%AppData%\\example.dll\"",
+    "explanation": "This command simulates a benign-looking execution of rundll32.exe with shell32.dll and Control_RunDLL, targeting a DLL in the %AppData% directory, which is flagged by the Sigma rule."
   },
   {
-    "output": "rundll32.exe Control_RunDLL,shell32 payload.dll",
-    "explanation": "Reordered the command-line arguments to test if the rule is sensitive to argument order."
+    "output": "rundll32.exe shell32.dll,Control_RunDLL \"C:\\Users\\Public\\example.dll\"",
+    "explanation": "This command uses rundll32.exe with shell32.dll and Control_RunDLL to execute a DLL in the Users\\Public directory, which is considered a suspicious location by the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,Control_RunDLL \"%tmp%\\example.dll\"",
+    "explanation": "This command simulates a test scenario where rundll32.exe is used with shell32.dll and Control_RunDLL to execute a DLL in the %tmp% directory, matching the Sigma rule's detection logic."
   }
 ]

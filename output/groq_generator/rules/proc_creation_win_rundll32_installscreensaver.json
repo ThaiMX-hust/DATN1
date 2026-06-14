@@ -1,14 +1,24 @@
+```json
 [
   {
-    "output": "rundll32.exe desk.cpl,InstallScreenSaver test.scr",
-    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing."
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.scr",
+    "explanation": "This is the original true positive command and matches the Sigma rule."
   },
   {
-    "output": "rundll32.exe  desk.cpl,InstallScreenSaver test.scr",
-    "explanation": "Insertion of an extra space before the first argument to test if the rule is sensitive to spacing."
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.SCR",
+    "explanation": "The file extension is capitalized, but the command is still valid and matches the Sigma rule."
   },
   {
-    "output": "rundll32.exe\" desk.cpl,InstallScreenSaver test.scr",
-    "explanation": "Insertion of a quote after rundll32.exe to test if the rule is sensitive to quote placement."
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver \"not_an_scr.scr\"",
+    "explanation": "Quotes are inserted around the SCR file path, but the command remains valid and matches the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.scr additional_argument",
+    "explanation": "An additional argument is appended, but the core command still matches the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.scr\\",
+    "explanation": "A trailing backslash is added to the SCR file path, but the command is still valid and matches the Sigma rule."
   }
 ]
+```

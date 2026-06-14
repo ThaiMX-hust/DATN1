@@ -1,6 +1,3 @@
 "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -nop -Command Write-Host JScript executed me!; exit
 "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -nop -Command Write-Host VBScript executed me!; exit
 powershell.exe -nop -Command Write-Host CustomAction export executed me; exit
-cmd.exe /c "echo bypass > C:\Program Files\SplunkUniversalForwarder\bin\dummy.txt"
-copy powershell.exe not_ps.exe && MsiExec.exe -Embedding 12345 /I fake.msi & not_ps.exe -Command "Write-Host 'Bypassed'"
-msiexec.exe /i legit.msi /q & start /b powershell.exe -ExecutionPolicy Bypass -File payload.ps1

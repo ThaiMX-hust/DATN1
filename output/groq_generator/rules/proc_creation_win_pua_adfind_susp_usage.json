@@ -1,42 +1,22 @@
 [
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f \"(objectcategory=subnet)\"",
-    "explanation": "The original command is already a valid test command. No mutation is needed for this case."
+    "output": "adfind -subnets -f name=\"Domain Admins\"",
+    "explanation": "This command uses the '-subnets' and '-f' flags with a quoted filter, which are included in the Sigma rule's detection logic. It is a simulated test command that would match the rule."
   },
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet)",
-    "explanation": "Removed quotes around the filter string. The command is still valid and matches the Sigma rule."
+    "output": "adfind domainlist",
+    "explanation": "The 'domainlist' flag is explicitly listed in the Sigma rule's detection logic. This command would trigger the rule and is a valid test command."
   },
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=\\\"subnet\\\")",
-    "explanation": "Added escape characters to the quotes around the filter string. The command is still valid and matches the Sigma rule."
+    "output": "adfind objectcategory=computer",
+    "explanation": "The 'objectcategory=' syntax is included in the Sigma rule's detection logic. This command uses a similar structure and would match the rule."
   },
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet) -accepteula",
-    "explanation": "Added an optional -accepteula flag, which is commonly used with AdFind. The command still matches the Sigma rule."
+    "output": "adfind -sc u:Domain\\User",
+    "explanation": "The '-sc u:' flag is part of the Sigma rule's detection logic. This command uses a valid equivalent format and would match the rule."
   },
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet) -s",
-    "explanation": "Added an optional -s flag to simulate a more complex query. The command still matches the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet) -gcb",
-    "explanation": "Added an optional -gcb flag to simulate a more complex query. The command still matches the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet) -sc trustdmp",
-    "explanation": "Added an optional -sc trustdmp flag to simulate a more complex query. The command still matches the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet) -b DC=example,DC=com",
-    "explanation": "Added an optional -b flag with a base DN to simulate a more complex query. The command still matches the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet) -s:example.com",
-    "explanation": "Added an optional -s flag with a server name to simulate a more complex query. The command still matches the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -f (objectcategory=subnet) -sc dclist",
-    "explanation": "Added an optional -sc dclist flag to simulate a more complex query. The command still matches the Sigma rule."
+    "output": "adfind computers_active",
+    "explanation": "The 'computers_active' flag is explicitly listed in the Sigma rule's detection logic. This command would trigger the rule and is a valid test command."
   }
 ]

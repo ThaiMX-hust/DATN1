@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\mmc.exe /Embedding",
+    "explanation": "Substitution technique. Replaces the hyphen-prefixed argument `-Embedding` with a forward slash `/Embedding`. Since the Sigma rule strictly looks for the literal string `-Embedding`, and the underlying Windows COM/OLE framework initialization switches typically accept slash syntax interchangeably, this avoids the rule condition while preserving expected behavior."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\mmc.exe \"-Embedding\"",
+    "explanation": "Insertion technique. Encloses the critical parameter inside double quotes (`\"-Embedding\"`). This disrupts the exact string match for `-Embedding` within the raw `CommandLine` field, whereas the operating system's internal command-line tokenization logic strips the quotes out before executing or handing off arguments to the application."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\mmc.exe   -Embedding",
+    "explanation": "Insertion technique. Introduces multiple contiguous spaces between the executable path and the argument switch. While the `CommandLine|contains: '-Embedding'` modifier matches any occurrence of the substring, variations in spacing combined with custom downstream parsers or regexes that look for single-space boundaries can be avoided, though the base Sigma rule remains sensitive to the string itself."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\mmc.exe -Embedding:Extra",
+    "explanation": "Substitution technique. Appends a colon and arbitrary data to the flag token. Because the rule searches for `-Embedding` as a broad substring, it may still trigger, but modifying the switch token format can cause strict field parsers that expect clean trailing delimiters or strict match lengths to break or categorize the switch incorrectly."
+  },
+  {
+    "output": "",
+    "explanation": "Omission or Recoding technique note: Since the `-Embedding` flag is a strict requirement explicitly hardcoded into the DCOM/COM initialization mechanics for `MMC20.Application` lateral movement invoked by the RPC subsystem, modifying the token characters completely (like encoding or omitted names) cannot be simulated without breaking the specific internal DCOM activation logic that triggers this parent-child process relationship."
+  }
+]

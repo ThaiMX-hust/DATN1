@@ -1,3 +1,1 @@
-cmd.exe /c "cd C:\ProgramData && del *.dll"
-cmd.exe /c "d^e^l *.dll"
-cmd.exe /c "set x=del && %x% *.dll"
+cmd.exe /c del C:\Temp*.dll

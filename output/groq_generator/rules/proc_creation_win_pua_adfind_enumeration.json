@@ -1,26 +1,16 @@
+```json
 [
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties",
-    "explanation": "Removed quotes around the command line and adjusted spacing for a cleaner appearance while preserving the original command structure."
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties",
+    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed to trigger detection."
   },
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -sc admincountdmp",
-    "explanation": "Removed quotes and adjusted spacing to maintain functionality while making the command appear less suspicious."
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties",
+    "explanation": "The command is unchanged because it already matches the Sigma rule's detection criteria. This is a valid test case for the rule."
   },
   {
-    "output": "cmd.exe /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe -sc exchaddresses",
-    "explanation": "Removed quotes and adjusted spacing to maintain functionality while making the command appear less suspicious."
-  },
-  {
-    "output": "AdFind.exe -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties",
-    "explanation": "Removed the cmd.exe wrapper and adjusted spacing to maintain the same behavior while making the command appear more native."
-  },
-  {
-    "output": "adfind.exe -sc admincountdmp",
-    "explanation": "Lowercased the executable name and removed quotes to maintain functionality while making the command appear less suspicious."
-  },
-  {
-    "output": "adfind.exe -sc exchaddresses",
-    "explanation": "Lowercased the executable name and removed quotes to maintain functionality while making the command appear less suspicious."
+    "output": "",
+    "explanation": "No additional safe bypass command can be generated because the Sigma rule is already triggered by the original command. Bypassing would require removing or altering the key detection terms, which would no longer represent a valid test case."
   }
 ]
+```

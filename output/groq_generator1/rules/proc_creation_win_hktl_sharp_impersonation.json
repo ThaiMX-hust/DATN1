@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sysupdate.exe \"user:Administrator\" \"binary:cmd.exe\"",
+    "explanation": "The command is unchanged as it already matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "updater.exe --user Administrator --binary calc.exe",
+    "explanation": "Substituted short options with long options to test if the detection rule is sensitive to option formatting."
+  },
+  {
+    "output": "updater.exe technique:CreateProcessWithTokenW binary:cmd.exe pid:1337",
+    "explanation": "Reordered the arguments to test if the detection rule is sensitive to argument order."
+  }
+]

@@ -1,34 +1,18 @@
 [
   {
-    "output": "C:\\WINDOWS\\system32\\net1  user /ADD \"T1136.001_Admin\" \"T1136_pass\"",
-    "explanation": "Used insertion of quotes and substitution of lowercase /add to uppercase /ADD to test if the rule is case-insensitive and quote-aware."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net1.exe user /add \"T1136.001_Admin\" \"T1136_pass\"",
+    "explanation": "This command uses the net1.exe binary with quotes around the username and password, which is a safe mutation technique. It matches the Sigma rule's criteria for command line content."
   },
   {
-    "output": "net  USER /add \"T1136.001_CMD\" \"T1136.001_CMD!\"",
-    "explanation": "Reordered command-line arguments and used substitution of lowercase /add to uppercase /ADD to test if argument order and case affect detection."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net.exe user /add \"T1136.001_CMD\" \"T1136.001_CMD!\"",
+    "explanation": "This command uses the net.exe binary with quotes around the username and password, which is a safe mutation technique. It matches the Sigma rule's criteria for command line content."
   },
   {
-    "output": "C:\\WINDOWS\\system32\\net1  USER /ADD $ATOMIC123! /active:yes",
-    "explanation": "Omitted the username space and used substitution of lowercase /add to uppercase /ADD to test if spacing and case affect detection."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net1.exe user /add $ ATOMIC123! /active:yes",
+    "explanation": "This command uses the net1.exe binary with special characters in the password and reordered flags, which is a safe mutation technique. It matches the Sigma rule's criteria for command line content."
   },
   {
-    "output": "NET  USER AtomicOperator$ At0micRedTeam! /ADD /expires:never",
-    "explanation": "Used substitution of lowercase /add to uppercase /ADD and tested if command case and argument order affect detection."
-  },
-  {
-    "output": "C:\\WINDOWS\\system32\\net1  user /add \"T1136.001_Admin\" \"T1136_pass\" /comment:\"Test User\"",
-    "explanation": "Inserted an optional /comment argument to test if additional parameters affect detection while preserving the core behavior."
-  },
-  {
-    "output": "net  user /add \"T1136.001_CMD\" \"T1136.001_CMD!\" /fullname:\"Test User\"",
-    "explanation": "Inserted an optional /fullname argument to test if additional parameters affect detection while preserving the core behavior."
-  },
-  {
-    "output": "C:\\WINDOWS\\system32\\net1  user /ADD \"T1136.001_Admin\" \"T1136_pass\" /passwordchg:no",
-    "explanation": "Inserted an optional /passwordchg argument to test if additional parameters affect detection while preserving the core behavior."
-  },
-  {
-    "output": "NET  USER \"T1136.001_CMD\" /add \"T1136.001_CMD!\" /passwordchg:no",
-    "explanation": "Reordered arguments and inserted an optional /passwordchg argument to test if argument order and additional parameters affect detection."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net.exe user AtomicOperator$ At0micRedTeam! /ADD /expires:never",
+    "explanation": "This command uses the net.exe binary with reordered flags and special characters in the password, which is a safe mutation technique. It matches the Sigma rule's criteria for command line content."
   }
 ]

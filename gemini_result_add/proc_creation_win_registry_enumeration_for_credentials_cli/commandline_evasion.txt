@@ -1,0 +1,14 @@
+[
+{
+"output": "reg query "HKCU\Software\SimonTatham\PuTTY\\Sessions" /t REG_SZ /s",
+"explanation": "Insertion technique: Adds an extra backslash character ('\\') inside the target registry key path. The rule evaluates the contiguous string '\Software\SimonTatham\PuTTY\Sessions' inside the command line. By inserting the additional separator, the literal pattern match fails, while the native Windows Registry tool and kernel path normalization automatically group and treat sequential duplicate backslashes as a single delimiter."
+},
+{
+"output": "cmd.exe /c "reg query HKCU\Software\SimonTatham\Pu^TTY\Sessions /t REG_SZ /s"",
+"explanation": "Insertion technique: Injects the command shell escape character caret ('^') directly into the targeted text block ('Pu^TTY'). When executed through 'cmd.exe', the interpreter processes and strips out the caret, handing a clean string to the query logic. However, the raw process creation log monitors the pre-interpreted command line, thus breaking the literal string match for '\Software\SimonTatham\PuTTY\Sessions'."
+},
+{
+"output": "reg query "HKCU\Software\SimonTatham\PuTTY""\Sessions" /t REG_SZ /s",
+"explanation": "Insertion technique: Encapsulates distinct sub-segments of the path using inline double quotes ('""'). Because the process command line telemetry captures the raw parameter string literal, the rule fails to match the unquoted path template. The application logic, however, automatically combines consecutive quoted arguments internally and executes the diagnostic test successfully."
+}
+]

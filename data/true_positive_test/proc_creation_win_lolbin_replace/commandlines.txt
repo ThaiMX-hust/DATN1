@@ -1,4 +1,2 @@
-C:\Windows\System32\replace.exe  "C:\AtomicRedTeam\atomics\T1105\src\redcanary.cab" C:\Users\thaim\AppData\Local\Temp /A
-C:\Windows\System32\replace.exe  \\127.0.0.1\c$\AtomicRedTeam\atomics\T1105\src\redcanary.cab C:\Users\thaim\AppData\Local\Temp /A
-replace.exe payload.exe C:\target\directory
-replace.exe payload.exe C:\target\directory /A
+C:\Windows\System32\replace.exe "C:\AtomicRedTeam\atomics\T1105\src\redcanary.cab" C:\Users\thaim\AppData\Local\Temp /A
+C:\Windows\System32\replace.exe \\127.0.0.1\c$\AtomicRedTeam\atomics\T1105\src\redcanary.cab C:\Users\thaim\AppData\Local\Temp /A

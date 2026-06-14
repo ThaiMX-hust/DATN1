@@ -1,10 +1,14 @@
 [
   {
     "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\hashcat6\\hashcat-6.1.1\\hashcat.exe -a 0 -m 1000 -r .\\rules\\Incisive-leetspeak.rule C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\sam.txt C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\password.lst",
-    "explanation": "The original command is modified by omitting the unnecessary 'cmd.exe /c cd ...' part and using a direct path to hashcat.exe. This preserves the same behavior and should still trigger the Sigma rule."
+    "explanation": "The command line is simplified by removing the unnecessary 'cmd.exe /c cd ...' part while keeping the essential Hashcat execution intact. This preserves the behavior for testing purposes."
   },
   {
-    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\hashcat6\\hashcat-6.1.1\\hashcat.exe -a0 -m1000 -r .\\rules\\Incisive-leetspeak.rule C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\sam.txt C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\password.lst",
-    "explanation": "The command is modified by removing spaces between flags and their values (e.g., '-a 0' becomes '-a0'). This is a valid syntax for hashcat and should still trigger the Sigma rule."
+    "output": "\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\hashcat6\\hashcat-6.1.1\\hashcat.exe\" -a 0 -m 1000 -r \"rules\\Incisive-leetspeak.rule\" \"C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\sam.txt\" \"C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\password.lst\"",
+    "explanation": "Quotes are added around paths for safe handling of spaces and special characters, which is a safe mutation technique and does not alter the behavior of the command."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\hashcat6\\hashcat-6.1.1\\hashcat.exe -a 0 -m 1000 -r rules\\Incisive-leetspeak.rule C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\sam.txt C:\\AtomicRedTeam\\atomics\\T1110.002\\src\\password.lst",
+    "explanation": "The command line is simplified by omitting unnecessary quotes and spaces while maintaining the same functionality. This is a safe mutation for testing purposes."
   }
 ]

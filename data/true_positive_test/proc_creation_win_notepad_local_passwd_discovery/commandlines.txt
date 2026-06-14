@@ -1,4 +1,0 @@
-cmd.exe /c notepad.exe C:\Users\admin\Documents\passwords.txt
-notepad.exe "C:\Data\passwords.csv"
-notepad.exe C:\secure\passwords.bak
-powershell.exe -Command "notepad C:\backup\passwords.log"

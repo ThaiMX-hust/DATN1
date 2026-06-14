@@ -1,0 +1,22 @@
+[
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER C:\\\\Temp\\\\malicious.dll}",
+    "explanation": "This command uses the standard syntax to trigger the detection. It includes the 'INSTALLDRIVER' action and a DLL path, which matches the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe \"/A {INSTALLDRIVER C:\\\\Temp\\\\malicious.dll}\"",
+    "explanation": "Quotes are added around the command line to test parsing behavior, but the content remains the same and matches the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER C:\\Temp\\malicious.dll}",
+    "explanation": "A single backslash is used instead of double backslashes in the path. Windows accepts this as a valid path, and the command still matches the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER C:\\Temp\\malicious.dll} ",
+    "explanation": "An extra space is added at the end of the command line. This tests if the detection is sensitive to trailing spaces, while still matching the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER C:\\\\Temp\\\\malicious.dll} ",
+    "explanation": "Double backslashes are used in the path, and an extra space is added at the end. This tests parsing behavior while maintaining a match with the Sigma rule."
+  }
+]

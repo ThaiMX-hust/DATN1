@@ -1,22 +1,14 @@
 [
   {
-    "output": "c:\\windows\\system32\\msiexec.exe /z \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll\"",
-    "explanation": "The command uses standard syntax and matches the Sigma rule's detection criteria. It is a valid test command for the rule."
+    "output": "c:\\windows\\system32\\msiexec.exe -z C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll",
+    "explanation": "The command substitutes the long option '/z' with the equivalent short option '-z' and removes the quotes around the DLL path since they are optional in this context."
   },
   {
-    "output": "copy msiexec.exe not_msiexec.exe && .\\not_msiexec.exe -z payload.dll",
-    "explanation": "This command renames msiexec.exe and uses an alternative name, but the behavior remains the same. It matches the Sigma rule's detection criteria."
+    "output": "c:\\windows\\system32\\msiexec.exe /z C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll",
+    "explanation": "The command removes the quotes around the DLL path as they are not required for the command to function correctly in this scenario."
   },
   {
-    "output": "msiexec.exe -zpayload.dll",
-    "explanation": "This command removes the space between the flag and the payload, but it is still parsed correctly and matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "msiexec.exe /z \"C:\\path\\to\\payload.tmp\"",
-    "explanation": "This command uses a different file extension (.tmp) but still matches the rule because the command line contains a .dll-like payload reference."
-  },
-  {
-    "output": "msiexec.exe /z payload.dll",
-    "explanation": "This is a minimal valid command that matches the Sigma rule's detection criteria and is suitable for testing."
+    "output": "c:\\windows\\system32\\msiexec.exe /z C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\MSIRunner.dll",
+    "explanation": "The command uses a normalized path and removes unnecessary characters, ensuring the command remains functionally equivalent."
   }
 ]

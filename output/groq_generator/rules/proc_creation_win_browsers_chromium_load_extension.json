@@ -1,22 +1,22 @@
 [
   {
-    "output": "chrome.exe --load-extension=\"C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr\"",
-    "explanation": "This command uses the original flag format and a valid path, but normalizes the path and uses escaped quotes to test the Sigma rule detection."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=\"C:\\Temp\\test_extension\"",
+    "explanation": "The original command line is already a valid test case that matches the Sigma rule. No mutation is needed to generate a true positive."
   },
   {
-    "output": "chrome.exe --load-extension=C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr",
-    "explanation": "This command omits quotes around the path, which is still valid in many command-line contexts and tests if the rule detects the flag without additional syntax."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Temp\\test_extension",
+    "explanation": "Removed quotes around the extension path. The command line is still valid and matches the Sigma rule because the presence of '--load-extension=' is what triggers the detection."
   },
   {
-    "output": "chrome.exe --load-extension=\\?\\C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr",
-    "explanation": "This command uses the long path prefix (\\?), which is a valid Windows path normalization technique and tests if the rule handles extended path syntax."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Temp\\test_extension --user-data-dir=C:\\Temp\\chrome_userdata",
+    "explanation": "Added an additional optional argument '--user-data-dir' to simulate a more realistic scenario. The '--load-extension' flag is still present and triggers the Sigma rule."
   },
   {
-    "output": "chrome.exe --load-extension=\"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\HHe2lr\"",
-    "explanation": "This command uses escaped backslashes and quotes, which are still parsed correctly by the command line and test the Sigma rule's parsing robustness."
+    "output": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --load-extension=\"C:\\\\Temp\\\\test_extension\"",
+    "explanation": "Used double backslashes for path normalization. The command line is still valid and matches the Sigma rule."
   },
   {
-    "output": "chrome.exe --load-extension=$env:TEMP\\HHe2lr",
-    "explanation": "This command uses an environment variable to represent part of the path, testing if the rule can detect the flag when paths are dynamically resolved."
+    "output": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --load-extension=C:\\\\Temp\\\\test_extension",
+    "explanation": "Removed quotes around the executable path. The command line is still valid and matches the Sigma rule."
   }
 ]

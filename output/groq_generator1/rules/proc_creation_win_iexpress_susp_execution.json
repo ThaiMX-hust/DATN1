@@ -1,0 +1,14 @@
+[
+  {
+    "output": "iexpress.exe /n /q /m \"C:\\\\Users\\\\Public\\\\Documents\\\\config.sed\"",
+    "explanation": "This command uses standard spacing and quotes to invoke iexpress.exe with the required flags and a SED file path. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "iexpress.exe /n/q/m C:\\\\Windows\\\\Temp\\\\config.sed",
+    "explanation": "This command removes spaces between flags and uses an alternative suspicious path (Windows\\Temp) as defined in the Sigma rule. It still triggers the detection."
+  },
+  {
+    "output": "iexpress.exe /n /q /m C:\\\\Users\\\\Public\\\\Documents\\\\config.sed",
+    "explanation": "This command omits quotes around the SED file path since the path does not contain spaces. It still satisfies the Sigma rule's detection criteria."
+  }
+]

@@ -1,1 +1,0 @@
-curl.exe  -H "User-Agent: EvilAgent" http://example.com

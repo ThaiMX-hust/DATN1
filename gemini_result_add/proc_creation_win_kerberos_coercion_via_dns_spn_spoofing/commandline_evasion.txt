@@ -1,0 +1,18 @@
+[
+  {
+    "output": "nslookup.exe \"UWhRCAAAAABAAAAA\"",
+    "explanation": "Insertion technique: Enclosing the Base64-encoded structure string parameter within explicit double quotes. This alters the raw character stream boundary signature parsed by the SIEM logic while the Win32 subsystem strips the quotes natively prior to process initialization, presenting an identical query argument to nslookup."
+  },
+  {
+    "output": "cmd.exe /c nslookup.exe UWhRC^AAAAABAAAAA",
+    "explanation": "Insertion technique: Utilizing a cmd.exe wrapper context to inject a command shell caret escape operator ('^') directly into the middle of the signature payload string ('UWhRC^AAAAABAAAAA'). The parent command interpreter parses and drops the escape token prior to initializing the target child process, generating an EDR log footprint containing the caret which breaks the continuous literal substring check for 'UWhRCA'."
+  },
+  {
+    "output": "nslookup.exe UWhRCAAAAABAAA\"\"AA",
+    "explanation": "Insertion technique: Injecting a pair of adjacent empty double quotes within the second targeted token area ('BAAAA' mutated to 'BAAA\"\"AA'). The native command-line processor unquotes individual internal string segments during process tokenization, feeding the full cohesive parameter to the application binary while successfully blinding string signature rule monitors looking for a contiguous 'BAAAA' sequence."
+  },
+  {
+    "output": "nslookup.exe \"UWhRCAAAAA\"\"BAAAAA\"",
+    "explanation": "Insertion technique: Splitting the single continuous Base64 payload block token into two adjacent quoted segments directly at the boundary of the two signature targets. Windows transparently handles and merges adjacent quoted sub-strings during process tokenization, providing functional execution consistency while completely avoiding the single-token 'contains all' logic layout."
+  }
+]

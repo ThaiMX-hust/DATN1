@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"[char[]](83,116,97,114,116,45,80,114,111,99,101,115,115,32,99,97,108,99,46,101,120,101) | Join-String -Separator ''\"",
+    "explanation": "This command uses character array encoding and Join-String to bypass the detection by avoiding explicit 'join' or 'char' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"(83,116,97,114,116,45,80,114,111,99,101,115,115,32,99,97,108,99,46,101,120,101 | ForEach-Object {[char]$_}) -join ''\"",
+    "explanation": "This command uses ForEach-Object to convert ASCII codes to characters and joins them, avoiding direct use of [char[]] and 'join' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String('U2t5c3NlcnZlciB0ZXN0')) | IEX\"",
+    "explanation": "This command uses base64 encoding to obfuscate the command, avoiding direct use of 'char' or 'join' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('V3JpdGUtSG9zdCAiSGVsbG8i')) | IEX\"",
+    "explanation": "This command uses base64 encoding and UTF8 decoding to obfuscate the command, avoiding direct use of 'char' or 'join' in the command line."
+  }
+]

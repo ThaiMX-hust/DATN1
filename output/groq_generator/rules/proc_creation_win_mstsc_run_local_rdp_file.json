@@ -1,18 +1,26 @@
 [
   {
-    "output": "mstsc.exe C:\\Temp\\hidden.rdp",
-    "explanation": "Removed quotes around the .rdp file path, which may still be parsed correctly depending on the context."
+    "output": "mstsc.exe C:\\Users\\User\\Documents\\test.rdp",
+    "explanation": "This command directly matches the Sigma rule by executing mstsc.exe with a local .rdp file, fulfilling the 'CommandLine|endswith' condition."
   },
   {
-    "output": "mstsc.exe C:\\Users\\Public\\malicious.rdp -f",
-    "explanation": "Replaced the '/' with a '-', which is an equivalent syntax for command-line flags in some Windows utilities."
+    "output": "mstsc.exe \"C:\\\\Users\\\\User\\\\Documents\\\\test.rdp\"",
+    "explanation": "Inserts quotes around the file path and uses double backslashes for escaping, which is still parsed correctly by Windows."
   },
   {
-    "output": "mstsc.exe \"C:\\Temp\\hidden.rdp\"",
-    "explanation": "Inserted escape characters before quotes to test if the command still executes as expected."
+    "output": "mstsc.exe C:/Users/User/Documents/test.rdp",
+    "explanation": "Replaces backslashes with forward slashes for path normalization, which Windows accepts as valid."
   },
   {
-    "output": "mstsc.exe C:\\Users\\Public\\malicious.rdp /f",
-    "explanation": "Reordered the command line to test if the execution behavior remains unchanged."
+    "output": "mstsc C:\\Users\\User\\Documents\\test.rdp",
+    "explanation": "Uses the short command name 'mstsc' instead of 'mstsc.exe', which is functionally equivalent."
+  },
+  {
+    "output": "mstsc.exe C:\\Users\\User\\Documents\\test.rdp -v",
+    "explanation": "Adds a harmless verbose flag '-v' that does not affect the .rdp file execution, preserving the rule match."
+  },
+  {
+    "output": "mstsc.exe C:\\Users\\User\\Documents\\test.rdp\"\"",
+    "explanation": "Appends extra quotes at the end of the command line, which are ignored by the parser but still match the rule."
   }
 ]

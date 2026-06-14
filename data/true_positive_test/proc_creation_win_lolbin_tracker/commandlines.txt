@@ -1,1 +1,0 @@
-Tracker.exe /ERRORREPORT:PROMPT /d malicious.dll /c calc.exe

@@ -1,3 +1,0 @@
-reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LegitService" /v "ImagePath" /t REG_EXPAND_SZ /d "malicious.exe" /f
-reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\WeakService" /v "Image"+"Path" /d "pwned.exe"
-reg.exe copy "HKLM\SYSTEM\ControlSet001\Services\ServiceA" "HKLM\SYSTEM\ControlSet001\Services\ServiceB" /s /f

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe   add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\"  /v ScreenSaveActive  /t REG_SZ  /d 1  /f",
+    "explanation": "Inserted extra spaces and used standard syntax. The command remains functionally identical but appears different in logs."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Control Panel\\Desktop\" /v ScreenSaveActive /t REG_SZ /d 1 /f",
+    "explanation": "Substituted HKEY_CURRENT_USER with HKCU and used standard syntax. This is a valid equivalent command."
+  },
+  {
+    "output": "reg.exe add HKCU\\Control Panel\\Desktop /v ScreenSaveTimeout /t REG_SZ /d 60 /f",
+    "explanation": "Omitted quotes around the registry key path. The command is still valid and functionally identical."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Control Panel\\Desktop\" /v SCRNSAVE.EXE /t REG_SZ /d \"C:\\\\WINDOWS\\\\System32\\\\evilscreensaver.scr\" /f",
+    "explanation": "Used double backslashes for path escaping and standard syntax. The command remains functionally identical."
+  },
+  {
+    "output": "reg add HKCU\\Control Panel\\Desktop /v SCRNSAVE.EXE /t REG_SZ /d calc.exe /f",
+    "explanation": "Removed quotes around the value and used standard syntax. The command is still valid and functionally identical."
+  }
+]

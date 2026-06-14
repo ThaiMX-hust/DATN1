@@ -1,22 +1,22 @@
 [
   {
-    "output": "cmd.exe /c \"cd C:\\ProgramData && del *.dll\"",
-    "explanation": "This command matches the Sigma rule by using 'del' with a wildcard to delete files in a directory. It is a direct representation of the rule's detection logic."
+    "output": "cmd.exe /c del \"C:\\Temp*.dll\"",
+    "explanation": "Inserted quotes around the file path to test if the Sigma rule detects quoted wildcards."
   },
   {
-    "output": "cmd.exe /c \"cd C:\\ProgramData && erase *.dll\"",
-    "explanation": "The 'erase' command is equivalent to 'del' in Windows, and this command matches the Sigma rule by using a wildcard to delete files in a directory."
+    "output": "cmd.exe /c del C:\\Temp*.dll",
+    "explanation": "Used double backslashes for path normalization to test if the Sigma rule handles escaped paths."
   },
   {
-    "output": "cmd.exe /c \"cd C:\\\\ProgramData && del *.dll\"",
-    "explanation": "This command uses an extra backslash for 'ProgramData' to test path normalization and still matches the Sigma rule by using 'del' with a wildcard."
+    "output": "cmd.exe /c erase C:\\Temp*.dll",
+    "explanation": "Substituted 'del' with its equivalent command 'erase' to test if the Sigma rule detects both variations."
   },
   {
-    "output": "cmd.exe /c \"cd C:\\ProgramData && del \\*.dll\"",
-    "explanation": "This command uses an absolute path wildcard to match the Sigma rule's detection of greedy file deletion."
+    "output": "cmd.exe /c del C:\\Temp\\*.dll",
+    "explanation": "Modified the path to include an explicit directory traversal to test if the Sigma rule handles nested paths."
   },
   {
-    "output": "cmd.exe /c \"cd C:\\ProgramData && del *.dll & exit\"",
-    "explanation": "This command includes an 'exit' at the end, which is a common pattern in malware to terminate the shell after execution, and still matches the Sigma rule."
+    "output": "cmd.exe /c del C:\\Temp*.exe",
+    "explanation": "Changed the file extension to test if the Sigma rule is specific to certain extensions or broadly detects wildcards."
   }
 ]

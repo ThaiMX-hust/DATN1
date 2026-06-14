@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path C:\\*.lnk -Recurse | Get-Content -Raw | [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) | Set-Content -Path C:\\output.txt\"",
+    "explanation": "This command simulates PowerShell reading .lnk files recursively and performing a base64 decoding operation, which aligns with the Sigma rule's detection criteria. It uses standard PowerShell cmdlets and syntax to mimic potential decryption behavior."
+  },
+  {
+    "output": "pwsh -c \"gci -Path C:\\*.lnk -Recurse | gc -Raw | [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($_)) | Out-File C:\\output.txt\"",
+    "explanation": "This command uses short-form cmdlet aliases (gci, gc) and simulates reading .lnk files recursively and decoding base64 content, which matches the Sigma rule's detection logic. It is a safe mutation using substitution and omission techniques."
+  },
+  {
+    "output": "powershell.exe -Command \"ls C:\\*.lnk -Recurse | cat -Raw | [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) | Out-File C:\\output.txt\"",
+    "explanation": "This command uses alternative aliases (ls, cat) and simulates reading .lnk files recursively and decoding base64 content, which aligns with the Sigma rule's detection criteria. It is a safe mutation using substitution and omission techniques."
+  }
+]

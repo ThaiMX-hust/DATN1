@@ -1,22 +1,26 @@
 [
   {
-    "output": "update.exe -c \"cmd /c calc.exe\" -t schtask",
-    "explanation": "The original command is already a valid test command for the Sigma rule. No mutation is needed for the controlled test environment."
+    "output": "SharPersist.exe -t schtask -c 'echo test' -m add",
+    "explanation": "This command simulates a typical usage of SharPersist to add a scheduled task persistence mechanism, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "update.exe -c cmd //c calc.exe -t schtask",
-    "explanation": "Replaced the double slash (//) as an alternative to the single slash (/) in the 'cmd /c' syntax. This is a safe substitution technique."
+    "output": "SharPersist.exe -t startupfolder -c 'echo test' -m add",
+    "explanation": "This command uses the startup folder persistence mechanism with equivalent syntax, matching the Sigma rule's detection for the startupfolder type."
   },
   {
-    "output": "\"update.exe\" -c \"cmd /c calc.exe\" -t schtask",
-    "explanation": "Inserted quotes around the executable name to test how the detection rule handles quoted paths, a common insertion technique."
+    "output": "SharPersist.exe -t reg -c 'echo test' -m add",
+    "explanation": "This command uses the registry persistence mechanism, matching the Sigma rule's detection for the registry type with the 'add' modifier."
   },
   {
-    "output": "update.exe -t schtask -c \"cmd /c calc.exe\"",
-    "explanation": "Reordered the command-line arguments to test if the detection rule is sensitive to argument order, a safe reordering technique."
+    "output": "SharPersist.exe -t service -c 'echo test' -m add",
+    "explanation": "This command uses the service persistence mechanism, matching the Sigma rule's detection for the service type with the 'add' modifier."
   },
   {
-    "output": "update.exe -c \"cmd /c calc.exe\" -t sch\\task",
-    "explanation": "Used an escaped backslash in the '-t sch\\task' argument to test path normalization and parsing behavior, a safe recoding technique."
+    "output": "SharPersist.exe -t schtask -c \"echo test\" -m add",
+    "explanation": "This command uses quotes instead of single quotes for the command string, demonstrating insertion and encoding techniques while still matching the Sigma rule."
+  },
+  {
+    "output": "SharPersist.exe -t schtask -c 'echo test' add",
+    "explanation": "This command omits the '-' before 'add' in the modifier, relying on argument parsing flexibility, and still matches the Sigma rule."
   }
 ]

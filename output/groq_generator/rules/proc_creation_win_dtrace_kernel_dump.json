@@ -1,26 +1,20 @@
+```json
 [
   {
-    "output": "dtrace.exe -w -n \"syscall:::return {lkd(0); exit(0);} \"",
-    "explanation": "Added an extra space before the closing quote to test insertion technique while maintaining valid syntax."
+    "output": "dtrace.exe -n 'syscall:::return { lkd(0); }'",
+    "explanation": "This command simulates a suspicious kernel dump using dtrace.exe as described by the Sigma rule. It uses a system call probe and the lkd(0) function, which aligns with the rule's detection criteria."
   },
   {
-    "output": "dtrace.exe -w -n syscall:::return\\ {lkd(0); exit(0);}",
-    "explanation": "Used an escaped space to test insertion technique, which is still parsed correctly by the command-line interpreter."
+    "output": "dtrace.exe -n \"syscall:::return { lkd\\(0\\); }\"",
+    "explanation": "This command uses escaped parentheses to simulate obfuscation while still matching the Sigma rule's detection logic. The insertion of escape characters is a safe mutation technique for testing."
   },
   {
-    "output": "dtrace.exe -w -n 'syscall:::return {lkd(0); exit(0);}'",
-    "explanation": "Replaced double quotes with single quotes to test substitution technique, which is functionally equivalent in this context."
+    "output": "dtrace.exe -n 'syscall:::return { lkd(0); }' ",
+    "explanation": "This command adds a trailing space after the command line, which is a safe mutation technique (insertion) that does not affect execution but may test detection resilience to whitespace variations."
   },
   {
-    "output": "dtrace.exe -w -n syscall:::return {lkd(0); exit(0);}",
-    "explanation": "Removed quotes around the probe script to test omission technique, assuming the command line is still valid and functional."
-  },
-  {
-    "output": "dtrace.exe -n -w \"syscall:::return {lkd(0); exit(0);} \"",
-    "explanation": "Reordered the -w and -n flags to test reordering technique, which is accepted by dtrace.exe."
-  },
-  {
-    "output": "dtrace.exe -w -n \"syscall:::return {lkd(0); exit(0);}\"",
-    "explanation": "Used standard syntax with no mutation applied for reference."
+    "output": "dtrace.exe -n syscall:::return { lkd(0); }",
+    "explanation": "This command omits the single quotes around the probe definition, relying on the shell's parsing behavior. It is a safe mutation technique (omission) that may test detection resilience to syntax variations."
   }
 ]
+```

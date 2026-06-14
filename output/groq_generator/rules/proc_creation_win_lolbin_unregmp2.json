@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\unregmp2.exe /HideWMP",
+    "explanation": "This command uses the exact command-line argument specified in the Sigma rule, making it a direct match for the detection condition."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\unregmp2.exe \\/HideWMP",
+    "explanation": "This command uses escaped backslashes and a quoted slash to represent the command-line argument, which is a safe mutation technique that maintains the same behavior."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\unregmp2.exe\" /HideWMP",
+    "explanation": "This command wraps the executable path in quotes, a common safe mutation technique that does not change the behavior but alters the command-line structure."
+  },
+  {
+    "output": "C:\\Windows\\System32\\unregmp2.exe \"/HideWMP\"",
+    "explanation": "This command wraps the argument in quotes, which is a safe mutation technique that maintains the same functionality."
+  },
+  {
+    "output": "C:\\Windows\\System32\\unregmp2.exe /HideWMP",
+    "explanation": "This command omits unnecessary whitespace and uses a direct path, which is a minimalistic representation of the original command."
+  }
+]

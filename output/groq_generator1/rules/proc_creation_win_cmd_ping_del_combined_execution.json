@@ -1,0 +1,18 @@
+[
+  {
+    "output": "ping 127.0.0.1 -n 5 >NUL && del /f /q lockbit.exe",
+    "explanation": "Added optional /f and /q flags to the del command, which are equivalent to the original in this context. This variation preserves the original behavior while using additional flags."
+  },
+  {
+    "output": "ping 127.0.0.1 -n 5 > NUL & del lockbit.exe",
+    "explanation": "Replaced '&&' with '&' which is functionally equivalent in command-line execution when chaining commands."
+  },
+  {
+    "output": "ping 127.0.0.1 -n 5 >NUL & del /f /q lockbit.exe",
+    "explanation": "Used path normalization by adding optional flags to del and omitted spaces around '>' to test parsing variations."
+  },
+  {
+    "output": "ping 127.0.0.1 -n 5 > NUL && del lockbit.exe",
+    "explanation": "Original command with no mutation applied for reference."
+  }
+]

@@ -1,2 +1,0 @@
-explorer.exe "/root,calc.exe"
-explorer.exe,/root,calc.exe

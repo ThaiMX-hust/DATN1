@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip:true /param \"IT_BrowseForFile=echo TEST-HOST\"",
+    "explanation": "Replaced '/skip true' with '/skip:true' (substitution of equivalent syntax) and added quotes around the parameter value for consistency."
+  },
+  {
+    "output": "msdt.exe -id PCWDiagnostic -skip true -param \"IT_BrowseForFile=echo TEST-HOST\"",
+    "explanation": "Replaced '/id' and '/skip' with their equivalent short option syntax '-id' and '-skip' (substitution of equivalent syntax)."
+  },
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param IT_BrowseForFile=echo TEST-HOST",
+    "explanation": "Removed quotes around the parameter value where not strictly necessary (omission of optional elements while preserving test behavior)."
+  },
+  {
+    "output": "msdt.exe /param \"IT_BrowseForFile=echo TEST-HOST\" /id PCWDiagnostic /skip true",
+    "explanation": "Reordered the command-line arguments (reordering of arguments accepted by the target program)."
+  },
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=echo $(echo TEST-HOST)\"",
+    "explanation": "Used command substitution to recode the command (recoding/encoding technique for test purposes)."
+  }
+]

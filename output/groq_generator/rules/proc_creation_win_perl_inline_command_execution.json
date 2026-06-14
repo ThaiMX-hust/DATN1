@@ -1,0 +1,20 @@
+```json
+[
+  {
+    "output": "C:\\Strawberry\\perl\\bin\\perl.exe -E 'print \"TEST-HOST\"'",
+    "explanation": "The '-e' flag in the Sigma rule can be substituted with '-E', which is a valid equivalent in Perl for executing inline code. This substitution is a safe mutation technique."
+  },
+  {
+    "output": "C:\\Strawberry\\perl\\bin\\perl.exe -e print\\x20\"TEST-HOST\"",
+    "explanation": "The command line uses escape characters and hex encoding for space (\\x20) to obfuscate the string while maintaining the same functionality. This is a safe mutation technique for testing bypasses."
+  },
+  {
+    "output": "\"C:\\Strawberry\\perl\\bin\\perl.exe\" -e \"print 'TEST-HOST'\"",
+    "explanation": "Quotes are inserted around the executable path and command line arguments, which is a valid mutation technique that does not change the behavior of the command."
+  },
+  {
+    "output": "C:\\Strawberry\\perl\\bin\\perl.exe -e print q{TEST-HOST}",
+    "explanation": "The string is rewritten using Perl's q{} syntax for quoting, which is functionally equivalent but syntactically different. This is a safe mutation technique."
+  }
+]
+```

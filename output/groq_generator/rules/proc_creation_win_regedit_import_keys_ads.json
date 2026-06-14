@@ -1,22 +1,14 @@
 [
   {
-    "output": "regedit.exe /s \"C:\\path\\to\\file.txt:script.reg\"",
-    "explanation": "This command uses the standard syntax for importing a registry file from an alternate data stream (ADS) with regedit.exe, which matches the Sigma rule's detection criteria."
+    "output": "regedit.exe /i \"C:\\\\test.reg:stream\"",
+    "explanation": "This command uses the /i flag to import a registry file with an alternate data stream (ADS) named 'stream', which matches the Sigma rule's detection criteria. The command is formatted with quotes around the file path to simulate safe mutation techniques."
   },
   {
-    "output": "regedit.exe /s 'C:\\path\\to\\file.txt:script.reg'",
-    "explanation": "This command is a direct copy of the standard syntax for importing a registry file from an ADS, and it matches the Sigma rule's detection criteria."
+    "output": "regedit.exe /i C:\\\\test.reg:stream",
+    "explanation": "This command is a simplified version of the first, omitting quotes around the file path. It still includes the /i flag and the ADS indicator (':stream'), which are key to triggering the Sigma rule."
   },
   {
-    "output": "regedit.exe /s C:\\path\\to\\file.txt:script.reg",
-    "explanation": "This command omits quotes around the ADS path, which is still valid in some contexts and matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "regedit.exe /s \"C:\\path\\to\\file.txt:hidden.reg\"",
-    "explanation": "This command uses a different ADS name (hidden.reg) but follows the same structure as the original command, matching the Sigma rule's detection criteria."
-  },
-  {
-    "output": "regedit.exe /s \"C:\\temp\\file.txt:payload.reg\"",
-    "explanation": "This command uses a different file path and ADS name but follows the same structure as the original command, matching the Sigma rule's detection criteria."
+    "output": "regedit.exe /i test.reg:stream",
+    "explanation": "This command omits the full path and uses a relative path instead. It still includes the /i flag and the ADS indicator (':stream'), making it a valid test case for the Sigma rule."
   }
 ]

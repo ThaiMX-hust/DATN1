@@ -1,18 +1,22 @@
 [
   {
-    "output": "powershell.exe -Command \"& {function C2SS { ConvertTo-SecureString -String 'MySecret' -AsPlainText -Force }; C2SS }\"",
-    "explanation": "This command uses a function to encapsulate the ConvertTo-SecureString call, which may evade detection by altering the direct appearance of the cmdlet in the command line."
+    "output": "powershell.exe -Command \"$PWord = ConvertTo-SecureString -String 'P@ssword1' -AsPlainText -Force; $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'Administrator', $PWord; Start-Process calc.exe -Credential $Credential\"",
+    "explanation": "This command uses the ConvertTo-SecureString cmdlet but is wrapped in a single -Command argument. It is a valid mutation technique using reordering and omission to avoid explicit detection by the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"& { $cmd = 'ConvertTo-SecureString'; & $cmd -String 'MySecret' -AsPlainText -Force }\"",
-    "explanation": "This command stores the cmdlet name in a variable and invokes it dynamically, which may bypass detection by not directly showing the full cmdlet name in the command line."
+    "output": "powershell.exe -Command \"$PWord = ConvertTo-SecureString -String 'P@ssword1' -AsPlainText -Force; $Credential = New-Object System.Management.Automation.PSCredential('Administrator', $PWord); Start-Process calc.exe -Credential $Credential\"",
+    "explanation": "This command uses substitution (shortened object creation syntax) and omission (removing unnecessary parentheses) to bypass the detection while maintaining the same functionality."
   },
   {
-    "output": "powershell.exe -Command \"& { $s = 'MySecret'; ConvertTo-SecureString -String $s -AsPlainText -Force }\"",
-    "explanation": "This command uses a variable to store the string input, which may avoid direct detection by not showing the plain text password or the full cmdlet in a single line."
+    "output": "powershell.exe -Command \"$PWord = ConvertTo-SecureString -String 'P@ssword1' -AsPlainText -Force; $Credential = New-Object System.Management.Automation.PSCredential('Administrator', $PWord); Start-Process -FilePath calc.exe -Credential $Credential\"",
+    "explanation": "This command uses reordering and substitution (using -FilePath instead of just the executable name) to avoid the direct detection of 'ConvertTo-SecureString' in the command line."
   },
   {
-    "output": "powershell.exe -Command \"& { $cmd = 'ConvertTo-'; $cmd += 'SecureString'; & $cmd -String 'MySecret' -AsPlainText -Force }\"",
-    "explanation": "This command concatenates the cmdlet name in parts, which may evade detection by not showing the full cmdlet name in the command line."
+    "output": "powershell.exe -Command \"$PWord = ConvertTo-SecureString -String 'P@ssword1' -AsPlainText -Force; $Credential = New-Object System.Management.Automation.PSCredential('Administrator', $PWord); Invoke-Command -ScriptBlock {Start-Process calc.exe} -Credential $Credential\"",
+    "explanation": "This command uses reordering and substitution (using Invoke-Command instead of Start-Process) to bypass the detection while maintaining the same functionality."
+  },
+  {
+    "output": "powershell.exe -Command \"$PWord = ConvertTo-SecureString -String 'P@ssword1' -AsPlainText -Force; $Credential = New-Object System.Management.Automation.PSCredential('Administrator', $PWord); Start-Process -FilePath calc.exe -Credential $Credential -WindowStyle Hidden\"",
+    "explanation": "This command uses reordering and substitution (adding -WindowStyle Hidden) to bypass the detection while maintaining the same functionality."
   }
 ]

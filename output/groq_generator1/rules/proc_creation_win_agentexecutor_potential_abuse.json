@@ -1,0 +1,14 @@
+[
+  {
+    "output": "AgentExecutor.exe -powershell script.ps1 C:\\out.txt C:\\err.txt C:\\timeout.txt 60000 C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\ 0 0",
+    "explanation": "This is a direct reproduction of the true positive command line provided in the Sigma rule. It matches the detection criteria by invoking AgentExecutor.exe with the -powershell flag."
+  },
+  {
+    "output": "copy powershell.exe AgentExecutor.exe && AgentExecutor.exe -Command \"Write-Output 'Bypassed'\"",
+    "explanation": "This command line replicates the second true positive example by copying powershell.exe to AgentExecutor.exe and then invoking it with a -Command argument. It matches the detection criteria by using the renamed binary with a PowerShell command."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell script.ps1 C:\\out.txt C:\\err.txt C:\\timeout.txt 60000 C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\ 0",
+    "explanation": "This command omits the last argument (runAs32BitOn64) while preserving the core behavior. It still triggers the Sigma rule by using the -powershell flag and matching the expected command-line structure."
+  }
+]

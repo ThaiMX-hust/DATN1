@@ -1,3 +1,0 @@
-powershell.exe -Command "Add-MpP`r`eference -ExclusionP`a`th 'C:\Temp'"
-powershell.exe -Command "Add-MpPreference -ExclusionP 'C:\Temp'"
-powershell.exe -Command "Add-MpPreference -ExclusionPath'C:\Temp'"

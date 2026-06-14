@@ -1,14 +1,27 @@
 [
   {
-    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" --buildcache --cachefilename c:\\temp\\cache.txt",
-    "explanation": "The command omits optional elements like user, password, and domain while preserving the core behavior of using --buildcache and --cachefilename, which are part of the Sigma rule's detection logic."
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" --user thaim --password P@ssword1 --domain THAIMX --dc 10.0.1.14 --bhdump --cachefilename c:\\temp\\cache.txt --outputdirectory c:\\temp\\test2",
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing detection accuracy."
   },
   {
-    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" --bhdump -o c:\\temp\\test2 --cachefilename c:\\temp\\cache.txt",
-    "explanation": "This command uses short option '-o' instead of '--outputdirectory' and omits optional elements like user and domain, while still including --bhdump and --cachefilename, which are part of the Sigma rule's detection logic."
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" --user thaim THAIMX --password P@ssword1 --dc 10.0.1.14 --buildcache --cachefilename c:\\temp\\cache.txt",
+    "explanation": "This command omits the domain parameter and uses --buildcache instead of --bhdump, which are both included in the Sigma rule's detection logic."
   },
   {
-    "output": "\"powershell.exe\" & {C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe --dnsdump}",
-    "explanation": "This command uses PowerShell to invoke SOAPHound with --dnsdump, which is part of the Sigma rule's detection logic. It is a minimal command that still matches the rule."
-  }
-]
+    "output": "\"powershell.exe\" & {C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe --user $($env:USERNAME)@$($env:USERDOMAIN) --password P@ssword1 --dc 10.0.1.14 --buildcache --cachefilename c:\\temp\\cache.txt}",
+    "explanation": "This command uses PowerShell to invoke SOAPHound with environment variables and includes --buildcache and --cachefilename, both of which are included in the Sigma rule."
+  },
+  {
+    "output": "\"powershell.exe\" & {C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe --user $env:USERNAME --password P@ssword1 --domain $env:USERDOMAIN --dc 10.0.1.14 --bhdump --cachefilename c:\\temp\\cache.txt --outputdirectory c:\\temp\\test2}",
+    "explanation": "This command uses PowerShell with environment variables and includes --bhdump, --cachefilename, and --outputdirectory, all of which are included in the Sigma rule."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" -user thaim -password P@ssword1 -domain THAIMX -dc 10.0.1.14 -bhdump -cachefilename c:\\temp\\cache.txt -outputdirectory c:\\temp\\test2",
+    "explanation": "This command uses short-form flags (-user, -password, etc.) instead of long-form flags (--user, --password, etc.), which is a valid substitution technique."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" --user thaim --password P@ssword1 --domain THAIMX --dc 10.0.1.14 --bhdump --cachefilename c:\\temp\\cache.txt --outputdirectory c:\\temp\\test2",
+    "explanation": "This command adds extra spaces and quotes to the command line, which is a valid insertion technique."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe

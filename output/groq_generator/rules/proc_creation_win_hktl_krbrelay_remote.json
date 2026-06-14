@@ -1,6 +1,26 @@
 [
   {
-    "output": "sysupdate.exe -clsid 9bf5fdf6-f947-4e34-929d-4e92a2a7a858 -target dc.domain.local -victim srv.domain.local -rbcd dc$",
-    "explanation": "Removed quotes around the -clsid argument and simplified spacing for a cleaner command line while maintaining the same functionality."
+    "output": "RemoteKrbRelay.exe -clsid <clsid> -target <target> -victim <victim>",
+    "explanation": "This command includes the required flags (-clsid, -target, -victim) that match the 'selection_cli_required' condition in the Sigma rule. It is a minimal representation of a true positive for testing."
+  },
+  {
+    "output": "RemoteKrbRelay.exe -rbcd -cn <computername>",
+    " explanation": "This command includes the '-rbcd' and '-cn' flags, which match the 'selection_cli_attack_rbcd_*' condition in the Sigma rule. It represents a minimal test case for the RBCD attack scenario."
+  },
+  {
+    "output": "RemoteKrbRelay.exe -chp -chpUser <username> -chpPass <password>",
+    "explanation": "This command includes the '-chp', '-chpUser', and '-chpPass' flags, which match the 'selection_cli_attack_changepass' condition in the Sigma rule. It represents a minimal test case for the password change attack scenario."
+  },
+  {
+    "output": "RemoteKrbRelay.exe -addgroupmember -group <groupname> -groupuser <username>",
+    "explanation": "This command includes the '-addgroupmember', '-group', and '-groupuser' flags, which match the 'selection_cli_attack_addgrpname' condition in the Sigma rule. It represents a minimal test case for the add group member attack scenario."
+  },
+  {
+    "output": "RemoteKrbRelay.exe -smb --smbkeyword interactive secrets service-add",
+    "explanation": "This command includes the '-smb', '--smbkeyword', and additional keywords 'interactive', 'secrets', and 'service-add', which match the 'selection_cli_attack_smb' condition in the Sigma rule. It represents a minimal test case for the SMB attack scenario."
+  },
+  {
+    "output": "RemoteKrbRelay.exe -clsid <clsid> -target <target> -victim <victim> -rbcd -cn <computername>",
+    "explanation": "This command combines multiple conditions from the Sigma rule, including 'selection_cli_required' and 'selection_cli_attack_rbcd_*'. It represents a more complex test case that covers multiple detection conditions."
   }
 ]

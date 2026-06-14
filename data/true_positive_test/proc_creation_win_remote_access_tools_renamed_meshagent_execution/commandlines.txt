@@ -1,3 +1,0 @@
-cmd.exe /c start remote.exe -arg1 -arg2
-cmd.exe /c "svchost.exe --m^eshServiceName"
-meshagent.exe --meshServiceName

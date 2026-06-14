@@ -1,0 +1,22 @@
+[
+  {
+    "output": "InfDefaultInstall.exe C:\\path\\to\\malicious.inf",
+    "explanation": "This is the original command that matches the Sigma rule. It directly executes InfDefaultInstall.exe with a .inf file as an argument."
+  },
+  {
+    "output": "InfDefaultInstall.exe  \"C:\\path\\to\\malicious.inf\"",
+    "explanation": "Inserted an extra space after the executable name and used quotes around the path. This is a safe mutation technique (insertion and recoding) that preserves the original behavior."
+  },
+  {
+    "output": "InfDefaultInstall.exe C:\\path\\to\\malicious.INF",
+    "explanation": "Changed the file extension to uppercase (.INF). This is a safe mutation technique (recoding) that preserves the original behavior."
+  },
+  {
+    "output": "InfDefaultInstall.exe C:\\path\\to\\malicious.inf.txt",
+    "explanation": "Appended .txt to the filename. This is a safe mutation technique (recoding) that preserves the original behavior."
+  },
+  {
+    "output": "copy InfDefaultInstall.exe not_suspicious.exe && not_suspicious.exe C:\\path\\to\\malicious.inf",
+    "explanation": "Copied the executable to a renamed file and executed it. This is a safe mutation technique (recoding) that preserves the original behavior."
+  }
+]

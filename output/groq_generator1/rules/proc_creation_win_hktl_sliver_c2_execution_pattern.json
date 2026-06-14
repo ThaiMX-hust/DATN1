@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -EncodedCommand W0NvbnNvbGVdOjpPdXRwdXRFbmNvZGluZz1bVGV4dC5VVEY4RW5jb2RpbmddOjpVVEY4",
+    "explanation": "The original command line is already a valid test case and does not require mutation."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"[Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8\"",
+    "explanation": "Replaces the encoded command with a clear-text command to simulate the same behavior, using quotes for safe insertion."
+  },
+  {
+    "output": "powershell.exe -Ex Bypass -Win H -Command \"[Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8\"",
+    "explanation": "Uses short forms of the flags (-Ex for -ExecutionPolicy, -Win for -WindowStyle) and quotes for safe insertion."
+  },
+  {
+    "output": "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"[Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8\"",
+    "explanation": "Reorders the flags while preserving the same behavior and uses quotes for safe insertion."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"[Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8\" -Command \"\"",
+    "explanation": "Adds an additional empty -Command flag to test how the parser handles multiple -Command arguments."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"[Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8\" `\"\"",
+    "explanation": "Adds an escaped quote at the end to test how the parser handles trailing quotes."
+  }
+]

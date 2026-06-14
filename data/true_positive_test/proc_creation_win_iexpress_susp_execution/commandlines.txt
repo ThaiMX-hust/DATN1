@@ -1,2 +1,0 @@
-copy "iexpress.exe" "not_iexpress.exe" && "not_iexpress.exe" /n /q /m "C:\Users\Public\Documents\config.sed"
-iexpress.exe /n/q/m C:\Windows\config.sed

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"& {. 'C:\\AtomicRedTeam\\atomics\\T1134.004\\src\\PPID-Spoof.ps1' $ppid=Get-Process explorer | select -expand id PPID-Spoof -ppid $ppid -spawnto 'C:\\Program Files\\Internet Explorer\\iexplore.exe' -dllpath 'C:\\AtomicRedTeam\\atomics\\T1134.004\\bin\\calc.dll'}\"",
+    "explanation": "The original command is modified by replacing the complex call with a simplified PowerShell -Command execution. Spaces and quotes are adjusted for safe parsing while maintaining the same behavior."
+  },
+  {
+    "output": "node.exe -e \"require('child_process').execSync('cmd /c echo PPID-spoof')\"",
+    "explanation": "This is a safe test command that simulates the presence of the keyword 'PPID-spoof' in the command line without executing malicious behavior. It uses Node.js to execute a harmless command."
+  }
+]

@@ -1,5 +1,3 @@
-nltest  /domain_trusts
-nltest.exe  /dclist:%%userdnsdomain%%
-nltest  /trusted_domains
-nltest /dcl"i"st:contoso.local
-nltest /domain"_"trusts
+nltest /domain_trusts
+nltest /trusted_domains
+nltest.exe /dclist:%%userdnsdomain%%

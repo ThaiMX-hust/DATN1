@@ -1,13 +1,10 @@
-"powershell.exe" & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe' $com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(\""Excel.Application\"",\""localhost\"")) $com.ActivateMicrosoftApp(\""5\"")}
-"cmd.exe" /c certutil -encode C:\Windows\System32\calc.exe %%temp%%\T1140_calc.txt & certutil -decode %%temp%%\T1140_calc.txt %%temp%%\T1140_calc_decoded.exe
-"cmd.exe" /c copy %%windir%%\system32\certutil.exe %%temp%%\tcm.tmp & %%temp%%\tcm.tmp -encode C:\Windows\System32\calc.exe %%temp%%\T1140_calc2.txt & %%temp%%\tcm.tmp -decode %%temp%%\T1140_calc2.txt %%temp%%\T1140_calc2_decoded.exe
-C:\Users\thaim\AppData\Local\Temp\tcm.tmp  -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt
-certutil  -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc.txt
-"cmd.exe" /c set comspec=%%windir%%\System32\calc.exe & cscript %%windir%%\System32\manage-bde.wsf
 "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-gpu-sandbox --gpu-launcher="C:\\Windows\\System32\\calc.exe &&" --flag-switches-begin --flag-switches-end --do-not-de-elevate
 "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-gpu-sandbox "--gpu-launcher=C:\\Windows\\System32\\calc.exe &&"
-"powershell.exe" & {$edgePath64 = \""C:\Program Files\Microsoft\Edge\Application\msedge.exe\"" if (Test-Path $edgePath64) {     $edgePath = $edgePath64 } else {     # Check 32-bit Edge installation path     $edgePath32 = \""C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe\""     if (Test-Path $edgePath32) {         $edgePath = $edgePath32     } else {         exit 1     } } & $edgePath --disable-gpu-sandbox --gpu-launcher=\""C:\\Windows\\System32\\calc.exe &&\"" sleep 5 taskkill -f -im msedge.exe taskkill -f -im calc.exe taskkill -f -im win32calc.exe}
+"cmd.exe" /c certutil -encode C:\Windows\System32\calc.exe %%temp%%\T1140_calc.txt & certutil -decode %%temp%%\T1140_calc.txt %%temp%%\T1140_calc_decoded.exe
 "cmd.exe" /c copy %%windir%%\System32\calc.exe not_an_scr.scr & rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.scr
-"calc.exe" -suspicious_flag
-calc.exe/parameter
-copy calc.exe math.exe && math.exe -suspicious_flag
+"cmd.exe" /c copy %%windir%%\system32\certutil.exe %%temp%%\tcm.tmp & %%temp%%\tcm.tmp -encode C:\Windows\System32\calc.exe %%temp%%\T1140_calc2.txt & %%temp%%\tcm.tmp -decode %%temp%%\T1140_calc2.txt %%temp%%\T1140_calc2_decoded.exe
+"cmd.exe" /c set comspec=%%windir%%\System32\calc.exe & cscript %%windir%%\System32\manage-bde.wsf
+"powershell.exe" & {$edgePath64 = \""C:\Program Files\Microsoft\Edge\Application\msedge.exe\"" if (Test-Path $edgePath64) { $edgePath = $edgePath64 } else { # Check 32-bit Edge installation path $edgePath32 = \""C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe\"" if (Test-Path $edgePath32) { $edgePath = $edgePath32 } else { exit 1 } } & $edgePath --disable-gpu-sandbox --gpu-launcher=\""C:\\Windows\\System32\\calc.exe &&\"" sleep 5 taskkill -f -im msedge.exe taskkill -f -im calc.exe taskkill -f -im win32calc.exe}
+"powershell.exe" & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe' $com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(\""Excel.Application\"",\""localhost\"")) $com.ActivateMicrosoftApp(\""5\"")}
+C:\Users\thaim\AppData\Local\Temp\tcm.tmp -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt
+certutil -encode C:\Windows\System32\calc.exe C:\Users\thaim\AppData\Local\Temp\T1140_calc.txt

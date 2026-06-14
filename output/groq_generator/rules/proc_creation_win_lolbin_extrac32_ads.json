@@ -1,14 +1,18 @@
 [
   {
-    "output": "extrac32.exe /Y /L \"C:\\\\target\\\\path\\\" C:\\\\test\\\\data.cab file.txt:ads",
-    "explanation": "The command uses substitution of the long path format and quotes, and omits unnecessary elements while preserving the ADS execution behavior."
+    "output": "extrac32.exe -F\".cab\" C:\\Temp\\test.cab:test.txt",
+    "explanation": "This command simulates the use of Extrac32 to extract a .cab file and create an alternate data stream (ADS) named 'test.txt'. The command includes a colon in the filename to match the Sigma rule's regex condition for ADS detection."
   },
   {
-    "output": "extrac32.exe /L \"C:\\\\target\\\\path\\\" C:\\\\test\\\\data.cab file.txt:ads",
-    "explanation": "The command omits the /Y flag, which is optional in many cases, and uses quotes and path normalization to bypass detection while maintaining the same behavior."
+    "output": "extrac32.exe -F \".cab\" C:\\Temp\\test.cab:test.txt",
+    "explanation": "This command uses an escaped quote to bypass the Sigma rule's detection by altering the command structure while still creating an alternate data stream. The insertion of escape characters changes the appearance without altering the behavior."
   },
   {
-    "output": "extrac32.exe -Y -L \"C:\\\\target\\\\path\\\" C:\\\\test\\\\data.cab file.txt:ads",
-    "explanation": "The command substitutes /Y with -Y (equivalent syntax) and uses quotes and path normalization to evade detection while preserving the original behavior."
+    "output": "extrac32.exe -F .cab C:\\Temp\\test.cab:test.txt",
+    "explanation": "This command omits the quotes around the .cab extension, which may bypass detection if the Sigma rule relies on specific formatting. The behavior remains unchanged, and the ADS is still created."
+  },
+  {
+    "output": "extrac32.exe C:\\Temp\\test.cab:test.txt -F .cab",
+    "explanation": "This command reorders the arguments to test if the Sigma rule's detection is sensitive to argument order. The command still creates an alternate data stream and matches the rule's conditions."
   }
 ]

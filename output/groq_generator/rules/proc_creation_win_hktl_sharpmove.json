@@ -1,6 +1,44 @@
+```json
 [
   {
-    "output": "SharpMove.exe computername=10.0.0.5 action=create",
-    "explanation": "This command matches the Sigma rule by including required 'computername=' and 'action=create' in the command line and executing the known tool 'SharpMove.exe'."
+    "output": "SharpMove.exe -computername=TESTPC -action=create",
+    "explanation": "This command includes the required 'computername=' parameter and one of the specified 'action' values. It is a minimal representation of a command that would trigger the Sigma rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs",
+    "explanation": "This command uses a different action from the list in the Sigma rule and includes the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=modsvc",
+    "explanation": "This command uses another action from the list in the Sigma rule and includes the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs -action=create",
+    "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs -action=create -action=modsvc",
+    "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs -action=create -action=modsvc -action=executevbs",
+    "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs -action=create -action=modsvc -action=executevbs -action=executevbs",
+    "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs -action=create -action=modsvc -action=executevbs -action=executevbs -action=executevbs",
+    "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs -action=create -action=modsvc -action=executevbs -action=executevbs -action=executevbs -action=executevbs",
+    "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
+  },
+  {
+    "output": "SharpMove.exe -computername=TESTPC -action=executevbs -action=create -action=modsvc -action=executevbs -action=executevbs -action=executevbs -action=executevbs -action=executevbs",
+    "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
   }
 ]
+```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"move script.ps1 s.ps1 && powershell.exe -File s.ps1\"",
+    "explanation": "The command is already a valid test case. No mutation is needed to trigger the Sigma rule as it directly involves PowerShell execution, which is detected by the rule."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File malicious.ps1",
+    "explanation": "This command is a simplified version of the original test command. It removes the `cmd.exe` wrapper and focuses on PowerShell execution, which is still relevant to the Sigma rule."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\cmd.exe\" /c \"copy powershell.exe %TEMP%\\_powershell.exe && start-process ONENOTE.EXE -ArgumentList '/hyperlink C:\\path\\to\\malicious.one' && %TEMP%\\_powershell.exe -ExecutionPolicy Bypass -File malicious.ps1\"",
+    "explanation": "This command uses reordering and insertion techniques to simulate the same behavior as the original test command but in a slightly different format. It still involves OneNote execution and PowerShell execution, which aligns with the Sigma rule."
+  }
+]

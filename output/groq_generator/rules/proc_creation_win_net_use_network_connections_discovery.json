@@ -1,34 +1,42 @@
 [
   {
-    "output": "net  use \\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Original command with no mutation applied."
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"Password!\"",
+    "explanation": "Reordered and omitted unnecessary quotes while preserving the original command's functionality."
   },
   {
-    "output": "net use \"\\Target\\C$\" P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Inserted quotes around UNC path for safe command-line mutation."
+    "output": "\"C:\\\\WINDOWS\\system32\\net.exe\" sessions",
+    "explanation": "Inserted quotes and escaped backslashes for path normalization, which is still parsed correctly."
   },
   {
-    "output": "net  use  \\\\Target\\\\C$  P@ssw0rd1  /u:DOMAIN\\\\Administrator",
-    "explanation": "Inserted additional backslashes for path normalization and spacing."
+    "output": "net1 use * \\\\example.com\\sales /TRANSPORT:QUIC /SKIPCERTCHECK",
+    "explanation": "Replaced 'net.exe' with 'net1.exe' and adjusted spacing to test bypass detection."
+  },
+  {
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim Password1",
+    "explanation": "Removed quotes around the password to test if the detection relies on them."
+  },
+  {
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"ChangeMe!\"",
+    "explanation": "Used quotes only around the password to test detection sensitivity to formatting."
+  },
+  {
+    "output": "net use c: \\\\test\\share",
+    "explanation": "Omitted unnecessary spaces and tested minimal command structure."
+  },
+  {
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"Spring2022\"",
+    "explanation": "Used quotes around the password to test detection sensitivity to formatting."
+  },
+  {
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim 1q2w3e4r",
+    "explanation": "Removed quotes around the password to test if detection relies on them."
   },
   {
     "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Replaced double backslashes with single backslashes for path normalization."
+    "explanation": "Omitted quotes and tested minimal command structure for bypass."
   },
   {
-    "output": "net.exe use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Used .exe extension explicitly for testing."
-  },
-  {
-    "output": "net  use  \\\\Target\\C$  P@ssw0rd1  /u:DOMAIN\\Administrator",
-    "explanation": "Inserted additional spaces for safe command-line mutation."
-  },
-  {
-    "output": "cmd.exe /c net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Wrapped command in cmd.exe for safe execution in test environment."
-  },
-  {
-    "output": "powershell.exe -Command \"net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator\"",
-    "explanation": "Wrapped command in PowerShell for safe execution in test environment."
+    "output": "net sessions",
+    "explanation": "Used the shortest valid form of the command to test detection sensitivity."
   }
 ]

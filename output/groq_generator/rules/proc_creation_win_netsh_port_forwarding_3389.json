@@ -1,6 +1,8 @@
+```json
 [
   {
-    "output": "netsh interface portproxy add v4tov4 listenport=3389 connectport=80 connectaddress=10.0.0.5",
-    "explanation": "Replaced 'PORTPROXY' with lowercase 'portproxy' to test case-insensitive parsing and verify detection resilience."
+    "output": "netsh.exe interface portproxy add v4tov4 listenport=3389 listenaddress=192.0.2.10 connectport=3389 connectaddress=192.0.2.10",
+    "explanation": "The original command is already a valid test case and cannot be mutated further without changing its behavior or omitting required parameters."
   }
 ]
+```

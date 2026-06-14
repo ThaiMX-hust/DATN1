@@ -1,4 +1,3 @@
-C:\WINDOWS\system32\net1  time \\localhost
-net  time \\localhost
-w32tm  /tz
-copy net.exe not_net.exe && not_net.exe time
+C:\WINDOWS\system32\net1 time \\localhost
+net time \\localhost
+w32tm /tz

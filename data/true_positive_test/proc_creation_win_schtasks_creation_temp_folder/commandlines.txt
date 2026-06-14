@@ -1,1 +1,1 @@
-C:\Temp ewtask.sys /create /sc once
+schtasks.exe /create /tn "TestTask1" /tr "C:\Windows\Temp\test.txt" /sc once /st 12:00

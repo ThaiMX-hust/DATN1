@@ -1,0 +1,38 @@
+[
+  {
+    "output": "TrolleyExpress.exe 755",
+    "explanation": "This command matches the Sigma rule as it uses the expected executable name and passes a process ID in the valid range."
+  },
+  {
+    "output": "TrolleyExpress.exe \"755\"",
+    "explanation": "This command uses quotes around the process ID, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "TrolleyExpress.exe -ma 755",
+    "explanation": "This command includes the '-ma' flag, which is explicitly listed in the Sigma rule as a detection pattern."
+  },
+  {
+    "output": "TrolleyExpress.exe 1044",
+    "explanation": "This command uses a process ID outside the typical range but still matches the Sigma rule because it uses the whitelisted executable name."
+  },
+  {
+    "output": "TrolleyExpress.exe 700",
+    "explanation": "This command uses a process ID at the lower end of the expected range and matches the Sigma rule."
+  },
+  {
+    "output": "TrolleyExpress.exe 999",
+    "explanation": "This command uses a process ID at the upper end of the expected range and matches the Sigma rule."
+  },
+  {
+    "output": "TrolleyExpress.exe 755\\r\\n",
+    "explanation": "This command uses newline characters after the process ID, which may be parsed correctly and still match the Sigma rule."
+  },
+  {
+    "output": "TrolleyExpress.exe 755 | echo bypass",
+    "explanation": "This command appends a harmless pipeline to the original command, which may not affect detection but is included for testing purposes."
+  },
+  {
+    "output": "TrolleyExpress.exe `755`",
+    "explanation": "This command uses backticks to enclose the process ID, which is a safe mutation technique and still matches the Sigma rule."
+  }
+]

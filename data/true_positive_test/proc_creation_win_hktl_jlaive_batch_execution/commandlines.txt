@@ -1,3 +1,0 @@
-cmd.exe /c "script.bat " && xcopy powershell.exe script.bat.exe*
-cmd.exe /c script.bat && copy powershell.exe script.bat.exe
-cmd.exe /c script.cmd && xcopy powershell.exe hidden.cmd.exe*

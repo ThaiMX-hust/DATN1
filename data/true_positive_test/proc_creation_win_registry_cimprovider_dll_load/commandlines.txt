@@ -1,3 +1,1 @@
-C:\Windows\SysWow64\Register-CimProvider.exe  -Path "C:\AtomicRedTeam\atomics\T1218\src\Win32\T1218-2.dll"
-copy register-cimprovider.exe not_reg.exe && not_reg.exe -path evil.dll
-register-cimprovider.exe -path C:\Path\To\Malicious.tmp
+C:\Windows\SysWow64\Register-CimProvider.exe -Path "C:\AtomicRedTeam\atomics\T1218\src\Win32\T1218-2.dll"

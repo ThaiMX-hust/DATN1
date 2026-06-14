@@ -1,0 +1,18 @@
+[
+  {
+    "output": "setspn.exe -T %USERDNSDOMAIN% \"-q\" */*",
+    "explanation": "Insertion technique: Wrapped the query flag '-q' in double quotes. The Windows command-line argument parser handles quoted flags normally, but this modification breaks the contiguous unquoted string search for ' -q ' specified in selection_cli."
+  },
+  {
+    "output": "setspn.exe -T %USERDNSDOMAIN% -q:*/+",
+    "explanation": "Substitution technique: Replaced the standard space separation between the option flag and its argument with a colon character ('-q:*/+'). The setspn utility natively parses the colon format for queries, which successfully removes the mandatory trailing space inside the ' -q ' selection criterion."
+  },
+  {
+    "output": "cmd.exe /c setspn.exe -T %USERDNSDOMAIN% -^q */*",
+    "explanation": "Insertion technique: Injected a caret (^) escape character into the middle of the parameter flag ('-^q') while invoking execution via cmd.exe. The shell evaluates and strips the caret out before launching the utility, but process logs store the raw caret sequence, evading the exact literal rules in selection_cli."
+  },
+  {
+    "output": "setspn.exe -T %USERDNSDOMAIN% -q\t*/*",
+    "explanation": "Insertion technique: Replaced the trailing space after the query option with a horizontal tab character (\\t). Windows process creation engines capture tabs as part of the command line, which breaks string logic requiring literal spaces (' -q ') while remaining functionally equivalent for tokenizing parameters."
+  }
+]

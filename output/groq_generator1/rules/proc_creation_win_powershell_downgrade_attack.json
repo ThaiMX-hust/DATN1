@@ -1,0 +1,38 @@
+[
+  {
+    "output": "powershell.exe -Version 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria, as it explicitly uses '-Version 2' in the command line."
+  },
+  {
+    "output": "powershell.exe -v 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "The '-v' shorthand is equivalent to '-Version' and is included in the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -ver 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "The '-ver' shorthand is equivalent to '-Version' and is included in the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -vers 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "The '-vers' shorthand is equivalent to '-Version' and is included in the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -versi 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "The '-versi' shorthand is equivalent to '-Version' and is included in the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -versio 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "The '-versio' shorthand is equivalent to '-Version' and is included in the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -version 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria, as it explicitly uses '-version 2' in the command line."
+  },
+  {
+    "output": "powershell.exe -Version 2.0 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria, as it explicitly uses '-Version 2' in the command line."
+  },
+  {
+    "output": "copy powershell.exe updater.exe && updater.exe -version 2 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria, as it explicitly uses '-version 2' in the command line."
+  }
+]

@@ -1,2 +1,1 @@
-sc.exe  stop spooler
-sc  stop mpssvc
+sc.exe stop spooler

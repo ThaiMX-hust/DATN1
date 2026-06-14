@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe \"shell32\".dll,Control_RunDLL C:\\Users\\Public\\benign.cpl",
+    "explanation": "Insertion technique: Placing double quotes around the library filename '\"shell32\".dll' splits the contiguous character sequence in raw process telemetry logs. While the Windows loader natively ignores internal quotes during target loading and parses 'shell32.dll' seamlessly, this breaks the continuous string lookup constraint required by the 'CommandLine|contains|all' list item, successfully preventing rule evaluation."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe shell32.dll,Control_R^unDLL C:\\Users\\Public\\benign.cpl",
+    "explanation": "Insertion technique: Invoking via the standard command processor allows the insertion of a command-line caret escape character (^) directly inside the destination function export name token ('Control_R^unDLL'). The cmd shell processes and drops the character prior to spawning the process image, leaving the executable logic equivalent, whereas tracking engines record the literal character, bypassing string verification matching rules."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,Control_RunDLL C:\\Users\\%USERNAME%\\..\\Public\\benign.cpl",
+    "explanation": "Recoding / Path Normalization technique: Referencing a directory destination through an unmonitored path structure like '%USERNAME%\\..\\Public\\' leverages canonical folder traversal logic. The OS accurately locates the correct target library folder destination, while evading all static directory and environment variable blocklists configured within the rule's secondary lookup constraints (such as '\\Users\\Public\\')."
+  }
+]

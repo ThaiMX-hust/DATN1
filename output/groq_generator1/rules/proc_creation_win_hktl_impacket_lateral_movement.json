@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /Q /c whoami 1> \\\\127.0.0.1\\ADMIN$\\__1567439113.54 2>&1",
+    "explanation": "This command mimics the structure of a typical wmiexec.py lateral movement command. It uses the same command-line arguments and redirection pattern to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /Q /c cd  1> \\\\127.0.0.1\\ADMIN$\\__1567439113.54 2>&1",
+    "explanation": "This command mirrors the behavior of dcomexec.py, using the same command-line structure and output redirection to a UNC path, which aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\cmd.exe\" /Q /c cd  1> \\\\127.0.0.1\\ADMIN$\\__1567442499.05 2>&1",
+    "explanation": "This command simulates the execution pattern seen in dcomexec.py with the MMC20 object. It includes quoted path syntax and redirection to a UNC path, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\system32\\cmd.exe /Q /c echo tasklist ^> \\\\127.0.0.1\\C$\\__output 2^>^&1 > C:\\Windows\\TEMP\\execute.bat & C:\\Windows\\system32\\cmd.exe /Q /c C:\\Windows\\TEMP\\execute.bat & del C:\\Windows\\TEMP\\execute.bat",
+    "explanation": "This command emulates the behavior of smbexec.py, including the use of a temporary batch file and redirection to a UNC path. It matches the Sigma rule's detection logic for smbexec activity."
+  },
+  {
+    "output": "cmd.exe /C tasklist /m > C:\\Windows\\Temp\\bAJrYQtL.tmp 2>&1",
+    "explanation": "This command simulates the structure of an atexec.py lateral movement command. It includes the use of /C and output redirection to a temporary file, which aligns with the Sigma rule's detection criteria."
+  }
+]

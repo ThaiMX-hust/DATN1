@@ -1,22 +1,28 @@
+```json
 [
   {
-    "output": "bash.exe -c \"whoami\"",
-    "explanation": "The original command is already a valid test case. No mutation is needed for this baseline."
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe -c \"whoami\"",
+    "explanation": "The original command is preserved as a baseline for testing."
   },
   {
-    "output": "bash.exe -c'whoami'",
-    "explanation": "Single quotes are used instead of double quotes to enclose the command, which is a valid syntax substitution."
+    "output": "\"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\\\\bash.exe\" -c \"whoami\"",
+    "explanation": "Added quotes around the executable path to test parsing behavior while maintaining functionality."
   },
   {
-    "output": "bash.exe -c whoami",
-    "explanation": "Quotes are omitted since the command is a single word and does not require them for parsing."
+    "output": "C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\\\\bash.exe -c whoami",
+    "explanation": "Removed quotes around the command argument to test if the rule detects the -c flag without quotes."
   },
   {
-    "output": "bash.exe -c\"whoami\"",
-    "explanation": "Escape characters are inserted before the quotes to demonstrate safe mutation techniques while preserving functionality."
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe -c `whoami`",
+    "explanation": "Used backticks for command substitution as an alternative syntax to test detection resilience."
   },
   {
-    "output": "bash.exe -c \"whoami\" --",
-    "explanation": "A harmless '--' is appended to indicate end of options, which is accepted by many command-line tools and does not affect execution."
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe -c \"\\\"whoami\\\"\"",
+    "explanation": "Escaped quotes inside the command to test parsing and detection behavior."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe -c \"$(whoami)\"",
+    "explanation": "Used command substitution with $() as an alternative to test detection coverage."
   }
 ]
+```

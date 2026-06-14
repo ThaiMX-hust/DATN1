@@ -1,0 +1,22 @@
+[
+  {
+    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin",
+    "explanation": "The original command is already a valid test command that matches the Sigma rule. No mutation is needed for this test case."
+  },
+  {
+    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -z",
+    "explanation": "Added an optional flag (-z) that may be present in some variants of the tool. This is a safe mutation that preserves the core behavior for testing."
+  },
+  {
+    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -c \"{cmd.exe}\"",
+    "explanation": "Added a -c flag with a command string to simulate JuicyPotatoNG's behavior. This is a safe mutation that aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -c \"{\\\"cmd.exe\\\"}\"",
+    "explanation": "Escaped the command string to simulate encoded or escaped payloads. This is a safe mutation that aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -c \"{cmd.exe}\" -z",
+    "explanation": "Combined multiple flags to simulate JuicyPotatoNG behavior. This is a safe mutation that aligns with the Sigma rule's detection logic."
+  }
+]

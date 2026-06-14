@@ -1,6 +1,22 @@
 [
   {
-    "output": "copy \"Mouse Lock_2.0.exe\" \"sys_util.exe\" && \"sys_util.exe\"",
-    "explanation": "The original command is already a valid test case. No mutation is needed to maintain the same behavior for testing purposes."
+    "output": "Mouse Lock_ -h",
+    "explanation": "This command simulates a basic invocation of the Mouse Lock tool, which may be detected by the Sigma rule. The command includes the 'Mouse Lock_' string to match the rule's 'CommandLine' condition."
+  },
+  {
+    "output": "\"Mouse Lock_\" -h",
+    "explanation": "This command uses quotes to wrap the executable name, a safe mutation technique, while still matching the Sigma rule's 'CommandLine' condition."
+  },
+  {
+    "output": "Mouse Lock_ -?",
+    "explanation": "This command uses an alternative flag (-?) instead of -h to simulate a help command, which may be accepted by the tool and still match the Sigma rule's 'CommandLine' condition."
+  },
+  {
+    "output": "MouseLock_ -h",
+    "explanation": "This command omits the space between 'Mouse' and 'Lock_', which may still be accepted by the tool depending on its parsing logic, while matching the Sigma rule's 'CommandLine' condition."
+  },
+  {
+    "output": "Mouse\\ Lock_ -h",
+    "explanation": "This command uses a backslash to separate 'Mouse' and 'Lock_', simulating a path-like structure, which may still be parsed correctly by the tool and match the Sigma rule."
   }
 ]

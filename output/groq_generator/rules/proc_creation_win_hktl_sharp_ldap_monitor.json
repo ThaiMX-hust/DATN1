@@ -1,0 +1,22 @@
+[
+  {
+    "output": "SharpLDAPmonitor.exe /user:admin /pass:password /dcip:192.168.1.1",
+    "explanation": "This command includes the required flags '/user:', '/pass:', and '/dcip:' as specified in the Sigma rule. It simulates a typical execution of SharpLDAPmonitor.exe with valid command-line arguments."
+  },
+  {
+    "output": "SharpLDAPmonitor.exe -user admin -pass password -dcip 192.168.1.1",
+    "explanation": "This command uses substitution by replacing '/' with '-', which is a common equivalent syntax in command-line tools. It maintains the same behavior while altering the format."
+  },
+  {
+    "output": "SharpLDAPmonitor.exe /user:admin /pass:password /dcip:192.168.1.1",
+    "explanation": "This command omits unnecessary whitespace and uses minimal formatting to simulate a compact execution of the tool. It retains all required flags."
+  },
+  {
+    "output": "SharpLDAPmonitor.exe /dcip:192.168.1.1 /user:admin /pass:password",
+    "explanation": "This command reorders the arguments, which is often accepted by command-line tools. It still includes all required flags as specified in the Sigma rule."
+  },
+  {
+    "output": "SharpLDAPmonitor.exe /user:admin /pass:password /dcip:`192.168.1.1`",
+    "explanation": "This command uses recoding by enclosing the IP address in backticks, which may be parsed correctly by the tool. It maintains the required flags and values."
+  }
+]

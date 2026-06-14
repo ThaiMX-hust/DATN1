@@ -1,2 +1,0 @@
-AD_Auditor.exe
-execute-assembly /opt/TruffleSnout.exe

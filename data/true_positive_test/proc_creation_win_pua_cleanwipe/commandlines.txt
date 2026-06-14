@@ -1,4 +1,0 @@
-CATClean.exe -uninstall
-copy SepRemovalToolNative_x64.exe not_an_installer.exe && not_an_installer.exe
-NetInstaller.exe /r
-WFPUnins.exe /enterprise /uninstal

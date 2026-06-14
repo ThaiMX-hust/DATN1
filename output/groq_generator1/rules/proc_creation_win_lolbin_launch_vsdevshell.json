@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsWherePath 'evil.exe' -VsInstallationPath 'C:\\'",
+    "explanation": "This command uses single quotes instead of double quotes for the argument values, which is a valid syntax substitution and should still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsWherePath evil.exe -VsInstallationPath C:\\",
+    "explanation": "This command omits the quotes around the arguments, assuming the values do not contain spaces. This is a valid mutation that should still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsInstallationPath \"C:\\\" -VsWherePath \"evil.exe\"",
+    "explanation": "This command reorders the arguments, which is allowed if the program accepts arguments in any order. It should still trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsWherePath \"evil.exe\" -VsInstallationPath \"C:\\\"",
+    "explanation": "This is the original command structure with no mutation applied, serving as a baseline for comparison."
+  }
+]

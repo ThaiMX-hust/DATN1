@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v PythonFunctionWarnings /d 0 /f",
+    "explanation": "This command uses omission and reordering to simplify the original command while maintaining the same registry modification behavior. It removes unnecessary elements like quotes around the value and uses a simpler decimal format for the value data."
+  },
+  {
+    "output": "reg.exe add HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security /v PythonFunctionWarnings /t REG_DWORD /d 0 /f",
+    "explanation": "This command uses omission and reordering to simplify the original command while maintaining the same registry modification behavior. It removes quotes and unnecessary elements while using the decimal format for the value data."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v PythonFunctionWarnings /t REG_DWORD /d 0 /f",
+    "explanation": "This command uses omission and reordering to simplify the original command while maintaining the same registry modification behavior. It removes unnecessary elements like quotes around the value and uses a simpler decimal format for the value data."
+  }
+]

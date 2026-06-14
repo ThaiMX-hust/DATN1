@@ -1,22 +1,22 @@
 [
   {
-    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionPath 'C:\\\\Temp'\"",
-    "explanation": "This is a direct match to the Sigma rule as it uses the 'Add-MpPreference' cmdlet with the '-ExclusionPath' parameter."
+    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionPath 'C:\\\\TestFolder'\"",
+    "explanation": "This command uses PowerShell to add a Defender exclusion path. It includes quotes around the command line and uses the full cmdlet name, which aligns with the Sigma rule's detection criteria."
   },
   {
-    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionPath C:\\\\Temp\"",
-    "explanation": "This command omits the quotes around the path, but still triggers the rule because it contains the exact parameter and cmdlet."
+    "output": "powershell.exe -c \"Set-MpPreference -ExclusionProcess 'notepad.exe'\"",
+    "explanation": "This command uses the short form of the -Command parameter (-c) and sets a Defender exclusion for a process. It matches the Sigma rule's detection of Set-MpPreference with exclusion parameters."
   },
   {
-    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionPath `\"C:\\\\Temp`\"\"",
-    "explanation": "This command uses escaped double quotes around the path, which is a safe mutation technique and still matches the rule."
+    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionExtension \".txt\"\"",
+    "explanation": "This command adds an exclusion for a file extension using Add-MpPreference. The use of quotes and escaped double quotes demonstrates safe mutation techniques while maintaining the original intent."
   },
   {
-    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionPath C:\\\\Temp\\\"",
-    "explanation": "This command uses a trailing backslash, which is allowed in paths and does not affect detection by the Sigma rule."
+    "output": "powershell.exe -Command \"Set-MpPreference -ExclusionIpAddress '192.168.1.1'\"",
+    "explanation": "This command sets an exclusion for an IP address using Set-MpPreference. It uses the -Command parameter and includes quotes around the command line, aligning with the Sigma rule's detection criteria."
   },
   {
-    "output": "powershell.exe -Command \"Set-MpPreference -ExclusionPath 'C:\\\\Temp'\"",
-    "explanation": "This command uses the 'Set-MpPreference' cmdlet instead of 'Add-MpPreference', which is also detected by the Sigma rule."
+    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionPath 'C:\\\\TestFolder\\'\\\"\"",
+    "explanation": "This command uses an escaped quote at the end of the path to demonstrate safe mutation techniques. The command remains valid and matches the Sigma rule's detection of Add-MpPreference with exclusion parameters."
   }
 ]

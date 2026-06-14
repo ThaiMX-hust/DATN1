@@ -1,0 +1,18 @@
+[
+  {
+    "output": "ScriptRunner.exe \"-appvscript\" C:\\Windows\\Temp\\test.cmd",
+    "explanation": "Insertion technique: Wrapping the target parameter flag in double quotes breaks the exact, contiguous literal text substring matching logic (' -appvscript ') specified by selection_cli. Because the standard Windows argument parsing framework naturally cleanses and strips double quotes from strings before passing them to the application's underlying code, the utility functions completely normally in a controlled test environment."
+  },
+  {
+    "output": "cmd.exe /c ScriptRunner.exe -appv^script C:\\Windows\\Temp\\test.cmd",
+    "explanation": "Insertion technique: Injecting a shell caret (^) escape symbol directly into the argument string creates '-appv^script' in raw process telemetry logs, which comfortably avoids the static rule signature. The Windows command processor strips this character away right before program initiation, leaving the utility performance unhindered."
+  },
+  {
+    "output": "ScriptRunner.exe\\t-appvscript\\tC:\\Windows\\Temp\\test.cmd",
+    "explanation": "Substitution technique: Exchanging standard structural white spaces with horizontal tab characters (\\t). The underlying Windows command-line tokenizer accepts tabs as fully functional parameter delimiters, but this modification changes the character sequence from a space to a tab, evading the rule's strict requirement for both a leading and trailing literal space (' -appvscript ')."
+  },
+  {
+    "output": "ScriptRunner.exe /appvscript C:\\Windows\\Temp\\test.cmd",
+    "explanation": "Substitution technique: Swapping out the leading hyphen/dash delimiter with a standard forward slash character ('/'). ScriptRunner natively handles both styles interchangeably for its argument properties, but this action breaks the rule logic which explicitly limits its pattern tracking to the dash string syntax."
+  }
+]

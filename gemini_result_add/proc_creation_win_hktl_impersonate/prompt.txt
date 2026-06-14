@@ -1,0 +1,83 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: HackTool - Impersonate Execution
+id: cf0c254b-22f1-4b2b-8221-e137b3c0af94
+status: test
+description: Detects execution of the Impersonate tool. Which can be used to manipulate tokens on a Windows computers remotely (PsExec/WmiExec) or interactively
+references:
+    - https://sensepost.com/blog/2022/abusing-windows-tokens-to-compromise-active-directory-without-touching-lsass/
+    - https://github.com/sensepost/impersonate
+author: Sai Prashanth Pulisetti @pulisettis
+date: 2022-12-21
+modified: 2024-11-23
+tags:
+    - attack.privilege-escalation
+    - attack.defense-evasion
+    - attack.t1134.001
+    - attack.t1134.003
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_commandline_exe:
+        CommandLine|contains: 'impersonate.exe'
+    selection_commandline_opt:
+        CommandLine|contains:
+            - ' list '
+            - ' exec '
+            - ' adduser '
+    selection_hash:
+        Hashes|contains:
+            - 'MD5=9520714AB576B0ED01D1513691377D01'
+            - 'SHA256=E81CC96E2118DC4FBFE5BAD1604E0AC7681960143E2101E1A024D52264BB0A8A'
+            - 'IMPHASH=0A358FFC1697B7A07D0E817AC740DF62'
+    condition: all of selection_commandline_* or selection_hash
+falsepositives:
+    - Unknown
+level: medium
+```
+
+True positive test command:
+
+```text
+
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

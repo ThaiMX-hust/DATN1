@@ -1,0 +1,18 @@
+[
+  {
+    "output": "PowerShell -Command \"Enable-WindowsOptionalFeature -Online -FeatureName 'TelnetServer'\"",
+    "explanation": "This command enables the 'TelnetServer' feature using the Enable-WindowsOptionalFeature cmdlet with the required '-Online' and '-FeatureName' parameters. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "PowerShell -Command ^\"Enable-WindowsOptionalFeature -Online -FeatureName ^\"^\"TelnetServer^\"^\"^\"",
+    "explanation": "This command uses escape characters and quotes to obfuscate the original command slightly, but it still executes the same action and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "PowerShell -Command \"Enable-WindowsOptionalFeature -Online -FeatureName Internet-Explorer-Optional-amd64\"",
+    "explanation": "This command enables the 'Internet-Explorer-Optional-amd64' feature using the Enable-WindowsOptionalFeature cmdlet with the required '-Online' and '-FeatureName' parameters. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "PowerShell -Command \"Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux\"",
+    "explanation": "This command enables the 'Microsoft-Windows-Subsystem-Linux' feature using the Enable-WindowsOptionalFeature cmdlet with the required '-Online' and '-FeatureName' parameters. It matches the Sigma rule's detection criteria."
+  }
+]

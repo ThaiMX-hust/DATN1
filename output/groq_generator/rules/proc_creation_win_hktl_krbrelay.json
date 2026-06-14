@@ -1,10 +1,22 @@
 [
   {
-    "output": "KrbRelay.exe -spn cifs/target.domain.local -clsid {12345678-1234-1234-1234-123456789012} -rbcd target$",
-    "explanation": "The command uses substitution by replacing '/' with '-' for flag syntax, which is a valid mutation technique. The command still matches the Sigma rule's detection criteria."
+    "output": "KrbRelay.exe -spn \"HTTP/target.domain.com\" -clsid {12345678-1234-1234-1234-123456789012} -rbcd",
+    "explanation": "This command includes the required flags (-spn, -clsid, -rbcd) and uses quotes around the SPN value to simulate a valid command line. It matches the Sigma rule's selection_cli_1 condition."
   },
   {
-    "output": "KrbRelay.exe -spn \"cifs/target.domain.local\" -clsid \"{12345678-1234-1234-1234-123456789012}\" -rbcd target$",
-    "explanation": "The command uses insertion by adding quotes around arguments, which is a valid mutation technique. The command still matches the Sigma rule's detection criteria."
+    "output": "KrbRelay.exe -spn HTTP/target.domain.com -clsid {12345678-1234-1234-1234-123456789012} -rbcd",
+    "explanation": "This command is a simplified version of the first, omitting quotes around the SPN value. It still satisfies the selection_cli_1 condition by including all required flags."
+  },
+  {
+    "output": "KrbRelay.exe -spn \"HTTP/target.domain.com\" -clsid {12345678-1234-1234-1234-123456789012} -rbcd",
+    "explanation": "This command uses quotes around the SPN value and matches the selection_cli_1 condition by including all required flags. It is a direct representation of a typical KrbRelay command."
+  },
+  {
+    "output": "KrbRelay.exe -spn HTTP/target.domain.com -clsid {12345678-1234-1234-1234-123456789012} shadowcred",
+    "explanation": "This command includes the 'shadowcred' keyword along with 'spn' and 'clsid' to match the selection_cli_2 condition. It simulates a command line that would trigger the Sigma rule."
+  },
+  {
+    "output": "KrbRelay.exe -spn HTTP/target.domain.com -clsid {12345678-1234-1234-1234-123456789012} -session 1",
+    "explanation": "This command includes 'spn', 'clsid', and 'session' to match the selection_cli_3 condition. It simulates a command line that would trigger the Sigma rule."
   }
 ]

@@ -1,3 +1,0 @@
-impersonate.exe "exec" cmd.exe
-ren impersonate.exe sysupdate.exe && sysupdate.exe exec cmd.exe
-sysupdate.exe list

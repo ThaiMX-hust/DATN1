@@ -1,15 +1,2 @@
-secedit.exe  /export /areas SECURITYPOLICY /cfg output_mysecpol.txt
-secedit  /configure /db mytemplate.db
-copy secedit.exe Update.exe && Update.exe /export /cfg C:\Users\Public\out.inf
-secedit /EXPORT /CFG config.inf
-secedit.exe "/export" "/cfg" out.inf
-copy secedit.exe svecedit.exe && svecedit.exe /export /cfg %temp%\secpol.inf
-copy secedit.exe svchost.exe && svchost.exe /export /cfg C:\temp\secpolicy.inf
-copy secedit.exe update.exe && update.exe /export /cfg C:\temp\policy.inf
-copy secedit.exe UpdateTool.exe && UpdateTool.exe /export /cfg C:\Users\Public\policy.inf
-cmd.exe /c "copy secedit.exe not_secedit.exe && not_secedit.exe /export /cfg C:\temp\policy.inf"
-secedit.exe "/export" "/cfg" C:\temp\policy.inf
-secedit.exe /EXPORT /CFG C:\temp\policy.inf
-copy secedit.exe sec_tool.exe && sec_tool.exe /export /cfg C:\Users\Public\out.inf
-secedit /export /cfg:C:\Users\Public\config.inf
-secedit.exe "/EXPORT" "/CFG" C:\Users\Public\config.inf
+secedit /configure /db mytemplate.db
+secedit.exe /export /areas SECURITYPOLICY /cfg output_mysecpol.txt

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks.exe /delete /tn '*' /f",
+    "explanation": "The command uses quotes around the wildcard symbol, which is a valid syntax variation and demonstrates insertion technique."
+  },
+  {
+    "output": "schtasks.exe -delete -tn * -f",
+    "explanation": "The command substitutes '/' with '-' for flags, which is an equivalent syntax variation and demonstrates substitution technique."
+  },
+  {
+    "output": "schtasks.exe /delete /tn * /f",
+    "explanation": "The command omits unnecessary spaces and uses minimal syntax, demonstrating omission technique while preserving the original behavior."
+  },
+  {
+    "output": "schtasks.exe /f /delete /tn *",
+    "explanation": "The command reorders the flags, which is accepted by the schtasks.exe program and demonstrates reordering technique."
+  }
+]

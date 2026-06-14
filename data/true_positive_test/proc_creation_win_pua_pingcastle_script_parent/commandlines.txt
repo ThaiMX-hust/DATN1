@@ -1,2 +1,1 @@
-C:\Program Files\PingCastle\PingCastle.exe --healthcheck --server dc01.internal
-copy PingCastle.exe Taskmgr.exe /Y && Taskmgr.exe --healthcheck --level Full
+C:\Tools\PingCastle.exe --healthcheck --level Full

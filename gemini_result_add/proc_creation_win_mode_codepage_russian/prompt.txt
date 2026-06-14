@@ -1,0 +1,88 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: CodePage Modification Via MODE.COM To Russian Language
+id: 12fbff88-16b5-4b42-9754-cd001a789fb3
+related:
+    - id: d48c5ffa-3b02-4c0f-9a9e-3c275650dd0e
+      type: derived
+status: test
+description: |
+    Detects a CodePage modification using the "mode.com" utility to Russian language.
+    This behavior has been used by threat actors behind Dharma ransomware.
+references:
+    - https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mode
+    - https://strontic.github.io/xcyclopedia/library/mode.com-59D1ED51ACB8C3D50F1306FD75F20E99.html
+    - https://www.virustotal.com/gui/file/5e75ef02517afd6e8ba6462b19217dc4a5a574abb33d10eb0f2bab49d8d48c22/behavior
+author: Joseliyo Sanchez, @Joseliyo_Jstnk
+date: 2024-01-17
+tags:
+    - attack.defense-evasion
+    - attack.t1036
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    # VT Query: behavior:"mode con cp select=1251"
+    # VT Query: behavior:"mode con cp select=866"
+    selection_img:
+        - Image|endswith: '\mode.com'
+        - OriginalFileName: 'MODE.COM'
+    selection_cli:
+        CommandLine|contains|all:
+            - ' con '
+            - ' cp '
+            - ' select='
+        CommandLine|endswith:
+            - '=1251' # ANSI Cyrillic; Cyrillic (Windows) - Observed ITW by Dharma ransomware
+            - '=866' # OEM Russian; Cyrillic (DOS) - Observed ITW by other malware
+    condition: all of selection_*
+falsepositives:
+    - Russian speaking people changing the CodePage
+level: medium
+```
+
+True positive test command:
+
+```text
+
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

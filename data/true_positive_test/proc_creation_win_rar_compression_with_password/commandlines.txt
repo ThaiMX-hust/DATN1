@@ -1,3 +1,1 @@
-rar.exe "a" "-hpSecret" "-m5" archive.rar C:\temp\sensitive_data.txt
-rar.exe a -hpSecret -m5 archive.rar C:\temp\sensitive_data.txt
-rar.exe a -pSecret -m5 archive.rar C:\temp\sensitive_data.txt
+"C:\Program Files\WinRAR\rar.exe" a -hpTestPass123 -m5 C:\Temp\test.rar C:\Temp\test.txt

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32 .\\payload.dll,StartNodeRelay",
+    "explanation": "Omission technique: Omitting the `.exe` extension from the binary name. When executed directly inside cmd.exe or via a standard CreateProcess call, Windows automatically resolves `rundll32` to `rundll32.exe`. This breaks the strict literal string check for 'rundll32.exe' while preserving functional equivalent behavior in a test environment."
+  },
+  {
+    "output": "rundll32.exe C:\\Temp\\payload.dll,\"StartNodeRelay\"",
+    "explanation": "Insertion technique: Enclosing the target export function string token inside double quotes ('\"StartNodeRelay\"'). The native internal argument parser of `rundll32.exe` handles and strips away quotes around the export name transparently during entry point resolution, ensuring flawless execution while breaking the unquoted continuous character string evaluation in the SIEM engine."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe C:\\Temp\\payload.dll,StartNode^Relay",
+    "explanation": "Insertion technique: Interposing a command shell caret escape character ('^') within the exported function name string token. When routed through a cmd.exe environment, the parent command interpreter strips the escape modifier out prior to child instantiation, resulting in a recorded command-line trace of 'StartNode^Relay' that evades the rigid 'StartNodeRelay' literal check."
+  },
+  {
+    "output": "rundll32.exe C:\\Temp\\payload.dll,#1",
+    "explanation": "Substitution technique: Replacing the explicit literal name of the exported function with its numerical ordinal integer target identification (e.g., `#1`), assuming the compiler configured the export as the first entry point ordinal. Rundll32 seamlessly processes function ordinals natively, which completely blinds string signature rule monitors looking exclusively for 'StartNodeRelay'."
+  },
+  {
+    "output": "rundll32.exe C:\\Temp\\payload.dll,   StartNodeRelay",
+    "explanation": "Insertion technique: Injecting multiple consecutive space characters between the comma delimiter and the target export name parameter. The internal logic parsing function of `rundll32.exe` natively strips leading whitespaces from the export name string token before attempting `GetProcAddress`, ensuring equivalent execution while breaking unoptimized string rules."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable \"out\" C:\\Temp\\test.txt -c -T",
+    "explanation": "Insertion technique: Placing double quotes around the positional keyword argument 'out' causes the raw command line to log as '\"out\"'. This interrupts the continuous substring sequence ' out ' (with leading and trailing spaces) mandated by 'selection_cli', while bcp.exe inherently strips the quotes and parses the direction argument normally."
+  },
+  {
+    "output": "cmd.exe /c C:\\Tools\\bcp.exe TestDB.dbo.TestTable o^ut C:\\Temp\\test.txt -c -T",
+    "explanation": "Insertion technique: Executing the utility through cmd.exe permits the insertion of a shell caret escape character ('^') into the command argument. The command interpreter unescapes and removes the caret before initiating bcp.exe, but process creation telemetry logs it as 'o^ut', breaking the exact ' out ' selection rule."
+  },
+  {
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable\tout\tC:\\Temp\\test.txt -c -T",
+    "explanation": "Substitution technique: Replacing the required single space character limits padding 'out' with horizontal tab characters ('\\t'). The native Windows execution environment processes tabs as valid argument whitespace delimiters, which successfully forces a signature bypass against static substring rules enforcing precise space separation."
+  },
+  {
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out\tC:\\Temp\\test.txt -c -T",
+    "explanation": "Substitution technique: Substituting the literal space after the 'out' keyword with a tab character. This keeps the execution completely valid within bcp.exe but avoids triggering the rule's strict string check for a trailing space (' out ')."
+  }
+]

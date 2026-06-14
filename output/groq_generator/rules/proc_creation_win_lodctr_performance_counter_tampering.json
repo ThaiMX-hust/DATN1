@@ -1,0 +1,22 @@
+[
+  {
+    "output": "lodctr.exe -r",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria. It executes lodctr.exe with the '-r' flag, which aligns with the rule's detection logic."
+  },
+  {
+    "output": "lodctr.exe  -r",
+    "explanation": "Inserting an extra space between the executable and the flag is a safe mutation technique that still triggers the rule since the '-r' flag is present."
+  },
+  {
+    "output": "lodctr.exe\" -r",
+    "explanation": "Adding a quote after the executable name is a safe mutation that does not affect the parsing of the '-r' flag and still matches the rule."
+  },
+  {
+    "output": "lodctr.exe -r ",
+    "explanation": "Appending a space after the '-r' flag is a safe mutation that does not change the behavior or detection by the Sigma rule."
+  },
+  {
+    "output": "lodctr.exe -r",
+    "explanation": "This is the canonical command line that matches the Sigma rule's detection criteria for testing purposes."
+  }
+]

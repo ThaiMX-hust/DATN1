@@ -1,1 +1,1 @@
-copy "rar.exe" archiver.exe && archiver.exe a C:\Temp\archive.rar C:\SensitiveData\*
+"C:\Program Files\WinRAR\rar.exe" a C:\Temp\test.rar C:\Temp\test.txt

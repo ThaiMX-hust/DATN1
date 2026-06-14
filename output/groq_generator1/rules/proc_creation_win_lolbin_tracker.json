@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Tracker.exe /ERRORREPORT:PROMPT /d malicious.dll /c calc.exe",
+    "explanation": "This is the original true positive command provided for testing."
+  }
+]

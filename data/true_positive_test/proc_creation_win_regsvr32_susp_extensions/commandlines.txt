@@ -1,1 +1,1 @@
-C:\Windows\system32\regsvr32.exe  /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg
+C:\Windows\system32\regsvr32.exe /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg

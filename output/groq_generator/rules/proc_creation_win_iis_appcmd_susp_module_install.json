@@ -1,10 +1,20 @@
+```json
 [
   {
-    "output": "cmd.exe /c echo ^<globalModules^>^<add name=\"MyModule\" image=\"MyModule.dll\" /^>^</globalModules^> >> C:\\Windows\\System32\\inetsrv\\config\\applicationHost.config",
-    "explanation": "The original command is already a valid test case. No mutation is needed to simulate a true positive for the Sigma rule."
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe install module -name:MaliciousModule C:\\Path\\To\\MaliciousModule.dll",
+    "explanation": "This command simulates the installation of a native-code module via appcmd.exe, which matches the Sigma rule's detection criteria. It includes 'install', 'module', and '-name:' in the command line and uses appcmd.exe as the image."
   },
   {
-    "output": "powershell.exe -Command \"Import-Module WebAdministration; New-WebGlobalModule -Name 'MyModule' -Image 'MyModule.dll'\"",
-    "explanation": "The original PowerShell command is already a valid test case. No mutation is needed to simulate a true positive for the Sigma rule."
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe install module --name:MaliciousModule C:\\Path\\To\\MaliciousModule.dll",
+    "explanation": "This command uses the long-form option '--name' instead of '-name', which is equivalent in syntax and still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe install module -name:MaliciousModule \"C:\\Path\\To\\MaliciousModule.dll\"",
+    "explanation": "This command adds quotes around the DLL path, which is a safe mutation technique (insertion), and still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe install module -name:MaliciousModule C:\\Path\\To\\MaliciousModule.dll",
+    "explanation": "This command omits unnecessary whitespace and uses a direct path without quotes, which is a minimal form of the command and still matches the Sigma rule."
   }
 ]
+```

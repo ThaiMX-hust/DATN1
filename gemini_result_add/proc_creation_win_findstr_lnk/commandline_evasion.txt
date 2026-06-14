@@ -1,0 +1,18 @@
+[
+  {
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk ",
+    "explanation": "Insertion technique: Appending a trailing space character to the absolute end of the command line. Because the rule utilizes the strict 'CommandLine|endswith' filter looking for '.lnk' or basic trailing quotes, any extra trailing whitespace invalidates the suffix match logic while preserving identical application execution behavior."
+  },
+  {
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk & rem",
+    "explanation": "Other techniques (Command Chaining): Appending a harmless inline shell comment delimiter ('& rem') at the end of the execution string. This shifts the target '.lnk' file string parameter entirely away from the trailing edge of the logged process creation string, evading 'selection_cli' while executing safely."
+  },
+  {
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk -h",
+    "explanation": "Omission/Substitution technique: Appending an invalid or unrecognized parameter flag switch like '-h' to the very end of the line. Findstr ignores or displays errors for invalid parameters without affecting the logging of the structural initialization event, shifting the target filename suffix to evade detection."
+  },
+  {
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk.lnk",
+    "explanation": "Recoding / Encoding technique: Intentionally appending a second extension to create a double-extension layout string sequence ('test.lnk.lnk'). In a test environment, if the file is appropriately duplicated on the filesystem to match, this target will be successfully searched while changing the underlying token context signature relative to end-of-string rules."
+  }
+]

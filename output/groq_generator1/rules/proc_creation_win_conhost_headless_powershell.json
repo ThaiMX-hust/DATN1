@@ -1,0 +1,22 @@
+[
+  {
+    "output": "conhost.exe --headless \"powershell.exe -Command Write-Host 'Bypassed'\"",
+    "explanation": "This command uses insertion of quotes and preserves the original behavior. The command line is syntactically valid and mimics the structure of the true positives."
+  },
+  {
+    "output": "conhost.exe --headless powershell.exe -Command \"Write-Host 'Bypassed'\"",
+    "explanation": "This command omits unnecessary quotes around the command and preserves the intended execution. It remains valid and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "conhost.exe --headless pwsh -c \"Write-Host 'Bypassed'\"",
+    "explanation": "This command substitutes 'pwsh' for 'powershell.exe' and uses the short option '-c' for '-Command'. It is syntactically valid and functionally equivalent."
+  },
+  {
+    "output": "conhost.exe --headless powershell -ExecutionPolicy Bypass -Command \"Write-Host 'Bypassed'\"",
+    "explanation": "This command includes an additional parameter '-ExecutionPolicy Bypass' to simulate a realistic execution scenario while still matching the Sigma rule."
+  },
+  {
+    "output": "conhost.exe --headless powershell.exe -Command Write-Host 'Bypassed'",
+    "explanation": "This command omits quotes around the command line arguments where not strictly necessary, but still executes correctly and matches the Sigma rule."
+  }
+]

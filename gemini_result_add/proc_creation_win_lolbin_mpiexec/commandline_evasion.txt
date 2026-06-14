@@ -1,0 +1,22 @@
+[
+  {
+    "output": "mpiexec.exe\t-n\t1\tcalc.exe",
+    "explanation": "Substitution technique: Replacing the required structural single space characters flanking the flag sequence (' -n 1 ') with horizontal tab characters ('\\t'). Assuming the file has been renamed to evade the image condition, the rule relies heavily on the space-padded command-line string. The Windows kernel natively tokenizes tabs as valid parameter whitespace separators, fulfilling execution requirements while cleanly breaking the space-padded literal check."
+  },
+  {
+    "output": "mpiexec.exe \"-n\" 1 calc.exe",
+    "explanation": "Insertion technique: Enclosing the core configuration switch parameter inside explicit double quotes ('\"-n\"'). This modifies the raw command-line text string context recorded by process creation telemetry, successfully disrupting the continuous unquoted text pattern check requiring space padding around the literal switch, while the application automatically strips the quotes during argument initialization."
+  },
+  {
+    "output": "mpiexec.exe -n \"1\" calc.exe",
+    "explanation": "Insertion technique: Enclosing the rank count value inside explicit double quotes ('\"1\"'). This breaks the raw string signature check for ' -n 1 ' by inserting a quote boundary character immediately preceding the digit 1, while the underlying Win32 process creation handler unquotes the token array natively prior to initializing the application context."
+  },
+  {
+    "output": "cmd.exe /c mpiexec.exe -^n 1 calc.exe",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe environment allows the integration of a command shell caret escape operator ('^') directly into the switch parameter name ('-^n'). The parent console subsystem filters this token out entirely prior to initiating the child context, generating an EDR/SIEM field footprint containing '-^n 1' which safely subverts the literal string match."
+  },
+  {
+    "output": "mpiexec.exe  -n  1  calc.exe",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces between the binary name and its parameters instead of a single space delimiter. Standard argument parsing models collapse contiguous whitespaces into single parameter boundary vectors during tokenization, maintaining execution consistency while breaking strict single-space padded signature strings like ' -n 1 '."
+  }
+]

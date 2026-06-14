@@ -1,6 +1,0 @@
-AdvancedRun.exe"/EXEFilename" "cmd.exe" "/Run"
-modified_advrun.exe /Run C:\Windows\Temp\settings.cfg
-modified_advrun.exe /Run C:\temp\config.cfg
-AdvancedRun.exe /EXEFilename "notepad.exe" /RunAs 4 /WindowState 1 /Run
-copy AdvancedRun.exe svchost_updater.exe && svchost_updater.exe /EXEFilename "cmd.exe" /RunAs 8 /Run
-"C:\Users\SwachchhandaP\Downloads\advancedrun-x64\AdvancedRun.exe"

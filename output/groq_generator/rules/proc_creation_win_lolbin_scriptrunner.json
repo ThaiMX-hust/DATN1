@@ -1,14 +1,22 @@
 [
   {
-    "output": "ScriptRunner.exe -appvscript calc.exe",
-    "explanation": "This command uses the exact syntax from the Sigma rule and is a direct match for testing detection accuracy."
+    "output": "C:\\\\Windows\\\\System32\\\\ScriptRunner.exe -appvscript \".\\\\script.ps1\"",
+    "explanation": "This command uses the exact syntax from the Sigma rule's detection condition. It invokes ScriptRunner.exe with the '-appvscript' flag, which is flagged by the rule."
   },
   {
-    "output": "ScriptRunner.exe /appvscript calc.exe",
-    "explanation": "This command uses a long option format (/appvscript) instead of the short option (-appvscript), which is a valid substitution technique."
+    "output": "C:\\\\Windows\\\\System32\\\\ScriptRunner.exe -appvscript .\\\\script.ps1",
+    "explanation": "Removes quotes around the script path, relying on the assumption that the command line parser still interprets the argument correctly. This is a safe mutation using omission."
   },
   {
-    "output": "ScriptRunner.exe -appvscript\" calc.exe",
-    "explanation": "This command uses an insertion technique by adding a quote after the flag, which is still parsed correctly by the binary."
+    "output": "\"C:\\\\Windows\\\\System32\\\\ScriptRunner.exe\" -appvscript \".\\\\script.ps1\"",
+    "explanation": "Adds quotes around the executable path for safe insertion, which is still parsed correctly by the command line interpreter."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\ScriptRunner.exe -appvscript \".\\\\script.ps1\" >NUL 2>&1",
+    "explanation": "Appends redirection to suppress output, which is a safe mutation using insertion. The core behavior of the command remains unchanged."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\ScriptRunner.exe -appvscript \".\\\\script.ps1\" | Out-Null",
+    "explanation": "Uses PowerShell-specific command chaining to suppress output, which is a safe mutation using insertion and substitution."
   }
 ]

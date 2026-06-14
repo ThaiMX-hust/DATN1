@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh advfirewall \"firewall\" \"delete\" rule name=\"TestRule\"",
+    "explanation": "Insertion technique. Encloses the words 'firewall' and 'delete' in independent double quotation marks. This cleanly avoids the exact trailing space constraint within `delete ` under the `CommandLine|contains|all` section, while the `netsh.exe` internal parser strips the quotes and executes the removal smoothly."
+  },
+  {
+    "output": "netsh advfirewall firewall\tdelete\trule name=\"TestRule\"",
+    "explanation": "Substitution technique. Replaces the standard blank space following the 'delete' verb with a horizontal tab (`\t`) character. This breaks the literal string selection query for `delete ` (which strictly mandates a standard trailing space), whereas the Windows command processor treats tabs natively as valid parameter delimiters."
+  },
+  {
+    "output": "netsh advfirewall firewall del rule name=\"TestRule\"",
+    "explanation": "Omission technique. Truncates the context verb `delete` to its shortest acceptable abbreviated form `del`. Because the internal shell environment of `netsh.exe` inherently permits parameter prefix matching where the intent is unambiguous, this completely eliminates the literal word string `delete ` from the raw process log."
+  },
+  {
+    "output": "netsh advfirewall firewall delete   rule name=\"TestRule\"",
+    "explanation": "Insertion technique. Increases the whitespace trailing the delete verb into multiple consecutive space characters (`delete   `). If the telemetry parser or backend query engine evaluates exact single-character boundaries or fails to normalize spacing intervals, this mutation slips past the rigid word signature."
+  },
+  {
+    "output": "netsh advfirewall firewall delete rule name=Dropbox",
+    "explanation": "Other technique (Filter Abuse / False Positive Spoofing). Appends `name=Dropbox` to the argument array. If an adversary pairs this argument string with an execution context that mimics the exclusion constraints defined in `filter_optional_dropbox` (such as via parent process hollowing or launching from a renamed folder), the SIEM rule drops the alert entirely."
+  }
+]

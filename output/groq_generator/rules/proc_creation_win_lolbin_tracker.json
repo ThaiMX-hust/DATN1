@@ -1,6 +1,18 @@
 [
   {
-    "output": "Tracker.exe /ERRORREPORT:PROMPT /d malicious.dll /c calc.exe",
-    "explanation": "This is the original true positive command provided for testing."
+    "output": "C:\\Windows\\System32\\tracker.exe /d C:\\Windows\\System32\\kernel32.dll",
+    "explanation": "This command simulates a potential DLL injection attempt using Tracker.exe with the /d flag, which is part of the Sigma rule's detection criteria. The command is a minimal test case that matches the rule's 'CommandLine|contains: \"/d\"' condition."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\tracker.exe\" /c \"C:\\\\Windows\\\\System32\\\\kernel32.dll\"",
+    "explanation": "This command uses Tracker.exe with the /c flag, which is part of the Sigma rule's detection criteria. The command is a minimal test case that matches the rule's 'CommandLine|contains: \"/c\"' condition."
+  },
+  {
+    "output": "C:\\Windows\\System32\\tracker.exe /d C:\\Windows\\System32\\kernel32.dll",
+    "explanation": "This command simulates a potential DLL injection attempt using Tracker.exe with the /d flag. It is a simplified version of the first command, with no unnecessary elements, while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\tracker.exe /d kernel32.dll",
+    "explanation": "This command uses Tracker.exe with the /d flag and omits the full path to the DLL. It still matches the Sigma rule's detection criteria while being a minimal test case."
   }
 ]

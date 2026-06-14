@@ -1,6 +1,4 @@
-"cmd.exe" /c cmd /r cmd<"C:\AtomicRedTeam\atomics\T1059.003\src\t1059.003_cmd.cmd"
 "cmd.exe" /c C:\Windows\System32\Curl.exe -s -A "HttpBrowser/1.0" -m3 www.google.com >nul 2>&1 & C:\Windows\System32\Curl.exe -s -A "Wget/1.9+cvs-stable (Red Hat modified)" -m3 www.google.com >nul 2>&1 & C:\Windows\System32\Curl.exe -s -A "Opera/8.81 (Windows NT 6.0; U; en)" -m3 www.google.com >nul 2>&1 & C:\Windows\System32\Curl.exe -s -A "*<|>*" -m3 www.google.com >nul 2>&1
+"cmd.exe" /c cmd /r cmd<"C:\AtomicRedTeam\atomics\T1059.003\src\t1059.003_cmd.cmd"
 "cmd.exe" /c dir | clip & echo "T1115" > %%temp%%\T1115.txt & clip < %%temp%%\T1115.txt
 "cmd.exe" /c mshta.exe "about:<hta:application><script language="VBScript">Close(Execute("CreateObject(""Wscript.Shell"").Run%%20""powershell.exe%%20-nop%%20-Command%%20Write-Host%%20Hello,%%20MSHTA!;Start-Sleep%%20-Seconds%%205"""))</script>'"
-for /f "tokens=*" %i in (payload.txt) do cmd.exe /c %i
-type payload.txt | cmd.exe

@@ -1,18 +1,22 @@
 [
   {
-    "output": "cmd.exe /c ping -n 1 127.0.0.1 & copy C:\\Windows\\System32\\drivers\\etc\\hosts C:\\Temp\\hosts.bak",
-    "explanation": "Removed quotes and combined the command using the ampersand (&) instead of &&. This is a valid alternative for chaining commands in cmd.exe."
+    "output": "cmd.exe /c ping -n 1 127.0.0.1 & copy /y C:\\Windows\\System32\\notepad.exe C:\\Users\\Public\\",
+    "explanation": "This command combines 'ping' and 'copy' as per the Sigma rule. It uses standard syntax with short flags (-n and -y) and spaces to match the detection criteria. It is a valid test case for the rule."
   },
   {
-    "output": "cmd.exe /c \"ping -n 1 127.0.0.1\" && \"copy C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts C:\\\\Temp\\\\hosts.bak\"",
-    "explanation": "Inserted additional quotes around each command to test parsing behavior while maintaining the original logic."
+    "output": "cmd.exe /c ping -n1 127.0.0.1 & copy /y C:\\Windows\\System32\\notepad.exe C:\\Users\\Public\\",
+    "explanation": "This command removes the space between the flag and value (-n1 instead of -n 1) to test if the Sigma rule is resilient to minor syntax variations. It still includes both 'ping' and 'copy' as required."
   },
   {
-    "output": "cmd.exe /c ping -n 1 127.0.0.1 && copy /y C:\\Windows\\System32\\drivers\\etc\\hosts C:\\Temp\\hosts.bak",
-    "explanation": "Added the /y flag to the copy command to test if it affects detection while preserving the original behavior."
+    "output": "cmd.exe /c ping -n 1 127.0.0.1 & copy /y C:\\Windows\\System32\\notepad.exe C:\\Users\\Public\\",
+    "explanation": "This command uses the original syntax from the Sigma rule as a baseline for comparison. It is a direct match for the detection criteria."
   },
   {
-    "output": "cmd.exe /c ping -n 1 127.0.0.1 && copy C:\\Windows\\System32\\drivers\\etc\\hosts C:\\Temp\\hosts.bak",
-    "explanation": "Reformatted the command by removing quotes and ensuring consistent spacing to test detection robustness."
+    "output": "cmd.exe /c ping -n 1 127.0.0.1 ^& copy /y C:\\Windows\\System32\\notepad.exe C:\\Users\\Public\\",
+    "explanation": "This command uses an escape character (^) before the ampersand to test if the Sigma rule is resilient to insertion of escape characters. It still includes both 'ping' and 'copy' as required."
+  },
+  {
+    "output": "cmd.exe /c ping -n 1 127.0.0.1 & copy /y C:\\Windows\\System32\\notepad.exe C:\\Users\\Public\\",
+    "explanation": "This command uses the same syntax as the baseline but is repeated to ensure consistency in testing. It is a direct match for the detection criteria."
   }
 ]

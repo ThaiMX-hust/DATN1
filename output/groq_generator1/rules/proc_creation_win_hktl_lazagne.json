@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Temp\\lazagne.exe all",
+    "explanation": "This command simulates the execution of LaZagne from a common temporary directory and uses the 'all' argument to dump all credentials. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Users\\Public\\lazagne.exe -all",
+    "explanation": "This command uses a common system directory and substitutes 'all' with '-all' to test if the Sigma rule detects equivalent command-line arguments."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\lazagne.exe browsers mails",
+    "explanation": "This command omits the 'all' argument and specifies two modules, testing if the Sigma rule detects partial command-line patterns."
+  },
+  {
+    "output": "C:\\Users\\User\\AppData\\Local\\Temp\\lazagne.exe -browsers -mails",
+    "explanation": "This command uses an alternative path and substitutes space-separated arguments with hyphen-prefixed flags to test if the Sigma rule detects equivalent command-line syntax."
+  },
+  {
+    "output": "C:\\Users\\User\\Downloads\\lazagne.exe -credman -lsa_secrets",
+    "explanation": "This command uses a common user directory and specifies specific modules to test if the Sigma rule detects targeted credential dumping."
+  }
+]

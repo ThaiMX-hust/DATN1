@@ -1,18 +1,42 @@
 [
   {
-    "output": "ilasm -dll -out=test.dll source.il",
-    "explanation": "Substituted '/output' with '-out', a common equivalent syntax accepted by ilasm.exe for specifying output files."
+    "output": "ilasm.exe /dll test.il",
+    "explanation": "This command uses the /dll flag to compile an IL file into a DLL, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "ilasm /dll source.il -out:test.dll",
-    "explanation": "Reordered the arguments to place the '-out' flag after the source file, which is still valid syntax for ilasm.exe."
+    "output": "ilasm.exe /exe test.il",
+    "explanation": "This command uses the /exe flag to compile an IL file into an EXE, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "ilasm /dll source.il --out=test.dll",
-    "explanation": "Replaced '-out' with '--out' to simulate a long-form flag equivalent, which is a safe mutation for testing purposes."
+    "output": "ilasm.exe / dll test.il",
+    "explanation": "This command uses an extra space before the /dll flag to test if the Sigma rule is resilient to minor spacing variations."
   },
   {
-    "output": "ilasm /dll source.il -out:./test.dll",
-    "explanation": "Inserted a relative path './' before the output filename, which is a safe mutation that does not affect the behavior of ilasm.exe."
+    "output": "ilasm.exe /dll  test.il",
+    "explanation": "This command adds an extra space after the /dll flag to test if the Sigma rule is resilient to spacing variations."
+  },
+  {
+    "output": "ilasm.exe /DLL test.il",
+    "explanation": "This command uses uppercase for the /dll flag to test if the Sigma rule is case-sensitive."
+  },
+  {
+    "output": "ilasm.exe /exe  test.il",
+    "explanation": "This command adds an extra space after the /exe flag to test if the Sigma rule is resilient to spacing variations."
+  },
+  {
+    "output": "ilasm.exe /EXE test.il",
+    "explanation": "This command uses uppercase for the /exe flag to test if the Sigma rule is case-sensitive."
+  },
+  {
+    "output": "ilasm.exe /dll\" test.il",
+    "explanation": "This command adds a quote after the /dll flag to test if the Sigma rule is resilient to quote insertion."
+  },
+  {
+    "output": "ilasm.exe /exe\" test.il",
+    "explanation": "This command adds a quote after the /exe flag to test if the Sigma rule is resilient to quote insertion."
+  },
+  {
+    "output": "ilasm.exe /dll test.il",
+    "explanation": "This command uses a single space between the /dll flag and the IL file to test if the Sigma rule is resilient to spacing variations."
   }
 ]

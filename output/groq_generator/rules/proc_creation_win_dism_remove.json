@@ -1,14 +1,22 @@
 [
   {
-    "output": "dism.exe /Online /Disable-Feature -FeatureName:Windows-Defender /Quiet /NoRestart",
-    "explanation": "This command uses a mix of short and long syntax for flags (-FeatureName instead of /FeatureName) and reorders the arguments, which are safe mutation techniques that do not affect the behavior of the command."
+    "output": "dism /Online /Disable-Feature /FeatureName:Windows-Defender-Features /NoRestart",
+    "explanation": "This command uses DISM to disable a Windows feature, which aligns with the Sigma rule's detection criteria. It includes '/Online' and '/Disable-Feature' as required and omits optional elements like '/quiet' to test detection behavior."
   },
   {
-    "output": "dism.exe /Online -Disable-Feature /FeatureName:Windows-Defender /NoRestart /Quiet",
-    "explanation": "This command reorders the /Quiet and /NoRestart flags and uses a mix of short and long syntax for flags, which are safe mutation techniques that do not alter the command's functionality."
+    "output": "dism /Online /Disable-Feature /FeatureName:Windows-Defender-Features /NoRestart /quiet",
+    "explanation": "This command adds the '/quiet' flag to test if the Sigma rule detects it despite optional arguments. It still matches the required criteria for detection."
   },
   {
-    "output": "dism.exe /Online /Disable-Feature /FeatureName:Windows-Defender /Quiet /NoRestart",
-    "explanation": "This command is a direct copy of the original command and is included to show that the original syntax is also valid and unaffected by mutation techniques."
+    "output": "dism /Online /Disable-Feature /FeatureName:Windows-Defender-Features /NoRestart /quiet",
+    "explanation": "This command reorders optional flags and includes '/quiet' to test detection robustness against argument order and inclusion of optional parameters."
+  },
+  {
+    "output": "dism /Online /Disable-Feature /FeatureName:Windows-Defender-Features /NoRestart",
+    "explanation": "This command omits the '/quiet' flag to test if the Sigma rule still detects the command without optional arguments."
+  },
+  {
+    "output": "dism /Online /Disable-Feature /FeatureName:Windows-Defender-Features /NoRestart",
+    "explanation": "This command uses a different feature name to test if the Sigma rule is specific to certain features or if it broadly detects '/Disable-Feature'."
   }
 ]

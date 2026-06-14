@@ -1,6 +1,0 @@
-"cmd.exe" /c echo execute-assembly
-"cmd.exe" /c execute-assembly
-%COMSPEC% /c make_token
-cmd.exe /c echo logonpasswords
-cmd.exe /c echo m^ake_token
-cmd.exe /c p^sinject

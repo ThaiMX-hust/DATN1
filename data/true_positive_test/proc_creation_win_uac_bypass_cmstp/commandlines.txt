@@ -1,4 +1,2 @@
-cmstp.exe  /s "C:\AtomicRedTeam\atomics\T1218.003\src\T1218.003_uacbypass.inf" /au
-cmstp.exe  /s "C:\AtomicRedTeam\atomics\T1218.003\src\T1218.003.inf"
-cmstp.exe /s /ni C:\Path\To\Malicious.inf
-copy cmstp.exe not_cmstp.exe && not_cmstp.exe /S /AU C:\Users\Public\Downloads\payload.inf
+cmstp.exe /s "C:\AtomicRedTeam\atomics\T1218.003\src\T1218.003_uacbypass.inf" /au
+cmstp.exe /s "C:\AtomicRedTeam\atomics\T1218.003\src\T1218.003.inf"

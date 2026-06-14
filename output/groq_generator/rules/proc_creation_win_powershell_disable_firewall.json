@@ -1,22 +1,22 @@
 [
   {
-    "output": "powershell.exe -Command \"Set-NetFirewallProfile -Profile `\"Private`\" -Enabled False\"",
-    "explanation": "Inserted escape characters (`) around the profile name to bypass detection while maintaining valid PowerShell syntax."
+    "output": "powershell.exe Set-NetFirewallProfile -Enabled False -All",
+    "explanation": "This command disables all Windows Firewall profiles using PowerShell. It matches the Sigma rule by including the required command-line arguments in a single line."
   },
   {
-    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Private -Enabled:0",
-    "explanation": "Removed the space after -Enabled and used the colon syntax as an equivalent substitution to evade signature-based detection."
+    "output": "powershell.exe \"Set-NetFirewallProfile -Enabled False -All\"",
+    "explanation": "This command uses quotes to encapsulate the command line, which is a safe mutation technique (insertion). It still matches the Sigma rule because the content inside the quotes is unchanged."
   },
   {
-    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Public -Enabled $false",
-    "explanation": "Used PowerShell's boolean variable syntax ($false) instead of the string 'False' to alter the command structure safely."
+    "output": "powershell.exe Set-NetFirewallProfile -Enabled False -All",
+    "explanation": "This is the same as the first command but without any mutation. It is included to show the baseline command that matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Domain -Enabled False",
-    "explanation": "Reordered and simplified the command line by removing unnecessary quotes and using direct boolean syntax."
+    "output": "powershell.exe Set-NetFirewallProfile -Enabled False -Profile Domain,Private,Public",
+    "explanation": "This command specifies individual profiles instead of using the -All flag. It matches the Sigma rule by including the required command-line arguments."
   },
   {
-    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Private -Enabled False -All",
-    "explanation": "Added the -All flag as an optional parameter that does not affect the core functionality but changes the command structure."
+    "output": "powershell.exe -Command Set-NetFirewallProfile -Enabled False -All",
+    "explanation": "This command uses the -Command flag to execute the PowerShell command. It matches the Sigma rule by including the required command-line arguments."
   }
 ]

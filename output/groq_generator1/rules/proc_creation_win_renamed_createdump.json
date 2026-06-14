@@ -1,0 +1,22 @@
+[
+  {
+    "output": "createdump.exe -f /tmp/test.dmp -u 632",
+    "explanation": "This is the original true positive command and does not require mutation for testing purposes."
+  },
+  {
+    "output": "createdump.exe -u -f /tmp/test.dmp 632",
+    "explanation": "Reordered the flags '-f' and '-u' which are accepted by the utility and do not affect the behavior."
+  },
+  {
+    "output": "createdump.exe --name /tmp/test.dmp --full 632",
+    "explanation": "Replaced short flags '-f' and '-u' with their long-form equivalents '--name' and '--full', which are functionally equivalent."
+  },
+  {
+    "output": "createdump.exe -f \"/tmp/test.dmp\" -u 632",
+    "explanation": "Wrapped the filename in quotes to simulate safe insertion of characters that do not alter the command's behavior."
+  },
+  {
+    "output": "createdump.exe -f /tmp/test.dmp\\  -u 632",
+    "explanation": "Added a trailing backslash to the filename, which is a safe mutation that does not affect the command's execution."
+  }
+]

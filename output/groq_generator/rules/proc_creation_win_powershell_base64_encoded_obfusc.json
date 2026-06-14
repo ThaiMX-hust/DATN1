@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"& { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SQBTAHUAcABwAGwAIAA=')).Replace(' ', [char]0x20) } | Out-String | Invoke-Expression\"",
+    "explanation": "This command uses base64 encoding and string replacement with a space represented as [char]0x20 to obfuscate the payload. This technique may bypass detection by altering the string representation while maintaining the same behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"& { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SQBTAHUAcABwAGwAIAA=')) -bxor 0x0 } | Out-String | Invoke-Expression\"",
+    "explanation": "This command includes a -bxor 0x0 operation, which is a no-op but is often used in obfuscated PowerShell code. This mutation may evade detection by introducing a harmless XOR operation."
+  },
+  {
+    "output": "powershell.exe -Command \"& { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SQBTAHUAcABwAGwAIAA=')) -f [string]::Empty } | Out-String | Invoke-Expression\"",
+    "explanation": "This command uses a string formatting operation with an empty string to obfuscate the payload. This technique may bypass detection by altering the string structure while preserving the intended execution."
+  }
+]

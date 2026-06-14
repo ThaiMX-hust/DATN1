@@ -1,10 +1,22 @@
 [
   {
-    "output": "powershell.exe -Command \"Import-Module CL_LoadAssembly.ps1; Get-Item -Path function:LoadAssemblyFromPath | Select-Object -ExpandProperty ScriptBlock | . -args 'malicious.dll' , 'Namespace' , 'Class'\"",
-    "explanation": "This command uses insertion of additional spaces between arguments and encloses the command in quotes to simulate a bypass attempt while maintaining the original behavior. It is safe for testing."
+    "output": "powershell.exe -Command \"& { . C:\\Windows\\System32\\CL_LoadAssembly.ps1; LoadAssemblyFromPath 'C:\\malicious\\assembly.dll' }\"",
+    "explanation": "This command simulates a PowerShell invocation that loads an assembly using LoadAssemblyFromPath from the CL_LoadAssembly.ps1 script. It uses standard PowerShell syntax and is a direct match for the Sigma rule."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -File CL_LoadAssembly.ps1; $func = 'LoadAssembly'+'FromNS'; & $func 'malicious.dll' 'Target.Namespace' 'Target.Class'",
-    "explanation": "This command uses string concatenation to obfuscate the function name and reorders the arguments slightly for testing purposes. It remains functionally equivalent to the original."
+    "output": "powershell.exe -Command \"& { . C:\\Windows\\System32\\CL_LoadAssembly.ps1; LoadAssemblyFromNS 'Namespace.Assembly' }\"",
+    "explanation": "This command simulates a PowerShell invocation that loads an assembly using LoadAssemblyFromNS from the CL_LoadAssembly.ps1 script. It uses standard PowerShell syntax and is a direct match for the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"& { . C:\\Windows\\System32\\CL_LoadAssembly.ps1; LoadAssemblyFromPath 'C:\\malicious\\assembly.dll' }\" -WindowStyle Hidden",
+    "explanation": "This command adds the -WindowStyle Hidden flag to obscure the PowerShell window, which is a common evasion technique. It still includes the LoadAssemblyFromPath call, matching the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"& { . C:\\Windows\\System32\\CL_LoadAssembly.ps1; LoadAssemblyFromNS 'Namespace.Assembly' }\" -ExecutionPolicy Bypass",
+    "explanation": "This command includes the -ExecutionPolicy Bypass flag, which is often used to bypass PowerShell execution restrictions. It still includes the LoadAssemblyFromNS call, matching the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"& { . C:\\Windows\\System32\\CL_LoadAssembly.ps1; LoadAssemblyFromPath 'C:\\malicious\\assembly.dll' }\" -NonInteractive",
+    "explanation": "This command uses the -NonInteractive flag to prevent user interaction, which is a common technique in automated attacks. It still includes the LoadAssemblyFromPath call, matching the Sigma rule."
   }
 ]

@@ -1,0 +1,95 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: PowerShell Defender Threat Severity Default Action Set to 'Allow' or 'NoAction'
+id: 1e8a9b4d-3c2a-4f9b-8d1e-7c6a5b4f3d2e
+related:
+    - id: 5a9e1b2c-8f7d-4a1e-9b3c-0f6d7e5a4b1f
+      type: similar
+status: experimental
+description: |
+    Detects the use of PowerShell to execute the 'Set-MpPreference' cmdlet to configure Windows Defender's threat severity default action to 'Allow' (value '6') or 'NoAction' (value '9').
+    This is a highly suspicious configuration change that effectively disables Defender's ability to automatically mitigate threats of a certain severity level.
+    An attacker might use this technique via the command line to bypass defenses before executing payloads.
+references:
+    - https://learn.microsoft.com/en-us/powershell/module/defender/set-mppreference
+    - https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-threatseveritydefaultaction
+    - https://research.splunk.com/endpoint/7215831c-8252-4ae3-8d43-db588e82f952
+    - https://gist.github.com/Dump-GUY/8daef859f382b895ac6fd0cf094555d2
+    - https://thedfirreport.com/2021/10/18/icedid-to-xinglocker-ransomware-in-24-hours/
+author: 'Matt Anderson (Huntress)'
+date: 2025-07-11
+tags:
+    - attack.defense-evasion
+    - attack.t1562.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmdlet:
+        CommandLine|contains: 'Set-MpPreference'
+    selection_action:
+        CommandLine|contains:
+            - '-LowThreatDefaultAction'
+            - '-ModerateThreatDefaultAction'
+            - '-HighThreatDefaultAction'
+            - '-SevereThreatDefaultAction'
+            - '-ltdefac '
+            - '-mtdefac '
+            - '-htdefac '
+            - '-stdefac '
+    selection_value:
+        CommandLine|contains:
+            - 'Allow'
+            - '6'
+            - 'NoAction'
+            - '9'
+    condition: all of selection_*
+falsepositives:
+    - Highly unlikely
+level: high
+```
+
+True positive test command:
+
+```text
+
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

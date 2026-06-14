@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ScreenConnect.ClientSetup.exe -e=Access -y=Guest -p=1 -c=2 -k=3",
+    "explanation": "Replaced the URL-encoded format with direct parameter flags, which may bypass the Sigma rule if it only looks for the exact string pattern."
+  },
+  {
+    "output": "ScreenConnect.ClientSetup.exe \"e=Access&y=Guest&p=1&c=2&k=3\"",
+    "explanation": "Removed the escape characters (^) and unnecessary quotes, which may still match the rule, but demonstrates how the command can be simplified."
+  },
+  {
+    "output": "ScreenConnect.ClientSetup.exe /e:Access /y:Guest /p:1 /c:2 /k:3",
+    "explanation": "Used alternative syntax with /flag: instead of = to bypass the Sigma rule's string-based detection."
+  },
+  {
+    "output": "ScreenConnect.ClientSetup.exe \"e=Access\" \"y=Guest\" \"p=1\" \"c=2\" \"k=3\"",
+    "explanation": "Split the command line into separate quoted arguments, which may avoid the Sigma rule's string-based detection."
+  },
+  {
+    "output": "ScreenConnect.ClientSetup.exe e=Access y=Guest p=1 c=2 k=3",
+    "explanation": "Removed the & separators and quotes, which may bypass the Sigma rule if it relies on the presence of & characters."
+  }
+]

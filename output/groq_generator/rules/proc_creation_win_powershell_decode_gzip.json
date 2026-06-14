@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-Type -AssemblyName System.IO.Compression; [IO.Compression.GZipStream]::Decompress('encodedData', [IO.File]::Create('output.txt'))\"",
+    "explanation": "This command uses PowerShell to decompress Gzip data using the GZipStream class, which matches the Sigma rule's detection criteria. It is a direct simulation of the behavior described in the rule."
+  },
+  {
+    "output": "powershell -c \"Add-Type -Assembly System.IO.Compression; [IO.Compression.GZipStream]::Decompress([Convert]::FromBase64String('encodedData'), [IO.File]::Create('output.txt'))\"",
+    "explanation": "This command uses an alternate syntax for the PowerShell command-line interface (-c instead of -Command) and encodes the input data as Base64, which is a safe mutation technique. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-Type -AssemblyName System.IO.Compression; [IO.Compression.GZipStream]::Decompress('encodedData', [IO.File]::Create('output.txt'))\" -WindowStyle Hidden",
+    "explanation": "This command adds the -WindowStyle Hidden parameter, which is a common obfuscation technique. It does not change the core behavior of the command and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-Type -AssemblyName System.IO.Compression; [IO.Compression.GZipStream]::Decompress([Text.Encoding]::ASCII.GetBytes('encodedData'), [IO.File]::Create('output.txt'))\"",
+    "explanation": "This command uses an alternative method to represent the input data (ASCII encoding) instead of directly passing it as a string. It is a safe mutation technique and still matches the Sigma rule."
+  }
+]

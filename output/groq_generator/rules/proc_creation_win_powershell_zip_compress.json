@@ -1,10 +1,14 @@
 [
   {
-    "output": "powershell.exe -Command \"Compress-Archive -Path 'C:\\AtomicRedTeam\\atomics\\T1074.001\\bin\\Folder_to_zip' -DestinationPath $env:TEMP\\Folder_to_zip.zip -Force\"",
-    "explanation": "This command uses a simplified version of the original command by omitting unnecessary elements like the script block and quotes around the command. It retains the core functionality of compressing a folder to a temporary destination."
+    "output": "\"powershell.exe\" -Command Compress-Archive -Path \"C:\\AtomicRedTeam\\atomics\\T1074.001\\bin\\Folder_to_zip\" -DestinationPath $env:TEMP\\Folder_to_zip.zip -Force",
+    "explanation": "Replaced the script block syntax with the -Command parameter for equivalent execution. No other changes were necessary as the command is already valid and matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command Compress-Archive -Path C:\\SensitiveData\\* -DestinationPath C:\\Users\\Public\\Documents\\archive.zip",
-    "explanation": "This command removes the outer quotes around the command string since PowerShell can still parse the command correctly without them. The command structure remains the same, making it a valid test case."
+    "output": "\"powershell.exe\" Compress-Archive -Path \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1074.001\\\\bin\\\\Folder_to_zip\" -DestinationPath $env:TEMP\\\\Folder_to_zip.zip -Force",
+    "explanation": "Used double backslashes for path normalization and omitted the -Command parameter since it is implied when no script block is used. This is a valid alternative syntax in PowerShell."
+  },
+  {
+    "output": "\"powershell.exe\" -c Compress-Archive -Path \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1074.001\\\\bin\\\\Folder_to_zip\" -DestinationPath $env:TEMP\\\\Folder_to_zip.zip -Force",
+    "explanation": "Substituted the long option '-Command' with its short form '-c'. This is a valid and equivalent syntax in PowerShell."
   }
 ]

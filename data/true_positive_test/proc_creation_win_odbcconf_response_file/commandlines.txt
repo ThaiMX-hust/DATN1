@@ -1,4 +1,1 @@
-odbcconf.exe  -f "T1218.008.rsp"
-odbcconf.exe /a {REGSVR malicious.dll}
-odbcconf.exe /f C:\Windows\Temp\payload.txt
-odbcconf.exe /fC:\Windows\Temp\payload.rsp
+odbcconf.exe -f "T1218.008.rsp"

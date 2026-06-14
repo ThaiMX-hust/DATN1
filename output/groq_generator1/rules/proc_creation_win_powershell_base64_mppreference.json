@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand \"UwBlAHQALQBNAHAARQByAGYAZQByAGUAbgBjAGUAIAAtAEUAeABjAGwAdQBzAGkAbwBuAFAAYQB0AGgAIABDADoAXAB0AGUAcwB0AA==\"",
+    "explanation": "This command uses base64 encoding to execute a Set-MpPreference command with an exclusion path. It is a direct mutation of the original command by re-encoding the same string with minor formatting changes."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -ExclusionPath 'C:\\test'\"",
+    "explanation": "This command uses the -Command parameter instead of -EncodedCommand to execute the same logic in plain text. It is a safe mutation that omits encoding and uses plain command syntax."
+  },
+  {
+    "output": "powershell.exe -c \"Set-MpPreference -ExclusionPath C:\\\\test\"",
+    "explanation": "This command uses the short form of -Command (-c) and omits quotes around the path. It is a valid mutation that preserves the original behavior."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand UwBlAHQALQBNAHAARQByAGYAZQByAGUAbgBjAGUAIAAtAEUAeABjAGwAdQBzAGkAbwBuAFAAYQB0AGgAIABDADoAXAB0AGUAcwB0AA==",
+    "explanation": "This command is a re-encoded version of the original command with minor whitespace or formatting differences. It is a safe mutation that still matches the Sigma rule."
+  }
+]

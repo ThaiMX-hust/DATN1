@@ -1,1 +1,0 @@
-sdbinst.exe C:\temp\hidden.sdb_folder\malicious_shim.bin

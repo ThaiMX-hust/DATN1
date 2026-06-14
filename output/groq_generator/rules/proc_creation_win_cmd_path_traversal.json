@@ -1,18 +1,22 @@
 [
   {
-    "output": "cmd.exe /c \"..\\..\\Windows\\System32\\calc.exe\"",
-    "explanation": "Inserted quotes around the path to test if the Sigma rule detects the traversal pattern regardless of quoting."
+    "output": "cmd.exe /c \"echo test > C:\\test.txt\"",
+    "explanation": "This command uses a standard invocation of cmd.exe with the /c flag to execute a simple command. It does not include path traversal patterns like '/../../', so it should not trigger the Sigma rule."
   },
   {
-    "output": "cmd.exe /c ..\\..\\Windows\\System32\\calc.exe",
-    "explanation": "Removed quotes to test if the Sigma rule detects the traversal pattern without them."
+    "output": "cmd.exe /k echo test",
+    "explanation": "This command uses the /k flag to execute a command and keep the command prompt open. It is a standard usage of cmd.exe without any path traversal or suspicious patterns."
   },
   {
-    "output": "cmd.exe /c \"./.././../Windows/System32/calc.exe\"",
-    "explanation": "Used a more complex traversal path with mixed slashes and dots to test if the Sigma rule generalizes well."
+    "output": "cmd.exe -c echo test",
+    "explanation": "This command substitutes the long option '/c' with the short option '-c', which is functionally equivalent. It remains benign and should not trigger the Sigma rule."
   },
   {
-    "output": "cmd.exe /c \"\\Windows\\System32\\calc.exe\"",
-    "explanation": "Removed traversal components to test if the Sigma rule is sensitive only to traversal patterns and not absolute paths."
+    "output": "cmd.exe /c echo test",
+    "explanation": "This is a basic and common usage of cmd.exe with the /c flag. It is straightforward and should not be flagged by the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"echo test > ..\\..\\test.txt\"",
+    "explanation": "This command includes a path traversal pattern using '..\\..\\', which is the Windows equivalent of '/../../'. It is designed to trigger the Sigma rule for testing purposes."
   }
 ]

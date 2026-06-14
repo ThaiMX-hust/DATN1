@@ -1,0 +1,1 @@
+C:\Windows\System32\AtBroker.exe start C:\Windows\Temp\payload.exe

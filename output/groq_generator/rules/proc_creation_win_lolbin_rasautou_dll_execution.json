@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "rasautou.exe -d test.dll -p DllMain",
-    "explanation": "This command removes unnecessary quotes and spacing from the original command, using minimal syntax while preserving the same behavior."
+    "output": "rasautou.exe -d \"C:\\\\Path\\\\To\\\\Malicious.dll\" -p \"ExportFunctionName\"",
+    "explanation": "This command uses the original syntax from the Sigma rule, specifying a DLL path and an export function. It is a direct representation of the malicious behavior described in the rule."
   },
   {
-    "output": "rasautou.exe -d test.dll -pDllMain",
-    "explanation": "This command removes the space between '-p' and the export name, which is still valid syntax and maintains the same functionality."
+    "output": "rasautou.exe -d C:\\\\Path\\\\To\\\\Malicious.dll -p ExportFunctionName",
+    "explanation": "This command omits quotes around the DLL path and export function name, which may be accepted by the program if the path and name do not contain spaces. It is a simplified version of the original command."
   },
   {
-    "output": "rasautou.exe -p DllMain -d test.dll",
-    "explanation": "This command reorders the arguments '-d' and '-p', which is accepted by the program and does not affect the test behavior."
+    "output": "rasautou.exe -d C:\\\\Path\\\\To\\\\Malicious.dll -p ExportFunctionName",
+    "explanation": "This command uses short syntax and no additional formatting. It is a minimalistic version of the original command, preserving the same behavior."
   },
   {
-    "output": "rasautou.exe -d\"test.dll\" -p\"DllMain\"",
-    "explanation": "This command uses quotes around the arguments in a different format than the original but remains valid and functionally equivalent."
+    "output": "rasautou.exe -p ExportFunctionName -d C:\\\\Path\\\\To\\\\Malicious.dll",
+    "explanation": "This command reorders the arguments '-d' and '-p'. If the program accepts arguments in any order, this is a valid mutation."
+  },
+  {
+    "output": "rasautou.exe -d C:\\\\Path\\\\To\\\\Malicious.dll -p ExportFunctionName",
+    "explanation": "This command uses a normalized path representation and no additional formatting. It is a minimalistic version of the original command, preserving the same behavior."
   }
 ]
+```

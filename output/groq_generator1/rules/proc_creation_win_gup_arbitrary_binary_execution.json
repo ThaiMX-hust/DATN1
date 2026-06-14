@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\\\Windows\\\\explorer.exe\"",
+    "explanation": "The original command line is already a valid test case for the Sigma rule. No mutation is needed to maintain its integrity for testing purposes."
+  },
+  {
+    "output": "\"C:\\\\Windows\\explorer.exe\"",
+    "explanation": "Removed an unnecessary backslash in the path to test whether the rule is resilient to minor path normalization variations."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\explorer.exe\" /test",
+    "explanation": "Added a harmless test flag to simulate reordering or addition of optional arguments while maintaining the core behavior."
+  },
+  {
+    "output": "C:\\\\Windows\\\\explorer.exe",
+    "explanation": "Removed quotes to test whether the rule is resilient to missing quotes in the command line."
+  }
+]

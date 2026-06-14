@@ -1,3 +1,0 @@
-cmd.exe /c "Invoke-UserHunter"
-cmd.exe /c "echo Invoke-UserHunter"
-cmd.exe /c "powershell.exe -Command Invoke-UserHunter"

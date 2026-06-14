@@ -1,18 +1,6 @@
 [
   {
-    "output": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --headless=new --disable-gpu https://mockbin.org/bin/31b1332f-8f5c-490e-8ec0-78e77b4e5709",
-    "explanation": "The command line is a direct match to the Sigma rule's detection criteria and will trigger the rule. It is provided as a true positive test case."
-  },
-  {
-    "output": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --headless=new --disable-gpu https://run.mocky.io/12345678-90ab-cdef-ghij-klmnopqrstuv",
-    "explanation": "The Sigma rule includes detection for URLs containing '://run.mocky' or '://mockbin'. This command uses 'run.mocky.io' and will also trigger the rule."
-  },
-  {
-    "output": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --headless=new --disable-gpu https://mockbin.org/bin/31b1332f-8f5c-490e-8ec0-78e77b4e5709?test=1",
-    "explanation": "Appending a query parameter to the URL does not change the detection criteria of the Sigma rule. The command still contains the 'mockbin.org' URL and will trigger the rule."
-  },
-  {
-    "output": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --headless=new --disable-gpu https://mockbin.org/bin/31b1332f-8f5c-490e-8ec0-78e77b4e5709#fragment",
-    "explanation": "Adding a fragment to the URL does not affect the Sigma rule's detection logic. The command still contains the 'mockbin.org' URL and will trigger the rule."
+    "output": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --headless https://run.mocky.io/v3/example",
+    "explanation": "The original command line is already a true positive for the Sigma rule. No mutation is needed for testing."
   }
 ]

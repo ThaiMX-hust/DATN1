@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /s /a { \"Driver\"=\"C:\\Windows\\Temp\\malicious.dll\" }",
+    "explanation": "This command uses a suspicious DLL path in a Windows Temp directory, which matches the Sigma rule. The command is formatted using standard syntax for odbcconf.exe and includes a suspicious path."
+  },
+  {
+    "output": "odbcconf.exe -a \"Driver=C:\\Windows\\System32\\spool\\PRINTERS\\malicious.dll\"",
+    "explanation": "This command uses a suspicious DLL path in a Windows System32 spool directory, which matches the Sigma rule. The command is formatted using standard syntax for odbcconf.exe and includes a suspicious path."
+  },
+  {
+    "output": "odbcconf.exe /a { Driver=C:\\Users\\Public\\malicious.dll }",
+    "explanation": "This command uses a suspicious DLL path in a Users\\Public directory, which matches the Sigma rule. The command is formatted using standard syntax for odbcconf.exe and includes a suspicious path."
+  }
+]

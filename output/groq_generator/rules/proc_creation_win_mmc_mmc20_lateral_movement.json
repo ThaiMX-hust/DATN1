@@ -1,22 +1,8 @@
+```json
 [
   {
     "output": "C:\\\\WINDOWS\\\\system32\\\\mmc.exe -Embedding",
-    "explanation": "The original command line is already a direct match for the Sigma rule. No mutation is needed to trigger the detection."
-  },
-  {
-    "output": "\"C:\\\\WINDOWS\\\\system32\\\\mmc.exe\" -Embedding",
-    "explanation": "Inserted quotes around the executable path to test if the rule is sensitive to command-line formatting."
-  },
-  {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\mmc.exe  -Embedding",
-    "explanation": "Inserted an extra space before the -Embedding flag to test if the rule is sensitive to spacing."
-  },
-  {
-    "output": "C:\\\\WINDOWS\\system32\\mmc.exe -Embedding",
-    "explanation": "Used short path notation (8.3 format) to test if the rule is sensitive to path normalization."
-  },
-  {
-    "output": "C:\\\\WINNT\\\\system32\\\\mmc.exe -Embedding",
-    "explanation": "Used an alternative Windows directory name (WINNT instead of WINDOWS) to test if the rule is sensitive to path normalization."
+    "explanation": "No safe bypass command can be generated."
   }
 ]
+```

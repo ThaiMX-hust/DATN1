@@ -1,0 +1,42 @@
+[
+  {
+    "output": "splwow64.exe",
+    "explanation": "The Sigma rule detects the execution of splwow64.exe without any command line parameters. This command represents the exact scenario described by the rule."
+  },
+  {
+    "output": "splwow64.exe   ",
+    "explanation": "Inserting trailing spaces in the command line is a safe mutation technique that does not alter the behavior of the process but may bypass simplistic detection based on exact string matching."
+  },
+  {
+    "output": "\"splwow64.exe\"",
+    "explanation": "Enclosing the executable name in quotes is a safe mutation technique that does not change the execution behavior but may evade detection based on unquoted string patterns."
+  },
+  {
+    "output": "splwow64.exe\"",
+    "explanation": "Adding an unmatched quote at the end is a safe mutation technique that may bypass detection if the rule does not account for such cases."
+  },
+  {
+    "output": "splwow64.exe\"",
+    "explanation": "Adding an unmatched quote at the end is a safe mutation technique that may bypass detection if the rule does not account for such cases."
+  },
+  {
+    "output": "splwow64.exe\"",
+    "explanation": "Adding an unmatched quote at the end is a safe mutation technique that may bypass detection if the rule does not account for such cases."
+  },
+  {
+    "output": "splwow64.exe\"",
+    "explanation": "Adding an unmatched quote at the end is a safe mutation technique that may bypass detection if the rule does not account for such cases."
+  },
+  {
+    "output": "splwow64.exe\"",
+    "explanation": "Adding an unmatched quote at the end is a safe mutation technique that may bypass detection if the rule does not account for such cases."
+  },
+  {
+    "output": "splwow64.exe\"",
+    "explanation": "Adding an unmatched quote at the end is a safe mutation technique that may bypass detection if the rule does not account for such cases."
+  },
+  {
+    "output": "splwow64.exe\"",
+    "explanation": "Adding an unmatched quote at the end is a safe mutation technique that may bypass detection if the rule does not account for such cases."
+  }
+]

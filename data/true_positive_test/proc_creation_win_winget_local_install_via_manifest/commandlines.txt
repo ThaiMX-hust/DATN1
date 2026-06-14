@@ -1,0 +1,2 @@
+winget.exe install --manifest C:\Temp\test.yaml
+winget.exe install -m C:\Temp\test.yaml

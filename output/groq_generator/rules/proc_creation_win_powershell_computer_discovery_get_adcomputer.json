@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"Ge`t-ADCo`mputer -Filter * | Out-Fi`le computers.txt\"",
-    "explanation": "Used insertion (backticks) to obfuscate command parts while maintaining functionality. This is a safe mutation technique for testing bypasses."
+    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Select Name, DistinguishedName | Out-File -FilePath C:\\temp\\computers.txt\"",
+    "explanation": "This command uses the Get-ADComputer cmdlet with a filter to export computer information to a file. It aligns with the Sigma rule's detection criteria by including 'Get-ADComputer', '-Filter *', and 'Out-File'."
   },
   {
-    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Se`lect-Object * | Out-File computers.txt\"",
-    "explanation": "Inserted a backtick to split 'Select' into 'Se`lect' and added Select-Object to simulate a benign administrative use case while still matching the rule."
+    "output": "pwsh -c \"Get-ADComputer -Filter * | Select-Object Name, DistinguishedName | Set-Content -Path C:\\temp\\computers_output.txt\"",
+    "explanation": "This command uses an alternative PowerShell executable (pwsh) and substitutes 'Select' with 'Select-Object' and 'Set-Content' instead of 'Out-File'. It still matches the Sigma rule's detection logic."
   },
   {
-    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Out-File -FilePath computers.txt\"",
-    "explanation": "Reordered and expanded the output command to use the full parameter name '-FilePath' instead of redirection, which is a valid substitution and reordering."
+    "output": "powershell.exe \"Get-ADComputer -Filter * | Add-Content -Path C:\\temp\\computers_list.txt\"",
+    "explanation": "This command uses 'Add-Content' instead of 'Out-File' and omits the 'Select' part. It still satisfies the Sigma rule's detection criteria by including 'Get-ADComputer', '-Filter *', and an output command."
   },
   {
-    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Out-File computers.`txt\"",
-    "explanation": "Used insertion (backtick) to obfuscate the file extension while maintaining the same file output behavior."
+    "output": "powershell.exe -Command { Get-ADComputer -Filter * | Select Name, DistinguishedName > C:\\temp\\computers_export.txt }",
+    "explanation": "This command uses redirection '>' for output and includes the required 'Get-ADComputer' and '-Filter *' elements. It matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "pwsh -Command \"Get-ADComputer -Filter * | Select Name, DistinguishedName | Out-File -FilePath C:\\temp\\computers_data.txt\"",
+    "explanation": "This command uses the alternative PowerShell executable (pwsh) and includes all required elements for detection by the Sigma rule."
   }
 ]
+```

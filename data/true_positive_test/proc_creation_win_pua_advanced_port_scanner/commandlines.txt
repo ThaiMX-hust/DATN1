@@ -1,3 +1,0 @@
-net_audit.exe
-custom_scanner.exe /scan
-"C:\Users\SWACHC~1\AppData\Local\Temp\2\Advanced Port Scanner 2\advanced_port_scanner.exe" /portable "C:/Users/SwachchhandaP/Downloads/" /lng en_us

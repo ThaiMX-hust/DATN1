@@ -1,0 +1,22 @@
+[
+  {
+    "output": "advanced_port_scanner.exe /portable /lng",
+    "explanation": "No mutation technique was used for this command as it directly matches the true positive test command. The rule conditions 'selection_img' and 'selection_cli' are triggered by this command. The high-level behavior is expected to remain equivalent in a test environment because the command directly invokes the Advanced Port Scanner with the required flags."
+  },
+  {
+    "output": "\"advanced_port_scanner.exe\" /portable /lng",
+    "explanation": "Insertion mutation technique was used by adding quotes around the executable name. The rule condition 'selection_img' is still triggered by this command because the 'Image' field in the process creation log will contain the executable name without quotes. The high-level behavior is expected to remain equivalent in a test environment because the quotes do not affect the execution of the command."
+  },
+  {
+    "output": "advanced_port_scanner.exe  /portable  /lng",
+    "explanation": "Insertion mutation technique was used by adding extra spaces between the flags. The rule condition 'selection_cli' is still triggered by this command because the 'CommandLine' field in the process creation log will contain the flags with the extra spaces. The high-level behavior is expected to remain equivalent in a test environment because the extra spaces do not affect the parsing of the flags."
+  },
+  {
+    "output": "advanced_port_scanner.exe /portable",
+    "explanation": "Omission mutation technique was used by removing the '/lng' flag. However, this command may not trigger the 'selection_cli' condition because it only contains one of the required flags. The high-level behavior may not remain equivalent in a test environment because the removal of the '/lng' flag may affect the behavior of the Advanced Port Scanner."
+  },
+  {
+    "output": "advanced_port_scanner.exe /lng /portable",
+    "explanation": "Reordering mutation technique was used by swapping the order of the flags. The rule condition 'selection_cli' is still triggered by this command because the 'CommandLine' field in the process creation log will contain both flags regardless of their order. The high-level behavior is expected to remain equivalent in a test environment because the order of the flags does not affect the parsing of the flags."
+  }
+]

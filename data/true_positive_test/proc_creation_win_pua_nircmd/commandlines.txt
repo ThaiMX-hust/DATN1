@@ -1,3 +1,1 @@
-C:\AtomicRedTeam\atomics\..\ExternalPayloads\nircmd.exe  win child class Shell_TrayWnd hide class TrayClockWClass
-copy nircmd.exe sys_utility.exe && sys_utility.exe win min process itunes.exe
-n.exe "e""x""e""c" "h""i""d""e" notepad.exe
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\nircmd.exe win child class Shell_TrayWnd hide class TrayClockWClass

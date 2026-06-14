@@ -1,0 +1,18 @@
+[
+  {
+    "output": "adplus.exe /hang /pn notepad.exe /o C:\\Users\\Public",
+    "explanation": "Substitution technique: Replacing the hyphen '-' indicator with a forward slash '/' for the command-line arguments. Adplus natively processes forward slashes interchangeably with hyphens for its parameters, which safely subverts the literal string match matching patterns like ' -hang ' or ' -pn ' in 'selection_cli'."
+  },
+  {
+    "output": "adplus.exe \"-hang\" \"-pn\" notepad.exe \"-o\" C:\\Users\\Public",
+    "explanation": "Insertion technique: Individual argument indicators are enclosed in double quotes. The underlying Windows command-line tokenizer transparently extracts the switches cleanly for Adplus execution, but the literal character sequence logging rules containing leading/trailing spaces such as ' -hang ' or ' -pn ' fail to find a contiguous matching pattern."
+  },
+  {
+    "output": "cmd.exe /c adplus.exe -ha^ng -p^n notepad.exe -o C:\\Users\\Public",
+    "explanation": "Insertion technique: Injects the cmd.exe string escape character caret ('^') into the core argument text blocks. The outer command shell strips these carets before handing the parsed arguments down to the target binary, preserving flawless target operational mechanics while rendering the process creation telemetry text fundamentally distinct from the simple ' -hang ' or ' -pn ' string matches."
+  },
+  {
+    "output": "adplus.exe\t-hang\t-pn\tnotepad.exe\t-o\tC:\\Users\\Public",
+    "explanation": "Substitution technique: Replaces the traditional single space character ' ' padding surrounding the parameter switches with tab characters ('\\t'). The Windows command-line parser treats tabs as valid parameter whitespace separators, successfully breaking string patterns that explicitly look for space bounds such as ' -hang ' or ' -pn '."
+  }
+]

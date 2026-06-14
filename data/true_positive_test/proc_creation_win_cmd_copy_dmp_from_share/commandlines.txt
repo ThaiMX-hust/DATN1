@@ -1,0 +1,1 @@
+"C:\Windows\System32\cmd.exe" /c copy \example.com\logs\crash.hdmp C:\Temp\test.hdmp

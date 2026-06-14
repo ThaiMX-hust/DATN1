@@ -1,10 +1,18 @@
 [
   {
-    "output": "schtasks.exe /run /tn \"Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser\"",
-    "explanation": "The command uses substitution (/RUN to /run and /TN to /tn) and insertion (additional backslashes for path normalization) to mutate the original command while maintaining its functionality."
+    "output": "schtasks /run /tn \"\\Application Experience\\Microsoft Compatibility Appraiser\"",
+    "explanation": "This command simulates the execution of the Microsoft Compatibility Appraiser task using schtasks.exe. It matches the Sigma rule's detection criteria by including the 'run' command and the specific task name."
   },
   {
-    "output": "schtasks.exe /run /tn \"Microsoft\\\\Windows\\\\Application Experience\\\\Microsoft Compatibility Appraiser\"",
-    "explanation": "The command uses recoding (additional backslashes for path normalization) and substitution (/RUN to /run and /TN to /tn) to mutate the original command while maintaining its functionality."
+    "output": "schtasks /run /tn '\\Application Experience\\Microsoft Compatibility Appraiser'",
+    "explanation": "This command uses single quotes instead of double quotes to enclose the task name, demonstrating a safe mutation technique (substitution). It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /run /tn \"\\\\Application Experience\\\\Microsoft Compatibility Appraiser\"",
+    "explanation": "This command uses additional escape characters for the backslashes in the task name, demonstrating a safe mutation technique (recoding/encoding). It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /run /tn \"\\Application Experience\\Microsoft Compatibility Appraiser\" /i",
+    "explanation": "This command adds an optional '/i' flag, which is accepted by schtasks.exe but does not affect the core behavior of the command. It demonstrates a safe mutation technique (omission). It still matches the Sigma rule's detection criteria."
   }
 ]

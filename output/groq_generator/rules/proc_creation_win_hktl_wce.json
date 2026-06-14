@@ -1,0 +1,30 @@
+[
+  {
+    "output": "wce.exe -S",
+    "explanation": "This command represents a basic execution of WCE with the -S flag, which is likely detected by the Sigma rule. It serves as a baseline for testing."
+  },
+  {
+    "output": "\"wce.exe\" -S",
+    "explanation": "Adding quotes around the executable name is a safe mutation technique that may bypass detection if the rule does not account for quoted paths."
+  },
+  {
+    "output": "wce.exe  -S",
+    "explanation": "Adding an extra space before the -S flag is a safe mutation technique that may bypass detection if the rule does not account for spacing variations."
+  },
+  {
+    "output": "wce.exe -s",
+    "explanation": "Using the lowercase -s flag instead of -S is a substitution technique. If the program accepts both, it may bypass detection if the rule only checks for uppercase -S."
+  },
+  {
+    "output": "wce.exe -S ",
+    "explanation": "Adding a trailing space after the -S flag is a safe mutation technique that may bypass detection if the rule does not account for trailing spaces."
+  },
+  {
+    "output": "wce.exe -S`n",
+    "exercise": "Inserting an escape character (e.g., backtick) followed by a newline is a safe mutation technique that may bypass detection if the rule does not account for such characters."
+  },
+  {
+    "output": "wce.exe -S",
+    "explanation": "This is the original command line as per the Sigma rule's detection condition. It is included for completeness and to confirm detection behavior."
+  }
+]

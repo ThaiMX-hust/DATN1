@@ -1,0 +1,30 @@
+[
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v CurrentBuildNumber",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It queries the Windows Registry for system information using reg.exe with the /v flag."
+  },
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v ProductName",
+    "explanation": "This command also matches the Sigma rule's detection criteria. It queries the Windows Registry for system information using reg.exe with the /v flag."
+  },
+  {
+    "output": "reg query \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\" /v TimeZoneKeyName",
+    "explanation": "This command matches the Sigma rule's detection criteria. It queries the Windows Registry for system information using reg.exe with the /v flag."
+  },
+  {
+    "output": "\"powershell.exe\" & {Get-ItemPropertyValue -Path \"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\" -Name \"Shell\"}",
+    "explanation": "This command matches the Sigma rule's detection criteria. It uses PowerShell to query registry information."
+  },
+  {
+    "output": "\"powershell.exe\" & {Get-ItemPropertyValue -Path \"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\" -Name \"Userinit\"}",
+    "explanation": "This command matches the Sigma rule's detection criteria. It uses PowerShell to query registry information."
+  },
+  {
+    "output": "powershell.exe Get-ItemPropertyValue -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion'",
+    "explanation": "This command matches the Sigma rule's detection criteria. It uses PowerShell to query registry information."
+  },
+  {
+    "output": "powershell.exe Invoke-Command -ScriptBlock { Start-Process 'cmd.exe' -ArgumentList '/c echo Success' }",
+    "explanation": "This command does not match the Sigma rule's detection criteria. It uses PowerShell to execute a command but does not query the registry for system information."
+  }
+]

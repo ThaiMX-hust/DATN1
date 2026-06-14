@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.Net.Sockets.TCPClient]::new('192.168.1.100',443).GetStream().Write([Text.Encoding]::ASCII.GetBytes('test'),0,4)\"",
+    "explanation": "This command uses the [System.Net.Sockets.TCPClient] class to establish a TCP connection and send data, which matches the Sigma rule's detection criteria. It is a safe test command that simulates the behavior of a reverse shell without executing malicious actions."
+  },
+  {
+    "output": "pwsh.exe -c \"[Net.Sockets.TCPClient]::new('192.168.1.100',443).GetStream().Write([Text.Encoding]::ASCII.GetBytes('test'),0,4)\"",
+    "explanation": "This command uses PowerShell Core (pwsh.exe) to perform the same TCPClient action as the previous command. It is a valid mutation of the original command using a different executable name and shortening the namespace for testing purposes."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Net.Sockets.TCPClient]::new('192.168.1.100',443).GetStream().Write([Text.Encoding]::ASCII.GetBytes('test'),0,4) | Out-Null\"",
+    "explanation": "This command adds an 'Out-Null' to suppress output, which is a safe mutation technique. It still triggers the Sigma rule by using the same TCPClient logic."
+  }
+]

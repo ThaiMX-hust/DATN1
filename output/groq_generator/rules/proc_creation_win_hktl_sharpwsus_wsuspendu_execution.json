@@ -1,0 +1,22 @@
+[
+  {
+    "output": "SharpWSUS.exe check",
+    "explanation": "This command uses a basic execution of SharpWSUS with the 'check' argument, which is part of the Sigma rule's detection criteria. It is a minimal command that would trigger the rule."
+  },
+  {
+    "output": "SharpWSUS.exe /payload:example.exe approve",
+    "explanation": "This command uses the '/payload:' flag and 'approve' command, both of which are included in the Sigma rule's detection criteria. It is a minimal command that would trigger the rule."
+  },
+  {
+    "output": "SharpWSUS.exe create -Inject -PayloadArgs 'test' -PayloadFile 'C:\\test.exe'",
+    "explanation": "This command includes multiple elements that match the Sigma rule's detection criteria, such as 'create', '-Inject', '-PayloadArgs', and '-PayloadFile'. It is a minimal command that would trigger the rule."
+  },
+  {
+    "output": "SharpWSUS.exe delete /updateid:12345",
+    "explanation": "This command uses the 'delete' command and '/updateid:' flag, both of which are included in the Sigma rule's detection criteria. It is a minimal command that would trigger the rule."
+  },
+  {
+    "output": "SharpWSUS.exe check /payload=C:\\payload.exe",
+    "explanation": "This command uses the 'check' command and '/payload=' flag, both of which are included in the Sigma rule's detection criteria. It is a minimal command that would trigger the rule."
+  }
+]

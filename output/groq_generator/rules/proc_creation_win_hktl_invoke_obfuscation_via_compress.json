@@ -1,22 +1,12 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::ASCII); $r.ReadToEnd()\"",
-    "explanation": "This is the original true positive command and not a bypass. It is included for reference."
+    "output": "powershell -Command \"[System.IO.Compression.DeflateStream]::new([System.IO.StreamReader]::new([System.IO.StreamReader]::new([System.Text.Encoding]::ASCII.GetBytes('$(echo \"COMPRESS OBFUSCATION\" | Out-String)')).BaseStream).BaseStream).ReadToEnd() | Out-String | Invoke-Expression\"",
+    "explanation": "This command attempts to bypass the Sigma rule by using nested streams and encoded obfuscation techniques. It uses equivalent syntax and safe command-line mutation techniques like reordering and recoding to evade detection while maintaining the same behavior as the original obfuscated PowerShell script."
   },
   {
-    "output": "powershell.exe -c \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::ASCII); $r.ReadToEnd()\"",
-    "explanation": "Substituted '-Command' with '-c' (short option). This is a safe mutation that preserves the original behavior."
-  },
-  {
-    "output": "powershell.exe -Command \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::GetEncoding('ASCII')); $r.ReadToEnd()\"",
-    "explanation": "Replaced [System.Text.Encoding]::ASCII with [System.Text.Encoding]::GetEncoding('ASCII'), which is functionally equivalent but syntactically different. This is a safe mutation that preserves the original behavior."
-  },
-  {
-    "output": "powershell.exe -Command \"$d = [System.IO.Compression.DeflateStream]::new($s, 0); $r = [System.IO.StreamReader]::new($d, [System.Text.Encoding]::ASCII); $r.ReadToEnd()\"",
-    "explanation": "Replaced 'New-Object' with the type accelerator syntax '::new()' for the same classes. This is a safe mutation that preserves the original behavior."
-  },
-  {
-    "output": "powershell.exe -Command \"$d = New-Object System.IO.Compression.DeflateStream($s, 0); $r = New-Object System.IO.StreamReader($d, [System.Text.Encoding]::ASCII); & { $r.ReadToEnd() }\"",
-    "explanation": "Wrapped the final method call in a script block and executed it with the call operator '&'. This is a safe mutation that preserves the original behavior."
+    "output": "powershell -c \"& { [System.IO.Compression.DeflateStream] $d = [System.IO.StreamReader]::new([System.IO.StreamReader]::new([System.Text.Encoding]::ASCII.GetBytes('$(echo \"COMPRESS OBFUSCATION\" | Out-String)')).BaseStream); $d.ReadToEnd() | iex }\"",
+    "explanation": "This command uses a script block to encapsulate the obfuscated logic, making it harder for the Sigma rule to detect the exact string patterns. It applies safe mutation techniques such as substitution and recoding to avoid matching the rule's detection criteria."
   }
 ]
+```

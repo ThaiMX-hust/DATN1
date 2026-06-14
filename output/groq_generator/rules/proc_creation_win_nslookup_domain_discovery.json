@@ -1,22 +1,18 @@
 [
   {
-    "output": "nslookup -querytype:ALL -timeout=10 _ldap._tcp.dc._msdcs.DomainName",
-    "explanation": "Substituted the equals sign (=) in '-querytype=ALL' with a colon (:) as an equivalent syntax for command-line arguments in some contexts."
+    "output": "nslookup -q=ALL -timeout=12 \"_ldap._tcp.dc._msdcs.%%USERDNSDOMAIN%%\"",
+    "explanation": "The command uses substitution (-q for -querytype) and insertion (quotes around the domain string) to bypass the Sigma rule while maintaining the same functionality."
   },
   {
-    "output": "nslookup -querytype=ALL --timeout=10 _ldap._tcp.dc._msdcs.DomainName",
-    "explanation": "Replaced the single hyphen '-timeout' with a double hyphen '--timeout' to test for long-form flag substitution."
+    "output": "nslookup -querytype=ALL _ldap._tcp.dc._msdcs.`DomainName`",
+    "explanation": "The command uses recoding (backticks for variable representation) and omission (removing the timeout parameter, which is optional) to bypass the Sigma rule while preserving the core behavior."
   },
   {
-    "output": "nslookup -timeout=10 -querytype=ALL _ldap._tcp.dc._msdcs.DomainName",
-    "explanation": "Reordered the '-timeout' and '-querytype' arguments to test for argument order flexibility."
+    "output": "nslookup -q=ALL _ldap._tcp.dc._msdcs.Workgroup",
+    "explanation": "The command uses substitution (-q for -querytype) and omission (removing the timeout parameter) to bypass the Sigma rule while maintaining the same functionality."
   },
   {
-    "output": "nslookup -querytype=ALL -timeout=10 \"_ldap._tcp.dc._msdcs.DomainName\"",
-    "explanation": "Inserted quotes around the final domain name argument to test for safe string parsing variations."
-  },
-  {
-    "output": "nslookup -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.DomainName",
-    "explanation": "Used the original command as a baseline for comparison in testing."
+    "output": "nslookup -q=ALL -t 12 _ldap._tcp.dc._msdcs.%%USERDNSDOMAIN%%",
+    "explanation": "The command uses substitution (-t for -timeout) and insertion (space between -t and timeout value) to bypass the Sigma rule while preserving the original behavior."
   }
 ]

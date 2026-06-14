@@ -1,2 +1,0 @@
-copy powershell.exe not_ps.exe && diskshadow.exe /s C:\path\to\script_calling_not_ps.txt
-diskshadow.exe /s C:\path\to\script.txt

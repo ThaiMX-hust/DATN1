@@ -1,1 +1,1 @@
-"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"   --headless=new --disable-gpu https://mockbin.org/bin/31b1332f-8f5c-490e-8ec0-78e77b4e5709
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless https://run.mocky.io/v3/example

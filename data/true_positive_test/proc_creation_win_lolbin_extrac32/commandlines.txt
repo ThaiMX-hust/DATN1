@@ -1,3 +1,0 @@
-extrac32.exe /C \\127.0.0.1\share\archive.zip C:\path\to\extract\file.txt
-extrac32.exe /c C:\path\to\source.cab C:\path\to\destination.txt
-extrac32.exe /E /A \\127.0.0.1\share\archive.cab C:\path\to\extract\

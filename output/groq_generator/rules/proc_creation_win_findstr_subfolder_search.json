@@ -1,42 +1,22 @@
 [
   {
-    "output": "findstr /s /i \"password\" C:\\*.txt",
-    "explanation": "This is the original command that matches the Sigma rule. It uses the /s and /i flags for subfolder and case-insensitive search."
+    "output": "findstr -s -i \"subfolder\" \"C:\\\\Windows\\\\System32\\\\*.txt\"",
+    "explanation": "This command uses the -s and -i flags as specified in the Sigma rule, searching for the term 'subfolder' in a case-insensitive manner across all .txt files in the System32 directory and subdirectories."
   },
   {
-    "output": "findstr /s/i \"password\" C:\\*.txt",
-    "explanation": "The /s and /i flags are combined without spaces, which is an equivalent syntax accepted by findstr.exe."
+    "output": "findstr /s /i \"subfolder\" \"C:\\\\Windows\\\\System32\\\\*.txt\"",
+    "explanation": "This command substitutes short flags (-s, -i) with their equivalent long form (/s, /i), which is a valid mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "findstr -s -i \"password\" C:\\*.txt",
-    "explanation": "The /s and /i flags are replaced with their equivalent -s and -i syntax, which is still valid in findstr.exe."
+    "output": "findstr -i -s \"subfolder\" \"C:\\\\Windows\\\\System32\\\\*.txt\"",
+    "explanation": "This command reorders the flags (-i and -s), which is a valid mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "findstr -si \"password\" C:\\*.txt",
-    "explanation": "The -s and -i flags are combined into a single -si flag, which is a valid shorthand in findstr.exe."
+    "output": "findstr -s -i \"subfolder\" \"C:\\\\Windows\\\\System32\\\\*.txt\" > NUL",
+    "explanation": "This command omits output by redirecting it to NUL, which is a valid mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "findstr /S /I \"password\" C:\\*.txt",
-    "explanation": "The /s and /i flags are capitalized, but case does not matter in Windows command-line arguments."
-  },
-  {
-    "output": "findstr.exe /s /i \"password\" C:\\*.txt",
-    "explanation": "The full executable name is used, but it is still valid and matches the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c findstr /s /i \"password\" C:\\*.txt",
-    "explanation": "The command is executed via cmd.exe, which is a common way to run command-line utilities in Windows."
-  },
-  {
-    "output": "copy findstr.exe grep.exe && grep.exe /s /i \"password\" C:\\*.txt",
-    "explanation": "The findstr.exe binary is renamed to grep.exe, but the same /s and /i flags are used, matching the Sigma rule."
-  },
-  {
-    "output": "copy findstr.exe fstr.exe && fstr.exe /s /i \"password\" .",
-    "explanation": "The findstr.exe binary is renamed to fstr.exe, and the search is performed in the current directory, still matching the Sigma rule."
-  },
-  {
-    "output": "findstr \"password\" . /s /i",
-    "explanation": "The search string and target directory are reordered, but the /s and /i flags are still present, matching the Sigma rule."
+    "output": "findstr -s -i \"subfolder\" \"%windir%\\\\System32\\\\*.txt\"",
+    "explanation": "This command uses an environment variable (%windir%) to represent the Windows directory, which is a valid mutation technique and still matches the Sigma rule."
   }
 ]

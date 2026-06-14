@@ -1,22 +1,24 @@
+```json
 [
   {
-    "output": "c:\\windows\\system32\\msiexec.exe /q /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
-    "explanation": "The original command is preserved with no mutation applied for baseline testing."
-  },
-  {
     "output": "c:\\windows\\system32\\msiexec.exe /quiet /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
-    "explanation": "The /q flag is replaced with its equivalent /quiet flag to test substitution of equivalent syntax."
+    "explanation": "Reordered the quiet flag to appear before the /i flag, which is functionally equivalent and may bypass detection relying on specific argument order."
   },
   {
-    "output": "c:\\windows\\system32\\msiexec.exe /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\" /q",
-    "explanation": "The order of the /q and /i flags is swapped to test reordering of arguments."
+    "output": "c:\\windows\\system32\\msiexec.exe /q \" /i C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
+    "explanation": "Inserted extra space after the /q flag and before the /i flag, which may bypass detection that relies on strict spacing patterns."
   },
   {
-    "output": "\"c:\\windows\\system32\\msiexec.exe\" /q /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
-    "explanation": "The executable path is wrapped in quotes to test insertion of quotes for bypass testing."
+    "output": "c:\\windows\\system32\\msiexec.exe /i C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi /quiet",
+    "explanation": "Moved the /quiet flag to the end of the command line, which is still valid and may evade detection that looks for /quiet immediately after /i."
   },
   {
-    "output": "c:\\windows\\system32\\msiexec.exe /q /i C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi",
-    "explanation": "The quotes around the MSI path are removed to test omission of optional syntax."
+    "output": "c:\\windows\\system32\\msiexec.exe /i C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi -q",
+    "explanation": "Used the short form of the quiet flag (-q) instead of /quiet, which is functionally equivalent and may bypass detection expecting the long form."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /i C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi /qn",
+    "explanation": "Used /qn instead of /quiet, which is a valid alternative flag for quiet installation and may bypass detection looking for /quiet."
   }
 ]
+```

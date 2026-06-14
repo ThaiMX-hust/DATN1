@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rclone.exe --config \"C:\\\\Users\\\\User\\\\rclone.conf\" --no-check-certificate copy C:\\\\Data remote:Backup --transfers=4 --multi-thread-streams=8",
+    "explanation": "This command uses the same rclone.exe utility with the --config and --no-check-certificate flags, as well as the 'copy' command, which matches the Sigma rule. It includes additional flags like --transfers and --multi-thread-streams to simulate realistic behavior. The command is structured to match the rule's detection criteria."
+  },
+  {
+    "output": "rclone.exe -c \"C:\\\\Users\\\\User\\\\rclone.conf\" --no-check-certificate sync C:\\\\Data remote:Backup -t=4 -m=8",
+    "explanation": "This command uses substitution techniques by replacing --config with -c and --multi-thread-streams with -m. It also uses short-form flags for transfers (-t) instead of --transfers. The command still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rclone.exe --config C:\\\\Users\\\\User\\\\rclone.conf --no-check-certificate lsd remote: --config C:\\\\Users\\\\User\\\\rclone.conf",
+    "explanation": "This command uses the 'lsd' command, which is included in the Sigma rule's detection list. It also includes the --config and --no-check-certificate flags. The --config flag is repeated to test redundancy, which is still valid in rclone."
+  }
+]

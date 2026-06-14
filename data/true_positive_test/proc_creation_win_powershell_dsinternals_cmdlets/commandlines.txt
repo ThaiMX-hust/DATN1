@@ -1,3 +1,1 @@
-"powershell.exe" & {Get-ADReplAccount -All -Server $ENV:logonserver.TrimStart(\""\\"")}
-powershell.exe -Command "& ('Ge'+'t-ADDBAc'+'count')"
-powershell.exe -Command "Get-ADDBAccount"
+powershell.exe -Command "Get-ADReplAccount -All -Server $ENV:LOGONSERVER.TrimStart('\')"

@@ -1,18 +1,36 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"New-Service -Name 'TestService' -BinaryPathName 'cmd.exe' -StartupType Manual\"",
-    "explanation": "This command uses the same structure as the Sigma rule but omits unnecessary elements and uses standard syntax. It is a direct match for the detection rule."
+    "output": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -c New-Service -Name svcHighPriv -BinaryPathName 'C:\\windows\\system32\\cmd.exe /C echo Uuup! > \\\\\\\\.\$$pipe\\HighPriv' -StartupType Manual",
+    "explanation": "This is the original command and matches the Sigma rule exactly."
   },
   {
-    "output": "powershell.exe -Command \"New-Service -BinaryPathName 'cmd.exe' -Name 'TestService' -StartupType Manual\"",
-    "explanation": "Reorders the arguments of the New-Service command. The order of parameters does not affect the functionality or detection by the Sigma rule."
+    "output": "\"powershell.exe\" & {New-Service -Name \"AtomicTestService_PowerShell\" -BinaryPathName \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1543.003\\\\bin\\\\AtomicService.exe\" Start-Service -Name \"AtomicTestService_PowerShell\"}",
+    "explanation": "This command is a direct match to the Sigma rule and would be detected."
   },
   {
-    "output": "powershell.exe -Command \"New-Service -Name 'TestService' -bin 'cmd.exe' -StartupType Manual\"",
-    "explanation": "Substitutes '-BinaryPathName' with its short form '-bin', which is functionally equivalent and still matches the Sigma rule."
+    "output": "\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"New-Service -Name BypassTest -BinaryPathName 'C:\\\\windows\\\\system32\\\\cmd.exe /C echo Bypass > \\\\\\\\.\$$pipe\\BypassTest' -StartupType Manual\"",
+    "explanation": "This command uses the -Command parameter instead of -c, which is an equivalent substitution. It still matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"N`ew-Service -Name 'TestService' -BinaryPathName 'cmd.exe' -StartupType Manual\"",
-    "explanation": "Uses an escaped character (`) to split 'New-Service' into 'N`ew-Service', which is still parsed correctly and matches the Sigma rule."
-  }
-]
+    "output": "\"powershell.exe\" -c \"New-Service -BinaryPathName 'C:\\\\windows\\\\system32\\\\cmd.exe /C echo Bypass > \\\\\\\\.\$$pipe\\BypassTest' -Name BypassTest -StartupType Manual\"",
+    "explanation": "This command reorders the arguments but still includes all required elements and matches the Sigma rule."
+  },
+  {
+    "output": "\"powershell.exe\" -c \"New-Service -Name BypassTest -StartupType Manual -BinaryPathName 'C:\\\\windows\\\\system32\\\\cmd.exe /C echo Bypass > \\\\\\\\.\$$pipe\\BypassTest'\"",
+    "explanation": "This command reorders the arguments and uses equivalent syntax, but still matches the Sigma rule."
+  },
+  {
+    "output": "\"powershell.exe\" -Command \"New-Service -Name BypassTest -BinaryPathName 'C:\\\\windows\\\\system32\\\\cmd.exe /C echo Bypass > \\\\\\\\.\$$pipe\\BypassTest' -StartupType Manual\"",
+    "explanation": "This command uses -Command instead of -c, which is a valid substitution and still matches the Sigma rule."
+  },
+  {
+    "output": "\"powershell.exe\" -c \"New-Service -Name BypassTest -BinaryPathName 'C:\\\\windows\\\\system32\\\\cmd.exe /C echo Bypass > \\\\\\\\.\$$pipe\\BypassTest' -StartupType Manual\"",
+    "explanation": "This command uses equivalent syntax and matches the Sigma rule."
+  },
+  {
+    "output": "\"powershell.exe\" -c \"New-Service -Name BypassTest -BinaryPathName 'C:\\\\windows\\\\system32\\\\cmd.exe /C echo Bypass > \\\\\\\\.\$$pipe\\BypassTest' -StartupType Manual\"",
+    "explanation": "This command is a direct match to the Sigma rule and would be detected."
+  },
+  {
+    "output": "\"powershell.exe\" -c \"New-Service -Name BypassTest -BinaryPathName 'C:\\\\windows\\\\system32\\\\cmd.exe /

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "chcp.com 936",
+    "explanation": "This is the original true positive command and will trigger the Sigma rule."
+  },
+  {
+    "output": "chcp 936",
+    "explanation": "Removes the .com extension, which is still valid in Windows command-line execution context and should trigger the rule."
+  },
+  {
+    "output": "chcp  936",
+    "explanation": "Inserts an extra space between 'chcp' and '936', which is still valid and should trigger the rule."
+  },
+  {
+    "output": "\"chcp\" 936",
+    "explanation": "Wraps the command in quotes, which is a safe mutation and should still trigger the rule."
+  }
+]

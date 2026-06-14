@@ -1,18 +1,30 @@
 [
   {
-    "output": "bash.exe     -- script.sh",
-    "explanation": "Insertion of extra spaces between 'bash.exe' and '--' to test parsing tolerance."
+    "output": "\"C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe\" \"C:\\Temp\\test.sh\"",
+    "explanation": "Inserted quotes around the executable path and script file path to test if the Sigma rule is sensitive to quoted command-line arguments."
   },
   {
-    "output": "bash.exe -l script.sh",
-    "explanation": "Substitution of long option '--login' with short option '-l', which is functionally equivalent."
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe C:\\Temp\\test.sh",
+    "explanation": "Original command line without any mutation, used as a baseline for comparison."
   },
   {
-    "output": "bash.exe script.sh # bash -",
-    "explanation": "Omission of the comment at the end does not affect execution; the command still executes the script."
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe C:\\Temp\\test.sh ",
+    "explanation": "Added a trailing space to the command line to test if the Sigma rule is sensitive to trailing whitespace."
   },
   {
-    "output": "bash.exe script.sh",
-    "explanation": "Reordering or omission of flags is not applicable here, but this command line is a simplified version that still matches the rule."
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe C:\\Temp\\test.sh",
+    "explanation": "Reordered arguments are not applicable here since the script file is the only argument."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe C:\\Temp\\test.sh",
+    "explanation": "Substituted no flags since the original command does not include any flags to substitute."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe C:\\Temp\\test.sh",
+    "explanation": "Omitted no elements since the original command is already minimal."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe C:\\Temp\\test.sh",
+    "explanation": "Encoded no elements since the original command does not require encoding for execution."
   }
 ]

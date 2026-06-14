@@ -1,42 +1,24 @@
+```json
 [
   {
-    "output": "powershell.exe -exec bypass -File script.ps1",
-    "explanation": "This is a direct match to the Sigma rule's detection criteria, as it uses the '-exec' flag with 'bypass', which is flagged by the rule."
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Write-Output 'Test bypass command'\"",
+    "explanation": "This command uses the -ExecutionPolicy flag with 'Bypass' to match the Sigma rule's detection criteria. It is a safe test command that simulates the behavior without performing malicious actions."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -File script.ps1",
-    "explanation": "This uses the full form of the flag '-ExecutionPolicy' instead of the shorthand '-exec', but it still matches the rule's detection of '-executionpolicy' with 'Bypass'."
+    "output": "powershell.exe -ep Bypass -c \"Write-Output 'Testing execution policy bypass'\"",
+    "explanation": "This command uses the short form of the execution policy flag (-ep) with 'Bypass' to match the Sigma rule's detection criteria. It is a safe test command that simulates the behavior without performing malicious actions."
   },
   {
-    "output": "powershell.exe -ep Bypass -File script.ps1",
-    "explanation": "This uses the shorthand '-ep' instead of '-exec' or '-ExecutionPolicy', which is still detected by the rule's inclusion of ' -ep ' in the command line."
+    "output": "powershell.exe -ExecutionPolicy Unrestricted -Command \"Write-Output 'Testing unrestricted policy'\"",
+    "explanation": "This command uses the '-ExecutionPolicy' flag with 'Unrestricted' to match the Sigma rule's detection criteria. It is a safe test command that simulates the behavior without performing malicious actions."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Unrestricted -File script.ps1",
-    "explanation": "This uses the '-ExecutionPolicy' flag with 'Unrestricted', which is explicitly flagged by the Sigma rule as an insecure level."
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Write-Output 'Testing bypass'\"",
+    "explanation": "This command uses the '-ExecutionPolicy' flag with 'Bypass' to match the Sigma rule's detection criteria. It is a safe test command that simulates the behavior without performing malicious actions."
   },
   {
-    "output": "powershell.exe -ep Unrestricted -File script.ps1",
-    "explanation": "This uses the shorthand '-ep' with 'Unrestricted', which is still detected by the rule's inclusion of ' -ep ' and 'Unrestricted' in the command line."
-  },
-  {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command Get-ExecutionPolicy",
-    "explanation": "This uses '-ExecutionPolicy Bypass' but does not execute a script. It is still flagged by the rule because it sets the execution policy to 'Bypass'."
-  },
-  {
-    "output": "powershell.exe -ep Bypass -Command Get-ExecutionPolicy",
-    "explanation": "This uses the shorthand '-ep' with 'Bypass', which is still detected by the rule's inclusion of ' -ep ' and 'Bypass' in the command line."
-  },
-  {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Scope CurrentUser -File script.ps1",
-    "explanation": "This adds the '-Scope' parameter, which is optional and does not affect the detection by the Sigma rule, which focuses on the presence of '-ExecutionPolicy' or its shorthand with an insecure level."
-  },
-  {
-    "output": "powershell.exe -ep Bypass -Scope CurrentUser -File script.ps1",
-    "explanation": "This uses the shorthand '-ep' with 'Bypass' and adds the '-Scope' parameter, which is optional and does not affect the detection by the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Set-ExecutionPolicy Bypass -Scope CurrentUser\"",
-    "explanation": "This uses '-ExecutionPolicy Bypass' and executes a command to set the execution policy again. It is still flagged by the rule because it sets the execution policy to 'Bypass'."
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command Write-Output 'Testing bypass'",
+    "explanation": "This command omits quotes around the command to test if the Sigma rule detects the execution policy change regardless of command formatting. It is a safe test command that simulates the behavior without performing malicious actions."
   }
 ]
+```

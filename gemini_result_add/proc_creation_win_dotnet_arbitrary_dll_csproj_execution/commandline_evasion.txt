@@ -1,0 +1,18 @@
+[
+  {
+    "output": "dotnet.exe exec C:\\Temp\\payload.dll ",
+    "explanation": "Insertion technique: Appending a trailing space character at the absolute end of the command line. Because the Sigma rule utilizes the strict 'CommandLine|endswith' string modifier looking explicitly for variants ending with the extension or a quote character (e.g., '.dll', '.dll\"'), adding any trailing whitespace breaks the modifier's evaluation constraint while preserving identical operational mechanics."
+  },
+  {
+    "output": "dotnet.exe exec C:\\Temp\\payload.dll & whoami",
+    "explanation": "Other techniques (Command Chaining): Appending a second harmless command using the shell operator ('& whoami') moves the target payload extension away from the trailing edge of the process execution string. This invalidates the 'CommandLine|endswith' rule filter while ensuring that the primary dotnet execution evaluates successfully first."
+  },
+  {
+    "output": "dotnet.exe exec C:\\Temp\\payload.dll --param value",
+    "explanation": "Omission/Substitution technique: Appending extra harmless arguments or parameters to the target execution string. Passing trailing application-specific parameters or arguments to the sub-command moves the target file path away from the end of the line, safely modifying the command line away from the strict rule suffixes."
+  },
+  {
+    "output": "dotnet.exe exec C:\\Temp\\payload.dll -h",
+    "explanation": "Omission/Substitution technique: Appending a benign help switch parameter or invalid flag to the very end of the string. This alters the suffix layout recorded in process creation telemetry so that it no longer matches the monitored '.dll' or '.csproj' suffixes, while the main execution behavior can be simulated safely in a test environment."
+  }
+]

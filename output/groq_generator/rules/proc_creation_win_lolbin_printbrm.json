@@ -1,30 +1,24 @@
+```json
 [
   {
-    "output": "PrintBrm.exe -f \"C:\\Users\\Public\\data.zip\" -b",
-    "explanation": "Inserted quotes around the file path to test if the rule handles quoted paths correctly."
+    "output": "PrintBrm.exe -f \"C:\\Temp\\test.zip\" extract -o \"C:\\Output\\\"",
+    "explanation": "This command uses the Sigma rule's detection criteria by invoking PrintBrm.exe with a .zip file and the -f flag. It is a valid test command that matches the rule."
   },
   {
-    "output": "PrintBrm.exe -fC:\\Users\\Public\\data.zip -b",
-    "explanation": "Removed space between -f and the file path to test if the rule detects the flag-value concatenation."
+    "output": "PrintBrm.exe -f C:\\Temp\\test.zip extract -o C:\\Output\\",
+    "explanation": "This command omits quotes around file paths, which may be accepted by the program. It still includes the -f flag and .zip file, matching the Sigma rule."
   },
   {
-    "output": "PrintBrm.exe -f C:\\Users\\Public\\data.zip",
-    "explanation": "Omitted the -b flag to test if the rule still detects the presence of the -f flag and .zip file."
+    "output": "PrintBrm.exe -f C:\\Temp\\test.zip -o C:\\Output\\ extract",
+    "explanation": "This command reorders the arguments by placing the -o flag before the extract command. The -f flag and .zip file are still present, matching the Sigma rule."
   },
   {
-    "output": "PrintBrm.exe -f:C:\\Users\\Public\\data.zip -b",
-    "explanation": "Used a colon after -f to test if the rule handles alternate flag-value syntax."
+    "output": "PrintBrm.exe -f C:\\Temp\\test.zip extract",
+    "explanation": "This command omits the -o flag and output directory, which are optional. It still includes the -f flag and .zip file, matching the Sigma rule."
   },
   {
-    "output": "PrintBrm.exe -f C:\\Users\\Public\\data.7z",
-    "explanation": "Changed the file extension to .7z to test if the rule is specific to .zip files."
-  },
-  {
-    "output": "set ZIP_PATH=C:\\Users\\Public\\data.zip && PrintBrm.exe -f %ZIP_PATH% -b",
-    "explanation": "Used an environment variable to represent the file path to test if the rule handles variable expansion."
-  },
-  {
-    "output": "PrintBrm.exe -b -f C:\\Users\\Public\\data.zip",
-    "explanation": "Reordered the flags to test if the rule is sensitive to argument order."
+    "output": "PrintBrm.exe -f \"C:\\Temp\\test.zip\" extract -o \"C:\\Output\\\"`",
+    "explanation": "This command adds an unnecessary trailing backtick, which may be tolerated by some shells. It still includes the -f flag and .zip file, matching the Sigma rule."
   }
 ]
+```

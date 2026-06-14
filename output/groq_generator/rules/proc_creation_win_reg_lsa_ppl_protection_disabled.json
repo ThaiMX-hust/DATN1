@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f",
-    "explanation": "This command matches the Sigma rule exactly and serves as the baseline for testing."
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f",
+    "explanation": "This command matches the Sigma rule by using reg.exe to modify the RunAsPPL registry key under the Lsa subkey, which disables LSA PPL protection. It includes all required elements: 'add', 'RunAsPPL', and '/d 0'."
   },
   {
-    "output": "reg   add   \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Lsa\"   /v   RunAsPPL   /d   0   /f",
-    "explanation": "Extra spaces between arguments and command parts are inserted, which is a safe mutation technique and still parsed correctly by reg.exe."
+    "output": "reg.exe add HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Lsa /v RunAsPPL /d 0 /f",
+    "explanation": "This command uses double backslashes for escaping, which is a safe mutation technique. It still performs the same action as the original command and matches the Sigma rule."
   },
   {
-    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0x0 /f",
-    "explanation": "The decimal value '0' is replaced with its hexadecimal equivalent '0x0', which is functionally equivalent in this context."
+    "output": "reg.exe add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa /v RunAsPPL /d 0",
+    "explanation": "This command omits the '/f' flag, which is optional in this context. The core behavior of disabling LSA PPL protection remains unchanged, and it still matches the Sigma rule."
   },
   {
-    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /f /v RunAsPPL /d 0",
-    "explanation": "The order of the arguments is changed, but reg.exe accepts reordered flags as long as the required parameters are present."
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /d 0 /v RunAsPPL",
+    "explanation": "This command reorders the arguments '/d 0' and '/v RunAsPPL', which is acceptable for reg.exe. It still performs the same action and matches the Sigma rule."
+  },
+  {
+    "output": "reg.exe add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa ^/v RunAsPPL ^/d 0 ^/f",
+    "explanation": "This command uses escape characters (^) before the '/' flags, which is a valid mutation technique in some command-line environments. It still matches the Sigma rule."
   }
 ]
+```

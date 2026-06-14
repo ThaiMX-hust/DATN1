@@ -1,22 +1,22 @@
 [
   {
-    "output": "powershell.exe -c \"& ([string]::Join('' , ([char]73, [char]69, [char]88))) 'Write-Host Educational_Test'\"",
-    "explanation": "Inserted quotes around the command line to test how the detection rule handles quoted strings. The command remains functionally identical."
+    "output": "powershell.exe -Command '$PSHome[0]+$PSHome[1]'",
+    "explanation": "This command attempts to bypass the Sigma rule by using a direct PowerShell command that references $PSHome with array indexing, similar to obfuscated patterns. It uses safe syntax and avoids complex obfuscation."
   },
   {
-    "output": "powershell.exe -Command \"& ([string]::Join('' , ([char]73, [char]69, [char]88))) 'Write-Host Educational_Test'\"",
-    "explanation": "Substituted the short option '-c' with the long option '-Command'. This is a valid equivalent syntax in PowerShell."
+    "output": "powershell.exe -c '$env:Public[2]+$env:Public[3]'",
+    "explanation": "This command simulates a bypass by referencing $env:Public with array indexing, which is a pattern detected by the Sigma rule. It uses short syntax (-c) and safe command-line formatting."
   },
   {
-    "output": "powershell.exe -c & ([string]::Join('',([char]73,[char]69,[char]88))) 'Write-Host Educational_Test'",
-    "explanation": "Removed spaces between elements where possible without affecting functionality. The command remains valid and functionally identical."
+    "output": "powershell.exe -Command '$ShellId[5]+$ShellId[6]'",
+    "explanation": "This command mimics the obfuscated behavior by using $ShellId with array indexing. It uses standard PowerShell syntax and is a safe representation of the Sigma rule's detection pattern."
   },
   {
-    "output": "powershell.exe -c \"& ([string]::Join('', @([char]73, [char]69, [char]88))) 'Write-Host Educational_Test'\"",
-    "explanation": "Reordered and added array notation '@()' for the character array. This is a syntactically valid alternative in PowerShell."
+    "output": "powershell.exe -Command '$VerbosePreference.ToString()'",
+    "explanation": "This command tests the detection of $VerbosePreference.ToString(), a pattern included in the Sigma rule. It uses standard PowerShell syntax and is not obfuscated beyond the original rule's scope."
   },
   {
-    "output": "powershell.exe -c \"& ([string]([char]73+[char]69+[char]88)) 'Write-Host Educational_Test'\"",
-    "explanation": "Replaced [string]::Join with string casting via [string] and used '+' operator for concatenation. This is a functionally equivalent alternative."
+    "output": "powershell.exe -Command '[String]$VerbosePreference'",
+    "explanation": "This command tests the detection of [String]$VerbosePreference, another pattern in the Sigma rule. It uses minimal syntax and is a safe representation of the rule's detection logic."
   }
 ]

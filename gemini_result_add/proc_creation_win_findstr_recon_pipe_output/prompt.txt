@@ -1,0 +1,89 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Recon Command Output Piped To Findstr.EXE
+id: ccb5742c-c248-4982-8c5c-5571b9275ad3
+related:
+    - id: fe63010f-8823-4864-a96b-a7b4a0f7b929
+      type: derived
+status: test
+description: |
+    Detects the execution of a potential recon command where the results are piped to "findstr". This is meant to trigger on inline calls of "cmd.exe" via the "/c" or "/k" for example.
+    Attackers often time use this technique to extract specific information they require in their reconnaissance phase.
+references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/02cb591f75064ffe1e0df9ac3ed5972a2e491c97/atomics/T1057/T1057.md#atomic-test-6---discover-specific-process---tasklist
+    - https://www.hhs.gov/sites/default/files/manage-engine-vulnerability-sector-alert-tlpclear.pdf
+    - https://www.trendmicro.com/en_us/research/22/d/spring4shell-exploited-to-deploy-cryptocurrency-miners.html
+author: Nasreddine Bencherchali (Nextron Systems), frack113
+date: 2023-07-06
+modified: 2024-06-27
+tags:
+    - attack.discovery
+    - attack.t1057
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains:
+            # Note: Add additional CLI to increase and enhance coverage
+            # Note: We use wildcards in this instance to avoid writing a lot of variations that can be avoided easily. You can switch to regex if its supported by your backend.
+            - 'ipconfig*|*find'
+            - 'net*|*find'
+            - 'netstat*|*find'
+            - 'ping*|*find'
+            - 'systeminfo*|*find'
+            - 'tasklist*|*find'
+            - 'whoami*|*find'
+    condition: selection
+falsepositives:
+    - Unknown
+level: medium
+```
+
+True positive test command:
+
+```text
+"cmd.exe" /c cmd.exe /C whoami & wmic useraccount get /ALL & quser /SERVER:"localhost" & quser & qwinsta.exe /server:localhost & qwinsta.exe & for /F "tokens=1,2" %%i in ('qwinsta /server:localhost ^| findstr "Active Disc"') do @echo %%i | find /v "#" | find /v "console" || echo %%j > computers.txt & @FOR /F %%n in (computers.txt) DO @FOR /F "tokens=1,2" %%i in ('qwinsta /server:%%n ^| findstr "Active Disc"') do @echo %%i | find /v "#" | find /v "console" || echo %%j > usernames.txt
+"cmd.exe" /c netsh.exe advfirewall show allprofiles & netsh.exe advfirewall firewall dump & netsh.exe advfirewall show currentprofile & netsh.exe advfirewall firewall show rule name=all & netsh.exe firewall show state & netsh.exe firewall show config & sc query windefend & powershell.exe /c "Get-Process | Where-Object { $_.ProcessName -eq 'Sysmon' }" & powershell.exe /c "Get-Service | where-object {$_.DisplayName -like '*sysm*'}" & powershell.exe /c "Get-CimInstance Win32_Service -Filter 'Description = ''System Monitor service'''" & tasklist.exe & tasklist.exe | findstr /i virus & tasklist.exe | findstr /i cb & tasklist.exe | findstr /i defender & tasklist.exe | findstr /i cylance & tasklist.exe | findstr /i mc & tasklist.exe | findstr /i "virus cb defender cylance mc"
+"cmd.exe" /c tasklist | findstr lsass
+"powershell.exe" & {$localip = ((ipconfig | findstr [0-9].\.)[0]).Split()[-1] $pieces = $localip.split(\"".\"") $firstOctet = $pieces[0] $secondOctet = $pieces[1] $thirdOctet = $pieces[2] foreach ($ip in 1..255 | %% { \""$firstOctet.$secondOctet.$thirdOctet.$_\"" } ) {cmd.exe /c nslookup $ip}}
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

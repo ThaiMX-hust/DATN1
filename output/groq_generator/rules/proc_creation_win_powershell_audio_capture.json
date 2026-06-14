@@ -1,22 +1,14 @@
 [
   {
-    "output": "powershell.exe -Command \"\\$m = Get-AudioDevice -Recording; Set-AudioDevice -ID \\$m.ID; Start-Sleep -Seconds 5\"",
-    "explanation": "The original command is modified by using double quotes around the command string and escaping the variable assignment with a backslash. This uses insertion and safe string formatting to maintain functionality."
+    "output": "powershell.exe & {$mic = Get-AudioDevice -Recording; Set-AudioDevice -ID $mic.ID; Start-Sleep -Seconds 5}",
+    "explanation": "The command was modified by removing unnecessary spaces and using semicolons to separate commands. This is a safe mutation technique that preserves the original behavior for testing purposes."
   },
   {
-    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/frgnca/AudioDeviceCmdlets/master/AudioDeviceCmdlets.ps1'); G`et-AudioDevice -List\"",
-    "explanation": "The command is slightly altered by using a backtick to split 'Get-AudioDevice' into 'G`et-AudioDevice' to test parsing resilience while maintaining the same behavior."
+    "output": "\"powershell.exe\" & {$mic = Get-AudioDevice -Recording; Set-AudioDevice -ID $mic.ID; Start-Sleep -s 5}",
+    "explanation": "The command was altered by using the short form of the sleep time parameter (-s instead of -Seconds). This is a valid substitution technique that maintains the same functionality."
   },
   {
-    "output": "powershell.exe -Command \"Import-Module AudioDeviceCmdlets; $func = 'Get-AudioDevice'; & $func -List\"",
-    "explanation": "The command is simplified by removing unnecessary string concatenation and using a direct variable assignment for the function name. This uses omission and substitution techniques."
-  },
-  {
-    "output": "powershell.exe -EncodedCommand SQBhAGwAbABvAHUAbQBpAG4ALQBBAHUAZABpAG8ARABlAHYAaQBjAGUARgBvAG4AdA==",
-    "explanation": "The command is encoded using Base64 to test encoded command detection. This uses recoding/encoding techniques to simulate obfuscation."
-  },
-  {
-    "output": "powershell.exe -Command \"Get-AudioDevice -Recording | Set-AudioDevice; Start-Sleep 5\"",
-    "explanation": "The command is restructured by using a pipeline instead of variable assignment and removes the explicit -Seconds parameter. This uses reordering and omission techniques."
+    "output": "powershell.exe & { $mic = Get-AudioDevice -Recording; Set-AudioDevice -ID $mic.ID; Start-Sleep 5 }",
+    "explanation": "The command was modified by removing optional spaces and using the shorthand form of the sleep command. This is a safe reordering and omission technique that preserves the original behavior."
   }
 ]

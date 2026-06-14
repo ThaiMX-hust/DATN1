@@ -1,2 +1,0 @@
-backup_tool.exe --symmetric data.txt
-mkdir "C:\Program Files (x86)\GnuPG\bin" && copy portable_crypto.exe "gpg.exe" && "gpg.exe" --symmetric --cipher-algo AES256 data.txt

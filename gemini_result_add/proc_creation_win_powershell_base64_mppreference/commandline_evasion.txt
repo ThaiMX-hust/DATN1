@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell -Command \"& { Add-MpPreference -ExclusionPath 'C:\\\\\\\\temp' }\"",
+    "explanation": "Insertion technique used to add unnecessary backslashes and curly braces, avoiding the rule condition of exact 'Add-MpPreference' match. The high-level behavior is expected to remain equivalent as PowerShell can parse the command correctly."
+  },
+  {
+    "output": "powershell -Command \"& { Set-MpPreference -ExclusionPath 'C:\\\\temp' }\"",
+    "explanation": "Insertion technique used to add unnecessary backslashes, avoiding the rule condition of exact 'Set-MpPreference' match. The high-level behavior is expected to remain equivalent as PowerShell can parse the command correctly."
+  },
+  {
+    "output": "powershell -Command \"& { Add-MpPreference  -ExclusionPath 'C:/temp' }\"",
+    "explanation": "Substitution technique used to replace backslash with forward slash, avoiding the rule condition of exact path match. The high-level behavior is expected to remain equivalent as PowerShell can parse the command correctly."
+  },
+  {
+    "output": "powershell -Command \"& { Set-MpPreference -ExclusionPath ${env:TEMP} }\"",
+    "explanation": "Recoding/Encoding technique used to represent the path using an environment variable, avoiding the rule condition of exact path match. The high-level behavior is expected to remain equivalent as PowerShell can parse the command correctly."
+  },
+  {
+    "output": "powershell -Command \"& { Add-MpPreference -ExclusionPath ( 'C:\\\\temp' ) }\"",
+    "explanation": "Insertion technique used to add unnecessary parentheses, avoiding the rule condition of exact 'Add-MpPreference' match. The high-level behavior is expected to remain equivalent as PowerShell can parse the command correctly."
+  }
+]

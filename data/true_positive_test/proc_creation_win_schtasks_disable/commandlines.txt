@@ -1,3 +1,1 @@
-schtasks.exe  /Change /TN "\Microsoft\Windows\SystemRestore\SR" /disable
-copy schtasks.exe st.exe && st.exe /Change /TN "\Windows\SystemRestore\SR" /disable
-schtasks.exe /change /disable /tn "\Windows\SystemRestore\S"^"R"
+schtasks.exe /Change /TN "\Microsoft\Windows\SystemRestore\SR" /disable

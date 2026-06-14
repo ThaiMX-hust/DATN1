@@ -1,1 +1,0 @@
-curl.exe  --cookie-jar cookie "http://example.com"

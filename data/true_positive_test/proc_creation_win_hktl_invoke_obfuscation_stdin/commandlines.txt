@@ -1,3 +1,0 @@
-cmd.exe /c "echo Write-Host 'Bypass' | powershell.exe -noprofile -command -"
-cmd.exe /c "echo Write-Host 'Bypass' | pwsh.exe -noexit -"
-powershell.exe -c "echo 'Write-Host Bypass' | powershell.exe -noexit -"

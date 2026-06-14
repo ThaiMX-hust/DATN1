@@ -1,0 +1,38 @@
+[
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full",
+    "explanation": "This is the original command line used for testing the Sigma rule. It is not a bypass but a valid test case."
+  },
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp -processId 752 -dumpType Full",
+    "explanation": "Substitution of long options to short options where applicable (e.g., --processId to -processId) is a safe mutation technique."
+  },
+  {
+    "output": "DumpMinitool.exe -file C:\\Temp\\memory.dmp --processId 752 --dumpType Full",
+    "explanation": "Substitution of long options to short options where applicable (e.g., --file to -file) is a safe mutation technique."
+  },
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId=752 --dumpType=Full",
+    "explanation": "Use of equals (=) instead of space for argument assignment is a safe mutation technique."
+  },
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 Full",
+    "explanation": "Reordering of arguments where the program accepts positional arguments is a safe mutation technique."
+  },
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full .txt",
+    "explanation": "Appending a harmless '.txt' at the end of the command line may bypass the 'CommandLine|contains: .txt' detection logic while still being valid for testing."
+  },
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full --",
+    "explanation": "Appending '--' to indicate end of options is a safe mutation technique and may bypass some simplistic string-based detection logic."
+  },
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full\\",
+    "explanation": "Appending a backslash at the end of the command line is a safe mutation technique and may bypass some simplistic string-based detection logic."
+  },
+  {
+    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full\"\"",
+    "explanation": "Appending quotes at the end of the command line is a safe mutation technique and may bypass some simplistic string-based detection logic."
+  }
+]

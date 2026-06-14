@@ -1,26 +1,22 @@
 [
   {
     "output": "C:\\Windows\\system32\\regsvr32.exe /s \"C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg\"",
-    "explanation": "Inserted quotes around the file path to test if the rule is sensitive to quoted arguments."
+    "explanation": "Inserted quotes around the file path to test if the rule is sensitive to such formatting. The command remains functionally identical."
   },
   {
     "output": "C:\\Windows\\system32\\regsvr32.exe -s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
-    "explanation": "Substituted '/s' with '-s' to test if the rule is sensitive to short option syntax variations."
+    "explanation": "Replaced '/s' with '-s' to test if the rule is sensitive to short option syntax variations."
   },
   {
-    "output": "C:\\Windows\\system32\\regsvr32.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
-    "explanation": "Omitted the '/s' switch to test if the rule is sensitive to the presence of optional switches."
-  },
-  {
-    "output": "\"C:\\Windows\\system32\\regsvr32.exe\" -s \"C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg\"",
-    "explanation": "Inserted quotes around the executable and file path to test if the rule is sensitive to quoted paths."
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpeg",
+    "explanation": "Changed the file extension from '.jpg' to '.jpeg' to test if the rule is sensitive to specific extensions in the detection list."
   },
   {
     "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.tmp",
-    "explanation": "Replaced '.jpg' with '.tmp' to test if the rule is sensitive to specific file extensions."
+    "explanation": "Changed the file extension to '.tmp' to test if the rule includes this extension in its detection logic."
   },
   {
-    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.JPEG",
-    "explanation": "Changed the file extension to uppercase '.JPEG' to test if the rule is sensitive to case variations."
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "Original command provided as a baseline for comparison."
   }
 ]

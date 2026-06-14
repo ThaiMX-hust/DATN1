@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v CurrentBuildNumber",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks traditionally treat forward slashes ('/') interchangeably with hyphens ('-') as switch prefixes. Substituting '-v' with '/v' completely breaks the literal character check for '-v' within 'selection_cmd_reg' (which has the windash modifier tracking explicit dashes), while the underlying registry lookup functionality remains completely unchanged."
+  },
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" \"-v\" CurrentBuildNumber",
+    "explanation": "Insertion technique: Enclosing the parameter switch inside double quotes ('\"-v\"') disrupts the continuous literal character string matching criteria monitored by the SIEM engine. The native Windows argument tokenizer automatically unquotes parameters during process initialization, passing the intact switch to the executable and allowing the rule to be bypassed."
+  },
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\\\Windows NT\\\\CurrentVersion\" /v CurrentBuildNumber",
+    "explanation": "Recoding / Encoding technique: Injecting duplicate consecutive backslashes ('\\\\') inside the target path sequence string. The Win32 Registry API subsystem automatically normalizes and collapses duplicate path separators down to a single backslash during compilation lookups, changing the logged telemetry string to '\\SOFTWARE\\Microsoft\\\\Windows NT\\\\CurrentVersion' which evades 'selection_keys'."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ItemProperty -Path 'HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion' | Select-Object -ExpandProperty CurrentBuildNumber\"",
+    "explanation": "Substitution/Omission technique: Substituting the monitored 'Get-ItemPropertyValue' (or short form 'gpv') cmdlet entirely with the standard alternative combination of 'Get-ItemProperty' piped into 'Select-Object -ExpandProperty'. This returns the exact same configuration metadata value in a testing context while avoiding all monitored string identifiers inside 'selection_cmd_powershell'."
+  },
+  {
+    "output": "powershell.exe -Command \"gp\"\"v -Path 'HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion' -Name CurrentBuildNumber\"",
+    "explanation": "Insertion technique: Inserting an adjacent set of empty double quotes inside the short-form alias identifier ('gp\"\"v'). PowerShell natively collapses and reconciles string fragments back to their original runtime alias structure at execution, but it effectively splits the signature to bypass the 'gpv' lookup in 'selection_cmd_powershell'."
+  }
+]

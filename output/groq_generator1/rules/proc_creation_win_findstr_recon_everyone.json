@@ -1,0 +1,42 @@
+[
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"Everyone\"",
+    "explanation": "Original command line matches the Sigma rule as it uses 'icacls' and 'findstr' with the keyword 'Everyone'."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr /c:\"Everyone\"",
+    "explanation": "Used substitution by replacing the implicit pattern with /c: to explicitly define the search string, which is still detected by the Sigma rule."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"EVERYONE\"",
+    "explanation": "Used case variation of the keyword 'Everyone' to 'EVERYONE', which is still detected by the Sigma rule."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"Everyone\" | findstr \"(M)\"",
+    "explanation": "Added an additional 'findstr' filter for '(M)', which does not affect detection of the 'Everyone' keyword in the first 'findstr'."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"Everyone\" | more",
+    "explanation": "Added a 'more' command at the end, which does not affect the detection of the 'Everyone' keyword."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr /i \"everyone\"",
+    "explanation": "Used case-insensitive search with /i flag, which still triggers the Sigma rule due to the presence of 'everyone'."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"Everyone\" > NUL",
+    "explanation": "Redirected output to NUL, but the command line still contains the 'Everyone' keyword and is detected."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"Everyone\" | findstr \"BUILTIN\\Users\"",
+    "explanation": "Added an additional 'findstr' filter for 'BUILTIN\\Users', which is still detected by the Sigma rule."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"Everyone\" | findstr \"(M)\" | findstr \"BUILTIN\\Users\"",
+    "explanation": "Chained multiple 'findstr' filters, but the presence of 'Everyone' still triggers the Sigma rule."
+  },
+  {
+    "output": "icacls \"C:\\\\Program Files\\*\" 2>nul | findstr \"Everyone\" | findstr \"(M)\" | findstr \"BUILTIN\\Users\" | more",
+    "explanation": "Added a 'more' command at the end, but the presence of 'Everyone' still triggers the Sigma rule."
+  }
+]

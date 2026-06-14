@@ -1,14 +1,22 @@
 [
   {
-    "output": "DumpMinitool.exe 712 C:\\temp\\dump.dmp F\"ull",
-    "explanation": "The command inserts an escape character before the quote to bypass detection while maintaining the same functionality. The CommandLine field still contains 'Full' as required for a true positive."
+    "output": "DumpMinitool.exe -Full",
+    "explanation": "This command uses the long form of the flag as per the Sigma rule's detection of ' Full' in the command line. It is a direct match and will trigger the rule."
   },
   {
-    "output": "DumpMinitool.exe 712 C:\\temp\\dump.dmp Full",
-    "explanation": "The command removes the quotes and unnecessary escape characters, simplifying the command while preserving the same behavior. The CommandLine still contains 'Full' for detection."
+    "output": "DumpMinitool.exe -Mini",
+    "explanation": "This command uses the long form of the flag as per the Sigma rule's detection of ' Mini' in the command line. It is a direct match and will trigger the rule."
   },
   {
-    "output": "DumpMinitool.exe 712 C:\\temp\\dump.dmp Fu\"ll",
-    "explanation": "The command splits the 'Full' argument using an escape character to alter the appearance of the CommandLine while retaining the same functionality."
+    "output": "DumpMinitool.exe -WithHeap",
+    "explanation": "This command uses the long form of the flag as per the Sigma rule's detection of ' WithHeap' in the command line. It is a direct match and will trigger the rule."
+  },
+  {
+    "output": "DumpMinitool.exe -Full -Mini -WithHeap",
+    "explanation": "This command includes all three flags that are detected by the Sigma rule. It will trigger the rule as it contains all the required command line elements."
+  },
+  {
+    "output": "DumpMinitool.exe -Full -Mini -WithHeap",
+    "explanation": "This command includes all three flags that are detected by the Sigma rule. It will trigger the rule as it contains all the required command line elements."
   }
 ]

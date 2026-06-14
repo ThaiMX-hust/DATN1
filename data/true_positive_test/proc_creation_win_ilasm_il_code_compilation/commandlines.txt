@@ -1,3 +1,0 @@
-copy ilasm.exe not_ilasm.exe && not_ilasm.exe /output:malicious.dll malicious.il
-ilasm -dll -output=test.dll source.il
-ilasm /resource:config.res /quiet malicious.il

@@ -1,3 +1,0 @@
-copy "Launch-VsDevShell.ps1" "Update.ps1"; powershell.exe -File "Update.ps1" -VsWherePath "evil.exe" -VsInstallationPath "C:\"
-powershell.exe -ExecutionPolicy Bypass -File "Launch-VsDevShell.ps1" -VsWherePath"evil.exe" -VsInstallationPath "C:\"
-powershell.exe -File "Launch-VsDevShell.ps1" -VsWherePath:"evil.exe" -VsInstallationPath:"C:\"

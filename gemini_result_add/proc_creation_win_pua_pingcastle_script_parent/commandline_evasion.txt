@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --level=Full",
+    "explanation": "Substitution technique used to replace the space between '--level' and 'Full' with '=' to avoid the rule condition 'CommandLine|contains: \"--level Full\"'. The high-level behavior is expected to remain equivalent as the '=' is a valid syntax for specifying options in command-line arguments."
+  },
+  {
+    "output": "\"C:\\Tools\\PingCastle.exe\" --healthcheck --level Full",
+    "explanation": "Insertion technique used to add quotes around the executable path to avoid the rule condition 'Image|endswith: \"\\\\PingCastle.exe\"' being triggered by a simple path match. The high-level behavior is expected to remain equivalent as the quotes are ignored by the shell."
+  },
+  {
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --level Full --no-enum-limit",
+    "explanation": "Insertion technique used to add an additional option '--no-enum-limit' to the command line. This option is already included in the rule, so it will not trigger a new detection. The high-level behavior is expected to remain equivalent as the additional option does not change the overall behavior of the command."
+  },
+  {
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --server --level Full",
+    "explanation": "Insertion technique used to add an additional option '--server' to the command line. This option is already included in the rule, so it will not trigger a new detection. The high-level behavior is expected to remain equivalent as the additional option does not change the overall behavior of the command."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "ruby.exe -e puts\\ \"Test Execution\"",
+    "explanation": "The command uses an escaped double quote and a space after the -e flag, which is a safe mutation technique (insertion and recoding). It still executes the same logic but alters the command line structure."
+  },
+  {
+    "output": "ruby.exe -e\"puts 'Test Execution'\"",
+    "explanation": "The command wraps the inline Ruby code in quotes directly after the -e flag, using insertion of quotes. This is a safe mutation that maintains the same execution behavior."
+  },
+  {
+    "output": "ruby.exe -e puts\\'Test Execution\\'",
+    "explanation": "The command uses escaped single quotes to wrap the inline Ruby code, which is a safe mutation technique (recoding). It preserves the original behavior while altering the command line structure."
+  },
+  {
+    "output": "ruby.exe -e puts 'Test Execution'",
+    "explanation": "The command omits the quotes around the inline Ruby code, which is a safe mutation technique (omission). This is accepted by ruby.exe and maintains the same execution behavior."
+  }
+]

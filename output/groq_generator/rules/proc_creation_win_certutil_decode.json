@@ -1,22 +1,22 @@
 [
   {
-    "output": "certutil.exe -decode input.b64 output.exe",
-    "explanation": "This is a direct match to the Sigma rule's detection criteria and is included as a baseline for testing."
+    "output": "certutil -decode C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc_decoded.exe",
+    "explanation": "This is the original true positive command with no mutation applied. It uses the exact syntax and parameters from the Sigma rule."
   },
   {
-    "output": "certutil.exe -decode input.b64 output.exe\"",
-    "explanation": "Added a trailing double quote, which is parsed correctly and still matches the rule."
+    "output": "certutil -decodehex C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc_decoded.exe",
+    "explanation": "The command uses '-decodehex' instead of '-decode' to test the detection rule's coverage for both 'decode' and 'decodehex' flags."
   },
   {
-    "output": "certutil.exe -decode input.b64 output.exe\"\"",
-    "explanation": "Inserted a pair of quotes at the end, which is a safe mutation and still matches the rule."
+    "output": "certutil -decode \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\T1140_calc.txt\" \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\T1140_calc_decoded.exe\"",
+    "explanation": "Quotes are added around the file paths to test how the detection rule handles quoted command-line arguments."
   },
   {
-    "output": "certutil.exe -decode input.b64 output.exe\\",
-    "explanation": "Added an escaped backslash at the end, which is a safe mutation and still matches the rule."
+    "output": "certutil -decode C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc_decoded.exe",
+    "explanation": "The command is simplified by removing unnecessary spaces and using a shorter path format to test detection robustness."
   },
   {
-    "output": "certutil.exe -decode input.b64 output.exe\\\"\"",
-    "explanation": "Combined multiple safe mutations (escaped backslash and quotes) while still matching the rule."
+    "output": "certutil -decode C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc_decoded.exe",
+    "explanation": "The command is restructured with minimal path normalization to test how the detection rule handles typical Windows path representations."
   }
 ]

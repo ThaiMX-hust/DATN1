@@ -1,22 +1,22 @@
 [
   {
     "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn\"",
-    "explanation": "This command uses the -Command parameter instead of -EncodedCommand and omits encoding to test if the detection rule can be bypassed by using a more readable command line."
+    "explanation": "This command attempts to add the Exchange PowerShell snap-in, which is the core behavior detected by the Sigma rule. It uses a direct command line without obfuscation to simulate typical usage."
   },
   {
-    "output": "powershell.exe -c Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn",
-    "explanation": "This command uses the short form of the -Command parameter (-c) and omits quotes to test if the detection rule can be bypassed by using minimal syntax."
+    "output": "pwsh -c \"Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn\"",
+    "explanation": "This command uses the alternative PowerShell executable (pwsh) and the short form of the -Command parameter (-c) to achieve the same behavior as the first command, testing for substitution and omission techniques."
   },
   {
-    "output": "powershell.exe -Command Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn",
-    "explanation": "This command uses the -Command parameter without quotes or encoding to test if the detection rule can be bypassed by using a simple, unencoded command line."
+    "output": "powershell.exe -Command \"Add-PSSnapin 'Microsoft.Exchange.Management.PowerShell.SnapIn'\"",
+    "explanation": "This command uses single quotes around the snap-in name to test for insertion techniques while maintaining the same functionality."
   },
   {
-    "output": "pwsh.exe -Command Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn",
-    "explanation": "This command uses the alternative PowerShell executable (pwsh.exe) and the -Command parameter to test if the detection rule can be bypassed by using a different executable name."
+    "output": "powershell.exe -Command Add-PSSnapin\\;\\ Microsoft.Exchange.Management.PowerShell.SnapIn",
+    "explanation": "This command uses escaped characters and spacing to test if the Sigma rule can detect the command despite syntactic variations."
   },
   {
-    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange.Powershell.Snapin\"",
-    "explanation": "This command uses the alternative module name (Microsoft.Exchange.Powershell.Snapin) to test if the detection rule can be bypassed by using a different module name."
+    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn\" -NoProfile",
+    "explanation": "This command adds the -NoProfile flag, which is optional but does not affect the core behavior of adding the snap-in. It tests for reordering and omission techniques."
   }
 ]

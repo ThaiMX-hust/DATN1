@@ -1,0 +1,30 @@
+[
+  {
+    "output": "\"cloudflared.exe\" --url http://example.com",
+    "explanation": "This is the original command and serves as a baseline for testing."
+  },
+  {
+    "output": "\"cloudflared.exe\" -url http://example.com",
+    "explanation": "Substituted long option '--url' with equivalent short option '-url'."
+  },
+  {
+    "output": "\"cloudflared.exe\" --url=http://example.com",
+    "explanation": "Reformatted the command to use an equals sign instead of space for the URL parameter."
+  },
+  {
+    "output": "\"cloudflared.exe\" --url \"http://example.com\"",
+    "explanation": "Inserted quotes around the URL parameter to test parsing behavior."
+  },
+  {
+    "output": "\"cloudflared.exe\" --url http://example.com -no-autoupdate",
+    "explanation": "Added optional '-no-autoupdate' flag to test detection with additional parameters."
+  },
+  {
+    "output": "\"cloudflared.exe\" -url http://example.com -no-autoupdate",
+    "explanation": "Used short option '-url' and added '-no-autoupdate' flag to test detection with short flags."
+  },
+  {
+    "output": "\"cloudflared.exe\" --url http://example.com --no-autoupdate",
+    "explanation": "Used long options for both '--url' and '--no-autoupdate' to test detection with long flags."
+  }
+]

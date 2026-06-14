@@ -1,2 +1,0 @@
-copy kavremover_dropped_binary.exe not_kav.exe && not_kav.exe run run-cmd "whoami"
-kavremover_binary.exe "run"^ "run-cmd" "net user"

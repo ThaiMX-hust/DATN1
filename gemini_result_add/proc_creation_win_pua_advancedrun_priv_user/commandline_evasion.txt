@@ -1,0 +1,18 @@
+[
+  {
+    "output": "AdvancedRun.exe /EXEFilename \"C:\\\\\\Program Files\\\\\\AdvancedRun\\\\\\example.exe\" /CommandLine \"arg1 arg2\" /RunAs 8",
+    "explanation": "Insertion technique used to add extra backslashes and quotes, avoiding the rule condition of exact CommandLine matching, while preserving the intended test behavior of running example.exe with arguments arg1 and arg2 as the SYSTEM account."
+  },
+  {
+    "output": "AdvancedRun.exe -EXEFilename C:\\\\Program Files\\\\AdvancedRun\\\\example.exe -CommandLine arg1 arg2 /RunAs 11",
+    "explanation": "Substitution technique used to replace /EXEFilename with -EXEFilename and /CommandLine with -CommandLine, avoiding the rule condition of exact CommandLine matching, while preserving the intended test behavior of running example.exe with arguments arg1 and arg2 as the SYSTEM account."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename C:\\\\Program Files\\\\AdvancedRun\\\\example.exe /RunAs 4 arg1 arg2",
+    "explanation": "Reordering technique used to move the arguments arg1 and arg2 after the /RunAs option, avoiding the rule condition of exact CommandLine matching, while preserving the intended test behavior of running example.exe with arguments arg1 and arg2 as the SYSTEM account."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename %PROGRAMFILES%\\\\AdvancedRun\\\\example.exe /CommandLine arg1 arg2 /RunAs 10",
+    "explanation": "Recoding/Encoding technique used to represent the path using an environment variable %PROGRAMFILES%, avoiding the rule condition of exact CommandLine matching, while preserving the intended test behavior of running example.exe with arguments arg1 and arg2 as the SYSTEM account."
+  }
+]

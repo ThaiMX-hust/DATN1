@@ -1,4 +1,2 @@
 "cmd.exe" /c Rundll32.exe apphelp.dll,ShimFlushCache
-Rundll32.exe  apphelp.dll,ShimFlushCache
-copy rundll32.exe not_rundll.exe && not_rundll.exe apphelp.dll,ShimFlushCache
-rundll32 apphelp.dll,#+250
+Rundll32.exe apphelp.dll,ShimFlushCache

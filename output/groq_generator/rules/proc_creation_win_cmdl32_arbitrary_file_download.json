@@ -1,22 +1,18 @@
 [
   {
-    "output": "cmdl32.exe \"/vpn\" \"/lan\" C:\\path\\to\\config.txt",
-    "explanation": "The command uses insertion of quotes around the flags to test if the Sigma rule is sensitive to such formatting changes."
+    "output": "cmdl32.exe /vpn /lan C:\\Users\\thaim\\AppData\\Local\\Temp\\T1105\\setting.txt",
+    "explanation": "The original command is already a valid true positive for the Sigma rule. No mutation is needed to trigger the detection."
   },
   {
-    "output": "cmdl32.exe -vpn -lan C:\\path\\to\\config.txt",
-    "explanation": "The command substitutes the '/' flag syntax with '-', testing if the Sigma rule is sensitive to flag syntax variations."
+    "output": "cmdl32 /lan /vpn C:\\Users\\thaim\\AppData\\Local\\Temp\\T1105\\setting.txt",
+    "explanation": "Reordered the /vpn and /lan flags, which are still parsed correctly by the program and should trigger the same detection."
   },
   {
-    "output": "cmdl32.exe /lan /vpn C:\\path\\to\\config.txt",
-    "explanation": "The command reorders the flags to test if the Sigma rule is sensitive to the order of command-line arguments."
+    "output": "cmdl32.exe \"/vpn\" \"/lan\" C:\\Users\\thaim\\AppData\\Local\\Temp\\T1105\\setting.txt",
+    "explanation": "Inserted quotes around the /vpn and /lan flags, which is a safe mutation technique and should still trigger the detection."
   },
   {
-    "output": "cmdl32.exe /vpn /lan C:\\path\\to\\config.txt",
-    "explanation": "The command is unchanged but included to confirm the baseline detection behavior of the Sigma rule."
-  },
-  {
-    "output": "copy cmdl32.exe not_an_exploit.exe && not_an_exploit.exe /vpn /lan C:\\path\\to\\config.txt",
-    "explanation": "The command renames the binary to test if the Sigma rule is sensitive to binary name obfuscation techniques."
+    "output": "cmdl32 /vpn /lan C:\\Users\\thaim\\AppData\\Local\\Temp\\T1105\\setting.txt",
+    "explanation": "Used double backslashes for path normalization, which is a safe mutation technique and should still trigger the detection."
   }
 ]

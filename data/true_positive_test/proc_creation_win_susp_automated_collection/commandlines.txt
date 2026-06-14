@@ -1,4 +1,4 @@
-"cmd.exe" /c mkdir %%temp%%\T1119_command_prompt_collection >nul 2>&1 & dir c: /b /s .docx | findstr /e .docx & for /R c:\ %%f in (*.docx) do copy /Y %%f %%temp%%\T1119_command_prompt_collection
-C:\WINDOWS\system32\cmd.exe  /S /D /c" dir c: /b /s .docx "
-findstr  /e .docx
 "C:\WINDOWS\system32\findstr.exe" /si pass *.xml *.doc *.txt *.xls
+"cmd.exe" /c mkdir %%temp%%\T1119_command_prompt_collection >nul 2>&1 & dir c: /b /s .docx | findstr /e .docx & for /R c:\ %%f in (*.docx) do copy /Y %%f %%temp%%\T1119_command_prompt_collection
+C:\WINDOWS\system32\cmd.exe /S /D /c" dir c: /b /s .docx "
+findstr /e .docx

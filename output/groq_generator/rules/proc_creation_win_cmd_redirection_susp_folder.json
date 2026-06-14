@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c dir > \"%TEMP%\\output.txt\"",
+    "explanation": "This command uses a standard output redirection to a temporary directory, which matches the Sigma rule's detection criteria. It is a true positive for testing the rule."
+  },
+  {
+    "output": "cmd.exe /c hostname > \"%USERPROFILE%\\Documents\\hostname_output.txt\"",
+    "explanation": "This command redirects output to a user profile directory, which is flagged by the Sigma rule. It serves as a valid test case for the rule."
+  },
+  {
+    "output": "cmd.exe /c echo test >> \"C:\\Windows\\Temp\\testfile.txt\"",
+    "explanation": "This command appends output to a file in the Windows Temp directory, which is covered by the Sigma rule's detection logic. It is a suitable test case."
+  }
+]

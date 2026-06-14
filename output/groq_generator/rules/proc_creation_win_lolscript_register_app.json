@@ -1,10 +1,22 @@
 [
   {
-    "output": "copy C:\\Windows\\System32\\vss\\vsssampleprovider\\register_app.vbs %TEMP%\\legit.txt && cscript //e:vbscript %TEMP%\\legit.txt -register \"malicious.dll\" \"MaliciousProvider\"",
-    "explanation": "The original command is modified by omitting the typo in the source file path (\"egister_app.vbs\" to \"register_app.vbs\") and using standard spacing and syntax. This remains functionally equivalent and would still trigger the Sigma rule."
+    "output": "cscript.exe \"C:\\\\Windows\\\\System32\\\\register_app.vbs\" -register \"C:\\\\malicious.dll\"",
+    "explanation": "This command simulates a typical invocation of register_app.vbs with the -register flag. It includes the full path to cscript.exe and the script, and quotes the paths to demonstrate safe insertion techniques."
   },
   {
-    "output": "copy C:\\Windows\\System32\\vss\\vsssampleprovider\\register_app.vbs %TEMP%\\legit.txt && cscript //e:vbscript %TEMP%\\legit.txt -register malicious.dll MaliciousProvider",
-    "explanation": "Quotes around the arguments are omitted, but the command remains valid and functionally equivalent. This is a safe mutation that could still trigger the Sigma rule."
+    "output": "cscript.exe C:\\\\Windows\\\\System32\\\\register_app.vbs -register C:\\\\malicious.dll",
+    "explanation": "This command omits quotes around the paths, relying on the absence of spaces in the file paths. It demonstrates omission as a safe mutation technique."
+  },
+  {
+    "output": "cscript.exe register_app.vbs -register malicious.dll",
+    "explanation": "This command uses relative paths and omits quotes, assuming the current working directory is set appropriately. It demonstrates omission and recoding techniques."
+  },
+  {
+    "output": "cscript.exe register_app.vbs -register \"C:\\\\malicious.dll\"",
+    "explanation": "This command uses a relative path for the script and an absolute path for the DLL, with quotes around the DLL path. It demonstrates insertion and recoding techniques."
+  },
+  {
+    "output": "cscript.exe -nologo register_app.vbs -register C:\\\\malicious.dll",
+    "explanation": "This command adds the -nologo flag to suppress startup messages, which is a common substitution technique for cscript.exe."
   }
 ]

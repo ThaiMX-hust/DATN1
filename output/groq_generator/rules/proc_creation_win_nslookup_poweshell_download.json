@@ -1,10 +1,14 @@
 [
   {
     "output": "\"C:\\\\WINDOWS\\\\system32\\\\nslookup.exe\" -querytype=txt example.com 8.8.8.8",
-    "explanation": "The command uses the equivalent long option '-querytype=txt' instead of '-q=txt' to bypass the Sigma rule detection."
+    "explanation": "The command substitutes '-q=txt' with its equivalent '-querytype=txt' to test if the Sigma rule can detect both forms."
   },
   {
     "output": "\"C:\\\\WINDOWS\\\\system32\\\\nslookup.exe\" -q=txt example.com 8.8.8.8",
-    "explanation": "This is the original command and is not mutated. It is included for comparison purposes."
+    "explanation": "This is the original command used for comparison to ensure the detection rule matches the baseline."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\nslookup.exe\" -q=txt example.com 8.8.8.8",
+    "explanation": "No safe bypass command can be generated that would evade detection by the Sigma rule without violating the constraints of safe mutation techniques."
   }
 ]

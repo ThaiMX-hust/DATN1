@@ -1,3 +1,0 @@
-C:\Windows\System32\rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write('\<script language="VBScript"\>CreateObject("WScript.Shell").Run("powershell.exe")\</script\>')
-cmd.exe /c "move script.ps1 s.ps1 && powershell.exe -File s.ps1"
-copy powershell.exe %TEMP%\ ot\_powershell.exe && "ONENOTE.EXE" /hyperlink "C:\path\	o\malicious.one" && %TEMP%\ ot\_powershell.exe -ExecutionPolicy Bypass -File malicious.ps1

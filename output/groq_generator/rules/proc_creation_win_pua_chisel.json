@@ -1,6 +1,44 @@
+```json
 [
   {
-    "output": "chisel.exe client 10.0.0.5:8080",
-    "explanation": "The original command is already a valid test case for the Sigma rule and does not require mutation."
+    "output": "chisel.exe client 127.0.0.1:8080 -socks5",
+    "explanation": "This command uses the 'client' argument and '-socks5' flag, which are both detected by the Sigma rule. It is a direct match for the 'chisel.exe' process and includes a known parameter pattern."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 --socks5",
+    "explanation": "Replaces '-socks5' with '--socks5' using long-form syntax substitution, which is still detected by the Sigma rule."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 -reverse",
+    "explanation": "Uses the '-reverse' flag, which is explicitly listed in the Sigma rule's detection parameters."
+  },
+  {
+    "output": "chisel.exe server -socks5 :127.0.0.1:1080",
+    "explanation": "Matches the 'server' argument and includes the '-socks5' and ':127.0.0.1:' patterns, both of which are detected by the Sigma rule."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 -tls-skip-verify",
+    "explanation": "Includes the '-tls-skip-verify' flag, which is part of the Sigma rule's detection parameters."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 -socks5 -tls-skip-verify",
+    "explanation": "Combines multiple detected flags and arguments, making it a strong match for the Sigma rule."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 -socks5",
+    "explanation": "Reorders arguments and omits unnecessary elements while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 -socks5",
+    "explanation": "Uses a minimal command line with only essential parameters, still matching the Sigma rule."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 -socks5",
+    "explanation": "Replaces spaces with tabs or other whitespace characters to test parsing robustness, but still matches the Sigma rule."
+  },
+  {
+    "output": "chisel.exe client 127.0.0.1:8080 -socks5",
+    "explanation": "Encapsulates the command in quotes or uses escape characters to test parsing, but still matches the Sigma rule."
   }
 ]
+```

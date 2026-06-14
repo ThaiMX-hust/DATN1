@@ -1,0 +1,30 @@
+[
+  {
+    "output": "xmrig.exe -o \"stratum+ssl://xmr-pool.example.com:443\" -u wallet_address --donate-level=1 --algo rx/0",
+    "explanation": "Inserted quotes around the URL to test if the rule is sensitive to string formatting."
+  },
+  {
+    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0",
+    "explanation": "Original command line with no mutation applied for baseline testing."
+  },
+  {
+    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --cpu-priority=1",
+    "explanation": "Added an additional --cpu-priority flag to test if the rule detects this miner-specific parameter."
+  },
+  {
+    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --nicehash",
+    "explanation": "Added the --nicehash flag to test if the rule detects this miner-specific parameter."
+  },
+  {
+    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 -o pool.xmr-pool.com:443",
+    "explanation": "Added a redundant -o flag with a different pool to test if the rule is sensitive to multiple pool declarations."
+  },
+  {
+    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --cpu-priority=1 --nicehash",
+    "explanation": "Combined multiple miner-specific flags to test if the rule detects multiple indicators."
+  },
+  {
+    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --cpu-priority=1 --nicehash -o pool.xmr-pool.com:443",
+    "explanation": "Combined multiple miner-specific flags and added a redundant -o flag to test if the rule detects multiple indicators."
+  }
+]

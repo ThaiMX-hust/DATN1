@@ -1,3 +1,0 @@
-cmd.exe /c rename dummy.sys dummy.dll & rundll32.exe dummy.dll,EntryPoint
-rundll32.exe "dummy.sys",EntryPoint
-rundll32.exe dummy.sys.,EntryPoint

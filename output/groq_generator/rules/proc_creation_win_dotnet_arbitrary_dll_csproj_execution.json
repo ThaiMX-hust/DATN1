@@ -1,0 +1,22 @@
+[
+  {
+    "output": "dotnet \"C:\\\\Path\\\\With\\\\Spaces\\\\MyApp.csproj\"",
+    "explanation": "This command uses insertion of quotes to handle a file path with spaces, which is a safe mutation technique. It still matches the Sigma rule because it ends with '.csproj'."
+  },
+  {
+    "output": "dotnet -v run MyProject.csproj",
+    "explanation": "This command uses substitution of the '--version' flag with its short form '-v' and omits unnecessary arguments while preserving the test behavior. It still matches the Sigma rule because it ends with '.csproj'."
+  },
+  {
+    "output": "dotnet \"MyApp.dll\"",
+    "explanation": "This command uses insertion of quotes around the DLL file name, which is a safe mutation technique. It still matches the Sigma rule because it ends with '.dll'."
+  },
+  {
+    "output": "dotnet C:\\Projects\\MyApp.csproj",
+    "explanation": "This command omits quotes and uses a simple path. It still matches the Sigma rule because it ends with '.csproj'."
+  },
+  {
+    "output": "dotnet .\\MyApp.dll",
+    "explanation": "This command uses a relative path and omits unnecessary elements. It still matches the Sigma rule because it ends with '.dll'."
+  }
+]

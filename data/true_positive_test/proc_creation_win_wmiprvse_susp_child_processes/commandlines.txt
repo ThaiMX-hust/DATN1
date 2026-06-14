@@ -1,0 +1,1 @@
+wmic process call create "cmd.exe /c echo test > C:\Temp\test.txt"

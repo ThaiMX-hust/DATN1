@@ -1,26 +1,14 @@
 [
   {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -sd 'DCLCWPDTSD'\"",
-    "explanation": "The '-sd' parameter is a valid substitution for '-SecurityDescriptorSddl' in this context. This command is functionally equivalent and may bypass detection by appearing different in the command line."
+    "output": "pwsh -Command \"Set-Service -Name 'AtomicService' -SecurityDescriptorSddl 'D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)'\"",
+    "explanation": "This command uses the Set-Service cmdlet in PowerShell to set the security descriptor of a service. It is a direct equivalent of the original sc sdset command but uses PowerShell syntax. The command is structured to match the Sigma rule's detection criteria."
   },
   {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -SecurityDescriptorSddl 'DCLCWPDTSD'\"",
-    "explanation": "This is a direct copy of the true positive command. It is included for completeness and to show the baseline behavior."
+    "output": "pwsh -Command \"Set-Service -sd 'D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)' -Name 'AtomicService'\"",
+    "explanation": "This command uses the short form of the SecurityDescriptorSddl parameter (-sd) and reorders the arguments. It is a valid mutation that preserves the original behavior while testing the detection rule."
   },
   {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -SecurityDescriptorSddl ('DCLCW'+'PDTSD')\"",
-    "explanation": "This command uses string concatenation to obfuscate the SDDL string. It is functionally identical but may evade detection by not matching the 'DCLCWPDTSD' substring directly."
-  },
-  {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -SecurityDescriptorSddl (([char[]]'DSTDPWCLCD' | ForEach-Object { $_ }) -join '' -replace 'DSTDPWCLCD','DCLCWPDTSD')\"",
-    "explanation": "This command uses PowerShell string manipulation to generate the SDDL string. It is a more complex obfuscation technique that may evade simple substring-based detection."
-  },
-  {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -SecurityDescriptorSddl $env:SDDL\"",
-    "explanation": "This command uses an environment variable to store the SDDL string. This technique may bypass detection by not including the string directly in the command line."
-  },
-  {
-    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -SecurityDescriptorSddl $([Text.Encoding]::ASCII.GetString([Convert]::FromBase64String('RExMQ0NQVFBETlNERT0=')))\"",
-    "explanation": "This command uses Base64 encoding to obfuscate the SDDL string. It may evade detection by not containing the string in plain text."
+    "output": "pwsh -Command \"Set-Service -Name 'AtomicService' -SecurityDescriptorSddl 'D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)'\"",
+    "explanation": "This command is a direct copy of the original command with no mutation. It is included to confirm the baseline behavior of the Sigma rule."
   }
 ]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:\"C:\\\\Users\\\\Public\\\\Addins\"",
+    "explanation": "Inserted quotes around the path to test if the Sigma rule detects quoted paths correctly."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:C:/Users/Public/Addins",
+    "explanation": "Replaced backslashes with forward slashes to test path normalization detection in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:C:\\Users\\Public\\Addins\\",
+    "explanation": "Appended a trailing slash to test if the Sigma rule is sensitive to such variations."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:C:\\Users\\Public\\Addins -PipelineRoot:C:\\Users\\Public\\Pipelines",
+    "explanation": "Added an additional -PipelineRoot argument to test if the Sigma rule handles multiple suspicious flags correctly."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:C:\\Users\\Public\\Addins -AddInRoot:C:\\Users\\Public\\Addins",
+    "explanation": "Repeated the -AddInRoot argument to test if the Sigma rule detects redundant or repeated command-line parameters."
+  }
+]

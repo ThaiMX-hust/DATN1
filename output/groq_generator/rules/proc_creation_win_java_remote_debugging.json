@@ -1,0 +1,22 @@
+[
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n -jar myapp.jar",
+    "explanation": "This command triggers the Sigma rule by using remote debugging with a wildcard address (*), which bypasses the exclusion for localhost/127.0.0.1. It uses standard syntax and includes all required parameters."
+  },
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,address=0.0.0.0:5005,server=y,suspend=n -jar myapp.jar",
+    "explanation": "This command also triggers the Sigma rule by specifying a remote debugging address (0.0.0.0), which is not excluded. It uses standard syntax and includes all required parameters."
+  },
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,address=[::]:5005,server=y,suspend=n -jar myapp.jar",
+    "explanation": "This command uses IPv6 syntax to specify a remote debugging port on all interfaces, which is not excluded by the Sigma rule. It is a valid variation of the rule's detection pattern."
+  },
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n -jar myapp.jar",
+    "explanation": "This command uses the wildcard (*) character to allow remote debugging on all interfaces, which is not excluded by the Sigma rule. It is a valid test case for the rule."
+  },
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,address=192.168.1.100:5005,server=y,suspend=n -jar myapp.jar",
+    "explanation": "This command uses a specific remote IP address for debugging, which is not excluded by the Sigma rule. It is a valid test case for the rule."
+  }
+]

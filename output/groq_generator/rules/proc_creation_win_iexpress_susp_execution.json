@@ -1,14 +1,24 @@
+```json
 [
   {
-    "output": "iexpress.exe /n /q /m \"C:\\\\Users\\\\Public\\\\Documents\\\\config.sed\"",
-    "explanation": "This command uses standard spacing and quotes to invoke iexpress.exe with the required flags and a SED file path. It matches the Sigma rule's detection criteria."
+    "output": "iexpress.exe /n /q /m C:\\Temp\\malicious.sed",
+    "explanation": "This command uses the /n /q /m flags to create a self-extracting package from a SED file located in a suspicious directory (C:\\Temp\\), which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "iexpress.exe /n/q/m C:\\\\Windows\\\\Temp\\\\config.sed",
-    "explanation": "This command removes spaces between flags and uses an alternative suspicious path (Windows\\Temp) as defined in the Sigma rule. It still triggers the detection."
+    "output": "iexpress.exe /n /q /m \"C:\\\\Windows\\\\Temp\\\\payload.sed\"",
+    "explanation": "This command uses quotes to handle potential spaces in the path and includes a SED file in a suspicious location (C:\\Windows\\Temp\\), which aligns with the Sigma rule's detection logic."
   },
   {
-    "output": "iexpress.exe /n /q /m C:\\\\Users\\\\Public\\\\Documents\\\\config.sed",
-    "explanation": "This command omits quotes around the SED file path since the path does not contain spaces. It still satisfies the Sigma rule's detection criteria."
+    "output": "iexpress.exe /n /q /m C:\\Users\\Public\\malware.sed",
+    "explanation": "This command uses a common shared directory (C:\\Users\\Public\\) that may be considered suspicious, and includes the required /n /q /m flags, matching the Sigma rule's criteria."
+  },
+  {
+    "output": "iexpress.exe /n /q /m C:\\\\AppData\\\\Local\\\\Temp\\\\hidden.sed",
+    "explanation": "This command uses an encoded path (double backslashes) and a suspicious directory (AppData\\Local\\Temp\\), which aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "iexpress.exe /n /q /m C:\\\\ProgramData\\\\setup.sed",
+    "explanation": "This command uses a suspicious directory (C:\\ProgramData\\) and includes the required flags, matching the Sigma rule's detection criteria."
   }
 ]
+```

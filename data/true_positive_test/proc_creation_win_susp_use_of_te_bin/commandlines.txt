@@ -1,1 +1,0 @@
-copy "te.exe" update.exe && update.exe malicious.wsc

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\cmd.exe /c \"iox.exe  fwd  -l\"",
+    "explanation": "Insertion technique used to add quotes and spaces. This is intended to avoid the rule condition 'CommandLine|contains: \'.exe fwd -l \''. The high-level behavior is expected to remain equivalent in a test environment because the added quotes and spaces are ignored by the shell and the application."
+  },
+  {
+    "output": "iox.exe fwd --local",
+    "explanation": "Substitution technique used to replace the short option '-l' with the long option '--local'. This is intended to avoid the rule condition 'CommandLine|contains: \'.exe fwd -l \''. The high-level behavior is expected to remain equivalent in a test environment because the long option is equivalent to the short option."
+  },
+  {
+    "output": "iox fwd -l",
+    "explanation": "Omission technique used to remove the '.exe' extension. This is intended to avoid the rule condition 'Image|endswith: \'\\iox.exe\''. The high-level behavior is expected to remain equivalent in a test environment because the '.exe' extension is optional."
+  },
+  {
+    "output": "iox.exe -l fwd",
+    "explanation": "Reordering technique used to reorder the arguments. This is intended to avoid the rule condition 'CommandLine|contains: \'.exe fwd -l \''. The high-level behavior is expected to remain equivalent in a test environment because the target program accepts different argument order without changing behavior."
+  },
+  {
+    "output": "%COMSPEC% /c iox.exe fwd -l",
+    "explanation": "Recoding/Encoding technique used to represent the command using an environment variable. This is intended to avoid the rule condition 'Image|endswith: \'\\iox.exe\''. The high-level behavior is expected to remain equivalent in a test environment because the environment variable is equivalent to the hardcoded command."
+  }
+]

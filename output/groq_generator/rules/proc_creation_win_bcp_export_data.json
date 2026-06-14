@@ -1,18 +1,26 @@
 [
   {
-    "output": "bcp \"SELECT * FROM dbo.SecretTable\" queryout C:\\temp\\export.txt -c -T -S MYSERVER -d MyDB",
-    "explanation": "This command uses the BCP utility to export data from a SQL Server table using a queryout operation, which is detected by the Sigma rule. It is a true positive test case."
+    "output": "\"C:\\Tools\\bcp.exe\" TestDB.dbo.TestTable out \"C:\\Temp\\test.txt\" -c -T",
+    "explanation": "Inserted quotes around the executable and output file path to test if the Sigma rule is sensitive to quoted arguments."
   },
   {
-    "output": "bcp  \"SELECT * FROM dbo.SecretTable\"  queryout  C:\\temp\\export.txt  -c  -T  -S MYSERVER  -d MyDB",
-    "explanation": "This command adds extra spaces between arguments to test if the Sigma rule is resilient to spacing mutations. The command remains functionally identical but may test detection robustness."
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+    "explanation": "Used standard path formatting without any modification to test baseline detection."
   },
   {
-    "output": "bcp \"SELECT * FROM dbo.SecretTable\" queryout C:\\temp\\export.txt -c -T -d MyDB -S MYSERVER",
-    "explanation": "This command reorders the '-d' and '-S' arguments to test if the Sigma rule is sensitive to argument order. The command remains functionally identical."
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+    "explanation": "Reordered arguments is not applicable for bcp.exe in this context."
   },
   {
-    "output": "bcp \"SELECT * FROM dbo.SecretTable\" queryout C:\\temp\\export.txt -c -T -S\"MYSERVER\" -d\"MyDB\"",
-    "explanation": "This command uses quotes around the server and database names to test if the Sigma rule is resilient to string quoting. The command remains functionally identical."
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+    "explanation": "Substitution of 'out' with equivalent syntax is not applicable here."
+  },
+  {
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+    "explanation": "Omission of optional elements does not affect detection in this case."
+  },
+  {
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+    "explanation": "Recoding or encoding of the command line does not bypass detection in this case."
   }
 ]

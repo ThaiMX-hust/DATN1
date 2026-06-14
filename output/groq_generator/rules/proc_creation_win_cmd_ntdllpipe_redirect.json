@@ -1,0 +1,18 @@
+[
+  {
+    "output": "type \"%windir%\\system32\\ntdll.dll\" > \"\\\\.\\pipe\\testpipe\"",
+    "explanation": "This command uses insertion of quotes and a reordering of the redirection syntax to simulate the Sigma rule's detection pattern in a controlled test environment. It mimics the behavior of redirecting the content of ntdll.dll to a named pipe."
+  },
+  {
+    "output": "type %systemroot%\\system32\\ntdll.dll > \\\\.\\pipe\\testpipe",
+    "explanation": "This command omits quotes and uses standard environment variables to simulate the Sigma rule's detection pattern. It is a direct representation of the rule's detection logic for testing purposes."
+  },
+  {
+    "output": "type c:\\windows\\system32\\ntdll.dll > \\\\.\\pipe\\testpipe",
+    "explanation": "This command uses an absolute path instead of environment variables to simulate the Sigma rule's detection pattern. It is useful for testing scenarios where environment variables are not available or are being obfuscated."
+  },
+  {
+    "output": "type \"%windir%\\system32\\ntdll.dll\" > \"\\\\.\\pipe\\testpipe\"",
+    "explanation": "This command uses insertion of quotes around the path and the pipe name to test how the Sigma rule handles quoted command-line arguments. It ensures the test remains safe and controlled."
+  }
+]

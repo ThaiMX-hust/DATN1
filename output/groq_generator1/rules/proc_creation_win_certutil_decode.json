@@ -1,0 +1,22 @@
+[
+  {
+    "output": "certutil.exe -decode input.b64 output.exe",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria and is included as a baseline for testing."
+  },
+  {
+    "output": "certutil.exe -decode input.b64 output.exe\"",
+    "explanation": "Added a trailing double quote, which is parsed correctly and still matches the rule."
+  },
+  {
+    "output": "certutil.exe -decode input.b64 output.exe\"\"",
+    "explanation": "Inserted a pair of quotes at the end, which is a safe mutation and still matches the rule."
+  },
+  {
+    "output": "certutil.exe -decode input.b64 output.exe\\",
+    "explanation": "Added an escaped backslash at the end, which is a safe mutation and still matches the rule."
+  },
+  {
+    "output": "certutil.exe -decode input.b64 output.exe\\\"\"",
+    "explanation": "Combined multiple safe mutations (escaped backslash and quotes) while still matching the rule."
+  }
+]

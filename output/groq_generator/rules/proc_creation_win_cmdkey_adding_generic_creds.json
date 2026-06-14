@@ -1,22 +1,22 @@
 [
   {
-    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" /generic:TERMSRV/THAIMX /user:THAIMX\\\\thaim /pass:1password2!",
-    "explanation": "Original command line for testing the Sigma rule."
-  },
-  {
     "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -g TERMSRV/THAIMX -u THAIMX\\\\thaim -p 1password2!",
-    "explanation": "Substitution of /flags to -flags, which is an equivalent syntax for cmdkey.exe."
+    "explanation": "The original command uses long options (/generic, /user, /pass), which are replaced with their short equivalents (-g, -u, -p). This is a valid syntax substitution and should still trigger the Sigma rule."
   },
   {
-    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -gTERMSRV/THAIMX -uTHAIMX\\\\thaim -p1password2!",
-    "explanation": "Removal of spaces between flags and arguments, which is still valid syntax."
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -g TERMSRV/THAIMX -u THAIMX\\\\thaim -p 1password2! ",
+    "explanation": "A space is appended to the end of the command line. This is a harmless insertion that does not affect the command's functionality and should still trigger the Sigma rule."
   },
   {
     "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -u THAIMX\\\\thaim -g TERMSRV/THAIMX -p 1password2!",
-    "explanation": "Reordering of arguments; cmdkey.exe accepts flags in different orders."
+    "explanation": "The order of the command-line arguments is changed. Since the cmdkey.exe utility accepts flags in any order, this reordering should still trigger the Sigma rule."
   },
   {
-    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -g TERMSRV/THAIMX -u THAIMX\\\\thaim -p 1password2!\"",
-    "explanation": "Added quotes around the password argument to test parsing behavior."
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -g TERMSRV/THAIMX -u THAIMX\\\\thaim -p 1password2! ^^^",
+    "explanation": "Escape characters (^) are inserted, which are harmless in this context and do not alter the command's behavior. This should still trigger the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -g TERMSRV/THAIMX -u THAIMX\\\\thaim -p 1password2! ^^^ ",
+    "explanation": "A combination of escape characters (^) and a trailing space is used. This is a safe mutation that should still trigger the Sigma rule."
   }
 ]

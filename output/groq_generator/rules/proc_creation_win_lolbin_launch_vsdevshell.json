@@ -1,18 +1,14 @@
 [
   {
-    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsWherePath 'evil.exe' -VsInstallationPath 'C:\\'",
-    "explanation": "This command uses single quotes instead of double quotes for the argument values, which is a valid syntax substitution and should still trigger the Sigma rule."
+    "output": "powershell.exe -Command \"& 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1' -VsWherePath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community' -VsInstallationPath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community'\"",
+    "explanation": "This command simulates the execution of the 'Launch-VsDevShell.ps1' script using its full path and includes the required flags 'VsWherePath' and 'VsInstallationPath' as per the Sigma rule. It is a valid test command for a controlled environment."
   },
   {
-    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsWherePath evil.exe -VsInstallationPath C:\\",
-    "explanation": "This command omits the quotes around the arguments, assuming the values do not contain spaces. This is a valid mutation that should still trigger the Sigma rule."
+    "output": "powershell.exe -Command \"& 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1' -VsWherePath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community' -VsInstallationPath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community'\" -WindowStyle Hidden",
+    "explanation": "This command adds the '-WindowStyle Hidden' argument to obscure the PowerShell window, which is a common evasion tactic. It still includes the required flags and script name to match the Sigma rule."
   },
   {
-    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsInstallationPath \"C:\\\" -VsWherePath \"evil.exe\"",
-    "explanation": "This command reorders the arguments, which is allowed if the program accepts arguments in any order. It should still trigger the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -File \"Launch-VsDevShell.ps1\" -VsWherePath \"evil.exe\" -VsInstallationPath \"C:\\\"",
-    "explanation": "This is the original command structure with no mutation applied, serving as a baseline for comparison."
+    "output": "powershell.exe -Command \"& 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1' -VsWherePath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community' -VsInstallationPath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community'\" -EncodedCommand \"\"",
+    "explanation": "This command uses the '-EncodedCommand' parameter with an empty string to bypass detection by hiding the actual command content. However, it still includes the required flags and script name to match the Sigma rule."
   }
 ]

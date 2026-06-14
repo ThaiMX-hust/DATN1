@@ -1,26 +1,6 @@
 [
   {
-    "output": "cmdkey  /list",
-    "explanation": "This is the original true positive command and is not a bypass."
-  },
-  {
-    "output": "cmdkey /list",
-    "explanation": "Removed extra space before the /list flag, which is an allowed substitution and omission technique."
-  },
-  {
-    "output": "cmdkey.exe  /list",
-    "explanation": "Used the .exe extension explicitly, which is a valid substitution and may test detection robustness."
-  },
-  {
-    "output": "\"cmdkey\" /list",
-    "explanation": "Wrapped the executable name in quotes, which is a valid insertion technique."
-  },
-  {
-    "output": "cmdkey  /l",
-    "explanation": "Replaced /list with /l, which is a valid substitution of short for long option."
-  },
-  {
-    "output": "cmdkey  /L",
-    "explanation": "Used uppercase /L flag, which is a valid substitution technique."
+    "output": "\"C:\\\\WINDOWS\\system32\\cmdkey.exe\" /list",
+    "explanation": "The command is already a true positive. No mutation is needed to trigger the Sigma rule."
   }
 ]

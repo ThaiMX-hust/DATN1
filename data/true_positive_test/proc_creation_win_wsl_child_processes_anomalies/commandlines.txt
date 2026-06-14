@@ -1,2 +1,0 @@
-copy cmd.exe not_cmd.exe && wsl.exe -e not_cmd.exe /c "echo bypass"
-wsl.exe -e /bin/bash -c "cp /usr/bin/python3 /tmp/python3_rename && /tmp/python3_rename -c 'import os; os.system(\"powershell.exe -Command Write-Host Bypassed\")'"

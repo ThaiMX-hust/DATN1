@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"AccCheckConsole.exe\" -hwnd 1234 -dll \"C:\\\\Temp\\\\malicious.dll\"",
+    "explanation": "This command simulates a potential DLL injection via AccCheckConsole by specifying a window handle and a malicious DLL. It uses quotes for safe insertion and follows the expected syntax of the tool."
+  },
+  {
+    "output": "AccCheckConsole.exe -hwnd 5678 -dll C:\\\\Temp\\\\benign.dll",
+    "explanation": "This command represents a benign use case of AccCheckConsole with a valid window handle and a legitimate DLL. It demonstrates how the tool might be used in a legitimate scenario."
+  },
+  {
+    "output": "\"AccCheckConsole.exe\" -process 9876 -dll \"C:\\\\Users\\\\User\\\\Documents\\\\test.dll\"",
+    "explanation": "This command simulates a potential DLL injection via AccCheckConsole by specifying a process ID and a malicious DLL. It uses quotes for safe insertion and follows the expected syntax of the tool."
+  },
+  {
+    "output": "AccCheckConsole.exe -window \"MainWindow\" -dll C:\\\\Windows\\\\System32\\\\kernel32.dll",
+    "explanation": "This command simulates a potential DLL injection via AccCheckConsole by specifying a window name and a system DLL. It uses quotes for safe insertion and follows the expected syntax of the tool."
+  },
+  {
+    "output": "AccCheckConsole.exe -hwnd 1234 -dll C:\\\\Temp\\\\safe.dll",
+    "explanation": "This command represents a benign use case of AccCheckConsole with a valid window handle and a safe DLL. It demonstrates how the tool might be used in a legitimate scenario."
+  }
+]

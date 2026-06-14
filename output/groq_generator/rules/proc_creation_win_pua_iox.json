@@ -1,6 +1,18 @@
 [
   {
-    "output": "\"iox.exe\" -fwd -l 8080",
-    "explanation": "Original command line used for testing."
+    "output": "iox.exe fwd -l 8080 127.0.0.1:80",
+    "explanation": "This command represents a typical usage of IOX for local port forwarding, matching the Sigma rule's detection criteria for '.exe fwd -l ' in the command line."
+  },
+  {
+    "output": "iox.exe proxy -r 8080 127.0.0.1:80",
+    "explanation": "This command represents a typical usage of IOX for remote proxy setup, matching the Sigma rule's detection criteria for '.exe proxy -r ' in the command line."
+  },
+  {
+    "output": "iox.exe fwd -r 8080 127.0.0.1:80",
+    "explanation": "This command represents a typical usage of IOX for remote port forwarding, matching the Sigma rule's detection criteria for '.exe fwd -r ' in the command line."
+  },
+  {
+    "output": "iox.exe proxy -l 8080 127.0.0.1:80",
+    "explanation": "This command represents a typical usage of IOX for local proxy setup, matching the Sigma rule's detection criteria for '.exe proxy -l ' in the command line."
   }
 ]

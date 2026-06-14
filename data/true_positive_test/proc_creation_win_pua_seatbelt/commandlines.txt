@@ -1,6 +1,0 @@
-rundll32.exe Seatbelt.dll,main FullDFIR
-Seatbelt.exe -group=all
-seatbelt.exe InterestingServices
-"Seatbelt.exe" -group=custom -someOtherParam
-custom_audit.exe -group=system
-seatbelt_modified.exe DpapiMasterKeys

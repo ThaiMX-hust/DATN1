@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh \"interface\" \"portproxy\" \"add\" \"v4tov4\" listenport=1337 connectport=1337 connectaddress=127.0.0.1",
+    "explanation": "Insertion technique. Encloses the sub-commands ('interface', 'portproxy', 'add', 'v4tov4') inside independent double quotation marks. This breaks the sequential string containment required by `selection_cli_1` while also failing to trigger the abbreviated forms in `selection_cli_2` due to the lack of trailing spaces inside the quotes. The netsh internal parser strips the quotes and executes the configuration natively."
+  },
+  {
+    "output": "netsh interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=127.0.0.1 ",
+    "explanation": "Omission technique. Completely omits the optional parameter `listenaddress` and passes only `listenport`, `connectport`, and `connectaddress`. This avoids triggering the `selection_cli_3` rule cluster which enforces an all-of rule check looking for the string 'listena'. Since `listenaddress` defaults to all interfaces (`0.0.0.0`), the port forwarding rule executes identically in a test environment."
+  },
+  {
+    "output": "netsh interface portproxy add v4tov4 listenport=1337 connectport=1337 c=127.0.0.1",
+    "explanation": "Omission / Substitution technique. Abbreviates the parameter token `connectaddress=` to its shortest legal prefix option `c=`. While this variation triggers the `c=` clause in `selection_cli_3`, it completely skips the long-form keyword 'interface' or 'listena' selections if combined with custom parameter orders, bypassing legacy regex variations that assume hardcoded parameters."
+  },
+  {
+    "output": "netsh interface portproxy add v4tov4 connectport=1337 connectaddress=127.0.0.1 listenport=1337",
+    "explanation": "Reordering technique. Changes the operational placement of the argument parameters by placing the connection keys before the listening configuration. This targets fragile tokenizers, line-index parsers, or strict downstream correlation rules built on fixed positional ordering constraints."
+  },
+  {
+    "output": "netsh interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=localhost",
+    "explanation": "Recoding / Encoding technique. Replaces the standard loopback IP notation string `127.0.0.1` with its corresponding host resolution mapping string `localhost`. This variant alters the structural value strings to avoid simple exact-match correlation dependencies or IP block pattern signatures."
+  }
+]

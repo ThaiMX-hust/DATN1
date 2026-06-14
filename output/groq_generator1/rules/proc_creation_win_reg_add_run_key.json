@@ -1,0 +1,38 @@
+[
+  {
+    "output": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"Persistence\" /t REG_SZ /d \"payload.exe\" /f",
+    "explanation": "This command uses standard syntax and includes all required parameters to match the Sigma rule. It adds a registry entry under the Run key, which is the core behavior being detected."
+  },
+  {
+    "output": "REG ADD HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /V Persistence /t REG_SZ /F /D \"payload.exe\"",
+    "explanation": "This command uses uppercase syntax and omits optional spaces around the equals sign and slashes. It still performs the same action and matches the Sigma rule."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Persistence /t REG_SZ /d \"payload.exe\" /f",
+    "explanation": "This command removes quotes around the registry path and uses lowercase syntax. It is functionally identical and matches the Sigma rule."
+  },
+  {
+    "output": "REG ADD \"HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /V \"Persistence\" /t REG_SZ /F /D \"payload.exe\"",
+    "explanation": "This command uses quotes around the registry path and value name, and includes optional flags in a different order. It still matches the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Persistence /t REG_SZ /d \"payload.exe\" /f",
+    "explanation": "This command wraps the reg.exe call in cmd.exe with the /c flag. It is a common technique for executing commands and still matches the Sigma rule."
+  },
+  {
+    "output": "copy reg.exe not_reg.exe && not_reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Persistence /t REG_SZ /d \"payload.exe\"",
+    "explanation": "This command renames reg.exe to not_reg.exe and executes it. It is a common evasion technique but still matches the Sigma rule."
+  },
+  {
+    "output": "reg  add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v NetWire /t REG_SZ  /d \"C:\\\\Users\\\\admin\\\\AppData\\\\Roaming\\\\Install\\\\Host.exe\" /f",
+    "explanation": "This command includes a longer path and additional spaces. It matches the Sigma rule and is a realistic example of a persistence attempt."
+  },
+  {
+    "output": "REG  ADD \"HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /V \"Atomic Red Team\" /t REG_SZ /F /D \"C:\\\\Path\\\\AtomicRedTeam.exe\"",
+    "explanation": "This command uses quotes and includes a longer value name. It matches the Sigma rule and is a realistic example of a persistence attempt."
+  },
+  {
+    "output": "REG   ADD HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx\\0001\\Depend /v 1 /d \"C:\\\\Path\\\\AtomicRedTeam.dll\"",
+    "explanation": "This command adds a registry entry under the RunOnceEx key. It matches the Sigma rule and is a realistic example of a persistence attempt."
+  }
+]

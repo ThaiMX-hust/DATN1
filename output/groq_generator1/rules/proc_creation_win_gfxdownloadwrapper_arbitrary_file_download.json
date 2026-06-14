@@ -1,0 +1,18 @@
+[
+  {
+    "output": "GfxDownloadWrapper.exe https://gameplayapi.intel.com/legitfile.exe",
+    "explanation": "This command uses a legitimate URL from the filter_main_known_urls to bypass the Sigma rule detection while maintaining valid syntax."
+  },
+  {
+    "output": "GfxDownloadWrapper.exe \"https://gameplayapi.intel.com/legitfile.exe\"",
+    "explanation": "Adding quotes around the URL is a safe mutation technique that does not alter the behavior but changes the command structure slightly."
+  },
+  {
+    "output": "GfxDownloadWrapper.exe https://gameplayapi.intel.com/legitfile.exe\\",
+    "explanation": "Appending a backslash at the end of the URL is an allowed mutation that does not affect the core functionality and may bypass detection."
+  },
+  {
+    "output": "GfxDownloadWrapper.exe https://gameplayapi.intel.com/legitfile.exe # comment",
+    "explanation": "Appending a comment after the URL is a safe mutation that does not alter the execution behavior but changes the command line structure."
+  }
+]

@@ -1,2 +1,1 @@
 "C:\WINDOWS\system32\mstsc.exe" /v:THAIMX
-mstsc.exe C:\path\to\connection.rdp

@@ -1,2 +1,0 @@
-copy csi.exe not_csi.exe && cmd.exe /c not_csi.exe
-wmic process call create "csi.exe"

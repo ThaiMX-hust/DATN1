@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select-Object Name,Enabled | Out-File C:\\temp\\users.txt\"",
+    "explanation": "This command uses equivalent syntax for filtering (-Filter *), selects specific properties (Select-Object), and exports to a file (Out-File), which is a variation of the original command."
+  },
+  {
+    "output": "pwsh.exe -c \"Get-ADUser -f * | Out-String | Set-Content -Path users.txt\"",
+    "explanation": "This command uses the short form of the filter flag (-f instead of -Filter), uses Out-String to convert output, and writes to a file using Set-Content instead of Out-File, which is a safe mutation."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Export-Csv -Path C:\\temp\\users.csv -NoTypeInformation\"",
+    "explanation": "This command uses an alternative output method (Export-Csv) and includes the -NoTypeInformation flag, which is optional but commonly used, making it a safe variation."
+  }
+]

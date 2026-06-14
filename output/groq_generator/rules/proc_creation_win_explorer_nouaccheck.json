@@ -1,14 +1,22 @@
 [
   {
-    "output": "schtasks /create /tn \"TestUACBypass\" /tr \"explorer.exe /NOUACCHECK\" /sc once /st 12:00",
-    "explanation": "The original command is already a valid test case. No mutation is needed for this baseline."
+    "output": "explorer.exe /NOUACCHECK",
+    "explanation": "This command directly matches the Sigma rule's detection criteria by invoking explorer.exe with the /NOUACCHECK flag."
   },
   {
-    "output": "schtasks /create /tr \"explorer.exe /NOUACCHECK\" /sc once /st 12:00 /tn \"TestUACBypass\"",
-    "explanation": "Reordered the arguments of the command while maintaining the same functionality."
+    "output": "explorer.exe '/NOUACCHECK'",
+    "explanation": "Adding quotes around the /NOUACCHECK flag is a safe mutation technique that does not alter the command's behavior but may test parsing robustness."
   },
   {
-    "output": "schtasks /create /tn \"TestUACBypass\" /tr \"explorer.exe /NOUACCHECK\" /st 12:00 /sc once",
-    "explanation": "Reordered the /st and /sc arguments while maintaining the same functionality."
+    "output": "explorer.exe /NOUACCHECK ",
+    "explanation": "Appending a space after the /NOUACCHECK flag is a safe mutation that tests whether the detection rule is sensitive to trailing whitespace."
+  },
+  {
+    "output": "explorer.exe /nouacheck",
+    "explanation": "Lowercasing the flag is a safe mutation technique to test case sensitivity of the detection rule."
+  },
+  {
+    "output": "explorer.exe /NOUACCHECK\\",
+    "explanation": "Appending a backslash is a safe mutation that may test how the detection rule handles trailing characters."
   }
 ]

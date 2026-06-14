@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mpiexec.exe -n 1 calc.exe",
+    "explanation": "This is a direct match to the Sigma rule's detection condition and serves as a baseline true positive."
+  },
+  {
+    "output": "mpiexec.exe -n1 calc.exe",
+    "explanation": "Omission of space between -n and 1, which is still valid syntax and matches the rule."
+  },
+  {
+    "output": "mpiexec.exe /n 1 calc.exe",
+    "explanation": "Substitution of '-' with '/' for the flag, which is equivalent in Windows command-line syntax."
+  }
+]

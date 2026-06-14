@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" /generic:TERMSRV/THAIMX /user:THAIMX\\\\thaim /pass:1password2!",
+    "explanation": "Original command line for testing the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -g TERMSRV/THAIMX -u THAIMX\\\\thaim -p 1password2!",
+    "explanation": "Substitution of /flags to -flags, which is an equivalent syntax for cmdkey.exe."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -gTERMSRV/THAIMX -uTHAIMX\\\\thaim -p1password2!",
+    "explanation": "Removal of spaces between flags and arguments, which is still valid syntax."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -u THAIMX\\\\thaim -g TERMSRV/THAIMX -p 1password2!",
+    "explanation": "Reordering of arguments; cmdkey.exe accepts flags in different orders."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\cmdkey.exe\" -g TERMSRV/THAIMX -u THAIMX\\\\thaim -p 1password2!\"",
+    "explanation": "Added quotes around the password argument to test parsing behavior."
+  }
+]

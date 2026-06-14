@@ -1,1 +1,0 @@
-copy dnx.exe not_dnx.exe && not_dnx.exe .

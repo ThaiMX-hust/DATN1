@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" \"--load-extension\"=\"C:\\Temp\\test_extension\"",
+    "explanation": "Insertion technique: Placing double quotes around the flag key ('\"--load-extension\"') breaks the contiguous substring match for '--load-extension=' in the selection block. The native Windows argument parser unquotes the parameter prior to handing it to Chromium, meaning the browser evaluates the path flawlessly while evading the rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-ext^ension=\"C:\\Temp\\test_extension\"",
+    "explanation": "Insertion technique: Spawning via cmd.exe permits the insertion of a caret escape character ('^') into the middle of the parameter key string. The command shell parses and discards the escape token at initialization time, leaving a raw process execution log showing '--load-ext^ension=' which bypasses the exact match rule."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"\t--load-extension=\"C:\\Temp\\test_extension\"",
+    "explanation": "Substitution technique: Replaces the expected single space character delimiter before the target flag with a horizontal tab character ('\\t'). The Windows operating system recognizes tabs as legal whitespace separators between program arguments, disrupting signature engines that enforce static single-space string normalization around parameters."
+  }
+]

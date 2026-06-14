@@ -1,22 +1,42 @@
 [
   {
-    "output": "powershell.exe -EncodedCommand WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA==",
-    "explanation": "This command uses base64 encoding to load an assembly via PowerShell, which matches the Sigma rule's detection criteria."
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String('...'))\"",
+    "explanation": "This command simulates a PowerShell reflective assembly load using base64 encoded data. It is a direct representation of the Sigma rule's detection pattern."
   },
   {
-    "output": "powershell.exe -EncodedCommand IAAoAFsAcgBlAGYAbABlAGMAdABpAG8AbgAuAGEAcwBzAGUAbQBiAGwAeQBdADoAOgBMAG8AYQBkAC4ASQBuAHYAbwBrAGUAKAAkAGIAeQB0AGUAcwApACkAcwA=",
-    "explanation": "This command uses a different base64 string to invoke a reflective load, which is still detectable by the Sigma rule."
+    "output": "powershell.exe -c \"[Reflection.Assembly]::Load([System.Convert]::FromBase64String('...'))\"",
+    "explanation": "This command uses the short form of the -Command parameter (-c) and fully qualifies the Convert class, which is a syntactic variation of the original."
   },
   {
-    "output": "$a = '[Ref' + 'lection.Assembly]'; $m = 'Lo' + 'ad'; Invoke-Expression \"([$a]::$m($data))\"",
-    "explanation": "This command uses string concatenation to evade simple string-based detection but still performs the same reflective load behavior."
+    "output": "powershell.exe -Command \"& { [Reflection.Assembly]::Load([Convert]::FromBase64String('...')) }\"",
+    "explanation": "This command wraps the PowerShell command in a script block using &, which is a valid PowerShell syntax variation."
   },
   {
-    "output": "powershell.exe -Command \"& { [System.Reflection.Assembly]::Load([Convert]::FromBase64String('WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA==')) }\"",
-    "explanation": "This command uses a base64 string passed to Load and is detectable by the Sigma rule."
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String('...'))\" -WindowStyle Hidden",
+    "explanation": "This command adds an optional parameter (-WindowStyle Hidden) that does not affect the core behavior of the reflective load but is often used for evasion."
   },
   {
-    "output": "powershell.exe -Command \"& { [System.Reflection.Assembly]::Load([System.Convert]::FromBase64String('WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA==')) }\"",
-    "explanation": "This command uses a more verbose syntax but still performs the same reflective load behavior and is detectable."
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String(`\"...\"`))\"",
+    "explanation": "This command uses backticks to escape the quotes around the base64 string, which is a valid PowerShell syntax variation."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String(\\\"...\\\"))\"",
+    "explanation": "This command uses double backslashes to escape the quotes around the base64 string, which is a valid PowerShell syntax variation."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String('...'))\" -ExecutionPolicy Bypass",
+    "explanation": "This command adds the -ExecutionPolicy Bypass parameter, which is often used to allow script execution but does not alter the core reflective load behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String('...'))\" -NonInteractive",
+    "explanation": "This command adds the -NonInteractive parameter, which is often used in automation but does not affect the core reflective load behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String('...'))\" -NoProfile",
+    "explanation": "This command adds the -NoProfile parameter, which is often used to speed up execution but does not affect the core reflective load behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([Convert]::FromBase64String('...'))\" -Command \"\"",
+    "explanation": "This command appends an empty command string, which is a harmless addition that does not affect the core reflective load behavior."
   }
 ]

@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"Get-Content -Path '$env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt' | Select-String 'password', '-p', 'key', 'pwd', 'pass'\"",
-    "explanation": "This command uses environment variables and string substitution to access the history file. It avoids direct string concatenation and uses standard PowerShell syntax to bypass simple string-based detection."
+    "output": "powershell.exe -Command \"ls -R C:\\Users\\*\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt | Select-String \\\"password\\\", \\\"-p\\\", \\\"key\\\", \\\"pwd\\\", \\\"pass\\\"\"",
+    "explanation": "The original command is modified by using the -Command parameter instead of the call operator (&), and by normalizing the path and escaping quotes. This reordering and substitution should still trigger the Sigma rule."
   },
   {
-    "output": "powershell.exe -c \"gc $env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt | sls 'password'\"",
-    "explanation": "This command uses shorthand aliases (gc for Get-Content, sls for Select-String) and environment variables to obfuscate the command slightly while maintaining the same functionality."
+    "output": "powershell.exe \"ls -R C:\\\\Users\\\\*\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\PowerShell\\\\PSReadLine\\\\ConsoleHost_history.txt | Select-String \\\"password\\\", \\\"-p\\\", \\\"key\\\", \\\"pwd\\\", \\\"pass\\\"\"",
+    "explanation": "The command is wrapped in quotes and uses double backslashes for path normalization. The structure is preserved, and the Sigma rule should still detect it."
   },
   {
-    "output": "powershell.exe -Command \"Get-Content (Join-Path $env:APPDATA 'Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt') | Select-String 'pass'\"",
-    "explanation": "This command uses the Join-Path cmdlet to construct the file path dynamically, making it more difficult for simple string-based detection rules to identify."
+    "output": "powershell.exe -c \"Get-ChildItem -Recurse C:\\\\Users\\\\*\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\PowerShell\\\\PSReadLine\\\\ConsoleHost_history.txt | Select-String \\\"password\\\", \\\"-p\\\", \\\"key\\\", \\\"pwd\\\", \\\"pass\\\"\"",
+    "explanation": "The command is rewritten using Get-ChildItem instead of ls (alias), and the -c parameter is used instead of -Command. This substitution and reordering should still match the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"Get-Content -Path $env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt | Where-Object { $_ -match 'password' }\"",
-    "explanation": "This command replaces Select-String with Where-Object and a regex match, changing the syntax while preserving the same behavior, which may evade pattern-based detection."
+    "output": "powershell.exe -Command \"Get-ChildItem -Recurse C:\\\\Users\\\\*\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\PowerShell\\\\PSReadLine\\\\ConsoleHost_history.txt | Select-String -Pattern \\\"password\\\",\\\"-p\\\",\\\"key\\\",\\\"pwd\\\",\\\"pass\\\"\"",
+    "explanation": "The command is restructured by using the full cmdlet name and explicitly specifying the -Pattern parameter. This reordering and substitution should still match the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"ls -R C:\\\\Users\\\\$env:username\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\PowerShell\\\\PSReadLine\\\\ConsoleHost_history.txt | Select-String \\\"password\\\",\\\"-p\\\",\\\"key\\\",\\\"pwd\\\",\\\"pass\\\"\"",
+    "explanation": "The command uses an environment variable ($env:username) to dynamically reference the current user's directory. This substitution and recoding should still match the Sigma rule."
   }
 ]
+```

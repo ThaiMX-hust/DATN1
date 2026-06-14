@@ -1,4 +1,4 @@
 "cmd.exe" /c dir c:\ /b /s .key | findstr /e .key
-C:\WINDOWS\system32\cmd.exe  /S /D /c" dir c:\ /b /s .key "
-findstr  /e .key
-powershell.exe -c "Get-ChildItem -Path C:\ -Recurse -Include *.$('p'+'em')"
+"powershell.exe" & {$mypwd = ConvertTo-SecureString -String \""AtomicRedTeam\"" -Force -AsPlainText $cert = New-SelfSignedCertificate -DnsName atomicredteam.com -CertStoreLocation cert:\LocalMachine\My Set-Location Cert:\LocalMachine\My Get-ChildItem -Path $cert.Thumbprint | Export-PfxCertificate -FilePath $env:Temp\atomicredteam.pfx -Password $mypwd}
+C:\WINDOWS\system32\cmd.exe /S /D /c" dir c:\ /b /s .key "
+findstr /e .key

@@ -1,14 +1,14 @@
 [
   {
-    "output": "SyncAppvPublishingServer.exe \"n;\" -ex Bypass -File script.ps1",
-    "explanation": "Substituted '-ExecutionPolicy' with its short form '-ex' and used quotes to maintain the required 'n;' string. This is a safe mutation that preserves the original behavior for testing."
+    "output": "\"C:\\Program Files\\Microsoft Application Virtualization\\SyncAppvPublishingServer.exe\" -Command \"& { powershell.exe -Command 'Write-Output \"\"TestBypass\"\"' }\"",
+    "explanation": "This command simulates the execution of arbitrary PowerShell code via SyncAppvPublishingServer.exe, which aligns with the Sigma rule's detection criteria. It uses standard syntax and no evasion techniques, making it suitable for testing detection capabilities."
   },
   {
-    "output": "SyncAppvPublishingServer.exe \"n;\" `nStop-Process -Name 'lsass'",
-    "explanation": "Inserted a line break using the backtick escape character to separate the command, preserving the original intent while using safe mutation techniques."
+    "output": "\"C:\\Program Files\\Microsoft Application Virtualization\\SyncAppvPublishingServer.exe\" -Command \"& { powershell -c 'Write-Output \"\"TestBypass\"\"' }\"",
+    "explanation": "This command uses substitution (shortening 'powershell.exe' to 'powershell') and maintains the same behavior. It is still detectable by the Sigma rule and is safe for testing."
   },
   {
-    "output": "SyncAppvPublishingServer.exe \"n;\" Start-Process calc.exe",
-    "explanation": "Removed optional '-File' syntax and reordered the command line to achieve the same result, using safe mutation techniques."
+    "output": "\"C:\\Program Files\\Microsoft Application Virtualization\\SyncAppvPublishingServer.exe\" -Command \"& { powershell -Command Write-Output 'TestBypass' }\"",
+    "explanation": "This command omits the quotes around the output string, which is still valid PowerShell syntax. It remains detectable by the Sigma rule and is safe for testing."
   }
 ]

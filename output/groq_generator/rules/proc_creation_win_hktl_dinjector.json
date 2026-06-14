@@ -1,10 +1,14 @@
 [
   {
-    "output": "DInjector.exe /am51 /password:secret",
-    "explanation": "The command line uses the exact flags and syntax as described in the Sigma rule, making it a true positive."
+    "output": "powershell.exe -Command \"& { param($a, $b) Start-Process -FilePath 'dinjector.exe' -ArgumentList '/am51', '/password:123456'}\"",
+    "explanation": "This command simulates the execution of DInjector with the required flags '/am51' and '/password' using PowerShell. The command is wrapped in a PowerShell -Command block to mimic typical cradle behavior."
   },
   {
-    "output": "DInjector.exe /am^51 /password:secret",
-    "explanation": "The command line includes an escaped character (^) for the flag, which is still parsed correctly by the program and matches the Sigma rule."
+    "output": "powershell.exe -c \"Start-Process -FilePath 'dinjector.exe' -ArgumentList '/am51', '/password=123456'\"",
+    "explanation": "This command uses PowerShell's -c (short for -Command) to execute Start-Process with the required DInjector flags. The arguments are passed as an array to ensure correct parsing."
+  },
+  {
+    "output": "powershell.exe -Command \"& { Start-Process -FilePath 'dinjector.exe' -ArgumentList '/am51 /password:123456' }\"",
+    "explanation": "This command uses a single string for the arguments to simulate how the flags might be passed in a more compact form. The command is still valid and matches the Sigma rule."
   }
 ]

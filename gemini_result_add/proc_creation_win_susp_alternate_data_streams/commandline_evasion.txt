@@ -1,0 +1,18 @@
+[
+  {
+    "output": "type C:\\Temp\\test.txt>C:\\Temp\\host.txt:stream.txt",
+    "explanation": "Omission/Recoding technique: Removed the optional whitespace padding surrounding the redirection operator ('>' instead of ' > ') and gave the stream file an arbitrary extension name (.txt instead of .txt:...). This executes identically in cmd.exe, writing the target content directly into an alternate data stream while avoiding the literal strings 'txt:' in selection_stream and ' > ' in selection_tools_type."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software\\Test \"C:\\Temp\\backup.log:hidden\"",
+    "explanation": "Recoding/Omission technique: Directed the registry export tool to use a target alternate data stream with a generic descriptive label (':hidden') on top of a non-text parent log placeholder file ('.log'). This allows valid diagnostic exporting while completely dropping the hardcoded text token constraint 'txt:' evaluated by selection_stream."
+  },
+  {
+    "output": "regedit.exe /e \"C:\\Temp\\export.reg:out\" HKCU\\Software\\Test",
+    "explanation": "Substitution/Case modification technique: Substituted the target data stream keyword extension name and modified the uppercase switch filter to a lowercase syntax option ('/e' instead of ' /E '). Windows commands are case-insensitive, ensuring proper administrative configuration parsing while avoiding the static case pattern expected by selection_tools_regedit."
+  },
+  {
+    "output": "cmd.exe /c ty^pe C:\\Temp\\test.txt > C:\\Temp\\host.dat:ads",
+    "explanation": "Insertion/Recoding technique: Injected a caret escape character inside the tool token ('ty^pe') and modified the extension suffix signature to bypass the 'txt:' filter in selection_stream. The cmd shell resolves the string syntax natively before invocation, maintaining lab test functionality while breaking exact string lookups inside selection_tools_type."
+  }
+]

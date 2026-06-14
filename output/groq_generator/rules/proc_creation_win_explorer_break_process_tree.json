@@ -1,14 +1,14 @@
 [
   {
-    "output": "explorer.exe \"/root,calc.exe\"",
-    "explanation": "Inserts quotes around the argument to test how the rule handles quoted command lines."
+    "output": "explorer.exe /root,\\\\.\\pipe\\something /factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b}",
+    "explanation": "This command simulates a process tree break using explorer.exe with the /root and /factory flags, which aligns with the Sigma rule's detection criteria. It is a safe test command that mimics the suspicious behavior without executing malicious payloads."
   },
   {
-    "output": "explorer.exe /root,calc.exe",
-    "explanation": "Uses the original format without quotes to test basic detection."
+    "output": "explorer.exe /root,C:\\ /factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b}",
+    "explanation": "This command uses a common path as the /root argument, which is a safe variation of the suspicious behavior described in the Sigma rule. It is designed for testing and does not perform any harmful actions."
   },
   {
-    "output": "explorer.exe /root\\,calc.exe",
-    "explanation": "Escapes the comma to test if the rule is sensitive to escape characters."
+    "output": "explorer.exe /root,\\\\127.0.0.1\\c$ /factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b}",
+    "explanation": "This command uses a UNC path as the /root argument, which is a valid and safe variation that matches the Sigma rule's detection logic. It is intended for testing purposes only."
   }
 ]

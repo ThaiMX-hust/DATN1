@@ -1,0 +1,18 @@
+[
+  {
+    "output": "LINK -/help",
+    "explanation": "Substitution technique: Replacing the required forward slash parameter indicator ('LINK /') with a combined hyphen and forward slash format ('-/'). The Windows native LINK.EXE tool handles typical Win32 option parsing variations where parameters can be introduced using alternative switches. This completely avoids the 'CommandLine|contains' literal match string while ensuring identical application parsing logic."
+  },
+  {
+    "output": "LINK\t/help",
+    "explanation": "Substitution technique: Substituting the structural single space character inside the target literal sequence ('LINK /') with a horizontal tab character ('\\t'). The Windows process creation layer natively recognizes and treats horizontal tabs as a standard token separator. This breaks the specific string match rule while ensuring that the binary executes and receives its sub-commands flawlessly."
+  },
+  {
+    "output": "LINK  /help",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces inside the command string boundary sequence ('LINK  /'). While the operating system automatically normalizes and collapses duplicate whitespaces into unified parameter boundary vectors during program array initialization, it causes rigid signature rules expecting exactly a single-space character alignment to fail."
+  },
+  {
+    "output": "\"LINK\" /help",
+    "explanation": "Insertion technique: Enclosing the core binary name string inside explicit double quotes. This alters the raw character stream sequence evaluated by the SIEM logic from an unquoted 'LINK /' format into a quoted structure block, while the Win32 execution engine implicitly unwraps and invokes the correct process target."
+  }
+]

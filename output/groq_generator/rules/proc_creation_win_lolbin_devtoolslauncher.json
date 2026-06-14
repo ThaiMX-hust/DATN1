@@ -1,30 +1,22 @@
 [
   {
-    "output": "devtoolslauncher.exe LaunchForDeploy calc.exe",
-    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+    "output": "devtoolslauncher.exe -LaunchForDeploy",
+    "explanation": "This command uses the 'LaunchForDeploy' argument directly as specified in the Sigma rule. It is a minimal representation of the rule's detection condition."
   },
   {
-    "output": "devtoolslauncher.exe LaunchForDeploy calc .exe",
-    "explanation": "The command is modified by splitting 'calc.exe' into 'calc .exe', which may still be parsed correctly by the executable in some contexts."
+    "output": "devtoolslauncher.exe --LaunchForDeploy",
+    "explanation": "This command uses a long-form option syntax for 'LaunchForDeploy', assuming the program accepts long-form flags as equivalent to short-form."
   },
   {
-    "output": "devtoolslauncher.exe LaunchForDeploy `calc.exe`",
-    "explanation": "Backticks are used to enclose the binary name, which may be parsed correctly by the executable while altering the command structure."
+    "output": "devtoolslauncher.exe -LaunchForDeploy .\\payload.exe",
+    "explanation": "This command adds an optional payload argument to simulate execution of another binary, which is typical behavior for devtoolslauncher.exe."
   },
   {
-    "output": "devtoolslauncher.exe LaunchForDeploy .\\calc.exe",
-    "explanation": "The binary path is modified to use a relative path ('.\\calc.exe') instead of just 'calc.exe', which may still be valid depending on the context."
+    "output": "devtoolslauncher.exe -LaunchForDeploy ..\\..\\payload.exe",
+    "explanation": "This command uses path normalization to bypass simple string-based detection while still fulfilling the rule's condition."
   },
   {
-    "output": "devtoolslauncher.exe LaunchForDeploy calc.exe # comment",
-    "explanation": "A comment is appended to the command line. While this is not standard in Windows command lines, it may be tolerated in some parsing contexts."
-  },
-  {
-    "output": "devtoolslauncher.exe LaunchForDeploy calc.exe #",
-    "explanation": "A comment marker is added without content, which may be ignored by the parser while still triggering the rule."
-  },
-  {
-    "output": "devtoolslauncher.exe LaunchForDeploy calc.exe\\",
-    "explanation": "An escape character is added at the end of 'calc.exe', which may be ignored by the parser but still execute the intended binary."
+    "output": "devtoolslauncher.exe -LaunchForDeploy \"C:\\Test\\payload.exe\"",
+    "explanation": "This command uses quotes to enclose the payload path, which is a safe mutation technique that preserves the intended behavior."
   }
 ]

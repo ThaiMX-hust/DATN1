@@ -1,26 +1,22 @@
 [
   {
-    "output": "SharpEvtMute.exe --Filter \"rule name { eventid == 4624 }\"",
-    "explanation": "This command uses the original syntax from the Sigma rule and is a direct match for the detection condition. It is a valid test command for verifying detection."
+    "output": "SharpEvtMute.exe --Filter \"rule 1\"",
+    "explanation": "This command matches the Sigma rule's detection criteria by including the '--Filter \"rule ' substring in the command line."
   },
   {
-    "output": "SharpEvtMute.exe -f \"rule name { eventid == 4624 }\"",
-    "explanation": "This command uses substitution (short option -f instead of --Filter) and is still valid for testing detection based on the Sigma rule."
+    "output": "SharpEvtMute.exe --Filter 'rule 1'",
+    "explanation": "This command uses single quotes instead of double quotes to bypass the specific string match in the Sigma rule while still representing valid usage."
   },
   {
-    "output": "SharpEvtMute.exe --Encoded --Filter \"cnVsZSBuYW1lIHsgZXZlbnRpZCA9PSA0NjI0IH0=\"",
-    "explanation": "This command uses the encoded filter parameter as specified in the Sigma rule and is a valid test command for verifying detection."
+    "output": "SharpEvtMute.exe -Filter \"rule 1\"",
+    "explanation": "This command uses a short option '-Filter' instead of the long option '--Filter' to test whether the Sigma rule accounts for substitution techniques."
   },
   {
-    "output": "SharpEvtMute.exe -e \"cnVsZSBuYW1lIHsgZXZlbnRpZCA9PSA0NjI0IH0=\"",
-    "explanation": "This command uses substitution (short option -e instead of --Encoded) and is still valid for testing detection based on the Sigma rule."
+    "output": "SharpEvtMute.exe --Filter \"rule 1\" --Encoded",
+    "explanation": "This command includes the '--Encoded' flag, which is explicitly referenced in the Sigma rule's detection logic and ensures the command is flagged."
   },
   {
-    "output": "SharpEvtMute.exe --Filter 'rule name { eventid == 4624 }'",
-    "explanation": "This command uses single quotes instead of double quotes for the filter parameter, which is a safe mutation technique and still valid for testing."
-  },
-  {
-    "output": "SharpEvtMute.exe --Filter \"rule name { eventid == 4624 }\" --Encoded",
-    "explanation": "This command reorders the arguments but still includes the encoded filter parameter, making it valid for testing detection."
+    "output": "SharpEvtMute.exe --Filter \"rule 1\" --Encoded --Verbosity 2",
+    "explanation": "This command adds an additional optional argument '--Verbosity 2' to test whether the Sigma rule is affected by argument reordering or omission."
   }
 ]

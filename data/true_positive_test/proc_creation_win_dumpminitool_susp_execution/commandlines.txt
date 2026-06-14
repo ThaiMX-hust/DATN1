@@ -1,1 +1,0 @@
-mkdir C:\Temp\Extensions\ && copy DumpMinitool.exe DumpMinitool.exe && DumpMinitool.exe --file C:\Temp\memory.dmp --processId 752 --dumpType Full

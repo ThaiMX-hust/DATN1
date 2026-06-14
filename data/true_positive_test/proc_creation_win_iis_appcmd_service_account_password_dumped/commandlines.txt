@@ -1,3 +1,0 @@
-%comspec% /c "set a=li& set b=st& call appcmd.exe %a%%b% config /section:identity"
-appcmd.exe list config -section:system.webServer/proxy /@t:password
-copy appcmd.exe not_evil.exe && not_evil.exe list config /section:identity

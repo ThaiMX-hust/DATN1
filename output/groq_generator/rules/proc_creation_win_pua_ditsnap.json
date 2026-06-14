@@ -1,0 +1,23 @@
+[
+  {
+    "output": "ditsnap.exe",
+    "explanation": "The Sigma rule detects process creation events where the Image ends with 'ditsnap.exe' and the CommandLine contains 'ditsnap.exe'. Simply invoking 'ditsnap.exe' without arguments will still match the rule since the CommandLine contains 'ditsnap.exe'."
+  },
+  {
+    "output": "\"ditsnap.exe\"",
+    "explanation": "Adding quotes around the command is a safe mutation technique that does not change the behavior but alters the command line format. The Sigma rule will still detect it since the CommandLine contains 'ditsnap.exe'."
+  },
+  {
+    "output": "ditsnap.exe ",
+    "output": "ditsnap.exe  ",
+    "explanation": "Appending extra spaces after the command is a safe mutation technique. The Sigma rule will still detect it since the CommandLine contains 'ditsnap.exe'."
+  },
+  {
+    "output": "ditsnap.exe -h",
+    "explanation": "Adding a common help flag (-h) is a safe mutation technique that does not alter the detection behavior. The Sigma rule will still detect it since the CommandLine contains 'ditsnap.exe'."
+  },
+  {
+    "output": "ditsnap.exe --help",
+    "explanation": "Using the long form of the help flag (--help) is a safe mutation technique. The Sigma rule will still detect it since the CommandLine contains 'ditsnap.exe'."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" --buildcache --cachefilename c:\\temp\\cache.txt",
+    "explanation": "The command omits optional elements like user, password, and domain while preserving the core behavior of using --buildcache and --cachefilename, which are part of the Sigma rule's detection logic."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe\" --bhdump -o c:\\temp\\test2 --cachefilename c:\\temp\\cache.txt",
+    "explanation": "This command uses short option '-o' instead of '--outputdirectory' and omits optional elements like user and domain, while still including --bhdump and --cachefilename, which are part of the Sigma rule's detection logic."
+  },
+  {
+    "output": "\"powershell.exe\" & {C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe --dnsdump}",
+    "explanation": "This command uses PowerShell to invoke SOAPHound with --dnsdump, which is part of the Sigma rule's detection logic. It is a minimal command that still matches the rule."
+  }
+]

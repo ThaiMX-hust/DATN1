@@ -1,0 +1,14 @@
+[
+{
+"output": "C:\Windows\SysWow64\Register-CimProvider.exe /Path "C:\AtomicRedTeam\atomics\T1218\src\Win32\T1218-2.dll"",
+"explanation": "Substitution technique: Replaces the hyphen prefix in '-Path' with a forward slash '/Path' to avoid the rule's command line constraint for the literal string '-path'. High-level behavior is expected to remain equivalent because native Windows command-line binaries frequently accept forward slashes as alternative switch indicators. Assumption: Assumes Register-CimProvider.exe accepts slashes for parameters."
+},
+{
+"output": "C:\Windows\SysWow64\Register-CimProvider.exe -p"a"th "C:\AtomicRedTeam\atomics\T1218\src\Win32\T1218-2.dll"",
+"explanation": "Insertion technique: Injects double quotes inside the parameter switch name to create '-p"a"th', avoiding the rule's condition for the contiguous substring '-path'. The high-level behavior remains equivalent because the Windows argument parser (CommandLineToArgvW) strips quotes from arguments before handing them to the utility's internal logic. Assumption: Assumes standard quote-stripping behavior is used by the binary."
+},
+{
+"output": "C:\Windows\SysWow64\Register-CimProvider.exe -Path "C:\AtomicRedTeam\atomics\T1218\src\Win32\T1218-2.tmp"",
+"explanation": "Recoding/Encoding technique: Modifies the target payload extension from '.dll' to '.tmp' to completely avoid the rule's requirement for the substring 'dll' in the command line. The behavior remains equivalent because the underlying Windows dynamic loading mechanisms evaluate file structure (PE header) rather than strictly relying on file extensions to execute code. Assumption: Requires renaming the source test DLL to a '.tmp' extension in the lab."
+}
+]

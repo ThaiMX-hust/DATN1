@@ -1,0 +1,22 @@
+[
+  {
+    "output": "conhost.exe 0xffffffff -ForceV1",
+    "explanation": "This is a direct and minimal representation of the command line that matches the Sigma rule's detection criteria. It includes the required process name, hexadecimal value, and the -ForceV1 flag."
+  },
+  {
+    "output": "\"conhost.exe\" 0xffffffff -ForceV1",
+    "explanation": "Adding quotes around the executable name is a safe mutation technique that does not alter the behavior of the command but may help evade certain simplistic detection mechanisms."
+  },
+  {
+    "output": "conhost.exe 0xFFFFFFFF -forcev1",
+    "explanation": "The hexadecimal value is capitalized and the flag is in lowercase. This is a safe substitution that preserves the same behavior and still matches the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\conhost.exe 0xffffffff -ForceV1",
+    "explanation": "Using the full path to conhost.exe is a safe mutation that does not change the behavior of the command and still satisfies the Sigma rule's detection criteria."
+  },
+  {
+    "output": "conhost.exe 0xffffffff -ForceV1 -ForceV1",
+    "explanation": "Repeating the -ForceV1 flag is a safe mutation that does not change the behavior of the command and still satisfies the Sigma rule's detection criteria."
+  }
+]

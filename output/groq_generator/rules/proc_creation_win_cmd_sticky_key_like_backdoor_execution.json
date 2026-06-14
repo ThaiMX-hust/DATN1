@@ -1,18 +1,6 @@
 [
   {
-    "output": "cmd.exe ^\"sethc.exe^\"",
-    "explanation": "The command uses escape characters (^) to bypass the Sigma rule's simple string-based detection of 'sethc.exe' in the command line while maintaining the same execution behavior."
-  },
-  {
-    "output": "\"cmd.exe\" \"sethc.exe\"",
-    "explanation": "Quotes are inserted around the command and its argument to obscure the direct string match for 'sethc.exe' in the command line."
-  },
-  {
-    "output": "cmd.exe sethc.exe",
-    "explanation": "Spaces and quotes are omitted where possible, but the command still executes the same behavior, and the Sigma rule may not detect it due to parsing logic."
-  },
-  {
-    "output": "cmd.exe %VARIABLE% where VARIABLE=sethc.exe",
-    "explanation": "An environment variable is used to recode the string 'sethc.exe', which may bypass the Sigma rule's string-based detection."
+    "output": "rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl,,0",
+    "explanation": "This command is not related to the Sigma rule and cannot be used to test the rule. The rule requires a process spawned by winlogon.exe with a command line containing specific executables like 'sethc.exe', 'utilman.exe', etc. This command does not meet the criteria."
   }
 ]

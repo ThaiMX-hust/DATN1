@@ -1,0 +1,22 @@
+[
+  {
+    "output": "RunXCmd.exe /account:system /exec:cmd.exe",
+    "explanation": "Replaced equals (=) with colon (:) for the account and exec parameters, which is still parsed correctly by the tool."
+  },
+  {
+    "output": "RunXCmd.exe /account=SYSTEM /exec=cmd.exe",
+    "explanation": "Used uppercase 'SYSTEM' instead of lowercase 'system' for the account parameter, which is still valid."
+  },
+  {
+    "output": "RunXCmd.exe /exec cmd.exe /account ti",
+    "explanation": "Removed equals (=) signs and used whitespace separation, which is accepted by some command-line parsers."
+  },
+  {
+    "output": "RunXCmd.exe /exec=\"cmd.exe\" /account=\\\"system\\\"",
+    "explanation": "Added escape characters to quotes around parameters, which is still parsed correctly."
+  },
+  {
+    "output": "RunXCmd.exe /account=system /exec=cmd.exe",
+    "explanation": "Original command with no mutation, included for completeness."
+  }
+]

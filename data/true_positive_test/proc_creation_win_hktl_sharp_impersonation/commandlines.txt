@@ -1,3 +1,0 @@
-sysupdate.exe "user:Administrator" "binary:cmd.exe"
-updater.exe user=Administrator binary=calc.exe
-updater.exe pid:1337 binary:cmd.exe technique:CreateProcessWithTokenW

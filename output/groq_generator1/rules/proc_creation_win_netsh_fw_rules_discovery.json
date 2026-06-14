@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh advfirewall firewall show rule name^=all",
+    "explanation": "Escape character (^) is inserted before the equals sign to test if the Sigma rule detects escaped input correctly."
+  },
+  {
+    "output": "\"netsh\" advfirewall firewall show rule name=all",
+    "explanation": "Quotes are added around the executable name to test if the Sigma rule is affected by quoted command-line arguments."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name=all",
+    "explanation": "Extra spaces are added to the command line to test if the Sigma rule is affected by spacing variations."
+  }
+]

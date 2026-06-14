@@ -1,1 +1,1 @@
-sdbinst.exe  "C:\AtomicRedTeam\atomics\T1546.011\bin\AtomicShimx86.sdb"
+sdbinst.exe "C:\AtomicRedTeam\atomics\T1546.011\bin\AtomicShimx86.sdb"

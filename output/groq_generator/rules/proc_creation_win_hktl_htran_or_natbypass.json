@@ -1,6 +1,22 @@
 [
   {
-    "output": "htran.exe -tran -c 127.0.0.1 -p 8080",
-    "explanation": "Removed quotes around the IP address and command-line arguments, which may bypass detection if the Sigma rule relies on quoted strings."
+    "output": "htran.exe -tran 127.0.0.1:8080 127.0.0.1:80",
+    "explanation": "This command simulates the execution of htran.exe with the -tran flag, which is detected by the Sigma rule. It is a direct representation of the rule's detection logic for testing purposes."
+  },
+  {
+    "output": "htran.exe -tran 127.0.0.1:8080 127.0.0.1:80",
+    "explanation": "No bypass is needed as this is a true positive command that matches the Sigma rule. It is included for completeness in testing."
+  },
+  {
+    "output": "htran.exe -tran 127.0.0.1:8080 127.0.0.1:80",
+    "explanation": "The command is already minimal and matches the rule. No safe mutation can avoid detection without altering the test behavior."
+  },
+  {
+    "output": "htran.exe -tran 127.0.0.1:8080 127.0.0.1:80",
+    "explanation": "The command is already minimal and matches the rule. No safe mutation can avoid detection without altering the test behavior."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
   }
 ]

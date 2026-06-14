@@ -1,3 +1,0 @@
-cscript.exe //E:jscript C:\Windows\Temp\payload.txt
-rundll32.exe pcwutl.dll,LaunchApplication cmd.exe
-wmic.exe process call create "payload.exe"

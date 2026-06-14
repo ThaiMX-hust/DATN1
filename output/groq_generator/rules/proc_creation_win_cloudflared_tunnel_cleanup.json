@@ -1,38 +1,18 @@
 [
   {
-    "output": "cloudflared tunnel cleanup --config C:\\temp\\config.yml",
-    "explanation": "Original command line as a baseline for comparison."
+    "output": "C:\\Tools\\cloudflared.exe tunnel cleanup -connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "The command is a direct match to the Sigma rule's detection criteria, including the presence of 'tunnel', 'cleanup', and '-connector-id'."
   },
   {
-    "output": "cloudflared tunnel cleanup --config=\"C:\\temp\\config.yml\"",
-    "explanation": "Inserted quotes around the config file path to test parsing behavior."
+    "output": "C:\\Tools\\cloudflared.exe  tunnel  cleanup  -connector-id=99999999-8888-7777-6666-555555555555",
+    "explanation": "Added extra spaces between arguments and used an equals sign (=) instead of a space after '-connector-id', which is still valid syntax and matches the Sigma rule."
   },
   {
-    "output": "cloudflared.exe tunnel cleanup -config C:\\temp\\config.yml",
-    "explanation": "Replaced 'cloudflared' with 'cloudflared.exe' and used short flag '-config' instead of '--config'."
+    "output": "\"C:\\Tools\\cloudflared.exe\" tunnel cleanup -connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "Wrapped the executable path in quotes to simulate a scenario where the path contains spaces, which is a safe mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "cloudflared.exe tunnel cleanup -config=C:\\temp\\config.yml",
-    "explanation": "Used equals sign (=) to assign the config path directly after the flag."
-  },
-  {
-    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123",
-    "explanation": "Added an additional flag '--connector-id' to simulate a more complex command line."
-  },
-  {
-    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=\"ABC-123-DEF\"",
-    "explanation": "Inserted quotes around the connector ID to test parsing behavior."
-  },
-  {
-    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123 --",
-    "explanation": "Added a trailing '--' to test if the command line parser stops processing flags."
-  },
-  {
-    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123 -v",
-    "explanation": "Added a verbose flag '-v' to test if optional flags are ignored by the detection rule."
-  },
-  {
-    "output": "cloudflared.exe tunnel cleanup --config C:\\temp\\config.yml --connector-id=ABC123 --log-level=debug",
-    "explanation": "Added a debug logging flag to test if additional flags are ignored by the detection rule."
+    "output": "C:\\Tools\\cloudflared.exe tunnel cleanup -connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "Omitted optional elements (like -config) while preserving the core behavior of the command, which still matches the Sigma rule."
   }
 ]

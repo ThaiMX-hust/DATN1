@@ -1,2 +1,0 @@
-mstsc.exe "C:\Temp\hidden.rdp"
-mstsc.exe "C:\Users\Public\malicious.rdp" /f

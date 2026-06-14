@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c echo ^<globalModules^>^<add name=\"MyModule\" image=\"MyModule.dll\" /^>^</globalModules^> >> C:\\Windows\\System32\\inetsrv\\config\\applicationHost.config",
+    "explanation": "The original command is already a valid test case. No mutation is needed to simulate a true positive for the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module WebAdministration; New-WebGlobalModule -Name 'MyModule' -Image 'MyModule.dll'\"",
+    "explanation": "The original PowerShell command is already a valid test case. No mutation is needed to simulate a true positive for the Sigma rule."
+  }
+]

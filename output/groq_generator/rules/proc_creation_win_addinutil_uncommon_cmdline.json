@@ -1,14 +1,18 @@
 [
   {
-    "output": "AddInUtil.exe -AddInRoot:C:\\\\Users\\\\Public\\\\Payload",
-    "explanation": "This command uses a common flag format (-AddInRoot) and a valid path. It omits quotes and uses a straightforward path format, which is not uncommon but still triggers the Sigma rule because it does not match the filtered benign paths."
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:\"C:\\\\Users\\\\Public\\\\Addins\"",
+    "explanation": "Inserted quotes around the path to simulate a valid but slightly mutated command line. This mimics a scenario where the path is enclosed in quotes, which is a common safe mutation technique."
   },
   {
-    "output": "AddInUtil.exe /AddInRoot:C:\\\\Users\\\\Public\\\\Payload",
-    "explanation": "This command substitutes the '-' flag with '/' which is an equivalent syntax in Windows command-line tools. It does not use quotes and uses a straightforward path, which is not uncommon but still triggers the Sigma rule."
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:C:\\\\Users\\\\Public\\\\Addins",
+    "explanation": "Removed quotes around the path to test if the detection rule is sensitive to the presence of quotes. This is a safe mutation that preserves the command's functionality."
   },
   {
-    "output": "AddInUtil.exe -AddInRoot:C:\\\\Users\\\\Public\\\\Payload\\",
-    "explanation": "This command adds a trailing backslash to the path, which is a minor variation but still valid. It uses the standard flag format and path structure, which is not uncommon but still triggers the Sigma rule."
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:C:\\\\Users\\\\Public\\\\Addins\\",
+    "explanation": "Appended a trailing backslash to the path. This is a safe mutation that may test how the detection rule handles minor path formatting differences."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\AddInUtil.exe -AddInRoot:C:\\\\Users\\\\Public\\\\Addins\\..\\Addins",
+    "explanation": "Used relative path normalization (..\\) to represent the same directory. This is a safe mutation that tests how the detection rule handles path normalization."
   }
 ]

@@ -1,0 +1,123 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Potential Browser Data Stealing
+id: 47147b5b-9e17-4d76-b8d2-7bac24c5ce1b
+related:
+    - id: fc028194-969d-4122-8abe-0470d5b8f12f
+      type: derived
+status: test
+description: |
+    Adversaries may acquire credentials from web browsers by reading files specific to the target browser.
+    Web browsers commonly save credentials such as website usernames and passwords so that they do not need to be entered manually in the future.
+    Web browsers typically store the credentials in an encrypted format within a credential store.
+references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1555.003/T1555.003.md
+    - https://www.cisa.gov/sites/default/files/2024-04/aa24-109a-stopransomware-akira-ransomware_2.pdf
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-12-23
+modified: 2025-03-19
+tags:
+    - attack.credential-access
+    - attack.t1555.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmd:
+        - CommandLine|contains:
+              - 'copy-item'
+              - 'copy '
+              - 'cpi '
+              - ' cp '
+              - 'move '
+              - 'move-item'
+              - ' mi '
+              - ' mv '
+        - Image|endswith:
+              - '\esentutl.exe' # akira ransomware
+              - '\xcopy.exe'
+              - '\robocopy.exe'
+        - OriginalFileName:
+              - 'esentutl.exe'
+              - 'XCOPY.EXE'
+              - 'robocopy.exe'
+    selection_path:
+        CommandLine|contains:
+            - '\Amigo\User Data'
+            - '\BraveSoftware\Brave-Browser\User Data'
+            - '\CentBrowser\User Data'
+            - '\Chromium\User Data'
+            - '\CocCoc\Browser\User Data'
+            - '\Comodo\Dragon\User Data'
+            - '\Elements Browser\User Data'
+            - '\Epic Privacy Browser\User Data'
+            - '\Google\Chrome Beta\User Data'
+            - '\Google\Chrome SxS\User Data'
+            - '\Google\Chrome\User Data\'
+            - '\Kometa\User Data'
+            - '\Maxthon5\Users'
+            - '\Microsoft\Edge\User Data'
+            - '\Mozilla\Firefox\Profiles'
+            - '\Nichrome\User Data'
+            - '\Opera Software\Opera GX Stable\'
+            - '\Opera Software\Opera Neon\User Data'
+            - '\Opera Software\Opera Stable\'
+            - '\Orbitum\User Data'
+            - '\QIP Surf\User Data'
+            - '\Sputnik\User Data'
+            - '\Torch\User Data'
+            - '\uCozMedia\Uran\User Data'
+            - '\Vivaldi\User Data'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
+```
+
+True positive test command:
+
+```text
+"powershell.exe" & {Copy-Item \""$env:APPDATA\Mozilla\Firefox\Profiles\\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\"" -Force -Recurse}
+"powershell.exe" & {Copy-Item \""$env:APPDATA\Opera Software\Opera Stable\Login Data\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\""}
+"powershell.exe" & {Copy-Item \""$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Login Data\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\"" Copy-Item \""$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Login Data For Account\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\""}
+"powershell.exe" & {Copy-Item \""$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\"" -Destination \""C:\AtomicRedTeam\atomics\..\ExternalPayloads\Edge\"" -Force -Recurse}
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

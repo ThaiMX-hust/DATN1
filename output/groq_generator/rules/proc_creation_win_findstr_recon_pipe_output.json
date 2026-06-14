@@ -1,6 +1,22 @@
 [
   {
-    "output": "cmd.exe /c tasklist | findstr lsass",
-    "explanation": "This is a direct match to the Sigma rule's detection pattern. It uses 'tasklist' piped to 'findstr', which is explicitly targeted by the rule."
+    "output": "cmd.exe /c whoami | findstr /i \"user\"",
+    "explanation": "This command uses a simple variation of the 'whoami' command piped to 'findstr', which matches the Sigma rule's detection pattern. It is a safe mutation using standard syntax."
+  },
+  {
+    "output": "cmd.exe /c tasklist | findstr /i \"explorer\"",
+    "explanation": "This command uses 'tasklist' piped to 'findstr' to search for a specific process, aligning with the Sigma rule. It is a direct match and safe for testing."
+  },
+  {
+    "output": "cmd.exe /c netstat -an | findstr /i \"ESTABLISHED\"",
+    "explanation": "This command uses 'netstat' piped to 'findstr' to filter network connections, matching the Sigma rule's pattern. It is a safe and valid test command."
+  },
+  {
+    "output": "cmd.exe /c ipconfig | findstr /i \"IPv4\"",
+    "explanation": "This command uses 'ipconfig' piped to 'findstr' to extract IPv4 information, which aligns with the Sigma rule. It is a safe and valid test command."
+  },
+  {
+    "output": "cmd.exe /c ping 127.0.0.1 | findstr /i \"Reply\"",
+    "explanation": "This command uses 'ping' piped to 'findstr' to detect a reply, matching the Sigma rule's pattern. It is a safe and valid test command."
   }
 ]

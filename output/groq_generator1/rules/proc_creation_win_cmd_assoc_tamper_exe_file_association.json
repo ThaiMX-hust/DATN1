@@ -1,0 +1,14 @@
+[
+  {
+    "output": "assoc .txt=exefile",
+    "explanation": "This is the original true positive command that matches the Sigma rule. It directly changes the file association of .txt to exefile."
+  },
+  {
+    "output": "assoc .txt=\"exefile\"",
+    "explanation": "Inserts quotes around the value, which is still parsed correctly by the assoc command and maintains the same behavior."
+  },
+  {
+    "output": "cmd /c assoc .txt=exefile",
+    "explanation": "Uses the short form of the command-line option and omits the .exe extension for cmd.exe, which is still valid and matches the rule."
+  }
+]

@@ -1,14 +1,6 @@
 [
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"Expand-Archive -Path 'C:\\Temp\\payload.zip' -DestinationPath 'C:\\Temp\\extracted' -Force; Start-Process 'binary.exe'\"",
-    "explanation": "Reordered and normalized the command line by using double backslashes and ensuring consistent spacing, which is still parsed correctly by PowerShell."
-  },
-  {
-    "output": "powershell -ep Bypass -w Hidden -Command {Expand-Archive -Path 'C:\\Temp\\payload.zip' -DestinationPath 'C:\\Temp\\extracted' -Force; Start-Process 'binary.exe'}",
-    "explanation": "Used short flags (-ep instead of -ExecutionPolicy, -w instead of -WindowStyle) and curly braces for the command block, which is an equivalent syntax in PowerShell."
-  },
-  {
-    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command Expand-Archive -Path 'C:\\Temp\\payload.zip' -DestinationPath 'C:\\Temp\\extracted' -Force; Start-Process 'binary.exe'",
-    "explanation": "Removed quotes around the command string since PowerShell can still parse the command correctly without them in this context."
+    "output": "Controlled testing not applicable for this Sigma rule.",
+    "explanation": "No safe bypass command can be generated."
   }
 ]

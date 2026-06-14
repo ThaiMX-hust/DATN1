@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://127.0.0.1 -OutFile C:\\Users\\Public\\safe.txt\"",
+    "explanation": "This command uses a benign URL and a safe output path to simulate a legitimate use of Invoke-WebRequest. It avoids suspicious behavior while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -c \"iwr -URI https://example.com -OutFile C:\\Users\\Public\\example.txt\"",
+    "explanation": "This command uses a benign URL and a safe output path to simulate a legitimate use of the iwr alias for Invoke-WebRequest. It avoids suspicious behavior while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"wget -Uri https://example.com -OutFile C:\\Users\\Public\\example.txt\"",
+    "explanation": "This command uses the wget alias for Invoke-WebRequest and a safe output path to simulate a legitimate use. It avoids suspicious behavior while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri https://example.com -OutFile C:\\Users\\Public\\example.txt\"",
+    "explanation": "This command uses a benign URL and a safe output path to simulate a legitimate use of Invoke-WebRequest. It avoids suspicious behavior while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri https://example.com -OutFile C:\\Users\\Public\\example.txt -Method GET\"",
+    "explanation": "This command uses a benign URL and a safe output path to simulate a legitimate use of Invoke-WebRequest. It includes the -Method flag explicitly to test detection coverage for explicit method usage."
+  }
+]

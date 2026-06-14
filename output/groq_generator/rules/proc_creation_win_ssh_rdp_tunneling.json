@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ssh -p 3389 user@remotehost",
+    "explanation": "This command simulates the use of ssh.exe to connect to a remote host on port 3389, which aligns with the Sigma rule's detection of RDP tunneling via SSH."
+  },
+  {
+    "output": "ssh.exe user@remotehost -p 3389",
+    "explanation": "Reordered arguments to test if the Sigma rule detects the same behavior regardless of argument order."
+  },
+  {
+    "output": "ssh -oPort=3389 user@remotehost",
+    "explanation": "Used an alternative syntax (-oPort) to specify the port, testing if the Sigma rule detects different command-line formats."
+  },
+  {
+    "output": "ssh user@remotehost -p 3389",
+    "explanation": "Omitted optional arguments while preserving the core behavior of connecting to port 3389."
+  },
+  {
+    "output": "ssh -p$env:PORT user@remotehost",
+    "explanation": "Used an environment variable to represent the port number, testing if the Sigma rule can detect encoded or dynamic values."
+  }
+]

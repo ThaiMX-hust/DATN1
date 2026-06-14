@@ -1,2 +1,1 @@
-reg  query "HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer" /v svcVersion
-copy reg.exe r.exe && r.exe query "HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer" /v svcVersion
+reg query "HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer" /v svcVersion

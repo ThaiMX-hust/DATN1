@@ -1,10 +1,18 @@
 [
   {
-    "output": "certutil -addstore root C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\cert.cer",
-    "explanation": "This command uses the short form of the store name 'root' and includes path normalization (shortened username) to test if the Sigma rule can detect the activity despite minor variations in command-line formatting."
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\certutil.exe\" -addstore -f -user ROOT C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\rootCA2.cer",
+    "explanation": "This command adds a certificate to the Root store using the -addstore flag, which matches the Sigma rule's detection criteria. It includes optional flags like -f and -user, which are commonly used in such scenarios."
   },
   {
-    "output": "certutil -addstore -user root C:\\Temp\\cert.cer",
-    "explanation": "This command adds the '-user' flag to test if the Sigma rule is sensitive to additional optional flags while still detecting the core '-addstore root' pattern."
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\certutil.exe\" -addstore\\x20-f\\x20-user\\x20ROOT\\x20C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\rootCA2.cer",
+    "explanation": "This command uses URL-encoded spaces (\\x20) to obfuscate the command line, which may bypass some simplistic parsing but still matches the Sigma rule's detection criteria for -addstore and ROOT."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\certutil.exe\" -addstore -f -user\\x20ROOT C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\rootCA2.cer",
+    "explanation": "This command uses URL-encoded space (\\x20) after the -user flag to separate the store name, which may evade some basic detection while still matching the Sigma rule's criteria."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\certutil.exe\" -addstore -f -user\\x20ROOT\\x20C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\rootCA2.cer",
+    "explanation": "This command uses URL-encoded spaces (\\x20) to obfuscate the command line, which may bypass some simplistic parsing but still matches the Sigma rule's detection criteria for -addstore and ROOT."
   }
 ]

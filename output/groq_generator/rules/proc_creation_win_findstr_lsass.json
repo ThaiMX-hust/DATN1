@@ -1,22 +1,22 @@
 [
   {
-    "output": "cmd.exe /c tasklist | findstr lsass",
-    "explanation": "This command matches the Sigma rule by using findstr to search for 'lsass' in the output of tasklist, which is a typical use case for detecting LSASS reconnaissance."
-  },
-  {
     "output": "cmd.exe /c tasklist | findstr /i \"lsass\"",
-    "explanation": "Adding quotes around the search term 'lsass' is a safe mutation technique that does not change the behavior of the command but may help in testing bypass scenarios."
+    "explanation": "The command adds the /i flag to make the search case-insensitive, which is a valid and equivalent mutation. It still matches the Sigma rule's detection logic."
   },
   {
-    "output": "cmd.exe /c tasklist | findstr /i lsass.exe",
-    "explanation": "This command includes 'lsass.exe' instead of 'lsass' to test if the rule captures variations of the keyword, which is a valid test scenario."
+    "output": "cmd.exe /c tasklist | findstr \"lsass\"",
+    "explanation": "The command uses explicit quotes around the search term, which is a valid insertion technique. It maintains the same behavior and matches the Sigma rule."
   },
   {
-    "output": "cmd.exe /c tasklist | findstr /R \"lsass\"",
-    "explanation": "Using the /R option with a regex pattern 'lsass' is a valid test case that matches the Sigma rule's detection criteria."
+    "output": "cmd.exe /c tasklist | findstr lsass",
+    "explanation": "The command omits quotes around the search term, which is acceptable in many command-line contexts. It still matches the Sigma rule."
   },
   {
-    "output": "cmd.exe /c tasklist | findstr /R \"ls[a]ss\"",
-    "explanation": "This command uses a regex pattern to match 'lsass' in a more obfuscated form, which is a safe mutation technique for testing detection coverage."
+    "output": "cmd.exe /c tasklist | findstr.exe /i lsass",
+    "explanation": "The full executable name 'findstr.exe' is used instead of just 'findstr', and the /i flag is added. This is a valid substitution and still matches the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c tasklist | findstr.exe lsass",
+    "explanation": "The command uses the full executable name 'findstr.exe' and omits quotes. It remains functionally equivalent and matches the Sigma rule."
   }
 ]

@@ -1,42 +1,22 @@
 [
   {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable",
-    "explanation": "This command matches the Sigma rule by using auditpol.exe with the 'disable' keyword. It is a direct representation of the rule's detection logic."
+    "output": "auditpol.exe /remove /category:\\"Account Management\\"",
+    "explanation": "This command uses the 'remove' flag, which is detected by the Sigma rule. The command is modified with quotes around the category name to test insertion as a safe mutation technique."
   },
   {
-    "output": "auditpol.exe /set /category:Detailed_Tracking /success:disable",
-    "explanation": "The category name is modified by replacing spaces with underscores, which may bypass detection if the rule does not account for such variations."
+    "output": "auditpol.exe -clear -category:\\"Logon/Logoff\\"",
+    "explanation": "The 'clear' flag is used, which is part of the Sigma rule's detection. The command is modified by using a dash '-' instead of a slash '/' for the flag, testing substitution as a safe mutation technique."
   },
   {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable /failure:disable",
-    "explanation": "The command includes an additional optional parameter '/failure:disable' that does not affect the core detection logic but may evade pattern-based detection."
+    "output": "auditpol.exe /disable /subcategory:\\"Application Group Management\\"",
+    "explanation": "The 'disable' flag is used, which is part of the Sigma rule's detection. The command is formatted with a normalized path-like structure for the subcategory to test recoding as a safe mutation technique."
   },
   {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable /",
-    "explanation": "An extra trailing slash is added at the end of the command line, which may be ignored by the parser but could bypass some detection logic."
+    "output": "auditpol.exe /restore /file:C:\\\\Temp\\\\auditpolicy.pol",
+    "explanation": "The 'restore' flag is used, which is part of the Sigma rule's detection. The command is modified by using double backslashes in the file path to test encoding as a safe mutation technique."
   },
   {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable ^",
-    "explanation": "An escape character (^) is appended at the end of the command line, which may be ignored in some environments but could be used to test detection resilience."
-  },
-  {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`",
-    "explanation": "A backtick is appended at the end of the command line, which may be ignored in some environments but could be used to test detection resilience."
-  },
-  {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable # comment",
-    "explanation": "A comment is appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
-  },
-  {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`n",
-    "explanation": "A newline character is appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
-  },
-  {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`r`n",
-    "explanation": "A carriage return and newline are appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
-  },
-  {
-    "output": "auditpol.exe /set /category:\"Detailed Tracking\" /success:disable`r",
-    "explanation": "A carriage return is appended to the command line, which may be ignored by the parser but could be used to test detection resilience."
+    "output": "auditpol.exe /remove /category:\\"Account Management\\" /subcategory:\\"User Account Management\\""",
+    "explanation": "This command includes multiple arguments and uses the 'remove' flag. The command is modified by adding quotes around the category and subcategory values to test insertion as a safe mutation technique."
   }
 ]

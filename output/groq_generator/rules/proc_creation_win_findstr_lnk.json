@@ -1,22 +1,30 @@
 [
   {
-    "output": "findstr \"search_string\" C:\\temp\\malicious.lnk",
-    "explanation": "This command uses standard syntax with a .lnk file as the input, which matches the Sigma rule's detection criteria."
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk",
+    "explanation": "The original command line is already a valid test case for the Sigma rule."
   },
   {
-    "output": "findstr /I \"search_string\" \"C:\\temp\\malicious.lnk\"",
-    "explanation": "The command includes the /I flag for case-insensitive search and uses quotes around the .lnk file path, which is still detected by the Sigma rule."
+    "output": "findstr.exe /TEST-HOST C:\\Temp\\test.lnk",
+    "explanation": "Replaced the argument with an equivalent switch-style format to test if the detection is switch-agnostic."
   },
   {
-    "output": "findstr \"search_string\" C:\\temp\\malicious.lnk > NUL",
-    "explanation": "This command redirects output to NUL, but the .lnk file is still present in the command line and matches the Sigma rule."
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk ",
+    "explanation": "Added an extra space at the end of the command line to test if the detection is sensitive to trailing whitespace."
   },
   {
-    "output": "findstr \"search_string\" C:\\temp\\malicious.lnk C:\\Windows\\win.ini",
-    "explanation": "The command includes an additional file, but the presence of the .lnk file still triggers the Sigma rule."
+    "output": "findstr.exe TEST-HOST \"C:\\Temp\\test.lnk\"",
+    "explanation": "Wrapped the file path in quotes to test if the detection is sensitive to quoted paths."
   },
   {
-    "output": "findstr /V /C:\"search_string\" C:\\temp\\malicious.lnk & rem evasion_string",
-    "explanation": "This command uses advanced options and a comment, but the .lnk file is still present and matches the Sigma rule."
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk' ",
+    "explanation": "Added a single quote at the end of the command line to test if the detection is sensitive to trailing characters."
+  },
+  {
+    "output": "findstr.exe TEST-HOST C:\\Temp\\test.lnk | findstr .",
+    "explanation": "Appended a pipeline to test if the detection is sensitive to additional command chaining."
+  },
+  {
+    "output": "C:\\Windows\\System32\\findstr.exe TEST-HOST C:\\Temp\\test.lnk",
+    "explanation": "Used the full path to the executable to test if the detection is sensitive to path normalization."
   }
 ]

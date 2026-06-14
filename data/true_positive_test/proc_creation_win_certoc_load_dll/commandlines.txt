@@ -1,3 +1,1 @@
-certoc.exe -loaddll malicious.dll
-certoc.exe /LoadDLL malicious.dll
-copy certoc.exe not_certoc.exe && not_certoc.exe -LoadDLL malicious.dll
+"C:\Windows\SysWOW64\certoc.exe" -LoadDLL C:\Windows\System32\version.dll

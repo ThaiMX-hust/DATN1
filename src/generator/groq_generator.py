@@ -1,8 +1,9 @@
 """Generate Sigma command-line mutation cases through the Groq chat API.
 
-The module pairs local Sigma rules with true-positive command-line examples,
-renders ``prompt_template.txt``, calls Groq's OpenAI-compatible chat endpoint,
-and writes cases that can be consumed by ``sigma_rule_evaluator.cli``.
+The module renders local Sigma rules, with true-positive command-line examples
+when available, through ``prompt_template.txt``, calls Groq's OpenAI-compatible
+chat endpoint, and writes cases that can be consumed by
+``sigma_rule_evaluator.cli``.
 """
 
 from __future__ import annotations
@@ -37,12 +38,13 @@ DEFAULT_RAW_OUTPUT_DIR = Path("output/groq_generator")
 DEFAULT_RULE_OUTPUT_DIR = DEFAULT_RAW_OUTPUT_DIR / "rules"
 DEFAULT_MAX_OUTPUTS = 3
 DEFAULT_MAX_COMPLETION_TOKENS = 768
-DEFAULT_MIN_REQUEST_INTERVAL_SECONDS = 60.0
+DEFAULT_MIN_REQUEST_INTERVAL_SECONDS = 30.0
 RETRYABLE_HTTP_CODES = {429, 500, 502, 503, 504}
 NON_RETRYABLE_HTTP_CODES = {400, 401, 403, 404, 422}
 
 SIGMA_PLACEHOLDER = "{{SIGMA_RULE}}"
 COMMAND_PLACEHOLDER = "{{TRUE_POSITIVE_TEST_COMMAND}}"
+NO_TRUE_POSITIVE_COMMAND_TEXT = "No true-positive test command was provided. Use the Sigma rule only."
 ATTACK_TECHNIQUE_RE = re.compile(r"attack\.(t\d{4}(?:\.\d{3})?)", re.IGNORECASE)
 CODE_FENCE_RE = re.compile(r"^\s*```(?:json)?\s*|\s*```\s*$", re.IGNORECASE)
 TRY_AGAIN_RE = re.compile(r"try again in\s+([0-9.]+\s*(?:ms|s|m|h))", re.IGNORECASE)
@@ -223,14 +225,14 @@ def format_true_positive_commands(commands: Iterable[str]) -> str:
     """Format one or more true-positive commands for the prompt template."""
     command_list = [command.strip() for command in commands if command.strip()]
     if not command_list:
-        return ""
+        return NO_TRUE_POSITIVE_COMMAND_TEXT
     if len(command_list) == 1:
         return command_list[0]
     return "\n".join(f"{index}. {command}" for index, command in enumerate(command_list, start=1))
 
 
 def build_jobs(config: GenerationConfig) -> list[GenerationJob]:
-    """Create generation jobs from local rules and true-positive commands."""
+    """Create generation jobs from local rules, using true-positive commands when available."""
     jobs: list[GenerationJob] = []
     rule_paths = selected_rule_paths(config.rules_dir, config.include_rules)
     if config.limit_rules is not None:
@@ -241,9 +243,18 @@ def build_jobs(config: GenerationConfig) -> list[GenerationJob]:
         commands = load_true_positive_commands(true_positive_path(rule_path, config.true_positive_dir))
         if config.limit_commands_per_rule is not None:
             commands = commands[: config.limit_commands_per_rule]
-        if not commands:
-            continue
         technique_id = rule_technique_id(rule_text)
+        if not commands:
+            jobs.append(
+                GenerationJob(
+                    rule_path=rule_path,
+                    rule_text=rule_text,
+                    source_commands=(),
+                    command_index=None,
+                    technique_id=technique_id,
+                )
+            )
+            continue
         if config.prompt_scope == "command":
             for index, command in enumerate(commands, start=1):
                 jobs.append(
@@ -823,7 +834,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--prompt-scope",
         choices=["rule", "command"],
         default="rule",
-        help="Use one prompt per rule by default, or one prompt per true-positive command.",
+        help="Use one prompt per rule by default, or one prompt per true-positive command; rules without commands still get one prompt.",
     )
     parser.add_argument("--shell", default="cmd.exe")
     parser.add_argument("--temperature", type=float, default=0.2)

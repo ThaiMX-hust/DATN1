@@ -1,0 +1,10 @@
+[
+  {
+    "output": "KrbRelay.exe -spn cifs/target.domain.local -clsid {12345678-1234-1234-1234-123456789012} -rbcd target$",
+    "explanation": "The command uses substitution by replacing '/' with '-' for flag syntax, which is a valid mutation technique. The command still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "KrbRelay.exe -spn \"cifs/target.domain.local\" -clsid \"{12345678-1234-1234-1234-123456789012}\" -rbcd target$",
+    "explanation": "The command uses insertion by adding quotes around arguments, which is a valid mutation technique. The command still matches the Sigma rule's detection criteria."
+  }
+]

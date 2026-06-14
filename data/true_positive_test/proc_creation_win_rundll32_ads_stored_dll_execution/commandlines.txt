@@ -1,3 +1,0 @@
-copy rundll32.exe not_rundll.exe && not_rundll.exe "file.txt:malicious.dll",DllMain
-rundll32.exe " file.txt:malicious.dll",DllMain
-rundll32.exe ..\..\..\path\to\file.txt:malicious.dll,DllMain

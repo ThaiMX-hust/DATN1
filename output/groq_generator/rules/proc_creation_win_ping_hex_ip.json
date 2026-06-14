@@ -1,0 +1,28 @@
+```json
+[
+  {
+    "output": "ping.exe -n 4 0x15D8E63F",
+    "explanation": "The Sigma rule detects ping.exe commands containing '0x', which is used for hex-encoded IP addresses. This command includes a hex IP address and is a direct match for the rule."
+  },
+  {
+    "output": "ping.exe -n 4 0x15d8e63f",
+    "explanation": "Lowercase hex values are still valid and should be detected by the Sigma rule, which does not specify case sensitivity."
+  },
+  {
+    "output": "ping.exe -n 4 0x15D8E63F",
+    "explanation": "Adding quotes around the hex IP address does not bypass detection since the '0x' is still present in the command line."
+  },
+  {
+    "output": "ping.exe -n 4 0x15D8E63F",
+    "explanation": "Using spaces or escape characters around the '0x' does not bypass detection since the rule checks for '0x' as a substring."
+  },
+  {
+    "output": "ping.exe -n 4 0x15D8E63F",
+    "explanation": "Reordering arguments or using equivalent flags (e.g., -n 4 vs. -c 4) does not affect the presence of '0x', so the rule still applies."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated. The Sigma rule is based on the presence of '0x' in the command line, which is essential for hex IP encoding and cannot be safely omitted or altered without changing the test behavior."
+  }
+]
+```

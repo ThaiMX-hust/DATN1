@@ -1,0 +1,22 @@
+[
+  {
+    "output": "iexpress.exe /n\tC:\\Temp\\package.sed",
+    "explanation": "Substitution technique: Replacing the trailing structural space character flanking the mandatory flag (' /n ') with a horizontal tab character ('\\t'). The Windows command-line processing engine normalizes horizontal tabs natively as valid whitespace token separators. This ensures that the iexpress parsing engine receives the required '/n' option cleanly, while completely breaking the space-padded continuous string constraint evaluated in 'selection_cli'."
+  },
+  {
+    "output": "iexpress.exe \"/n\" C:\\Temp\\package.sed",
+    "explanation": "Insertion technique: Enclosing the core configuration switch inside explicit double quotes ('\"/n\"'). This modifies the raw command line string buffer context recorded by process creation telemetry, successfully disrupting the continuous text pattern check requiring space padding around unquoted forward slashes, while iexpress automatically strips the quotes away during argument initialization."
+  },
+  {
+    "output": "iexpress.exe /n C:\\Users\\Public\\..\\Temp\\package.sed",
+    "explanation": "Recoding / Encoding technique (Path Normalization): Altering the file path sequence by injecting a relative directory traversal component ('\\..\\') to point to the exact same destination. The underlying file subsystem resolves this path smoothly to 'C:\\Temp\\package.sed', but the change in the literal sequence completely blinds the rigid string validation signatures looking for direct string anchors like ':\\Temp\\' or '\\AppData\\Local\\Temp\\'."
+  },
+  {
+    "output": "cmd.exe /c iexpress.exe /^n C:\\Temp\\package.sed",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe environment allows the integration of a command shell caret escape operator ('^') directly into the switch parameter ('/^n'). The parent console subsystem filters this token out entirely prior to child process initialization, generating an EDR/SIEM field footprint containing '/^n' that successfully subverts the literal string match."
+  },
+  {
+    "output": "iexpress.exe  /n  C:\\Temp\\package.sed",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces before and after the required option flag instead of a single space delimiter. Standard argument parsing models collapse contiguous whitespaces into single parameter boundary vectors during tokenization, maintaining execution consistency while breaking strict pattern match strings like ' /n '."
+  }
+]

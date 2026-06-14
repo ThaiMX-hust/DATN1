@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe  C:\\Temp\\test.sh",
+    "explanation": "Insertion technique: Inserting an extra space character between 'bash.exe' and the script path. The rule filters out benign default execution if the command line is strictly 'bash.exe', but triggers when a script path follows. However, the 'filter_main_cli_flag' checks for 'bash.exe -'. By padding the call with multiple spaces, it forces an anomaly in poorly optimized regex logic, while the Windows engine normalizes sequential spaces cleanly during argument parsing."
+  },
+  {
+    "output": "\"C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe\" C:\\Temp\\test.sh",
+    "explanation": "Insertion technique: Enclosing the fully qualified path to the executable image inside double quotes. The rule condition relies heavily on detecting literal unquoted sequences or specific transitions to separate benign invocations. The command line processor peels off the outer boundary quotes automatically at execution initialization, while the raw string stored in process logs successfully deviates from simple unquoted match assumptions."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash.exe .\\C:\\Temp\\test.sh",
+    "explanation": "Recoding / Encoding technique: Passing the destination script file using a relative path designator prefix ('.\\') before the absolute root drive path. The underlying Win32 file subsystem normalizes directory paths and resolves tracking anchors flawlessly upon system lookups, but it corrupts linear command-line substring logic looking for explicit native directory syntax patterns right after the image name."
+  },
+  {
+    "output": "cmd.exe /c C:\\Users\\thaim\\AppData\\Local\\Microsoft\\WindowsApps\\bash^.exe C:\\Temp\\test.sh",
+    "explanation": "Insertion technique: Spawning the target command string within a cmd.exe environment allows the placement of a shell caret escape token ('^') right into the file extension name. The active command interpreter interprets and strips the caret out completely prior to process instantiation, recording a raw process creation string event of 'bash^.exe' which invalidates the static rules."
+  }
+]

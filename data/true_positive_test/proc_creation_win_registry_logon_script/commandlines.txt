@@ -1,3 +1,2 @@
 "cmd.exe" /c echo "echo Art "Logon Script" atomic test was successful. >> %%USERPROFILE%%\desktop\T1037.001-log.txt" > %%temp%%\art.bat & REG.exe ADD HKCU\Environment /v UserInitMprLogonScript /t REG_SZ /d "%%temp%%\art.bat" /f
-REG.exe  ADD HKCU\Environment /v UserInitMprLogonScript /t REG_SZ /d "C:\Users\thaim\AppData\Local\Temp\art.bat" /f
-reg import C:\Windows\Temp\persist.reg
+REG.exe ADD HKCU\Environment /v UserInitMprLogonScript /t REG_SZ /d "C:\Users\thaim\AppData\Local\Temp\art.bat" /f

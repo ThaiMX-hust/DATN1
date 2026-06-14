@@ -1,0 +1,22 @@
+[
+  {
+    "output": "curl.exe -H 'User-Agent: EvilAgent' http://example.com",
+    "explanation": "Substitution of double quotes with single quotes around the User-Agent header value."
+  },
+  {
+    "output": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
+    "explanation": "Insertion of escape characters before double quotes to simulate equivalent command-line parsing."
+  },
+  {
+    "output": "curl.exe -H User-Agent:EvilAgent http://example.com",
+    "explanation": "Omission of quotes around the User-Agent header value, assuming the command still parses correctly."
+  },
+  {
+    "output": "curl.exe -H User-Agent: EvilAgent http://example.com",
+    "explanation": "Insertion of a space after the colon in the User-Agent header value, which may still be parsed correctly."
+  },
+  {
+    "output": "curl.exe --header 'User-Agent: EvilAgent' http://example.com",
+    "explanation": "Substitution of the short option '-H' with the long option '--header'."
+  }
+]

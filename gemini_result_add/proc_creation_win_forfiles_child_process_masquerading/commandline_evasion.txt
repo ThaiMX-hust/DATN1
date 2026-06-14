@@ -1,0 +1,14 @@
+[
+  {
+    "output": "forfiles.exe  /p C:\\Windows /c \"cmd.exe /c echo Hello\"",
+    "explanation": "Omission technique: While the rule assumes that a non-default or masqueraded 'forfiles.exe' execution spawns a child `cmd.exe` whose command line starts exactly with '/c echo \"', this condition can be subverted by explicitly feeding additional parameters to the `/c` command call. Passing explicit string execution variables or leading structural spaces shifts the child process token string layout, causing the child `CommandLine|startswith` check to fail while achieving identical test results."
+  },
+  {
+    "output": "forfiles.exe /c \"cmd.exe \t/c echo \"",
+    "explanation": "Substitution technique: Substituting the structural space character separating the child executable switches with a horizontal tab character ('\\t'). The native Windows operating system tokenizes horizontal tabs as valid whitespace argument boundaries, passing the sub-switch safely into the target process initialization layer while breaking the strict string sequence expected by 'CommandLine|startswith: \'/c echo \"''."
+  },
+  {
+    "output": "forfiles.exe /c \"cmd.exe \"\"/c echo \"\"\"",
+    "explanation": "Insertion technique: Inserting adjacent empty double quote characters inside the child argument payload execution pattern. The native application argument parser handles, strips, and collapses empty quote strings transparently at runtime, ensuring functional equivalence while disrupting continuous string parsing parameters monitored in 'selection'."
+  }
+]

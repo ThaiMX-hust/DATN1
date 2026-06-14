@@ -1,22 +1,22 @@
 [
   {
-    "output": "RunXCmd.exe /account:system /exec:cmd.exe",
-    "explanation": "Replaced equals (=) with colon (:) for the account and exec parameters, which is still parsed correctly by the tool."
+    "output": "RunXCmd.exe /account=system /exec=cmd.exe /c whoami",
+    "explanation": "This command uses the RunXCmd tool to execute 'whoami' as the SYSTEM account, matching the Sigma rule's detection criteria for '/account=system' and '/exec=' in the command line."
   },
   {
-    "output": "RunXCmd.exe /account=SYSTEM /exec=cmd.exe",
-    "explanation": "Used uppercase 'SYSTEM' instead of lowercase 'system' for the account parameter, which is still valid."
+    "output": "RunXCmd.exe /account=ti /exec=cmd.exe /c echo test",
+    "explanation": "This command uses the RunXCmd tool to execute 'echo test' as the TrustedInstaller (TI) account, matching the Sigma rule's detection criteria for '/account=ti' and '/exec=' in the command line."
   },
   {
-    "output": "RunXCmd.exe /exec cmd.exe /account ti",
-    "explanation": "Removed equals (=) signs and used whitespace separation, which is accepted by some command-line parsers."
+    "output": "RunXCmd.exe /account=system /exec=cmd /c dir",
+    "explanation": "This command uses the RunXCmd tool to execute 'dir' as the SYSTEM account. The omission of the '.exe' extension in 'cmd' is a safe mutation technique and still matches the Sigma rule's detection criteria."
   },
   {
-    "output": "RunXCmd.exe /exec=\"cmd.exe\" /account=\\\"system\\\"",
-    "explanation": "Added escape characters to quotes around parameters, which is still parsed correctly."
+    "output": "RunXCmd.exe /exec=cmd.exe /c whoami /account=system",
+    "explanation": "This command reorders the '/exec' and '/account' flags, which is a valid mutation technique. It still matches the Sigma rule's detection criteria."
   },
   {
-    "output": "RunXCmd.exe /account=system /exec=cmd.exe",
-    "explanation": "Original command with no mutation, included for completeness."
+    "output": "RunXCmd.exe /account=system /exec=cmd.exe /c \"echo bypass test\"",
+    "explanation": "This command uses quotes around the command to execute, which is a safe insertion technique. It still matches the Sigma rule's detection criteria."
   }
 ]

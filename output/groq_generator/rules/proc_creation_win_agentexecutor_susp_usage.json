@@ -1,0 +1,22 @@
+[
+  {
+    "output": "AgentExecutor.exe -powershell \"C:\\\\script.ps1\" \"C:\\\\output.txt\" \"C:\\\\error.txt\" \"C:\\\\timeout.txt\" 60000 \"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" 0 0",
+    "explanation": "This command simulates a typical execution of AgentExecutor.exe with the -powershell flag, specifying paths and parameters. It is designed to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell 'C:\\\\script.ps1' 'C:\\\\output.txt' 'C:\\\\error.txt' 'C:\\\\timeout.txt' 60000 'C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe' 0 0",
+    "explanation": "This command uses single quotes instead of double quotes for the arguments, which is a safe mutation technique (substitution) that should still be detected by the Sigma rule."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell C:\\\\script.ps1 C:\\\\output.txt C:\\\\error.txt C:\\\\timeout.txt 60000 C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe 0 0",
+    "explanation": "This command omits the quotes around the arguments, which is a safe mutation technique (omission) that should still be detected by the Sigma rule."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell \"C:\\\\script.ps1\" \"C:\\\\output.txt\" \"C:\\\\error.txt\" \"C:\\\\timeout.txt\" 60000 \"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" 0 0",
+    "explanation": "This command uses escaped backslashes for path representation, which is a safe mutation technique (recoding/encoding) that should still be detected by the Sigma rule."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell \"C:\\\\script.ps1\" \"C:\\\\output.txt\" \"C:\\\\error.txt\" \"C:\\\\timeout.txt\" 60000 \"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" 0",
+    "explanation": "This command omits the last argument (runAs32BitOn64), which is optional and should not affect detection. This is a safe mutation technique (omission)."
+  }
+]

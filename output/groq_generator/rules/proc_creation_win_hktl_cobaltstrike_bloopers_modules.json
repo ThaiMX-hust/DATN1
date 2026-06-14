@@ -1,14 +1,30 @@
 [
   {
     "output": "cmd.exe /c \"Invoke-UserHunter\"",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the detection."
+    "explanation": "The command simulates a CMD process invoking a Cobalt Strike module (Invoke-UserHunter) as per the Sigma rule. It uses quotes for safe insertion and avoids any malicious payload."
   },
   {
-    "output": "cmd.exe /c \"invoke-userhunter\"",
-    "explanation": "Lowercase substitution of the command name (substitution technique). The rule uses case-insensitive matching, so this should still trigger the detection."
+    "output": "cmd.exe /c Invoke-ShareFinder",
+    "explanation": "This command simulates a CMD process invoking another Cobalt Strike module (Invoke-ShareFinder). It uses minimal syntax to align with the Sigma rule while remaining safe for testing."
   },
   {
-    "output": "cmd.exe /c \"Invoke-UserHunter\"  # Test comment",
-    "explanation": "Appending a comment after the command (insertion technique). The command remains valid and should still trigger the Sigma rule."
+    "output": "cmd.exe /c \"Invoke-Kerberoast -Verbose\"",
+    "explanation": "This command simulates a CMD process invoking the Invoke-Kerberoast module with an optional flag (-Verbose). The flag is omitted in the Sigma rule, but it is included here to test reordering and optional argument handling."
+  },
+  {
+    "output": "cmd.exe /c Invoke-SMBAutoBrute",
+    "explanation": "This command simulates a CMD process invoking the Invoke-SMBAutoBrute module. It uses minimal syntax and is directly aligned with the Sigma rule's detection logic."
+  },
+  {
+    "output": "cmd.exe /c \"Invoke-Nightmare\"",
+    "explanation": "This command simulates a CMD process invoking the Invoke-Nightmare module. It uses quotes for safe insertion and is aligned with the Sigma rule's detection logic."
+  },
+  {
+    "output": "cmd.exe /c zerologon",
+    "explanation": "This command simulates a CMD process invoking the zerologon module. It is directly aligned with the Sigma rule's detection logic and uses minimal syntax for safe testing."
+  },
+  {
+    "output": "cmd.exe /c \"av_query\"",
+    "explanation": "This command simulates a CMD process invoking the av_query module. It uses quotes for safe insertion and is aligned with the Sigma rule's detection logic."
   }
 ]

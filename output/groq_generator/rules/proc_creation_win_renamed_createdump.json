@@ -1,22 +1,42 @@
 [
   {
-    "output": "createdump.exe -f /tmp/test.dmp -u 632",
-    "explanation": "This is the original true positive command and does not require mutation for testing purposes."
+    "output": "createdump -u -f test.dmp",
+    "explanation": "This command uses the short flags '-u' and '-f' as specified in the Sigma rule, and ends with a '.dmp' file. It matches the detection criteria for the renamed CreateDump utility."
   },
   {
-    "output": "createdump.exe -u -f /tmp/test.dmp 632",
-    "explanation": "Reordered the flags '-f' and '-u' which are accepted by the utility and do not affect the behavior."
+    "output": "createdump --full --name test.dmp",
+    "explanation": "This command uses the long flags '--full' and '--name' as specified in the Sigma rule, and ends with a '.dmp' file. It matches the detection criteria for the renamed CreateDump utility."
   },
   {
-    "output": "createdump.exe --name /tmp/test.dmp --full 632",
-    "explanation": "Replaced short flags '-f' and '-u' with their long-form equivalents '--name' and '--full', which are functionally equivalent."
+    "output": "createdump -u --name test.dmp",
+    "explanation": "This command mixes a short flag '-u' with a long flag '--name' and ends with a '.dmp' file. It matches the detection criteria for the renamed CreateDump utility."
   },
   {
-    "output": "createdump.exe -f \"/tmp/test.dmp\" -u 632",
-    "explanation": "Wrapped the filename in quotes to simulate safe insertion of characters that do not alter the command's behavior."
+    "output": "createdump --full -f test.dmp",
+    "explanation": "This command mixes a long flag '--full' with a short flag '-f' and ends with a '.dmp' file. It matches the detection criteria for the renamed CreateDump utility."
   },
   {
-    "output": "createdump.exe -f /tmp/test.dmp\\  -u 632",
-    "explanation": "Added a trailing backslash to the filename, which is a safe mutation that does not affect the command's execution."
+    "output": "createdump -u -f C:\\Temp\\test.dmp",
+    "explanation": "This command uses the short flags '-u' and '-f' with a full path to the output file ending in '.dmp'. It matches the detection criteria for the renamed CreateDump utility."
+  },
+  {
+    "output": "createdump --full --name C:/Temp/test.dmp",
+    "explanation": "This command uses the long flags '--full' and '--name' with a Unix-style path to the output file ending in '.dmp'. It matches the detection criteria for the renamed CreateDump utility."
+  },
+  {
+    "output": "createdump -u --name C:\\Users\\User\\Desktop\\test.dmp",
+    "explanation": "This command mixes a short flag '-u' with a long flag '--name' and uses a full Windows-style path to the output file ending in '.dmp'. It matches the detection criteria for the renamed CreateDump utility."
+  },
+  {
+    "output": "createdump --full -f C:/Users/User/Desktop/test.dmp",
+    "explanation": "This command mixes a long flag '--full' with a short flag '-f' and uses a Unix-style path to the output file ending in '.dmp'. It matches the detection criteria for the renamed CreateDump utility."
+  },
+  {
+    "output": "createdump -u -f test.dmp",
+    "explanation": "This command uses the short flags '-u' and '-f' as specified in the Sigma rule, and ends with a '.dmp' file. It matches the detection criteria for the renamed CreateDump utility."
+  },
+  {
+    "output": "createdump --full --name test.dmp",
+    "explanation": "This command uses the long flags '--full' and '--name' as specified in the Sigma rule, and ends with a '.dmp' file. It matches the detection criteria for the renamed CreateDump utility."
   }
 ]

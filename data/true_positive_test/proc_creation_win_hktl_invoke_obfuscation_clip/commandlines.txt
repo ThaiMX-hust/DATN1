@@ -1,5 +1,0 @@
-cmd /c "echo Write-Host 'Test Execution' | clip & powershell -NoProfile -Command Add-Type -AssemblyName System.Windows.Forms; IEX([System.Windows.Forms.Clipboard]::GetText())"
-cmd /c "echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \"iex([System.Windows.Forms.Clipboard]::GetText())\""
-cmd /c "echo Write-Host 'Test' | clip & powershell -Sta -NoProfile -Command Add-Type -AssemblyName PresentationCore; Invoke-Expression ([System.Windows.Clipboard]::GetText())"
-cmd /r "echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \"$c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\""
-powershell.exe -NoProfile -Command "Set-Clipboard -Value 'Write-Host Executed'; Invoke-Expression (Get-Clipboard)"

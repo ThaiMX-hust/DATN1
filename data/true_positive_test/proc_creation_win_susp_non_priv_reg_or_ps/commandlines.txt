@@ -1,0 +1,1 @@
+reg.exe add "HKLM\System\CurrentControlSet\Services\TEST-HOST" /v ImagePath /t REG_EXPAND_SZ /d "C:\Temp\test.txt" /f

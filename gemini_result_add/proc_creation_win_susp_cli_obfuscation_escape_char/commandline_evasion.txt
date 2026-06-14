@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c curl.exe ht^tp://example.com/test.txt",
+    "explanation": "Insertion technique: Injected only a single caret escape character ('ht^tp') instead of the hardcoded pattern of multiple sequential carets ('h^t^t^p') monitored by the rule. The Windows command shell (cmd.exe) strips the caret before launching curl, making the network fetch behavior functionally identical while evading the static selection pattern."
+  },
+  {
+    "output": "cmd.exe /c curl.exe h\"tt\"p://example.com/test.txt",
+    "explanation": "Insertion technique: Interleaved single quotes or a specific quote sequence variation ('h\"tt\"p') inside the protocol designator. This breaks the contiguous literal signature lookup for 'h\"t\"t\"p' while the target application or cmd parser strips out the embedded character boundaries natively to process the location successfully."
+  },
+  {
+    "output": "cmd.exe /c set PROTO=http&& call curl.exe %PROTO%://example.com/test.txt",
+    "explanation": "Recoding / Environment variable technique: Substituted the literal protocol string entirely by placing it inside an environment variable (%PROTO%) before invoking the target capability. This allows legitimate, un-obfuscated down-stream resource requests in a lab environment while avoiding any direct path indicators or escape character rules listed in the selection section."
+  },
+  {
+    "output": "cmd.exe /c curl.exe h^t\"t\"p://example.com/test.txt",
+    "explanation": "Other techniques / Mixed insertion: Mixed both caret and double quote styles simultaneously within a single parameter token ('h^t\"t\"p'). The interactive command parser un-wraps both obfuscation constructs during runtime translation, but the complex interleaved signature profile satisfies neither static signature rule filter."
+  }
+]

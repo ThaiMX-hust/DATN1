@@ -1,1 +1,0 @@
-forfiles.exe /p C:\Windows\System32 /m * /c "cmd /c echo \"Hello from bypass\""

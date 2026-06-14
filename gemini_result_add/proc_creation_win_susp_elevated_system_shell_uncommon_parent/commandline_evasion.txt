@@ -1,0 +1,26 @@
+[
+{
+"output": "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command echo TEST-HOST",
+"explanation": "No reliable bypass: insertion/option mutation changes only CommandLine arguments, but the rule triggers mainly on Image|endswith '\powershell.exe' or OriginalFileName 'PowerShell.EXE' plus SYSTEM LogonId. This variant preserves behavior but is still expected to match."
+},
+{
+"output": "C:\Windows\System32\WindowsPowerShell\v1.0\powershell -Command echo TEST-HOST",
+"explanation": "Omission: omits the .exe suffix in the typed command. However, Windows process creation logs usually record the resolved Image as powershell.exe, so selection_shell is still expected to match."
+},
+{
+"output": "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Write-Output 'TEST-HOST'"",
+"explanation": "Substitution: replaces echo with the equivalent PowerShell Write-Output command. This preserves the test behavior but does not avoid the rule because detection is based on the spawned shell image and SYSTEM logon context, not the echoed string."
+},
+{
+"output": "C:\Windows\System32\cscript.exe //NoLogo //E:JScript "C:\Temp\print_test_host.js"",
+"explanation": "Substitution: uses Windows Script Host instead of PowerShell to perform a safe simulated output action. This avoids selection_shell because cscript.exe is not in the listed shell images, but equivalence is approximate because it no longer spawns PowerShell."
+},
+{
+"output": "C:\Windows\System32\where.exe powershell.exe",
+"explanation": "Substitution/other: uses a non-shell Windows utility for a benign test action. It avoids selection_shell because where.exe is not listed, but it only preserves a safe diagnostic behavior, not an actual interactive shell spawn."
+},
+{
+"output": "",
+"explanation": "No safe command-line-only mutation can reliably bypass this rule while still spawning PowerShell/cmd as SYSTEM from an uncommon parent, because the key detection terms are Image, OriginalFileName, User, LogonId, and ParentImage rather than mutable shell arguments."
+}
+]

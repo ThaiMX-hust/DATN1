@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe import \"C:\\\\Users\\\\Public\\\\test.reg\"",
+    "explanation": "Insertion technique was used to add escape characters, which the shell may ignore or still parse correctly. This is intended to avoid the 'CommandLine|contains' condition in the 'selection_cli' and 'selection_paths' sections of the Sigma rule. The high-level behavior is expected to remain equivalent in a test environment because the added escape characters do not change the intended command behavior."
+  },
+  {
+    "output": "reg.exe /i C:\\\\Users\\\\Public\\\\test.reg",
+    "explanation": "Substitution technique was used to replace the 'import' keyword with the '/i' option, which is an equivalent syntax for the 'reg.exe' utility. This is intended to avoid the 'CommandLine|contains: \' import \'' condition in the 'selection_cli' section of the Sigma rule. The high-level behavior is expected to remain equivalent in a test environment because the '/i' option has the same effect as the 'import' keyword."
+  },
+  {
+    "output": "reg.exe import C:\\\\Users\\\\Public\\test",
+    "explanation": "Omission technique was used to remove the '.reg' file extension, which is an optional element. This is intended to avoid the 'CommandLine|contains' condition in the 'selection_paths' section of the Sigma rule. The high-level behavior is expected to remain equivalent in a test environment because the 'reg.exe' utility can still import the file without the '.reg' extension."
+  },
+  {
+    "output": "reg.exe import \"C:\\\\Users\\\\Public\\\\test.reg\" /reg:64",
+    "explanation": "Insertion technique was used to add an optional flag '/reg:64', which does not change the behavior of the command. This is intended to avoid the 'CommandLine|contains' condition in the 'selection_cli' and 'selection_paths' sections of the Sigma rule. The high-level behavior is expected to remain equivalent in a test environment because the added flag does not change the intended command behavior."
+  },
+  {
+    "output": "%windir%\\system32\\reg.exe import C:\\\\Users\\\\Public\\\\test.reg",
+    "explanation": "Recoding/Encoding technique was used to represent the 'reg.exe' path using an environment variable. This is intended to avoid the 'Image|endswith: \'\\reg.exe\'' condition in the 'selection_img' section of the Sigma rule. The high-level behavior is expected to remain equivalent in a test environment because the environment variable '%windir%' is expanded to the correct path."
+  }
+]

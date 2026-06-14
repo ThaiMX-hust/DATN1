@@ -1,42 +1,22 @@
 [
   {
     "output": "powershell.exe -file \"C:\\Users\\Public\\script.ps1\"",
-    "explanation": "This command matches the Sigma rule by using the -file parameter to execute a PowerShell script located in the Public folder."
+    "explanation": "This command uses the -file parameter to execute a PowerShell script located in the Public folder, matching the Sigma rule's detection criteria."
   },
   {
-    "output": "powershell.exe -File \"C:\\Users\\Public\\script.ps1\"",
-    "explanation": "This command uses the long-form parameter name (-File) to execute a script in the Public folder, which is detected by the rule."
+    "output": "powershell.exe -File C:\\Users\\Public\\script.ps1",
+    "explanation": "This command uses the -File parameter with the Public folder path, matching the Sigma rule's detection criteria with a different capitalization style."
+  },
+  {
+    "output": "powershell.exe -Command \"& { C:\\Users\\Public\\script.ps1 }\"",
+    "explanation": "This command uses the -Command parameter to execute a script from the Public folder, which may not be directly matched by the Sigma rule but demonstrates a related execution pattern."
+  },
+  {
+    "output": "pwsh.exe -File \"C:\\Users\\Public\\script.ps1\"",
+    "explanation": "This command uses pwsh.exe with the -File parameter to execute a script in the Public folder, matching the Sigma rule's detection criteria."
   },
   {
     "output": "powershell.exe -f \"C:\\Users\\Public\\script.ps1\"",
-    "explanation": "This command uses the short-form parameter (-f) to execute a script in the Public folder, matching the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"& { . 'C:\\Users\\Public\\script.ps1' }\"",
-    "explanation": "This command uses the -Command parameter to execute a script in the Public folder, which is detected by the rule."
-  },
-  {
-    "output": "powershell.exe -Command \"& 'C:\\Users\\Public\\script.ps1'\"",
-    "explanation": "This command uses the -Command parameter with single quotes to execute a script in the Public folder, matching the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -ep Bypass -File \"C:\\Users\\Public\\script.ps1\"",
-    "explanation": "This command includes an execution policy bypass flag and executes a script in the Public folder, matching the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -File \"%Public%\\script.ps1\"",
-    "explanation": "This command uses the %Public% environment variable to reference the Public folder and execute a script, which is detected by the rule."
-  },
-  {
-    "output": "powershell.exe -File \"C:\\Users\\Public\\script.ps1\" -Command \"Write-Output 'Test'\"",
-    "explanation": "This command executes a script in the Public folder and includes an additional command, which is still detected by the rule."
-  },
-  {
-    "output": "powershell.exe -File \"C:\\Users\\Public\\script.ps1\" -noprofile",
-    "explanation": "This command executes a script in the Public folder and includes a common flag (-noprofile), which is detected by the rule."
-  },
-  {
-    "output": "powershell.exe -File \"C:\\Users\\Public\\script.ps1\" -Command \"& 'C:\\Users\\Public\\script.ps1'\"",
-    "explanation": "This command uses the -File parameter and includes an additional -Command parameter, which is detected by the rule."
+    "explanation": "This command uses the short form of the -file parameter (-f) to execute a script in the Public folder, matching the Sigma rule's detection criteria."
   }
 ]

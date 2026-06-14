@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\windows\\system32\\wbem\\mofcomp.exe\" ..\\..\\Users\\Public\\evil.mof",
+    "explanation": "Recoding / Encoding technique. Uses relative path traversal (`..\\..\\`) to point to a file inside a suspicious directory. This avoids the explicit string match for `\\Users\\Public\\` or other absolute patterns targeted by the `CommandLine|contains` selection, while the underlying OS successfully resolves the path to the targeted malicious file."
+  },
+  {
+    "output": "\"C:\\windows\\system32\\wbem\\mofcomp.exe\" C:\\Users\\Public\\\\evil.mof",
+    "explanation": "Insertion technique. Injects an extra backslash character (`\\\\`) within the file path. This safely breaks strict static string matching for `\\Users\\Public\\` inside the `CommandLine|contains` field, while the Windows file subsystem handles double slashes transparently and normalizes the path during execution."
+  },
+  {
+    "output": "\"C:\\windows\\system32\\wbem\\mofcomp.exe\" C:/Users/Public/evil.mof",
+    "explanation": "Substitution technique. Substitutes standard Windows backslashes (`\\`) with forward slashes (`/`). This evades the `CommandLine|contains` selection logic which explicitly looks for backslash boundaries like `\\Users\\Public\\`, whereas the Windows API natively treats forward slashes as valid path separators."
+  },
+  {
+    "output": "\"C:\\windows\\system32\\wbem\\mofcomp.exe\" \"C:\\Users\\Public\\evil.mof\"",
+    "explanation": "Insertion technique. Encloses the target path parameter within quotation marks. While this variation still contains the target string, it can successfully disrupt downstream fragile logic or tightly scoped regex patterns that assume unquoted arguments or strict single-space token delimiters."
+  },
+  {
+    "output": "",
+    "explanation": "Omission / Other technique note: If the true positive command is invoked directly from a non-suspicious parent (e.g., a custom administrative binary or a service that is not in the `selection_case` parent image list), and it points to a non-standard path like `C:\\AtomicRedTeam\\`, it already bypasses the rule completely without requiring further command-line mutations."
+  }
+]

@@ -1,10 +1,18 @@
 [
   {
-    "output": "powershell.exe -EncodedCommand TgBlAHcALQBPAGIAagBlAGMAdAAgAG4AYABFAHQALgBXAGABRQBiAEMAbABpAEUAbgBUAA==",
-    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed to trigger the rule."
+    "output": "powershell.exe -Command \"NeT.WEbCliEnT\"",
+    "explanation": "This command uses abnormal casing for 'Net.WebClient' to simulate obfuscation techniques that the Sigma rule is designed to detect."
   },
   {
-    "output": "powershell.exe -ENC TgBlAHcALQBPAGIAagBlAGMAdAAgAG4AYABFAHQALgBXAGABRQBiAEMAbABpAEUAbgBUAA==",
-    "explanation": "The '-EncodedCommand' flag is substituted with its short form '-ENC', which is an equivalent syntax and still matches the rule."
+    "output": "pwsh.exe -c \"nEt.WEbCliEnT\"",
+    "explanation": "This command uses a mix of lowercase and uppercase letters in 'Net.WebClient' to mimic obfuscated PowerShell commands that the Sigma rule aims to catch."
+  },
+  {
+    "output": "powershell.exe -Command \"[SyStEm.NeT.WeBcLiEnT]\"",
+    "explanation": "This command uses casing variation and full namespace to simulate obfuscated PowerShell usage of 'Net.WebClient', which the Sigma rule is designed to detect."
+  },
+  {
+    "output": "pwsh.exe -c \"[sYsTeM.nEt.wEbClIeNt]\"",
+    "explanation": "This command uses inconsistent casing in the .NET namespace and class name to simulate obfuscation techniques that the Sigma rule is intended to flag."
   }
 ]

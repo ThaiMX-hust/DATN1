@@ -1,6 +1,14 @@
 [
   {
-    "output": "Pester.bat 'calc.exe; Get-Process'",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the detection."
+    "output": "powershell.exe -Command \"Get-Help Pester\"",
+    "explanation": "This command uses 'Get-Help' with 'Pester' in PowerShell, which matches the 'powershell_module' detection condition. It is a safe mutation that simulates a test case without malicious intent."
+  },
+  {
+    "output": "cmd.exe /c pester ; echo test",
+    "explanation": "This command includes 'pester' and a semicolon (';'), matching the 'cmd_execution' detection condition. It is a safe mutation for testing purposes only."
+  },
+  {
+    "output": "powershell.exe -Command \"help Pester\"",
+    "explanation": "This command uses 'help' with 'Pester' in PowerShell, matching the 'get_help' detection condition. It is a safe mutation for testing the Sigma rule."
   }
 ]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe & {Invoke-WebRequest -OutFile \"C:\\Users\\$env:username\\Desktop\\AnyDesk.exe\" https://download.anydesk.com/AnyDesk.exe}",
+    "explanation": "Reordering and Omission techniques were used to avoid the 'selection_flags' condition. The '-OutFile' parameter is used instead of '-o' and the 'Start-Process' command is omitted to preserve the intended test behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -OutFile $env:TEMP\\Atomic-license.txt\"",
+    "explanation": "Substitution and Recoding techniques were used to avoid the 'selection_commands' condition. The 'iwr' alias is replaced with 'Invoke-WebRequest' and the output file path is represented using an environment variable."
+  },
+  {
+    "output": "powershell.exe -Command \"& {Invoke-WebRequest -Uri https://download.anydesk.com/AnyDesk.exe -Method Get -OutFile C:\\Users\\$env:username\\Desktop\\AnyDesk.exe}\"",
+    "explanation": "Insertion and Substitution techniques were used to avoid the 'selection_flags' condition. The '-Command' parameter is used to insert a new scope and the '-Method' parameter is added to substitute the default 'Get' method."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Invoke-WebRequest -Uri https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -OutFile $env:TEMP\\Atomic-license.txt\"",
+    "explanation": "Insertion technique was used to avoid the 'selection_img' condition. The '-ExecutionPolicy' parameter is used to insert a new execution policy scope."
+  },
+  {
+    "output": "powershell.exe -NoLogo -Command \"Invoke-WebRequest -Uri https://download.anydesk.com/AnyDesk.exe -OutFile C:\\Users\\$env:username\\Desktop\\AnyDesk.exe\"",
+    "explanation": "Insertion technique was used to avoid the 'selection_img' condition. The '-NoLogo' parameter is used to insert a new parameter and avoid the 'powershell_ise.exe' image name."
+  }
+]

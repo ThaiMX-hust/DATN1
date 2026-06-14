@@ -1,6 +1,14 @@
 [
   {
-    "output": "dotnet-trace collect -- calc.exe",
-    "explanation": "This is the base command that matches the Sigma rule and is used as a reference for testing."
+    "output": "dotnet-trace.exe -- 'collect' -- 'cmd.exe' /c 'whoami'",
+    "explanation": "This command attempts to bypass the Sigma rule by using quotes to separate the '--' flag and the 'collect' argument, and reordering arguments to obscure the intent while still triggering the same behavior."
+  },
+  {
+    "output": "dotnet-trace.exe --collect -- \"cmd.exe /c whoami\"",
+    "explanation": "This command uses a spaceless flag format and escaped quotes to obscure the command line while maintaining the same execution behavior."
+  },
+  {
+    "output": "dotnet-trace.exe -- 'collect' -- cmd.exe /c whoami",
+    "explanation": "This command omits quotes around the final command and uses spacing to separate arguments, which may evade detection while still executing the same process."
   }
 ]

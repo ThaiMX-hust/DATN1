@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\system32\\setspn.exe\" -T %USERDNSDOMAIN% -Q */*",
+    "explanation": "The command uses environment variables and standard syntax. The original command uses double percent signs for environment variables, which can be simplified to a single percent sign in some test environments. The command line is functionally equivalent and avoids unnecessary escaping."
+  },
+  {
+    "output": "setspn -T %USERDNSDOMAIN% -Q */*",
+    "explanation": "This is a simplified version of the original command, omitting quotes and unnecessary escaping. It uses the short form of the executable name and retains the same query functionality for SPN enumeration."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\system32\\setspn.exe\" -T %USERDNSDOMAIN% -q */*",
+    "explanation": "The long option '-Q' is replaced with its equivalent short form '-q'. The command remains functionally identical and is still detected by the Sigma rule due to the presence of '-q' in the CommandLine field."
+  },
+  {
+    "output": "setspn.exe -T %USERDNSDOMAIN% -Q */*",
+    "explanation": "This version omits the full path to the executable, relying on the system's PATH environment variable. It is still functionally equivalent and would be detected by the Sigma rule due to the presence of the '-Q' flag and the executable name in the process creation log."
+  }
+]

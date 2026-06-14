@@ -1,3 +1,0 @@
-copy runscripthelper.exe not_suspicious.exe && not_suspicious.exe surfacecheck script.ps1 C:\Windows\Temp
-runscripthelper.exe "surface""check" script.ps1 C:\Windows\Temp
-runscripthelper.exe SurfaceCheck script.ps1 C:\Windows\Temp

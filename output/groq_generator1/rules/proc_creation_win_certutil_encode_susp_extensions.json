@@ -1,0 +1,6 @@
+[
+  {
+    "output": "certutil.exe -encode payload.bin encoded_payload.txt",
+    "explanation": "This is the standard command that matches the Sigma rule. It uses the -encode flag to encode a file with a non-suspicious extension (.bin) to base64."
+  }
+]

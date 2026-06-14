@@ -1,22 +1,26 @@
 [
   {
-    "output": "C:\\\\Program Files\\\\PingCastle\\\\PingCastle.exe --healthcheck --server dc01\\\\.internal",
-    "explanation": "Inserted an escape character (\\\\) before the dot in the server name and added an extra backslash in the path to test path normalization and reordering. This simulates a safe mutation that may bypass the rule if it relies strictly on string matching."
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --level Full",
+    "explanation": "This is the original command and serves as a baseline for testing."
   },
   {
-    "output": "copy \"PingCastle.exe\" \"Taskmgr.exe\" /Y && \"Taskmgr.exe\" --healthcheck --level Full",
-    "explanation": "Wrapped filenames in quotes and used equivalent syntax for the copy command to test if the rule can detect renamed executables with command-line arguments. This simulates a safe mutation that may bypass the rule if it relies on exact filename matching."
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --level Full --no-enum-limit",
+    "explanation": "Added the optional '--no-enum-limit' flag to simulate a more complete command line while staying within safe mutation techniques."
   },
   {
-    "output": "C:\\\\Progra~1\\\\PingCastle\\\\PingCastle.exe --healthcheck --server dc01.internal",
-    "explanation": "Used short path notation (Progra~1) for the directory name to test path normalization. This simulates a safe mutation that may bypass the rule if it relies on full path matching."
+    "output": "\"C:\\Tools\\PingCastle.exe\" --healthcheck --level Full",
+    "explanation": "Inserted quotes around the executable path to simulate a scenario where the path may contain spaces or special characters."
   },
   {
-    "output": "C:\\\\Program Files\\\\PingCastle\\\\PingCastle.exe --healthcheck --level Full --server dc01.internal",
-    "explanation": "Reordered the command-line arguments to test if the rule can detect the same command with a different argument sequence. This simulates a safe mutation that may bypass the rule if it relies on fixed argument order."
+    "output": "C:\\Tools\\PingCastle.exe --level Full --healthcheck",
+    "explanation": "Reordered the '--healthcheck' and '--level Full' flags, which are accepted in any order by PingCastle."
   },
   {
-    "output": "set CMDLINE=--healthcheck --server dc01.internal && C:\\\\Program Files\\\\PingCastle\\\\PingCastle.exe %CMDLINE%",
-    "explanation": "Used an environment variable to store the command-line arguments to test if the rule can detect indirect command-line execution. This simulates a safe mutation that may bypass the rule if it does not inspect environment variables."
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --level=Full",
+    "explanation": "Used an equals sign (=) instead of a space to separate the flag and its value, which is a valid syntax in some command-line interfaces."
+  },
+  {
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --level Full --server localhost",
+    "explanation": "Added the '--server localhost' flag to simulate a more complete command line while staying within safe mutation techniques."
   }
 ]

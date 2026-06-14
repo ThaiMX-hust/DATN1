@@ -1,10 +1,14 @@
 [
   {
-    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dll,StartNodeRelay",
-    "explanation": "This command replaces the .dat file extension with .dll while keeping the same file path and function name, which still matches the Sigma rule's detection logic."
+    "output": "rundll32.exe \"C:\\\\Path\\\\To\\\\Payload.dll\",StartNodeRelay",
+    "explanation": "This command uses quotes around the DLL path and includes the expected function name 'StartNodeRelay'. It matches the Sigma rule's detection criteria by including 'rundll32.exe', '.dll', and 'StartNodeRelay' in the command line."
   },
   {
-    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dll, StartNodeRelay",
-    "explanation": "Adding a space between the comma and the function name is a safe mutation that does not affect execution and still matches the rule."
+    "output": "rundll32.exe C:\\\\Path\\\\To\\\\Payload.dll,StartNodeRelay",
+    "explanation": "This command omits quotes around the DLL path, but still includes the required elements 'rundll32.exe', '.dll', and 'StartNodeRelay'. It demonstrates that no quotes are needed for the command to be valid and still match the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe .\\\\Payload.dll,StartNodeRelay",
+    "explanation": "This command uses a relative path to the DLL file. It still includes the required elements 'rundll32.exe', '.dll', and 'StartNodeRelay', and demonstrates path normalization as a safe mutation technique."
   }
 ]

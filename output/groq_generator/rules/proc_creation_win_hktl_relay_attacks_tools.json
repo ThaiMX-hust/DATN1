@@ -1,22 +1,41 @@
 [
   {
-    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin",
-    "explanation": "The original command is already a valid test command that matches the Sigma rule. No mutation is needed for this test case."
+    "output": "JuicyPotatoNG.exe -c \"{\\\"assembly\\\":\\\"System\\\",\\\"method\\\":\\\"CreateInstance\\\",\\\"type\\\":\\\"System.Diagnostics.Process\\\",\\\"args\\\":{\\\"arg0\\\":\\\"cmd.exe\\\",\\\"arg1\\\":\\\"/c calc.exe\\\"}}}\" -l 1337",
+    "explanation": "This command simulates a JuicyPotatoNG execution using the -c flag with an encoded payload. It uses a JSON-like structure to bypass simple string-based detection, leveraging encoding and syntax substitution to avoid direct keyword matches in the Sigma rule."
   },
   {
-    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -z",
-    "explanation": "Added an optional flag (-z) that may be present in some variants of the tool. This is a safe mutation that preserves the core behavior for testing."
+    "output": "PetitPotam.exe -target 192.168.1.100 -user domain\\user",
+    "output": "PetitPotam.exe -target 192.168.1.100 -user domain\\user",
+    "explanation": "This command simulates PetitPotam execution with a target and user parameter. It uses standard syntax and does not attempt to bypass the Sigma rule, but it demonstrates a true positive case."
   },
   {
-    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -c \"{cmd.exe}\"",
-    "explanation": "Added a -c flag with a command string to simulate JuicyPotatoNG's behavior. This is a safe mutation that aligns with the Sigma rule's detection logic."
+    "output": "RottenPotato.exe -exec calc.exe",
+    "explanation": "This command simulates RottenPotato execution with a basic payload. It does not attempt to bypass detection and serves as a straightforward test case for the Sigma rule."
   },
   {
-    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -c \"{\\\"cmd.exe\\\"}\"",
-    "explanation": "Escaped the command string to simulate encoded or escaped payloads. This is a safe mutation that aligns with the Sigma rule's detection logic."
+    "output": "HotPotato.exe -exec calc.exe",
+    "explanation": "This command simulates HotPotato execution with a basic payload. It does not attempt to bypass detection and serves as a straightforward test case for the Sigma rule."
   },
   {
-    "output": "TempBenign_name.exe -t 192.168.1.10 -p payload.bin -c \"{cmd.exe}\" -z",
-    "explanation": "Combined multiple flags to simulate JuicyPotatoNG behavior. This is a safe mutation that aligns with the Sigma rule's detection logic."
-  }
-]
+    "output": "Responder.exe -I eth0 -w",
+    "explanation": "This command simulates Responder execution with interface and SMB relay options. It does not attempt to bypass detection and serves as a straightforward test case for the Sigma rule."
+  },
+  {
+    "output": "smbrelayx.py -h target_ip",
+    "explanation": "This command simulates SMB relay execution using Impacket's smbrelayx. It does not attempt to bypass detection and serves as a straightforward test case for the Sigma rule."
+  },
+  {
+    "output": "ntlmrelayx.py -t http://target_url",
+    "explanation": "This command simulates NTLM relay execution using Impacket's ntlmrelayx. It does not attempt to bypass detection and serves as a straightforward test case for the Sigma rule."
+  },
+  {
+    "output": "Invoke-PetitPotam -Target 192.168.1.100",
+    "explanation": "This PowerShell command simulates PetitPotam execution via a PowerShell script. It does not attempt to bypass detection and serves as a straightforward test case for the Sigma rule."
+  },
+  {
+    "output": "cme smb 192.168.1.100 -u user -p password",
+    "explanation": "This command simulates CrackMapExec (cme) SMB execution with credentials. It does not attempt to bypass detection and serves as a straightforward test case for the Sigma rule."
+  },
+  {
+    "output": "Invoke-Tater -Target 192.168.1.100 -User domain\\user",
+    "explanation": "This PowerShell command simulates Tater execution with a target and user parameter. It does not attempt to bypass detection and serves as a straightforward test case for the

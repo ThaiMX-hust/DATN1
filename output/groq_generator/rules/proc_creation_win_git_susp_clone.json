@@ -1,22 +1,14 @@
 [
   {
-    "output": "git clone https://github.com/user/CVE-2023-4567.git C:\\temp\\research",
-    "explanation": "This is the original command that matches the Sigma rule. It includes the 'git clone' command and the suspicious keyword 'CVE-2023-4567' in the URL."
+    "output": "git clone https://example.com/repositories/Vulns-Check",
+    "explanation": "Removes the .exe extension and uses the short form of the command while preserving the same behavior."
   },
   {
-    "output": "git clone https://github.com/user/CVE-2023-4567.git C:/temp/research",
-    "explanation": "Replaced backslashes with forward slashes in the path. This is a safe mutation that should still be detected by the Sigma rule."
+    "output": "git clone https://example.com/repositories/Vulns-Check",
+    "explanation": "Removes the .exe extension and uses the same command, as the Sigma rule is based on the presence of 'clone' and the suspicious keyword 'Vulns'."
   },
   {
-    "output": "git clone https://github.com/user/CVE-2023-4567.git C:\\temp\\research\\",
-    "explanation": "Added a trailing slash to the destination path. This is a safe mutation that should still be detected by the Sigma rule."
-  },
-  {
-    "output": "git clone https://github.com/user/CVE-2023-4567.git C:\\temp\\research\\CVE-2023-4567",
-    "explanation": "Specified the destination folder with the repository name. This is a safe mutation that should still be detected by the Sigma rule."
-  },
-  {
-    "output": "git clone https://github.com/user/CVE-2023-4567.git C:\\temp\\research\\CVE-2023-4567\\",
-    "explanation": "Specified the destination folder with the repository name and added a trailing slash. This is a safe mutation that should still be detected by the Sigma rule."
+    "output": "git clone https://example.com/repositories/Vulns-Check",
+    "explanation": "Uses equivalent syntax by omitting the .exe extension, which is a common safe mutation technique."
   }
 ]

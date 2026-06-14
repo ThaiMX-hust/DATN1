@@ -1,6 +1,22 @@
 [
   {
-    "output": "copy UtilityFunctions.ps1 NotSuspicious.ps1; powershell.exe -ExecutionPolicy Bypass -File NotSuspicious.ps1 RegSnapin -DLLPath malicious.dll",
-    "explanation": "The original command is a true positive for the Sigma rule. It cannot be bypassed by safe mutation techniques without changing the behavior or violating the rule's detection logic."
+    "output": "powershell.exe -Command \"& { . .\\UtilityFunctions.ps1; RegSnapin }\"",
+    "explanation": "This command simulates the execution of UtilityFunctions.ps1 followed by RegSnapin, which matches the Sigma rule's detection criteria. It uses standard PowerShell syntax and does not include any bypass techniques."
+  },
+  {
+    "output": "powershell.exe -c \"& { . .\\UtilityFunctions.ps1; RegSnapin }\"",
+    "explanation": "This is a shortened version of the previous command using the -c (short for -Command) flag. It still executes the same logic and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"& { . .\\UtilityFunctions.ps1; RegSnapin }\" -WindowStyle Hidden",
+    "explanation": "This command adds the -WindowStyle Hidden argument, which is a common argument in PowerShell to hide the window. It does not affect the detection logic but is a realistic variation."
+  },
+  {
+    "output": "powershell.exe -Command \"& { . .\\UtilityFunctions.ps1; RegSnapin }\" -ExecutionPolicy Bypass",
+    "explanation": "This command includes the -ExecutionPolicy Bypass flag, which is often used to allow script execution. It does not bypass the Sigma rule but is a realistic variation in test scenarios."
+  },
+  {
+    "output": "powershell.exe -Command \"& { . .\\UtilityFunctions.ps1; RegSnapin }\" -NoProfile",
+    "explanation": "This command adds the -NoProfile flag to prevent loading the PowerShell profile, which is a common argument for reducing overhead. It does not affect the detection logic."
   }
 ]

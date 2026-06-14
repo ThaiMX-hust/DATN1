@@ -1,22 +1,22 @@
 [
   {
-    "output": "curl.exe -H 'User-Agent: EvilAgent' http://example.com",
-    "explanation": "Substitution of double quotes with single quotes around the User-Agent header value."
+    "output": "curl.exe -H \"User-Agent: CustomAgent/1.0\" https://example.com",
+    "explanation": "This command uses the standard -H flag to set a custom User-Agent header, matching the Sigma rule's detection criteria. It is a direct representation of the behavior the rule is designed to detect."
   },
   {
-    "output": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
-    "explanation": "Insertion of escape characters before double quotes to simulate equivalent command-line parsing."
+    "output": "curl.exe --header 'User-Agent: CustomAgent/1.0' https://example.com",
+    "explanation": "This command uses the long-form equivalent of the -H flag (--header) to set the User-Agent header. This is a valid substitution technique and still matches the Sigma rule."
   },
   {
-    "output": "curl.exe -H User-Agent:EvilAgent http://example.com",
-    "explanation": "Omission of quotes around the User-Agent header value, assuming the command still parses correctly."
+    "output": "curl.exe -H 'User-Agent: CustomAgent/1.0' https://example.com",
+    "explanation": "This command uses single quotes instead of double quotes to define the header string. This is a safe mutation via substitution and still matches the Sigma rule."
   },
   {
-    "output": "curl.exe -H User-Agent: EvilAgent http://example.com",
-    "explanation": "Insertion of a space after the colon in the User-Agent header value, which may still be parsed correctly."
+    "output": "curl.exe -H \"User-Agent: CustomAgent/1.0\" -o /dev/null https://example.com",
+    "explanation": "This command adds an additional -o /dev/null flag to discard the output, which does not affect the detection logic. It is a safe mutation via insertion and still matches the Sigma rule."
   },
   {
-    "output": "curl.exe --header 'User-Agent: EvilAgent' http://example.com",
-    "explanation": "Substitution of the short option '-H' with the long option '--header'."
+    "output": "curl.exe -H \"User-Agent: CustomAgent/1.0\" https://example.com",
+    "explanation": "This command uses a normalized path for curl.exe (e.g., without specifying the full path), which is a safe mutation via omission and still matches the Sigma rule."
   }
 ]

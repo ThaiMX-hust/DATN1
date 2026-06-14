@@ -1,14 +1,20 @@
+```json
 [
   {
-    "output": "schtasks.exe /Create /ST 00:00 /SC ONCE /TN \"UpdateTask\" /TR \"update.exe\" /F",
-    "explanation": "Reordered the arguments while preserving the same functionality. This demonstrates how the command can be altered without changing its behavior."
+    "output": "schtasks /create /tn \"TestTask\" /tr \"wscript C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\payload.vbs\" /sc once /st 00:00",
+    "explanation": "This command creates a one-time scheduled task using wscript.exe at 00:00, which matches the Sigma rule's detection criteria. It includes all required elements: uncommon action (wscript), one-time schedule, and time at 00:00."
   },
   {
-    "output": "schtasks.exe /Create /SC ONCE /ST 00:00 /TN \"UpdateTask\" /TR update.exe /F",
-    "explanation": "Removed quotes around the /TR argument value since they are optional in some contexts and the command still functions as intended."
+    "output": "schtasks.exe /create /tn TestTask /tr \"cscript //B C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\script.js\" /sc once /st 00:00",
+    "explanation": "This command uses cscript.exe in a one-time scheduled task at 00:00, which aligns with the Sigma rule's detection logic. It includes equivalent syntax and structure to avoid false negatives in testing."
   },
   {
-    "output": "schtasks.exe /Create /SC ONCE /ST 00:00 /TN \"UpdateTask\" /TR \"update.exe\" /F",
-    "explanation": "Used equivalent spacing and quotation formatting to demonstrate safe mutation techniques that do not alter the command's behavior."
+    "output": "schtasks /create /tn TestTask /tr \"powershell.exe -Command Get-Date\" /sc once /st 00:00",
+    "explanation": "This command creates a one-time task using PowerShell at 00:00, which is flagged by the Sigma rule. It serves as a test case to validate detection of scheduled tasks with suspicious actions."
+  },
+  {
+    "output": "schtasks /create /tn TestTask /tr \"wmic process call create \"notepad.exe\"\" /sc once /st 00:00",
+    "explanation": "This command uses wmic.exe in a one-time task at 00:00, matching the Sigma rule's criteria. It demonstrates how wmic can be used in scheduled tasks for testing detection."
   }
 ]
+```

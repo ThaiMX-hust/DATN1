@@ -1,0 +1,22 @@
+[
+  {
+    "output": "csvde.exe -f C:\\Users\\Public\\ad_export.csv",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria, as it uses 'csvde.exe' with the '-f' flag to export data, which is the behavior the rule is designed to detect."
+  },
+  {
+    "output": "csvde.exe -fC:\\Users\\Public\\ad_export.csv",
+    "explanation": "This command omits the space between '-f' and the filename, which is a valid syntax variation for the tool. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "csvde.exe -f \"C:\\Users\\Public\\ad_export.csv\"",
+    "explanation": "This command uses quotes around the filename, which is a valid syntax variation. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "csvde.exe -f C:\\Users\\Public\\ad_export.csv -i",
+    "explanation": "This command includes the '-i' flag, which is filtered out by the Sigma rule. It is included here to demonstrate a false positive scenario."
+  },
+  {
+    "output": "csvde.exe -f C:\\Users\\Public\\ad_export.csv -i -f C:\\Users\\Public\\real_export.csv",
+    "explanation": "This command includes multiple '-f' flags, which is valid for the tool. The Sigma rule includes a filter to exclude commands with '-i', making this a false positive."
+  }
+]

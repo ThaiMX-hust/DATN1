@@ -1,14 +1,14 @@
 [
   {
-    "output": "MsiExec.exe -Embedding 12345 /I fake.msi & powershell.exe -nop -Command Write-Host 'Bypassed'",
-    "explanation": "This command uses reordering and omission techniques to bypass the Sigma rule. The '-Embedding' flag is retained, but the command structure avoids triggering the specific filters by omitting unnecessary elements and using a clean PowerShell command."
+    "output": "powershell.exe -Command Write-Host CustomAction export executed me; exit",
+    "explanation": "The original command includes '-nop' which is not required for execution in newer PowerShell versions. Removing '-nop' changes the command slightly but still triggers the Sigma rule by maintaining the presence of 'powershell.exe' and the '-Command' argument."
   },
   {
-    "output": "MsiExec.exe -Embedding 12345 /I fake.msi & pwsh -nop -Command Write-Host 'Bypassed'",
-    "explanation": "This command uses substitution (pwsh instead of powershell.exe) and omission to bypass the Sigma rule. The '-Embedding' flag is retained, and the PowerShell command is simplified to avoid triggering the rule's filters."
+    "output": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -Command Write-Host JScript executed me!; exit",
+    "explanation": "This command uses quotes and full path to simulate a scenario where the command might be embedded in a script or executed from a different directory. The structure remains valid and still matches the Sigma rule."
   },
   {
-    "output": "MsiExec.exe -Embedding 12345 /I fake.msi & powershell.exe -Command Write-Host 'Bypassed'",
-    "explanation": "This command uses omission to bypass the Sigma rule. The '-nop' flag is removed, and the command remains functional while avoiding the specific detection pattern in the rule."
+    "output": "pwsh.exe -Command Write-Host VBScript executed me!; exit",
+    "explanation": "The 'pwsh.exe' is the modern PowerShell executable equivalent to 'powershell.exe'. This substitution preserves the detection behavior while using a different executable name, still matching the Sigma rule."
   }
 ]

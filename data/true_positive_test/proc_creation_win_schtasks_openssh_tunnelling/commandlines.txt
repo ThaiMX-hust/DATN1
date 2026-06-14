@@ -1,1 +1,1 @@
-schtasks.exe /CREATE /SC ONLOGON /TN "SSHD" /TR "sshd.exe -D" /F
+schtasks.exe /create /tn "TestTask1" /tr "C:\Windows\System32\OpenSSH\ssh.exe -i C:\Temp\test.txt user@192.0.2.10" /sc daily

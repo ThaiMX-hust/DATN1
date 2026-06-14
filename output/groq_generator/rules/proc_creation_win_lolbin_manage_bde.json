@@ -1,18 +1,14 @@
 [
   {
-    "output": "cmd.exe /c \"cd /d C:\\Windows\\System32\\ && cscript.exe //nologo manage-bde.wsf\"",
-    "explanation": "The original command is already a valid test case. No mutation is needed for this case."
+    "output": "wscript.exe \"C:\\Windows\\System32\\manage-bde.wsf\" -? - - -",
+    "explanation": "This command uses insertion (quotes) and reordering (rearranging flags) to test if the Sigma rule can detect the execution of manage-bde.wsf via wscript.exe. The command is benign as it does not perform any malicious action but simulates the structure of a potential abuse scenario."
   },
   {
-    "output": "copy C:\\Windows\\System32\\manage-bde.wsf C:\\Users\\Public\\m.txt && cscript.exe //e:jscript C:\\Users\\Public\\m.txt",
-    "explanation": "The original command is already a valid test case. No mutation is needed for this case."
+    "output": "wscript.exe C:\\Windows\\System32\\manage-bde.wsf /?",
+    "explanation": "This command uses substitution (replacing '-' with '/') for flag syntax to test if the Sigma rule can detect the execution of manage-bde.wsf via wscript.exe. The command is safe as it only queries help information."
   },
   {
-    "output": "cmd.exe /c \"cd /d C:\\\\Windows\\\\System32\\\\ && cscript.exe //nologo manage-bde.wsf\"",
-    "explanation": "Inserted double backslashes for path normalization and added quotes for safe parsing. The command remains functionally equivalent."
-  },
-  {
-    "output": "cmd.exe /c ^\"cd /d C:\\Windows\\System32\\ ^&^& cscript.exe //nologo manage-bde.wsf^\"",
-    "explanation": "Used escape characters (^) to bypass simple string-based detection. The command remains functionally equivalent."
+    "output": "wscript.exe C:\\Windows\\System32\\manage-bde.wsf",
+    "explanation": "This command tests the basic execution of manage-bde.wsf via wscript.exe without additional flags. It is safe as it does not perform any action unless further parameters are provided."
   }
 ]

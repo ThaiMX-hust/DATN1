@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Test' | c^l^i^p.exe && powershell -c \\\"IEX ([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
+    "explanation": "This command uses insertion of escape characters (^) to obfuscate the command line, which is a safe mutation technique. It still executes the same behavior as the original test command."
+  },
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Test' | clip & powershell -c \\\"IEX ([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
+    "explanation": "This command uses substitution of && with &, which is functionally equivalent in this context. It maintains the same behavior while appearing different."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Clipboard -Value 'Write-Host test'; Invoke-Expression (Get-Clipboard)\"",
+    "explanation": "This command uses omission of unnecessary elements and substitution of syntax (e.g., using -Command instead of -c). It remains functionally equivalent to the original."
+  },
+  {
+    "output": "cmd.exe /c echo Write-Host 'Bypass Test' | clip & powershell -c IEX([Windows.Forms.Clipboard]::GetText())",
+    "explanation": "This command uses reordering and omission of quotes where not strictly necessary. It still performs the same action as the original command."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "dotnet-dump collect -p 1234",
+    "explanation": "This command uses the 'collect' flag as specified in the Sigma rule, making it a valid test case for detection."
+  },
+  {
+    "output": "dotnet-dump   collect  -p 1234",
+    "explanation": "Extra spaces between the command and arguments are inserted, which is a safe mutation technique and should still be detected."
+  },
+  {
+    "output": "dotnet-dump collect -p\"1234\"",
+    "explanation": "The process ID is wrapped in quotes, a safe mutation technique that should not affect detection."
+  },
+  {
+    "output": "dotnet-dump collect --process-id 1234",
+    "explanation": "The short option '-p' is replaced with the long option '--process-id', a valid substitution technique."
+  },
+  {
+    "output": "dotnet-dump collect -p1234",
+    "explanation": "The space between '-p' and the process ID is omitted, a safe mutation that should still be detected."
+  }
+]

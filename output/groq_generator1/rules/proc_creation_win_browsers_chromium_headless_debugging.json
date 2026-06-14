@@ -1,0 +1,26 @@
+[
+  {
+    "output": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User\\Data --headless",
+    "explanation": "Replaced the full path with a shorter version and omitted quotes around the user data directory, which is still valid in many command-line contexts."
+  },
+  {
+    "output": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User_Data --headless",
+    "explanation": "Modified the directory name slightly (e.g., 'User Data' to 'User_Data') to test path normalization and parsing behavior."
+  },
+  {
+    "output": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User\\Data --headless=new",
+    "explanation": "Used an extended or newer flag syntax (e.g., '--headless=new') that may still be valid in newer versions of Chromium-based browsers."
+  },
+  {
+    "output": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User\\Data --headless --disable-gpu",
+    "explanation": "Added an optional flag (--disable-gpu) that is commonly used alongside --headless and does not affect the core detection logic."
+  },
+  {
+    "output": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User\\Data --headless --incognito",
+    "explanation": "Added the --incognito flag, which is optional and does not affect the core detection logic but may appear in some test scenarios."
+  },
+  {
+    "output": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User\\Data --headless --disable-automation",
+    "explanation": "Added the --disable-automation flag, which is optional and does not affect the core detection logic but may appear in some test scenarios."
+  }
+]

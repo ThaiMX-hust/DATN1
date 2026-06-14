@@ -1,22 +1,20 @@
+```json
 [
   {
-    "output": "netsh.exe add helper \"C:\\AtomicRedTeam\\atomics\\T1546.007\\bin\\NetshHelper.dll\"",
-    "explanation": "This is the original command and serves as a baseline for testing."
+    "output": "netsh.exe add helper \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1546.007\\\\bin\\\\NetshHelper.dll\"",
+    "explanation": "Inserted escape characters and quotes to simulate a safe mutation while preserving the original behavior for testing."
   },
   {
-    "output": "netsh.exe  add helper \"C:\\AtomicRedTeam\\atomics\\T1546.007\\bin\\NetshHelper.dll\"",
-    "explanation": "Inserted an extra space before the first argument to test insertion mutation technique."
+    "output": "netsh.exe add helper C:/AtomicRedTeam/atomics/T1546.007/bin/NetshHelper.dll",
+    "explanation": "Replaced backslashes with forward slashes for path normalization, a common safe mutation technique."
   },
   {
-    "output": "copy netsh.exe not_netsh.exe && not_netsh.exe add helper evil.dll",
-    "explanation": "Copied netsh.exe to a renamed executable and executed it to test omission and substitution techniques."
+    "output": "\"netsh.exe\" add helper \"C:\\\\AtomicRedTeam\\atomics\\T1546.007\\bin\\NetshHelper.dll\"",
+    "explanation": "Wrapped the executable in quotes and inserted escape characters to simulate a safe mutation."
   },
   {
-    "output": "netsh add\thelper evil.dll",
-    "explanation": "Replaced space with a tab character to test reordering and substitution techniques."
-  },
-  {
-    "output": "netsh.exe \"a\"\"d\"\"d\" \"h\"\"e\"\"l\"\"p\"\"e\"\"r\" evil.dll",
-    "explanation": "Split each letter of 'add' and 'helper' into quoted characters to test recoding/encoding mutation technique."
+    "output": "netsh.exe add helper C:\\AtomicRedTeam\\atomics\\T1546.007\\bin\\NetshHelper.dll",
+    "explanation": "Used minimal modification by ensuring the command is still valid and executable in a test environment."
   }
 ]
+```

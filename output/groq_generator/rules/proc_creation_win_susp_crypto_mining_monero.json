@@ -1,30 +1,36 @@
 [
   {
-    "output": "xmrig.exe -o \"stratum+ssl://xmr-pool.example.com:443\" -u wallet_address --donate-level=1 --algo rx/0",
-    "explanation": "Inserted quotes around the URL to test if the rule is sensitive to string formatting."
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --cpu-priority=1 --algo=rx/0",
+    "explanation": "This command includes key indicators from the Sigma rule such as 'stratum+tcp://', '--cpu-priority=', and '--algo=rx/0'. It simulates a typical Monero mining command line."
   },
   {
-    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0",
-    "explanation": "Original command line with no mutation applied for baseline testing."
+    "output": "xmrig --url stratum+tcp://pool.minexmr.com:443 --user <username> --cpu-priority=2 --donate-level=0",
+    "explanation": "This command includes 'stratum+tcp://', '--cpu-priority=', and '--donate-level=0', which are all indicators from the Sigma rule. It represents a common XMRig mining command line."
   },
   {
-    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --cpu-priority=1",
-    "explanation": "Added an additional --cpu-priority flag to test if the rule detects this miner-specific parameter."
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --nicehash",
+    "explanation": "This command includes 'stratum+tcp://' and '--nicehash', both of which are indicators in the Sigma rule. It simulates a mining command line with Nicehash integration."
   },
   {
-    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --nicehash",
-    "explanation": "Added the --nicehash flag to test if the rule detects this miner-specific parameter."
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --algo=rx/0 --cpu-priority=3",
+    "explanation": "This command includes 'stratum+tcp://', '--algo=rx/0', and '--cpu-priority=', which are all part of the Sigma rule's detection criteria. It represents a typical Monero mining command line."
   },
   {
-    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 -o pool.xmr-pool.com:443",
-    "explanation": "Added a redundant -o flag with a different pool to test if the rule is sensitive to multiple pool declarations."
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --cpu-priority=4",
+    "explanation": "This command includes 'stratum+tcp://' and '--cpu-priority=', both of which are indicators in the Sigma rule. It simulates a basic mining command line."
   },
   {
-    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --cpu-priority=1 --nicehash",
-    "explanation": "Combined multiple miner-specific flags to test if the rule detects multiple indicators."
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --algo=rx/0 --cpu-priority=5",
+    "explanation": "This command includes 'stratum+tcp://', '--algo=rx/0', and '--cpu-priority=', which are all part of the Sigma rule's detection criteria. It represents a typical Monero mining command line."
   },
   {
-    "output": "xmrig.exe -o stratum+ssl://xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0 --cpu-priority=1 --nicehash -o pool.xmr-pool.com:443",
-    "explanation": "Combined multiple miner-specific flags and added a redundant -o flag to test if the rule detects multiple indicators."
-  }
-]
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --cpu-priority=6",
+    "explanation": "This command includes 'stratum+tcp://' and '--cpu-priority=', both of which are indicators in the Sigma rule. It simulates a basic mining command line."
+  },
+  {
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --algo=rx/0 --cpu-priority=7",
+    "explanation": "This command includes 'stratum+tcp://', '--algo=rx/0', and '--cpu-priority=', which are all part of the Sigma rule's detection criteria. It represents a typical Monero mining command line."
+  },
+  {
+    "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --cpu-priority=8",
+    "explanation": "This command includes 'stratum+tcp://' and '--cpu-p

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\\\System\\\\CurrentControlSet\\\\Control\\\\Lsa\" /v NoLMHash /t REG_DWORD /d 0 /f",
+    "explanation": "Insertion technique was used to add escape characters to the path. This is intended to avoid the rule condition that searches for the exact path string. The high-level behavior is expected to remain equivalent in a test environment because the escape characters do not change the semantic meaning of the command."
+  },
+  {
+    "output": "reg.exe add \"HKLM:System\\CurrentControlSet\\Control\\Lsa\" /v NoLMHash /t REG_DWORD /d 0 /f",
+    "explanation": "Substitution technique was used to replace the forward slash with a backslash in the registry path. This is intended to avoid the rule condition that searches for the exact path string. The high-level behavior is expected to remain equivalent in a test environment because the registry path is still correctly resolved."
+  },
+  {
+    "output": "reg.exe add \"HKLM:System\\CurrentControlSet\\Control\\Lsa\" /vNoLMHash /tREG_DWORD /d0 /f",
+    "explanation": "Omission technique was used to remove spaces between the option flags and their values. This is intended to avoid the rule condition that searches for the exact command-line string. The high-level behavior is expected to remain equivalent in a test environment because the option flags and their values are still correctly parsed."
+  },
+  {
+    "output": "reg.exe add \"HKLM:System\\CurrentControlSet\\Control\\Lsa\" /f /v NoLMHash /t REG_DWORD /d 0",
+    "explanation": "Reordering technique was used to change the order of the option flags. This is intended to avoid the rule condition that searches for the exact command-line string. The high-level behavior is expected to remain equivalent in a test environment because the option flags and their values are still correctly parsed."
+  },
+  {
+    "output": "reg.exe add \"HKLM:System\\CurrentControlSet\\Control\\Lsa\" /v NoLMHash /t REG_DWORD /d \"0\" /f",
+    "explanation": "Insertion technique was used to add quotes around the value of the registry key. This is intended to avoid the rule condition that searches for the exact command-line string. The high-level behavior is expected to remain equivalent in a test environment because the quotes do not change the semantic meaning of the command."
+  }
+]

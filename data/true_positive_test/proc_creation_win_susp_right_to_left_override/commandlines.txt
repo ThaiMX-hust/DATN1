@@ -1,6 +1,1 @@
-C:\WINDOWS\system32\cmd.exe /c ""C:\Users\thaim\Desktop\evil_batchÃ¢â‚¬Â®fdp.bat" "
-C:\WINDOWS\system32\cmd.exe /c ""C:\Users\thaim\Downloads\evil_batchÃ¢â‚¬Â®fdp.bat" "
-"C:\Users\administrator.SIGEN.000\AnnÃ¢â‚¬Â®gepj.exe"
-C:\WINDOWS\system32\cmd.exe /c ""C:\Users\thaim\Desktop\evil_batchâ€®fdp.bat" "
-C:\WINDOWS\system32\cmd.exe /c ""C:\Users\thaim\Downloads\evil_batchâ€®fdp.bat" "
-powershell -NoProfile -WindowHidden -Command "$rtlo=[char]0x202e; $f='legit_'+$rtlo+'.exe'; Start-Process $f"
+powershell.exe -Command "Write-Output 'TEST-HOST ‮'"

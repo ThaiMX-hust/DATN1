@@ -1,0 +1,20 @@
+```json
+[
+  {
+    "output": "ruby.exe -i \"-u username\" -p \"-p password\" https://github.com/Hackplayers/evil-winrm.git",
+    "explanation": "This command simulates a Ruby-based execution with quoted arguments that mimic the Sigma rule's detection criteria. It uses insertion of quotes and reordering of arguments to test if the rule can detect the pattern despite syntactic variations."
+  },
+  {
+    "output": "ruby.exe -i -u user -p pass https://github.com/Hackplayers/evil-winrm.git",
+    "explanation": "This command uses minimal syntax with no extra quotes or escapes, testing the Sigma rule's ability to detect the core pattern of the command line without syntactic obfuscation."
+  },
+  {
+    "output": "ruby.exe -i '-u user' -p 'pass' https://github.com/Hackplayers/evil-winrm.git",
+    "explanation": "This command uses single quotes to enclose arguments, testing whether the Sigma rule can detect the presence of the required command-line flags regardless of quotation style."
+  },
+  {
+    "output": "ruby.exe -i -u user -p pass https://github.com/Hackplayers/evil-winrm.git",
+    "explanation": "This command omits quotes and escape characters entirely, testing the Sigma rule's ability to detect the command line in its most straightforward form."
+  }
+]
+```

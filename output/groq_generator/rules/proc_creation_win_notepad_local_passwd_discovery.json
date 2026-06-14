@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "notepad.exe C:\\Users\\admin\\Documents\\passwords.txt",
-    "explanation": "This command directly matches the Sigma rule by launching notepad.exe with a file containing 'password' in its name and a supported extension (.txt)."
+    "output": "notepad.exe \"C:\\Users\\User\\Documents\\passwords.txt\"",
+    "explanation": "This command simulates the execution of Notepad to open a file named 'passwords.txt', which matches the Sigma rule's detection criteria. The filename includes 'password' and the .txt extension, and the command is wrapped in quotes to test safe mutation techniques like insertion."
   },
   {
-    "output": "notepad.exe \"C:\\\\Data\\\\passwords.csv\"",
-    "explanation": "The command uses quotes to handle the file path and matches the rule by opening a CSV file with 'password' in the filename."
+    "output": "notepad.exe C:\\Users\\User\\Documents\\passwords.csv",
+    "explanation": "This command simulates the execution of Notepad to open a file named 'passwords.csv', which matches the Sigma rule's detection criteria. The filename includes 'password' and the .csv extension. No unnecessary characters are added, testing the basic detection capability."
   },
   {
-    "output": "notepad.exe C:\\secure\\passwords.bak",
-    "explanation": "This command opens a file with 'password' in the name and a supported extension (.bak), matching the Sigma rule."
+    "output": "notepad.exe \"C:\\Users\\User\\Documents\\passwords.xls\"",
+    "explanation": "This command simulates the execution of Notepad to open a file named 'passwords.xls', which matches the Sigma rule's detection criteria. The filename includes 'password' and the .xls extension. The use of quotes tests safe insertion techniques."
   },
   {
-    "output": "powershell.exe -Command \"notepad C:\\\\backup\\\\passwords.log\"",
-    "explanation": "This command uses PowerShell to invoke Notepad with a file containing 'password' in the name and a supported extension (.log), matching the rule."
+    "output": "notepad.exe C:\\Users\\User\\Documents\\passwords.doc",
+    "explanation": "This command simulates the execution of Notepad to open a file named 'passwords.doc', which matches the Sigma rule's detection criteria. The filename includes 'password' and the .doc extension. This tests the detection of password-related file access in document formats."
+  },
+  {
+    "output": "notepad.exe \"C:\\Users\\User\\passwords.txt\"",
+    "explanation": "This command simulates the execution of Notepad to open a file named 'passwords.txt' in a different directory. The filename includes 'password' and the .txt extension. The use of quotes tests safe insertion techniques."
   }
 ]
+```

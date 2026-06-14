@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msedge_proxy.exe -u http://example.com/file.txt",
+    "explanation": "This command simulates a benign use of msedge_proxy.exe to download a file from an HTTP URL, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "msedge_proxy.exe --url https://example.com/file.txt",
+    "explanation": "This command uses the long-form option '--url' instead of '-u', demonstrating substitution as a mutation technique while still matching the Sigma rule."
+  },
+  {
+    "output": "msedge_proxy.exe -u http://example.com/file.txt -o C:\\Temp\\download.txt",
+    "explanation": "This command adds an output path argument, which is optional and does not affect the detection criteria of the Sigma rule."
+  },
+  {
+    "output": "msedge_proxy.exe -u http://example.com/file.txt   ",
+    "explanation": "This command uses insertion of extra spaces after the URL, which is still parsed correctly and matches the Sigma rule."
+  },
+  {
+    "output": "msedge_proxy.exe -u \"http://example.com/file.txt\"",
+    "explanation": "This command uses quotes around the URL, demonstrating insertion of quotes as a mutation technique while still matching the Sigma rule."
+  }
+]

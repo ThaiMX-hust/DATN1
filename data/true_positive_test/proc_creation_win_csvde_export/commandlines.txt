@@ -1,3 +1,0 @@
-copy csvde.exe Update.exe && Update.exe /f C:\Users\Public\ad_export.csv
-csvde.exe "-f" C:\Users\Public\out.csv
-csvde.exe -fC:\Users\Public\export.csv -i -f C:\Users\Public\real_export.csv

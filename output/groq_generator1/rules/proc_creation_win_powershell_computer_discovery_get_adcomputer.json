@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Ge`t-ADCo`mputer -Filter * | Out-Fi`le computers.txt\"",
+    "explanation": "Used insertion (backticks) to obfuscate command parts while maintaining functionality. This is a safe mutation technique for testing bypasses."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Se`lect-Object * | Out-File computers.txt\"",
+    "explanation": "Inserted a backtick to split 'Select' into 'Se`lect' and added Select-Object to simulate a benign administrative use case while still matching the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Out-File -FilePath computers.txt\"",
+    "explanation": "Reordered and expanded the output command to use the full parameter name '-FilePath' instead of redirection, which is a valid substitution and reordering."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Out-File computers.`txt\"",
+    "explanation": "Used insertion (backtick) to obfuscate the file extension while maintaining the same file output behavior."
+  }
+]

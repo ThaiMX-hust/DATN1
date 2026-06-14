@@ -1,4 +1,1 @@
-C:\Windows\system32\regsvr32.exe  /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg
-copy regsvr32.exe not_regsvr.exe && not_regsvr.exe /s C:\Tools\calc.ext
-regsvr32.exe /s "payload.dll;not_an_ext"
-regsvr32.exe /s /u malicious_file.dll.txt
+C:\Windows\system32\regsvr32.exe /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg

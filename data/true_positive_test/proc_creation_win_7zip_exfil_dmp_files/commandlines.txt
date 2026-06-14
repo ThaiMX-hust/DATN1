@@ -1,0 +1,1 @@
+C:\AtomicRedTeam\ExternalPayloads\7z\7z.exe a archive.7z lsass.dmp

@@ -1,6 +1,26 @@
 [
   {
-    "output": "powershell.exe -Command \"New-WebGlobalModule -Name 'SuspiciousModule' -Image 'module.dll'\"",
-    "explanation": "The command is unchanged because it already matches the Sigma rule's detection criteria. No safe mutation is needed to simulate the test case."
+    "output": "appcmd.exe add module /name:TestModule /type:TestType",
+    "explanation": "This command simulates a suspicious IIS module registration. It matches the Sigma rule's detection condition for 'appcmd.exe add module'."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-Type -AssemblyName System.Enterpriseservices.Internal.Publish\"",
+    "explanation": "This command simulates the use of PowerShell to load a suspicious assembly. It matches the Sigma rule's detection condition for 'system.enterpriseservices.internal.publish' in the command line."
+  },
+  {
+    "output": "gacutil.exe /I TestAssembly.dll",
+    "explanation": "This command simulates the registration of an assembly using gacutil. It matches the Sigma rule's detection condition for 'gacutil' and ' /I'."
+  },
+  {
+    "output": "  appcmd.exe   add   module   /name:TestModule   /type:TestType   ",
+    "explanation": "This command uses spacing insertion to simulate obfuscation while maintaining the same behavior. It matches the Sigma rule's detection condition for 'appcmd.exe add module'."
+  },
+  {
+    "output": "powershell.exe -c \"Add-Type -AssemblyName System.Enterpriseservices.Internal.Publish\"",
+    "explanation": "This command uses substitution of '-Command' with '-c' to simulate equivalent syntax. It matches the Sigma rule's detection condition for 'system.enterpriseservices.internal.publish' in the command line."
+  },
+  {
+    "output": "gacutil /i TestAssembly.dll",
+    "explanation": "This command uses substitution of '/I' with '/i' to simulate equivalent syntax. It matches the Sigma rule's detection condition for 'gacutil' and ' /I'."
   }
 ]

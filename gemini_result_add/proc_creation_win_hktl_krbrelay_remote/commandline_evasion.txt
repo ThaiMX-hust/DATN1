@@ -1,0 +1,22 @@
+[
+  {
+    "output": "RemoteKrbRelay.exe /clsid 9a404bab-4034-4b53-9ec4-332e185f2693 /target dc.domain.local /victim srv.domain.local",
+    "explanation": "Substitution technique: Replacing the required forward hyphens (' -clsid ', ' -target ', ' -victim ') with forward slashes ('/clsid', '/target', '/victim'). RemoteKrbRelay uses standard C#/.NET command-line parsing frameworks that handle forward slashes interchangeably with hyphens for arguments. This completely avoids the 'selection_cli_required' block by mutating the strict space-and-hyphen signature strings while preserving absolute execution logic equivalence."
+  },
+  {
+    "output": "RemoteKrbRelay.exe\t-clsid\t9a404bab-4034-4b53-9ec4-332e185f2693\t-target\tdc.domain.local\t-victim\tsrv.domain.local",
+    "explanation": "Substitution technique: Substituting structural space boundaries flanking the argument switches with horizontal tab characters ('\\t'). The Windows command-line tokenizer processes horizontal tabs as valid whitespace separators natively, satisfying application parsing requirements while breaking the single space-padded literal checks like ' -clsid ', ' -target ', and ' -victim ' across 'selection_cli_required'."
+  },
+  {
+    "output": "RemoteKrbRelay.exe \"-clsid\" 9a404bab-4034-4b53-9ec4-332e185f2693 \"-target\" dc.domain.local \"-victim\" srv.domain.local",
+    "explanation": "Insertion technique: Enclosing the core configuration switches inside explicit double quotes. The Windows execution environment strips outer quote boundaries transparently prior to populating the program's parameter arrays, allowing identical tool interaction while disrupting contiguous literal pattern matching on the unquoted switch streams."
+  },
+  {
+    "output": "cmd.exe /c RemoteKrbRelay.exe -clsi^d 9a404bab-4034-4b53-9ec4-332e185f2693 -tar^get dc.domain.local -vic^tim srv.domain.local",
+    "explanation": "Insertion technique: Utilizing a cmd.exe environment to inject a shell caret escape operator ('^') directly into the switch names. The parent command interpreter parses and drops the escape token prior to launching the target child binary, logging variants like '-clsi^d' and '-tar^get' which cleanly bypasses the 'selection_cli_required' string groupings."
+  },
+  {
+    "output": "RemoteKrbRelay.exe -clsid  9a404bab-4034-4b53-9ec4-332e185f2693 -target  dc.domain.local -victim  srv.domain.local",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces directly after the option strings. While the operating system normalizes and flattens sequential whitespaces into discrete token breaks at runtime initialization, strict single-space padded signature checkers (such as ' -clsid ', ' -target ', and ' -victim ') will fail to trigger."
+  }
+]

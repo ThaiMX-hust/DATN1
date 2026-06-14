@@ -1,5 +1,2 @@
 "cmd.exe" /c InfDefaultInstall.exe "C:\AtomicRedTeam\atomics\T1218\src\Infdefaultinstall.inf"
-InfDefaultInstall.exe  "C:\AtomicRedTeam\atomics\T1218\src\Infdefaultinstall.inf"
-copy InfDefaultInstall.exe not_suspicious.exe && not_suspicious.exe C:\path\to\malicious.inf
-InfDefaultInstall.exe "C:\path\to\malicious.INF"
-InfDefaultInstall.exe C:\path\to\malicious.inf.txt
+InfDefaultInstall.exe "C:\AtomicRedTeam\atomics\T1218\src\Infdefaultinstall.inf"

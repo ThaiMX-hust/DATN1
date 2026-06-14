@@ -1,0 +1,18 @@
+[
+  {
+    "output": "diskshadow.exe -s \"C:\\temp\\payload.txt\"",
+    "explanation": "Inserts quotes around the script path to test if the rule detects the command line with additional characters."
+  },
+  {
+    "output": "diskshadow.exe -s C:\\temp\\payload   .txt",
+    "explanation": "Inserts extra spaces between the filename and extension to test if the rule is sensitive to spacing."
+  },
+  {
+    "output": "diskshadow.exe /s C:\\temp\\payload.`txt",
+    "explanation": "Uses an escape character (backtick) to test if the rule is sensitive to alternative path formatting."
+  },
+  {
+    "output": "diskshadow.exe -s C:\\temp\\payload.txt",
+    "explanation": "Uses lowercase flag '-s' to test if the rule is case-sensitive."
+  }
+]

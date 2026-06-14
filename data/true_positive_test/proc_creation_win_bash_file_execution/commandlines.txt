@@ -1,3 +1,1 @@
-bash.exe -- script.sh
-bash.exe -l script.sh
-bash.exe script.sh # bash -
+C:\Users\thaim\AppData\Local\Microsoft\WindowsApps\bash.exe C:\Temp\test.sh

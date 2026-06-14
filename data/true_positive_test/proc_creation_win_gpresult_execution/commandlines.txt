@@ -1,4 +1,1 @@
-gpresult  /z
-copy gpresult.exe not_gp.exe && not_gp.exe /r
-gpresult.exe /h report.html /f
-powershell.exe -Command "Get-GPOReport -All -ReportType Xml -Path C:\temp\gporeport.xml"
+gpresult /z

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c powershell.exe -nop -ep bypass",
+    "explanation": "This command is already a valid test case for the Sigma rule. It represents a suspicious child process (PowerShell) launched from a parent process (cmd.exe), which could be flagged if the parent process is associated with ManageEngine ServiceDesk."
+  },
+  {
+    "output": "MSBuild.exe C:\\path\\to\\malicious.xml",
+    "explanation": "This command is already a valid test case for the Sigma rule. MSBuild.exe is not listed in the rule's suspicious child process list, but it can be used to execute malicious payloads and may still be flagged if the parent process is associated with ManageEngine ServiceDesk."
+  },
+  {
+    "output": "rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication\";document.write();",
+    "explanation": "This command is already a valid test case for the Sigma rule. It represents a suspicious child process (rundll32.exe) that is not explicitly listed in the rule but may be flagged if the parent process is associated with ManageEngine ServiceDesk."
+  }
+]

@@ -1,6 +1,22 @@
 [
   {
-    "output": "copy mshta.exe DirectX.exe && DirectX.exe javascript:a=(new ActiveXObject('WScript.Shell')).Run('calc.exe');window.close();",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to simulate suspicious mshta.exe execution."
+    "output": "mshta.exe C:\\Users\\Public\\malicious.hta",
+    "explanation": "This command simulates a suspicious mshta.exe execution from a known suspicious folder (C:\\Users\\Public\\), which aligns with the Sigma rule's detection criteria. It is a direct test case for the rule."
+  },
+  {
+    "output": "mshta C:\\Windows\\Temp\\malicious.hta",
+    "explanation": "This command simulates a suspicious mshta execution from a known suspicious folder (C:\\Windows\\Temp\\), matching the Sigma rule's detection criteria. The omission of the .exe extension is allowed since the system may still resolve it correctly."
+  },
+  {
+    "output": "mshta.exe \"C:\\ProgramData\\malicious\\payload.hta\"",
+    "explanation": "This command uses quotes to handle spaces in the path and executes mshta.exe from a suspicious folder (C:\\ProgramData\\), which aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "mshta.exe C:\\Users\\Public\\malicious\\payload.hta",
+    "explanation": "This command uses a nested path within a suspicious folder (C:\\Users\\Public\\) and executes mshta.exe, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "mshta.exe C:\\Windows\\Temp\\malicious\\payload.hta",
+    "explanation": "This command executes mshta.exe from a suspicious folder (C:\\Windows\\Temp\\), which is flagged by the Sigma rule. The path is nested to simulate realistic obfuscation techniques."
   }
 ]

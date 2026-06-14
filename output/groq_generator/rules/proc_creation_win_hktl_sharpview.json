@@ -1,42 +1,22 @@
 [
   {
-    "output": "SharpView.exe Get-DomainComputer",
-    "explanation": "The Sigma rule detects specific command-line arguments like 'Get-DomainComputer'. This command is a direct match and would trigger the rule."
+    "output": "\"powershell.exe\" & {Import-Module \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PowerView.ps1\"; Get-DomainGPO}",
+    "explanation": "This command bypasses the Sigma rule by using 'Import-Module' instead of downloading PowerView at runtime, avoiding the 'DownloadString' or 'IWR' patterns. It also omits unnecessary parameters while maintaining the same behavior."
   },
   {
-    "output": "SharpView.exe Get-Domain\"Computer",
-    "explanation": "Inserting a quote in 'Get-DomainComputer' may bypass detection if the SIEM does not normalize quotes in command-line arguments."
+    "output": "\"powershell.exe\" -Command \"& {Import-Module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PowerView.ps1'; Find-DomainShare -CheckShareAccess}\"",
+    "explanation": "This command uses a direct module import and shortens the command line by using '-Command' instead of a script block, avoiding the 'IEX' or 'DownloadString' patterns that the Sigma rule detects."
   },
   {
-    "output": "SharpView.exe Get-DomaInComputer",
-    "explanation": "Changing the case of the command may bypass detection if the SIEM does not enforce case-insensitive matching."
+    "output": "\"powershell.exe\" -c \"& {Import-Module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PowerView.ps1'; Find-GPOComputerAdmin -ComputerName $env:COMPUTERNAME}\"",
+    "explanation": "This command uses a simplified syntax for '-c' instead of a full script block and avoids the 'IEX' or 'DownloadString' patterns, making it less likely to trigger the Sigma rule."
   },
   {
-    "output": "SharpView.exe Get-Doma^inComputer",
-    "explanation": "Using an escape character (^) to split the command may bypass detection if the SIEM does not normalize escape sequences."
+    "output": "\"powershell.exe\" -Command \"& {Import-Module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PowerView.ps1'; Get-DomainTrust}\"",
+    "explanation": "This command uses a direct module import and omits verbose or unnecessary parameters, avoiding the 'IEX' or 'DownloadString' patterns that the Sigma rule is designed to detect."
   },
   {
-    "output": "SharpView.exe Get-DomainComputer`",
-    "explanation": "Appending a backtick may bypass detection if the SIEM does not properly handle trailing characters in command-line arguments."
-  },
-  {
-    "output": "SharpView.exe Get-Domain`Computer",
-    "explanation": "Using a backtick to split the command may bypass detection if the SIEM does not normalize backticks in command-line arguments."
-  },
-  {
-    "output": "SharpView.exe Get-DomainComputer`n",
-    "explanation": "Appending a newline character may bypass detection if the SIEM does not properly handle newlines in command-line arguments."
-  },
-  {
-    "output": "SharpView.exe Get-DomainComputer`r",
-    "explanation": "Appending a carriage return may bypass detection if the SIEM does not properly handle carriage returns in command-line arguments."
-  },
-  {
-    "output": "SharpView.exe Get-DomainComputer`r`n",
-    "explanation": "Appending a newline and carriage return may bypass detection if the SIEM does not properly handle these characters in command-line arguments."
-  },
-  {
-    "output": "SharpView.exe Get-DomainComputer` `",
-    "explanation": "Using backticks to escape spaces may bypass detection if the SIEM does not properly handle multiple escaped spaces in command-line arguments."
+    "output": "\"powershell.exe\" -Command \"& {Import-Module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PowerView.ps1'; Get-ForestTrust}\"",
+    "explanation": "This command uses a direct module import and avoids the 'IEX' or 'DownloadString' patterns, making it less likely to be flagged by the Sigma rule."
   }
 ]

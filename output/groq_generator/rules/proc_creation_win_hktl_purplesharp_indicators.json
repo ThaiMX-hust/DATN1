@@ -1,18 +1,14 @@
 [
   {
-    "output": "ren PurpleSharp.exe PsSim.exe && .\\PsSim.exe -t T1059.001 -m localhost",
-    "explanation": "The original command uses renaming and execution, which aligns with the Sigma rule's detection of PurpleSharp execution. This simulated command is a direct match and would trigger the rule."
+    "output": "PurpleSharp.exe -xyz123456.exe",
+    "explanation": "This command simulates a PurpleSharp execution with a command line that includes 'xyz123456.exe' and 'PurpleSharp' as per the Sigma rule. It uses minimal syntax to match the detection criteria."
   },
   {
-    "output": ".\\PurpleSharp.exe -t T1059.001 -m localhost",
-    "explanation": "Executing the tool directly without renaming will still match the 'OriginalFileName: PurpleSharp.exe' condition in the Sigma rule, thus triggering the detection."
+    "output": "\"PurpleSharp.exe\" --xyz123456.exe",
+    "explanation": "This command uses quotes and long-form options to simulate a PurpleSharp execution. It matches the Sigma rule by including 'xyz123456.exe' and 'PurpleSharp' in the command line."
   },
   {
-    "output": "Start-Process .\\PurpleSharp.exe -ArgumentList '-t T1059.001 -m localhost'",
-    "explanation": "Using PowerShell's Start-Process to launch PurpleSharp.exe with arguments will match the Sigma rule's detection criteria based on the original file name and command line content."
-  },
-  {
-    "output": "Copy-Item PurpleSharp.exe not_a_tool.exe; .\\not_a_tool.exe -t T1059.001 -m localhost",
-    "explanation": "This command renames the executable and executes it, which matches the Sigma rule's detection criteria for PurpleSharp execution."
+    "output": "PurpleSharp.exe xyz123456.exe",
+    "explanation": "This command simulates a PurpleSharp execution with a direct command line that includes 'xyz123456.exe' and 'PurpleSharp', matching the Sigma rule's detection criteria."
   }
 ]

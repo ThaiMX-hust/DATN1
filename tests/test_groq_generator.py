@@ -14,6 +14,7 @@ from generator.groq_generator import (
     GroqHTTPError,
     HTTPResponse,
     GenerationConfig,
+    NO_TRUE_POSITIVE_COMMAND_TEXT,
     build_jobs,
     call_groq,
     format_true_positive_commands,
@@ -85,6 +86,11 @@ class GroqGeneratorParsingTests(unittest.TestCase):
         formatted = format_true_positive_commands(["whoami", "hostname"])
 
         self.assertEqual(formatted, "1. whoami\n2. hostname")
+
+    def test_format_missing_true_positive_command(self) -> None:
+        formatted = format_true_positive_commands([])
+
+        self.assertEqual(formatted, NO_TRUE_POSITIVE_COMMAND_TEXT)
 
     def test_parse_duration_seconds(self) -> None:
         self.assertAlmostEqual(parse_duration_seconds("940ms") or 0, 0.94)
@@ -207,6 +213,73 @@ class GroqGeneratorJobTests(unittest.TestCase):
             self.assertEqual(jobs[0].command_index, 1)
             self.assertEqual(jobs[1].source_commands, ("hostname",))
             self.assertEqual(jobs[1].command_index, 2)
+
+    def test_build_jobs_includes_rules_without_commandlines(self) -> None:
+        with tempfile.TemporaryDirectory() as dirname:
+            temp_dir = Path(dirname)
+            rules_dir = temp_dir / "rules"
+            tp_dir = temp_dir / "data" / "true_positive_test"
+            empty_rule_dir = tp_dir / "proc_creation_win_empty"
+            rules_dir.mkdir(parents=True)
+            empty_rule_dir.mkdir(parents=True)
+            for rule_name in ("proc_creation_win_empty", "proc_creation_win_missing"):
+                (rules_dir / f"{rule_name}.yml").write_text(
+                    "title: Demo\n"
+                    "tags:\n"
+                    "  - attack.execution\n"
+                    "  - attack.t1059.003\n",
+                    encoding="utf-8",
+                )
+            (empty_rule_dir / "commandlines.txt").write_text("# no commands yet\n\n", encoding="utf-8")
+
+            jobs = build_jobs(
+                GenerationConfig(
+                    rules_dir=rules_dir,
+                    true_positive_dir=tp_dir,
+                    prompt_template=Path("unused"),
+                    output_path=Path("unused"),
+                    raw_output_dir=Path("unused"),
+                )
+            )
+
+            self.assertEqual(len(jobs), 2)
+            self.assertEqual({job.rule_path.stem for job in jobs}, {"proc_creation_win_empty", "proc_creation_win_missing"})
+            self.assertTrue(all(job.source_commands == () for job in jobs))
+            self.assertTrue(all(job.command_index is None for job in jobs))
+
+    def test_command_scope_includes_rules_without_commandlines(self) -> None:
+        with tempfile.TemporaryDirectory() as dirname:
+            temp_dir = Path(dirname)
+            rules_dir = temp_dir / "rules"
+            tp_dir = temp_dir / "data" / "true_positive_test"
+            command_rule_dir = tp_dir / "proc_creation_win_with_commands"
+            rules_dir.mkdir(parents=True)
+            command_rule_dir.mkdir(parents=True)
+            for rule_name in ("proc_creation_win_missing", "proc_creation_win_with_commands"):
+                (rules_dir / f"{rule_name}.yml").write_text(
+                    "title: Demo\n"
+                    "tags:\n"
+                    "  - attack.execution\n"
+                    "  - attack.t1059.003\n",
+                    encoding="utf-8",
+                )
+            (command_rule_dir / "commandlines.txt").write_text("cmd.exe /c whoami\nhostname\n", encoding="utf-8")
+
+            jobs = build_jobs(
+                GenerationConfig(
+                    rules_dir=rules_dir,
+                    true_positive_dir=tp_dir,
+                    prompt_template=Path("unused"),
+                    output_path=Path("unused"),
+                    raw_output_dir=Path("unused"),
+                    prompt_scope="command",
+                )
+            )
+
+            self.assertEqual(len(jobs), 3)
+            missing_job = next(job for job in jobs if job.rule_path.stem == "proc_creation_win_missing")
+            self.assertEqual(missing_job.source_commands, ())
+            self.assertIsNone(missing_job.command_index)
 
     def test_run_generation_writes_rule_files_and_resumes_missing_rules(self) -> None:
         with tempfile.TemporaryDirectory() as dirname:

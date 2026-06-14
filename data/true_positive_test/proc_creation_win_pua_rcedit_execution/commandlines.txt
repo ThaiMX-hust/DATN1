@@ -1,7 +1,0 @@
-custom_editor.exe payload.exe --set-version-string OriginalFileName "svchost.exe"
-rcedit-x64.exe payload.exe --set-version-string "Original""FileName" "svchost.exe"
-copy rcedit-x64.exe r.exe && .\r.exe target.exe --set-version-string "Original""FileName" "svchost.exe"
-powershell -Command "Move-Item rcedit-x64.exe legal_tool.exe; .\legal_tool.exe binary.exe --set-version-string 'CompanyName' 'Microsoft'"
-ren rcedit-x64.exe not_rcedit.exe && .\not_rcedit.exe target.exe --set-version-string "OriginalFileName" "lsass.exe"
-rcedit.exe --icon C:\Temp\payload.ico malware.exe
-resedit.exe --set-company-name "MaliciousCorp" target.exe

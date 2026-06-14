@@ -1,0 +1,1 @@
+"C:\Program Files\WinRAR\rar.exe" a C:\Temp\memory_dump.rar C:\Temp\test.dmp

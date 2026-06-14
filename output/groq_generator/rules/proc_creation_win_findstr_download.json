@@ -1,42 +1,22 @@
 [
   {
-    "output": "findstr /v /l . \"\\\\192.168.1.100\\share\\payload.txt\"",
-    "explanation": "Replaced '-' with '/' for flag substitution and added quotes for path normalization."
+    "output": "findstr /v /l \"TEST-HOST\" \\\\example.com\\\\share\\\\test.txt",
+    "explanation": "Replaced 'findstr.exe' with 'findstr' (common shorthand), used double backslashes for UNC path, and inserted quotes around the search string for safe parsing."
   },
   {
-    "output": "findstr -v -l . \"\\\\192\\.168\\.1\\.100\\share\\payload.txt\"",
-    "explanation": "Used escape characters for dots in the IP address to test path normalization."
+    "output": "findstr -v -l \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Substituted short flags '/v' and '/l' with equivalent long syntax '-v' and '-l', and used a mix of single and double backslashes in the UNC path for safe mutation."
   },
   {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" > NUL",
-    "explanation": "Added redirection to NUL to suppress output while preserving the original command structure."
+    "output": "findstr /l /v \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Reordered the flags '/v' and '/l' since they are accepted in any order by findstr.exe, and used standard UNC path formatting."
   },
   {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" | findstr .",
-    "explanation": "Piped the output to another findstr command to test reordering and insertion techniques."
+    "output": "findstr /v /l TEST-HOST \\\\example.com\\share\\test.txt",
+    "explanation": "Omitted quotes around the search string since it does not contain special characters, and used standard UNC path formatting."
   },
   {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" && echo Done",
-    "explanation": "Appended a harmless echo command after the original command to test argument omission and reordering."
-  },
-  {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^| more",
-    "explanation": "Used an escape character with a pipe to test safe command-line mutation techniques."
-  },
-  {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^>^> NUL",
-    "explanation": "Used escape characters and redirection to test safe command-line mutation techniques."
-  },
-  {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^< NUL",
-    "explanation": "Used redirection from NUL to test safe command-line mutation techniques."
-  },
-  {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^<^> NUL",
-    "explanation": "Used redirection from and to NUL to test safe command-line mutation techniques."
-  },
-  {
-    "output": "findstr -v -l . \"\\\\192.168.1.100\\share\\payload.txt\" ^| findstr /m .",
-    "explanation": "Used a pipe and another findstr command to test safe command-line mutation techniques."
+    "output": "findstr.exe -v -l \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Substituted flag syntax from '/' to '-', inserted quotes for safe parsing, and used standard UNC path formatting."
   }
 ]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "ilasm -dll -out=test.dll source.il",
+    "explanation": "Substituted '/output' with '-out', a common equivalent syntax accepted by ilasm.exe for specifying output files."
+  },
+  {
+    "output": "ilasm /dll source.il -out:test.dll",
+    "explanation": "Reordered the arguments to place the '-out' flag after the source file, which is still valid syntax for ilasm.exe."
+  },
+  {
+    "output": "ilasm /dll source.il --out=test.dll",
+    "explanation": "Replaced '-out' with '--out' to simulate a long-form flag equivalent, which is a safe mutation for testing purposes."
+  },
+  {
+    "output": "ilasm /dll source.il -out:./test.dll",
+    "explanation": "Inserted a relative path './' before the output filename, which is a safe mutation that does not affect the behavior of ilasm.exe."
+  }
+]

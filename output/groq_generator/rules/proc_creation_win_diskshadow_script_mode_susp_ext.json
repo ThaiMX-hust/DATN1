@@ -1,18 +1,22 @@
 [
   {
-    "output": "diskshadow.exe -s \"C:\\temp\\payload.txt\"",
-    "explanation": "Inserts quotes around the script path to test if the rule detects the command line with additional characters."
+    "output": "diskshadow -s script.vbs",
+    "explanation": "The Sigma rule filters for script files with the .txt extension. Using a .vbs extension bypasses the filter while still executing a script in Diskshadow's script mode."
   },
   {
-    "output": "diskshadow.exe -s C:\\temp\\payload   .txt",
-    "explanation": "Inserts extra spaces between the filename and extension to test if the rule is sensitive to spacing."
+    "output": "diskshadow -s script.ps1",
+    "explanation": "The Sigma rule filters for script files with the .txt extension. Using a .ps1 extension bypasses the filter while still executing a script in Diskshadow's script mode."
   },
   {
-    "output": "diskshadow.exe /s C:\\temp\\payload.`txt",
-    "explanation": "Uses an escape character (backtick) to test if the rule is sensitive to alternative path formatting."
+    "output": "diskshadow -s script.cmd",
+    "explanation": "The Sigma rule filters for script files with the .txt extension. Using a .cmd extension bypasses the filter while still executing a script in Diskshadow's script mode."
   },
   {
-    "output": "diskshadow.exe -s C:\\temp\\payload.txt",
-    "explanation": "Uses lowercase flag '-s' to test if the rule is case-sensitive."
+    "output": "diskshadow -s script.bat",
+    "explanation": "The Sigma rule filters for script files with the .txt extension. Using a .bat extension bypasses the filter while still executing a script in Diskshadow's script mode."
+  },
+  {
+    "output": "diskshadow -s script.js",
+    "explanation": "The Sigma rule filters for script files with the .txt extension. Using a .js extension bypasses the filter while still executing a script in Diskshadow's script mode."
   }
 ]

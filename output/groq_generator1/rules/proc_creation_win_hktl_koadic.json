@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /q /c chcp 1252",
+    "explanation": "This is a simplified and direct command line that matches the Sigma rule's detection criteria by using the required flags and command."
+  },
+  {
+    "output": "cmd.exe /q /c \"chcp\" 1252",
+    "explanation": "Quotes are inserted around 'chcp' to test if the rule is sensitive to quoted arguments, a common safe mutation technique."
+  },
+  {
+    "output": "cmd.exe /q /c ch^cp 1252",
+    "explanation": "An escape character is inserted before the 'c' in 'chcp' to test if the rule is sensitive to escaped characters."
+  },
+  {
+    "output": "cmd.exe /q /c chcp^ 1252",
+    "explanation": "An escape character is inserted after 'chcp' to test if the rule is sensitive to escaped spaces."
+  }
+]

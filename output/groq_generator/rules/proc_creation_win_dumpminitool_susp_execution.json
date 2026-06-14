@@ -1,38 +1,22 @@
 [
   {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full",
-    "explanation": "This is the original command line used for testing the Sigma rule. It is not a bypass but a valid test case."
+    "output": "DumpMinitool.exe Full .\\secrets.txt",
+    "explanation": "This command uses the 'Full' flag and a .txt file, which matches the Sigma rule's 'susp_flags' condition. It is a minimal test case that avoids unnecessary complexity."
   },
   {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp -processId 752 -dumpType Full",
-    "explanation": "Substitution of long options to short options where applicable (e.g., --processId to -processId) is a safe mutation technique."
+    "output": "DumpMinitool.exe Mini .\\output.txt",
+    "explanation": "This command uses the 'Mini' flag and a .txt file, which matches the Sigma rule's 'susp_flags' condition. It is a minimal test case that avoids unnecessary complexity."
   },
   {
-    "output": "DumpMinitool.exe -file C:\\Temp\\memory.dmp --processId 752 --dumpType Full",
-    "explanation": "Substitution of long options to short options where applicable (e.g., --file to -file) is a safe mutation technique."
+    "output": "DumpMinitool.exe WithHeap .\\results.txt",
+    "explanation": "This command uses the 'WithHeap' flag and a .txt file, which matches the Sigma rule's 'susp_flags' condition. It is a minimal test case that avoids unnecessary complexity."
   },
   {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId=752 --dumpType=Full",
-    "explanation": "Use of equals (=) instead of space for argument assignment is a safe mutation technique."
+    "output": "DumpMinitool.exe -Full .\\data.txt",
+    "explanation": "This command uses the short form of the 'Full' flag and a .txt file, which matches the Sigma rule's 'susp_flags' condition. It demonstrates substitution of long flag syntax with short flag syntax."
   },
   {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 Full",
-    "explanation": "Reordering of arguments where the program accepts positional arguments is a safe mutation technique."
-  },
-  {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full .txt",
-    "explanation": "Appending a harmless '.txt' at the end of the command line may bypass the 'CommandLine|contains: .txt' detection logic while still being valid for testing."
-  },
-  {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full --",
-    "explanation": "Appending '--' to indicate end of options is a safe mutation technique and may bypass some simplistic string-based detection logic."
-  },
-  {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full\\",
-    "explanation": "Appending a backslash at the end of the command line is a safe mutation technique and may bypass some simplistic string-based detection logic."
-  },
-  {
-    "output": "DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full\"\"",
-    "explanation": "Appending quotes at the end of the command line is a safe mutation technique and may bypass some simplistic string-based detection logic."
+    "output": "DumpMinitool.exe Full .\\\"output.txt\"",
+    "explanation": "This command uses the 'Full' flag and a .txt file with quotes around the filename, which matches the Sigma rule's 'susp_flags' condition. It demonstrates insertion of quotes for safe mutation."
   }
 ]

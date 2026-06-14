@@ -1,3 +1,0 @@
-copy netsh.exe not_netsh.exe && not_netsh.exe advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes
-netsh advfirewall firewall set rule name="Remote Desktop" new enable=Yes
-netsh.exe advfirewall firewall set rule group="@FirewallAPI.dll,-28752" new enable=Yes

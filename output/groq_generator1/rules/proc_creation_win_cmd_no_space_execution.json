@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe/cwhoami",
+    "explanation": "This command omits the space between /c and the command, which matches the Sigma rule's detection criteria for missing space before the /c flag."
+  },
+  {
+    "output": "cmd.exe/c whoami",
+    "explanation": "This command includes a space after /c, which is a valid and safe variation that would not trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /cwhoami",
+    "explanation": "This command omits the space between /c and the command, which matches the Sigma rule's detection criteria for missing space after the /c flag."
+  },
+  {
+    "output": "cmd.exe /c whoami",
+    "explanation": "This command includes a space after /c, which is a valid and safe variation that would not trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe/c^whoami",
+    "explanation": "This command uses an escape character (^) to obfuscate the command line, which is a safe mutation technique for testing and may bypass the Sigma rule's detection."
+  }
+]

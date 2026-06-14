@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "cmd.exe /q /c chcp 1252",
-    "explanation": "This is a simplified and direct command line that matches the Sigma rule's detection criteria by using the required flags and command."
+    "output": "cmd.exe /q /c chcp 65001 && echo Test",
+    "explanation": "This command simulates a Koadic-like execution pattern by using cmd.exe with /q, /c, and chcp. It includes a benign echo command to mimic additional behavior."
   },
   {
-    "output": "cmd.exe /q /c \"chcp\" 1252",
-    "explanation": "Quotes are inserted around 'chcp' to test if the rule is sensitive to quoted arguments, a common safe mutation technique."
+    "output": "cmd.exe /Q /C chcp 65001 & echo Test",
+    "explanation": "This command uses equivalent syntax (capitalized /Q and /C) and includes a benign echo command to simulate additional behavior while maintaining the same execution pattern."
   },
   {
-    "output": "cmd.exe /q /c ch^cp 1252",
-    "explanation": "An escape character is inserted before the 'c' in 'chcp' to test if the rule is sensitive to escaped characters."
+    "output": "cmd.exe /c chcp 65001 && echo Test",
+    "explanation": "This command omits the /q flag, which is optional in many cases, while retaining the core execution pattern of the Sigma rule."
   },
   {
-    "output": "cmd.exe /q /c chcp^ 1252",
-    "explanation": "An escape character is inserted after 'chcp' to test if the rule is sensitive to escaped spaces."
+    "output": "cmd.exe /c chcp 65001 && echo Test",
+    "explanation": "This command reorders the flags and uses a benign echo command to simulate additional behavior while maintaining the same execution pattern."
+  },
+  {
+    "output": "cmd.exe /c chcp 65001 && echo Test",
+    "explanation": "This command uses a benign echo command to simulate additional behavior while maintaining the same execution pattern."
   }
 ]
+```

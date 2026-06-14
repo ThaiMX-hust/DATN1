@@ -1,14 +1,10 @@
 [
   {
-    "output": "cmd.exe /c curl h\"t\"t\"p\"😕//example.com",
-    "explanation": "The original command uses escape characters (^) to obfuscate the URL. This mutation substitutes ^ with \" to achieve similar obfuscation while maintaining valid syntax."
+    "output": "cmd.exe /c echo h^t^t^p",
+    "explanation": "This command uses escape characters (^) to obfuscate the string 'http', which matches the Sigma rule's detection pattern for command-line obfuscation using escape characters."
   },
   {
-    "output": "cmd.exe /c curl h  t  t  p://example.com",
-    "explanation": "This mutation replaces escape characters (^) with spaces to simulate obfuscation. While spaces are not escape characters, they visually mimic obfuscation techniques and are still parsed correctly."
-  },
-  {
-    "output": "cmd.exe /c curl h^t^t^p://example.com",
-    "explanation": "This is a simplified version of the original command, omitting the last ^p to test whether the detection rule still applies when only part of the obfuscation is present."
+    "output": "cmd.exe /c echo h\"t\"t\"p",
+    "explanation": "This command uses quotes to obfuscate the string 'http', which also matches the Sigma rule's detection pattern for command-line obfuscation using escape characters."
   }
 ]

@@ -1,2 +1,1 @@
-fsutil  fsinfo drives
-copy fsutil.exe not_fsutil.exe && not_fsutil.exe fsinfo drives
+fsutil fsinfo drives

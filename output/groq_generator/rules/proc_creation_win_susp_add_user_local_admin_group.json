@@ -1,0 +1,18 @@
+[
+  {
+    "output": "net localgroup  administrators  \"T1136.001_Admin\"   /add",
+    "explanation": "Added extra spaces between arguments and used escaped quotes to test if the Sigma rule can be bypassed by insertion techniques."
+  },
+  {
+    "output": "net1 localgroup administrators \"T1136.001_Admin\" /add",
+    "explanation": "Used an alternate name for the net command (net1) and preserved the rest of the command structure to test if the Sigma rule can be bypassed by recoding techniques."
+  },
+  {
+    "output": "net localgroup administrators T1136.001_Admin /add",
+    "explanation": "Removed the quotes around the username to test if the Sigma rule can be bypassed by omission techniques."
+  },
+  {
+    "output": "net /add administrators localgroup T1136.001_Admin",
+    "explanation": "Reordered the command-line arguments to test if the Sigma rule can be bypassed by reordering techniques."
+  }
+]

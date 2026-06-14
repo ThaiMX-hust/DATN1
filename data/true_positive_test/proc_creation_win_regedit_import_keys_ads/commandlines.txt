@@ -1,4 +1,0 @@
-copy regedit.exe trusted.exe && trusted.exe /s "C:\temp\file.txt:payload.reg"
-powershell.exe -Command "Get-Content -Path 'C:\test\file.txt' -Stream 'hidden.reg' | Out-File 'C:\temp\temp.reg'; regedit.exe /s 'C:\temp\temp.reg'; Remove-Item 'C:\temp\temp.reg'"
-reg.exe import "C:\path\to\file.txt:hidden.reg"
-regedit.exe -m "C:\path\to\file.txt:script.reg"

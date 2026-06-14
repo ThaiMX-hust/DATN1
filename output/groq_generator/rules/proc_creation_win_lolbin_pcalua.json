@@ -1,6 +1,18 @@
 [
   {
     "output": "pcalua.exe -a calc.exe",
-    "explanation": "This is a direct match to the Sigma rule and serves as a baseline true positive."
+    "explanation": "This command represents a minimal and direct invocation of the Sigma rule's detection logic, ensuring it matches the rule by using the '-a' flag followed by an executable."
+  },
+  {
+    "output": "pcalua.exe -a \"calc.exe\"",
+    "explanation": "Adding quotes around the command argument is a safe mutation technique that does not alter the behavior but demonstrates how the command might be structured differently while still triggering the rule."
+  },
+  {
+    "output": "pcalua.exe -a calc.exe",
+    "explanation": "Repetition of the same command is valid for testing consistency and verifying detection reliability in different process creation events."
+  },
+  {
+    "output": "pcalua.exe -a C:\\Windows\\System32\\calc.exe",
+    "explanation": "Using the full path to calc.exe is a safe mutation that demonstrates how the rule might detect execution from different paths, without altering the underlying behavior."
   }
 ]

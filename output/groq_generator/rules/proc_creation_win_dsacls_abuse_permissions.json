@@ -1,0 +1,20 @@
+```json
+[
+  {
+    "output": "dsacls.exe \"C:\\path\\to\\object\" /G \"DOMAIN\\User:GA\" /I:S",
+    "explanation": "This command uses Dsacls.exe to grant full access (GA) to a user, matching the Sigma rule's detection criteria. The command includes safe mutations like quotes around the path and user, and uses the /I:S flag to specify inheritance behavior."
+  },
+  {
+    "output": "dsacls.exe C:\\path\\to\\object /G DOMAIN\\User:GE /I:S",
+    "explanation": "This command grants extended access (GE) to a user. It omits unnecessary quotes and uses short syntax for the /I flag, which is still valid and matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "dsacls.exe -G DOMAIN\\User:GR C:\\path\\to\\object /I:S",
+    "explanation": "This command uses the equivalent syntax of '-G' instead of '/G' to grant read access (GR). The reordering of the path and user arguments is valid for Dsacls.exe and still matches the Sigma rule."
+  },
+  {
+    "output": "dsacls.exe C:\\path\\to\\object /G DOMAIN\\User:GW",
+    "explanation": "This command grants write access (GW) to a user. It omits optional flags like /I:S to demonstrate that the Sigma rule can still detect the core malicious behavior."
+  }
+]
+```

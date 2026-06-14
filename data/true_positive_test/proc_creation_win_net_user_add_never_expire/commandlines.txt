@@ -1,3 +1,0 @@
-C:\WINDOWS\system32\net1  USER AtomicOperator$ At0micRedTeam! /ADD /expires:never
-NET  USER AtomicOperator$ At0micRedTeam! /ADD /expires:never
-net us^er testuser P@ssw0rd123! /ad^d /expi^res:never

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil.exe -exportPFX LocalMachine C:\\temp\\cert.pfx",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria and serves as a baseline true positive."
+  },
+  {
+    "output": "certutil.exe -exportPFX CurrentUser C:\\temp\\cert.pfx",
+    "explanation": "Reordered and substituted storage location from 'LocalMachine' to 'CurrentUser' while preserving the same behavior and triggering the rule."
+  }
+]

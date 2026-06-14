@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -SevereThreatDefaultAction Allow\"",
+    "explanation": "This command uses PowerShell to set the severe threat default action to 'Allow', matching the Sigma rule's detection criteria. The command is formatted directly and clearly."
+  },
+  {
+    "output": "powershell.exe -Command Set-MpPreference -stdefac 6",
+    "explanation": "This command uses the short form of the parameter '-stdefac' and the numeric value '6' for 'Allow', which is also detected by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -SevereThreatDefaultAction `\"Allow`\"\"",
+    "explanation": "This command uses escaped quotes around the value 'Allow', which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command Set-MpPreference -SevereThreatDefaultAction NoAction",
+    "explanation": "This command uses the string 'NoAction' as the value for the 'SevereThreatDefaultAction' parameter, which is also detected by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command Set-MpPreference -SevereThreatDefaultAction 9",
+    "explanation": "This command uses the numeric value '9' for 'NoAction', which is another valid input detected by the Sigma rule."
+  }
+]

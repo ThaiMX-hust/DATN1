@@ -1,38 +1,14 @@
 [
   {
-    "output": "TrolleyExpress.exe 755",
-    "explanation": "This command matches the Sigma rule as it uses the expected executable name and passes a process ID in the valid range."
+    "output": "\"C:\\\\Windows\\\\System32\\\\TrolleyExpress.exe\" -ma 700",
+    "explanation": "The Sigma rule detects command lines containing 'TrolleyExpress' followed by a space and a number between 7 and 9, or '-ma'. This command uses the full path with quotes, includes '-ma' and a PID (700) to simulate a memory dump attempt. It aligns with the rule's pattern but uses a full PID to avoid partial matches."
   },
   {
-    "output": "TrolleyExpress.exe \"755\"",
-    "explanation": "This command uses quotes around the process ID, which is a safe mutation technique and still matches the Sigma rule."
+    "output": "C:\\\\Windows\\\\System32\\\\TrolleyExpress.exe 800",
+    "explanation": "This command uses the executable name and a PID (800) that matches the pattern in the Sigma rule. It omits any additional flags but still triggers the rule due to the presence of the filename and a number in the expected range."
   },
   {
-    "output": "TrolleyExpress.exe -ma 755",
-    "explanation": "This command includes the '-ma' flag, which is explicitly listed in the Sigma rule as a detection pattern."
-  },
-  {
-    "output": "TrolleyExpress.exe 1044",
-    "explanation": "This command uses a process ID outside the typical range but still matches the Sigma rule because it uses the whitelisted executable name."
-  },
-  {
-    "output": "TrolleyExpress.exe 700",
-    "explanation": "This command uses a process ID at the lower end of the expected range and matches the Sigma rule."
-  },
-  {
-    "output": "TrolleyExpress.exe 999",
-    "explanation": "This command uses a process ID at the upper end of the expected range and matches the Sigma rule."
-  },
-  {
-    "output": "TrolleyExpress.exe 755\\r\\n",
-    "explanation": "This command uses newline characters after the process ID, which may be parsed correctly and still match the Sigma rule."
-  },
-  {
-    "output": "TrolleyExpress.exe 755 | echo bypass",
-    "explanation": "This command appends a harmless pipeline to the original command, which may not affect detection but is included for testing purposes."
-  },
-  {
-    "output": "TrolleyExpress.exe `755`",
-    "explanation": "This command uses backticks to enclose the process ID, which is a safe mutation technique and still matches the Sigma rule."
+    "output": "C:\\\\Windows\\\\System32\\\\TrolleyExpress.exe -ma 900",
+    "explanation": "This command includes the '-ma' flag and a PID (900), which matches both the 'TrolleyExpress.exe -ma' and the numeric pattern in the Sigma rule. It uses standard syntax and is a direct match for the detection condition."
   }
 ]

@@ -1,2 +1,0 @@
-copy csi.exe not_csi.exe && not_csi.exe script.csx
-csi.exe

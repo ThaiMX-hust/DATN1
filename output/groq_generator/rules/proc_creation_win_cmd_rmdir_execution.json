@@ -1,14 +1,22 @@
 [
   {
-    "output": "cmd.exe /c rmdir /s /q \"%temp%\\deleteme_T1551.004\"",
-    "explanation": "Inserted quotes around the path and used environment variable expansion to simulate a safe mutation while preserving the original behavior."
+    "output": "\"cmd.exe\" /c rmdir /s /q \"%temp%\\deleteme_T1551.004\"",
+    "explanation": "This command uses standard syntax and environment variables to delete a directory. It is a direct match for the Sigma rule and is safe for testing."
   },
   {
-    "output": "cmd.exe /c rd /s /q C:\\temp\\malicious_folder",
-    "explanation": "Replaced 'rmdir' with its equivalent 'rd' command and used double backslashes for path normalization, preserving the original behavior."
+    "output": "\"cmd.exe\" /c rmdir -s -q \"%temp%\\deleteme_T1551.004\"",
+    "explanation": "This command substitutes short flags with long flags (-s instead of /s, -q instead of /q), which is a valid mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "cmd.exe /c rmdir /q /s %temp%\\deleteme_T1551.004",
-    "explanation": "Reordered the '/s' and '/q' flags, which are accepted in any order by the 'rmdir' command, while keeping the same functionality."
+    "output": "\"cmd.exe\" /c rmdir /q /s \"%temp%\\deleteme_T1551.004\"",
+    "explanation": "This command reorders the flags (/q before /s), which is acceptable if the program accepts reordered arguments. It still matches the Sigma rule."
+  },
+  {
+    "output": "\"cmd.exe\" /c rmdir /s /q \"%temp%\\deleteme_T1551.004\"  ",
+    "explanation": "This command adds trailing spaces, which is a safe mutation technique and does not affect the command's behavior or detection by the Sigma rule."
+  },
+  {
+    "output": "\"cmd.exe\" /c rmdir ^/s ^/q \"%temp%\\deleteme_T1551.004\"",
+    "explanation": "This command uses escape characters (^) to bypass the Sigma rule's string-based detection. It is a valid test for assessing rule resilience."
   }
 ]

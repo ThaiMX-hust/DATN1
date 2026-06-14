@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ScriptRunner.exe -appvscript calc.exe",
+    "explanation": "This command uses the exact syntax from the Sigma rule and is a direct match for testing detection accuracy."
+  },
+  {
+    "output": "ScriptRunner.exe /appvscript calc.exe",
+    "explanation": "This command uses a long option format (/appvscript) instead of the short option (-appvscript), which is a valid substitution technique."
+  },
+  {
+    "output": "ScriptRunner.exe -appvscript\" calc.exe",
+    "explanation": "This command uses an insertion technique by adding a quote after the flag, which is still parsed correctly by the binary."
+  }
+]

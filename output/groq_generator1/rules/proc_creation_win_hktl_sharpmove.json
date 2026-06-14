@@ -1,0 +1,6 @@
+[
+  {
+    "output": "SharpMove.exe computername=10.0.0.5 action=create",
+    "explanation": "This command matches the Sigma rule by including required 'computername=' and 'action=create' in the command line and executing the known tool 'SharpMove.exe'."
+  }
+]

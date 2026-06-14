@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -c \"Import-Certificate -FilePath C:\\\\Windows\\\\TEMP\\\\malicious.cer -CertStoreLocation Cert:\\\\LocalMachine\\\\Root\"",
+    "explanation": "This command matches the Sigma rule by using Import-Certificate with a file path in the Windows Temp directory and the Root certificate store."
+  },
+  {
+    "output": "powershell.exe -Command Import-Certificate -f C:\\\\Windows\\\\TEMP\\\\malicious.cer -CertStoreLocation Cert:\\\\LocalMachine\\\\Root",
+    "explanation": "Substituted '-c' with '-Command' and replaced '-FilePath' with its short form '-f', which are equivalent in PowerShell and still match the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -c \"Import-Certificate -FilePath 'C:\\\\Windows\\\\TEMP\\\\malicious.cer' -CertStoreLocation Cert:\\\\LocalMachine\\\\Root\"",
+    "explanation": "Used single quotes inside the command string instead of double quotes for the file path, which is a safe syntactic variation and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -c Import-Certificate -FilePath C:\\\\Windows\\\\TEMP\\\\malicious.cer -CertStoreLocation Cert:\\\\LocalMachine\\\\Root",
+    "explanation": "Omitted the outer quotes around the command, which is valid in some execution contexts and still matches the Sigma rule."
+  }
+]

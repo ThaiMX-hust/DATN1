@@ -1,0 +1,18 @@
+[
+{
+"output": "cscript.exe //B "C:\Windows\System32\register_app.vbs" "-reg""ister" COMPlusApp Name C:\path\to\provider.dll",
+"explanation": "Insertion technique: Inserting empty double quotes within the parameter switch modifies it to '"-reg""ister"'. This breaks the literal substring search for '-register' in process logs. The Windows engine and VBScript script host strip out these nested quotes during argument compilation, ensuring functionality is completely retained."
+},
+{
+"output": "cmd.exe /c cscript.exe //B C:\Windows\System32\register_app.vbs -reg^ister COMPlusApp Name C:\path\to\provider.dll",
+"explanation": "Insertion technique: Introducing a caret (^) escape character inside the parameter token creates '-reg^ister' in raw telemetry logs, defeating the '-register' rule match. Because the line is interpreted via cmd.exe, the shell strips the caret prior to running cscript.exe, meaning the execution is unaffected."
+},
+{
+"output": "cscript.exe //B C:/Windows/System32/register_app.vbs -register COMPlusApp Name C:\path\to\provider.dll",
+"explanation": "Substitution technique: Normalizing the file path by changing standard Windows backslashes ('\') into forward slashes ('/'). Windows subsystems accept forward slashes for resolving directory objects, allowing register_app.vbs to run as intended, but this change evades the rule's explicit '\register_app.vbs' condition."
+},
+{
+"output": "cscript.exe //B C:\Windows\System32\.\register_app.vbs -register COMPlusApp Name C:\path\to\provider.dll",
+"explanation": "Recoding technique: Adding a relative directory identifier ('.\') right before the script file name causes process logging to store the mutated path string '\.\register_app.vbs'. The engine evaluates and canonicalizes the path accurately, avoiding the strict static string check for '\register_app.vbs'."
+}
+]

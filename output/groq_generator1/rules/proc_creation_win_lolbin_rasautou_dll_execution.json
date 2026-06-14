@@ -1,0 +1,18 @@
+[
+  {
+    "output": "rasautou.exe -d test.dll -p DllMain",
+    "explanation": "This command removes unnecessary quotes and spacing from the original command, using minimal syntax while preserving the same behavior."
+  },
+  {
+    "output": "rasautou.exe -d test.dll -pDllMain",
+    "explanation": "This command removes the space between '-p' and the export name, which is still valid syntax and maintains the same functionality."
+  },
+  {
+    "output": "rasautou.exe -p DllMain -d test.dll",
+    "explanation": "This command reorders the arguments '-d' and '-p', which is accepted by the program and does not affect the test behavior."
+  },
+  {
+    "output": "rasautou.exe -d\"test.dll\" -p\"DllMain\"",
+    "explanation": "This command uses quotes around the arguments in a different format than the original but remains valid and functionally equivalent."
+  }
+]

@@ -1,2 +1,1 @@
-W32tm  /stripchart /computer:localhost /period:5 /dataonly /samples:2
-copy w32tm.exe t.exe && t.exe /stripchart /computer:localhost /period:5 /dataonly /samples:1
+W32tm /stripchart /computer:localhost /period:5 /dataonly /samples:2

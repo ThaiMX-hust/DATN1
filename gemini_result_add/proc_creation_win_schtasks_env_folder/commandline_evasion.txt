@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks.exe -create /tn \"TestTask1\" /tr \"C:\\Perflogs\\test.txt\" /sc daily",
+    "explanation": "Substitution technique: Replaced the forward slash flag indicator ('/create') with a hyphen ('-create'). Windows schtasks.exe accepts hyphen prefixes natively for options. This avoids matching the strict literal string ' /create ' (with a leading space and trailing space) defined in selection_1_create."
+  },
+  {
+    "output": "schtasks.exe \"/create\" /tn \"TestTask1\" /tr \"C:\\Perflogs\\test.txt\" /sc daily",
+    "explanation": "Insertion technique: Wrapped the action flag '/create' inside double quotes. The native Windows command line argument parser correctly interprets quoted parameters, but this modification breaks simple substring matching logic on the SIEM, thereby avoiding selection_1_create."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:/Perflogs/test.txt\" /sc daily",
+    "explanation": "Recoding technique: Substituted the backward slash with a forward slash ('C:/Perflogs/test.txt') in the file path string. Windows handles forward slashes inside path definitions automatically via normalization APIs, but this breaks the exact literal substring ':\\Perflogs' specified in selection_1_all_folders and selection_2_some_folders."
+  },
+  {
+    "output": "cmd.exe /c schtasks.exe /cr^eate /tn \"TestTask1\" /tr \"C:\\Perflogs\\test.txt\" /sc daily",
+    "explanation": "Insertion technique: Executed through the command shell (cmd.exe) and injected a caret (^) escape character into the middle of the action flag ('/cr^eate'). The shell handles, strips, and evaluates out the caret before executing the process, but the raw process creation log captures the raw text, evading selection_1_create."
+  }
+]

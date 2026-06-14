@@ -1,3 +1,0 @@
-odbcconf.exe /a {REGSVR "C:	emp\payload.dll"}
-odbcconf.exe /F "C:	emp\payload.rsp"
-odbcconf.exe /F"C:	emp\payload.txt"

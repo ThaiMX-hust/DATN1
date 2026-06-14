@@ -1,3 +1,0 @@
-cmd.exe /c "tree.com C:\ >> %TEMP%\tree_data.log"
-sc.exe query > C:\Users\Public\Documents\services.txt
-wmic.exe OS get caption /format:list | Out-File -FilePath "$env:TEMP\sys_info.txt"

@@ -1,14 +1,14 @@
 [
   {
-    "output": "extrac32.exe /C \\\\127.0.0.1\\share\\archive.zip C:\\path\\to\\extract\\file.txt",
-    "explanation": "Replaced single quotes with double backslashes for escaping, and preserved the original command structure to maintain detection triggers."
+    "output": "extrac32.exe /C /Y \"example.cab\" \"C:\\\\temp\\\\output\"",
+    "explanation": "This command uses the Extrac32 executable with the /C and /Y flags, which are included in the Sigma rule's selection_options. The command also includes a .cab file and a path with double backslashes, which aligns with the rule's detection criteria. The command is formatted with quotes and proper spacing to simulate a safe mutation for testing."
   },
   {
-    "output": "extrac32.exe /c C:\\path\\to\\source.cab C:\\path\\to\\destination.txt",
-    "explanation": "Used double backslashes for path normalization and preserved the core command structure to maintain detection triggers."
+    "output": "\"extrac32.exe\" /C /Y example.cab C:\\\\temp\\\\output",
+    "explanation": "This command uses quotes around the executable name and omits unnecessary spaces, which is a safe mutation technique. It still includes the /C and /Y flags and a .cab file, matching the Sigma rule's detection criteria."
   },
   {
-    "output": "extrac32.exe /E /A \\\\127.0.0.1\\share\\archive.cab C:\\path\\to\\extract\\",
-    "explanation": "Replaced single quotes with double backslashes for escaping, and preserved the original command structure to maintain detection triggers."
+    "output": "extrac32.exe /C /Y example.cab C:\\temp\\output",
+    "explanation": "This command uses a normalized path with single backslashes and includes the required /C and /Y flags along with a .cab file. It is a minimal but valid command that matches the Sigma rule's detection criteria."
   }
 ]

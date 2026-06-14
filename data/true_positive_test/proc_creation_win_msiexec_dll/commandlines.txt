@@ -1,5 +1,1 @@
-c:\windows\system32\msiexec.exe  /z "C:\AtomicRedTeam\atomics\T1218.007\bin\MSIRunner.dll"
-copy msiexec.exe not_msiexec.exe && .\not_msiexec.exe -z payload.dll
-msiexec.exe -zpayload.dll
-msiexec.exe /z "C:\path\to\payload.tmp"
-msiexec.exe /z payload.dll
+c:\windows\system32\msiexec.exe /z "C:\AtomicRedTeam\atomics\T1218.007\bin\MSIRunner.dll"

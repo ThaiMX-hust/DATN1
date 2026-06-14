@@ -1,6 +1,18 @@
 [
   {
-    "output": "VSIISExeLauncher.exe -p calc.exe -a arguments",
-    "explanation": "This is a true positive command that matches the Sigma rule. It uses the -p flag to specify the executable and the -a flag to pass arguments."
+    "output": "VSIISExeLauncher.exe -p \"C:\\Windows\\System32\\cmd.exe\" -a \"\"",
+    "explanation": "This command uses the VSIISExeLauncher.exe to execute cmd.exe, which matches the Sigma rule's detection criteria. The command is formatted with quotes and spaces to simulate potential insertion techniques."
+  },
+  {
+    "output": "VSIISExeLauncher.exe -p C:\\Windows\\System32\\cmd.exe -a \"\"",
+    "explanation": "This command is a variation of the first, with the omission of quotes around the path. It still matches the Sigma rule and demonstrates how optional elements can be removed while maintaining detection."
+  },
+  {
+    "output": "VSIISExeLauncher.exe -a \"\" -p \"C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "This command reorders the arguments '-p' and '-a', which is allowed by the launcher. It still matches the Sigma rule and demonstrates reordering as a bypass technique."
+  },
+  {
+    "output": "VSIISExeLauncher.exe -p \"C:\\\\Windows\\\\System32\\\\cmd.exe\" -a \"\"",
+    "explanation": "This command uses double backslashes for path normalization, which is a form of recoding. It still matches the Sigma rule and demonstrates how encoding can be used in testing."
   }
 ]

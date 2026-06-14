@@ -1,0 +1,22 @@
+[
+  {
+    "output": "SharpEvtMute.exe --Filter\t\"rule test\"",
+    "explanation": "Substitution technique: Replacing the required single structural space character following the filter option ('--Filter \"rule ') with a horizontal tab character ('\\t'). Assuming the binary is renamed to bypass the image hook, this variation cleanly breaks the strict space-padded continuous string constraint in 'selection' while the .NET argument binder normalizes the tab natively into a valid parameter divider."
+  },
+  {
+    "output": "SharpEvtMute.exe \"--Filter\" \"rule test\"",
+    "explanation": "Insertion technique: Enclosing the operational option token inside explicit double quotes ('\"--Filter\"'). This modifies the command line recorded in process creation events, successfully disrupting the continuous literal string verification logic checking for an unquoted prefix string component, while the Win32 subsystem unquotes it seamlessly at initialization."
+  },
+  {
+    "output": "cmd.exe /c SharpEvtMute.exe --Fil^ter \"rule test\"",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe context allows the integration of a command shell caret escape operator ('^') directly into the long flag switch name ('--Fil^ter'). The parent command processor interprets and drops this modifier prior to child process initialization, generating an EDR process log footprint containing '--Fil^ter' that successfully subverts the literal keyword filter."
+  },
+  {
+    "output": "SharpEvtMute.exe --Filter   \"rule test\"",
+    "explanation": "Insertion technique: Injecting multiple consecutive space characters between the flag option and the rule definition argument. The underlying application parser collapses contiguous whitespaces into single parameter boundary vectors during process array tokenization, preserving functional execution while breaking static match signatures expecting an exact single-space format alignment."
+  },
+  {
+    "output": "SharpEvtMute.exe --Filter \"rule\t test\"",
+    "explanation": "Substitution technique: Injecting a horizontal tab character ('\\t') inside the rule definition configuration block immediately following the keyword literal entry component ('\"rule\\t test\"'). Since the application logic checks for matching event patterns via standard configuration parsing rules, manipulating whitespace syntax properties internally inside the definition token can invalidate exact substring string detections without disrupting execution."
+  }
+]

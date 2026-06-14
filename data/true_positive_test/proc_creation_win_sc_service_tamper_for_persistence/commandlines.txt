@@ -1,9 +1,5 @@
 "cmd.exe" /c copy "C:\AtomicRedTeam\atomics\T1543.003\bin\w64time.dll" %%systemroot%%\system32\ & sc create W64Time binPath= "c:\Windows\System32\svchost.exe -k TimeService" type= share start=auto & sc config W64Time DisplayName= "Windows 64 Time" & sc description W64Time "Maintain date and time synch on all clients and services in the network" & reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Svchost" /v TimeService /t REG_MULTI_SZ /d "W64Time" /f & reg add "HKLM\SYSTEM\CurrentControlSet\Services\W64Time\Parameters" /v ServiceDll /t REG_EXPAND_SZ /d "%%systemroot%%\system32\w64time.dll" /f & sc start W64Time
-"cmd.exe" /c sc config Fax binPath= "C:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -c \"write-host 'T1543.003 Test'\"" & sc start Fax
-sc  config Fax binPath= "C:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -c \"write-host 'T1543.003 Test'\""
 "cmd.exe" /c reg add HKLM\System\CurrentControlSet\Control\BootVerificationProgram /v ImagePath /t REG_SZ /d "C:\Program Files\Internet Explorer\iexplore.exe"
-reg  add HKLM\System\CurrentControlSet\Control\BootVerificationProgram /v ImagePath /t REG_SZ /d "C:\Program Files\Internet Explorer\iexplore.exe"
-reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\ExampleService" /v ImagePath /t REG_EXPAND_SZ /d "C:\Windows\Temp\backdoor" /f
-sc.exe config "ExampleService" binPath= "\"payload.exe\""
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\ExampleService" /v ImagePath /t REG_EXPAND_SZ /d "C:\Windows\Temp\payload.txt" /f
-sc.exe config "ExampleService" binPath= "calc.exe"
+"cmd.exe" /c sc config Fax binPath= "C:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -c \"write-host 'T1543.003 Test'\"" & sc start Fax
+reg add HKLM\System\CurrentControlSet\Control\BootVerificationProgram /v ImagePath /t REG_SZ /d "C:\Program Files\Internet Explorer\iexplore.exe"
+sc config Fax binPath= "C:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -c \"write-host 'T1543.003 Test'\""

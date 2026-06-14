@@ -1,6 +1,6 @@
-"C:\WINDOWS\system32\nslookup.exe" -q=txt example.com 8.8.8.8
-"C:\WINDOWS\system32\nslookup.exe"
-"C:\WINDOWS\system32\schtasks.exe" /query /fo LIST /V
-"C:\WINDOWS\system32\certutil.exe" -verifyctl -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt
-"C:\WINDOWS\system32\certutil.exe" -p password -exportPFX Root 1F3D38F280635F275BE92B87CF83E40E40458400 c:\temp\atomic.pfx
 "C:\WINDOWS\system32\certutil.exe" -addstore my C:\Users\thaim\AppData\Local\Temp\rootCA2.cer
+"C:\WINDOWS\system32\certutil.exe" -p password -exportPFX Root 1F3D38F280635F275BE92B87CF83E40E40458400 c:\temp\atomic.pfx
+"C:\WINDOWS\system32\certutil.exe" -verifyctl -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt
+"C:\WINDOWS\system32\nslookup.exe"
+"C:\WINDOWS\system32\nslookup.exe" -q=txt example.com 8.8.8.8
+"C:\WINDOWS\system32\schtasks.exe" /query /fo LIST /V

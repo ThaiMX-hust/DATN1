@@ -1,14 +1,22 @@
 [
   {
-    "output": "copy msedge.exe not_a_browser.exe && not_a_browser.exe --headless",
-    "explanation": "This command renames msedge.exe to a non-browser-like name and executes it with the --headless flag, mimicking the behavior of the Sigma rule without triggering it due to the renamed executable."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --headless https://example.com",
+    "explanation": "The original command line is already a valid true positive for the Sigma rule and does not require mutation."
   },
   {
-    "output": "msedge.exe --headless=old",
-    "explanation": "This command uses an alternative syntax for the --headless flag, which is still valid but may not be directly matched by the Sigma rule's simple 'contains' logic."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" -headless https://example.com",
+    "explanation": "The '--headless' flag is substituted with '-headless' as a valid equivalent syntax for testing purposes."
   },
   {
-    "output": "set \"FLAG=--headless\" && msedge.exe %FLAG%",
-    "explanation": "This command uses an environment variable to pass the --headless flag indirectly, which may not be captured by the Sigma rule if it does not account for variable expansion."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --headless https://example.com --no-sandbox",
+    "explanation": "An additional optional argument '--no-sandbox' is appended, which does not affect the detection logic but is allowed by reordering and insertion techniques."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --headless https://example.com --headless=new",
+    "explanation": "The '--headless' flag is repeated with an additional parameter to simulate a variation in command-line syntax while still matching the rule."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --headless https://example.com --disable-gpu",
+    "explanation": "An optional argument '--disable-gpu' is added, which is commonly used with headless mode and does not affect the detection logic."
   }
 ]

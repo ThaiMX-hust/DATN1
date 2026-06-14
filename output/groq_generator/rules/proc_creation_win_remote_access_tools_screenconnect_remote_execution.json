@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\3c41d689-bbf5-4216-b2f4-ba8fd6192c25run.cmd\"",
+    "explanation": "This command simulates a typical invocation of cmd.exe with a path containing '\\TEMP\\ScreenConnect\\', which matches the Sigma rule's detection criteria. It is a safe test command for controlled environments."
+  },
+  {
+    "output": "cmd.exe /c C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\3c41d689-bbf5-4216-b2f4-ba8fd6192c25run.cmd",
+    "explanation": "This command omits the quotes around the command line argument, which may be parsed correctly by the system and still match the Sigma rule. It is a safe test command for controlled environments."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\3c41d689-bbf5-4216-b2f4-ba8fd6192c25run.cmd\" ",
+    "explanation": "This command adds an extra space at the end, which is a safe mutation technique and may still match the Sigma rule. It is a safe test command for controlled environments."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\3c41d689-bbf5-4216-b2f4-ba8fd6192c25run.cmd\" ^",
+    "explanation": "This command adds an escape character (^) at the end, which may be parsed correctly and still match the Sigma rule. It is a safe test command for controlled environments."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\3c41d689-bbf5-4216-b2f4-ba8fd6192c25run.cmd\" --",
+    "explanation": "This command adds an unnecessary '--' at the end, which may be parsed correctly and still match the Sigma rule. It is a safe test command for controlled environments."
+  }
+]

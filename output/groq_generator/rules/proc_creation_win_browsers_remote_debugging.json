@@ -1,46 +1,10 @@
 [
   {
-    "output": "chrome.exe --remote-debugging-port=9222",
-    "explanation": "The command line includes the flag --remote-debugging-port, which is directly detected by the Sigma rule. This is a true positive and not a bypass."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222",
+    "explanation": "This is the original true positive command and is not modified."
   },
   {
-    "output": "chrome.exe -remote-debugging-port=9222",
-    "explanation": "The flag --remote-debugging-port is substituted with -remote-debugging-port, which is not a valid flag for Chrome. This is not a valid bypass and may not be accepted by the browser."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\User\\AppData\\Local\\Chrome\\User\\Data",
-    "explanation": "Additional optional arguments are added, but the --remote-debugging-port flag is still present. This is a true positive and not a bypass."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-port=9222 --profile-directory=Default",
-    "explanation": "The command includes the --remote-debugging-port flag, which is directly detected by the Sigma rule. This is a true positive and not a bypass."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222",
-    "explanation": "The command includes a variation of the remote debugging flag, --remote-debugging-address, which is also covered by the Sigma rule's detection pattern. This is a true positive and not a bypass."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-socket-name=debug_socket",
-    "explanation": "The command uses a different remote debugging flag, --remote-debugging-socket-name, which is explicitly covered by the Sigma rule. This is a true positive and not a bypass."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-pipe=debug_pipe",
-    "explanation": "The command uses a different remote debugging flag, --remote-debugging-pipe, which is explicitly covered by the Sigma rule. This is a true positive and not a bypass."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-port=9222 --no-sandbox",
-    "explanation": "The command includes the --remote-debugging-port flag and an additional --no-sandbox flag. The Sigma rule still detects the presence of the remote debugging flag. This is a true positive and not a bypass."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-port=9222 --disable-gpu",
-    "explanation": "The command includes the --remote-debugging-port flag and an additional --disable-gpu flag. The Sigma rule still detects the presence of the remote debugging flag. This is a true positive and not a bypass."
-  },
-  {
-    "output": "chrome.exe --remote-debugging-port=9222 --headless=new",
-    "explanation": "The command includes the --remote-debugging-port flag and an additional --headless=new flag. The Sigma rule still detects the presence of the remote debugging flag. This is a true positive and not a bypass."
-  },
-  {
-    "output": "firefox.exe -start-debugger-server 9222",
-    "explanation": "The command includes the Firefox-specific flag -start-debugger-server, which is directly detected by the Sigma rule. This is a true positive and not a bypass."
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222",
+    "explanation": "No safe bypass command can be generated without triggering the Sigma rule, as the presence of '--remote-debugging-' is the core detection mechanism."
   }
 ]

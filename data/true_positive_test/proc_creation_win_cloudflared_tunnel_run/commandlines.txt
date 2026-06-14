@@ -1,8 +1,1 @@
-cloudflared.exe "tunnel" "run" --credentials-file cert.json
-cloudflared.exe "tunnel" "run" --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-cloudflared.exe --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... tunnel run
-cloudflared.exe tunnel run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-cmd.exe /c "set TUNNEL_TOKEN=eyJhbGci... && cloudflared.exe tunnel run"
-cloudflared.exe ^t^u^n^n^e^l ^r^u^n --token eyJhIjoi...n0=
-copy cloudflared.exe cf.exe && cf.exe --token=eyJhIjoi...n0= tunnel run
-set A=tunnel&& set B=run&& cloudflared.exe %A% %B% --token eyJhbGciOiJIUzI1NiJ9.fake
+C:\Tools\cloudflared.exe tunnel run -credentials-file C:\Temp\test.json

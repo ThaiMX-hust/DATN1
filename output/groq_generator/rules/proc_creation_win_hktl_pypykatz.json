@@ -1,0 +1,18 @@
+[
+  {
+    "output": "python.exe -c \"import pypykatz; pypykatz.live.registry()\"",
+    "explanation": "This command simulates the use of Python to invoke pypykatz with the 'live' and 'registry' parameters, which aligns with the Sigma rule's detection criteria. It uses Python instead of pypykatz.exe and encodes the command line as a Python string to bypass simple pattern matching."
+  },
+  {
+    "output": "pypykatz.exe live registry",
+    "explanation": "This is a direct invocation of pypykatz.exe with the 'live' and 'registry' arguments, matching the Sigma rule's detection criteria. It serves as a baseline for testing."
+  },
+  {
+    "output": "pypykatz.exe live\\tregistry",
+    "explanation": "This command uses an escaped tab character between arguments to obfuscate the command line while still passing the 'live' and 'registry' parameters. This is a safe mutation technique that may bypass simple string-based detection."
+  },
+  {
+    "output": "python.exe -c 'import pypykatz; pypykatz.live.registry()' -- ",
+    "explanation": "This command uses Python to execute the pypykatz module with the 'live' and 'registry' parameters. The '--' at the end is a safe mutation that may help in bypassing certain parsing rules."
+  }
+]

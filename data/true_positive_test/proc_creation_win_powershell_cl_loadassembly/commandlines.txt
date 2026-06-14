@@ -1,2 +1,0 @@
-powershell.exe -Command "Import-Module CL_LoadAssembly.ps1; Get-Item -Path function:LoadAssemblyFromPath | Select-Object -ExpandProperty ScriptBlock | . -args 'malicious.dll'", "Namespace", "Class"
-powershell.exe -ExecutionPolicy Bypass -File CL_LoadAssembly.ps1; $func = 'LoadAssembly'+'FromPath'; & $func 'malicious.dll' 'Target.Namespace' 'Target.Class'

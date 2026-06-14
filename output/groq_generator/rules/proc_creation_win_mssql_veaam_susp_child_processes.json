@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /C echo Test",
+    "explanation": "This command represents a benign use of cmd.exe that does not include suspicious keywords like 'bypass', 'http://', or 'https://', and is not initiated by a Veeam-related process. It is designed to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net.exe view",
+    "explanation": "This command is a standard usage of net.exe to view network resources. It does not include any suspicious behavior or originate from a Veeam-related parent process, making it safe and non-triggering for the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\whoami.exe",
+    "explanation": "This is a standard command to display the current user identity. It does not originate from a Veeam-related parent process and lacks any suspicious child process behavior, making it safe for testing without triggering the Sigma rule."
+  }
+]

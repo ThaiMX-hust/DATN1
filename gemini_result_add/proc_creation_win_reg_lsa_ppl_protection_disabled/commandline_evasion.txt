@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f",
+    "explanation": "Insertion technique was used to add quotes around the registry path, and the '/f' flag was added to force the operation. This is intended to avoid the rule condition that relies on the exact syntax of the command line. The high-level behavior is expected to remain equivalent in a test environment, as the added quotes and flag do not change the registry operation being performed. Assumption: the target system accepts the added quotes and flag without changing the behavior."
+  },
+  {
+    "output": "reg.exe add /v RunAsPPL /d 0 HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+    "explanation": "Reordering technique was used to change the order of the arguments. This is intended to avoid the rule condition that relies on the exact order of the arguments. The high-level behavior is expected to remain equivalent in a test environment, as the registry operation being performed remains the same. Assumption: the target system accepts the changed argument order without changing the behavior."
+  },
+  {
+    "output": "reg.exe add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0",
+    "explanation": "Recoding/Encoding technique was used to represent the registry path using the 'HKEY_LOCAL_MACHINE' abbreviation instead of 'HKLM'. This is intended to avoid the rule condition that relies on the exact syntax of the registry path. The high-level behavior is expected to remain equivalent in a test environment, as the registry operation being performed remains the same. Assumption: the target system accepts the abbreviated registry path without changing the behavior."
+  },
+  {
+    "output": "reg.exe  add  \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\"  /v RunAsPPL  /d 0",
+    "explanation": "Insertion technique was used to add extra spaces around the arguments. This is intended to avoid the rule condition that relies on the exact syntax of the command line. The high-level behavior is expected to remain equivalent in a test environment, as the added spaces do not change the registry operation being performed. Assumption: the target system ignores the extra spaces without changing the behavior."
+  }
+]

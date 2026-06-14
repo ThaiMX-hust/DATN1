@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1.exe user Administrator /active:yes",
+    "explanation": "This command uses a variation of the username 'Administrator' with capitalization and avoids spaces. It uses the original file name 'net1.exe' and the valid syntax '/active:yes' to match the Sigma rule's detection logic."
+  },
+  {
+    "output": "net user \"Admin\"istrator /active:yes",
+    "explanation": "This command uses quotes around part of the username and reorders the syntax slightly to test detection boundaries while maintaining the same functionality as the true positive."
+  },
+  {
+    "output": "net user Administrator /domain",
+    "explanation": "This command is a direct match to the true positive and is included for completeness, as it would be detected by the Sigma rule."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net.exe user Guest /active:no",
+    "explanation": "This command uses the 'Guest' account and the '/active:no' flag, which is part of the Sigma rule's detection scope. It is included to test detection of the 'guest' account manipulation."
+  }
+]

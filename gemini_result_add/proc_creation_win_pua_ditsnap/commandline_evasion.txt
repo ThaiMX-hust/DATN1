@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\Program Files\\\\ditsnap\\\\ditsnap.exe\" -?",
+    "explanation": "Insertion technique was used to add quotes and escape characters. This is intended to avoid the 'Image|endswith: '\\\\ditsnap.exe'' rule condition. The high-level behavior is expected to remain equivalent because the quotes and escape characters are ignored by the shell. Assumption: the target system has the ditsnap.exe executable in the specified path."
+  },
+  {
+    "output": "ditsnap.exe --help",
+    "explanation": "Substitution technique was used to replace the syntax with equivalent syntax. This is intended to avoid the 'CommandLine|contains: 'ditsnap.exe'' rule condition. The high-level behavior is expected to remain equivalent because the --help flag is a common alternative to the default command. Uncertainty: the rule may still detect this command if it contains other specific keywords."
+  },
+  {
+    "output": "C:\\\\Program Files\\\\ditsnap\\\\ditsnap",
+    "explanation": "Omission technique was used to remove the .exe extension. This is intended to avoid the 'Image|endswith: '\\\\ditsnap.exe'' rule condition. The high-level behavior is expected to remain equivalent because the shell can still execute the command without the extension. Assumption: the target system has the ditsnap executable in the specified path and the .exe extension is not required for execution."
+  },
+  {
+    "output": "ditsnap.exe  /?",
+    "explanation": "Substitution technique was used to replace the syntax with equivalent syntax. This is intended to avoid the 'CommandLine|contains: 'ditsnap.exe'' rule condition. The high-level behavior is expected to remain equivalent because the /? flag is a common alternative to the default command. Uncertainty: the rule may still detect this command if it contains other specific keywords."
+  },
+  {
+    "output": "%COMSPEC% /c ditsnap.exe",
+    "explanation": "Recoding/Encoding technique was used to represent the command using environment variables. This is intended to avoid the 'CommandLine|contains: 'ditsnap.exe'' rule condition. The high-level behavior is expected to remain equivalent because the %COMSPEC% variable is expanded to the command shell executable. Assumption: the target system has the COMSPEC environment variable set to the command shell executable."
+  }
+]

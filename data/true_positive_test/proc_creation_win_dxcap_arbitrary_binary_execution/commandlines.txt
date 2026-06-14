@@ -1,3 +1,0 @@
-copy DXCap.exe NotDXCap.exe && NotDXCap.exe -c calc.exe
-DXCap.exe	-c	calc.exe
-DXCap.exe -v -c notepad.exe

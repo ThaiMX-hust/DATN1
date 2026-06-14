@@ -1,18 +1,18 @@
 [
   {
-    "output": "netsh advfirewall firewall set rule group=\"File and Printer Sharing\" new enable=Yes",
-    "explanation": "This command matches the Sigma rule and serves as a baseline for testing."
+    "output": "netsh advfirewall firewall set rule group=\"All\" new enable=Yes",
+    "explanation": "This command uses the same structure as the Sigma rule's detection criteria. It sets a firewall rule group to enabled, which matches the 'advfirewall', 'firewall', 'set', 'rule', 'group=', 'new', and 'enable=Yes' keywords. The command is formatted with quotes and spacing that are valid and safe for testing."
   },
   {
-    "output": "netsh advfirewall firewall set rule group='File and Printer Sharing' new enable=Yes",
-    "explanation": "Single quotes are used instead of double quotes for the group name, which is a valid syntax variation."
+    "output": "netsh advfirewall firewall set rule group=All new enable=Yes",
+    "explanation": "This command omits the quotes around the group name, which is still valid syntax. It matches the Sigma rule's detection criteria and demonstrates how optional elements like quotes can be removed while preserving the command's behavior."
   },
   {
-    "output": "netsh advfirewall firewall set rule new enable=Yes group=\"File and Printer Sharing\"",
-    "explanation": "Arguments are reordered where the command allows flexibility in parameter sequence."
+    "output": "netsh advfirewall firewall set rule new enable=Yes group=All",
+    "explanation": "This command reorders the arguments 'group=All' and 'new enable=Yes'. The netsh command accepts reordered arguments in many cases, and this variation still matches the Sigma rule's detection logic."
   },
   {
-    "output": "netsh advfirewall firewall set rule group=\"%windir%\\system32\\drivers\\etc\\File and Printer Sharing\" new enable=Yes",
-    "explanation": "The group name is recoded using an environment variable and path normalization for testing."
+    "output": "netsh advfirewall firewall set rule group=\\.\All new enable=Yes",
+    "explanation": "This command uses an alternative string representation for the group name by including a path-like prefix (\\.\). This is a safe test-only recoding technique that still executes the same command and matches the Sigma rule's detection logic."
   }
 ]

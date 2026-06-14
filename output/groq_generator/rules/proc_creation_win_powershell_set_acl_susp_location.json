@@ -1,0 +1,42 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl 'C:\\\\Windows\\')\"",
+    "explanation": "This command sets the ACL of the Windows folder using PowerShell. It is a direct match for the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl 'C:\\\\Windows\\')",
+    "explanation": "Omission of quotes around the command line arguments where not strictly necessary. The command is still parsed correctly and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path $env:windir -AclObject (Get-Acl $env:windir)\"",
+    "explanation": "Uses environment variable $env:windir instead of hardcoding the path. This is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl -Path 'C:\\\\Windows\\')\"",
+    "explanation": "Reordered the arguments for Get-Acl to match the same path as Set-Acl. The command remains valid and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl -Path $env:windir)\"",
+    "explanation": "Mixed hardcoded path and environment variable for the same target. The command is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl -Path 'C:\\\\Windows\\') | Out-Null\"",
+    "explanation": "Added Out-Null to suppress output. This does not affect the detection logic and is a safe mutation."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl 'C:\\\\Windows\\')\" | Out-String",
+    "explanation": "Added Out-String to test command output handling. This does not affect the detection logic and is a safe mutation."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl 'C:\\\\Windows\\')\" -WindowStyle Hidden",
+    "explanation": "Added -WindowStyle Hidden to hide the PowerShell window. This is a safe mutation and does not affect detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl 'C:\\\\Windows\\')\" -ExecutionPolicy Bypass",
+    "explanation": "Added -ExecutionPolicy Bypass to ensure the script runs. This is a safe mutation and does not affect detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path 'C:\\\\Windows\\' -AclObject (Get-Acl 'C:\\\\Windows\\')\" -NonInteractive",
+    "explanation": "Added -NonInteractive to prevent user interaction. This is a safe mutation and does not affect detection logic."
+  }
+]

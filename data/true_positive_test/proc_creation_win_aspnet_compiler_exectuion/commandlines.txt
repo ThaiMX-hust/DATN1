@@ -1,2 +1,0 @@
-copy aspnet_compiler.exe not_a_compiler.exe && not_a_compiler.exe -v / -p C:\path\to\malicious\code C:\Windows\Temp
-New-Item -ItemType HardLink -Path "linked_compiler.exe" -Target "aspnet_compiler.exe"; .\linked_compiler.exe -v / -p C:\payload C:\Windows\Temp

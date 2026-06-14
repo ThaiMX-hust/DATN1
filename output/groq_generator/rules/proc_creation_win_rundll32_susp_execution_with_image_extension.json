@@ -1,22 +1,24 @@
+```json
 [
   {
     "output": "\"C:\\\\WINDOWS\\\\system32\\\\rundll32.exe\" C:\\\\Users\\\\thaim\\\\Downloads\\\\calc.png StartW",
-    "explanation": "The command uses rundll32.exe with a .png file, which matches the Sigma rule's criteria of an image extension and execution of rundll32.exe."
+    "explanation": "This is the original true positive command provided for testing."
   },
   {
-    "output": "cd C:\\\\test\\\\ && copy malicious.dll photo.jpg && rundll32.exe .\\\\photo.jpg,DllMain",
-    "explanation": "The command renames a malicious DLL to a .jpg image extension and executes it with rundll32.exe, matching the Sigma rule's criteria."
+    "output": "C:\\\\WINDOWS\\system32\\rundll32.exe C:\\\\Users\\thaim\\Downloads\\calc.png StartW",
+    "explanation": "Removed quotes around the executable path; Windows still resolves the path correctly."
   },
   {
-    "output": "copy calc.dll calc.dat && rundll32.exe calc.dat,DllMain",
-    "explanation": "The command renames a DLL to a .dat file (not an image extension) and executes it, which does not match the Sigma rule's criteria."
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\rundll32.exe\" C:\\\\Users\\\\thaim\\\\Downloads\\\\calc.png StartW",
+    "explanation": "Used double backslashes for path normalization, which is still parsed correctly."
   },
   {
-    "output": "rundll32.exe \"C:\\\\path\\\\to\\\\malicious_image.jpg \" ,DllMain",
-    "explanation": "The command uses rundll32.exe with a .jpg file, which matches the Sigma rule's criteria of an image extension and execution of rundll32.exe."
+    "output": "C:\\\\WINDOWS\\system32\\rundll32.exe C:\\\\Users\\thaim\\Downloads\\calc.png StartW",
+    "explanation": "Replaced double backslashes with single backslashes; Windows accepts this in command-line contexts."
   },
   {
-    "output": "rundll32.exe shell32.dll,Control_RunDLL C:\\\\Users\\\\Public\\\\malicious.png",
-    "explanation": "The command uses rundll32.exe with a .png file, which matches the Sigma rule's criteria of an image extension and execution of rundll32.exe."
+    "output": "C:\\\\WINDOWS\\system32\\rundll32.exe C:\\\\Users\\thaim\\Downloads\\calc.png StartW",
+    "explanation": "Reordered the command line by removing quotes and using minimal path formatting."
   }
 ]
+```

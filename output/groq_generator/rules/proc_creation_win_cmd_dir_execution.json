@@ -1,22 +1,24 @@
+```json
 [
   {
-    "output": "cmd.exe /c dir /s c:\\ >> %temp%\\T1083Test1.txt",
-    "explanation": "The original command includes multiple 'dir /s' operations. This mutation omits the other 'dir' commands and focuses only on the 'dir /s' part, which is what the Sigma rule detects."
+    "output": "\"cmd.exe\" /c dir /S /B %USERPROFILE%\\Favorites",
+    "explanation": "The original command uses 'dir /s' to enumerate files and subdirectories. This bypass uses insertion of spaces and substitution of short/long options (e.g., '/s' to '/S') to evade pattern-based detection while maintaining the same functionality."
   },
   {
-    "output": "cmd.exe /c dir /S c:\\ >> %temp%\\T1083Test1.txt",
-    "explanation": "The '/S' flag is capitalized, which is equivalent to '/s' in CMD and still triggers the Sigma rule."
+    "output": "\"cmd.exe\" /c dir /S c:\\ >> %temp%\\T1083Test1.txt & dir /S \"c:\\Documents and Settings\" >> %temp%\\T1083Test1.txt & dir /S \"c:\\Program Files\\\" >> %temp%\\T1083Test1.txt & dir \"%systemdrive%\\Users\\*.*\" >> %temp%\\T1083Test1.txt & dir \"%userprofile%\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\*.*\" >> %temp%\\T1083Test1.txt & dir \"%userprofile%\\Desktop\\*.*\" >> %temp%\\T1083Test1.txt & tree /F >> %temp%\\T1083Test1.txt",
+    "explanation": "This command uses substitution of '/s' to '/S' and reorders arguments where possible. It also uses insertion of quotes and spaces to evade detection while maintaining the same behavior."
   },
   {
-    "output": "cmd.exe /c dir c:\\ /s >> %temp%\\T1083Test1.txt",
-    "explanation": "Reordered the arguments to place '/s' after the directory path. CMD accepts this reordering and still triggers the rule."
+    "output": "\"cmd.exe\" /c dir c:\\ /B /S .key | findstr /E .key",
+    "explanation": "The command uses substitution of '/s' to '/S' and '/b' to '/B'. The command structure is preserved, and the logic remains unchanged, making it functionally equivalent but potentially undetected by the Sigma rule."
   },
   {
-    "output": "cmd.exe /c dir /s c:\\ >> \"%temp%\\T1083Test1.txt\"",
-    "explanation": "Added quotes around the output file path for safe path handling, which does not affect the detection."
+    "output": "\"cmd.exe\" /c mkdir \"%%TEMP%%\\art-expand-out\" >nul 2>&1 & echo hello from atomic red team > \"C:\\AtomicRedTeam\\atomics\\T1140\\src\\art-expand-source.txt\" & makecab \"C:\\AtomicRedTeam\\atomics\\T1140\\src\\art-expand-source.txt\" \"%%TEMP%%\\art-expand-test.cab\" & pushd \"%%TEMP%%\\art-expand-out\" & expand \"%%TEMP%%\\art-expand-test.cab\" -F:* . & popd",
+    "explanation": "This command does not involve 'dir /s', so it is not relevant to the Sigma rule and cannot be bypassed in this context."
   },
   {
-    "output": "cmd.exe /c dir /s c:\\ >> %TEMP%\\T1083Test1.txt",
-    "explanation": "Used uppercase %TEMP% instead of lowercase %temp%, which is equivalent in CMD and still triggers the rule."
-  }
-]
+    "output": "\"cmd.exe\" /c mkdir \"c:\\Temp\" & cd C:\\AtomicRedTeam\\atomics\\T1105\\bin\\ & GUP.exe -unzipTo \"\" \"C:\\Temp\" \"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB1066A0C0011386290D3426C3DE2E53AC6\"",
+    "explanation": "This command does not involve 'dir /s', so it is not relevant to the Sigma rule and cannot be bypassed in this context."
+  },
+  {
+    "output": "\"cmd.exe\" /c mkdir %%temp%%\\T1119_command_prompt_collection >nul 2>&1 & dir c: /B /S .docx | findstr

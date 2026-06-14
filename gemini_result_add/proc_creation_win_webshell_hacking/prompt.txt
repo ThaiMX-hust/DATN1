@@ -1,0 +1,149 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Webshell Hacking Activity Patterns
+id: 4ebc877f-4612-45cb-b3a5-8e3834db36c9
+status: test
+description: |
+    Detects certain parent child patterns found in cases in which a web shell is used to perform certain credential dumping or exfiltration activities on a compromised system
+references:
+    - https://youtu.be/7aemGhaE9ds?t=641
+author: Florian Roth (Nextron Systems)
+date: 2022-03-17
+modified: 2023-11-09
+tags:
+    - attack.persistence
+    - attack.discovery
+    - attack.t1505.003
+    - attack.t1018
+    - attack.t1033
+    - attack.t1087
+logsource:
+    category: process_creation
+    product: windows
+detection:
+   # Webserver
+    selection_webserver_image:
+        ParentImage|endswith:
+            - '\caddy.exe'
+            - '\httpd.exe'
+            - '\nginx.exe'
+            - '\php-cgi.exe'
+            - '\w3wp.exe'
+            - '\ws_tomcatservice.exe'
+    selection_webserver_characteristics_tomcat1:
+        ParentImage|endswith:
+            - '\java.exe'
+            - '\javaw.exe'
+        ParentImage|contains:
+            - '-tomcat-'
+            - '\tomcat'
+    selection_webserver_characteristics_tomcat2:
+        ParentImage|endswith:
+            - '\java.exe'
+            - '\javaw.exe'
+        CommandLine|contains:
+            - 'catalina.jar'
+            - 'CATALINA_HOME'
+    # Suspicious child processes
+    selection_child_1:
+        # Process dumping
+        CommandLine|contains|all:
+            - 'rundll32'
+            - 'comsvcs'
+    selection_child_2:
+        # Winrar exfil
+        CommandLine|contains|all:
+            - ' -hp'
+            - ' a '
+            - ' -m'
+    selection_child_3:
+        # User add
+        CommandLine|contains|all:
+            - 'net'
+            - ' user '
+            - ' /add'
+    selection_child_4:
+        CommandLine|contains|all:
+            - 'net'
+            - ' localgroup '
+            - ' administrators '
+            - '/add'
+    selection_child_5:
+        Image|endswith:
+            # Credential stealing
+            - '\ntdsutil.exe'
+            # AD recon
+            - '\ldifde.exe'
+            - '\adfind.exe'
+            # Process dumping
+            - '\procdump.exe'
+            - '\Nanodump.exe'
+            # Destruction / ransom groups
+            - '\vssadmin.exe'
+            - '\fsutil.exe'
+    selection_child_6:
+        # SUspicious patterns
+        CommandLine|contains:
+            - ' -decode '  # Used with certutil
+            - ' -NoP '  # Often used in malicious PowerShell commands
+            - ' -W Hidden '  # Often used in malicious PowerShell commands
+            - ' /decode '  # Used with certutil
+            - ' /ticket:'  # Rubeus
+            - ' sekurlsa'  # Mimikatz
+            - '.dmp full'  # Process dumping method apart from procdump
+            - '.downloadfile('  # PowerShell download command
+            - '.downloadstring('  # PowerShell download command
+            - 'FromBase64String' # PowerShell encoded payload
+            - 'process call create' # WMIC process creation
+            - 'reg save '  # save registry SAM - syskey extraction
+            - 'whoami /priv'
+    condition: 1 of selection_webserver_* and 1 of selection_child_*
+falsepositives:
+    - Unlikely
+level: high
+```
+
+True positive test command:
+
+```text
+
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

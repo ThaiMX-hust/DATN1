@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "loader.exe --pid:1234 --outfile:C:\\Temp\\lsass_obf_dump.dmp",
+    "explanation": "This command simulates the execution of HandleKatz with the required flags and output file format as described in the Sigma rule. It includes the necessary command-line arguments to match the detection condition."
+  },
+  {
+    "output": "loader.exe -pid:1234 -outfile:C:\\Temp\\lsass_obf_dump.dmp",
+    "explanation": "This command uses short flags (-pid and -outfile) instead of long flags (--pid and --outfile), which is a common substitution technique. It still satisfies the Sigma rule's detection condition."
+  },
+  {
+    "output": "loader.exe --pid:1234 --outfile=C:\\Temp\\lsass_obfuscated_dump.dmp",
+    "explanation": "This command replaces 'obf' with 'obfuscated' in the filename while maintaining the '.dmp' extension and the presence of 'lsass' and 'dump' in the command line. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "loader.exe --pid:1234 --outfile=C:\\Temp\\lsass_dump_obf.dmp",
+    "explanation": "This command reorders the words in the filename ('lsass_dump_obf' instead of 'lsass_obf_dump') while preserving the required keywords and file extension. It still satisfies the Sigma rule's detection condition."
+  },
+  {
+    "output": "loader.exe --pid:1234 --outfile=C:\\Temp\\lsass_obf_dump.dmp",
+    "explanation": "This command uses a normalized path and standard command-line syntax. It includes all required keywords and format to match the Sigma rule's detection condition."
+  }
+]
+```

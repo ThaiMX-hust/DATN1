@@ -1,22 +1,18 @@
 [
   {
-    "output": "Certify.exe find /vulnerable /domain:internal.corp",
-    "explanation": "This command matches the Sigma rule by using the 'find' command and '/vulnerable' and '/domain' options, which are explicitly detected in the rule."
+    "output": "Certify.exe find /vulnerable /template:templateName /altname:altName /domain:example.com",
+    "explanation": "This command includes key command-line arguments from the Sigma rule (find, /vulnerable, /template, /altname, /domain) and uses the expected executable name. It simulates a typical Certify usage pattern without obfuscation."
   },
   {
-    "output": "Certify.exe .\\find /vulnerable /domain:internal.corp",
-    "explanation": "This command uses a relative path ('.\\find') to invoke the 'find' command, which is a valid mutation technique (reordering and recoding) and still matches the Sigma rule."
+    "output": "Certify.exe request /ca:CAName /path:C:\\Temp\\cert.req /template:templateName",
+    "explanation": "This command uses the 'request' subcommand and includes the /ca, /path, and /template options, which are part of the Sigma rule's detection criteria. It represents a typical Certify command line for certificate requests."
   },
   {
-    "output": "Certify.exe find /vulnerable /domain:internal.corp /path:C:\\Temp\\",
-    "explanation": "This command adds an optional '/path' parameter, which is allowed by the Sigma rule and does not affect the detection logic."
+    "output": "Certify.exe download /path:C:\\Temp\\cert.cer /ca:CAName",
+    "explanation": "This command uses the 'download' subcommand and includes the /path and /ca options, aligning with the Sigma rule's detection logic. It reflects a common usage pattern for downloading certificates."
   },
   {
-    "output": "Certify.exe find /vulnerable /domain:internal.corp /template:template1",
-    "explanation": "This command adds an optional '/template' parameter, which is allowed by the Sigma rule and does not affect the detection logic."
-  },
-  {
-    "output": "Certify.exe find /vulnerable /domain:internal.corp /altname:altname1",
-    "explanation": "This command adds an optional '/altname' parameter, which is allowed by the Sigma rule and does not affect the detection logic."
+    "output": "Certify.exe pkiobjects /domain:example.com /vulnerable",
+    "explanation": "This command uses the 'pkiobjects' subcommand with the /domain and /vulnerable flags, which are part of the Sigma rule's detection criteria. It represents a typical Certify command line for enumerating PKI objects."
   }
 ]

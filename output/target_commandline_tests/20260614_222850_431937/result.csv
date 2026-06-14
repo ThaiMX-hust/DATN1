@@ -1,0 +1,2 @@
+﻿Technical	Rule_name	Title	Rule_id	Command_match_rule	Commandline_evasion	Excutable	Bypass target rule	Bypass all rule	Trigger rule
+t1021.002	proc_creation_win_susp_copy_lateral_movement	Copy From Or To Admin Share Or Sysvol Folder	855bc8b5-2ae8-402e-a9ed-b889e6df1900		"cmd.exe /c \""type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\payload.exe"""	FALSE	FALSE	FALSE	

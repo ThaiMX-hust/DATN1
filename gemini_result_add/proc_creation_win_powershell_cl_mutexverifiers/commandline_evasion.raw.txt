@@ -1,0 +1,74 @@
+<think>
+Okay, let's tackle this problem step by step. The user wants to assess if the given Sigma rule can be bypassed using safe command-line obfuscation techniques. First, I need to understand the Sigma rule thoroughly.
+
+The rule's title mentions detecting the use of CL_mutexverifiers.ps1 to proxy execution. The detection logic checks for PowerShell processes (powershell.exe or pwsh.exe) with a specific command line that includes "-nologo -windowstyle minimized -file " and also looks for temporary directories like AppData\Local\Temp\ or Windows\Temp\ in the command line.
+
+The true positive test command isn't provided, but based on the rule, a typical command might be something like:
+powershell.exe -nologo -windowstyle minimized -file "C:\Users\user\AppData\Local\Temp\CL_mutexverifiers.ps1"
+
+Now, the goal is to generate variants of this command that avoid detection by applying safe mutation techniques. Let's break down the detection conditions:
+
+1. ParentImage and Image must end with powershell.exe or pwsh.exe.
+2. CommandLine must contain " -nologo -windowstyle minimized -file ".
+3. CommandLine must contain a temp directory path.
+
+The challenge is to mutate the command line without changing its behavior. Let's consider each part.
+
+First, the "-nologo -windowstyle minimized -file " part. Maybe substitution could work here. For example, using the long form of options if they exist. But in PowerShell, these are not options but parameters. Alternatively, reordering arguments if possible. However, PowerShell's parameter order might matter. Wait, in PowerShell, parameters can be in any order if they're named. For example, "-file script.ps1 -windowstyle minimized" is the same as "-windowstyle minimized -file script.ps1". So reordering could be a technique here. The rule looks for the exact sequence " -nologo -windowstyle minimized -file ", so changing the order might break that sequence.
+
+Another idea: omitting optional parameters. But "-nologo" and "-windowstyle" are specific; if they're not required for the script execution, maybe they can be omitted. However, the rule requires their presence. So if the script relies on those parameters, removing them might change behavior. But if the test environment allows, maybe they can be safely omitted. However, the user's instruction says to preserve intended test behavior, so we can't just remove necessary parameters.
+
+What about encoding or escaping? For example, using escape characters around the script path. The original command might have quotes around the path. Inserting extra spaces or escape characters might work. For example, adding a space between parameters or using double quotes differently.
+
+For the temp directory path, maybe using environment variables instead of the full path. Like using "$env:TEMP\" instead of "C:\Users\user\AppData\Local\Temp\". That would change the string but still point to the same directory. The rule checks for specific substrings like "\AppData\Local\Temp\" or "\Windows\Temp\", so replacing that with an environment variable reference would avoid those substrings.
+
+Another angle: the script name is CL_mutexverifiers.ps1. If the script is stored in a different location or with a different name, but that might change the behavior. However, the rule is looking for the execution of this specific script via the "-file" parameter. If the script is renamed or moved, that might bypass the rule, but that's changing the script's location/name, which might not be considered safe mutation. The user wants safe techniques that don't alter the script's functionality.
+
+Let me think of specific examples. Suppose the original command is:
+
+powershell.exe -nologo -windowstyle minimized -file "C:\Users\user\AppData\Local\Temp\CL_mutexverifiers.ps1"
+
+Possible mutations:
+
+1. Reorder the parameters: "-windowstyle minimized -nologo -file ...". The rule checks for the exact sequence, so reordering would break the "contains" condition.
+
+2. Use environment variable for the temp path: Replace "C:\Users\user\AppData\Local\Temp\" with "$env:TEMP\".
+
+3. Substitute "-file" with its short form if applicable. But in PowerShell, "-file" is the only form for that parameter.
+
+4. Insert spaces or escape characters in the command line. For example, adding extra spaces between parameters or around the equals sign if there are named parameters. Wait, in this case, the parameters are positional. Hmm.
+
+Another idea: using the "-Command" parameter instead of "-file". Wait, but the rule specifically looks for "-file". If the script is executed via "-Command", that might bypass the rule. However, the original test command uses "-file", so changing that would alter the behavior. But if the script is intended to be run via "-file", then changing to "-Command" might not be safe. The user wants to preserve the intended test behavior, so this might not be acceptable.
+
+Wait, the Sigma rule's detection is based on the presence of " -nologo -windowstyle minimized -file " in the command line. So if we can change the way the script is invoked while keeping the same effect, that might work. For example, using the "-Command" parameter with "& .\script.ps1" instead of "-file". But again, that changes the execution method, which might affect behavior. The user wants to preserve the intended test behavior, so this might not be safe.
+
+Another approach: encoding the command line. For example, using Base64 encoded command. But the rule is looking for specific strings in the command line. If the command is encoded, the original strings won't be present. However, encoding would change the behavior (needs decoding), which might not be acceptable in a test environment where the actual execution is needed. So this might not be a safe mutation.
+
+Let me focus on the temp directory part. The rule checks for the presence of "\AppData\Local\Temp\" or "\Windows\Temp\". If the script is placed in a different temporary directory, but still within the user's temp, using environment variables could avoid the specific substrings. For example, using "$env:TEMP\script.ps1" instead of the full path. The command line would then contain "$env:TEMP\" instead of the literal path. Since the rule is looking for the specific substrings, this would bypass it.
+
+So, modifying the command line to use environment variables for the temp path would avoid the "contains" condition on the temp directory. That's a recoding/encoding technique.
+
+Another possibility is changing the order of parameters. For example, the original command has "-nologo -windowstyle minimized -file ...". If we reorder them to "-windowstyle minimized -nologo -file ...", the exact sequence " -nologo -windowstyle minimized -file " is broken, so the "contains" check would fail. However, the parameters are still present, just in a different order. Since PowerShell allows parameters in any order, this should work. This is a reordering technique.
+
+Additionally, inserting extra spaces or escape characters. For example, adding a space between the parameters or using escape characters like ` (backtick) to escape spaces. For example, "-nologo` -windowstyle` minimized` -file` ...". But in practice, the backtick is a line continuation character in PowerShell, so this might not work as intended. Alternatively, adding extra spaces between the parameters. For example, "-nologo   -windowstyle   minimized   -file ...". The "contains" check would still find the sequence because it's looking for the presence of the exact string, but with extra spaces, it might not match. Wait, the rule uses "contains" which checks if the substring exists anywhere. If the original command has " -nologo -windowstyle minimized -file ", and we add extra spaces, like " -nologo  -windowstyle  minimized  -file ", the "contains" would still find " -nologo -windowstyle minimized -file " as a substring if the extra spaces don't interfere. Wait, no. The "contains" operator in Sigma is case-insensitive and checks if the entire string is present. So if the original is " -nologo -windowstyle minimized -file " and the mutated command has extra spaces, like " -nologo  -windowstyle  minimized  -file ", the "contains" would not find the exact substring because the spacing is different. Therefore, inserting extra spaces could break the detection.
+
+So, combining reordering and environment variables could be effective. Let's outline possible mutations:
+
+1. Reorder the parameters to break the exact sequence in the "contains" check.
+2. Replace the temp path with an environment variable reference.
+3. Use different quoting or escaping for the script path.
+
+Let's create an example command using these techniques.
+
+Original command:
+powershell.exe -nologo -windowstyle minimized -file "C:\Users\user\AppData\Local\Temp\CL_mutexverifiers.ps1"
+
+Mutated command 1 (reordering parameters):
+powershell.exe -windowstyle minimized -nologo -file "$env:TEMP\CL_mutexverifiers.ps1"
+
+Explanation: Reordering the "-windowstyle" and "-nologo" parameters breaks the exact sequence that the rule is looking for. Using "$env:TEMP" instead of the full path avoids the substring "\AppData\Local\Temp\".
+
+Mutated command 2 (inserting spaces and environment variable):
+powershell.exe -nologo   -windowstyle   minimized   -file   "$env:TEMP\CL_mutexverifiers.ps1"
+
+Here, extra spaces between parameters and the script path. The "contains" check for the exact sequence would fail because of the extra spaces. Also, using the environment

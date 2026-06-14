@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy \"Mouse Lock_2.0.exe\" \"sys_util.exe\" && \"sys_util.exe\"",
+    "explanation": "The original command is already a valid test case. No mutation is needed to maintain the same behavior for testing purposes."
+  }
+]

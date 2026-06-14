@@ -1,0 +1,16 @@
+```json
+[
+  {
+    "output": "ldifde.exe -f C:\\output.ldf -d DC=example,DC=com -l *",
+    "explanation": "This command uses ldifde.exe to export Active Directory structure, matching the Sigma rule's detection criteria by including the '-f' flag and not including the '-i' flag for import."
+  },
+  {
+    "output": "ldifde.exe -f C:\\output.ldf -d DC=example,DC=com -l *",
+    "explanation": "Same as the first command; no mutation applied. This is the base command for testing."
+  },
+  {
+    "output": "ldifde.exe -f C:\\output.ldf -d DC=example,DC=com -l *",
+    "explanation": "No safe bypass command can be generated. The Sigma rule is focused on the presence of '-f' and absence of '-i', which are required for export and not optional. Mutation techniques cannot remove or alter these flags without changing the command's behavior."
+  }
+]
+```

@@ -1,4 +1,0 @@
-"node.exe" "Adobe Creative Cloud Experience\js\malicious.js"
-"node.exe" -e "console.log('Adobe Creative Cloud Experience\js'); require('child_process').exec('malicious_script.js')"
-cd "C:\Program Files\Adobe\Adobe Creative Cloud Experience\libs\" && .\node.exe -e "require('os')"
-copy "node.exe" not_node.exe && not_node.exe -e "require('child_process').exec('calc.exe')"

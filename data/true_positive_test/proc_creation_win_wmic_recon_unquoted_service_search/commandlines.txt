@@ -1,1 +1,0 @@
-wmic.exe /node:"localhost" /namespace:\\root\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode /format:csv

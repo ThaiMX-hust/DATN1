@@ -1,18 +1,18 @@
 [
   {
-    "output": "ping 127.0.0.1 -n 5 >NUL && del /f /q lockbit.exe",
-    "explanation": "Added optional /f and /q flags to the del command, which are equivalent to the original in this context. This variation preserves the original behavior while using additional flags."
+    "output": "cmd.exe /C ping 127.0.0.1 -n 3 >Nul & del /f /q \"C:\\\\Test\\\\file.exe\"",
+    "explanation": "This command simulates the malicious behavior described in the Sigma rule by using ping to delay execution and del to delete a file. It uses standard syntax and no obfuscation to remain a valid test case."
   },
   {
-    "output": "ping 127.0.0.1 -n 5 > NUL & del lockbit.exe",
-    "explanation": "Replaced '&&' with '&' which is functionally equivalent in command-line execution when chaining commands."
+    "output": "cmd.exe /C \"ping 127.0.0.1 -n 3 > Nul\" & \"del /f /q C:\\\\Test\\\\file.exe\"",
+    "explanation": "This command adds explicit quotes around the command parts, which is a safe mutation technique. It maintains the same behavior as the original but uses spacing and quotation changes to test detection resilience."
   },
   {
-    "output": "ping 127.0.0.1 -n 5 >NUL & del /f /q lockbit.exe",
-    "explanation": "Used path normalization by adding optional flags to del and omitted spaces around '>' to test parsing variations."
+    "output": "cmd.exe /C ping 127.0.0.1 -n 3 >Nul & del /q /f C:\\\\Test\\\\file.exe",
+    "explanation": "This command reorders the del flags (/f /q to /q /f), which is a valid mutation technique. The command behavior remains unchanged, but the argument order is altered for testing purposes."
   },
   {
-    "output": "ping 127.0.0.1 -n 5 > NUL && del lockbit.exe",
-    "explanation": "Original command with no mutation applied for reference."
+    "output": "cmd.exe /C ping 127.0.0.1 -n 3 >Nul & del /f /q C:\\\\Test\\\\file.exe",
+    "explanation": "This command uses minimal spacing and no unnecessary characters, representing a simplified version of the original command. It tests whether the detection rule is sensitive to spacing variations."
   }
 ]

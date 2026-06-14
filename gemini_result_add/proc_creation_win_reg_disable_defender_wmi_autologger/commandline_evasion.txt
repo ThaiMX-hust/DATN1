@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe add \"\\\\\\Control\\\\WMI\\\\Autologger\\\\DefenderApiLogger\\\\Start\" /v 0 /t REG_DWORD /d 0 /f",
+    "explanation": "Insertion technique was used to add escape characters and quotes, which are ignored by the shell. This command is intended to avoid the 'OriginalFileName' and 'Image' conditions in the Sigma rule by using a quoted path. The high-level behavior is expected to remain equivalent as the registry key is still being modified."
+  },
+  {
+    "output": "reg add /v \"Control\\WMI\\Autologger\\DefenderAuditLogger\\Start\" /t REG_DWORD /d 0",
+    "explanation": "Substitution and omission techniques were used to replace the 'Image' and 'OriginalFileName' with a shortened version and omit the '.exe' extension. This command is intended to avoid the 'Image|endswith' condition in the Sigma rule. The high-level behavior is expected to remain equivalent as the registry key is still being modified."
+  },
+  {
+    "output": "reg.exe add \"\\\\\\Control\\\\WMI\\\\Autologger\\\\DefenderApiLogger\\\\Start\" 0",
+    "explanation": "Omission technique was used to remove the '/v', '/t', '/d' options and only keep the required arguments. This command is intended to avoid the 'CommandLine|contains|all' condition in the Sigma rule. The high-level behavior is expected to remain equivalent as the registry key is still being modified, assuming the default type is REG_DWORD."
+  },
+  {
+    "output": "reg.exe add /d 0 /t REG_DWORD /v \"Control\\WMI\\Autologger\\DefenderAuditLogger\\Start\"",
+    "explanation": "Reordering technique was used to change the order of the arguments. This command is intended to avoid the 'CommandLine|contains' condition in the Sigma rule. The high-level behavior is expected to remain equivalent as the registry key is still being modified."
+  },
+  {
+    "output": "reg.exe add \"Control\\WMI\\Autologger\\DefenderApiLogger\\Start\" 0x0",
+    "explanation": "Recoding/Encoding technique was used to represent the value '0' as a hexadecimal value '0x0'. This command is intended to avoid the 'CommandLine|contains' condition in the Sigma rule. The high-level behavior is expected to remain equivalent as the registry key is still being modified."
+  }
+]

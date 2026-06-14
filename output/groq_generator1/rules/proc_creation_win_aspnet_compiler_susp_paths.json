@@ -1,0 +1,22 @@
+[
+  {
+    "output": "aspnet_compiler.exe -v / -p \"C:\\Users\\Public\\TestSite\" \"C:\\AppData\\Local\\Temp\\Output\"",
+    "explanation": "Inserted quotes around paths to test parsing behavior while maintaining the suspicious destination path in the command line."
+  },
+  {
+    "output": "aspnet_compiler.exe -v / -p C:\\Users\\Public\\TestSite C:\\AppData\\Local\\Temp\\Output",
+    "explanation": "Used short path format with no additional syntax changes to test baseline detection."
+  },
+  {
+    "output": "aspnet_compiler.exe -v / -p C:\\Users\\Public\\TestSite C:\\Windows\\Temp\\Output",
+    "explanation": "Replaced AppData with Windows\\Temp to test if alternate suspicious paths are also flagged."
+  },
+  {
+    "output": "aspnet_compiler.exe -v / -p C:\\Users\\Public\\TestSite C:\\Users\\MyUser\\AppData\\Local\\Temp\\Output",
+    "explanation": "Used a more specific AppData path to test detection sensitivity to path depth and specificity."
+  },
+  {
+    "output": "aspnet_compiler.exe -v / -p C:\\Users\\Public\\TestSite C:\\Windows\\System32\\Tasks\\Output",
+    "explanation": "Used a path from the detection rule's suspicious list to test if the rule correctly identifies it."
+  }
+]

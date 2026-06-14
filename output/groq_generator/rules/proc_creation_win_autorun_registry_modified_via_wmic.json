@@ -1,14 +1,14 @@
 [
   {
-    "output": "wmic process call create \"reg.exe add HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"\\\"updater.exe\\\"\" /f\"",
-    "explanation": "This command uses quotes and escape characters to simulate a safe mutation of the original command. It maintains the same functionality but alters the syntax slightly."
+    "output": "wmic.exe process call create \"reg.exe add HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"\"C:\\Windows\\Temp\\malware.exe\"\" /f\"",
+    "explanation": "This command uses wmic.exe to execute reg.exe and add a registry entry to the autorun key. It matches the Sigma rule's detection criteria by using wmic.exe as the execution image, including 'reg add' in the command line, and referencing a suspicious path (\\Windows\\Temp)."
   },
   {
-    "output": "wmic process call create \"reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"\\\"updater.exe\\\"\" /f\"",
-    "explanation": "This command uses the short form of the registry hive (HKCU) and includes proper escaping of quotes to simulate a safe mutation of the original command."
+    "output": "wmic.exe /namespace:\\\\root\\cimv2 path Win32_Process call create \"reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"\"C:\\\\Windows\\\\Temp\\\\malware.exe\"\" /f\"",
+    "explanation": "This command uses a fully qualified namespace in WMIC to call Win32_Process, which is functionally equivalent to the default behavior. It still executes reg.exe to add an autorun entry in a suspicious location, matching the Sigma rule's detection logic."
   },
   {
-    "output": "wmic process call create \"reg.exe add HKEY_CURRENT_USER\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run /v Updater /t REG_SZ /d \"\\\"updater.exe\\\"\" /f\"",
-    "explanation": "This command uses double backslashes for path normalization and includes escaped quotes to simulate a safe mutation of the original command."
+    "output": "wmic.exe process call create \"reg.exe add HKEY_CURRENT_USER\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run /v Updater /t REG_SZ /d \"\"C:\\\\Users\\\\user\\\\AppData\\\\Roaming\\\\malware.exe\"\" /f\"",
+    "explanation": "This command uses double backslashes in the registry path and in the file path, which is a safe mutation technique. It still executes reg.exe to add an autorun entry in a suspicious location (AppData\\Roaming), matching the Sigma rule's detection logic."
   }
 ]

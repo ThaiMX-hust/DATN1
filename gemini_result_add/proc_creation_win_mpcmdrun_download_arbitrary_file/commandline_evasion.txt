@@ -1,0 +1,22 @@
+[
+  {
+    "output": "MpCmdRun.exe -Downloadfile -Url https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -path C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Substitution technique. Altering the casing of the command arguments to `-Downloadfile` and `-Url`. Since the Sigma rule uses a standard `CommandLine|contains|all` modifier without explicitly defining case-insensitivity flags, poorly configured or un-normalized SIEM engines that defaults to case-sensitive string matching will fail to match the literal tokens 'DownloadFile' and 'url'."
+  },
+  {
+    "output": "MpCmdRun.exe \"-DownloadFile\" \"-url\" https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -path C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Insertion technique. Enclosing the parameter switches inside quotation marks (`\"-DownloadFile\"` and `\"-url\"`). The quotation marks are safely handled and discarded by the application subsystem during internal argv tokenization, but they successfully alter the raw process command line layout and can break basic sub-string filters."
+  },
+  {
+    "output": "MpCmdRun.exe /DownloadFile /url https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -path C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Substitution technique. Substituting the traditional dash `-` notation with a forward slash `/` syntax for the parameter definitions. MpCmdRun natively handles both formats during configuration evaluation, while any downstream rule relying on space-and-dash token combinations could be subverted."
+  },
+  {
+    "output": "MpCmdRun.exe -path C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt -url https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -DownloadFile",
+    "explanation": "Reordering technique. Reordering the positional layout of arguments by passing `-path` before `-url` and `-DownloadFile`. While the core rule utilizes a multi-token containment strategy (`contains|all`) that still captures this variation, it easily evades brittle pattern sequences or tightly configured structural regexes."
+  },
+  {
+    "output": "",
+    "explanation": "Omission / Other technique note: It is functionally impossible to omit or encode the explicit terms 'DownloadFile' or 'url' via command-line mutations alone without breaking execution, as MpCmdRun strictly validates these specific command arguments internally to activate its network download engine."
+  }
+]

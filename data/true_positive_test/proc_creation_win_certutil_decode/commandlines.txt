@@ -1,4 +1,2 @@
-C:\Users\thaim\AppData\Local\Temp\tcm.tmp  -decode C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt C:\Users\thaim\AppData\Local\Temp\T1140_calc2_decoded.exe
-certutil  -decode C:\Users\thaim\AppData\Local\Temp\T1140_calc.txt C:\Users\thaim\AppData\Local\Temp\T1140_calc_decoded.exe
-certutil.exe "-decode" input.b64 output.exe
-certutil.exe -decode	input.b64 output.exe
+C:\Users\thaim\AppData\Local\Temp\tcm.tmp -decode C:\Users\thaim\AppData\Local\Temp\T1140_calc2.txt C:\Users\thaim\AppData\Local\Temp\T1140_calc2_decoded.exe
+certutil -decode C:\Users\thaim\AppData\Local\Temp\T1140_calc.txt C:\Users\thaim\AppData\Local\Temp\T1140_calc_decoded.exe

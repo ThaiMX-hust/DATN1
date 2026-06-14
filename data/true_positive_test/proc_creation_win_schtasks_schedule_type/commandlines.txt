@@ -1,5 +1,5 @@
-SCHTASKS  /Create /SC ONCE /TN spawn /TR C:\windows\system32\cmd.exe /ST 20:10
-schtasks  /create /tn "T1053_005_OnLogon" /sc onlogon /tr "cmd.exe /c calc.exe"
-schtasks /create /tn "Updater HIGHEST" /tr "cmd.exe /c payload.exe" /sc ONLOGON
-schtasks /create /tn "Updater" /tr "cmd.exe /c payload.exe" /sc "ONLOGON"
-schtasks /create /tn "Updater" /tr "cmd.exe /c payload.exe" /sc ONLOGON
+SCHTASKS /Create /SC ONCE /TN spawn /TR C:\windows\system32\cmd.exe /ST 20:10
+schtasks /Create /TN "CompMgmtBypass" /TR "compmgmt.msc" /SC ONLOGON /RL HIGHEST /F
+schtasks /Create /TN "EventViewerBypass" /TR "eventvwr.msc" /SC ONLOGON /RL HIGHEST /F
+schtasks /create /tn "T1053_005_OnLogon" /sc onlogon /tr "cmd.exe /c calc.exe"
+schtasks /create /tn "T1053_005_OnStartup" /sc onstart /ru system /tr "cmd.exe /c calc.exe"

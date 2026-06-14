@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"node.exe\" \"Adobe Creative Cloud Experience\\js\\malicious.js\"",
+    "explanation": "Original command line with quotes inserted for testing. This is a true positive as it matches the Sigma rule."
+  },
+  {
+    "output": "\"node.exe\" -e \"console.log('Adobe Creative Cloud Experience\\\\js'); require('child_process').exec('malicious_script.js')\"",
+    "explanation": "Original command line with quotes inserted and escaped backslashes for testing. This is a true positive as it matches the Sigma rule."
+  },
+  {
+    "output": "cd \"C:\\\\Program Files\\\\Adobe\\\\Adobe Creative Cloud Experience\\\\libs\\\" && .\\\\node.exe -e \"require('os')\"",
+    "explanation": "Original command line with quotes inserted and escaped backslashes for testing. This is a true positive as it matches the Sigma rule."
+  },
+  {
+    "output": "copy \"node.exe\" not_node.exe && not_node.exe -e \"require('child_process').exec('calc.exe')\"",
+    "explanation": "Original command line with quotes inserted for testing. This is a true positive as it matches the Sigma rule."
+  },
+  {
+    "output": "\"node.exe\" \"Adobe Creative Cloud Experience\\\\js\\\\malicious.js\"",
+    "explanation": "Inserted additional escape characters to test parsing behavior. Still matches the Sigma rule."
+  }
+]

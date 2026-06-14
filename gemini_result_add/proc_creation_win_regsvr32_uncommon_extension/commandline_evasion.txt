@@ -1,0 +1,14 @@
+[
+{
+"output": "C:\Windows\system32\regsvr32.exe /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg #.dll",
+"explanation": "Insertion / Other techniques (Logic Abuse): Appends a comment delimiter character ('#') followed by an allowed substring ('.dll') to the end of the argument array. Since the rule checks via the weak modifier 'CommandLine|contains', the inclusion of '.dll' triggers the whitelisted 'filter_main_legit_ext' exclusion logic. High-level processing behaves identically because regsvr32.exe stops evaluation when it resolves the targeted payload file and disregards unreferenced shell parameters trailing after it."
+},
+{
+"output": "C:\Windows\system32\regsvr32.exe /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg ".dll"",
+"explanation": "Insertion technique: Injects a safe, dummy parameter string literal value containing ".dll" enclosed in quotes at the end of the command array. This triggers the 'filter_main_legit_ext' condition to discard the alert. The primary runtime parsing of regsvr32.exe maps the first unflagged positional item ('shell32.jpg') as the library object target, leaving the auxiliary text entry dormant and safe for standard testing environments."
+},
+{
+"output": "C:\Windows\system32\regsvr32.exe /s C:\Users\thaim\AppData\Local\Temp\shell32.jpg;dll",
+"explanation": "Recoding technique: Modifies the simulated payload filename extension boundary dynamically within a path string parameter structure like 'shell32.jpg;dll'. The rule applies a blanket substring containment pattern query for the exact literal pattern '.dll'. Since some Windows file parsing routines allow composite parameters separated by punctuation characters like semicolons under explicit library initialization contexts, this safe variation suppresses alert states by altering data alignment definitions in logs."
+}
+]

@@ -1,22 +1,16 @@
+```json
 [
   {
-    "output": "copy powershell.exe trusted_updater.exe && \"ONENOTE.EXE\" /hyperlink trusted_updater.exe",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to simulate a suspicious child process of OneNote."
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo Bypass Test",
+    "explanation": "This command simulates a benign child process of onenote.exe using cmd.exe, which is included in the Sigma rule's detection list. The command is modified using safe techniques like full path specification and minimal arguments to avoid triggering the rule."
   },
   {
-    "output": "explorer.exe \"C:\\Users\\Public\\Documents\\payload.lnk\"",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to simulate a suspicious child process of OneNote."
+    "output": "C:\\Windows\\System32\\PowerShell.exe -Command \"Write-Output 'Bypass Test'\"",
+    "explanation": "This command simulates a benign child process of onenote.exe using PowerShell.exe, which is included in the Sigma rule's detection list. The command is modified using full path specification and safe command-line syntax to avoid triggering the rule."
   },
   {
-    "output": "\"ONENOTE.EXE\" /hyperlink \"calc.exe\"",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to simulate a suspicious child process of OneNote."
-  },
-  {
-    "output": "\"ONENOTE.EXE\" /hyperlink \"explorer.exe\" \"payload.exe\"",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to simulate a suspicious child process of OneNote."
-  },
-  {
-    "output": "copy powershell.exe not_a_backdoor.exe && \"ONENOTE.EXE\" /hyperlink not_a_backdoor.exe",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to simulate a suspicious child process of OneNote."
+    "output": "\"C:\\Windows\\System32\\rundll32.exe\" shell32.dll,Control_RunDLL",
+    "explanation": "This command simulates a benign child process of onenote.exe using rundll32.exe, which is included in the Sigma rule's detection list. The command is modified using quotes and full path to avoid triggering the rule."
   }
 ]
+```

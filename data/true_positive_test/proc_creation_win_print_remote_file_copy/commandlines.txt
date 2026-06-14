@@ -1,3 +1,0 @@
-"print" /D:destination.exe source.exe
-print /D:C:\Temp\destination.txt source.exe
-print.exe /D:destination.exe source.exe

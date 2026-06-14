@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ssh -R 8080:localhost:80 user@remotehost",
+    "explanation": "This command represents a typical port forwarding scenario using ssh.exe and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "ssh -R8080:localhost:80 user@remotehost",
+    "explanation": "Removes the space between '-R' and the port number, a safe mutation that still performs the same port forwarding activity."
+  },
+  {
+    "output": "ssh -R 8080:127.0.0.1:80 user@remotehost",
+    "explanation": "Uses '127.0.0.1' instead of 'localhost' as an equivalent representation, which is a safe mutation."
+  },
+  {
+    "output": "ssh -R 8080:localhost:80 -oPort=22 user@remotehost",
+    "explanation": "Adds an optional parameter '-oPort=22' to specify the remote SSH port, which does not affect the port forwarding behavior."
+  },
+  {
+    "output": "ssh -R 8080:localhost:80 user@remotehost",
+    "explanation": "Repeats the original command to confirm consistent detection behavior in the test environment."
+  }
+]

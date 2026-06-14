@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "C:\\Windows\\Sysnative\\rundll32.exe C:\\Windows\\System32\\davclnt.dll,DavSetCookie http://127.0.0.1/spoolss",
+    "explanation": "This command simulates a typical test case for the Sigma rule by invoking rundll32.exe with the DavSetCookie function and an HTTP URL targeting spoolss. It aligns with the rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\davclnt.dll,DavSetCookie http://127.0.0.1/srvsvc",
+    "explanation": "This command uses a similar structure but targets 'srvsvc' instead of 'spoolss'. It still meets the Sigma rule's detection criteria by using rundll32.exe with DavSetCookie and an HTTP URL."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\davclnt.dll,DavSetCookie http://127.0.0.1/print/pipe/spoolss",
+    "explanation": "This command includes '/print/pipe/' in the URL, which is part of the Sigma rule's detection logic. It demonstrates a realistic test scenario for the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\davclnt.dll,DavSetCookie http://127.0.0.1/spoolss",
+    "explanation": "This is a minimal version of the command that still satisfies the Sigma rule's detection criteria by using rundll32.exe with DavSetCookie and an HTTP URL targeting spoolss."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\davclnt.dll,DavSetCookie http://127.0.0.1/spoolss",
+    "explanation": "This command is a direct match for the Sigma rule's detection logic. It uses rundll32.exe with DavSetCookie and an HTTP URL targeting spoolss, which is the core of the rule."
+  }
+]
+```

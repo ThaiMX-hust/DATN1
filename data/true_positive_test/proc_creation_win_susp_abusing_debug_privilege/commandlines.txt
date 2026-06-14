@@ -1,4 +1,4 @@
 C:\windows\system32\cmd.exe /C echo Uuup! > \\.\pipe\HighPriv
+C:\WINDOWS\system32\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\art-marker.txt
 C:\WINDOWS\system32\cmd.exe /C start C:\WINDOWS\system32\cmd.exe /C "timeout /t 3 >nul&&echo TestSVC > \\.\pipe\TestSVC"
 cmd.exe /k tscon 1337 /dest:rdp-tcp#55
-C:\WINDOWS\system32\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\art-marker.txt

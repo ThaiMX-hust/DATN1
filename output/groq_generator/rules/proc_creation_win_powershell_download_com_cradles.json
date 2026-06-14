@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"[Activator]::CreateInstance([Type]::GetTypeFromCLSID('0002DF01-0000-0000-C000-000000000046'))\"",
+    "explanation": "This command uses [Type]::GetTypeFromCLSID with a known CLSID from the Sigma rule. It is a direct test of the detection logic and uses standard PowerShell syntax."
+  },
+  {
+    "output": "powershell.exe -Command \"[Type]::GetTypeFromCLSID('F6D90F16-9C73-11D3-B32E-00C04F990BB4') | Out-Null\"",
+    "explanation": "This command uses a CLSID from the Sigma rule and appends | Out-Null to suppress output. It demonstrates how the command can be altered to avoid unnecessary output while still triggering the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"[Type]::GetTypeFromCLSID('F5078F35-C551-11D3-89B9-0000F81FE221') | Out-String | Out-Null\"",
+    "explanation": "This command adds additional pipeline elements to demonstrate reordering and insertion techniques. The command remains functionally equivalent but is slightly more obfuscated."
+  },
+  {
+    "output": "powershell.exe -Command \"[Type]::GetTypeFromCLSID('88d96a0a-f192-11d4-a65f-0040963251e5')\"",
+    "explanation": "This command uses a CLSID from the Sigma rule without additional output suppression or redirection. It is a minimal test command that still triggers the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"[Type]::GetTypeFromCLSID('AFBA6B42-5692-48EA-8141-DC517DCF0EF1') | Out-Null\"",
+    "explanation": "This command uses a CLSID from the Sigma rule and includes Out-Null to suppress output. It is a clean test command that avoids unnecessary side effects."
+  }
+]

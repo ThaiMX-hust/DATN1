@@ -1,22 +1,22 @@
 [
   {
-    "output": "powershell.exe -Command \"& ( '{0}{1}{2}' -f 'I','EX','' ) ('Wri'+'te-H'+'ost ''Bypass''')\"",
-    "explanation": "This command uses string concatenation and formatting to bypass the Sigma rule's detection of special characters in the command line. The rule looks for multiple '+' characters in sequence, but this command uses '+' in a way that is still functional but less likely to trigger the regex pattern."
+    "output": "powershell.exe -Command \"Write-Output 'Test'\"",
+    "explanation": "This command is a benign PowerShell command that outputs 'Test' and does not contain any special characters that would trigger the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"& { $cmd = 'IEX' ; & $cmd ('Wri'+'te-H'+'ost ''Bypass'') }\"",
-    "explanation": "This command uses variable assignment and command substitution to bypass the Sigma rule. The rule detects multiple '+' characters, but this command uses string concatenation and variable assignment to achieve the same result without using '+' in a way that would trigger the regex pattern."
+    "output": "pwsh -c \"Write-Host 'Hello World'\"",
+    "explanation": "This command uses the short form of the -Command parameter and does not contain any special characters that would trigger the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"& { function Invoke-Command { param($cmd) iex $cmd } Invoke-Command ('Wri'+'te-H'+'ost ''Bypass'') }\"",
-    "explanation": "This command defines a function to execute commands, which is then used to execute a concatenated string. This approach avoids the use of '+' in a way that would trigger the Sigma rule's regex patterns."
+    "output": "powershell.exe -Command { Write-Host 'No special characters here' }",
+    "explanation": "This command uses a script block with no special characters that would trigger the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"& { $cmd = 'Write-Host'; $arg = 'Bypass'; & $cmd $arg }\"",
-    "explanation": "This command uses variable assignment to store the command and its argument, then executes the command. This avoids the use of '+' and other special characters that would trigger the Sigma rule's detection."
+    "output": "pwsh -Command \"Write-Output 'Safe command'\"",
+    "explanation": "This command is a simple PowerShell command that outputs 'Safe command' and does not contain any special characters that would trigger the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"& { $cmd = 'Write-Host'; & $cmd 'Bypass' }\"",
-    "explanation": "This command uses variable assignment to store the command and directly executes it with the argument. This approach avoids the use of '+' and other special characters that would trigger the Sigma rule's detection."
+    "output": "powershell.exe -Command \"Write-Host 'Testing'\"",
+    "explanation": "This command is a simple PowerShell command that outputs 'Testing' and does not contain any special characters that would trigger the Sigma rule."
   }
 ]

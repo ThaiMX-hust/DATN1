@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=Dropbox dir=in action=allow \"program=C:\\Program Files (x86)\\Dropbox\\Client\\Dropbox.exe\" enable=yes profile=Any",
+    "explanation": "Other technique (Filter Abuse). Replicates the exact structure defined in `filter_optional_dropbox` but provides a real path instead of the wildcards. This causes the SIEM to drop the alert entirely via the exclusion logic, while allowing arbitrary attacker payload configurations if they mask their rule attributes to mimic Dropbox's installer installer criteria."
+  },
+  {
+    "output": "netsh advfirewall \"firewall\" \"add\" rule name=\"TestRule\" dir=in action=allow protocol=TCP localport=4489",
+    "explanation": "Insertion technique. Encloses the target keywords inside double quotation marks (`\"firewall\"` and `\"add\"`). This directly avoids the selection criteria `CommandLine|contains|all` which searches for the explicit space-padded strings ` firewall ` and ` add `, whereas `netsh.exe` strips the quotes and parses the verbs natively."
+  },
+  {
+    "output": "netsh advfirewall\tfirewall\tadd\trule name=\"TestRule\" dir=in action=allow protocol=TCP localport=4489",
+    "explanation": "Substitution technique. Substitutes standard blank spaces with horizontal tabs (`\t`) around the target verbs. This breaks the strict static rule lookup requirements for a leading and trailing space (` firewall ` and ` add `) while the Windows command processor treats tabs as valid argument token delimiters."
+  },
+  {
+    "output": "netsh advfirewall firewall   add   rule name=\"TestRule\" dir=in action=allow protocol=TCP localport=4489",
+    "explanation": "Insertion technique. Increases the whitespace density between verbs to multiple contiguous spaces. If a parser relies on exact single-space boundary tokens or does not collapse multiple spacing buffers during log ingestion, changing the token distance can bypass rigid sub-string containment checks."
+  },
+  {
+    "output": "netsh advfirewall firewall a rule name=\"TestRule\" dir=in action=allow protocol=TCP localport=4489",
+    "explanation": "Omission technique. Truncates the `add` verb to its shortest natively accepted form `a`. Because the internal parser of `netsh.exe` supports command abbreviations as long as they are distinct contextually, this completely eliminates the literal word ` add ` from appearing inside the process telemetry creation log."
+  }
+]

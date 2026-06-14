@@ -1,14 +1,22 @@
 [
   {
-    "output": "powershell.exe -enc dwBoAG8AYQBtAGkA",
-    "explanation": "The '-enc' flag is a valid substitution for '-EncodedCommand'. This mutation preserves the behavior while using a shorter flag, which is allowed under safe command-line mutation techniques."
+    "output": "powershell.exe -enc SQBFAFgA",
+    "explanation": "The Sigma rule detects base64 encoded commands using '-encodedcommand' or '-e'. The command is modified using substitution by replacing '-encodedcommand' with its short form '-enc', which is functionally equivalent and still matches the rule."
   },
   {
-    "output": "powershell.exe -EncodedCommand\"dwBoAG8AYQBtAGkA\"",
-    "explanation": "Adding quotes around the base64 string is a safe insertion technique. It ensures proper parsing in some environments and does not alter the behavior of the command."
+    "output": "powershell.exe -e SQBFAFgA",
+    "explanation": "The '-encodedcommand' flag is further shortened to '-e', which is a valid and equivalent syntax for passing base64 encoded commands in PowerShell. This is a safe substitution and still triggers the Sigma rule."
   },
   {
-    "output": "powershell.exe -EncodedCommand dwBoAG8AYQBtAGkA",
-    "explanation": "No mutation is required as the original command already matches the Sigma rule. This is included to confirm the baseline behavior."
+    "output": "powershell.exe -enc \"SQBFAFgA\"",
+    "explanation": "Quotes are inserted around the encoded command to test how the rule handles string parsing. This is a safe insertion technique and does not alter the behavior of the command."
+  },
+  {
+    "output": "powershell.exe -enc SQBFAFgA`n",
+    "explanation": "A newline character is appended to the command line using an escape character. This tests how the rule handles whitespace and escape characters in the command line."
+  },
+  {
+    "output": "powershell.exe -enc SQBFAFgA ",
+    "explanation": "Extra whitespace is added at the end of the command line. This is a safe mutation technique to test how the rule handles trailing spaces in the command line."
   }
 ]

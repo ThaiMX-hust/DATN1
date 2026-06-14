@@ -1,4 +1,0 @@
-cmd.exe /^q /^c c^hcp 437
-cmd.exe /q /c "ch""cp" 1252
-cmd.exe /q /c c^hcp 1252
-set x=chcp && cmd.exe /q /c %x% 1252

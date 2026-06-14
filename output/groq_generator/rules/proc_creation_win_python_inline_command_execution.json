@@ -1,34 +1,26 @@
 [
   {
-    "output": "python.exe -c \"import os; os.system('whoami')\"",
-    "explanation": "This is the direct command that matches the Sigma rule and is used for testing detection accuracy."
+    "output": "python -c \"print('Hello, World!')\"",
+    "explanation": "This command uses the '-c' flag to execute an inline Python command, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "python.exe -c'import os; os.system(\"whoami\")'",
-    "explanation": "Single quotes are used instead of double quotes to enclose the command string, which is a valid syntax substitution."
+    "output": "python -c\"print('Hello, World!')\"",
+    "explanation": "Removes a space between '-c' and the command string, which may bypass detection if the rule relies on space-based parsing."
   },
   {
-    "output": "python.exe -c\"import os; os.system('whoami')\"",
-    "explanation": "Quotes are directly appended to the -c flag without a space, which is still valid syntax in some command-line interpreters."
+    "output": "python -c \"print(\\'Hello, World!\\')\"",
+    "explanation": "Uses escaped single quotes within the command string to test if the detection rule accounts for different quotation styles."
   },
   {
-    "output": "python.exe -c \"import os; os.system('whoami')\" # test comment",
-    "explanation": "A comment is appended to the command line, which is allowed in some shells and does not affect execution."
+    "output": "python -c \"__import__('os').system('echo Hello World')\"",
+    "explanation": "Uses Python's __import__ function to execute a system command inline, which is a common technique for obfuscation and may evade simple string-based detection."
   },
   {
-    "output": "python.exe -c \"import os; os.system('whoami')\"\\n",
-    "explanation": "A newline character is appended to the command line, which is allowed in some shells and does not affect execution."
+    "output": "python -c \"print('Hello, World!')\" # Inline comment",
+    "explanation": "Adds a comment after the command line, which may be ignored by some parsing systems and could bypass detection if not properly handled."
   },
   {
-    "output": "python.exe -c \"import os; os.system('whoami')\"\\t",
-    "explanation": "A tab character is appended to the command line, which is allowed in some shells and does not affect execution."
-  },
-  {
-    "output": "python.exe -c \"import os; os.system('whoami')\"\\r",
-    "explanation": "A carriage return character is appended to the command line, which is allowed in some shells and does not affect execution."
-  },
-  {
-    "output": "python.exe -c \"import os; os.system('whoami')\"\\x20",
-    "explanation": "A hex-encoded space character is appended to the command line, which is allowed in some shells and does not affect execution."
+    "output": "python -c\"print('Hello, World!')\" # Inline comment",
+    "explanation": "Combines omission of space between '-c' and the command string with an inline comment, increasing the possibility of bypassing detection."
   }
 ]

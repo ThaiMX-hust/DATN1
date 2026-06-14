@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo Test",
+    "explanation": "This command simulates a suspicious command line that might trigger the Sigma rule. It uses `cmd.exe` with `/c` to execute a benign command, which aligns with the `CommandLine|contains: 'cmd /c'` detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\PowerShell.exe -Command \"Invoke-Expression 'echo Test'\"",
+    "explanation": "This command simulates a suspicious PowerShell invocation using `Invoke-`, which matches the `CommandLine|contains: 'Invoke-'` detection logic in the Sigma rule. The command is benign but structured to test detection coverage."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe some.dll,SomeFunction",
+    "explanation": "This command simulates a suspicious use of `rundll32.exe`, which is included in the `Image|endswith` list of suspicious binaries in the Sigma rule. The command is benign but structured to test detection coverage."
+  },
+  {
+    "output": "C:\\Windows\\System32\\mshta.exe about:blank",
+    "explanation": "This command simulates a benign invocation of `mshta.exe`, which is included in the `Image|endswith` list of suspicious binaries in the Sigma rule. It is used here to test detection coverage without malicious intent."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cscript.exe //B //Nologo some.vbs",
+    "explanation": "This command simulates a benign invocation of `cscript.exe`, which is included in the `Image|endswith` list of suspicious binaries in the Sigma rule. It is used here to test detection coverage without malicious intent."
+  }
+]

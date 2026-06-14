@@ -1,26 +1,18 @@
 [
   {
-    "output": "AdvancedRun.exe /EXEFilename cmd.exe /Run",
-    "explanation": "This command uses minimal syntax and omits optional parameters while still matching the Sigma rule's detection criteria."
+    "output": "AdvancedRun.exe \"/EXEFilename C:\\Windows\\System32\\cmd.exe\" \"/Run\" \"/WindowState 0\" \"/RunAs SYSTEM\" \"/CommandLine C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "This command simulates the execution of AdvancedRun.exe with parameters that match the Sigma rule. It includes the required flags and arguments in a standard format."
   },
   {
-    "output": "AdvancedRun.exe /EXEFilename \"cmd.exe\" /RunAs 4 /WindowState 0 /Run",
-    "explanation": "This command includes optional parameters explicitly, which aligns with the Sigma rule's detection logic and is a valid test case."
+    "output": "AdvancedRun.exe -EXEFilename \"C:\\\\Windows\\\\System32\\\\cmd.exe\" -Run -WindowState 0 -RunAs SYSTEM -CommandLine \"C:\\\\Windows\\\\System32\\\\cmd.exe\"",
+    "explanation": "This command uses substitution of '/' with '-' for flag syntax, which is a common equivalent in command-line tools, while maintaining the same functionality and matching the Sigma rule."
   },
   {
-    "output": "AdvancedRun.exe /EXEFilename \"cmd.exe\" /RunAs 4 /Run",
-    "explanation": "This command omits the /WindowState parameter, which is optional, but still meets the required criteria for detection."
+    "output": "AdvancedRun.exe \"/EXEFilename C:\\Windows\\System32\\cmd.exe\" \"/Run\" \"/WindowState 0\" \"/RunAs SYSTEM\" \"/CommandLine C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "This command uses path normalization (single backslashes instead of double backslashes) and omits unnecessary escape characters where not required, while still matching the Sigma rule."
   },
   {
-    "output": "AdvancedRun.exe /EXEFilename cmd.exe /RunAs 8 /Run",
-    "explanation": "This command uses a different /RunAs value but still satisfies the Sigma rule's detection conditions."
-  },
-  {
-    "output": "\"C:\\Users\\SwachchhandaP\\Downloads\\advancedrun-x64\\AdvancedRun.exe\" /EXEFilename \"cmd.exe\" /Run",
-    "explanation": "This command uses full path notation and quotes for the executable, which is a common variation and still matches the Sigma rule."
-  },
-  {
-    "output": "",
-    "explanation": "No safe bypass command can be generated."
+    "output": "AdvancedRun.exe \"/Run\" \"/EXEFilename C:\\Windows\\System32\\cmd.exe\" \"/WindowState 0\" \"/RunAs SYSTEM\" \"/CommandLine C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "This command reorders the arguments, which is acceptable if the program accepts arguments in any order, while still matching the Sigma rule."
   }
 ]

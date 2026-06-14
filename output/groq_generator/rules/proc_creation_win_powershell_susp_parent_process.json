@@ -1,18 +1,22 @@
 [
   {
     "output": "C:\\WINDOWS\\system32\\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\\art-marker.txt",
-    "explanation": "This command is a true positive for the Sigma rule as it uses cmd.exe to launch PowerShell with suspicious parameters. No bypass is needed since it already triggers the rule."
+    "explanation": "The original command line is already a valid test case for the Sigma rule. No mutation is needed to produce a true positive."
   },
   {
-    "output": "InstallUtil.exe /logfile= /LogToConsole=false /U CustomPowerShellRunspace.dll",
-    "explanation": "This command is a true positive for the Sigma rule as it uses InstallUtil.exe to execute a PowerShell payload. No bypass is needed since it already triggers the rule."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\cmd.exe /c powershell.exe -nop -w hidden -command \"New-Item -ItemType File C:\\\\art-marker.txt\"",
+    "explanation": "Inserted quotes around the command to test how the system parses quoted arguments, which is a safe mutation technique."
   },
   {
-    "output": "schtasks /create /tn \"TaskBypass\" /tr \"powershell.exe -ExecutionPolicy Bypass -Command Write-Host 'Bypassed'\" /sc once /st 00:00 /f && schtasks /run /tn \"TaskBypass\"",
-    "explanation": "This command is a true positive for the Sigma rule as it uses schtasks to launch PowerShell with suspicious execution policy. No bypass is needed since it already triggers the rule."
+    "output": "C:\\\\WINDOWS\\system32\\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\\art-marker.txt",
+    "explanation": "Used a mix of double backslashes and single backslashes for path normalization, a safe mutation technique."
   },
   {
-    "output": "wmic process call create \"powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command ping 127.0.0.1\"",
-    "explanation": "This command is a true positive for the Sigma rule as it uses wmic to launch PowerShell with suspicious execution policy and hidden window style. No bypass is needed since it already triggers the rule."
+    "output": "C:\\\\WINDOWS\\system32\\cmd.exe /c powershell.exe -nop -w hidden -command (New-Item -ItemType File C:\\\\art-marker.txt)",
+    "explanation": "Wrapped the command in parentheses to test alternative syntax parsing, which is a safe mutation technique."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\\art-marker.txt",
+    "explanation": "Used a mix of single and double backslashes in the path for path normalization, a safe mutation technique."
   }
 ]

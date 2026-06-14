@@ -1,22 +1,14 @@
 [
   {
-    "output": "powershell.exe -Command \"$a = 'j'; $b = 'oin'; $c = 'spl'; $d = 'it'; $cmd = $a+$b+' '+$c+$d; Invoke-Expression ('Write-Host ' + $cmd)\"",
-    "explanation": "This command uses insertion and omission techniques to split the strings 'join' and 'split' into parts and reassemble them. It avoids direct use of the full strings 'join split' while maintaining the same behavior."
+    "output": "powershell.exe -Command \"( $env:Public[13]+$env:Public[5]+''x'') -Join '' '' | Out-Null\"",
+    "explanation": "This command attempts to mimic the obfuscated PowerShell behavior by using similar string manipulation techniques. It uses environment variables and string indexing to avoid direct string literals while staying within safe mutation techniques."
   },
   {
-    "output": "powershell.exe -Command \"$p = $env:Public; $char1 = $p[13]; $char2 = $p[5]; $exec = $char1 + $char2 + 'y'; Invoke-Expression $exec\"",
-    "explanation": "This command uses index-based character extraction from the $env:Public variable to construct the 'exec' string. It avoids direct use of the string 'exec' while maintaining the same behavior."
+    "output": "pwsh -c \"( $PSHOME[0]+$PSHOME[1]+''x'') -Join '' '' | Out-Null\"",
+    "explanation": "This command simulates obfuscated PowerShell behavior using $PSHOME variable and string indexing. It uses a different executable (pwsh) and reorders the command structure to test bypass potential."
   },
   {
-    "output": "powershell.exe -EncodedCommand JABzID0gJ2pvaW4lMjZzcGxp dCcgOyBXcml0ZS1Ib3N0ICRz",
-    "explanation": "This command uses base64 encoding to obfuscate the PowerShell command. It avoids direct string detection while maintaining the same behavior."
-  },
-  {
-    "output": "powershell.exe -Command \"$a = 'jo'; $b = 'in'; $c = 'spl'; $d = 'it'; $cmd = $a+$b+' '+$c+$d; Invoke-Expression ('Write-Host ' + $cmd)\"",
-    "explanation": "This command uses string substitution and reordering to split the strings 'join' and 'split' into parts and reassemble them. It avoids direct use of the full strings while maintaining the same behavior."
-  },
-  {
-    "output": "powershell.exe -Command \"[char[]](106,111,105,110) -join '' + ' ' + [char[]](115,112,108,105,116) -join ''\"",
-    "explanation": "This command uses ASCII character codes to construct the strings 'join' and 'split'. It avoids direct use of the strings while maintaining the same behavior."
+    "output": "powershell.exe -Command \"( [char]80+[char]115+[char]120 ) -Join '' '' | Out-Null\"",
+    "explanation": "This command uses char code representation to simulate obfuscation techniques. It avoids direct string literals and uses alternative syntax to test if the Sigma rule can detect such variations."
   }
 ]

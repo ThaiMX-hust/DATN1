@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe \"/create\" /tn \"TestTask1\" /tr \"C:\\Windows\\Temp\\test.txt\" /sc \"once\" /st 12:00",
+    "explanation": "Insertion technique: Enclosing the action flag `\"/create\"` and the frequency modifier `\"once\"` inside double quotes disrupts the contiguous string logging in process creation logs. While the Windows application subsystem automatically unquotes these arguments and passes them cleanly to schtasks.exe, this technique effectively breaks the exact literal substring requirements for `' /create '` and `' /sc once '` within the rule's selection logic."
+  },
+  {
+    "output": "cmd.exe /c schtasks.exe /cr^eate /tn \"TestTask1\" /tr \"C:\\Windows\\Temp\\test.txt\" /sc on^ce /st 12:00",
+    "explanation": "Insertion technique: Running the command via `cmd.exe` permits inserting the shell caret (`^`) escape character into the command-line parameters (`/cr^eate` and `on^ce`). The command processor strips out these escape characters before invoking the schtasks binary, ensuring identical operational execution, but the raw process logging infrastructure records the caret characters literals, failing the rule's strict text searches."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:/Windows/Temp/test.txt\" /sc once /st 12:00",
+    "explanation": "Recoding technique: Normalizing the folder path inside the task run parameter with forward slashes (`C:/Windows/Temp/test.txt`) instead of backslashes avoids matching the static `\\Temp\\` lookup filter. Windows APIs and built-in binaries inherently support forward slashes for folder paths, meaning the target execution performs identically while remaining completely invisible to the rule's specific delimiter criteria."
+  }
+]

@@ -1,10 +1,28 @@
+```json
 [
   {
-    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\akew4mzz\\akew4mzz.cmdline\"",
-    "explanation": "The original command is already a valid test command. No mutation is needed to simulate a legitimate execution that matches the Sigma rule."
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\4pk1n4ga\\4pk1n4ga.cmdline\"",
+    "explanation": "This command uses a response file with escaped quotes and standard path formatting to invoke csc.exe, which is already aligned with the Sigma rule's detection criteria and cannot be bypassed using safe mutation techniques without altering the malicious intent."
   },
   {
-    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /fullpaths /noconfig @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\akew4mzz\\akew4mzz.cmdline\"",
-    "explanation": "Reordered the command-line arguments to test if argument order affects detection. This is a safe mutation technique for testing."
-  }
-]
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\4qvmfagk\\4qvmfagk.cmdline\"",
+    "explanation": "This command uses a response file with escaped quotes and standard path formatting to invoke csc.exe, which is already aligned with the Sigma rule's detection criteria and cannot be bypassed using safe mutation techniques without altering the malicious intent."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\akew4mzz\\akew4mzz.cmdline\"",
+    "explanation": "This command uses a response file with escaped quotes and standard path formatting to invoke csc.exe, which is already aligned with the Sigma rule's detection criteria and cannot be bypassed using safe mutation techniques without altering the malicious intent."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\aqdzmt0z\\aqdzmt0z.cmdline\"",
+    "explanation": "This command uses a response file with escaped quotes and standard path formatting to invoke csc.exe, which is already aligned with the Sigma rule's detection criteria and cannot be bypassed using safe mutation techniques without altering the malicious intent."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\bt33acch\\bt33acch.cmdline\"",
+    "explanation": "This command uses a response file with escaped quotes and standard path formatting to invoke csc.exe, which is already aligned with the Sigma rule's detection criteria and cannot be bypassed using safe mutation techniques without altering the malicious intent."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\fonvsqyp\\fonvsqyp.cmdline\"",
+    "explanation": "This command uses a response file with escaped quotes and standard path formatting to invoke csc.exe, which is already aligned with the Sigma rule's detection criteria and cannot be bypassed using safe mutation techniques without altering the malicious intent."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /

@@ -1,1 +1,1 @@
-C:\AtomicRedTeam\atomics\..\ExternalPayloads\sqlite-tools-win32-x86-3380200\sqlite3.exe  "C:\Users\thaim\AppData\Local\Google\Chrome\User Data\Default\Network\Cookies"
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\sqlite-tools-win32-x86-3380200\sqlite3.exe "C:\Users\thaim\AppData\Local\Google\Chrome\User Data\Default\Network\Cookies"

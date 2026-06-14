@@ -1,14 +1,35 @@
 [
   {
-    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select-Object Name,Enabled | Out-File C:\\temp\\users.txt\"",
-    "explanation": "This command uses equivalent syntax for filtering (-Filter *), selects specific properties (Select-Object), and exports to a file (Out-File), which is a variation of the original command."
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select Name,UserPrincipalName | Out-File -FilePath C:\\users\\user\\desktop\\users.txt\"",
+    "explanation": "This command uses PowerShell to execute the Get-ADUser cmdlet with a filter to retrieve all users, selects specific properties, and exports the output to a file. It matches the Sigma rule's detection criteria."
   },
   {
-    "output": "pwsh.exe -c \"Get-ADUser -f * | Out-String | Set-Content -Path users.txt\"",
-    "explanation": "This command uses the short form of the filter flag (-f instead of -Filter), uses Out-String to convert output, and writes to a file using Set-Content instead of Out-File, which is a safe mutation."
+    "output": "pwsh.exe -c \"Get-ADUser -Filter * | Select-Object Name,UserPrincipalName | Out-File C:\\users\\user\\desktop\\users.txt\"",
+    "explanation": "This command uses PowerShell Core (pwsh.exe) to achieve the same behavior as the previous command, using equivalent syntax and matching the Sigma rule's detection criteria."
   },
   {
-    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Export-Csv -Path C:\\temp\\users.csv -NoTypeInformation\"",
-    "explanation": "This command uses an alternative output method (Export-Csv) and includes the -NoTypeInformation flag, which is optional but commonly used, making it a safe variation."
-  }
-]
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select Name,UserPrincipalName > C:\\users\\user\\desktop\\users.txt\"",
+    "explanation": "This command uses PowerShell to redirect output to a file using the '>' operator, which is another valid method for exporting data and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Out-File -FilePath C:\\users\\user\\desktop\\users.txt -Append\"",
+    "explanation": "This command uses the Out-File cmdlet with the -Append parameter to add output to a file, which is another valid method for exporting data and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select-Object Name,UserPrincipalName | Set-Content C:\\users\\user\\desktop\\users.txt\"",
+    "explanation": "This command uses PowerShell to execute the Get-ADUser cmdlet with a filter to retrieve all users, selects specific properties, and exports the output to a file using Set-Content, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select Name,UserPrincipalName | Add-Content C:\\users\\user\\desktop\\users.txt\"",
+    "explanation": "This command uses PowerShell to execute the Get-ADUser cmdlet with a filter to retrieve all users, selects specific properties, and appends the output to a file using Add-Content, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select Name,UserPrincipalName | Out-File -FilePath C:\\users\\user\\desktop\\users.txt -Encoding UTF8\"",
+    "explanation": "This command uses PowerShell to execute the Get-ADUser cmdlet with a filter to retrieve all users, selects specific properties, and exports the output to a file with UTF8 encoding, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select Name,UserPrincipalName | Out-File -FilePath C:\\users\\user\\desktop\\users.txt -Force\"",
+    "explanation": "This command uses PowerShell to execute the Get-ADUser cmdlet with a filter to retrieve all users, selects specific properties, and exports the output to a file using the -Force parameter to overwrite the file if it exists, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter *

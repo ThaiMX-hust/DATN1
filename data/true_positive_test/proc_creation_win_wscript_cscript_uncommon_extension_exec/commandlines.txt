@@ -1,4 +1,3 @@
 "C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.png.vbs"
 "C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.xls.vbs"
 "C:\WINDOWS\System32\WScript.exe" "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.xlsx.vbs"
-copy script.vbs script.vbs.txt && cscript //e:vbs script.vbs.txt

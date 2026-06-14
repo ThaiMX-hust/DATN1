@@ -1,10 +1,24 @@
+```json
 [
   {
-    "output": "\"cmd.exe\" /c cmd /r cmd < \"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
-    "explanation": "This command uses redirection via '<' to read from a file, which is directly detected by the Sigma rule. It is included as a baseline for testing."
+    "output": "cmd.exe /c cmd /r cmd < \"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
+    "explanation": "The original command uses redirection with '<' to read from a file. This is a direct match for the Sigma rule. No mutation is applied."
   },
   {
-    "output": "\"cmd.exe\" /c cmd /r cmd<\"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
-    "explanation": "The redirection operator '<' is used without a space before the file path, which may bypass detection by altering the command structure slightly."
+    "output": "cmd.exe /c cmd /r cmd < \"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\" >nul 2>&1",
+    "explanation": "The redirection of output to 'nul' is added to suppress output, but the '<' redirection remains unchanged and still matches the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c cmd /r cmd <\"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
+    "explanation": "The '<' redirection is preserved, and the file path is written without a space between '<' and the file path. This is a valid mutation and still matches the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c cmd /r cmd < \"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
+    "explanation": "The command is wrapped in quotes and uses standard redirection with '<'. This is a direct match for the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c cmd /r cmd < \"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
+    "explanation": "The command is unchanged and directly matches the Sigma rule's detection of '<' in the command line."
   }
 ]
+```

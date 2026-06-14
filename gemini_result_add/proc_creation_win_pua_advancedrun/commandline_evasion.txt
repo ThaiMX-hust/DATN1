@@ -1,0 +1,22 @@
+[
+  {
+    "output": "AdvancedRun.exe /EXEFilename \"C:\\\\\\Program Files\\\\\\MyApp.exe\" /Run /WindowState=0 /RunAs /CommandLine \"cmd /c echo Hello\"",
+    "explanation": "Insertion technique used to add quotes and extra backslashes, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the shell will ignore the extra quotes and backslashes, and the program will still execute with the intended arguments."
+  },
+  {
+    "output": "AdvancedRun.exe -EXEFilename C:\\\\Program Files\\\\MyApp.exe -Run -WindowState 0 -RunAs -CommandLine cmd /c echo Hello",
+    "explanation": "Substitution technique used to replace the forward slashes with hyphens, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the program may accept both forward slashes and hyphens as option prefixes."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename C:\\Program Files\\MyApp.exe /Run /WindowState0 /RunAs /CommandLine cmd /c echo Hello",
+    "explanation": "Omission technique used to remove the space between /WindowState and its value, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the program may accept the option and value without a space."
+  },
+  {
+    "output": "AdvancedRun.exe /Run /EXEFilename C:\\Program Files\\MyApp.exe /WindowState 0 /RunAs /CommandLine cmd /c echo Hello",
+    "explanation": "Reordering technique used to change the order of the arguments, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the program may accept the arguments in a different order."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename %PROGRAMFILES%\\MyApp.exe /Run /WindowState 0 /RunAs /CommandLine cmd /c echo Hello",
+    "explanation": "Recoding/Encoding technique used to represent the path using an environment variable, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the program will expand the environment variable to the correct path."
+  }
+]

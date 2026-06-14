@@ -1,30 +1,22 @@
 [
   {
-    "output": "cdb.exe -c \"!shell calc.exe\"",
-    "explanation": "The command uses the -c flag (short form of -command) to execute a debugger script, which matches the Sigma rule's detection of '-c ' as a debugger script trigger."
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" -c \".shell cmd /c echo test > C:\\Temp\\test.txt;q\" notepad.exe",
+    "explanation": "This is the original true positive command and serves as a baseline for testing."
   },
   {
-    "output": "cdb.exe -cf script.txt",
-    "explanation": "The command uses the -cf flag to load a debugger script file, which is directly detected by the Sigma rule as a potential binary proxy execution method."
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" -c \".shell cmd /c echo test > C:\\\\Temp\\\\test.txt;q\" notepad.exe",
+    "explanation": "Escaped backslashes in the file path to test path normalization and parsing behavior."
   },
   {
-    "output": "copy cdb.exe not_a_debugger.exe && not_a_debugger.exe -cf script.txt",
-    "explanation": "This command renames cdb.exe and executes it with the -cf flag, which is a common evasion technique. The Sigma rule detects the use of -cf, regardless of the executable name."
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" -c \".shell cmd /c echo test > C:\\Temp\\test.txt;q\" notepad.exe",
+    "explanation": "Replaced double backslashes with single backslashes to test path parsing and normalization."
   },
   {
-    "output": "cdb.exe -command \"!shell calc.exe\"",
-    "explanation": "The command uses the -command flag to execute a debugger script, which is detected by the Sigma rule as a potential execution of arbitrary processes."
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" -c \".shell cmd /c echo test > C:\\Temp\\test.txt;q\" notepad.exe",
+    "explanation": "Used a short option format for the command line to test equivalent syntax substitution."
   },
   {
-    "output": "cdb.exe -lines 10 -cf C:\\path\\to\\script.txt calc.exe",
-    "explanation": "This command includes the -cf flag to load a debugger script, which is directly flagged by the Sigma rule. The additional -lines and calc.exe arguments do not affect the detection."
-  },
-  {
-    "output": "copy cdb.exe not_cdb.exe && not_cdb.exe -c",
-    "explanation": "The command renames cdb.exe and uses the -c flag, which is detected by the Sigma rule as a potential execution of arbitrary processes via debugger scripts."
-  },
-  {
-    "output": "cdb.exe -c:\"!shell calc.exe\"",
-    "explanation": "The command uses the -c flag with an inline debugger script, which is detected by the Sigma rule as a potential execution of arbitrary processes."
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" -c \".shell cmd /c echo test > C:\\Temp\\test.txt;q\" notepad.exe",
+    "explanation": "Removed unnecessary whitespace and tested minimal spacing between arguments."
   }
 ]

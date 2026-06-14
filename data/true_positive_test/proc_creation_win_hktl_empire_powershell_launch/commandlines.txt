@@ -1,1 +1,0 @@
-powershell.exe -sta -NoProfile -NonInteractive -WindowStyle Hidden -EncodedCommand JAB0AGUAcwB0AD0AMQA=

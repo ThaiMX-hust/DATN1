@@ -1,0 +1,18 @@
+[
+  {
+    "output": "dsquery.exe * -filter \"(objectClass=trustedDomain)\"",
+    "explanation": "Substitution technique: Substituting the built-in macro/alias syntax 'dsquery trusteddomain' with a raw LDAP filter search expression using 'dsquery * -filter'. The Active Directory query engine processes the underlying LDAP filter identically to retrieve all trusted domain objects, completely avoiding the literal string 'trustedDomain' within the first argument layer to bypass 'selection_cli'."
+  },
+  {
+    "output": "dsquery.exe * -filter \"(objectCategory=trustedDomain)\"",
+    "explanation": "Substitution technique: Replaces the object class filter constraint with an object category assignment rule targeting the 'trustedDomain' schema designation. This returns an equivalent dataset of active directory domain infrastructure trusts in a test environment while placing the string inside an explicit filter flag sequence."
+  },
+  {
+    "output": "dsquery.exe \"trustedDomain\"",
+    "explanation": "Insertion technique: Enclosing the object type query alias inside an explicit pair of double quotes ('\"trustedDomain\"'). This breaks the exact raw literal unquoted sequence check in naive signature string scanning frameworks that look for unquoted positional arguments, while the underlying binary strips the outer boundaries natively during tokenization."
+  },
+  {
+    "output": "cmd.exe /c dsquery.exe tru\"\"stedDomain",
+    "explanation": "Insertion technique: Inserting an adjacent pair of empty double quotes directly inside the target parameter token string ('tru\"\"stedDomain'). The native Windows command line parser transparently peels off and collapses these empty structures during token parsing, reconstructing the string back to 'trustedDomain' at application entry while successfully disrupting the continuous text pattern lookup in 'selection_cli'."
+  }
+]

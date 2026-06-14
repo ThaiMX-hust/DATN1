@@ -1,0 +1,22 @@
+[
+  {
+    "output": "unregmp2.exe -HideWMP",
+    "explanation": "Substitution technique. Replaces the forward slash `/` with a hyphen `-`. Since the Sigma rule uses the `|windash` modifier, it automatically compensates for normal dashes (`-HideWMP`), but because the rule includes a strict leading space character (` /HideWMP`), changing the slash to a dash might fail to match if the parser fails to properly normalize the whitespace-slash token combination under specific command-line variations."
+  },
+  {
+    "output": "unregmp2.exe \"/HideWMP\"",
+    "explanation": "Insertion technique. Encloses the target switch in quotation marks. This breaks the literal string matching for ` /HideWMP` (and its windash equivalents) within the raw `CommandLine` field, while the Windows API/application arguments parser strips the quotes and executes the application with the intended flag."
+  },
+  {
+    "output": "unregmp2.exe /HideWMP:extra",
+    "explanation": "Substitution technique. Appends a colon and trailing characters to the flag. The binary `unregmp2.exe` evaluates the token prefix to trigger the behavior, but a strict trailing space assumption in detections or logs can cause brittle logic to miss it, although the `|contains` modifier usually catches substrings unless the detection relies heavily on whitespace padding."
+  },
+  {
+    "output": "unregmp2.exe    /HideWMP",
+    "explanation": "Insertion technique. Interjects multiple spaces before the argument switch. If a security control or custom parser tokenizes or truncates multiple spaces incorrectly, it can bypass simple substring checks that don't account for dynamic token distances, though it still contains the raw string."
+  },
+  {
+    "output": "unregmp2.exe /HideWmp",
+    "explanation": "Substitution technique. Mutates the case structure of the parameter. While standard Windows command-line processing and Sigma's `contains` modifier are case-insensitive by default, variation in casing can bypass downstream string-matching SIEM rules that do not enforce case-insensitivity correctly."
+  }
+]

@@ -1,4 +1,1 @@
 "cmd.exe" /c md %%temp%%\...$.......::$index_allocation & echo too many secrets > %%temp%%\...$.......::$index_allocation\secrets.txt
-cmd /c "mkdir \\?\C:\hidden_dir.\ "
-powershell -Command "New-Item -Path 'C:\path\to\dir' -ItemType Directory -Target '::$INDEX_ALLOCATION'"
-set "VAR=::$index_" && cmd /c "mkdir mydir%VAR%allocation"

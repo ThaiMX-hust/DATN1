@@ -1,1 +1,0 @@
-powershell.exe -c "& ([string]::Join('', ([char]73, [char]69, [char]88))) 'Write-Host Educational_Test'"

@@ -1,30 +1,19 @@
 [
   {
-    "output": "DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'powershell.exe -c \"\"Copy-Item cmd.exe -Destination sql_update.exe\"\"', 0, 0; -- followed by executing sql_update.exe",
-    "explanation": "This is the original true positive command and is not a bypass. It is included to confirm detection of the rule."
+    "output": "cmd.exe /c echo BypassTest",
+    "explanation": "This command simulates a child process of sqlservr.exe by launching cmd.exe with a benign command. It uses the omission technique by removing unnecessary arguments while preserving the process creation behavior."
   },
   {
-    "output": "DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'powershell -c \"\"Copy-Item cmd.exe -Destination sql_update.exe\"\"', 0, 0; -- followed by executing sql_update.exe",
-    "explanation": "Substitution of 'powershell.exe' with 'powershell' (shortened executable name) and removal of quotes around the command line while maintaining the same behavior."
+    "output": "powershell.exe -Command \"Write-Output 'BypassTest'\"",
+    "explanation": "This command simulates a suspicious child process of sqlservr.exe by launching PowerShell with a benign command. It uses substitution by replacing long-form syntax with short-form and ensures the command is still parsed correctly."
   },
   {
-    "output": "DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'pwsh.exe -c \"\"Copy-Item cmd.exe -Destination sql_update.exe\"\"', 0, 0; -- followed by executing sql_update.exe",
-    "explanation": "Substitution of 'powershell.exe' with 'pwsh.exe' (equivalent PowerShell Core executable) to test detection resilience."
+    "output": "\"C:\\Windows\\System32\\cmd.exe\" /c dir",
+    "output": "cmd.exe /c dir",
+    "explanation": "This command simulates a child process of sqlservr.exe by launching cmd.exe with a benign command. It uses insertion by adding quotes and reordering to test parsing behavior."
   },
   {
-    "output": "DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'wmic.exe process call create \"\"calc.exe\"\"', 0, 0;",
-    "explanation": "This is the original true positive command and is not a bypass. It is included to confirm detection of the rule."
-  },
-  {
-    "output": "DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'wmic.exe process call create calc.exe', 0, 0;",
-    "explanation": "Omission of quotes around the command line argument 'calc.exe' while maintaining the same behavior."
-  },
-  {
-    "output": "cscript.exe //nologo payload.vbs",
-    "explanation": "Substitution of 'cscript.exe payload.vbs' with '//nologo' flag to suppress startup banner, which is a common safe mutation for testing."
-  },
-  {
-    "output": "cscript payload.vbs",
-    "explanation": "Omission of '.exe' extension from 'cscript.exe' and substitution with just 'cscript', which is valid in Windows environments."
+    "output": "wsl --exec ls",
+    "explanation": "This command simulates a suspicious child process of sqlservr.exe by launching wsl with a benign command. It uses omission to simplify the command while maintaining the same process creation behavior."
   }
 ]

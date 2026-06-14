@@ -1,42 +1,24 @@
+```json
 [
   {
-    "output": "php.exe -r \"system('whoami');\"",
-    "explanation": "This is a direct match to the Sigma rule's detection criteria. It uses the '-r' flag to execute inline PHP code, which is the primary condition being monitored."
+    "output": "php.exe -r \"echo 'test';\"",
+    "explanation": "This command uses the '-r' flag to execute inline PHP code, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "php.exe\t-r \"system('whoami');\"",
-    "explanation": "The '-r' flag is modified with a tab character (\\t) to test if the detection is sensitive to whitespace variations. This is a safe mutation using insertion and recoding techniques."
+    "output": "php.exe  -r\"echo 'test';\"",
+    "explanation": "This command uses the '-r' flag with no space between the flag and the inline code, which is a valid syntax variation."
   },
   {
-    "output": "php.exe --run \"system('whoami');\"",
-    "explanation": "The '--run' long option is used instead of the '-r' short option. This is a valid substitution technique that may bypass detection if the rule does not account for long options."
+    "output": "php.exe -r \"echo 'test';\" --",
+    "explanation": "This command adds a harmless '--' to indicate the end of options, but the '-r' flag is still present and matches the Sigma rule."
   },
   {
-    "output": "php.exe -R \"system('whoami');\"",
-    "explanation": "The '-R' flag is used instead of '-r'. This is a valid substitution technique that may bypass detection if the rule does not account for case-insensitive flag matching."
+    "output": "php.exe -r 'echo \"test\";'",
+    "explanation": "This command uses single quotes instead of double quotes to enclose the inline PHP code, which is a valid syntax variation."
   },
   {
-    "output": "php.exe -r system('whoami');",
-    "explanation": "The quotes around the inline PHP code are omitted. This is a test to see if the detection is sensitive to the presence of quotes, which may vary depending on the command-line parser."
-  },
-  {
-    "output": "php.exe -r \"system(\\'whoami\\');\"",
-    "explanation": "The single quotes inside the inline PHP code are escaped using backslashes. This is a safe mutation using recoding techniques to test if the detection is sensitive to string quoting."
-  },
-  {
-    "output": "php.exe -r \"system(`whoami`);\"",
-    "explanation": "The PHP code is modified to use backticks instead of single quotes for command execution. This is a valid substitution technique to test if the detection is sensitive to the syntax used for command execution."
-  },
-  {
-    "output": "php.exe -r \"eval(base64_decode('c3lzdGVtKCd3aG9hbWknKTs='));\"",
-    "explanation": "The PHP code is encoded in base64 and then decoded at runtime using eval(). This is a safe mutation using recoding techniques to test if the detection is sensitive to obfuscated payloads."
-  },
-  {
-    "output": "php.exe -r \"\\x73\\x79\\x73\\x74\\x65\\x6d\\x28\\x27\\x77\\x68\\x6f\\x61\\x6d\\x69\\x27\\x29\\x3b",
-    "explanation": "The PHP code is represented using hexadecimal escape sequences. This is a safe mutation using recoding techniques to test if the detection is sensitive to encoded or obfuscated payloads."
-  },
-  {
-    "output": "php.exe -r \"${system}('whoami');",
-    "explanation": "The PHP function name is dynamically referenced using a variable. This is a safe mutation using recoding techniques to test if the detection is sensitive to function name obfuscation."
+    "output": "php.exe -r \"echo 'test';\" > output.txt",
+    "explanation": "This command appends redirection to a file, but the '-r' flag is still present and matches the Sigma rule."
   }
 ]
+```

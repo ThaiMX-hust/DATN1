@@ -1,0 +1,14 @@
+[
+{
+"output": "ScreenConnect.Client.exe "e=Access&" "y=Guest&" "&p=77&" "&c=simulated&" "&k=test_key"",
+"explanation": "Insertion technique: Individual token strings are isolated and wrapped inside double quotes. The rule utilizes the 'CommandLine|contains|all' logic block to find exact matches for unquoted character literal configurations like '&p=' and '&c='. Adding quotation boundaries alters the character layout recorded by raw security event parameters (e.g., logging '"&p="' instead of '&p='), safely breaking the rule patterns while the standard Windows argument handler normalizes the strings identically during binary execution."
+},
+{
+"output": "cmd.exe /c "ScreenConnect.Client.exe e=Acc^ess^& y=Gu^est^& ^&p=77 ^&c=simulated ^&k=test_key"",
+"explanation": "Insertion technique: Injects the standard command prompt caret escape character ('^') directly within the monitored payload parameters. When wrapped inside a cmd.exe context execution string, the command interpreter parses and cleans out the carets prior to starting the ScreenConnect child process. The raw telemetry logged for the event retains the character insertions verbatim, preventing successful keyword evaluation against the strict substring criteria."
+},
+{
+"output": "cmd.exe /c "set "P1=e=Access&" && set "P2=y=Guest&" && set "P3=&p=77" && ScreenConnect.Client.exe %P1% %P2% %P3% &c=simulated &k=test_key"",
+"explanation": "Recoding / Environment Variables technique: Declares separate local environment variable handles to host a subset of the critical pattern tokens before executing the application target block. Since SIEM log parsing for the rule evaluates the initial string containment literally rather than running runtime shell variable expansion, splitting the mandatory substrings breaks the combined detection check while delivering the complete expected string properties to the tool environment."
+}
+]

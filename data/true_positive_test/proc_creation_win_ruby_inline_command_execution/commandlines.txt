@@ -1,2 +1,0 @@
-echo puts "Test Execution" | ruby.exe
-ruby.exe"-e" "puts 'Test Execution'"

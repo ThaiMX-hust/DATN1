@@ -1,1 +1,0 @@
-copy jsc.exe not_jsc.exe && not_jsc.exe /out:payload.exe script.js

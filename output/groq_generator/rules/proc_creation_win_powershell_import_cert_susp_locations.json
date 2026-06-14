@@ -1,18 +1,14 @@
 [
   {
-    "output": "powershell.exe -c \"Import-Certificate -FilePath C:\\\\Windows\\\\TEMP\\\\malicious.cer -CertStoreLocation Cert:\\\\LocalMachine\\\\Root\"",
-    "explanation": "This command matches the Sigma rule by using Import-Certificate with a file path in the Windows Temp directory and the Root certificate store."
+    "output": "powershell.exe -Command \"Import-Certificate -FilePath 'C:\\Users\\Public\\malicious_cert.cer' -CertStoreLocation 'Cert:\\LocalMachine\\Root'\"",
+    "explanation": "This command simulates the installation of a certificate from a suspicious location ('C:\\Users\\Public\\') using the 'Import-Certificate' cmdlet. It matches the Sigma rule's detection criteria by including the required command-line parameters and a suspicious path."
   },
   {
-    "output": "powershell.exe -Command Import-Certificate -f C:\\\\Windows\\\\TEMP\\\\malicious.cer -CertStoreLocation Cert:\\\\LocalMachine\\\\Root",
-    "explanation": "Substituted '-c' with '-Command' and replaced '-FilePath' with its short form '-f', which are equivalent in PowerShell and still match the Sigma rule."
+    "output": "powershell.exe -c Import-Certificate -FilePath C:\\Users\\Public\\malicious_cert.cer -CertStoreLocation Cert:\\LocalMachine\\Root",
+    "explanation": "This is a simplified version of the command with omitted quotes around the command-line arguments. The behavior remains unchanged, and it still matches the Sigma rule's detection logic."
   },
   {
-    "output": "powershell.exe -c \"Import-Certificate -FilePath 'C:\\\\Windows\\\\TEMP\\\\malicious.cer' -CertStoreLocation Cert:\\\\LocalMachine\\\\Root\"",
-    "explanation": "Used single quotes inside the command string instead of double quotes for the file path, which is a safe syntactic variation and still matches the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -c Import-Certificate -FilePath C:\\\\Windows\\\\TEMP\\\\malicious.cer -CertStoreLocation Cert:\\\\LocalMachine\\\\Root",
-    "explanation": "Omitted the outer quotes around the command, which is valid in some execution contexts and still matches the Sigma rule."
+    "output": "powershell.exe -Command \"Import-Certificate -CertStoreLocation 'Cert:\\LocalMachine\\Root' -FilePath 'C:\\Users\\Public\\malicious_cert.cer'\"",
+    "explanation": "This command reorders the arguments but maintains the same functionality. It still meets the Sigma rule's detection criteria by including the required command-line parameters and a suspicious path."
   }
 ]

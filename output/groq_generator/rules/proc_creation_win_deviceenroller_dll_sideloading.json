@@ -1,18 +1,21 @@
+```json
 [
   {
-    "output": "deviceenroller.exe /PhoneDeepLink",
-    "explanation": "This command directly matches the Sigma rule's detection criteria by using the '/PhoneDeepLink' parameter with the 'deviceenroller.exe' executable."
+    "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=\"C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll\"",
+    "explanation": "This command simulates a potential DLL sideloading attempt using the /PhoneDeepLink parameter with a non-existent DLL. It matches the Sigma rule's detection criteria."
   },
   {
-    "output": "deviceenroller.exe -PhoneDeepLink",
-    "explanation": "This command uses the '-PhoneDeepLink' parameter instead of '/PhoneDeepLink', which is a substitution of equivalent syntax and still triggers the Sigma rule."
+    "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll",
+    "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll",
+    "explanation": "This command is a simplified version of the first, with the omission of quotes around the path. It still matches the Sigma rule's detection criteria."
   },
   {
-    "output": "deviceenroller.exe /Phone\"\"DeepLink",
-    "explanation": "This command uses insertion of quotes in the '/PhoneDeepLink' parameter, which is still parsed correctly and matches the Sigma rule."
+    "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll",
+    "explanation": "This command uses a normalized path and no additional parameters. It is a direct match for the Sigma rule's detection logic."
   },
   {
-    "output": "copy deviceenroller.exe not_an_enroller.exe && not_an_enroller.exe /PhoneDeepLink",
-    "explanation": "This command renames 'deviceenroller.exe' and executes it under a different name, but the original file name is preserved in the 'OriginalFileName' field, which is detected by the Sigma rule."
+    "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll",
+    "explanation": "This command is a direct match for the Sigma rule's detection logic and is used as a baseline for testing."
   }
 ]
+```

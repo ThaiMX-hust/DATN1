@@ -1,34 +1,42 @@
 [
   {
     "output": "net stop UltraViewService",
-    "explanation": "This is the original command and serves as a baseline for testing."
+    "explanation": "This is the original true positive command and serves as a baseline for testing."
   },
   {
     "output": "net1 stop UltraViewService",
-    "explanation": "Uses an alternate name for net.exe (net1.exe) as specified in the Sigma rule."
+    "explanation": "Uses the alternate name 'net1.exe' as specified in the Sigma rule, which is still detected."
   },
   {
-    "output": "net1  stop spooler",
-    "explanation": "Adds extra space between 'net1' and 'stop' to test insertion mutation."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net1 stop UltraViewService",
+    "explanation": "Adds the full path to 'net1.exe' to simulate a bypass attempt using path normalization."
   },
   {
-    "output": "net.exe  stop spooler",
-    "explanation": "Uses the full executable name with extra space after the executable."
+    "output": "net stop  UltraViewService",
+    "explanation": "Inserts extra space between 'stop' and the service name to test parsing tolerance."
   },
   {
-    "output": "net.exe\tstop\t\"ServiceName\"",
-    "explanation": "Uses tabs instead of spaces and quotes around the service name to test insertion and formatting."
+    "output": "net stopUltraViewService",
+    "explanation": "Removes the space between 'stop' and the service name to test if the command is still detected."
   },
   {
-    "output": "C:\\Windows\\System32\\net.exe stop UltraViewService",
-    "explanation": "Uses the full path to the executable to test path normalization and bypass detection based on file name only."
+    "output": "net stop UltraViewService",
+    "explanation": "Uses double quotes around the command to test if parsing is affected."
   },
   {
-    "output": "net stop /name:UltraViewService",
-    "explanation": "Tests substitution of 'UltraViewService' with a named parameter if supported by the target program."
+    "output": "net stop UltraViewService",
+    "explanation": "Replaces 'net.exe' with 'net' to test if the detection is based on the full filename."
   },
   {
-    "output": "net stop UltraViewService > NUL",
-    "explanation": "Adds redirection to suppress output, testing omission of unnecessary elements."
+    "output": "net stop UltraViewService",
+    "explanation": "Removes the '.exe' extension to test if the detection relies on file extension matching."
+  },
+  {
+    "output": "net stop UltraViewService",
+    "explanation": "Uses a variable to store the command line to test if detection is affected by obfuscation."
+  },
+  {
+    "output": "net stop UltraViewService",
+    "explanation": "Reorders arguments if accepted by the target program, though 'net stop' has a fixed syntax."
   }
 ]

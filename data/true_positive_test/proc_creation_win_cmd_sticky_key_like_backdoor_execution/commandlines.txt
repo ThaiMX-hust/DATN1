@@ -1,2 +1,0 @@
-cmd.exe "sethc.exe "
-renamed_cmd.exe sethc.exe

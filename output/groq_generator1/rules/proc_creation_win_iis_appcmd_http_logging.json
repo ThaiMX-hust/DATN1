@@ -1,0 +1,10 @@
+[
+  {
+    "output": "appcmd.exe set config \"Default Web Site\" /section:httpLogging /dontLog:1",
+    "explanation": "Original command for reference."
+  },
+  {
+    "output": "appcmd.exe set config \"Default Web Site\" /section:httplogging /dontLog:True",
+    "explanation": "Substitution of '1' with 'True' and lowercase 'httplogging' to test case insensitivity."
+  }
+]

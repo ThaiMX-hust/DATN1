@@ -1,22 +1,22 @@
 [
   {
-    "output": "dctask64.exe -executecmd64 \"whoami\"",
-    "explanation": "This command uses standard syntax and matches the Sigma rule's detection criteria. It is a valid test case for the rule."
+    "output": "dctask64.exe -executecmd64 calc.exe",
+    "explanation": "This command simulates a potential abuse scenario by using the 'executecmd64' parameter to execute a command. It aligns with the Sigma rule's detection of 'executecmd64' in the command line."
   },
   {
-    "output": "dctask64.exe -executecmd64:whoami",
-    "explanation": "This command uses a colon instead of a space to separate the flag and argument, which is a valid syntax variation and still matches the Sigma rule."
+    "output": "dctask64.exe --invokeexe notepad.exe",
+    "explanation": "This command uses the '--invokeexe' parameter to launch an application, which is another string the Sigma rule detects. It demonstrates a safe mutation by using long-form syntax."
   },
   {
-    "output": "dctask64.exe -\"execute\"cmd64 \"whoami\"",
-    "explanation": "This command uses escaped quotes around the flag name, which is a safe mutation technique and still matches the Sigma rule."
+    "output": "dctask64.exe injectDll C:\\Windows\\System32\\calc.exe",
+    "explanation": "This command uses the 'injectDll' parameter to simulate DLL injection behavior, which is flagged by the Sigma rule. It represents a direct match to the rule's detection criteria."
   },
   {
-    "output": "dctask64.exe -executecmd64 \"whoami\" > NUL",
-    "explanation": "This command adds an output redirection to suppress output, which is a safe mutation technique and still matches the Sigma rule."
+    "output": "dctask64.exe  -executecmd64  calc.exe",
+    "explanation": "This command adds extra spaces around the '-executecmd64' parameter to test whether the Sigma rule is resilient to spacing mutations."
   },
   {
-    "output": "dctask64.exe -executecmd64 `echo whoami`",
-    "explanation": "This command uses command substitution with backticks to pass the argument, which is a safe mutation technique and still matches the Sigma rule."
+    "output": "dctask64.exe --injectDll=C:\\Windows\\System32\\calc.exe",
+    "explanation": "This command uses an equals sign to pass the DLL path to the 'injectDll' parameter, testing equivalent syntax variations."
   }
 ]

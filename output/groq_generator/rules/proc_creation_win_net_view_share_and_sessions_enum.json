@@ -1,22 +1,42 @@
 [
   {
     "output": "net view",
-    "explanation": "This command omits optional flags while preserving the core behavior of share and session enumeration, which aligns with the Sigma rule's detection logic."
+    "explanation": "The command 'net view' is a direct match for the Sigma rule's detection of 'view' in the command line and is included in the test commands."
+  },
+  {
+    "output": "net1 view",
+    "explanation": "The command 'net1 view' uses 'net1.exe' instead of 'net.exe', which is also covered by the Sigma rule's Image and OriginalFileName checks."
+  },
+  {
+    "output": "net view /all",
+    "explanation": "The command 'net view /all' includes 'view' and is part of the test commands, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "net view /domain",
+    "explanation": "The command 'net view /domain' includes 'view' and is part of the test commands, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "net view  ",
+    "explanation": "The command 'net view  ' adds extra spaces after 'view', which is a safe mutation technique (insertion) and still matches the Sigma rule."
+  },
+  {
+    "output": "net view\\",
+    "explanation": "The command 'net view\\' adds an escape character after 'view', which is a safe mutation technique (insertion) and still matches the Sigma rule."
+  },
+  {
+    "output": "net view /ALL",
+    "explanation": "The command 'net view /ALL' uses uppercase for the flag, which is a safe mutation technique (substitution) and still matches the Sigma rule."
+  },
+  {
+    "output": "net view /a",
+    "explanation": "The command 'net view /a' uses a short form of the '/all' flag, which is a safe mutation technique (substitution) and still matches the Sigma rule."
+  },
+  {
+    "output": "net view /D",
+    "explanation": "The command 'net view /D' uses uppercase for the '/domain' flag, which is a safe mutation technique (substitution) and still matches the Sigma rule."
   },
   {
     "output": "net view /d",
-    "explanation": "The '/d' flag is a short form of '/domain', which is a valid substitution and still triggers the rule due to the presence of 'view'."
-  },
-  {
-    "output": "net view \\\\127.0.0.1",
-    "explanation": "This command includes a target IP address but is still detected by the Sigma rule because it contains 'view' and does not include the filter condition of double backslashes in the command line."
-  },
-  {
-    "output": "net view ^v^i^e^w",
-    "explanation": "The insertion of escape characters (^) does not change the command's functionality and is still parsed as 'net view', triggering the rule."
-  },
-  {
-    "output": "net view --all",
-    "explanation": "This is not a valid substitution for the 'net.exe' command-line syntax and would not execute as expected, making it an invalid bypass attempt."
+    "explanation": "The command 'net view /d' uses a lowercase form of the '/domain' flag, which is a safe mutation technique (substitution) and still matches the Sigma rule."
   }
 ]

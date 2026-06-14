@@ -1,14 +1,14 @@
 [
   {
-    "output": "mpiexec.exe -n 1 calc.exe",
-    "explanation": "This is a direct match to the Sigma rule's detection condition and serves as a baseline true positive."
+    "output": "mpiexec.exe -n 1 cmd.exe",
+    "explanation": "This command uses the equivalent short option '-n' instead of '/n' and executes a benign command (cmd.exe) for testing purposes. It matches the Sigma rule's detection logic."
   },
   {
-    "output": "mpiexec.exe -n1 calc.exe",
-    "explanation": "Omission of space between -n and 1, which is still valid syntax and matches the rule."
+    "output": "mpiexec.exe /n1 cmd.exe",
+    "explanation": "This command omits the space after '/n 1' and uses a single argument '/n1' which may still be parsed correctly by mpiexec.exe. It aligns with the Sigma rule's detection criteria."
   },
   {
-    "output": "mpiexec.exe /n 1 calc.exe",
-    "explanation": "Substitution of '-' with '/' for the flag, which is equivalent in Windows command-line syntax."
+    "output": "\"mpiexec.exe\" -n 1 calc.exe",
+    "explanation": "This command uses quotes around the binary name and executes a benign GUI application (calc.exe) for testing. It matches the Sigma rule's detection logic."
   }
 ]

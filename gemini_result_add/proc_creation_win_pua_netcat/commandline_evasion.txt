@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\cmd.exe /c \"ncat.exe -l -v -p 8080 -e cmd.exe\"",
+    "explanation": "Insertion and reordering techniques were used to avoid the 'selection_cmdline' condition. The high-level behavior is expected to remain equivalent as the command still executes Netcat with the same parameters, but the reordered arguments and added quotes may bypass the rule's detection."
+  },
+  {
+    "output": "nc.exe -lvnp 8080",
+    "explanation": "Substitution technique was used to replace 'ncat.exe' with 'nc.exe' and to use the short option '-lvnp' instead of '-l -v -p'. This may avoid the 'selection_img' and 'selection_cmdline' conditions. The high-level behavior is expected to remain equivalent as the command still executes Netcat with the same parameters."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\cmd.exe /c ncat.exe --lua-exec cmd.exe",
+    "explanation": "Insertion and substitution techniques were used to avoid the 'selection_cmdline' condition. The high-level behavior is expected to remain equivalent as the command still executes Netcat with the same parameters, but the use of '--lua-exec' instead of '-e' and the added quotes may bypass the rule's detection."
+  },
+  {
+    "output": "",
+    "explanation": "No safe command-line variant could be generated that would preserve the intended test behavior and avoid all rule conditions."
+  }
+]

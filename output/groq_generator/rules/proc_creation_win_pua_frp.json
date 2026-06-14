@@ -1,18 +1,22 @@
 [
   {
-    "output": "proxy_service.exe -c \"C:\\Windows\\Temp\\config.conf\"",
-    "explanation": "Inserted quotes around the file path to test how the detection rule handles quoted paths, a common safe mutation technique."
+    "output": "frpc -c \"C:\\\\frpc.ini\"",
+    "explanation": "This command simulates a typical invocation of frpc.exe with the configuration file specified in the Sigma rule. It uses a standard command-line format and does not attempt to bypass detection."
   },
   {
-    "output": "proxy_service.exe --config C:\\Windows\\Temp\\config.conf",
-    "explanation": "Substituted the short option '-c' with the long option '--config', which is functionally equivalent and a safe mutation technique."
+    "output": "frpc.exe -c C:\\frpc.ini",
+    "explanation": "This command uses the executable name with the .exe extension and a direct path to the configuration file. It is a straightforward representation of the process and does not attempt to bypass detection."
   },
   {
-    "output": "proxy_service.exe -c C:/Windows/Temp/config.conf",
-    "explanation": "Replaced backslashes with forward slashes in the file path, a safe mutation technique that may test path normalization handling."
+    "output": "frpc -c C:/frpc.ini",
+    "explanation": "This command uses forward slashes instead of backslashes for the file path, which is a valid alternative in Windows command-line environments. It remains functionally equivalent and does not attempt to bypass detection."
   },
   {
-    "output": "proxy_service.exe -c C:\\Windows\\Temp\\config.conf",
-    "explanation": "Preserved the original command line with no mutation for baseline testing purposes."
+    "output": "frpc -config C:\\\\frpc.ini",
+    "explanation": "This command uses the long-form option '-config' instead of the short-form '-c', which is a valid substitution in many command-line tools. It remains functionally equivalent and does not attempt to bypass detection."
+  },
+  {
+    "output": "frpc -c \"C:\\\\Temp\\frpc.ini\"",
+    "explanation": "This command uses a different directory for the configuration file while maintaining the same structure and syntax. It remains functionally equivalent and does not attempt to bypass detection."
   }
 ]

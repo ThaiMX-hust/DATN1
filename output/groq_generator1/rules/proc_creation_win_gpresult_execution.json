@@ -1,0 +1,34 @@
+[
+  {
+    "output": "gpresult  /z",
+    "explanation": "This is the original command and matches the Sigma rule directly. It is included as a baseline for testing."
+  },
+  {
+    "output": "gpresult /z",
+    "explanation": "Removed the space between 'gpresult' and '/z', which is a minor mutation that does not affect detection but demonstrates syntactic variation."
+  },
+  {
+    "output": "gpresult.exe /z",
+    "explanation": "Explicitly used the .exe extension, which is equivalent to the base command and still matches the Sigma rule."
+  },
+  {
+    "output": "gpresult /V",
+    "explanation": "Replaced '/z' with '/v' (uppercase), which is a valid substitution and still matches the 'CommandLine|contains' condition in the Sigma rule."
+  },
+  {
+    "output": "gpresult /z /r",
+    "explanation": "Added an additional valid flag '/r' which does not interfere with the '/z' flag and still matches the Sigma rule."
+  },
+  {
+    "output": "gpresult /z /h report.html",
+    "explanation": "Added the '/h' flag to generate an HTML report, which does not affect the detection of '/z' and is still covered by the Sigma rule."
+  },
+  {
+    "output": "copy gpresult.exe not_gp.exe && not_gp.exe /z",
+    "explanation": "Renamed the executable using 'copy' and executed it with '/z', which matches the Sigma rule's detection of the renamed executable and the '/z' flag."
+  },
+  {
+    "output": "powershell.exe -Command \"gpresult /z\"",
+    "explanation": "Invoked 'gpresult' via PowerShell, which is a common obfuscation technique but still results in the same process and command line being logged."
+  }
+]

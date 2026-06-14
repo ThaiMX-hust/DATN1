@@ -1,0 +1,22 @@
+[
+  {
+    "output": "Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToIPs 192.168.1.1 -ReplyToDomains example.com -ReplyToMACs 00-11-22-33-44-55 -SnifferIP 192.168.1.200",
+    "explanation": "This command represents a typical execution of Inveigh.exe with various flags that match the Sigma rule's detection criteria. It includes the required flags such as -SpooferIP, -ReplyToIPs, -ReplyToDomains, -ReplyToMACs, and -SnifferIP."
+  },
+  {
+    "output": "Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToIPs 192.168.1.1 -ReplyToDomains example.com -ReplyToMACs 00:11:22:33:44:55 -SnifferIP 192.168.1.200",
+    "explanation": "This command is a variation of the first one, using a different MAC address format (with colons instead of hyphens). This demonstrates a safe mutation technique by changing the format of the MAC address while maintaining the same functionality."
+  },
+  {
+    "output": "Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToIPs 192.168.1.1 -ReplyToDomains example.com -SnifferIP 192.168.1.200",
+    "explanation": "This command omits the -ReplyToMACs flag, which is optional. It still matches the Sigma rule because it includes the required flags such as -SpooferIP, -ReplyToIPs, -ReplyToDomains, and -SnifferIP."
+  },
+  {
+    "output": "Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToDomains example.com -ReplyToIPs 192.168.1.1 -SnifferIP 192.168.1.200",
+    "explanation": "This command reorders the arguments to demonstrate that the order of the flags does not affect the detection. The Sigma rule is based on the presence of the flags, not their order."
+  },
+  {
+    "output": "Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToIPs 192.168.1.1 -ReplyToDomains example.com -ReplyToMACs 00-11-22-33-44-55 -SnifferIP 192.168.1.200",
+    "explanation": "This command uses the same flags as the first one but includes additional spaces and quotes around the MAC address to demonstrate safe mutation techniques. The command is still parsed correctly and matches the Sigma rule."
+  }
+]

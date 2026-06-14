@@ -1,0 +1,18 @@
+[
+  {
+    "output": "fsutil fsinfo \"drives\"",
+    "explanation": "Insertion technique: Enclosing the sub-command argument string token inside double quotes ('\"drives\"') breaks continuous character stream tracking for the literal pattern sequence. The underlying Win32 utility parser natively unquotes and processes execution parameters at instantiation, ensuring equivalent logical behavior while bypassing the naked literal string check in 'selection_cli'."
+  },
+  {
+    "output": "cmd.exe /c fsutil fsinfo dri^ves",
+    "explanation": "Insertion technique: Spawning the execution through a cmd.exe environment permits the injection of a command shell caret escape character ('^') inside the 'drives' sub-command string. The parent shell processes and strips this character before launching the target child process image, logging 'dri^ves' in process creation telemetry to evade 'selection_cli'."
+  },
+  {
+    "output": "fsutil fsinfo\tdrives",
+    "explanation": "Substitution technique: Replacing the standard space character separator flanking the target parameter switch with a horizontal tab character ('\\t'). The native Windows operating system decodes horizontal tabs as valid whitespace argument delimiters, safely maintaining native capability execution while breaking static string configurations that rely on explicit space token boundaries."
+  },
+  {
+    "output": "fsutil fsinfo DRIves",
+    "explanation": "Other techniques (Case Variation Strategy): Altering the casing structure of the targeted sub-command parameter ('DRIves'). If a downstream SIEM engine deployment or log forwarder parser enforces case-sensitive matching strings strictly rather than normalizing the raw command-line text data, this variation successfully blinds the lower-case 'drives' keyword monitor."
+  }
+]

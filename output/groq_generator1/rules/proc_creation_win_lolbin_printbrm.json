@@ -1,0 +1,30 @@
+[
+  {
+    "output": "PrintBrm.exe -f \"C:\\Users\\Public\\data.zip\" -b",
+    "explanation": "Inserted quotes around the file path to test if the rule handles quoted paths correctly."
+  },
+  {
+    "output": "PrintBrm.exe -fC:\\Users\\Public\\data.zip -b",
+    "explanation": "Removed space between -f and the file path to test if the rule detects the flag-value concatenation."
+  },
+  {
+    "output": "PrintBrm.exe -f C:\\Users\\Public\\data.zip",
+    "explanation": "Omitted the -b flag to test if the rule still detects the presence of the -f flag and .zip file."
+  },
+  {
+    "output": "PrintBrm.exe -f:C:\\Users\\Public\\data.zip -b",
+    "explanation": "Used a colon after -f to test if the rule handles alternate flag-value syntax."
+  },
+  {
+    "output": "PrintBrm.exe -f C:\\Users\\Public\\data.7z",
+    "explanation": "Changed the file extension to .7z to test if the rule is specific to .zip files."
+  },
+  {
+    "output": "set ZIP_PATH=C:\\Users\\Public\\data.zip && PrintBrm.exe -f %ZIP_PATH% -b",
+    "explanation": "Used an environment variable to represent the file path to test if the rule handles variable expansion."
+  },
+  {
+    "output": "PrintBrm.exe -b -f C:\\Users\\Public\\data.zip",
+    "explanation": "Reordered the flags to test if the rule is sensitive to argument order."
+  }
+]

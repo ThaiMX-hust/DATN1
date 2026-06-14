@@ -1,4 +1,0 @@
-copy nircmd.exe n.exe && n.exe "runassystem" "cmd.exe"
-nircmd.exe	runassystem	cmd.exe
-nircmd.exe  runassystem  "cmd.exe"
-set a=run&& set b=assystem&& nircmd.exe %a%%b% cmd.exe

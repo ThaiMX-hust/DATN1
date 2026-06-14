@@ -1,14 +1,52 @@
 [
   {
-    "output": "powershell.exe -Command \"gps lsass | Out-Minidump\"",
-    "explanation": "The original command uses 'Get-Process', which can be substituted with its alias 'gps'. This substitution is a safe mutation technique and would still trigger the Sigma rule."
+    "output": "powershell.exe -Command \"Get-Process lsass\"",
+    "explanation": "This command directly matches the Sigma rule's detection criteria by using the 'Get-Process' cmdlet with 'lsass' as the target process."
   },
   {
-    "output": "powershell.exe -Command \"Get-Process -Name lsass | Out-Minidump\"",
-    "explanation": "Adding the '-Name' parameter is an optional element that does not change the behavior of the command. This is a safe mutation technique and would still trigger the Sigma rule."
+    "output": "powershell.exe -Command \"gps lsass\"",
+    "explanation": "The 'gps' is an alias for 'Get-Process', and this command matches the Sigma rule's detection criteria by targeting the 'lsass' process."
   },
   {
-    "output": "powershell.exe -Command \"Get-Process lsass | Out-Minidump\"",
-    "explanation": "This is the original command and is included to show that no mutation is needed to trigger the Sigma rule."
-  }
-]
+    "output": "powershell.exe -Command \"ps lsass\"",
+    "explanation": "The 'ps' is another alias for 'Get-Process', and this command matches the Sigma rule's detection criteria by targeting the 'lsass' process."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process -Name lsass\"",
+    "explanation": "This command uses the full syntax of 'Get-Process' with the '-Name' parameter, which still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"gps -Name lsass\"",
+    "explanation": "This command uses the 'gps' alias with the '-Name' parameter, which is equivalent to 'Get-Process -Name lsass' and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"ps -Name lsass\"",
+    "explanation": "This command uses the 'ps' alias with the '-Name' parameter, which is equivalent to 'Get-Process -Name lsass' and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process lsass | Out-Null\"",
+    "explanation": "This command uses 'Get-Process' to retrieve the 'lsass' process and then pipes the output to 'Out-Null', which still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"gps lsass | Out-Null\"",
+    "explanation": "This command uses the 'gps' alias with 'lsass' and pipes the output to 'Out-Null', which still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"ps lsass | Out-Null\"",
+    "explanation": "This command uses the 'ps' alias with 'lsass' and pipes the output to 'Out-Null', which still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process lsass > $null\"",
+    "explanation": "This command uses 'Get-Process' to retrieve the 'lsass' process and redirects the output to $null, which still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"gps lsass > $null\"",
+    "explanation": "This command uses the 'gps' alias with 'lsass' and redirects the output to $null, which still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"ps lsass > $null\"",
+    "explanation": "This command uses the 'ps' alias with 'lsass' and redirects the output to $null, which still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process lsass | Out-String | Out-Null\"",
+    "explanation": "This command uses 'Get-Process' to retrieve the 'lsass' process, converts it to a string, and then discards

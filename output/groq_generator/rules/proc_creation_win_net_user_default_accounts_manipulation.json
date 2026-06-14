@@ -1,18 +1,22 @@
 [
   {
-    "output": "C:\\WINDOWS\\system32\\net1.exe user Administrator /active:yes",
-    "explanation": "This command uses a variation of the username 'Administrator' with capitalization and avoids spaces. It uses the original file name 'net1.exe' and the valid syntax '/active:yes' to match the Sigma rule's detection logic."
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net1.exe user Administrator /domain",
+    "explanation": "The command uses 'net1.exe' (a potential obfuscated variant of 'net.exe') and targets the 'Administrator' account with the '/domain' flag, matching the Sigma rule's detection criteria."
   },
   {
-    "output": "net user \"Admin\"istrator /active:yes",
-    "explanation": "This command uses quotes around part of the username and reorders the syntax slightly to test detection boundaries while maintaining the same functionality as the true positive."
+    "output": "net user \"Administrator\" /domain",
+    "explanation": "This command uses double quotes around the username, which is a valid syntax variation and still matches the Sigma rule's detection logic."
   },
   {
     "output": "net user Administrator /domain",
-    "explanation": "This command is a direct match to the true positive and is included for completeness, as it would be detected by the Sigma rule."
+    "explanation": "This is a direct match to the Sigma rule's detection criteria, using the English 'Administrator' account and the '/domain' flag."
   },
   {
-    "output": "C:\\\\WINDOWS\\\\system32\\\\net.exe user Guest /active:no",
-    "explanation": "This command uses the 'Guest' account and the '/active:no' flag, which is part of the Sigma rule's detection scope. It is included to test detection of the 'guest' account manipulation."
+    "output": "net user guest /active:yes",
+    "explanation": "This command targets the 'guest' account and modifies its active status, which aligns with the Sigma rule's focus on default account manipulation."
+  },
+  {
+    "output": "net user 'guest' /active:yes",
+    "explanation": "This command uses single quotes around the username, a safe mutation technique, and still matches the Sigma rule's detection logic."
   }
 ]

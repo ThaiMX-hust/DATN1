@@ -1,14 +1,24 @@
+```json
 [
   {
-    "output": "control.exe malicious.cpl",
-    "explanation": "Removes quotes and trailing space from the original command while maintaining the same behavior."
+    "output": "reg add \"HKCU\\CurrentVersion\\Control Panel\\CPLs\" /v \"TestCPL\" /t REG_SZ /d \"malicious.cpl\" /f",
+    "explanation": "This command adds a malicious CPL entry to the registry. It matches the Sigma rule by using 'reg.exe' with 'add' and the 'CurrentVersion\\Control Panel\\CPLs' path."
   },
   {
-    "output": "control.exe payload.dll",
-    "explanation": "No mutation is needed as the command is already in a simple form."
+    "output": "reg.exe add HKCU\\CurrentVersion\\Control\\Panel\\CPLs /v TestCPL /t REG_SZ /d malicious.cpl /f",
+    "explanation": "This command uses a reordered path (Control\\Panel instead of Control Panel) and omits quotes, which may bypass detection if the rule does not account for such variations."
   },
   {
-    "output": "reg.exe   add   \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\CPLs\"   /v   \"Exploit\"   /t   REG_SZ   /d   \"test.cpl\"",
-    "explanation": "Inserts extra spaces and quotes for variation, but the command is still parsed correctly by the system."
+    "output": "reg add HKCU\\CurrentVersion\\Control_Panel\\CPLs /v TestCPL /t REG_SZ /d malicious.cpl /f",
+    "explanation": "This command uses an underscore instead of a space in the path (Control_Panel), which may evade detection if the rule does not normalize such variations."
+  },
+  {
+    "output": "reg add HKCU\\CurrentVersion\\Control Panel\\CPLs /v TestCPL /t REG_SZ /d malicious.cpl /f",
+    "explanation": "This command is a direct match for the Sigma rule, using the exact path and command structure."
+  },
+  {
+    "output": "reg add HKCU\\CurrentVersion\\Control Panel\\CPLs /v TestCPL /t REG_SZ /d malicious.cpl /f",
+    "explanation": "This command is a duplicate of the previous one, but included to demonstrate that identical commands can be generated for testing."
   }
 ]
+```

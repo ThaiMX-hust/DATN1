@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"\t--remote-debugging-address=127.0.0.1 --remote-debugging-port=9222",
+    "explanation": "Substitution technique: Replacing the required leading space character padding before the flag with a horizontal tab character ('\\t'). The native Windows execution environment processes tabs as valid argument whitespace separators, which safely subverts the strict string check matching patterns like ' --remote-debugging-' that explicitly look for a space boundary."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" \"--remote-debugging-address\"=127.0.0.1 \"--remote-debugging-port\"=9222",
+    "explanation": "Insertion technique: Individual argument switch tokens are wrapped in double quotes. The Windows native command line parser strips the quotes before delivering parameters to the executable, ensuring equivalent application logic execution, while the literal continuous string sequence tracking ' --remote-debugging-' fails to fire."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-de^bugging-address=127.0.0.1 --remote-de^bugging-port=9222",
+    "explanation": "Insertion technique: Running via cmd.exe permits inserting the caret ('^') escape operator inside the flag name tokens. The command processor filters out this character immediately before initiating the target process image context, keeping the raw process log preserved with the caret character, thereby evading literal matches."
+  }
+]

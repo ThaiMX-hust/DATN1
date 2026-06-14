@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion",
+    "explanation": "Insertion technique used to add escape characters, avoiding the rule condition of exact string matching for 'Software'. The high-level behavior is expected to remain equivalent as the escape characters do not change the command's intent."
+  },
+  {
+    "output": "reg.exe query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion",
+    "explanation": "Omission technique not applicable, instead using the full executable name 'reg.exe' to test if the rule relies on the executable name without extension. The rule condition of 'Image|endswith: '\\reg.exe'' might be avoided if the rule does not account for the executable name with extension."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer -v svcVersion",
+    "explanation": "Substitution technique used to replace '/v' with '-v', avoiding the rule condition of exact string matching for '/v'. The high-level behavior is expected to remain equivalent as the option '-v' is equivalent to '/v' in some command-line parsers."
+  },
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v \"svcVersion\"",
+    "explanation": "Insertion technique used to add quotes around 'svcVersion', avoiding the rule condition of exact string matching for 'svcversion'. The high-level behavior is expected to remain equivalent as the quotes do not change the command's intent."
+  },
+  {
+    "output": "reg.exe query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" -v \"svcVersion\"",
+    "explanation": "Combination of substitution and insertion techniques used to replace '/v' with '-v' and add quotes around 'svcVersion'. The rule conditions of exact string matching for '/v' and 'svcversion' are avoided. The high-level behavior is expected to remain equivalent as the option '-v' is equivalent to '/v' and the quotes do not change the command's intent."
+  }
+]

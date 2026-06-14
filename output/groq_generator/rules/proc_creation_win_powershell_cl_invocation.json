@@ -1,34 +1,26 @@
 [
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; Get-Item Function:\\$method | ForEach-Object { & $_ 'calc.exe' ' ' }\"",
-    "explanation": "This is the original true positive command and is not a bypass, but rather a valid test case for the Sigma rule."
+    "output": "powershell.exe -Command \". C:\\Windows\\Diagnostics\\system\\Audio\\CL_Invocation.ps1; SyncInvoke whoami.exe\"",
+    "explanation": "Original command preserved as a baseline for testing."
   },
   {
-    "output": "powershell.exe -ep Bypass -c \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; Get-Item Function:\\$method | ForEach-Object { & $_ 'calc.exe' ' ' }\"",
-    "explanation": "Substitution of '-ExecutionPolicy' with '-ep' and '-Command' with '-c' as equivalent short options."
+    "output": "powershell.exe -c \". C:\\Windows\\Diagnostics\\system\\Audio\\CL_Invocation.ps1; SyncInvoke whoami.exe\"",
+    "explanation": "Substituted '-Command' with its short form '-c', which is functionally equivalent."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module CL_Invocation.ps1; $method = 'SyncInvoke'; Get-Item Function:\\$method | ForEach-Object { & $_ 'calc.exe' ' ' }\"",
-    "explanation": "Omission of quotes around the module name 'CL_Invocation.ps1' where acceptable by the parser."
+    "output": "powershell.exe -Command \". C:\\\\Windows\\\\Diagnostics\\\\system\\\\Audio\\\\CL_Invocation.ps1; SyncInvoke whoami.exe\"",
+    "explanation": "Inserted extra backslashes for path representation, which are still parsed correctly by PowerShell."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; & (Get-Item Function:\\$method) 'calc.exe' ' '\"",
-    "explanation": "Reordering and simplification of the command by replacing 'Get-Item Function:\\$method | ForEach-Object { & $_ ... }' with direct invocation using '& (Get-Item Function:\\$method)'."
+    "output": "powershell.exe -Command \". C:\\Windows\\Diagnostics\\system\\Audio\\CL_Invocation.ps1\"; SyncInvoke whoami.exe",
+    "explanation": "Split the command into two parts using a semicolon, which is valid in PowerShell for separating commands."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; & $method 'calc.exe' ' '\"",
-    "explanation": "Reordering and simplification by directly invoking the function using the variable $method without using 'Get-Item' and 'ForEach-Object'."
+    "output": "powershell.exe -Command \". C:\\Windows\\Diagnostics\\system\\Audio\\CL_Invocation.ps1; SyncInvoke whoami.exe\" -WindowStyle Hidden",
+    "explanation": "Added an optional parameter '-WindowStyle Hidden' that does not affect the core behavior of the command."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; & $method calc.exe ' '\"",
-    "explanation": "Omission of quotes around 'calc.exe' where acceptable by the parser."
-  },
-  {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'SyncInvoke'; & $method 'calc.exe' ' '\"",
-    "explanation": "Reordering and simplification by combining the string 'Sync' + 'Invoke' into a single string 'SyncInvoke'."
-  },
-  {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'CL_Invocation.ps1'; $method = 'SyncInvoke'; & $method calc.exe ' '\"",
-    "explanation": "Combination of multiple safe mutations including substitution, omission, and reordering."
+    "output": "powershell.exe -Command \". C:\\Windows\\Diagnostics\\system\\Audio\\CL_Invocation.ps1; SyncInvoke whoami.exe\" -NonInteractive",
+    "explanation": "Added '-NonInteractive' flag, which is optional and does not alter the execution of the script."
   }
 ]

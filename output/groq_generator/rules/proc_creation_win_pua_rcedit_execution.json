@@ -1,6 +1,18 @@
 [
   {
-    "output": "rcedit-x64.exe payload.exe --set-version-string OriginalFileName svchost.exe",
-    "explanation": "Omission of quotes around the value 'svchost.exe' where they are not strictly necessary, and using the unquoted string is still valid in the context of the command line."
+    "output": "rcedit-x64.exe --set-version-string \"CompanyName\" \"MyCompany\" \"C:\\\\TestApp.exe\"",
+    "explanation": "This command modifies the 'CompanyName' version string of an executable using rcedit-x64.exe. It aligns with the Sigma rule's detection of metadata tampering via rcedit and the use of '--set-' in the command line."
+  },
+  {
+    "output": "rcedit-x86.exe --set-resource-string \"OriginalFileName\" \"MaliciousApp.exe\" \"C:\\\\TestApp.exe\"",
+    "explanation": "This command alters the 'OriginalFileName' resource string of an executable using rcedit-x86.exe. It matches the Sigma rule's criteria for metadata tampering and includes the required '--set-' command-line pattern."
+  },
+  {
+    "output": "rcedit-x64.exe --set-version-string ProductName \"TestApp\" \"C:\\\\TestApp.exe\"",
+    "explanation": "This command changes the 'ProductName' version string of an executable using rcedit-x64.exe. It fits the Sigma rule's detection logic by modifying PE metadata and using the '--set-' command-line syntax."
+  },
+  {
+    "output": "rcedit-x86.exe --set-version-string LegalCopyright \"Copyright 2023\" \"C:\\\\TestApp.exe\"",
+    "explanation": "This command modifies the 'LegalCopyright' version string of an executable using rcedit-x86.exe. It aligns with the Sigma rule's focus on metadata tampering and includes the required '--set-' command-line pattern."
   }
 ]

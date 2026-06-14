@@ -1,30 +1,22 @@
 [
   {
-    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v CurrentBuildNumber",
-    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It queries the Windows Registry for system information using reg.exe with the /v flag."
+    "output": "powershell.exe -Command \"Get-ItemPropertyValue -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion' -Name 'CurrentBuildNumber'\"",
+    "explanation": "This command uses PowerShell to query a registry key covered by the Sigma rule. It omits unnecessary parts of the original command and uses direct syntax for testing."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ItemPropertyValue -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation' -Name 'TimeZoneKeyName'\"",
+    "explanation": "This command uses PowerShell to query a registry key covered by the Sigma rule. It simplifies the command for testing while maintaining the same behavior."
   },
   {
     "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v ProductName",
-    "explanation": "This command also matches the Sigma rule's detection criteria. It queries the Windows Registry for system information using reg.exe with the /v flag."
+    "explanation": "This command uses reg.exe to query a registry key covered by the Sigma rule. It is a simplified version of the original command for testing purposes."
   },
   {
-    "output": "reg query \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\" /v TimeZoneKeyName",
-    "explanation": "This command matches the Sigma rule's detection criteria. It queries the Windows Registry for system information using reg.exe with the /v flag."
+    "output": "reg query \"HKLM\\SYSTEM\\CurrentControlSet\\Services\" /v Description",
+    "explanation": "This command uses reg.exe to query a registry key covered by the Sigma rule. It is a simplified version of the original command for testing purposes."
   },
   {
-    "output": "\"powershell.exe\" & {Get-ItemPropertyValue -Path \"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\" -Name \"Shell\"}",
-    "explanation": "This command matches the Sigma rule's detection criteria. It uses PowerShell to query registry information."
-  },
-  {
-    "output": "\"powershell.exe\" & {Get-ItemPropertyValue -Path \"HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\" -Name \"Userinit\"}",
-    "explanation": "This command matches the Sigma rule's detection criteria. It uses PowerShell to query registry information."
-  },
-  {
-    "output": "powershell.exe Get-ItemPropertyValue -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion'",
-    "explanation": "This command matches the Sigma rule's detection criteria. It uses PowerShell to query registry information."
-  },
-  {
-    "output": "powershell.exe Invoke-Command -ScriptBlock { Start-Process 'cmd.exe' -ArgumentList '/c echo Success' }",
-    "explanation": "This command does not match the Sigma rule's detection criteria. It uses PowerShell to execute a command but does not query the registry for system information."
+    "output": "powershell.exe -Command \"(Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall').PSObject.Properties | Where-Object { $_.Name -eq 'DisplayName' } | Select-Object -ExpandProperty Value\"",
+    "explanation": "This command uses PowerShell to query a registry key covered by the Sigma rule. It uses alternative syntax to retrieve the same information for testing."
   }
 ]

@@ -1,3 +1,0 @@
-copy rundll32.exe loader.exe && loader.exe payload.dll,StartNodeRelay
-rundll32.exe C:\Windows\Temp\payload.dat,StartNodeRelay
-rundll32.exe payload.dll,#1

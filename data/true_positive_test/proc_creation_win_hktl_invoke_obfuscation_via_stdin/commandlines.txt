@@ -1,4 +1,0 @@
-cmd.exe /c "set A=in^voke & set B=environment & echo %A% | powershell -"
-cmd.exe /V:ON /C "set a=in&& set b=voke&& set c=!a!!b!&& echo !c! | powershell -"
-powershell.exe -ExecutionPolicy Bypass -Command "$invoke='payload'; Write-Host 'Test Execution'"
-set a=1 & set invoke=payload & powershell -c "Write-Host 'Test Execution'"

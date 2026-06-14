@@ -1,4 +1,0 @@
-copy wevtutil.exe tutil.exe && tutil.exe qe Security
-Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624}
-wevtutil.exe query-events "Security" /q:"*[System[(EventID=4624)]]"
-powershell  -Command "Get-WinEvent -LogName 'Microsoft-Windows-TerminalServices-LocalSessionManager/Operational' | Where-Object {$_.Id -eq 21} | ForEach-Object { $eventXml = [xml]$_.ToXml(); $username = $eventXml.Event.UserData.EventXML.User; $ipAddress = $eventXml.Event.UserData.EventXML.Address; $loginTime = $_.TimeCreated; if ($username -and $ipAddress -and $loginTime) { Write-Output ('User: ' + $username + ' IP: ' + $ipAddress + ' Login Time: ' + $loginTime) }}"

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \" . C:\\\\Windows\\\\Diagnostics\\\\system\\\\Audio\\\\CL_Invocation.ps1 ; SyncInvoke whoami.exe\"",
+    "explanation": "Insertion technique was used to add escape characters to the path, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the shell will still parse the command correctly. Assumption: the shell will correctly interpret the escape characters."
+  },
+  {
+    "output": "powershell.exe -Command '. C:/Windows/Diagnostics/system/Audio/CL_Invocation.ps1; SyncInvoke whoami.exe'",
+    "explanation": "Substitution technique was used to replace backslashes with forward slashes in the path, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the shell will still parse the command correctly. Assumption: the shell will correctly interpret the forward slashes."
+  },
+  {
+    "output": "powershell.exe -Command '. CL_Invocation.ps1; SyncInvoke whoami.exe' -WorkingDirectory 'C:\\Windows\\Diagnostics\\system\\Audio'",
+    "explanation": "Omission and Recoding/Encoding techniques were used to remove the full path and use the -WorkingDirectory flag instead, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the shell will still execute the command in the correct directory. Assumption: the -WorkingDirectory flag will correctly set the working directory."
+  },
+  {
+    "output": "powershell.exe -Command \"& { . C:\\Windows\\Diagnostics\\system\\Audio\\CL_Invocation.ps1; SyncInvoke whoami.exe }\"",
+    "explanation": "Reordering technique was used to wrap the command in a script block, avoiding the rule condition of exact CommandLine matching. The high-level behavior is expected to remain equivalent as the shell will still execute the command correctly. Assumption: the shell will correctly interpret the script block."
+  }
+]

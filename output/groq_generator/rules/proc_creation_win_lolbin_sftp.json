@@ -1,0 +1,18 @@
+[
+  {
+    "output": "sftp.exe -D C:\\Windows\\System32\\calc.exe",
+    "explanation": "This command uses the '-D' flag with a full path to calc.exe, matching the Sigma rule's detection criteria. It is a direct representation of the rule's intent for testing."
+  },
+  {
+    "output": "sftp.exe -D ..\\..\\..\\Windows\\System32\\calc.exe",
+    "explanation": "This command uses the '-D' flag with a relative path to calc.exe, which aligns with the Sigma rule's detection logic. The relative path is a valid alternative to the full path."
+  },
+  {
+    "output": "sftp.exe -D \"C:\\\\Windows\\\\System32\\\\calc.exe\"",
+    "explanation": "This command uses the '-D' flag with a full path enclosed in quotes. The quotes are a safe mutation technique (insertion) and do not affect the detection logic."
+  },
+  {
+    "output": "sftp.exe -D C:/Windows/System32/calc.exe",
+    "explanation": "This command uses forward slashes instead of backslashes in the file path. This is a safe mutation technique (recoding) that does not affect detection by the Sigma rule."
+  }
+]

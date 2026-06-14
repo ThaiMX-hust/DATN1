@@ -1,2 +1,0 @@
-copy python.exe runner.exe && runner.exe -m adidnsdump -u DOMAIN\User -p Password ldap://10.10.10.10
-python.exe my_dns_enum.py -u DOMAIN\User -p Password ldap://10.10.10.10

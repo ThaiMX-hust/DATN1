@@ -1,2 +1,0 @@
-conhost.exe --headless "p^o^w^e^r^s^h^e^l^l -ExecutionPolicy Bypass -File script.ps1"
-ren conhost.exe notconhost.exe && notconhost.exe --headless powershell

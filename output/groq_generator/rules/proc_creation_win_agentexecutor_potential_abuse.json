@@ -1,14 +1,27 @@
 [
   {
-    "output": "AgentExecutor.exe -powershell script.ps1 C:\\out.txt C:\\err.txt C:\\timeout.txt 60000 C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\ 0 0",
-    "explanation": "This is a direct reproduction of the true positive command line provided in the Sigma rule. It matches the detection criteria by invoking AgentExecutor.exe with the -powershell flag."
+    "output": "AgentExecutor.exe -powershell C:\\test.ps1 C:\\output.txt C:\\error.txt C:\\timeout.txt 60 C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe 0 0",
+    "explanation": "This command simulates a typical execution of AgentExecutor.exe with a PowerShell script. It includes all required positional arguments and uses the full path to powershell.exe to align with the Sigma rule's detection logic."
   },
   {
-    "output": "copy powershell.exe AgentExecutor.exe && AgentExecutor.exe -Command \"Write-Output 'Bypassed'\"",
-    "explanation": "This command line replicates the second true positive example by copying powershell.exe to AgentExecutor.exe and then invoking it with a -Command argument. It matches the detection criteria by using the renamed binary with a PowerShell command."
+    "output": "AgentExecutor.exe -powershell C:\\test.ps1 C:\\output.txt C:\\error.txt C:\\timeout.txt 60 C:\\Windows\\System32\\powershell.exe 0 0",
+    "explanation": "This command uses a shorter path to powershell.exe by omitting the full subdirectory, which may still be valid and detectable by the Sigma rule, demonstrating that the rule is not overly dependent on the exact path length."
   },
   {
-    "output": "AgentExecutor.exe -powershell script.ps1 C:\\out.txt C:\\err.txt C:\\timeout.txt 60000 C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\ 0",
-    "explanation": "This command omits the last argument (runAs32BitOn64) while preserving the core behavior. It still triggers the Sigma rule by using the -powershell flag and matching the expected command-line structure."
+    "output": "AgentExecutor.exe -powershell C:\\test.ps1 C:\\output.txt C:\\error.txt C:\\timeout.txt 60 C:\\Windows\\System32\\powershell.exe 1 0",
+    "explanation": "This command changes the enforceSignatureCheck flag to '1', which should trigger a different PowerShell execution policy as per the Sigma rule's note. This tests the rule's ability to detect variations in execution policy flags."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell C:\\test.ps1 C:\\output.txt C:\\error.txt C:\\timeout.txt 60 C:\\Windows\\System32\\powershell.exe 0 1",
+    "explanation": "This command modifies the runAs32BitOn64 flag to '1', testing whether the Sigma rule is sensitive to this parameter or if it focuses only on the presence of the -powershell flag and powershellPath."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell C:\\test.ps1 C:\\output.txt C:\\error.txt C:\\timeout.txt 60 C:\\Windows\\System32\\powershell.exe 0",
+    "output": "AgentExecutor.exe -powershell C:\\test.ps1 C:\\output.txt C:\\error.txt C:\\timeout.txt 60 C:\\Windows\\System32\\powershell.exe 0",
+    "explanation": "This command omits the last argument (runAs32BitOn64), which is optional. It tests whether the Sigma rule still detects the command when not all arguments are provided."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell C:\\test.ps1 C:\\output.txt C:\\error.txt C:\\timeout.txt 60 C:\\Windows\\System32\\powershell.exe 0 0",
+    "explanation": "This command uses double quotes around the command line arguments when passed to a parent process, simulating a scenario where the command is embedded in a larger script or command string. The Sigma rule should still detect the presence of the -powershell flag."
   }
 ]

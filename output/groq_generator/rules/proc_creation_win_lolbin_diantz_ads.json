@@ -1,10 +1,18 @@
 [
   {
-    "output": "copy diantz.exe d.exe && d.exe C:\\path\\to\\input.txt C:\\path\\to\\target.txt:output.cab",
-    "explanation": "The original command is already a valid representation of the Sigma rule's detection criteria. No mutation is needed for this baseline test."
+    "output": "diantz.exe -c target.txt:stream.cab",
+    "explanation": "This command uses diantz.exe to compress a file into a CAB archive stored in an Alternate Data Stream (ADS) of the target file. It aligns with the Sigma rule's detection criteria by including 'diantz.exe', '.cab', and the ADS syntax (':stream.cab')."
   },
   {
-    "output": "copy diantz.exe d.exe && d.exe C:\\path\\to\\input.txt C:\\path\\to\\target.txt\\:output.cab",
-    "explanation": "Inserted an extra backslash before the colon to test parsing behavior while still matching the rule's regex for ADS detection."
+    "output": "diantz.exe -c target.txt :stream.cab",
+    "explanation": "This command uses diantz.exe with a space between the filename and ADS stream name, which is still valid in Windows. It includes all the required elements for the Sigma rule to detect."
+  },
+  {
+    "output": "diantz.exe /c target.txt:stream.cab",
+    "explanation": "This command uses the equivalent /c flag instead of -c. The rest of the command remains unchanged and meets the Sigma rule's detection criteria."
+  },
+  {
+    "output": "diantz.exe -c target.txt:stream.cab -v",
+    "explanation": "This command adds a verbose flag (-v) to the original command. The core behavior remains unchanged, and the Sigma rule will still detect the presence of 'diantz.exe', '.cab', and the ADS syntax."
   }
 ]

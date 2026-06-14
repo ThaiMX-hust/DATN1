@@ -1,14 +1,22 @@
 [
   {
-    "output": "sysupdate.exe -u System cmd.exe",
-    "explanation": "Removal of quotes around 'System' in the command line, which is still valid and matches the Sigma rule."
+    "output": "wsudo -u System cmd.exe",
+    "explanation": "This command uses the '-u System' argument, which is directly detected by the Sigma rule. It represents a typical execution pattern of wsudo to run a process with System privileges."
   },
   {
-    "output": "sysupdate.exe -uTrustedInstaller cmd.exe",
-    "explanation": "Substitution of '-u TrustedInstaller' with '-uTrustedInstaller', which is an equivalent syntax and matches the Sigma rule."
+    "output": "wsudo -uTrustedInstaller powershell.exe",
+    "explanation": "This command uses the '-uTrustedInstaller' argument without a space between '-u' and 'TrustedInstaller', which is a valid syntax variation and still matches the Sigma rule."
   },
   {
-    "output": "sysupdate.exe --ti cmd.exe",
-    "explanation": "Replaces '-u TrustedInstaller' with '--ti', which is an equivalent flag supported by the tool and matches the Sigma rule."
+    "output": "wsudo --ti notepad.exe",
+    "explanation": "This command uses the '--ti' flag, which is explicitly listed in the Sigma rule as a detectable argument for TrustedInstaller execution."
+  },
+  {
+    "output": "wsudo -u System  cmd.exe",
+    "explanation": "This command includes an extra space between '-u System' and the executable, which is a safe mutation technique (insertion) and still matches the Sigma rule."
+  },
+  {
+    "output": "wsudo -u System",
+    "explanation": "This command omits the executable argument, but the '-u System' flag is still present and matches the Sigma rule. It may not be functional but is still detectable."
   }
 ]

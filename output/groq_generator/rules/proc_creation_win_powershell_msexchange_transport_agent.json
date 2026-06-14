@@ -1,6 +1,14 @@
 [
   {
-    "output": "\"powershell.exe\" Install-TransportAgent -Name \"Security Interop Agent\" -TransportAgentFactory Microsoft.Exchange.Security.Interop.SecurityInteropAgentFactory -AssemblyPath \"c:\\program files\\microsoft\\Exchange Server\\v15\\bin\\Microsoft.Exchange.Security.Interop.dll\" Enable-TransportAgent \"Security Interop Agent\" Get-TransportAgent | Format-List Name,Enabled",
-    "explanation": "The original command is modified by removing unnecessary script block syntax '&' and ensuring proper spacing and quotation for command-line parsing. This is a safe mutation for testing purposes."
+    "output": "powershell.exe Install-TransportAgent -Name \"Security Interop Agent\" -TransportAgentFactory Microsoft.Exchange.Security.Interop.SecurityInteropAgentFactory -AssemblyPath \"c:\\program files\\microsoft\\Exchange Server\\v15\\bin\\Microsoft.Exchange.Security.Interop.dll\" Enable-TransportAgent \"Security Interop Agent\" Get-TransportAgent | Format-List Name,Enabled",
+    "explanation": "The original command is modified by removing unnecessary ampersand and quotes around the command block, and by using standard double quotes for string parameters. This is a safe mutation that preserves the original behavior for testing purposes."
+  },
+  {
+    "output": "powershell.exe Install-TransportAgent -Name 'Security Interop Agent' -TransportAgentFactory Microsoft.Exchange.Security.Interop.SecurityInteropAgentFactory -AssemblyPath 'c:\\program files\\microsoft\\Exchange Server\\v15\\bin\\Microsoft.Exchange.Security.Interop.dll' Enable-TransportAgent 'Security Interop Agent' Get-TransportAgent | Format-List Name,Enabled",
+    "explanation": "Single quotes are substituted for double quotes around string parameters, which is functionally equivalent in PowerShell. This is a safe mutation that maintains the original command's behavior."
+  },
+  {
+    "output": "powershell.exe Install-TransportAgent -Name Security\\Interop\\Agent -TransportAgentFactory Microsoft.Exchange.Security.Interop.SecurityInteropAgentFactory -AssemblyPath c:\\program\\files\\microsoft\\Exchange\\Server\\v15\\bin\\Microsoft.Exchange.Security.Interop.dll Enable-TransportAgent Security\\Interop\\Agent Get-TransportAgent | Format-List Name,Enabled",
+    "explanation": "Path normalization and escaping are applied to the command line. The name parameter is also slightly modified with backslashes to test if the detection is resilient to minor syntactic changes. This is a safe mutation for testing."
   }
 ]

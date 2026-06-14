@@ -1,0 +1,22 @@
+[
+  {
+    "output": "curl.exe --proxy-insecure -x http://127.0.0.1:8080 https://example.com",
+    "explanation": "This command uses the insecure proxy flag (--proxy-insecure) and a proxy server, which matches the Sigma rule's detection criteria. It is a valid test command for verifying detection."
+  },
+  {
+    "output": "curl.exe --doh-insecure https://example.com",
+    "explanation": "This command uses the insecure DOH flag (--doh-insecure), which matches the Sigma rule's detection criteria. It is a valid test command for verifying detection."
+  },
+  {
+    "output": "curl.exe --proxy-insecure -x \"http://127.0.0.1:8080\" https://example.com",
+    "explanation": "This command uses quotes around the proxy URL as an insertion mutation, but it still matches the Sigma rule's detection criteria for --proxy-insecure."
+  },
+  {
+    "output": "curl.exe --doh-insecure -k https://example.com",
+    "explanation": "This command uses the short form of the insecure flag (-k) instead of --doh-insecure, which is a substitution mutation. However, -k is not specific to DOH and may not match the Sigma rule's exact criteria."
+  },
+  {
+    "output": "curl.exe -x http://127.0.0.1:8080 --proxy-insecure https://example.com",
+    "explanation": "This command reorders the arguments but still includes the --proxy-insecure flag, matching the Sigma rule's detection criteria."
+  }
+]

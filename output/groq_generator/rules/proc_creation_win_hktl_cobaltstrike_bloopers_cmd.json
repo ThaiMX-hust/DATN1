@@ -1,42 +1,18 @@
 [
   {
-    "output": "cmd.exe /c \"psinject\"",
-    "explanation": "The command uses insertion of quotes to simulate a benign command that still matches the Sigma rule's detection of 'psinject' in the command line."
+    "output": "cmd.exe /c echo psinject > nul",
+    "explanation": "This command includes 'psinject' in the command line, which is a keyword detected by the Sigma rule. However, it is benign as it simply writes 'psinject' to a null device. This tests if the rule can be triggered by a keyword without malicious intent."
   },
   {
-    "output": "cmd.exe /c spawnas",
-    "explanation": "The command uses omission of surrounding text to simulate a benign command that still matches the Sigma rule's detection of 'spawnas' in the command line."
+    "output": "cmd /k echo spawnas | findstr spawnas",
+    "explanation": "This command uses 'spawnas' in a benign context, testing if the Sigma rule can be triggered by the presence of the keyword in a non-malicious command line."
   },
   {
-    "output": "cmd.exe /c make_token",
-    "explanation": "The command uses the exact keyword 'make_token' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
+    "output": "c:\\windows\\system32\\cmd.exe /c echo make_token > nul",
+    "explanation": "This command includes 'make_token' in the command line, which is a keyword detected by the Sigma rule. It is harmless as it only writes 'make_token' to a null device, testing the rule's sensitivity to the keyword."
   },
   {
-    "output": "cmd.exe /c \"rev2self\"",
-    "explanation": "The command uses insertion of quotes to simulate a benign command that still matches the Sigma rule's detection of 'rev2self' in the command line."
-  },
-  {
-    "output": "cmd.exe /c execute-assembly",
-    "explanation": "The command uses the exact keyword 'execute-assembly' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
-  },
-  {
-    "output": "cmd.exe /c dcsync",
-    "explanation": "The command uses the exact keyword 'dcsync' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
-  },
-  {
-    "output": "cmd.exe /c logonpasswords",
-    "explanation": "The command uses the exact keyword 'logonpasswords' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
-  },
-  {
-    "output": "cmd.exe /c getsystem",
-    "explanation": "The command uses the exact keyword 'getsystem' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
-  },
-  {
-    "output": "cmd.exe /c \"ps^inject\"",
-    "explanation": "The command uses escape characters to simulate a benign command that still matches the Sigma rule's detection of 'psinject' in the command line."
-  },
-  {
-    "output": "cmd.exe /c \"m^ake_token\"",
-    "explanation": "The command uses escape characters to simulate a benign command that still matches the Sigma rule's detection of 'make_token' in the command line."
+    "output": "cmd.exe -c 'echo remote-exec > nul'",
+    "explanation": "This command uses 'remote-exec' in a benign context, testing if the Sigma rule can be triggered by the presence of the keyword in a non-malicious command line."
   }
 ]

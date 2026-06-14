@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rar.exe a -m5 -r -y -ta20210204000000 -hp1qazxcde32ws -v2560k Asia1Dpt-PC-c.rar \"c:\\\\*.doc\" \"c:\\\\*.docx\" \"c:\\\\*.xls\" \"c:\\\\*.xlsx\" \"c:\\\\*.pdf\" \"c:\\\\*.ppt\" \"c:\\\\*.pptx\" \"c:\\\\*.jpg\" \"c:\\\\*.txt\" > nul",
+    "explanation": "The mutation technique used is insertion of quotes and escape characters. This is intended to avoid the rule condition 'CommandLine|contains: \".exe a \"'. The high-level behavior is expected to remain equivalent in a test environment because the quotes and escape characters do not change the functionality of the command. However, there is an assumption that the target system will correctly parse the inserted quotes and escape characters."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rar.exe  /a  -m5  -r  -y  -ta20210204000000  -hp1qazxcde32ws  -v2560k  Asia1Dpt-PC-c.rar  c:\\*.doc  c:\\*.docx  c:\\*.xls  c:\\*.xlsx  c:\\*.pdf  c:\\*.ppt  c:\\*.pptx  c:\\*.jpg  c:\\*.txt  > nul",
+    "explanation": "The mutation technique used is insertion of spaces. This is intended to avoid the rule condition 'CommandLine|contains: \" a -m\"'. The high-level behavior is expected to remain equivalent in a test environment because the inserted spaces do not change the functionality of the command. However, there is an assumption that the target system will correctly parse the inserted spaces."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rar.exe -a -m5 -r -y -ta20210204000000 -hp1qazxcde32ws -v2560k Asia1Dpt-PC-c.rar c:\\\\*.doc c:\\\\*.docx c:\\\\*.xls c:\\\\*.xlsx c:\\\\*.pdf c:\\\\*.ppt c:\\\\*.pptx c:\\\\*.jpg c:\\\\*.txt > nul",
+    "explanation": "The mutation technique used is substitution of the 'a' option with '-a'. This is intended to avoid the rule condition 'CommandLine|contains: \".exe a \"'. The high-level behavior is expected to remain equivalent in a test environment because the '-a' option is equivalent to the 'a' option. However, there is an assumption that the target system will correctly parse the substituted option."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rar.exe a -m5 -r -y -ta20210204000000 -hp1qazxcde32ws -v2560k Asia1Dpt-PC-c.rar c:\\\\*.doc c:\\\\*.docx c:\\\\*.xls c:\\\\*.xlsx c:\\\\*.pdf c:\\\\*.ppt c:\\\\*.pptx c:\\\\*.jpg c:\\\\*.txt",
+    "explanation": "The mutation technique used is omission of the redirection operator '> nul'. This is intended to avoid the rule condition 'CommandLine|contains: \"> nul\"'. The high-level behavior is expected to remain equivalent in a test environment because the omission of the redirection operator does not change the functionality of the command. However, there is an assumption that the target system will correctly handle the omitted redirection operator."
+  }
+]

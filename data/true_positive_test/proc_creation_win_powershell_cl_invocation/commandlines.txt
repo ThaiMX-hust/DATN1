@@ -1,3 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass -Command "Import-Module 'CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; Get-Item Function:\$method | ForEach-Object { & $_ 'calc.exe' ' ' }"
-powershell.exe -ExecutionPolicy Bypass -EncodedCommand SUVYIChHZXQtQ29udGVudCAnQzpcV2luZG93c1xkaWFnbm9zdGljc1xzeXN0ZW1cTmV0d29ya2luZ1xDTF9JbnZvY2F0aW9uLnBzMScpOyBTeW5jSW52b2tlICdjYWxjLmV4ZScgJyAn
-powershell.exe -ExecutionPolicy Bypass -File "malicious_script.ps1"
+powershell.exe -Command ". C:\Windows\Diagnostics\system\Audio\CL_Invocation.ps1; SyncInvoke whoami.exe"

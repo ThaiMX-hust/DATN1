@@ -1,0 +1,14 @@
+[
+  {
+    "output": "MpCmdRun.exe -RemoveDefinitions -All",
+    "explanation": "Substituted '/' with '-' to match equivalent syntax for command-line flags."
+  },
+  {
+    "output": "MpCmdRun.exe /RemoveDefinitions /All",
+    "explanation": "Original command line used in the Sigma rule as a true positive test case."
+  },
+  {
+    "output": "MpCmdRun.exe\" /RemoveDefinitions /All",
+    "explanation": "Inserted a quote at the beginning of the command line, which is still parsed correctly in most environments."
+  }
+]

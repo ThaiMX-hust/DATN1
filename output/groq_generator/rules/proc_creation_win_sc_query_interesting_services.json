@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc.exe query termservice",
+    "explanation": "This command queries the status of the 'termservice' (Remote Desktop Services) using sc.exe, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sc.exe  query   termservice",
+    "explanation": "Extra spaces between 'sc.exe', 'query', and 'termservice' are inserted, but the command is still parsed correctly and matches the Sigma rule."
+  },
+  {
+    "output": "sc.exe query \"termservice\"",
+    "explanation": "The service name 'termservice' is enclosed in quotes, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "sc.exe query /value termservice",
+    "explanation": "The '/value' flag is added, which is not part of the original command but is allowed in sc.exe and does not affect the detection criteria."
+  },
+  {
+    "output": "sc.exe query termservice > NUL",
+    "explanation": "Output is redirected to NUL to suppress it, but the command line still contains 'query' and 'termservice', matching the Sigma rule."
+  }
+]

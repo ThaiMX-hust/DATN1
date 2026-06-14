@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\nircmd.exe  win child class Shell_TrayWnd hide class TrayClockWClass",
+    "explanation": "This command is a true positive for the Sigma rule as it directly matches the detection condition for hiding window classes using NirCmd."
+  },
+  {
+    "output": "copy nircmd.exe sys_utility.exe && sys_utility.exe win min process itunes.exe",
+    "explanation": "This command is a true positive as it executes NirCmd under a different name (sys_utility.exe) and performs a window minimization action, which is part of the detection scope."
+  },
+  {
+    "output": "n.exe \"e\"\"x\"\"e\"\"c\" \"h\"\"i\"\"d\"\"e\" notepad.exe",
+    "explanation": "This command is a true positive as it uses encoded command-line arguments to execute the 'exec' and 'hide' actions, which are part of the detection criteria."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\nircmd.exe  exec hide notepad.exe",
+    "explanation": "This command is a simplified version of the true positive command that still matches the Sigma rule's detection condition for 'exec' and 'hide' actions."
+  },
+  {
+    "output": "nircmd.exe execmd run calc.exe",
+    "explanation": "This command is a true positive as it uses the 'execmd' argument, which is explicitly listed in the Sigma rule's detection condition."
+  }
+]

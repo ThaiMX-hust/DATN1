@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh advfirewall firewall set rule group=\"remote desktop\" new enable=yes",
+    "explanation": "Substitution technique. Modifies the character casing of the parameter value from 'enable=Yes' to 'enable=yes'. The Sigma rule utilizes a strict case-sensitive `CommandLine|contains|all` search logic targeting the exact token 'enable=Yes' without an explicit modifier for case-insensitivity. In SIEM implementations that enforce case distinction by default, this variation avoids detection while the native `netsh.exe` CLI parses the keyword case-insensitively."
+  },
+  {
+    "output": "netsh \"advfirewall\" \"firewall\" \"set\" \"rule\" \"group=remote desktop\" \"new\" \"enable=Yes\"",
+    "explanation": "Insertion technique. Encloses each separate contextual sub-command and parameter string block within independent double quotation marks. This safely breaks up continuous string lookups and raw regex boundary constraints for unquoted sequences, while the standard Windows process execution subsystem strips the outer quotes and forwards the arguments natively to the binary."
+  },
+  {
+    "output": "netsh advfirewall firewall se rule group=\"remote desktop\" new enable=Yes",
+    "explanation": "Omission technique. Truncates the operational verb `set` down to its shortest accepted prefix abbreviation `se`. Because the legacy interactive shell infrastructure of `netsh.exe` inherently supports character prefix matching when a token is contextually unique, this completely eliminates the literal word string 'set' required by the `selection_cli` signature block."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule group= remote desktop new enable=Yes",
+    "explanation": "Insertion technique. Injects an extra space character right after the equal sign (`group= `). While this effectively alters the raw sequential text format to break the literal string check for `group=`, the internal command line interpreter of the Windows firewall utility safely strips or accounts for the whitespace token gap during internal argument mapping."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule new enable=Yes group=\"remote desktop\"",
+    "explanation": "Reordering technique. Rearranges the functional order of the parameters by placing the `new` context group before the `group=` constraint. Although the rule uses an unanchored `contains|all` condition, this variation targets brittle downstream parsers, fixed positional index scripts, or tightly bound custom lookahead parameters."
+  }
+]

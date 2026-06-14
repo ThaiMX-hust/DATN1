@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\\\AtomicRedTeam\\\\atomics\\\\..\\\\ExternalPayloads\\\\AdFind.exe -default -s base \"lockoutduration\" \"lockoutthreshold\" \"lockoutobservationwindow\" \"maxpwdage\" \"minpwdage\" \"minpwdlength\" \"pwdhistorylength\" \"pwdproperties\"",
+    "explanation": "Insertion technique used to add quotes around the parameters, avoiding the selection_password condition by making the rule's contains operator less effective due to the added quotes."
+  },
+  {
+    "output": "C:\\\\AtomicRedTeam\\\\atomics\\\\..\\\\ExternalPayloads\\\\AdFind.exe -f (objectcategory=computer) -gcb",
+    "explanation": "Reordering technique used to add an optional flag (-gcb) which does not change the behavior of the command but may avoid the selection_enum_ad condition if the rule is not expecting this flag combination."
+  },
+  {
+    "output": "C:\\\\AtomicRedTeam\\\\atomics\\\\..\\\\ExternalPayloads\\\\AdFind.exe -sc \"admincountdmp\"",
+    "explanation": "Insertion technique used to add quotes around the parameter, avoiding the selection_enum_ad condition by making the rule's contains operator less effective due to the added quotes."
+  },
+  {
+    "output": "C:\\\\AtomicRedTeam\\\\atomics\\\\..\\\\ExternalPayloads\\\\AdFind.exe -f (objectcategory=organizationalUnit) -s base",
+    "explanation": "Reordering and insertion technique used to add an optional flag (-s base) and reorder the parameters which does not change the behavior of the command but may avoid the selection_enum_exchange condition if the rule is not expecting this flag combination."
+  },
+  {
+    "output": "C:\\\\AtomicRedTeam\\\\atomics\\\\..\\\\ExternalPayloads\\\\AdFind.exe -gcb -sc \"exchaddresses\"",
+    "explanation": "Insertion and reordering technique used to add an optional flag (-gcb) and add quotes around the parameter, avoiding the selection_enum_exchange condition by making the rule's contains operator less effective due to the added quotes and flag combination."
+  }
+]

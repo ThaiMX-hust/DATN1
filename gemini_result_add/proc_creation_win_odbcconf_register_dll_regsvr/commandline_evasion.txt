@@ -1,0 +1,22 @@
+[
+  {
+    "output": "odbcconf.exe /S /A {regsvr \"C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll\"}",
+    "explanation": "Substitution technique. Modifies the character casing of the component action verb from uppercase to lowercase ('regsvr'). The Sigma rule utilizes a strict `CommandLine|contains|all` search logic targeting the exact token 'REGSVR ' without an explicit modifier for case-insensitivity. In SIEM implementations that enforce case distinction by default, this variation avoids detection while the native `odbcconf.exe` binary parses the action string case-insensitively."
+  },
+  {
+    "output": "odbcconf.exe /S /A {REGSVR\t\"C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll\"}",
+    "explanation": "Substitution technique. Replaces the standard blank space following the action keyword with a horizontal tab (`\t`) character. This directly targets the rule's explicit requirement for a trailing space (`REGSVR `). While the Windows command processor and MDAC subsystem treat tabs as valid parameter boundaries, the rule logic misses the continuous substring sequence."
+  },
+  {
+    "output": "odbcconf.exe /S /A {\"REGSVR\" \"C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll\"}",
+    "explanation": "Insertion technique. Encloses the action verb `REGSVR` inside independent double quotation marks. This safely breaks up continuous string lookups and raw regex boundary constraints for unquoted sequences inside the configuration curly braces, while `odbcconf.exe` strips the outer quotes smoothly during tokenization."
+  },
+  {
+    "output": "odbcconf.exe /S /A {REGSVR \"C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll \"}",
+    "explanation": "Insertion technique. Injects an unnecessary trailing space inside the file path boundary quotes (`.dll `). This alters path string termination parameters to disrupt strict substring lookups or positional token logic without breaking the native Windows API, which automatically trims trailing path whitespaces during normalization."
+  },
+  {
+    "output": "odbcconf.exe /S /F C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\script.rsp",
+    "explanation": "Other technique (Response File Indirect Execution). Relocates the malicious `REGSVR` execution syntax inside a separate external configuration response script file (`/F`) rather than exposing it on the raw command line. This completely purges both targeted strings (`REGSVR ` and `.dll`) from the process creation `CommandLine` log field, blinding the current rule's detection visibility entirely."
+  }
+]

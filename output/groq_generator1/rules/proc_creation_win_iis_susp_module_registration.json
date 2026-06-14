@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-WebGlobalModule -Name 'SuspiciousModule' -Image 'module.dll'\"",
+    "explanation": "The command is unchanged because it already matches the Sigma rule's detection criteria. No safe mutation is needed to simulate the test case."
+  }
+]

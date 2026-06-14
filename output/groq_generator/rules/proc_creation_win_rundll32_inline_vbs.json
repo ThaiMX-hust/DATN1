@@ -1,18 +1,16 @@
+```json
 [
   {
-    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:\"Execute(RegRead('...')); window.close;\"",
-    "explanation": "The original command is preserved with quotes escaped using backslashes, which is a safe mutation technique for testing purposes."
+    "output": "rundll32.exe javascript:\"\$(Execute('RegRead();window.close;'))\"",
+    "explanation": "The original Sigma rule detects command lines containing 'rundll32.exe', 'Execute', 'RegRead', and 'window.close'. This command uses equivalent syntax and string formatting (e.g., quotes and spacing) to bypass detection while maintaining the same behavior for testing purposes."
   },
   {
-    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:Execute(RegRead('...')); window.close;",
-    "explanation": "Quotes are omitted where not strictly necessary, and the command remains functionally equivalent for testing purposes."
+    "output": "rundll32.exe  j a v a s c r i p t :\"\\$(E x e c u t e ( ' R e g R e a d ( ) ; w i n d o w . c l o s e ; ' ) )\"",
+    "explanation": "This command uses spacing and escape characters to obfuscate the original command line. The spacing and encoding are parsed correctly by the system but may evade pattern-based detection mechanisms."
   },
   {
-    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:Execute(RegRead(\"...\")); window.close;",
-    "explanation": "Double quotes are used instead of single quotes around the RegRead argument, which is a valid syntax substitution."
-  },
-  {
-    "output": "copy rundll32.exe updater.exe && updater.exe vbscript:Execute(RegRead('...'));window.close;",
-    "explanation": "Whitespace is removed between the semicolon and window.close, which is a safe reordering/omission technique."
+    "output": "rundll32.exe javascript:\"$(Execute('RegRead();window.close;'))\"",
+    "explanation": "This command uses standard syntax and no unnecessary obfuscation. It is included as a baseline for comparison with the obfuscated versions."
   }
 ]
+```

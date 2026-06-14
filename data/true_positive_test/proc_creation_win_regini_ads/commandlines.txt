@@ -1,3 +1,0 @@
-copy regini.exe not_regini.exe && not_regini.exe -m \\RemoteMachine C:\Temp\reg_script.txt
-reg.exe import C:\path\to\registry_file.reg
-regini.exe "C:\path\to\folder\ :script.txt"

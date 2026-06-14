@@ -1,22 +1,22 @@
 [
   {
-    "output": "ngrok.exe tcp 22",
-    "explanation": "This is a true positive command that matches the Sigma rule. It executes ngrok with a 'tcp' argument, which is detected by selection3 in the rule."
+    "output": "C:\\Users\\Public\\ngrok\\ngrok.exe tcp 3389",
+    "explanation": "This command directly matches the Sigma rule's detection criteria by using 'ngrok.exe' with the 'tcp' argument and a port number (3389), which is explicitly listed in the rule."
   },
   {
-    "output": "ngrok.exe start --all --config config.yml",
-    "explanation": "This command matches selection2 in the Sigma rule by including 'start', '--all', '--config', and a '.yml' file. It is a valid test command for the rule."
+    "output": "C:\\Users\\Public\\ngrok\\ngrok.exe --config=C:\\Users\\Public\\ngrok\\config.yml start --all",
+    "explanation": "This command includes 'start --all' and '--config' with a YAML file, matching the 'selection2' condition in the Sigma rule. It also uses the 'ngrok.exe' binary, aligning with the rule's focus on Ngrok execution."
   },
   {
-    "output": "ngrok.exe -tcp 22",
-    "explanation": "This command uses a substitution technique by replacing 'tcp' with '-tcp' as a short option. It still matches the rule's detection logic for 'tcp' in the command line."
+    "output": "C:\\Users\\Public\\ngrok\\ngrok.exe authtoken N/A",
+    "explanation": "This command includes 'authtoken', which is part of the Sigma rule's 'selection4' condition. It aligns with the rule's detection of Ngrok commands involving authentication tokens."
   },
   {
-    "output": "ngrok.exe start --all --config=C:\\path\\to\\config.yml",
-    "explanation": "This command uses path normalization and equivalent syntax for the '--config' argument. It still matches selection2 in the Sigma rule."
+    "output": "C:\\Users\\Public\\ngrok\\ngrok.exe http 8080",
+    "explanation": "This command uses 'ngrok.exe' with the 'http' argument, which is part of the 'selection3' condition in the Sigma rule. It matches the pattern of using Ngrok for tunneling services."
   },
   {
-    "output": "ngrok.exe start --config config.yml --all",
-    "explanation": "This command reorders the arguments but still satisfies selection2 in the Sigma rule by including all required elements."
+    "output": "C:\\Users\\Public\\ngrok\\ngrok.exe tcp 445",
+    "explanation": "This command uses 'ngrok.exe' with the 'tcp' argument and a port number (445), which is explicitly listed in the 'selection1' condition of the Sigma rule."
   }
 ]

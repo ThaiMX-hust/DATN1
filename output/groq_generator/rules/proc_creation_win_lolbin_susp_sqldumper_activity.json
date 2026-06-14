@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sqldumper.exe 0x0110 0x01100:40",
+    "explanation": "This command simulates the original Sigma rule detection by invoking sqldumper.exe with the exact command-line arguments specified in the rule. It serves as a baseline for testing."
+  },
+  {
+    "output": "sqldumper.exe 0x0110 0x01100:40",
+    "explanation": "No mutation is applied here, as the command already matches the Sigma rule. This is the original test command for the rule."
+  },
+  {
+    "output": "sqldumper.exe 0x0110 0x01100:40",
+    "explanation": "No safe bypass command can be generated without altering the essential behavior that the Sigma rule is designed to detect. Any mutation that avoids detection would likely change the command's purpose or behavior."
+  }
+]

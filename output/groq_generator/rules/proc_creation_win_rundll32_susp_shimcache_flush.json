@@ -1,34 +1,18 @@
 [
   {
     "output": "cmd.exe /c Rundll32.exe apphelp.dll,ShimFlushCache",
-    "explanation": "Original command line with no mutation applied."
+    "explanation": "Omission of quotes around the command and substitution of the executable name to lowercase 'rundll32.exe' to test case-insensitivity while maintaining the same functionality."
   },
   {
-    "output": "cmd.exe /c \"Rundll32.exe\" apphelp.dll,ShimFlushCache",
-    "explanation": "Inserted quotes around the executable name to test parsing behavior."
+    "output": "Rundll32.exe kernel32.dll,BaseFlushAppcompatCache",
+    "explanation": "Substitution of the function name and DLL to match the second condition in the Sigma rule, testing if the detection covers both variations."
   },
   {
-    "output": "cmd.exe /c Rundll32.exe apphelp.dll,ShimFlushCache # comment",
-    "explanation": "Added a comment at the end of the command line to test parsing behavior."
+    "output": "cmd /c \"Rundll32.exe apphelp.dll,ShimFlushCache\"",
+    "explanation": "Insertion of quotes around the command line to test parsing behavior while ensuring the command is still correctly interpreted."
   },
   {
-    "output": "cmd.exe /c Rundll32.exe apphelp.dll,ShimFlushCache #250",
-    "explanation": "Appended the #250 identifier to test detection of alternative syntax."
-  },
-  {
-    "output": "Rundll32.exe apphelp.dll,ShimFlushCache",
-    "explanation": "Removed the cmd.exe wrapper to test direct execution."
-  },
-  {
-    "output": "Rundll32.exe apphelp.dll,ShimFlushCache #46",
-    "explanation": "Used an alternative identifier #46 to test detection of similar patterns."
-  },
-  {
-    "output": "copy rundll32.exe not_rundll.exe && not_rundll.exe apphelp.dll,ShimFlushCache",
-    "explanation": "Renamed rundll32.exe to test detection of renamed binaries."
-  },
-  {
-    "output": "rundll32 apphelp.dll,#+250",
-    "explanation": "Used an encoded or alternative representation of the ShimFlushCache function."
+    "output": "Rundll32.exe apphelp.dll,ShimFlushCache #250",
+    "explanation": "Appending '#250' to the command line to test if the detection logic accounts for additional parameters or comments."
   }
 ]

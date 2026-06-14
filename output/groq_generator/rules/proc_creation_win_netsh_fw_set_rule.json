@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh advfirewall firewall set rule \"group=\\\"Network Discovery\\\"\" new enable=Yes",
+    "explanation": "This command uses quotes and escaped characters to match the Sigma rule's detection criteria for a firewall rule update via netsh.exe. It includes the required keywords 'advfirewall', 'firewall', and 'set' in the command line."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule name=\"Network Discovery\" new enable=Yes",
+    "explanation": "This command simulates a firewall rule update using a different rule identifier (name instead of group), but still includes the required keywords 'advfirewall', 'firewall', and 'set' to match the Sigma rule."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule \"group=\\\"File and Printer Sharing\\\"\" new enable=Yes",
+    "explanation": "This command uses escaped quotes and includes the required keywords to match the Sigma rule. It simulates enabling a firewall rule for 'File and Printer Sharing'."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule \"group=\\\"Network Discovery\\\"\" new enable=No",
+    "explanation": "This command uses escaped quotes and includes the required keywords to match the Sigma rule. It simulates disabling a firewall rule for 'Network Discovery'."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule name=\"Remote Desktop\" new enable=Yes",
+    "explanation": "This command uses a different rule name but still includes the required keywords to match the Sigma rule. It simulates enabling a firewall rule for 'Remote Desktop'."
+  }
+]

@@ -1,2 +1,1 @@
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "NoLMHash" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "NoLMHash" /t REG_DWORD /d 0x00000000 /f
+reg.exe add "HKLM\System\CurrentControlSet\Control\Lsa" /v NoLMHash /t REG_DWORD /d 0 /f

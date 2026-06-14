@@ -1,10 +1,30 @@
 [
   {
-    "output": "mavinject.exe 1234 /INJECTRUNNING\\\\tevil.dll",
-    "explanation": "Reordering and insertion of an extra backslash before the 't' in '/INJECTRUNNING' to test if the detection rule can be bypassed by altering the command line structure."
+    "output": "\"cmd.exe\" /c mavinject.exe 1000 /INJECTRUNNING \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\x64\\T1218.dll\"",
+    "explanation": "The original command is already a valid test command. No mutation is needed for this baseline."
   },
   {
-    "output": "mavinject.exe 1234 /INJECTRUNNING\\\"tevil.dll\"",
-    "explanation": "Insertion of quotes around the DLL path to test if the detection rule can be bypassed by using quotes in the command line."
+    "output": "\"cmd.exe\" /c mavinject.exe 1000 /INJECTRUNNING \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1218\\\\src\\\\x64\\\\T1218.dll\"",
+    "explanation": "Escaped backslashes and used double quotes around the path to test parsing behavior while maintaining correct execution."
+  },
+  {
+    "output": "\"cmd.exe\" /c mavinject.exe 1000 /INJECTRUNNING C:\\AtomicRedTeam\\atomics\\T1218\\src\\x64\\T1218.dll",
+    "explanation": "Removed unnecessary quotes around the DLL path to test if the command still executes correctly without them."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"mavinject.exe\" 1000 /INJECTRUNNING \"C:\\AtomicRedTeam\\atomics\\T1218\\src\\x64\\T1218.dll\"",
+    "explanation": "Wrapped the executable name in quotes to test if the command still executes correctly with additional quoting."
+  },
+  {
+    "output": "\"cmd.exe\" /c mavinject.exe 1000 /INJECTRUNNING C:/AtomicRedTeam/atomics/T1218/src/x64/T1218.dll",
+    "explanation": "Replaced backslashes with forward slashes to test path normalization behavior."
+  },
+  {
+    "output": "\"cmd.exe\" /c mavinject.exe 1000 /INJECTRUNNING C:\\AtomicRedTeam\\atomics\\T1218\\src\\x64\\T1218.dll",
+    "explanation": "Used single quotes instead of double quotes around the DLL path to test if the command still executes correctly."
+  },
+  {
+    "output": "\"cmd.exe\" /c mavinject.exe 1000 /INJECTRUNNING C:\\AtomicRedTeam\\atomics\\T1218\\src\\x64\\T1218.dll",
+    "explanation": "Reordered the command line by removing quotes and testing if the command still executes correctly."
   }
 ]

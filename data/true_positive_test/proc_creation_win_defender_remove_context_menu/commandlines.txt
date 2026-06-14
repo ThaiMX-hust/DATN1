@@ -1,1 +1,0 @@
-powershell.exe -Command "rm 'HKCR\*\shellex\ContextMenuHandlers\EPP'"

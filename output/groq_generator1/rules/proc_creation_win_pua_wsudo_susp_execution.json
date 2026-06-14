@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sysupdate.exe -u System cmd.exe",
+    "explanation": "Removal of quotes around 'System' in the command line, which is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "sysupdate.exe -uTrustedInstaller cmd.exe",
+    "explanation": "Substitution of '-u TrustedInstaller' with '-uTrustedInstaller', which is an equivalent syntax and matches the Sigma rule."
+  },
+  {
+    "output": "sysupdate.exe --ti cmd.exe",
+    "explanation": "Replaces '-u TrustedInstaller' with '--ti', which is an equivalent flag supported by the tool and matches the Sigma rule."
+  }
+]

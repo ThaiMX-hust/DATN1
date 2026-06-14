@@ -1,14 +1,20 @@
+```json
 [
   {
-    "output": "python.exe -m adidnsdump -u DOMAIN\\User -p Password ldap://10.10.10.10",
-    "explanation": "This command uses the standard invocation of the adidnsdump module via Python, which matches the Sigma rule's detection criteria. It is a valid test command for generating a true positive."
+    "output": "python.exe -c \"import adidnsdump; adidnsdump.run()\"",
+    "explanation": "This command simulates execution of the adidnsdump module using Python, which matches the Sigma rule's detection criteria. The command is modified using safe techniques like using -c for inline execution and string representation."
   },
   {
-    "output": "python.exe -m adidnsdump -u DOMAIN/User -p Password ldap://10.10.10.10",
-    "explanation": "This command replaces the backslash in the username with a forward slash, which is a safe mutation technique. It still triggers the Sigma rule because it contains 'adidnsdump' in the command line and is executed by python.exe."
+    "output": "python.exe adidnsdump.py",
+    "explanation": "This command simulates running a standalone script named adidnsdump.py using Python, which matches the Sigma rule's detection criteria. It uses a direct script execution method."
   },
   {
-    "output": "python.exe -m adidnsdump -p Password -u DOMAIN\\User ldap://10.10.10.10",
-    "explanation": "This command reorders the arguments '-u' and '-p'. Since argument order is often flexible in command-line tools, this is a valid mutation that still matches the Sigma rule."
+    "output": "python.exe .\\adidnsdump.py",
+    "explanation": "This command simulates running a script in the current directory using Python, which matches the Sigma rule's detection criteria. It uses relative path notation for the script."
+  },
+  {
+    "output": "python.exe adidnsdump",
+    "explanation": "This command simulates execution of the adidnsdump module as a script, which matches the Sigma rule's detection criteria. It assumes the module is in the Python path or current directory."
   }
 ]
+```

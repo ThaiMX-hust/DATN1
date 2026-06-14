@@ -1,22 +1,22 @@
 [
   {
-    "output": "conhost.exe --headless \"powershell.exe -Command Write-Host 'Bypassed'\"",
-    "explanation": "This command uses insertion of quotes and preserves the original behavior. The command line is syntactically valid and mimics the structure of the true positives."
+    "output": "conhost.exe --headless powershell -Command \"Write-Output 'Test'\"",
+    "explanation": "This command simulates a headless conhost.exe process launching PowerShell, matching the Sigma rule's detection criteria. It includes the required '--headless' and 'powershell' in the command line."
   },
   {
-    "output": "conhost.exe --headless powershell.exe -Command \"Write-Host 'Bypassed'\"",
-    "explanation": "This command omits unnecessary quotes around the command and preserves the intended execution. It remains valid and matches the Sigma rule's detection criteria."
+    "output": "conhost.exe --headless powershell -c \"Write-Output 'Test'\"",
+    "explanation": "This command uses the short form of the '-Command' option as a substitution technique, maintaining the same behavior while altering the syntax slightly."
   },
   {
-    "output": "conhost.exe --headless pwsh -c \"Write-Host 'Bypassed'\"",
-    "explanation": "This command substitutes 'pwsh' for 'powershell.exe' and uses the short option '-c' for '-Command'. It is syntactically valid and functionally equivalent."
+    "output": "conhost.exe --headless powershell -Command Write-Output 'Test'",
+    "explanation": "This command omits the quotes around the PowerShell command, relying on the interpreter to parse the command correctly, which is accepted in many cases."
   },
   {
-    "output": "conhost.exe --headless powershell -ExecutionPolicy Bypass -Command \"Write-Host 'Bypassed'\"",
-    "explanation": "This command includes an additional parameter '-ExecutionPolicy Bypass' to simulate a realistic execution scenario while still matching the Sigma rule."
+    "output": "conhost.exe --headless powershell -Command \"Write-Output 'Test'\" ",
+    "explanation": "This command adds extra whitespace at the end of the command line, which is a safe mutation technique and does not affect the execution."
   },
   {
-    "output": "conhost.exe --headless powershell.exe -Command Write-Host 'Bypassed'",
-    "explanation": "This command omits quotes around the command line arguments where not strictly necessary, but still executes correctly and matches the Sigma rule."
+    "output": "conhost.exe --headless powershell -Command \"Write-Output 'Test'\" | Out-Null",
+    "explanation": "This command appends a harmless pipeline to suppress output, which does not alter the detection logic but demonstrates reordering and omission techniques."
   }
 ]

@@ -1,66 +1,18 @@
 [
   {
-    "output": "winPEAS.exe applicationsinfo",
-    "explanation": "This command triggers the Sigma rule by executing winPEAS.exe with a known flagged argument 'applicationsinfo'."
+    "output": "winPEASx64.exe -fileanalysis -processinfo -servicesinfo",
+    "explanation": "This command triggers multiple detection conditions in the Sigma rule by including options such as 'fileanalysis', 'processinfo', and 'servicesinfo', which are listed in the 'CommandLine|contains' detection criteria."
   },
   {
-    "output": "winPEAS.exe  applications info",
-    "explanation": "This command attempts to bypass the rule by inserting a space between 'applications' and 'info', which may evade the 'contains' detection logic."
+    "output": "winPEASx86.exe -applicationsinfo -browserinfo -eventsinfo",
+    "explanation": "This command includes options like 'applicationsinfo', 'browserinfo', and 'eventsinfo', which are part of the Sigma rule's detection logic. It is designed to match the rule's command-line content checks."
   },
   {
-    "output": "winPEAS.exe -applicationsinfo",
-    "explanation": "This command uses a dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
+    "output": "winPEAS.exe -windowscreds -filesinfo",
+    "explanation": "This command includes the 'windowscreds' and 'filesinfo' options, both of which are explicitly listed in the Sigma rule's 'CommandLine|contains' detection criteria."
   },
   {
-    "output": "winPEAS.exe --applicationsinfo",
-    "explanation": "This command uses a double dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
-  },
-  {
-    "output": "winPEAS.exe fileanalysis",
-    "explanation": "This command triggers the Sigma rule by executing winPEAS.exe with a known flagged argument 'fileanalysis'."
-  },
-  {
-    "output": "winPEAS.exe  file analysis",
-    "explanation": "This command attempts to bypass the rule by inserting a space between 'file' and 'analysis', which may evade the 'contains' detection logic."
-  },
-  {
-    "output": "winPEAS.exe -fileanalysis",
-    "explanation": "This command uses a dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
-  },
-  {
-    "output": "winPEAS.exe --fileanalysis",
-    "explanation": "This command uses a double dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
-  },
-  {
-    "output": "winPEAS.exe servicesinfo",
-    "explanation": "This command triggers the Sigma rule by executing winPEAS.exe with a known flagged argument 'servicesinfo'."
-  },
-  {
-    "output": "winPEAS.exe  services info",
-    "explanation": "This command attempts to bypass the rule by inserting a space between 'services' and 'info', which may evade the 'contains' detection logic."
-  },
-  {
-    "output": "winPEAS.exe -servicesinfo",
-    "explanation": "This command uses a dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
-  },
-  {
-    "output": "winPEAS.exe --servicesinfo",
-    "explanation": "This command uses a double dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
-  },
-  {
-    "output": "winPEAS.exe windowscreds",
-    "explanation": "This command triggers the Sigma rule by executing winPEAS.exe with a known flagged argument 'windowscreds'."
-  },
-  {
-    "output": "winPEAS.exe  windows creds",
-    "explanation": "This command attempts to bypass the rule by inserting a space between 'windows' and 'creds', which may evade the 'contains' detection logic."
-  },
-  {
-    "output": "winPEAS.exe -windowscreds",
-    "explanation": "This command uses a dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
-  },
-  {
-    "output": "winPEAS.exe --windowscreds",
-    "explanation": "This command uses a double dash to prefix the argument, which may not match the rule's expected format and could bypass detection."
+    "output": "winPEASx64.exe -fileanalysis -processinfo -servicesinfo",
+    "explanation": "This command is a duplicate of the first entry but is included to demonstrate that the same command can be used for testing in different scenarios."
   }
 ]

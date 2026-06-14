@@ -1,0 +1,62 @@
+[
+  {
+    "output": "calc.exe -suspicious_flag",
+    "explanation": "This command directly uses 'calc.exe' with a suspicious flag, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "calc.exe /parameter",
+    "explanation": "This command uses 'calc.exe' with a parameter, which is flagged by the Sigma rule as suspicious."
+  },
+  {
+    "output": "copy calc.exe math.exe && math.exe -suspicious_flag",
+    "explanation": "This command copies 'calc.exe' to 'math.exe' and executes it with a suspicious flag, which evades the known location filter and matches the rule."
+  },
+  {
+    "output": "calc.exe",
+    "explanation": "This command is not flagged by the Sigma rule because it lacks suspicious parameters and is executed from a known location."
+  },
+  {
+    "output": "C:\\Windows\\System32\\calc.exe",
+    "explanation": "This command is not flagged by the Sigma rule because it is executed from a known location and has no suspicious parameters."
+  },
+  {
+    "output": "calc.exe /?",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard help request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe -help",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard help request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe -h",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard help request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe /h",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard help request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe --help",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard help request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe -v",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard version request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe /v",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard version request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe --version",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard version request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe -version",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard version request and lacks suspicious parameters."
+  },
+  {
+    "output": "calc.exe -?",
+    "explanation": "This command is not flagged by the Sigma rule because it is a standard help request and lacks suspicious parameters."
+  }
+]

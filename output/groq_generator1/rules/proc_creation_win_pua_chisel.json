@@ -1,0 +1,6 @@
+[
+  {
+    "output": "chisel.exe client 10.0.0.5:8080",
+    "explanation": "The original command is already a valid test case for the Sigma rule and does not require mutation."
+  }
+]

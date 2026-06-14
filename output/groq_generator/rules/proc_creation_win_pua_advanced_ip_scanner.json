@@ -1,6 +1,18 @@
 [
   {
-    "output": "advanced_ip_scanner.exe",
-    "explanation": "The original command is already a valid test case and cannot be meaningfully mutated without altering its behavior or triggering the Sigma rule."
+    "output": "advanced_ip_scanner.exe /portable /lng=en",
+    "explanation": "This command line represents a typical invocation of Advanced IP Scanner with the '/portable' and '/lng' flags, which aligns with the Sigma rule's detection criteria. It is a safe and valid test command for a controlled environment."
+  },
+  {
+    "output": "\"advanced_ip_scanner.exe\" /portable /lng=en",
+    "explanation": "By adding quotes around the executable name, this command demonstrates an insertion mutation technique. It remains functionally equivalent and is still detectable by the Sigma rule."
+  },
+  {
+    "output": "advanced_ip_scanner.exe /portable /lng:en",
+    "explanation": "This command uses a colon (':') instead of an equals sign ('=') for the '/lng' parameter, which is a substitution mutation. It is still valid and detectable by the Sigma rule."
+  },
+  {
+    "output": "advanced_ip_scanner.exe /lng=en /portable",
+    "explanation": "Reordering the command-line arguments does not affect detection by the Sigma rule, as it only checks for the presence of both '/portable' and '/lng'."
   }
 ]

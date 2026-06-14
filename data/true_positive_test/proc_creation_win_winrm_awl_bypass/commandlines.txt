@@ -1,1 +1,1 @@
-copy cscript.exe moved_cscript.exe && moved_cscript.exe //nologo winrm.vbs get wmicimv2/Win32_Process?Handle=4 -format:pretty
+C:\Temp\cscript.exe C:\Temp\winrm.vbs quickconfig -format:pretty

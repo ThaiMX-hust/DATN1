@@ -1,0 +1,18 @@
+[
+  {
+    "output": "esentutl.exe /r \"%LocalAppData%\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat\" /d",
+    "explanation": "This command uses the original syntax with environment variable expansion and quotes around the file path to test the Sigma rule. It preserves the behavior of the original command while applying safe mutation techniques."
+  },
+  {
+    "output": "esentutl.exe -r \"%LocalAppData%\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat\" /d",
+    "explanation": "This command substitutes the long option '/r' with its equivalent '-r' format, which is valid for esentutl.exe, and uses quotes around the file path for safe parsing."
+  },
+  {
+    "output": "esentutl.exe /r %LocalAppData%\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat /d",
+    "explanation": "This command omits the quotes around the file path, which is still valid in many Windows environments and does not alter the behavior of the command."
+  },
+  {
+    "output": "set \"flag=/r\" && esentutl.exe %flag% \"%LocalAppData%\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat\" /d",
+    "explanation": "This command uses an environment variable to store the '/r' flag and applies quotes around the file path for safe parsing, while maintaining the original behavior."
+  }
+]

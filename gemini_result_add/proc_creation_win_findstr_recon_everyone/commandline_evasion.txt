@@ -1,0 +1,26 @@
+[
+  {
+    "output": "icacls \"C:\\Program Files\\*\" 2>nul | findstr (M) | findstr Everyone",
+    "explanation": "Omission technique: Removing explicit string literal quotation marks around the search criteria parameters (omitting the quotes in 'Everyone' or '(M)'). In standard cmd.exe pipeline streams, findstr perfectly interprets unquoted alphanumeric words as target string literals, meaning it functions identically in a test environment while completely evading 'selection_findstr_cli' which strictly expects wrapped quotes like '\"Everyone\"' or \"'Everyone'\". (Note: 'selection_special' may still fire if executed inside a single handler process context like cmd /c, but this cleanly bypasses the primary findstr signature match logic)."
+  },
+  {
+    "output": "icacls \"C:\\Program Files\\*\" 2>nul | findstr \"Everyo\"\"ne\"",
+    "explanation": "Insertion technique: Placing adjacent empty double quotes right inside the search filter parameter keyword token ('\"Everyo\"\"ne\"'). The Windows command-line tokenizer transparently strips and normalizes empty string quote sets during runtime evaluation, meaning the binary handles 'Everyone' internally while the recorded process creation telemetry shows 'Everyo\"\"ne' which breaks all literal word lookups for 'Everyone'."
+  },
+  {
+    "output": "icacls \"C:\\Program Files\\*\" 2>nul | findstr -i EVERYONE",
+    "explanation": "Other techniques (Case Variation / Regular Expression Matching): Capitalizing the positional search argument entirely while pairing findstr with its case-insensitive switch parameter ('-i EVERYONE'). If the downstream SIEM log management engine or parsing logic configuration enforces unoptimized or strict case-sensitive comparisons over the raw command-line text metrics, this variation neutralizes the lowercase or mixed-case string matches smoothly."
+  },
+  {
+    "output": "icacls \"C:\\Program Files\\*\" 2>nul | findstr \"Every.ne\"",
+    "explanation": "Other techniques (Regular Expression Wildcarding): Swapping a character in the target text with a dot operator regex wildcard descriptor ('\"Every.ne\"'). Because findstr handles basic patterns as regular expressions by default, the dot acts as a single-character placeholder that securely evaluates against 'Everyone' inside the stdout pipeline stream at execution time, while safely avoiding the monitored continuous text patterns."
+  },
+  {
+    "output": "icacls \"C:\\Program Files\\*\" 2>nul | findstr \"BUILTIN\\\\\"",
+    "explanation": "Recoding / Encoding technique: Normalizing the Active Directory object domain prefix marker by adding a redundant trailing escape backslash separator sequence ('\"BUILTIN\\\\\"'). The search function evaluates the backslash natively as an literal string boundary character lookup constraint, effectively mapping identical group query records in a test environment while altering the exact continuous substring validation targeted by '\"BUILTIN\\\"'."
+  },
+  {
+    "output": "icacls\t\"C:\\Program Files\\*\"\t2>nul\t|\tfindstr\t\"Everyone\"",
+    "explanation": "Substitution technique: Replacing the structural argument space boundaries separating the pipeline chains with horizontal tab characters ('\\t'). The core Windows kernel command environment normalizes tabs into traditional argument boundary tokens seamlessly, breaking static string rule matchers like 'icacls ' or 'findstr ' that enforce explicit single space padding."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe  /create /tn \"BenignTask1\" /sc once /tr C:\\windows\\system32\\cmd.exe /st 20:10",
+    "explanation": "Insertion technique: Adding an extra space between the executable path and the action flag modifies the spacing pattern. This circumvents the strict substring match logic under 'selection' (' /create ') by modifying the boundary white space, while the Windows process creation API continues to normalize and route parameters identically during authorized regression testing."
+  },
+  {
+    "output": "schtasks.exe \"/create\" /tn \"BenignTask2\" /sc once /tr C:\\windows\\system32\\cmd.exe /st 20:10",
+    "explanation": "Insertion technique: Placing double quotes around the action keyword creates the sequence '\"/create\"' in the logged process metadata. The Windows schtasks binary natively processes quoted argument parameters accurately, but it entirely prevents matching the rule's literal contiguous check criterion under 'CommandLine|contains'."
+  },
+  {
+    "output": "cmd.exe /c schtasks.exe /cr^eate /tn \"BenignTask3\" /sc once /tr C:\\windows\\system32\\cmd.exe /st 20:10",
+    "explanation": "Insertion technique: Running the line via cmd.exe enables the use of the shell caret (^) escape symbol inside the flag parameter ('/cr^eate'). The cmd console strips out caret symbols before calling the child application layer, guaranteeing equivalent execution flow while breaking raw text token search patterns stored by the SIEM tracker."
+  }
+]

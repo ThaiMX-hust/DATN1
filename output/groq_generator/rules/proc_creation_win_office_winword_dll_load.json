@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\WINWORD.EXE /l C:\\\\Temp\\\\malicious.dll",
+    "explanation": "This command simulates the behavior of the Sigma rule by invoking WINWORD.exe with the '/l' flag followed by a DLL path. It matches the detection criteria of the rule."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\WINWORD.EXE /l \"C:\\\\Temp\\\\malicious.dll\"",
+    "explanation": "Adding quotes around the DLL path is a safe mutation technique (insertion) that does not change the behavior but may test how the rule handles quoted command-line arguments."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\WINWORD.EXE /l C:\\\\Temp\\\\malicious.dll",
+    "explanation": "This is a simplified version of the original command with no unnecessary modifications. It directly matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\WINWORD.EXE /l C:\\\\Temp\\\\malicious.dll ",
+    "explanation": "Appending an extra space at the end of the command line is a safe mutation technique (insertion) that tests how the rule handles trailing spaces."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\WINWORD.EXE /l C:\\\\Temp\\\\malicious.dll",
+    "explanation": "Using a different case for the executable (WINWORD.EXE) is a safe mutation technique (recoding) that tests case-insensitive detection behavior."
+  }
+]

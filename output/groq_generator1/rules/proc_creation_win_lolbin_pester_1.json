@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Pester.bat 'calc.exe; Get-Process'",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the detection."
+  }
+]

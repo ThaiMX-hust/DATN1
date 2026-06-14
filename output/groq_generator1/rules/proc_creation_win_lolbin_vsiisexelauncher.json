@@ -1,0 +1,6 @@
+[
+  {
+    "output": "VSIISExeLauncher.exe -p calc.exe -a arguments",
+    "explanation": "This is a true positive command that matches the Sigma rule. It uses the -p flag to specify the executable and the -a flag to pass arguments."
+  }
+]

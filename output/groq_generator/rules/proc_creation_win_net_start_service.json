@@ -1,6 +1,18 @@
 [
   {
-    "output": "net start sesshijack",
-    "explanation": "The Sigma rule detects the presence of a space between 'net' and 'start' followed by a service name. This command omits the space between 'net' and 'start', which may not match the rule's detection logic."
+    "output": "C:\\WINDOWS\\system32\\net1.exe start sesshijack",
+    "explanation": "This command matches the Sigma rule by using 'net1.exe' with the 'start' flag followed by a service name, which is the intended detection pattern."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net.exe start sesshijack",
+    "explanation": "This command matches the Sigma rule by using 'net.exe' with the 'start' flag followed by a service name, which is the intended detection pattern."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 start sesshijack",
+    "explanation": "This command matches the Sigma rule by using 'net1' (without .exe) with the 'start' flag followed by a service name, which is the intended detection pattern."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net start sesshijack",
+    "explanation": "This command matches the Sigma rule by using 'net' (without .exe) with the 'start' flag followed by a service name, which is the intended detection pattern."
   }
 ]

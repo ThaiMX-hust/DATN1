@@ -1,0 +1,22 @@
+[
+  {
+    "output": "query.exe session > C:\\Users\\User\\Desktop\\sessions.txt",
+    "explanation": "This command uses 'query.exe' to retrieve session information and redirect the output to a file, matching the Sigma rule's detection of 'session >'."
+  },
+  {
+    "output": "query.exe process > C:\\Users\\User\\Documents\\processes.txt",
+    "explanation": "This command uses 'query.exe' to retrieve process information and redirect the output to a file, matching the Sigma rule's detection of 'process >'."
+  },
+  {
+    "output": "query.exe session > \\\\?\\"C:\\Users\\User\\Downloads\\sessions_output.txt",
+    "explanation": "This command uses 'query.exe' to retrieve session information and redirect the output to a file using the long path prefix '\\\\?\\', which is a safe mutation technique."
+  },
+  {
+    "output": "query.exe process > C:\\Users\\User\\AppData\\Local\\Temp\\processes_output.log",
+    "explanation": "This command uses 'query.exe' to retrieve process information and redirect the output to a file in a different directory, which is a safe mutation technique."
+  },
+  {
+    "output": "query.exe session > C:\\Users\\User\\OneDrive\\sessions_output.txt",
+    "explanation": "This command uses 'query.exe' to retrieve session information and redirect the output to a file in a cloud-synced directory, which is a safe mutation technique."
+  }
+]

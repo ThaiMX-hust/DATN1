@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msdt.exe /cab C:\\Temp\\test.cab",
+    "explanation": "Substitution technique. Replaces the hyphen-prefixed switch ` -cab ` with a forward slash `/cab`. Because the Sigma rule utilizes the `|windash` modifier, it normalizes dashes (like `-cab` or `–cab`), but because the rule requires strict leading and trailing space buffers (` -cab `), stripping or shifting the whitespace-to-switch boundary completely bypasses the rule while remaining perfectly valid under standard Windows parameter tokenization."
+  },
+  {
+    "output": "msdt.exe \"-cab\" C:\\Temp\\test.cab",
+    "explanation": "Insertion technique. Encloses the target option switch within double quotes (`\"-cab\"`). This directly avoids the strict literal search criteria ` -cab ` in the raw `CommandLine` field, whereas the underlying Windows OS safely strips out the quotes before passing the structural parameter array to the application."
+  },
+  {
+    "output": "msdt.exe -cab:C:\\Temp\\test.cab",
+    "explanation": "Substitution technique. Modifies the argument delimiter from a space character to a colon character (`-cab:`). This removes the critical trailing space expected by the rule's ` -cab ` string, while the utility parsing logic natively parses and executes the switch parameter value pair appropriately."
+  },
+  {
+    "output": "msdt.exe\t-cab\tC:\\Temp\\test.cab",
+    "explanation": "Substitution technique. Replaces the whitespace padding characters around the target switch with horizontal tabs (`\t`). The Windows command-line tokenizer transparently treats tabs as standard parameter delimiters, but it prevents the rigid SIEM substring logic from discovering the exact ` -cab ` string sequence."
+  },
+  {
+    "output": "msdt.exe    -cab    C:\\Temp\\test.cab",
+    "explanation": "Insertion technique. Injects multiple consecutive space characters before and after the flag parameter. Depending on how the telemetry collection layer transforms, normalizes, or compresses raw command strings, expanding token distance can slip past strict single-space sub-string signatures."
+  }
+]

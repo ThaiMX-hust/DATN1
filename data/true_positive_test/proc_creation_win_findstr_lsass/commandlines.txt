@@ -1,4 +1,2 @@
 "cmd.exe" /c tasklist | findstr lsass
-findstr  lsass
-tasklist | findstr /I /R "l.ass.exe"
-tasklist | findstr /R "ls[a]ss"
+findstr lsass

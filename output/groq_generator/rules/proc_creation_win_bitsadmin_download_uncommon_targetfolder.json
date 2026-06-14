@@ -1,14 +1,18 @@
 [
   {
+    "output": "bitsadmin.exe /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin1_flag.ps1",
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing."
+  },
+  {
     "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
-    "explanation": "This is the original command and serves as a baseline for comparison. It uses the full path to bitsadmin.exe and includes all required flags and parameters."
+    "explanation": "This command is a direct match to the Sigma rule and is used as a baseline for testing."
   },
   {
-    "output": "bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
-    "explanation": "Removed the full path to bitsadmin.exe since it is commonly found in system directories. This is a valid mutation technique and still matches the Sigma rule."
-  },
-  {
-    "output": "bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt \"%temp%\\Atomic-license.txt\"",
-    "explanation": "Replaced the explicit path with the %temp% environment variable. This is a safe mutation technique and still matches the Sigma rule."
+    "output": "bitsadmin.exe /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "No safe bypass command can be generated."
   }
 ]

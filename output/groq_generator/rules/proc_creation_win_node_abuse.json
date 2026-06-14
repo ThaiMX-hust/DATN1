@@ -1,14 +1,22 @@
 [
   {
-    "output": "node.exe -e \"require('child_process').exec('cmd /c echo test > C:\\\\Windows\\\\Temp\\\\test.txt');\"",
-    "explanation": "This command uses node.exe with the -e flag to execute a JavaScript snippet that spawns a command shell to create a test file. It matches the Sigma rule's detection criteria by including ' -e ' and 'child_process', simulating a potential arbitrary code execution scenario."
+    "output": "node.exe -e \"require('child_process').exec('net.socket.connect');\"",
+    "explanation": "This command simulates a potential arbitrary code execution scenario using node.exe with the -e flag, which is detected by the Sigma rule. It includes the key indicators such as -e and child_process, which are part of the detection logic."
   },
   {
-    "output": "node.exe --eval \"require('child_process').exec('powershell -Command ' + [char]34 + 'Write-Output \"bypass\" | Out-File C:\\\\Windows\\\\Temp\\\\bypass.txt' + [char]34);\"",
-    "explanation": "This command uses node.exe with the --eval flag (equivalent to -e) to execute a JavaScript snippet that uses PowerShell to write a test file. It matches the Sigma rule by including ' --eval ' and 'child_process', simulating a potential arbitrary code execution scenario."
+    "output": "node.exe --eval \"require('child_process').exec('net.socket.connect');\"",
+    "explanation": "This command is a variation of the first one, using --eval instead of -e to achieve the same result. It is also detected by the Sigma rule due to the inclusion of --eval and the use of child_process."
   },
   {
-    "output": "node.exe -e \"require('net').Socket().connect(1337, '127.0.0.1', () => { console.log('Connected'); });\"",
-    "explanation": "This command uses node.exe with the -e flag to execute a JavaScript snippet that creates a net socket and connects to a local port. It matches the Sigma rule by including ' -e ' and 'net.socket', simulating a potential reverse shell scenario."
+    "output": "node.exe -e \"require('child_process').exec('net.socket.connect')\"",
+    "explanation": "This command omits the semicolon at the end of the JavaScript code, but it is still valid and detected by the Sigma rule. The omission does not affect the detection as the key elements are still present."
+  },
+  {
+    "output": "node.exe -e \"require('child_process').exec('net.socket.connect')\" ",
+    "explanation": "This command adds an extra space at the end of the command line. The Sigma rule is not affected by trailing spaces, so it is still detected."
+  },
+  {
+    "output": "node.exe -e \"require('child_process').exec('net.socket.connect')\" # Bypass test",
+    "explanation": "This command adds a comment at the end of the command line. The Sigma rule is not affected by comments, so it is still detected."
   }
 ]

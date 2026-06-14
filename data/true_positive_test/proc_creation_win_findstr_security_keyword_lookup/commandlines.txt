@@ -1,1 +1,1 @@
-findstr  /i "virus cb defender cylance mc"
+findstr /i "virus cb defender cylance mc"

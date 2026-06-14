@@ -1,0 +1,42 @@
+[
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "This is the original command that matches the Sigma rule and serves as a baseline for testing."
+  },
+  {
+    "output": "icacls.exe C:\\\\Users\\\\Public\\\\secret /deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "Removed quotes around the file path since they are optional in many cases and the command is still valid."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(CI)(OI)(DE,DC)",
+    "explanation": "Reordered the ACE flags (CI)(OI) to (OI)(CI), which is functionally equivalent and accepted by icacls."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) && echo Test",
+    "explanation": "Appended a harmless command after the original command using &&, which does not affect the behavior of the original command."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) >NUL 2>&1",
+    "explanation": "Redirected output to NUL to suppress console output, which is a common obfuscation technique but does not alter the command's behavior."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null",
+    "explanation": "Piped output to Out-Null to suppress console output, which is functionally equivalent to redirecting to NUL."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-String",
+    "explanation": "Piped output to Out-String, which does not change the behavior of the original command and is often used for formatting."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null | Out-Null",
+    "explanation": "Chained multiple output redirections, which is redundant but does not affect the original command's behavior."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null | Out-String",
+    "explanation": "Chained multiple output redirections and formatting, which is redundant but does not affect the original command's behavior."
+  },
+  {
+    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null | Out-String | Out-Null",
+    "explanation": "Chained multiple output redirections and formatting, which is redundant but does not affect the original command's behavior."
+  }
+]

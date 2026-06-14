@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -nologo -windowstyle minimized -file \"C:\\Users\\User\\AppData\\Local\\Temp\\CL_mutexverifiers.ps1\"",
+    "explanation": "This command simulates the execution of the CL_mutexverifiers.ps1 script via PowerShell with minimized window style and no logo, using a typical temporary directory path as specified in the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -nologo -windowstyle minimized -file 'C:\\Windows\\Temp\\CL_mutexverifiers.ps1'",
+    "explanation": "This command uses pwsh.exe instead of powershell.exe and specifies a Windows Temp directory path, aligning with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -nologo -windowstyle hidden -file \"C:\\Users\\User\\AppData\\Local\\Temp\\CL_mutexverifiers.ps1\"",
+    "explanation": "This command substitutes '-windowstyle minimized' with '-windowstyle hidden' as an equivalent argument, which is accepted by PowerShell and still matches the rule's behavior."
+  },
+  {
+    "output": "powershell.exe -nologo -windowstyle minimized -file C:\\Users\\User\\AppData\\Local\\Temp\\CL_mutexverifiers.ps1",
+    "explanation": "This command omits quotes around the file path, which is still valid in PowerShell and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -nologo -windowstyle minimized -file C:\\Users\\User\\AppData\\Local\\Temp\\CL_mutexverifiers.ps1 -Command \"Write-Output 'test'\"",
+    "explanation": "This command adds an additional -Command argument, which is optional and does not affect the core detection logic of the Sigma rule."
+  }
+]

@@ -1,14 +1,16 @@
+```json
 [
   {
-    "output": "cmd.exe /c \"move script.ps1 s.ps1 && powershell.exe -File s.ps1\"",
-    "explanation": "The command is already a valid test case. No mutation is needed to trigger the Sigma rule as it directly involves PowerShell execution, which is detected by the rule."
+    "output": "powershell.exe -Command \"Start-Process 'C:\\exported\\malicious_script.ps1'\"",
+    "explanation": "This command simulates the execution of a malicious embedded script via PowerShell, which aligns with the Sigma rule's detection criteria. The command is modified using safe techniques such as reordering and recoding to simulate evasion while maintaining the same behavior for testing."
   },
   {
-    "output": "powershell.exe -ExecutionPolicy Bypass -File malicious.ps1",
-    "explanation": "This command is a simplified version of the original test command. It removes the `cmd.exe` wrapper and focuses on PowerShell execution, which is still relevant to the Sigma rule."
+    "output": "cmd.exe /c start \"\" \"C:\\onenoteofflinecache_files\\malicious_script.bat\"",
+    "explanation": "This command simulates the execution of a malicious script via CMD, which is detected by the Sigma rule. The command is altered using substitution and recoding techniques to test detection resilience in a controlled environment."
   },
   {
-    "output": "\"C:\\Windows\\System32\\cmd.exe\" /c \"copy powershell.exe %TEMP%\\_powershell.exe && start-process ONENOTE.EXE -ArgumentList '/hyperlink C:\\path\\to\\malicious.one' && %TEMP%\\_powershell.exe -ExecutionPolicy Bypass -File malicious.ps1\"",
-    "explanation": "This command uses reordering and insertion techniques to simulate the same behavior as the original test command but in a slightly different format. It still involves OneNote execution and PowerShell execution, which aligns with the Sigma rule."
+    "output": "cscript.exe //Nologo \"C:\\exported\\malicious_script.vbs\"",
+    "explanation": "This command simulates the execution of a VBScript via cscript.exe, which is covered by the Sigma rule. The command is modified using omission and recoding techniques to test detection capabilities safely."
   }
 ]
+```

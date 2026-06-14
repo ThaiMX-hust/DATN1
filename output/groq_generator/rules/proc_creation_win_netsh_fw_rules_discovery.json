@@ -1,14 +1,42 @@
 [
   {
-    "output": "netsh advfirewall firewall show rule name^=all",
-    "explanation": "Escape character (^) is inserted before the equals sign to test if the Sigma rule detects escaped input correctly."
+    "output": "netsh advfirewall firewall show rule name= all",
+    "explanation": "Inserted a space between 'name=' and 'all' to test if the command is still detected."
   },
   {
-    "output": "\"netsh\" advfirewall firewall show rule name=all",
-    "explanation": "Quotes are added around the executable name to test if the Sigma rule is affected by quoted command-line arguments."
+    "output": "netsh advfirewall firewall show rule name=\"all\"",
+    "explanation": "Wrapped the 'all' argument in quotes to test if the detection is affected by string formatting."
   },
   {
     "output": "netsh advfirewall firewall show rule name=all",
-    "explanation": "Extra spaces are added to the command line to test if the Sigma rule is affected by spacing variations."
+    "explanation": "Original command as a baseline for comparison."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name=ALL",
+    "explanation": "Used uppercase for the 'all' argument to test case sensitivity in detection."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name= all",
+    "explanation": "Inserted an extra space between 'name=' and 'all' to test parsing robustness."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name=^all",
+    "explanation": "Used an escaped 'all' with a caret (^) to test if the detection handles escape characters."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name=all",
+    "explanation": "Original command for reference."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name= all",
+    "explanation": "Inserted a space after 'name=' to test if spacing affects detection."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name= all",
+    "explanation": "Reordered spacing to test if detection is sensitive to whitespace."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name= all",
+    "explanation": "Used spacing to test if detection is affected by minor formatting changes."
   }
 ]

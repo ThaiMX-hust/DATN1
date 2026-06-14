@@ -1,3 +1,0 @@
-powershell.exe -c "& 'payload.ps1'"
-powershell.exe -Command "& {Invoke-Expression (Get-Content $env:APPDATA\script.ps1 -Raw)}"
-powershell.exe -EncodedCommand SUVYIChHZXQtQ29udGVudCBDOlxVc2Vyc1xQdWJsaWNcQXBwRGF0YVxMb2NhbFxwYXlsb2FkLnBzMSk=

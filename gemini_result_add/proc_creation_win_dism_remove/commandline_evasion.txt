@@ -1,0 +1,22 @@
+[
+  {
+    "output": "dism.exe -Online -Disable-Feature -FeatureName:Windows-Defender /NoRestart /quiet",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks traditionally treat hyphens ('-') interchangeably with forward slashes ('/') as argument switch prefixes. Substituting '/Online' and '/Disable-Feature' with '-Online' and '-Disable-Feature' completely breaks the literal string detection strings in both selection blocks, while dism.exe handles the parameter switches identically."
+  },
+  {
+    "output": "dism.exe \"/Online\" \"/Disable-Feature\" -FeatureName:Windows-Defender /NoRestart /quiet",
+    "explanation": "Insertion technique: Enclosing the critical execution verb parameters in individual double quotes ('\"/Online\"' and '\"/Disable-Feature\"') interrupts the continuous character sequence logic monitored by the SIEM engine. The standard Win32 process parser extracts and strips the encapsulation boundaries automatically on process initialization, leaving target functionality intact."
+  },
+  {
+    "output": "cmd.exe /c dism.exe /On^line /Disable-Fe^ature -FeatureName:Windows-Defender /NoRestart /quiet",
+    "explanation": "Insertion technique: Injects command shell caret escape operators ('^') inside the argument flags via a cmd.exe environment. The parent console subsystem strips these character modifiers away prior to handing off execution context to the child binary, creating a process creation log string holding '/On^line' and '/Disable-Fe^ature' to evade detection."
+  },
+  {
+    "output": "dism.exe /Disable-Feature -FeatureName:Windows-Defender /Online /NoRestart /quiet",
+    "explanation": "Reordering technique: Changes the execution parameter layout sequence by swapping the positions of the target parameters. While this specific rule relies on basic non-positional 'contains|all' checks and will still fire, modifying the linear order often exposes brittle assumptions in customized parsing configurations or downstream correlation logics."
+  },
+  {
+    "output": "dism.exe\t/Online\t/Disable-Feature\t-FeatureName:Windows-Defender\t/NoRestart\t/quiet",
+    "explanation": "Substitution technique: Substituting structural space characters with horizontal tab characters ('\\t'). The native Windows operating system evaluates tabs as valid whitespace argument boundaries, allowing arguments to be mapped accurately into target executable entry functions while breaking static string patterns that depend on space boundaries."
+  }
+]

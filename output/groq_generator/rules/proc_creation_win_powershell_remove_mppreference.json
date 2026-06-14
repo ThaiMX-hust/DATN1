@@ -1,42 +1,18 @@
 [
   {
-    "output": "powershell.exe -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\'\"",
-    "explanation": "This is a direct and unmodified command that matches the Sigma rule. It is included as a baseline for comparison."
+    "output": "powershell.exe -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\\\TestFolder' -AttackSurfaceReductionRules_Ids 'ID123' -AttackSurfaceReductionRules_Actions 'Action1' -CheckForSignaturesBeforeRunningScan $true\"",
+    "explanation": "This command simulates a legitimate attempt to remove Windows Defender configurations using the Remove-MpPreference cmdlet with multiple parameters. It matches the Sigma rule's detection criteria."
   },
   {
-    "output": "powershell.exe -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\'\" -WindowStyle Hidden",
-    "explanation": "Adds an optional parameter (-WindowStyle Hidden) that does not affect the core behavior of the command but may alter the appearance of the process."
+    "output": "powershell.exe -c \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\\\TestFolder' -AttackSurfaceReductionRules_Ids 'ID123' -AttackSurfaceReductionRules_Actions 'Action1' -CheckForSignaturesBeforeRunningScan $true\"",
+    "explanation": "This command uses the short form of the -Command parameter (-c) and includes all relevant parameters from the Sigma rule. It is a valid mutation of the original command using substitution."
   },
   {
-    "output": "powershell.exe -Command \"& { Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\' }\"",
-    "explanation": "Uses a subexpression to invoke the command, which is syntactically different but functionally equivalent."
+    "output": "powershell.exe -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\\\TestFolder' -AttackSurfaceReductionRules_Ids 'ID123' -AttackSurfaceReductionRules_Actions 'Action1' -CheckForSignaturesBeforeRunningScan $true\"",
+    "explanation": "This command uses double quotes around the command line and includes all relevant parameters. It is a valid representation of the original command."
   },
   {
-    "output": "powershell.exe -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders C:\\\"",
-    "explanation": "Removes quotes around the folder path, relying on the parser to interpret the string correctly."
-  },
-  {
-    "output": "powershell.exe -Command \"Set-Item -Path 'function:\\Remove-MpPreference' -Value { param($a) Write-Host 'Simulated' } ; Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\'\"",
-    "explanation": "Overrides the Remove-MpPreference function for simulation purposes, allowing the command to be executed without actual tampering."
-  },
-  {
-    "output": "powershell.exe -Command \"& (Get-Command Remove-MpPreference) -ControlledFolderAccessProtectedFolders 'C:\\'\"",
-    "explanation": "Uses the Get-Command cmdlet to retrieve and invoke Remove-MpPreference, which is a syntactic variation."
-  },
-  {
-    "output": "powershell.exe -Command \"Invoke-Expression 'Remove-MpPreference -ControlledFolderAccessProtectedFolders C:\\'\"",
-    "explanation": "Uses Invoke-Expression to execute the command string, which is a common PowerShell idiom."
-  },
-  {
-    "output": "powershell.exe -Command \"& { param($arg) Remove-MpPreference -ControlledFolderAccessProtectedFolders $arg } -arg 'C:\\'\"",
-    "explanation": "Uses a script block with a parameter to pass the folder path, which is a syntactic variation."
-  },
-  {
-    "output": "powershell.exe -Command \"[System.Management.Automation.PowerShell]::Create().AddCommand('Remove-MpPreference').AddParameter('ControlledFolderAccessProtectedFolders', 'C:\\').Invoke()\"",
-    "explanation": "Uses the .NET PowerShell API to invoke the command, which is a more advanced but still valid method."
-  },
-  {
-    "output": "powershell.exe -Command \"& { $cmd = 'Remove-MpPreference'; & $cmd -ControlledFolderAccessProtectedFolders 'C:\\' }\"",
-    "explanation": "Stores the command name in a variable before invoking it, which is a common obfuscation technique."
+    "output": "powershell.exe -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\\\TestFolder' -AttackSurfaceReductionRules_Ids 'ID123' -AttackSurfaceReductionRules_Actions 'Action1' -CheckForSignaturesBeforeRunningScan $true\"",
+    "explanation": "This command uses escaped backslashes in the folder path and includes all relevant parameters. It is a valid mutation using path normalization."
   }
 ]

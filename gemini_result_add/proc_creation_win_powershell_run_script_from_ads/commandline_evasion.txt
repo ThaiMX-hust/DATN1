@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"& {Add-Content -Path $env:TEMP\\NTFS_ADS.txt -Value 'Write-Host \\\"Stream Data Executed\\\"' -Stream 'streamCommand'; $streamcommand = Get-Content -Path $env:TEMP\\NTFS_ADS.txt -Stream 'streamcommand'; Invoke-Expression $streamcommand}\"",
+    "explanation": "Insertion and Recoding/Encoding techniques were used to modify the command line. The rule condition 'CommandLine|contains|all: - 'Get-Content' and '-Stream'' is avoided by using the '-Command' option and encoding the inner quotes and backslashes. The high-level behavior is expected to remain equivalent because the command still executes the same PowerShell script from an Alternate Data Stream (ADS). Assumption: the target system has PowerShell installed and configured to accept the '-Command' option."
+  },
+  {
+    "output": "pwsh.exe -c \"Add-Content -Path $env:TEMP/NTFS_ADS.txt -Value 'Write-Host \\\"Stream Data Executed\\\"' -Stream streamCommand; $streamcommand = Get-Content -Path $env:TEMP/NTFS_ADS.txt -Stream streamcommand; Invoke-Expression $streamcommand\"",
+    "explanation": "Substitution and Omission techniques were used to modify the command line. The rule condition 'ParentImage|endswith: - '\\\\powershell.exe'' is avoided by using 'pwsh.exe' instead of 'powershell.exe'. The high-level behavior is expected to remain equivalent because the command still executes the same PowerShell script from an Alternate Data Stream (ADS). Assumption: the target system has PowerShell Core installed and configured to accept the '-c' option."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand \"$streamcommand = Get-Content -Path $env:TEMP\\NTFS_ADS.txt -Stream 'streamcommand'; Invoke-Expression $streamcommand; Add-Content -Path $env:TEMP\\NTFS_ADS.txt -Value 'Write-Host \\\"Stream Data Executed\\\"' -Stream 'streamCommand'\"",
+    "explanation": "Reordering and Recoding/Encoding techniques were used to modify the command line. The rule condition 'CommandLine|contains|all: - 'Get-Content' and '-Stream'' is avoided by reordering the commands and using the '-EncodedCommand' option. The high-level behavior is expected to remain equivalent because the command still executes the same PowerShell script from an Alternate Data Stream (ADS). Assumption: the target system has PowerShell installed and configured to accept the '-EncodedCommand' option."
+  }
+]

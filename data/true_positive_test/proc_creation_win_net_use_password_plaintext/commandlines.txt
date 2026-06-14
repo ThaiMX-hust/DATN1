@@ -1,1 +1,1 @@
-"net.exe" user DOMAIN\\user password123 /add
+net use \192.0.2.10\share /USER:domain\user password

@@ -1,18 +1,22 @@
 [
   {
-    "output": "svchost.exe /method:ntlm --verbose",
-    "explanation": "The command line was modified by substituting '/verbose' with '--verbose', which is a common equivalent syntax in many command-line tools. This change does not alter the behavior of the command and is a safe mutation for testing purposes."
+    "output": "SharpLdapWhoami.exe -m ntlm",
+    "explanation": "This command uses substitution by replacing '/method:ntlm' with '-m ntlm', which is an equivalent syntax accepted by the tool. It matches the Sigma rule's detection logic."
   },
   {
-    "output": "svchost.exe /m:ntlm /v",
-    "explanation": "The command line was modified by substituting '/method:ntlm' with '/m:ntlm' and '/verbose' with '/v', which are common short-form flags. This change does not alter the behavior of the command and is a safe mutation for testing purposes."
+    "output": "SharpLdapWhoami.exe /method:kerb",
+    "explanation": "This command uses the original syntax '/method:kerb' as specified in the Sigma rule, making it a direct match for the detection logic."
   },
   {
-    "output": "svchost.exe /method:ntlm  /verbose",
-    "explanation": "The command line was modified by inserting an extra space between '/method:ntlm' and '/verbose'. This change does not alter the behavior of the command and is a safe mutation for testing purposes."
+    "output": "SharpLdapWhoami.exe -m kerb",
+    "explanation": "This command uses substitution by replacing '/method:kerb' with '-m kerb', which is an equivalent syntax accepted by the tool. It matches the Sigma rule's detection logic."
   },
   {
-    "output": "svchost.exe /method:ntlm\" /verbose",
-    "explanation": "The command line was modified by inserting a quote after '/method:ntlm', which is still parsed correctly by many command-line interpreters. This change does not alter the behavior of the command and is a safe mutation for testing purposes."
+    "output": "SharpLdapWhoami.exe /m:nego",
+    "explanation": "This command uses the '/m:nego' syntax directly as specified in the Sigma rule, making it a direct match for the detection logic."
+  },
+  {
+    "output": "SharpLdapWhoami.exe -method:nego",
+    "explanation": "This command uses substitution by replacing '/m:nego' with '-method:nego', which is an equivalent syntax accepted by the tool. It matches the Sigma rule's detection logic."
   }
 ]

@@ -1,34 +1,45 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName 'Win32_ShadowCopy'\"",
-    "explanation": "This command uses a direct string instead of base64 encoding to bypass the Sigma rule's detection of encoded WMI class names."
+    "output": "powershell.exe -EncodedCommand UwBoAGEAZABvAHcAYwBvAHAAeQ==",
+    "explanation": "This command uses base64 encoding for the WMI class 'Win32_ShadowCopy' and is a direct match for the Sigma rule. It is provided as a true-positive test command."
   },
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName (\"Win32\" + \"_\" + \"ShadowCopy\")\"",
-    "explanation": "This command splits the WMI class name into parts and concatenates them, avoiding the base64-encoded string detection."
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_ShadowCopy\" | Out-String | clip",
+    "explanation": "This command is a direct invocation of the WMI class 'Win32_ShadowCopy' and is a true positive for the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName (\"Win32_\" + 'ShadowCopy')\"",
-    "explanation": "This command uses a mix of string literals and variables to construct the WMI class name, evading the encoded string check."
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_ScheduledJob\" | Out-String | clip",
+    "explanation": "This command is a direct invocation of the WMI class 'Win32_ScheduledJob' and is a true positive for the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName ([char]87+[char]105+[char]110+[char]51+[char]50+[char]95+[char]83+[char]104+[char]97+[char]100+[char]111+[char]119+[char]67+[char]111+[char]112+[char]121)\"",
-    "explanation": "This command uses ASCII character codes to reconstruct the WMI class name, avoiding direct or encoded string detection."
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_Process\" | Out-String | clip",
+    "explanation": "This command is a direct invocation of the WMI class 'Win32_Process' and is a true positive for the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName (\"Win32_\" + [char]83 + [char]104 + [char]97 + [char]100 + [char]111 + [char]119 + [char]67 + [char]111 + [char]112 + [char]121)\"",
-    "explanation": "This command combines a literal string with ASCII characters to form the WMI class name, bypassing the encoded string detection."
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount\" | Out-String | clip",
+    "explanation": "This command is a direct invocation of the WMI class 'Win32_UserAccount' and is a true positive for the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName (\"Win32_\" + $env:WMI_Class)\"",
-    "explanation": "This command uses an environment variable to store the WMI class name, making it harder for the rule to detect the encoded or direct string."
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_LoggedOnUser\" | Out-String | clip",
+    "explanation": "This command is a direct invocation of the WMI class 'Win32_LoggedOnUser' and is a true positive for the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName (\"Win32_\" + [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::UTF8.GetBytes('ShadowCopy')))\"",
-    "explanation": "This command encodes and then decodes the WMI class name using UTF-8 encoding, which is a safe mutation technique that avoids direct or base64-encoded string detection."
+    "output": "pwsh -EncodedCommand UwBoAGEAZABvAHcAYwBvAHAAeQ==",
+    "explanation": "This command uses base64 encoding for the WMI class 'Win32_ShadowCopy' and is a direct match for the Sigma rule. It is provided as a true-positive test command."
   },
   {
-    "output": "powershell.exe -Command \"Get-CimInstance -ClassName (\"Win32_\" + [System.String]::Concat('Shadow','Copy'))\"",
-    "explanation": "This command uses the String.Concat method to combine parts of the WMI class name, avoiding direct or encoded string detection."
-  }
-]
+    "output": "pwsh -Command \"Get-CimInstance -ClassName Win32_ShadowCopy\" | Out-String | clip",
+    "explanation": "This command uses the newer CIM cmdlet to access the WMI class 'Win32_ShadowCopy', which is functionally equivalent and a true positive for the Sigma rule."
+  },
+  {
+    "output": "pwsh -Command \"Get-CimInstance -ClassName Win32_ScheduledJob\" | Out-String | clip",
+    "explanation": "This command uses the newer CIM cmdlet to access the WMI class 'Win32_ScheduledJob', which is functionally equivalent and a true positive for the Sigma rule."
+  },
+  {
+    "output": "pwsh -Command \"Get-CimInstance -ClassName Win32_Process\" | Out-String | clip",
+    "explanation": "This command uses the newer CIM cmdlet to access the WMI class 'Win32_Process', which is functionally equivalent and a true positive for the Sigma rule."
+  },
+  {
+    "output": "pwsh -Command \"Get-CimInstance -ClassName Win32_UserAccount\" | Out-String | clip",
+    "explanation

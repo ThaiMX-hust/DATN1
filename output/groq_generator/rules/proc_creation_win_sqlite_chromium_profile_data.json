@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe\" \"C:\\Users\\thaim\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies\"",
+    "explanation": "Inserted quotes around the binary path and the database path to demonstrate safe mutation via insertion. The command remains functionally identical."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe C:\\Users\\thaim\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies",
+    "explanation": "Removed quotes from the command line to test if the rule detects the command without them. The command is still valid and functionally identical."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe\" \"C:\\Users\\thaim\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies\"",
+    "explanation": "Used double quotes around both the binary and database path to test if the rule accounts for quoted paths. This is a safe mutation technique for testing detection robustness."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe C:\\Users\\thaim\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies",
+    "explanation": "Reordered the command line by using a shorter path representation (no quotes) to test if the rule is sensitive to such variations. The command remains functionally identical."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe \"C:\\Users\\thaim\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies\"",
+    "explanation": "Applied mixed quoting (no quotes on the binary, quotes on the database path) to test if the rule is sensitive to such variations. The command remains functionally identical."
+  }
+]

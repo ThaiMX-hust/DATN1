@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand TgBlAHcALQBPAGIAagBlAGMAdAAgAG4AYABFAHQALgBXAGABRQBiAEMAbABpAEUAbgBUAA==",
+    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "powershell.exe -ENC TgBlAHcALQBPAGIAagBlAGMAdAAgAG4AYABFAHQALgBXAGABRQBiAEMAbABpAEUAbgBUAA==",
+    "explanation": "The '-EncodedCommand' flag is substituted with its short form '-ENC', which is an equivalent syntax and still matches the rule."
+  }
+]

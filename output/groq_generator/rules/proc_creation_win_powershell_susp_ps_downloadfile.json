@@ -1,34 +1,36 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
-    "explanation": "This command uses standard PowerShell syntax to invoke DownloadFile without any obfuscation or bypass techniques, making it a direct match for the Sigma rule."
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\"",
+    "explanation": "This command uses a direct PowerShell invocation with the -Command parameter to execute the DownloadFile method. It is a standard representation of the Sigma rule's detection criteria."
   },
   {
-    "output": "powershell.exe -Command \"(New-Object Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
-    "explanation": "This command uses the shortened namespace 'Net' instead of 'System.Net', which is a valid substitution and still matches the rule."
+    "output": "powershell.exe -c \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\"",
+    "explanation": "This command uses the short form of the -Command parameter (-c) as a substitution for the long form. It is functionally equivalent and still matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"(New-Object System.Net.Web`Client).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
-    "explanation": "This command uses an escape character (`) to split 'WebClient' into 'Web`Client', which is a valid insertion and still matches the rule."
+    "output": "powershell.exe & { (New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt') }",
+    "explanation": "This command uses a script block with the call operator (&) to execute the same logic. It is a valid alternative syntax that still matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"(New-Object System.N'et.WebClient').DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
-    "explanation": "This command uses string concatenation to split 'Net' into 'N' + 'et', which is a valid recoding technique and still matches the rule."
+    "output": "powershell.exe -Command \"(New-Object [System.Net.WebClient]).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\"",
+    "explanation": "This command uses an alternate syntax for the namespace (bracket notation) and is still functionally equivalent. It matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', '$env:TEMP\\test.txt')\"",
-    "explanation": "This command uses an environment variable ($env:TEMP) instead of a hard-coded path, which is a valid recoding technique and still matches the rule."
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\" -WindowStyle Hidden",
+    "explanation": "This command adds an optional parameter (-WindowStyle Hidden) to obscure the PowerShell window. It does not affect the detection logic and still matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\t'+'est.txt')\"",
-    "explanation": "This command uses string concatenation to split the filename into 'test.txt', which is a valid substitution and still matches the rule."
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\" -ExecutionPolicy Bypass",
+    "explanation": "This command includes the -ExecutionPolicy Bypass parameter, which is often used to allow script execution. It is a common addition in real-world scenarios and still matches the Sigma rule."
   },
   {
-    "output": "pwsh.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
-    "explanation": "This command uses PowerShell Core (pwsh) instead of PowerShell, which is a valid substitution and still matches the rule."
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\" -NonInteractive",
+    "explanation": "This command adds the -NonInteractive flag, which is often used in automated scripts. It does not affect the detection logic and still matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://example.com/test.txt', 'C:\\test.txt')\"",
-    "explanation": "This command uses a variable to store the WebClient object, which is a valid reordering and still matches the rule."
-  }
-]
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\" -NoProfile",
+    "explanation": "This command adds the -NoProfile parameter to avoid loading user profiles. It is a common optimization and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-

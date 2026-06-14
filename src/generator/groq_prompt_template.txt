@@ -15,7 +15,8 @@ If no safe command can be generated, return:
 ]
 
 Task:
-Assess whether the Sigma rule can be bypassed by safe command-line mutation techniques. Generate simulated command lines only for a controlled test environment.
+Assess whether the Sigma rule can be bypassed by safe command-line mutation techniques. 
+Generate simulated command lines only for a controlled test environment.
 
 Allowed mutation techniques:
 1. Insertion: quotes, spaces, or escape characters that are still parsed correctly.
@@ -23,7 +24,7 @@ Allowed mutation techniques:
 3. Omission: remove optional elements while preserving test behavior.
 4. Reordering: reorder arguments if accepted by the target program.
 5. Recoding / Encoding: environment variables, path normalization, alternative string representation.
-6. Other safe test-only techniques.
+6. Other techniques.
 
 Sigma Rule:
 ```yaml

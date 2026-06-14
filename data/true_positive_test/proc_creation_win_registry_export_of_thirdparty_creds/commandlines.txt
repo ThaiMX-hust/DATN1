@@ -1,3 +1,0 @@
-copy reg.exe not_reg.exe && not_reg.exe export HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions C:\Users\Public\putty.reg
-reg  exp HKLM\Software\Sota\FFFTP C:\Users\Public\out.reg
-reg export "HKCU\Software\SimonTatham\PuTTY"\Sessions C:\temp\p.reg

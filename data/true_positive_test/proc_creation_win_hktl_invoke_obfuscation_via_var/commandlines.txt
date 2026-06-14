@@ -1,2 +1,0 @@
-cmd.exe /c "set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \"{1}{0}\" -f 'st','Te' & %LAUNCH%"
-cmd.exe /c "set VAR=Invoke-Expression 'Write-Host Safe' &&set RUN=powershell.exe -c ('Te'+'st') && %RUN%"

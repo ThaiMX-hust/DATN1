@@ -1,38 +1,26 @@
 [
   {
     "output": "powershell.exe -Command \"Get-Clipboard\"",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed for this baseline."
+    "explanation": "The Sigma rule detects the presence of 'Get-Clipboard' in the command line. This command uses a direct call to 'Get-Clipboard' and is a valid test case."
   },
   {
-    "output": "powershell.exe -Command \"Get-Clip`board\"",
-    "explanation": "The command uses an escaped character (`) to split 'Get-Clipboard' into 'Get-Clip' and 'board', which is parsed correctly by PowerShell and still matches the Sigma rule."
+    "output": "powershell.exe -c \"Get-Clipboard\"",
+    "explanation": "The '-c' flag is a shorthand for '-Command', which is functionally equivalent. This is a valid substitution under the allowed mutation techniques."
   },
   {
-    "output": "powershell.exe -Command \"IEX ('Get-' + 'Clipboard')\"",
-    "explanation": "The command uses string concatenation to form 'Get-Clipboard' at runtime, which is still parsed correctly and matches the Sigma rule."
+    "output": "\"powershell.exe\" \"Get-Clipboard\"",
+    "explanation": "The command is restructured by omitting the '-Command' flag, but PowerShell still interprets the argument as a command. This is allowed under omission techniques."
   },
   {
-    "output": "powershell.exe -Command \"Set-Alias gc-alt Get-Clipboard; gc-alt\"",
-    "explanation": "The command creates an alias for 'Get-Clipboard' and executes it. The alias 'gc-alt' is used, but the original cmdlet name is still present in the command line and matches the Sigma rule."
+    "output": "powershell.exe -Command Get-Clipboard",
+    "explanation": "Removal of quotes around the command line argument is allowed under omission techniques, as PowerShell can still parse and execute the command correctly."
   },
   {
-    "output": "powershell.exe -EncodedCommand R2V0LUNsaXBib2FyZA==",
-    "explanation": "The command uses base64 encoding to execute 'Get-Clipboard'. The encoded string still represents the original cmdlet and matches the Sigma rule."
+    "output": "powershell.exe -Command \"& {Get-Clipboard}\"",
+    "explanation": "The command is wrapped in a script block ('& {}'), which is a safe mutation technique that does not alter the behavior of the original command."
   },
   {
-    "output": "powershell.exe -Command \"Get-Clipboard\" -WindowStyle Hidden",
-    "explanation": "The command adds an optional argument '-WindowStyle Hidden' which does not affect the detection of 'Get-Clipboard' in the command line and still matches the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"Get-Clipboard\" -Command \"\"",
-    "explanation": "The command adds an empty second '-Command' argument, which is allowed in PowerShell and does not affect the detection of 'Get-Clipboard'."
-  },
-  {
-    "output": "powershell.exe -Command \"Get-Clipboard\" -Command \"Write-Output 'Test'\"",
-    "explanation": "The command adds a second '-Command' argument with a harmless command. The first '-Command' still contains 'Get-Clipboard' and matches the Sigma rule."
-  },
-  {
-    "output": "powershell.exe -Command \"Get-Clipboard\" -Command \"Write-Output 'Test'\" -Command \"\"",
-    "explanation": "The command adds multiple '-Command' arguments, including an empty one. The first '-Command' still contains 'Get-Clipboard' and matches the Sigma rule."
+    "output": "powershell.exe -Command \"Get-Clipboard\" -NoProfile",
+    "explanation": "Appending an optional argument like '-NoProfile' does not affect the detection logic and is allowed under safe mutation techniques."
   }
 ]

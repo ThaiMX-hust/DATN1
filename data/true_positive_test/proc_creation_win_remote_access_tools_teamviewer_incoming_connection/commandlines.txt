@@ -1,3 +1,1 @@
-TeamViewer_Desktop.exe --IPCport 5939 --Module 1
-TeamViewer_Desktop.exe --IPCport 5939 --Module 1 --ignoredFlag
-tv_desktop.exe --IPCport 5939 --Module 1
+"C:\Program Files\TeamViewer\TeamViewer_Desktop.exe" --IPCport 5939 --Module 1

@@ -1,18 +1,28 @@
+```json
 [
   {
     "output": "CATClean.exe --uninstall",
-    "explanation": "The command uses the long option '--uninstall' instead of the short option '-uninstall', which is an allowed substitution technique."
+    "explanation": "This command matches the Sigma rule's selection2 criteria. It uses the '--uninstall' flag as specified."
   },
   {
-    "output": "not_an_installer.exe",
-    "explanation": "The command renames the executable file and executes it under a different name, which is a safe reordering and recoding technique."
+    "output": "CATClean.exe --uninstall   ",
+    "explanation": "Trailing spaces after the command line are inserted, which is a safe mutation technique and still matches the rule."
   },
   {
-    "output": "NetInstaller.exe -r",
-    "explanation": "The command uses the short option '-r' instead of the long option '/r', which is an allowed substitution technique."
+    "output": "CATClean.exe \"--uninstall\"",
+    "explanation": "The '--uninstall' flag is wrapped in quotes, which is a safe insertion technique and still matches the rule."
   },
   {
-    "output": "WFPUnins.exe /uninstall /enterprise",
-    "explanation": "The command reorders the arguments while preserving the same functionality, which is an allowed reordering technique."
+    "output": "CATClean.exe --uninstall --",
+    "explanation": "Appending '--' to indicate end of options is a safe reordering technique and still matches the rule."
+  },
+  {
+    "output": "CATClean.exe --uninstall -",
+    "explanation": "Appending '-' is a safe reordering technique and still matches the rule."
+  },
+  {
+    "output": "CATClean.exe --uninstall\\",
+    "explanation": "Appending a backslash is a safe insertion technique and still matches the rule."
   }
 ]
+```

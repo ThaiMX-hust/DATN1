@@ -1,5 +1,1 @@
-rundll32.exe
-copy rundll32.exe not_rundll.exe && not_rundll.exe
-rundll32.exe ,
-copy rundll32.exe not_rundll32.exe && not_rundll32.exe
-rundll32.exe #
+"C:\Windows\System32\rundll32.exe"

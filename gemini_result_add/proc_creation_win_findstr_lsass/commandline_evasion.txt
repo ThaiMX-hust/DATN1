@@ -1,0 +1,18 @@
+[
+  {
+    "output": "findstr lsa\"\"ss",
+    "explanation": "Insertion technique: Inserting an adjacent pair of empty double quotes inside the target keyword string ('lsa\"\"ss'). The native Windows command-line argument parser handles and strips out these empty quote pairs during initial tokenization, passing the intact literal string 'lsass' to findstr.exe. This completely breaks the continuous substring sequence check required by 'selection_findstr_cli' and 'selection_special'."
+  },
+  {
+    "output": "findstr [l][s][a][s][s]",
+    "explanation": "Other techniques (Regular Expression Matching): Using regular expression character classes ('[l][s][a][s][s]') to search for the string. Because findstr treats positional search strings as regular expressions by default, this syntactically matches the text 'lsass' inside the pipe context identical to a literal string, while avoiding the literal character sequence 'lsass' in the command-line logs."
+  },
+  {
+    "output": "findstr lsa.s",
+    "explanation": "Other techniques (Regular Expression Wildcards): Utilizing the regular expression dot operator ('.') as a single-character wildcard placeholder inside the search term ('lsa.s'). This successfully matches 'lsass' within the input stream at runtime during execution testing, while evading the static 'lsass' substring lookups monitored across all selection criteria."
+  },
+  {
+    "output": "findstr -i LSASS",
+    "explanation": "Other techniques (Case Variation Strategy): Capitalizing the search string target argument while invoking findstr with the case-insensitive flag ('-i LSASS'). If a SIEM deployment uses unoptimized backends or case-sensitive string matching parsers instead of true case-insensitive evaluation on the raw command line, this variation successfully blinds the 'lsass' lower-case keyword monitors."
+  }
+]

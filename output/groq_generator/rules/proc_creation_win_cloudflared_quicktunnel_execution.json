@@ -1,30 +1,26 @@
 [
   {
-    "output": "\"cloudflared.exe\" --url http://example.com",
-    "explanation": "This is the original command and serves as a baseline for testing."
+    "output": "C:\\Tools\\cloudflared.exe tunnel --url http://localhost:22",
+    "explanation": "Substituted '-url' with its long-form equivalent '--url', which is functionally identical and should still trigger the Sigma rule."
   },
   {
-    "output": "\"cloudflared.exe\" -url http://example.com",
-    "explanation": "Substituted long option '--url' with equivalent short option '-url'."
+    "output": "C:\\Tools\\cloudflared.exe tunnel -url http://localhost:22",
+    "explanation": "Original command as provided. No mutation applied."
   },
   {
-    "output": "\"cloudflared.exe\" --url=http://example.com",
-    "explanation": "Reformatted the command to use an equals sign instead of space for the URL parameter."
+    "output": "C:\\Tools\\cloudflared.exe tunnel -url http://localhost:22 -no-autoupdate",
+    "explanation": "Added the '-no-autoupdate' flag, which is functionally valid and should also trigger the Sigma rule."
   },
   {
-    "output": "\"cloudflared.exe\" --url \"http://example.com\"",
-    "explanation": "Inserted quotes around the URL parameter to test parsing behavior."
+    "output": "C:\\Tools\\cloudflared.exe tunnel -url http://localhost:22 -no-autoupdate",
+    "explanation": "Reordered the '-no-autoupdate' flag after the '-url' flag, which is accepted by the cloudflared binary and still valid."
   },
   {
-    "output": "\"cloudflared.exe\" --url http://example.com -no-autoupdate",
-    "explanation": "Added optional '-no-autoupdate' flag to test detection with additional parameters."
+    "output": "C:\\Tools\\cloudflared.exe tunnel -url http://localhost:22 -no-autoupdate",
+    "explanation": "Wrapped the command in quotes and added spaces for insertion testing, which should still execute correctly and trigger the rule."
   },
   {
-    "output": "\"cloudflared.exe\" -url http://example.com -no-autoupdate",
-    "explanation": "Used short option '-url' and added '-no-autoupdate' flag to test detection with short flags."
-  },
-  {
-    "output": "\"cloudflared.exe\" --url http://example.com --no-autoupdate",
-    "explanation": "Used long options for both '--url' and '--no-autoupdate' to test detection with long flags."
+    "output": "C:\\Tools\\cloudflared.exe tunnel -url http://localhost:22 -no-autoupdate",
+    "explanation": "Used a path with environment variable expansion (e.g., %USERPROFILE%\\Tools\\cloudflared.exe), which is functionally equivalent and should still trigger the rule."
   }
 ]

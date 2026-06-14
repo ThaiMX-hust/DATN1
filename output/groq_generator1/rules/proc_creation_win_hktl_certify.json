@@ -1,0 +1,22 @@
+[
+  {
+    "output": "Certify.exe find /vulnerable /domain:internal.corp",
+    "explanation": "This command matches the Sigma rule by using the 'find' command and '/vulnerable' and '/domain' options, which are explicitly detected in the rule."
+  },
+  {
+    "output": "Certify.exe .\\find /vulnerable /domain:internal.corp",
+    "explanation": "This command uses a relative path ('.\\find') to invoke the 'find' command, which is a valid mutation technique (reordering and recoding) and still matches the Sigma rule."
+  },
+  {
+    "output": "Certify.exe find /vulnerable /domain:internal.corp /path:C:\\Temp\\",
+    "explanation": "This command adds an optional '/path' parameter, which is allowed by the Sigma rule and does not affect the detection logic."
+  },
+  {
+    "output": "Certify.exe find /vulnerable /domain:internal.corp /template:template1",
+    "explanation": "This command adds an optional '/template' parameter, which is allowed by the Sigma rule and does not affect the detection logic."
+  },
+  {
+    "output": "Certify.exe find /vulnerable /domain:internal.corp /altname:altname1",
+    "explanation": "This command adds an optional '/altname' parameter, which is allowed by the Sigma rule and does not affect the detection logic."
+  }
+]

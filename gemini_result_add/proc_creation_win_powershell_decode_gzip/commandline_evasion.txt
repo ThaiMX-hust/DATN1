@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Add-Type -AssemblyName System.IO.Compression; $stream = New-Object IO.Compression.GZipStream($file, [IO.Compression.CompressionMode]::Decompress); $stream.Read($data, 0, $data.Length)\"",
+    "explanation": "The mutation technique used is recoding/encoding. This command is intended to avoid the rule condition 'GZipStream' and '::Decompress' by using the full type name 'IO.Compression.GZipStream' and the enum value '[IO.Compression.CompressionMode]::Decompress'. The high-level behavior is expected to remain equivalent in a test environment because the functionality of decompressing a GZip stream is preserved. However, there is an assumption that the target system has the necessary .NET assemblies and PowerShell version to support this command."
+  },
+  {
+    "output": "powershell -Command \"[System.IO.Compression.GZipStream]::new($file, [System.IO.Compression.CompressionMode]::Decompress)\"",
+    "explanation": "The mutation technique used is recoding/encoding and omission. This command is intended to avoid the rule condition '::Decompress' by using the static method call '[System.IO.Compression.GZipStream]::new' and omitting the unnecessary variable assignments. The high-level behavior is expected to remain equivalent in a test environment because the functionality of creating a new GZipStream object for decompression is preserved. There is an uncertainty about whether the target system has the necessary .NET assemblies and PowerShell version to support this command."
+  },
+  {
+    "output": "powershell -c \"& { Add-Type -AssemblyName System.IO.Compression; $stream = New-Object IO.Compression.GZipStream($file, [IO.Compression.CompressionMode]::Decompress); $stream.Read($data, 0, $data.Length) }\"",
+    "explanation": "The mutation technique used is insertion and reordering. This command is intended to avoid the rule condition 'GZipStream' and '::Decompress' by using a script block and reordering the arguments. The high-level behavior is expected to remain equivalent in a test environment because the functionality of decompressing a GZip stream is preserved. However, there is an assumption that the target system has the necessary .NET assemblies and PowerShell version to support this command."
+  }
+]

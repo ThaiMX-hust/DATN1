@@ -1,18 +1,22 @@
 [
   {
-    "output": "schtasks.exe /delete /tn '*' /f",
-    "explanation": "The command uses quotes around the wildcard symbol, which is a valid syntax variation and demonstrates insertion technique."
-  },
-  {
-    "output": "schtasks.exe -delete -tn * -f",
-    "explanation": "The command substitutes '/' with '-' for flags, which is an equivalent syntax variation and demonstrates substitution technique."
-  },
-  {
     "output": "schtasks.exe /delete /tn * /f",
-    "explanation": "The command omits unnecessary spaces and uses minimal syntax, demonstrating omission technique while preserving the original behavior."
+    "explanation": "This command matches the Sigma rule by using schtasks.exe with the /delete, /tn *, and /f flags, which aligns with the detection criteria."
+  },
+  {
+    "output": "schtasks.exe /delete /tn '*' /f",
+    "explanation": "The asterisk is enclosed in single quotes, a safe mutation technique, but the command still matches the Sigma rule's detection logic."
   },
   {
     "output": "schtasks.exe /f /delete /tn *",
-    "explanation": "The command reorders the flags, which is accepted by the schtasks.exe program and demonstrates reordering technique."
+    "explanation": "The arguments are reordered, but the command remains functionally equivalent and matches the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /delete /tn * -f",
+    "explanation": "The /f flag is replaced with -f, a substitution of equivalent syntax, but the command still aligns with the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /delete /tn * /f",
+    "explanation": "No mutation is applied, but this is included to confirm the baseline command that matches the Sigma rule."
   }
 ]

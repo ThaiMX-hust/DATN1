@@ -1,0 +1,18 @@
+[
+{
+"output": "taskkill /f /im "RaccineSettings".exe",
+"explanation": "Insertion technique: Inserting double quotes inside the binary name 'RaccineSettings.exe' ('"RaccineSettings".exe'). Windows command-line parsers correctly resolve and execute this, but it breaks the strict 'CommandLine|contains|all' substring matching requirement ('RaccineSettings.exe') used in selection1."
+},
+{
+"output": "reg.exe delete "HKCU\Software\Raccine" /v "Raccine Tray"",
+"explanation": "Insertion technique: Inserting double quotes within the task name/key string ('"Raccine Tray"'). This remains functionally identical for the reg.exe utility but circumvents the rule's strict substring matching logic in selection2, which searches for the contiguous string 'Raccine Tray'."
+},
+{
+"output": "cmd.exe /c schtasks /D^ELETE /TN "Raccine Rules Updater" /F",
+"explanation": "Insertion technique: Injected a caret (^) escape character into the command flag ('/D^ELETE') while executing through the command shell (cmd.exe). The shell strips the caret before process invocation, allowing the command to succeed, but the process creation log registers the raw literal string, evading the strict '/DELETE' check in selection3."
+},
+{
+"output": "schtasks /delete /tn "Raccine Rules"" Updater" /f",
+"explanation": "Insertion technique: Using split-quote obfuscation (empty double quotes '""') within the task name string. The OS command-line parser joins these segments transparently during runtime, but the raw command line string stored in telemetry logs no longer matches the expected static substring 'Raccine Rules Updater' in selection3."
+}
+]

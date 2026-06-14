@@ -1,14 +1,22 @@
 [
   {
-    "output": "curl.exe --cookie-jar cookie http://example.com",
-    "explanation": "Removed unnecessary quotes around the URL while preserving the command's behavior."
+    "output": "curl.exe -c cookies.txt https://example.com",
+    "explanation": "This command uses the '-c' flag to save cookies, which matches the Sigma rule's detection condition. It is a valid test command for verifying detection."
   },
   {
-    "output": "curl.exe -c cookie \"http://example.com\"",
-    "explanation": "Replaced '--cookie-jar' with its short flag '-c' and added quotes around the URL for safe testing."
+    "output": "curl.exe --cookie-jar cookies.txt https://example.com",
+    "explanation": "This command uses the long-form equivalent '--cookie-jar' of the '-c' flag, which is also detected by the Sigma rule. It is a valid test command for verifying detection."
   },
   {
-    "output": "curl.exe --cookie-jar=cookie http://example.com",
-    "explanation": "Used an equals sign (=) instead of space to separate the flag and value, which is an equivalent syntax."
+    "output": "curl.exe -c\"cookies.txt\" https://example.com",
+    "explanation": "This command uses the '-c' flag with quotes inserted around the filename, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "curl.exe -\\t-c\\t cookies.txt https://example.com",
+    "explanation": "This command uses escape characters and spacing to obfuscate the '-c' flag slightly, but it remains valid and matches the Sigma rule."
+  },
+  {
+    "output": "curl.exe -ccookies.txt https://example.com",
+    "explanation": "This command omits the space between the '-c' flag and the filename, which is still valid in some contexts and matches the Sigma rule."
   }
 ]

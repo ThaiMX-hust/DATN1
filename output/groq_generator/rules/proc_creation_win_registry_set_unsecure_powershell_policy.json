@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ExecutionPolicy Bypass -Scope CurrentUser -Force\"",
+    "explanation": "This command sets the PowerShell execution policy to 'Bypass' for the current user, which matches the Sigma rule's detection criteria for execution policy tampering."
+  },
+  {
+    "output": "powershell.exe -c \"Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force\"",
+    "explanation": "This command sets the PowerShell execution policy to 'Unrestricted' for the local machine, which is another value monitored by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell' -Name ExecutionPolicy -Value 'RemoteSigned'\"",
+    "explanation": "This command modifies the PowerShell execution policy registry key directly to 'RemoteSigned', which is another value monitored by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ExecutionPolicy Bypass -Scope CurrentUser -Force\"",
+    "explanation": "This command uses a direct execution policy change with the 'Bypass' value, which is explicitly flagged by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -c \"Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force\"",
+    "explanation": "This command uses the short form of the command-line argument (-c) and sets the execution policy to 'Bypass', matching the Sigma rule's detection criteria."
+  }
+]

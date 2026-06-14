@@ -1,34 +1,22 @@
 [
   {
-    "output": "hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\payload.chm",
-    "explanation": "This command uses a standard path that matches the rule's detection criteria. It is a direct execution of hh.exe with a CHM file in a common temporary directory."
+    "output": "C:\\Windows\\hh.exe C:\\Users\\Public\\help.chm",
+    "explanation": "The original command line is already a true positive for the Sigma rule. No mutation is needed to trigger the rule."
   },
   {
-    "output": "cmd.exe /c \"hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\payload.chm\"",
-    "explanation": "This command wraps the execution in CMD.EXE with the /c flag, which is a common technique for executing commands. It still triggers the rule because it executes hh.exe with a CHM file in a known suspicious directory."
+    "output": "C:\\Windows\\hh.exe \"C:\\Users\\Public\\help.chm\"",
+    "explanation": "Inserted quotes around the file path to test if the rule is sensitive to quoted command-line arguments."
   },
   {
-    "output": "hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\..\\payload.chm",
-    "explanation": "This command uses path normalization to bypass the rule by changing the path structure while still accessing the same file. The rule may not detect this due to the altered path traversal."
+    "output": "C:\\Windows\\hh.exe C:\\Users\\Public\\help.chm ",
+    "explanation": "Added trailing space to test if the rule is sensitive to whitespace in the command line."
   },
   {
-    "output": "hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\payload.chm::/script.htm",
-    "explanation": "This command uses ms-its syntax to execute a script within the CHM file. It is a known evasion technique that may bypass the rule if the rule does not account for such syntax variations."
+    "output": "C:\\Windows\\hh.exe C:\\Users\\Public\\help.chm\\",
+    "explanation": "Appended a trailing backslash to test if the rule is sensitive to malformed or normalized paths."
   },
   {
-    "output": "hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\payload.chm --",
-    "explanation": "This command adds an unnecessary '--' at the end of the command line, which may confuse the rule if it does not account for such syntax variations. It is a safe mutation technique that may help evade detection."
-  },
-  {
-    "output": "hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\payload.chm\"",
-    "explanation": "This command adds an extra quote at the end of the command line, which may confuse the rule if it does not account for such syntax variations. It is a safe mutation technique that may help evade detection."
-  },
-  {
-    "output": "hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\payload.chm\\",
-    "explanation": "This command adds an unnecessary backslash at the end of the file path, which may confuse the rule if it does not account for such syntax variations. It is a safe mutation technique that may help evade detection."
-  },
-  {
-    "output": "hh.exe C:\\Users\\Victim\\AppData\\Local\\Temp\\payload.chm::",
-    "explanation": "This command adds an unnecessary '::' at the end of the file path, which may confuse the rule if it does not account for such syntax variations. It is a safe mutation technique that may help evade detection."
+    "output": "C:\\Windows\\hh.exe C:\\Users\\Public\\help.chm -",
+    "explanation": "Appended a trailing dash to test if the rule is sensitive to trailing characters or flags."
   }
 ]

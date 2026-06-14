@@ -1,0 +1,22 @@
+[
+  {
+    "output": "MpCmdRun.exe /RemoveDefinitions /All",
+    "explanation": "Substitution technique. Replaces the hyphen prefix `-` with a forward slash `/` for both switches. The Sigma rule explicitly searches for the hardcoded string patterns ` -RemoveDefinitions` and ` -All` (including a leading space and a hyphen). Since MpCmdRun parses forward slashes natively, this completely evades the selection logic while maintaining identical behavior."
+  },
+  {
+    "output": "MpCmdRun.exe \"-RemoveDefinitions\" \"-All\"",
+    "explanation": "Insertion technique. Encloses the argument switches in double quotes. The quotation marks are evaluated and stripped by the command-line parser of the executable, but they break the literal string comparison `CommandLine|contains|all` for ` -RemoveDefinitions` and ` -All` by shifting the characters immediately following the space."
+  },
+  {
+    "output": "MpCmdRun.exe\t-RemoveDefinitions\t-All",
+    "explanation": "Substitution technique. Replaces the single space prefix with a horizontal tab (`\t`) character. While the Windows shell handles the tab as a standard argument separator, the rule's strict requirement for a literal space character prefix (` -RemoveDefinitions` and ` -All`) causes the detection rule to miss the execution."
+  },
+  {
+    "output": "MpCmdRun.exe -All -RemoveDefinitions",
+    "explanation": "Reordering technique. Swaps the operational order of the arguments. Although the rule uses an `all of selection_*` condition (meaning both strings are looked for anywhere in the command line), this variant is intended to avoid brittle downstream correlations or custom regex parsers that assume `-RemoveDefinitions` must sequentially precede `-All`."
+  },
+  {
+    "output": "MpCmdRun.exe    -RemoveDefinitions    -All",
+    "explanation": "Insertion technique. Expands the single space token padding into multiple contiguous space characters before each switch. If a parser relies on rigid space tokenization or strict character counting from the parent process string without token normalization, it will fail to cleanly align with the exact string matches specified in the rule."
+  }
+]

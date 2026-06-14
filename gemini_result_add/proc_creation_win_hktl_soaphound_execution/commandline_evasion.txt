@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Tools\\sh.exe --bhdump\t--cachefilename\tc:\\temp\\cache.txt",
+    "explanation": "Substitution technique: Replacing the required single structural trailing space character flanking the switch options (' --bhdump ' and ' --cachefilename ') with horizontal tab characters ('\\t'). Assuming the binary is renamed to 'sh.exe' to bypass any potential image-based alerting, the rule relies entirely on command-line string padding. The Windows kernel natively tokenizes horizontal tabs as valid whitespace separators, preserving execution logic equivalence while breaking the space-padded literal checks inside selection_1 and selection_2."
+  },
+  {
+    "output": "C:\\Tools\\sh.exe \"--bhdump\" --cachefilename c:\\temp\\cache.txt",
+    "explanation": "Insertion technique: Enclosing the target switch parameter inside explicit double quotes ('\"--bhdump\"'). This breaks the continuous unquoted string format check (' --bhdump ') in selection_1. The .NET argument parser natively unquotes and processes the flag during target context initialization, ensuring identical behavioral capability."
+  },
+  {
+    "output": "cmd.exe /c C:\\Tools\\sh.exe --bhd^ump --cachefilename c:\\temp\\cache.txt",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe environment allows the integration of a command shell caret escape character ('^') directly into the long flag argument ('--bhd^ump'). The parent shell processes and strips out the caret prior to spawning the child process, yielding a recorded process creation command line that subverts literal keyword tracking filters."
+  },
+  {
+    "output": "C:\\Tools\\sh.exe  --bhdump  --cachefilename  c:\\temp\\cache.txt",
+    "explanation": "Insertion technique: Injecting multiple consecutive spaces between the parameter switches instead of a single space delimiter. The underlying operating system argument handler collapses contiguous whitespaces into single parameter boundary vectors during tokenization, maintaining execution consistency while breaking rigid signature rules looking for an explicit single-space prefix structure."
+  },
+  {
+    "output": "C:\\Tools\\sh.exe --bhdump -c\tc:\\temp\\cache.txt",
+    "explanation": "Substitution technique: Swapping out the long parameter switch '--cachefilename ' for its short option alias form (' -c '), combined with using a horizontal tab character ('\\t') as a separator instead of a trailing space. This satisfies the tool's runtime argument layout while evading the strict single space-padded ' -c ' entry constraint within selection_2."
+  }
+]

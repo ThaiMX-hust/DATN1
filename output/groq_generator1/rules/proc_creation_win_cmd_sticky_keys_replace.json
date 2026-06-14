@@ -1,0 +1,22 @@
+[
+  {
+    "output": "copy /y cmd.exe sethc.exe",
+    "explanation": "The Sigma rule detects the command line containing 'copy ', '/y ', and 'cmd.exe sethc.exe'. This command matches the pattern exactly and is a direct representation of the malicious activity described in the rule."
+  },
+  {
+    "output": "copy /Y cmd.exe sethc.exe",
+    "explanation": "The '/Y' flag is capitalized, which is an equivalent syntax to '/y' and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "copy /y C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\sethc.exe",
+    "explanation": "This command includes full paths for both source and destination files, which are explicitly mentioned in the Sigma rule and still match the detection criteria."
+  },
+  {
+    "output": "copy /y cmd.exe  sethc.exe",
+    "explanation": "Extra space between 'cmd.exe' and 'sethc.exe' is inserted, which is a safe mutation technique and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "copy /y cmd.exe\" sethc.exe",
+    "explanation": "A quote is inserted after 'cmd.exe', which is a safe mutation technique and still matches the Sigma rule's detection logic."
+  }
+]

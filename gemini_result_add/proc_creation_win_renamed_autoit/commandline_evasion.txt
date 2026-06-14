@@ -1,0 +1,14 @@
+[
+{
+"output": "C:\Windows\Temp\legit_name_masquerade.exe /AutoIt3ExecuteScri^pt C:\data\script.au3",
+"explanation": "Insertion technique: Renaming the AutoIt binary to an arbitrary name (e.g., 'legit_name_masquerade.exe') evades the 'filter_main_legit_name' exclusion filter. Additionally, injecting a caret (^) into the '/AutoIt3ExecuteScript' command-line flag breaks the literal substring matching required by 'selection_1' in raw telemetry, while the command shell resolves the command correctly."
+},
+{
+"output": "C:\Windows\Temp\renamed_binary.exe "/AutoIt3ExecuteScript" "C:\data\test.au3"",
+"explanation": "Insertion technique: By wrapping the command-line flag in double quotes, the telemetry log records the quoted string, preventing the rule from matching the required unquoted substring. Renaming the binary ensures it is not caught by the 'filter_main_legit_name' allowlist, and the Windows command parser automatically handles the stripped quotes during execution."
+},
+{
+"output": "cmd.exe /c "set "FLAG=/AutoIt3ExecuteScript" && C:\Windows\Temp\renamed_binary.exe %FLAG% C:\data\test.au3"",
+"explanation": "Recoding / Environment Variables technique: Abstracting the mandatory '/AutoIt3ExecuteScript' flag into a temporary environment variable. Process creation logging captures the command line before the shell expands the variable. This prevents the Sigma rule from seeing the required trigger string while allowing the command to execute successfully after environment variable expansion."
+}
+]

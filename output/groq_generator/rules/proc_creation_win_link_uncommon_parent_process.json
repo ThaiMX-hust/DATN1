@@ -1,18 +1,11 @@
 [
   {
-    "output": "copy cmd.exe link.exe && dumpbin.exe /EXPORTS kernel32.dll",
-    "explanation": "The command omits quotes around dumpbin.exe, which is still valid and accepted by the Windows command interpreter. This simulates a safe mutation technique by reordering and omitting unnecessary syntax."
+    "output": "cmd.exe /c start \"\" \"C:\\\\Program Files (x86)\\\\Microsoft Visual Studio\\\\2019\\\\Community\\\\VC\\\\Tools\\\\MSVC\\\\14.29.30133\\\\bin\\\\Hostx64\\\\x64\\\\link.exe\" /INCREMENTAL:NO",
+    "explanation": "This command simulates a process creation event where LINK.EXE is executed with a hardcoded command line argument. The parent process path is modified slightly to avoid matching the hardcoded Visual Studio paths in the Sigma rule, making it appear as an uncommon parent process."
   },
   {
-    "output": "copy cmd.exe link.exe && \"dumpbin.exe\" /EXPORTS kernel32.dll",
-    "explanation": "The command uses quotes around dumpbin.exe, which is a valid insertion technique. This demonstrates how the command can be altered while maintaining its functionality."
-  },
-  {
-    "output": "copy cmd.exe link.exe && dumpbin.exe /EX kernel32.dll",
-    "explanation": "The command substitutes /EXPORTS with /EX, which is a valid short form of the same option in dumpbin.exe. This demonstrates substitution as a safe mutation technique."
-  },
-  {
-    "output": "copy cmd.exe link.exe && dumpbin.exe /EXPORTS: kernel32.dll",
-    "explanation": "The command adds a colon after /EXPORTS, which is a valid syntax variation accepted by dumpbin.exe. This demonstrates insertion as a safe mutation technique."
+    "output": "powershell.exe -Command \"Start-Process -FilePath 'C:\\\\link.exe' -ArgumentList '/INCREMENTAL:NO' -WorkingDirectory 'C:\\\\Temp'\"",
+    "output": "powershell.exe -Command \"Start-Process -FilePath 'C:\\\\link.exe' -ArgumentList '/INCREMENTAL:NO' -WorkingDirectory 'C:\\\\Temp'\"",
+    "explanation": "This command uses PowerShell to launch LINK.EXE from a non-standard location (C:\\\\Temp), which would not match the expected Visual Studio paths in the Sigma rule. The command line includes the hardcoded '/INCREMENTAL:NO' argument to match the rule's detection logic."
   }
 ]

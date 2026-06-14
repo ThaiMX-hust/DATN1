@@ -1,0 +1,38 @@
+[
+  {
+    "output": "New-ItemProperty -Path \"HKCU\\Software\\Microsoft\\Internet Explorer\\Main\" -PropertyType DWord -Name \"DisableFirstRunCustomize\" -Value 2",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the detection."
+  },
+  {
+    "output": "New-ItemProperty -Path 'HKCU\\Software\\Microsoft\\Internet Explorer\\Main' -PropertyType DWord -Name 'DisableFirstRunCustomize' -Value 2",
+    "explanation": "Single quotes are used instead of double quotes to test if the detection is resilient to quote insertion/substitution."
+  },
+  {
+    "output": "New-ItemProperty -Path \"HKCU\\Software\\Microsoft\\Internet Explorer\\Main\" -Name \"DisableFirstRunCustomize\" -Value 2 -PropertyType DWord",
+    "explanation": "Reordered arguments to test if the detection is resilient to reordering while preserving the command's functionality."
+  },
+  {
+    "output": "New-ItemProperty -Path \"HKCU\\Software\\Microsoft\\Internet Explorer\\Main\" -PropertyType DWord -Name \"DisableFirstRunCustomize`\" -Value 2",
+    "explanation": "Inserted an escape character (`) after the name to test if the detection is resilient to minor syntax variations."
+  },
+  {
+    "output": "Set-ItemProperty -Path \"HKLM\\SOFTWARE\\Microsoft\\Internet Explorer\\Main\" -Name \"IEHarden\" -Value 0",
+    "explanation": "Used Set-ItemProperty instead of New-ItemProperty to test if the detection is resilient to equivalent cmdlet substitution."
+  },
+  {
+    "output": "Set-ItemProperty -Path \"HKLM\\SOFTWARE\\Microsoft\\Internet Explorer\\Main\" -Name 'IEHarden' -Value 0",
+    "explanation": "Mixed quote types (double and single) to test if the detection is resilient to quote insertion/substitution."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Active Setup\\Installed Components\\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}\" /v IsInstalled /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the detection."
+  },
+  {
+    "output": "reg add 'HKLM\\SOFTWARE\\Microsoft\\Active Setup\\Installed Components\\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}' /v IsInstalled /t REG_DWORD /d 0 /f",
+    "explanation": "Single quotes are used instead of double quotes to test if the detection is resilient to quote insertion/substitution."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Active Setup\\Installed Components\\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}\" /f /v IsInstalled /t REG_DWORD /d 0",
+    "explanation": "Reordered arguments to test if the detection is resilient to reordering while preserving the command's functionality."
+  }
+]

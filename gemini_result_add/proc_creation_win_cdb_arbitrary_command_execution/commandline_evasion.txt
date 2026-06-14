@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" /c \".shell cmd /c echo test > C:\\Temp\\test.txt;q\" notepad.exe",
+    "explanation": "Substitution technique: Microsoft Debugging Tools binaries (like cdb.exe) traditionally accept the forward slash ('/') as an alternative parameter switch prefix interchangeably with a hyphen ('-'). Using '/c' breaks the precise literal substring match for ' -c ' (with leading and trailing spaces) in 'selection_cli' while preserving identical execution behavior."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" \"-c\" \".shell cmd /c echo test > C:\\Temp\\test.txt;q\" notepad.exe",
+    "explanation": "Insertion technique: Enclosing the command parameter switch in double quotes ('\"-c\"') disrupts the continuous literal character matching string sequence expected by the SIEM. The native Windows command line parser transparently extracts the unquoted parameter at invocation, keeping the functional debugger script execution identical."
+  },
+  {
+    "output": "cmd.exe /c \"\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\" -^c \".shell cmd /c echo test > C:\\Temp\\test.txt;q\" notepad.exe\"",
+    "explanation": "Insertion technique: Executing via cmd.exe permits the integration of a caret string escape character ('^') directly into the switch token. The shell processes and strips this symbol prior to launching the target child binary, leaving a raw process execution log showing '-^c' which evades the literal string rule condition."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe\"\t-c\t\".shell cmd /c echo test > C:\\Temp\\test.txt;q\"\tnotepad.exe",
+    "explanation": "Substitution technique: Replacing the required single space character boundaries around the '-c' switch with horizontal tab characters ('\\t'). The Windows command-line parser treats tabs as valid whitespace separators, effectively subverting the detection logic that strictly looks for space-padded blocks."
+  }
+]

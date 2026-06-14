@@ -1,22 +1,22 @@
 [
   {
-    "output": "powershell.exe -Command \"Import-Module '$Env:Temp\\suspicious_module.psm1'\"",
-    "explanation": "This command uses single quotes inside the PowerShell command string, which is a safe mutation technique. It maintains the same behavior as the original command but alters the syntax slightly."
+    "output": "powershell.exe -Command \"Import-Module '$Env:Temp\\'",
+    "explanation": "This command attempts to import a PowerShell module from the Temp directory using single quotes and minimal spacing, which may bypass detection by altering the string formatting."
   },
   {
-    "output": "powershell.exe -Command \"Import-Module $Env:Temp\\\\suspicious_module.psm1\"",
-    "explanation": "This command uses double backslashes to escape the path, which is a valid and safe mutation technique. It ensures the command is parsed correctly while changing the structure."
+    "output": "powershell.exe -Command Import-Module\\x20$Env:Appdata\\",
+    "explanation": "This command uses URL-encoded space (\\x20) and omits quotes to obfuscate the command line while still referencing the Appdata directory, potentially evading pattern-based detection."
   },
   {
-    "output": "powershell.exe -Command \"Import-Module ($Env:Temp + '\\\\suspicious_module.psm1')\"",
-    "explanation": "This command uses string concatenation to construct the path, which is a safe mutation technique. It achieves the same result but uses a different syntax."
+    "output": "powershell.exe -Command \"ipmo C:\\\\Users\\\\Public\\\\\"",
+    "explanation": "This command uses the alias 'ipmo' for 'Import-Module' and escaped backslashes, which may evade detection by altering syntax and escaping characters."
   },
   {
-    "output": "powershell.exe -Command \"ipmo $Env:Temp\\\\suspicious_module.psm1\"",
-    "explanation": "This command uses the alias 'ipmo' for 'Import-Module', which is a valid substitution technique. It maintains the same functionality while changing the command syntax."
+    "output": "powershell.exe -Command Import-Module\\x20\"$Env:Appdata\\",
+    "explanation": "This command uses URL-encoded space (\\x20) and double quotes to obfuscate the command line while referencing the Appdata directory, potentially evading pattern-based detection."
   },
   {
-    "output": "powershell.exe -Command \"Import-Module ($Env:AppData + '\\\\suspicious_module.psm1')\"",
-    "explanation": "This command uses the $Env:AppData variable instead of $Env:Temp, which is a valid substitution. It changes the environment variable used but maintains the same suspicious behavior pattern."
+    "output": "powershell.exe -Command Import-Module $Env:Public\\",
+    "explanation": "This command references the 'Public' directory using the $Env:Public environment variable instead of the full path, which may bypass detection by avoiding hardcoded suspicious paths."
   }
 ]

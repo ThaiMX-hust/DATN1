@@ -1,0 +1,30 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\AtBroker.exe start \"C:\\Windows\\Temp\\payload.exe\"",
+    "explanation": "Inserted quotes around the payload path to test if the Sigma rule is affected by minor syntax changes."
+  },
+  {
+    "output": "C:\\Windows\\System32\\AtBroker.exe start C:\\Windows\\Temp\\payload.exe",
+    "explanation": "Original command line used for comparison. No mutation applied."
+  },
+  {
+    "output": "C:\\Windows\\System32\\AtBroker.exe start C:\\Windows\\Temp\\payload.exe ",
+    "explanation": "Inserted a trailing space after the payload path to test if the Sigma rule is affected by whitespace."
+  },
+  {
+    "output": "C:\\Windows\\System32\\AtBroker.exe start C:\\Windows\\Temp\\payload.exe",
+    "explanation": "Reordered arguments is not applicable here as the order is fixed."
+  },
+  {
+    "output": "C:\\Windows\\System32\\AtBroker.exe start C:\\Windows\\Temp\\payload.exe",
+    "explanation": "Omission of optional elements is not applicable here as all elements are required."
+  },
+  {
+    "output": "C:\\Windows\\System32\\AtBroker.exe start C:\\Windows\\Temp\\payload.exe",
+    "explanation": "Substitution of equivalent syntax is not applicable here as the command structure is fixed."
+  },
+  {
+    "output": "C:\\Windows\\System32\\AtBroker.exe start C:\\Windows\\Temp\\payload.exe",
+    "explanation": "Recoding or encoding is not applicable here as the command is already in a standard format."
+  }
+]

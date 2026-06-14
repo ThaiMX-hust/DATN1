@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger\" /v Start /t REG_DWORD /d 0 /f",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria. It uses reg.exe to modify the Start value of the DefenderApiLogger to 0, disabling the autologger session."
+  },
+  {
+    "output": "reg.exe add HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger /v Start /t REG_DWORD /d 0 /f",
+    "explanation": "This command omits the quotes around the registry path, which is still valid and achieves the same result. It remains detectable by the Sigma rule."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger\" /v Start /t REG_DWORD /d 0x0 /f",
+    "explanation": "This command uses hexadecimal notation (0x0) instead of decimal (0) for the data value. It is still detectable by the Sigma rule since the rule checks for the presence of '0' in the command line."
+  }
+]

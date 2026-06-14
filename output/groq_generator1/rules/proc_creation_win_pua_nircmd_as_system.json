@@ -1,0 +1,38 @@
+[
+  {
+    "output": "nircmd.exe runassystem cmd.exe",
+    "explanation": "The command is a direct match to the Sigma rule's detection logic. It is included as a baseline for comparison."
+  },
+  {
+    "output": "nircmd.exe  runassystem  cmd.exe",
+    "explanation": "Added extra spaces between 'runassystem' and 'cmd.exe' to test if spacing affects detection."
+  },
+  {
+    "output": "nircmd.exe\" runassystem \"cmd.exe",
+    "explanation": "Inserted quotes around the command line arguments to test if the Sigma rule can detect the command despite the quotes."
+  },
+  {
+    "output": "nircmd.exe runassystem \"cmd.exe",
+    "explanation": "Inserted a quote after 'cmd.exe' to test if the Sigma rule can detect the command despite the quote."
+  },
+  {
+    "output": "set a=run&& set b=assystem&& nircmd.exe %a%%b% cmd.exe",
+    "explanation": "Used environment variables to split the 'runassystem' command into parts to test if the Sigma rule can detect the command despite variable substitution."
+  },
+  {
+    "output": "copy nircmd.exe n.exe && n.exe runassystem cmd.exe",
+    "explanation": "Renamed the executable to bypass potential file name-based detection, but the command line still contains the detectable 'runassystem' string."
+  },
+  {
+    "output": "nircmd.exe runassystem C:\\Windows\\System32\\cmd.exe",
+    "explanation": "Used the full path to cmd.exe to test if the Sigma rule can detect the command despite the full path."
+  },
+  {
+    "output": "nircmd.exe runassystem cmd.exe /c echo test",
+    "explanation": "Added an additional argument to the command line to test if the Sigma rule can detect the command despite the extra arguments."
+  },
+  {
+    "output": "nircmd.exe runassystem \"C:\\Windows\\System32\\cmd.exe\" /c echo test",
+    "explanation": "Used quotes around the full path to cmd.exe and added an additional argument to test if the Sigma rule can detect the command despite the quotes and extra arguments."
+  }
+]

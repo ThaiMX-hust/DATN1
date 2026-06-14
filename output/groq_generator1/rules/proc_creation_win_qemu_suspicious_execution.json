@@ -1,0 +1,26 @@
+[
+  {
+    "output": "qemu-system-x86_64.exe -m 1M -netdev user,id=n1,restrict=off,connect=10.0.0.5:80 -nographic",
+    "explanation": "This command removes the '-cdrom' argument and the '& REM' comment from the original command, which is allowed under the omission technique. It still contains the suspicious flags '-m 1M', 'restrict=off', '-netdev', 'connect=', and '-nographic' that trigger the Sigma rule."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 1M -netdev user,id=lan,restrict=off -netdev socket,id=sock,connect=192.168.1.10:443 -nographic",
+    "explanation": "This command omits '-cdrom NUL' and keeps the suspicious flags '-m 1M', 'restrict=off', '-netdev', 'connect=', and '-nographic' that trigger the Sigma rule. It uses reordering and omission techniques."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 1M -netdev user,id=n0,restrict=off,connect=192.168.1.100:443 -nographic",
+    "explanation": "This command omits '-blockdev driver=null,node-name=dummy' and keeps the suspicious flags '-m 1M', 'restrict=off', '-netdev', 'connect=', and '-nographic' that trigger the Sigma rule. It uses omission techniques."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 4M -netdev user,id=n0,restrict=off,connect=192.168.1.100:443 -nographic",
+    "explanation": "This command omits '-m 4M' to '-m 1M' and keeps the suspicious flags '-m 1M', 'restrict=off', '-netdev', 'connect=', and '-nographic' that trigger the Sigma rule. It uses recoding techniques."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 4M -netdev user,id=net0,restrict=n,connect=127.0.0.1:4444 -display none",
+    "explanation": "This command replaces '-nographic' with '-display none' (equivalent substitution) and omits '-cdrom dummy.iso'. It still contains the suspicious flags '-m 4M', 'restrict=n', '-netdev', and 'connect=' that trigger the Sigma rule."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 512K -netdev \"user,id=vlan0,restrict=o\"\"ff,connect=10.0.0.5:8080\" -nographic",
+    "explanation": "This command uses quotes and escape characters to modify the command line (insertion technique) while preserving the original behavior. It still contains the suspicious flags '-m 512K', 'restrict=off', '-netdev', 'connect=', and '-nographic' that trigger the Sigma rule."
+  }
+]

@@ -1,18 +1,22 @@
 [
   {
-    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp",
-    "explanation": "This is the original command line and serves as a baseline for testing the Sigma rule."
+    "output": "Runscripthelper.exe -s surfacecheck",
+    "explanation": "This command simulates a typical invocation of Runscripthelper.exe with the 'surfacecheck' argument, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp\\",
-    "explanation": "Appending a trailing backslash to the path is a safe mutation that does not affect the behavior of the command."
+    "output": "Runscripthelper.exe --s surfacecheck",
+    "explanation": "This command uses a long-form option equivalent to '-s' to invoke Runscripthelper.exe with 'surfacecheck', matching the Sigma rule's detection criteria."
   },
   {
-    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp\\.",
-    "explanation": "Appending \".\" to the path is a safe mutation that does not affect the behavior of the command."
+    "output": "Runscripthelper.exe -s\"surfacecheck\"",
+    "explanation": "This command uses quotes to enclose the 'surfacecheck' argument, which is a safe mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "runscripthelper.exe surfacecheck script.ps1 C:\\Windows\\Temp\\..\\Windows\\Temp",
-    "explanation": "Using relative path normalization to reference the same directory is a safe mutation."
+    "output": "Runscripthelper.exe -s surfacecheck ",
+    "explanation": "This command adds an extra space at the end, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "Runscripthelper.exe -s surfacecheck # comment",
+    "explanation": "This command appends a comment after the command line, which is a safe mutation technique and still matches the Sigma rule."
   }
 ]

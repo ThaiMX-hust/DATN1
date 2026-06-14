@@ -1,0 +1,18 @@
+[
+  {
+    "output": "bash.exe     -- script.sh",
+    "explanation": "Insertion of extra spaces between 'bash.exe' and '--' to test parsing tolerance."
+  },
+  {
+    "output": "bash.exe -l script.sh",
+    "explanation": "Substitution of long option '--login' with short option '-l', which is functionally equivalent."
+  },
+  {
+    "output": "bash.exe script.sh # bash -",
+    "explanation": "Omission of the comment at the end does not affect execution; the command still executes the script."
+  },
+  {
+    "output": "bash.exe script.sh",
+    "explanation": "Reordering or omission of flags is not applicable here, but this command line is a simplified version that still matches the rule."
+  }
+]

@@ -1,2 +1,0 @@
-AddInUtil.exe C:\Temp\malicious.addin
-copy cmd.exe conhost.exe /Y && AddInUtil.exe C:\Temp\malicious.addin

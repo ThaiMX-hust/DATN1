@@ -1,0 +1,18 @@
+[
+  {
+    "output": "net localgroup \"Remote Desktop Users\" TEST-HOST -add",
+    "explanation": "Substitution technique: Replaced the forward-slash flag indicator ('/add') with a hyphen ('-add'). The Windows native 'net' utility accepts option keywords starting with either a forward slash or a hyphen interchangeably. This substitution breaks the selection_main rule logic which specifically targets the literal string ' /add'."
+  },
+  {
+    "output": "net localgroup \"Remote Desktop Users\" TEST-HOST \"/add\"",
+    "explanation": "Insertion technique: Wrapped the command flag parameter '/add' inside double quotes. Malleable command-line parsing on Windows automatically normalizes and strips these structural quotes before evaluation, allowing the command to execute successfully while evading the contiguous string lookup for ' /add' in logs."
+  },
+  {
+    "output": "cmd.exe /c net localgroup \"Remote Desktop Users\" TEST-HOST /a^dd",
+    "explanation": "Insertion technique: Injected a caret (^) escape character into the middle of the addition switch ('/a^dd') while running the operation inside a cmd.exe subshell context. The command processor unescapes and cleans the string prior to invoking the process, ensuring correct execution behavior while causing process logs to record the raw caret sequence and evade selection_main."
+  },
+  {
+    "output": "net localgroup \"Remote Desktop Users\" TEST-HOST /add/",
+    "explanation": "Insertion technique: Appended a trailing forward slash directly onto the addition option parameter ('/add/'). The native Windows argument dispatcher handles the trailing slash transparently, but it alters the trailing string footprint needed to match the rule if the SIEM enforces precise word boundaries or whitespace positioning."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "extrac32.exe C:\\Temp\\test.cab \"C:\\Temp\\test.txt:hidden.txt\"",
+    "explanation": "Insertion technique: Enclosing the target Alternate Data Stream (ADS) destination path inside explicit double quotes. The rule applies a regular expression `:[^\\]` against the raw `CommandLine` field to catch the stream colon delimiter without a trailing backslash. Placing a quote boundary character immediately surrounding the string alters the raw text sequence parsed by simpler regex engines, while the Win32 subsystem strips the quotes during initialization, allowing extrac32 to successfully extract the file inside the stream target."
+  },
+  {
+    "output": "extrac32.exe C:\\Temp\\test.cab C:\\Temp\\test.txt:\\hidden.txt",
+    "explanation": "Substitution technique (Path Syntax Mutation): Explicitly appending a backward slash immediately after the stream colon indicator (`:\\hidden.txt`). The underlying Windows NT Virtual File System (VFS) routes file stream lookups smoothly when paths incorporate root directory delimiters inside the stream label assignment block. This mutation explicitly violates the rule's strict negative regular expression match clause (`:[^\\]` which dictates that the character following the colon *must not* be a backslash), neutralizing the rule condition entirely while retaining exact tool behavior."
+  },
+  {
+    "output": "cmd.exe /c extra^c32.exe C:\\Temp\\test.cab C:\\Temp\\test.txt:hidden.txt",
+    "explanation": "Insertion technique: Routing execution through a cmd.exe interpreter session to place a command shell caret escape operator (`^`) directly inside the binary image file string token (`extra^c32.exe`). The parent interpreter filters out the modifier token entirely before committing process initialization bounds, generating an EDR log string containing `extra^c32.exe` that safely subverts the explicit rule condition requiring the literal sequence `extrac32.exe`."
+  },
+  {
+    "output": "extrac32.exe C:\\Temp\\test.cab \\\\?\\C:\\Temp\\test.txt:hidden.txt",
+    "explanation": "Recoding / Encoding technique (Path Normalization): Prefacing the Alternate Data Stream file reference target path expression with the Win32 Extended-Length Path prefix descriptor (`\\\\?\\`). The Windows filesystem API handles extended-length prefixes cleanly for absolute disk assignments, but altering the leading string layouts introduces structural changes that can throw off standard text search boundaries and regex constraints depending on the SIEM's keyword parsing breadth."
+  }
+]

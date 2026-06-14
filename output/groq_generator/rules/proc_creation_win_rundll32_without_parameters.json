@@ -1,22 +1,22 @@
 [
   {
-    "output": "rundll32.exe",
-    "explanation": "The original command is already a valid test case for the Sigma rule."
+    "output": "\"C:\\Windows\\System32\\rundll32.exe\"",
+    "explanation": "The original command is preserved with quotes added for safe execution in a test environment."
   },
   {
-    "output": "rundll32",
-    "explanation": "Omission of the .exe extension is allowed on Windows and still refers to the same executable."
+    "output": "C:\\Windows\\System32\\rundll32.exe",
+    "explanation": "Omission of quotes is allowed in some contexts, and this variation tests if the detection rule accounts for it."
   },
   {
-    "output": "rundll32.exe #",
-    "explanation": "Appending a comment character (#) is a safe mutation that does not alter the execution behavior."
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\"",
+    "explanation": "Double backslashes are used as an alternative representation of the path, simulating path normalization."
   },
   {
-    "output": "copy rundll32.exe not_rundll.exe && not_rundll.exe",
-    "explanation": "Copying the executable and renaming it is a safe mutation that still executes the same binary."
+    "output": "\"C:\\Windows\\Sysnative\\rundll32.exe\"",
+    "explanation": "Sysnative is a special alias for System32 in 32-bit processes on 64-bit Windows, testing path recoding."
   },
   {
-    "output": "copy rundll32.exe not_rundll32.exe && not_rundll32.exe",
-    "explanation": "Similar to the previous case, this is a safe mutation that executes the same binary under a different name."
+    "output": "\"%windir%\\System32\\rundll32.exe\"",
+    "explanation": "Uses the %windir% environment variable as an alternative representation of the Windows directory."
   }
 ]

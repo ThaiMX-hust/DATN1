@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "dism.exe /online /enable-feature /featurename:WindowsPowerShellWebAccess",
+    "explanation": "This command enables the PowerShell Web Access feature using DISM, matching the Sigma rule's detection criteria. It is a standard and safe command for testing in a controlled environment."
+  },
+  {
+    "output": "dism.exe /online /enable-feature /featurename:WindowsPowerShellWebAccess /quiet",
+    "explanation": "The addition of '/quiet' suppresses output, but the core command remains unchanged and still matches the Sigma rule. This is a safe variation for testing."
+  },
+  {
+    "output": "dism.exe /online /enable-feature /featurename:WindowsPowerShellWebAccess /norestart",
+    "explanation": "The '/norestart' flag prevents automatic restarts, but the command still matches the Sigma rule. This is a safe variation for testing."
+  },
+  {
+    "output": "dism.exe /online /enable-feature /featurename:WindowsPowerShellWebAccess /quiet /norestart",
+    "explanation": "Combines '/quiet' and '/norestart' flags for a more complete test command while still matching the Sigma rule. This is a safe variation for testing."
+  },
+  {
+    "output": "dism.exe /online /enable-feature /featurename:WindowsPowerShellWebAccess /featurename:WindowsPowerShellWebAccess",
+    "explanation": "Repetition of the '/featurename' parameter is redundant but still valid and matches the Sigma rule. This is a safe variation for testing."
+  }
+]
+```

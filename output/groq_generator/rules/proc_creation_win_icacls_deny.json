@@ -1,42 +1,22 @@
 [
   {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC)",
-    "explanation": "This is the original command that matches the Sigma rule and serves as a baseline for testing."
+    "output": "icacls \"C:\\\\Users\\\\admin\\\\AppData\\\\Local\\\\37f92fe8-bcf0-4ee0-b8ba-561f797f5696\" /deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "This command matches the Sigma rule by using icacls.exe with the /deny flag and the *S-1-1-0 SID, which aligns with the detection logic. It is a direct representation of the rule's intent."
   },
   {
-    "output": "icacls.exe C:\\\\Users\\\\Public\\\\secret /deny *S-1-1-0:(OI)(CI)(DE,DC)",
-    "explanation": "Removed quotes around the file path since they are optional in many cases and the command is still valid."
+    "output": "icacls C:\\\\Users\\\\admin\\\\AppData\\\\Local\\\\37f92fe8-bcf0-4ee0-b8ba-561f797f5696 ^/deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "This command uses an escape character (^) before the /deny flag to simulate a safe mutation technique. The command remains functionally equivalent but demonstrates how insertion of escape characters can alter the command's appearance."
   },
   {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(CI)(OI)(DE,DC)",
-    "explanation": "Reordered the ACE flags (CI)(OI) to (OI)(CI), which is functionally equivalent and accepted by icacls."
+    "output": "icacls \"C:\\\\Users\\\\admin\\\\AppData\\\\Local\\\\37f92fe8-bcf0-4ee0-b8ba-561f797f5696\" /deny *S-1-1-0:(CI)(OI)(DE,DC)",
+    "explanation": "This command reorders the (OI)(CI) flags to (CI)(OI), which is accepted by icacls as the order of ACE flags does not affect functionality. This demonstrates reordering as a safe mutation technique."
   },
   {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) && echo Test",
-    "explanation": "Appended a harmless command after the original command using &&, which does not affect the behavior of the original command."
+    "output": "icacls C:\\\\Users\\\\admin\\\\AppData\\\\Local\\\\37f92fe8-bcf0-4ee0-b8ba-561f797f5696 /deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "This command omits the quotes around the file path, which is allowed if the path does not contain spaces. This demonstrates omission as a safe mutation technique."
   },
   {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) >NUL 2>&1",
-    "explanation": "Redirected output to NUL to suppress console output, which is a common obfuscation technique but does not alter the command's behavior."
-  },
-  {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null",
-    "explanation": "Piped output to Out-Null to suppress console output, which is functionally equivalent to redirecting to NUL."
-  },
-  {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-String",
-    "explanation": "Piped output to Out-String, which does not change the behavior of the original command and is often used for formatting."
-  },
-  {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null | Out-Null",
-    "explanation": "Chained multiple output redirections, which is redundant but does not affect the original command's behavior."
-  },
-  {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null | Out-String",
-    "explanation": "Chained multiple output redirections and formatting, which is redundant but does not affect the original command's behavior."
-  },
-  {
-    "output": "icacls.exe \"C:\\\\Users\\\\Public\\\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC) | Out-Null | Out-String | Out-Null",
-    "explanation": "Chained multiple output redirections and formatting, which is redundant but does not affect the original command's behavior."
+    "output": "icacls C:\\\\Users\\\\admin\\\\AppData\\\\Local\\\\37f92fe8-bcf0-4ee0-b8ba-561f797f5696 /deny *S-1-1-0:$(echo (OI)(CI)(DE,DC))",
+    "explanation": "This command uses command substitution to represent the ACE flags dynamically. This is a safe test-only technique for simulating recoding or encoding."
   }
 ]

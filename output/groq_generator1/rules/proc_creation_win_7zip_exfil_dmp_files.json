@@ -1,0 +1,42 @@
+[
+  {
+    "output": "7z a archive.zip lsass.dmp",
+    "explanation": "This is the original true positive command and will trigger the Sigma rule. It is included for reference."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp\"",
+    "explanation": "Appending a trailing quote to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp\\",
+    "explanation": "Appending a backslash to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp' '",
+    "explanation": "Appending a space after the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp\\n",
+    "explanation": "Appending a newline character to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp`",
+    "explanation": "Appending a backtick to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp#",
+    "explanation": "Appending a comment character to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp;",
+    "explanation": "Appending a semicolon to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp:",
+    "explanation": "Appending a colon to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "7z a archive.zip lsass.dmp|",
+    "explanation": "Appending a pipe character to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+  }
+]

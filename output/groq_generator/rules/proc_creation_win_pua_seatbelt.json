@@ -1,22 +1,14 @@
 [
   {
-    "output": "Seatbelt.exe -group=\\\"all\\\" -outputfile=\\\"C:\\\\output.txt\\\"",
-    "explanation": "This command uses standard syntax with escaped quotes to simulate a typical Seatbelt execution that matches the Sigma rule. It includes a group flag and an output file parameter, both of which are covered in the detection conditions."
+    "output": "Seatbelt.exe -group=misc -outputfile=C:\\Temp\\output.txt",
+    "explanation": "This command simulates a Seatbelt execution with a group flag and output file, which matches the Sigma rule's detection criteria. It uses standard syntax and includes a group and outputfile parameter to align with the rule's 'CommandLine|contains' conditions."
   },
   {
-    "output": "Seatbelt.exe -group=all -outputfile=C:\\\\output.txt",
-    "explanation": "This is a simplified version of the command without escaped quotes, but still includes the group and outputfile parameters. It matches the Sigma rule's detection criteria."
+    "output": "Seatbelt.exe -group=system --CommandLine=\"InterestingProcesses\" -outputfile=.\temp\output.log",
+    "explanation": "This command includes a group flag and a command-line argument that matches the Sigma rule's detection criteria. The use of quotes and alternative path notation (.\temp) demonstrates safe mutation techniques like insertion and recoding."
   },
   {
-    "output": "Seatbelt.exe InterestingFiles",
-    "explanation": "This command uses a direct command parameter instead of a group flag. It matches the Sigma rule's detection criteria based on the CommandLine|contains condition."
-  },
-  {
-    "output": "Seatbelt.exe -group=system -outputfile=C:\\\\output\\\"\\\".txt",
-    "explanation": "This command uses a group flag and an outputfile parameter with quotes embedded in the filename. It still matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "Seatbelt.exe -group=\\\"user\\\" InterestingProcesses",
-    "explanation": "This command combines a group flag and a direct command parameter, using escaped quotes for the group flag. It matches the Sigma rule's detection criteria."
+    "output": "Seatbelt.exe -group=chromium -outputfile=C:/Users/test/Desktop/results.csv",
+    "explanation": "This command uses a group flag and outputfile parameter that align with the Sigma rule's detection logic. The path uses forward slashes for normalization, demonstrating safe mutation through recoding."
   }
 ]

@@ -1,8 +1,8 @@
-C:\WINDOWS\system32\net1  user /add "T1136.001_Admin" "T1136_pass"
-C:\WINDOWS\system32\net1  user /add "T1136.001_CMD" "T1136.001_CMD!"
-net  user /add "T1136.001_Admin" "T1136_pass"
-net  user /add "T1136.001_CMD" "T1136.001_CMD!"
-C:\WINDOWS\system32\net1  user $ ATOMIC123! /add /active:yes
-net  user $ ATOMIC123! /add /active:yes
-C:\WINDOWS\system32\net1  USER AtomicOperator$ At0micRedTeam! /ADD /expires:never
-NET  USER AtomicOperator$ At0micRedTeam! /ADD /expires:never
+C:\WINDOWS\system32\net1 user /add "T1136.001_Admin" "T1136_pass"
+C:\WINDOWS\system32\net1 user /add "T1136.001_CMD" "T1136.001_CMD!"
+C:\WINDOWS\system32\net1 user $ ATOMIC123! /add /active:yes
+C:\WINDOWS\system32\net1 USER AtomicOperator$ At0micRedTeam! /ADD /expires:never
+net user /add "T1136.001_Admin" "T1136_pass"
+net user /add "T1136.001_CMD" "T1136.001_CMD!"
+net user $ ATOMIC123! /add /active:yes
+NET USER AtomicOperator$ At0micRedTeam! /ADD /expires:never

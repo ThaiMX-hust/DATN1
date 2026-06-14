@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host (\\\"[char]\\\" 0x41)\"",
+    "explanation": "This command uses the [char] type with hexadecimal notation, which is directly detected by the Sigma rule. It is a true positive."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([System.Char]0x41)\"",
+    "explanation": "This command uses the fully qualified [System.Char] type with hexadecimal notation, which is also detected by the Sigma rule. It is a true positive."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host (\\\"[char]\\\" 65)\"",
+    "explanation": "This command uses [char] with decimal notation instead of hexadecimal. Since the Sigma rule specifically looks for '0x' in the command line, this bypasses the detection by omitting the hexadecimal format."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([Convert]::ToChar(0x41))\"",
+    "explanation": "This command uses the [Convert]::ToChar method instead of [char] casting. The Sigma rule does not detect this syntax, making it a potential bypass."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([char]([Convert]::ToInt32(\\\"A\\\", 16)))\"",
+    "explanation": "This command converts the hexadecimal value indirectly by converting the string 'A' to an integer using base 16. The Sigma rule does not detect this obfuscated method."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([char](0x41))\"",
+    "explanation": "This command uses parentheses to enclose the hexadecimal value. The Sigma rule does not detect this variation of syntax."
+  }
+]

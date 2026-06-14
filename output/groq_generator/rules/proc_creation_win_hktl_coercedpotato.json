@@ -1,6 +1,26 @@
 [
   {
-    "output": "update_service.exe -e 1",
-    "explanation": "The original command is already a true positive for the Sigma rule, so no mutation is needed for testing."
+    "output": "CoercedPotato.exe --exploitId 12345",
+    "explanation": "This command simulates the execution of CoercedPotato.exe with a command-line parameter containing '--exploitId', which matches the Sigma rule's detection condition. The command is unmodified and directly reflects typical usage."
+  },
+  {
+    "output": "CoercedPotato.exe --exploitId=12345",
+    "explanation": "This command uses an equals sign (=) instead of a space to separate the flag and value, which is a valid syntax substitution and still matches the Sigma rule."
+  },
+  {
+    "output": "CoercedPotato.exe --exploitId\"12345\"",
+    "explanation": "This command uses quotes around the value, which is a safe mutation technique (insertion) and still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "CoercedPotato.exe --exploitId 12345",
+    "explanation": "This command omits any additional parameters beyond what is necessary for detection, preserving the test behavior while minimizing complexity."
+  },
+  {
+    "output": "CoercedPotato.exe --exploitId 12345",
+    "explanation": "This command uses reordering of arguments if the program allows it, but in this case, the order is fixed, so it remains unchanged."
+  },
+  {
+    "output": "CoercedPotato.exe --exploitId 12345",
+    "explanation": "This command uses no encoding or recoding since the Sigma rule is based on direct string matching, and encoding would not bypass it."
   }
 ]

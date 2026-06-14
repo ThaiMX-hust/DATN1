@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=\"C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr\"",
+    "explanation": "The command uses quotes around the path and the --load-extension flag, which is consistent with the Sigma rule. It is a safe variation that would still trigger the rule."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Users\\user\\AppData\\Local\\Temp\\HHe2lr",
+    "explanation": "This command omits the quotes around the extension path, but the --load-extension flag is still present and the path is valid. It is a safe variation that would still trigger the rule."
+  },
+  {
+    "output": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --load-extension=C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\HHe2lr",
+    "explanation": "This command uses double backslashes for path escaping, a common Windows technique. It is a safe variation that would still trigger the rule."
+  }
+]

@@ -1,14 +1,14 @@
 [
   {
-    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v PythonFunctionWarnings /d 0 /f",
-    "explanation": "This command uses omission and reordering to simplify the original command while maintaining the same registry modification behavior. It removes unnecessary elements like quotes around the value and uses a simpler decimal format for the value data."
+    "output": "reg add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v PythonFunctionWarnings /t REG_DWORD /d 0 /f",
+    "explanation": "This command sets the registry value PythonFunctionWarnings to 0, which disables security warnings for Python function execution in Excel. It uses standard Windows registry command syntax and can be mutated using safe techniques."
   },
   {
-    "output": "reg.exe add HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security /v PythonFunctionWarnings /t REG_DWORD /d 0 /f",
-    "explanation": "This command uses omission and reordering to simplify the original command while maintaining the same registry modification behavior. It removes quotes and unnecessary elements while using the decimal format for the value data."
+    "output": "reg add HKCU\\\\Microsoft\\\\Office\\\\16.0\\\\Excel\\\\Security /v PythonFunctionWarnings /d 0 /t REG_DWORD /f",
+    "explanation": "This is a variation of the original command using escaped backslashes and reordered arguments. It remains functionally equivalent and is a safe mutation for testing purposes."
   },
   {
-    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v PythonFunctionWarnings /t REG_DWORD /d 0 /f",
-    "explanation": "This command uses omission and reordering to simplify the original command while maintaining the same registry modification behavior. It removes unnecessary elements like quotes around the value and uses a simpler decimal format for the value data."
+    "output": "reg add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v PythonFunctionWarnings /d 0 /t REG_DWORD /f",
+    "explanation": "This command omits the /f flag (which forces the operation without prompting) since it is optional and does not affect the test behavior in most scenarios. It is a safe mutation for testing."
   }
 ]

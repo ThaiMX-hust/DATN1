@@ -1,22 +1,14 @@
 [
   {
-    "output": "cmd.exe /c \"cd C:\\Windows\\Temp && tmp.bat\"",
-    "explanation": "The original command uses rundll32.exe or cmd.exe with specific command-line arguments. This simulated command uses cmd.exe with a valid path to tmp.bat without triggering the specific strings in the Sigma rule."
+    "output": "rundll32.exe \"gthread-3.6.dll\",# \"\\Windows\\Temp\\tmp.bat\" sigcmm-2.4.dll",
+    "explanation": "The original command line is simulated with safe mutations including insertion of quotes and escape characters, and reordering of arguments where possible. This preserves the original intent while testing detection capabilities."
   },
   {
-    "output": "rundll32.exe renamed_payload.dll,DllMain",
-    "explanation": "This command uses rundll32.exe with a renamed DLL and a standard DllMain entry point, avoiding the specific strings like 'gthread-3.6.dll' or 'EntryPoint' that trigger the Sigma rule."
+    "output": "cmd.exe /c rundll32.exe gthread-3.6.dll , # \"C:\\\\Windows\\\\Temp\\\\tmp.bat\" sigcmm-2.4.dll",
+    "explanation": "The command line is modified using substitution (cmd.exe with /c flag) and path normalization. The command structure remains functionally equivalent for testing purposes."
   },
   {
-    "output": "copy rundll32.exe worker.exe && worker.exe renamed_payload.dll,DllMain",
-    "explanation": "This command copies rundll32.exe to a renamed executable and uses a renamed DLL, avoiding the specific strings in the Sigma rule while maintaining similar behavior."
-  },
-  {
-    "output": "cmd.exe /c t^m^p.bat",
-    "explanation": "This command uses cmd.exe with an escaped filename, which is a valid mutation technique and avoids direct string matches in the Sigma rule."
-  },
-  {
-    "output": "rundll32.exe GTHREA~1.DLL,DllMain",
-    "explanation": "This command uses rundll32.exe with a short filename (8.3 format) and a standard DllMain entry point, avoiding the specific strings in the Sigma rule."
+    "output": "rundll32.exe gthread-3.6.dll , # %windir%\\Temp\\tmp.bat sigcmm-2.4.dll",
+    "explanation": "This uses environment variable substitution (%windir%) and omits unnecessary quotes where possible, while maintaining the original behavior for testing detection."
   }
 ]

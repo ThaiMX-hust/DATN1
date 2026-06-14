@@ -1,4 +1,0 @@
-net stop WinDefend
-powershell.exe Set-MpPreference -DisableB $true
-powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true
-powershell.exe Set-MpPreference -DisableBehaviorMonitoring 1

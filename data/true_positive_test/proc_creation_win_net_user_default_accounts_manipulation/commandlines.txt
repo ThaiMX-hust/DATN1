@@ -1,4 +1,2 @@
-C:\WINDOWS\system32\net1  user administrator /domain
-net  user administrator /domain
-net user "Admin"istrator /active:yes
-net user Administrator/active:yes
+C:\WINDOWS\system32\net1 user administrator /domain
+net user administrator /domain

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "diskshadow.exe /s C:\\Temp\\script.dsh",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks traditionally treat forward slashes ('/') interchangeably with hyphens ('-') as switch prefixes. Substituting '-s ' with '/s ' completely breaks the literal character sequence check within 'selection_flag' (which has the windash modifier tracking explicit dashes), while the underlying script processing functionality remains completely unchanged."
+  },
+  {
+    "output": "diskshadow.exe \"-s\" C:\\Temp\\script.dsh",
+    "explanation": "Insertion technique: Enclosing the core action switch argument in double quotes ('\"-s\"') disrupts the continuous sequence matching requirement of the SIEM engine. The standard Windows command line parser transparently peels off the outer quote boundaries during initialization, fulfilling the operational requirements of the test scenario while evading the 'selection_flag' check."
+  },
+  {
+    "output": "cmd.exe /c diskshadow.exe -s^  C:\\Temp\\script.dsh",
+    "explanation": "Insertion technique: Spawning the execution through cmd.exe permits the insertion of a command shell caret escape character ('^') right into the switch whitespace token chain. The parent console subsystem filters this token out entirely prior to initiating the child context, logging '-s^ ' in process creation event streams and successfully subverting the 'selection_flag' detection logic."
+  },
+  {
+    "output": "diskshadow.exe\t-s\tC:\\Temp\\script.dsh",
+    "explanation": "Substitution technique: Replacing the required single space character boundaries flanking the '-s' switch with horizontal tab characters ('\\t'). The native Windows execution environment tokenizes horizontal tabs as valid whitespace parameter separators, bypassing strict space-padded string checks like '-s '."
+  },
+  {
+    "output": "diskshadow.exe -s C:\\Temp\\script.txt.dsh",
+    "explanation": "Recoding / Encoding technique: Naming the malicious script file using a double extension format with the expected extension embedded inside the middle path component ('script.txt.dsh'). This safely tricks the rule's logic because the exclusion clause 'filter_main_ext' checks for the simple presence of '.txt' via a loose 'contains' evaluation, mistakenly treating this payload run as a whitelisted text file execution."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"& {LoadAssemblyFromPath}\"",
+    "explanation": "The mutation technique used is 'Omission' and 'Reordering'. The rule condition avoided is the exact match for 'LoadAssemblyFromPath '. The high-level behavior is expected to remain equivalent because the ampersand (&) is used to invoke the expression, and the space after 'LoadAssemblyFromPath' is omitted. The assumption is that the target system will parse the command correctly and execute the intended action."
+  },
+  {
+    "output": "powershell -Command \"LoadAssemblyFromPath;\"",
+    "explanation": "The mutation technique used is 'Insertion'. The rule condition avoided is the exact match for 'LoadAssemblyFromPath '. The high-level behavior is expected to remain equivalent because a semicolon is added at the end of the command, which is a valid PowerShell syntax. The assumption is that the target system will parse the command correctly and execute the intended action."
+  },
+  {
+    "output": "powershell -Command \"$env:temp\\LoadAssemblyFromPath\"",
+    "explanation": "The mutation technique used is 'Recoding / Encoding'. The rule condition avoided is the exact match for 'LoadAssemblyFromPath '. The high-level behavior is expected to remain equivalent because an environment variable is used to represent the path. The assumption is that the target system has the 'temp' environment variable set and will parse the command correctly."
+  }
+]

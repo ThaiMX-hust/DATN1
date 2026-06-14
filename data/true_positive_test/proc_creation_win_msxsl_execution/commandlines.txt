@@ -1,2 +1,0 @@
-copy msxsl.exe not_suspicious.exe && not_suspicious.exe customer.xml style.xsl
-ren msxsl.exe m.exe && m.exe script.xml transform.xsl

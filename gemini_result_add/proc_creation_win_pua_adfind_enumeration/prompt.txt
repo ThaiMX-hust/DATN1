@@ -1,0 +1,107 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: PUA - Suspicious ActiveDirectory Enumeration Via AdFind.EXE
+id: 455b9d50-15a1-4b99-853f-8d37655a4c1b
+related:
+    - id: 9a132afa-654e-11eb-ae93-0242ac130002
+      type: similar
+    - id: 514e7e3e-b3b4-4a67-af60-be20f139198b
+      type: similar
+status: test
+description: Detects active directory enumeration activity using known AdFind CLI flags
+references:
+    - https://www.joeware.net/freetools/tools/adfind/
+    - https://social.technet.microsoft.com/wiki/contents/articles/7535.adfind-command-examples.aspx
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1087.002/T1087.002.md
+author: frack113
+date: 2021-12-13
+modified: 2023-03-05
+tags:
+    - attack.discovery
+    - attack.t1087.002
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_password: # Listing password policy
+        CommandLine|contains:
+            - lockoutduration
+            - lockoutthreshold
+            - lockoutobservationwindow
+            - maxpwdage
+            - minpwdage
+            - minpwdlength
+            - pwdhistorylength
+            - pwdproperties
+    selection_enum_ad: # Enumerate Active Directory Admins
+        CommandLine|contains: '-sc admincountdmp'
+    selection_enum_exchange: # Enumerate Active Directory Exchange AD Objects
+        CommandLine|contains: '-sc exchaddresses'
+    condition: 1 of selection_*
+falsepositives:
+    - Authorized administrative activity
+level: high
+```
+
+True positive test command:
+
+```text
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=computer)
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=group)
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=organizationalUnit)
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=person)
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -f (objectcategory=subnet)
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -gcb -sc trustdmp
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -sc admincountdmp
+"cmd.exe" /c "C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe" -sc exchaddresses
+"powershell.exe" & {(([adsisearcher]'(objectcategory=organizationalunit)').FindAll()).Path | %%{if(([ADSI]\""$_\"").gPlink){Write-Host \""[+] OU Path:\""([ADSI]\""$_\"").Path;$a=((([ADSI]\""$_\"").gplink) -replace \""[[;]\"" -split \""]\"");for($i=0;$i -lt $a.length;$i++){if($a[$i]){Write-Host \""Policy Path[$i]:\""([ADSI]($a[$i]).Substring(0,$a[$i].length-1)).Path;Write-Host \""Policy Name[$i]:\""([ADSI]($a[$i]).Substring(0,$a[$i].length-1)).DisplayName} };Write-Output \""`n\"" }}}
+"powershell.exe" & {([adsisearcher]\""objectcategory=computer\"").FindAll(); ([adsisearcher]\""objectcategory=computer\"").FindOne()}
+"powershell.exe" & {([adsisearcher]\""objectcategory=group\"").FindAll(); ([adsisearcher]\""objectcategory=group\"").FindOne()}
+"powershell.exe" & {([adsisearcher]\""objectcategory=user\"").FindAll(); ([adsisearcher]\""objectcategory=user\"").FindOne()}
+"powershell.exe" & {$DirectorySearcher = New-Object System.DirectoryServices.DirectorySearcher(\""(ObjectCategory=Computer)\"") $DirectorySearcher.PropertiesToLoad.Add(\""Name\"") $Computers = $DirectorySearcher.findall() foreach ($Computer in $Computers) { $Computer = $Computer.Properties.name if (!$Computer) { Continue } Write-Host $Computer}}
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe -f (objectcategory=computer)
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe -f (objectcategory=organizationalUnit)
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe -f (objectcategory=subnet)
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe -gcb -sc trustdmp
+C:\AtomicRedTeam\atomics\..\ExternalPayloads\AdFind.exe -sc dclist
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

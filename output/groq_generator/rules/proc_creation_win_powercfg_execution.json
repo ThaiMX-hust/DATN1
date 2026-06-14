@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK",
+    "explanation": "This command matches the Sigma rule's detection criteria for changing lock screen timeout via Powercfg. It uses the original syntax as described in the rule."
+  },
+  {
+    "output": "powercfg.exe -change -standby-timeout-ac 3000",
+    "explanation": "This command matches the Sigma rule's detection criteria for changing the AC standby timeout. It uses the alternative syntax with hyphens as described in the rule."
+  },
+  {
+    "output": "powercfg.exe /SETACVALUEINDEX\" SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK",
+    "explanation": "This command uses insertion of quotes after the /SETACVALUEINDEX flag, which is still parsed correctly by the program. It remains functionally equivalent to the original command."
+  },
+  {
+    "output": "powercfg.exe -change -standby-timeout-ac 3000 -standby-timeout-dc 3000",
+    "explanation": "This command adds an additional -standby-timeout-dc flag with the same value as the -standby-timeout-ac flag. It is functionally equivalent and still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powercfg.exe -change -standby-timeout-ac 3000   ",
+    "explanation": "This command adds extra spaces after the command line arguments. It is functionally equivalent and still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK",
+    "explanation": "This command uses lowercase letters for the flag, which is still valid and matches the Sigma rule's detection criteria."
+  }
+]

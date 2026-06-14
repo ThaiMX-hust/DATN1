@@ -1,14 +1,18 @@
 [
   {
-    "output": "mstsc.exe \"C:\\Users\\Public\\connection.rdp\"",
-    "explanation": "The command is unchanged except for the addition of explicit quotes and escaped backslashes for testing purposes, which does not alter the behavior."
+    "output": "mstsc.exe \"C:\\Users\\Public\\test.rdp\"",
+    "explanation": "This command simulates the execution of mstsc.exe with a local .rdp file located in a suspicious directory (\\Users\\Public\\), as defined in the Sigma rule. The command uses quotes to safely handle the file path."
   },
   {
-    "output": "mstsc.exe %TEMP%\\rogue.rdp",
-    "explanation": "The command uses an environment variable and a single backslash, which is a valid and equivalent representation of the original command."
+    "output": "mstsc.exe C:\\Windows\\Temp\\malicious.rdp",
+    "explanation": "This command simulates the execution of mstsc.exe with a local .rdp file located in a suspicious directory (\\Windows\\Temp\\), as defined in the Sigma rule. No additional syntax is needed since the path does not require quotes."
   },
   {
-    "output": "mstsc.exe C:\\Windows\\Temp\\payload.rdp -f",
-    "explanation": "The command replaces the '/' with '-', which is an equivalent switch for the MSTSC.EXE application."
+    "output": "mstsc.exe \"C:\\Users\\User\\AppData\\Local\\Temp\\rdp_session.rdp\"",
+    "explanation": "This command simulates the execution of mstsc.exe with a local .rdp file located in a suspicious directory (\\AppData\\Local\\Temp\\), as defined in the Sigma rule. The command uses quotes to safely handle the file path."
+  },
+  {
+    "output": "mstsc.exe C:\\Users\\User\\Downloads\\rdp_connect.rdp",
+    "explanation": "This command simulates the execution of mstsc.exe with a local .rdp file located in a suspicious directory (\\Downloads\\), as defined in the Sigma rule. No additional syntax is needed since the path does not require quotes."
   }
 ]

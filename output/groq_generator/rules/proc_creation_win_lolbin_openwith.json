@@ -1,22 +1,24 @@
+```json
 [
   {
-    "output": "OpenWith.exe /c calc.exe",
-    "explanation": "This command uses the original syntax of the Sigma rule with the '/c' flag, which is directly detected by the rule."
+    "output": "OpenWith.exe /c notepad.exe",
+    "explanation": "This command uses the '/c' flag as specified in the Sigma rule, which is directly detectable by the rule."
   },
   {
-    "output": "OpenWith.exe -c calc.exe",
-    "explanation": "The '/c' flag is replaced with '-c' as a substitution technique. Some programs accept both short and alternative flag formats, which could bypass detection if the rule only checks for '/c'."
+    "output": "OpenWith.exe  /c   notepad.exe",
+    "explanation": "Inserts extra spaces between the '/c' flag and the binary name, which is still parsed correctly by OpenWith.exe."
   },
   {
-    "output": "OpenWith.exe /c calc.exe >nul 2>&1",
-    "explanation": "Redirection of output to null is added as an optional element. This does not change the core behavior but may help evade certain detection mechanisms that look for verbose command lines."
+    "output": "OpenWith.exe\" /c notepad.exe",
+    "explanation": "Inserts a quote after OpenWith.exe, which is safely closed before parsing the command line arguments."
   },
   {
-    "output": "OpenWith.exe ^/c calc.exe",
-    "explanation": "The '/' in '/c' is escaped using the caret (^) character. This is a safe mutation technique that may bypass detection if the rule does not account for escape characters."
+    "output": "OpenWith.exe /c \"notepad.exe\"",
+    "explanation": "Encloses the binary name in quotes, which is a safe mutation and still matches the Sigma rule."
   },
   {
-    "output": "OpenWith.exe /c calc.exe | findstr .",
-    "explanation": "Piping the output to findstr . is added as a harmless test technique. This does not alter the execution but may change the command line signature."
+    "output": "OpenWith.exe -c notepad.exe",
+    "explanation": "Replaces '/c' with '-c', which is an equivalent syntax accepted by OpenWith.exe."
   }
 ]
+```

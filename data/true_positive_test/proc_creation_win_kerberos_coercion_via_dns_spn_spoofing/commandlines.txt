@@ -1,3 +1,1 @@
-cmd.exe /c "set P1=UWhRCA && set P2=BAAAA && echo Simulated payload execution using %P1% %P2%"
-powershell.exe -Command "$part1 = 'UWh' + 'RCA'; $part2 = 'BAA' + 'AA'; Write-Output 'Simulated execution of payload'"
-powershell.exe -ExecutionPolicy Bypass -File marshaled_cred_payload.ps1
+nslookup.exe UWhRCAAAAABAAAAA

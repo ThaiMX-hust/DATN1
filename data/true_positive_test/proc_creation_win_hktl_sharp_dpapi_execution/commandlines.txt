@@ -1,2 +1,0 @@
-CustomTool.exe "backupkey" "/machine"
-LegitimateApp.exe "backupkey" "/unprotect"

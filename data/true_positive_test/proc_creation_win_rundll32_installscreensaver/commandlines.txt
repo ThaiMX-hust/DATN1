@@ -1,2 +1,1 @@
-rundll32.exe  desk.cpl,InstallScreenSaver not_an_scr.scr
-copy rundll32.exe updater.exe && updater.exe desk.cpl,InstallScreenSaver
+rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.scr

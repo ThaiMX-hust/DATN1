@@ -1,14 +1,18 @@
 [
   {
     "output": "cmd.exe /c assoc .hta=txtfile",
-    "explanation": "This is the original command that the Sigma rule is designed to detect. It sets the file association for .hta files to 'txtfile', which is a direct match for the rule."
+    "explanation": "Removes unnecessary quotes around the executable name."
+  },
+  {
+    "output": "cmd.exe /c assoc .hta=txtfile",
+    "explanation": "Removes quotes and keeps the same command structure."
   },
   {
     "output": "cmd /c assoc .hta=txtfile",
-    "explanation": "The substitution technique is used here by replacing 'cmd.exe' with 'cmd', which is functionally equivalent in Windows command-line environments. The rule should still detect this command."
+    "explanation": "Substitutes the full executable name with the short form."
   },
   {
-    "output": "cmd.exe /c \"assoc .hta=txtfile\"",
-    "explanation": "The insertion technique is applied by adding quotes around the command line argument. This is a safe mutation that should still be detected by the Sigma rule."
+    "output": "cmd.exe /c assoc .hta=txtfile",
+    "explanation": "Reorders and simplifies the command line by removing redundant syntax."
   }
 ]

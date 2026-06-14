@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy register_app.vbs legit_script.vbs && cscript //nologo legit_script.vbs -register YourMalicious.dll",
+    "explanation": "The original command is already a valid test command that matches the Sigma rule. No mutation is needed for this baseline."
+  },
+  {
+    "output": "copy register_app.vbs legit_script.vbs && cscript //nologo legit_script.vbs --register YourMalicious.dll",
+    "explanation": "Substitution of '-register' with '--register' if the application accepts long-form flags as equivalent."
+  },
+  {
+    "output": "copy register_app.vbs legit_script.vbs && cscript /nologo legit_script.vbs -register YourMalicious.dll",
+    "explanation": "Substitution of '//nologo' with '/nologo' to test alternate flag syntax acceptance."
+  },
+  {
+    "output": "copy register_app.vbs legit_script.vbs && cscript //nologo legit_script.vbs -register \"YourMalicious.dll\"",
+    "explanation": "Insertion of quotes around the final argument to test parsing behavior while maintaining the same functionality."
+  }
+]

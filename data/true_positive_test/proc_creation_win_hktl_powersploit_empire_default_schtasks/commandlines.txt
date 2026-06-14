@@ -1,2 +1,0 @@
-schtasks.exe /Create /TN EvilTask /TR "calc.exe" /SC WEEKLY /D MON /ST 08:00
-schtasks.exe /Create /TN "WinUpdateTask" /TR "powershell -NoProfile -NonInteractive -WindowStyle Hidden -Command \"Write-Host 'Test'\"" /SC ONLOGON

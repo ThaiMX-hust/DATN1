@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" \"keymgr\",\"KRShowKeyMgr\"",
+    "explanation": "Insertion technique: Wrapping the library parameter 'keymgr' and the export function parameter 'KRShowKeyMgr' individually in double quotes disrupts literal continuous string searches. While the Windows command-line argument parser joins and normalizes these pieces, allowing rundll32.exe to receive and read the parameters perfectly, the raw telemetry logs contain structural punctuation symbols, evading the exact 'keymgr' and 'KRShowKeyMgr' substring lookup requirements specified by 'selection_cli'."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\WINDOWS\\system32\\rundll32.exe\" k^eymgr,K^RShowKeyMgr",
+    "explanation": "Insertion technique: Passing the command line strings via cmd.exe permits injecting caret (^) escape characters into both the DLL name and the export destination function name strings ('k^eymgr' and 'K^RShowKeyMgr'). The command processor automatically unescapes and discards caret sequences prior to spawning the process image, preserving expected code behavior. Process logging tools record the literal command containing the caret punctuation, bypassing the plain text matching condition."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" keymgr.dll,KRShowKeyMgr",
+    "explanation": "Substitution / Other technique: Explicitly appending the extension suffix to the DLL parameter ('keymgr.dll' instead of 'keymgr') modifies the logged text stream. While the Sigma rule explicitly dictates a match for the literal argument without the file extension structure, rundll32 natively handles both names identically when loading the binary target module from storage during safe lab validation testing."
+  }
+]

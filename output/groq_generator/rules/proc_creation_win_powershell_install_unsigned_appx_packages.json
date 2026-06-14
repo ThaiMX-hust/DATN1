@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-AppxPackage -AllowUnsigned -Path 'C:\\Test\\Package.appx'\"",
+    "explanation": "This command uses the original syntax from the Sigma rule and is a direct representation of an unsigned AppX installation attempt."
+  },
+  {
+    "output": "powershell.exe -Command Add-AppxPackage -AllowUnsigned -Path 'C:\\Test\\Package.appx'",
+    "explanation": "Omission of quotes around the command removes optional syntax while maintaining the same behavior."
+  },
+  {
+    "output": "pwsh.exe -c \"Add-AppPackage -AllowUnsigned -Path 'C:\\Test\\Package.appx'\"",
+    "explanation": "Substitution of 'Add-AppPackage' (alias) for 'Add-AppxPackage' and use of 'pwsh.exe' instead of 'powershell.exe' demonstrates equivalent syntax."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-AppxPackage -Path 'C:\\Test\\Package.appx' -AllowUnsigned\"",
+    "explanation": "Reordering the '-AllowUnsigned' flag and '-Path' argument to test if argument order affects detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-AppxPackage -AllowUnsigned -Path C:\\Test\\Package.appx\"",
+    "explanation": "Removal of quotes around the path to test if the absence of quotes affects detection."
+  }
+]

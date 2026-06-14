@@ -1,0 +1,10 @@
+[
+  {
+    "output": "DInjector.exe /am51 /password:secret",
+    "explanation": "The command line uses the exact flags and syntax as described in the Sigma rule, making it a true positive."
+  },
+  {
+    "output": "DInjector.exe /am^51 /password:secret",
+    "explanation": "The command line includes an escaped character (^) for the flag, which is still parsed correctly by the program and matches the Sigma rule."
+  }
+]

@@ -1,6 +1,14 @@
 [
   {
-    "output": "forfiles.exe /p C:\\Windows\\System32 /m * /c \"cmd /c echo \\\"Hello from bypass\\\"\"",
-    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+    "output": "C:\\Windows\\System32\\forfiles.exe /p \".\" /c \"cmd.exe /c echo \"\"\"",
+    "explanation": "This command simulates the behavior of forfiles.exe spawning a cmd.exe child process with a command line starting with '/c echo', as described in the Sigma rule. It uses a default Windows path to avoid triggering the rule's filter for non-default locations."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\forfiles.exe\" /p \".\" /c \"'cmd.exe' /c echo ''\"",
+    "explanation": "This command uses quotes and single quotes to obfuscate the command line slightly, but still follows the expected structure of the Sigma rule. It remains safe for testing and avoids bypassing the rule's intent."
+  },
+  {
+    "output": "C:\\Windows\\System32\\forfiles.exe -p \".\" -c cmd.exe /c echo \"\"",
+    "explanation": "This command uses short option syntax (-p instead of /p) and omits unnecessary quotes, but still matches the expected behavior of the Sigma rule. It is a valid test case for the detection logic."
   }
 ]

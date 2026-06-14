@@ -1,22 +1,20 @@
+```json
 [
   {
-    "output": "csvde.exe -f C:\\Users\\Public\\ad_export.csv",
-    "explanation": "This command is a direct match to the Sigma rule's detection criteria, as it uses 'csvde.exe' with the '-f' flag to export data, which is the behavior the rule is designed to detect."
+    "output": "csvde.exe -f C:\\temp\\export.csv",
+    "explanation": "This command simulates a typical usage of csvde.exe to export Active Directory data to a CSV file. It matches the Sigma rule's detection criteria by using the '-f' flag and not including the '-i' flag (which is filtered out)."
   },
   {
-    "output": "csvde.exe -fC:\\Users\\Public\\ad_export.csv",
-    "explanation": "This command omits the space between '-f' and the filename, which is a valid syntax variation for the tool. It still matches the Sigma rule's detection logic."
+    "output": "csvde.exe  -f C:\\temp\\export.csv",
+    "explanation": "Extra space before the '-f' flag is inserted, which is a safe mutation technique. The command remains functionally identical and still matches the Sigma rule."
   },
   {
-    "output": "csvde.exe -f \"C:\\Users\\Public\\ad_export.csv\"",
-    "explanation": "This command uses quotes around the filename, which is a valid syntax variation. It still matches the Sigma rule's detection logic."
+    "output": "csvde.exe -fC:\\temp\\export.csv",
+    "explanation": "The space between '-f' and the filename is omitted, which is an allowed substitution in some command-line interfaces. This is a valid mutation that still matches the Sigma rule."
   },
   {
-    "output": "csvde.exe -f C:\\Users\\Public\\ad_export.csv -i",
-    "explanation": "This command includes the '-i' flag, which is filtered out by the Sigma rule. It is included here to demonstrate a false positive scenario."
-  },
-  {
-    "output": "csvde.exe -f C:\\Users\\Public\\ad_export.csv -i -f C:\\Users\\Public\\real_export.csv",
-    "explanation": "This command includes multiple '-f' flags, which is valid for the tool. The Sigma rule includes a filter to exclude commands with '-i', making this a false positive."
+    "output": "csvde.exe -f C:\\temp\\export.csv",
+    "explanation": "No mutation applied; this is the base command that matches the Sigma rule and is used as a reference for testing."
   }
 ]
+```

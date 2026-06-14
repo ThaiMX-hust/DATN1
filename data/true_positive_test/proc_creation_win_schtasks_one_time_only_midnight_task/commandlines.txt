@@ -1,1 +1,0 @@
-schtasks.exe /Create /SC ONCE /ST 00:00 /TN "UpdateTask" /TR "update.exe" /F

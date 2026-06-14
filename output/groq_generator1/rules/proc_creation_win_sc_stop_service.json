@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc.exe stop spooler",
+    "explanation": "This is the original command and serves as a baseline for testing detection accuracy."
+  },
+  {
+    "output": "sc stop spooler",
+    "explanation": "Omission of the .exe extension, which is valid in Windows when the file is in the system PATH."
+  },
+  {
+    "output": "sc.exe   stop   spooler",
+    "explanation": "Insertion of extra spaces between the command and arguments, which is still parsed correctly by Windows."
+  },
+  {
+    "output": "sc stop \"spooler\"",
+    "explanation": "Insertion of quotes around the service name, which is valid and does not change the command behavior."
+  },
+  {
+    "output": "sc stop $env:service_name",
+    "explanation": "Recoding using an environment variable to represent the service name, which is valid in a test environment."
+  }
+]

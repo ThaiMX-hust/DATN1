@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "net use \"\\\\Target\\C$\" P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Inserted quotes around the UNC path to test if the rule is sensitive to spacing or quotation changes."
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"Password! \"",
+    "explanation": "This command uses quotes around the password and omits unnecessary spaces, but still matches the Sigma rule's detection criteria for admin share mounting."
   },
   {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN/Administrator",
-    "explanation": "Replaced backslashes in the username with forward slashes to test if the rule is sensitive to path normalization or syntax substitution."
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"Password1 \"",
+    "explanation": "This command is a variation of the original with a different password but still matches the Sigma rule's detection criteria."
   },
   {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Removed extra spaces in the command line to test if the rule is sensitive to spacing variations."
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"Spring2022 \"",
+    "explanation": "This command uses a different password but still matches the Sigma rule's detection criteria."
   },
   {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /user:DOMAIN\\Administrator",
-    "explanation": "Replaced the short option '/u' with the long option '/user' to test if the rule is sensitive to option substitution."
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"1q2w3e4r \"",
+    "explanation": "This command uses a different password but still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"ChangeMe! \"",
+    "explanation": "This command uses a different password but still matches the Sigma rule's detection criteria."
   }
 ]
+```

@@ -1,4 +1,1 @@
 "C:\windows\system32\wbem\mofcomp.exe" C:\AtomicRedTeam\atomics\T1546.003\src\T1546.003.mof
-copy mofcomp.exe not_mof.exe && not_mof.exe C:\Windows\Tasks\malicious.mof
-mofcomp.exe -N:root\subscription C:\Windows\TEMP\evasion.mof
-Start-Process mofcomp.exe -ArgumentList "C:\ProgramData\legit.mof"

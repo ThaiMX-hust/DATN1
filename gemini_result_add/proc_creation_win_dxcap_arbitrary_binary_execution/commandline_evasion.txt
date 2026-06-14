@@ -1,0 +1,22 @@
+[
+  {
+    "output": "DXCap.exe /c calc.exe",
+    "explanation": "Substitution technique: Built-in Microsoft binaries leveraging standard Windows CLI parsing frameworks traditionally treat forward slashes ('/') interchangeably with hyphens ('-') as switch prefixes. Substituting ' -c ' with '/c ' completely breaks the literal string detection 'CommandLine|contains: \' -c \'' while performing the exact same application launching behavior."
+  },
+  {
+    "output": "DXCap.exe \"-c\" calc.exe",
+    "explanation": "Insertion technique: Enclosing the capture switch parameter inside double quotes ('\"-c\"') disrupts the continuous space-padded substring matching logic (' -c ') configured in 'selection_cli'. The native Win32 argument tokenization routines unquote parameters transparently before execution, allowing the program logic to run identically."
+  },
+  {
+    "output": "cmd.exe /c DXCap.exe -c^  calc.exe",
+    "explanation": "Insertion technique: Invoking the command via cmd.exe permits the integration of a caret escape operator ('^') right inside the trailing whitespace segment of the flag block. The console interpreter processes and strips the caret out upon instantiation, logging a raw command-line signature containing '-c^ ' to safely neutralize strict space boundary expectations."
+  },
+  {
+    "output": "DXCap.exe\t-c\tcalc.exe",
+    "explanation": "Substitution technique: Replacing the structural literal spaces surrounding the '-c' parameter switch with horizontal tab characters ('\\t'). The Windows kernel processes horizontal tabs as valid command parameter whitespace separators, which seamlessly subverts tokenized string lookups that require explicit space-padded fields."
+  },
+  {
+    "output": "DXCap.exe  -c  calc.exe",
+    "explanation": "Insertion technique: Inserting an extra space character before or after the '-c' switch. Standard Windows application tokenizers merge contiguous whitespace sequences during shell parsing routines, ensuring functional behavior remains equivalent while avoiding static patterns expecting exactly a single space delimiter (' -c ')."
+  }
+]

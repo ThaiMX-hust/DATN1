@@ -1,0 +1,6 @@
+[
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication calc.exe",
+    "explanation": "This is a direct match to the Sigma rule and serves as a baseline for testing."
+  }
+]

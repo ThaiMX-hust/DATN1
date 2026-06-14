@@ -1,14 +1,14 @@
 [
   {
-    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | powershell.exe -noprofile -command -\"",
-    "explanation": "Original command matches the Sigma rule. No mutation needed for testing."
+    "output": "cmd /C \"echo Invoke-Expression (New-Object Net.WebClient).DownloadString | powershell -NoExit -\"",
+    "explanation": "This command simulates the obfuscated PowerShell execution via stdin as described in the Sigma rule. It uses standard command-line syntax and does not include malicious payloads for testing purposes."
   },
   {
-    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | powershell.exe -noprofile -c -\"",
-    "explanation": "Substitution of '-command' with its short form '-c' is a valid mutation that preserves the original behavior."
+    "output": "CMD.EXE /C \"echo Invoke-Expression (New-Object Net.WebClient).DownloadString | PowerShell -nol $ExecutionContext.InvokeCommand.InvokeScript( $Input )\"",
+    "explanation": "This command reorders and uses alternative capitalization for CMD.EXE and PowerShell, and includes a PowerShell expression that aligns with the Sigma rule's detection pattern. It is safe for testing and avoids malicious behavior."
   },
   {
-    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | powershell -noprofile -command -\"",
-    "explanation": "Omission of '.exe' extension and reordering of arguments are safe mutations that preserve the original behavior."
+    "output": "cmd /C \"echo Invoke-Expression (New-Object Net.WebClient).DownloadString | powershell -\"",
+    "explanation": "This command omits optional elements while preserving the core behavior of the original command. It uses minimal syntax to simulate the Sigma rule's detection pattern in a safe manner."
   }
 ]

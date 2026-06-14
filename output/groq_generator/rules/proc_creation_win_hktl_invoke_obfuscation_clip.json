@@ -1,30 +1,14 @@
 [
   {
-    "output": "cmd /c \"echo Write-Host 'Test Execution' | clip & powershell -NoProfile -Command Add-Type -AssemblyName System.Windows.Forms; IEX([System.Windows.Forms.Clipboard]::GetText())\"",
-    "explanation": "This is a true positive command and cannot be considered a bypass since it matches the Sigma rule exactly."
+    "output": "cmd /c \"echo Invoke-Expression (New-Object Net.WebClient).DownloadString | clip && powershell -noprofile -command [System.Windows.Forms.Clipboard]::GetText().Invoke()\"",
+    "explanation": "This command mimics the structure of the Sigma rule by using 'cmd /c', '&&', and PowerShell clipboard interaction. It uses standard syntax and avoids obfuscation to remain safe for testing."
   },
   {
-    "output": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \"iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
-    "explanation": "This is a true positive command and cannot be considered a bypass since it matches the Sigma rule exactly."
+    "output": "cmd /c \"echo Invoke-Expression (New-Object Net.WebClient).DownloadString | clip && powershell -noprofile -c [System.Windows.Forms.Clipboard]::GetText().Invoke()\"",
+    "explanation": "This variation uses equivalent syntax with shorter flags (-c instead of -command) and omits unnecessary obfuscation, while maintaining the same logical structure as the Sigma rule."
   },
   {
-    "output": "cmd /c \"echo Write-Host 'Test' | clip & powershell -Sta -NoProfile -Command Add-Type -AssemblyName PresentationCore; Invoke-Expression ([System.Windows.Clipboard]::GetText())\"",
-    "explanation": "This is a true positive command and cannot be considered a bypass since it matches the Sigma rule exactly."
-  },
-  {
-    "output": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \"$c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
-    "explanation": "This is a true positive command and cannot be considered a bypass since it matches the Sigma rule exactly."
-  },
-  {
-    "output": "powershell.exe -NoProfile -Command \"Set-Clipboard -Value 'Write-Host Executed'; Invoke-Expression (Get-Clipboard)\"",
-    "explanation": "This is a true positive command and cannot be considered a bypass since it matches the Sigma rule exactly."
-  },
-  {
-    "output": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \"iex([System.Windows.Forms.Clipboard]::GetText())\"",
-    "explanation": "This is a duplicate of an existing true positive and not a bypass."
-  },
-  {
-    "output": "",
-    "explanation": "No safe bypass command can be generated."
+    "output": "cmd /c \"echo Invoke-Expression (New-Object Net.WebClient).DownloadString | clip && powershell -noprofile -command ([System.Windows.Forms.Clipboard]::GetText().Invoke())\"",
+    "explanation": "This command uses parentheses to change the formatting slightly but does not alter the behavior. It remains safe and avoids obfuscation techniques."
   }
 ]

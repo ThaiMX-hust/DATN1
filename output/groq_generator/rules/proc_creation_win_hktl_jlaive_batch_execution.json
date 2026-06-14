@@ -1,18 +1,14 @@
 [
   {
-    "output": "cmd.exe /c script.bat && xcopy powershell.exe script.bat.exe*",
-    "explanation": "This command matches the original Sigma rule's detection criteria by using xcopy to copy powershell.exe as a .bat.exe file, following a batch script execution. It is a direct match for selection1."
+    "output": "xcopy.exe /w \"powershell.exe -Command echo 'test' > test.bat.exe\"",
+    "explanation": "This command uses xcopy.exe with the /w flag to simulate a delay, and embeds a PowerShell command to create a .bat.exe file. It aligns with the Sigma rule's detection of xcopy.exe invoking PowerShell and creating a .bat.exe file."
   },
   {
-    "output": "cmd.exe /c script.bat && xcopy pwsh.exe script.bat.exe*",
-    "explanation": "This command uses 'pwsh.exe' instead of 'powershell.exe' to match the second selection condition (selection2) in the Sigma rule. The rest of the command structure remains unchanged."
+    "output": "attrib.exe +s +h test.bat.exe",
+    "explanation": "This command sets the system and hidden attributes on a test.bat.exe file, which matches the Sigma rule's detection of attrib.exe being used with +s and +h flags on a .bat.exe file."
   },
   {
-    "output": "cmd.exe /c script.cmd && attrib +s +h script.cmd.exe && xcopy powershell.exe script.cmd.exe*",
-    "explanation": "This command includes the 'attrib' command with '+s' and '+h' flags to match selection3 in the Sigma rule. It also uses 'xcopy' to copy 'powershell.exe' as a .cmd.exe file, fulfilling multiple detection conditions."
-  },
-  {
-    "output": "cmd.exe /c script.bat && copy powershell.exe script.bat.exe",
-    "explanation": "This command matches the original Sigma rule's detection criteria by using 'copy' instead of 'xcopy' to copy powershell.exe as a .bat.exe file, following a batch script execution. It is a direct match for selection1."
+    "output": "xcopy.exe /w \"pwsh.exe -Command echo 'test' > test.bat.exe\"",
+    "explanation": "This command uses xcopy.exe with the /w flag and invokes pwsh.exe (PowerShell Core) to create a .bat.exe file, which matches the Sigma rule's detection of pwsh.exe and .bat.exe in the command line."
   }
 ]

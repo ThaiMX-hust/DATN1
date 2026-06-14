@@ -1,0 +1,18 @@
+[
+  {
+    "output": "hh.exe -decompile C:\\Users\\thaim\\AppData\\Local\\Temp \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.ch\"\"m\"",
+    "explanation": "Insertion technique: Inserting an adjacent pair of empty double quotes inside the target file extension string ('ch\"\"m'). The native Windows command-line tokenizer automatically normalizes and strips out these empty quote structures at process instantiation, reassembling the parameter back to its functional '.chm' state while completely breaking the continuous substring match required by the 'CommandLine|contains: \'.chm\'' filter."
+  },
+  {
+    "output": "cmd.exe /c hh.exe -decompile C:\\Users\\thaim\\AppData\\Local\\Temp \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.ch^m\"",
+    "explanation": "Insertion technique: Routing the execution through a cmd.exe context allows the integration of a command shell caret escape character ('^') directly inside the extension token. The parent interpreter processes and strips the caret away prior to launching the HTML Help executable context, yielding a process creation log footprint of '.ch^m' that successfully blinds the rigid literal keyword monitor."
+  },
+  {
+    "output": "hh.exe \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.chm \"",
+    "explanation": "Insertion technique: Appending a trailing space character inside the quoted path string directly after the extension. The underlying Windows file subsystem strips trailing whitespace from path components natively during file access initialization, ensuring flawless payload location execution while potentially breaking poorly scoped or custom trailing-edge string validation algorithms."
+  },
+  {
+    "output": "hh.exe -decompile C:\\Users\\thaim\\AppData\\Local\\Temp \"C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.CHM\"",
+    "explanation": "Other techniques (Case Variation Strategy): Converting the target extension string token to uppercase ('CHM'). While standard Sigma logic backends default to case-insensitive evaluations for 'contains' fields, unoptimized or localized SIEM configurations, custom index filters, or raw log parsers sometimes operate under strict case-sensitive constraints."
+  }
+]

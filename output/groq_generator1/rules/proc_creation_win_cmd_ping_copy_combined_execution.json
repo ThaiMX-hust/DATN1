@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c ping -n 1 127.0.0.1 & copy C:\\Windows\\System32\\drivers\\etc\\hosts C:\\Temp\\hosts.bak",
+    "explanation": "Removed quotes and combined the command using the ampersand (&) instead of &&. This is a valid alternative for chaining commands in cmd.exe."
+  },
+  {
+    "output": "cmd.exe /c \"ping -n 1 127.0.0.1\" && \"copy C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts C:\\\\Temp\\\\hosts.bak\"",
+    "explanation": "Inserted additional quotes around each command to test parsing behavior while maintaining the original logic."
+  },
+  {
+    "output": "cmd.exe /c ping -n 1 127.0.0.1 && copy /y C:\\Windows\\System32\\drivers\\etc\\hosts C:\\Temp\\hosts.bak",
+    "explanation": "Added the /y flag to the copy command to test if it affects detection while preserving the original behavior."
+  },
+  {
+    "output": "cmd.exe /c ping -n 1 127.0.0.1 && copy C:\\Windows\\System32\\drivers\\etc\\hosts C:\\Temp\\hosts.bak",
+    "explanation": "Reformatted the command by removing quotes and ensuring consistent spacing to test detection robustness."
+  }
+]

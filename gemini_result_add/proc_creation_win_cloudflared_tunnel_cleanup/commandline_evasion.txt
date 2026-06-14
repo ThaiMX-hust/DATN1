@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Tools\\cloudflared.exe tunnel cleanup --connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "Substitution technique: Cloudflared accepts standard Go-style double hyphens ('--connector-id') interchangeably with single hyphens ('-connector-id') for long options. Using '--connector-id' completely evades the strict single-hyphen substring check '-connector-id ' in the rule, while the executable handles the parameter identically."
+  },
+  {
+    "output": "C:\\Tools\\cloudflared.exe tunnel \"cleanup\" -connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "Insertion technique: Enclosing the action verb token in double quotes ('\"cleanup\"') breaks up the contiguous literal character sequence 'cleanup ' (with a trailing space) inside the process creation logs. The internal Go argument library processes the unquoted parameter string transparently at runtime execution."
+  },
+  {
+    "output": "cmd.exe /c C:\\Tools\\cloudflared.exe tunnel cle^anup -connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "Insertion technique: Injects a command shell caret escape character ('^') inside the 'cleanup' keyword string via cmd.exe. The shell strips the escape character before handing execution context down to the binary, leaving the raw process logs holding 'cle^anup', which subverts the literal string match."
+  },
+  {
+    "output": "C:\\Tools\\cloudflared.exe tunnel\tcleanup\t-connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "Substitution technique: Replaces the expected single space character limits flanking the arguments with horizontal tab characters ('\\t'). The native Windows operating system tokenizes horizontal tabs as valid whitespace parameter separators, bypassing strict space-padded string checks like ' tunnel ' or 'cleanup '."
+  }
+]

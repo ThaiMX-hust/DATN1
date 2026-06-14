@@ -1,0 +1,22 @@
+[
+  {
+    "output": "certipy.exe find -u administrator -p Password123 -dc-ip 10.10.10.10",
+    "explanation": "This is the original true positive command and is not a bypass. It is included for reference."
+  },
+  {
+    "output": "certipy.exe  find -u administrator -p Password123 -dc-ip 10.10.10.10",
+    "explanation": "Added an extra space before the first argument to test insertion of whitespace as a mutation technique."
+  },
+  {
+    "output": "certipy.exe find -u admin -p Password123 -dc-ip 10.10.10.10",
+    "explanation": "Modified the username from 'administrator' to 'admin' to test substitution of equivalent values in a controlled environment."
+  },
+  {
+    "output": "-dc-ip 10.10.10.10 certipy.exe find -u administrator -p Password123",
+    "explanation": "Reordered the command-line arguments to test reordering as a mutation technique."
+  },
+  {
+    "output": "certipy.exe find -u administrator -p Password123 --dc-ip 10.10.10.10",
+    "explanation": "Replaced '-dc-ip' with '--dc-ip' to test substitution of short/long options as a mutation technique."
+  }
+]

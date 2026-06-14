@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell -Command \"& {Set-Service -Name wuauserv -StartupType Disabled}\"",
+    "explanation": "The mutation technique used is 'Recoding / Encoding' by utilizing the PowerShell -Command parameter and the call operator (&). This is intended to avoid the rule condition that relies on the exact 'Set-Service' and '-StartupType' syntax in the command line. The high-level behavior is expected to remain equivalent because the command still invokes the Set-Service cmdlet with the same parameters, but in a more encoded manner. Assumption: The target system has PowerShell installed and configured to execute commands in this format."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command Set-Service -Name wuauserv -StartupType Manual",
+    "explanation": "The mutation technique used is 'Insertion' by adding the '-ExecutionPolicy Bypass' parameter, which is often used to bypass PowerShell execution policy restrictions. This is intended to avoid the rule condition that looks for the 'Set-Service' and '-StartupType' keywords without considering additional parameters. The high-level behavior is expected to remain equivalent because the command still changes the startup type of a service, but with an additional parameter that might evade detection. Uncertainty: The effectiveness of this evasion depends on the system's execution policy and how the rule is implemented to handle additional parameters."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe Set-Service -Name wuauserv -StartupType Disabled",
+    "explanation": "The mutation technique used is 'Recoding / Encoding' by specifying the full path to the PowerShell executable. This is intended to avoid the rule condition that relies on the 'powershell.exe' keyword without considering the full path. The high-level behavior is expected to remain equivalent because the command still invokes PowerShell to change the service startup type. Assumption: The target system has the specified PowerShell path and it is correctly configured."
+  },
+  {
+    "output": "powershell -Command \"(Get-Service -Name wuauserv).StartupType = 'Disabled'; Stop-Service -Name wuauserv -Force\"",
+    "explanation": "The mutation technique used is 'Substitution' by replacing the 'Set-Service' cmdlet with equivalent operations using 'Get-Service' and direct property modification. This is intended to avoid the rule condition that specifically looks for 'Set-Service'. The high-level behavior is expected to remain equivalent because the command achieves the same goal of disabling a service, albeit through different means. Uncertainty: This method might not be as straightforward to detect as the original command and could potentially evade the rule."
+  }
+]

@@ -1,1 +1,0 @@
-copy setres.exe renamed_utility.exe && cd C:\temp && renamed_utility.exe

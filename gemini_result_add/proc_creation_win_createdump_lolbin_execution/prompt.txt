@@ -1,0 +1,85 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: CreateDump Process Dump
+id: 515c8be5-e5df-4c5e-8f6d-a4a2f05e4b48
+related:
+    - id: 1a1ed54a-2ba4-4221-94d5-01dee560d71e
+      type: similar
+status: test
+description: Detects uses of the createdump.exe LOLOBIN utility to dump process memory
+references:
+    - https://www.crowdstrike.com/blog/overwatch-exposes-aquatic-panda-in-possession-of-log-4-shell-exploit-tools/
+    - https://twitter.com/bopin2020/status/1366400799199272960
+author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+date: 2022-01-04
+modified: 2022-08-19
+tags:
+    - attack.defense-evasion
+    - attack.t1036
+    - attack.t1003.001
+    - attack.credential-access
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\createdump.exe'
+        - OriginalFileName: 'FX_VER_INTERNALNAME_STR'
+    selection_cli:
+        CommandLine|contains:
+            - ' -u ' # Short version of '--full'
+            - ' --full '
+            - ' -f ' # Short version of '--name'
+            - ' --name '
+            - '.dmp '
+    condition: all of selection_*
+falsepositives:
+    - Command lines that use the same flags
+level: high
+```
+
+True positive test command:
+
+```text
+"C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\createdump.exe" -u -f C:\Users\thaim\AppData\Local\Temp\dotnet-lsass.dmp 788
+"powershell.exe" & {$exePath = resolve-path \""$env:ProgramFiles\dotnet\shared\Microsoft.NETCore.App\5*\createdump.exe\"" & \""$exePath\"" -u -f $env:Temp\dotnet-lsass.dmp (Get-Process lsass).id}
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

@@ -1,18 +1,18 @@
 [
   {
-    "output": "odbcconf.exe /A {REGSVR \"C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll\"}",
-    "explanation": "This command uses standard syntax for registering a DLL via odbcconf.exe. It is a direct representation of the Sigma rule's detection pattern."
+    "output": "odbcconf.exe /S /A REGSVR C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll",
+    "explanation": "Omission of quotes around the DLL path and substitution of spaces with no spaces where acceptable. This maintains the same behavior but alters the command line to potentially bypass the Sigma rule."
   },
   {
-    "output": "odbcconf.exe /A {REGSVR C:\\Temp\\malicious.txt}",
-    "explanation": "This command mirrors the second test command but omits unnecessary quotes around the DLL path, which is still valid and detectable by the Sigma rule."
+    "output": "odbcconf.exe /S /A REGSVR C:/AtomicRedTeam/atomics/T1218.008/src/Win32/T1218-2.dll",
+    "explanation": "Replaced backslashes with forward slashes for path normalization and omitted quotes. This is a safe mutation that may bypass detection based on specific string patterns."
   },
   {
-    "output": "odbcconf.exe -A {REGSVR C:\\Temp\\malicious.txt}",
-    "explanation": "This command uses the short form of the action flag (-A instead of /A), which is functionally equivalent and detectable by the Sigma rule."
+    "output": "odbcconf.exe /S /A REGSVR \"C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll\"",
+    "explanation": "Inserted explicit quotes around the DLL path. This is a safe mutation that may bypass detection if the Sigma rule does not account for quoted strings."
   },
   {
-    "output": "odbcconf.exe /A {REGSVR \"C:\\\\Temp\\\\malicious.txt\"}",
-    "explanation": "This command uses double backslashes for escaping, which is a safe mutation technique and still detectable by the Sigma rule."
+    "output": "odbcconf.exe /S /A REGSVR C:\\AtomicRedTeam\\atomics\\T1218.008\\src\\Win32\\T1218-2.dll",
+    "explanation": "Reordered the command line by omitting the braces and quotes. This is a safe mutation that may bypass detection if the Sigma rule relies on specific syntax patterns."
   }
 ]

@@ -1,3 +1,4 @@
+```json
 [
   {
     "output": "dllhost.exe",
@@ -5,14 +6,20 @@
   },
   {
     "output": "\"dllhost.exe\"",
-    "explanation": "Inserting quotes around the executable name is a safe mutation technique that does not change the behavior but may bypass simplistic detection patterns."
+    "explanation": "Inserted quotes around the executable name, which is a safe mutation technique and still valid for triggering the rule."
+  },
+  {
+    "output": "dllhost.exe ",
+    "explanation": "Added a trailing space, which is a safe mutation and still valid for triggering the rule."
   },
   {
     "output": "d l l h o s t . e x e",
-    "explanation": "Splitting the executable name into individual characters with spaces is a safe mutation technique that may bypass simplistic string-based detection."
+    "output": "d l l h o s t . e x e",
+    "explanation": "Split the executable name into individual characters using spaces, which is a form of safe recoding and still valid for triggering the rule."
   },
   {
-    "output": "cmd.exe /c dllhost.exe",
-    "explanation": "Invoking the target process via cmd.exe with the /c flag is a safe mutation that may bypass detection while preserving the test behavior."
+    "output": "cmd /c dllhost.exe",
+    "explanation": "Used the CMD shell to execute the original command, which is a safe mutation technique and still valid for triggering the rule."
   }
 ]
+```

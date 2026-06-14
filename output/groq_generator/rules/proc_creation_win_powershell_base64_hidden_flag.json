@@ -1,22 +1,24 @@
+```json
 [
   {
-    "output": "powershell.exe -WindowStyle Hidden -EncodedCommand \"QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==\"",
-    "explanation": "Inserted quotes around the encoded command to test if the rule is affected by string quoting."
+    "output": "powershell.exe -EncodedCommand JABjAGgAdQBuAGsAXwBzAGkAegBlAA==",
+    "explanation": "This command uses base64 encoding to pass an argument to PowerShell, which aligns with the Sigma rule's detection criteria. The encoded string is a safe, benign command for testing purposes."
   },
   {
-    "output": "powershell.exe -w hidden -EncodedCommand QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
-    "explanation": "Substituted '-WindowStyle' with its short form '-w' to test if the rule is affected by option abbreviation."
+    "output": "pwsh -e JABjAGgAdQBuAGsAXwBzAGkAegBlAA==",
+    "explanation": "This command uses the short form of the encoded command flag (-e instead of -EncodedCommand) and base64 encoding, which aligns with the Sigma rule's detection criteria. The encoded string is a safe, benign command for testing purposes."
   },
   {
-    "output": "powershell.exe -EncodedCommand QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg== -WindowStyle Hidden",
-    "explanation": "Reordered the command-line arguments to test if the rule is affected by argument order."
+    "output": "powershell.exe -EncodedCommand \"JABjAGgAdQBuAGsAXwBzAGkAegBlAA==\"",
+    "explanation": "This command uses base64 encoding and quotes around the encoded command, which is a safe mutation technique. The encoded string is a safe, benign command for testing purposes."
   },
   {
-    "output": "powershell.exe -EncodedCommand QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
-    "explanation": "Omitted the '-WindowStyle Hidden' parameter to test if the rule is affected by the absence of this parameter."
+    "output": "pwsh.exe -EncodedCommand JABjAGgAdQBuAGsAXwBzAGkAegBlAA==",
+    "explanation": "This command uses base64 encoding and the full executable name (pwsh.exe), which aligns with the Sigma rule's detection criteria. The encoded string is a safe, benign command for testing purposes."
   },
   {
-    "output": "powershell.exe -EncodedCommand $env:EncodedCmd",
-    "explanation": "Replaced the encoded command with an environment variable to test if the rule is affected by variable substitution."
+    "output": "powershell.exe -Command \"[Convert]::FromBase64String('JABjAGgAdQBuAGsAXwBzAGkAegBlAA==') | Out-String\"",
+    "explanation": "This command uses PowerShell's [Convert] class to decode a base64 string, which is a safe mutation technique. The encoded string is a safe, benign command for testing purposes."
   }
 ]
+```

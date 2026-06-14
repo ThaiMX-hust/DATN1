@@ -1,22 +1,22 @@
 [
   {
-    "output": "at 13:20 /i cmd",
-    "explanation": "The /interactive flag is substituted with its short form /i, which is equivalent and still triggers the Sigma rule."
+    "output": "at 13:20 /interactive cmd",
+    "explanation": "This is the original true positive command and is not modified."
   },
   {
-    "output": "at 13:20   /interactive   cmd",
-    "explanation": "Additional spaces are inserted around the /interactive flag and between arguments, which does not affect execution but tests detection robustness."
+    "output": "at 13:20 /i cmd",
+    "explanation": "The /interactive flag is replaced with its short form /i, which is functionally equivalent."
+  },
+  {
+    "output": "at 13:20  /interactive cmd",
+    "explanation": "Extra space is inserted before the /interactive flag, which is a valid mutation technique."
   },
   {
     "output": "at 13:20/interactive cmd",
-    "explanation": "A space between the time and the /interactive flag is omitted, but the command is still valid and should be detected."
+    "explanation": "No space is inserted between the time and the /interactive flag, which may still be parsed correctly depending on the system."
   },
   {
     "output": "at 13:20 /INTERACTIVE cmd",
-    "explanation": "The /interactive flag is capitalized to /INTERACTIVE, testing case-insensitive detection capabilities."
-  },
-  {
-    "output": "at 13:20 /interactive cmd.exe",
-    "explanation": "The full path or executable name is expanded from 'cmd' to 'cmd.exe', which is still valid and should be detected."
+    "explanation": "The flag is capitalized, which is a valid mutation technique as Windows is case-insensitive."
   }
 ]

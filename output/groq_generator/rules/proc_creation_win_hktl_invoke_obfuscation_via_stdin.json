@@ -1,18 +1,10 @@
 [
   {
-    "output": "cmd.exe /c \"set A=in^voke & set B=environment & echo %A% | powershell -\"",
-    "explanation": "This command uses insertion (quotes and escape characters) and variable assignment to obfuscate the invocation of PowerShell, aligning with the Sigma rule's detection pattern."
+    "output": "powershell.exe -Command \"set-variable -Name env -Value 'test' && set-content -Path env:\\VAR -Value 'obfuscate' && invoke-expression $env:VAR\"",
+    "explanation": "This command simulates a scenario where PowerShell is used to set variables and invoke expressions, which aligns with the Sigma rule's detection pattern. It uses safe mutation techniques like reordering and substitution to avoid direct obfuscation while still matching the rule's regex."
   },
   {
-    "output": "cmd.exe /V:ON /C \"set a=in&& set b=voke&& set c=!a!!b!&& echo !c! | powershell -\"",
-    "explanation": "This command uses variable expansion and delayed environment variables to obfuscate the execution of PowerShell, which matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"$invoke='payload'; Write-Host 'Test Execution'\"",
-    "explanation": "This command directly executes a PowerShell command with obfuscated variable assignment, which is consistent with the Sigma rule's intent to detect obfuscated PowerShell execution."
-  },
-  {
-    "output": "set a=1 & set invoke=payload & powershell -c \"Write-Host 'Test Execution'\"",
-    "explanation": "This command uses environment variables and chaining to obfuscate the PowerShell execution, which is detectable by the Sigma rule."
+    "output": "powershell.exe -c \"set env:test && set-item env:\\VAR -Value 'invoke' && iex $env:VAR\"",
+    "explanation": "This command uses equivalent syntax (shortened flags and aliases) and reordering to simulate the behavior of the Sigma rule's detection pattern. It remains functionally equivalent but uses safe mutation techniques."
   }
 ]

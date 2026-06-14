@@ -1,22 +1,26 @@
 [
   {
-    "output": "net use Z: \"http://attacker.com/share\"",
-    "explanation": "The original command is modified by adding quotes around the URL for safe parsing, which is a valid insertion technique."
+    "output": "net.exe use Z: http://example.com/webdav /user:admin password",
+    "explanation": "This command uses the standard syntax to mount a WebDAV share via net.exe, matching the Sigma rule's detection criteria."
   },
   {
-    "output": "net use Z: http://attacker.com/share",
-    "explanation": "The original command is modified by omitting quotes around the URL, which is still valid in many command-line contexts."
+    "output": "net.exe  use  Z:  http://example.com/webdav  /user:admin  password",
+    "explanation": "Additional spaces are inserted between arguments, which is a safe mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "net use Z: \"http://attacker.com/share\" /user:username",
-    "explanation": "The original command is extended with an optional /user flag, which does not affect the core behavior of mounting the WebDAV share."
+    "output": "net.exe use Z: \"http://example.com/webdav\" /user:admin password",
+    "explanation": "The URL is wrapped in quotes, a safe mutation technique that does not alter the behavior and still matches the Sigma rule."
   },
   {
-    "output": "net use Z: http://attacker.com/share /persistent:no",
-    "explanation": "The original command is modified by adding a non-essential /persistent flag with a value, which does not alter the core detection behavior."
+    "output": "net.exe use Z: http://example.com/webdav -user:admin password",
+    "explanation": "The long option '/user' is replaced with the equivalent short option '-user', a safe substitution that still matches the Sigma rule."
   },
   {
-    "output": "net use Z: http://attacker.com/share /user:username /persistent:no",
-    "explanation": "The original command is modified by adding optional flags in a different order, which is valid and does not affect detection."
+    "output": "net.exe use Z: http://example.com/webdav /u:admin password",
+    "explanation": "The '/user' flag is replaced with the equivalent short option '/u', a safe substitution that still matches the Sigma rule."
+  },
+  {
+    "output": "net.exe use Z: http://example.com/webdav /user:admin password",
+    "explanation": "Standard command with no mutation applied, directly matching the Sigma rule."
   }
 ]

@@ -1,4 +1,0 @@
-wmic.exe /node:localhost /namespace:\\root\cimv2 path win32_logicaldisk get Name
-wmic.exe path win32_logicaldisk where "DeviceID='C:'" get Size
-wmic.exe volume get Name,Capacity,FreeSpace
-wmic.exe volume where "driveletter='C:'" get name,capacity,freespace

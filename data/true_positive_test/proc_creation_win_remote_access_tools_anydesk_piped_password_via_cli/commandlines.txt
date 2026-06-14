@@ -1,2 +1,0 @@
-anydesk.exe --set-password < C:\Temp\pass.txt
-cmd.exe /c"echo(J9kzQ2Y0qO|anydesk --set-password"

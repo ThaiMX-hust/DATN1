@@ -1,2 +1,2 @@
-certutil.exe -urlcache -split -f http://0xC0000201/example.txt C:\	emp\example.txt
-certutil.exe -urlcache -split -f http://testuser@192.0.2.1/example.txt C:\	emp\example.txt
+"C:\WINDOWS\system32\certutil.exe" -verifyctl -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt
+certutil -urlcache -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt Atomic-license.txt

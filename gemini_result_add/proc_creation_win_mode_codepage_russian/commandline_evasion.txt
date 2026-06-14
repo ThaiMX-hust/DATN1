@@ -1,0 +1,22 @@
+[
+  {
+    "output": "mode.com con cp select=1251 ",
+    "explanation": "Insertion technique. Appends a trailing space character at the very end of the command line. This safely bypasses the strict `CommandLine|endswith` rule conditions (`=1251` and `=866`), while `mode.com` ignores the trailing whitespace and executes the codepage modification successfully."
+  },
+  {
+    "output": "mode.com con cp select=866 & rem",
+    "explanation": "Insertion technique. Appends a command separator (`&`) and a comment (`rem`) at the end of the command string. This breaks the `CommandLine|endswith` condition because the command string no longer ends with the literal codepage numbers, but `mode.com` executes its part before the shell interprets the comment."
+  },
+  {
+    "output": "mode.com \"con\" \"cp\" \"select=1251\"",
+    "explanation": "Insertion technique. Encloses individual command tokens in double quotes. This breaks the selection logic for `CommandLine|contains|all` which expects strict space-padded tokens like ` con ` and ` cp `, whereas the Windows environment unquotes the strings natively during execution."
+  },
+  {
+    "output": "mode.com con cp select=001251",
+    "explanation": "Recoding / Encoding technique. Pads the target codepage identifier with leading zeros (`001251`). This effectively alters the absolute string ending required by the `endswith` logic while `mode.com` parses the value numerically or handles the identifier correctly within its internal configuration scheme."
+  },
+  {
+    "output": "mode.com con cp select=866 #",
+    "explanation": "Insertion technique. Appends a trailing hash symbol or safe delimiter character to the command line. This prevents a successful match against the strict `endswith` patterns (`=1251` and `=866`) while remaining a valid execution string under standard testing scenarios."
+  }
+]

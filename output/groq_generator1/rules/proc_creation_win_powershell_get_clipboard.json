@@ -1,0 +1,38 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Clipboard\"",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed for this baseline."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Clip`board\"",
+    "explanation": "The command uses an escaped character (`) to split 'Get-Clipboard' into 'Get-Clip' and 'board', which is parsed correctly by PowerShell and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX ('Get-' + 'Clipboard')\"",
+    "explanation": "The command uses string concatenation to form 'Get-Clipboard' at runtime, which is still parsed correctly and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Alias gc-alt Get-Clipboard; gc-alt\"",
+    "explanation": "The command creates an alias for 'Get-Clipboard' and executes it. The alias 'gc-alt' is used, but the original cmdlet name is still present in the command line and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand R2V0LUNsaXBib2FyZA==",
+    "explanation": "The command uses base64 encoding to execute 'Get-Clipboard'. The encoded string still represents the original cmdlet and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Clipboard\" -WindowStyle Hidden",
+    "explanation": "The command adds an optional argument '-WindowStyle Hidden' which does not affect the detection of 'Get-Clipboard' in the command line and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Clipboard\" -Command \"\"",
+    "explanation": "The command adds an empty second '-Command' argument, which is allowed in PowerShell and does not affect the detection of 'Get-Clipboard'."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Clipboard\" -Command \"Write-Output 'Test'\"",
+    "explanation": "The command adds a second '-Command' argument with a harmless command. The first '-Command' still contains 'Get-Clipboard' and matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Clipboard\" -Command \"Write-Output 'Test'\" -Command \"\"",
+    "explanation": "The command adds multiple '-Command' arguments, including an empty one. The first '-Command' still contains 'Get-Clipboard' and matches the Sigma rule."
+  }
+]

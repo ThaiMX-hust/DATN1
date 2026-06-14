@@ -1,0 +1,22 @@
+[
+  {
+    "output": "odbcconf.exe INSTALLDRIVER C:\\Temp\\malicious_driver.sys",
+    "explanation": "This command uses a .sys file instead of a .dll, which matches the Sigma rule's detection criteria for suspicious driver installation."
+  },
+  {
+    "output": "odbcconf.exe INSTALLDRIVER C:\\Temp\\malicious_driver",
+    "explanation": "This command omits the file extension entirely, which may still be flagged as suspicious if the file is not a .dll."
+  },
+  {
+    "output": "odbcconf.exe INSTALLDRIVER C:\\Temp\\malicious_driver.dll",
+    "explanation": "This command includes a .dll extension, which is explicitly filtered out by the Sigma rule and thus would not trigger an alert."
+  },
+  {
+    "output": "odbcconf.exe /A INSTALLDRIVER C:\\Temp\\malicious_driver.sys",
+    "explanation": "This command uses the optional '/A' flag, which is allowed by the Sigma rule but does not affect detection since the action is still INSTALLDRIVER with a non-.dll file."
+  },
+  {
+    "output": "odbcconf.exe INSTALLDRIVER C:\\Temp\\malicious_driver.sys",
+    "explanation": "This command uses a long path or alternate directory to simulate evasion techniques while still matching the Sigma rule's criteria."
+  }
+]

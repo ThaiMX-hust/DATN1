@@ -1,2 +1,1 @@
 "powershell.exe" & {. \""C:\AtomicRedTeam\atomics\T1134.004\src\PPID-Spoof.ps1\"" $ppid=Get-Process explorer | select -expand id PPID-Spoof -ppid $ppid -spawnto \""C:\Program Files\Internet Explorer\iexplore.exe\"" -dllpath \""C:\AtomicRedTeam\atomics\T1134.004\bin\calc.dll\""}
-node.exe -e

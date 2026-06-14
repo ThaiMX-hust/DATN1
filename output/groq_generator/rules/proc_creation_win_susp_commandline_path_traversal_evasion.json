@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo test > C:\\Windows\\..\\System32\\test.txt\"",
+    "explanation": "This command uses path traversal (..\\) within a Windows command line to simulate an evasion attempt. It is wrapped in quotes and uses an alternative execution method (/c) to demonstrate safe mutation techniques like insertion and recoding."
+  },
+  {
+    "output": "powershell.exe -Command \"echo 'test' > '..\\Windows\\test.txt'\"",
+    "explanation": "This PowerShell command simulates a path traversal attempt by using '..\\Windows\\', which is a common evasion pattern. The command is structured using PowerShell's native command syntax to align with the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\notepad.exe ..\\..\\Windows\\test.txt",
+    "explanation": "This command attempts to access a file using multiple path traversal sequences (..\\..\\). It uses a standard Windows executable (notepad.exe) and demonstrates how path traversal can be embedded in a seemingly legitimate command line."
+  }
+]

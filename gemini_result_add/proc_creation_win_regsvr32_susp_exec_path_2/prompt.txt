@@ -1,0 +1,111 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Regsvr32 Execution From Highly Suspicious Location
+id: 327ff235-94eb-4f06-b9de-aaee571324be
+status: test
+description: Detects execution of regsvr32 where the DLL is located in a highly suspicious locations
+references:
+    - Internal Research
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2023-05-26
+tags:
+    - attack.defense-evasion
+    - attack.t1218.010
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\regsvr32.exe'
+        - OriginalFileName: 'REGSVR32.EXE'
+    selection_path_1:
+        CommandLine|contains:
+            - ':\PerfLogs\'
+            - ':\Temp\'
+            - '\Windows\Registration\CRMLog'
+            - '\Windows\System32\com\dmp\'
+            - '\Windows\System32\FxsTmp\'
+            - '\Windows\System32\Microsoft\Crypto\RSA\MachineKeys\'
+            - '\Windows\System32\spool\drivers\color\'
+            - '\Windows\System32\spool\PRINTERS\'
+            - '\Windows\System32\spool\SERVERS\'
+            - '\Windows\System32\Tasks_Migrated\'
+            - '\Windows\System32\Tasks\Microsoft\Windows\SyncCenter\'
+            - '\Windows\SysWOW64\com\dmp\'
+            - '\Windows\SysWOW64\FxsTmp\'
+            - '\Windows\SysWOW64\Tasks\Microsoft\Windows\PLA\System\'
+            - '\Windows\SysWOW64\Tasks\Microsoft\Windows\SyncCenter\'
+            - '\Windows\Tasks\'
+            - '\Windows\Tracing\'
+    selection_path_2:
+        CommandLine|contains:
+            # This is to avoid collisions with CLI starting with "C:\"
+            - ' "C:\'
+            - ' C:\'
+            - " 'C:\\"
+            - 'D:\'
+    selection_exclude_known_dirs:
+        CommandLine|contains:
+            # Note: add additional locations that are related to third party applications
+            - 'C:\Program Files (x86)\'
+            - 'C:\Program Files\'
+            - 'C:\ProgramData\'
+            - 'C:\Users\'
+            # Note: The space added here are to avoid collisions with the "regsvr32" binary full path
+            - ' C:\Windows\'
+            - ' "C:\Windows\'
+            - " 'C:\\Windows\\"
+    filter_main_empty:
+        CommandLine: ''
+    filter_main_null:
+        CommandLine: null
+    condition: selection_img and (selection_path_1 or (selection_path_2 and not selection_exclude_known_dirs)) and not 1 of filter_main_*
+falsepositives:
+    - Unlikely
+level: high
+```
+
+True positive test command:
+
+```text
+C:\Windows\syswow64\regsvr32.exe /s C:\AtomicRedTeam\atomics\T1218.010\bin\AllTheThingsx86.dll
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

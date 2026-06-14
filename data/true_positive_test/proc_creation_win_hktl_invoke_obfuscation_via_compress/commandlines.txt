@@ -1,3 +1,0 @@
-powershell.exe -Command "$d = N`ew-Object System.IO.Compression.DeflateStream($s, 0); $r = N`ew-Object System.IO.StreamReader($d, [System.T`ext.Encoding]::ASCII); $r.ReadToEnd()"
-powershell.exe -Command "$stream = [System.IO.Compression.DeflateStream]::new($ms, 0); $reader = [System.IO.StreamReader]::new($stream, [System.Text.Encoding]::UTF8); iex $reader.ReadToEnd()"
-powershell.exe -Command "$m = New-Object IO.MemoryStream(,$b); $d = New-Object IO.Compression.DeflateStream($m, [IO.Compression.CompressionMode]::Decompress); $r = New-Object IO.StreamReader($d, [System.Text.Encoding]::GetEncoding('ASCII')); $r.ReadToEnd()"

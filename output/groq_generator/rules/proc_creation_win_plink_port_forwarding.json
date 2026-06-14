@@ -1,0 +1,22 @@
+[
+  {
+    "output": "plink.exe -R 8080:localhost:80 user@remotehost",
+    "explanation": "This command uses the -R flag for port forwarding, which matches the Sigma rule's detection of ' -R ' in the command line. It simulates a suspicious Plink port forwarding scenario."
+  },
+  {
+    "output": "plink.exe -R8080:localhost:80 user@remotehost",
+    "explanation": "The -R flag is combined with the port number without a space, which is a valid syntax variation. This demonstrates how the rule can be bypassed by omitting the space after -R."
+  },
+  {
+    "output": "plink.exe -R 8080:127.0.0.1:80 user@remotehost",
+    "explanation": "This command uses '127.0.0.1' instead of 'localhost', which is an equivalent representation. The rule still detects the -R flag, but this shows how arguments can be modified while maintaining the same behavior."
+  },
+  {
+    "output": "plink.exe -R 8080:localhost:80 -P 22 user@remotehost",
+    "explanation": "Adding an additional parameter (-P 22) does not affect the core behavior of the port forwarding. This demonstrates how optional parameters can be added without changing the detection signature."
+  },
+  {
+    "output": "plink.exe -R 8080:localhost:80 user@remotehost",
+    "explanation": "No safe bypass command can be generated. The Sigma rule is based on the presence of ' -R ', which is a core part of the command and cannot be safely omitted or altered without changing the behavior."
+  }
+]

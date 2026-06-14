@@ -1,0 +1,22 @@
+[
+  {
+    "output": "Dumpert.dll",
+    "explanation": "The Sigma rule detects the presence of 'Dumpert.dll' in the command line. This is a direct match and represents a true positive."
+  },
+  {
+    "output": "\"Dumpert.dll\"",
+    "explanation": "Adding quotes around the filename is a safe mutation technique that does not change the detection logic of the Sigma rule."
+  },
+  {
+    "output": "Dumpert .dll",
+    "explanation": "Inserting a space between 'Dumpert' and '.dll' is a safe mutation technique that may bypass simplistic pattern matching but still represents a test case for detection robustness."
+  },
+  {
+    "output": "Dumpert.dll extra_argument",
+    "explanation": "Appending an extra argument to the command line is a safe mutation technique that does not affect the presence of the key 'Dumpert.dll' in the command line."
+  },
+  {
+    "output": "Dumpert.dll\\",
+    "explanation": "Appending a backslash is a safe mutation technique that does not change the presence of 'Dumpert.dll' in the command line."
+  }
+]

@@ -1,0 +1,97 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Disable Windows Defender AV Security Monitoring
+id: a7ee1722-c3c5-aeff-3212-c777e4733217
+status: test
+description: Detects attackers attempting to disable Windows Defender using Powershell
+references:
+    - https://research.nccgroup.com/2020/06/23/wastedlocker-a-new-ransomware-variant-developed-by-the-evil-corp-group/
+    - https://rvsec0n.wordpress.com/2020/01/24/malwares-that-bypass-windows-defender/
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md
+author: 'ok @securonix invrep-de, oscd.community, frack113'
+date: 2020-10-12
+modified: 2022-11-18
+tags:
+    - attack.defense-evasion
+    - attack.t1562.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_pwsh_binary:
+        - Image|endswith:
+              - '\powershell.exe'
+              - '\pwsh.exe'
+        - OriginalFileName:
+              - 'PowerShell.EXE'
+              - 'pwsh.dll'
+    selection_pwsh_cli:
+        CommandLine|contains:
+            - '-DisableBehaviorMonitoring $true'
+            - '-DisableRuntimeMonitoring $true'
+    selection_sc_binary:
+        - Image|endswith: '\sc.exe'
+        - OriginalFileName: 'sc.exe'
+    selection_sc_tamper_cmd_stop:
+        CommandLine|contains|all:
+            - 'stop'
+            - 'WinDefend'
+    selection_sc_tamper_cmd_delete:
+        CommandLine|contains|all:
+            - 'delete'
+            - 'WinDefend'
+    selection_sc_tamper_cmd_disabled:
+        CommandLine|contains|all:
+            - 'config'
+            - 'WinDefend'
+            - 'start=disabled'
+    condition: all of selection_pwsh_* or (selection_sc_binary and 1 of selection_sc_tamper_*)
+falsepositives:
+    - 'Minimal, for some older versions of dev tools, such as pycharm, developers were known to sometimes disable Windows Defender to improve performance, but this generally is not considered a good security practice.'
+level: high
+```
+
+True positive test command:
+
+```text
+
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

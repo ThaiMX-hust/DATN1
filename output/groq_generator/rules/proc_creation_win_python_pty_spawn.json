@@ -1,14 +1,24 @@
+```json
 [
   {
-    "output": "py.exe -c \"import pty; pty.spawn( '\\\"/bin/sh\\\"' )\"",
-    "explanation": "Inserted escape characters around the path string to obscure the command line while maintaining functionality."
+    "output": "python -c \"import pty; pty.spawn('/bin/sh')\"",
+    "explanation": "This command uses Python to import the pty module and spawn a shell, which matches the Sigma rule's detection criteria. It is a direct simulation of the malicious behavior described in the rule."
   },
   {
-    "output": "python.exe -c \"exec(import('base64').b64decode('aW1wb3J0IHB0eTsgcHR5LnNwYXZuKCIvYmluL3NoIik='))\"",
-    "explanation": "Modified the base64 string slightly to test detection resilience while keeping the decoded payload the same."
+    "output": "python -c 'import pty; pty.spawn(\"/bin/sh\")'",
+    "explanation": "This command is a variation of the first, using single quotes and escaped double quotes. It demonstrates equivalent syntax and should still trigger the Sigma rule."
   },
   {
-    "output": "python.exe -c \"import pty; pty. spawn('/bin/sh')\"",
-    "explanation": "Inserted an extra space before the dot in 'pty. spawn' to test if the detection is sensitive to spacing."
+    "output": "python -c \"from pty import spawn; spawn('/bin/sh')\"",
+    "explanation": "This command uses an explicit import of the 'spawn' function from the pty module, which is another valid way to express the same logic and should also trigger the Sigma rule."
+  },
+  {
+    "output": "python -c \"import pty; pty.spawn('cmd.exe')\"",
+    "explanation": "This command is similar to the first but uses 'cmd.exe' instead of '/bin/sh' to simulate a Windows-specific scenario, which is relevant for the Windows logsource in the Sigma rule."
+  },
+  {
+    "output": "python -c \"import pty; pty.spawn( 'cmd.exe' )\"",
+    "explanation": "This command adds extra spaces around the function argument to demonstrate safe mutation via insertion. It should still be detected by the Sigma rule."
   }
 ]
+```

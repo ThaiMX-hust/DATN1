@@ -1,2 +1,1 @@
-msedge.exe --headless=old
-set "FLAG=--headless" && msedge.exe %FLAG%
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless https://example.com

@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "msdt.exe -af \"C:\\WINDOWS\\diagnostics\\index\\PCWDiagnostic.xml\"",
+    "explanation": "This command simulates the execution of msdt.exe with an answer file, which is the core behavior of the Sigma rule. It uses a standard flag format (-af) and a hardcoded path to the XML file."
+  },
+  {
+    "output": "msdt.exe /af \"C:\\\\WINDOWS\\\\diagnostics\\\\index\\\\PCWDiagnostic.xml\"",
+    "explanation": "This command uses the equivalent /af flag instead of -af and includes double backslashes for escaping. It still represents the same behavior as the Sigma rule."
+  },
+  {
+    "output": "msdt.exe -af 'C:\\WINDOWS\\diagnostics\\index\\PCWDiagnostic.xml'",
+    "explanation": "This command uses single quotes instead of double quotes to enclose the path, which is a safe mutation technique and still represents the same behavior."
+  },
+  {
+    "output": "msdt.exe -af C:\\\\WINDOWS\\\\diagnostics\\\\index\\\\PCWDiagnostic.xml",
+    "explanation": "This command omits the quotes around the path. Since the path does not contain spaces, it is still valid and represents the same behavior."
+  },
+  {
+    "output": "msdt.exe -af \"C:\\\\WINDOWS\\diagnostics\\index\\PCWDiagnostic.xml\"",
+    "explanation": "This command uses a mix of single and double backslashes for path normalization, which is a safe mutation technique and still represents the same behavior."
+  }
+]
+```

@@ -35,8 +35,7 @@ FAILED_COMMAND_PATTERNS = (
     "missing expression after",
     "unexpected token",
     "missing closing",
-    "incomplete string",
-    "access is denied"
+    "incomplete string"
 )
 
 

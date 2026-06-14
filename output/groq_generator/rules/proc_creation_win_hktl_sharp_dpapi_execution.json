@@ -1,22 +1,14 @@
 [
   {
-    "output": "SharpDPAPI.exe backupkey --machine",
-    "explanation": "This command uses the 'backupkey' and '/machine' flags as in the original test command. It is a direct match to the Sigma rule's detection criteria."
+    "output": "SharpDPAPI.exe -backupkey -file:\"C:\\example.blob\" -unprotect",
+    "explanation": "This command uses the -backupkey flag and includes a file path with quotes to simulate a typical usage of SharpDPAPI while applying safe mutation techniques like substitution of long flags to short flags and insertion of quotes."
   },
   {
-    "output": "SharpDPAPI.exe backupkey /machine",
-    "explanation": "This command is identical to the first, but uses the standard flag format '/machine' as in the original test command."
+    "output": "SharpDPAPI.exe /blob /machine /server:localhost",
+    "explanation": "This command uses alternative flag syntax (forward slashes) and reorders arguments to demonstrate how the Sigma rule might be bypassed through substitution and reordering techniques."
   },
   {
-    "output": "SharpDPAPI.exe backupkey \"/machine\"",
-    "explanation": "This command uses quotes around the '/machine' flag, which is a safe mutation technique (insertion) and still matches the Sigma rule."
-  },
-  {
-    "output": "SharpDPAPI.exe \"backupkey\" /machine",
-    "explanation": "This command uses quotes around the 'backupkey' argument, which is a safe mutation technique (insertion) and still matches the Sigma rule."
-  },
-  {
-    "output": "SharpDPAPI.exe backupkey /machine:",
-    "explanation": "This command adds a trailing space after the '/machine' flag, which is a safe mutation technique (insertion) and still matches the Sigma rule."
+    "output": "SharpDPAPI.exe -credentials -password:SecurePass123 -pvk:C:\\keys\\key.pvk",
+    "explanation": "This command omits non-essential arguments and uses substitution of long flags to short flags, demonstrating how the Sigma rule can be bypassed while maintaining the core functionality."
   }
 ]

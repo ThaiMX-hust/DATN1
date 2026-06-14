@@ -1,4 +1,0 @@
-schtasks.exe /Create /SC ONLOGON /RU Administrator /TR "malware.exe"
-cmd.exe /c "cd C:\Users\Public\..\Admin\AppData\Local && schtasks /Create /TN "UpdateTask" /TR "payload.exe" /SC ONSTART /RU SYSTEM"
-schtasks /Create /TN "UpdateTask" /TR "payload.exe" /SC ONSTART /RU S-1-5-18
-schtasks /create /tn "UpdateTask" /xml C:\Windows\Temp\task_config.xml

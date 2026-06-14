@@ -1,42 +1,42 @@
 [
   {
-    "output": "7z a archive.zip lsass.dmp",
-    "explanation": "This is the original true positive command and will trigger the Sigma rule. It is included for reference."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dmp",
+    "explanation": "This is the original true positive command and matches the Sigma rule exactly."
   },
   {
-    "output": "7z a archive.zip lsass.dmp\"",
-    "explanation": "Appending a trailing quote to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dump",
+    "explanation": "The filename extension is changed from '.dmp' to '.dump', which is still detected by the Sigma rule."
   },
   {
-    "output": "7z a archive.zip lsass.dmp\\",
-    "explanation": "Appending a backslash to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7za.exe a archive.7z lsass.dmp",
+    "explanation": "The executable name is changed from '7z.exe' to '7za.exe', which is still detected by the Sigma rule."
   },
   {
-    "output": "7z a archive.zip lsass.dmp' '",
-    "explanation": "Appending a space after the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.hdmp",
+    "explanation": "The filename extension is changed to '.hdmp', which is still detected by the Sigma rule."
   },
   {
-    "output": "7z a archive.zip lsass.dmp\\n",
-    "explanation": "Appending a newline character to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dmp -r",
+    "explanation": "An additional optional argument '-r' is added, but the core behavior of compressing a .dmp file remains unchanged and is still detected."
   },
   {
-    "output": "7z a archive.zip lsass.dmp`",
-    "explanation": "Appending a backtick to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dmp -t7z",
+    "explanation": "The archive type is explicitly specified with '-t7z', but the core behavior of compressing a .dmp file remains unchanged and is still detected."
   },
   {
-    "output": "7z a archive.zip lsass.dmp#",
-    "explanation": "Appending a comment character to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dmp -pPassword",
+    "explanation": "A password is added to the command line, but the core behavior of compressing a .dmp file remains unchanged and is still detected."
   },
   {
-    "output": "7z a archive.zip lsass.dmp;",
-    "explanation": "Appending a semicolon to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dmp -sdel",
+    "explanation": "The '-sdel' option is added to delete the source file after compression, but the core behavior of compressing a .dmp file remains unchanged and is still detected."
   },
   {
-    "output": "7z a archive.zip lsass.dmp:",
-    "explanation": "Appending a colon to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dmp -mx=9",
+    "explanation": "The compression level is set to maximum with '-mx=9', but the core behavior of compressing a .dmp file remains unchanged and is still detected."
   },
   {
-    "output": "7z a archive.zip lsass.dmp|",
-    "explanation": "Appending a pipe character to the filename is a safe mutation that may bypass detection if the SIEM does not properly normalize command-line arguments."
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\7z\\7z.exe a archive.7z lsass.dmp -mmt=on",
+    "explanation": "Multithreaded compression is enabled with '-mmt=on', but the core behavior of compressing a .dmp file remains unchanged and is still detected."
   }
 ]

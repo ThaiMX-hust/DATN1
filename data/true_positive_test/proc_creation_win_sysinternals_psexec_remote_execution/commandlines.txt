@@ -1,0 +1,1 @@
+"C:\Users\Public\Temp\PsExec.exe" \TEST-HOST -u testuser -p testpassword -accepteula whoami

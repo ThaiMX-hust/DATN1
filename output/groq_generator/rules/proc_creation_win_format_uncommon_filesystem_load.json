@@ -1,0 +1,42 @@
+[
+  {
+    "output": "format.com /fs:UDF",
+    "explanation": "This command is a known filesystem type and will not trigger the Sigma rule because it is included in the filter list."
+  },
+  {
+    "output": "format.com /fs:exFAT",
+    "explanation": "This command is a known filesystem type and will not trigger the Sigma rule because it is included in the filter list."
+  },
+  {
+    "output": "format.com /fs:NTFS",
+    "explanation": "This command is a known filesystem type and will not trigger the Sigma rule because it is included in the filter list."
+  },
+  {
+    "output": "format.com /fs:ReFS",
+    "explanation": "This command is a known filesystem type and will not trigger the Sigma rule because it is included in the filter list."
+  },
+  {
+    "output": "format.com /fs:FAT",
+    "explanation": "This command is a known filesystem type and will not trigger the Sigma rule because it is included in the filter list."
+  },
+  {
+    "output": "format.com /fs:UDF",
+    "explanation": "This command is a known filesystem type and will not trigger the Sigma rule because it is included in the filter list."
+  },
+  {
+    "output": "format.com /fs:JFS",
+    "explanation": "This command uses a filesystem type not in the filter list, making it a potential detection for the Sigma rule."
+  },
+  {
+    "output": "format.com /fs:HFS",
+    "explanation": "This command uses a filesystem type not in the filter list, making it a potential detection for the Sigma rule."
+  },
+  {
+    "output": "format.com /fs:APFS",
+    "explanation": "This command uses a filesystem type not in the filter list, making it a potential detection for the Sigma rule."
+  },
+  {
+    "output": "format.com /fs:EXT4",
+    "explanation": "This command uses a filesystem type not in the filter list, making it a potential detection for the Sigma rule."
+  }
+]

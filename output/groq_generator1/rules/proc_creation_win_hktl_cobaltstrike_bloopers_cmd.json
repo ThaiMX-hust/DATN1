@@ -1,0 +1,42 @@
+[
+  {
+    "output": "cmd.exe /c \"psinject\"",
+    "explanation": "The command uses insertion of quotes to simulate a benign command that still matches the Sigma rule's detection of 'psinject' in the command line."
+  },
+  {
+    "output": "cmd.exe /c spawnas",
+    "explanation": "The command uses omission of surrounding text to simulate a benign command that still matches the Sigma rule's detection of 'spawnas' in the command line."
+  },
+  {
+    "output": "cmd.exe /c make_token",
+    "explanation": "The command uses the exact keyword 'make_token' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
+  },
+  {
+    "output": "cmd.exe /c \"rev2self\"",
+    "explanation": "The command uses insertion of quotes to simulate a benign command that still matches the Sigma rule's detection of 'rev2self' in the command line."
+  },
+  {
+    "output": "cmd.exe /c execute-assembly",
+    "explanation": "The command uses the exact keyword 'execute-assembly' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
+  },
+  {
+    "output": "cmd.exe /c dcsync",
+    "explanation": "The command uses the exact keyword 'dcsync' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
+  },
+  {
+    "output": "cmd.exe /c logonpasswords",
+    "explanation": "The command uses the exact keyword 'logonpasswords' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
+  },
+  {
+    "output": "cmd.exe /c getsystem",
+    "explanation": "The command uses the exact keyword 'getsystem' as a standalone argument to simulate a benign command that matches the Sigma rule's detection."
+  },
+  {
+    "output": "cmd.exe /c \"ps^inject\"",
+    "explanation": "The command uses escape characters to simulate a benign command that still matches the Sigma rule's detection of 'psinject' in the command line."
+  },
+  {
+    "output": "cmd.exe /c \"m^ake_token\"",
+    "explanation": "The command uses escape characters to simulate a benign command that still matches the Sigma rule's detection of 'make_token' in the command line."
+  }
+]

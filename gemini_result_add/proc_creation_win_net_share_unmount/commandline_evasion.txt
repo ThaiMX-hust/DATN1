@@ -1,0 +1,22 @@
+[
+  {
+    "output": "net share C$ -delete",
+    "explanation": "Substitution technique. Replaces the forward slash switch `/delete` with a hyphen alternative `-delete`. The Sigma rule explicitly targets the exact literal string `/delete`. Because the native Windows `net.exe` and `net1.exe` command-line parsers accept both forward slashes and hyphens interchangeably for options, this safely evades the string match while maintaining equivalent behavior."
+  },
+  {
+    "output": "net share C$ /del",
+    "explanation": "Omission technique. Truncates the `/delete` argument to its shortest accepted form `/del`. The `net` utility natively supports argument abbreviation as long as the option remains unambiguous, which completely breaks the rule's strict `CommandLine|contains|all` requirement for the substring `/delete`."
+  },
+  {
+    "output": "net share C$ \"/delete\"",
+    "explanation": "Insertion technique. Encloses the target option switch within double quotation marks (`\"/delete\"`). The application subsystem tokenizes and strips the quotes out smoothly at execution time, but it alters the contiguous raw character string layout, effectively breaking the exact `CommandLine|contains` sequence."
+  },
+  {
+    "output": "net.exe /delete share C$",
+    "explanation": "Reordering technique. Changes the positional placement of the arguments by moving `/delete` before the `share` verb. While the rule's `contains|all` modifier will still catch both strings, this variant targets fragile custom regex filters, sequence dependencies, or tightly bound token-distance logic."
+  },
+  {
+    "output": "net\tshare\tC$\t/delete",
+    "explanation": "Substitution technique. Substitutes standard blank space delimiters with horizontal tab (`\t`) characters. The Windows shell processes tabs as valid token separators, but this alteration can subvert brittle custom log parsers or downstream regex boundaries that assume clean single-space delimiters between command entities."
+  }
+]

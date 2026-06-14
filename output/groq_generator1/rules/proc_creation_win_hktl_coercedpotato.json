@@ -1,0 +1,6 @@
+[
+  {
+    "output": "update_service.exe -e 1",
+    "explanation": "The original command is already a true positive for the Sigma rule, so no mutation is needed for testing."
+  }
+]

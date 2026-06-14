@@ -1,0 +1,87 @@
+You are a SIEM detection engineering assistant with expert knowledge of Sigma rules, Windows process creation logs, and command-line parsing.
+
+Your task is to assess whether the given Sigma rule may be bypassed by safe command-line obfuscation/mutation techniques
+
+Allowed command-line mutation techniques:
+
+1. Insertion: Insert characters that the shell/application may ignore or still parse correctly, such as quotes, spaces, or escape characters.
+2. Substitution: Replace syntax with equivalent syntax, such as short option to long option, `/flag` to `-flag`, or equivalent argument forms.
+3. Omission: Remove optional or unnecessary elements while preserving the intended test behavior, such as omitting `.exe` or optional flags.
+4. Reordering: Reorder arguments if the target program accepts different argument order without changing behavior.
+5. Recoding / Encoding: Represent the same value differently, such as environment variables, path normalization, alternative IP notation, or equivalent string representation.
+6. Other  techniques
+
+Analysis procedure:
+
+1. Parse the Sigma rule and identify the fields and exact search terms that are likely to trigger detection.
+2. Compare the rule logic with the true positive test command.
+3. Identify which tokens in the true positive command are semantically important and which tokens are only syntactic indicators used by the rule.
+4. Generate only command-line variants that are safe, simulated, and likely to preserve the intended test behavior.
+5. For each generated command, explain:
+
+   * which mutation technique was used;
+   * which rule condition it is intended to avoid;
+   * why the high-level behavior is expected to remain equivalent in a test environment;
+   * any assumption or uncertainty.
+
+Input:
+
+Sigma Rule:
+
+```yaml
+title: Potential Arbitrary File Download Using Office Application
+id: 4ae3e30b-b03f-43aa-87e3-b622f4048eed
+related:
+    - id: 0c79148b-118e-472b-bdb7-9b57b444cc19
+      type: obsolete
+status: test
+description: Detects potential arbitrary file download using a Microsoft Office application
+references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Winword/
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Powerpnt/
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Excel/
+    - https://medium.com/@reegun/unsanitized-file-validation-leads-to-malicious-payload-download-via-office-binaries-202d02db7191
+author: Nasreddine Bencherchali (Nextron Systems), Beyu Denis, oscd.community
+date: 2022-05-17
+modified: 2023-06-22
+tags:
+    - attack.defense-evasion
+    - attack.t1202
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith:
+              - '\EXCEL.EXE'
+              - '\POWERPNT.EXE'
+              - '\WINWORD.exe'
+        - OriginalFileName:
+              - 'Excel.exe'
+              - 'POWERPNT.EXE'
+              - 'WinWord.exe'
+    selection_http:
+        CommandLine|contains:
+            - 'http://'
+            - 'https://'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: high
+```
+
+True positive test command:
+
+```text
+
+```
+
+Output JSON schema:
+[
+{
+"output": "A generated simulated command line. Use an empty string only when no safe command can be generated.",
+"explanation": "A short explanation mentioning the mutation technique and the avoided rule condition." "
+}
+]
+
+Return JSON only.

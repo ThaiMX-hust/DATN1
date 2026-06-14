@@ -1,22 +1,20 @@
+```json
 [
   {
-    "output": "\"node.exe\" \"Adobe Creative Cloud Experience\\js\\malicious.js\"",
-    "explanation": "Original command line with quotes inserted for testing. This is a true positive as it matches the Sigma rule."
+    "output": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe -e \"console.log('bypass test')\"",
+    "explanation": "This command simulates a Node.js execution using the specific path from the Sigma rule. It uses the -e flag to execute a simple script inline, which is a common test method. It does not include any malicious behavior and is designed for testing detection capabilities."
   },
   {
-    "output": "\"node.exe\" -e \"console.log('Adobe Creative Cloud Experience\\\\js'); require('child_process').exec('malicious_script.js')\"",
-    "explanation": "Original command line with quotes inserted and escaped backslashes for testing. This is a true positive as it matches the Sigma rule."
+    "output": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe --eval \"console.log('bypass test')\"",
+    "explanation": "This command is a variation of the first, using the long-form equivalent of the -e flag (--eval). This demonstrates substitution of equivalent syntax, a safe mutation technique."
   },
   {
-    "output": "cd \"C:\\\\Program Files\\\\Adobe\\\\Adobe Creative Cloud Experience\\\\libs\\\" && .\\\\node.exe -e \"require('os')\"",
-    "explanation": "Original command line with quotes inserted and escaped backslashes for testing. This is a true positive as it matches the Sigma rule."
+    "output": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe -e console.log('bypass test')",
+    "explanation": "This command omits the quotes around the inline script, relying on the shell to still parse it correctly. This demonstrates omission of optional syntax while preserving behavior."
   },
   {
-    "output": "copy \"node.exe\" not_node.exe && not_node.exe -e \"require('child_process').exec('calc.exe')\"",
-    "explanation": "Original command line with quotes inserted for testing. This is a true positive as it matches the Sigma rule."
-  },
-  {
-    "output": "\"node.exe\" \"Adobe Creative Cloud Experience\\\\js\\\\malicious.js\"",
-    "explanation": "Inserted additional escape characters to test parsing behavior. Still matches the Sigma rule."
+    "output": "C:\\Progra~1\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe -e \"console.log('bypass test')\"",
+    "explanation": "This command uses path normalization (shortened directory name) to test detection resilience against path variations. This is a safe mutation technique for testing."
   }
 ]
+```

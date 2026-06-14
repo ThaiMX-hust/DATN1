@@ -1,30 +1,10 @@
 [
   {
-    "output": "fsutil file setZeroData offset=0 length=10 C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1070-2.txt",
-    "explanation": "This is a direct mutation using path normalization and omission of quotes. The command is functionally identical to the original but avoids explicit string matches."
+    "output": "fsutil.exe usn deletejournal /D C:",
+    "explanation": "The command uses the 'deletejournal' parameter, which is flagged by the Sigma rule. It is a direct match and cannot be bypassed using safe mutation techniques without removing the suspicious behavior."
   },
   {
-    "output": "fsutil usn deletejournal /D C:",
-    "explanation": "This is the original command with no mutation. It is included for completeness."
-  },
-  {
-    "output": "fsutil usn deletejournal /D C:\\",
-    "explanation": "Appending an extra backslash to the drive path is a safe mutation that does not affect functionality but may bypass signature-based detection."
-  },
-  {
-    "output": "fsutil  usn deletejournal /D C:",
-    "explanation": "Insertion of an extra space between 'fsutil' and 'usn' is a safe mutation that does not affect execution but may bypass simple string-based detection."
-  },
-  {
-    "output": "fsutil usn deletejournal /D C: \\",
-    "explanation": "Appending an extra space and backslash is a safe mutation that does not affect functionality but may bypass signature-based detection."
-  },
-  {
-    "output": "fsutil usn deletejournal /D C: | Out-Null",
-    "explanation": "Appending a PowerShell pipeline to suppress output is a safe mutation that does not affect the core functionality of the command."
-  },
-  {
-    "output": "fsutil usn deletejournal /D C: > NUL",
-    "explanation": "Redirecting output to NUL is a safe mutation that suppresses output and may help evade certain detection mechanisms."
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\fsutil.exe\" file setZeroData offset=0 length=10 C:\\\\AtomicRedTeam\\\\atomics\\\\..\\\\ExternalPayloads\\\\T1070-2.txt",
+    "explanation": "The command uses the 'setZeroData' parameter, which is flagged by the Sigma rule. It is a direct match and cannot be bypassed using safe mutation techniques without removing the suspicious behavior."
   }
 ]

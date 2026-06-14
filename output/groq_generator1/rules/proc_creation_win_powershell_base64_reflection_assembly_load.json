@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA==",
+    "explanation": "This command uses base64 encoding to load an assembly via PowerShell, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand IAAoAFsAcgBlAGYAbABlAGMAdABpAG8AbgAuAGEAcwBzAGUAbQBiAGwAeQBdADoAOgBMAG8AYQBkAC4ASQBuAHYAbwBrAGUAKAAkAGIAeQB0AGUAcwApACkAcwA=",
+    "explanation": "This command uses a different base64 string to invoke a reflective load, which is still detectable by the Sigma rule."
+  },
+  {
+    "output": "$a = '[Ref' + 'lection.Assembly]'; $m = 'Lo' + 'ad'; Invoke-Expression \"([$a]::$m($data))\"",
+    "explanation": "This command uses string concatenation to evade simple string-based detection but still performs the same reflective load behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"& { [System.Reflection.Assembly]::Load([Convert]::FromBase64String('WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA==')) }\"",
+    "explanation": "This command uses a base64 string passed to Load and is detectable by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"& { [System.Reflection.Assembly]::Load([System.Convert]::FromBase64String('WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA==')) }\"",
+    "explanation": "This command uses a more verbose syntax but still performs the same reflective load behavior and is detectable."
+  }
+]

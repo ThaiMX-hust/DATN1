@@ -1,22 +1,22 @@
 [
   {
-    "output": "findstr /i \"virus cb defender cylance mc\"",
-    "explanation": "The command is unchanged as it already matches the Sigma rule's detection criteria."
-  },
-  {
-    "output": "findstr /i 'virus cb defender cylance mc'",
-    "explanation": "Single quotes are used instead of double quotes, which is an equivalent syntax for string representation in this context."
-  },
-  {
-    "output": "findstr -i \"virus cb defender cylance mc\"",
-    "explanation": "The /i flag is replaced with -i, which is a valid substitution for case-insensitive search in some versions of findstr."
-  },
-  {
     "output": "findstr /i \"virus\" \"cb\" \"defender\" \"cylance\" \"mc\"",
-    "explanation": "Each keyword is separated into its own quoted string, which is a safe mutation that still matches the detection criteria."
+    "explanation": "Reordered and separated search terms into individual quoted strings, which is still parsed correctly by findstr."
   },
   {
-    "output": "findstr /i \"virus cb defender cylance mc\" < NUL",
-    "explanation": "Input redirection from NUL is added, which is a safe mutation that does not affect the detection criteria."
+    "output": "findstr /i 'virus' 'cb' 'defender' 'cylance' 'mc'",
+    "explanation": "Replaced double quotes with single quotes for string representation, which is still valid in Windows command-line syntax."
+  },
+  {
+    "output": "findstr /i virus cb defender cylance mc",
+    "explanation": "Removed quotes around search terms, which is still valid if the command line does not include spaces or special characters."
+  },
+  {
+    "output": "findstr /i \"virus cb defender cylance mc\" | findstr /v \"\"",
+    "explanation": "Piped output to a harmless findstr filter to test behavior without altering the original intent."
+  },
+  {
+    "output": "cmd /c findstr /i \"virus cb defender cylance mc\"",
+    "explanation": "Wrapped the command in a cmd /c call, a common method for executing commands in Windows."
   }
 ]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "mspub.exe -url http://example.com/file.pub",
+    "explanation": "This command simulates a benign use of MSPUB.EXE to download a file via HTTP. It uses a standard URL format and minimal arguments to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "mspub.exe --url https://example.com/document.pub",
+    "explanation": "This command uses the long-form option '--url' instead of '-url' and HTTPS instead of HTTP. It remains functionally equivalent but uses a different syntax to test detection robustness."
+  },
+  {
+    "output": "mspub.exe -url ftp://example.com/resource.pub",
+    "explanation": "This command uses the FTP protocol instead of HTTP/HTTPS. It is functionally equivalent and tests whether the Sigma rule detects all URL-based triggers."
+  },
+  {
+    "output": "mspub.exe -url http://example.com\\file.pub",
+    "explanation": "This command uses a backslash in the URL path, which is a safe mutation technique to test parsing behavior and detection robustness."
+  },
+  {
+    "output": "mspub.exe -url http://example.com:80/file.pub",
+    "explanation": "This command adds an explicit port number to the URL. It is a safe mutation that tests whether the Sigma rule accounts for such variations."
+  }
+]

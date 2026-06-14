@@ -1,10 +1,15 @@
 [
   {
-    "output": "copy kavremover_dropped_binary.exe not_kav.exe && not_kav.exe run run-cmd \"whoami\"",
-    "explanation": "The original command is already a valid test case. No mutation is needed to reproduce the Sigma rule's detection logic."
+    "output": "cmd.exe /c run run-cmd",
+    "explanation": "This command simulates the execution of a process with 'run run-cmd' in the command line, which matches the Sigma rule's detection condition. It uses a standard Windows command interpreter and includes the required string in a minimal form for testing."
   },
   {
-    "output": "kavremover_binary.exe \"run\"^ \"run-cmd\" \"net user\"",
-    "explanation": "The original command is already a valid test case. No mutation is needed to reproduce the Sigma rule's detection logic."
+    "output": "cmd.exe /c \"run run-cmd\"",
+    "explanation": "This command uses quotes to enclose the 'run run-cmd' argument, which is a safe mutation technique (insertion of quotes). It still satisfies the Sigma rule's detection condition while demonstrating how the command might appear in a real-world scenario."
+  },
+  {
+    "output": "run run-cmd",
+    "output": "run run-cmd",
+    "explanation": "This command is a simplified version of the original, omitting the explicit invocation of cmd.exe. It still contains the required string 'run run-cmd' and is valid for testing the Sigma rule in a controlled environment."
   }
 ]

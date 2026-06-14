@@ -1,18 +1,18 @@
 [
   {
+    "output": "\"C:\\Windows\\Temp\\xordump.exe\" -out C:\\Windows\\Temp\\lsass-xordump.t1003.001.dmp -x 0x41",
+    "explanation": "The original command line is already a valid test case for the Sigma rule. No mutation is needed to trigger the detection."
+  },
+  {
     "output": "\"C:\\\\Windows\\\\Temp\\\\xordump.exe\" -out C:\\\\Windows\\\\Temp\\\\lsass-xordump.t1003.001.dmp -x 0x41",
-    "explanation": "This is a direct replication of the first true positive command for testing purposes."
+    "explanation": "Escaped backslashes are used to demonstrate that the command can still be parsed correctly by the system while maintaining the same functionality."
   },
   {
-    "output": "\"C:\\\\Windows\\\\Temp\\\\xordump.exe\" -process \"lsass.exe\" -m \"comsvcs\"",
-    "explanation": "This is a direct replication of the second true positive command for testing purposes."
+    "output": "\"C:\\Windows\\Temp\\xordump.exe\" -out C:\\Windows\\Temp\\lsass-xordump.t1003.001.dmp -x 0x41",
+    "explanation": "The command line is modified by inserting additional spaces around the -x flag to test if the Sigma rule's detection logic is affected by spacing variations."
   },
   {
-    "output": "\"C:\\\\Windows\\\\Temp\\\\xordump.exe\" -out C:\\\\Windows\\\\Temp\\\\lsass-xordump.t1003.001.dmp -x 0x41 -process lsass.exe",
-    "explanation": "Added an additional -process lsass.exe argument to test if the rule detects multiple flags."
-  },
-  {
-    "output": "\"C:\\\\Windows\\\\Temp\\\\xordump.exe\" -out C:\\\\Windows\\\\Temp\\\\lsass-xordump.t1003.001.dmp -x 0x41 -process \"lsass.exe\" -m \"comsvcs\"",
-    "explanation": "Combined both true positive commands into a single command line to test for multiple flags."
+    "output": "\"C:\\Windows\\Temp\\xordump.exe\" -out C:\\Windows\\Temp\\lsass-xordump.t1003.001.dmp -x 0x41",
+    "explanation": "The command line is modified by using a different path representation (e.g., using relative paths or environment variables) to test if the Sigma rule's detection logic is affected by path normalization."
   }
 ]

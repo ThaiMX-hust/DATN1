@@ -1,0 +1,16 @@
+```json
+[
+  {
+    "output": "cmd.exe /c echo Test",
+    "explanation": "This command uses a legitimate Windows process (cmd.exe) with a simple and benign command line. It does not include suspicious command-line arguments or paths that would trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command Write-Host 'Hello World'",
+    "explanation": "This command uses PowerShell with a straightforward and non-malicious command line. It avoids encoded commands, suspicious paths, or hidden window flags that would trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\notepad.exe C:\\Users\\Public\\test.txt",
+    "explanation": "This command launches Notepad with a file in a common public directory. It avoids suspicious command-line arguments or paths that would trigger the Sigma rule."
+  }
+]
+```

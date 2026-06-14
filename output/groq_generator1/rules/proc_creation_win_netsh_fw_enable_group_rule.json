@@ -1,0 +1,18 @@
+[
+  {
+    "output": "netsh advfirewall firewall set rule group=\"File and Printer Sharing\" new enable=Yes",
+    "explanation": "This command matches the Sigma rule and serves as a baseline for testing."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule group='File and Printer Sharing' new enable=Yes",
+    "explanation": "Single quotes are used instead of double quotes for the group name, which is a valid syntax variation."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule new enable=Yes group=\"File and Printer Sharing\"",
+    "explanation": "Arguments are reordered where the command allows flexibility in parameter sequence."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule group=\"%windir%\\system32\\drivers\\etc\\File and Printer Sharing\" new enable=Yes",
+    "explanation": "The group name is recoded using an environment variable and path normalization for testing."
+  }
+]

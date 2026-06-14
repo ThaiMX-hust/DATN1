@@ -1,3 +1,0 @@
-copy extrac32.exe not_extrac.exe && not_extrac.exe C:\test\data.cab C:\test\file.txt:ads
-extrac32.exe /Y /L "C:\target\path\" C:\source\files.cab file.txt:ads
-extrac32.exe /Y /L "C:\Windows\Temp" C:\path\to\payload.cab legit.txt:stream.dll

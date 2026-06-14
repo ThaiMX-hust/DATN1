@@ -1,0 +1,22 @@
+[
+  {
+    "output": "tracker.exe -d test.dll -c cmd.exe",
+    "explanation": "Substitution technique. Replaces the forward slash indicator `/d` and `/c` with a hyphen `-d` and `-c`. Windows command-line parsers often accept both slash and hyphen for arguments, which entirely bypasses the strict string selection ` /d ` and ` /c `."
+  },
+  {
+    "output": "tracker.exe /d:test.dll /c:cmd.exe",
+    "explanation": "Substitution technique. Modifies the space delimiter to a colon delimiter (e.g., `/d:` and `/c:`). This disrupts the strict space-padded string matching ` /d ` and ` /c ` while remaining valid syntax for many MSBuild-related utilities."
+  },
+  {
+    "output": "tracker.exe   /d   test.dll   /c   cmd.exe",
+    "explanation": "Insertion technique. Introduces multiple consecutive spaces between the executable and the switches. Since the rule looks for specific leading and trailing spaces like ` /d `, collapsing or expanding whitespace can cause logic mismatches depending on how standard tokenizers handle raw command lines."
+  },
+  {
+    "output": "tracker.exe /c cmd.exe /d test.dll",
+    "explanation": "Reordering technique. Changes the position of the `/c` and `/d` parameters. While this specific rule uses an `all of selection_*` condition (meaning both strings must be present anywhere in the command line), reordering combined with other character mutations breaks fragile substring ordering assumptions in loosely written parsers."
+  },
+  {
+    "output": "tracker.exe \"/d\" test.dll \"/c\" cmd.exe",
+    "explanation": "Insertion technique. Quotes the command-line switches as `\"/d\"` and `\"/c\"`. The quotes are stripped or handled safely by the application subsystem during argument parsing, but they prevent the `CommandLine|contains` rule from matching the literal ` /d ` and ` /c ` patterns."
+  }
+]

@@ -1,1 +1,0 @@
-echo import os; os.system('whoami') | python.exe

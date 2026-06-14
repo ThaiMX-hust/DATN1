@@ -1,0 +1,42 @@
+[
+  {
+    "output": "QuarksPwDump.exe --dump-hash-local",
+    "explanation": "This command uses the long-form equivalent of '-dhl' as specified in the Sigma rule, which is a valid substitution technique."
+  },
+  {
+    "output": "QuarksPwDump.exe -dhdc",
+    "explanation": "This command uses the short-form flag '-dhdc' directly from the Sigma rule, with no modification required."
+  },
+  {
+    "output": "QuarksPwDump.exe --dump-hash-domain-cached",
+    "explanation": "This command uses the long-form equivalent of '-dhdc' as specified in the Sigma rule, which is a valid substitution technique."
+  },
+  {
+    "output": "QuarksPwDump.exe --dump-hash-local --dump-hash-domain-cached",
+    "explanation": "This command combines two flags from the Sigma rule using valid syntax and spacing, which is allowed under reordering and insertion techniques."
+  },
+  {
+    "output": "QuarksPwDump.exe --dump-hash-local   ",
+    "explanation": "This command adds extra spaces after the flag, which is a valid insertion technique and still parsed correctly."
+  },
+  {
+    "output": "QuarksPwDump.exe --dump-hash-local --dump-hash-domain-cached --dump-bitlocker",
+    "explanation": "This command combines multiple flags from the Sigma rule using valid syntax and spacing, which is allowed under reordering and insertion techniques."
+  },
+  {
+    "output": "QuarksPwDump.exe --ntds-file C:\\temp\\ntds.dit",
+    "explanation": "This command uses the '--ntds-file' flag from the Sigma rule with a valid file path, which is a valid test command."
+  },
+  {
+    "output": "QuarksPwDump.exe -dhl -dhdc",
+    "explanation": "This command uses multiple short-form flags from the Sigma rule, which is a valid test command."
+  },
+  {
+    "output": "QuarksPwDump.exe --dump-hash-local --dump-hash-domain-cached --dump-bitlocker --ntds-file=C:\\temp\\ntds.dit",
+    "explanation": "This command uses multiple flags from the Sigma rule with valid syntax and spacing, which is allowed under reordering and insertion techniques."
+  },
+  {
+    "output": "QuarksPwDump.exe --dump-hash-local --dump-hash-domain-cached --dump-bitlocker --ntds-file=C:\\temp\\ntds.dit",
+    "explanation": "This command uses multiple flags from the Sigma rule with valid syntax and spacing, which is allowed under reordering and insertion techniques."
+  }
+]

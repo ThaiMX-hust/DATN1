@@ -1,0 +1,18 @@
+[
+  {
+    "output": "auditpol.exe -logon:none",
+    "explanation": "Substitution technique: Legacy NT Resource Kit binaries traditionally accept a hyphen ('-') interchangeably with a forward slash ('/') for setting argument options. Utilizing '-logon:none' completely subverts the literal string match for '/logon:none' in the rule selection condition while keeping the functional test configuration identical."
+  },
+  {
+    "output": "auditpol.exe \"/logon\":none",
+    "explanation": "Insertion technique: Placing double quotes around the option header ('\"/logon\":none') breaks up the continuous character matching sequence monitored by the SIEM. The native Win32 execution engine transparently extracts and evaluates the raw values during runtime parsing, ensuring the custom policy setting still succeeds."
+  },
+  {
+    "output": "cmd.exe /c auditpol.exe /log^on:none",
+    "explanation": "Insertion technique: Spawning via cmd.exe permits the insertion of a caret ('^') escape character inside the target flag option string. The command shell normalizes and trims the caret away before executing the target utility binary, but process creation telemetry logs record the verbatim configuration of '/log^on:none' and bypass the rule detection logic."
+  },
+  {
+    "output": "auditpol.exe\t/logon:none",
+    "explanation": "Omission technique: This variant is designed to highlight a logical gap between the true positive command provided in the prompt and the provided rule logic. The rule logic targets an entirely different variant of the utility (NT Resource Kit version) using specific syntax strings like '/logon:none'. Passing this syntax string separated by a standard tab whitespace successfully mimics the intended threat vector of the target rule while bypassing rules searching for exact space-bounded command tokens."
+  }
+]

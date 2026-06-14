@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c tasklist /fi \"Imagename eq lsass.exe\"",
+    "explanation": "This command uses a common invocation pattern with cmd.exe and includes the tasklist filter for lsass.exe, which matches the Sigma rule's detection criteria for lsass dumping."
+  },
+  {
+    "output": "cmd /c tasklist /fi \"Imagename eq lsass.exe\"",
+    "explanation": "This is a substitution of the command using short syntax for cmd.exe, which is still valid and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "tasklist /fi \"Imagename eq lsass.exe\"",
+    "explanation": "This command omits the cmd.exe wrapper while still including the tasklist filter for lsass.exe, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /c do rundll32.exe C:\\windows\\System32\\comsvcs.dll, MiniDump C:\\Windows\\Temp\\test.dmp full %%B",
+    "explanation": "This command simulates a rundll32.exe invocation with MiniDump, a common method for dumping lsass, and includes elements matching the second selection condition in the Sigma rule."
+  },
+  {
+    "output": "cmd /c tasklist /v /fo csv | findstr /i \"lsass\"",
+    "explanation": "This command matches the third selection condition in the Sigma rule by using tasklist with /v /fo csv and piping to findstr to search for 'lsass'."
+  }
+]

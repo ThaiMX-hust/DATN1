@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command Add-WindowsCapability -Name OpenSSH.Server -Online",
+    "explanation": "This command uses PowerShell to add the OpenSSH.Server capability, which matches the Sigma rule's detection criteria for the 'Add-WindowsCapability' cmdlet and 'OpenSSH.' capability."
+  },
+  {
+    "output": "pwsh -c \"Add-WindowsCapability -Name OpenSSH.Client -Online\"",
+    "explanation": "This command uses PowerShell Core (pwsh) to add the OpenSSH.Client capability, which also matches the Sigma rule's detection criteria for the 'Add-WindowsCapability' cmdlet and 'OpenSSH.' capability."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-WindowsCapability -Online -Name OpenSSH.Server\"",
+    "explanation": "Reordering the arguments '-Name' and '-Online' while maintaining the same functionality. This is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command Add-WindowsCapability -Online -Name OpenSSH.Client",
+    "explanation": "Omitting quotes around the command while using the same parameters. This is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-WindowsCapability -Name OpenSSH.Server -Online\"",
+    "explanation": "Using double quotes around the command line while keeping the same parameters. This is a valid mutation technique and still matches the Sigma rule."
+  }
+]

@@ -1,42 +1,22 @@
 [
   {
-    "output": "net  use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Original command with double backslashes and spacing preserved, matching the Sigma rule's detection criteria."
+    "output": "net.exe use \\\\server\\share",
+    "explanation": "This command uses the 'net.exe' utility to mount a network share, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN/Administrator",
-    "explanation": "Substituted backslash in domain with forward slash, which is still valid in Windows for UNC paths and user domains."
+    "output": "net use \\\\server\\share",
+    "explanation": "This command omits the full path to 'net.exe', relying on the system's PATH variable. It still matches the Sigma rule because the process name remains 'net.exe'."
   },
   {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator",
-    "explanation": "Removed extra space between 'net' and 'use', which is still valid and matches the rule's detection."
+    "output": "net.exe  use   \\\\server\\share",
+    "explanation": "This command adds extra spaces between arguments, which is a safe mutation technique and still matches the Sigma rule."
   },
   {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator /persistent:no",
-    "explanation": "Added optional flag '/persistent:no' which does not affect detection and is still valid."
+    "output": "\"net.exe\" use \"\\\\server\\share\"",
+    "explanation": "This command wraps the executable and arguments in quotes, a safe mutation technique that does not affect detection by the Sigma rule."
   },
   {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator /y",
-    "explanation": "Replaced '/persistent:no' with '/y' (equivalent flag for non-persistent mapping), still valid and matches detection."
-  },
-  {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator /Y",
-    "explanation": "Used uppercase '/Y' instead of lowercase '/y' for flag substitution, still valid and matches detection."
-  },
-  {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator /Y /TRANSPORT:QUIC",
-    "explanation": "Added optional '/TRANSPORT:QUIC' flag, which is valid and does not interfere with the detection logic."
-  },
-  {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator /Y /TRANSPORT:QUIC /SKIPCERTCHECK",
-    "explanation": "Added optional flags '/TRANSPORT:QUIC' and '/SKIPCERTCHECK', which are valid and do not interfere with detection."
-  },
-  {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator /Y /TRANSPORT:QUIC /SKIPCERTCHECK /LOGONDOMAIN:DOMAIN",
-    "explanation": "Added optional '/LOGONDOMAIN:DOMAIN' flag, which is valid and does not interfere with detection."
-  },
-  {
-    "output": "net use \\\\Target\\C$ P@ssw0rd1 /u:DOMAIN\\Administrator /Y /TRANSPORT:QUIC /SKIPCERTCHECK /LOGONDOMAIN:DOMAIN /LOGONWORKSTATION:WORKSTATION",
-    "explanation": "Added optional '/LOGONWORKSTATION:WORKSTATION' flag, which is valid and does not interfere with detection."
+    "output": "net.exe use \\\\server\\share\\",
+    "explanation": "This command appends a trailing backslash to the share path, which is still parsed correctly and matches the Sigma rule."
   }
 ]

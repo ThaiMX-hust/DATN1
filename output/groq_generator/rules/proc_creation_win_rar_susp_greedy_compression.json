@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rar.exe a -m5 -r -y -ta20210204000000 -hp1qazxcde32ws -v2560k Asia1Dpt-PC-c.rar C:\\*.doc C:\\*.docx C:\\*.xls C:\\*.xlsx C:\\*.pdf C:\\*.ppt C:\\*.pptx C:\\*.jpg C:\\*.txt >nul",
+    "explanation": "This command matches the Sigma rule by using RAR with suspicious compression flags and targeting multiple file types across system folders. It includes all required flags and folder patterns."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rar.exe a -m5 -r -y -hp1qazxcde32ws -v2560k Asia1Dpt-PC-c.rar C:\\*.doc C:\\*.docx C:\\*.xls C:\\*.xlsx C:\\*.pdf C:\\*.ppt C:\\*.pptx C:\\*.jpg C:\\*.txt >nul",
+    "explanation": "This command omits the timestamp flag (-ta20210204000000) but retains all other suspicious elements. It still aligns with the Sigma rule by using RAR with recursive compression and a password."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rar.exe a -m5 -r -y -hp1qazxcde32ws -v2560k Asia1Dpt-PC-c.rar C:\\*.doc C:\\*.docx C:\\*.xls C:\\*.xlsx C:\\*.pdf C:\\*.ppt C:\\*.pptx C:\\*.jpg C:\\*.txt 2>&1 | Out-Null",
+    "explanation": "This command replaces the redirection to nul with PowerShell redirection to suppress output. It maintains the same behavior and matches the Sigma rule's suspicious pattern."
+  }
+]

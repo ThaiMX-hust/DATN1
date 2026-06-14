@@ -1,1 +1,0 @@
-wmic /NAMESPACE:\\root\subscription PATH ActiveScriptEventConsumer CREATE Name="Bypass", ScriptingEngine="VBScript", ScriptText="MsgBox 'Hi'"

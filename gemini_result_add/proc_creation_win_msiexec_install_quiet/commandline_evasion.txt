@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msiexec.exe /quiet /package \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
+    "explanation": "Substitution technique. Replaces the short flag option `/i` with its official long alternative `/package`. The rule relies on selection_cli matching `-i`, `-package`, `-a`, or `-j` with the windash modifier. While this specific variant would still be caught by `-package`, utilizing long alternatives or equivalent argument permutations can effectively evade rules that only account for the most common short switches."
+  },
+  {
+    "output": "msiexec.exe \"/i\" \"/quiet\" \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
+    "explanation": "Insertion technique. Encloses individual installation switches within independent double quotes (`\"/i\"` and `\"/quiet\"`). The internal command-line tokenization layer of the Windows Installer engine parses and discards these quotes smoothly, but they modify the continuous byte arrangement of the process command line string, breaking the literal string matching for underlying SIEM logic."
+  },
+  {
+    "output": "msiexec.exe /i:\"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\" /quiet",
+    "explanation": "Substitution technique. Modifies the syntax layout by using a colon connector (`/i:`) to attach the payload package parameter directly to the installer engine switch. This avoids fragile whitespace-dependent containment detections or specific structural lookahead regex parsing rules while remaining valid parameters for msiexec."
+  },
+  {
+    "output": "msiexec.exe /qn /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
+    "explanation": "Substitution technique. Substitutes the standard `/quiet` flag with the specialized quiet option `/qn` (quiet, no UI). Since the rule covers a generalized `-q` via the `|windash` modifier, it will still match the character string, but leveraging less-common sub-switches such as `/qn+`, `/qb`, or `/qr` can bypass un-normalized or poorly scoped string filters targeting exact words."
+  },
+  {
+    "output": "",
+    "explanation": "Omission technique note: Complete omission or encoding of both parameters simultaneously (the installation indicator and the quiet execution switch) is not functionally possible via pure command-line mutations alone, as msiexec enforces explicit validation on these switches to initialize an installer package silently."
+  }
+]

@@ -1,18 +1,24 @@
+```json
 [
   {
-    "output": "netsh advfirewall firewall delete rule name=\"Allow Port 80\"",
-    "explanation": "The original command is modified by removing the space between 'delete' and 'rule' and ensuring proper quotation marks. This is a syntactically valid variation of the original command."
+    "output": "netsh.exe firewall delete rule name=\"TestRule\"",
+    "explanation": "This command matches the Sigma rule by using 'netsh.exe', 'firewall', and 'delete' in the command line. It represents a typical command for deleting a firewall rule."
   },
   {
-    "output": "netsh.exe advfirewall firewall del rule name=\"All\"",
-    "explanation": "The command substitutes 'delete' with its short form 'del' and removes unnecessary spaces. This is a valid and equivalent command-line variation."
+    "output": "netsh.exe  firewall   delete rule name=TestRule",
+    "explanation": "This command uses spacing variation (extra spaces between arguments) to test if the Sigma rule is resilient to such mutations."
   },
   {
-    "output": "netsh advfirewall firewall delete rule name=\\\"Allow Port 80\\\"",
-    "explanation": "The command uses escaped quotes (\\\\\") for the rule name, which is a valid syntax variation in Windows command-line parsing."
+    "output": "netsh.exe\" firewall delete rule name=\"TestRule\"",
+    "explanation": "This command uses an escaped quote at the end of netsh.exe to test if the Sigma rule can handle malformed or mutated command lines."
   },
   {
-    "output": "netsh advfirewall firewall delete rule name=\"All\"",
-    "explanation": "The command adds an extra space at the end, which is a safe mutation technique that does not affect the execution behavior."
+    "output": "netsh.exe firewall delete rule name=TestRule",
+    "explanation": "This command omits quotes around the rule name to test if the Sigma rule is affected by optional syntax elements."
+  },
+  {
+    "output": "netsh.exe -f firewall delete rule name=TestRule",
+    "explanation": "This command substitutes a short option '-f' (hypothetical) for the default behavior to test if the Sigma rule is affected by substitution techniques."
   }
 ]
+```

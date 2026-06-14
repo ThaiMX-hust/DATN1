@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"if(0){{{0}}}' -f $(0 -as [char]) +\"",
+    "explanation": "This command simulates a potential AMSI bypass using a null bit obfuscation technique. It uses PowerShell to execute a string that includes obfuscated logic, which aligns with the Sigma rule's detection pattern."
+  },
+  {
+    "output": "powershell.exe -c \"#<NULL>\"",
+    "explanation": "This command includes the '#<NULL>' string, which is directly referenced in the Sigma rule as a potential AMSI bypass indicator. It is a minimal test command that matches the rule's detection criteria."
+  }
+]

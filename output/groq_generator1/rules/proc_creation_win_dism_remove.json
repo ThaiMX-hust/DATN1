@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dism.exe /Online /Disable-Feature -FeatureName:Windows-Defender /Quiet /NoRestart",
+    "explanation": "This command uses a mix of short and long syntax for flags (-FeatureName instead of /FeatureName) and reorders the arguments, which are safe mutation techniques that do not affect the behavior of the command."
+  },
+  {
+    "output": "dism.exe /Online -Disable-Feature /FeatureName:Windows-Defender /NoRestart /Quiet",
+    "explanation": "This command reorders the /Quiet and /NoRestart flags and uses a mix of short and long syntax for flags, which are safe mutation techniques that do not alter the command's functionality."
+  },
+  {
+    "output": "dism.exe /Online /Disable-Feature /FeatureName:Windows-Defender /Quiet /NoRestart",
+    "explanation": "This command is a direct copy of the original command and is included to show that the original syntax is also valid and unaffected by mutation techniques."
+  }
+]

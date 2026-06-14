@@ -1,22 +1,24 @@
+```json
 [
   {
-    "output": "logman.exe stop  \"Circular Kernel Context Logger\"",
-    "explanation": "This command uses the 'stop' action on a known ETW session, matching the Sigma rule's detection criteria. The quotes around the session name simulate safe mutation via insertion."
+    "output": "logman stop Circular Kernel Context Logger",
+    "explanation": "This command attempts to stop a known ETW session, which matches the Sigma rule's detection criteria for suspicious logman.exe activity."
   },
   {
-    "output": "logman.exe delete EventLog-System",
-    "explanation": "This command uses the 'delete' action on a session name starting with 'EventLog-', matching the Sigma rule's detection criteria. The command is unaltered but demonstrates a legitimate test case."
+    "output": "logman delete EventLog-System",
+    "explanation": "This command attempts to delete a trace session starting with 'EventLog-', which aligns with the Sigma rule's detection of suspicious logman.exe behavior."
   },
   {
-    "output": "logman.exe -stop \"SYSMON TRACE\"",
-    "explanation": "This command uses the short flag '-stop' instead of the long form 'stop' and includes quotes around the session name, simulating substitution and insertion techniques."
+    "output": "logman -s SYSMON TRACE stop",
+    "explanation": "This command uses a short option '-s' to specify the session name and stops it, matching the Sigma rule's criteria for tampering with ETW sessions."
   },
   {
-    "output": "logman.exe delete SysmonDnsEtwSession",
-    "explanation": "This command uses the 'delete' action on a session name matching the Sigma rule's criteria. The command is unmodified but serves as a direct test case."
+    "output": "logman /d SysmonDnsEtwSession",
+    "explanation": "This command uses an alternative syntax with '/d' to delete the 'SysmonDnsEtwSession' trace session, which is flagged by the Sigma rule."
   },
   {
-    "output": "logman.exe stop EventLog-Application",
-    "explanation": "This command uses the 'stop' action on a session name starting with 'EventLog-', matching the Sigma rule's criteria. No mutation is applied, but it serves as a valid test case."
+    "output": "logman delete \"EventLog-Application\"",
+    "explanation": "This command uses quotes to handle potential spaces in the session name, which is a safe mutation technique and still matches the Sigma rule's detection logic."
   }
 ]
+```

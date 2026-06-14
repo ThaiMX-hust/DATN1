@@ -1,0 +1,14 @@
+[
+  {
+    "output": "appcmd set config section:system.webServer/rewrite/globalRules /commit:appPool",
+    "explanation": "This command uses the same structure as the Sigma rule to set a configuration in the globalRules section and includes 'commit' as required. It is a safe mutation using reordering and omission techniques to simulate a test case."
+  },
+  {
+    "output": "appcmd.exe set config section:system.webServer/rewrite/globalRules /commit:serverFarm",
+    "explanation": "This command uses the full executable name 'appcmd.exe' and includes the required keywords 'set', 'config', and 'section:system.webServer/rewrite/globalRules' with a different 'commit' target. It is a safe mutation using substitution and omission techniques."
+  },
+  {
+    "output": "appcmd set config \"section:system.webServer/rewrite/globalRules\" /commit:webSite",
+    "explanation": "This command uses quotes around the section path and includes the required keywords. It is a safe mutation using insertion and reordering techniques to simulate a test case."
+  }
+]

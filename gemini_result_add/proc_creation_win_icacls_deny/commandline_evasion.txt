@@ -1,0 +1,26 @@
+[
+  {
+    "output": "icacls.exe \"C:\\Users\\Public\\test.exe\" -deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "Substitution technique: Replacing the forward slash parameter prefix ('/deny') with a hyphen character ('-deny'). The Windows native icacls.exe utility processes both forward slashes and hyphens interchangeably for its option switches. This modification completely evades the strict literal match for '/deny' in 'selection_cmd' while maintaining identical security descriptor configuration behavior."
+  },
+  {
+    "output": "icacls.exe \"C:\\Users\\Public\\test.exe\" /deny\t*S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "Substitution technique: Replacing the structural single space separation boundary between the target switch and its argument value with a horizontal tab character ('\\t'). The Windows command-line processing engine normalizes horizontal tabs into standard parameter separators natively, ensuring functional equivalence in a test scenario while breaking continuous literal string pattern checks."
+  },
+  {
+    "output": "icacls.exe \"C:\\Users\\Public\\test.exe\" \"/deny\" \"*S-1-1-0:(OI)(CI)(DE,DC)\"",
+    "explanation": "Insertion technique: Enclosing the key operational switches and arguments inside explicit double quotes. The Windows execution subsystem automatically strips outer quotation mark pairs during application parameter tokenization, ensuring the application executes correctly while breaking the raw string signature checks for unquoted '/deny' or '*S-1-1-0:'."
+  },
+  {
+    "output": "cmd.exe /c icacls.exe /de^ny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "Insertion technique: Utilizing a cmd.exe context to inject a command shell caret escape operator ('^') directly into the switch name parameter ('/de^ny'). The parent interpreter parses and drops the escape token prior to initializing the target child process, leaving a recorded event log sequence that completely subverts the rigid keyword filter."
+  },
+  {
+    "output": "icacls.exe \"C:\\Users\\Public\\test.exe\" /deny  *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "Insertion technique: Injecting multiple consecutive space characters between the target option parameters. The operating system normalizes duplicate whitespaces into unified parameter boundary vectors during tokenization, maintaining identical execution consistency while breaking strict pattern match strings."
+  },
+  {
+    "output": "icacls.exe \"C:\\Users\\Public\\test.exe\" /deny Everyone:(OI)(CI)(DE,DC)",
+    "explanation": "Substitution technique: Replacing the hardcoded Well-Known SID literal ('*S-1-1-0:') with its string localized equivalent name constant ('Everyone'). The icacls tool translates localized group names into their corresponding binary SIDs under the hood, meaning functionally the permissions are restricted identically while completely blinding signature rules tailored to check explicitly for the raw SID string pattern."
+  }
+]

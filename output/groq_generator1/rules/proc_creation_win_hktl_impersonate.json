@@ -1,0 +1,14 @@
+[
+  {
+    "output": "impersonate.exe exec cmd.exe",
+    "explanation": "This command uses the 'exec' option directly without quotes, which is a simplified form of the original command and still matches the Sigma rule."
+  },
+  {
+    "output": "ren impersonate.exe sysupdate.exe && sysupdate.exe exec cmd.exe",
+    "explanation": "This command renames the executable and executes it with the 'exec' option, which is equivalent to the original command and matches the Sigma rule."
+  },
+  {
+    "output": "sysupdate.exe list",
+    "explanation": "This command uses the renamed executable and the 'list' option, which is equivalent to the original command and matches the Sigma rule."
+  }
+]
