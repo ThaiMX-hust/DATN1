@@ -1,0 +1,2 @@
+﻿Technical	Rule_name	Title	Rule_id	Command_match_rule	Commandline_evasion	Excutable	Bypass target rule	Bypass all rule	Trigger rule
+t1005	proc_creation_win_sqlcmd_veeam_db_recon	Veeam Backup Database Suspicious Query	696bfb54-227e-4602-ac5b-30d9d2053312		"powershell.exe Invoke-Sqlcmd -Query ""SELECT * FROM VeeamBackup.dbo.Credentials"" -ServerInstance ""localhost"""	FALSE	FALSE	FALSE	

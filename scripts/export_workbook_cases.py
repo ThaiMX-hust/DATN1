@@ -27,6 +27,8 @@ TRUE_VALUES = {"1", "1.0", "true", "yes", "y"}
 FALSE_VALUES = {"0", "0.0", "false", "no", "n"}
 ATTACK_TECHNIQUE_RE = re.compile(r"attack\.(t\d{4}(?:\.\d{3})?)", re.IGNORECASE)
 ATTACK_TACTIC_RE = re.compile(r"attack\.([a-z][a-z0-9_-]*)", re.IGNORECASE)
+BACKSLASH_RUN_RE = re.compile(r"\\+")
+UNC_HOST_RE = re.compile(r"(?:\d{1,3}(?:\.\d{1,3}){3}|[A-Za-z0-9_.-]+)\\")
 
 
 def column_index(cell_ref: str) -> int:
@@ -157,7 +159,33 @@ def technique_or_tactic_from_rule(rules_dir: Path, rule_name: str) -> str:
 
 def normalize_command(command: str) -> str:
     """Normalize worksheet command text without changing shell syntax."""
-    return command.replace("\r\n", "\n").replace("\r", "\n").strip()
+    normalized = command.replace("\r\n", "\n").replace("\r", "\n").strip()
+    # Workbook cells can contain JSON-style escaped command text. Decode only the
+    # escape forms that become literal syntax errors in cmd.exe/PowerShell while
+    # leaving normal JSON serialization to json.dumps.
+    normalized = normalized.replace(r"\"", '"').replace(r"\/", "/")
+    return normalize_backslash_runs(normalized)
+
+
+def normalize_backslash_runs(command: str) -> str:
+    """Collapse JSON-style escaped backslashes while preserving UNC prefixes."""
+
+    def replace_run(match: re.Match[str]) -> str:
+        run = match.group(0)
+        start, end = match.span()
+        previous = command[start - 1] if start > 0 else ""
+        after = command[end:]
+        at_unc_prefix = (
+            previous in {"", " ", "\t", "'", '"', "(", ",", "=", ">", "<", "|"}
+            and UNC_HOST_RE.match(after) is not None
+        )
+        if at_unc_prefix and len(run) >= 2:
+            return r"\\"
+        if len(run) >= 2:
+            return "\\" * max(1, len(run) // 2)
+        return run
+
+    return BACKSLASH_RUN_RE.sub(replace_run, command)
 
 
 def build_cases(

