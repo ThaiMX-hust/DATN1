@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe",
+    "explanation": "The Sigma rule detects uncommon child processes of userinit.exe. 'cmd.exe' is a common child process and would not trigger the rule. This is a safe test command to simulate a benign process."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Output 'Hello'\"",
+    "explanation": "PowerShell is a known legitimate child process of userinit.exe, especially on Windows Core systems. This command simulates a benign PowerShell invocation that would be filtered by the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe",
+    "explanation": "Using the full path to cmd.exe simulates a process creation event. Since cmd.exe is a known legitimate child process of userinit.exe, it would not trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command Write-Output 'Hello'",
+    "explanation": "This is an alternative path to PowerShell with a simplified command line. It is a legitimate child process of userinit.exe and would be filtered by the rule."
+  },
+  {
+    "output": "C:\\Windows\\explorer.exe",
+    "explanation": "Explorer.exe is explicitly filtered in the Sigma rule. This command simulates a benign process that would not trigger the rule."
+  }
+]

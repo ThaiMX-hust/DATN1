@@ -1,0 +1,28 @@
+[
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command modifies the ImagePath of a service in the registry, which is detected by the Sigma rule. It includes the keywords 'CurrentControlSet', 'services', and 'ImagePath', and would be initiated by a process with Medium Integrity Level, matching the rule's detection criteria."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService /v FailureCommand /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "expression": "This command modifies the FailureCommand of a service in the registry. It includes the keywords 'CurrentControlSet', 'services', and 'FailureCommand', and would be initiated by a process with Medium Integrity Level, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService /v ServiceDll /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command modifies the ServiceDll of a service in the registry. It includes the keywords 'CurrentControlSet', 'services', and 'ServiceDll', and would be initiated by a process with Medium Integrity Level, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\ControlSet001\\services\\TestService /v ImagePath /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command uses an alternative ControlSet (ControlSet001) to modify the ImagePath of a service. It includes the keywords 'ControlSet', 'services', and 'ImagePath', and would be initiated by a process with Medium Integrity Level, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\ControlSet002\\services\\TestService /v FailureCommand /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command uses an alternative ControlSet (ControlSet002) to modify the FailureCommand of a service. It includes the keywords 'ControlSet', 'services', and 'FailureCommand', and would be initiated by a process with Medium Integrity Level, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\ControlSet003\\services\\TestService /v ServiceDll /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command uses an alternative ControlSet (ControlSet003) to modify the ServiceDll of a service. It includes the keywords 'ControlSet', 'services', and 'ServiceDll', and would be initiated by a process with Medium Integrity Level, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService /v ImagePath /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command modifies the ImagePath of a service in the registry using short syntax for the registry path. It includes the keywords

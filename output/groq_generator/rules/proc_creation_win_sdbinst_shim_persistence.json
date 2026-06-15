@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sdbinst.exe C:\\AtomicRedTeam\\atomics\\T1546.011\\bin\\AtomicShimx86.sdb",
+    "explanation": "Removed quotes around the file path. The command still executes the same functionality without using quotes, which may bypass detection relying on quoted paths."
+  },
+  {
+    "output": "sdbinst.exe C:\\AtomicRedTeam\\atomics\\T1546.011\\bin\\AtomicShimx86.sdb\\",
+    "explanation": "Appended a trailing backslash to the file path. This may be parsed correctly by the program and could bypass detection that strictly matches on '.sdb' extensions."
+  },
+  {
+    "output": "sdbinst.exe C:\\AtomicRedTeam\\atomics\\T1546.011\\bin\\AtomicShimx86.sdb --",
+    "explanation": "Added a harmless '--' to the end of the command line. This is a common trick to prevent further argument parsing and may bypass detection if the rule does not account for it."
+  },
+  {
+    "output": "sdbinst.exe C:\\AtomicRedTeam\\atomics\\T1546.011\\bin\\AtomicShimx86.sdb ",
+    "explanation": "Added a trailing space at the end of the command line. This is a simple mutation that may bypass detection if the rule does not normalize or trim whitespace."
+  },
+  {
+    "output": "sdbinst.exe C:\\AtomicRedTeam\\atomics\\T1546.011\\bin\\AtomicShimx86.sdb",
+    "explanation": "Used double backslashes for path escaping. This is equivalent to the original command but may bypass detection if the rule does not normalize path representations."
+  }
+]

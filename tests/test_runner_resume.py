@@ -10,8 +10,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sigma_rule_evaluator.cases import group_by_technique, technique_dir_map
 from sigma_rule_evaluator.detection import collect_triggered_rules_for_case
-from sigma_rule_evaluator.models import CaseResult, TargetCase
-from sigma_rule_evaluator.runner import evtx_name_for_case, restored_result_for_case, select_cases_after_last_evtx
+from sigma_rule_evaluator.models import CaseResult, RunnerConfig, TargetCase
+from sigma_rule_evaluator.runner import (
+    effective_case_timeout_seconds,
+    evtx_name_for_case,
+    restored_result_for_case,
+    select_cases_after_last_evtx,
+)
 
 
 def make_case(index: int, test_id: str, technique_id: str) -> TargetCase:
@@ -113,6 +118,18 @@ class ResumeFromEvtxTests(unittest.TestCase):
 
         self.assertEqual(len(rules), 1)
         self.assertEqual(rules[0].id, "rule-1")
+
+    def test_case_timeout_is_capped_by_runner_config(self) -> None:
+        case = make_case(1, "a1", "T1000.001")
+        case.timeout_seconds = 10
+        config = RunnerConfig(
+            config_path=Path("input.json"),
+            output_dir=Path("output"),
+            base_dir=Path("."),
+            timeout_seconds=2,
+        )
+
+        self.assertEqual(effective_case_timeout_seconds(case, config), 2)
 
 
 if __name__ == "__main__":

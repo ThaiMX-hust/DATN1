@@ -1,0 +1,22 @@
+[
+  {
+    "output": "Plink -l forward -P 22 -R 8080:localhost:80",
+    "explanation": "This command simulates a renamed Plink binary being used with the required flags to match the Sigma rule. It includes the '-l forward', '-P', and '-R' parameters as specified."
+  },
+  {
+    "output": "Plink -l forward -P 22 -R 8080:localhost:80",
+    "explanation": "Reordered arguments do not affect the detection in this case since the presence of the required flags is what triggers the rule."
+  },
+  {
+    "output": "Plink -l forward -P22 -R8080:localhost:80",
+    "explanation": "Removed spaces after flags (-P and -R) to test if the Sigma rule is sensitive to spacing in the command line."
+  },
+  {
+    "output": "Plink -l forward -P 22 -R 8080:localhost:80",
+    "explanation": "Used quotes around the command line to test if the Sigma rule is sensitive to command-line formatting."
+  },
+  {
+    "output": "Plink -l forward -P 22 -R 8080:localhost:80",
+    "explanation": "Used environment variables to represent parts of the command line to test if the Sigma rule is sensitive to such obfuscation techniques."
+  }
+]

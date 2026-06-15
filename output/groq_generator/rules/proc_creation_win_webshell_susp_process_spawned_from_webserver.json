@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe   query   HKLM\\SOFTWARE",
+    "explanation": "Reordered and added extra spaces between arguments, which is a safe mutation technique that does not alter the behavior of the command."
+  },
+  {
+    "output": "\"reg.exe\" /v \"HKLM\\SOFTWARE\"",
+    "explanation": "Used quotes and substituted the argument syntax with /v, which is an equivalent syntax for querying registry values in reg.exe."
+  },
+  {
+    "output": "reg.exe\" \"query\" \"HKLM\\\\SOFTWARE",
+    "explanation": "Inserted quotes and escaped backslashes for path normalization, which is a safe mutation technique that preserves the command's behavior."
+  },
+  {
+    "output": "reg.exe query HKLM\\SOFTWARE",
+    "explanation": "Original command with no mutation applied for reference."
+  }
+]

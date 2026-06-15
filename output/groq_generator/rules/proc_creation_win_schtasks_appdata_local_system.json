@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks /Create /RU \"NT AUTHORITY\\SYSTEM\" /TN TestTask /TR \"C:\\Users\\<USER>\\AppData\\Local\\test.exe\" /F",
+    "explanation": "This command creates a scheduled task using schtasks.exe with the same structure as the Sigma rule detects. It includes the required parameters such as /Create, /RU, /TR, and the AppData\\Local path. It is a valid test command for the rule."
+  },
+  {
+    "output": "schtasks /Create /RU \"SYSTEM\" /TN TestTask /TR \"C:\\Users\\<USER>\\AppData\\Local\\test.exe\" /F",
+    "explanation": "This command omits the full 'NT AUTHORITY\\SYSTEM' string and uses the shorthand 'SYSTEM', which is still valid in schtasks. This is a potential bypass as the Sigma rule explicitly checks for 'NT AUT' or ' SYSTEM ' in the command line."
+  },
+  {
+    "output": "schtasks /Create /RU \"NT AUTHORITY\\SYSTEM\" /TN TestTask /TR C:\\Users\\<USER>\\AppData\\Local\\test.exe /F",
+    "explanation": "This command omits the quotes around the /TR argument, which is still valid in schtasks. This is a potential bypass as the Sigma rule may not account for this variation in formatting."
+  },
+  {
+    "output": "schtasks /Create /RU \"NT AUTHORITY\\SYSTEM\" /TN TestTask /TR \"C:\\Users\\<USER>\\AppData\\Local\\test.exe\" /F",
+    "explanation": "This command uses double quotes around the /TR argument, which is valid in schtasks. This is a potential bypass as the Sigma rule may not account for this variation in formatting."
+  },
+  {
+    "output": "schtasks /Create /RU \"NT AUTHORITY\\SYSTEM\" /TN TestTask /TR \"C:\\Users\\<USER>\\AppData\\Local\\test.exe\" /F",
+    "explanation": "This command uses a different order of arguments but still includes all required elements. This is a potential bypass as the Sigma rule may not account for this variation in argument order."
+  }
+]

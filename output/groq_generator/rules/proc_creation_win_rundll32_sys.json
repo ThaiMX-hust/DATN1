@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe \"C:\\\\Windows\\\\System32\\\\drivers\\\\example.sys\" dummyFunction",
+    "explanation": "This command simulates a suspicious rundll32 invocation using a .sys file. The command is structured to match the Sigma rule by including 'rundll32.exe' and a .sys file reference."
+  },
+  {
+    "output": "rundll32.exe C:\\\\Windows\\\\System32\\\\drivers\\\\example.sys dummyFunction",
+    "explanation": "This command is a simplified version of the first, with quotes omitted but still matching the Sigma rule by referencing a .sys file."
+  },
+  {
+    "output": "rundll32.exe .\\example.sys dummyFunction",
+    "explanation": "This command uses a relative path to the .sys file, which is a common evasion technique. It still matches the Sigma rule by referencing a .sys file."
+  },
+  {
+    "output": "rundll32.exe ..\\\\example.sys dummyFunction",
+    "explanation": "This command uses a parent directory reference to the .sys file, which is another common evasion technique. It still matches the Sigma rule by referencing a .sys file."
+  },
+  {
+    "output": "rundll32.exe C:\\\\Windows\\\\System32\\\\drivers\\\\example.sys dummyFunction",
+    "explanation": "This command uses a full path to the .sys file, which is a standard method of invocation. It still matches the Sigma rule by referencing a .sys file."
+  }
+]

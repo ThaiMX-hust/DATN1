@@ -1,0 +1,44 @@
+[
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe",
+    "explanation": "The original command line already matches the Sigma rule's detection criteria. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.pdf.exe",
+    "explanation": "The original command line already matches the Sigma rule's detection criteria. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe ",
+    "explanation": "Added a trailing space to the filename. The detection rule includes spaces in the pattern, so this variation should still trigger the rule."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe______.exe",
+    "explanation": "Appended '______.exe' to the filename. This mimics the suspicious double extension pattern and should still match the Sigma rule."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.doc.exe",
+    "explanation": "Added an additional double extension (.doc.exe). This variation still matches the suspicious pattern and should trigger the rule."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.docx.exe",
+    "explanation": "Modified the double extension to include .docx.exe. This variation is still within the Sigma rule's detection scope."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.docx.js",
+    "explanation": "Modified the double extension to include .docx.js. This variation is still within the Sigma rule's detection scope."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.doc.js",
+    "explanation": "Modified the double extension to include .doc.js. This variation is still within the Sigma rule's detection scope."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.pdf.exe",
+    "explanation": "Modified the double extension to include .pdf.exe. This variation is still within the Sigma rule's detection scope."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.pdf.js",
+    "explanation": "Modified the double extension to include .pdf.js. This variation is still within the Sigma rule's detection scope."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.docx.exe",
+    "explanation": "Modified the double extension to include .docx.exe. This variation is still within the Sigma rule's detection scope."

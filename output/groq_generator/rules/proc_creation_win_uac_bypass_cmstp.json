@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "cmstp.exe -s \"C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003_uacbypass.inf\" -au",
+    "explanation": "Substituted '/' with '-' for command-line flags (-s and -au). This is a valid equivalent syntax for the same command."
+  },
+  {
+    "output": "cmstp.exe /s \"C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003.inf\"",
+    "explanation": "Original command with no mutation applied. This is the baseline for comparison."
+  },
+  {
+    "output": "cmstp.exe /s \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.003\\\\src\\\\T1218.003_uacbypass.inf\" /au",
+    "explanation": "Inserted double backslashes in the file path to test path normalization and escape character parsing."
+  },
+  {
+    "output": "cmstp.exe -s \"C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003_uacbypass.inf\" /au",
+    "explanation": "Substituted '/' with '-' for the -s flag and kept '/au' as-is. This tests flag substitution and parsing consistency."
+  },
+  {
+    "output": "cmstp.exe /s \"C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003_uacbypass.inf\" -au",
+    "explanation": "Substituted '-au' with '/au' to test flag parsing and detection of flag syntax variations."
+  }
+]
+```

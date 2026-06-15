@@ -1,0 +1,42 @@
+[
+  {
+    "output": "wmic service get name,displayname,pathname,startmode",
+    "explanation": "This command matches the Sigma rule's detection criteria by querying service details using wmic.exe, which is the behavior the rule is designed to detect."
+  },
+  {
+    "output": "wmic.exe  service get name,displayName,pathname,startMode",
+    "explanation": "This command uses insertion (space after .exe) and substitution (capitalization of 'displayName' and 'startMode') to test if the rule is sensitive to such variations."
+  },
+  {
+    "output": "wmic service get name displayname pathname startmode",
+    "explanation": "This command omits commas between fields to test if the rule is sensitive to formatting differences in the command line."
+  },
+  {
+    "output": "wmic -U .\\Administrator%password service get name,displayname,pathname,startmode",
+    "explanation": "This command adds an authentication flag (-U) and credentials to test if the rule is sensitive to additional arguments."
+  },
+  {
+    "output": "wmic.exe /node:localhost service get name,displayname,pathname,startmode",
+    "explanation": "This command adds the /node flag to test if the rule is sensitive to additional flags that do not affect the core detection logic."
+  },
+  {
+    "output": "wmic service get startmode,pathname,displayname,name",
+    "explanation": "This command reorders the fields in the get command to test if the rule is sensitive to argument order."
+  },
+  {
+    "output": "wmic service get name,displayname,pathname,startmode | findstr /i \"unquoted\"",
+    "explanation": "This command appends a findstr filter to test if the rule is sensitive to piped commands or additional filters."
+  },
+  {
+    "output": "wmic service get name,displayname,pathname,startmode > C:\\temp\\output.txt",
+    "explanation": "This command adds output redirection to test if the rule is sensitive to redirection operators or file paths."
+  },
+  {
+    "output": "wmic service get name,displayname,pathname,startmode --% /value",
+    "explanation": "This command adds the --% operator to stop argument parsing and includes a /value flag to test if the rule is sensitive to parsing behavior or additional flags."
+  },
+  {
+    "output": "wmic service get name,displayname,pathname,startmode ^| findstr /i \"unquoted\"",
+    "explanation": "This command uses an escaped pipe character to test if the rule is sensitive to encoded or escaped characters in the command line."
+  }
+]

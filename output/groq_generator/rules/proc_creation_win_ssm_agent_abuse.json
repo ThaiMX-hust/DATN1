@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "\"C:\\Program Files\\Amazon\\SSM\\amazon-ssm-agent.exe\" -register -code \"TESTCODE123\" -id \"TESTID123\" -region \"us-east-1\"",
+    "explanation": "This command simulates a potential hijacking attempt by registering the SSM agent with arbitrary code, ID, and region. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Program\\ Files\\Amazon\\SSM\\amazon-ssm-agent.exe -register -code TESTCODE123 -id TESTID123 -region us-east-1",
+    "explanation": "This command uses spaces and path normalization (e.g., 'Program\\ Files') to bypass simple pattern matching while still matching the Sigma rule's criteria."
+  },
+  {
+    "output": "C:\\Amazon\\SSM\\amazon-ssm-agent.exe -register -code TESTCODE123 -id TESTID123 -region us-east-1",
+    "explanation": "This command uses an alternative path to the SSM agent executable, which may bypass detection based on hardcoded paths while still matching the Sigma rule's criteria."
+  },
+  {
+    "output": "C:\\Amazon\\SSM\\amazon-ssm-agent.exe -register -code TESTCODE123 -id TESTID123 -region us-east-1 -additionalFlag",
+    "explanation": "This command adds an extra flag that does not affect the core detection logic but may help evade simple signature-based detection."
+  },
+  {
+    "output": "C:\\Amazon\\SSM\\amazon-ssm-agent.exe -register -code TESTCODE123 -id TESTID123 -region us-east-1 >NUL 2>&1",
+    "explanation": "This command suppresses output using redirection, which may help evade detection in environments where output is monitored."
+  }
+]
+```

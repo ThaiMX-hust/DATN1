@@ -1,0 +1,22 @@
+[
+  {
+    "output": "psloglist.exe -c -s system",
+    "explanation": "This command uses the flags -c and -s to clear and display the system event log. It matches the Sigma rule's detection criteria by including the -c flag and referencing the 'system' log."
+  },
+  {
+    "output": "psloglist.exe -g application",
+    "explanation": "This command exports the application event log as an evt file using the -g flag. It aligns with the Sigma rule by referencing the 'application' log and using a flagged command-line option."
+  },
+  {
+    "output": "psloglist.exe -d security",
+    "explanation": "This command displays the security event log using the -d flag. It meets the Sigma rule's criteria by referencing the 'security' log and using a flagged command-line option."
+  },
+  {
+    "output": "psloglist.exe -x system",
+    "explanation": "This command displays the system event log in XML format using the -x flag. It aligns with the Sigma rule by referencing the 'system' log and using a flagged command-line option."
+  },
+  {
+    "output": "psloglist.exe -c -d security",
+    "explanation": "This command clears and displays the security event log using the -c and -d flags. It matches the Sigma rule's criteria by referencing the 'security' log and using flagged command-line options."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "wbadmin.exe start backup -backupTarget:C:\\Backup -include:C:\\Windows\\NTDS\\NTDS.dit",
+    "explanation": "This command attempts to use wbadmin.exe to back up the NTDS.dit file, which is a sensitive file targeted by the Sigma rule. The command is structured to match the detection criteria by including the file path in the command line."
+  },
+  {
+    "output": "wbadmin.exe start recovery -version:2024-05-10-0830 -itemType:SystemState -items:C:\\Windows\\NTDS\\NTDS.dit -recoveryTarget:C:\\Recovery",
+    "explanation": "This command uses wbadmin.exe to recover the NTDS.dit file, which is a sensitive file. The command includes the file path in the command line, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "wbadmin.exe start backup -backupTarget:C:\\Backup -include:C:\\config\\SECURITY",
+    "explanation": "This command attempts to back up the SECURITY hive, which is a sensitive file targeted by the Sigma rule. The command includes the file path in the command line, matching the detection criteria."
+  },
+  {
+    "output": "wbadmin.exe start recovery -version:2024-05-10-0830 -itemType:SystemState -items:C:\\config\\SAM -recoveryTarget:C:\\Recovery",
+    "explanation": "This command uses wbadmin.exe to recover the SAM hive, which is a sensitive file. The command includes the file path in the command line, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "wbadmin.exe start backup -backupTarget:C:\\Backup -include:C:\\config\\SYSTEM",
+    "explanation": "This command attempts to back up the SYSTEM hive, which is a sensitive file targeted by the Sigma rule. The command includes the file path in the command line, matching the detection criteria."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\Sysnative\\cmd.exe\"",
+    "explanation": "This command attempts to invoke the Sysnative folder in a Windows environment, which is the focus of the Sigma rule. The use of quotes and command chaining is a safe mutation technique to test detection reliability."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process -FilePath 'C:\\Windows\\Sysnative\\notepad.exe'\"",
+    "explanation": "This command uses PowerShell to start a process from the Sysnative folder. It demonstrates reordering and substitution (using PowerShell instead of direct execution) to test detection coverage."
+  },
+  {
+    "output": "C:\\Windows\\Sysnative\\cmd.exe",
+    "explanation": "A direct invocation of the Sysnative folder without additional obfuscation. This is the simplest form of the test command and helps establish baseline detection behavior."
+  }
+]

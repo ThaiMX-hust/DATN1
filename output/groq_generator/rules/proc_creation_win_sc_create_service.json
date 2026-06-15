@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc.exe create MyService binPath= \"C:\\Windows\\System32\\notepad.exe\"",
+    "explanation": "This command uses the standard syntax for creating a service with sc.exe, which is directly detected by the Sigma rule. It serves as a baseline for testing."
+  },
+  {
+    "output": "sc create MyService binPath= \"C:\\\\Windows\\\\System32\\\\notepad.exe\"",
+    "explanation": "Escaped backslashes and omitted .exe extension for 'sc' (accepted on Windows). This is a valid mutation that may bypass detection if the rule does not account for such variations."
+  },
+  {
+    "output": "sc create MyService binPath= \"C:\\Windows\\System32\\notepad.exe\" start= auto",
+    "explanation": "Added optional parameter 'start= auto' which is allowed by sc.exe. This reordering and addition of optional parameters may bypass detection if the rule does not account for extra arguments."
+  },
+  {
+    "output": "sc.exe create MyService binPath= \"%windir%\\System32\\notepad.exe\"",
+    "explanation": "Used environment variable %windir% instead of hardcoding 'C:\\Windows'. This is a valid mutation that may bypass detection if the rule does not normalize path representations."
+  },
+  {
+    "output": "sc create MyService binPath= \"C:\\Windows\\System32\\notepad.exe\"",
+    "explanation": "Removed .exe extension from 'sc.exe' and used short form of command. This is a valid mutation that may bypass detection if the rule does not account for such variations."
+  }
+]

@@ -1,0 +1,44 @@
+```json
+[
+  {
+    "output": "\"cmd.exe\" /c cmd.exe /Q /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The original command is preserved with escaped backslashes to simulate a valid Windows path. This is a direct representation of the test command in a JSON-safe format."
+  },
+  {
+    "output": "\"cmd.exe\" /c cmd /Q /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The second instance of 'cmd.exe' is shortened to 'cmd' as a valid Windows substitution. This is a safe mutation that does not bypass the rule."
+  },
+  {
+    "output": "\"cmd.exe\" /c cmd /Q /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>\\&1",
+    "explanation": "The redirection operator '>&' is reordered as '>&' is equivalent to '>&' in Windows command-line syntax. This is a valid mutation that does not bypass the rule."
+  },
+  {
+    "output": "cmd.exe /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The first instance of 'cmd.exe' is removed as it is redundant in this context. The command still performs the same redirection to the admin share and is still detectable."
+  },
+  {
+    "output": "cmd /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "Both instances of 'cmd.exe' are shortened to 'cmd' as a valid Windows substitution. This is a safe mutation that does not bypass the rule."
+  },
+  {
+    "output": "cmd /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The command is simplified by removing redundant elements while maintaining the same behavior. The redirection to the admin share remains detectable."
+  },
+  {
+    "output": "cmd /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The command is formatted with minimal syntax and no unnecessary elements. The redirection to the admin share remains detectable."
+  },
+  {
+    "output": "cmd /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The command is simplified further by removing redundant syntax. The redirection to the admin share remains detectable."
+  },
+  {
+    "output": "cmd /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The command is formatted in a minimal and clean way. The redirection to the admin share remains detectable."
+  },
+  {
+    "output": "cmd /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "The command is simplified to its core functionality. The redirection to the admin share remains detectable."
+  }
+]
+```

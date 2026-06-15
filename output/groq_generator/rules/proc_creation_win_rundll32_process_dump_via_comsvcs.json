@@ -1,0 +1,35 @@
+[
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll MiniDump 204 \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp\" full",
+    "explanation": "This is the original command line and serves as a baseline for testing the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll,MiniDump 204 \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp\" full",
+    "explanation": "Inserted a comma after 'comsvcs.dll' to test parsing flexibility while maintaining functionality."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll MiniDump 204 \"C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp\" full",
+    "explanation": "Used double quotes around the executable path to test quote insertion as a bypass technique."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll MiniDump 204 C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp full",
+    "explanation": "Removed quotes around the output file path to test if the rule detects quoted vs unquoted paths."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll MiniDump 204 C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp full",
+    "explanation": "Reordered the command line arguments to test if the rule is sensitive to argument order."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll MiniDump 204 C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp full",
+    "explanation": "Used short path notation (e.g., C:\\\\Users\\\\thaim instead of C:\\\\Users\\\\thaim) to test path normalization bypass."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll MiniDump 204 C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp full",
+    "explanation": "Used environment variables for the output file path to test if the rule is sensitive to dynamic path generation."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rundll32.exe\" C:\\\\windows\\\\System32\\\\comsvcs.dll MiniDump 204 C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\svchost-exe.dmp full",
+    "explanation": "Used escape characters to obscure the command line while maintaining functionality."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\rund

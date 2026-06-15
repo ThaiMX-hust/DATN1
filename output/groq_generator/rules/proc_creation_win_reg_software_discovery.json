@@ -1,0 +1,42 @@
+[
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion",
+    "explanation": "No mutation applied. This is the original command used for testing."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer /v svcVersion",
+    "explanation": "Removed quotes around the registry key path. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\\\Software\\\\Microsoft\\\\Internet Explorer\" /v svcVersion",
+    "explanation": "Escaped backslashes in the registry key path. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\ Explorer /v svcVersion",
+    "explanation": "Split 'Explorer' into 'Explorer' with a space. This is a minor mutation that should still trigger the Sigma rule."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\\ Explorer -v svcVersion",
+    "explanation": "Replaced '/v' with '-v' to use an equivalent syntax. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\\ Explorer /v SVCVERSION",
+    "explanation": "Changed 'svcVersion' to uppercase 'SVCVERSION'. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\INTERNET\\ EXPLORER /v svcVersion",
+    "explanation": "Used uppercase for registry key path. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\\ Explorer /v svcVersion",
+    "explanation": "Reordered the registry key path slightly. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\\ Explorer /v svcVersion",
+    "explanation": "Inserted extra spaces in the registry key path. The command is still valid and should trigger the Sigma rule."
+  },
+  {
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\\ Explorer /v svcVersion",
+    "explanation": "Used a variable to store the registry key path. The command is still valid and should trigger the Sigma rule."
+  }
+]

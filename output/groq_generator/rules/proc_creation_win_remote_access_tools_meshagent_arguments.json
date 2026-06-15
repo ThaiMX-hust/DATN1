@@ -1,0 +1,42 @@
+[
+  {
+    "output": "MeshAgent.exe --meshServiceName=CustomName",
+    "explanation": "This command includes the '--meshServiceName' argument, which is the key indicator in the Sigma rule. It is a direct match and would trigger the detection."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName\\=CustomName",
+    "explanation": "Escape characters are inserted after the equals sign to obfuscate the argument. The command is still parsed correctly by the program and matches the Sigma rule."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName  CustomName",
+    "explanation": "A space is inserted between the equals sign and the value to bypass simple string-based detection. The command remains valid and matches the Sigma rule."
+  },
+  {
+    "output": "MeshAgent.exe -meshServiceName=CustomName",
+    "explanation": "The double hyphen is replaced with a single hyphen, which may be accepted by the program as an equivalent flag. This substitution is a common technique for evading signature-based detection."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName=CustomName --otherFlag",
+    "explanation": "Additional flags are appended to the command line to increase complexity and potentially confuse detection logic. The '--meshServiceName' argument remains intact and triggers the rule."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName=`CustomName`",
+    "explanation": "Backticks are used to wrap the value of the '--meshServiceName' argument, which may be parsed correctly by the program while evading simple string-based detection."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName=$env:CustomName",
+    "explanation": "The value of the '--meshServiceName' argument is replaced with an environment variable reference. This technique uses recoding/encoding to obfuscate the value while still matching the Sigma rule."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName=CustomName .\\",
+    "explanation": "A relative path is appended after the command line to simulate execution from a different directory. This reordering and addition of path elements does not affect the detection trigger."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName=CustomName\\x00",
+    "explanation": "A null byte is appended to the end of the command line to potentially interfere with parsing or string handling in the detection logic. The '--meshServiceName' argument remains intact and triggers the rule."
+  },
+  {
+    "output": "MeshAgent.exe --meshServiceName=CustomName # comment",
+    "explanation": "A comment is appended to the end of the command line. While not always supported in Windows command lines, this technique may be used in scripts or interpreted contexts to obfuscate the command while still matching the Sigma rule."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks /Change /TN \"MyTask\" /TR \"C:\\Users\\User\\AppData\\Local\\Temp\\malicious.exe\"",
+    "explanation": "This command modifies an existing scheduled task to execute from a suspicious location (AppData\\Local\\Temp), which matches the Sigma rule's detection criteria for suspicious paths."
+  },
+  {
+    "output": "schtasks /Change /TN MyTask /TR \"%TEMP%\\malicious.exe\"",
+    "explanation": "This command uses an environment variable (%TEMP%) to reference a suspicious location, which is equivalent to AppData\\Local\\Temp and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /Change /TN MyTask /TR \"C:\\Users\\Public\\malicious.exe\"",
+    "explanation": "This command modifies a scheduled task to execute from the Users\\Public directory, which is flagged as a suspicious location by the Sigma rule."
+  },
+  {
+    "output": "schtasks /Change /TN MyTask /TR \"C:\\ProgramData\\malicious.exe\"",
+    "explanation": "This command modifies a scheduled task to execute from the ProgramData directory, which is flagged as a suspicious location by the Sigma rule."
+  },
+  {
+    "output": "schtasks /Change /TN MyTask /TR \"C:\\Users\\User\\Downloads\\malicious.exe\"",
+    "explanation": "This command modifies a scheduled task to execute from the Downloads directory, which is flagged as a suspicious location by the Sigma rule."
+  }
+]

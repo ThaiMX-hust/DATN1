@@ -1,0 +1,14 @@
+[
+  {
+    "output": "eventvwr.exe",
+    "explanation": "The Sigma rule focuses on command-line arguments involving redirection and paths to 'RecentViews'. Since 'eventvwr.exe' alone does not include these indicators, it would not trigger the rule and is safe for testing."
+  },
+  {
+    "output": "echo test > RecentViews",
+    "explanation": "This command demonstrates redirection to a 'RecentViews' file without involving malicious components like UAC bypass or Event Viewer manipulation. It is safe for testing and does not match the Sigma rule's full condition."
+  },
+  {
+    "output": "copy RecentViews \"%LOCALAPPDATA%\\Microsoft\\EventV~1\\RecentViews\"",
+    "explanation": "This command simulates the file copy action seen in the Sigma rule but does not include the redirection or execution of malicious payloads. It is safe for testing and does not fully match the rule."
+  }
+]

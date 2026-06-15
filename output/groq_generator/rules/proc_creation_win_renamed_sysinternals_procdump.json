@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ren C:\\Tools\\procdump.exe C:\\Tools\\dumpTool.exe && C:\\Tools\\dumpTool.exe -ma -accepteula -i notepad.exe",
+    "explanation": "This command renames the original ProcDump executable to 'dumpTool.exe' and executes it with the same flags as the Sigma rule. The renaming evades the filter based on known names while retaining the same behavior."
+  },
+  {
+    "output": "ren C:\\Windows\\System32\\procdump.exe C:\\Windows\\System32\\sysdiag.exe && C:\\Windows\\System32\\sysdiag.exe /accepteula -ma notepad.exe",
+    "explanation": "This command renames the ProcDump executable to 'sysdiag.exe' and uses equivalent syntax for the '-ma' flag as '/ma'. The renamed executable is executed with the same behavior as the Sigma rule."
+  },
+  {
+    "output": "ren C:\\Temp\\procdump64.exe C:\\Temp\\processTool.exe && C:\\Temp\\processTool.exe -accepteula -ma -i calc.exe",
+    "explanation": "This command renames 'procdump64.exe' to 'processTool.exe' and executes it with the '-ma' flag and '-accepteula'. The renamed executable avoids the filter based on known names."
+  }
+]

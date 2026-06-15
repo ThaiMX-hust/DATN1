@@ -1,0 +1,22 @@
+[
+  {
+    "output": "perl -\\-help",
+    "explanation": "The command 'perl --help' is modified by inserting an escape character before the double hyphen. This is a safe mutation technique that maintains the same functionality while altering the command structure."
+  },
+  {
+    "output": "perl -h",
+    "explanation": "The command 'perl --help' is replaced with 'perl -h', which is a valid short option for the same functionality. This is a substitution technique that maintains the same behavior."
+  },
+  {
+    "output": "python --h\\elp",
+    "explanation": "The command 'python --help' is altered by inserting an escape character between '--' and 'help'. This is a safe mutation technique that maintains the same functionality while changing the command structure."
+  },
+  {
+    "output": "python -h",
+    "explanation": "The command 'python --help' is replaced with 'python -h', which is a valid short option for the same functionality. This is a substitution technique that maintains the same behavior."
+  },
+  {
+    "output": "wget --\\-help",
+    "explanation": "The command 'wget --help' is modified by inserting an escape character before the double hyphen. This is a safe mutation technique that maintains the same functionality while altering the command structure."
+  }
+]

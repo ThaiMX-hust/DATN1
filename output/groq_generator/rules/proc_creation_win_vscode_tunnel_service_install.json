@@ -1,0 +1,22 @@
+[
+  {
+    "output": "code-tunnel tunnel service internal-run --log-file tunnel-service.log",
+    "explanation": "This command simulates the installation of the Visual Studio Code tunnel service by including all required keywords ('tunnel', 'service', 'internal-run', 'tunnel-service.log') in the command line. It aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "code-tunnel tunnel service internal-run --log-file=tunnel-service.log",
+    "explanation": "This command uses an equals sign (=) instead of a space to assign the log file path, which is a valid syntax substitution. It still contains all required keywords and should be detected by the Sigma rule."
+  },
+  {
+    "output": "code-tunnel tunnel service internal-run --log-file \".\\tunnel-service.log\"",
+    "explanation": "This command uses a relative path with quotes and escape characters to represent the log file path. It maintains the required keywords and should still be detected by the Sigma rule."
+  },
+  {
+    "output": "code-tunnel tunnel service internal-run --log-file tunnel-service.log",
+    "explanation": "This command omits the equals sign (=) when assigning the log file path, relying on the command-line parser to interpret the argument correctly. It retains all required keywords and should be detected."
+  },
+  {
+    "output": "code-tunnel tunnel service internal-run --log-file tunnel-service.log",
+    "explanation": "This command uses standard syntax with no modifications. It includes all required keywords and serves as a baseline for detection."
+  }
+]

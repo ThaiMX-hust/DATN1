@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\\\Program Files\\\\AnyDesk\\\\AnyDesk.exe",
+    "explanation": "This command simulates the execution of AnyDesk.exe, which is the target binary in the Sigma rule. However, it does not include a version check or command-line arguments that would trigger the rule. It is a baseline for testing."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\AnyDesk\\\\AnyDesk.exe\" -v 7.1.5",
+    "explanation": "This command simulates the execution of AnyDesk.exe with a version number that matches the vulnerable range in the Sigma rule. The version is specified using a short option (-v), which is a common substitution technique."
+  },
+  {
+    "output": "C:\\\\Progra~1\\\\AnyDesk\\\\AnyDesk.exe --version=8.0.7",
+    "explanation": "This command uses path normalization (shortened path) and a long option (--version) to specify a vulnerable version. It is a valid test command that matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\\\Program Files\\\\AnyDesk\\\\AnyDesk.exe --uninstall",
+    "explanation": "This command includes the uninstall flag, which is explicitly excluded by the Sigma rule's filter. It is useful for testing the rule's filtering logic."
+  },
+  {
+    "output": "C:\\\\Program Files\\\\AnyDesk\\\\AnyDesk.exe -v 8.0.8",
+    "explanation": "This command specifies a version (8.0.8) that is not included in the vulnerable range. It is useful for testing the rule's false-negative behavior."
+  }
+]

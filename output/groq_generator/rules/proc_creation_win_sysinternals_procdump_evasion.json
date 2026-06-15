@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd /c \"copy procdump.exe procdump_copy.exe\"",
+    "explanation": "This command uses insertion of quotes and the /c flag to execute the copy command, which may bypass detection by obfuscating the command line while maintaining the same behavior as the Sigma rule targets."
+  },
+  {
+    "output": "copy procdump.exe procdump_copy.exe",
+    "explanation": "This is a direct copy command that matches the Sigma rule's detection criteria. It is included for testing purposes to confirm detection accuracy."
+  },
+  {
+    "output": "cmd /c copy procdump.exe procdump_copy.exe",
+    "explanation": "This command uses the /c flag to execute the copy command, which may bypass detection by wrapping the command in a way that changes the command line structure."
+  },
+  {
+    "output": "copy procdump.exe procdump_copy.exe >nul",
+    "explanation": "This command appends redirection to suppress output, which may help evade detection by making the command line less suspicious while preserving the core behavior."
+  },
+  {
+    "output": "cmd /c \"copy procdump.exe procdump_copy.exe\" >nul",
+    "explanation": "This command combines insertion of quotes, the /c flag, and output redirection to obfuscate the command line further, potentially evading detection."
+  }
+]

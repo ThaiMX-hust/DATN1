@@ -1,0 +1,22 @@
+[
+  {
+    "output": "vshadow.exe -exec cmd.exe /c whoami",
+    "explanation": "This command uses the -exec parameter to execute a command after creating shadow copies. It matches the Sigma rule by invoking vshadow.exe with '-exec' in the command line."
+  },
+  {
+    "output": "vshadow.exe -exec \"cmd.exe /c whoami\"",
+    "explanation": "This command uses quotes around the executed command, which is a safe mutation technique (insertion). It still matches the Sigma rule as it contains '-exec' in the command line."
+  },
+  {
+    "output": "vshadow.exe -exec cmd /c whoami",
+    "explanation": "This command omits the '.exe' extension from 'cmd.exe' and uses the short form of the executable. It still matches the Sigma rule as '-exec' is present."
+  },
+  {
+    "output": "vshadow.exe -exec cmd.exe /c echo bypass",
+    "explanation": "This command changes the executed command to a benign one (echo bypass) while maintaining the same structure. It matches the Sigma rule as '-exec' is still present."
+  },
+  {
+    "output": "vshadow.exe -exec cmd.exe^ /c^ whoami",
+    "explanation": "This command uses escape characters (^) to obfuscate the command line slightly. It is a safe mutation technique and still matches the Sigma rule."
+  }
+]

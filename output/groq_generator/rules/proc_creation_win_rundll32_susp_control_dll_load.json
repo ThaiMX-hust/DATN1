@@ -1,0 +1,16 @@
+```json
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL",
+    "explanation": "This command represents a typical legitimate usage of rundll32.exe with shell32.dll, which is excluded by the Sigma rule's filter. It is not a bypass but a baseline for comparison."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL",
+    "explanation": "Repetition of the same command as a controlled test case to confirm detection behavior."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]
+```

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "taskkill /F \"RaccineSettings.exe\"",
+    "explanation": "This command attempts to bypass detection by using quotes around the executable name and explicit flags (/F) that are still parsed correctly by the command interpreter."
+  },
+  {
+    "output": "reg.exe delete HKCU\\Software\\Raccine\\Tray /f",
+    "explanation": "This command uses explicit registry path syntax and the /f flag instead of just 'delete' to bypass detection while maintaining the same behavior."
+  },
+  {
+    "output": "schtasks /DELETE /TN \"Raccine Rules Updater\" /F",
+    "explanation": "This command adds the /F flag and uses quotes around the task name to evade detection while maintaining the same functionality."
+  },
+  {
+    "output": "taskkill RaccineSettings.exe",
+    "explanation": "This command omits the /F flag, which is optional, and removes unnecessary spaces to reduce the likelihood of detection."
+  },
+  {
+    "output": "reg delete HKCU\\Software\\Raccine\\Tray /f",
+    "explanation": "This command uses the short form of the command (reg delete instead of reg.exe delete) and omits unnecessary spaces to evade detection."
+  },
+  {
+    "output": "schtasks /delete /tn Raccine Rules Updater /f",
+    "explanation": "This command uses lowercase flags and reorders the arguments to evade detection while maintaining the same behavior."
+  }
+]

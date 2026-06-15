@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks /delete /tn \"\\Windows\\Windows Defender\\\" /f",
+    "explanation": "This command deletes a scheduled task in the 'Windows Defender' folder. It includes the required '/delete' and '/tn' flags and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /D /TN \"\\Windows\\WindowsUpdate\\\" /F",
+    "explanation": "This command uses short flags (/D for /delete, /TN for /tn, /F for /f) as a substitution technique. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /delete /tn '\\Windows\\WindowsBackup\\' /f",
+    "explanation": "This command uses single quotes instead of double quotes for the task name, which is a valid mutation technique. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /delete /tn \"\\Windows\\Windows Defender\\\" /f",
+    "explanation": "This command omits unnecessary whitespace and uses standard quoting. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /delete /tn \"\\Windows\\WindowsUpdate\\' /f",
+    "explanation": "This command uses a mix of double and single quotes in the task name, which is a valid mutation technique. It still matches the Sigma rule's detection criteria."
+  }
+]

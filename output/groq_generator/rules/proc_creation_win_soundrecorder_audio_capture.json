@@ -1,0 +1,36 @@
+```json
+[
+  {
+    "output": "SoundRecorder.exe /FILE C:\\RecordedAudio.wav",
+    "explanation": "This command directly matches the Sigma rule's detection criteria by invoking SoundRecorder.exe with the /FILE argument, which is flagged by the rule."
+  },
+  {
+    "output": "SoundRecorder.exe /FILE\" C:\\RecordedAudio.wav\"",
+    "explanation": "Inserts quotes around the file path, which may bypass detection if the rule does not account for quoted arguments."
+  },
+  {
+    "output": "SoundRecorder.exe /FILE C:\\\\RecordedAudio.wav",
+    "explanation": "Escapes the backslashes in the file path, which may evade detection if the rule does not normalize or handle escaped characters."
+  },
+  {
+    "output": "SoundRecorder.exe /FILE C:\\RecordedAudio.wav /OTHERFLAG",
+    "explanation": "Adds an additional flag that does not affect the core functionality but may confuse the rule if it does not account for extra arguments."
+  },
+  {
+    "output": "SoundRecorder.exe /FILE C:\\RecordedAudio.wav -",
+    "explanation": "Appends a trailing dash, which may be ignored by the application but could bypass detection if the rule does not account for trailing characters."
+  },
+  {
+    "output": "SoundRecorder.exe /FILE C:\\RecordedAudio.wav ",
+    "explanation": "Adds a trailing space after the command line, which may be parsed differently depending on the system or log source."
+  },
+  {
+    "output": "SoundRecorder.exe /FILE C:\\RecordedAudio.wav && echo Bypass",
+    "explanation": "Appends a harmless command after the main command using a command separator, which may be ignored or misparsed by the detection rule."
+  },
+  {
+    "output": "SoundRecorder.exe /FILE C:\\RecordedAudio.wav | more",
+    "explanation": "Pipes the output to another command, which may be ignored or not parsed correctly by the detection rule."
+  }
+]
+```

@@ -1,0 +1,32 @@
+```json
+[
+  {
+    "output": "wmic.exe csproduct get name",
+    "explanation": "This command triggers the Sigma rule by executing wmic.exe with 'csproduct' in the command line, which is directly detected by the rule."
+  },
+  {
+    "output": "wmic.exe \"csproduct\" get name",
+    "explanation": "Quotes are inserted around 'csproduct' as a mutation technique. The command is still parsed correctly and matches the Sigma rule."
+  },
+  {
+    "output": "wmic.exe -U // csproduct get name",
+    "explanation": "Reordering and substitution techniques are applied. However, this does not bypass the rule since 'csproduct' is still present."
+  },
+  {
+    "output": "wmic.exe csproduct get name > nul",
+    "explanation": "Output redirection is added to suppress output, but 'csproduct' remains in the command line and is still detected."
+  },
+  {
+    "output": "wmic.exe csproduct get name | findstr /v /c:\"\" > nul",
+    "explanation": "Command line is modified to suppress output using findstr, but 'csproduct' is still present and detectable."
+  },
+  {
+    "output": "set CMD=csproduct& wmic.exe %CMD% get name",
+    "explanation": "Environment variable substitution is used to encode 'csproduct'. This bypasses the Sigma rule by not having 'csproduct' directly in the command line."
+  },
+  {
+    "output": "wmic.exe /namespace:\\\\root\\cimv2 path Win32_ComputerSystemProduct get Name",
+    "explanation": "The equivalent functionality is achieved using a different WMI path and syntax, avoiding the 'csproduct' keyword and bypassing the rule."
+  }
+]
+```

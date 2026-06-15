@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo TVqQAAMAAAAEAAAA | base64 --decode > payload.exe",
+    "explanation": "This command simulates a scenario where a base64 string resembling an MZ header is decoded into a file. The Sigma rule would detect the presence of 'TVqQAAMAAAAEAAAA' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Convert]::FromBase64String('TVpQAAIAAAAEAA8A') | Set-Content -Path payload.exe\"",
+    "explanation": "This PowerShell command decodes a base64 string into a file. The string 'TVpQAAIAAAAEAA8A' is part of the Sigma rule's detection criteria and would trigger an alert."
+  },
+  {
+    "output": "echo TVqAAAEAAAAEABAA | base64 -d > test.exe",
+    "explanation": "This command uses a base64 string 'TVqAAAEAAAAEABAA' from the Sigma rule and decodes it into a file. The Sigma rule would detect the presence of this string in the command line."
+  }
+]

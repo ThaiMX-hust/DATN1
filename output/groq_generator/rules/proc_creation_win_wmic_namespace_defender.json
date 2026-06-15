@@ -1,0 +1,23 @@
+[
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\Microsoft\\Windows\\Defender path DefendDefender set ExclusionPath=\"C:\\\\Temp\"",
+    "explanation": "This command attempts to set a Windows Defender exclusion path using WMIC. It matches the Sigma rule by including the specific namespace and is a valid test command for the rule."
+  },
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\Microsoft\\Windows\\Defender PATH DefendDefender SET ExclusionPath='C:\\\\Temp'",
+    "explanation": "This is a variation of the original command with single quotes instead of double quotes. It uses the same namespace and path, making it a valid test command that matches the Sigma rule."
+  },
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\Microsoft\\Windows\\Defender PATH DefendDefender SET ExclusionPath=C:\\\\Temp",
+    "explanation": "This command omits the quotation marks around the path. Since the path does not contain spaces, it is still valid and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "wmic.exe \"/Namespace:\\\\root\\Microsoft\\Windows\\Defender\" PATH DefendDefender SET ExclusionPath=\"C:\\\\Temp\"",
+    "explanation": "This command uses escaped quotes around the namespace parameter. It is a valid mutation that still matches the Sigma rule."
+  },
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\Microsoft\\Windows\\Defender PATH DefendDefender SET ExclusionPath=\"%TEMP%\\..\\Temp\"",
+    "expression": "wmic.exe /Namespace:\\\\root\\Microsoft\\Windows\\Defender PATH DefendDefender SET ExclusionPath=\"%TEMP%\\..\\Temp\"",
+    "explanation": "This command uses an environment variable (%TEMP%) and path traversal to obfuscate the path. It still matches the Sigma rule's detection criteria."
+  }
+]

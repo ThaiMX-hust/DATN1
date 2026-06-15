@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\" add HKEY_CURRENT_USER\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\WindowsAI /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\" delete HKEY_CURRENT_USER\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\WindowsAI /v DisableAIDataAnalysis /f",
+    "explanation": "The original command is already a valid test case for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\" add HKEY_CURRENT_USER\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\WindowsAI ^/v DisableAIDataAnalysis ^/t REG_DWORD ^/d 0 ^/f",
+    "explanation": "Escape characters (^) are inserted before each slash to demonstrate a safe mutation technique. The command remains valid and should still trigger the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\" add HKEY_CURRENT_USER\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\WindowsAI /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f",
+    "explanation": "The command is unchanged but included as a valid test case. It is already aligned with the Sigma rule's detection logic."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\" delete HKEY_CURRENT_USER\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\WindowsAI /v DisableAIDataAnalysis /f",
+    "explanation": "The command is unchanged but included as a valid test case. It is already aligned with the Sigma rule's detection logic."
+  }
+]

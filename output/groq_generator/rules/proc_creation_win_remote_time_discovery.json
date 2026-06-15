@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\\\WINDOWS\\\\system32\\\\net1.exe time \\\\\\\\localhost",
+    "explanation": "The command uses insertion of full path and double backslashes for localhost, which is still parsed correctly by Windows. This is a safe mutation technique."
+  },
+  {
+    "output": "net.exe time \\\\\\\\localhost",
+    "explanation": "The command substitutes 'net' with 'net.exe' and uses double backslashes for localhost. This is a safe mutation technique."
+  },
+  {
+    "output": "w32tm.exe /query /tz",
+    "explanation": "The command uses substitution of full executable name and expands the short option '/tz' to '/query /tz', which is equivalent in behavior."
+  }
+]

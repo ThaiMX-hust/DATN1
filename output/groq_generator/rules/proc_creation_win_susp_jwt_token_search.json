@@ -1,0 +1,22 @@
+[
+  {
+    "output": "echo 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' | findstr /i 'eyJ0eX' > nul",
+    "explanation": "This command simulates a process that includes a JWT token in the command line. The token contains 'eyJ0eXAiOi', which matches the Sigma rule's detection pattern. The output is redirected to nul to avoid clutter in a test environment."
+  },
+  {
+    "output": "echo \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\" | findstr /i 'eyJhbG' > nul",
+    "explanation": "This command simulates a process that includes a JWT token in the command line. The token contains 'eyJhbGciOi', which matches the Sigma rule's detection pattern. The output is redirected to nul to avoid clutter in a test environment."
+  },
+  {
+    "output": "powershell -Command \"Write-Output 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' | Select-String 'eyJ0eX'\" | Out-Null",
+    "explanation": "This PowerShell command simulates a process that includes a JWT token in the command line. The token contains 'eyJ0eXAiOi', which matches the Sigma rule's detection pattern. The output is suppressed using Out-Null to avoid clutter in a test environment."
+  },
+  {
+    "output": "cmd /c echo eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ== | findstr /i 'eyJ0eX' > nul",
+    "explanation": "This command simulates a process that includes a JWT token in the command line. The token contains 'eyJ0eXAiOi', which matches the Sigma rule's detection pattern. The output is redirected to nul to avoid clutter in a test environment."
+  },
+  {
+    "output": "echo eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ== | findstr /i 'eyJ0eX' > nul",
+    "explanation": "This command simulates a process that includes a JWT token in the command line. The token contains 'eyJ0eXAiOi', which matches the Sigma rule's detection pattern. The output is redirected to nul to avoid clutter in a test environment."
+  }
+]

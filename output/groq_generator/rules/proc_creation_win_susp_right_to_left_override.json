@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Output 'TEST-HOST ‮'\"",
+    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "powershell.exe -c \"Write-Output 'TEST-HOST ‮'\"",
+    "explanation": "Substituted '-Command' with its short form '-c', which is functionally equivalent and still contains the right-to-left override character to trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Output 'TEST-HOST\u202E'\"",
+    "explanation": "Used Unicode escape sequence for the right-to-left override character instead of its direct representation, which still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Output 'TEST-HOST‮'\"",
+    "explanation": "Used an encoded or visually similar representation of the right-to-left override character that still matches the Sigma rule's detection logic."
+  }
+]

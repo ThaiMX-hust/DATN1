@@ -1,0 +1,30 @@
+[
+  {
+    "output": "taskkill /F /IM ccSvcHst.exe",
+    "explanation": "This is the base command that matches the Sigma rule. It uses the exact syntax and arguments specified in the rule to kill the 'ccSvcHst.exe' process."
+  },
+  {
+    "output": "taskkill /F /IM \"ccSvcHst.exe\"",
+    "explanation": "Inserts quotes around the image name, which is a common mutation technique. The command remains functionally identical but may evade detection if the rule does not account for quoted strings."
+  },
+  {
+    "output": "taskkill /F /IM ccSvcHst.exe ",
+    "explanation": "Adds an extra space at the end of the command line. This is a simple insertion that may bypass detection if the rule does not normalize whitespace."
+  },
+  {
+    "output": "taskkill /IM ccSvcHst.exe /F",
+    "explanation": "Reorders the flags '/F' and '/IM'. Some programs accept reordered arguments, and this could evade detection if the rule does not account for argument order."
+  },
+  {
+    "output": "taskkill /F /IM CcSvChSt.exe",
+    "explanation": "Alters the case of the filename. Windows is case-insensitive, so this should still work and may evade detection if the rule does not enforce case-insensitive matching."
+  },
+  {
+    "output": "taskkill /F /IM ..\\ccSvcHst.exe",
+    "explanation": "Uses a relative path with '..\\' to reference the same file. This is a form of path normalization and may evade detection if the rule does not normalize paths."
+  },
+  {
+    "output": "taskkill /F /IM $env:CCSVCHST",
+    "explanation": "Replaces the filename with an environment variable. This is a form of recoding and may evade detection if the rule does not expand variables."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "regedit.exe /E C:\\Temp\\registry_export.reg HKEY_CURRENT_USER\\Software\\TestKey",
+    "explanation": "This command exports a registry key to a file using regedit.exe with the /E flag, which is equivalent to the -E flag in the Sigma rule. It is a direct match for the detection condition."
+  },
+  {
+    "output": "regedit.exe /E C:\\Temp\\registry_export.reg HKCU\\Software\\TestKey",
+    "explanation": "This command uses the short form 'HKCU' instead of the full 'HKEY_CURRENT_USER' to bypass potential signature-based detection while maintaining the same behavior."
+  },
+  {
+    "output": "regedit.exe /E C:\\Temp\\registry_export.reg HKEY_CURRENT_USER\\Software\\TestKey\\",
+    "explanation": "Appending a trailing backslash to the registry key path may bypass the Sigma rule if it relies on exact string matching and does not account for such variations."
+  },
+  {
+    "output": "regedit.exe /E C:\\Temp\\registry_export.reg HKEY_CURRENT_USER\\Software\\TestKey 1> NUL",
+    "explanation": "Appending '1> NUL' suppresses output, which may be used to avoid detection in environments where command output is monitored. The core behavior remains unchanged."
+  },
+  {
+    "output": "regedit.exe /E C:\\Temp\\registry_export.reg HKEY_CURRENT_USER\\Software\\TestKey | Out-Null",
+    "explanation": "Piping the output to 'Out-Null' is a PowerShell technique to suppress output, potentially evading detection based on command-line content analysis."
+  },
+  {
+    "output": "regedit.exe /E C:\\Temp\\registry_export.reg HKEY_CURRENT_USER\\Software\\TestKey",
+    "explanation": "This is a standard command that matches the Sigma rule's detection criteria. It is included to show the baseline behavior."
+  }
+]

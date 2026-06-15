@@ -1,0 +1,22 @@
+[
+  {
+    "output": "winget source add --uri http://example.com",
+    "explanation": "This command attempts to add an insecure HTTP source to winget, which should trigger the Sigma rule. It uses standard syntax and is a direct match to the rule's detection criteria."
+  },
+  {
+    "output": "winget.exe source add --uri http://example.com",
+    "explanation": "This command is a variation using the full executable name 'winget.exe' and includes the '--uri' flag, which is equivalent to 'add' in the Sigma rule's detection logic."
+  },
+  {
+    "output": "winget source add --uri \"http://example.com\"",
+    "explanation": "This command uses quotes around the URI, which is a safe mutation technique (insertion) and should still trigger the Sigma rule."
+  },
+  {
+    "output": "winget source add --uri http://example.com\\",
+    "explanation": "This command adds an unnecessary trailing backslash, which is a safe mutation technique (insertion) and should still trigger the Sigma rule."
+  },
+  {
+    "output": "winget source add --uri http://example.com -v",
+    "explanation": "This command adds a verbose flag '-v' which is optional and does not affect the detection logic. It should still trigger the Sigma rule."
+  }
+]

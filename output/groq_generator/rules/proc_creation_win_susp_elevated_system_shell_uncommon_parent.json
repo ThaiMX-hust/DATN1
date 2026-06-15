@@ -1,0 +1,42 @@
+[
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command echo TEST-HOST",
+    "explanation": "The original command is already a valid true positive for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command \"echo TEST-HOST\"",
+    "explanation": "Inserted quotes around the command to test if the Sigma rule is affected by command-line formatting."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -c echo TEST-HOST",
+    "explanation": "Substituted '-Command' with '-c', which is an equivalent short option in PowerShell."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe echo TEST-HOST",
+    "explanation": "Omitted the '-Command' flag, which is sometimes optional in PowerShell when the command is provided directly."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command `echo TEST-HOST`",
+    "explanation": "Used backticks to escape the command, testing if the Sigma rule is affected by escape characters."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command echo TEST-HOST | Out-Null",
+    "explanation": "Appended a harmless pipeline to test if the Sigma rule is affected by additional command-line arguments."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command [Environment]::SetEnvironmentVariable('TEST','HOST'); echo TEST-HOST",
+    "explanation": "Inserted an environment variable setting before the main command to test if the Sigma rule is affected by additional logic in the command."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command \"echo TEST-HOST\" | Out-String",
+    "explanation": "Modified the command to include a common PowerShell output redirection to test if the Sigma rule is affected by such changes."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command echo TEST-HOST -NoProfile",
+    "explanation": "Added a common PowerShell flag '-NoProfile' to test if the Sigma rule is affected by additional flags."
+  },
+  {
+    "output": "C:\\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command echo TEST-HOST -ExecutionPolicy Bypass",
+    "explanation": "Added a common PowerShell flag '-ExecutionPolicy Bypass' to test if the Sigma rule is affected by additional flags."
+  }
+]

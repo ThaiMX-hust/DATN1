@@ -1,0 +1,19 @@
+[
+  {
+    "output": "cmd.exe /c dir C:\\ /b /s .key | findstr .key",
+    "explanation": "The command omits the '/e' flag in findstr, which is optional and does not affect the core behavior of searching for .key files. This mutation preserves the intent while bypassing the rule's dependency on explicit command-line syntax."
+  },
+  {
+    "output": "powershell.exe -Command Get-ChildItem Cert:\\LocalMachine\\My\\* -Recurse",
+    "explanation": "This command omits certificate creation and export logic while retaining the Get-ChildItem command used in the original. It removes the certificate export logic, which is not essential for the detection rule's focus on certificate store access."
+  },
+  {
+    "output": "cmd /c dir C:\\ /b /s .key | findstr .key",
+    "output": "cmd.exe /c dir C:\\ /b /s .key | findstr .key",
+    "explanation": "The command removes the quotes and escape characters, and omits the '/S' and '/D' flags which are not essential for the command's core behavior. The command still performs the same directory search for .key files."
+  },
+  {
+    "output": "findstr .key",
+    "explanation": "The command omits the '/e' flag in findstr, which is optional and does not affect the core behavior of searching for .key files. This mutation preserves the intent while bypassing the rule's dependency on explicit command-line syntax."
+  }
+]

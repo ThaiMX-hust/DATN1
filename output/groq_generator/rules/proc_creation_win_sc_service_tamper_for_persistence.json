@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc \\\"config\\\" Fax binPath= C:\\\\windows\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -noexit -c \\\"write-host 'T1543.003 Test'\\\"",
+    "explanation": "The original command uses 'sc config' to modify a service's binary path. By inserting quotes around 'config' and using double backslashes for path normalization, the command remains functionally equivalent but may bypass detection by Sigma rules that do not account for such formatting variations."
+  },
+  {
+    "output": "sc config Fax binPath= \".\\..\\..\\windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe\" -noexit -c \"write-host 'T1543.003 Test'\"",
+    "explanation": "The command uses relative path normalization (e.g., .\\..\\..\\) to represent the absolute path. This technique may bypass detection if the Sigma rule does not account for such path variations."
+  },
+  {
+    "output": "sc config Fax binPath= C:\\\\windows\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -noexit -c write-host 'T1543.003 Test'",
+    "explanation": "The command omits the outer quotes around the PowerShell command. This may bypass detection if the Sigma rule relies on specific syntax patterns that include quotes."
+  },
+  {
+    "output": "sc config Fax binPath= C:\\\\windows\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -c write-host 'T1543.003 Test' -noexit",
+    "explanation": "The command reorders the '-noexit' and '-c' flags. If the program accepts reordered arguments, this variation may bypass detection based on fixed argument order in the Sigma rule."
+  },
+  {
+    "output": "sc config Fax binPath= C:\\\\windows\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -noexit -Command \"write-host 'T1543.003 Test'\"",
+    "explanation": "The command substitutes '-c' with '-Command', which is an equivalent long-form flag in PowerShell. This substitution may bypass detection if the Sigma rule does not account for such flag variations."
+  }
+]

@@ -1,0 +1,20 @@
+```json
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Original command with no mutation applied for baseline testing."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "No bypass mutation applied; this is the same as the original command."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "No bypass mutation applied; this is the same as the original command."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]
+```

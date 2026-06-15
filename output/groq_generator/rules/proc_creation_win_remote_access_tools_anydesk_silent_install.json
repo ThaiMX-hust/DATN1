@@ -1,0 +1,42 @@
+[
+  {
+    "output": "\"AnyDesk_Setup.exe\" --install --start-with-win --silent",
+    "explanation": "This command adds quotes around the executable name to test if the Sigma rule is sensitive to such insertion. It uses the exact flags from the rule and is a valid test case."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win --silent",
+    "explanation": "This command omits quotes and extra spaces, testing if the Sigma rule is sensitive to minimal formatting."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --silent --start-with-win",
+    "explanation": "This command reorders the flags to test if the Sigma rule is sensitive to argument order."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win -silent",
+    "explanation": "This command substitutes '--silent' with '-silent' to test if the Sigma rule is sensitive to short/long option syntax."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win --silent --",
+    "explanation": "This command appends an extra '--' to test if the Sigma rule is sensitive to additional arguments or separators."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win --silent`",
+    "explanation": "This command appends an escape character (`) to test if the Sigma rule is sensitive to trailing escape characters."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win --silent ",
+    "explanation": "This command adds a trailing space to test if the Sigma rule is sensitive to trailing whitespace."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win --silent^",
+    "explanation": "This command appends a caret (^) to test if the Sigma rule is sensitive to escape characters in the command line."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win --silent\"",
+    "explanation": "This command appends a quote to test if the Sigma rule is sensitive to trailing quotes."
+  },
+  {
+    "output": "AnyDesk_Setup.exe --install --start-with-win --silent' '",
+    "explanation": "This command appends a space within quotes to test if the Sigma rule is sensitive to embedded whitespace in quoted strings."
+  }
+]

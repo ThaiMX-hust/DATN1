@@ -1,0 +1,30 @@
+[
+  {
+    "output": "procdump.exe -ma 504",
+    "explanation": "This command uses the standard syntax to dump the memory of the lsass.exe process (PID 504) with the -ma flag, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "procdump.exe \"-ma\" 504",
+    "explanation": "Inserts quotes around the -ma flag, which is a valid mutation technique and still matches the Sigma rule's detection."
+  },
+  {
+    "output": "procdump.exe -ma 504",
+    "explanation": "Standard command with no mutation applied. Matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "procdump.exe -ma 504",
+    "explanation": "Reordering is not applicable here as the order of the flags and PID is fixed for this command."
+  },
+  {
+    "output": "procdump.exe -ma 504",
+    "explanation": "No omission is possible without losing the malicious behavior of the command."
+  },
+  {
+    "output": "procdump.exe -ma 504",
+    "explanation": "No substitution is possible for -ma as it is the only valid flag for dumping memory in this context."
+  },
+  {
+    "output": "procdump.exe -ma 504",
+    "explanation": "No encoding or recoding is needed as the command is already straightforward and matches the Sigma rule."
+  }
+]

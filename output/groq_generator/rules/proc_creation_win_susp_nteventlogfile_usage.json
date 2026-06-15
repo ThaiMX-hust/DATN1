@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_NTEventlogFile | ForEach-Object { $_.Delete() }\"",
+    "explanation": "This command simulates a PowerShell script invoking the 'Delete()' method on the 'Win32_NTEventlogFile' WMI class, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -c \"Get-WmiObject -Class Win32_NTEventlogFile | % { $_.DeleteEx() }\"",
+    "explanation": "This command uses a shorthand alias for 'ForEach-Object' (%), and calls the 'DeleteEx()' method, which is also covered by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_NTEventlogFile | ForEach-Object { $_.ChangeSecurityPermissions() }\"",
+    "explanation": "This command invokes the 'ChangeSecurityPermissions()' method on the 'Win32_NTEventlogFile' class, which is flagged by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -c \"Get-WmiObject Win32_NTEventlogFile | ForEach-Object { $_.Rename('TestLog') }\"",
+    "explanation": "This command uses the 'Rename()' method on the 'Win32_NTEventlogFile' class, which is also included in the Sigma rule's detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_NTEventlogFile | ForEach-Object { $_.TakeOwnerShip() }\"",
+    "explanation": "This command calls the 'TakeOwnerShip()' method on the 'Win32_NTEventlogFile' class, which is part of the Sigma rule's detection criteria."
+  }
+]

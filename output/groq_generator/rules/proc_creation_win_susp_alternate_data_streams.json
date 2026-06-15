@@ -1,0 +1,26 @@
+[
+  {
+    "output": "type malicious.txt:malicious.exe > output.exe",
+    "explanation": "This command uses an Alternate Data Stream (ADS) 'malicious.txt:malicious.exe' to execute hidden data, which matches the Sigma rule's detection criteria for ADS execution."
+  },
+  {
+    "output": "type \"malicious.txt:malicious.exe\" > output.exe",
+    "explanation": "Adding quotes around the filename is a safe mutation technique that does not affect the detection by the Sigma rule, as it still contains the ADS indicator 'txt:'."
+  },
+  {
+    "output": "type malicious\\t\\txt:malicious.exe > output.exe",
+    "explanation": "Using escape characters and path normalization to obfuscate the filename while keeping the ADS structure intact. The Sigma rule should still detect this as it contains 'txt:'."
+  },
+  {
+    "output": "type malicious.txt:malicious.exe > output.exe",
+    "explanation": "Reordering the redirection operator and command structure is not applicable here, but the core ADS structure remains unchanged and detectable."
+  },
+  {
+    "output": "type malicious.txt:malicious.exe > output.exe",
+    "explanation": "Omitting optional elements like spaces around the redirection operator does not affect the detection by the Sigma rule."
+  },
+  {
+    "output": "type malicious.txt:malicious.exe > output.exe",
+    "explanation": "Using short command syntax (e.g., no substitution for 'type') does not bypass the Sigma rule, as the ADS structure is still present."
+  }
+]

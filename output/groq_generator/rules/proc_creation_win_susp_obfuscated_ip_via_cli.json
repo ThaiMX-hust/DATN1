@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ping.exe 8.8.8.8",
+    "explanation": "This command is not obfuscated and uses a standard IP address. It does not match the Sigma rule's detection patterns for obfuscated IP addresses."
+  },
+  {
+    "output": "ping.exe 0x8.0x8.0x8.0x8",
+    "explanation": "This command uses hexadecimal notation for an IP address, which matches the Sigma rule's detection pattern for obfuscated IP addresses."
+  },
+  {
+    "output": "ping.exe 10.0.0.1",
+    "explanation": "This command is not obfuscated and uses a standard IP address. It does not match the Sigma rule's detection patterns for obfuscated IP addresses."
+  },
+  {
+    "output": "ping.exe 012.010.010.010",
+    "explanation": "This command uses octal notation for an IP address, which matches the Sigma rule's detection pattern for obfuscated IP addresses."
+  },
+  {
+    "output": "ping.exe 020.020.020.020",
+    "explanation": "This command uses octal notation for an IP address, which matches the Sigma rule's detection pattern for obfuscated IP addresses."
+  }
+]

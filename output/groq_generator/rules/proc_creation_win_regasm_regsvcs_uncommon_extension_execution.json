@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regsvcs.exe\" C:\\Users\\thaim\\AppData\\Local\\Temp\\T1218.009.txt",
+    "explanation": "The command uses a .txt extension instead of .dll to match the Sigma rule's uncommon extension criteria. The command line is formatted with quotes around the executable path for consistency."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regasm.exe /U C:\\Users\\thaim\\AppData\\Local\\Temp\\T1218.009.jpeg",
+    "explanation": "The command uses a .jpeg extension instead of .dll to match the Sigma rule's uncommon extension criteria. The /U flag is preserved, and no additional syntax changes are made."
+  }
+]

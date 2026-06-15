@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe   add   \"HKCU\\Control Panel\\Desktop\"   /v Wallpaper   /t REG_SZ   /d \"C:\\Temp\\test.jpg\"   /f",
+    "explanation": "This command uses additional spacing and quotes for mutation while preserving the original functionality. It should trigger the Sigma rule as it matches the same registry key and command-line parameters."
+  },
+  {
+    "output": "reg.exe add HKCU\\Control\\Panel\\Desktop /v Wallpaper /t REG_SZ /d C:\\Temp\\test.jpg /f",
+    "explanation": "This command omits quotes around the registry path and file path, relying on the command-line parser to still interpret them correctly. It should still trigger the Sigma rule as the key and command-line structure remain unchanged."
+  },
+  {
+    "output": "reg.exe /v Wallpaper add HKCU\\Control\\Panel\\Desktop /t REG_SZ /d C:\\Temp\\test.jpg /f",
+    "explanation": "This command reorders the '/v Wallpaper' flag to appear before the registry key. Since 'reg.exe' accepts this order, it should still match the Sigma rule and trigger the detection."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d \"C:\\Temp\\test.jpg\" ^| echo Bypass",
+    "explanation": "This command appends a harmless pipe to a benign command (echo Bypass) after the original command. However, the original command remains intact and should still trigger the Sigma rule."
+  },
+  {
+    "output": "reg.exe add HKCU\\Control\\Panel\\Desktop /v Wallpaper /t REG_SZ /d C:\\Temp\\test.jpg /f",
+    "explanation": "This command uses short-form syntax for the registry path and omits quotes. It should still match the Sigma rule as the key and command-line parameters remain unchanged."
+  }
+]

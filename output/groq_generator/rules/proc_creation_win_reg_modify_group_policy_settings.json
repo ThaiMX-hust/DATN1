@@ -1,0 +1,28 @@
+```json
+[
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v EnableSmartScreen /t REG_DWORD /d 0 /f",
+    "explanation": "Omission of quotes around the registry path and substitution of double backslashes with single backslashes. The command is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "reg add \"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\System\" /v GroupPolicyRefreshTime /t REG_DWORD /d 0 /f",
+    "explanation": "Insertion of additional escape characters and quotes around the registry path. The command remains valid and matches the Sigma rule."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v GroupPolicyRefreshTimeDC /t REG_DWORD /d 0 /f",
+    "explanation": "Omission of quotes and use of single backslashes. The command is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "reg add \"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\System\" /v GroupPolicyRefreshTimeOffset /t REG_DWORD /d 0 /f",
+    "explanation": "Insertion of additional escape characters and quotes around the registry path. The command remains valid and matches the Sigma rule."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v GroupPolicyRefreshTimeOffsetDC /t REG_DWORD /d 0 /f",
+    "explanation": "Omission of quotes and use of single backslashes. The command is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "reg add \"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\System\" /v ShellSmartScreenLevel /t REG_SZ /d Block /f",
+    "explanation": "Insertion of additional escape characters and quotes around the registry path. The command remains valid and matches the Sigma rule."
+  }
+]
+```

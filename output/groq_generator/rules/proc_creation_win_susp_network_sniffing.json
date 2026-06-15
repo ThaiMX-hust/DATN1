@@ -1,0 +1,26 @@
+[
+  {
+    "output": "tshark -i 1 -f \"tcp\" -w capture.pcap",
+    "explanation": "This command uses tshark with the -i flag to specify an interface, which matches the Sigma rule's detection criteria. It includes a filter and output file for capturing packets."
+  },
+  {
+    "output": "tshark -i 1 -f 'tcp' -w capture.pcap",
+    "explanation": "This command is a variation of the first with single quotes around the filter argument, demonstrating insertion of quotes as a mutation technique."
+  },
+  {
+    "output": "tshark -i1 -f tcp -w capture.pcap",
+    "explanation": "This command removes spaces between the -i flag and its value and omits quotes around the filter, demonstrating omission and substitution techniques."
+  },
+  {
+    "output": "tshark -w capture.pcap -i 1 -f \"tcp\"",
+    "explanation": "This command reorders the arguments while maintaining the same functionality, demonstrating reordering as a mutation technique."
+  },
+  {
+    "output": "tshark -i 1 -f \"tcp\" -w capture.pcap",
+    "explanation": "This command uses standard syntax and is the base command for comparison."
+  },
+  {
+    "output": "tshark -i 1 -f \"tcp\" -w capture.pcap",
+    "explanation": "No safe bypass command can be generated without removing key elements that trigger the Sigma rule."
+  }
+]

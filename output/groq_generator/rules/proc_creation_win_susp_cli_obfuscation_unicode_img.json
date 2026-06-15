@@ -1,0 +1,26 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Desktop\\evil_batch®fdp.bat\" \"",
+    "explanation": "The Unicode character '®' is used in the command line, which is detected by the Sigma rule. This is a direct representation of the obfuscation technique the rule is designed to catch."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Downloads\\evil_batch®fdp.bat\" \"",
+    "explanation": "This command uses the '®' character as part of the filename, which is flagged by the Sigma rule. It demonstrates how an attacker might attempt to obfuscate a malicious command line."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Desktop\\evil_batch\u00AEfdp.bat\" \"",
+    "explanation": "The '®' character is encoded in Unicode (\\u00AE) to test if the Sigma rule can detect encoded obfuscation techniques."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Downloads\\evil_batch\u00AEfdp.bat\" \"",
+    "explanation": "This command uses Unicode encoding for '®' to simulate obfuscation. It tests whether the Sigma rule can detect encoded or alternative representations of suspicious characters."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Desktop\\evil_batch®fdp.bat\" \"",
+    "explanation": "The command line includes the '®' character in the filename, which is flagged by the Sigma rule as potential obfuscation. This is a direct test of the rule's detection capability."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"\"C:\\Users\\thaim\\Downloads\\evil_batch®fdp.bat\" \"",
+    "explanation": "This command demonstrates a realistic scenario where a malicious batch file is executed with a Unicode character in the filename, which is flagged by the Sigma rule."
+  }
+]

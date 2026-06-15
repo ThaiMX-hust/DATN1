@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Roaming\\notepad.exe /B DllRegisterServer",
+    "explanation": "The command line includes 'DllRegisterServer' but uses a renamed executable (not rundll32.exe). This matches the Sigma rule's detection condition."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Roaming\\svchost.exe \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1036.003\\src\\T1036.003_masquerading.vbs\" DllRegisterServer",
+    "explanation": "This command adds 'DllRegisterServer' to the command line of a renamed executable (svchost.exe), which is not rundll32.exe. This satisfies the Sigma rule's detection condition."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Roaming\\updater.exe -Command DllRegisterServer",
+    "explanation": "This command uses a renamed executable (updater.exe) and includes 'DllRegisterServer' in the command line. It matches the Sigma rule's condition of a non-rundll32.exe process calling DllRegisterServer."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\tcm.tmp -decode C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2_decoded.exe DllRegisterServer",
+    "explanation": "This command appends 'DllRegisterServer' to the command line of a renamed executable (tcm.tmp), which is not rundll32.exe. It matches the Sigma rule's condition."
+  },
+  {
+    "output": "powershell.exe -nop -Command Write-Host DllRegisterServer; exit",
+    "explanation": "This command includes 'DllRegisterServer' in the PowerShell command line. Since the executable is not rundll32.exe, it matches the Sigma rule's detection condition."
+  }
+]

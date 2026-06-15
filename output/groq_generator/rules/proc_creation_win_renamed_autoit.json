@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Temp\\AutoIt3.exe\" /AutoIt3ExecuteScript \"C:\\Scripts\\malicious.au3\" /ErrorStdOut",
+    "explanation": "This command simulates a renamed AutoIt3.exe being executed with the /AutoIt3ExecuteScript and /ErrorStdOut flags, which matches the Sigma rule's detection criteria. The command uses standard syntax and includes the required flags for triggering the rule."
+  },
+  {
+    "output": "cmd.exe /c C:\\Temp\\AutoIt3.exe /AutoIt3ExecuteScript C:\\Scripts\\malicious.au3 /ErrorStdOut",
+    "explanation": "This command is a simplified version of the first command, with quotes omitted where not strictly necessary. It still includes the required flags and executable name to match the Sigma rule."
+  },
+  {
+    "output": "C:\\Temp\\AutoIt3.exe /AutoIt3ExecuteScript C:\\Scripts\\malicious.au3 /ErrorStdOut",
+    "explanation": "This command directly executes the renamed AutoIt3.exe with the required flags. It is a minimal and direct match to the Sigma rule's detection logic."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Temp\\AutoIt3.exe\" -AutoIt3ExecuteScript \"C:\\Scripts\\malicious.au3\" -ErrorStdOut",
+    "explanation": "This command uses '-' instead of '/' for the flags, which may be accepted by the executable as equivalent syntax. It still matches the Sigma rule's detection criteria."
+  }
+]

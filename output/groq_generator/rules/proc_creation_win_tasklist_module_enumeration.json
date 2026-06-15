@@ -1,0 +1,26 @@
+[
+  {
+    "output": "tasklist.exe -m rdpcorets.dll",
+    "explanation": "This command matches the Sigma rule by using tasklist.exe with the '-m' flag to enumerate modules and specifying 'rdpcorets.dll'."
+  },
+  {
+    "output": "tasklist.exe -m \"rdpcorets.dll\"",
+    "explanation": "Quotes are inserted around the module name to test parsing behavior while ensuring the command is still valid."
+  },
+  {
+    "output": "tasklist.exe -m rdpcorets.dll",
+    "explanation": "The command is simplified by omitting unnecessary elements while maintaining the core behavior of the original."
+  },
+  {
+    "output": "tasklist.exe /m rdpcorets.dll",
+    "explanation": "The '-m' flag is replaced with '/m' to test substitution of equivalent syntax."
+  },
+  {
+    "output": "tasklist.exe rdpcorets.dll -m",
+    "explanation": "The order of the arguments is changed to test if the command still functions as intended."
+  },
+  {
+    "output": "tasklist.exe -m $env:module_name",
+    "explanation": "The module name is replaced with an environment variable to test recoding techniques."
+  }
+]

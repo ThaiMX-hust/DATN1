@@ -1,0 +1,18 @@
+[
+  {
+    "output": "wevtutil.exe  set-log TEST-HOST /e:false",
+    "explanation": "Reordered the arguments by adding an extra space between 'wevtutil.exe' and 'set-log', which is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "wevtutil.exe set-log TEST-HOST /e:False",
+    "explanation": "Capitalized the value of the '/e' flag to 'False', which is still valid in some contexts and may not be detected by case-sensitive rules."
+  },
+  {
+    "output": "wevtutil.exe set-log TEST-HOST /e:$false",
+    "explanation": "Replaced the boolean value with a PowerShell-style variable representation, which may be parsed differently but still achieves the same result."
+  },
+  {
+    "output": "wevtutil.exe set-log TEST-HOST /e:false",
+    "explanation": "Original command line that matches the Sigma rule and is included as a reference."
+  }
+]

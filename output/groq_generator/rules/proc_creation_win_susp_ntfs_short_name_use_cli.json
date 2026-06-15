@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Progra~1\\MyApp\\app.exe\" --flag",
+    "explanation": "This command uses an NTFS short name (e.g., 'Progra~1') to reference a directory, which would trigger the Sigma rule. It simulates a scenario where an attacker might use short names to evade detection."
+  },
+  {
+    "output": "powershell.exe -Command \"& 'C:\\\\Docume~1\\\\User\\\\script.ps1' -arg1 -arg2\"",
+    "explanation": "This command uses a short name (e.g., 'Docume~1') to reference a user directory and executes a PowerShell script. It demonstrates how short names can be used in command lines to bypass detection mechanisms."
+  },
+  {
+    "output": "C:\\\\Temp\\\\MyShor~1.EXE /option1 /option2",
+    "explanation": "This command directly uses an executable with a short name (e.g., 'MyShor~1.EXE'), which matches the Sigma rule's detection criteria. It represents a typical evasion technique using 8.3 filename notation."
+  }
+]

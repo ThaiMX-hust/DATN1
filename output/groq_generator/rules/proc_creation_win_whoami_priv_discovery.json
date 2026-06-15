@@ -1,0 +1,26 @@
+[
+  {
+    "output": "whoami.exe /priv",
+    "explanation": "This is a direct execution of whoami.exe with the /priv flag, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "whoami.exe  /priv",
+    "explanation": "Inserting an extra space before the /priv flag, which is still parsed correctly by the command-line interpreter."
+  },
+  {
+    "output": "whoami.exe-priv",
+    "explanation": "Removing the space between the executable and the /priv flag, relying on the interpreter's ability to parse the argument."
+  },
+  {
+    "output": "whoami.exe --priv",
+    "explanation": "Using --priv instead of /priv as a potential substitution, though this is not a valid flag for whoami.exe, it is included to test parsing behavior."
+  },
+  {
+    "output": "whoami.exe / PRIV",
+    "explanation": "Inserting a space after the '/' character and capitalizing the flag, which may still be parsed correctly depending on the interpreter."
+  },
+  {
+    "output": "whoami.exe /priv ",
+    "explanation": "Appending a space after the /priv flag, which is still parsed correctly by the command-line interpreter."
+  }
+]

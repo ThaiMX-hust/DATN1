@@ -1,0 +1,18 @@
+[
+  {
+    "output": "wbadmin.exe  recovery  start  recoveryTarget:C:\\  itemtype:File  -backupTarget:C:\\Backup",
+    "explanation": "This command simulates a file recovery operation using wbadmin.exe. It includes the required 'recovery' and 'itemtype:File' elements, and adds optional parameters like 'recoveryTarget' and '-backupTarget' to align with the Sigma rule's detection logic."
+  },
+  {
+    "output": "wbadmin.exe recovery start recoveryTarget:C:\\ itemtype:File backupTarget:C:\\Backup",
+    "explanation": "This command uses reordering and omission of optional elements (like the '-' before 'backupTarget') to maintain functionality while altering the command structure."
+  },
+  {
+    "output": "wbadmin.exe\" recovery start recoveryTarget:C:\\ itemtype:File backupTarget:C:\\Backup",
+    "explanation": "This command uses insertion of quotes around the executable name to test if the Sigma rule is sensitive to such mutations."
+  },
+  {
+    "output": "wbadmin.exe recovery start recoveryTarget:C:\\ itemtype:File backupTarget:C:\\Backup\\",
+    "explanation": "This command adds an extra trailing backslash to the backupTarget path to test path normalization and parsing behavior."
+  }
+]

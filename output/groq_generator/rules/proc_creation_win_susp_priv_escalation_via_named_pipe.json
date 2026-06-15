@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /C echo Uuup! > \"\\\\.\\pipe\\HighPriv\"",
+    "explanation": "The command uses explicit quotes around the pipe path, which is a safe mutation technique (insertion). The behavior remains unchanged, but the syntax is slightly modified to test for potential bypasses."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /C echo Uuup! > \\\\.\pipe\\HighPriv",
+    "explanation": "This is the original command with no mutation applied. It is included for comparison purposes."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /C echo Uuup! ^> \\\\.\pipe\\HighPriv",
+    "explanation": "The '>' redirection operator is escaped using the caret (^) character, which is a valid mutation technique (recoding/encoding). This tests whether escaping characters can bypass detection."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /C echo Uuup! > \\\\.\pipe\\HighPriv",
+    "explanation": "The command is simplified by removing unnecessary elements (omission), but it retains the core behavior of writing to a named pipe. This tests minimalistic bypass scenarios."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /C \"echo Uuup! > \\\\.\pipe\\HighPriv\"",
+    "explanation": "The entire command is wrapped in quotes (insertion), which may alter parsing behavior in some contexts. This tests whether quote insertion can bypass detection."
+  }
+]

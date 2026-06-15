@@ -1,0 +1,22 @@
+[
+  {
+    "output": "REG  QUERY  HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography   /v   MachineGuid",
+    "explanation": "Inserted extra spaces between command and arguments, and used double backslashes for path normalization. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "REG QUERY \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography\" /v MachineGuid",
+    "explanation": "Wrapped the registry path in quotes and used standard backslashes. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "REG /v MachineGuid QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography",
+    "explanation": "Reordered the arguments to place the /v flag before the registry path. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "REG QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography ^/v MachineGuid",
+    "explanation": "Used an escape character (^) before the /v flag to demonstrate recoding. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "REG QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography /v MachineGuid",
+    "explanation": "Original command with no mutation applied. This is included for completeness."
+  }
+]

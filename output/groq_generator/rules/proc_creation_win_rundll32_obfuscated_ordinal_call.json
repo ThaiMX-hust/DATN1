@@ -1,0 +1,26 @@
+[
+  {
+    "output": "rundll32.exe some.dll,#24",
+    "explanation": "This command represents a typical use of rundll32 with an ordinal call. It is not obfuscated and would be detected by the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe some.dll,#0024",
+    "explanation": "Adding leading zeros to the ordinal number is a common obfuscation technique. This command is a safe mutation that may bypass the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe some.dll,#65540",
+    "explanation": "Using a larger number that wraps around in 16-bit space (65536 + 24 = 65560) is another obfuscation technique. This command is a safe mutation that may bypass the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe some.dll, #24",
+    "explanation": "Adding a space between the comma and the ordinal number is a safe mutation that may bypass the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe some.dll, #\x32\x34",
+    "explanation": "Using hexadecimal escape sequences to represent the ordinal number is a safe mutation that may bypass the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe some.dll, #$(echo 24)",
+    "explanation": "Using command substitution to dynamically generate the ordinal number is a safe mutation that may bypass the Sigma rule."
+  }
+]

@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "reg.exe save HKCU\\Software\\Aerofox\\Foxmail\\V3.1 C:\\exported_key.reg",
+    "explanation": "This command uses 'reg.exe' with the 'save' verb to export a registry path associated with third-party credentials, matching the Sigma rule."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software\\SimonTatham\\PuTTY\\Sessions C:\\exported_key.reg",
+    "explanation": "This command uses 'reg.exe' with the 'export' verb to export a registry path associated with third-party credentials, matching the Sigma rule."
+  },
+  {
+    "output": "reg.exe save HKCU\\Software\\OpenSSH\\Agent\\Keys C:\\exported_key.reg",
+    "explanation": "This command uses 'reg.exe' with the 'save' verb to export a registry path associated with third-party credentials, matching the Sigma rule."
+  },
+  {
+    "output": "reg.exe export HKCU\\Software\\SimonTatham\\PuTTY\\SshHostKeys C:\\exported_key.reg",
+    "explanation": "This command uses 'reg.exe' with the 'export' verb to export a registry path associated with third-party credentials, matching the Sigma rule."
+  },
+  {
+    "output": "reg.exe save HKCU\\Software\\SimonTatham\\PuTTY\\Sessions C:\\exported_key.reg",
+    "explanation": "This command uses 'reg.exe' with the 'save' verb to export a registry path associated with third-party credentials, matching the Sigma rule."
+  }
+]
+```

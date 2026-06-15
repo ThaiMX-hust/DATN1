@@ -1,0 +1,32 @@
+```json
+[
+  {
+    "output": "TpmVscMgr.exe create",
+    "explanation": "This is a direct representation of the Sigma rule's detection criteria for creating a virtual smart card."
+  },
+  {
+    "output": "TpmVscMgr.exe   create",
+    "explanation": "Inserting extra spaces between the command and argument, which is still parsed correctly."
+  },
+  {
+    "output": "\"TpmVscMgr.exe\" create",
+    "explanation": "Wrapping the command in quotes to test insertion-based bypass techniques."
+  },
+  {
+    "output": "TpmVscMgr.exe create",
+    "explanation": "Using the short form of the command with no additional parameters, as per the Sigma rule."
+  },
+  {
+    "output": "TpmVscMgr.exe create",
+    "explanation": "Reordering is not applicable here as the command only has two elements."
+  },
+  {
+    "output": "TpmVscMgr.exe create",
+    "explanation": "No omission is possible without removing the essential 'create' argument."
+  },
+  {
+    "output": "TpmVscMgr.exe create",
+    "explanation": "No encoding or recoding is necessary for this basic command."
+  }
+]
+```

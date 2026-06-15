@@ -149,7 +149,7 @@ def run_case(case: TargetCase, evtx_path: Path, config: RunnerConfig) -> CaseRes
         return result
 
     result.start_record_id = latest_before
-    timeout_seconds = case.timeout_seconds or config.timeout_seconds
+    timeout_seconds = effective_case_timeout_seconds(case, config)
     result.execution = execute_command(case, timeout_seconds)
     if not result.execution.started:
         result.note = result.execution.note or "runner failed to launch executor"
@@ -253,6 +253,7 @@ def run_target_batch(config: RunnerConfig) -> int:
         "execute_count": len(cases_to_run),
         "restored_count": sum(len(results) for results in restored_results_by_technique.values()),
         "execute": config.execute,
+        "timeout_seconds": config.timeout_seconds,
         "sysmon_log_name": SYSMON_LOG_NAME,
         "sysmon_event_id": SYSMON_EVENT_ID,
         "process_tree_quiescence_seconds": config.process_tree_quiescence_seconds,
@@ -359,3 +360,10 @@ def run_target_batch(config: RunnerConfig) -> int:
     print(f"\n[+] Result CSV  : {batch_dir / 'result.csv'}")
     print(f"\n[+] Result JSON : {batch_dir / 'result.json'}")
     return 0
+
+
+def effective_case_timeout_seconds(case: TargetCase, config: RunnerConfig) -> int:
+    """Return the per-command timeout, capped by the runner config."""
+    if case.timeout_seconds is None:
+        return config.timeout_seconds
+    return min(case.timeout_seconds, config.timeout_seconds)

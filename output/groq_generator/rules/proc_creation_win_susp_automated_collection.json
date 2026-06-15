@@ -1,0 +1,20 @@
+```json
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c dir c: /b /s .docx",
+    "explanation": "This command omits the for loop and redirection to a temporary directory, which reduces complexity while still triggering the 'dir' and file extension detection in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\findstr.exe /si .docx *.docx",
+    "explanation": "This command uses substitution and omission by replacing 'pass' with '.docx' and removing unnecessary arguments, still matching the 'findstr' detection criteria."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /S /D /c \"dir c: /b /s .docx\"",
+    "explanation": "This command uses insertion (quotes) and reordering to maintain the same behavior while slightly altering the syntax to test detection robustness."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c for /R c:\\ %f in (*.docx) do @echo %f",
+    "explanation": "This command omits the 'copy' action but retains the 'for /R' loop and file extension, simulating data collection behavior without actual file copying."
+  }
+]
+```

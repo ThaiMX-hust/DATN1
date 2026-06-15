@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths /v Test /t REG_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command attempts to add a value to the 'TypedPaths' registry key, which is detected by the Sigma rule. It is a direct match to the rule's detection condition."
+  },
+  {
+    "output": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths\" /v Test /t REG_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
+    "explanation": "This command uses quotes around the registry path, which is a safe mutation technique (insertion), but the content still matches the Sigma rule's detection condition."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths /v Test /t REG_SZ /d C:\\Windows\\System32\\cmd.exe /f",
+    "explanation": "This command omits the quotes around the data value, which is an omission technique. However, the path still matches the rule's detection condition."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths /f /v Test /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /t REG_SZ",
+    "explanation": "This command reorders the arguments, which is a reordering technique. The content still matches the rule's detection condition."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths /v Test /t REG_SZ /d \"%windir%\\System32\\cmd.exe\" /f",
+    "explanation": "This command uses an environment variable (%windir%) as a recoding technique. The resulting path still matches the rule's detection condition."
+  }
+]

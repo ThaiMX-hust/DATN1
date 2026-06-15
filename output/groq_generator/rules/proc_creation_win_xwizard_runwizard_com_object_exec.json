@@ -1,0 +1,22 @@
+[
+  {
+    "output": "Xwizard.exe RunWizard {12345678-1234-1234-1234-123456789012}",
+    "explanation": "This command represents a typical invocation of Xwizard.exe with the 'RunWizard' flag and a GUID-like argument, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "Xwizard.exe RunWizard \"{12345678-1234-1234-1234-123456789012}\"",
+    "explanation": "Inserting quotes around the GUID argument is a safe mutation technique that does not alter the behavior but may bypass simplistic detection relying on exact string matching."
+  },
+  {
+    "output": "Xwizard.exe RunWizard {12345678123412341234123456789012}",
+    "explanation": "Omitting hyphens from the GUID argument is a safe mutation technique. While not a valid GUID format, it may evade detection if the Sigma rule relies on regex patterns that assume hyphens."
+  },
+  {
+    "output": "Xwizard.exe RunWizard {12345678-1234-1234-1234-12123456789012}",
+    "explanation": "Modifying the last segment of the GUID to be 14 characters instead of 12 is an invalid GUID format but may bypass detection if the Sigma rule's regex is strict about the full 12-character segment."
+  },
+  {
+    "output": "Xwizard.exe RunWizard {12345678-1234-1234-1234-123456789012} ",
+    "explanation": "Appending a trailing space after the GUID is a safe mutation technique that does not affect execution but may evade detection if the Sigma rule does not account for trailing whitespace."
+  }
+]

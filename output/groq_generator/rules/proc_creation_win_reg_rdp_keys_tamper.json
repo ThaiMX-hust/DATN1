@@ -1,0 +1,29 @@
+```json
+[
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal\\ Server /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "Inserted extra spaces and used double backslash to obfuscate the path slightly while maintaining valid syntax."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "Wrapped the registry path in quotes to test parsing behavior and ensure the command is still valid."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections /t REG_DWORD /d 0 /f /f",
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "Reordered the /f flag to test if the command still triggers the rule when the order is changed."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "Used lowercase 'hklm' instead of uppercase to test case sensitivity in the detection rule."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "Replaced 'CurrentControlSet' with its equivalent 'ControlSet001' to test path normalization evasion."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "Used an environment variable to represent part of the registry path to test dynamic evasion techniques."
+  }
+]
+```

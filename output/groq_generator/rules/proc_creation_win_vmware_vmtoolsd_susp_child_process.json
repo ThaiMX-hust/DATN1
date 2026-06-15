@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo bypass > C:\\Users\\Public\\test.txt",
+    "explanation": "This command simulates a benign child process of vmtoolsd.exe that could be mistaken for malicious behavior. It uses a legitimate executable (cmd.exe) with a simple command to avoid triggering the Sigma rule while mimicking process creation patterns."
+  },
+  {
+    "output": "C:\\Windows\\System32\\PowerShell.exe -Command \"Write-Output 'safe test' | Out-File C:\\Users\\Public\\test.txt\"",
+    "explanation": "This command simulates a PowerShell child process of vmtoolsd.exe with a harmless payload. It uses PowerShell, which is flagged in the Sigma rule, but the command is benign and does not match known malicious patterns."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL",
+    "explanation": "This command simulates a rundll32.exe child process of vmtoolsd.exe. It uses a legitimate Windows function to open the Control Panel, which is a safe and common usage of rundll32.exe."
+  }
+]

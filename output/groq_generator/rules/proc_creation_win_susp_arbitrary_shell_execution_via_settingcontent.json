@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "\"C:\\\\Windows\\\\explorer.exe\" \"C:\\\\Users\\\\Public\\\\SettingsShortcut.SettingContent-ms\"",
+    "explanation": "The original command line is already a valid test case for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\explorer.exe\" \"C:\\\\Users\\\\Public\\\\SettingsShortcut.SettingContent-ms\" ",
+    "explanation": "Added an extra space at the end of the command line, which is a safe insertion technique and should still trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\explorer.exe\" \"C:\\\\Users\\\\Public\\\\SettingsShortcut.SettingContent-ms\"",
+    "explanation": "Replaced backslashes with double backslashes for string representation consistency in test environments."
+  },
+  {
+    "output": "\"C:\\\\Windows\\explorer.exe\" \"C:\\\\Users\\Public\\SettingsShortcut.SettingContent-ms\"",
+    "explanation": "Used short path notation for directory traversal (e.g., \\ instead of \\\\), which is a form of path normalization and should still trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\explorer.exe\" \"C:\\\\Users\\\\Public\\\\SettingsShortcut.SettingContent-ms\"",
+    "explanation": "Wrapped the command line in extra quotes for insertion testing, which is still parsed correctly and should trigger the rule."
+  }
+]
+```

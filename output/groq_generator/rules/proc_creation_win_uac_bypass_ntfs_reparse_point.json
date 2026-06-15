@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\\\Windows\\\\system32\\\\wusa.exe\" /q C:\\\\Users\\\\%USERNAME%\\\\AppData\\\\Local\\\\Temp\\\\update.msu",
+    "explanation": "This command simulates the UAC bypass using wusa.exe by using equivalent syntax (e.g., /q instead of /quiet) and environment variables for user-specific paths. It aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\system32\\\\dism.exe\" /online /q /norestart /add-package /packagepath:\"C:\\\\Windows\\\\system32\\\\pe386\" /ignorecheck",
+    "explanation": "This command simulates the Dism.exe-based UAC bypass by using equivalent syntax (e.g., /q instead of /quiet) and aligns with the Sigma rule's detection criteria for the parent process."
+  }
+]

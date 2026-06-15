@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /k tscon 1337 /dest:rdp-tcp#55",
+    "explanation": "The command line is already a direct match for the Sigma rule. No mutation is needed to trigger the detection."
+  },
+  {
+    "output": "cmd.exe /k tscon 1337 /dest:rdp-tcp#55",
+    "explanation": "The command line remains unchanged because it already matches the rule. This is a true positive for testing."
+  },
+  {
+    "output": "sc.exe create sesshijack binpath= \"cmd.exe /k tscon 1337 /dest:rdp-tcp#55\"",
+    "explanation": "This command line is part of the original test command and already contains the suspicious pattern. It will trigger the Sigma rule as expected."
+  }
+]

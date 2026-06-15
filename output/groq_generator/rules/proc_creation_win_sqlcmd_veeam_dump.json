@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "sqlcmd.exe -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\"",
+    "explanation": "This command uses sqlcmd.exe to execute a query that selects the top 1 record from the [VeeamBackup].[dbo].[Credentials] table. It matches the Sigma rule by including 'SELECT', 'TOP', and the specific table name."
+  },
+  {
+    "output": "sqlcmd.exe -q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\"",
+    "explanation": "This command is a variation using the -q option instead of -Q to execute the same query. The Sigma rule does not distinguish between -Q and -q, making this a valid test command."
+  },
+  {
+    "output": "sqlcmd.exe -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\" -S localhost",
+    "explanation": "This command adds a server parameter (-S localhost) to the original query. The Sigma rule does not exclude this variation, so it still matches the detection criteria."
+  },
+  {
+    "output": "sqlcmd.exe -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\" -E",
+    "explanation": "This command includes the -E option for trusted connection authentication. The Sigma rule does not exclude this variation, so it still matches the detection criteria."
+  },
+  {
+    "output": "sqlcmd.exe -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\" -U sa -P password123",
+    "explanation": "This command includes explicit username (-U) and password (-P) parameters. The Sigma rule does not exclude this variation, so it still matches the detection criteria."
+  }
+]
+```

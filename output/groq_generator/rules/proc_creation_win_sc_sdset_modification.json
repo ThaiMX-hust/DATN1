@@ -1,0 +1,18 @@
+[
+  {
+    "output": "sc.exe sdset MyService D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;IU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)(A;;RP;;;S-1-5-21-1234567890-1234567890-1234567890-1001)",
+    "explanation": "This command uses sc.exe to set a service's security descriptor, which is the behavior targeted by the Sigma rule. The command is a typical example of service security descriptor tampering."
+  },
+  {
+    "output": "sc sdset MyService D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;IU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)(A;;RP;;;S-1-5-21-1234567890-1234567890-1234567890-1001)",
+    "explanation": "This command omits the .exe extension from sc.exe, which is a valid substitution on Windows due to file extension handling."
+  },
+  {
+    "output": "sc.exe sdset MyService \"D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;IU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)(A;;RP;;;S-1-5-21-1234567890-1234567890-1234567890-1001)\"",
+    "explanation": "This command wraps the security descriptor string in quotes, which is a valid insertion technique and does not change the behavior."
+  },
+  {
+    "output": "sc.exe sdset MyService D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;IU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)(A;;RP;;;S-1-5-21-1234567890-1234567890-1234567890-1001) ",
+    "explanation": "This command adds a trailing space after the final argument, which is a valid insertion technique and does not affect execution."
+  }
+]

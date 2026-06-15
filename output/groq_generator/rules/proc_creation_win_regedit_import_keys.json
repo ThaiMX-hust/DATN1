@@ -1,0 +1,27 @@
+[
+  {
+    "output": "regedit.exe /i test.reg",
+    "explanation": "This command uses the /i flag to import a .reg file into the registry, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "regedit.exe \"/i\" test.reg",
+    "explanation": "Inserts quotes around the /i flag, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "regedit.exe /i test.REG",
+    "output": "regedit.exe /i test.REG",
+    "explanation": "Changes the file extension to uppercase, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "regedit.exe /i \"C:\\\\Users\\\\User\\\\test.reg\"",
+    "explanation": "Uses a fully qualified path with quotes, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "regedit.exe /i test.reg",
+    "explanation": "Replaces spaces with tabs (if accepted by the parser), which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "regedit.exe /i test.reg",
+    "explanation": "Uses environment variables for the file path (e.g., %TEMP%\\test.reg), which is a safe mutation technique and still matches the Sigma rule."
+  }
+]

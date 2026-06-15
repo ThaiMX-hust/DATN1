@@ -1,0 +1,25 @@
+```json
+[
+  {
+    "output": "svchost.exe",
+    "explanation": "The Sigma rule detects svchost.exe processes with no command-line arguments. This command represents a true positive for the rule as it matches the detection criteria."
+  },
+  {
+    "output": "svchost.exe\"",
+    "explanation": "Adding a trailing quote is a safe mutation technique that does not alter the command's behavior but may bypass detection if the SIEM parsing does not handle trailing quotes correctly."
+  },
+  {
+    "output": "\"svchost.exe\"",
+    "explanation": "Enclosing the command in quotes is a safe mutation technique that may bypass detection if the SIEM parsing does not normalize quoted command lines."
+  },
+  {
+    "output": "svchost.exe ",
+    "output": "svchost.exe",
+    "explanation": "Inserting a space followed by an escaped space may be parsed as a single argument in some environments, potentially evading detection if the SIEM parsing is sensitive to whitespace."
+  },
+  {
+    "output": "svchost.exe^",
+    "explanation": "Appending an escape character (^) is a safe mutation technique that may bypass detection if the SIEM parsing does not handle escape characters correctly."
+  }
+]
+```

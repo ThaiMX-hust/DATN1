@@ -1,0 +1,22 @@
+[
+  {
+    "output": "msiexec.exe /i \"C:\\Windows\\Installer\\{12345678-1234-1234-1234-123456789012}.tmp\" ALLUSERS=1",
+    "explanation": "This command simulates a Windows Installer (msiexec.exe) attempting to install an MSI package with elevated privileges. It includes a typical path under the Windows Installer directory and uses the ALLUSERS=1 flag, which may trigger the Sigma rule."
+  },
+  {
+    "output": "msiexec.exe -i C:\\Windows\\Installer\\{87654321-4321-4321-4321-210987654321}.tmp ALLUSERS=1",
+    "explanation": "This command uses the equivalent syntax '-i' instead of '/i' for the install flag and omits quotes around the path. It still represents a valid attempt to install an MSI package with elevated privileges, which may be detected by the Sigma rule."
+  },
+  {
+    "output": "msiexec.exe /i C:\\Windows\\Installer\\{12345678-1234-1234-1234-123456789012}.tmp ALLUSERS=1",
+    "explanation": "This command is a straightforward execution of msiexec.exe with the /i flag to install an MSI file. It includes the ALLUSERS=1 flag, which is commonly associated with elevated installation attempts and may be detected by the Sigma rule."
+  },
+  {
+    "output": "msiexec.exe /i \"C:\\\\Windows\\\\Installer\\\\{12345678-1234-1234-1234-123456789012}.tmp\" ALLUSERS=1",
+    "explanation": "This command uses double backslashes and quotes around the path to simulate a potential bypass technique. It still represents a valid attempt to install an MSI package with elevated privileges, which may be detected by the Sigma rule."
+  },
+  {
+    "output": "msiexec.exe /i C:\\Windows\\Installer\\{12345678-1234-1234-1234-123456789012}.tmp ALLUSERS=1",
+    "explanation": "This command uses a standard path and flag format. It is a direct execution of msiexec.exe to install an MSI file with elevated privileges, which aligns with the Sigma rule's detection criteria."
+  }
+]

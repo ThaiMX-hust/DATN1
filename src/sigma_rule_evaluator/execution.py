@@ -39,6 +39,8 @@ FAILED_COMMAND_PATTERNS = (
 )
 
 ERROR_DETAIL_LIMIT = 500
+PROCESS_TREE_KILL_TIMEOUT_SECONDS = 2
+PROCESS_CLEANUP_TIMEOUT_SECONDS = 1
 
 
 @dataclass(frozen=True)
@@ -258,7 +260,7 @@ def kill_process_tree(pid: int) -> str:
                 ["taskkill.exe", "/PID", str(pid), "/T", "/F"],
                 capture_output=True,
                 text=True,
-                timeout=5,
+                timeout=PROCESS_TREE_KILL_TIMEOUT_SECONDS,
                 check=False,
             )
             return "\n".join(part for part in (result.stdout, result.stderr) if part)
@@ -269,6 +271,29 @@ def kill_process_tree(pid: int) -> str:
         return ""
     except Exception as exc:
         return str(exc)
+
+
+def close_process_pipes(proc: subprocess.Popen[str]) -> None:
+    """Close captured pipes so a timed-out process cannot keep communicate blocked."""
+    for pipe_name in ("stdin", "stdout", "stderr"):
+        pipe = getattr(proc, pipe_name, None)
+        if pipe is None:
+            continue
+        try:
+            pipe.close()
+        except Exception:
+            pass
+
+
+def output_from_timeout(exc: subprocess.TimeoutExpired) -> tuple[str, str]:
+    """Return any partial output carried by a TimeoutExpired exception."""
+    stdout = exc.output or ""
+    stderr = exc.stderr or ""
+    if isinstance(stdout, bytes):
+        stdout = stdout.decode("utf-8", errors="replace")
+    if isinstance(stderr, bytes):
+        stderr = stderr.decode("utf-8", errors="replace")
+    return stdout, stderr
 
 
 def execute_command(case: TargetCase, timeout_seconds: int) -> ExecutionResult:
@@ -310,7 +335,25 @@ def execute_command(case: TargetCase, timeout_seconds: int) -> ExecutionResult:
                 proc.kill()
             except Exception as exc:
                 kill_note = "\n".join(part for part in (kill_note, str(exc)) if part)
-            stdout, stderr = proc.communicate()
+            try:
+                stdout, stderr = proc.communicate(timeout=PROCESS_CLEANUP_TIMEOUT_SECONDS)
+            except subprocess.TimeoutExpired as cleanup_exc:
+                cleanup_stdout, cleanup_stderr = output_from_timeout(cleanup_exc)
+                try:
+                    kill_process_tree(proc.pid)
+                except Exception:
+                    pass
+                close_process_pipes(proc)
+                stdout = cleanup_stdout
+                stderr = cleanup_stderr
+                kill_note = "\n".join(
+                    part
+                    for part in (
+                        kill_note,
+                        f"cleanup timed out after {PROCESS_CLEANUP_TIMEOUT_SECONDS}s",
+                    )
+                    if part
+                )
             result.exit_code = None
             result.note = kill_note
         result.stdout = stdout or ""

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe /s \"C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\"",
+    "explanation": "Inserted quotes around the DLL path to test if the rule is sensitive to quoted paths."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe -s C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll",
+    "explanation": "Substituted '/s' with '-s' to test if the rule is sensitive to switch syntax variations."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe /s C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll",
+    "explanation": "Reordered command line arguments to test if the rule is sensitive to argument order."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe /s C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll",
+    "explanation": "Removed unnecessary spaces to test if the rule is sensitive to spacing."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\\regsvr32.exe /s C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll",
+    "explanation": "Used environment variable expansion (e.g., %USERPROFILE%) to test if the rule is sensitive to path normalization techniques."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"cmd.exe\" /sc ONCE /st 00:00 /ru \"NT AUTHORITY\\SYSTEM\" /rp \"\"",
+    "explanation": "This command creates a scheduled task using the suspicious schedule type 'ONCE' and runs it with high privileges ('NT AUTHORITY\\SYSTEM'), matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "schtasks /create /tn TestTask /tr cmd.exe /sc ONCE /st 00:00 /ru SYSTEM /rp \"\"",
+    "explanation": "This command uses the short form of the user parameter ('SYSTEM') instead of the full name ('NT AUTHORITY\\SYSTEM'), which is still recognized by schtasks and matches the Sigma rule."
+  },
+  {
+    "output": "schtasks /create /tn TestTask /tr cmd.exe /sc ONCE /st 00:00 /ru \"SYSTEM\" /rp \"\"",
+    "explanation": "This command uses quotes around the user parameter ('SYSTEM'), which is a safe mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "schtasks /create /tn TestTask /tr cmd.exe /sc ONCE /st 00:00 /ru SYSTEM /rp \"\" /f",
+    "explanation": "This command adds an optional '/f' (force) flag, which does not affect the detection criteria but demonstrates reordering and omission of optional elements."
+  },
+  {
+    "output": "schtasks /create /tn TestTask /tr cmd.exe /sc ONCE /st 00:00 /ru HIGHEST /rp \"\"",
+    "explanation": "This command uses 'HIGHEST' as the user privilege level, which is another valid value for the '/ru' parameter and matches the Sigma rule's detection criteria."
+  }
+]

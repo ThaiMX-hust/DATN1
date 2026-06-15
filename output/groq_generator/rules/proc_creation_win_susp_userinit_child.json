@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c start-process -FilePath \"notepad.exe\" -ArgumentList \"C:\\\\Windows\\\\System32\\\\calc.exe\" -PassThru",
+    "explanation": "This command simulates a suspicious child process spawned by userinit.exe. It uses safe mutation techniques like reordering and substitution to mimic evasion tactics while staying within a controlled test environment."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process -FilePath 'notepad.exe' -ArgumentList 'C:\\\\Windows\\\\System32\\\\calc.exe' -WindowStyle Hidden\"",
+    "explanation": "This command simulates a suspicious child process of userinit.exe using PowerShell. It uses reordering and substitution techniques to bypass detection while maintaining test validity."
+  },
+  {
+    "output": "cmd.exe /c \"start-process -FilePath 'notepad.exe' -ArgumentList 'C:\\\\Windows\\\\System32\\\\calc.exe' -PassThru\"",
+    "explanation": "This command uses encoded or quoted arguments to simulate a suspicious child process of userinit.exe. It applies safe mutation techniques like insertion and recoding to evade detection in a test environment."
+  }
+]

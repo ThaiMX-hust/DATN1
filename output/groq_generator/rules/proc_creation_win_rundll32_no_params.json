@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe",
+    "explanation": "The original command line is already a true positive for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\rundll32.exe",
+    "explanation": "Double backslashes are used as an equivalent representation of the original path, which still ends with 'rundll32.exe' and matches the rule."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\rundll32.exe\"",
+    "explanation": "Quotes are added around the path, but the command still ends with 'rundll32.exe' and matches the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe ",
+    "explanation": "An extra space is added at the end of the command line, but the command still ends with 'rundll32.exe' and matches the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe\"",
+    "explanation": "A trailing quote is added, but the command still ends with 'rundll32.exe' and matches the rule."
+  }
+]
+```

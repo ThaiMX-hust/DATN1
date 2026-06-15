@@ -1,0 +1,22 @@
+[
+  {
+    "output": "curl.exe -sSL https://attachment.outlook.live.net/owa/test.txt -o C:\\Temp\\test.txt",
+    "explanation": "Removed quotes around the URL and output path, which are optional in many command-line contexts. This is a safe mutation that preserves the original behavior."
+  },
+  {
+    "output": "curl.exe -s -S -L https://attachment.outlook.live.net/owa/test.txt -o C:\\Temp\\test.txt",
+    "explanation": "Expanded the combined flag '-sSL' into individual flags '-s -S -L', which is functionally equivalent. This is a safe mutation that maintains the same behavior."
+  },
+  {
+    "output": "curl.exe --silent --show-error --location https://attachment.outlook.live.net/owa/test.txt -o C:\\Temp\\test.txt",
+    "explanation": "Replaced short flags with their long-form equivalents (--silent for -s, --show-error for -S, --location for -L), which is a valid substitution technique."
+  },
+  {
+    "output": "curl.exe -L --silent --show-error https://attachment.outlook.live.net/owa/test.txt -o C:\\Temp\\test.txt",
+    "explanation": "Reordered the flags '-sSL' into '-L --silent --show-error' while maintaining the same functionality. This is a valid reordering technique."
+  },
+  {
+    "output": "curl.exe -sSL https://attachment.outlook.live.net/owa/test.txt -o $env:TEMP\\test.txt",
+    "explanation": "Replaced the hardcoded output path with an environment variable ($env:TEMP), which is a valid recoding technique and still points to a temporary directory."
+  }
+]

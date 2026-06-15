@@ -1,0 +1,22 @@
+[
+  {
+    "output": "code.exe tunnel --accept-server-license-terms",
+    "explanation": "This command matches the Sigma rule's detection criteria by using 'code.exe tunnel' and including the '--accept-server-license-terms' argument."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --remote --port 8080",
+    "explanation": "Adds optional arguments like '--remote' and '--port' which are not required by the Sigma rule, but still include the required '.exe tunnel' and '--accept-server-license-terms'."
+  },
+  {
+    "output": "code.exe  tunnel   --accept-server-license-terms",
+    "explanation": "Uses extra spaces between 'code.exe' and 'tunnel' to test insertion-based bypasses. The Sigma rule uses 'endswith' and 'contains' which are resilient to spacing changes."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --no-sandbox",
+    "explanation": "Adds an optional '--no-sandbox' flag to test if additional arguments can be appended without triggering the rule. The core detection remains intact."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --host 127.0.0.1",
+    "explanation": "Adds a '--host' argument to test if additional parameters can be included without affecting detection. The Sigma rule is not sensitive to such additions."
+  }
+]

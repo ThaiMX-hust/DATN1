@@ -1,0 +1,22 @@
+[
+  {
+    "output": "net localgroup 'Remote Desktop Users' TEST-HOST /add",
+    "explanation": "Inserted single quotes instead of double quotes around the group name, which is still parsed correctly by the command interpreter."
+  },
+  {
+    "output": "net localgroup Remote\\Desktop\\Users TEST-HOST /add",
+    "explanation": "Used path normalization by replacing spaces with backslashes, which is an accepted alternative representation in Windows command-line syntax."
+  },
+  {
+    "output": "Add-LocalGroupMember -Group 'Remote Desktop Users' -Member TEST-HOST",
+    "explanation": "Used PowerShell equivalent command with single quotes instead of double quotes and reordered the parameters."
+  },
+  {
+    "output": "net localgroup \"Remote Desktop Users\" TEST-HOST /add",
+    "explanation": "Escaped double quotes using backslashes, which is still parsed correctly by the command interpreter."
+  },
+  {
+    "output": "net localgroup Remote\Desktop\Users TEST-HOST /add",
+    "explanation": "Used alternative string representation with backslashes to replace spaces, which is accepted in Windows command-line syntax."
+  }
+]

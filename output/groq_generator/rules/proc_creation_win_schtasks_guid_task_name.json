@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "schtasks /Create /TN \"{12345678-9ABC-DEF0-1234-56789ABCDEF0}\" /SC ONCE /ST 00:00 /TR \"notepad.exe\"",
+    "explanation": "This command creates a scheduled task with a GUID-like name, which matches the Sigma rule. It serves as a true-positive test case."
+  },
+  {
+    "output": "schtasks /Create /TN '{12345678-9ABC-DEF0-1234-56789ABCDEF0}' /SC ONCE /ST 00:00 /TR \"notepad.exe\"",
+    "explanation": "This command uses single quotes around the GUID-like task name, which is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "schtasks /Create /TN {12345678-9ABC-DEF0-1234-56789ABCDEF0} /SC ONCE /ST 00:00 /TR \"notepad.exe\"",
+    "explanation": "This command omits the quotes around the GUID-like task name, which is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "schtasks /Create /TN \"{12345678-9ABC-DEF0-1234-56789ABCDEF0} \" /SC ONCE /ST 00:00 /TR \"notepad.exe\"",
+    "explanation": "This command adds an extra space after the closing quote, which is a valid insertion mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "schtasks /Create /TN \"{12345678-9ABC-DEF0-1234-56789ABCDEF0}\" /TR \"notepad.exe\" /SC ONCE /ST 00:00",
+    "explanation": "This command reorders the arguments, which is a valid mutation technique and still matches the Sigma rule."
+  }
+]
+```

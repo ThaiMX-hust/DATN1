@@ -1,0 +1,42 @@
+[
+  {
+    "output": "RegAsm.exe",
+    "explanation": "The Sigma rule detects RegAsm.exe execution without command-line flags or files. This command matches the rule as it executes RegAsm.exe without any additional arguments."
+  },
+  {
+    "output": "\"RegAsm.exe\"",
+    "explanation": "Inserting quotes around the executable name is a safe mutation technique that does not alter the behavior but may evade certain simplistic detection mechanisms."
+  },
+  {
+    "output": "RegAsm.exe ",
+    "explanation": "Appending a space after the executable name is a safe mutation that does not change the execution behavior but may bypass detection relying on exact string matching."
+  },
+  {
+    "output": "RegAsm.exe  ",
+    "explanation": "Adding multiple trailing spaces is a safe mutation that preserves the execution behavior while potentially evading detection based on strict command-line parsing."
+  },
+  {
+    "output": "RegAsm.exe''",
+    "explanation": "Appending single quotes is a safe mutation that does not affect execution but may bypass detection mechanisms that do not account for such syntax variations."
+  },
+  {
+    "output": "RegAsm.exe\"\"",
+    "explanation": "Appending double quotes is a safe mutation that does not alter the execution behavior but may evade detection based on exact string matching."
+  },
+  {
+    "output": "RegAsm.exe'\"'",
+    "explanation": "Combining single and double quotes is a safe mutation that does not change the execution behavior but may bypass simplistic detection logic."
+  },
+  {
+    "output": "RegAsm.exe`",
+    "Explanation": "Appending a backtick is a safe mutation that does not affect execution but may bypass detection mechanisms that do not account for such characters."
+  },
+  {
+    "output": "RegAsm.exe^",
+    "Explanation": "Appending a caret is a safe mutation that does not alter the execution behavior but may bypass detection based on exact string matching."
+  },
+  {
+    "output": "RegAsm.exe~",
+    "Explanation": "Appending a tilde is a safe mutation that does not affect execution but may bypass detection mechanisms that do not account for such characters."
+  }
+]

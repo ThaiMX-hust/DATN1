@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe   add  \"HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST\"   /v ImagePath  /t REG_EXPAND_SZ  /d \"C:\\Temp\\test.txt\"  /f",
+    "explanation": "This command uses insertion of extra spaces and quotes to obfuscate the original command while maintaining its functionality. The Sigma rule should still detect it since it checks for the presence of 'reg add' and other relevant parameters."
+  },
+  {
+    "output": "reg.exe add HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST /v ImagePath /t REG_EXPAND_SZ /d C:\\Temp\\test.txt /f",
+    "explanation": "This command omits quotes around the registry path and file path, which may be accepted by the target program. The Sigma rule should still detect it as it focuses on the presence of key command-line elements."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\Temp\\test.txt\" /f",
+    "explanation": "This command uses standard syntax with quotes around paths. It is the original command slightly reformatted, and the Sigma rule should detect it as intended."
+  }
+]

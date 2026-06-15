@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\Werfault.exe -u -p 456 -ip 789 -s 101",
+    "explanation": "This command simulates a malicious use of Werfault.exe with the required flags (-u, -p, -ip, -s) to match the Sigma rule. The values for -p, -ip, and -s are arbitrary PIDs and handles for testing purposes."
+  },
+  {
+    "output": "C:\\\\Windows\\\\system32\\\\Werfault.exe -u -p 456 -ip 789 -s 101",
+    "explanation": "This command uses double backslashes for path representation, which is a valid mutation technique (recoding/encoding). It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\system32\\Werfault.exe -u -p 456 -ip 789 -s 101",
+    "explanation": "This command uses a space before the -u flag, which is a valid insertion technique. The command structure remains unchanged and still matches the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\system32\\Werfault.exe -u -p 456 -ip 789 -s 101",
+    "explanation": "This command uses short flags and minimal spacing, which is a valid omission technique. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\system32\\Werfault.exe -u -ip 789 -p 456 -s 101",
+    "explanation": "This command reorders the -p and -ip flags, which is a valid reordering technique. The command structure remains functionally equivalent and still matches the Sigma rule."
+  }
+]

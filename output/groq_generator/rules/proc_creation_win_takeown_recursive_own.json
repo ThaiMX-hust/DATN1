@@ -1,0 +1,22 @@
+[
+  {
+    "output": "takeown.exe /f \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_takeown_folder\" /r",
+    "explanation": "Inserted quotes around the file path to test if the Sigma rule detects the command with additional formatting."
+  },
+  {
+    "output": "takeown.exe /f C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_takeown_folder /R",
+    "explanation": "Substituted '/r' with '/R' to test if the Sigma rule is case-insensitive in detecting the recursive flag."
+  },
+  {
+    "output": "takeown.exe /r /f C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_takeown_folder",
+    "explanation": "Reordered the command-line arguments to test if the Sigma rule is sensitive to argument order."
+  },
+  {
+    "output": "takeown.exe /f C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_takeown_folder /r /d y",
+    "explanation": "Added an optional '/d y' flag to test if the Sigma rule can differentiate between optional and required elements."
+  },
+  {
+    "output": "takeown.exe /f C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_takeown_folder /r",
+    "explanation": "Original command line for reference, included to ensure the test environment has a baseline."
+  }
+]

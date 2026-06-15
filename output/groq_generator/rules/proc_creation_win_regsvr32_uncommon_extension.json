@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s \"C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg\"",
+    "explanation": "Inserted quotes around the file path to test if the Sigma rule accounts for quoted arguments. This mimics a common mutation technique while preserving the original command behavior."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe -s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "Substituted '/s' with '-s' to test if the Sigma rule is sensitive to short option syntax variations."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg /nologo",
+    "explanation": "Added an optional '/nologo' flag to test if the Sigma rule is affected by additional benign command-line arguments."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "Omitted the '/s' flag to test if the Sigma rule is sensitive to the presence of optional flags."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg /",
+    "explanation": "Appended an extra '/' to test if the Sigma rule is affected by trailing or malformed arguments."
+  }
+]

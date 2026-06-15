@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c dir C:\\Windows\\SYSVOL\\sysvol\\example.com\\policies",
+    "explanation": "This command accesses the SYSVOL directory structure, which is flagged by the Sigma rule. It uses standard Windows command-line syntax to simulate a potential access to domain group policy files."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path 'C:\\\\Windows\\\\SYSVOL\\\\sysvol\\\\example.com\\\\policies'\"",
+    "explanation": "This PowerShell command accesses the SYSVOL directory structure using a different command-line interface, which is still detected by the Sigma rule due to the presence of '\\SYSVOL\\' and '\\policies\\' in the command line."
+  },
+  {
+    "output": "cmd.exe /c \"dir \\\"C:\\\\Windows\\\\SYSVOL\\\\sysvol\\\\example.com\\\\policies\\\"\"",
+    "explanation": "This command uses escaped quotes to access the SYSVOL directory structure, demonstrating insertion techniques while still being detected by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -c Get-ChildItem -Path C:\\\\Windows\\\\SYSVOL\\\\sysvol\\\\example.com\\\\policies",
+    "explanation": "This PowerShell command uses a shorter syntax for the -Command parameter and accesses the SYSVOL directory structure, which is still flagged by the Sigma rule."
+  }
+]

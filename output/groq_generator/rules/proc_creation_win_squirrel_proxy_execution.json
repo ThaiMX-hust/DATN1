@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --processStart \"cmd.exe\" /C \"echo Bypass Test\"",
+    "explanation": "This command uses Squirrel.exe to start a new process (cmd.exe) with a command to echo a test message. It includes the required '--processStart' flag and uses quotes to safely encapsulate the command line arguments, which is a valid mutation technique."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --processStartAndWait cmd.exe /C echo Bypass Test",
+    "explanation": "This command uses Squirrel.exe to start and wait for a new process (cmd.exe) to execute a test command. It includes the '--processStartAndWait' flag and omits unnecessary quotes, which is a valid mutation technique."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --createShortcut \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "This command uses Squirrel.exe to create a shortcut to calc.exe. It includes the '--createShortcut' flag and uses quotes to safely encapsulate the path, which is a valid mutation technique."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --processStart \"C:\\Windows\\System32\\notepad.exe\" \"C:\\\\test.txt\"",
+    "explanation": "This command uses Squirrel.exe to start notepad.exe with a file path. It includes the '--processStart' flag and uses quotes to safely handle the file path, which is a valid mutation technique."
+  },
+  {
+    "output": "C:\\Windows\\System32\\squirrel.exe --processStart cmd.exe /C \"echo Bypass Test > C:\\\\test.txt\"",
+    "explanation": "This command uses Squirrel.exe to start cmd.exe and redirect output to a file. It includes the '--processStart' flag and uses command redirection, which is a valid mutation technique."
+  }
+]

@@ -1,0 +1,28 @@
+```json
+[
+  {
+    "output": "livekd.exe -m",
+    "explanation": "This is a direct match to the Sigma rule's detection criteria. It uses the '-m' flag, which is explicitly targeted by the rule."
+  },
+  {
+    "output": "livekd.exe  -m",
+    "explanation": "Inserting an extra space before the '-m' flag is a safe mutation technique that does not change the behavior of the command but may evade simple pattern-based detection."
+  },
+  {
+    "output": "\"livekd.exe\" -m",
+    "explanation": "Adding quotes around the executable name is a safe mutation technique that may bypass detection if the rule does not account for quoted paths."
+  },
+  {
+    "output": "livekd.exe -m",
+    "explanation": "No mutation applied. This is the standard command line that matches the Sigma rule."
+  },
+  {
+    "output": "livekd64.exe -m",
+    "explanation": "Using the 64-bit variant of the tool is a valid test case since the Sigma rule includes both 'livekd.exe' and 'livekd64.exe' in its detection logic."
+  },
+  {
+    "output": "livekd.exe -m",
+    "explanation": "No safe bypass command can be generated without altering the behavior of the command. The '-m' flag is essential for triggering the detection, and omitting or modifying it would no longer represent a true test of the Sigma rule."
+  }
+]
+```

@@ -1,0 +1,23 @@
+[
+  {
+    "output": "cmd.exe /c \"arp -a\"",
+    "explanation": "Inserted quotes around the command to test if the Sigma rule detects quoted commands correctly."
+  },
+  {
+    "output": "cmd.exe /c ipconfig /all & net config workstation & net view /all /domain & nltest /domain_trusts",
+    "explanation": "Removed quotes around the command line to test if the Sigma rule is sensitive to quoted versus unquoted input."
+  },
+  {
+    "output": "cmd.exe /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config",
+    "explanation": "Reordered and slightly modified spacing to test if the Sigma rule is sensitive to argument ordering or spacing."
+  },
+  {
+    "output": "cmd.exe /c ipconfig /all ^& netsh interface show interface ^& arp -a ^& nbtstat -n ^& net config",
+    "output": "cmd.exe /c ipconfig /all ^& netsh interface show interface ^& arp -a ^& nbtstat -n ^& net config",
+    "explanation": "Used escape characters (^) to test if the Sigma rule can detect escaped command concatenation."
+  },
+  {
+    "output": "cmd.exe /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config",
+    "explanation": "Used short-form command syntax and preserved spacing to test if the Sigma rule is sensitive to spacing or command structure."
+  }
+]

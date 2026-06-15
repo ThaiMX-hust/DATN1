@@ -1,0 +1,26 @@
+[
+  {
+    "output": "\"C:\\Program Files\\WinRAR\\rar.exe\" a C:\\Temp\\memory_dump.rar C:\\Temp\\test.dmp",
+    "explanation": "The original command line is already a valid test case for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\WinRAR\\\\rar.exe\" a C:\\\\Temp\\\\memory_dump.rar C:\\\\Temp\\\\test.dmp",
+    "explanation": "Inserted extra backslashes for path normalization, which is still parsed correctly by Windows command-line interfaces."
+  },
+  {
+    "output": "\"C:\\Program Files\\WinRAR\\rar.exe\" a C:\\Temp\\memory_dump.rar C:\\Temp\\test.dump",
+    "explanation": "Substituted \".dmp\" with \".dump\", which is one of the file extensions targeted by the Sigma rule."
+  },
+  {
+    "output": "\"C:\\Program Files\\WinRAR\\rar.exe\" a C:\\Temp\\memory_dump.rar C:\\Temp\\test.hdmp",
+    "explanation": "Substituted \".dmp\" with \".hdmp\", which is another file extension targeted by the Sigma rule."
+  },
+  {
+    "output": "\"C:\\Program Files\\WinRAR\\rar.exe\" a C:\\Temp\\memory_dump.rar C:\\Temp\\test.dmp",
+    "explanation": "Reordered command-line arguments using equivalent syntax (e.g., using short options if applicable), but in this case, the order remains unchanged since the command is already valid."
+  },
+  {
+    "output": "set RAR_PATH=\"C:\\Program Files\\WinRAR\\rar.exe\" && %RAR_PATH% a C:\\Temp\\memory_dump.rar C:\\Temp\\test.dmp",
+    "explanation": "Used environment variable substitution to recode the command line, which is still valid and would trigger the Sigma rule."
+  }
+]

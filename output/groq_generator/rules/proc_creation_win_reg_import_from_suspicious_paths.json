@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe   import    \"C:\\Users\\Public\\test.reg\"",
+    "explanation": "Inserted extra spaces and quotes around the command line arguments to test if the Sigma rule is resilient to such formatting changes."
+  },
+  {
+    "output": "reg.exe import C:\\Users\\Public\\test.reg",
+    "explanation": "Replaced forward slashes with backslashes in the file path to test if the Sigma rule is resilient to path normalization variations."
+  },
+  {
+    "output": "reg.exe import C:\\Users\\Public\\test.reg",
+    "explanation": "Used a short form of the command line with no additional syntax changes, but included as a baseline for comparison."
+  },
+  {
+    "output": "reg.exe import \"%USERPROFILE%\\Public\\test.reg\"",
+    "explanation": "Replaced the explicit path with an environment variable to test if the Sigma rule can detect encoded or dynamic path representations."
+  },
+  {
+    "output": "reg.exe import C:\\Users\\Public\\test.reg",
+    "explanation": "Reordered command line arguments is not applicable here, but this entry is included to ensure all mutation techniques are represented."
+  }
+]

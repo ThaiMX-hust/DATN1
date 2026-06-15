@@ -1,0 +1,42 @@
+[
+  {
+    "output": "psexec -u system -c cmd",
+    "explanation": "This command includes the suspicious -u system and -c cmd flags, which are directly detected by the Sigma rule. It serves as a baseline for testing detection."
+  },
+  {
+    "output": "psexec -u 'system' -c \"cmd\"",
+    "explanation": "Uses quotes and single quotes around the user parameter to test if the detection is resilient to string formatting variations."
+  },
+  {
+    "output": "psexec --user system -c powershell",
+    "explanation": "Replaces the short option -u with the long option --user and uses powershell instead of cmd to test detection coverage."
+  },
+  {
+    "output": "psexec -u system -c cmd /c echo test",
+    "explanation": "Adds an additional command argument to test if the detection is affected by extra parameters after the main command."
+  },
+  {
+    "output": "psexec -u NT -c cmd",
+    "explanation": "Tests the detection for the -u NT variation, which is also included in the Sigma rule's detection patterns."
+  },
+  {
+    "output": "psexec -u system -c \"cmd.exe\"",
+    "explanation": "Uses the full executable name cmd.exe instead of cmd to test if the detection is affected by such variations."
+  },
+  {
+    "output": "psexec -u system -c 'powershell.exe -Command Get-Process'",
+    "explanation": "Tests the detection with a more complex command string to see if it still triggers on the -c powershell pattern."
+  },
+  {
+    "output": "psexec -u system -c cmd.exe",
+    "explanation": "Replaces cmd with cmd.exe to test if the detection is affected by executable name variations."
+  },
+  {
+    "output": "psexec -u system -c \"cmd\" /c echo test",
+    "explanation": "Tests the detection with a quoted command and additional arguments to evaluate parsing robustness."
+  },
+  {
+    "output": "psexec -u system -c cmd --",
+    "explanation": "Adds an end-of-options marker (--), which may affect parsing and could potentially bypass detection if not handled correctly."
+  }
+]

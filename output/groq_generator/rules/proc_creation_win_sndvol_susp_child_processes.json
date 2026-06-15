@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe shell32.dll,Control_RunDLL",
+    "explanation": "This command simulates a suspicious child process of SndVol.exe by launching rundll32.exe with a command line that includes 'shell32.dll,Control_RunDLL', which is not excluded by the Sigma rule's filter."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe \"shell32.dll,Control_RunDLL\"",
+    "explanation": "This command uses quotes to enclose the command-line argument, which is a safe mutation technique. It still matches the Sigma rule's detection criteria and is not excluded by the filter."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe shell32.dll,Control_RunDLL",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria and is not excluded by the filter. It represents a typical malicious pattern associated with rundll32.exe."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c dir C:\\Progra~1\\Git\\cmd\\scalar.exe",
+    "explanation": "This command uses the 8.3 short name format (e.g., 'Progra~1') to reference a file path, which would trigger the Sigma rule. It simulates an attempt to evade detection by using short names instead of long paths."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\DOCUME~1\\User\\Desktop\\file.txt\"",
+    "explanation": "This command uses a short name format ('DOCUME~1') in a PowerShell command line, which would match the Sigma rule's detection logic. It demonstrates how short names can be used in different command-line interfaces."
+  },
+  {
+    "output": "notepad.exe C:\\Progra~1\\Common~1\\Microsoft\\Shared\\WebServer\\index.html",
+    "explanation": "This command uses the 8.3 short name format to access a file path, which would be detected by the Sigma rule. It shows how even standard applications can be used with short names to potentially evade detection."
+  }
+]

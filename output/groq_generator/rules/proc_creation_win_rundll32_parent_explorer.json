@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL",
+    "explanation": "This command attempts to mimic a benign use of rundll32.exe with a parent process of explorer.exe. It uses a standard Windows DLL and function call to avoid matching the filter conditions in the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe C:\\\\Windows\\\\System32\\\\shell32.dll,Control_RunDLL",
+    "explanation": "This command uses double backslashes for path normalization and is equivalent to the first command. It is designed to test if the Sigma rule is sensitive to such encoding variations."
+  },
+  {
+    "output": "rundll32.exe C:/Windows/System32/shell32.dll,Control_RunDLL",
+    "explanation": "This command uses forward slashes instead of backslashes for path representation, which is a valid Windows syntax. It tests whether the Sigma rule is sensitive to path normalization techniques."
+  },
+  {
+    "output": "rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL",
+    "explanation": "This command omits the second backslash in the path normalization. It tests whether the Sigma rule is sensitive to minor path formatting differences."
+  },
+  {
+    "output": "rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL",
+    "explanation": "This command is a standard benign invocation of rundll32.exe with a parent process of explorer.exe. It is designed to test detection accuracy without triggering false positives."
+  }
+]
+```

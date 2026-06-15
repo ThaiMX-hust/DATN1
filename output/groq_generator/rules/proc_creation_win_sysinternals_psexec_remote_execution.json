@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" \\\\TEST-HOST -u testuser -p testpassword -accepteula whoami",
+    "explanation": "This is the original true positive command and is not modified."
+  },
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" \\\\TEST-HOST -u testuser -p testpassword -accepteula whoami",
+    "explanation": "No safe bypass command can be generated without triggering the rule or breaking functionality."
+  }
+]

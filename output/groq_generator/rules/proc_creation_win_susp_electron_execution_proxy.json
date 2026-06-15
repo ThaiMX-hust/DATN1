@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\Program Files\\\\Microsoft Teams\\\\Teams.exe\" --renderer-cmd-prefix=malicious_payload.exe",
+    "explanation": "This command attempts to mimic a suspicious Electron application command line by using the '--renderer-cmd-prefix' flag, which is detected by the Sigma rule. The command is formatted with quotes and escaped spaces to test if the detection is resilient to insertion techniques."
+  },
+  {
+    "output": "C:\\\\Program Files\\\\Microsoft Teams\\\\Teams.exe --gpu-launcher=malicious_payload.exe",
+    "explanation": "This command uses the '--gpu-launcher' flag, which is flagged by the Sigma rule. It omits unnecessary spaces and uses a direct path to test if the detection is resilient to omission techniques."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\Microsoft Teams\\\\Teams.exe\" --utility-cmd-prefix=malicious_payload.exe",
+    "explanation": "This command uses the '--utility-cmd-prefix' flag, which is flagged by the Sigma rule. The command is wrapped in quotes to test if the detection is resilient to insertion techniques."
+  },
+  {
+    "output": "C:\\\\Program Files\\\\Microsoft Teams\\\\Teams.exe --browser-subprocess-path=malicious_payload.exe",
+    "explanation": "This command uses the '--browser-subprocess-path' flag, which is flagged by the Sigma rule. It is formatted without additional spaces or quotes to test if the detection is resilient to omission techniques."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\Microsoft Teams\\\\Teams.exe\" --renderer-cmd-prefix=malicious_payload.exe --gpu-launcher=malicious_payload2.exe",
+    "explanation": "This command includes multiple flagged switches ('--renderer-cmd-prefix' and '--gpu-launcher') to test if the detection is resilient to reordering or additional arguments."
+  }
+]

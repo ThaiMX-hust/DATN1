@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe Shell32.dll,RunDll_ShellExecuteW,cmd.exe,open,calc.exe,\"\",""",
+    "explanation": "This command simulates the abuse of ShellDispatch.dll via ShellExecute by invoking rundll32.exe with the RunDll_ShellExecuteW function. It uses insertion of quotes and commas to mimic the expected syntax while triggering the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe Shell32.dll,RunDll_ShellExecuteW cmd.exe open calc.exe \"\"",
+    "explanation": "This command is a simplified version of the first, using reordering and omission of commas to maintain the same behavior while evading parsing that expects strict formatting. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32.exe Shell32.dll,RunDll_ShellExecuteW calc.exe",
+    "explanation": "This command omits optional parameters while still invoking the same function. It may not fully match the Sigma rule, but it demonstrates how the rule could be bypassed if the detection relies on specific command-line patterns."
+  }
+]

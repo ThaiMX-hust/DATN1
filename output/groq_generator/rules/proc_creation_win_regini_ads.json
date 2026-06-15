@@ -1,0 +1,22 @@
+[
+  {
+    "output": "regini.exe @echo off :ADS",
+    "explanation": "This command attempts to bypass the Sigma rule by using an alternate data stream (ADS) marker (':ADS') in a way that may not trigger the regex detection. The command is modified with an '@echo off' to obscure output, but the ADS marker is placed in a way that may not be detected as suspicious by the rule."
+  },
+  {
+    "output": "regini.exe :ADS",
+    "explanation": "This command uses an alternate data stream marker (':ADS') directly after the executable name. It is a minimal variation that may not be flagged by the Sigma rule's regex if the ADS is not associated with an import file."
+  },
+  {
+    "output": "regini.exe :ADS\\",
+    "explanation": "This command adds an extra backslash after the ADS marker, which may be parsed differently by the system or detection rule, potentially evading the regex detection."
+  },
+  {
+    "output": "regini.exe :ADS^",
+    "explanation": "This command uses an escape character (^) after the ADS marker, which may alter how the command is parsed by the shell or detection rule, potentially evading detection."
+  },
+  {
+    "output": "regini.exe :ADS`",
+    "example": "This command uses a backtick (`) after the ADS marker, which may be interpreted differently in some shells or detection engines, potentially evading the rule."
+  }
+]

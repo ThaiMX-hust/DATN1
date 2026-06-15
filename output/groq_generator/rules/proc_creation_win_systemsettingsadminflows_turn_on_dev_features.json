@@ -1,0 +1,22 @@
+[
+  {
+    "output": "SystemSettingsAdminFlows.exe -CommandLine 'TurnOnDeveloperFeatures DeveloperUnlock EnableSideloading'",
+    "explanation": "This command simulates the activation of developer features as described in the Sigma rule. It includes the required command-line arguments to match the detection logic."
+  },
+  {
+    "output": "SystemSettingsAdminFlows.exe --CommandLine TurnOnDeveloperFeatures DeveloperUnlock EnableSideloading",
+    "explanation": "This command uses long-form syntax for the CommandLine parameter and omits quotes around the arguments, which may still be parsed correctly depending on the program's argument parser."
+  },
+  {
+    "output": "SystemSettingsAdminFlows.exe CommandLine=TurnOnDeveloperFeatures DeveloperUnlock EnableSideloading",
+    "explanation": "This command uses an alternate syntax for specifying the CommandLine parameter, which may be accepted by the program and still match the Sigma rule."
+  },
+  {
+    "output": "SystemSettingsAdminFlows.exe -CommandLine EnableSideloading DeveloperUnlock TurnOnDeveloperFeatures",
+    "explanation": "This command reorders the CommandLine arguments. If the program accepts reordered arguments, this may still trigger the Sigma rule."
+  },
+  {
+    "output": "SystemSettingsAdminFlows.exe -CommandLine 'TurnOnDeveloperFeatures DeveloperUnlock'",
+    "explanation": "This command omits the 'EnableSideloading' argument, which may still be sufficient to trigger the Sigma rule if the remaining arguments are enough to match the detection logic."
+  }
+]

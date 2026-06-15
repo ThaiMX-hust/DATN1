@@ -1,0 +1,26 @@
+[
+  {
+    "output": "VSDiagnostics.exe start -launch:C:\\Windows\\System32\\notepad.exe",
+    "explanation": "This command triggers the Sigma rule by using the 'start' command with the '-launch' parameter to execute an arbitrary binary (notepad.exe)."
+  },
+  {
+    "output": "VSDiagnostics.exe start --launch=C:\\Windows\\System32\\notepad.exe",
+    "explanation": "This command uses the long-form option '--launch' instead of '-launch' to bypass the rule's detection based on short-form flags."
+  },
+  {
+    "output": "VSDiagnostics.exe start -launch=C:\\Windows\\Sysnative\\notepad.exe",
+    "explanation": "This command uses 'Sysnative' as an alternative path to System32, which may bypass detection by altering the binary path."
+  },
+  {
+    "output": "VSDiagnostics.exe start -launch=.\.\.\Windows\System32\notepad.exe",
+    "explanation": "This command uses path normalization with multiple dots and newline characters to obfuscate the binary path and evade detection."
+  },
+  {
+    "output": "VSDiagnostics.exe start -launch=%SystemRoot%\\System32\\notepad.exe",
+    "explanation": "This command uses an environment variable to represent the path, which may bypass the rule by avoiding direct string matching."
+  },
+  {
+    "output": "VSDiagnostics.exe start -launch=C:\\Windows\\System32\\notepad.exe -otherflag",
+    "explanation": "This command adds an additional flag to the command line, which may help evade detection by increasing complexity and altering the string pattern."
+  }
+]

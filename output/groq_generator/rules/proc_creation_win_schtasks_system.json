@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /CREATE /TN \"T1053_005_OnStartup\" /SC ONSTART /RU \"NT AUTHORITY\\SYSTEM\" /TR \"cmd.exe /c calc.exe\"",
+    "explanation": "This command uses the equivalent long option '/CREATE' instead of '/create', and fully specifies 'NT AUTHORITY\\SYSTEM' instead of 'system'. It maintains the same behavior as the original command but may bypass the Sigma rule by altering the command syntax."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "This is the original command and is not a bypass. It is included for reference."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

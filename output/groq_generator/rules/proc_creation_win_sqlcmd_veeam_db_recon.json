@@ -1,0 +1,44 @@
+```json
+[
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\"",
+    "explanation": "This command simulates a SQL query targeting the VeeamBackup database. It includes the required 'VeeamBackup' and 'BackupRepositories' keywords to match the Sigma rule."
+  },
+  {
+    "output": "sqlcmd -S . -d VeeamBackup -Q \"SELECT * From Backups\"",
+    "explanation": "This command uses 'From' instead of 'FROM' to demonstrate case-insensitive matching and includes the 'Backups' keyword, which is part of the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM Credentials\"",
+    "explanation": "This command includes the 'VeeamBackup' database and the 'Credentials' keyword, which is part of the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM SmbFileShares\"",
+    "explanation": "This command includes the 'VeeamBackup' database and the 'SmbFileShares' keyword, which is part of the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM Ssh_creds\"",
+    "explanation": "This command includes the 'VeeamBackup' database and the 'Ssh_creds' keyword, which is part of the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM VSphereInfo\"",
+    "explanation": "This command includes the 'VeeamBackup' database and the 'VSphereInfo' keyword, which is part of the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\" -o output.txt",
+    "explanation": "This command includes the 'VeeamBackup' database and the 'BackupRepositories' keyword, with an additional output redirection to demonstrate optional arguments that do not affect detection."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\" --output output.txt",
+    "explanation": "This command uses a long-form option (--output) instead of the short-form (-o) to demonstrate substitution while still including the required keywords."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\"   ",
+    "explanation": "This command includes extra spaces after the query to demonstrate insertion of whitespace, which does not affect detection."
+  },
+  {
+    "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\" | findstr BackupRepositories",
+    "explanation": "This command appends a pipeline to filter output, but the original query still includes the required keywords for detection."
+  }
+]
+```

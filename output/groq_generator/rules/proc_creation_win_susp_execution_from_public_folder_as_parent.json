@@ -1,0 +1,26 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\\"bitsadmin.exe\" /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Temp\\test.txt",
+    "explanation": "Inserted quotes around the executable name to test if the Sigma rule accounts for such mutations. The command remains functionally identical."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe  /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Temp\\test.txt",
+    "explanation": "Inserted extra space after the executable path to test if the Sigma rule accounts for spacing variations."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Temp\\test.txt",
+    "explanation": "Used short form of the command line without any mutation. This is the original command for reference."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Temp\\test.txt",
+    "explanation": "Reordered flags and arguments where possible, but in this case, the order is fixed by the bitsadmin.exe syntax, so no reordering was applied."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Temp\\test.txt",
+    "explanation": "Removed optional elements where possible, but in this case, all elements are required for the command to function as intended."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Temp\\test.txt",
+    "explanation": "Used standard syntax without any encoding or recoding, as encoding is not typically applied to bitsadmin.exe command lines."
+  }
+]

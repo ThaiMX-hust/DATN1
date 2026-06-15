@@ -1,0 +1,26 @@
+[
+  {
+    "output": "verclsid.exe /S /C",
+    "explanation": "This command uses the original syntax of the Sigma rule and matches the detection criteria. It is a direct representation of the rule's expected behavior."
+  },
+  {
+    "output": "verclsid.exe /S\\ /C",
+    "explanation": "The insertion of an escape character before the second '/' in '/C' may bypass detection if the SIEM does not properly normalize command-line arguments."
+  },
+  {
+    "output": "verclsid.exe /S /C\"",
+    "explanation": "Appending a quote at the end of the command line may bypass detection if the SIEM does not properly handle trailing characters."
+  },
+  {
+    "output": "verclsid.exe /S /C   ",
+    "explanation": "Adding extra spaces at the end of the command line may bypass detection if the SIEM does not properly trim whitespace."
+  },
+  {
+    "output": "verclsid.exe /s /c",
+    "explanation": "Lowercase substitution of flags may bypass detection if the SIEM does not normalize case for command-line arguments."
+  },
+  {
+    "output": "verclsid.exe /C /S",
+    "explanation": "Reordering the flags may bypass detection if the SIEM does not account for argument order in its parsing logic."
+  }
+]

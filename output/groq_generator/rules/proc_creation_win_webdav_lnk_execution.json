@@ -1,0 +1,18 @@
+[
+  {
+    "output": "explorer.exe /e,\\server\webdav\path\file.lnk",
+    "explanation": "This command simulates launching a LNK file via explorer.exe, which could be interpreted as accessing a WebDAV resource. It aligns with the Sigma rule's detection criteria by having explorer.exe as the parent process and potentially triggering execution via a LNK file."
+  },
+  {
+    "output": "cmd.exe /c start \\\\server\\webdav\\path\\file.lnk",
+    "explanation": "This command uses cmd.exe to start a LNK file from a WebDAV path. It matches the Sigma rule by having cmd.exe as the child process of explorer.exe and referencing a WebDAV path."
+  },
+  {
+    "output": "powershell.exe -Command Start-Process -FilePath \\\\server\\webdav\\path\\file.lnk",
+    "explanation": "This command uses PowerShell to start a LNK file from a WebDAV path. It aligns with the Sigma rule by using PowerShell as the child process of explorer.exe and referencing a WebDAV path."
+  },
+  {
+    "output": "mshta.exe \\\\server\\webdav\\path\\file.lnk",
+    "explanation": "This command uses mshta.exe to execute a LNK file from a WebDAV path. It matches the Sigma rule by using mshta.exe as the child process of explorer.exe and referencing a WebDAV path."
+  }
+]

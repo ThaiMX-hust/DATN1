@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c whoami",
+    "explanation": "This command simulates a benign use of 'whoami' but could be used to test if the Sigma rule detects 'whoami' in the command line. It uses a standard Windows command-line interface."
+  },
+  {
+    "output": "powershell.exe -Command whoami",
+    "explanation": "This command uses PowerShell to execute 'whoami'. It is a valid command line that includes 'whoami' and can be used to test the Sigma rule in a controlled environment."
+  },
+  {
+    "output": "C:\\Windows\\System32\\whoami.exe",
+    "explanation": "This command directly executes the 'whoami.exe' binary. It is a valid command line that includes 'whoami' and can be used to test the Sigma rule in a controlled environment."
+  },
+  {
+    "output": "cmd /c whoami",
+    "explanation": "This command uses a shorter form of the command to execute 'whoami'. It is a valid command line that includes 'whoami' and can be used to test the Sigma rule in a controlled environment."
+  },
+  {
+    "output": "whoami",
+    "explanation": "This command directly executes 'whoami'. It is a valid command line that includes 'whoami' and can be used to test the Sigma rule in a controlled environment."
+  }
+]

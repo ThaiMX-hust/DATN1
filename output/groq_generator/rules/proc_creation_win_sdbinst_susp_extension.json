@@ -1,0 +1,26 @@
+[
+  {
+    "output": "sdbinst.exe -i C:\\Temp\\malicious.sdb",
+    "explanation": "This command simulates a suspicious shim database installation using sdbinst.exe with an uncommon extension (e.g., .sdb). It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sdbinst.exe -i C:\\Temp\\malicious.sdb -f",
+    "explanation": "This command adds a common flag (-f) to simulate a legitimate-looking command line, but still includes the suspicious .sdb extension. It may bypass detection if the rule does not account for additional flags."
+  },
+  {
+    "output": "sdbinst.exe -i C:\\Temp\\malicious.sdb -c",
+    "explanation": "This command includes a common flag (-c) to blend in with legitimate usage patterns. It may bypass detection if the rule does not account for reordering or additional flags."
+  },
+  {
+    "output": "sdbinst.exe -i C:\\Temp\\malicious.sdb -t",
+    "explanation": "This command adds a common flag (-t) to simulate a legitimate command line. It may bypass detection if the rule does not account for additional flags."
+  },
+  {
+    "output": "sdbinst.exe -i C:\\Temp\\malicious.sdb -m -bg",
+    "explanation": "This command includes a combination of flags (-m -bg) that are considered legitimate by the Sigma rule's filter. It may bypass detection if the rule does not account for these combinations."
+  },
+  {
+    "output": "sdbinst.exe -i C:\\Temp\\malicious.sdb -i C:\\Temp\\malicious2.sdb",
+    "explanation": "This command includes multiple -i flags to simulate a more complex command line. It may bypass detection if the rule does not account for multiple instances of the same flag."
+  }
+]

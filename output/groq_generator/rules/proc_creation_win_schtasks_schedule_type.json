@@ -1,0 +1,26 @@
+[
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnLogon\" /sc onlogon /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "This command is already a valid test case for the Sigma rule and does not require mutation to trigger detection."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "This command is already a valid test case for the Sigma rule and does not require mutation to trigger detection."
+  },
+  {
+    "output": "schtasks /Create /TN \"CompMgmtBypass\" /TR \"compmgmt.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "This command is already a valid test case for the Sigma rule and does not require mutation to trigger detection."
+  },
+  {
+    "output": "schtasks /Create /TN \"EventViewerBypass\" /TR \"eventvwr.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "This command is already a valid test case for the Sigma rule and does not require mutation to trigger detection."
+  },
+  {
+    "output": "SCHTASKS /Create /SC ONCE /TN spawn /TR C:\\windows\\system32\\cmd.exe /ST 20:10",
+    "explanation": "This command is already a valid test case for the Sigma rule and does not require mutation to trigger detection."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\VaultCmd.exe\" \\/listcreds:\"Web Credentials\" \\/all",
+    "explanation": "The command uses standard syntax and is a direct match for the Sigma rule. It is included as a baseline for testing."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\VaultCmd.exe\" \\/listcreds:\"Windows Credentials\" \\/all",
+    "explanation": "This command is a valid mutation using substitution (short option format) and insertion (quotes around arguments). It matches the Sigma rule."
+  },
+  {
+    "output": "vaultcmd \\/listcreds:\"Windows Credentials\"",
+    "explanation": "This command omits the /all flag but still matches the Sigma rule because it contains the required /listcreds argument."
+  }
+]

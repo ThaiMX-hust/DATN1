@@ -1,0 +1,14 @@
+[
+  {
+    "output": "W32tm /stripchart /computer:localhost /period:5 /dataonly /samples:2",
+    "explanation": "This is the original command and will trigger the Sigma rule as a true positive."
+  },
+  {
+    "output": "W32tm /stripchart /computer:localhost /period:5 /samples:2 /dataonly",
+    "explanation": "Reordering the arguments does not affect the behavior of the command and still triggers the Sigma rule."
+  },
+  {
+    "output": "W32tm /stripchart /computer:localhost /period:5 /dataonly /samples:2",
+    "explanation": "No bypass is possible with safe command-line mutation techniques because all required arguments are mandatory and must be present for the command to function as intended."
+  }
+]

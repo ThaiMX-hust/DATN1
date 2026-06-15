@@ -1,0 +1,26 @@
+[
+  {
+    "output": "schtasks /create /xml C:\\Temp\\maliciousfile.xml /tn \"TestTask\" /tr \"cmd.exe /c echo Test\"",
+    "explanation": "This command creates a scheduled task using the '/xml' flag with a file that has the '.xml' extension. It is not a bypass since the Sigma rule filters out commands with '.xml' extensions."
+  },
+  {
+    "output": "schtasks /create -xml C:\\Temp\\maliciousfile /tn \"TestTask\" /tr \"cmd.exe /c echo Test\"",
+    "explanation": "This command uses the '-xml' flag with a file that does not have the '.xml' extension, which aligns with the Sigma rule's detection criteria. It is a true positive and not a bypass."
+  },
+  {
+    "output": "schtasks /create -xml C:\\Temp\\maliciousfile   /tn \"TestTask\" /tr \"cmd.exe /c echo Test\"",
+    "explanation": "This command uses the '-xml' flag with a file that does not have the '.xml' extension and includes extra spaces for insertion mutation. It still matches the Sigma rule and is not a bypass."
+  },
+  {
+    "output": "schtasks /create -xml C:\\Temp\\maliciousfile /tr \"cmd.exe /c echo Test\" /tn \"TestTask\"",
+    "explanation": "This command uses the '-xml' flag with a file that does not have the '.xml' extension and reorders the arguments. It still matches the Sigma rule and is not a bypass."
+  },
+  {
+    "output": "schtasks /create -xml C:\\Temp\\maliciousfile /tn \"TestTask\" /tr \"cmd.exe /c echo Test\"",
+    "explanation": "This command uses the '-xml' flag with a file that does not have the '.xml' extension and is a direct match for the Sigma rule. It is not a bypass."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

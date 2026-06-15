@@ -1,0 +1,6 @@
+[
+  {
+    "output": "vsls-agent.exe --agentExtensionPath \"C:\\\\Path\\\\To\\\\Malicious.dll\"",
+    "explanation": "This command simulates a suspicious vsls-agent.exe execution with the --agentExtensionPath parameter, which matches the Sigma rule's detection criteria. It is crafted to trigger the rule in a controlled test environment."
+  }
+]

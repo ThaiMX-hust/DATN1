@@ -12,6 +12,14 @@ from .runner import run_target_batch
 from .utils import resolve_path
 
 
+def positive_int(value: str) -> int:
+    """Parse a positive integer CLI argument."""
+    parsed = int(value)
+    if parsed < 1:
+        raise argparse.ArgumentTypeError("must be >= 1")
+    return parsed
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Build the CLI argument parser."""
     parser = argparse.ArgumentParser(description="Run target command lines, export Sysmon EVTX, and scan with Zircolite.")
@@ -26,7 +34,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--execute", action="store_true", help="Run command lines. Without this, only dry-run.")
-    parser.add_argument("--timeout-seconds", type=int, default=30)
+    parser.add_argument("--timeout-seconds", type=positive_int, default=2)
     parser.add_argument("--flush-wait-seconds", type=float, default=1.0)
     parser.add_argument("--record-read-timeout-seconds", type=int, default=15)
     parser.add_argument("--export-timeout-seconds", type=int, default=60)

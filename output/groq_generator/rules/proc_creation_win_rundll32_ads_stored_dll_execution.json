@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe \"C:\\ads\\file.txt:ADSDLL.dll\",DllMain",
+    "explanation": "This command simulates the execution of rundll32 with a DLL stored in an Alternate Data Stream (ADS), as detected by the Sigma rule. The command is formatted to match the rule's detection logic."
+  },
+  {
+    "output": "rundll32.exe C:\\ads\\file.txt:ADSDLL.dll,DllMain",
+    "explanation": "This command is a simplified version of the first, omitting quotes around the ADS path. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "rundll32.exe \"C:\\ads\\file.txt:ADSDLL.dll\" DllMain",
+    "explanation": "This command uses a different syntax where the function name is provided as a separate argument. It still matches the rule's detection logic."
+  },
+  {
+    "output": "rundll32.exe \"C:\\ads\\file.txt:ADSDLL.dll\",DllMain",
+    "explanation": "This command uses double quotes around the ADS path, which is a safe mutation technique (insertion). It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "rundll32.exe C:\\ads\\file.txt:ADSDLL.dll,DllMain",
+    "explanation": "This command omits quotes and uses a direct path, which is a safe mutation technique (omission). It still matches the Sigma rule's detection logic."
+  }
+]

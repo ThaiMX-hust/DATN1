@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "wmic /NameSpace:\\\\root\\default Class StdRegProv Call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\DeleteMe\"",
+    "explanation": "This command uses wmic.exe to call the StdRegProv class for registry manipulation, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "wmic -NameSpace:\\\\root\\default Class StdRegProv Call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\DeleteMe\"",
+    "explanation": "Substituting '/' with '-' for the /NameSpace flag is a valid mutation technique and still matches the Sigma rule."
+  },
+  {
+    "output": "wmic /NameSpace:\\\\root\\default StdRegProv Call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\DeleteMe\"",
+    "explanation": "Omitting the 'Class' keyword is allowed in some versions of wmic.exe and still achieves the same behavior, matching the Sigma rule."
+  },
+  {
+    "output": "wmic /NameSpace:\\\\root\\default call StdRegProv.CreateKey sSubKeyName=\"SOFTWARE\\Policies\\DeleteMe\"",
+    "explanation": "Reordering and simplifying the syntax while preserving the same functionality matches the Sigma rule."
+  },
+  {
+    "output": "wmic /NameSpace:\\\\root\\default Class StdRegProv call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\DeleteMe\"",
+    "explanation": "Inserting extra spaces and using standard syntax still matches the Sigma rule's detection criteria."
+  }
+]
+```

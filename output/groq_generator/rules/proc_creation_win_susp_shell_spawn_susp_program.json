@@ -1,0 +1,26 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\certutil.exe\" -addstore my C:\\\\Users\\\\thaim\\\\AppData\\\\Local\\\\Temp\\\\rootCA2.cer",
+    "explanation": "This command is already a valid test case for the Sigma rule. No mutation is needed to simulate a benign use case."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\certutil.exe\" -p password -exportPFX Root 1F3D38F280635F275BE92B87CF83E40E40458400 c:\\\\temp\\\\atomic.pfx",
+    "explanation": "This command is already a valid test case for the Sigma rule. No mutation is needed to simulate a benign use case."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\certutil.exe\" -verifyctl -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt",
+    "explanation": "This command is already a valid test case for the Sigma rule. No mutation is needed to simulate a benign use case."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\nslookup.exe\"",
+    "explanation": "This command is already a valid test case for the Sigma rule. No mutation is needed to simulate a benign use case."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\nslookup.exe\" -q=txt example.com 8.8.8.8",
+    "explanation": "This command is already a valid test case for the Sigma rule. No mutation is needed to simulate a benign use case."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\schtasks.exe\" /query /fo LIST /V",
+    "explanation": "This command is already a valid test case for the Sigma rule. No mutation is needed to simulate a benign use case."
+  }
+]

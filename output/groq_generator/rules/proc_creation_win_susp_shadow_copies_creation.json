@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"(Get-WmiObject -List Win32_ShadowCopy).Create('C:\\','ClientAccessible')\"",
+    "explanation": "This command uses equivalent syntax (Get-WmiObject instead of gwmi) and adds a -Command flag to invoke the script block, which is a valid mutation technique. It preserves the original behavior while altering the command structure."
+  },
+  {
+    "output": "vssadmin  create shadowcopy for=C:",
+    "explanation": "This command uses a rephrased argument (shadowcopy instead of shadow) and omits the .exe extension, which is allowed under reordering and omission techniques. The behavior remains unchanged."
+  }
+]

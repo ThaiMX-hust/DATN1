@@ -1,0 +1,22 @@
+[
+  {
+    "output": "renamed_cloudflared.exe tunnel run -config config.yaml -credentials-contents \"credentials\" -token mytoken",
+    "explanation": "This command renames the cloudflared binary to 'renamed_cloudflared.exe' and executes it with the 'tunnel run' command and necessary flags. This simulates a renamed binary execution, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "renamed_cloudflared.exe tunnel cleanup -config config.yaml -connector-id 12345",
+    "explanation": "This command uses a renamed binary and executes the 'tunnel cleanup' command with the required flags. It matches the Sigma rule's detection criteria for renamed cloudflared execution."
+  },
+  {
+    "output": "renamed_cloudflared.exe tunnel -url https://example.com",
+    "explanation": "This command uses a renamed binary and executes the 'tunnel' command with the '-url' flag. It matches the Sigma rule's detection criteria for renamed cloudflared execution."
+  },
+  {
+    "output": "renamed_cloudflared.exe -url https://example.com tunnel",
+    "explanation": "This command reorders the '-url' flag and 'tunnel' command to test if the Sigma rule can detect reordered arguments in a renamed binary execution."
+  },
+  {
+    "output": "renamed_cloudflared.exe tunnel run -config config.yaml -credentials-contents \"credentials\" -token mytoken",
+    "explanation": "This command uses a renamed binary and executes the 'tunnel run' command with the required flags. It matches the Sigma rule's detection criteria for renamed cloudflared execution."
+  }
+]

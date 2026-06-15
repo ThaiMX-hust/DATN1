@@ -1,0 +1,44 @@
+```json
+[
+  {
+    "output": "WerFault.exe -pr \"C:\\Malicious\\Payload.exe\"",
+    "explanation": "This command represents a basic true-positive scenario where WerFault.exe is invoked with the '-pr' flag followed by a malicious payload path."
+  },
+  {
+    "output": "WerFault.exe -pr\" C:\\Malicious\\Payload.exe\"",
+    "explanation": "The '-pr' flag is directly followed by the payload path without a space, exploiting the parser's tolerance for missing spaces."
+  },
+  {
+    "output": "WerFault.exe -pr  \"C:\\Malicious\\Payload.exe\"",
+    "explanation": "Extra spaces between '-pr' and the payload path are inserted, which may bypass detection relying on exact string matching."
+  },
+  {
+    "output": "WerFault.exe -pr \"C:\\Malicious\\^Payload.exe\"",
+    "explanation": "An escape character (^) is inserted into the path, which may evade detection if the rule does not account for such characters."
+  },
+  {
+    "output": "WerFault.exe -pr \"C:\\Malicious\\..\\Payload.exe\"",
+    "explanation": "A relative path is used with directory traversal, which may be used to obfuscate the actual location of the payload."
+  },
+  {
+    "output": "WerFault.exe -pr \"%TEMP%\\Payload.exe\"",
+    "explanation": "The payload path is expressed using an environment variable, which may evade detection if the rule does not resolve variables."
+  },
+  {
+    "output": "WerFault.exe -pr \"C:\\Malicious\\Payload.exe\" --",
+    "explanation": "An additional '--' is appended to the command line, which may be used to indicate the end of options and bypass parsing logic."
+  },
+  {
+    "output": "WerFault.exe -pr \"C:\\Malicious\\Payload.exe\" 2>&1",
+    "explanation": "Appending shell redirection does not affect the '-pr' flag but may be used to obfuscate the command line in some contexts."
+  },
+  {
+    "output": "WerFault.exe -pr \"C:\\Malicious\\Payload.exe\" | echo",
+    "explanation": "The command is piped to another benign command, which may be used to evade detection based on direct command line content."
+  },
+  {
+    "output": "WerFault.exe -pr \"C:\\Malicious\\Payload.exe\" && echo success",
+    "explanation": "A logical AND operator is appended to the command line, which may be used to chain commands and obfuscate the original intent."
+  }
+]
+```

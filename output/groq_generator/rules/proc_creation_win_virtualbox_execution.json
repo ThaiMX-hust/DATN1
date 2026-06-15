@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"cmd.exe\" /c \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" createvm --name \"Atomic VM\" --register & \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" modifyvm \"Atomic VM\" --firmware efi & \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" startvm \"Atomic VM\"",
+    "explanation": "The original command is already a valid test case and does not require mutation for this rule. It directly matches the detection criteria for starting a VM."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxSVC.exe\" /reregserver & regsvr32 /S \"C:\\Program Files\\Oracle\\VirtualBox\\VboxC.dll\" & rundll32 \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxRT.dll,RTR3Init\" & sc create VBoxDRV binpath= \"C:\\Program Files\\Oracle\\VirtualBox\\drivers\\VboxDrv.sys\" type= kernel start= auto error= normal displayname= PortableVBoxDRV & sc start VBoxDRV",
+    "explanation": "The original command is already a valid test case and does not require mutation for this rule. It directly matches the detection criteria for driver installation."
+  }
+]

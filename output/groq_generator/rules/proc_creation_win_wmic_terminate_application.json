@@ -1,0 +1,22 @@
+[
+  {
+    "output": "wmic.exe process where name=\"notepad.exe\" call terminate",
+    "explanation": "This command matches the Sigma rule by using wmic.exe with 'call' and 'terminate' in the command line. It is a direct representation of the rule's detection logic."
+  },
+  {
+    "output": "wmic.exe\" process where name=\"notepad.exe\" call terminate",
+    "explanation": "This command uses an escaped quote after wmic.exe, which is a safe mutation technique (insertion). It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "wmic.exe process call terminate where name=\"notepad.exe\"",
+    "explanation": "This command reorders the arguments while preserving the same functionality. It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "wmic.exe process where name='notepad.exe' call terminate",
+    "explanation": "This command uses single quotes instead of double quotes for the process name, which is a safe mutation technique (substitution). It still matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "wmic.exe process where name=$\"notepad.exe\" call terminate",
+    "explanation": "This command uses escaped double quotes for the process name, which is a safe mutation technique (recoding/encoding). It still matches the Sigma rule's detection logic."
+  }
+]

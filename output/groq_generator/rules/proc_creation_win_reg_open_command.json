@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command\" /ve /d \"\" && reg add \"HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command\" /v DelegateExecute /d \"\"",
+    "explanation": "This command simulates the suspicious behavior by adding an empty string to the registry key and setting the DelegateExecute value. It uses quotes and spacing to bypass simple pattern matching while maintaining the same functionality."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command /ve /d \"\" && reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command /v DelegateExecute /d \"\"",
+    "explanation": "This command is a simplified version of the first, omitting unnecessary quotes. It still performs the same actions and could bypass detection if the rule does not account for spacing variations."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command /ve /d \"\" && reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command /v DelegateExecute /d \"\"",
+    "explanation": "This command uses minimal spacing and no extra quotes, making it a clean test case. It demonstrates that the behavior can be replicated without any syntactic obfuscation."
+  }
+]

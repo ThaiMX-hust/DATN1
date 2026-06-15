@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /t REG_DWORD /v TestExclusion /d 0",
+    "explanation": "This command adds a registry entry to Windows Defender exclusions, matching the Sigma rule's detection criteria. It is a valid test command for verifying detection."
+  },
+  {
+    "output": "reg.exe ADD 'HKLM\\SOFTWARE\\Microsoft\\Microsoft Antimalware\\Exclusions\\Paths' /t REG_DWORD /v TestExclusion /d 0",
+    "explanation": "This command adds a registry entry to Microsoft Antimalware exclusions, matching the Sigma rule's detection criteria. It is a valid test command for verifying detection."
+  },
+  {
+    "output": "reg.exe ADD HKLM\\SOFTWARE\\Microsoft\\Windows\\Defender\\Exclusions\\Paths /t REG_DWORD /v TestExclusion /d 0",
+    "explanation": "This command uses a slightly different path but still matches the Sigma rule's detection criteria. It is a valid test command for verifying detection."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" -t REG_DWORD -v TestExclusion -d 0",
+    "explanation": "This command uses short syntax (-t instead of /t) and quotes for the registry path, which is still parsed correctly and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "reg.exe ADD HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths /t REG_DWORD /v TestExclusion /d 0",
+    "explanation": "This command omits the quotes around the registry path but still matches the Sigma rule's detection criteria. It is a valid test command for verifying detection."
+  }
+]

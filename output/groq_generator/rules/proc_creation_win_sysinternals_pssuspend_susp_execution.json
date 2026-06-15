@@ -1,0 +1,26 @@
+[
+  {
+    "output": "pssuspend.exe -i 4 msmpeng.exe",
+    "explanation": "This command represents a typical execution of PsSuspend targeting a critical process (msmpeng.exe). It can be used as a baseline for testing detection."
+  },
+  {
+    "output": "pssuspend.exe  -i    4   msmpeng.exe",
+    "explanation": "Uses spacing insertion to obfuscate the command line while maintaining the same functionality."
+  },
+  {
+    "output": "pssuspend.exe --interactive=4 msmpeng.exe",
+    "explanation": "Replaces the short option '-i' with its long form '--interactive', which is functionally equivalent."
+  },
+  {
+    "output": "pssuspend.exe msmpeng.exe -i 4",
+    "explanation": "Reorders the arguments to test if the detection rule is sensitive to argument order."
+  },
+  {
+    "output": "pssuspend.exe -i 0x4 msmpeng.exe",
+    "explanation": "Uses hexadecimal representation for the process ID (4 in decimal is 0x4 in hex) to test if the detection rule handles encoded values."
+  },
+  {
+    "output": "pssuspend.exe -i 4 \"msmpeng.exe\"",
+    "explanation": "Adds unnecessary quotes around the process name to test if the detection rule is affected by such formatting."
+  }
+]

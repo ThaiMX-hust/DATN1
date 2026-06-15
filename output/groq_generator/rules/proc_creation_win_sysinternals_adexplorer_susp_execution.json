@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ADExp.exe -snapshot -path \"%USERPROFILE%\\Downloads\\snapshot.ldf\"",
+    "explanation": "This command uses the original executable name and the '-snapshot' flag as per the Sigma rule. It includes a path to a suspicious directory ('Downloads'), which aligns with the rule's detection criteria."
+  },
+  {
+    "output": "ADExplorer64.exe -snapshot -path \"%TEMP%\\snapshot.ldf\"",
+    "explanation": "This command uses an alternative executable name (ADExplorer64.exe) and the '-snapshot' flag. It uses the %TEMP% environment variable to bypass explicit path detection while still matching the rule's suspicious directory criteria."
+  },
+  {
+    "output": "ADExp.exe -snapshot -path \"C:\\\\Users\\\\Public\\\\snapshot.ldf\"",
+    "explanation": "This command uses double backslashes for escaping and a direct reference to a suspicious directory ('Users\\Public') as defined in the Sigma rule. It remains functionally equivalent while using a slightly altered syntax."
+  },
+  {
+    "output": "ADExplorer.exe -snapshot -path \"C:\\\\AppData\\\\snapshot.ldf\"",
+    "explanation": "This command uses the 'AppData' directory, which is flagged as suspicious in the Sigma rule. The path is written with escaped backslashes to test detection resilience against such encoding."
+  },
+  {
+    "output": "ADExp.exe -snapshot -path \"%USERPROFILE%\\AppData\\Local\\Temp\\snapshot.ldf\"",
+    "explanation": "This command uses an environment variable and a nested path that includes 'Temp', which is a suspicious directory according to the Sigma rule. It tests whether the detection is resilient to nested paths and environment variables."
+  }
+]

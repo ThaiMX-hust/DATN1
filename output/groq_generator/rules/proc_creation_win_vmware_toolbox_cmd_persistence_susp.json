@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\\"VMwareToolBoxCmd.exe\" script set \":\\Temp\\malicious_script.bat\" on resume",
+    "explanation": "This command simulates a suspicious usage of VMwareToolBoxCmd.exe by setting a script to execute on VM state change (resume). The path to the script is in a suspicious directory (\\Temp\\), which aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "C:\\VMware\\VMwareToolBoxCmd.exe script set \":\\AppData\\Local\\Temp\\persistence_script.bat\" on power on",
+    "explanation": "This command uses a valid VMwareToolBoxCmd.exe path and sets a script to execute on VM power-on. The script is located in a suspicious directory (\\AppData\\Local\\Temp\\), matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Program Files\\VMware\\VMware Tools\\VMwareToolBoxCmd.exe script set \":\\Windows\\Temp\\startup_script.bat\" on guest login",
+    "explanation": "This command simulates a persistence mechanism by setting a script to execute on guest login. The script is located in a suspicious directory (\\Windows\\Temp\\), which is flagged by the Sigma rule."
+  }
+]

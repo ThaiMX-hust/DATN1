@@ -1,0 +1,22 @@
+[
+  {
+    "output": "VMwareToolBoxCmd.exe script set -state on -script \"C:\\\\Scripts\\\\persistence.bat\"",
+    "explanation": "This command simulates the execution of VMwareToolBoxCmd.exe with the 'script' and 'set' flags, which aligns with the Sigma rule's detection criteria. It is a direct representation of the rule's intent for testing."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe script set -state on -script C:\\Scripts\\persistence.bat",
+    "explanation": "This command omits quotes around the script path, which is still valid in many Windows environments. It maintains the same behavior as the original command while using a simpler syntax."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe set script -state on -script \"C:\\\\Scripts\\\\persistence.bat\"",
+    "explanation": "This command reorders the 'script' and 'set' flags. Some command-line tools accept reordered arguments, and this variation may bypass detection if the Sigma rule does not account for argument order."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe script set --state on --script \"C:\\\\Scripts\\\\persistence.bat\"",
+    "explanation": "This command substitutes short flags (-state, -script) with their long equivalents (--state, --script), which may be accepted by the tool. This substitution could bypass detection if the Sigma rule does not account for both forms."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe script set -state on -script \"%cd%\\Scripts\\persistence.bat\"",
+    "explanation": "This command uses an environment variable (%cd%) to represent the current directory, which is functionally equivalent to a hard-coded path. This recoding technique may evade detection if the Sigma rule does not normalize such variables."
+  }
+]

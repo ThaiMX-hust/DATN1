@@ -1,0 +1,42 @@
+[
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" -i -s cmd -accepteula",
+    "explanation": "This is the original true positive command and is not a bypass."
+  },
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" -s -i cmd -accepteula",
+    "explanation": "Reordered the flags (-i and -s) which are accepted by PsExec and still trigger the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" -i -s \"cmd\" -accepteula",
+    "explanation": "Inserted quotes around 'cmd' to test if parsing is affected, but the behavior remains unchanged and still triggers the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" -i -s powershell -accepteula",
+    "explanation": "Replaced 'cmd' with 'powershell' as allowed by the Sigma rule, which still matches the pattern."
+  },
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" -i -s pwsh -accepteula",
+    "explanation": "Replaced 'cmd' with 'pwsh' as allowed by the Sigma rule, which still matches the pattern."
+  },
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" -i -s cmd /accepteula",
+    "explanation": "Replaced '-' in '-accepteula' with '/' to test flag substitution, which is still recognized by PsExec and matches the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe\" -i -s cmd -accepteula",
+    "explanation": "Omitted the executable path normalization and used direct invocation, which still matches the Sigma rule."
+  },
+  {
+    "output": "C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe -i -s cmd -accepteula",
+    "explanation": "Removed quotes from the command line, which is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe -i -s cmd -accepteula",
+    "explanation": "Used short path notation without quotes, which is still valid and matches the Sigma rule."
+  },
+  {
+    "output": "C:\\\\Users\\\\Public\\\\Temp\\\\PsExec.exe -i -s cmd -accepteula",
+    "explanation": "Used environment variable expansion (e.g., %TEMP%\\PsExec.exe) but reverted to full path for testing consistency."
+  }
+]

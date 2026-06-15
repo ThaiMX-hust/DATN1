@@ -1,0 +1,42 @@
+[
+  {
+    "output": "\"C:\\\\WINDOWS\\\\system32\\\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "This is the original true positive command and serves as the baseline for testing."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\system32\\\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "Inserted an extra backslash in the path to test path normalization and parsing behavior."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\\\rundll32.exe keymgr,KRShowKeyMgr",
+    "explanation": "Removed quotes around the executable path to test if the command still triggers the rule without them."
+  },
+  {
+    "output": "\"C:\\\\WINNT\\system32\\\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "Replaced 'WINDOWS' with 'WINNT' as an alternative directory name commonly used in Windows."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\system32\\\\rundll32.exe\" KeyMgr,KRShowKeyMgr",
+    "explanation": "Capitalized 'keymgr' to 'KeyMgr' to test case-insensitive detection behavior."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\system32\\\\rundll32.exe\" keymgr,krshowkeymgr",
+    "explanation": "Lowercased 'KRShowKeyMgr' to 'krshowkeymgr' to test case-insensitive detection behavior."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\system32\\\\rundll32.exe\" keymgr, KRShowKeyMgr",
+    "explanation": "Inserted an extra space between the comma and the second argument to test parsing tolerance."
+  },
+  {
+    "output": "\"C:\\\\WINDOWS\\system32\\\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "Used short path notation for testing if the rule is path-agnostic."
+  },
+  {
+    "output": "C:\\\\WINDOWS\\system32\\\\rundll32.exe keymgr,KRShowKeyMgr",
+    "explanation": "Removed quotes around the executable path to test if the rule is sensitive to quoted paths."
+  },
+  {
+    "output": "rundll32.exe keymgr,KRShowKeyMgr",
+    "explanation": "Used the executable name without the full path to test if the rule is path-agnostic."
+  }
+]

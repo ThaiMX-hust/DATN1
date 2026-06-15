@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\Program Files\\\\TeamViewer\\\\TeamViewer_Desktop.exe\" --IPCport 5939 --Module=1",
+    "explanation": "Substitution of the equals sign (=) in place of a space for the --Module argument, which is still valid in some command-line interpreters."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\TeamViewer\\\\TeamViewer_Desktop.exe\" --IPCport=5939 --Module 1",
+    "explanation": "Substitution of the equals sign (=) in place of a space for the --IPCport argument."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\TeamViewer\\\\TeamViewer_Desktop.exe\" --Module 1 --IPCport 5939",
+    "explanation": "Reordering of the --IPCport and --Module arguments, which may be accepted by the application."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\TeamViewer\\\\TeamViewer_Desktop.exe\" --IPCport 5939 -Module 1",
+    "explanation": "Substitution of a single hyphen (-) in place of double hyphen (--) for the Module flag."
+  },
+  {
+    "output": "\"C:\\\\Program Files\\\\TeamViewer\\\\TeamViewer_Desktop.exe\" --IPCport 5939 --Module 1",
+    "explanation": "Original command line provided for comparison and testing purposes."
+  }
+]

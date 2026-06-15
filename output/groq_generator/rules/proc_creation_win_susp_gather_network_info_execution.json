@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cscript.exe //Nologo \"C:\\Windows\\System32\\gatherNetworkInfo.vbs\"",
+    "explanation": "This command uses quotes around the path and adds the //Nologo flag, which is equivalent to omitting output banners. It still executes the same script and should trigger the Sigma rule."
+  },
+  {
+    "output": "cscript.exe C:\\Windows\\System32\\gatherNetworkInfo.vbs",
+    "explanation": "This command omits the //Nologo flag and uses a direct path without quotes. It still executes the same script and should trigger the Sigma rule."
+  },
+  {
+    "output": "cscript.exe C:\\\\Windows\\\\System32\\\\gatherNetworkInfo.vbs",
+    "explanation": "This command uses double backslashes for path normalization, which is still parsed correctly by Windows. It should trigger the Sigma rule."
+  },
+  {
+    "output": "cscript.exe C:/Windows/System32/gatherNetworkInfo.vbs",
+    "explanation": "This command uses forward slashes instead of backslashes for the path, which is an alternative string representation accepted by Windows. It should trigger the Sigma rule."
+  },
+  {
+    "output": "cscript.exe \"%windir%\\System32\\gatherNetworkInfo.vbs\"",
+    "explanation": "This command uses the %windir% environment variable to reference the Windows directory, which is a safe recoding technique. It should trigger the Sigma rule."
+  }
+]

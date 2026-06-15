@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c echo \u0410\u0412\u0415\u041a\u041c\u041d\u041e\u0420\u0421\u0422\u0425",
+    "explanation": "This command uses homoglyph characters that appear identical to ASCII letters. The Sigma rule is designed to detect such characters, so this command would trigger the rule."
+  },
+  {
+    "output": "cmd.exe /c echo ABECTKMHOPCSX",
+    "explanation": "This command uses standard ASCII characters and does not include homoglyphs. It would not trigger the Sigma rule."
+  }
+]

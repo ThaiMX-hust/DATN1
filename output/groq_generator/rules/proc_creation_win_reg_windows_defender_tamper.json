@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 0 /f",
+    "explanation": "The original command is already a true positive for the Sigma rule. No mutation is needed to trigger the rule."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\Defender\\Features /v TamperProtection /t REG_DWORD /d 0 /f",
+    "explanation": "This command uses a renamed registry path (Windows\\Defender instead of Windows Defender) and omits quotes around the value name. It still matches the rule because the path and value are still relevant to Defender tampering."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features /v TamperProtection /t REG_DWORD /d 0 /f",
+    "explanation": "This command omits quotes around the registry path and uses a simplified format. It still matches the rule because the path and value remain unchanged."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features /v TamperProtection /t REG_DWORD /d 0 /f",
+    "explanation": "This command uses a space instead of a tab between the registry path and the /v flag. It still matches the rule because the structure and content are unchanged."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 0 /f",
+    "explanation": "This command uses double quotes around the registry path and value name, which is a common variation. It still matches the rule because the path and value are unchanged."
+  }
+]

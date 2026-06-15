@@ -1,0 +1,14 @@
+[
+  {
+    "output": "echo test > C:\\Windows\\System32\\Tasks\\bypass.txt",
+    "explanation": "This command uses the 'echo' command to write to a file in the Tasks folder, which matches the Sigma rule's detection criteria. It simulates a benign file creation that could be used for testing."
+  },
+  {
+    "output": "copy NUL C:\\Windows\\SysWow64\\Tasks\\bypass.txt",
+    "explanation": "This command uses the 'copy' command to create an empty file in the Tasks folder. It aligns with the Sigma rule's detection logic and demonstrates a safe mutation technique for testing."
+  },
+  {
+    "output": "type NUL > C:\\Windows\\System32\\Tasks\\bypass.txt",
+    "explanation": "This command uses the 'type' command to create an empty file in the Tasks folder. It matches the Sigma rule's detection criteria and is a safe mutation for testing purposes."
+  }
+]

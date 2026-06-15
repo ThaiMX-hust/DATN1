@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sqlite3.exe -separator \",\" \"C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\Profiles\\\\profile.default\\\\cookies.sqlite\" \".tables\"",
+    "explanation": "This command uses a valid SQLite3 executable with a quoted path and includes a common command to list tables in the Firefox cookies.sqlite database. It is a realistic test command that aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlite.exe \"C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\Profiles\\\\profile.default\\\\places.sqlite\" \".dump\"",
+    "explanation": "This command uses the sqlite binary to perform a dump on the Firefox places.sqlite database. It includes proper path quoting and a common SQLite command (\".dump\"). This is a realistic test command that aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlite3.exe C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\Profiles\\\\profile.default\\\\cookies.sqlite \".exit\"",
+    "explanation": "This command uses the sqlite3 binary to access the Firefox cookies.sqlite database. It includes a minimal command (\".exit\") to test process creation without performing destructive actions. It aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlite3.exe -separator \",\" \"C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\Profiles\\\\profile.default\\\\cookies.sqlite\" \".tables\" > output.txt",
+    "explanation": "This command uses redirection to output the results to a file. It includes a quoted path and a common SQLite command (\".tables\"). It aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sqlite3.exe \"C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\Profiles\\\\profile.default\\\\cookies.sqlite\" \".tables\" | findstr \"cookies\"",
+    "explanation": "This command uses a pipeline to filter the output of the SQLite command. It includes a quoted path and a common SQLite command (\".tables\"). It aligns with the Sigma rule's detection criteria."
+  }
+]

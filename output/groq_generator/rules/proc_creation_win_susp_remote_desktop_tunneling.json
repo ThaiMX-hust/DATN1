@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ssh -R 3389:localhost:3389 user@remotehost",
+    "explanation": "This command uses the -R flag to set up a reverse SSH tunnel mapping port 3389 (RDP) on the remote host to localhost. It matches the Sigma rule by including ':3389' and '-R' in the command line."
+  },
+  {
+    "output": "ssh -L 3389:localhost:3389 user@remotehost",
+    "explanation": "This command uses the -L flag to set up a local SSH tunnel mapping port 3389 (RDP) on the local machine to localhost. It matches the Sigma rule by including ':3389' and '-L' in the command line."
+  },
+  {
+    "output": "ssh -P 22 -R 3389:localhost:3389 user@remotehost",
+    "explanation": "This command uses the -P flag to specify the SSH port and the -R flag to set up a reverse SSH tunnel for port 3389 (RDP). It matches the Sigma rule by including ':3389' and '-R' in the command line."
+  },
+  {
+    "output": "ssh -oPort=22 -R 3389:localhost:3389 user@remotehost",
+    "explanation": "This command uses the -o option to specify the SSH port and the -R flag to set up a reverse SSH tunnel for port 3389 (RDP). It matches the Sigma rule by including ':3389' and '-R' in the command line."
+  },
+  {
+    "output": "ssh -R 3389:127.0.0.1:3389 user@remotehost",
+    "explanation": "This command uses the -R flag to set up a reverse SSH tunnel mapping port 3389 (RDP) on the remote host to 127.0.0.1:3389. It matches the Sigma rule by including ':3389' and '-R' in the command line."
+  }
+]

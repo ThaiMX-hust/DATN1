@@ -1,0 +1,39 @@
+[
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer)",
+    "explanation": "This command is a direct match to the Sigma rule's detection criteria and is included as a baseline for testing."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) # Bypass attempt using comment insertion",
+    "explanation": "Inserting a comment at the end of the command line is a safe mutation technique that does not affect the execution but may bypass detection if the rule does not account for trailing comments."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) #",
+    "explanation": "Adding a comment character '#' at the end of the command line is a safe mutation that may bypass detection if the rule does not account for trailing comments."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) ",
+    "explanation": "Appending a space at the end of the command line is a safe mutation that may bypass detection if the rule does not account for trailing spaces."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer)  ",
+    "explanation": "Appending multiple spaces at the end of the command line is a safe mutation that may bypass detection if the rule does not account for trailing spaces."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) # Bypass attempt using comment insertion",
+    "explanation": "Inserting a comment at the end of the command line is a safe mutation technique that does not affect the execution but may bypass detection if the rule does not account for trailing comments."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) #",
+    "explanation": "Adding a comment character '#' at the end of the command line is a safe mutation that may bypass detection if the rule does not account for trailing comments."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) ",
+    "explanation": "Appending a space at the end of the command line is a safe mutation that may bypass detection if the rule does not account for trailing spaces."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer)  ",
+    "explanation": "Appending multiple spaces at the end of the command line is a safe mutation that may bypass detection if the rule does not account for trailing spaces."
+  },
+  {
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) # Bypass

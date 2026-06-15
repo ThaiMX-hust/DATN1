@@ -1,0 +1,22 @@
+[
+  {
+    "output": "regsvr32.exe /s /n /i:calc.exe",
+    "explanation": "This command simulates a suspicious child process of regsvr32.exe by launching calc.exe as an argument. It uses the /s (silent), /n (no registration), and /i (calls DllInstall) flags, which are valid and commonly used with regsvr32.exe. The command is structured to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "regsvr32.exe -s -n -i:cscript.exe",
+    "explanation": "This command uses short-form flags (-s, -n, -i) instead of long-form flags (/s, /n, /i) to invoke cscript.exe as a child process. This is a valid substitution technique and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "regsvr32.exe /s /n /i:.\powershell.exe",
+    "explanation": "This command uses path normalization (.\powershell.exe) to bypass potential static string detection. It still matches the Sigma rule because powershell.exe is listed in the detection criteria."
+  },
+  {
+    "output": "regsvr32.exe /s /n /i:..\notepad.exe",
+    "explanation": "This command uses relative pathing (..\notepad.exe) to evade simple string-based detection. It still matches the Sigma rule because notepad.exe is listed in the detection criteria."
+  },
+  {
+    "output": "regsvr32.exe /s /n /i:mshta.exe",
+    "explanation": "This command uses the /i flag to invoke mshta.exe as a child process. It is a direct match for the Sigma rule's detection criteria."
+  }
+]

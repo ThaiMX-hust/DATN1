@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc.exe create BypassTest binPath= \"C:\\\\Windows\\\\System32\\\\cmd.exe /C echo BypassTest > \\\\\\\\.\$$pipe\\\\BypassTest\" type= own start= auto",
+    "explanation": "This command uses the 'sc.exe' utility to create a new service with a benign command line that avoids suspicious keywords like 'powershell', 'svchost', or 'rundll32'. The binary path uses a standard Windows binary (cmd.exe) and a named pipe output, which is less likely to trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-Service -Name TestService -BinaryPathName 'C:\\\\Windows\\\\System32\\\\notepad.exe' -StartupType Manual\"",
+    "explanation": "This command uses PowerShell's 'New-Service' cmdlet but specifies a legitimate Windows binary (notepad.exe) as the service binary path. It avoids suspicious paths and binaries, making it less likely to trigger the Sigma rule."
+  },
+  {
+    "output": "sc.exe create SafeService binPath= \"C:\\\\Windows\\\\System32\\\\svchost.exe -k netsvcs\" type= share start= auto",
+    "explanation": "This command creates a service using 'svchost.exe', which is a legitimate Windows process. The command is structured to avoid suspicious command-line patterns and uses a known service group (-k netsvcs), making it less likely to trigger the Sigma rule."
+  },
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\\\Windows\\\\System32\\\\taskhostw.exe\" start= auto type= own",
+    "explanation": "This command creates a service using 'taskhostw.exe', a legitimate Windows process. The command line is minimal and does not include suspicious keywords or paths, reducing the likelihood of detection by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-Service -Name TestService -BinaryPathName 'C:\\\\Windows\\\\System32\\\\explorer.exe' -StartupType Manual\"",
+    "explanation": "This command uses PowerShell to create a new service with a legitimate binary path (explorer.exe). It avoids any suspicious command-line arguments or paths, making it less likely to trigger the Sigma rule."
+  }
+]

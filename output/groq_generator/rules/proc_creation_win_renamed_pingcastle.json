@@ -1,0 +1,22 @@
+[
+  {
+    "output": "PingCastle.exe --healthcheck --level Full --server \\\\domain\\controller --scanner aclcheck --no-enum-limit",
+    "explanation": "This command simulates a renamed PingCastle binary execution with the required command-line arguments as per the Sigma rule. It includes the required flags and parameters to match the detection criteria."
+  },
+  {
+    "output": "PingCastle.exe -healthcheck -level Full --server \\\\domain\\controller -scanner aclcheck --no-enum-limit",
+    "explanation": "This command uses short flags (-healthcheck, -level) instead of long flags (--healthcheck, --level Full) to demonstrate substitution as a mutation technique while still matching the Sigma rule."
+  },
+  {
+    "output": "PingCastle.exe --healthcheck --level Full --server \\\\domain\\controller --scanner antivirus --no-enum-limit",
+    "explanation": "This command replaces the '--scanner aclcheck' with '--scanner antivirus' to demonstrate reordering and substitution of scanner flags while maintaining the same structure and detection match."
+  },
+  {
+    "output": "PingCastle.exe --healthcheck --level Full --server \\\\domain\\controller --scanner aclcheck --no-enum-limit",
+    "explanation": "This command omits optional elements such as additional scanner flags, but still includes the required flags for detection as per the Sigma rule."
+  },
+  {
+    "output": "PingCastle.exe --healthcheck --level Full --server \\\\domain\\controller --scanner aclcheck --no-enum-limit",
+    "explanation": "This command uses standard spacing and formatting to simulate a typical execution that would match the Sigma rule."
+  }
+]

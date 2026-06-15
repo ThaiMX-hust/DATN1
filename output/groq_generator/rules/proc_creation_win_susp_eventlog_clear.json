@@ -1,0 +1,42 @@
+[
+  {
+    "output": "wevtutil.exe cl Application",
+    "explanation": "This command uses the short form 'cl' for 'clear-log' to bypass detection by the Sigma rule that may not account for short command syntax."
+  },
+  {
+    "output": "wevtutil.exe clear-log Application",
+    "explanation": "This command uses the full 'clear-log' syntax but includes extra spaces and quotes to test if the Sigma rule is sensitive to such mutations."
+  },
+  {
+    "output": "powershell.exe -Command \"Clear-EventLog -LogName Application\"",
+    "explanation": "This command uses PowerShell to clear an event log, which is directly detected by the Sigma rule, but is included for completeness in testing."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Diagnostics.EventLog]::GetEventLogs('Application') | ForEach-Object { $_.Clear() }\"",
+    "explanation": "This command uses an alternative PowerShell method to clear event logs, which may bypass detection if the Sigma rule does not account for this syntax."
+  },
+  {
+    "output": "wevtutil.exe sl Application /l:C:\\Temp\\log.evtx",
+    "explanation": "This command uses the 'set-log' command to change the log file location, which is a suspicious action detected by the Sigma rule."
+  },
+  {
+    "output": "wevtutil.exe set-log Application /l:C:\\Temp\\log.evtx",
+    "explanation": "This command uses the full 'set-log' syntax to change the log file location, which is a suspicious action detected by the Sigma rule."
+  },
+  {
+    "output": "wmic.exe /namespace:\\\\root\\\\subscription path __EventFilterCallToMethodEvent call ClearEventLog",
+    "explanation": "This command uses WMI to clear event logs, which is a suspicious action detected by the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"Clear-WinEvent -LogName Application\"",
+    "explanation": "This command uses PowerShell Core (pwsh) to clear event logs, which is a suspicious action detected by the Sigma rule."
+  },
+  {
+    "output": "wevtutil.exe \"clear-log\" Application",
+    "explanation": "This command uses quotes around the 'clear-log' command to test if the Sigma rule is sensitive to such mutations."
+  },
+  {
+    "output": "wevtutil.exe clear-log Application",
+    "explanation": "This command uses the full 'clear-log' syntax to test if the Sigma rule is sensitive to standard command syntax."
+  }
+]

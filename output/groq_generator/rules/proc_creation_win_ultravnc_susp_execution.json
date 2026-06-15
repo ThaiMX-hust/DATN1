@@ -1,0 +1,10 @@
+[
+  {
+    "output": "vncviewer -autoreconnect -connect 192.168.1.100 -id:12345",
+    "explanation": "This command includes the suspicious UltraVNC flags '-autoreconnect', '-connect', and '-id:' as specified in the Sigma rule. It represents a typical test command that would trigger the rule."
+  },
+  {
+    "output": "vncviewer -autoreconnect -connect 192.168.1.100 -id:12345",
+    "explanation": "No safe bypass command can be generated. The Sigma rule detects a specific combination of flags that are unlikely to be altered without changing the malicious intent."
+  }
+]

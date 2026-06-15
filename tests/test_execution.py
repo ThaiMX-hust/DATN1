@@ -3,6 +3,7 @@ from __future__ import annotations
 import subprocess
 import sys
 import unittest
+from io import StringIO
 from pathlib import Path
 from unittest.mock import patch
 
@@ -244,7 +245,7 @@ class ExecuteCommandTests(unittest.TestCase):
 
             def communicate(self, input: str | None = None, timeout: int | None = None):
                 self.calls += 1
-                if timeout is not None:
+                if timeout is not None and self.calls == 1:
                     raise subprocess.TimeoutExpired(cmd="fake", timeout=timeout)
                 return "", ""
 
@@ -263,6 +264,43 @@ class ExecuteCommandTests(unittest.TestCase):
         kill_tree.assert_called_once_with(1234)
         self.assertIs(popen.call_args.kwargs["stdin"], subprocess.PIPE)
         self.assertFalse(popen.call_args.kwargs["shell"])
+
+    def test_timeout_cleanup_has_bounded_wait(self) -> None:
+        class FakeProcess:
+            pid = 1234
+            returncode = None
+
+            def __init__(self) -> None:
+                self.calls = 0
+                self.killed = False
+                self.stdin = StringIO()
+                self.stdout = StringIO()
+                self.stderr = StringIO()
+
+            def communicate(self, input: str | None = None, timeout: int | None = None):
+                self.calls += 1
+                if timeout is not None:
+                    raise subprocess.TimeoutExpired(cmd="fake", timeout=timeout, output="partial", stderr="err")
+                return "", ""
+
+            def kill(self) -> None:
+                self.killed = True
+
+        fake_process = FakeProcess()
+        with patch("sigma_rule_evaluator.execution.subprocess.Popen", return_value=fake_process):
+            with patch("sigma_rule_evaluator.execution.kill_process_tree", return_value="killed") as kill_tree:
+                result = execute_command(make_case("whoami"), timeout_seconds=1)
+
+        self.assertTrue(result.timed_out)
+        self.assertEqual(result.status, "FAILED_TIMEOUT")
+        self.assertEqual(result.stdout, "partial")
+        self.assertEqual(result.stderr, "err")
+        self.assertIn("cleanup timed out after", result.note)
+        self.assertTrue(fake_process.killed)
+        self.assertEqual(kill_tree.call_count, 2)
+        self.assertTrue(fake_process.stdin.closed)
+        self.assertTrue(fake_process.stdout.closed)
+        self.assertTrue(fake_process.stderr.closed)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "regini -v C:\\Temp\\regedit.txt",
+    "explanation": "This command uses the verbose option (-v) to execute regini.exe with a registry modification file. It matches the Sigma rule because it executes regini.exe with a command line that does not trigger the filter condition."
+  },
+  {
+    "output": "regini /v C:\\Temp\\regedit.txt",
+    "explanation": "This command substitutes the short option '-v' with '/v', which is equivalent in some Windows command-line tools. It still executes regini.exe and matches the Sigma rule."
+  },
+  {
+    "output": "regini -v C:\\Temp\\..\\Temp\\regedit.txt",
+    "explanation": "This command uses path normalization to reference the same file. It executes regini.exe with a valid command line and matches the Sigma rule."
+  },
+  {
+    "output": "regini -v C:\\Temp\\regedit.txt > NUL",
+    "explanation": "This command appends output redirection to suppress output. It executes regini.exe with a valid command line and matches the Sigma rule."
+  },
+  {
+    "output": "regini -v C:\\Temp\\regedit.txt 2>&1",
+    "explanation": "This command redirects standard error to standard output. It executes regini.exe with a valid command line and matches the Sigma rule."
+  }
+]

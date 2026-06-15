@@ -1,0 +1,40 @@
+[
+  {
+    "output": "Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624}",
+    "explanation": "This command queries the Security log for event ID 4624, which matches the Sigma rule's detection of log query utilities targeting specific event IDs."
+  },
+  {
+    "output": "wevtutil qe Security /q:*[System[EventID=4624]]",
+    "explanation": "This command uses wevtutil.exe to query the Security log for event ID 4624, matching the Sigma rule's detection of log query utilities targeting specific event IDs."
+  },
+  {
+    "output": "Get-EventLog -LogName Security -InstanceId 4624",
+    "explanation": "This command retrieves event ID 4624 from the Security log using Get-EventLog, which is detected by the Sigma rule as suspicious log query behavior."
+  },
+  {
+    "output": "wmic.exe ntevent where (logfile='Security' and EventCode=4624) get EventCode, Message",
+    "explanation": "This command uses wmic.exe to query the Security log for event code 4624, matching the Sigma rule's detection of log query utilities targeting specific event IDs."
+  },
+  {
+    "output": "Get-WinEvent -FilterXPath '*[System[EventID=4624]]' -LogName Security",
+    "explanation": "This command uses XPath to query the Security log for event ID 4624, which aligns with the Sigma rule's detection of log query utilities targeting specific event IDs."
+  },
+  {
+    "output": "Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-Security-Auditing'; ID=4778}",
+    "explanation": "This command queries the Microsoft-Windows-Security-Auditing log for event ID 4778, matching the Sigma rule's detection of log query utilities targeting specific event IDs."
+  },
+  {
+    "output": "wevtutil qe Microsoft-Windows-Security-Auditing /q:*[System[EventID=4778]]",
+    "explanation": "This command uses wevtutil.exe to query the Microsoft-Windows-Security-Auditing log for event ID 4778, matching the Sigma rule's detection of log query utilities targeting specific event IDs."
+  },
+  {
+    "output": "Get-EventLog -LogName Microsoft-Windows-Security-Auditing -InstanceId 4778",
+    "explanation": "This command retrieves event ID 4778 from the Microsoft-Windows-Security-Auditing log using Get-EventLog, which is detected by the Sigma rule as suspicious log query behavior."
+  },
+  {
+    "output": "wmic.exe ntevent where (logfile='Microsoft-Windows-Security-Auditing' and EventCode=4778) get EventCode, Message",
+    "explanation": "This command uses wmic.exe to query the Microsoft-Windows-Security-Auditing log for event code 4778, matching the Sigma rule's detection of log query utilities targeting specific event IDs."
+  },
+  {
+    "output": "Get-WinEvent -FilterXPath '*[System[EventID=4778]]' -LogName Microsoft-Windows-Security-Auditing",
+    "explanation": "This command uses XPath to query the Microsoft-Windows-Security-Auditing log for event ID 4778, which aligns with the Sigma rule's

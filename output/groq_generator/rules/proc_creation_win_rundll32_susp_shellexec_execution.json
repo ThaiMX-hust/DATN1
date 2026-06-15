@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe shell32.dll,ShellExec_RunDLL cmd.exe /c echo test > C:\\Users\\Public\\test.txt",
+    "explanation": "This command uses ShellExec_RunDLL to execute a benign command (echo) and writes to a suspicious directory (C:\\Users\\Public\\). It matches the Sigma rule's detection criteria by including 'ShellExec_RunDLL' and a suspicious path."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,ShellExec_RunDLL cmd /c echo test > C:\\Temp\\test.txt",
+    "explanation": "This command uses ShellExec_RunDLL to execute a benign command (echo) and writes to a suspicious directory (C:\\Temp\\). It matches the Sigma rule's detection criteria by including 'ShellExec_RunDLL' and a suspicious path."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,ShellExec_RunDLL cmd.exe /c echo test > C:\\Users\\Public\\test.txt",
+    "explanation": "This command uses ShellExec_RunDLL to execute a benign command (echo) and writes to a suspicious directory (C:\\Users\\Public\\). It matches the Sigma rule's detection criteria by including 'ShellExec_RunDLL' and a suspicious path."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,ShellExec_RunDLL cmd /c echo test > C:\\Temp\\test.txt",
+    "explanation": "This command uses ShellExec_RunDLL to execute a benign command (echo) and writes to a suspicious directory (C:\\Temp\\). It matches the Sigma rule's detection criteria by including 'ShellExec_RunDLL' and a suspicious path."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,ShellExec_RunDLL cmd.exe /c echo test > C:\\Users\\Public\\test.txt",
+    "explanation": "This command uses ShellExec_RunDLL to execute a benign command (echo) and writes to a suspicious directory (C:\\Users\\Public\\). It matches the Sigma rule's detection criteria by including 'ShellExec_RunDLL' and a suspicious path."
+  }
+]

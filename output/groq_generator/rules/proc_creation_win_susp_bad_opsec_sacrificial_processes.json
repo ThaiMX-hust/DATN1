@@ -1,0 +1,22 @@
+[
+  {
+    "output": "WerFault.exe",
+    "explanation": "The Sigma rule detects processes like WerFault.exe when they are executed without arguments. This is a trivial example of a sacrificial process with improper arguments. The command 'WerFault.exe' matches the rule because its command line ends with the process name without additional parameters."
+  },
+  {
+    "output": "rundll32.exe",
+    "explanation": "The Sigma rule detects rundll32.exe when executed without arguments. This is a common bad OpSec default in tooling like Cobalt Strike. The command 'rundll32.exe' matches the rule because its command line ends with the process name without additional parameters."
+  },
+  {
+    "output": "regsvr32.exe",
+    "explanation": "The Sigma rule detects regsvr32.exe when executed without arguments. This is a trivial example of a sacrificial process with improper arguments. The command 'regsvr32.exe' matches the rule because its command line ends with the process name without additional parameters."
+  },
+  {
+    "output": "regasm.exe",
+    "explanation": "The Sigma rule detects regasm.exe when executed without arguments. This is a trivial example of a sacrificial process with improper arguments. The command 'regasm.exe' matches the rule because its command line ends with the process name without additional parameters."
+  },
+  {
+    "output": "regsvcs.exe",
+    "explanation": "The Sigma rule detects regsvcs.exe when executed without arguments. This is a trivial example of a sacrificial process with improper arguments. The command 'regsvcs.exe' matches the rule because its command line ends with the process name without additional parameters."
+  }
+]

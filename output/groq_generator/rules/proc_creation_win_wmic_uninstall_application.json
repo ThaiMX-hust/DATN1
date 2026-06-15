@@ -1,0 +1,18 @@
+[
+  {
+    "output": "wmic.exe \\/namespace\\\\:\\\\\\\"\\\\\\\\\\\\\\root\\\\cimv2\\\\\\\\\\\\\" PATH Win32_Product WHERE IdentifyingNumber=\"{ProductCode}\" CALL Uninstall",
+    "explanation": "This command uses encoded slashes (\\\\/) and quotes to obfuscate the original command line, which may bypass detection by Sigma rules that rely on simple string matching. The insertion of escape characters and quotes is a safe mutation technique for testing."
+  },
+  {
+    "output": "wmic.exe /namespace:\\\\root\\cimv2 PATH Win32_Product WHERE IdentifyingNumber=\"{ProductCode}\" CALL Uninstall",
+    "explanation": "This command reorders and simplifies the namespace path while maintaining the same functionality. It omits unnecessary backslashes and uses standard syntax, which may avoid detection by Sigma rules that look for specific string patterns."
+  },
+  {
+    "output": "wmic.exe -namespace:\\\\root\\cimv2 PATH Win32_Product WHERE IdentifyingNumber=\"{ProductCode}\" CALL Uninstall",
+    "explanation": "This command substitutes the slash (/) with a hyphen (-) for the namespace flag, which is equivalent in some Windows command-line utilities. This substitution may bypass detection if the Sigma rule does not account for such variations."
+  },
+  {
+    "output": "wmic.exe /namespace:\\\\root\\cimv2 PATH Win32_Product WHERE IdentifyingNumber=`\"{ProductCode}`\" CALL Uninstall",
+    "explanation": "This command uses backticks to enclose the product code string instead of standard quotes. This is a safe mutation technique that may evade detection if the Sigma rule does not account for alternative string representations."
+  }
+]

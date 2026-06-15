@@ -1,0 +1,43 @@
+[
+  {
+    "output": "code.exe tunnel --accept-server-license-terms",
+    "explanation": "This command matches the Sigma rule's detection criteria for 'selection_image_tunnel_args' by including '.exe tunnel' and '--accept-server-license-terms'."
+  },
+  {
+    "output": "code.exe tunnel service internal-run --log-file tunnel-service.log",
+    "output": "code.exe tunnel service internal-run --log-file tunnel-service.log",
+    "explanation": "This command matches the Sigma rule's detection criteria for 'selection_image_tunnel_service' by including 'tunnel', 'service', 'internal-run', and 'tunnel-service.log'."
+  },
+  {
+    "output": "cmd.exe /d /c \"C:\\Program Files\\Microsoft VS Code\\servers\\Stable-12345\\code-server.cmd\" tunnel",
+    "explanation": "This command matches the Sigma rule's detection criteria for 'selection_parent_tunnel' by including '/d /c', '\\servers\\Stable-', 'code-server.cmd', and 'tunnel'."
+  },
+  {
+    "output": "\"code.exe\" tunnel --accept-server-license-terms",
+    "explanation": "This command uses insertion (quotes) to bypass simple pattern matching while still matching the Sigma rule's detection criteria for 'selection_image_tunnel_args'."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --no-sandbox",
+    "explanation": "This command adds an optional argument (--no-sandbox) while still matching the Sigma rule's detection criteria for 'selection_image_tunnel_args'."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --port 8080",
+    "explanation": "This command adds an optional argument (--port 8080) while still matching the Sigma rule's detection criteria for 'selection_image_tunnel_args'."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --remote WSL:Ubuntu",
+    "explanation": "This command adds an optional argument (--remote WSL:Ubuntu) while still matching the Sigma rule's detection criteria for 'selection_image_tunnel_args'."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --no-restore",
+    "explanation": "This command adds an optional argument (--no-restore) while still matching the Sigma rule's detection criteria for 'selection_image_tunnel_args'."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --user-data-dir=C:\\Temp",
+    "explanation": "This command adds an optional argument (--user-data-dir=C:\\Temp) while still matching the Sigma rule's detection criteria for 'selection_image_tunnel_args'."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms --no-extensions",
+    "explanation": "This command adds an optional argument (--no-extensions) while still matching the Sigma rule's detection criteria for 'selection_image_tunnel_args'."
+  }
+]

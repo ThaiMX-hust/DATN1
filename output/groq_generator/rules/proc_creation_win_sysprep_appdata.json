@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sysprep.exe /oobe /generalize /shutdown /unattend:C:\\Users\\%APPDATA%\\unattend.xml",
+    "explanation": "This command simulates a sysprep process using the AppData folder by referencing it via the %APPDATA% environment variable, which is a safe mutation technique (recoding/encoding). It avoids direct path exposure while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sysprep.exe /oobe /generalize /shutdown /unattend:C:\\Users\\\\\"AppData\\Roaming\\unattend.xml",
+    "explanation": "This command uses quotes and escaped backslashes to mutate the command line while still referencing the AppData folder. It leverages insertion and recoding techniques to bypass detection while maintaining the same behavior."
+  },
+  {
+    "output": "sysprep.exe /generalize /oobe /shutdown /unattend:C:\\Users\\<username>\\AppData\\Roaming\\unattend.xml",
+    "explanation": "This command uses a placeholder username and direct path to the AppData folder. It is a minimal mutation and may not fully bypass detection, but it demonstrates how the command can be structured for testing."
+  }
+]

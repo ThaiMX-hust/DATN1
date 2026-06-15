@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dotnet myapp.dll -- COMPlus_ETWEnabled=0",
+    "explanation": "This command sets the COMPlus_ETWEnabled environment variable to disable ETW logging, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "dotnet myapp.dll -- COMPlus_ETWFlags=0x0",
+    "explanation": "This command sets the COMPlus_ETWFlags environment variable to disable specific ETW logging flags, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "dotnet myapp.dll -- COMPlus_ETWEnabled=0 COMPlus_ETWFlags=0x0",
+    "explanation": "This command sets both COMPlus_ETWEnabled and COMPlus_ETWFlags environment variables to disable ETW logging, which matches the Sigma rule's detection criteria."
+  }
+]

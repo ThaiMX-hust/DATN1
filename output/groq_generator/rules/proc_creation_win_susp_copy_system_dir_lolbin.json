@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\calc.exe %temp%\\T1036.007_masquerading.exe /Y",
+    "explanation": "This command bypasses the Sigma rule by omitting file extensions that could trigger detection, using environment variables instead of hardcoded paths, and avoiding suspicious file extensions like .docx or .vbs that are explicitly referenced in the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path $env:windir\\System32\\calc.exe -Destination $env:temp\\T1036.007_masquerading.exe -Force\"",
+    "explanation": "This command uses PowerShell's Copy-Item with environment variables and avoids suspicious file extensions or paths that are explicitly referenced in the Sigma rule, making it less likely to trigger detection."
+  },
+  {
+    "output": "cmd.exe /c copy %SystemRoot%\\System32\\cscript.exe %APPDATA%\\notepad.exe /Y",
+    "explanation": "This command uses environment variables and avoids additional execution or suspicious file extensions, reducing the likelihood of triggering the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path $env:windir\\system32\\calc.exe -Destination $env:temp\\T1140_calc2.exe -Force\"",
+    "explanation": "This command uses PowerShell's Copy-Item with environment variables and avoids suspicious file extensions or paths that are explicitly referenced in the Sigma rule, making it less likely to trigger detection."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\calc.exe C:\\Users\\Public\\Documents\\T1036.007_masquerading.exe /Y",
+    "explanation": "This command avoids using environment variables that might be monitored, uses a common directory like Public\\Documents, and omits suspicious file extensions to bypass the Sigma rule."
+  }
+]

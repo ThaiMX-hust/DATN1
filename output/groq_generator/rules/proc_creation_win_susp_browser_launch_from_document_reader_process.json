@@ -1,0 +1,22 @@
+[
+  {
+    "output": "AcrobatReader.exe -open \"C:\\\\Test\\\\Document.pdf\" && chrome.exe --new-tab https://example.com",
+    "explanation": "This command simulates launching a browser (chrome.exe) from a document reader process (AcrobatReader.exe) with a command line containing 'http'. It aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "AcrobatReader.exe -open C:\\\\Test\\\\Document.pdf & chrome.exe https://example.com",
+    "explanation": "This command uses reordering and omission techniques to bypass detection. The '&' operator replaces '&&' for process chaining, and the URL is directly passed without specifying a tab creation flag."
+  },
+  {
+    "output": "AcrobatReader.exe /open \"C:\\\\Test\\\\Document.pdf\" && chrome.exe --new-window https://example.com",
+    "explanation": "This command uses substitution (short/long options) and insertion (quotes) to simulate a browser launch from a document reader process. It maintains the same behavior but uses different syntax."
+  },
+  {
+    "output": "AcrobatReader.exe -open C:\\\\Test\\\\Document.pdf && chrome.exe https://example.com",
+    "explanation": "This command omits optional flags (e.g., --new-tab) and uses minimal syntax to simulate the same behavior while avoiding more obvious patterns."
+  },
+  {
+    "output": "AcrobatReader.exe -open C:\\\\Test\\\\Document.pdf && \"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" https://example.com",
+    "explanation": "This command uses full path normalization and quotes to bypass detection by altering the command structure while maintaining the same behavior."
+  }
+]

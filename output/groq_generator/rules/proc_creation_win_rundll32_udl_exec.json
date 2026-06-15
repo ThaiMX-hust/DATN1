@@ -1,0 +1,22 @@
+[
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile \"C:\\Users\\TestUser\\Downloads\\malicious.udl\"",
+    "explanation": "This command simulates a malicious rundll32.exe invocation to open a UDL file as described in the Sigma rule. It includes the required elements: rundll32.exe, oledb32.dll, OpenDSLFile, and a UDL file in the Downloads directory."
+  },
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile C:\\Users\\TestUser\\Downloads\\malicious.udl",
+    "explanation": "This command is a simplified version of the first, omitting quotes around the UDL file path. It still matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile \"C:\\Users\\TestUser\\Downloads\\malicious.udl\" >nul 2>&1",
+    "explanation": "This command adds redirection to suppress output, which is a common obfuscation technique. It still includes the required elements to match the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile \"C:\\Users\\TestUser\\Downloads\\malicious.udl\" | findstr /v \"error\"",
+    "explanation": "This command uses a pipeline to filter output, which is a safe mutation technique. It still includes the required elements to match the Sigma rule."
+  },
+  {
+    "output": "set UDL_PATH=C:\\Users\\TestUser\\Downloads\\malicious.udl && rundll32.exe oledb32.dll,OpenDSLFile \"%UDL_PATH%\"",
+    "explanation": "This command uses an environment variable to store the UDL file path, which is a safe mutation technique. It still includes the required elements to match the Sigma rule."
+  }
+]

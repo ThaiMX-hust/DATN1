@@ -1,0 +1,26 @@
+[
+  {
+    "output": "cleanmgr.exe /autoclean /d C:",
+    "explanation": "This command simulates the basic structure of the malicious command in the Sigma rule. It omits the quotes and full path, but still matches the ends-with condition for 'cleanmgr.exe /autoclean /d C:'."
+  },
+  {
+    "output": "\"cleanmgr.exe\" /autoclean /d C:",
+    "explanation": "This command adds quotes around the executable name, which is a common mutation technique. It still matches the ends-with condition in the Sigma rule."
+  },
+  {
+    "output": "cleanmgr.exe /autoclean /d C: ",
+    "explanation": "This command adds a trailing space after the command line, which is a safe mutation technique. It still matches the ends-with condition in the Sigma rule."
+  },
+  {
+    "output": "cleanmgr.exe /autoclean /d C:  ",
+    "explanation": "This command adds multiple trailing spaces after the command line, which is a safe mutation technique. It still matches the ends-with condition in the Sigma rule."
+  },
+  {
+    "output": "cleanmgr.exe /autoclean /d C:\\",
+    "explanation": "This command adds an escaped backslash at the end of the command line, which is a safe mutation technique. It still matches the ends-with condition in the Sigma rule."
+  },
+  {
+    "output": "cleanmgr.exe /autoclean /d C: /",
+    "explanation": "This command adds an extra slash at the end of the command line, which is a safe mutation technique. It still matches the ends-with condition in the Sigma rule."
+  }
+]

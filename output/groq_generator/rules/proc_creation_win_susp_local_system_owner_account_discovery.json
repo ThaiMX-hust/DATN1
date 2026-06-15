@@ -1,0 +1,64 @@
+```json
+[
+  {
+    "output": "C:\\Windows\\System32\\cmdkey.exe ^/list",
+    "explanation": "Inserted escape character (^) before /list to obfuscate the command while remaining functionally equivalent."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net.exe user",
+    "explanation": "Used full path and standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net.exe user NewLocalUser",
+    "explanation": "Used full path and standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\whoami.exe",
+    "explanation": "Used full path and standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\whoami.exe /all",
+    "explanation": "Used full path and standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c dir C:\\Users\\\\%USERNAME%\\AppData\\Local\\Microsoft\\Cred*",
+    "explanation": "Used full path and partial wildcard to avoid matching the 'dir ' + 'Users' pattern in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c net user & dir C:\\Users\\ & cmdkey.exe /list & net localgroup Users & net localgroup",
+    "explanation": "Used full path and standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net1.exe user",
+    "explanation": "Used full path and alternative name (net1.exe) to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net1.exe user NewLocalUser",
+    "explanation": "Used full path and alternative name (net1.exe) to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net1.exe users",
+    "explanation": "Used full path and alternative name (net1.exe) to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmdkey.exe /list",
+    "explanation": "Used full path and standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net.exe localgroup Users",
+    "explanation": "Used full path and standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim 1q2w3e4r",
+    "explanation": "Used standard command syntax without quotes to avoid matching the Sigma rule's quoted string pattern."
+  },
+  {
+    "output": "net user",
+    "explanation": "Used standard command syntax to match the Sigma rule's detection criteria."
+  },
+  {
+    "output": "whoami",
+    "explanation": "Used standard command syntax to match the Sigma rule's detection criteria."
+  }
+]
+```

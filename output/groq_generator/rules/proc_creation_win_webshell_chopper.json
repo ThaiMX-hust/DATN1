@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cscript //nologo wscript.exe \"&ipconfig&echo\" > output.txt",
+    "explanation": "This command attempts to mimic the Sigma rule's detection pattern by using a command-line string containing '&ipconfig&echo'. The insertion of quotes and redirection to a file simulates obfuscation techniques while preserving the core detection pattern."
+  },
+  {
+    "output": "cmd.exe /c \"&whoami&echo\"",
+    "explanation": "This command simulates a malicious payload by using the '&whoami&echo' pattern, which is part of the Sigma rule's detection criteria. The use of /c and quotes represents a safe mutation technique to test detection reliability."
+  },
+  {
+    "output": "powershell.exe -Command \"& { whoami; echo }\"",
+    "explanation": "This command uses PowerShell to execute a command sequence similar to the Sigma rule's detection pattern. The use of curly braces and the -Command flag represents a safe mutation technique to test detection reliability."
+  },
+  {
+    "output": "wscript.exe //E:VBScript \"CreateObject(\"WScript.Shell\").Run \"&dir&echo\", 0, True\"",
+    "explanation": "This command uses VBScript to execute a command sequence similar to the Sigma rule's detection pattern. The use of VBScript and encoded command execution represents a safe mutation technique to test detection reliability."
+  },
+  {
+    "output": "cmd.exe /c \"&echo [S]\"",
+    "explanation": "This command simulates a malicious payload by using the '&echo [S]' pattern, which is part of the Sigma rule's detection criteria. The use of /c and quotes represents a safe mutation technique to test detection reliability."
+  }
+]

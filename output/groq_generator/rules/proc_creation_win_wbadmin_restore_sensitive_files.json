@@ -1,0 +1,18 @@
+[
+  {
+    "output": "wbadmin start recovery -recoveryTarget:C:\\ -itemType:File -items:C:\\config\\SECURITY",
+    "explanation": "This command simulates the recovery of a sensitive file using wbadmin.exe with the specified parameters. It aligns with the Sigma rule's detection criteria by including 'recovery', 'recoveryTarget', 'itemtype:File', and a sensitive file path ('SECURITY')."
+  },
+  {
+    "output": "wbadmin start recovery -recoveryTarget:C:\\ -itemType:File -items:C:\\Windows\\NTDS\\NTDS.dit",
+    "explanation": "This command attempts to recover the NTDS.dit file using wbadmin.exe. It includes the required 'recovery', 'recoveryTarget', and 'itemtype:File' parameters, and specifies a sensitive file path, which matches the Sigma rule's detection logic."
+  },
+  {
+    "output": "wbadmin start recovery -recoveryTarget:C:\\ -itemType:File -items:C:\\config\\SYSTEM",
+    "explanation": "This command simulates the recovery of the SYSTEM hive using wbadmin.exe. It includes the required 'recovery', 'recoveryTarget', and 'itemtype:File' parameters, and specifies a sensitive file path, which aligns with the Sigma rule's detection logic."
+  },
+  {
+    "output": "wbadmin start recovery -recoveryTarget:C:\\ -itemType:File -items:C:\\config\\SAM",
+    "explanation": "This command simulates the recovery of the SAM database using wbadmin.exe. It includes the required 'recovery', 'recoveryTarget', and 'itemtype:File' parameters, and specifies a sensitive file path, which matches the Sigma rule's detection criteria."
+  }
+]

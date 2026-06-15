@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "tar.exe -xvf \"C:\\Temp\\test.tar\" -C C:\\Temp",
+    "explanation": "Inserted quotes around the file path to test how the rule handles quoted arguments."
+  },
+  {
+    "output": "tar.exe -x -v -f C:\\Temp\\test.tar -C C:\\Temp",
+    "explanation": "Reordered and split the '-xvf' into '-x -v -f' to test if the rule detects the '-x' flag regardless of argument order."
+  },
+  {
+    "output": "tar.exe -xvf C:/Temp/test.tar -C C:/Temp",
+    "explanation": "Replaced backslashes with forward slashes for path normalization to test if the rule is sensitive to path formatting."
+  },
+  {
+    "output": "tar.exe -xvf C:\\Temp\\test.tar -C C:\\Temp\\",
+    "explanation": "Added an extra trailing backslash to the output directory to test if the rule is sensitive to such minor syntax variations."
+  },
+  {
+    "output": "tar.exe -xvf C:\\Temp\\test.tar -C C:\\Temp",
+    "explanation": "Original command for reference, with no mutation applied."
+  }
+]
+```

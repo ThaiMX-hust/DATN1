@@ -49,7 +49,7 @@ class RunnerConfig:
     offset: int = 0
     limit: int | None = None
     execute: bool = False
-    timeout_seconds: int = 30
+    timeout_seconds: int = 2
     flush_wait_seconds: float = 1.0
     record_read_timeout_seconds: int = 15
     export_timeout_seconds: int = 60

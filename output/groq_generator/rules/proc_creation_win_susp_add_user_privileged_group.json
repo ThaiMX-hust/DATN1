@@ -1,0 +1,22 @@
+[
+  {
+    "output": "net.exe localgroup \"Administrators\" user1 /add",
+    "explanation": "This command attempts to add a user to a privileged group using the 'net.exe' command. It matches the Sigma rule's detection criteria by including 'localgroup' and '/add' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-LocalGroupMember -Group 'Administrators' -Member 'user1'\"",
+    "explanation": "This command uses PowerShell to add a user to a privileged group. It matches the Sigma rule's detection criteria by including 'Add-LocalGroupMember' and '-Group' in the command line."
+  },
+  {
+    "output": "net.exe  localgroup   Administrators   user1    /add",
+    "explanation": "This command adds extra spaces between arguments to test if the Sigma rule can detect the command despite whitespace variation. It still includes the key elements 'localgroup' and '/add'."
+  },
+  {
+    "output": "powershell.exe -Command Add-LocalGroupMember -Member user1 -Group \"Administrators\"",
+    "explanation": "This command reorders the arguments of the PowerShell command. It still includes the key elements 'Add-LocalGroupMember' and '-Group', matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "net.exe localgroup Administrators user1 /add",
+    "explanation": "This is the standard command for adding a user to a privileged group. It includes the key elements 'localgroup' and '/add', matching the Sigma rule's detection criteria."
+  }
+]

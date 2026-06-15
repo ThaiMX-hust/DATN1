@@ -1,0 +1,42 @@
+[
+  {
+    "output": "sc stop 'WinDefend'",
+    "explanation": "This command stops the Windows Defender service, which is listed in the Sigma rule as a suspicious target. It uses the 'sc' binary and the 'stop' command, both of which are flagged by the rule."
+  },
+  {
+    "output": "sc \\\"delete\\\" \\\"MSSQL$SQLEXPRESS\\\"",
+    "explanation": "This command deletes a SQL Server Express service, which is a known critical service. The use of escaped quotes and the 'delete' command aligns with the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Stop-Service -Name 'WinDefend'\"",
+    "explanation": "This PowerShell command stops the Windows Defender service using the 'Stop-Service' cmdlet, which is explicitly flagged in the Sigma rule. It uses PowerShell, a binary monitored by the rule."
+  },
+  {
+    "output": "wmic service where name='WinDefend' call stopservice",
+    "explanation": "This command stops the Windows Defender service using 'wmic', which is included in the Sigma rule's list of monitored binaries. The action 'stop' is also flagged."
+  },
+  {
+    "output": "sc config 'WinDefend' start= disabled",
+    "explanation": "This command disables the Windows Defender service. It uses the 'sc' binary and the 'config' command with 'start=disabled', which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_Service -Filter 'Name=\"WinDefend\"' | % { $_.Delete() }\"",
+    "explanation": "This PowerShell command deletes the Windows Defender service using WMI. The use of '.Delete()' is explicitly flagged in the Sigma rule."
+  },
+  {
+    "output": "sc.exe \\\"delete\\\" \\\"avast! Antivirus\\\"",
+    "explanation": "This command deletes the 'avast! Antivirus' service, which is listed in the Sigma rule as a suspicious target. The use of 'sc.exe' and 'delete' aligns with the rule's detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Service -Name 'WinDefend' | Stop-Service\"",
+    "explanation": "This PowerShell command stops the Windows Defender service using the 'Stop-Service' cmdlet, which is explicitly flagged in the Sigma rule."
+  },
+  {
+    "output": "sc.exe stop 'McAfeeDLPAgentService'",
+    "explanation": "This command stops the 'McAfeeDLPAgentService', which is listed in the Sigma rule as a suspicious target. It uses the 'sc.exe' binary and the 'stop' command, both of which are flagged."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject win32_service -Filter 'name=\"avast! Antivirus\"' | % { $_.Delete() }\"",
+    "explanation": "This PowerShell command deletes the 'avast! Antivirus' service using WMI. The use of '.Delete()' is explicitly flagged in the Sigma rule."
+  }
+]

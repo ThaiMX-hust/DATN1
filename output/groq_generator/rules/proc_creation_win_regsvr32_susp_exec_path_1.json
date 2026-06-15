@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s \"C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg\"",
+    "explanation": "The command uses quotes around the file path and replaces the explicit path with AppData\\Local\\Temp\\ with the equivalent %TEMP% environment variable. This is a safe mutation that still triggers the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe -s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "The command substitutes the /s flag with the equivalent -s flag and keeps the same suspicious path. This is a valid mutation that preserves the behavior and triggers the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "The command uses the original syntax but omits unnecessary whitespace. This is a minimal mutation that still triggers the Sigma rule."
+  }
+]

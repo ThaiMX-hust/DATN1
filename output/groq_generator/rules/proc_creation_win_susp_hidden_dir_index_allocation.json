@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c md %temp%\\...$.......::$index_allocation && echo too many secrets > %temp%\\...$.......::$index_allocation\\secrets.txt",
+    "explanation": "This command uses environment variable expansion and standard command chaining to replicate the original behavior. It avoids unnecessary quotes and uses standard command syntax to remain functionally equivalent while appearing slightly different."
+  },
+  {
+    "output": "cmd /c mkdir \"%temp%\\...$.......::$index_allocation\" && echo too many secrets > \"%temp%\\...$.......::$index_allocation\\secrets.txt\"",
+    "explanation": "This command uses the 'mkdir' equivalent of 'md' and adds quotes around paths to handle spaces, which is a common variation in command-line syntax. It remains functionally identical to the original."
+  },
+  {
+    "output": "cmd.exe /c md %temp%\\...$.......::$index_allocation & echo too many secrets > %temp%\\...$.......::$index_allocation\\secrets.txt",
+    "explanation": "This command omits unnecessary quotes and uses standard command syntax. It is a simplified version of the original command but still performs the same actions."
+  },
+  {
+    "output": "cmd.exe /c \"md %temp%\\...$.......::$index_allocation && echo too many secrets > %temp%\\...$.......::$index_allocation\\secrets.txt\"",
+    "explanation": "This command wraps the entire command line in quotes, which is a valid mutation technique. It maintains the same behavior while altering the structure slightly."
+  },
+  {
+    "output": "cmd.exe /c md %temp%\\...$.......::$index_allocation && echo too many secrets > %temp%\\...$.......::$index_allocation\\secrets.txt",
+    "explanation": "This command uses logical AND (&&) instead of the ampersand (&) for command chaining, which is a valid substitution in command-line syntax. It remains functionally equivalent."
+  }
+]

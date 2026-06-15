@@ -1,0 +1,26 @@
+[
+  {
+    "output": "\"C:\\Tools\\RemoteExecHelper.exe\" -s cmd /c whoami",
+    "explanation": "Inserts quotes around the command line to bypass simple string-based detection while preserving the original behavior."
+  },
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -s cmd /c whoami",
+    "explanation": "Normalizes the path using double backslashes, which is still valid in Windows command-line parsing."
+  },
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -s -i cmd /c whoami",
+    "explanation": "Adds the '-i' flag, which is optional and does not affect the core behavior of the command but changes the string signature."
+  },
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -i -s cmd /c whoami",
+    "explanation": "Reorders the '-s' and '-i' flags, which are accepted in any order by the tool, altering the string signature without changing behavior."
+  },
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -s \"cmd /c whoami\"",
+    "explanation": "Wraps the command argument in quotes, which is a valid syntax change that avoids direct flag detection."
+  },
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -s cmd^ /c whoami",
+    "explanation": "Escapes the '/' character with a caret (^), which is a valid Windows command-line escape character and alters the string signature."
+  }
+]

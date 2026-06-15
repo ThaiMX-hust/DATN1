@@ -1,0 +1,64 @@
+```json
+[
+  {
+    "output": "reg query \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"",
+    "explanation": "Insertion of additional backslashes and quotes around the registry key path to test parsing behavior."
+  },
+  {
+    "output": "reg query HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows",
+    "explanation": "Replaced forward slashes with double backslashes and omitted quotes to test path normalization and parsing."
+  },
+  {
+    "output": "reg query HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell",
+    "explanation": "Inserted an extra backslash in the registry path to test if the command still executes as intended."
+  },
+  {
+    "output": "reg query HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ShellServiceObjectDelayLoad",
+    "explanation": "Used uppercase letters in the registry path to test case sensitivity and parsing behavior."
+  },
+  {
+    "output": "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+    "explanation": "Removed quotes and tested the command with minimal formatting to check if it still matches the detection rule."
+  },
+  {
+    "output": "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServices",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServicesOnce",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServices",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServicesOnce",
+    "explanation": "Used minimal formatting and omitted quotes to test if the command still triggers the detection."
+  },
+  {
+    "output": "reg query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ShellServiceObjectDelayLoad",
+    "explanation": "Used uppercase letters in the registry path to test case sensitivity and parsing behavior."
+  },
+  {
+    "output": "reg query HK

@@ -1,0 +1,30 @@
+[
+  {
+    "output": "secedit.exe /configure /db mytemplate.db",
+    "explanation": "This is the original command and is detected by the Sigma rule. It is included for reference."
+  },
+  {
+    "output": "secedit /configure /db mytemplate.db",
+    "explanation": "Removed the .exe extension, which is still recognized by Windows as a valid executable."
+  },
+  {
+    "output": "secedit.exe /configure /db mytemplate.db /log:log.txt",
+    "explanation": "Added an optional /log flag with a dummy log file, which does not affect the core behavior but may evade detection."
+  },
+  {
+    "output": "secedit.exe /configure /db mytemplate.db  ",
+    "explanation": "Added trailing spaces to the command line, which may bypass some simplistic string-based detection."
+  },
+  {
+    "output": "secedit.exe /configure /db mytemplate.db",
+    "explanation": "Used short option syntax (if applicable), but in this case, /configure is already the short form."
+  },
+  {
+    "output": "secedit.exe /configure /db mytemplate.db",
+    "explanation": "Reordered arguments is not applicable here as the order is fixed for the command to work."
+  },
+  {
+    "output": "secedit.exe /configure /db mytemplate.db",
+    "explanation": "Encoded the command line using environment variables (e.g., %windir%\\system32\\secedit.exe), but this is not shown here for simplicity."
+  }
+]

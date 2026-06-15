@@ -1,0 +1,22 @@
+[
+  {
+    "output": "sc.exe config MyService binPath= \"C:\\Malicious\\Path.exe\"",
+    "explanation": "This command uses the `sc.exe` utility to modify a service's binary path, which matches the Sigma rule's detection criteria for `config` and `binPath`. It simulates a privilege escalation attempt via weak service permissions."
+  },
+  {
+    "output": "sc.exe failure MyService command= \"C:\\Malicious\\Path.exe\" reset= 86400 actions= restart/60000,restart/60000,restart/60000",
+    "explanation": "This command modifies the failure command of a service using `sc.exe`, which aligns with the Sigma rule's detection of `failure` and `command`. It simulates a potential privilege escalation via service misconfiguration."
+  },
+  {
+    "output": "sc.exe \\\"config\\\" MyService binPath= \\\"C:\\\\Malicious\\\\Path.exe\\\"",
+    "explanation": "This command uses escaped quotes and alternative spacing to obfuscate the original command while maintaining the same behavior. It still matches the Sigma rule's detection logic for `config` and `binPath`."
+  },
+  {
+    "output": "sc.exe config MyService binPath= \"C:\\\\Malicious\\\\Path.exe\"",
+    "explanation": "This command uses double backslashes for path normalization, a common mutation technique. It retains the same functionality and matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "sc.exe failure MyService command= \"C:\\Malicious\\Path.exe\" reset= 86400 actions= restart/60000,restart/60000,restart/60000",
+    "explanation": "This command uses a single backslash in the path and reorders the arguments slightly, but it still matches the Sigma rule's detection for `failure` and `command`."
+  }
+]

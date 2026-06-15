@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "rundll32.exe advpack.dll,InstallOCX C:\\Windows\\System32\\shell32.dll,#123456789012",
+    "explanation": "This command simulates a suspicious call to advpack.dll with an obfuscated ordinal call, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "rundll32.exe advpack.dll,InstallOCX C:\\Windows\\System32\\shell32.dll,#12",
+    "explanation": "This command uses a shorter ordinal value but still matches the pattern of obfuscated ordinals, aligning with the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe advpack.dll,InstallOCX C:\\Windows\\System32\\shell32.dll,#12--",
+    "explanation": "This command adds additional characters after the ordinal to simulate obfuscation, which may still be detected by the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe advpack.dll,InstallOCX C:\\Windows\\System32\\shell32.dll,#12 #12",
+    "explanation": "This command repeats the ordinal pattern to test detection sensitivity to multiple obfuscated ordinals."
+  },
+  {
+    "output": "rundll32.exe advpack.dll,InstallOCX C:\\Windows\\System32\\shell32.dll,#12-12",
+    "explanation": "This command uses a combination of characters to simulate obfuscation, which may still be detected by the Sigma rule."
+  }
+]
+```

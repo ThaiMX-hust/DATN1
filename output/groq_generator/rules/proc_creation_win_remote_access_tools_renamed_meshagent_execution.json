@@ -1,0 +1,24 @@
+```json
+[
+  {
+    "output": "meshagent.exe --meshServiceName=MyService",
+    "explanation": "This command simulates a renamed MeshAgent execution with the '--meshServiceName' argument, which matches the Sigma rule's detection criteria."
+  },
+  {
+    "output": "\"meshagent.exe\" --meshServiceName=MyService",
+    "explanation": "Adding quotes around the executable name simulates a common evasion technique while still matching the Sigma rule's detection criteria."
+  },
+  {
+    "output": "meshagent.exe -meshServiceName MyService",
+    "explanation": "Replacing '--meshServiceName' with '-meshServiceName' uses a substitution technique, but the Sigma rule detects the presence of the argument regardless of syntax."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName=MyService /otherFlag",
+    "explanation": "Adding an additional flag (/otherFlag) demonstrates reordering and insertion techniques, but the Sigma rule still detects the presence of '--meshServiceName'."
+  },
+  {
+    "output": "meshagent.exe --meshServiceName=MyService --",
+    "explanation": "Appending '--' to indicate the end of command-line options is a common mutation technique, but the Sigma rule still detects the presence of '--meshServiceName'."
+  }
+]
+```

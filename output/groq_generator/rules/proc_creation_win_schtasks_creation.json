@@ -1,0 +1,32 @@
+```json
+[
+  {
+    "output": "schtasks /Create /S localhost /RU DOMAIN\\user /RP At0micStrong /TN \"Atomic task\" /TR \"C:\\windows\\system32\\cmd.exe\" /SC daily /ST 20:10",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "schtasks /Create /SC ONCE /TN spawn /TR C:\\windows\\system32\\cmd.exe /ST 20:10",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "schtasks /Create /TN \"CompMgmtBypass\" /TR \"compmgmt.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "schtasks /Create /TN \"EventViewerBypass\" /TR \"eventvwr.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnLogon\" /sc onlogon /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"ATOMIC-T1053.005\" /TR \"cmd /c start /min \"\" powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\" /sc daily /st 07:45",
+    "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
+  }
+]
+```

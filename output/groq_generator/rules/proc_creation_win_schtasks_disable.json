@@ -1,0 +1,22 @@
+[
+  {
+    "output": "schtasks.exe /C /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\" /disable",
+    "explanation": "The command substitutes '/Change' with '/C' (equivalent short option) and adds an extra space between '/C' and '/TN' for insertion. This maintains the same functionality while altering the command structure."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\" /disable",
+    "explanation": "This is the original command line. It is included to show that the rule can detect the standard form of the command."
+  },
+  {
+    "output": "schtasks.exe /Change /TN '\\Microsoft\\Windows\\SystemRestore\\SR' /disable",
+    "explanation": "Single quotes are used instead of double quotes to enclose the task name. This is a valid syntax variation on Windows command lines."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"Microsoft\\Windows\\SystemRestore\\SR\" /disable",
+    "explanation": "The leading backslash in the task path is omitted, but the command is still valid if the task name is known to exist in the default task folder."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\" /disable",
+    "explanation": "Extra spaces are inserted between the command-line arguments. This is a safe mutation that does not affect the command's functionality."
+  }
+]
