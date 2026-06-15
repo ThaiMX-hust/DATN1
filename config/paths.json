@@ -1,6 +1,6 @@
 {
   "base_dir": "..",
-  "input_config": "input/cmdline_bypass_with_LLM.json",
+  "input_config": "input/gemini_cases.generated.json",
   "output_dir": "output/target_commandline_tests",
   "rules_dir": "rules",
   "zircolite": {

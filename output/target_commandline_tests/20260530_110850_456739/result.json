@@ -1,0 +1,231 @@
+{
+  "batch": {
+    "batch_id": "20260530_110850_456739",
+    "created_at": "2026-05-30T11:08:50.458847+07:00",
+    "config": "C:\\DATN1\\input\\test_case_sample.json",
+    "path_config": "C:\\DATN1\\config\\paths.json",
+    "selected_count": 4,
+    "execute": true,
+    "sysmon_log_name": "Microsoft-Windows-Sysmon/Operational",
+    "sysmon_event_id": 1,
+    "process_tree_quiescence_seconds": 2.0,
+    "process_tree_max_wait_seconds": 15.0,
+    "zircolite_path": "C:\\Tools\\Zircolite\\zircolite.py",
+    "ruleset": "C:\\Tools\\Zircolite\\rules_sysmon.json",
+    "rules_dir": "C:\\DATN1\\rules",
+    "base_dir": "C:\\DATN1",
+    "zircolite_jsononly": false,
+    "save_debug_artifacts": false
+  },
+  "counts": {
+    "bypass_target_rule": 3,
+    "bypass_all_rules": 1
+  },
+  "techniques": [
+    {
+      "technique_id": "t1027",
+      "case_count": 3,
+      "evtx_count": 3,
+      "zircolite": {
+        "ran": true,
+        "exit_code": 0,
+        "status": "OK",
+        "result_path": null,
+        "detection_count": 3,
+        "note": ""
+      },
+      "final_status_counts": {
+        "bypass_target_rule": 3
+      },
+      "test_ids": [
+        "t1027_001",
+        "t1027_002",
+        "t1027_003"
+      ]
+    },
+    {
+      "technique_id": "t1562.001",
+      "case_count": 1,
+      "evtx_count": 1,
+      "zircolite": {
+        "ran": true,
+        "exit_code": 0,
+        "status": "OK",
+        "result_path": null,
+        "detection_count": 0,
+        "note": ""
+      },
+      "final_status_counts": {
+        "bypass_all_rules": 1
+      },
+      "test_ids": [
+        "t1562.001_001"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "batch_id": "20260530_110850_456739",
+      "test_id": "t1027_001",
+      "technique_id": "t1027",
+      "mutation": "base64",
+      "target_commandline": "powershell.exe -Command \"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\"",
+      "target_rule": "proc_creation_win_powershell_frombase64string",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": null,
+      "start_record_id": 46178,
+      "end_record_id": 46190,
+      "evtx_path": "C:\\DATN1\\output\\target_commandline_tests\\20260530_110850_456739\\evtx\\t1027__t1027_001.evtx",
+      "root_process_guid": "{20525dd1-62d2-6a1a-e701-000000001b00}",
+      "root_process_commandline": "cmd.exe /c \"powershell.exe -Command \\\"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\\\"\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"powershell.exe -Command \\\"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\\\"\"",
+        "powershell.exe  -Command \\\"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\\\""
+      ],
+      "zircolite_status": "TRIGGERED_OTHER_RULE",
+      "triggered_rule_count": 1,
+      "triggered_rules": [
+        {
+          "rule_id": "f4bbd493-b796-416e-bbf2-121235348529",
+          "rule_title": "Non Interactive PowerShell Process Spawned",
+          "rule_name": "",
+          "sigmafile": "",
+          "level": "low",
+          "process_guid": "20525DD1-62D3-6A1A-E801-000000001B00",
+          "parent_process_guid": "20525DD1-62D2-6A1A-E701-000000001B00",
+          "commandline": "powershell.exe  -Command \\\"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\\\"",
+          "parent_commandline": "cmd.exe /c \"powershell.exe -Command \\\"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\\\"\"",
+          "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "parent_image": "C:\\Windows\\System32\\cmd.exe",
+          "original_logfile": "t1027__t1027_001.evtx",
+          "event_record_id": 46183
+        }
+      ],
+      "matched_target_rule": false,
+      "final_status": "bypass_target_rule",
+      "note": ""
+    },
+    {
+      "batch_id": "20260530_110850_456739",
+      "test_id": "t1027_002",
+      "technique_id": "t1027",
+      "mutation": "utf8",
+      "target_commandline": "powershell.exe -Command \"Write-Host ([char]65 + [char]66)\"",
+      "target_rule": "proc_creation_win_powershell_obfuscation_via_utf8",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": null,
+      "start_record_id": 46197,
+      "end_record_id": 46206,
+      "evtx_path": "C:\\DATN1\\output\\target_commandline_tests\\20260530_110850_456739\\evtx\\t1027__t1027_002.evtx",
+      "root_process_guid": "{20525dd1-62da-6a1a-ef01-000000001b00}",
+      "root_process_commandline": "cmd.exe /c \"powershell.exe -Command \\\"Write-Host ([char]65 + [char]66)\\\"\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"powershell.exe -Command \\\"Write-Host ([char]65 + [char]66)\\\"\"",
+        "powershell.exe  -Command \\\"Write-Host ([char]65 + [char]66)\\\""
+      ],
+      "zircolite_status": "TRIGGERED_OTHER_RULE",
+      "triggered_rule_count": 1,
+      "triggered_rules": [
+        {
+          "rule_id": "f4bbd493-b796-416e-bbf2-121235348529",
+          "rule_title": "Non Interactive PowerShell Process Spawned",
+          "rule_name": "",
+          "sigmafile": "",
+          "level": "low",
+          "process_guid": "20525DD1-62DA-6A1A-F001-000000001B00",
+          "parent_process_guid": "20525DD1-62DA-6A1A-EF01-000000001B00",
+          "commandline": "powershell.exe  -Command \\\"Write-Host ([char]65 + [char]66)\\\"",
+          "parent_commandline": "cmd.exe /c \"powershell.exe -Command \\\"Write-Host ([char]65 + [char]66)\\\"\"",
+          "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "parent_image": "C:\\Windows\\System32\\cmd.exe",
+          "original_logfile": "t1027__t1027_002.evtx",
+          "event_record_id": 46200
+        }
+      ],
+      "matched_target_rule": false,
+      "final_status": "bypass_target_rule",
+      "note": ""
+    },
+    {
+      "batch_id": "20260530_110850_456739",
+      "test_id": "t1027_003",
+      "technique_id": "t1027",
+      "mutation": "utf8",
+      "target_commandline": "powershell.exe -Command \"Write-Host ([char] 0x41)\"",
+      "target_rule": "proc_creation_win_powershell_obfuscation_via_utf8",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": null,
+      "start_record_id": 46209,
+      "end_record_id": 46222,
+      "evtx_path": "C:\\DATN1\\output\\target_commandline_tests\\20260530_110850_456739\\evtx\\t1027__t1027_003.evtx",
+      "root_process_guid": "{20525dd1-62df-6a1a-f701-000000001b00}",
+      "root_process_commandline": "cmd.exe /c \"powershell.exe -Command \\\"Write-Host ([char] 0x41)\\\"\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"powershell.exe -Command \\\"Write-Host ([char] 0x41)\\\"\"",
+        "powershell.exe  -Command \\\"Write-Host ([char] 0x41)\\\""
+      ],
+      "zircolite_status": "TRIGGERED_OTHER_RULE",
+      "triggered_rule_count": 1,
+      "triggered_rules": [
+        {
+          "rule_id": "f4bbd493-b796-416e-bbf2-121235348529",
+          "rule_title": "Non Interactive PowerShell Process Spawned",
+          "rule_name": "",
+          "sigmafile": "",
+          "level": "low",
+          "process_guid": "20525DD1-62DF-6A1A-F801-000000001B00",
+          "parent_process_guid": "20525DD1-62DF-6A1A-F701-000000001B00",
+          "commandline": "powershell.exe  -Command \\\"Write-Host ([char] 0x41)\\\"",
+          "parent_commandline": "cmd.exe /c \"powershell.exe -Command \\\"Write-Host ([char] 0x41)\\\"\"",
+          "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "parent_image": "C:\\Windows\\System32\\cmd.exe",
+          "original_logfile": "t1027__t1027_003.evtx",
+          "event_record_id": 46216
+        }
+      ],
+      "matched_target_rule": false,
+      "final_status": "bypass_target_rule",
+      "note": ""
+    },
+    {
+      "batch_id": "20260530_110850_456739",
+      "test_id": "t1562.001_001",
+      "technique_id": "t1562.001",
+      "mutation": "quote_insertion",
+      "target_commandline": "w\"mi\"c product where name=\"Antivirus\" call uninstall /nointeractive",
+      "target_rule": "proc_creation_win_wmic_uninstall_security_products",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_NONZERO",
+      "exit_code": 1,
+      "timeout": false,
+      "execution_error": "The system cannot find the path specified.",
+      "start_record_id": 46232,
+      "end_record_id": 46242,
+      "evtx_path": "C:\\DATN1\\output\\target_commandline_tests\\20260530_110850_456739\\evtx\\t1562.001__t1562.001_001.evtx",
+      "root_process_guid": "{20525dd1-62e8-6a1a-0202-000000001b00}",
+      "root_process_commandline": "cmd.exe /c \"w\\\"mi\\\"c product where name=\\\"Antivirus\\\" call uninstall /nointeractive\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"w\\\"mi\\\"c product where name=\\\"Antivirus\\\" call uninstall /nointeractive\""
+      ],
+      "zircolite_status": "NOT_DETECTED",
+      "triggered_rule_count": 0,
+      "triggered_rules": [],
+      "matched_target_rule": false,
+      "final_status": "bypass_all_rules",
+      "note": ""
+    }
+  ]
+}
