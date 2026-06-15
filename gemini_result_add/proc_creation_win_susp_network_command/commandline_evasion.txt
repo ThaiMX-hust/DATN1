@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"arp\\t-a\"",
+    "explanation": "Insertion technique: Replaces the space between the application string 'arp' and the option switch '-a' with a tab character literal (\\t). The underlying Windows command-line tokenizer maps consecutive tabs to argument spaces smoothly during system creation initialization routines, producing identical test mapping configuration outputs. However, static textual matching filters parsing the process event stream looking explicitly for the hardcoded 'arp -a' sequence will evaluate this mutated sequence as non-matching."
+  },
+  {
+    "output": "cmd.exe /c \"ipconfig -all\"",
+    "explanation": "Substitution technique: Replaces the forward slash flag character configuration parameter ('/all') on the target executable argument engine string with a hyphen option identifier switch ('-all'). Because the native 'ipconfig.exe' console subsystem parsing architecture accepts both hyphens and forward-slashes as valid parameter markers interchangeably, behavioral execution context behaves identically while explicitly defeating the single selection literal string rule index for 'ipconfig /all'."
+  },
+  {
+    "output": "cmd.exe /c \"netsh int sh int\"",
+    "explanation": "Omission technique: Reduces the keyword strings 'interface' and 'show' down to their shortest recognized operational sub-abbreviations ('int' and 'sh') accepted naturally by the netsh.exe application console engine utility shell. The high-level network command executes seamlessly inside standard test instances, but evades detection by avoiding the fully qualified phrase signature explicitly specified under 'netsh interface show interface'."
+  },
+  {
+    "output": "cmd.exe /c \"set ATTR=workstation&& call net config %ATTR%\"",
+    "explanation": "Recoding / Encoding technique: Obfuscates 'net config' targeting criteria by appending an argument parameter token and applying shell environment variable token parsing dynamics via the 'call' shell built-in evaluation wrapper. This design structure avoids triggering the primitive matching signature on 'net config' as recorded into standard command telemetry records by adding dynamic evaluation layers during runtime."
+  }
+]

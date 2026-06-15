@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula -h 0 C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Substitution technique: Passing a custom value to the '-h' parameter ('-h 0') explicitly defines the number of zeroing iterations instead of using it as a standalone option. Since the rule defines the filter using a literal string containing a space prefix and a space suffix (' -h'), this change breaks the filter pattern logic, keeping the rule condition matching cleanly while maintaining identical file-wiping capabilities."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula \"-c\" C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Insertion technique: Explicitly wrapping the cleanup flag in double quotes ('\"-c\"') changes the logged string format captured by telemetry to disrupt literal checks. This prevents triggering the ' -c' negation filter while SDelete naturally strips the quotes on execution and maps the parameter to securely overwrite file contents."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula /c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Substitution technique: Replaces the hyphen flag indicator with a forward slash ('/c'). Sysinternals tools accept both styles across parameter structures. This circumvents the negative filter rule looking for ' -c', ensuring the telemetry fails to match the exemption list, therefore triggering a detection log event."
+  }
+]

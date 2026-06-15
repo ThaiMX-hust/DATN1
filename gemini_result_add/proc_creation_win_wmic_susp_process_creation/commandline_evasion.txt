@@ -1,0 +1,22 @@
+[
+{
+"output": "wmic.exe process  call  create  "rundll32.exe payload.dll,Start"",
+"explanation": "Insertion: Injected an extra space inside the sequential tracking strings for 'process ', 'call ', and 'create '. The WMIC utility processes multiple consecutive white spaces natively between parameters, ensuring identical execution behavior. This safely breaks the 'CommandLine|contains|all' rule condition which looks for single trailing spaces."
+},
+{
+"output": "wmic.exe "process" "call" "create" "rundll32.exe payload.dll,Start"",
+"explanation": "Insertion: Wrapped the core WMIC verbs ('process', 'call', and 'create') in double quotes. The Windows shell strips out outer quotes before delivering the arguments to the WMIC binary, preserving identical administrative behavior. This avoids the exact substring searches like 'process ' by disrupting the literal space sequence boundary."
+},
+{
+"output": "wmic.exe process call create "run""dll32.exe payload.dll,Start"",
+"explanation": "Insertion: Inserted empty double quotes inside the target executable name string ('run""dll32'). When WMIC parses the command-line payload string and passes it down to the CreateProcess API, the quotes are stripped natively, triggering identical process execution behavior while breaking the literal string check for 'rundll32'."
+},
+{
+"output": "wmic.exe process call create "cmd.exe  /c calc.exe"",
+"explanation": "Insertion: Injected a double space between the 'cmd.exe' token and its flag argument. The inner shell normalizes white space seamlessly during instantiation, but the additional space safely breaks the precise string sequence match rule requirements for 'cmd.exe /c '."
+},
+{
+"output": "wmic.exe process call create "C:\Windows\System32\cmd /q /c calc.exe"",
+"explanation": "Insertion / Substitution: Reordered internal shell option switches and appended the absolute path. By adding the quiet switch '/q' before the execution switch '/c', the target payload execution behaves exactly the same but completely bypasses static checks looking for rigid contiguous variations like 'cmd /c '."
+}
+]

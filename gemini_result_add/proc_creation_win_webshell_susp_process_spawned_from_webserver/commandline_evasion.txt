@@ -1,0 +1,10 @@
+[
+{
+"output": "",
+"explanation": "No safe bypass command line can be generated for the target binary itself because the rule relies entirely on the 'Image|endswith' field to track the spawned executable process (e.g., '\reg.exe'). Standard command-line argument mutations (Insertion, Substitution, Reordering) modify the parameters but cannot alter the final system process image file name reported in Windows process creation logs."
+},
+{
+"output": "Windows\system32\cmd.exe /c C:\ManageEngine\ADManager "Plus\ES\bin\elasticsearch.bat -Enode.name=RMP-NODE1 -pelasticsearch-pid.txt",
+"explanation": "Substitution / Other techniques: Forced the command-line value to mimic a known whitelist filter ('filter_main_fp_1'). If the adversary executes their payload or maps their execution architecture from an environment spawned under 'java.exe' while intentionally appending the exact string layout expected by the rule's exception clause, the logic triggers a negative evaluation and drops the alert while executing the initial target binary wrapper."
+}
+]

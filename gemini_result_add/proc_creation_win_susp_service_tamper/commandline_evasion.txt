@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe config \"BITS\" start= disabled",
+    "explanation": "Insertion technique: Injects an intentional white space between the assignment operator and the state value ('start= disabled'). While the rule explicitly monitors for the contiguous string 'start=disabled' via 'selection_tools_cli', the Windows sc.exe command-line subsystem parses and interprets the assignment identically with an added space after the equals sign. This preserves the modification behavior in authorized environments while cleanly evading the strict contiguous text block filter."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Service -Name '*BITS*' | Set-Service -Status Stopped\"",
+    "explanation": "Substitution technique: Replaces explicit verb indicators like 'Stop-Service' or 'Remove-Service' with a piped 'Set-Service -Status Stopped' modification construct. Additionally, it uses a wildcard placeholder string ('*BITS*') to specify the targeting objective. The command resolves and executes smoothly inside testing labs but avoids matching the exact literal patterns mapped across both 'selection_tools_cli' and 'selection_services'."
+  },
+  {
+    "output": "cmd.exe /c \"sc\\tstop\\tBITS\"",
+    "explanation": "Insertion technique: Replaces standard spacing flags separating the executable tool, action verb, and service name with horizontal tab character literals (\\t). The Windows process argument layer treats tabs as standard parameter delimiters, ensuring flawless administrative test verification. However, the static string inspection looking for spaces surrounding the action indicator (like ' stop ') will fail to match."
+  }
+]

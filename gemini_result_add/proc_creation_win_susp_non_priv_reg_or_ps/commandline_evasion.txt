@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"reg\\tadd \\\"HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST\\\" /v ImagePath /t REG_EXPAND_SZ /d \\\"C:\\Temp\\test.txt\\\" /f\"",
+    "explanation": "Insertion technique: Replaces the whitespace between the 'reg' utility token and its 'add' verb with a tab literal character (\\t). The underlying Windows CreateProcess argument tokenizer translates continuous white spaces or tab sequences into generic delimiter blocks, meaning it executes smoothly in administrative test labs. However, static substring inspection strings in the 'selection_cli' condition looking explicitly for 'reg ' (with a standard space character) will fail to record a literal pattern hit."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Servi*' -Name ('Image' + 'Path') -Value 'C:\\Temp\\test.txt'\"",
+    "explanation": "Substitution / Recoding technique: Leverages PowerShell provider management to alter registry values natively while introducing path wildcards ('Servi*') and string parsing concatenation ('Image' + 'Path') inside the engine loop. This completely suppresses or leaves incomplete the necessary contiguous text blocks looked for by 'selection_data' ('Services' and 'ImagePath'), rendering the SIEM filter rule unable to establish a cohesive match condition on the resultant telemetry."
+  },
+  {
+    "output": "cmd.exe /c \"set ACTION=add&& reg %ACTION% \\\"HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST\\\" /v ImagePath /t REG_EXPAND_SZ /d \\\"C:\\Temp\\test.txt\\\" /f\"",
+    "explanation": "Recoding / Encoding technique: Abstracts the mandatory command verb 'add' by caching its value inside an arbitrary shell environment variable first, then passing it dynamically to the reg invocation stack. Because the literal configuration context records the raw initialization block ('reg %ACTION%'), the core relational logic constraint 'contains|all: reg , add' within the rule definition engine is entirely broken."
+  }
+]

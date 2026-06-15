@@ -1,0 +1,22 @@
+[
+{
+"output": "VSDiagnostics.exe "start" /launch:C:\Windows\System32\calc.exe",
+"explanation": "Insertion: Wrapped the 'start' action verb inside double quotes. The application strips these quotes out during argument vector parsing, preserving identical behavioral execution. However, this alters the raw command line string enough to potentially bypass naive exact-match engine logic or specific token-indexed rules that do not strictly normalize the CommandLine field."
+},
+{
+"output": "VSDiagnostics.exe start  /launch:C:\Windows\System32\calc.exe",
+"explanation": "Insertion: Injected an extra space between the 'start' action verb and the subsequent parameter. The rule relies on the assumption of conventional spacing but doesn't explicitly restrict 'start' via padding. However, inserting irregular double spacing can occasionally disrupt complex multi-token search phrases or custom extraction logic depending on the parser."
+},
+{
+"output": "VSDiagnostics.exe start /launch=C:\Windows\System32\calc.exe",
+"explanation": "Substitution: Replaced the standard argument colon delimiter (':') with an equals sign ('=') inside the launch parameter. If the underlying argument parser for VSDiagnostics accepts standard Windows/POSIX parameter assignment style mappings, the functional execution remains completely stable while avoiding both explicit selection_cli_launch rules (' /launch:' and ' -launch:')."
+},
+{
+"output": "VSDiagnostics.exe start "/launch:C:\Windows\System32\calc.exe"",
+"explanation": "Insertion: Enclosed the entire launch switch and its payload within double quotes. While the operational proxy behavior remains entirely unaffected since the parsing layer interprets the parameter block safely, the leading character immediately following the mandatory space separator is now a double quote instead of a forward slash, breaking the precise ' /launch:' substring requirement."
+},
+{
+"output": "VSDiagnostics.exe ^s^t^a^r^t /launch:C:\Windows\System32\calc.exe",
+"explanation": "Insertion: Embedded caret escape indicators (^) into the 'start' token. When initialized under an active cmd.exe environment context, the shell strips out the character escape markers before exposing the command line string directly to the target executable. This safely breaks the plain text search verification loop for 'start' while enforcing equivalent tactical execution."
+}
+]

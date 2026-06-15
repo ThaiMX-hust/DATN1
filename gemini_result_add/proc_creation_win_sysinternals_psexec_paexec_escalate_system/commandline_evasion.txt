@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Users\\Public\\Temp\\PsExec.exe\" -i -s \"cmd\"",
+    "explanation": "Insertion technique: Placing double quotes around the target shell application string ('\"cmd\"') satisfies the application logic natively but changes the logged command string to ' -i -s \"cmd\"'. This explicitly breaks the exact contiguous character string ' -i -s cmd' specified in selection_sys."
+  },
+  {
+    "output": "\"C:\\Users\\Public\\Temp\\PsExec.exe\" -s -i cmd.exe -accepteula",
+    "explanation": "Substitution technique: Appending the literal '.exe' file extension to the target terminal ('cmd.exe') safely replicates the launch environment behavior while completely breaking the strict literal tokens (' -s -i cmd', etc.) configured within selection_sys."
+  },
+  {
+    "output": "\"C:\\Users\\Public\\Temp\\PsExec.exe\" -accepteula=true -i -s cmd",
+    "explanation": "Substitution technique: Passing an assignment format ('-accepteula=true') changes the signature pattern evaluated for the secondary requirement. Since Sysinternals utilities accept this assignment configuration natively, it fulfills execution requirements while introducing syntactic differences."
+  }
+]

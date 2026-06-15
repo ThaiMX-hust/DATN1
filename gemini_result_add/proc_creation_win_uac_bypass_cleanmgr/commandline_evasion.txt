@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\cleanmgr.exe /autoclean /d C: ",
+    "explanation": "Insertion technique: Appending a trailing space to the end of the argument string breaks the rule's strict 'endswith' match, which expects the string to end exactly with the character ':', while remaining completely valid for execution."
+  },
+  {
+    "output": "C:\\Windows\\system32\\cleanmgr.exe /autoclean /d c:",
+    "explanation": "Substitution technique: Lowercasing the drive letter from 'C:' to 'c:'. Since paths and drive letters are case-insensitive in Windows, the binary processes the parameter identically, but it evades the rule's case-sensitive 'endswith' string comparison."
+  },
+  {
+    "output": "C:\\Windows\\system32\\cleanmgr.exe /autoclean /d C:\\",
+    "explanation": "Substitution technique: Specifying the root directory explicitly with a trailing backslash ('C:\\') instead of just the drive letter ('C:'). Disk Cleanup accepts both path normalization styles, effectively mutating the final characters to circumvent the strict 'endswith' string match requirement."
+  }
+]

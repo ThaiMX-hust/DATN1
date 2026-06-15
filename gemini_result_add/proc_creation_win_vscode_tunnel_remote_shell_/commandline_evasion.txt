@@ -1,0 +1,18 @@
+[
+{
+"output": "powershell.exe -ExecutionPolicy Bypass -File "C:\Program Files\Microsoft VS Code\resources\app\out\vs\workbench\contrib\terminal\browser\media\..\media\shellIntegration.ps1"",
+"explanation": "Recoding / Encoding: Injected path traversal/normalization components ('\\..\\') into the shellIntegration.ps1 path parameter. The PowerShell interpreter successfully processes the path reference natively to point back to the same destination directory, but this alters the linear string character sequence, breaking the exact substring search condition for '\\terminal\\browser\\media\\shellIntegration.ps1\' inside selection_child_1."
+},
+{
+"output": "powershell.exe -NoExit -Command "& 'C:\Program Files\Microsoft VS Code\resources\app\out\vs\workbench\contrib\terminal\browser\media\""shellIntegration.ps1""'"",
+"explanation": "Insertion: Inserted empty or balanced internal double quotes inside the script file name token when invoked via an expression block or string literal context in PowerShell. The shell engine parses and yields the combined path dynamically on execution, but the addition of mid-token quote sequences breaks the rule's strict static sequence check for '\\terminal\\browser\\media\\shellIntegration.ps1\'."
+},
+{
+"output": "powershell.exe -ExecutionPolicy Bypass -File "C:/Program Files/Microsoft VS Code/resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.ps1"",
+"explanation": "Substitution: Substituted backslash directory separators ('\') with forward slashes ('/') in the script path argument. Since both Windows API sub-layers and the PowerShell engine interpret forward slashes interchangeably as valid folder delimiters, the script runs correctly while evading the rule's rigid criteria which depends explicitly on backslashes in '\\terminal\\browser\\media\\shellIntegration.ps1\'."
+},
+{
+"output": "powershell.exe -NoProfile -File .\\shellIntegration.ps1",
+"explanation": "Omission / Recoding: Executed the script using a relative path pathing model or relative reference instead of the static deep absolute directory path structure (assuming execution context starts within or is forced into the media directory). By relying on local file lookup mechanisms, the command-line entry completely omits the entire upstream prefix chain, dropping the mandatory substring '\\terminal\\browser\\media\\shellIntegration.ps1\'."
+}
+]

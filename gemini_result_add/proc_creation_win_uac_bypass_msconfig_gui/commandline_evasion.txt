@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\msconfig.exe -5",
+    "explanation": "Omission technique: Removes the outermost double quotes from around the binary path component. The Sigma rule checks for an absolute string matching CommandLine: '\"C:\\Windows\\system32\\msconfig.exe\" -5'. Stripping the optional surrounding double quotes allows valid execution on Windows while failing the rule's strict literal matching pattern."
+  },
+  {
+    "output": "\"C:\\Windows\\system32\\msconfig.exe\"    -5",
+    "explanation": "Insertion technique: Extends the parameter block structure by introducing multiple consecutive space characters between the application image name and the tool option switch. The Windows process launcher treats contiguous spaces as a single argument separator at runtime, but this manipulation modifies the literal string representation to bypass the exact phrase detection match."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\msconfig.exe\" /5",
+    "explanation": "Substitution technique: Replaces the dash parameter token separator with a forward slash ('/5'). The System Configuration utility accepts both dash and forward slash parameter formats seamlessly, enabling successful simulated module launch while completely evading the string equality check."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "tar.exe --extract -vf C:\\Temp\\test.tar -C C:\\Temp",
+    "explanation": "Substitution technique: Replaces the short option flag '-x' with its equivalent GNU long option '--extract'. This completely avoids matching the specific string literal pattern listed inside selection_extract while maintaining identical file decompression behavior in a test environment."
+  },
+  {
+    "output": "tar.exe xvf C:\\Temp\\test.tar -C C:\\Temp",
+    "explanation": "Omission technique: Removes the leading hyphen character from the options cluster ('xvf'). The Windows implementation of tar (bsdtar) supports traditional BSD-style argument syntax where options do not require a dash prefix. This cleanly breaks the literal substring search for '-x' specified by selection_extract."
+  },
+  {
+    "output": "cmd.exe /c tar.exe -^xvf C:\\Temp\\test.tar -C C:\\Temp",
+    "explanation": "Insertion technique: Injects a command shell escape character ('^') directly into the option block argument. When executed via cmd.exe, the shell strips out the caret before launching the target process, allowing tar to receive valid runtime options while ensuring the recorded process log signature differs from the literal check."
+  }
+]

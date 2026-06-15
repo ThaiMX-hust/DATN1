@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\PROGRA~1\\\\..\\PROGRA~1\\Internet Explorer\\iexplore.exe\"",
+    "explanation": "Insertion technique: Uses a redundant extra backslash after the short name component ('PROGRA~1\\\\'). The rule selection searches explicitly for a short name trailing indicator ending immediately with a single backslash ('~1\\' or '~2\\'). In Windows, consecutive path separators are flattened down during internal file system normalization logic, rendering this syntax completely valid for executing the target binary, while disrupting the rigid static string check inside the SIEM rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\PROGRA~1/.\\Internet Explorer\\iexplore.exe\"",
+    "explanation": "Substitution technique: Replaces the trailing backslash of the short name with a forward slash followed by a current directory dot reference ('/./'). The Windows operating system layer transparently accepts mixed forward and backward slashes for path traversal resolution. By changing the character immediately succeeding the short name suffix, the literal match requirements ('~1\\' or '~2\\') are cleanly broken without losing target folder behavior."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\PROGRA~3\\Internet Explorer\\iexplore.exe\"",
+    "explanation": "Substitution technique: Replaces the expected short name index suffix '~1' with an alternative matching index '~3'. Depending on the number of overlapping folder prefixes occupying a standard system directory, Windows can dynamically enumerate the 8.3 short name reference beyond '~1' or '~2' (e.g. '~3', '~4'). This avoids triggering the specific '~1\\' or '~2\\' selection criteria while still correctly referencing an short name location path entry in test scenarios."
+  }
+]

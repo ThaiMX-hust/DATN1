@@ -38,6 +38,8 @@ FAILED_COMMAND_PATTERNS = (
     "incomplete string"
 )
 
+ERROR_DETAIL_LIMIT = 500
+
 
 @dataclass(frozen=True)
 class ShellInvocation:
@@ -127,6 +129,41 @@ def first_matching_pattern(text: str, patterns: tuple[str, ...]) -> str:
     return "; ".join(pattern for pattern in patterns if pattern in text)
 
 
+def compact_error_text(value: str, limit: int = ERROR_DETAIL_LIMIT) -> str:
+    """Return a single-line excerpt suitable for result notes."""
+    text = " ".join(str(value or "").split())
+    if len(text) <= limit:
+        return text
+    return f"{text[: limit - 3]}..."
+
+
+def execution_error_excerpt(result: ExecutionResult) -> str:
+    """Return labeled stdout/stderr/note excerpts for execution failures."""
+    parts: list[str] = []
+    for label, value in (
+        ("stdout", result.stdout),
+        ("stderr", result.stderr),
+        ("note", result.note),
+    ):
+        excerpt = compact_error_text(value)
+        if excerpt:
+            parts.append(f"{label}: {excerpt}")
+    return "; ".join(parts)
+
+
+def command_error_detail(result: ExecutionResult) -> str:
+    """Return the matched failure pattern and useful process output detail."""
+    pattern = first_matching_pattern(execution_text(result), FAILED_COMMAND_PATTERNS)
+    if not pattern:
+        return ""
+
+    detail_parts = [f"matched error pattern(s): {pattern}"]
+    excerpt = execution_error_excerpt(result)
+    if excerpt:
+        detail_parts.append(excerpt)
+    return "; ".join(detail_parts)
+
+
 def command_execution_accepted(result: ExecutionResult) -> bool:
     """Return whether a command execution is accepted for Sysmon collection."""
     if not result.started:
@@ -148,9 +185,9 @@ def command_execution_failure_reason(result: ExecutionResult) -> str:
     """Return the reason a command execution is not accepted."""
     if not result.started:
         return result.note or "process was not started"
-    text = execution_text(result)
-    if has_any_pattern(text, FAILED_COMMAND_PATTERNS):
-        return "command failed before useful execution: missing binary or syntax error"
+    detail = command_error_detail(result)
+    if detail:
+        return f"command failed before useful execution: {detail}"
     return "command execution was not accepted for Sysmon collection"
 
 
@@ -184,14 +221,14 @@ def validate_payload_execution(
 ) -> PayloadValidation:
     """Classify whether execution produced usable process-tree evidence."""
     text = execution_text(execution)
-    error_pattern = first_matching_pattern(text, FAILED_COMMAND_PATTERNS)
+    error_detail = command_error_detail(execution)
     payload_observed = payload_event_observed(root_event, process_tree)
     execution.payload_observed = payload_observed
 
-    if error_pattern:
+    if error_detail:
         status = "command_output_error"
         execution.payload_validation_status = status
-        return PayloadValidation(False, payload_observed, status, error_pattern)
+        return PayloadValidation(False, payload_observed, status, error_detail)
 
     if execution.exit_code == 0:
         status = "exit_0"

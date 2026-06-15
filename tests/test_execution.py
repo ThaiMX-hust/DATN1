@@ -8,7 +8,12 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from sigma_rule_evaluator.execution import build_shell_invocation, execute_command, validate_payload_execution
+from sigma_rule_evaluator.execution import (
+    build_shell_invocation,
+    command_execution_failure_reason,
+    execute_command,
+    validate_payload_execution,
+)
 from sigma_rule_evaluator.models import ExecutionResult, SysmonProcessEvent, TargetCase
 
 
@@ -197,6 +202,34 @@ class PayloadValidationTests(unittest.TestCase):
         self.assertFalse(validation.payload_observed)
         self.assertEqual(validation.status, "command_output_error")
         self.assertEqual(execution.payload_validation_status, "command_output_error")
+
+
+class CommandExecutionFailureReasonTests(unittest.TestCase):
+    def test_includes_matched_pattern_and_stderr_excerpt(self) -> None:
+        execution = ExecutionResult(
+            started=True,
+            exit_code=1,
+            stderr="ParserError: Unexpected token '}' in expression or statement.",
+            launch_commandline="powershell.exe -Command bad",
+        )
+
+        reason = command_execution_failure_reason(execution)
+
+        self.assertIn("matched error pattern(s): parsererror; unexpected token", reason)
+        self.assertIn("stderr: ParserError: Unexpected token '}'", reason)
+
+    def test_includes_stdout_for_cmd_missing_binary(self) -> None:
+        execution = ExecutionResult(
+            started=True,
+            exit_code=1,
+            stdout="'badcmd' is not recognized as an internal or external command",
+            launch_commandline="cmd.exe /c badcmd",
+        )
+
+        reason = command_execution_failure_reason(execution)
+
+        self.assertIn("matched error pattern(s): is not recognized as an internal or external command", reason)
+        self.assertIn("stdout: 'badcmd' is not recognized", reason)
 
 
 class ExecuteCommandTests(unittest.TestCase):

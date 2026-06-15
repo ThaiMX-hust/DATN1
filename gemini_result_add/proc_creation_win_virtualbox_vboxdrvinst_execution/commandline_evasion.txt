@@ -1,0 +1,14 @@
+[
+{
+"output": "VBoxDrvInst.exe driver "e""x""e""c""u""t""e""i""n""f" C:\path\to\file.inf",
+"explanation": "Insertion: Injected empty double quotes inside the 'executeinf' string token. The application parses the argument sequence safely as a single parameter once the quotes are stripped, but this completely breaks the string literal match required by the 'CommandLine|contains|all' rule condition for 'executeinf'."
+},
+{
+"output": "VBoxDrvInst.exe ^d^r^i^v^e^r executeinf C:\path\to\file.inf",
+"explanation": "Insertion: Inserted caret escape characters (^) within the 'driver' token. Assuming execution occurs via cmd.exe, the shell strips the carets before passing the arguments to the executable, ensuring functional equivalence while bypassing the rule's strict 'driver' string requirement."
+},
+{
+"output": "VBoxDrvInst.exe "driver" "executeinf" C:\path\to\file.inf",
+"explanation": "Insertion: Wrapped the individual 'driver' and 'executeinf' static flags inside full double quotes. While many SIEM implementations strip quotes or perform substrings that still catch this, in specific log parsers or strict regex configurations, adding token-level quotation marks can alter the raw command-line representation enough to disrupt naive substring logic while preserving valid program execution."
+}
+]

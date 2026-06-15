@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\wusa.exe /quiet C:\\Users\\Public\\..\\AppData\\Local\\Temp\\update.msu",
+    "explanation": "Recoding / Encoding technique: Using directory traversal (..) in the path avoids the literal 'C:\\Users\\' prefix substring required by selection1 while resolving to the same physical file location in a test environment."
+  },
+  {
+    "output": "C:\\Windows\\System32\\dismhost.exe {A0000000-0000-0000-0000-000000000000} /ServiceSession:1",
+    "explanation": "Omission technique: By invoking DismHost.exe directly with alternate command-line flags and omitting the specific path patterns (e.g., '\\AppData\\Local\\Temp\\') demanded by the rule's selection2 condition, the execution bypasses the static string match while the tool still performs its intended diagnostic or system function."
+  },
+  {
+    "output": "\"C:\\Windows\\system32\\wusa.exe\"   /quiet \"C:\\Users\\Public\\AppData\\Local\\Temp\\update.msu\"",
+    "explanation": "Insertion technique: Adding multiple spaces between the binary path and the '/quiet' flag, and adding quotes around the file path. This disrupts the exact string concatenation expected by the rule's 'selection1' (which includes a specific space count and format) while remaining a valid command-line invocation."
+  }
+]

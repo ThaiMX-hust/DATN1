@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Temp\\RUNME~1\".exe",
+    "explanation": "Insertion technique: Injects double quotes inside the short filename string before the dot extension format marker ('RUNME~1\".exe'). The Windows native CreateProcess handler stripping logic normalizes the quoted path boundaries flawlessly during target evaluation execution. However, because the quotation symbol physically interrupts the contiguous signature format, the hardcoded log inspection rule checking for strings like '~1.exe' fails to detect a sequential match."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Temp\\RUNME~3.exe\"",
+    "explanation": "Substitution technique: Targets an alternative enumerated volume naming sequence index counter ('~3.exe') instead of the common '~1' or '~2' iterations explicitly evaluated by the selection scope. If a test folder contains multiple items sharing identical initial character subsets, Windows automatically populates short name values using increments like '~3' or '~4'. This executes predictably within administrative verification blocks while natively avoiding the selective pattern triggers entirely."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Temp\\RUNME~1.exe.\"",
+    "explanation": "Insertion technique: Appends a trailing dot character reference ('.') directly to the final extension part of the process destination path. Windows directory management subsystems routinely drop or ignore terminal periods during file path lookup evaluations, processing the file target accurately. This structural shift breaks the strict suffix pattern criteria ('~1.exe') since the string ends with a period, avoiding the static substring signature."
+  }
+]

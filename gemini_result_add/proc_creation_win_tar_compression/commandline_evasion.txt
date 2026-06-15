@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Windows\\System32\\tar.exe\" --create -f C:\\Temp\\test.tar C:\\Temp\\test.txt",
+    "explanation": "Substitution technique: Replaces the short option flag '-c' with its descriptive GNU long option counterpart '--create'. This completely avoids matching any string literal pattern listed inside selection_create while maintaining identical archive creation capabilities within the test environment."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\tar.exe\" cf C:\\Temp\\test.tar C:\\Temp\\test.txt",
+    "explanation": "Omission technique: Removes the leading hyphen character from the option block ('cf'). The Windows tar utility inherits traditional BSD-style argument parsing rules, meaning cluster parameters can be initialized without path switch prefixes. This breaks the literal substring expectations of '-c' inside the rule telemetry logic."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\System32\\tar.exe\" -^cf C:\\Temp\\test.tar C:\\Temp\\test.txt",
+    "explanation": "Insertion technique: Injects the command interpreter escape character ('^') directly into the command line parameter token. When executed via cmd.exe, the terminal handles and strips out the caret structure before binary execution, providing a valid option to tar while capturing an altered log signature."
+  }
+]

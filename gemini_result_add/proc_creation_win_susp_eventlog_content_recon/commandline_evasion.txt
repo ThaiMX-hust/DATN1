@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wevtutil.exe qe \"Security\" \"/q:*[System[(EventID=4624)]]\"",
+    "explanation": "Insertion technique: Injects double quotes inside the structural query argument surrounding the filter. The condition 'selection_logs_eid' explicitly monitors for the exact contiguous pattern 'System[EventID=462?]', without nested parentheses around the ID value. By using standard alternative XPath notation 'System[(EventID=4624)]', the underlying log query parses identically inside the Windows subsystem, but fails the strict text substring check required to satisfy the rule condition."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-WinEvent -LogName 'Sec*' -FilterXPath '*[System[(EventID=4624)]]'\"",
+    "explanation": "Substitution technique: Replaces the full literal event channel name 'Security' with a wildcard short alias 'Sec*'. This bypasses 'selection_logs_name' entirely while still mapping correctly to the Security event provider in a test execution setup. Additionally, it targets the XPath string token structure to avoid 'selection_logs_eid' matching rules."
+  },
+  {
+    "output": "wevtutil.exe qe Security /q:\"*[System/EventID=4624]\"",
+    "explanation": "Substitution technique: Changes the syntax of the standard XPath query by using a forward slash separator ('System/EventID=4624') instead of the bracket notation ('System[EventID=4624]'). The Windows event provider subsystem processes both XPath variations correctly, but this modification evades the exact literal match constraint specified under 'selection_logs_eid'."
+  }
+]
