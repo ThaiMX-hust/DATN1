@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "msdt.exe -af \"C:\\WINDOWS\\diagnostics\\index\\PCWDiagnostic.xml\"",
@@ -21,4 +20,3 @@
     "explanation": "This command uses a mix of single and double backslashes for path normalization, which is a safe mutation technique and still represents the same behavior."
   }
 ]
-```

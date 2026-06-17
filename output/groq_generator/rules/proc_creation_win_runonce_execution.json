@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "runonce.exe /AlternateShellStartup /r",
@@ -21,4 +20,3 @@
     "explanation": "Reordering the command-line arguments is a safe mutation technique (reordering) that may evade detection based on argument order."
   }
 ]
-```

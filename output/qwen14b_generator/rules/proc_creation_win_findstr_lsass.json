@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c tasklist | findstr \"Lsass\"",
+    "explanation": "Insertion of quotes around 'Lsass' may prevent the Sigma rule from matching the exact keyword 'lsass' in the command line."
+  },
+  {
+    "output": "cmd.exe /c tasklist | findstr \"LSASS\"",
+    "explanation": "Capitalization substitution may avoid the Sigma rule's case-sensitive match for 'lsass' in the command line."
+  },
+  {
+    "output": "cmd.exe /c tasklist | findstr \"Lsass.exe\"",
+    "explanation": "Appending '.exe' to 'Lsass' may avoid the Sigma rule's match for the keyword 'lsass' in the command line."
+  }
+]

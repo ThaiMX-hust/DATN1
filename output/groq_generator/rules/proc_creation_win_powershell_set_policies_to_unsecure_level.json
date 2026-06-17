@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Write-Output 'Test bypass command'\"",
@@ -21,4 +20,3 @@
     "explanation": "This command omits quotes around the command to test if the Sigma rule detects the execution policy change regardless of command formatting. It is a safe test command that simulates the behavior without performing malicious actions."
   }
 ]
-```

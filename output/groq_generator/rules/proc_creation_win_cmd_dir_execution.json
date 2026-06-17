@@ -1,4 +1,4 @@
-```json
+
 [
   {
     "output": "\"cmd.exe\" /c dir /S /B %USERPROFILE%\\Favorites",
@@ -21,4 +21,6 @@
     "explanation": "This command does not involve 'dir /s', so it is not relevant to the Sigma rule and cannot be bypassed in this context."
   },
   {
-    "output": "\"cmd.exe\" /c mkdir %%temp%%\\T1119_command_prompt_collection >nul 2>&1 & dir c: /B /S .docx | findstr
+    "output": "\"cmd.exe\" /c mkdir %%temp%%\\T1119_command_prompt_collection >nul 2>&1 & dir c: /B /S .docx | findstr"
+  }
+  ]

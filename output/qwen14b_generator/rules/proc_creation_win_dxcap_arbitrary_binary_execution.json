@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\DXCap.exe -c C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes and a harmless delimiter to the command line, which may prevent the Sigma rule from matching the ' -c ' string directly."
+  },
+  {
+    "output": "C:\\Lab\\tools\\DXCap.exe -c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Encoding: Used quotes to enclose the argument, which may change how the command line is parsed and avoid the ' -c ' string match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\DXCap.exe -c C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the target file with a benign placeholder, which may avoid triggering the Sigma rule while maintaining the same command-line structure."
+  }
+]

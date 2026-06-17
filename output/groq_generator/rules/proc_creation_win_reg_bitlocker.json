@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\FVE /v EnableBDEWithNoTPM /t REG_DWORD /d 1 /f",
@@ -21,4 +20,3 @@
     "explanation": "Used double backslashes for escaping and quotes around the registry path. This is a valid syntactic variation that does not alter the command's behavior."
   }
 ]
-```

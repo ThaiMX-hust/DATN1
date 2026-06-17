@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr /i \"virus cb defender cylance mc\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a benign file path to the command line, which may cause the Sigma rule to miss the keyword match as it focuses on the CommandLine field and may not account for additional parameters."
+  },
+  {
+    "output": "findstr /i virus cb defender cylance mc C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed quotes around the keywords, which may cause the Sigma rule to miss the keyword match as it focuses on quoted strings in the CommandLine field."
+  },
+  {
+    "output": "findstr /i \"cb virus defender cylance mc\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Changed the order of keywords, which may cause the Sigma rule to miss the keyword match as it focuses on specific keyword sequences in the CommandLine field."
+  }
+]

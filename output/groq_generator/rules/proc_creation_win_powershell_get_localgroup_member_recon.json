@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"powershell.exe\" -Command \"& { $x = Get-Random -Minimum 2 -Maximum 9999; $y = Get-Random -Minimum 2 -Maximum 9999; $z = Get-Random -Minimum 2 -Maximum 9999; $w = Get-Random -Minimum 2 -Maximum 9999; Write-Host HaHa_$x$y$z; $fmm = Get-LocalGroupMember -Group Administrators | Where-Object { $_.ObjectClass -match 'User' -and $_.PrincipalSource -match 'Local' } | Select Name; foreach ($member in $fmm) { if ($member -like '*Administrator*') { $account = $member.Name.Split('\\')[-1]; $originalDescription = (Get-LocalUser -Name $account).Description; Set-LocalUser -Name $account -Description (\"atr:$account;$originalDescription\").Substring(0,48); Rename-LocalUser -Name $account -NewName (\"HaHa_$x$y$z\"); Write-Host (\"Successfully Renamed $account Account on \") $Env:COMPUTERNAME } } }\"",
@@ -9,4 +8,6 @@
     "explanation": "This version omits the `$w` random variable and simplifies the `Get-Random` syntax by using `-Min` and `-Max` instead of `-Minimum` and `-Maximum`. It also removes redundant `Write-Host` calls and simplifies string escaping, while maintaining the same core functionality."
   },
   {
-    "output": "\"powershell.exe\" -Command \"& { $x = (Get-Random -Min 2 -Max 9999); $y = (Get-Random -Min 2 -Max 9999); $z = (Get-Random -Min 2 -Max 9999); $fmm = Get-LocalGroupMember -Group Administrators | Where-Object { $_.ObjectClass -match 'User' -and $_.PrincipalSource -match 'Local' } | Select Name; foreach ($member in $fmm) { if ($member -
+    "output": "\"powershell.exe\" -Command \"& { $x = (Get-Random -Min 2 -Max 9999); $y = (Get-Random -Min 2 -Max 9999); $z = (Get-Random -Min 2 -Max 9999); $fmm = Get-LocalGroupMember -Group Administrators | Where-Object { $_.ObjectClass -match 'User' -and $_.PrincipalSource -match 'Local' } | Select Name; foreach ($member in $fmm) { if ($member -"
+  }
+]

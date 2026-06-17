@@ -1,0 +1,14 @@
+[
+  {
+    "output": "fsutil behavior set SymlinkEvaluation R2L:1",
+    "explanation": "Omission: The command omits the suspicious keyword 'SymlinkEvaluation' by using a placeholder, but this changes the tested behavior and is not allowed."
+  },
+  {
+    "output": "fsutil behavior set SymlinkEvaluation R2R:1",
+    "explanation": "Omission: The command omits the suspicious keyword 'SymlinkEvaluation' by using a placeholder, but this changes the tested behavior and is not allowed."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

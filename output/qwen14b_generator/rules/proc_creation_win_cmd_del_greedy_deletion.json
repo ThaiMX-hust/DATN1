@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c del \"C:\\Temp\\*.dll\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may prevent the Sigma rule from matching the 'del' command with a wildcard."
+  },
+  {
+    "output": "cmd.exe /c del C:\\Temp\\*.dll",
+    "explanation": "Substitution: Replaced the space between 'C:\\Temp' and '*.dll' with a backslash to avoid the 'del' command with a wildcard, which might not trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c del C:\\Temp\\sample.dll",
+    "explanation": "Omission: Replaced the wildcard '*.dll' with a specific file 'sample.dll' to avoid triggering the Sigma rule that detects greedy file deletion using wildcards."
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "dsacls.exe \"C:\\path\\to\\object\" /G \"DOMAIN\\User:GA\" /I:S",
@@ -17,4 +16,3 @@
     "explanation": "This command grants write access (GW) to a user. It omits optional flags like /I:S to demonstrate that the Sigma rule can still detect the core malicious behavior."
   }
 ]
-```

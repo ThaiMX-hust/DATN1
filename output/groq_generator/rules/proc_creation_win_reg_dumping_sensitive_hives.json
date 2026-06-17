@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\\\WINDOWS\\\\system32\\\\reg.exe\"  eXport  HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session\\ Manager  C:\\\\AtomicRedTeam\\\\atomics\\\\T1547.001\\\\src\\\\SessionManagerBackup.reg /Y",
@@ -21,4 +20,3 @@
     "explanation": "Used substitution (/export instead of export) and insertion (extra spaces) to obfuscate the command while preserving functionality."
   }
 ]
-```

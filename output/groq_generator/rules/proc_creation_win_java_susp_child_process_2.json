@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "java.exe -jar someapp.jar && cmd.exe /c echo bypass",
@@ -13,4 +12,3 @@
     "explanation": "This command simulates a Java process spawning Bash, which is detected by the Sigma rule. It avoids the 'build' exclusion filter and uses a minimal command for test safety."
   }
 ]
-```

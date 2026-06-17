@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"Stop-Service -Name 'fax' -Force -ErrorAction SilentlyContinue | Out-Null; Set-ServiceBinaryPath -Name 'fax' -Path '$env:windir\\system32\\notepad.exe'; Start-Service -Name 'fax' -ErrorAction SilentlyContinue | Out-Null\"",
@@ -9,4 +8,3 @@
     "explanation": "This command omits the extra quotes around the service name 'fax' and uses environment variables directly without escaping. It maintains the same behavior while applying safe mutation techniques like omission and recoding."
   }
 ]
-```

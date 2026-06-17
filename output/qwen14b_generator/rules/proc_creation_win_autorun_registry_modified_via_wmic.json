@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f'",
+    "explanation": "Replaced the suspicious path with a benign lab placeholder (C:\\Lab\\input\\sample.txt) using substitution, which may avoid the Sigma rule's path-based detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f'\"",
+    "explanation": "Wrapped the command in quotes and used substitution for the target path, which may bypass the Sigma rule's string-based detection by altering the command structure."
+  },
+  {
+    "output": "powershell.exe -NoProfile -Command \"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f'\"",
+    "explanation": "Added the -NoProfile flag and used substitution for the target path, which may bypass the Sigma rule's string-based detection by modifying the command line structure."
+  }
+]

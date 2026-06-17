@@ -1,6 +1,6 @@
 [
   {
-    "output": "explorer.exe /e,\\server\webdav\path\file.lnk",
+    "output": "explorer.exe /e,\\server\\webdav\\path\file.lnk",
     "explanation": "This command simulates launching a LNK file via explorer.exe, which could be interpreted as accessing a WebDAV resource. It aligns with the Sigma rule's detection criteria by having explorer.exe as the parent process and potentially triggering execution via a LNK file."
   },
   {

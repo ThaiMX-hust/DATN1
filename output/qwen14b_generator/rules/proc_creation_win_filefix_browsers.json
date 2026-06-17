@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the suspicious CommandLine|contains: '#' indicator by replacing it with a benign command that does not include the '#' character."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Replaced the suspicious CommandLine|contains: '#' indicator with a legitimate PowerShell command that does not include the '#' character."
+  },
+  {
+    "output": "certutil.exe -hashfile C:\\Lab\\input\\sample.txt SHA256",
+    "explanation": "Reordering: The command uses a benign action with certutil.exe that does not include the '#' character, thus avoiding the suspicious CommandLine|contains: '#' indicator."
+  }
+]

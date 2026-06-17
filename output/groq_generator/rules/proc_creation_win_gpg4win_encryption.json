@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" -c --passphrase 'SomeParaphraseBlah' --batch --yes \"C:\\Users\\thaim\\AppData\\Local\\Temp\\test.txt\"",
@@ -17,4 +16,3 @@
     "explanation": "Used short-form options where applicable and tested if the detection rule is sensitive to short vs. long options."
   }
 ]
-```

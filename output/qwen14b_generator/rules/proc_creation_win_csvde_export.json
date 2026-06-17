@@ -1,0 +1,14 @@
+[
+  {
+    "output": "csvde.exe -f C:\\Lab\\input\\sample.csv",
+    "explanation": "Omission: Removed the '-i' flag which is used for importing, thus avoiding the 'filter_import' condition in the Sigma rule."
+  },
+  {
+    "output": "csvde.exe -f \"C:\\Lab\\input\\sample.csv\"",
+    "explanation": "Insertion: Added quotes around the file path, which may not trigger the 'CommandLine|contains: ' -f' detection as it is a common practice to enclose paths in quotes."
+  },
+  {
+    "output": "csvde.exe -f C:\\Lab\\input\\sample.csv -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Added an additional '-o' flag with a benign output path, which may not be detected by the Sigma rule as it focuses on the '-f' flag and the 'filter_import' condition."
+  }
+]

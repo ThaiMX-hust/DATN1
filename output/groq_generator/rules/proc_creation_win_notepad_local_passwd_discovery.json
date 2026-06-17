@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "notepad.exe \"C:\\Users\\User\\Documents\\passwords.txt\"",
@@ -21,4 +20,3 @@
     "explanation": "This command simulates the execution of Notepad to open a file named 'passwords.txt' in a different directory. The filename includes 'password' and the .txt extension. The use of quotes tests safe insertion techniques."
   }
 ]
-```

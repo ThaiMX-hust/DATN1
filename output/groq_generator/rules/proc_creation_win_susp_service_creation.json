@@ -1,6 +1,6 @@
 [
   {
-    "output": "sc.exe create BypassTest binPath= \"C:\\\\Windows\\\\System32\\\\cmd.exe /C echo BypassTest > \\\\\\\\.\$$pipe\\\\BypassTest\" type= own start= auto",
+    "output": "sc.exe create BypassTest binPath= \"C:\\\\Windows\\\\System32\\\\cmd.exe /C echo BypassTest > \\\\\\\\.\\$$pipe\\\\BypassTest\" type= own start= auto",
     "explanation": "This command uses the 'sc.exe' utility to create a new service with a benign command line that avoids suspicious keywords like 'powershell', 'svchost', or 'rundll32'. The binary path uses a standard Windows binary (cmd.exe) and a named pipe output, which is less likely to trigger the Sigma rule."
   },
   {

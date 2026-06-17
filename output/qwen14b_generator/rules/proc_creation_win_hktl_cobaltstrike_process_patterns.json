@@ -1,0 +1,14 @@
+[
+  {
+    "output": "conhost.exe 0xffffffff -ForceV1",
+    "explanation": "Omission: Removed the parent command line reference that triggers the selection_conhost_1 or selection_conhost_2 rules."
+  },
+  {
+    "output": "conhost.exe 0xffffffff -ForceV1 -SafeTest",
+    "explanation": "Insertion: Added a harmless flag '-SafeTest' that does not alter the command's behavior but may bypass string-based detection."
+  },
+  {
+    "output": "conhost.exe 0xffffffff -ForceV1 /test",
+    "explanation": "Substitution: Replaced a potential suspicious argument with a benign one, which may avoid matching the Sigma rule's string-based criteria."
+  }
+]

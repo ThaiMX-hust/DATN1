@@ -8,7 +8,7 @@
     "explanation": "This command avoids using encoded or joined strings in the command line by using standard PowerShell functions and string concatenation, bypassing the rule's detection of encoded patterns."
   },
   {
-    "output": "powershell.exe -Command \"& { $TokenSet = @{ U = [Char[]]'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; N = [Char[]]'0123456789' }; $Upper = Get-Random -Count 5 -InputObject $TokenSet.U; $Number = Get-Random -Count 5 -InputObject $TokenSet.N; $StringSet = $Upper + $Number; $rad = (Get-Random -Count 5 -InputObject $StringSet) -join ''; $file = 'rad' + $rad + '.tmp'; whoami.exe /all >> $env:temp\$file }\"",
+    "output": "powershell.exe -Command \"& { $TokenSet = @{ U = [Char[]]'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; N = [Char[]]'0123456789' }; $Upper = Get-Random -Count 5 -InputObject $TokenSet.U; $Number = Get-Random -Count 5 -InputObject $TokenSet.N; $StringSet = $Upper + $Number; $rad = (Get-Random -Count 5 -InputObject $StringSet) -join ''; $file = 'rad' + $rad + '.tmp'; whoami.exe /all >> $env:temp\\$file }\"",
     "explanation": "This command avoids using encoded or joined strings in the command line by using standard PowerShell functions and string concatenation, bypassing the rule's detection of encoded patterns."
   },
   {

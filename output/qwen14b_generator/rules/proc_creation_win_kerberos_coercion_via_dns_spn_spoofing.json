@@ -1,0 +1,14 @@
+[
+  {
+    "output": "nslookup.exe \"UWhRCAAAAABAAAAA\"",
+    "explanation": "Insertion: Adding quotes around the argument may prevent the Sigma rule from matching the command line as the pattern is enclosed within quotes."
+  },
+  {
+    "output": "nslookup.exe -type=SRV UWhRCAAAAABAAAAA",
+    "explanation": "Substitution: Adding an optional argument (-type=SRV) changes the command line structure without altering the core suspicious pattern, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "nslookup.exe UWhRCAAAAABAAAAA -type=SRV",
+    "explanation": "Reordering: Changing the order of the arguments may affect how the Sigma rule parses the command line, potentially avoiding the string match."
+  }
+]

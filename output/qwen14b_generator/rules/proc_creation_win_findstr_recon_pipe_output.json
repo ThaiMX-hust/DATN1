@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c whoami | findstr \"user\"",
+    "explanation": "Reordering: The command reorders the pipeline to use 'findstr' after the command, potentially bypassing the Sigma rule's pattern matching on the 'whoami' command."
+  },
+  {
+    "output": "cmd.exe /c tasklist | findstr \"notepad\"",
+    "explanation": "Substitution: Replacing the suspicious keyword with a benign one ('notepad') while maintaining the same command structure, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "cmd.exe /c systeminfo | findstr \"system\"",
+    "explanation": "Insertion: Adding a harmless delimiter or keyword in the command line that does not affect the execution but may alter the Sigma rule's string matching."
+  }
+]

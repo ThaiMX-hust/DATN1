@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\loader.exe --pid:1234 --outfile:C:\\Lab\\out\\sample.obf",
+    "explanation": "Reordering and substitution: Reordered arguments and replaced 'lsass' with a benign placeholder, which may avoid the 'lsass' keyword match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\loader.exe --pid:1234 --outfile:C:\\Lab\\out\\sample.obf --silent",
+    "explanation": "Insertion: Added a non-sensitive flag '--silent' which may not trigger the Sigma rule's keyword match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\loader.exe --pid:1234 --outfile:C:\\Lab\\out\\sample.obf --format:txt",
+    "explanation": "Substitution: Replaced '.dmp' with '.txt' and added a non-sensitive flag, which may avoid the '.dmp' and 'dump' keyword matches."
+  }
+]

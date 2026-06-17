@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\certmgr.exe\" /s /r localMachine root /add \"C:\\Temp\\TestRootCA.cer\"",
+    "explanation": "Reordering: The arguments are reordered to move '/add' after the target path, which may avoid the Sigma rule's '/add' and 'root' string matches."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\certmgr.exe\" /add \"C:\\Temp\\TestRootCA.cer\" /s /r localMachine root",
+    "explanation": "Insertion: Additional spaces are inserted between arguments to potentially evade string-based detection mechanisms in the Sigma rule."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\certmgr.exe\" /add \"C:\\Temp\\TestRootCA.cer\" /s /r localMachine root",
+    "explanation": "Omission: No changes made; the command is already safe and does not involve any suspicious behavior."
+  }
+]

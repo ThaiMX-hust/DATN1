@@ -1,0 +1,14 @@
+[
+  {
+    "output": "gpg -d --passphrase \"test123\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes around the passphrase to avoid direct string matching of 'passphrase' in the command line."
+  },
+  {
+    "output": "gpg2 -d --passphrase-file C:\\Lab\\input\\passphrase.txt C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the direct 'passphrase' argument with a file reference to avoid string matching of 'passphrase' in the command line."
+  },
+  {
+    "output": "gpg -d C:\\Lab\\input\\sample.txt --passphrase \"test123\"",
+    "explanation": "Reordering: Changed the order of the arguments to avoid the ' -d ' and 'passphrase' sequence that the Sigma rule might detect."
+  }
+]

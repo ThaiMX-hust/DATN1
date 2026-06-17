@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe -tran -l 127.0.0.1 -p 8080\"",
+    "explanation": "Reordering: Reordered arguments to avoid direct match with '.exe -tran ' in the CommandLine field."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe -l 127.0.0.1 -p 8080 -tran\"",
+    "explanation": "Reordering: Reordered arguments to avoid direct match with '.exe -tran ' in the CommandLine field."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe -tran -l 127.0.0.1 -p 8080 -d test\"",
+    "explanation": "Insertion: Added an extra flag '-d test' to the command line, which may alter the parsing and avoid the '.exe -tran ' match."
+  }
+]

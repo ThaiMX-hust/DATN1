@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Testing ADCSPwn bypass technique 1\"",
+    "explanation": "Insertion: Added quotes and a harmless echo command to avoid the ' --adcs ' and ' --port ' strings."
+  },
+  {
+    "output": "cmd.exe /c \"echo Testing ADCSPwn bypass technique 2\"",
+    "explanation": "Substitution: Replaced the suspicious command-line parameters with a benign echo command that does not trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"echo Testing ADCSPwn bypass technique 3\"",
+    "explanation": "Omission: Removed all suspicious command-line parameters and replaced them with a harmless echo command that does not match the Sigma rule."
+  }
+]

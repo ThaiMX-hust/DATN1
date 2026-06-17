@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"[System.IO.Compression.DeflateStream]::new([System.IO.MemoryStream][System.Text.Encoding]::ASCII.GetBytes('HelloWorld'), [System.IO.Compression.CompressionMode]::Decompress)\"",
+    "explanation": "Insertion: Added quotes and escaped characters to avoid direct string matching of the suspicious keywords in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"[System.IO.Compression.DeflateStream]::new([System.IO.MemoryStream][System.Text.Encoding]::ASCII.GetBytes('TestData'), [System.IO.Compression.CompressionMode]::Decompress)\"",
+    "explanation": "Substitution: Replaced 'readtoend(' with a benign placeholder 'Testdata' to avoid matching the suspicious keyword in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"[System.IO.Compression.DeflateStream]::new([System.IO.MemoryStream][System.Text.Encoding]::ASCII.GetBytes('Sample'), [System.IO.Compression.CompressionMode]::Decompress)\"",
+    "explanation": "Omission: Removed the 'StreamReader' and 'readtoend(' elements while preserving the benign test intent and avoiding the Sigma rule's suspicious indicators."
+  }
+]

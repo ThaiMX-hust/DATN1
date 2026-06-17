@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
@@ -17,4 +16,3 @@
     "explanation": "No safe bypass command can be generated."
   }
 ]
-```

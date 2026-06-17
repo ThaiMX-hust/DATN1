@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\explorer.exe",
+    "explanation": "Omission: Removed quotes, which may prevent the Sigma rule from matching the quoted path in the CommandLine field."
+  },
+  {
+    "output": "explorer.exe",
+    "explanation": "Omission: Removed the full path, which may prevent the Sigma rule from matching the ParentImage field if it relies on full path detection."
+  },
+  {
+    "output": "cmd /c start \"\" \"C:\\Windows\\explorer.exe\"",
+    "explanation": "Insertion: Added cmd and start command with empty title, which may alter the CommandLine parsing and avoid direct match with the suspicious pattern."
+  }
+]

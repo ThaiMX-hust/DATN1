@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\SharpLdapWhoami.exe /method:ntlm",
+    "explanation": "Insertion: Adding quotes or harmless delimiters may prevent string matching; the Sigma rule may not detect the command if the argument is parsed differently."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpLdapWhoami.exe -method:ntlm",
+    "explanation": "Substitution: Replacing '/' with '-' in the flag may prevent the Sigma rule from matching the command line arguments."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpLdapWhoami.exe /m:ntlm",
+    "explanation": "Substitution: Using the short flag '/m' instead of '/method' may prevent the Sigma rule from matching the command line arguments."
+  }
+]

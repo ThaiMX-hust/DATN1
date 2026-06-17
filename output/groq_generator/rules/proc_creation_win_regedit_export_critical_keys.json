@@ -4,8 +4,8 @@
     "explanation": "This command exports the SYSTEM hive from the local machine to a file. It matches the Sigma rule by using regedit.exe with the -E flag, targeting a critical registry key."
   },
   {
-    "output": "regedit.exe /E HKLM\\SECURITY \\\\?\\"C:\\Temp\\security.reg"",
-    "explanation": "This command uses the equivalent /E flag instead of -E and includes a long path prefix (\\\\?\) to bypass detection. It still exports a critical registry key, matching the Sigma rule."
+    "output": "regedit.exe /E HKLM\\\\SECURITY \\\\\\\\?\\\\\"C:\\\\Temp\\\\security.reg\"",
+    "explanation": "This command uses the equivalent /E flag instead of -E and includes a long path prefix (\\\\?\\) to bypass detection. It still exports a critical registry key, matching the Sigma rule."
   },
   {
     "output": "regedit.exe -E HKLM\\SAM C:\\Temp\\sam.reg",

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "fsutil file setZeroData offset=0 length=10 C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command reorders the parameters to avoid matching the suspicious 'setZeroData' keyword in the CommandLine field."
+  },
+  {
+    "output": "fsutil file setZeroData offset=0 length=10 C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: The command uses a benign placeholder file path (C:\\Lab\\input\\sample.log) to avoid matching the suspicious target path in the Sigma rule."
+  },
+  {
+    "output": "fsutil file setZeroData offset=0 length=10 C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: The command inserts a harmless delimiter (space) and uses a benign file path (C:\\Lab\\out\\archive.7z) to avoid matching the suspicious parameters in the Sigma rule."
+  }
+]

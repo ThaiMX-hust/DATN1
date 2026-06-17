@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "cmd.exe /c echo Test",
@@ -13,4 +12,3 @@
     "explanation": "This command launches Notepad with a file in a common public directory. It avoids suspicious command-line arguments or paths that would trigger the Sigma rule."
   }
 ]
-```

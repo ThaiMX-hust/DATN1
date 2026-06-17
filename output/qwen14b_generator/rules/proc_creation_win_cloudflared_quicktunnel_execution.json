@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\Tools\cloudflared.exe -url http://localhost:22 tunnel",
+    "explanation": "Reordering: The command-line arguments are reordered to move the '-url' parameter before the 'tunnel' command, which may bypass the Sigma rule's parameter order check."
+  },
+  {
+    "output": "C:\Tools\cloudflared.exe tunnel -no-autoupdate -url http://localhost:22",
+    "explanation": "Insertion: The '-no-autoupdate' flag is added to the command line, which may cause the Sigma rule's parameter collision check to fail as it does not match the required '-url' and 'tunnel' combination."
+  },
+  {
+    "output": "C:\Tools\cloudflared.exe tunnel -url http://localhost:22 --no-autoupdate",
+    "explanation": "Substitution: The '-no-autoupdate' flag is replaced with '--no-autoupdate' to test if the Sigma rule's parameter matching is case-sensitive or depends on short vs. long flag formats."
+  }
+]

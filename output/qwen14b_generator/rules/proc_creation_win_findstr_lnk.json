@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr.exe \"TEST-HOST\" C:\\Temp\\test.lnk",
+    "explanation": "Insertion: Added quotes around the search term, which may alter the parsing and avoid triggering the Sigma rule's CommandLine endswith check."
+  },
+  {
+    "output": "findstr.exe -i TEST-HOST C:\\Temp\\test.lnk",
+    "explanation": "Substitution: Added the case-insensitive flag (-i), which may change the command line parsing and avoid triggering the Sigma rule's CommandLine endswith check."
+  },
+  {
+    "output": "findstr.exe TEST-HOST C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the .lnk file with a benign .txt file, which may avoid triggering the Sigma rule's CommandLine endswith check for .lnk files."
+  }
+]

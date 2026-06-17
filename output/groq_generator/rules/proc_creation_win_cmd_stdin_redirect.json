@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "cmd.exe /c cmd /r cmd < \"C:\\AtomicRedTeam\\atomics\\T1059.003\\src\\t1059.003_cmd.cmd\"",
@@ -21,4 +20,3 @@
     "explanation": "The command is unchanged and directly matches the Sigma rule's detection of '<' in the command line."
   }
 ]
-```

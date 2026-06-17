@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"& {import-module 'C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\SharpHound.ps1'; try { Invoke-Bloodhound -OutputDirectory $env:Temp } catch { $_; exit $_.Exception.HResult }; Start-Sleep 5}\"",
@@ -13,4 +12,3 @@
     "explanation": "This command omits the try-catch block and other verbose elements while still executing the core functionality, which is sufficient for testing detection capabilities."
   }
 ]
-```

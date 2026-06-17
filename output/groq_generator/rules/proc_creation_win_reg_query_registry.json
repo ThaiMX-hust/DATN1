@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "reg query \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"",
@@ -61,4 +60,6 @@
     "explanation": "Used uppercase letters in the registry path to test case sensitivity and parsing behavior."
   },
   {
-    "output": "reg query HK
+    "output": "reg query HK"
+  }
+]

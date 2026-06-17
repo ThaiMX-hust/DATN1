@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "net.exe user /add testuser /expires:never",
@@ -21,4 +20,3 @@
     "explanation": "No encoding or environment variable substitution is needed for this command to match the Sigma rule."
   }
 ]
-```

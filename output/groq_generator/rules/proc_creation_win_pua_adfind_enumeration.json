@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -default -s base lockoutduration lockoutthreshold lockoutobservationwindow maxpwdage minpwdage minpwdlength pwdhistorylength pwdproperties",
@@ -13,4 +12,3 @@
     "explanation": "No additional safe bypass command can be generated because the Sigma rule is already triggered by the original command. Bypassing would require removing or altering the key detection terms, which would no longer represent a valid test case."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr.exe /v /l \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Insertion of escape characters to prevent direct string matching of the suspicious pattern '\\\\' by the Sigma rule."
+  },
+  {
+    "output": "findstr.exe -v -l \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Substitution of '/l' with '-l' and '/v' with '-v' to avoid matching the specific CLI flags in the Sigma rule."
+  },
+  {
+    "output": "findstr.exe -l -v \"TEST-HOST\" \\\\example.com\\share\\test.txt",
+    "explanation": "Reordering of the flags '-l' and '-v' to avoid the specific flag sequence that triggers the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c rmdir /s /q C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious path '%%temp%%\\deleteme_T1151.004' with a benign lab placeholder 'C:\\Lab\\input\\sample.txt' to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "cmd.exe /c rmdir /q /s C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Swapped the order of '/s' and '/q' flags, which may not affect the command's behavior but could bypass the Sigma rule's keyword-based detection."
+  },
+  {
+    "output": "cmd.exe /c rmdir /s /q \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Insertion: Added quotes around the path, which may not change the command's behavior but could bypass the Sigma rule's string-based detection."
+  }
+]

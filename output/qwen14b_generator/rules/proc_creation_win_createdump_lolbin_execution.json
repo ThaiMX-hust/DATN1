@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\5.0.17\\createdump.exe -u -f C:\\Lab\\input\\sample.dmp 788",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid triggering the Sigma rule's path match."
+  },
+  {
+    "output": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\5.0.17\\createdump.exe -f C:\\Lab\\input\\sample.dmp -u 788",
+    "explanation": "Reordering: Changed the order of the flags and the process ID to potentially avoid the Sigma rule's command line pattern match."
+  },
+  {
+    "output": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\5.0.17\\createdump.exe -u -f C:\\Lab\\input\\sample.dmp",
+    "explanation": "Omission: Removed the process ID argument, which may not be necessary for the benign test intent and avoids the Sigma rule's command line pattern match."
+  }
+]

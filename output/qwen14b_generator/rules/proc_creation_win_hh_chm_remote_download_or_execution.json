@@ -1,0 +1,14 @@
+[
+  {
+    "output": "hh.exe \"C:\\Lab\\input\\sample.chm\"",
+    "explanation": "Substitution: Replaced the remote URL with a local file path to avoid triggering the 'http://' or 'https://' detection in the Sigma rule."
+  },
+  {
+    "output": "hh.exe -src \"C:\\Lab\\input\\sample.chm\"",
+    "explanation": "Insertion: Added a benign flag '-src' before the local file path to modify the command line structure without changing the actual action, potentially evading string-based detection."
+  },
+  {
+    "output": "start-process -FilePath \"hh.exe\" -ArgumentList \"C:\\Lab\\input\\sample.chm\"",
+    "explanation": "Reordering: Used a different command-line syntax (PowerShell's start-process) to execute the same action, which may not match the Sigma rule's detection logic based on direct command-line parsing."
+  }
+]

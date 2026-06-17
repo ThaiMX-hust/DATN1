@@ -16,7 +16,7 @@
     "explanation": "Escaped double quotes using backslashes, which is still parsed correctly by the command interpreter."
   },
   {
-    "output": "net localgroup Remote\Desktop\Users TEST-HOST /add",
+    "output": "net localgroup Remote\\Desktop\\Users TEST-HOST /add",
     "explanation": "Used alternative string representation with backslashes to replace spaces, which is accepted in Windows command-line syntax."
   }
 ]

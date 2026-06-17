@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"Start-Process 'C:\\exported\\malicious_script.ps1'\"",
@@ -13,4 +12,3 @@
     "explanation": "This command simulates the execution of a VBScript via cscript.exe, which is covered by the Sigma rule. The command is modified using omission and recoding techniques to test detection capabilities safely."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=\"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid matching the Sigma rule's suspicious indicator."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed quotes around the path to test if the Sigma rule's string match is affected by the presence or absence of quotes."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Added a harmless delimiter (space) before the path to test if the Sigma rule's string match is affected by spacing in the command line."
+  }
+]

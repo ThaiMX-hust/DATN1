@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Dism.exe /Online /Disable-Feature /FeatureName:Windows-Defender /quiet",
+    "explanation": "Omission: Removed the '/Remove' argument, which may not trigger the Sigma rule's detection criteria."
+  },
+  {
+    "output": "Dism.exe /Online /Disable-Feature /FeatureName:Windows-Defender /NoRestart",
+    "explanation": "Substitution: Replaced '/quiet' with '/NoRestart', which may not trigger the Sigma rule's detection criteria."
+  },
+  {
+    "output": "Dism.exe /Online /Disable-Feature /FeatureName:Windows-Defender /NoRestart /quiet",
+    "explanation": "Insertion: Added a space between '/NoRestart' and '/quiet', which may not trigger the Sigma rule's detection criteria."
+  }
+]

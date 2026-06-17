@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmdl32 /lan /vpn \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes and reordering of flags may cause the Sigma rule's CommandLine|contains|all to miss the exact flag order and parsing."
+  },
+  {
+    "output": "cmdl32 -vpn -lan C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution of /vpn and /lan with -vpn and -lan may bypass the Sigma rule's detection based on specific flag syntax."
+  },
+  {
+    "output": "cmdl32 /lan C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission of the /vpn flag may bypass the Sigma rule's detection as it only checks for the presence of both /vpn and /lan flags."
+  }
+]

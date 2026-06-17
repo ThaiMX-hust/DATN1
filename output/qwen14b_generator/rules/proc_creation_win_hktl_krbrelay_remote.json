@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\RemoteKrbRelay.exe\" -clsid -target -victim -smb --smbkeyword interactive secrets service-add",
+    "explanation": "Insertion: Added quotes and spaces to restructure the command line while keeping the same executable and flags, which may bypass string-based detection if the Sigma rule relies on exact flag sequence matching."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\RemoteKrbRelay.exe\" -target -victim -clsid -smb --smbkeyword interactive secrets service-add",
+    "explanation": "Reordering: Changed the order of flags, which may bypass detection if the Sigma rule relies on a specific sequence of flags in the command line."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\RemoteKrbRelay.exe\" -clsid -target -victim -smb --smbkeyword interactive secrets service-add -cn test --computername test -chpPass test -chpUser test -addgroupmember -group test -groupuser test",
+    "explanation": "Substitution and Reordering: Reordered and added additional flags to simulate a more complex command line, which may bypass detection if the Sigma rule relies on a subset of flags or specific positional matching."
+  }
+]

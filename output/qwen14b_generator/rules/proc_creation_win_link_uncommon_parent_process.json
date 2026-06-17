@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\link.exe /VERBOSE",
+    "explanation": "Insertion: Added a space before '/VERBOSE' to change the command-line parsing structure, potentially avoiding the 'LINK /' pattern match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\link.exe -VERBOSE",
+    "explanation": "Substitution: Replaced '/VERBOSE' with '-VERBOSE' to change the command-line syntax, potentially avoiding the 'LINK /' pattern match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\link.exe /V",
+    "explanation": "Omission: Shortened '/VERBOSE' to '/V' to maintain the same functionality but change the command-line syntax, potentially avoiding the 'LINK /' pattern match."
+  }
+]

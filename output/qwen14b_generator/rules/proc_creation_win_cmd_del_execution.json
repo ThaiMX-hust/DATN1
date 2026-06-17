@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c erase /f C:\\Lab\\input\\sample.txt",
+    "explanation": "Replaces 'del' with 'erase' (equivalent command) and uses a benign lab placeholder file to avoid the Sigma rule's 'del' keyword match."
+  },
+  {
+    "output": "cmd.exe /c del /f C:\\Lab\\input\\sample.log",
+    "explanation": "Omission of optional flags while keeping the core 'del' command, but using a benign lab placeholder to avoid triggering the Sigma rule's suspicious file deletion intent."
+  },
+  {
+    "output": "cmd.exe /c del /f \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes around the path to ensure correct parsing while using a benign lab placeholder to avoid the Sigma rule's suspicious behavior detection."
+  }
+]

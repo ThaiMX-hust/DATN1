@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\SharpLDAPmonitor.exe /user:labuser /pass:labpass /dcip:127.0.0.1",
+    "explanation": "Reordering: Reordered command-line arguments to avoid matching the Sigma rule's specific string pattern."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpLDAPmonitor.exe -user labuser -pass labpass -dcip 127.0.0.1",
+    "explanation": "Substitution: Replaced '/' with '-' to change the syntax while maintaining the same intent, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpLDAPmonitor.exe /user:labuser /pass:labpass /dcip:127.0.0.1 -log C:\\Lab\\out\\log.txt",
+    "explanation": "Insertion: Added a benign '-log' argument with a placeholder file path, which may not trigger the Sigma rule's specific string pattern."
+  }
+]

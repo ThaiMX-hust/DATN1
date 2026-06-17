@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "rundll32.exe advpack.dll,InstallOCX C:\\Windows\\System32\\shell32.dll,#123456789012",
@@ -21,4 +20,3 @@
     "explanation": "This command uses a combination of characters to simulate obfuscation, which may still be detected by the Sigma rule."
   }
 ]
-```

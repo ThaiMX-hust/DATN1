@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin.exe /addfile AtomicBITS C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the URL with a local file path to avoid triggering the 'http:' or 'https:' detection in the Sigma rule."
+  },
+  {
+    "output": "bitsadmin.exe /Addfile AtomicBITS C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Changed '/addfile' to '/Addfile' to test case sensitivity variations, which may not be detected by the Sigma rule."
+  },
+  {
+    "output": "bitsadmin.exe /addfile AtomicBITS C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z /SetNotifyCmdLine C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Added a harmless '/SetNotifyCmdLine' with a local log file path to test if the Sigma rule would still trigger based on the presence of this flag."
+  }
+]

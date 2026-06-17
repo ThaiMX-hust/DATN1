@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "rundll32.exe 2.dll,StartW",
@@ -21,4 +20,3 @@
     "explanation": "Added a trailing space at the end of the command line, which is still valid and accepted by Windows."
   }
 ]
-```

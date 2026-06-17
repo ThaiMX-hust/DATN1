@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "SharpSuccessor.exe add /impersonate /path:C:\\Temp /account:Domain\\User /name:NewUser",
@@ -21,4 +20,3 @@
     "explanation": "Omitting unnecessary whitespace while maintaining the required command-line structure. The Sigma rule uses 'contains' and does not require exact spacing."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c start-process C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added 'start-process' as a harmless delimiter to avoid the 'cmd.exe' match in the Sigma rule."
+  },
+  {
+    "output": "cscript.exe //nologo C:\\Lab\\input\\sample.vbs",
+    "explanation": "Omission: Removed any command line arguments that might trigger the suspicious keywords in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | Out-File C:\\Lab\\out\\output.txt\"",
+    "explanation": "Substitution: Replaced the suspicious command line elements with a benign PowerShell script that does not trigger the Sigma rule."
+  }
+]

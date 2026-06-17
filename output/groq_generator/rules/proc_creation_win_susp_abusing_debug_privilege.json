@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\windows\\system32\\cmd.exe /C echo Uuup! > \"\\\\.\\pipe\\HighPriv\"",
@@ -9,7 +8,7 @@
     "explanation": "Used lowercase /c instead of /C to test if the Sigma rule is affected by case sensitivity in command-line arguments."
   },
   {
-    "output": "C:\\WINDOWS\\system32\\cmd.exe /C start C:\\WINDOWS\\system32\\cmd.exe /C \"timeout /t 3 >nul&&echo TestSVC > \\\\.\pipe\\TestSVC\"",
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /C start C:\\WINDOWS\\system32\\cmd.exe /C \"timeout /t 3 >nul&&echo TestSVC > \\\\.\\pipe\\TestSVC\"",
     "explanation": "Replaced single quotes with escaped double quotes to test if the Sigma rule is affected by quote usage in command-line arguments."
   },
   {
@@ -17,4 +16,3 @@
     "explanation": "Used short path (cmd.exe) instead of full path to test if the Sigma rule is affected by path normalization or shortening."
   }
 ]
-```

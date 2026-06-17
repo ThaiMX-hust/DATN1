@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil -encode C:\\Lab\\input\\sample.txt C:\\Lab\\out\\encoded.txt",
+    "explanation": "Substitution: Replaced the suspicious target file with a benign lab placeholder to avoid triggering the Sigma rule's file path match."
+  },
+  {
+    "output": "certutil -f -v -encode C:\\Lab\\input\\sample.log C:\\Lab\\out\\encoded_log.txt",
+    "explanation": "Substitution: Replaced the suspicious target file with a benign lab placeholder to avoid triggering the Sigma rule's file path match."
+  },
+  {
+    "output": "certutil -encode C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious target file with a benign lab placeholder and changed the output extension to avoid triggering the Sigma rule's file path match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "explorer.exe /root, C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: The suspicious flag '/factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b}' is omitted, which may avoid the Sigma string match."
+  },
+  {
+    "output": "explorer.exe /root, C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: The command line uses a benign lab placeholder instead of a suspicious target, which may avoid the Sigma field match."
+  },
+  {
+    "output": "explorer.exe /root, C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The command line reorders arguments to avoid the suspicious string match while preserving the benign test intent."
+  }
+]

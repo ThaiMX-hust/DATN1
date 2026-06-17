@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dnscmd.exe /enumrecords /recordname:example.com",
+    "explanation": "Omission: Removed the suspicious zone enumeration keyword, changing the behavior to a non-sensitive query."
+  },
+  {
+    "output": "dnscmd.exe /enumrecords /recordname:C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced a potential zone name with a benign lab placeholder to avoid matching the Sigma pattern."
+  },
+  {
+    "output": "dnscmd.exe /enumrecords /recordname:example.com /output:C:\\Lab\\out\\results.7z",
+    "explanation": "Insertion: Added a safe output path to the command, which does not trigger the Sigma rule's suspicious pattern."
+  }
+]

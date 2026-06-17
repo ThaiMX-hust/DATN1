@@ -1,0 +1,14 @@
+[
+  {
+    "output": "java -jar C:\\Lab\\input\\sample.jar --child-process C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion of harmless delimiters and substitution of suspicious paths with benign placeholders to avoid triggering the Sigma rule's path and executable checks."
+  },
+  {
+    "output": "java -jar C:\\Lab\\input\\sample.jar --exec C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering and substitution of command-line arguments to avoid direct matching of suspicious executable names listed in the Sigma rule."
+  },
+  {
+    "output": "java -jar C:\\Lab\\input\\sample.jar -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission of explicit child process invocation and use of a benign placeholder to avoid triggering the Sigma rule's executable name checks."
+  }
+]

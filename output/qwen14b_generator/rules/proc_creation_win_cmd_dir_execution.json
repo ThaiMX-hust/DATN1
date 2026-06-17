@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c dir /b c:\\",
+    "explanation": "Omission: Removed the '/s' flag, which is the key indicator in the Sigma rule, while maintaining a benign command that lists files in the current directory."
+  },
+  {
+    "output": "cmd.exe /c dir /b c:\\ | findstr /e .txt",
+    "explanation": "Insertion: Added a pipeline to filter output, which may bypass the Sigma rule's detection of the 'dir /s' pattern by altering the command structure."
+  },
+  {
+    "output": "cmd.exe /c dir /b c:\\ && echo Test",
+    "explanation": "Reordering: Added a harmless 'echo' command after 'dir', which may cause the Sigma rule to miss the '/s' flag if it only checks for 'dir*-s' in the command line."
+  }
+]

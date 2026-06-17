@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "reg add \"HKCU\\CurrentVersion\\Control Panel\\CPLs\" /v \"TestCPL\" /t REG_SZ /d \"malicious.cpl\" /f",
@@ -21,4 +20,3 @@
     "explanation": "This command is a duplicate of the previous one, but included to demonstrate that identical commands can be generated for testing."
   }
 ]
-```

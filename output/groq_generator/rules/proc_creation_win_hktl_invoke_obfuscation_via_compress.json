@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell -Command \"[System.IO.Compression.DeflateStream]::new([System.IO.StreamReader]::new([System.IO.StreamReader]::new([System.Text.Encoding]::ASCII.GetBytes('$(echo \"COMPRESS OBFUSCATION\" | Out-String)')).BaseStream).BaseStream).ReadToEnd() | Out-String | Invoke-Expression\"",
@@ -9,4 +8,3 @@
     "explanation": "This command uses a script block to encapsulate the obfuscated logic, making it harder for the Sigma rule to detect the exact string patterns. It applies safe mutation techniques such as substitution and recoding to avoid matching the rule's detection criteria."
   }
 ]
-```

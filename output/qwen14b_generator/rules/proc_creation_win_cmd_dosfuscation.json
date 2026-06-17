@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo ^ ^",
+    "explanation": "Insertion: Added a space between the caret characters, which may prevent the Sigma rule from detecting the '^^' pattern."
+  },
+  {
+    "output": "cmd.exe /c echo ^caret^",
+    "explanation": "Substitution: Replaced '^^' with a descriptive text 'caret', which avoids the Sigma pattern while maintaining the same command intent."
+  },
+  {
+    "output": "cmd.exe /c echo ^",
+    "explanation": "Omission: Removed the second caret, which may prevent the Sigma rule from detecting the '^^' pattern."
+  }
+]

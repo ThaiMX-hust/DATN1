@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange; Get-Recipient -Identity user@example.com | Select-Object -ExpandProperty EmailAddresses | Where-Object { $_.SmtpAddress } | Format-Table -HideTableHeaders\"",
@@ -13,4 +12,3 @@
     "explanation": "This command adds the -WindowStyle Hidden flag to simulate stealthy execution, which is a common tactic in malicious PowerShell scripts. It uses safe mutation techniques like insertion and substitution."
   }
 ]
-```

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "WerFault.exe -pr \"C:\\Malicious\\Payload.exe\"",
@@ -41,4 +40,3 @@
     "explanation": "A logical AND operator is appended to the command line, which may be used to chain commands and obfuscate the original intent."
   }
 ]
-```

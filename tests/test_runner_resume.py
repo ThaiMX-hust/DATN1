@@ -5,16 +5,18 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sigma_rule_evaluator.cases import group_by_technique, technique_dir_map
 from sigma_rule_evaluator.detection import collect_triggered_rules_for_case
-from sigma_rule_evaluator.models import CaseResult, RunnerConfig, TargetCase
+from sigma_rule_evaluator.models import CaseResult, ExecutionResult, RunnerConfig, TargetCase
 from sigma_rule_evaluator.runner import (
     effective_case_timeout_seconds,
     evtx_name_for_case,
     restored_result_for_case,
+    run_case,
     select_cases_after_last_evtx,
 )
 
@@ -130,6 +132,37 @@ class ResumeFromEvtxTests(unittest.TestCase):
         )
 
         self.assertEqual(effective_case_timeout_seconds(case, config), 2)
+
+    def test_run_case_marks_missing_sysmon_root_as_evidence_failure(self) -> None:
+        case = make_case(1, "a1", "T1000.001")
+        execution = ExecutionResult(
+            started=True,
+            pid=1234,
+            exit_code=1,
+            status="EXECUTED_EXIT_NONZERO",
+        )
+        config = RunnerConfig(
+            config_path=Path("input.json"),
+            output_dir=Path("output"),
+            base_dir=Path("."),
+            execute=True,
+            timeout_seconds=2,
+        )
+
+        with patch("sigma_rule_evaluator.runner.latest_sysmon_record_id", side_effect=[(100, ""), (105, "")]):
+            with patch("sigma_rule_evaluator.runner.execute_command", return_value=execution):
+                with patch(
+                    "sigma_rule_evaluator.runner.collect_process_tree",
+                    return_value=(None, [], "root process was not found in Sysmon Event ID 1 after start_record_id"),
+                ):
+                    result = run_case(case, Path("out.evtx"), config)
+
+        self.assertEqual(result.execution.status, "FAILED_NO_SYSMON_ROOT")
+        self.assertEqual(result.start_record_id, 100)
+        self.assertEqual(result.end_record_id, 105)
+        self.assertFalse(result.can_execute)
+        self.assertEqual(result.final_status, "execution_failed")
+        self.assertIn("root process was not found", result.execution.note)
 
 
 if __name__ == "__main__":

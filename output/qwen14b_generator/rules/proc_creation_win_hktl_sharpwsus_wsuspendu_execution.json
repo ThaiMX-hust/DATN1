@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Start-Process -FilePath 'C:\\Lab\\input\\sample.exe' -ArgumentList ' -Inject ' -Verb RunAs\"",
+    "explanation": "Insertion: Added quotes and spaces to restructure the command line, potentially avoiding the ' -Inject ' string match."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.bat\" -PayloadArgs dummy",
+    "explanation": "Substitution: Replaced actual payload arguments with a dummy placeholder, avoiding the ' -PayloadArgs ' string match."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.exe approve -dummy",
+    "explanation": "Omission: Removed the actual command flags, replacing them with a dummy argument to avoid the ' approve ' string match."
+  }
+]

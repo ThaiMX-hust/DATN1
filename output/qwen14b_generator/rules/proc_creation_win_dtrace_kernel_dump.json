@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dtrace.exe -C \"syscall:::return { trace(0); }\" -o C:\\Lab\\out\\dump.txt",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious 'lkd(0)' string, which may prevent the Sigma rule from matching the 'lkd(' substring."
+  },
+  {
+    "output": "dtrace.exe -C 'syscall:::return { trace(0); }' -o C:\\Lab\\out\\dump.txt",
+    "explanation": "Substitution: Single quotes are used instead of double quotes, which may change how the command is parsed and avoid triggering the 'lkd(' substring match."
+  },
+  {
+    "output": "dtrace.exe -C \"syscall:::return { trace(0); }\" -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: A different output file extension (.7z) is used, which may not be detected by the Sigma rule if it focuses on specific file types or paths."
+  }
+]

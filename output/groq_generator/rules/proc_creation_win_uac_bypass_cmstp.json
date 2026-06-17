@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "cmstp.exe -s \"C:\\AtomicRedTeam\\atomics\\T1218.003\\src\\T1218.003_uacbypass.inf\" -au",
@@ -21,4 +20,3 @@
     "explanation": "Substituted '-au' with '/au' to test flag parsing and detection of flag syntax variations."
   }
 ]
-```

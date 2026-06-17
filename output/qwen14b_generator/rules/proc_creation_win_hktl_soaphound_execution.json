@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe --user thaim --password P@ssword1 --domain THAIMX --dc 10.0.1.14 --cachefilename C:\\Lab\\input\\cache.txt",
+    "explanation": "Omission: Removed the --bhdump flag, which is a suspicious argument in the Sigma rule, while keeping the benign test intent."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe --user thaim --password P@ssword1 --domain THAIMX --dc 10.0.1.14 --cachefilename C:\\Lab\\input\\cache.txt --outputdirectory C:\\Lab\\out\\test2",
+    "explanation": "Omission: Removed the --bhdump flag and replaced the outputdirectory path with a benign lab placeholder, which avoids the suspicious Sigma indicator."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe --user thaim --password P@ssword1 --domain THAIMX --dc 10.0.1.14 --cachefilename C:\\Lab\\input\\cache.txt --outputdirectory C:\\Lab\\out\\test2 --buildcache",
+    "explanation": "Omission: Removed the --bhdump flag and replaced the outputdirectory path with a benign lab placeholder, which avoids the suspicious Sigma indicator."
+  }
+]

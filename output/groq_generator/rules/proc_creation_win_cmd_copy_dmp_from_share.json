@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\Windows\\System32\\cmd.exe\" /c copy \\\\example.com\\logs\\crash.hdmp C:\\Temp\\test.hdmp",
@@ -13,4 +12,3 @@
     "explanation": "No safe bypass is possible without altering the command's behavior or omitting required elements."
   }
 ]
-```

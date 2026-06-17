@@ -1,0 +1,14 @@
+[
+  {
+    "output": "doskey /history > C:\\Lab\\out\\output.txt",
+    "explanation": "Insertion: Added a harmless redirection to a lab placeholder file, which avoids the suspicious path match in the Sigma rule."
+  },
+  {
+    "output": "sc query type=service | findstr /v \"Service\" > C:\\Lab\\out\\output2.txt",
+    "explanation": "Reordering: Added a pipeline and redirection to a lab placeholder file, which changes the command structure and avoids the suspicious path match in the Sigma rule."
+  },
+  {
+    "output": "tree C:\\AtomicRedTeam\\atomics > C:\\Lab\\out\\output3.txt",
+    "explanation": "Substitution: Replaced the suspicious redirection with a redirection to a lab placeholder file, which avoids the suspicious path match in the Sigma rule."
+  }
+]

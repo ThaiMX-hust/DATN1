@@ -12,7 +12,7 @@
     "explanation": "Escaped backslashes in the registry key path. The command is still valid and should trigger the Sigma rule."
   },
   {
-    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\ Explorer /v svcVersion",
+    "output": "reg query HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet\\ Explorer /v svcVersion",
     "explanation": "Split 'Explorer' into 'Explorer' with a space. This is a minor mutation that should still trigger the Sigma rule."
   },
   {

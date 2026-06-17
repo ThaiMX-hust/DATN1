@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "PrintBrm.exe -f \"C:\\Temp\\test.zip\" extract -o \"C:\\Output\\\"",
@@ -21,4 +20,3 @@
     "explanation": "This command adds an unnecessary trailing backtick, which may be tolerated by some shells. It still includes the -f flag and .zip file, matching the Sigma rule."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "DumpMinitool.exe -h",
+    "explanation": "Omission: Removed the suspicious command-line arguments that trigger the Sigma rule's 'Full', 'Mini', or 'WithHeap' keywords."
+  },
+  {
+    "output": "DumpMinitool.exe --help",
+    "explanation": "Substitution: Replaced the suspicious command-line arguments with equivalent syntax that does not trigger the Sigma rule's 'Full', 'Mini', or 'WithHeap' keywords."
+  },
+  {
+    "output": "DumpMinitool.exe -?",
+    "explanation": "Insertion: Added a harmless delimiter to the command-line that does not trigger the Sigma rule's 'Full', 'Mini', or 'WithHeap' keywords."
+  }
+]

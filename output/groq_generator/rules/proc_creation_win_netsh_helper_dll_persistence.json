@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "netsh.exe add helper \"C:\\\\AtomicRedTeam\\\\atomics\\\\T1546.007\\\\bin\\\\NetshHelper.dll\"",
@@ -17,4 +16,3 @@
     "explanation": "Used minimal modification by ensuring the command is still valid and executable in a test environment."
   }
 ]
-```

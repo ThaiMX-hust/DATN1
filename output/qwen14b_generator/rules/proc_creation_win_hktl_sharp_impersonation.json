@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" -user:labuser -binary:C:\\Lab\\input\\sample.bin -shellcode:dummy -technique:CreateProcessAsUserW",
+    "explanation": "Insertion: Added quotes and spaces to modify the command line structure, which may prevent the Sigma rule's string matching from detecting the command."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.exe -user labuser -binary C:\\Lab\\input\\sample.bin -shellcode dummy -technique CreateProcessAsUserW",
+    "explanation": "Omission: Removed colons and hyphens to change the command line syntax, which may avoid the Sigma rule's specific keyword matching."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.exe -binary C:\\Lab\\input\\sample.bin -user labuser -technique CreateProcessAsUserW -shellcode dummy",
+    "explanation": "Reordering: Changed the order of command-line arguments, which may prevent the Sigma rule's pattern matching from detecting the command."
+  }
+]

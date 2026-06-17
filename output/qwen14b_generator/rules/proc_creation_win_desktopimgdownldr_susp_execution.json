@@ -1,0 +1,14 @@
+[
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:C:\\Lab\\input\\sample.txt /eventName:desktopimgdownldr",
+    "explanation": "Substitution: Replaced the URL with a local file path to avoid the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:C:\\Lab\\input\\sample.log /eventName:desktopimgdownldr",
+    "explanation": "Substitution: Replaced the URL with a local log file path to avoid the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "desktopimgdownldr.exe /eventName:desktopimgdownldr /lockscreenurl:C:\\Lab\\input\\sample.7z",
+    "explanation": "Reordering: Changed the argument order to avoid the suspicious indicator in the Sigma rule."
+  }
+]

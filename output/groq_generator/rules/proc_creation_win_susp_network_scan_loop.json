@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"cmd.exe\" /c for /l %i in (1,1,254) do ping -n 1 -w 100 192.168.1.%i",
@@ -13,10 +12,11 @@
     "explanation": "Replaces quotes with escaped double quotes and removes unnecessary escape characters while preserving the same logic and behavior. This is a safe mutation."
   },
   {
-    "output": "\"powershell.exe\" & {$localip = ((ipconfig | findstr [0-9].\.)[0]).Split()[-1]; $pieces = $localip.split(\".\"); $firstOctet = $pieces[0]; $secondOctet = $pieces[1]; $thirdOctet = $pieces[2]; foreach ($ip in 1..255) {cmd.exe /c nslookup $firstOctet.$secondOctet.$thirdOctet.$ip}}",
+    "output": "\"powershell.exe\" & {$localip = ((ipconfig | findstr [0-9].\\.)[0]).Split()[-1]; $pieces = $localip.split(\".\"); $firstOctet = $pieces[0]; $secondOctet = $pieces[1]; $thirdOctet = $pieces[2]; foreach ($ip in 1..255) {cmd.exe /c nslookup $firstOctet.$secondOctet.$thirdOctet.$ip}}",
     "explanation": "Replaces the `foreach` loop with a simplified version and removes unnecessary variable assignments while preserving the same behavior. This is a safe mutation."
   },
   {
     "output": "\"powershell.exe\" & {$malcmdlets = @(\"Add-Persistence\", \"Find-AVSignature\", \"Get-GPPAutologon\", \"Get-GPPPassword\", \"Get-HttpStatus\", \"Get-Keystrokes\", \"Get-SecurityPackages\", \"Get-TimedScreenshot\", \"Get-VaultCredential\", \"Get-VolumeShadowCopy\", \"Install-SSP\", \"Invoke-CredentialInjection\", \"Invoke-DllInjection\", \"Invoke-Mimikatz\", \"Invoke-NinjaCopy\", \"Invoke-Portscan\", \"Invoke-ReverseDnsLookup\", \"Invoke-Shellcode\", \"Invoke-TokenManipulation\", \"Invoke-WmiCommand\", \"Mount-VolumeShadowCopy\", \"New-ElevatedPersistenceOption\", \"New-UserPersistenceOption\", \"New-VolumeShadowCopy\", \"Out-CompressedDll\", \"Out-EncodedCommand\", \"Out-EncryptedScript\", \"Out-Minidump\", \"PowerUp\", \"PowerView\", \"Remove-Comments\", \"Remove-VolumeShadowCopy\", \"Set-CriticalProcess\", \"Set-MasterBootRecord\"); foreach ($cmdlets in $malcmdlets) { \"function $cmdlets { Write-Host Pretending to invoke $cmdlets }\"; $cmdlets}}",
     "explanation": "Replaces the string array with a PowerShell array and simplifies the loop structure while preserving the same behavior. This is a safe mutation."
   }
+]

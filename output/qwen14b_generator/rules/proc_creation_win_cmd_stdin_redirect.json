@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c type C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The '<' operator is replaced with 'type' which achieves similar file reading behavior without triggering the Sigma rule's '<' detection."
+  },
+  {
+    "output": "cmd.exe /c echo Hello > C:\\Lab\\out\\test.txt",
+    "explanation": "Omission: The command does not use '<' or any redirection that would trigger the Sigma rule's detection criteria."
+  },
+  {
+    "output": "cmd.exe /c findstr /i \"test\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: The command uses 'findstr' with a file path instead of '<' to read and process file contents, avoiding the Sigma rule's '<' detection."
+  }
+]

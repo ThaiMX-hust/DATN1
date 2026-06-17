@@ -1,0 +1,14 @@
+[
+  {
+    "output": "diskshadow.exe -s \"C:\\Lab\\input\\script.vbs\"",
+    "explanation": "Reordering: The command uses a .vbs extension instead of .txt, which may not trigger the Sigma rule's filter for .txt files."
+  },
+  {
+    "output": "diskshadow.exe -s C:\\Lab\\input\\script.vbs",
+    "explanation": "Omission: Removed quotes around the script path, which may not trigger the Sigma rule's filter for .txt files."
+  },
+  {
+    "output": "diskshadow.exe -s C:\\Lab\\input\\script",
+    "explanation": "Substitution: Removed the file extension entirely, which may not trigger the Sigma rule's filter for .txt files."
+  }
+]

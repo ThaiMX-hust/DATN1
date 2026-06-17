@@ -1,4 +1,4 @@
-```json
+
 [
   {
     "output": "chrome.exe --headless --remote-debugging-port=9222 --user-data-dir=C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Chromium\\\\User\\ Data\\\\Default",
@@ -30,4 +30,6 @@
   },
   {
     "output": "chrome.exe --headless --remote-debugging-port=9222 --user-data-dir=C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Chromium\\\\User\\ Data\\\\Default --disable-gpu",
-    "explanation": "This command adds an additional optional flag (--disable-gpu), which does not affect the Sigma rule's detection. The command still includes all
+    "explanation": "This command adds an additional optional flag (--disable-gpu), which does not affect the Sigma rule's detection. The command still includes all"
+  }
+]

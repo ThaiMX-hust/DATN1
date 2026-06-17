@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe -O \"http://example.com/testfile.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering arguments with -o to change the output path, which may avoid the Sigma rule's detection of the -O flag."
+  },
+  {
+    "output": "curl.exe --remote-name \"http://example.com/testfile.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution of -O with --remote-name and adding -o to specify a safe output path, which may bypass the Sigma rule's flag detection."
+  },
+  {
+    "output": "curl.exe \"http://example.com/testfile.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Omission of the -O or --remote-name flag and using -o directly, which may avoid the Sigma rule's detection of the download command."
+  }
+]

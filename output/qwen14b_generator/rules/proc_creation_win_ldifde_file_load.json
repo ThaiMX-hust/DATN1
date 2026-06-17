@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ldifde.exe -i -f \"C:\\Lab\\input\\sample.ldf\"",
+    "explanation": "Reordering: The arguments are reordered to avoid the explicit sequence that may trigger the Sigma rule's detection of '-i' followed by '-f'."
+  },
+  {
+    "output": "ldifde.exe -f \"C:\\Lab\\input\\sample.ldf\" -i",
+    "explanation": "Reordering: The arguments are reordered to avoid the explicit sequence that may trigger the Sigma rule's detection of '-i' followed by '-f'."
+  },
+  {
+    "output": "ldifde.exe -i -f C:\\Lab\\input\\sample.ldf",
+    "explanation": "Omission: Removal of quotes around the file path to avoid potential string matching that could be flagged by the Sigma rule."
+  }
+]

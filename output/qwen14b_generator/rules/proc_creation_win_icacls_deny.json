@@ -1,0 +1,14 @@
+[
+  {
+    "output": "icacls \"C:\\Lab\\input\\sample.txt\" /grant *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "Substitution: Replaced '/deny' with '/grant' which changes the action from denying access to granting access, potentially avoiding the Sigma rule's detection of malicious intent."
+  },
+  {
+    "output": "icacls C:\\Lab\\input\\sample.txt /deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "Omission: Removed quotes around the file path, which may bypass Sigma's detection if it relies on specific formatting of the command line."
+  },
+  {
+    "output": "icacls C:\\Lab\\input\\sample.txt /deny *S-1-1-0:(OI)(CI)(DE,DC) /t",
+    "explanation": "Insertion: Added '/t' flag which is a harmless and common parameter, potentially altering the command line structure to avoid matching the Sigma rule's string-based detection."
+  }
+]

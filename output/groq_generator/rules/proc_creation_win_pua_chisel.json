@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "chisel.exe client 127.0.0.1:8080 -socks5",
@@ -41,4 +40,3 @@
     "explanation": "Encapsulates the command in quotes or uses escape characters to test parsing, but still matches the Sigma rule."
   }
 ]
-```

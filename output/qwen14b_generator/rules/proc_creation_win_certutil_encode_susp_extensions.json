@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\Users\thaim\AppData\Local\Temp\tcm.tmp -encode \"C:\\Windows\\System32\\calc.exe\" \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2.txt\"",
+    "explanation": "Insertion: Added quotes around paths to ensure correct parsing, which may prevent the Sigma rule from matching the CommandLine field due to altered formatting."
+  },
+  {
+    "output": "C:\Users\thaim\AppData\Local\Temp\tcm.tmp -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2.txt",
+    "explanation": "Recoding: Used double backslashes for path normalization, which may alter the CommandLine field's string representation and avoid matching the Sigma rule."
+  },
+  {
+    "output": "C:\Users\thaim\AppData\Local\Temp\tcm.tmp -encode C:\\Windows\\System32\\calc.exe C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious output file path with a benign lab placeholder, which may avoid the Sigma rule's extension-based detection."
+  }
+]

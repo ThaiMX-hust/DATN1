@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "CATClean.exe --uninstall",
@@ -25,4 +24,3 @@
     "explanation": "Appending a backslash is a safe insertion technique and still matches the rule."
   }
 ]
-```

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\AtomicRedTeam\\atomics\\T1055\\bin\\x64\\CreateRemoteThread.exe\" -pid 11728 -debug",
@@ -13,4 +12,3 @@
     "explanation": "No safe bypass command can be generated without altering the essential behavior or triggering the rule."
   }
 ]
-```

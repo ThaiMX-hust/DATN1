@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Windows\\System32\\replace.exe \"C:\\AtomicRedTeam\\atomics\\T1105\\src\\redcanary.cab\" C:\\Users\\thaim\\AppData\\Local\\Temp /A",
@@ -21,4 +20,3 @@
     "explanation": "Used environment variable expansion for path normalization in a test environment."
   }
 ]
-```

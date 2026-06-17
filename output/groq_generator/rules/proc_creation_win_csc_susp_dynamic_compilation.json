@@ -1,4 +1,4 @@
-```json
+
 [
   {
     "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\4pk1n4ga\\4pk1n4ga.cmdline\"",
@@ -25,4 +25,6 @@
     "explanation": "This command uses a response file with escaped quotes and standard path formatting to invoke csc.exe, which is already aligned with the Sigma rule's detection criteria and cannot be bypassed using safe mutation techniques without altering the malicious intent."
   },
   {
-    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Users\\thaim\\AppData\\Local\\Temp\\4qvmfagk\\4qvmfagk.cmdline\""
+  }
+]

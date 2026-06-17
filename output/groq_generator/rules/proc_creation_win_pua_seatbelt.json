@@ -4,7 +4,7 @@
     "explanation": "This command simulates a Seatbelt execution with a group flag and output file, which matches the Sigma rule's detection criteria. It uses standard syntax and includes a group and outputfile parameter to align with the rule's 'CommandLine|contains' conditions."
   },
   {
-    "output": "Seatbelt.exe -group=system --CommandLine=\"InterestingProcesses\" -outputfile=.\temp\output.log",
+    "output": "Seatbelt.exe -group=system --CommandLine=\"InterestingProcesses\" -outputfile=.\temp\\output.log",
     "explanation": "This command includes a group flag and a command-line argument that matches the Sigma rule's detection criteria. The use of quotes and alternative path notation (.\temp) demonstrates safe mutation techniques like insertion and recoding."
   },
   {

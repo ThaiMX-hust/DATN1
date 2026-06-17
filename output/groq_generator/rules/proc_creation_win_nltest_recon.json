@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "nltest.exe /domain\\_trusts",
@@ -21,4 +20,3 @@
     "explanation": "The command uses environment variables and reordered syntax to obfuscate the original command line while maintaining the same behavior."
   }
 ]
-```

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "curl.exe -O http://192.168.1.1/file.txt",
@@ -25,4 +24,3 @@
     "explanation": "This command uses a different IP address but retains the same structure, ensuring the Sigma rule's detection logic is tested across variations."
   }
 ]
-```

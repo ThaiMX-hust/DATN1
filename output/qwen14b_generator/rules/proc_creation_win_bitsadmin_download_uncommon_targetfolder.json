@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering and substitution: The target path was changed to a benign lab placeholder while keeping the same executable family and intent, which may avoid the Sigma rule's folder path match."
+  },
+  {
+    "output": "bitsadmin.exe /Download /transfer Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering and substitution: The command-line arguments were reordered to avoid matching the Sigma rule's specific flag sequence, while still using the same executable family and benign intent."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: The target path was replaced with a benign lab placeholder while maintaining the same command-line structure, which may avoid the Sigma rule's folder path match."
+  }
+]

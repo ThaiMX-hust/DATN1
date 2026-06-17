@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --headless https://run.mocky.io/v3/example --disable-gpu",
+    "explanation": "Insertion: Added --disable-gpu flag, which may not trigger the Sigma rule's URL or headless detection."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" https://run.mocky.io/v3/example --headless",
+    "explanation": "Reordering: Changed the order of the URL and --headless flag, potentially altering the detection logic."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --headless https://example.com",
+    "explanation": "Substitution: Replaced the mockbin.org URL with a benign example.com URL, which may not trigger the Sigma rule's URL detection."
+  }
+]

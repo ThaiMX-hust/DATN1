@@ -1,0 +1,14 @@
+[
+  {
+    "output": "KrbRelayUp.exe -Domain labdomain -ComputerName labcomputer",
+    "explanation": "Omission: Removed the 'relay' keyword from the command line, which may prevent the Sigma rule's 'relay' string match."
+  },
+  {
+    "output": "KrbRelayUp.exe -Domain labdomain -ComputerName labcomputer -sc krbscm",
+    "explanation": "Reordering: Changed the order of arguments, which may prevent the Sigma rule's 'krbscm -sc' string match."
+  },
+  {
+    "output": "KrbRelayUp.exe -Domain labdomain -ComputerName labcomputer -d labdir -cn labname -cp labpath",
+    "explanation": "Insertion: Added spaces and delimiters, which may prevent the Sigma rule's 'spawn -d -cn -cp' string match."
+  }
+]

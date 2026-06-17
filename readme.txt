@@ -1,1 +1,6 @@
 python -m src.sigma_rule_evaluator.cli --config input\groq_cases.generated.json --execute --resume-from-batch output\target_commandline_tests\<batch_cu>
+
+
+
+python -m src.sigma_rule_evaluator.cli --execute `
+  --resume-from-batch output\target_commandline_tests\<ten_batch_cu>

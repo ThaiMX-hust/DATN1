@@ -39,4 +39,5 @@
     "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify\"",
     "explanation": "This command queries a registry key under a suspicious Winlogon path, which is included in the Sigma rule's detection criteria."
   },
-  {
+  {}
+]

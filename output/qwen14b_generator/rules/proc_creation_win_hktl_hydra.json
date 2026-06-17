@@ -1,0 +1,14 @@
+[
+  {
+    "output": "hydra -u \"testuser\" -p \"testpass\" -l \"testuser\" -e ns -t 4 -F C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes around username and password, and included additional benign flags and a placeholder file path, which may avoid matching the exact string patterns in the Sigma rule."
+  },
+  {
+    "output": "hydra -u testuser -p testpass -l testuser -e ns -t 4 -F C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed the caret characters (^) around USER and PASS, which may avoid matching the exact string patterns in the Sigma rule."
+  },
+  {
+    "output": "hydra -u testuser -p testpass -l testuser -e ns -t 4 -F C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the placeholder file path with a different benign file path, which may avoid matching the exact string patterns in the Sigma rule."
+  }
+]

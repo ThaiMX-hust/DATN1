@@ -36,4 +36,7 @@
     "explanation": "Used short path notation (e.g., C:\\AtomicRedTeam...). The command still executes the same behavior and should be detected by the Sigma rule."
   },
   {
-    "output": "hh.exe -decompile C:\\Users\\thaim\\AppData\\Local\\Temp C:\\
+    "output": "hh.exe -decompile C:\\Users\\thaim\\AppData\\Local\\Temp C:\\AtomicRedTeam\\atomics\\T1218.001\\src\\T1218.001.chm",
+    "explanation": "Used short path notation (e.g., C:\\AtomicRedTeam...). The command still executes the same behavior and should be detected by the Sigma rule."
+  }
+]

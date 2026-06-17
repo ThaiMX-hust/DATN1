@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "net use \\\\THAIMX\\IPC$ /user:THAIMX\\thaim \"Password! \"",
@@ -21,4 +20,3 @@
     "explanation": "This command uses a different password but still matches the Sigma rule's detection criteria."
   }
 ]
-```

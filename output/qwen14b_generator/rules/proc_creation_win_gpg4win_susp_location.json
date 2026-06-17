@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" --passphrase 'SomeParaphraseBlah' --batch --yes -c \"C:\\Lab\\input\\test.txt\"",
+    "explanation": "Replaced the suspicious path with a benign lab placeholder, using substitution mutation technique to avoid matching the Sigma rule's suspicious location indicators."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" --passphrase 'SomeParaphraseBlah' --batch --yes -c \"C:\\Lab\\input\\test.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Added an output file path using insertion mutation technique, which does not affect the command's core behavior but changes the path to avoid Sigma rule's suspicious location indicators."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" --passphrase 'SomeParaphraseBlah' --batch --yes -c \"C:\\Lab\\input\\test.txt\" --output \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Replaced the default output behavior with a specified output path using substitution mutation technique, avoiding the Sigma rule's suspicious location indicators while maintaining the same executable family and test intent."
+  }
+]

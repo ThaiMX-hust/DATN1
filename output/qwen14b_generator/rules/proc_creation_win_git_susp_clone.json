@@ -1,0 +1,14 @@
+[
+  {
+    "output": "git.exe clone \"https://example.com/repositories/Vulns-Check\" -q",
+    "explanation": "Insertion: Added a quiet flag (-q) to the command line. The Sigma rule checks for the presence of 'clone' in the CommandLine, but adding a flag does not alter the presence of 'clone' and may not be detected if the rule focuses on specific keywords."
+  },
+  {
+    "output": "git.exe clone https://example.com/repositories/Vulns-Check --no-checkout",
+    "explanation": "Substitution: Replaced the default behavior with --no-checkout. The Sigma rule checks for the presence of 'clone' in the CommandLine, but adding a flag does not alter the presence of 'clone' and may not be detected if the rule focuses on specific keywords."
+  },
+  {
+    "output": "git.exe -c core.quotepath=false clone https://example.com/repositories/Vulns-Check",
+    "explanation": "Reordering: Added a configuration option before the 'clone' command. The Sigma rule checks for the presence of 'clone' in the CommandLine, but adding a configuration option before 'clone' may not be detected if the rule focuses on specific keywords."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "devtoolslauncher.exe -arg1 value1 -arg2 value2",
+    "explanation": "Omission: Removed the 'LaunchForDeploy' keyword from the command line, which may prevent the Sigma rule's CommandLine|contains check from matching."
+  },
+  {
+    "output": "devtoolslauncher.exe \"-arg1 value1 -arg2 value2\"",
+    "explanation": "Insertion: Added quotes around the arguments, which may alter the parsing of the command line and avoid the Sigma rule's detection based on string content."
+  },
+  {
+    "output": "devtoolslauncher.exe -arg2 value2 -arg1 value1",
+    "explanation": "Reordering: Changed the order of arguments, which may not trigger the Sigma rule's detection if it relies on a specific argument sequence."
+  }
+]

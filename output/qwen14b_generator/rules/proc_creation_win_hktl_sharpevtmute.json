@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\SharpEvtMute.exe --Filter \"rule name=TestRule\" --Encoded",
+    "explanation": "Reordering: Reordered the '--Encoded' flag after the '--Filter' argument to potentially bypass the Sigma rule's CommandLine|contains check for the specific string order."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpEvtMute.exe --Filter \"rule name=TestRule\" --Encoded --NoLog",
+    "explanation": "Insertion: Added a harmless '--NoLog' flag to the command line, which may alter the CommandLine|contains match by inserting a new, benign argument."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpEvtMute.exe --Filter \"rule name=TestRule\" --Encoded --Quiet",
+    "explanation": "Substitution: Replaced '--Encoded' with '--Quiet' as a syntactically equivalent flag (if supported by the tool), which may avoid the Sigma rule's CommandLine|contains check for the '--Encoded' keyword."
+  }
+]

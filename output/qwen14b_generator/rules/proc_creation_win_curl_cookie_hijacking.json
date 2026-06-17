@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe -c \"C:\\Lab\\input\\sample.txt\" https://example.com",
+    "explanation": "Insertion: Added quotes around the path to avoid direct match with '-c' flag without a file argument, which may bypass the Sigma rule's regex."
+  },
+  {
+    "output": "curl.exe -c C:\\Lab\\input\\sample.txt https://example.com",
+    "explanation": "Omission: Removed spaces or delimiters that might trigger the Sigma rule's detection of '-c' flag with no explicit file path."
+  },
+  {
+    "output": "curl.exe --cookie-jar C:\\Lab\\input\\sample.txt https://example.com",
+    "explanation": "Substitution: Replaced '-c' with '--cookie-jar' which is functionally equivalent but may not trigger the Sigma rule's specific '-c' flag detection."
+  }
+]

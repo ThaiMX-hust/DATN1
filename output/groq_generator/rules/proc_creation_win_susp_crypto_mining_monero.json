@@ -33,4 +33,6 @@
   },
   {
     "output": "minerd -o stratum+tcp://pool.minexmr.com:443 -u <username> --cpu-priority=8",
-    "explanation": "This command includes 'stratum+tcp://' and '--cpu-p
+    "explanation": "This command includes 'stratum+tcp://' and '--cpu-p"
+  }
+]

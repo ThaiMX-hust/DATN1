@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo run run-cmd > C:\\Lab\\input\\test.txt",
+    "explanation": "Insertion: Inserting quotes and redirecting output to a lab file avoids the 'run run-cmd' string in the command line."
+  },
+  {
+    "output": "cmd.exe /c \"echo run run-cmd\" > C:\\Lab\\input\\test.txt",
+    "explanation": "Insertion: Using quotes and redirecting output to a lab file avoids the 'run run-cmd' string in the command line."
+  },
+  {
+    "output": "cmd.exe /c echo run-cmd > C:\\Lab\\input\\test.txt",
+    "explanation": "Omission: Removing the second 'run' in 'run run-cmd' changes the command line to avoid the Sigma rule's 'run run-cmd' string."
+  }
+]

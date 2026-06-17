@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ftp.exe -s \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to avoid triggering the '-s:' pattern match in the Sigma rule."
+  },
+  {
+    "output": "ftp.exe /s C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced '-s' with '/s' which may not be detected by the Sigma rule if it only looks for '-s:'."
+  },
+  {
+    "output": "ftp.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the '-s' flag entirely, which changes the behavior but avoids the Sigma rule's trigger."
+  }
+]

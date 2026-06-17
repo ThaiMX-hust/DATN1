@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "schtasks /Create /S localhost /RU DOMAIN\\user /RP At0micStrong /TN \"Atomic task\" /TR \"C:\\windows\\system32\\cmd.exe\" /SC daily /ST 20:10",
@@ -29,4 +28,3 @@
     "explanation": "The original command is already a valid test case. No mutation is needed to trigger the Sigma rule."
   }
 ]
-```

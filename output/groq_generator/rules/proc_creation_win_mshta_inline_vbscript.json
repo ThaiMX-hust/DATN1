@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "cmd.exe /c mshta vbscript:Execute(\"CreateObject(\"\"Wscript.Shell\"\"),Run \"\"powershell -noexit -file C:\\AtomicRedTeam\\atomics\\T1218.005\\src\\powershell.ps1\"\":close)",
@@ -21,4 +20,3 @@
     "explanation": "This command uses 'rundll32' with VBScript to invoke 'Wscript.Shell.Run' in a different format. It leverages path normalization and string concatenation to avoid direct keyword matching."
   }
 ]
-```

@@ -15,7 +15,7 @@ from .execution import (
     validate_payload_execution,
 )
 from .log_collection import collect_process_tree, export_evtx_by_process_tree, latest_sysmon_record_id
-from .models import CaseResult, RunnerConfig, SYSMON_EVENT_ID, SYSMON_LOG_NAME, TargetCase, ZircoliteRun
+from .models import CaseResult, RunnerConfig, SYSMON_EVENT_ID, SYSMON_LOG_NAME, SysmonProcessEvent, TargetCase, ZircoliteRun
 from .reports import (
     case_evidence_to_dict,
     case_result_to_dict,
@@ -178,7 +178,11 @@ def run_case(case: TargetCase, evtx_path: Path, config: RunnerConfig) -> CaseRes
         result.root_process_guid = root_event.process_guid
         result.root_process_commandline = root_event.commandline
     if not root_event or not process_tree:
-        result.note = join_notes(result.execution.note, tree_error)
+        result.execution.status = "FAILED_NO_SYSMON_ROOT" if not root_event else "FAILED_NO_SYSMON_PROCESS_TREE"
+        evidence_error = tree_error or "Sysmon process tree evidence was not collected"
+        result.execution.note = join_notes(result.execution.note, evidence_error)
+        result.note = result.execution.note
+        capture_end_record_id(result, config, process_tree)
         result.zircolite_status = "NOT_EXECUTED"
         result.final_status = "execution_failed"
         return result
@@ -367,3 +371,18 @@ def effective_case_timeout_seconds(case: TargetCase, config: RunnerConfig) -> in
     if case.timeout_seconds is None:
         return config.timeout_seconds
     return min(case.timeout_seconds, config.timeout_seconds)
+
+
+def capture_end_record_id(
+    result: CaseResult,
+    config: RunnerConfig,
+    process_tree: list[SysmonProcessEvent],
+) -> None:
+    """Populate the best available end RecordID for successful or failed evidence collection."""
+    latest_after, error = latest_sysmon_record_id(config.record_read_timeout_seconds)
+    if latest_after is not None:
+        result.end_record_id = latest_after
+    elif process_tree:
+        result.end_record_id = max(event.event_record_id for event in process_tree)
+    if error:
+        result.note = join_notes(result.note, f"failed to read end RecordID: {error}")

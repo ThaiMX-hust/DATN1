@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "tar.exe -xvf \"C:\\Temp\\test.tar\" -C C:\\Temp",
@@ -21,4 +20,3 @@
     "explanation": "Original command for reference, with no mutation applied."
   }
 ]
-```

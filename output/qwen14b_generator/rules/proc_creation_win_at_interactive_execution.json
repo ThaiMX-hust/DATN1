@@ -1,0 +1,14 @@
+[
+  {
+    "output": "at 13:20 /i cmd",
+    "explanation": "Substitution: Replaced '/interactive' with its short-form '/i', which may not be detected by the Sigma rule's 'CommandLine|contains: 'interactive' filter."
+  },
+  {
+    "output": "at 13:20 /interactive \"cmd\"",
+    "explanation": "Insertion: Added quotes around 'cmd' which may not affect the detection logic but introduces a harmless mutation."
+  },
+  {
+    "output": "at 13:20 /interactive cmd.exe",
+    "explanation": "Substitution: Replaced 'cmd' with 'cmd.exe', which is functionally equivalent but may not be detected by the Sigma rule's 'CommandLine|contains: 'interactive' filter."
+  }
+]

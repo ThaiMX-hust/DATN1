@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\test.dll,StartNodeRelay",
+    "explanation": "Reordering: The arguments are reordered to place the DLL path before the function, which may avoid the string match for 'StartNodeRelay' in the command line."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Lab\\input\\test.dll\" StartNodeRelay",
+    "explanation": "Insertion: Quotes are added around the DLL path, which may change the parsing and avoid the string match for 'StartNodeRelay' in the command line."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\test.dll,StartNodeRelayArg",
+    "explanation": "Substitution: The function name is changed to 'StartNodeRelayArg', which may avoid the string match for 'StartNodeRelay' in the command line."
+  }
+]

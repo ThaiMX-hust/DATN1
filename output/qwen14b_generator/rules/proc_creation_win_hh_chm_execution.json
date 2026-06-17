@@ -1,0 +1,14 @@
+[
+  {
+    "output": "hh.exe -decompile \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\input\\sample.chm\"",
+    "explanation": "Substitution: Replaced the suspicious .chm file path with a benign placeholder to avoid triggering the Sigma rule's .chm detection."
+  },
+  {
+    "output": "hh.exe \"C:\\Lab\\input\\sample.chm\"",
+    "explanation": "Substitution: Replaced the suspicious .chm file path with a benign placeholder to avoid triggering the Sigma rule's .chm detection."
+  },
+  {
+    "output": "hh.exe https://example.com/sample.chm",
+    "explanation": "Substitution: Replaced the suspicious .chm file path with a benign URL placeholder to avoid triggering the Sigma rule's .chm detection."
+  }
+]

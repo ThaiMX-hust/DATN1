@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "ldifde.exe -f C:\\output.ldf -d DC=example,DC=com -l *",
@@ -13,4 +12,3 @@
     "explanation": "No safe bypass command can be generated. The Sigma rule is focused on the presence of '-f' and absence of '-i', which are required for export and not optional. Mutation techniques cannot remove or alter these flags without changing the command's behavior."
   }
 ]
-```

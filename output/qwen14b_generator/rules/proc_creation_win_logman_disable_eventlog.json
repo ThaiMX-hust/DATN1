@@ -1,0 +1,14 @@
+[
+  {
+    "output": "logman stop \"Circular Kernel Context Logger\" -f xml -o C:\\Lab\\out\\trace.xml",
+    "explanation": "Insertion: Added -f xml -o C:\\Lab\\out\\trace.xml to provide a benign output path and format, which may bypass the Sigma rule's detection of 'stop' without a file path."
+  },
+  {
+    "output": "logman delete \"Circular Kernel Context Logger\" -q",
+    "explanation": "Omission: Removed the output file path and format parameters, which may bypass the Sigma rule's detection of 'delete' without additional parameters."
+  },
+  {
+    "output": "logman -stop \"Circular Kernel Context Logger\"",
+    "explanation": "Substitution: Replaced 'stop' with '-stop' to use a long option format, which may bypass the Sigma rule's detection of the 'stop' keyword."
+  }
+]

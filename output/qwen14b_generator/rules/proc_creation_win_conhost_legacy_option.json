@@ -1,0 +1,14 @@
+[
+  {
+    "output": "conhost.exe 0xffffffff -ForceV1",
+    "explanation": "Omission: Removed the path prefix \\??\\ which may be detected as a suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "conhost.exe -ForceV1 0xffffffff",
+    "explanation": "Reordering: Changed the order of arguments, which may avoid matching the Sigma rule's CommandLine|contains|all condition."
+  },
+  {
+    "output": "conhost.exe -ForceV1 0x00000000ffffffff",
+    "explanation": "Recoding: Expanded 0xffffffff to 0x00000000ffffffff, which may not match the Sigma rule's exact string match."
+  }
+]

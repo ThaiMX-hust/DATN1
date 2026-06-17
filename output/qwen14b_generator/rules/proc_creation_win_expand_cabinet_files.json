@@ -1,0 +1,14 @@
+[
+  {
+    "output": "expand \"C:\\Lab\\input\\sample.cab\" -F:* .",
+    "explanation": "Substitution: Replaced the suspicious folder path with a benign lab placeholder to avoid triggering the Sigma rule's folder-based detection."
+  },
+  {
+    "output": "expand C:\\Lab\\input\\sample.cab -F:* .",
+    "explanation": "Omission: Removed quotes around the file path, which may bypass the Sigma rule's string-based detection if it relies on specific formatting."
+  },
+  {
+    "output": "expand -F:* C:\\Lab\\input\\sample.cab .",
+    "explanation": "Reordering: Changed the order of arguments to potentially avoid the Sigma rule's CommandLine|contains detection based on positional patterns."
+  }
+]

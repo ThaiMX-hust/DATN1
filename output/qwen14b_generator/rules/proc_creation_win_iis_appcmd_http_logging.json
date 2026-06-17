@@ -1,0 +1,14 @@
+[
+  {
+    "output": "appcmd set config \"section:httplogging\" /commit:apphost",
+    "explanation": "Omission: Removed the 'dontLog:true' parameter, which is the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "appcmd set config \"section:httplogging\" -dontLog:true /commit:apphost",
+    "explanation": "Reordering: Changed the order of parameters, which may cause the Sigma rule's CommandLine|contains|all check to miss the exact sequence."
+  },
+  {
+    "output": "appcmd set config \"section:httplogging\" /dontLog:true /commit:apphost",
+    "explanation": "Substitution: Replaced the space between 'section:httplogging' and '/dontLog:true' with a slash, which may not be parsed correctly by the Sigma rule's string matching."
+  }
+]

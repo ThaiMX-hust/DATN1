@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f",
@@ -21,4 +20,3 @@
     "explanation": "This command uses escape characters (^) before the '/' flags, which is a valid mutation technique in some command-line environments. It still matches the Sigma rule."
   }
 ]
-```

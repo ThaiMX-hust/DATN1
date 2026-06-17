@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Zones\\0\" /v \"IEHarden\" /t REG_DWORD /d 0 /f",
@@ -13,4 +12,3 @@
     "explanation": "This command modifies the DisableFirstRunCustomize registry key to bypass IE's first-run customization. It aligns with the Sigma rule's detection logic."
   }
 ]
-```

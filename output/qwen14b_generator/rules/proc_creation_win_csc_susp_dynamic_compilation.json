@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe /r:System.EnterpriseServices.dll /out:C:\\Lab\\out\\T1218.009.dll /target:library /keyfile:C:\\Lab\\input\\key.snk C:\\Lab\\input\\T1218.009.cs",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Users\\thaim\\AppData\\Local\\Temp\\' with a benign lab placeholder 'C:\\Lab\\input\\' to avoid matching the 'selection_susp_location_1' pattern."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe /noconfig /fullpaths @\"C:\\Lab\\input\\4pk1n4ga\\4pk1n4ga.cmdline\"",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Users\\thaim\\AppData\\Local\\Temp\\' with a benign lab placeholder 'C:\\Lab\\input\\' to avoid matching the 'selection_susp_location_1' pattern."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe /out:C:\\Lab\\out\\T1027.004.exe C:\\Lab\\input\\calc.cs",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Windows\\Temp\\' with a benign lab placeholder 'C:\\Lab\\out\\' to avoid matching the 'selection_susp_location_1' pattern."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin.exe /addfile \"AtomicBITS\" \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md\" \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the transfer name and URL, which may prevent the Sigma rule from matching the CommandLine field directly."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md\" \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Changed the target path to a lab placeholder, which may avoid the suspicious domain match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt\" \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Reordering: The command line arguments are reordered but still function the same, which may avoid the Sigma rule's string matching."
+  }
+]

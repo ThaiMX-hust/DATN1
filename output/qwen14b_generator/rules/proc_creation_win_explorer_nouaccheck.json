@@ -1,0 +1,14 @@
+[
+  {
+    "output": "explorer.exe -NOUACCHECK",
+    "explanation": "Omission: Removed the suspicious path component, keeping the flag but changing the command line structure to avoid the Sigma path match."
+  },
+  {
+    "output": "explorer.exe /NOUACCHECK C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a benign file path argument, which may change the parsing context and avoid the Sigma string match."
+  },
+  {
+    "output": "explorer.exe /NOUACCHECK -help",
+    "explanation": "Substitution: Replaced the suspicious flag with a harmless argument, changing the command line behavior to avoid the Sigma flag match."
+  }
+]

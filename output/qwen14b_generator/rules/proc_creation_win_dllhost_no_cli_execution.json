@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dllhost.exe -help",
+    "explanation": "Insertion: Adding an argument to the command line changes the CommandLine field, potentially bypassing the Sigma rule's check for empty or 'dllhost.exe' command lines."
+  },
+  {
+    "output": "cmd.exe /c dllhost.exe",
+    "explanation": "Substitution: Wrapping the true-positive command in a shell command changes the executable and may alter the Sigma rule's detection logic based on the parent process or execution context."
+  },
+  {
+    "output": "dllhost.exe \"\"",
+    "explanation": "Insertion: Adding empty quotes to the command line may modify the CommandLine field in a way that the Sigma rule does not match, depending on how the parser interprets the command line."
+  }
+]

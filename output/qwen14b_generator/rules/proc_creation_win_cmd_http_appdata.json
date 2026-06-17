@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"set url=http://example.com & echo C:\\Lab\\input\\sample.txt !url!\"",
+    "explanation": "Substitution: Replaced the suspicious %AppData% with a benign lab placeholder C:\\Lab\\input\\sample.txt, which avoids the Sigma rule's AppData string match."
+  },
+  {
+    "output": "cmd.exe /c \"echo %AppData% !url! && set url=http://example.com\"",
+    "explanation": "Reordering: Changed the order of the commands so that the URL is not present in the initial part of the command line, which may avoid triggering the Sigma rule's URL detection."
+  },
+  {
+    "output": "cmd.exe /c \"set url=http://example.com & echo %AppData% !url!\" -nologo",
+    "explanation": "Insertion: Added an irrelevant parameter (-nologo) that does not affect the command's functionality but may alter the parsing and avoid matching the Sigma rule's string detection."
+  }
+]

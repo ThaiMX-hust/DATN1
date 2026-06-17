@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ldifde.exe -f \"C:\\Lab\\input\\sample.ldf\"",
+    "explanation": "Omission: Removed the '-i' flag which is used for importing, thus avoiding the filter_import condition."
+  },
+  {
+    "output": "ldifde.exe -f C:\\Lab\\input\\sample.ldf",
+    "explanation": "Insertion: Used double quotes around the file path to ensure proper parsing, which may not trigger the Sigma rule's string matching."
+  },
+  {
+    "output": "ldifde.exe -f C:\\Lab\\input\\sample.ldf -s",
+    "explanation": "Reordering: Added a non-sensitive flag '-s' which may not be detected by the Sigma rule's string matching."
+  }
+]

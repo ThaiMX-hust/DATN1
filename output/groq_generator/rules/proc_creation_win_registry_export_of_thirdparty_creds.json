@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "reg.exe save HKCU\\Software\\Aerofox\\Foxmail\\V3.1 C:\\exported_key.reg",
@@ -21,4 +20,3 @@
     "explanation": "This command uses 'reg.exe' with the 'save' verb to export a registry path associated with third-party credentials, matching the Sigma rule."
   }
 ]
-```

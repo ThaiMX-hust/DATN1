@@ -16,7 +16,7 @@
     "explanation": "Adding a space between the comma and the ordinal number is a safe mutation that may bypass the Sigma rule."
   },
   {
-    "output": "rundll32.exe some.dll, #\x32\x34",
+    "output": "rundll32.exe some.dll, #\\x32\\x34",
     "explanation": "Using hexadecimal escape sequences to represent the ordinal number is a safe mutation that may bypass the Sigma rule."
   },
   {

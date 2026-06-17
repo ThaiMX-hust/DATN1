@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\Tools\cloudflared.exe cleanup tunnel -connector-id 99999999-8888-7777-6666-555555555555",
+    "explanation": "Reordering: The command-line arguments are reordered to move 'cleanup' before 'tunnel', which may avoid the Sigma rule's string match for ' tunnel '."
+  },
+  {
+    "output": "C:\Tools\cloudflared.exe tunnel cleanup -connector-id 99999999-8888-7777-6666-555555555555 --config C:\\Lab\\input\\sample.config",
+    "explanation": "Insertion: A benign '--config' flag with a placeholder path is added, which may not trigger the Sigma rule's specific string match for '-config' due to the presence of the placeholder."
+  },
+  {
+    "output": "C:\Tools\cloudflared.exe tunnel cleanup -c 99999999-8888-7777-6666-555555555555",
+    "explanation": "Substitution: The '-connector-id' flag is replaced with '-c' as a shorthand, which may avoid the Sigma rule's string match for '-connector-id' while preserving the same executable family and intent."
+  }
+]

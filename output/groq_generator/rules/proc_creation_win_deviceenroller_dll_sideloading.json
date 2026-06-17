@@ -1,11 +1,9 @@
-```json
 [
   {
     "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=\"C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll\"",
     "explanation": "This command simulates a potential DLL sideloading attempt using the /PhoneDeepLink parameter with a non-existent DLL. It matches the Sigma rule's detection criteria."
   },
   {
-    "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll",
     "output": "C:\\\\Windows\\\\System32\\\\DeviceEnroller.exe /PhoneDeepLink=C:\\\\Path\\\\To\\\\NonExistent\\\\ShellChromeAPI.dll",
     "explanation": "This command is a simplified version of the first, with the omission of quotes around the path. It still matches the Sigma rule's detection criteria."
   },
@@ -18,4 +16,3 @@
     "explanation": "This command is a direct match for the Sigma rule's detection logic and is used as a baseline for testing."
   }
 ]
-```

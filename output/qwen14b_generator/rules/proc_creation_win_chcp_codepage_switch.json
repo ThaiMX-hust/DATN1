@@ -1,0 +1,6 @@
+[
+  {
+    "output": "chcp.com 936",
+    "explanation": "No mutation technique can avoid the suspicious code page identifier '936' in the command line."
+  }
+]

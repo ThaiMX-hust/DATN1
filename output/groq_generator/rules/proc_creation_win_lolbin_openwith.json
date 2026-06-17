@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "OpenWith.exe /c notepad.exe",
@@ -21,4 +20,3 @@
     "explanation": "Replaces '/c' with '-c', which is an equivalent syntax accepted by OpenWith.exe."
   }
 ]
-```

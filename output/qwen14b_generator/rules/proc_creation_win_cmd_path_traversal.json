@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the path to prevent path traversal detection, modifying how the command line is parsed."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed potential path traversal elements by using a benign lab path that does not contain suspicious characters."
+  },
+  {
+    "output": "cmd.exe /k C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced '/c' with '/k' to change the command execution mode while keeping the same benign intent and path."
+  }
+]

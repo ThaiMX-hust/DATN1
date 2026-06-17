@@ -32,4 +32,6 @@
     "explanation": "This command uses PowerShell to execute the Get-ADUser cmdlet with a filter to retrieve all users, selects specific properties, and exports the output to a file using the -Force parameter to overwrite the file if it exists, which matches the Sigma rule's detection criteria."
   },
   {
-    "output": "powershell.exe -Command \"Get-ADUser -Filter *
+    "output": "powershell.exe -Command \"Get-ADUser -Filter *"
+  }
+]

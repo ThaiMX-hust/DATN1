@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Testing command line mutation\"",
+    "explanation": "Insertion: Added quotes and a harmless echo command to avoid matching the suspicious CLI strings."
+  },
+  {
+    "output": "cmd.exe /c \"start-process -name TestApp -arg \"C:\\Lab\\input\\sample.txt\"\"",
+    "explanation": "Substitution: Replaced suspicious command names with a benign test command that does not trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"dir C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed any command-line elements that could trigger the Sigma rule while keeping a safe and benign command."
+  }
+]

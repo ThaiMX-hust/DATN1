@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /Q /c echo test > C:\\Lab\\out\\test.txt 2>&1",
+    "explanation": "Omission: Removed the network path redirection to a local file path, avoiding the suspicious '\\\\127.0.0.1\\' string in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c echo test > C:\\Lab\\out\\test.txt 2>&1",
+    "explanation": "Substitution: Replaced '/Q' with '/c' (equivalent syntax) and redirected output to a local file instead of a network path, avoiding the Sigma rule's network path detection."
+  },
+  {
+    "output": "cmd.exe /Q /c echo test > C:\\Lab\\out\\test.txt 2>&1",
+    "explanation": "Insertion: Added a harmless redirection to a local file, avoiding the network path '\\\\127.0.0.1\\' that triggers the Sigma rule."
+  }
+]

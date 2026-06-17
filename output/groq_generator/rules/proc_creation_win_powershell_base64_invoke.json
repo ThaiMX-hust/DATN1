@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell -e SQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AUABhAHQAaAAgAHcAaQBuADMAMgBfAHAAcgBvAGMAZQBzAHMAIAAtAE4AYQBtAGUAIABjAHIAZQBhAHQAZQAgAC0AQQByAGcAdQBtAGUAbgB0AEwAaQBzAHQAIABuAG8AdABlAHAAYQBkAC4AZQB4AGUA",
@@ -17,4 +16,3 @@
     "explanation": "Used a different case for the executable name ('PowerShell' instead of 'powershell'). This is a safe mutation that does not affect detection."
   }
 ]
-```

@@ -1,22 +1,18 @@
 [
   {
-    "output": "auditpol.exe /remove /category:\\"Account Management\\"",
+    "output": "auditpol.exe /remove /category:\"Account Management\"",
     "explanation": "This command uses the 'remove' flag, which is detected by the Sigma rule. The command is modified with quotes around the category name to test insertion as a safe mutation technique."
   },
   {
-    "output": "auditpol.exe -clear -category:\\"Logon/Logoff\\"",
+    "output": "auditpol.exe -clear -category:\"Logon/Logoff\"",
     "explanation": "The 'clear' flag is used, which is part of the Sigma rule's detection. The command is modified by using a dash '-' instead of a slash '/' for the flag, testing substitution as a safe mutation technique."
   },
   {
-    "output": "auditpol.exe /disable /subcategory:\\"Application Group Management\\"",
+    "output": "auditpol.exe /disable /subcategory:\"Application Group Management\"",
     "explanation": "The 'disable' flag is used, which is part of the Sigma rule's detection. The command is formatted with a normalized path-like structure for the subcategory to test recoding as a safe mutation technique."
   },
   {
     "output": "auditpol.exe /restore /file:C:\\\\Temp\\\\auditpolicy.pol",
     "explanation": "The 'restore' flag is used, which is part of the Sigma rule's detection. The command is modified by using double backslashes in the file path to test encoding as a safe mutation technique."
-  },
-  {
-    "output": "auditpol.exe /remove /category:\\"Account Management\\" /subcategory:\\"User Account Management\\""",
-    "explanation": "This command includes multiple arguments and uses the 'remove' flag. The command is modified by adding quotes around the category and subcategory values to test insertion as a safe mutation technique."
   }
 ]

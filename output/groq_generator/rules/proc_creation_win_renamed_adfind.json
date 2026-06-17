@@ -36,4 +36,6 @@
     "explanation": "Appending multiple spaces at the end of the command line is a safe mutation that may bypass detection if the rule does not account for trailing spaces."
   },
   {
-    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) # Bypass
+    "output": "\"cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\AdFind.exe\" -f (objectcategory=computer) # Bypass"
+  }
+]

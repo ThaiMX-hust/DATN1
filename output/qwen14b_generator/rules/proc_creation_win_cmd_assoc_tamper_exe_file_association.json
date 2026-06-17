@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c assoc .txt=exefile",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

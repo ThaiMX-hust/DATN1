@@ -1,0 +1,14 @@
+[
+  {
+    "output": "forfiles /p C:\\Lab\\input /m sample.txt /c echo Test",
+    "explanation": "Reordering and substitution: Reordered the '/c' flag with a benign command and replaced the target path with a lab placeholder, which may avoid the ' -c ' string match in the Sigma rule."
+  },
+  {
+    "output": "forfiles /p C:\\Lab\\input /m sample.txt /c \"echo Test\"",
+    "explanation": "Insertion: Added quotes around the '/c' argument, which may alter the string parsing and avoid the ' -c ' match in the Sigma rule."
+  },
+  {
+    "output": "forfiles /p C:\\Lab\\input /m sample.txt /c echo Test",
+    "explanation": "Omission: Removed spaces around the '/c' flag, which may avoid the ' -c ' string match in the Sigma rule."
+  }
+]

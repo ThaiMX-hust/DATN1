@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Get-Process | Where-Object { $_.Name -eq 'notepad' }\"",
+    "explanation": "Reordering: Reordered the command to avoid the suspicious stdin obfuscation pattern by using a direct PowerShell command instead of piping through stdin."
+  },
+  {
+    "output": "powershell -Command \"Get-Process | Where-Object { $_.Name -eq 'notepad' } | Format-List\"",
+    "explanation": "Insertion: Added a harmless delimiter (Format-List) to the command line, which does not affect the benign test behavior but changes the structure to avoid matching the Sigma rule's regex."
+  },
+  {
+    "output": "powershell -Command \"Get-Process | Where-Object { $_.Name -eq 'notepad' } | Select-Object Name, Id\"",
+    "explanation": "Substitution: Replaced the default output with a more specific selection command, which changes the command line structure and avoids the suspicious stdin obfuscation pattern."
+  }
+]

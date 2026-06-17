@@ -1,0 +1,14 @@
+[
+  {
+    "output": "gpresult -z",
+    "explanation": "Substitution: Replaced '/z' with its equivalent long option '-z', which may bypass the Sigma rule's '/z' string match."
+  },
+  {
+    "output": "gpresult /v",
+    "explanation": "Omission: Removed '/z' to avoid the Sigma rule's '/z' string match while retaining the '/v' flag, which may not trigger the rule."
+  },
+  {
+    "output": "gpresult /z | findstr /v \"Error\"",
+    "explanation": "Insertion: Added a pipeline to filter output, which may alter the command line's content and avoid the Sigma rule's CommandLine|contains match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -ma C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion of quotes and a space after -ma to avoid matching the ' -ma ' string in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -mp C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion of a space after -mp to avoid matching the ' -mp ' string in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Microsoft Visual Studio\\dump64.exe\" -ma -mp C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering arguments to avoid the ' -ma ' or ' -mp ' strings in the Sigma rule."
+  }
+]

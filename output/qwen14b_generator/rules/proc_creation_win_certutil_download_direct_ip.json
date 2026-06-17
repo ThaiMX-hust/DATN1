@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil -urlcache -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering and substitution: Replaced the output file name with a lab placeholder to avoid triggering the Sigma rule's suspicious file download detection."
+  },
+  {
+    "output": "certutil -urlcache -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the output file name with a lab placeholder to avoid triggering the Sigma rule's suspicious file download detection."
+  },
+  {
+    "output": "certutil -urlcache -split -f https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the output file name with a lab placeholder to avoid triggering the Sigma rule's suspicious file download detection."
+  }
+]

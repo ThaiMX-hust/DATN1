@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe & {. \"C:\\Lab\\input\\sample.txt\" $ppid=Get-Process explorer | select -expand id PPID-Spoof -ppid $ppid -spawnto \"C:\\Lab\\out\\archive.7z\" -dllpath \"C:\\Lab\\input\\sample.log\"}",
+    "explanation": "Reordering and substitution: Reordered arguments and replaced suspicious paths with lab placeholders to avoid matching the 'spoof-ppid' keyword and suspicious file paths."
+  },
+  {
+    "output": "powershell.exe & {. \"C:\\Lab\\input\\sample.txt\" $ppid=Get-Process explorer | select -expand id -spawnto \"C:\\Lab\\out\\archive.7z\" -dllpath \"C:\\Lab\\input\\sample.log\"}",
+    "explanation": "Omission: Removed the 'PPID-Spoof' keyword to avoid matching the Sigma rule's suspicious string while maintaining the general command structure."
+  },
+  {
+    "output": "powershell.exe & {. \"C:\\Lab\\input\\sample.txt\" $ppid=Get-Process explorer | select -expand id -spawnto \"C:\\Lab\\out\\archive.7z\" -dllpath \"C:\\Lab\\input\\sample.log\"}",
+    "explanation": "Reordering and substitution: Reordered the command line and replaced suspicious paths with lab placeholders to avoid matching the Sigma rule's suspicious string and file paths."
+  }
+]

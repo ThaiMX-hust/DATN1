@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin.exe /addfile \"AtomicBITS\" \"http://example.com/file.txt\" \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes around parameters to avoid direct string matching of suspicious keywords, while maintaining the same executable family and test intent."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground \"http://example.com/file.txt\" \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering and substitution of command-line arguments with a benign HTTP URL and lab placeholder path to avoid triggering Sigma string matches."
+  },
+  {
+    "output": "bitsadmin.exe /addfile \"AtomicBITS\" \"http://example.com/file.txt\" \"C:\\Lab\\input\\sample.txt\" /quiet",
+    "explanation": "Omission of optional elements and insertion of a harmless flag to alter the command-line structure without changing the benign test behavior."
+  }
+]

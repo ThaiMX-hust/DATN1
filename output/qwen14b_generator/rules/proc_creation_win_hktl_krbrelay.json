@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\KrbRelay.exe\" -spn HTTP/test -clsid 1234 -rbcd",
+    "explanation": "Insertion: Added quotes and spaces to modify the command line structure, potentially avoiding the 'contains' match for the suspicious CLI strings."
+  },
+  {
+    "output": "C:\\Lab\\tools\\KrbRelay.exe -clsid 1234 -spn HTTP/test -rbcd",
+    "explanation": "Reordering: Changed the order of command-line arguments, which might evade the 'contains' match if the Sigma rule relies on specific argument sequence."
+  },
+  {
+    "output": "C:\\Lab\\tools\\KrbRelay.exe -spn HTTP/test -rbcd -clsid 1234",
+    "explanation": "Omission: Removed optional elements while preserving the benign test behavior, which could bypass the 'contains' check if the omitted part is flagged."
+  }
+]

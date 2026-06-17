@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c mklink \"C:\\Lab\\input\\osk_symlink.exe\" \"C:\\Lab\\input\\cmd_sample.exe\"",
+    "explanation": "Reordering and substitution: Reordered command-line arguments and replaced the suspicious paths with benign lab placeholders to avoid matching the Sigma rule's path indicators."
+  },
+  {
+    "output": "cmd.exe /c mklink /h \"C:\\Lab\\input\\osk_symlink.exe\" \"C:\\Lab\\input\\cmd_sample.exe\"",
+    "explanation": "Substitution: Replaced the suspicious command-line keywords with equivalent syntax using the /h flag, which may not trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "cmd.exe /c mklink \"C:\\Lab\\input\\osk_symlink.exe\" \"C:\\Lab\\input\\cmd_sample.exe\" && echo Bypassed",
+    "explanation": "Insertion: Added a harmless command after the mklink operation, which may not trigger the Sigma rule's detection as the suspicious strings are still present but followed by a benign action."
+  }
+]

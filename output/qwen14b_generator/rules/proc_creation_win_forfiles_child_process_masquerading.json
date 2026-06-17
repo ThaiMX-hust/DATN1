@@ -1,0 +1,14 @@
+[
+  {
+    "output": "forfiles /p C:\\Lab\\input /m *.txt /c \"echo Test\"",
+    "explanation": "Insertion: Added quotes and a benign path to avoid triggering the 'cmd.exe' detection by altering the command line structure."
+  },
+  {
+    "output": "forfiles /p C:\\Lab\\input /m *.txt /c echo Test",
+    "explanation": "Omission: Removed quotes around 'echo Test' to avoid the hardcoded '/c echo \"' pattern that triggers the Sigma rule."
+  },
+  {
+    "output": "forfiles /p C:\\Lab\\input /m *.txt /c \"echo Test\" -nologo",
+    "explanation": "Substitution: Added a harmless flag '-nologo' to modify the command line without changing the core behavior, potentially evading the pattern match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "xcopy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z /s /h /y",
+    "explanation": "Reordering: The command uses xcopy but does not include 'powershell.exe' or 'pwsh.exe' in the CommandLine, avoiding the Sigma rule's keyword match."
+  },
+  {
+    "output": "attrib +s +h C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: The command uses attrib with +s and +h flags but does not include '.bat.exe' in the CommandLine, avoiding the Sigma rule's keyword match."
+  },
+  {
+    "output": "cmd /c echo Test > C:\\Lab\\out\\test.txt",
+    "explanation": "Substitution: The command uses cmd.exe but does not include any suspicious elements in the CommandLine, avoiding the Sigma rule's keyword match."
+  }
+]

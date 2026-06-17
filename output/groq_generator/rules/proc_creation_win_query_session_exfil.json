@@ -8,7 +8,7 @@
     "explanation": "This command uses 'query.exe' to retrieve process information and redirect the output to a file, matching the Sigma rule's detection of 'process >'."
   },
   {
-    "output": "query.exe session > \\\\?\\"C:\\Users\\User\\Downloads\\sessions_output.txt",
+    "output": "query.exe session > \\\\\\\\?\\\\\"C:\\\\Users\\\\User\\\\Downloads\\\\sessions_output.txt",
     "explanation": "This command uses 'query.exe' to retrieve session information and redirect the output to a file using the long path prefix '\\\\?\\', which is a safe mutation technique."
   },
   {

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ilasm.exe /help",
+    "explanation": "Omission: Removed the suspicious command-line flags (/dll or /exe) that trigger the Sigma rule, but the command still uses ilasm.exe with a benign purpose (displaying help)."
+  },
+  {
+    "output": "cmd.exe /c ilasm.exe /help",
+    "explanation": "Insertion: Wrapped the command in a harmless shell invocation (cmd.exe /c) to avoid direct detection of the suspicious executable in the command line."
+  },
+  {
+    "output": "C:\\Lab\\tools\\ilasm.exe /help",
+    "explanation": "Substitution: Replaced the default path with a benign lab placeholder (C:\\Lab\\tools\\ilasm.exe) to avoid the suspicious path match while preserving the executable family and intent."
+  }
+]

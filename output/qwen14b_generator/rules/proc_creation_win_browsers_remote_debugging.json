@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222 --disable-remote-debugging",
+    "explanation": "Omission: Removed the suspicious flag by disabling remote debugging, which may bypass the rule by not triggering the 'remote-debugging' keyword."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222 --disable-remote-debugging --disable-features=RemoteDebugging",
+    "explanation": "Insertion: Added a feature disable flag to prevent remote debugging, which may bypass the rule by not activating the debugging feature."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222 --disable-remote-debugging --disable-features=RemoteDebugging --no-sandbox",
+    "explanation": "Substitution: Added a sandbox disable flag to modify execution context, which may bypass the rule by not triggering the debugging flags."
+  }
+]

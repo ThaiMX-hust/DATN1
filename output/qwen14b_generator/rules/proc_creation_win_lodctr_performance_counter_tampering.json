@@ -1,0 +1,14 @@
+[
+  {
+    "output": "lodctr.exe -r \"C:\\Lab\\input\\sample.config\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "lodctr.exe -r C:\\Lab\\input\\sample.config",
+    "explanation": "Omission: Removed quotes around the path, which may not be required by the executable and avoids the Sigma rule's string-based detection."
+  },
+  {
+    "output": "lodctr.exe -r C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the .config extension with .txt, which may not be recognized by the Sigma rule's file extension-based detection."
+  }
+]

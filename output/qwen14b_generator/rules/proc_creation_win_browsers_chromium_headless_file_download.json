@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --headless --dump-dom http://192.0.2.10",
+    "explanation": "Reordering: Reordered the command-line arguments to test if the Sigma rule's 'CommandLine|contains|all' logic is sensitive to argument order."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --headless --dump-dom \"http://192.0.2.10\"",
+    "explanation": "Insertion: Added quotes around the URL to test if the Sigma rule's 'CommandLine|contains|all' logic is sensitive to quoted strings."
+  },
+  {
+    "output": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --headless --dump-dom http://192.0.2.10 --safe-mode",
+    "explanation": "Insertion: Added a benign '--safe-mode' argument to test if the Sigma rule's 'CommandLine|contains|all' logic is sensitive to additional non-malicious arguments."
+  }
+]

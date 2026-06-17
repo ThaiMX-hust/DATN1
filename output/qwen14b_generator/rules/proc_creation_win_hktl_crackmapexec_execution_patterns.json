@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"cmd.exe /Q /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1\"",
+    "explanation": "Insertion: Added quotes around the inner command to avoid direct string matching of the suspicious pattern, potentially bypassing the Sigma rule's string detection."
+  },
+  {
+    "output": "cmd.exe /c cmd.exe /Q /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "Omission: Removed unnecessary whitespace or characters that might trigger the Sigma rule's pattern matching."
+  },
+  {
+    "output": "cmd.exe /c cmd.exe /Q /c hostname 1> \\\\127.0.0.1\\ADMIN$\\output.txt 2>&1",
+    "explanation": "Reordering: Reordered command-line arguments to avoid matching the Sigma rule's specific string patterns."
+  }
+]

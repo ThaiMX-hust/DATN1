@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "SoundRecorder.exe /FILE C:\\RecordedAudio.wav",
@@ -33,4 +32,3 @@
     "explanation": "Pipes the output to another command, which may be ignored or not parsed correctly by the detection rule."
   }
 ]
-```

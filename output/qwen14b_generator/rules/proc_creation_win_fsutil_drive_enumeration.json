@@ -1,0 +1,14 @@
+[
+  {
+    "output": "fsutil fsinfo drives 2>&1 | findstr /v /c:\"No drives found\"",
+    "explanation": "Insertion: Added a pipeline and findstr command to filter output, potentially altering the command line structure and avoiding the 'drives' keyword match in the Sigma rule."
+  },
+  {
+    "output": "fsutil fsinfo drives > C:\\Lab\\out\\fsutil_output.txt",
+    "explanation": "Substitution: Redirected output to a lab-specific file, which may not trigger the Sigma rule if it only monitors the command line and not the output file."
+  },
+  {
+    "output": "fsutil fsinfo drives | more",
+    "explanation": "Reordering: Added a 'more' command to paginate output, which may change the command line parsing and avoid the 'drives' keyword match in the Sigma rule."
+  }
+]

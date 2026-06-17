@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\format.com /fs:exFAT C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the uncommon filesystem with 'exFAT' which is a known filesystem type, thus avoiding the Sigma rule's uncommon filesystem detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\format.com /fs:NTFS C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the uncommon filesystem with 'NTFS' which is a known filesystem type, thus avoiding the Sigma rule's uncommon filesystem detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\format.com /fs:UDF C:\\Lab\\input\\sample.7z",
+    "explanation": "Substitution: Replaced the uncommon filesystem with 'UDF' which is a known filesystem type, thus avoiding the Sigma rule's uncommon filesystem detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "conhost.exe /path/to/file.txt",
+    "explanation": "Omission: Removed the path traversal component '/../../' to avoid triggering the Sigma rule's path traversal detection."
+  },
+  {
+    "output": "conhost.exe -file C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious '/../../' with a benign path using a different flag syntax to avoid matching the Sigma rule's string pattern."
+  },
+  {
+    "output": "conhost.exe \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Enclosed the path in quotes to modify parsing behavior without altering the actual path, potentially avoiding the Sigma rule's string match."
+  }
+]

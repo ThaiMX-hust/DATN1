@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe --doh-insecure https://example.com --proxy-insecure http://proxy.example.com:8080",
+    "explanation": "Insertion: Adding harmless delimiters and placeholders to avoid direct keyword matching while maintaining the same command structure."
+  },
+  {
+    "output": "curl.exe --proxy-insecure http://proxy.example.com:8080 --doh-insecure https://example.com",
+    "explanation": "Reordering: Changing the order of flags to avoid direct keyword matching while preserving the command intent."
+  },
+  {
+    "output": "curl.exe --proxy-insecure http://proxy.example.com:8080 -doh-insecure https://example.com",
+    "explanation": "Substitution: Replacing '--doh-insecure' with a non-standard flag format that may not trigger the Sigma rule's string match."
+  }
+]

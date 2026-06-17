@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Windows\\SysWOW64\\certoc.exe\" -LoadDLL \"C:\\Lab\\input\\TestLibrary.dll\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's path indicators."
+  },
+  {
+    "output": "\"C:\\Windows\\SysWOW64\\certoc.exe\" -LoadDLL C:\\Lab\\input\\TestLibrary.dll",
+    "explanation": "Omission: Removed quotes around the DLL path, which may not trigger the Sigma rule's string matching."
+  },
+  {
+    "output": "certoc.exe -LoadDLL C:\\Lab\\input\\TestLibrary.dll",
+    "explanation": "Reordering: Removed the full path to the executable, relying on system PATH resolution, which may avoid the Sigma rule's image path matching."
+  }
+]

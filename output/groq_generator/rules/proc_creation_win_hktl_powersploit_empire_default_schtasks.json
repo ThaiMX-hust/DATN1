@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "schtasks.exe /Create /TN \"Updater\" /TR \"powershell.exe -NonI -Command Get-Date\" /SC ONLOGON",
@@ -17,4 +16,3 @@
     "explanation": "This command includes '/Create', '/TN Updater', '/TR pwsh.exe -NonI', and '/SC HOURLY', matching the Sigma rule's detection criteria for scheduled task creation."
   }
 ]
-```

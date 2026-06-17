@@ -1,0 +1,14 @@
+[
+  {
+    "output": "chcp | findstr /i \"codepage\"",
+    "explanation": "Insertion: Added a pipeline and command to filter output, which may alter the command structure and avoid direct string matches in the Sigma rule."
+  },
+  {
+    "output": "chcp 65001",
+    "explanation": "Substitution: Specifying a code page number may not trigger the same Sigma rule if it doesn't match the suspicious string/field patterns."
+  },
+  {
+    "output": "cmd /c chcp",
+    "explanation": "Reordering: Wrapping the command in a CMD invocation may change how the command line is parsed and reduce the likelihood of matching the Sigma rule."
+  }
+]

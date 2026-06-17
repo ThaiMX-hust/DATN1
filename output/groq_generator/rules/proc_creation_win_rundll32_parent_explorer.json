@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "rundll32.exe C:\\Windows\\System32\\shell32.dll,Control_RunDLL",
@@ -21,4 +20,3 @@
     "explanation": "This command is a standard benign invocation of rundll32.exe with a parent process of explorer.exe. It is designed to test detection accuracy without triggering false positives."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dotnet-trace collect -- \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes around the file path to prevent the '-- ' from being interpreted as a command-line argument, potentially bypassing the 'collect' keyword detection."
+  },
+  {
+    "output": "dotnet-trace collect -- C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission of the space after '--' to avoid triggering the 'collect' keyword detection, while still maintaining the same benign test intent."
+  },
+  {
+    "output": "dotnet-trace --collect C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution of '-- ' with '--collect' to maintain the same action but avoid the '-- ' and 'collect' keyword sequence that triggers the Sigma rule."
+  }
+]

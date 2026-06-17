@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "c:\\windows\\system32\\msiexec.exe /quiet /i \"C:\\AtomicRedTeam\\atomics\\T1218.007\\bin\\T1218.007_DLL.msi\"",
@@ -21,4 +20,3 @@
     "explanation": "Used /qn instead of /quiet, which is a valid alternative flag for quiet installation and may bypass detection looking for /quiet."
   }
 ]
-```

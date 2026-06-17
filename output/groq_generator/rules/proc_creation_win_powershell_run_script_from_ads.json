@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"Get-Content -Path $env:TEMP\\NTFS_ADS.txt -Stream 'streamCommand' | Invoke-Expression\"",
@@ -13,4 +12,3 @@
     "explanation": "This command wraps the original logic in a subexpression with minimal syntax changes, preserving the ADS execution pattern while using a slightly different invocation structure."
   }
 ]
-```

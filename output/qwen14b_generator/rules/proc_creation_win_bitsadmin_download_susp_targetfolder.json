@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin.exe /addfile AtomicBITS https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\input\\sample.txt",
+    "explanation": "Replaced the suspicious target folder with a benign lab placeholder using substitution, which may avoid the Sigma rule's folder path match."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\input\\sample.txt",
+    "explanation": "Replaced the suspicious target folder with a benign lab placeholder using substitution, which may avoid the Sigma rule's folder path match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bitsadmin.exe /transfer qcxjb7 /Priority HIGH https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt C:\\Lab\\input\\sample.txt",
+    "explanation": "Replaced the suspicious target folder with a benign lab placeholder using substitution, which may avoid the Sigma rule's folder path match."
+  }
+]

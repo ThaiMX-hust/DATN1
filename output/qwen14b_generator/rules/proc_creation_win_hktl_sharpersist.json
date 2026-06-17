@@ -1,0 +1,14 @@
+[
+  {
+    "output": "SharPersist.exe -t schtask -c \"C:\\Lab\\input\\sample.txt\" -m add",
+    "explanation": "Insertion: Added quotes around the command line argument to bypass the ' -c ' string match in the Sigma rule."
+  },
+  {
+    "output": "SharPersist.exe -t schtask -c C:\\Lab\\input\\sample.txt -m add",
+    "explanation": "Omission: Removed spaces around the ' -c ' argument to avoid matching the ' -c ' string in the Sigma rule."
+  },
+  {
+    "output": "SharPersist.exe -t schtask -c C:\\Lab\\input\\sample.txt -m add -v",
+    "explanation": "Reordering: Added an extra flag '-v' at the end to change the argument order and avoid matching the ' -c ' string in the Sigma rule."
+  }
+]

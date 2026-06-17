@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr.exe \"385201\"",
+    "explanation": "Insertion: Adding quotes around the argument may prevent the Sigma rule from matching the '385201' string in the command line."
+  },
+  {
+    "output": "findstr.exe 385201 -n",
+    "explanation": "Substitution: Adding a harmless flag (-n) may alter the command line parsing and avoid matching the '385201' string in the Sigma rule."
+  },
+  {
+    "output": "findstr.exe -n 385201",
+    "explanation": "Reordering: Reordering the arguments may change the command line parsing and avoid matching the '385201' string in the Sigma rule."
+  }
+]

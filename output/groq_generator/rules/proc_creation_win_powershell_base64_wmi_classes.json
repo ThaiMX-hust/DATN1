@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -EncodedCommand UwBoAGEAZABvAHcAYwBvAHAAeQ==",
@@ -39,7 +38,5 @@
   {
     "output": "pwsh -Command \"Get-CimInstance -ClassName Win32_Process\" | Out-String | clip",
     "explanation": "This command uses the newer CIM cmdlet to access the WMI class 'Win32_Process', which is functionally equivalent and a true positive for the Sigma rule."
-  },
-  {
-    "output": "pwsh -Command \"Get-CimInstance -ClassName Win32_UserAccount\" | Out-String | clip",
-    "explanation
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "WINWORD.EXE \"C:\\Users\\User\\AppData\\Roaming\\Microsoft\\Templates\\MaliciousDocument.docm\"",
@@ -13,4 +12,3 @@
     "explanation": "This command simulates the execution of POWERPNT.EXE with a document path that matches a trusted location (Microsoft Office\\root\\Templates). The use of quotes and uppercase extension is a safe mutation technique."
   }
 ]
-```

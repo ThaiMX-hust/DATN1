@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe --header \"User-Agent: Mozilla/5.0\" https://example.com",
+    "explanation": "Reordering: The command uses --header instead of -H, which may avoid the Sigma rule's regex match on '-H'."
+  },
+  {
+    "output": "curl.exe -H \"User-Agent: Mozilla/5.0\" https://example.com",
+    "explanation": "Insertion: Adding quotes around the header value may prevent the Sigma rule from detecting the 'User-Agent:' string in the command line."
+  },
+  {
+    "output": "curl.exe https://example.com -H \"User-Agent: Mozilla/5.0\"",
+    "explanation": "Reordering: The -H flag is placed after the URL, which may not be detected by the Sigma rule if it only checks for '-H' before the 'User-Agent' string."
+  }
+]

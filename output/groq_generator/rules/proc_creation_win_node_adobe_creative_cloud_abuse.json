@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe -e \"console.log('bypass test')\"",
@@ -17,4 +16,3 @@
     "explanation": "This command uses path normalization (shortened directory name) to test detection resilience against path variations. This is a safe mutation technique for testing."
   }
 ]
-```

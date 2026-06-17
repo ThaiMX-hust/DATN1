@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\SharpUp.exe -HijackablePaths C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command line reorders arguments to potentially avoid matching the 'HijackablePaths' keyword in the expected position, which may bypass the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpUp.exe -HijackablePaths \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Quotation marks are added around the path argument, which may alter parsing behavior and avoid matching the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpUp.exe -HijackablePaths C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: The file extension is changed from .txt to .log, which may avoid triggering the Sigma rule's suspicious file type detection while maintaining the same command-line structure."
+  }
+]

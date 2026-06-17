@@ -12,7 +12,7 @@
     "explanation": "This command uses 'Sysnative' as an alternative path to System32, which may bypass detection by altering the binary path."
   },
   {
-    "output": "VSDiagnostics.exe start -launch=.\.\.\Windows\System32\notepad.exe",
+    "output": "VSDiagnostics.exe start -launch=.\\.\\.\\Windows\\System32\notepad.exe",
     "explanation": "This command uses path normalization with multiple dots and newline characters to obfuscate the binary path and evade detection."
   },
   {

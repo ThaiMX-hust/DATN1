@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "SharpMove.exe -computername=TESTPC -action=create",
@@ -41,4 +40,3 @@
     "explanation": "This command includes multiple actions and the required 'computername' parameter. It is a valid test case for the rule."
   }
 ]
-```

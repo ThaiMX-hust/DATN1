@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "cmd.exe /q /c chcp 65001 && echo Test",
@@ -21,4 +20,3 @@
     "explanation": "This command uses a benign echo command to simulate additional behavior while maintaining the same execution pattern."
   }
 ]
-```

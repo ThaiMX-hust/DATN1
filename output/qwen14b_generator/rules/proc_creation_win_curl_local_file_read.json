@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe --data-binary @\"C:\\Lab\\input\\sample.txt\" http://localhost:8080/upload",
+    "explanation": "Reordering: The command uses --data-binary with a local file path but does not include the 'file:///' protocol, bypassing the Sigma rule's string match."
+  },
+  {
+    "output": "curl.exe -X POST -H \"Content-Type: application/octet-stream\" --data-binary @\"C:\\Lab\\input\\sample.txt\" http://localhost:8080/upload",
+    "explanation": "Substitution: Uses -X POST and -H for headers instead of 'file:///', changing the command structure without altering the benign intent."
+  },
+  {
+    "output": "curl.exe --data-binary @\"C:\\Lab\\input\\sample.txt\" https://localhost:8080/upload",
+    "explanation": "Insertion: Uses HTTPS instead of HTTP and includes a data-binary flag without the 'file:///' protocol, avoiding the Sigma rule's trigger."
+  }
+]

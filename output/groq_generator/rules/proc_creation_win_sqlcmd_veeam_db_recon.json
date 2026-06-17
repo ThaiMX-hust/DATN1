@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "sqlcmd -S localhost -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\"",
@@ -41,4 +40,3 @@
     "explanation": "This command appends a pipeline to filter output, but the original query still includes the required keywords for detection."
   }
 ]
-```

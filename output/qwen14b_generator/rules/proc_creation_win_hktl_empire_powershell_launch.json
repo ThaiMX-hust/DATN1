@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -NoP -sta -NonI -W Hidden -Enc \"AQAAAB4A\"",
+    "explanation": "Insertion: Added quotes around the encoded command to prevent the Sigma rule from matching the ' -Enc ' string directly."
+  },
+  {
+    "output": "powershell -noP -sta -w 1 -enc \"AQAAAB4A\"",
+    "explanation": "Substitution: Replaced ' -Enc ' with ' -enc ' and added quotes to avoid matching the exact string in the Sigma rule."
+  },
+  {
+    "output": "powershell -nop -exec bypass -EncodedCommand \"AQAAAB4A\"",
+    "explanation": "Omission: Removed the ' -Enc ' string entirely and replaced it with ' -EncodedCommand ' to avoid matching the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\IEExec.exe -f C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the URL-based command-line argument, which is the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\IEExec.exe -i C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the URL-based argument with a local file path, avoiding the suspicious network-related Sigma indicator."
+  },
+  {
+    "output": "C:\\Windows\\System32\\IEExec.exe -h C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the URL-based argument with a local archive file path, avoiding the suspicious network-related Sigma indicator."
+  }
+]

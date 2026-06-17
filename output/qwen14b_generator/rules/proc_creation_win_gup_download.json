@@ -1,0 +1,14 @@
+[
+  {
+    "output": "GUP.exe -unzipTo \"C:\\Lab\\out\\archive.7z\" \"C:\\Lab\\input\\sample.txt\" \"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB11386290D3426C3DE2E53AC6\"",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid the Sigma rule's suspicious path detection."
+  },
+  {
+    "output": "GUP.exe -unzipTo \"C:\\Lab\\out\\archive.7z\" \"C:\\Lab\\input\\sample.txt\" \"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB11386290D3426C3DE2E53AC6\" -silent",
+    "explanation": "Insertion: Added a harmless flag (-silent) to the command line without altering the core functionality, potentially bypassing the Sigma rule's string matching."
+  },
+  {
+    "output": "GUP.exe -unzipTo \"C:\\Lab\\out\\archive.7z\" \"C:\\Lab\\input\\sample.txt\" \"Sample https://getsamplefiles.com/download/zip/sample-2.zip CAC4D26F32CA629DFB10FE614ED00EB11386290D3426C3DE2E53AC6\" -nolog",
+    "explanation": "Insertion: Added a harmless flag (-nolog) to the command line without altering the core functionality, potentially bypassing the Sigma rule's string matching."
+  }
+]

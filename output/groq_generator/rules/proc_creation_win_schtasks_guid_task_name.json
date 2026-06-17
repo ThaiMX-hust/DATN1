@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "schtasks /Create /TN \"{12345678-9ABC-DEF0-1234-56789ABCDEF0}\" /SC ONCE /ST 00:00 /TR \"notepad.exe\"",
@@ -21,4 +20,3 @@
     "explanation": "This command reorders the arguments, which is a valid mutation technique and still matches the Sigma rule."
   }
 ]
-```

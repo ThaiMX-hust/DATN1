@@ -1,0 +1,14 @@
+[
+  {
+    "output": "auditpol /set /subcategory:\"Logon\" /success:disable /failure:disable /logon:none",
+    "explanation": "Insertion: Added '/logon:none' which is part of the Sigma rule's suspicious indicators, but may be missed if the rule is not checking for all possible flags together."
+  },
+  {
+    "output": "auditpol /set /subcategory:\"Logon\" /success:disable /failure:disable -logon:none",
+    "explanation": "Substitution: Replaced '/' with '-', which may be missed by the Sigma rule if it's not checking for alternative flag syntax."
+  },
+  {
+    "output": "auditpol /set /subcategory:\"Logon\" /success:disable /failure:disable --logon:none",
+    "explanation": "Reordering: Reordered arguments, which may be missed by the Sigma rule if it's not checking for argument order."
+  }
+]

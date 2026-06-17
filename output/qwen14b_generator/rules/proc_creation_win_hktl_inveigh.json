@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToIPs 192.168.1.1 -ReplyToDomains example.com -ReplyToMACs 00-11-22-33-44-55 -SnifferIP 192.168.1.200",
+    "explanation": "Insertion: Added explicit path to a lab placeholder file to avoid matching the suspicious path indicator in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToIPs 192.168.1.1 -ReplyToDomains example.com -ReplyToMACs 00-11-22-33-44-55 -SnifferIP 192.168.1.200 -d C:\\Lab\\out\\results",
+    "explanation": "Insertion: Added a harmless delimiter and a dummy output directory to avoid matching the suspicious command-line keywords in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\Inveigh.exe -SpooferIP 192.168.1.100 -ReplyToIPs 192.168.1.1 -ReplyToDomains example.com -ReplyToMACs 00-11-22-33-44-55 -SnifferIP 192.168.1.200 -t test",
+    "explanation": "Insertion: Added a harmless flag (-t test) to avoid matching the suspicious command-line keywords in the Sigma rule."
+  }
+]

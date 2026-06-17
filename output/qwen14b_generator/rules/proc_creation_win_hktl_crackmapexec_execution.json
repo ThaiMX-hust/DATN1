@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\Tools\crackmapexec.exe smb 192.0.2.10 -M dummy",
+    "explanation": "Insertion: Added '-M dummy' after the target IP to avoid triggering the ' -M pe_inject ' string match."
+  },
+  {
+    "output": "C:\Tools\crackmapexec.exe smb 192.0.2.10 -u test -p test",
+    "explanation": "Omission: Removed the '-M pe_inject' flag and replaced it with '-u test -p test' to avoid matching the ' -M pe_inject ' string."
+  },
+  {
+    "output": "C:\Tools\crackmapexec.exe smb 192.0.2.10 -u test -H 'TESTHASH'",
+    "explanation": "Substitution: Replaced the '-p' flag with '-H 'TESTHASH'' to avoid the ' -p ' string match in the Sigma rule."
+  }
+]

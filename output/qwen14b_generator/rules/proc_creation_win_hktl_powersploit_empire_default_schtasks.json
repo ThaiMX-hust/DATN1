@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN \"Updater\" /TR \"C:\\Lab\\input\\sample.txt\" /SC ONLOGON",
+    "explanation": "Reordering and substitution: The command reorders the arguments and replaces the suspicious PowerShell execution string with a benign placeholder, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "schtasks.exe /Create /TN Updater /TR \"C:\\Lab\\input\\sample.txt\" /SC ONLOGON",
+    "explanation": "Omission: The command omits the suspicious '/TR' argument with the PowerShell execution string, replacing it with a benign placeholder to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /Create /TN Updater /TR \"C:\\Lab\\input\\sample.txt\" /SC ONLOGON /F",
+    "explanation": "Insertion: The command inserts an additional '/F' flag, which does not alter the core behavior but may change the string matching logic of the Sigma rule."
+  }
+]

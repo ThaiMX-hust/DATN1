@@ -1,0 +1,14 @@
+[
+  {
+    "output": "appcmd set config \"system.webServer/rewrite/globalRules\" -commit:apphost",
+    "explanation": "Omission: Removed the suspicious 'set config section:system.webServer/rewrite/globalRules' string to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "appcmd set config -section:system.webServer/rewrite/globalRules -commit:apphost",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid the Sigma string match while maintaining the same intent."
+  },
+  {
+    "output": "appcmd set config -section:system.webServer/rewrite/globalRules -commit:apphost -config:C:\\Lab\\input\\config.xml",
+    "explanation": "Insertion: Added a benign placeholder path to the command line, which may prevent the Sigma rule from matching the original suspicious pattern."
+  }
+]

@@ -37,4 +37,6 @@
   },
   {
     "output": "powershell.exe & {rundll32.exe zipfldr.dll,RouteTheCall \"C:\\\\Windows\\\\System32\\\\calc.exe\"}",
-    "explanation": "Replaced environment variable
+    "explanation": "Replaced environment variable"
+  }
+]

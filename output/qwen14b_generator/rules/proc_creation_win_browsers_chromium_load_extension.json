@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=\"C:\\Lab\\input\\test_extension\"",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Temp\\test_extension' with a benign lab placeholder 'C:\\Lab\\input\\test_extension' to avoid triggering the Sigma rule while maintaining the same executable family and test intent."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Lab\\input\\test_extension",
+    "explanation": "Omission: Removed quotes around the path argument, which may be parsed correctly by the executable and avoid the Sigma rule's 'CommandLine|contains' check."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Lab\\input\\test_extension --disable-extensions",
+    "explanation": "Insertion: Added an additional flag '--disable-extensions' which may alter the command line parsing behavior and avoid the Sigma rule's 'CommandLine|contains' check."
+  }
+]

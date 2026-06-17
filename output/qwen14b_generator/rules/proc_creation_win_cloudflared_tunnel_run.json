@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\Tools\cloudflared.exe tunnel run -credentials-file \"C:\\Lab\\input\\sample.json\"",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Temp\\test.json' with a benign lab placeholder 'C:\\Lab\\input\\sample.json' using substitution technique, which may avoid the Sigma rule's path-based detection."
+  },
+  {
+    "output": "C:\Tools\cloudflared.exe tunnel run -credentials-file C:\\Lab\\input\\sample.json",
+    "explanation": "Encoding: Used double backslashes in the path 'C:\\Lab\\input\\sample.json' to encode the path safely, which may avoid the Sigma rule's string-based detection."
+  },
+  {
+    "output": "C:\Tools\cloudflared.exe tunnel run -credentials-file C:\\Lab\\input\\sample.json -v",
+    "explanation": "Insertion: Added a harmless verbose flag '-v' to the command line, which may not trigger the Sigma rule's detection based on the presence of '-credentials-file' and other keywords."
+  }
+]

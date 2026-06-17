@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"powershell.exe\" & {Export-Certificate -Cert (Get-ChildItem Cert:\\CurrentUser\\My)[0] -FilePath \"$env:PUBLIC\\T1649\\cert.cer\"}",
@@ -13,4 +12,3 @@
     "explanation": "This command uses `Export-Certificate` with dynamic path construction and environment variables. It avoids explicit certificate names and uses pipeline commands to select a certificate, reducing the likelihood of detection."
   }
 ]
-```

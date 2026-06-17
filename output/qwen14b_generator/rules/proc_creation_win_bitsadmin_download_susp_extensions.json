@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The command line reorders arguments to avoid triggering the suspicious extension check by placing the URL before the output path, which may not match the Sigma rule's string pattern."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\out\\archive",
+    "explanation": "Omission: The output path omits the file extension, which may not trigger the Sigma rule's extension check since the suspicious extension is not explicitly present."
+  },
+  {
+    "output": "bitsadmin.exe /transfer /Download /priority Foreground https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1197/T1197.md C:\\Lab\\out\\archive.txt",
+    "explanation": "Substitution: The output path uses a benign extension (.txt) instead of a suspicious one, which may avoid triggering the Sigma rule's extension check."
+  }
+]

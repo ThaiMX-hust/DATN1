@@ -1,7 +1,6 @@
-```json
 [
   {
-    "output": "rundll32.exe javascript:\"\$(Execute('RegRead();window.close;'))\"",
+    "output": "rundll32.exe javascript:\"\\$(Execute('RegRead();window.close;'))\"",
     "explanation": "The original Sigma rule detects command lines containing 'rundll32.exe', 'Execute', 'RegRead', and 'window.close'. This command uses equivalent syntax and string formatting (e.g., quotes and spacing) to bypass detection while maintaining the same behavior for testing purposes."
   },
   {
@@ -13,4 +12,3 @@
     "explanation": "This command uses standard syntax and no unnecessary obfuscation. It is included as a baseline for comparison with the obfuscated versions."
   }
 ]
-```

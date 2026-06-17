@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\gthread-3.6.dll",
+    "explanation": "Reordering: The suspicious command-line argument is omitted by reordering the arguments, which may avoid the 'CommandLine|contains' match."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\tmp.bat",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder, avoiding the 'CommandLine|contains' match while maintaining the same executable family."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Lab\\input\\gthread-3.6.dll\"",
+    "explanation": "Insertion: Added quotes around the DLL path, which may not be detected by the Sigma rule if it does not account for quoted paths in the 'CommandLine' field."
+  }
+]

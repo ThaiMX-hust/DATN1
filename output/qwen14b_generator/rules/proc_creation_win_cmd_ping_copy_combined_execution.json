@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c ping 127.0.0.1 -n 1 > C:\\Lab\\out\\ping_result.txt && copy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\copy_result.txt",
+    "explanation": "Reordering: The 'copy' command is moved after 'ping' with a logical '&&' operator, which may prevent the Sigma rule from detecting both commands in a single line."
+  },
+  {
+    "output": "cmd.exe /c ping 127.0.0.1 -n 1 && copy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\copy_result.txt",
+    "explanation": "Insertion: A space is inserted between 'copy' and the source path, which may bypass the 'copy ' string match in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c ping 127.0.0.1 -n 1 -y && copy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\copy_result.txt",
+    "explanation": "Substitution: The '-y' flag is added to 'ping' to avoid the ' -y ' string match in the Sigma rule, while the 'copy' command remains unchanged."
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\Windows\\SysWOW64\\certoc.exe\" -LoadDLL C:\\Users\\Public\\TestLibrary.dll",
@@ -33,4 +32,3 @@
     "explanation": "Used short option syntax if supported by the program (not applicable here as -LoadDLL is already short)."
   }
 ]
-```

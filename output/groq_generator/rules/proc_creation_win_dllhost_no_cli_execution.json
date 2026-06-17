@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "dllhost.exe",
@@ -14,7 +13,6 @@
   },
   {
     "output": "d l l h o s t . e x e",
-    "output": "d l l h o s t . e x e",
     "explanation": "Split the executable name into individual characters using spaces, which is a form of safe recoding and still valid for triggering the rule."
   },
   {
@@ -22,4 +20,3 @@
     "explanation": "Used the CMD shell to execute the original command, which is a safe mutation technique and still valid for triggering the rule."
   }
 ]
-```

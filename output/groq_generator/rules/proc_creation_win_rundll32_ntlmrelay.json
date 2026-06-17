@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Windows\\Sysnative\\rundll32.exe C:\\Windows\\System32\\davclnt.dll,DavSetCookie http://127.0.0.1/spoolss",
@@ -21,4 +20,3 @@
     "explanation": "This command is a direct match for the Sigma rule's detection logic. It uses rundll32.exe with DavSetCookie and an HTTP URL targeting spoolss, which is the core of the rule."
   }
 ]
-```

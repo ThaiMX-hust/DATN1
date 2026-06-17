@@ -1,0 +1,14 @@
+[
+  {
+    "output": "DeviceEnroller.exe /PhoneDeepLink C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command line uses /PhoneDeepLink with a benign file path, which may not trigger the Sigma rule's detection of non-existent DLL files."
+  },
+  {
+    "output": "DeviceEnroller.exe --PhoneDeepLink C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replacing / with -- may bypass the Sigma rule's detection of the /PhoneDeepLink parameter if it only checks for the short-form flag."
+  },
+  {
+    "output": "DeviceEnroller.exe /PhoneDeepLink C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Adding a harmless delimiter or using a different file extension may prevent the Sigma rule from detecting the suspicious DLL file name."
+  }
+]

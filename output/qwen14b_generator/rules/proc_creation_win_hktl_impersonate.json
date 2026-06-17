@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c impersonate.exe -l \"C:\\Lab\\input\\sample.txt\" -o \"C:\\Lab\\out\\result.log\"",
+    "explanation": "Insertion of quotes and spaces to avoid direct string matching of 'list' or 'exec' in the command line."
+  },
+  {
+    "output": "cmd.exe /c impersonate.exe -list \"C:\\Lab\\input\\sample.txt\" -output \"C:\\Lab\\out\\result.log\"",
+    "explanation": "Substitution of 'list' with '-list' and 'exec' with '-output' to avoid matching the suspicious keywords in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c impersonate.exe -o \"C:\\Lab\\out\\result.log\" -l \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering of arguments to avoid the Sigma rule's pattern matching on the order of 'list' or 'exec' keywords."
+  }
+]

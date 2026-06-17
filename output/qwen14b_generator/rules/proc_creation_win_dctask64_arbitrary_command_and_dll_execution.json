@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dctask64.exe -h",
+    "explanation": "Omission: Removed the suspicious command-line arguments that trigger the Sigma rule's 'executecmd64' or 'injectDll' keywords."
+  },
+  {
+    "output": "dctask64.exe \"-help\"",
+    "explanation": "Insertion: Added quotes around the argument to avoid triggering the Sigma rule's keyword-based detection."
+  },
+  {
+    "output": "dctask64.exe --help",
+    "explanation": "Substitution: Replaced the suspicious command-line keywords with a standard help flag that does not match the Sigma rule's trigger words."
+  }
+]

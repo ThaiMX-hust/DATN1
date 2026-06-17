@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "ftp -s:script.txt",
@@ -25,4 +24,3 @@
     "explanation": "A benign command is appended using '&&', which is a safe mutation technique (reordering) and still matches the Sigma rule for the first part."
   }
 ]
-```

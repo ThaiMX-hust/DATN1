@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"CurrentVersion\\Control Panel\\CPLs\" /v Test /t REG_SZ /d \"C:\\Lab\\input\\sample.cpl\" /f",
+    "explanation": "Insertion: Added quotes around the registry path and used a benign lab placeholder for the CPL file, which may avoid matching the suspicious string or path patterns in the Sigma rule."
+  },
+  {
+    "output": "reg add CurrentVersion\\Control Panel\\CPLs /v Test /t REG_SZ /d C:\\Lab\\input\\sample.cpl /f",
+    "explanation": "Omission: Removed quotes from the registry path, which may avoid triggering the Sigma rule's string-based detection mechanism."
+  },
+  {
+    "output": "reg add \"CurrentVersion\\Control Panel\\CPLs\" /v Test /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Substitution: Replaced the .cpl extension with .txt, which may avoid triggering the Sigma rule's file extension-based detection."
+  }
+]

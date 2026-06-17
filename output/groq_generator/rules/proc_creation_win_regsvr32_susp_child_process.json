@@ -8,8 +8,8 @@
     "explanation": "This command uses short-form flags (-s, -n, -i) instead of long-form flags (/s, /n, /i) to invoke cscript.exe as a child process. This is a valid substitution technique and matches the Sigma rule's detection criteria."
   },
   {
-    "output": "regsvr32.exe /s /n /i:.\powershell.exe",
-    "explanation": "This command uses path normalization (.\powershell.exe) to bypass potential static string detection. It still matches the Sigma rule because powershell.exe is listed in the detection criteria."
+    "output": "regsvr32.exe /s /n /i:.\\powershell.exe",
+    "explanation": "This command uses path normalization (.\\powershell.exe) to bypass potential static string detection. It still matches the Sigma rule because powershell.exe is listed in the detection criteria."
   },
   {
     "output": "regsvr32.exe /s /n /i:..\notepad.exe",

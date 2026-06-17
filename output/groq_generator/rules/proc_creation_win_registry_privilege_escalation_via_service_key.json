@@ -25,4 +25,6 @@
   },
   {
     "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService /v ImagePath /t REG_EXPAND_SZ /d \"C:\\\\Windows\\\\System32\\\\cmd.exe\" /f",
-    "explanation": "This command modifies the ImagePath of a service in the registry using short syntax for the registry path. It includes the keywords
+    "explanation": "This command modifies the ImagePath of a service in the registry using short syntax for the registry path. It includes the keywords"
+  }
+]

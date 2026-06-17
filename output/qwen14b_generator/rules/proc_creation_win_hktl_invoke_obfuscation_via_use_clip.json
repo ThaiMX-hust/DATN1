@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd /c \"echo Test | clip\" && cmd /c \"echo Clipboard content\"",
+    "explanation": "Insertion: Added a harmless second command after '&&' which does not involve Clipboard or invoke commands, potentially bypassing the Sigma rule's string match."
+  },
+  {
+    "output": "cmd /c \"echo Test | clip\" && notepad",
+    "explanation": "Substitution: Replaced the second part of the '&&' with a benign command 'notepad' that does not trigger the suspicious Sigma pattern."
+  },
+  {
+    "output": "cmd /c \"echo Test | clip\"",
+    "explanation": "Omission: Removed the second part of the '&&' entirely, leaving only the 'clip' command, which may not trigger the Sigma rule's complex pattern match."
+  }
+]

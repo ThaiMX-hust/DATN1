@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dsacls.exe \"C:\\Lab\\input\\sample.txt\" /G Everyone:GA",
+    "explanation": "Insertion: Added quotes around the file path to avoid triggering the ' /G ' keyword match in the Sigma rule."
+  },
+  {
+    "output": "dsacls.exe C:\\Lab\\input\\sample.txt /g Everyone:GA",
+    "explanation": "Substitution: Replaced ' /G ' with ' /g ' to avoid the case-sensitive keyword match in the Sigma rule."
+  },
+  {
+    "output": "dsacls.exe C:\\Lab\\input\\sample.txt /G Everyone:GR",
+    "explanation": "Omission: Removed the 'WD' permission from the command to avoid triggering the 'WD' keyword match in the Sigma rule."
+  }
+]

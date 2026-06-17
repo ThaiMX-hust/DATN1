@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" -arg1 value1 -arg2 value2",
+    "explanation": "Insertion of quotes and spaces to obfuscate the command line, potentially avoiding the 'PurpleSharp' keyword match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.exe -arg1 value1 -arg2 value2",
+    "explanation": "Omission of unnecessary elements and reordering of arguments to avoid the suspicious 'PurpleSharp' string, while maintaining the same executable family for testing."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.exe -arg1 value1 -arg2 value2 -arg3 xyz123456",
+    "explanation": "Substitution of the suspicious 'xyz123456.exe' with a benign placeholder in the argument list, ensuring the command line remains syntactically valid and safe."
+  }
+]

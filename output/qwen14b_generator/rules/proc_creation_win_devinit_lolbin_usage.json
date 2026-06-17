@@ -1,0 +1,14 @@
+[
+  {
+    "output": "devinit.exe -t msi-install -i C:\\Lab\\input\\sample.msi",
+    "explanation": "Substitution: Replaced the suspicious URL with a local benign file path to avoid triggering the 'http' keyword match in the Sigma rule."
+  },
+  {
+    "output": "devinit.exe -t msi-install -i C:\\Lab\\input\\sample.msi -s quiet",
+    "explanation": "Insertion: Added an additional harmless flag '-s quiet' to modify the command line structure without changing the core action, potentially avoiding string-based detection."
+  },
+  {
+    "output": "devinit.exe -i C:\\Lab\\input\\sample.msi -t msi-install",
+    "explanation": "Reordering: Swapped the order of flags to change the command line structure, which might avoid detection based on specific string ordering in the Sigma rule."
+  }
+]

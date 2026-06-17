@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "wmic.exe csproduct get name",
@@ -29,4 +28,3 @@
     "explanation": "The equivalent functionality is achieved using a different WMI path and syntax, avoiding the 'csproduct' keyword and bypassing the rule."
   }
 ]
-```

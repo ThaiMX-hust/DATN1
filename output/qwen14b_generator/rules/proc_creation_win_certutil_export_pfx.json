@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\certutil.exe -p password -exportPFX Root 1F3D38F280635F275BE92B87CF83E40E40458400 C:\\Lab\\out\\atomic.pfx",
+    "explanation": "Substitution: Replaced the target path with a benign lab placeholder to avoid matching the suspicious path indicator in the Sigma rule."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\certutil.exe\" -p password -exportPFX Root 1F3D38F280635F275BE92B87CF83E40E40458400 C:\\Lab\\out\\atomic.pfx",
+    "explanation": "Insertion: Added quotes around the executable path to avoid parsing issues while keeping the command safe and plausible."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\certutil.exe -p password -exportPFX Root 1F3D38F280635F275BE92B87CF83E40E40458400 C:\\Lab\\out\\atomic.pfx -f",
+    "explanation": "Insertion: Added a harmless flag (-f) to the command line, which does not affect the behavior but may change the parsing and evade the Sigma rule's string match."
+  }
+]

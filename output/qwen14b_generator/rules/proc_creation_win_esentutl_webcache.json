@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Users\\Public\\not_esentutl.exe /r \"C:\\Lab\\input\\webcache_simulator.dat\" /d",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid triggering the 'WebCache' keyword match."
+  },
+  {
+    "output": "C:\\Users\\Public\\not_esentutl.exe -r \"C:\\Lab\\input\\webcache_simulator.dat\" /d",
+    "explanation": "Substitution: Replaced '/r' with its equivalent '-r' syntax to avoid the 'windash' match while retaining the same behavior."
+  },
+  {
+    "output": "C:\\Users\\Public\\not_esentutl.exe /d -r \"C:\\Lab\\input\\webcache_simulator.dat\"",
+    "explanation": "Reordering: Changed the argument order to move '/d' before '-r' to avoid the 'windash' match while preserving the command's intent."
+  }
+]

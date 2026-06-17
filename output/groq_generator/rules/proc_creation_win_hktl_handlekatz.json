@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "loader.exe --pid:1234 --outfile:C:\\Temp\\lsass_obf_dump.dmp",
@@ -21,4 +20,3 @@
     "explanation": "This command uses a normalized path and standard command-line syntax. It includes all required keywords and format to match the Sigma rule's detection condition."
   }
 ]
-```

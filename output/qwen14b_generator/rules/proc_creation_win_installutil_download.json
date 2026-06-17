@@ -1,0 +1,14 @@
+[
+  {
+    "output": "InstallUtil.exe -o C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the suspicious URL from the command line, avoiding the 'http://' or 'ftp://' detection strings in the Sigma rule."
+  },
+  {
+    "output": "InstallUtil.exe -o \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the path to ensure correct parsing, while avoiding any URL-based triggers in the Sigma rule."
+  },
+  {
+    "output": "InstallUtil.exe -o C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the target file with a benign lab placeholder, ensuring the command does not include any suspicious URL patterns."
+  }
+]

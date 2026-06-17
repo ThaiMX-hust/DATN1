@@ -1,0 +1,14 @@
+[
+  {
+    "output": "diskshadow.exe /s \"C:\\Lab\\input\\script.txt\"",
+    "explanation": "Reordering and substitution: The command uses a benign lab path instead of suspicious ones, and the /s flag is used in a safe context, which may avoid the Sigma rule's path-based detection."
+  },
+  {
+    "output": "diskshadow.exe -s \"C:\\Lab\\input\\script.txt\"",
+    "explanation": "Substitution: Replaced '/s' with '-s' (equivalent syntax), and uses a benign lab path, which may bypass the Sigma rule's string-based detection."
+  },
+  {
+    "output": "diskshadow.exe /s C:\\Lab\\input\\script.txt",
+    "explanation": "Omission: Removed quotes around the script path, which may avoid the Sigma rule's detection based on specific string formatting."
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe install module -name:MaliciousModule C:\\Path\\To\\MaliciousModule.dll",
@@ -17,4 +16,3 @@
     "explanation": "This command omits unnecessary whitespace and uses a direct path without quotes, which is a minimal form of the command and still matches the Sigma rule."
   }
 ]
-```

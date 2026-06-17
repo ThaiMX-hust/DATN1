@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe -O http://example.com/test.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The '-o' flag is used instead of '-O' to avoid the suspicious flag match, while still simulating a download."
+  },
+  {
+    "output": "curl.exe --remote-name http://example.com/test.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: '--remote-name' is used instead of '-O' to avoid the suspicious flag match, while still simulating a download."
+  },
+  {
+    "output": "curl.exe http://example.com/test.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: The '-O' or '--remote-name' flag is omitted, but the download is still simulated with '-o' to avoid the suspicious flag match."
+  }
+]

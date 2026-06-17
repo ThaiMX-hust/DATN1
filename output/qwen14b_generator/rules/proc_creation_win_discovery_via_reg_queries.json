@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ItemPropertyValue -Path 'HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon' -Name 'Shell' | Out-File -FilePath 'C:\\Lab\\out\\output.txt'\"",
+    "explanation": "Omission: Removed the modification of registry values, which avoids triggering the 'selection_keys' condition while keeping the use of 'Get-ItemPropertyValue' in a benign context."
+  },
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\" /v CurrentBuildNumber | Findstr /i \"CurrentBuildNumber\" > \"C:\\Lab\\out\\output.txt\"",
+    "explanation": "Insertion: Added a pipeline to 'Findstr' and redirected output to a lab file, which may bypass the 'selection_keys' condition by altering the command structure without changing the registry query intent."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ItemPropertyValue -Path 'HKLM:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon' -Name 'Shell' | Set-Content -Path 'C:\\Lab\\out\\output.txt'\"",
+    "explanation": "Substitution: Replaced the registry modification with a benign output operation, which avoids triggering the 'selection_keys' condition while retaining the 'Get-ItemPropertyValue' command."
+  }
+]

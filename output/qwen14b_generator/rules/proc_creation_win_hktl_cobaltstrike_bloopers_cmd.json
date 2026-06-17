@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd /c echo Testing benign command",
+    "explanation": "Omission: Removed the suspicious Cobalt Strike command keywords from the command line, making it less likely to trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /k type C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious Cobalt Strike command with a benign 'type' command that reads a placeholder file, avoiding the Sigma rule's suspicious keywords."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c dir C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Used the full path to cmd.exe and executed a harmless 'dir' command on a placeholder file, avoiding the Sigma rule's suspicious keywords."
+  }
+]

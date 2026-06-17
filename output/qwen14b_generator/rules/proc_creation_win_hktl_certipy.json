@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Certipy.exe -vulnerable -dc-ip 192.168.1.100",
+    "explanation": "Omission: Removed the 'account' or 'auth' command which is part of the suspicious CLI arguments, potentially avoiding detection by the Sigma rule."
+  },
+  {
+    "output": "Certipy.exe -vulnerable -dc-ip 192.168.1.100 -target lab.example.com",
+    "explanation": "Reordering: Reordered command-line arguments to potentially avoid matching the Sigma rule's pattern of suspicious flags."
+  },
+  {
+    "output": "Certipy.exe -vulnerable -dc-ip 192.168.1.100 -target lab.example.com -template lab",
+    "explanation": "Substitution: Used a benign placeholder for the '-template' flag, which may not trigger the Sigma rule's detection logic."
+  }
+]

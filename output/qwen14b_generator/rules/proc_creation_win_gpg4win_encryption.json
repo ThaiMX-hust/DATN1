@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" --batch --yes -c \"C:\\Lab\\input\\test.txt\"",
+    "explanation": "Omission: Removed the 'passphrase' argument, which is the suspicious keyword in the Sigma rule, while maintaining the benign test behavior of encrypting a file."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" --batch --yes -c --passphrase-file \"C:\\Lab\\input\\passphrase.txt\" \"C:\\Lab\\input\\test.txt\"",
+    "explanation": "Substitution: Replaced the direct 'passphrase' argument with a 'passphrase-file' argument pointing to a lab placeholder file, avoiding the Sigma keyword while preserving encryption behavior."
+  },
+  {
+    "output": "\"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" --passphrase 'SomeParaphraseBlah' --batch --yes -c \"C:\\Lab\\input\\test.txt\"",
+    "explanation": "Insertion: Added a space between ' -c ' and 'passphrase' to avoid the ' -c ' and 'passphrase' string match in the Sigma rule, while keeping the command line valid."
+  }
+]

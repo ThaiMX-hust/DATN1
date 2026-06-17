@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmdkey.exe /list",
+    "explanation": "Reordering: The command uses the same executable and argument but reorders the components to avoid triggering the 'cmdkey' string match in the CommandLine field."
+  },
+  {
+    "output": "cmdkey /list",
+    "explanation": "Omission: The command omits the executable path (assuming it's in the system PATH), which may avoid triggering the 'cmdkey.exe' string match in the CommandLine field."
+  },
+  {
+    "output": "cmdkey.exe /list /v",
+    "explanation": "Insertion: Adds an additional harmless flag '/v' which may not be part of the Sigma rule's detection logic, potentially avoiding the ' -l' string match."
+  }
+]

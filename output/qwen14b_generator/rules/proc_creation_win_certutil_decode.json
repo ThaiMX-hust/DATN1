@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil -decodehex \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: The command uses -decodehex instead of -decode, which may not trigger the Sigma rule's keyword match."
+  },
+  {
+    "output": "certutil -decode \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Using -decode instead of -decodehex may avoid the specific keyword match in the Sigma rule."
+  },
+  {
+    "output": "certutil -decode \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.7z\" -f",
+    "explanation": "Insertion: Adding an extra flag (-f) may not affect the Sigma rule's detection based on the presence of -decode."
+  }
+]

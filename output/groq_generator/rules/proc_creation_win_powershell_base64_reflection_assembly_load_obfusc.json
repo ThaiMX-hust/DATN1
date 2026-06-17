@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"[System.Reflection.Assembly]::Load([System.Convert]::FromBase64String('oAOgAoACIATAAiACsAIgBvAGEAZAAiACkA'))\"",
@@ -13,4 +12,3 @@
     "explanation": "This command uses a base64-encoded string that represents a variation of the obfuscated 'Load' function call. It aligns with the Sigma rule's detection logic and is suitable for testing the rule's effectiveness."
   }
 ]
-```

@@ -49,4 +49,6 @@
   },
   {
     "output": "powershell.exe -Command \"Get-Process lsass | Out-String | Out-Null\"",
-    "explanation": "This command uses 'Get-Process' to retrieve the 'lsass' process, converts it to a string, and then discards
+    "explanation": "This command uses 'Get-Process' to retrieve the 'lsass' process, converts it to a string, and then discards"
+  }
+]

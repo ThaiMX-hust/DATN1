@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\Program Files\\Amazon\\SSM\\amazon-ssm-agent.exe\" -register -code \"TESTCODE123\" -id \"TESTID123\" -region \"us-east-1\"",
@@ -21,4 +20,3 @@
     "explanation": "This command suppresses output using redirection, which may help evade detection in environments where output is monitored."
   }
 ]
-```

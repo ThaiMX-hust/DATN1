@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dotnet.exe C:\\Lab\\input\\test.csproj",
+    "explanation": "Substitution: Replaced the suspicious '.csproj' file path with a benign lab placeholder to avoid triggering the Sigma rule's '.csproj' keyword match."
+  },
+  {
+    "output": "dotnet.exe \"C:\\Lab\\input\\test.csproj\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure correct parsing while still using a benign lab placeholder, which may not match the Sigma rule's string-based detection."
+  },
+  {
+    "output": "dotnet.exe -v C:\\Lab\\input\\test.csproj",
+    "explanation": "Insertion: Added a harmless flag '-v' before the file path to alter the command line structure, potentially avoiding the Sigma rule's CommandLine keyword match."
+  }
+]

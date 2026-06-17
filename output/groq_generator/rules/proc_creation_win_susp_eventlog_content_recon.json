@@ -37,4 +37,6 @@
   },
   {
     "output": "Get-WinEvent -FilterXPath '*[System[EventID=4778]]' -LogName Microsoft-Windows-Security-Auditing",
-    "explanation": "This command uses XPath to query the Microsoft-Windows-Security-Auditing log for event ID 4778, which aligns with the Sigma rule's
+    "explanation": "This command uses XPath to query the Microsoft-Windows-Security-Auditing log for event ID 4778, which aligns with the Sigma rule's"
+  }
+]

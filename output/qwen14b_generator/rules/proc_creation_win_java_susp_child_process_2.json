@@ -1,0 +1,14 @@
+[
+  {
+    "output": "java -jar C:\\Lab\\input\\sample.jar",
+    "explanation": "Omission: Removed the spawned shell process by not including it in the command line, which may avoid triggering the Sigma rule's detection of a spawned shell."
+  },
+  {
+    "output": "java -cp C:\\Lab\\input\\sample.jar com.example.Main",
+    "explanation": "Substitution: Replaced the default JAR execution with a classpath-based execution, which may not match the Sigma rule's pattern for spawning a shell."
+  },
+  {
+    "output": "java -Djava.library.path=C:\\Lab\\input\\libs -jar C:\\Lab\\input\\sample.jar",
+    "explanation": "Insertion: Added a system property to the command line, which may alter the parsing and avoid matching the Sigma rule's suspicious patterns."
+  }
+]

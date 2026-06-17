@@ -1,0 +1,14 @@
+[
+  {
+    "output": "explorer.exe shell:mycomputerfolder",
+    "explanation": "Omission: Removed the parent process (cmd.exe) which is part of the Sigma rule's selection criteria, making the command line less likely to trigger the rule."
+  },
+  {
+    "output": "explorer.exe \"shell:mycomputerfolder\"",
+    "explanation": "Insertion: Added quotes around the argument, which may alter how the command line is parsed and could avoid string-based detection."
+  },
+  {
+    "output": "explorer.exe /n \"shell:mycomputerfolder\"",
+    "explanation": "Substitution: Added a harmless flag (/n) to the command line, which may change the parsing context and avoid matching the Sigma rule's CommandLine|contains criteria."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "auditpol.exe /list /all",
+    "explanation": "Omission: Removed the suspicious keywords 'disable', 'clear', 'remove', or 'restore' by using a benign command that lists audit policies instead."
+  },
+  {
+    "output": "auditpol.exe -list -all",
+    "explanation": "Substitution: Replaced the '/' with '-' to achieve the same benign action without triggering the Sigma rule's keyword match."
+  },
+  {
+    "output": "auditpol.exe /list /all /output:C:\\Lab\\out\\auditpol_list.txt",
+    "explanation": "Insertion: Added a benign output redirection to a lab placeholder file without altering the command's core functionality, avoiding the suspicious keywords."
+  }
+]

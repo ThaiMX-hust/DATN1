@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\SharpMove.exe -action=create -computername=LABHOST",
+    "explanation": "Reordering arguments to use long options (-action instead of action=) may bypass the 'action=' string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpMove.exe -computername=LABHOST -action create",
+    "explanation": "Insertion of space between action and value may bypass the 'action=' string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\SharpMove.exe -computername=LABHOST -action create -output C:\\Lab\\out\\results.txt",
+    "explanation": "Adding an additional benign argument may obscure the original action parameter, reducing the likelihood of matching the Sigma rule."
+  }
+]

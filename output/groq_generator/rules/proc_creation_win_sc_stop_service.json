@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "sc.exe   stop   spooler",
@@ -21,4 +20,3 @@
     "explanation": "Used an alternative command syntax with /c and quotes to test if the parser still identifies the command."
   }
 ]
-```

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "rasautou.exe -d \"C:\\\\Path\\\\To\\\\Malicious.dll\" -p \"ExportFunctionName\"",
@@ -21,4 +20,3 @@
     "explanation": "This command uses a normalized path representation and no additional formatting. It is a minimalistic version of the original command, preserving the same behavior."
   }
 ]
-```

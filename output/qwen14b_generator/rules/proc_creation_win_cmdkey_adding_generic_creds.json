@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\cmdkey.exe /generic:TERMSRV/THAIMX /user:THAIMX\\thaim /pass:1password2!",
+    "explanation": "Reordering: Reordered the command-line arguments to potentially avoid the suspicious string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmdkey.exe /generic:TERMSRV/THAIMX /user:THAIMX\\thaim /pass:1password2! -g -u -p",
+    "explanation": "Insertion: Added redundant flags (-g, -u, -p) after the password argument, which may not be parsed by the command-line parser and may not trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmdkey.exe /generic:TERMSRV/THAIMX /user:THAIMX\\thaim /pass:1password2! -g -u -p -n",
+    "explanation": "Insertion: Added a non-suspicious flag (-n) after the password argument, which may not be parsed by the command-line parser and may not trigger the Sigma rule."
+  }
+]

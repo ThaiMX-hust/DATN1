@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mshta vbscript:createobject(\"scripting.filesystemobject\",0).getstandardstream(1).write(\"Test\")",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious sequence of 'set', '&&', and '.run' that the Sigma rule looks for."
+  },
+  {
+    "output": "mshta vbscript:CreateObject(\"scripting.filesystemobject\",0).GetStandardStream(1).Write(\"Test\")",
+    "explanation": "Substitution: The command line replaces lowercase function names with their uppercase equivalents, which may not be matched by the Sigma rule's case-sensitive string checks."
+  },
+  {
+    "output": "mshta vbscript:CreateObject(\"scripting.filesystemobject\",0).GetStandardStream(1).Write(\"Test\")",
+    "explanation": "Encoding: The command line uses alternate string representations (e.g., using uppercase for function names) that may not be detected by the Sigma rule's string matching logic."
+  }
+]

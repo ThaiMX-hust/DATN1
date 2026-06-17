@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Test command'; Start-Sleep 5\"",
+    "explanation": "Omission: Removed the suspicious command-line parameters and replaced the actual execution with a harmless command, which avoids the Sigma rule's detection based on specific command-line strings."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Test command with spaces' -ForegroundColor Cyan; Start-Sleep 5\"",
+    "explanation": "Insertion: Added harmless spaces and a benign foreground color parameter, which may prevent the Sigma rule from matching the exact command-line strings it is looking for."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Test command with encoding' -ForegroundColor Cyan; Start-Sleep 5\"",
+    "explanation": "Recoding: Used alternative string representation with quotes and color parameters, which may avoid the Sigma rule's string matching due to altered command-line structure."
+  }
+]

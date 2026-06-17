@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"ls -R C:\\Users\\*\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt | Select-String \\\"password\\\", \\\"-p\\\", \\\"key\\\", \\\"pwd\\\", \\\"pass\\\"\"",
@@ -21,4 +20,3 @@
     "explanation": "The command uses an environment variable ($env:username) to dynamically reference the current user's directory. This substitution and recoding should still match the Sigma rule."
   }
 ]
-```

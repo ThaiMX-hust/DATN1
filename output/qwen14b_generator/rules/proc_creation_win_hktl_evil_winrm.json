@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ruby -i \"C:\\Lab\\input\\sample.txt\" -u \"C:\\Lab\\input\\sample.log\" -p \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion of quotes around paths to avoid direct string matching of suspicious keywords while keeping the same executable family and test intent."
+  },
+  {
+    "output": "ruby -i C:\\Lab\\input\\sample.txt -u C:\\Lab\\input\\sample.log -p C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission of quotes around paths to avoid string matching of suspicious keywords while keeping the same executable family and test intent."
+  },
+  {
+    "output": "ruby -p C:\\Lab\\out\\archive.7z -u C:\\Lab\\input\\sample.log -i C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering of arguments to avoid direct string matching of suspicious keywords while keeping the same executable family and test intent."
+  }
+]

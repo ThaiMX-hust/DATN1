@@ -1,0 +1,14 @@
+[
+  {
+    "output": "aspnet_regiis.exe -pdf connectionStrings C:\\Lab\\input\\sample.config",
+    "explanation": "Reordering: The arguments are reordered to place the file path at the end, which may avoid the 'connectionStrings' and ' -pdf' string match in the Sigma rule."
+  },
+  {
+    "output": "aspnet_regiis.exe -pdf C:\\Lab\\input\\sample.config -connectionStrings",
+    "explanation": "Substitution: The 'connectionStrings' keyword is replaced with a flag-like syntax, potentially avoiding the string match in the Sigma rule."
+  },
+  {
+    "output": "aspnet_regiis.exe -pdf C:\\Lab\\input\\sample.config",
+    "explanation": "Omission: The 'connectionStrings' keyword is omitted, which may avoid the string match in the Sigma rule while still using the ' -pdf' argument."
+  }
+]

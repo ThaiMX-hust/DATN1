@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Windows\\Temp\\xordump.exe\" -out C:\\Lab\\out\\archive.7z -x 0x41",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid the 'lsass.exe' string match."
+  },
+  {
+    "output": "\"C:\\Windows\\Temp\\xordump.exe\" -x 0x41 -out C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Changed the order of command-line arguments to avoid the ' -process lsass.exe ' string match."
+  },
+  {
+    "output": "\"C:\\Windows\\Temp\\xordump.exe\" -x 0x41 -out C:\\Lab\\out\\archive.7z -m comsvcs",
+    "explanation": "Omission: Removed the ' -process lsass.exe ' string by omitting it and keeping the rest of the command line safe."
+  }
+]

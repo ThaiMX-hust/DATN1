@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -enc SQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AUABhAHQAaAAgAHcAaQBuADMAMgBfAHAAcgBvAGMAZQBzAHMAIAAtAE4AYQBtAGUAIABjAHIAZQBhAHQAZQAgAC0AQQByAGcAdQBtAGUAbgB0AEwAaQBzAHQAIABuAG8AdABlAHAAYQBkAC4AZQB4AGUA",
@@ -22,4 +21,6 @@
   },
   {
     "output": "powershell.exe -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACIASABlAHkALAAgAEEAdABvAG0AaQBjACEAIgA= -Command \"Write-Host 'Hey, Atomic!'\" -inputFormat xml -outputFormat text",
-    "explanation": "This command adds '-inputFormat xml -outputFormat text' to test if the rule
+    "explanation": "This command adds '-inputFormat xml -outputFormat text' to test if the rule"
+  }
+]

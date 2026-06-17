@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dsquery.exe -h -o dn \"trustedDomain\"",
+    "explanation": "Insertion: Added quotes and flags to alter parsing structure, potentially avoiding the 'trustedDomain' keyword match in the command line."
+  },
+  {
+    "output": "dsquery.exe -h -o dn trustedDomain",
+    "explanation": "Reordering: Reordered arguments to change how the command line is parsed, possibly evading the 'trustedDomain' string match."
+  },
+  {
+    "output": "dsquery.exe -h -o dn trustedDomain --help",
+    "explanation": "Substitution: Added a non-suspicious flag (--help) to alter the command line structure, which may prevent the Sigma rule from matching the 'trustedDomain' keyword."
+  }
+]

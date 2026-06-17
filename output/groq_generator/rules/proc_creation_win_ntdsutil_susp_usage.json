@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "ntdsutil.exe \"ac i ntds\" \"ifm\" \"create full C:\\\\Windows\\\\Temp\\\\ntds_T1003\" q q",
@@ -21,4 +20,3 @@
     "explanation": "This command uses escape characters and alternative quoting to test if the detection rule is sensitive to the use of escape characters in the command line."
   }
 ]
-```

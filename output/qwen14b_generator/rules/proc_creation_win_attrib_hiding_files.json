@@ -1,0 +1,14 @@
+[
+  {
+    "output": "attrib.exe +h \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "attrib.exe +h C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes around the path to ensure correct parsing without altering the command's intent, which may bypass string-based detection."
+  },
+  {
+    "output": "attrib.exe +h C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Changed the file extension from .txt to .log, which may not be flagged by the Sigma rule if it relies on specific file types or paths."
+  }
+]

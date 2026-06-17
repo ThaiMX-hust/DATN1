@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Windows\\System32\\calc.exe",
@@ -21,4 +20,3 @@
     "explanation": "This command uses CMD to start calc.exe from its standard location without any additional arguments. If the rule does not flag calc.exe launched via CMD without arguments, it may bypass the detection."
   }
 ]
-```

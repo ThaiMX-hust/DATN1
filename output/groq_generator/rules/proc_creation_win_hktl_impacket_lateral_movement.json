@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "cmd.exe /Q /c whoami 1> \\\\127.0.0.1\\ADMIN$\\__1567439113.54 2>&1",
@@ -25,4 +24,3 @@
     "explanation": "This command simulates an atexec scenario. It executes 'tasklist' via cmd.exe and redirects output to a temporary file in the Windows Temp directory, matching the Sigma rule's detection criteria."
   }
 ]
-```

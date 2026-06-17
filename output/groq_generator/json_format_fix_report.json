@@ -1,0 +1,1208 @@
+{
+  "root": "output\\groq_generator",
+  "fixed_count": 200,
+  "failed_count": 0,
+  "fixed_files": [
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_7zip_password_compression.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_bash_command_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_calc_uncommon_exec.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_certoc_load_dll_susp_locations.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 8
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_certutil_ntlm_coercion.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_cloudflared_tunnel_run.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 2
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_cmd_copy_dmp_from_share.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_cmd_stdin_redirect.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_control_panel_item.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_csvde_export.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_curl_download_direct_ip_exec.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_deviceenroller_dll_sideloading.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_dism_enable_powershell_web_access_feature.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_dllhost_no_cli_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_dsacls_abuse_permissions.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_dtrace_kernel_dump.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_dxcap_arbitrary_binary_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 2
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_esentutl_params.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_findstr_gpp_passwords.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_fsutil_symlinkevaluation.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_ftp_arbitrary_command_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_gpg4win_encryption.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_bloodhound_sharphound.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_cobaltstrike_load_by_rundll32.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_covenant.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_evil_winrm.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_handlekatz.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_impacket_lateral_movement.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_impersonate.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_invoke_obfuscation_via_compress.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 2
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_invoke_obfuscation_via_use_mhsta.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 3 column 292 (char 297)",
+      "items": 1
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_invoke_obfuscation_via_var.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_koadic.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_mimikatz_command_line.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 23 column 173 (char 2480)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_powersploit_empire_default_schtasks.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_relay_attacks_tools.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 41 column 194 (char 2957)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_rubeus.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_selectmyparent.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_sharpmove.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_sharpsuccessor_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_sliver_c2_execution_pattern.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_hktl_soaphound_execution.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 27 column 75 (char 2432)",
+      "items": 7
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_iexpress_susp_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_iis_appcmd_susp_module_install.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_iis_connection_strings_decryption.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_java_susp_child_process_2.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_ldifde_export.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_logman_disable_eventlog.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_lolbin_msdeploy.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 19 column 71 (char 1204)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_lolbin_msdt_answer_file.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_lolbin_openwith.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_lolbin_printbrm.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_lolbin_pubprn.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_lolbin_rasautou_dll_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_lolbin_replace.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_mmc_mmc20_lateral_movement.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 1
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_mshta_inline_vbscript.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_msiexec_install_quiet.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_msiexec_web_install.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_net_use_mount_admin_share.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_net_use_password_plaintext.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_net_user_add_never_expire.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_netsh_fw_delete_rule.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_netsh_fw_enable_group_rule.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 15 column 61 (char 1137)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_netsh_helper_dll_persistence.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_netsh_port_forwarding_3389.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 1
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_nltest_recon.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_node_adobe_creative_cloud_abuse.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_notepad_local_passwd_discovery.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_ntdsutil_susp_usage.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_odbcconf_response_file.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 55 column 38 (char 2575)",
+      "items": 14
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_office_exec_from_trusted_locations.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_office_onenote_embedded_script_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_office_onenote_susp_child_processes.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_pdqdeploy_runner_susp_children.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_perl_inline_command_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_php_inline_command_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_ping_hex_ip.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_base64_encoded_cmd_patterns.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 3 column 1052 (char 1057)",
+      "items": 1
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_base64_hidden_flag.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_base64_invoke.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_base64_reflection_assembly_load_obfusc.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_base64_wmi_classes.json",
+      "mode": "pairs",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_computer_discovery_get_adcomputer.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_console_history_file_access.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_create_service.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 9
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_disable_ie_features.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_dsinternals_cmdlets.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_email_exfil.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_encode.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_encoding_patterns.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 11 column 395 (char 1527)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_exec_data_file.json",
+      "mode": "normal",
+      "before_error": "Expecting ',' delimiter: line 14 column 1 (char 2751)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_export_certificate.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_frombase64string.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_get_localgroup_member_recon.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_getprocess_lsass.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 52 column 128 (char 2916)",
+      "items": 13
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_iex_patterns.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 24 column 54 (char 2853)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_mailboxexport_share.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_remotefxvgpudisablement_abuse.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 2
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_run_script_from_ads.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_sam_access.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_set_policies_to_unsecure_level.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_set_service_disabled.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_stop_service.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 2
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_susp_parameter_variation.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_susp_ps_appdata.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_susp_ps_downloadfile.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 9
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_user_discovery_get_aduser.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 35 column 62 (char 3224)",
+      "items": 9
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_powershell_xor_commandline.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_presentationhost_uncommon_location_exec.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_print_remote_file_copy.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 1
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_pua_adfind_enumeration.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_pua_chisel.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_pua_cleanwipe.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_pua_seatbelt.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 7 column 100 (char 470)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_python_adidnsdump.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_python_pty_spawn.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_query_session_exfil.json",
+      "mode": "pairs",
+      "before_error": "Expecting ',' delimiter: line 11 column 44 (char 562)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rar_compression_with_password.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_bitlocker.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_dumping_sensitive_hives.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_lsa_ppl_protection_disabled.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_modify_group_policy_settings.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_query_registry.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 16
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_rdp_keys_tamper.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_software_discovery.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 15 column 75 (char 767)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_reg_susp_paths.json",
+      "mode": "normal",
+      "before_error": "Expecting property name enclosed in double quotes: line 43 column 1 (char 2968)",
+      "items": 11
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_regedit_export_critical_keys.json",
+      "mode": "pairs",
+      "before_error": "Expecting ',' delimiter: line 7 column 54 (char 326)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_registry_export_of_thirdparty_creds.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_registry_install_reg_debugger_backdoor.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_registry_new_network_provider.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 2
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_registry_privilege_escalation_via_service_key.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 28 column 152 (char 3081)",
+      "items": 7
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_regsvr32_susp_child_process.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 11 column 39 (char 730)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_remote_access_tools_renamed_meshagent_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_renamed_adfind.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 39 column 133 (char 3041)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_advpack_obfuscated_ordinal_call.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_inline_vbs.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_installscreensaver.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_mshtml_runhtmlapplication.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 3 column 40 (char 45)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_no_params.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_ntlmrelay.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_obfuscated_ordinal_call.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 19 column 40 (char 901)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_parent_explorer.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_process_dump_via_comsvcs.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 35 column 51 (char 2610)",
+      "items": 9
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_shelldispatch_potential_abuse.json",
+      "mode": "pairs",
+      "before_error": "Expecting ',' delimiter: line 3 column 90 (char 95)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_susp_activity.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 40 column 50 (char 2713)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_susp_control_dll_load.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_susp_execution_with_image_extension.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_rundll32_uncommon_dll_extension.json",
+      "mode": "pairs",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 8
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_runonce_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sc_sdset_allow_service_changes.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 27 column 71 (char 1938)",
+      "items": 7
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sc_sdset_hide_sevices.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 19 column 186 (char 1992)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sc_stop_service.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_schtasks_creation.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 7
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_schtasks_guid_task_name.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_schtasks_one_time_only_midnight_task.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_schtasks_susp_pattern.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_soundrecorder_audio_capture.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 8
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sqlcmd_veeam_db_recon.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sqlcmd_veeam_dump.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_squirrel_download.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_ssm_agent_abuse.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_abusing_debug_privilege.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_add_user_remote_desktop_group.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 19 column 37 (char 943)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_arbitrary_shell_execution_via_settingcontent.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_automated_collection.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_copy_lateral_movement.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 19 column 252 (char 2674)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_crypto_mining_monero.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 36 column 72 (char 2608)",
+      "items": 9
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_double_extension.json",
+      "mode": "normal",
+      "before_error": "Expecting ',' delimiter: line 45 column 1 (char 2712)",
+      "items": 11
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_eventlog_content_recon.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 40 column 151 (char 2883)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_image_missing.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_inline_win_api_access.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 3
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_lnk_exec_hidden_cmd.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 3 column 38 (char 43)",
+      "items": 1
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_local_system_owner_account_discovery.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 15
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_lsass_dmp_cli_keywords.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_ms_appinstaller_download.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_network_scan_loop.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_priv_escalation_via_named_pipe.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 7 column 68 (char 396)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_redirect_local_admin_share.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_script_exec_from_env_folder.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_script_exec_from_temp.json",
+      "mode": "normal",
+      "before_error": "Expecting ',' delimiter: line 25 column 1 (char 2594)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_sensitive_file_access_shadowcopy.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 7 column 35 (char 351)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_susp_service_creation.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 3 column 119 (char 124)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_svchost_execution_with_no_cli_flags.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sysinternals_adexplorer_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 8
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sysinternals_eula_accepted.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 9
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sysinternals_livekd_kernel_memory_dump.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_sysinternals_sdelete.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_tar_extraction.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_tpmvscmgr_add_virtual_smartcard.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 7
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_uac_bypass_cmstp.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_virtualbox_vboxdrvinst_execution.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_vsdiagnostics_execution_proxy.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 15 column 49 (char 790)",
+      "items": 6
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_webdav_lnk_execution.json",
+      "mode": "normal",
+      "before_error": "Invalid \\escape: line 3 column 40 (char 45)",
+      "items": 4
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_webshell_hacking.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 39 column 71 (char 3353)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_webshell_recon_commands_and_processes.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 3 column 1188 (char 1193)",
+      "items": 1
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_werfault_reflect_debugger_exec.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 10
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_wmic_recon_csproduct.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 7
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_wmic_recon_product.json",
+      "mode": "normal",
+      "before_error": "Invalid control character at: line 7 column 2838 (char 3085)",
+      "items": 2
+    },
+    {
+      "path": "output\\groq_generator\\rules\\proc_creation_win_wmic_stdregprov_reg_modification.json",
+      "mode": "normal",
+      "before_error": "Expecting value: line 1 column 1 (char 0)",
+      "items": 5
+    }
+  ],
+  "failed_files": []
+}

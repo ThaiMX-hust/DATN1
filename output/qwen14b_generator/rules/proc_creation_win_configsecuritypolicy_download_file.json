@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\ConfigSecurityPolicy.exe -help",
+    "explanation": "Omission: Removed the URL parameter, which is the suspicious indicator in the Sigma rule, while keeping the same executable family for testing."
+  },
+  {
+    "output": "C:\\Lab\\tools\\ConfigSecurityPolicy.exe -h",
+    "explanation": "Substitution: Replaced the URL parameter with a harmless '-h' flag, which is equivalent to '-help' in many command-line tools, avoiding the suspicious indicator."
+  },
+  {
+    "output": "C:\\Lab\\tools\\ConfigSecurityPolicy.exe -v",
+    "explanation": "Substitution: Replaced the URL parameter with a harmless '-v' flag, which is equivalent to '-version' in many command-line tools, avoiding the suspicious indicator."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -NoExit -Command \"[Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8\"",
+    "explanation": "Insertion: Added quotes around the command argument. The Sigma rule matches on the content of the CommandLine field, and adding quotes does not change the argument's value, so the rule may miss it due to the added quotes."
+  },
+  {
+    "output": "powershell.exe -Command -NoExit \"[Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8\"",
+    "explanation": "Reordering: Swapped the order of the -Command and -NoExit arguments. The Sigma rule checks for the presence of the specific string in the CommandLine, and reordering arguments may cause the rule to miss the exact string match."
+  },
+  {
+    "output": "powershell.exe -NoExit -Command [Console]::OutputEncoding=[Text.UTF8Encoding]::UTF8 | Out-Null",
+    "explanation": "Appending a harmless pipe. The Sigma rule checks for the presence of the specific string in the CommandLine, and adding a harmless pipe may cause the rule to miss the exact string match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\JuicyPotatoNG.exe -c \"{C:\\Lab\\input\\sample.txt}\" -z",
+    "explanation": "Reordering and encoding: The command reorders arguments and encodes the path to avoid direct string matching of the suspicious CommandLine patterns."
+  },
+  {
+    "output": "C:\\Lab\\tools\\JuicyPotatoNG.exe -t * -p C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious pattern with a benign test path while maintaining the same executable family and test intent."
+  },
+  {
+    "output": "C:\\Lab\\tools\\JuicyPotatoNG.exe -c \"C:\\Lab\\input\\sample.txt\" -z",
+    "explanation": "Insertion: Added quotes around the path to avoid triggering the CommandLine|contains pattern that matches the suspicious string."
+  }
+]

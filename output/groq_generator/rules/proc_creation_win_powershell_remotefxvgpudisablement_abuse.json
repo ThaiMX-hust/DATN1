@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"powershell.exe\" & {Invoke-ATHRemoteFXvGPUDisablementCommand -ModuleName foo -ModulePath $PWD}",
@@ -9,4 +8,3 @@
     "explanation": "No safe bypass command can be generated."
   }
 ]
-```

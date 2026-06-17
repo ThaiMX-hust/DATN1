@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dnscmd.exe /config /serverlevelplugindll \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious DLL path with a benign lab placeholder to avoid triggering the Sigma rule's string match."
+  },
+  {
+    "output": "dnscmd.exe /config /serverlevelplugindll C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Added quotes around the path to ensure correct parsing while using a benign lab placeholder to avoid the Sigma rule's string match."
+  },
+  {
+    "output": "dnscmd.exe /config /serverlevelplugindll C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Used a different benign file type (7z) as the target, which may not be flagged by the Sigma rule's string match."
+  }
+]

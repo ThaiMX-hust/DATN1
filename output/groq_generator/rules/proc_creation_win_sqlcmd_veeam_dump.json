@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "sqlcmd.exe -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\"",
@@ -21,4 +20,3 @@
     "explanation": "This command includes explicit username (-U) and password (-P) parameters. The Sigma rule does not exclude this variation, so it still matches the detection criteria."
   }
 ]
-```

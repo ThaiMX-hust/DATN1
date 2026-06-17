@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "ADExp.exe -snapshot",
@@ -34,4 +33,3 @@
     "explanation": "Uses command substitution to dynamically insert the 'snapshot' flag, which may bypass detection if the SIEM does not normalize or evaluate dynamic command-line content."
   }
 ]
-```

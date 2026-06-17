@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil -encode C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering and substitution: The command uses a benign lab placeholder path instead of a suspicious one, avoiding the Sigma rule's suspicious location check through path substitution."
+  },
+  {
+    "output": "certutil -v -encode C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Adding the '-v' flag does not change the core behavior but may alter the command line parsing, potentially evading the Sigma rule's string match."
+  },
+  {
+    "output": "certutil -encode C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z -f",
+    "explanation": "Reordering: Rearranging the '-f' flag after the target file path may alter how the command line is parsed, potentially evading the Sigma rule's string match."
+  }
+]

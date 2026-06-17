@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dism.exe /online /enable-feature /featurename:WindowsPowerShellWebAccess /all /norestart",
+    "explanation": "Reordering: Reordered arguments to avoid the suspicious keyword 'WindowsPowerShellWebAccess' appearing in a position that might trigger the Sigma rule's string match."
+  },
+  {
+    "output": "dism.exe /enable-feature /featurename:WindowsPowerShellWebAccess /online /norestart",
+    "explanation": "Reordering: Changed the order of '/online' and '/enable-feature' to potentially bypass the Sigma rule's detection based on argument sequence."
+  },
+  {
+    "output": "dism.exe /enable-feature /featurename:WindowsPowerShellWebAccess /online /norestart",
+    "explanation": "Substitution: Used equivalent syntax with long options, but no mutation technique can avoid the 'WindowsPowerShellWebAccess' keyword, making bypass impossible."
+  }
+]

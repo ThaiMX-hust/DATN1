@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "AppInstaller.exe --uri \"ms-appinstaller://?source=https://example.com/file.appinstaller\"",
@@ -21,4 +20,3 @@
     "explanation": "This command is the base command that matches the Sigma rule and is used as a reference for mutation."
   }
 ]
-```

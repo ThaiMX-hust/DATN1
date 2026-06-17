@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\" & start /b \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious 'net use http' and 'start /b' sequence, which may bypass the Sigma rule's string match."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\" && start /b \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the suspicious 'net use http' with a benign command and used '&&' instead of '&' to change the syntax, potentially avoiding the Sigma rule's detection."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\" && start /b \"C:\\Lab\\out\\archive.7z\" -silent",
+    "explanation": "Insertion: Added a harmless '-silent' flag to the 'start' command, altering the syntax slightly without changing the benign intent, which may prevent the Sigma rule from matching."
+  }
+]

@@ -1,0 +1,15 @@
+﻿tactic,rule_count
+collection,26
+command-and-control,67
+credential-access,91
+defense-evasion,396
+discovery,82
+execution,248
+exfiltration,16
+impact,17
+initial-access,13
+lateral-movement,27
+persistence,78
+privilege-escalation,59
+reconnaissance,5
+resource-development,6

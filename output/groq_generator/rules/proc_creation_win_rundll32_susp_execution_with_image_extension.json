@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\\\WINDOWS\\\\system32\\\\rundll32.exe\" C:\\\\Users\\\\thaim\\\\Downloads\\\\calc.png StartW",
@@ -21,4 +20,3 @@
     "explanation": "Reordered the command line by removing quotes and using minimal path formatting."
   }
 ]
-```

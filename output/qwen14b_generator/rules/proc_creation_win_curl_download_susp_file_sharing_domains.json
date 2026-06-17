@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe -O \"C:\\Lab\\input\\sample.txt\" --output \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering and substitution: The command uses --output instead of -O and includes benign lab paths, which may bypass the selection_flag and selection_ext checks by not containing suspicious extensions or keywords."
+  },
+  {
+    "output": "curl.exe -o \"C:\\Lab\\input\\sample.log\" https://example.com/data.txt",
+    "explanation": "Omission and substitution: The command omits the -O flag and uses -o with a benign lab path, avoiding the selection_flag check and not containing suspicious extensions or keywords."
+  },
+  {
+    "output": "curl.exe \"https://example.com/data.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering and substitution: The command reorders the arguments and uses a benign lab path with a non-malicious extension, which may bypass the selection_flag and selection_ext checks."
+  }
+]

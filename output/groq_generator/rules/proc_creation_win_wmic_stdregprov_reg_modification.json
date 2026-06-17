@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "wmic /NameSpace:\\\\root\\default Class StdRegProv Call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\DeleteMe\"",
@@ -21,4 +20,3 @@
     "explanation": "Inserting extra spaces and using standard syntax still matches the Sigma rule's detection criteria."
   }
 ]
-```

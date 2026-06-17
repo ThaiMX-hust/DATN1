@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" https://example.com",
+    "explanation": "Omission: Removed the '--headless' flag, which is the suspicious indicator in the Sigma rule, making the command line not match the rule's detection criteria."
+  },
+  {
+    "output": "start-process \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" -ArgumentList \"https://example.com\"",
+    "explanation": "Recoding: Used a different command-line syntax (PowerShell's start-process) to execute the same action, which may not trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" https://example.com",
+    "explanation": "Insertion: Wrapped the command in a 'cmd.exe /c' invocation, which may alter the parsing context and prevent the Sigma rule from matching the CommandLine field."
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "iexpress.exe /n /q /m C:\\Temp\\malicious.sed",
@@ -21,4 +20,3 @@
     "explanation": "This command uses a suspicious directory (C:\\ProgramData\\) and includes the required flags, matching the Sigma rule's detection criteria."
   }
 ]
-```

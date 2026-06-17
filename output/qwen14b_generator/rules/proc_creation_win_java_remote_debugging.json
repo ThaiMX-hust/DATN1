@@ -1,0 +1,14 @@
+[
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5000 -cp C:\\Lab\\input\\sample.jar com.example.Main",
+    "explanation": "Reordering arguments to place the address parameter after the suspend flag. The Sigma rule may miss this if it only checks for 'address=' without considering its position in the command line."
+  },
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:5000,server=y,suspend=n -cp C:\\Lab\\input\\sample.jar com.example.Main",
+    "explanation": "Insertion of a comma after the 'address=' parameter to separate it from the 'server' flag. The Sigma rule may miss this if it does not account for commas separating parameters in the command line."
+  },
+  {
+    "output": "java -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:5000 -cp C:\\Lab\\input\\sample.jar com.example.Main",
+    "explanation": "Omission of the 'server' and 'suspend' flags while keeping the 'address' parameter. The Sigma rule may miss this if it only checks for the presence of 'address=' without verifying the full set of required flags."
+  }
+]

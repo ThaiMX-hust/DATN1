@@ -1,0 +1,14 @@
+[
+  {
+    "output": "python C:\\Lab\\scripts\\registry_parser.py --mode live --target registry",
+    "explanation": "Substitution: Replaced 'pypykatz.exe' with a benign script 'registry_parser.py' and used equivalent command-line flags to avoid the suspicious executable name and keyword match."
+  },
+  {
+    "output": "cmd /c \"python C:\\Lab\\scripts\\registry_parser.py --mode live --target registry\"",
+    "explanation": "Insertion: Wrapped the command in a cmd /c invocation with quotes to alter parsing context, potentially avoiding the Sigma rule's string matching."
+  },
+  {
+    "output": "python C:\\Lab\\scripts\\registry_parser.py --target registry --mode live",
+    "explanation": "Reordering: Changed the order of flags to avoid the 'live' and 'registry' keyword sequence that the Sigma rule detects."
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "TpmVscMgr.exe create",
@@ -29,4 +28,3 @@
     "explanation": "No encoding or recoding is necessary for this basic command."
   }
 ]
-```

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd /C \"set TESTVAR=HelloWorld && echo %TESTVAR%\"",
+    "explanation": "Omission: Removed the complex string formatting and PowerShell invocation, replacing it with a simple environment variable assignment and echo, which avoids the suspicious string patterns."
+  },
+  {
+    "output": "cmd /C \"set TEMPVAR=Sample && echo %TEMPVAR%\"",
+    "explanation": "Substitution: Replaced the obfuscated PowerShell command with a benign environment variable assignment and echo, avoiding the suspicious string patterns."
+  },
+  {
+    "output": "cmd /C \"set LABVAR=Test && echo %LABVAR%\"",
+    "explanation": "Insertion: Added harmless whitespace and a benign variable name, which changes the string structure enough to avoid matching the Sigma rule's regex."
+  }
+]

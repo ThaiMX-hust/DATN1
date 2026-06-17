@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\winPEASx64.exe -linpeas",
+    "explanation": "Omission: Removed the suspicious command-line options that trigger the Sigma rule's 'selection_cli_option' match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\winPEASx64.exe -l -i",
+    "explanation": "Substitution: Replaced the suspicious command-line options with harmless alternatives that do not trigger the Sigma rule's 'selection_cli_option' match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\winPEASx64.exe -linpeas -o C:\\Lab\\out\\results.txt",
+    "explanation": "Insertion: Added an output redirection that does not affect the Sigma rule's 'selection_cli_option' match but changes the command-line structure."
+  }
+]

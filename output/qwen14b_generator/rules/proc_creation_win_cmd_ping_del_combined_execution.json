@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ping 127.0.0.7 -n 3 > C:\\Lab\\out\\ping_result.txt && fsutil file setZeroData offset=0 length=524288 \"C:\\Lab\\input\\sample.txt\" && Del /f /q \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering and substitution: Reordered the command sequence and replaced the target file with a benign lab placeholder to avoid triggering the 'del' keyword match."
+  },
+  {
+    "output": "ping 127.0.0.7 -n 3 > C:\\Lab\\out\\ping_result.txt && fsutil file setZeroData offset=0 length=524288 \"C:\\Lab\\input\\sample.txt\" && erase /f /q \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced 'del' with 'erase' as an equivalent command, which may not be captured by the Sigma rule's 'del' keyword match."
+  },
+  {
+    "output": "ping 127.0.0.7 -n 3 > C:\\Lab\\out\\ping_result.txt && fsutil file setZeroData offset=0 length=524288 \"C:\\Lab\\input\\sample.txt\" && cmd /c del /f /q \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Wrapped 'del' in a 'cmd /c' wrapper, which may alter the parsing context and avoid direct 'del' keyword matches in the Sigma rule."
+  }
+]

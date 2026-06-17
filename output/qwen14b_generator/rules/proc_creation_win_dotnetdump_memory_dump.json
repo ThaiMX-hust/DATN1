@@ -1,0 +1,14 @@
+[
+  {
+    "output": "dotnet-dump collect -p 1234 --output C:\\Lab\\out\\dump.7z",
+    "explanation": "Reordering: Reordered the '--output' flag after 'collect' to change the command-line structure, which may avoid the 'collect' keyword match in the Sigma rule."
+  },
+  {
+    "output": "dotnet-dump -collect -p 1234 --output C:\\Lab\\out\\dump.7z",
+    "explanation": "Substitution: Replaced 'collect' with '-collect' (long option format) to maintain the same behavior but change the command-line format, which may avoid the 'collect' keyword match in the Sigma rule."
+  },
+  {
+    "output": "dotnet-dump -p 1234 --output C:\\Lab\\out\\dump.7z",
+    "explanation": "Omission: Removed the 'collect' flag entirely, which changes the behavior of the command but avoids the 'collect' keyword match in the Sigma rule."
+  }
+]

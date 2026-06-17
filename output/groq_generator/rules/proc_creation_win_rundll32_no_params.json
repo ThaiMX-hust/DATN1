@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Windows\\System32\\rundll32.exe",
@@ -21,4 +20,3 @@
     "explanation": "A trailing quote is added, but the command still ends with 'rundll32.exe' and matches the rule."
   }
 ]
-```

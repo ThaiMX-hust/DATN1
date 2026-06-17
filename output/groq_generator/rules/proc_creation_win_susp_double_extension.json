@@ -42,3 +42,5 @@
   {
     "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe.docx.exe",
     "explanation": "Modified the double extension to include .docx.exe. This variation is still within the Sigma rule's detection scope."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "appcmd install module -name:SampleModule -image:C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a benign placeholder path to avoid matching the suspicious module installation pattern by altering the command line structure."
+  },
+  {
+    "output": "appcmd -name:SampleModule install module -image:C:\\Lab\\input\\sample.log",
+    "explanation": "Reordering: Reordered the command line arguments to change the structure, potentially avoiding the Sigma rule's keyword-based detection."
+  },
+  {
+    "output": "appcmd install module -name:SampleModule -image:C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious module path with a benign lab placeholder, preserving the command structure but avoiding the Sigma rule's suspicious path indicators."
+  }
+]

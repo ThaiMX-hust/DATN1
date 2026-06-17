@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "php.exe -r \"echo 'test';\"",
@@ -21,4 +20,3 @@
     "explanation": "This command appends redirection to a file, but the '-r' flag is still present and matches the Sigma rule."
   }
 ]
-```

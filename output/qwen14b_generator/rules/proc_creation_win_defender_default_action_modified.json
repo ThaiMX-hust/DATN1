@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -LowThreatDefaultAction 6\"",
+    "explanation": "Insertion: Added quotes and escaped the command to avoid direct string matching, which may bypass the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powershell.exe -Command Set-MpPreference -LowThreatDefaultAction 6",
+    "explanation": "Omission: Removed quotes and escaped characters, relying on the parser to interpret the command correctly while avoiding explicit string matching."
+  },
+  {
+    "output": "powershell.exe -Command Set-MpPreference -LowThreatDefaultAction '6'",
+    "explanation": "Substitution: Replaced the numeric value '6' with a string '6' in quotes, which may alter the Sigma rule's numeric value detection."
+  }
+]

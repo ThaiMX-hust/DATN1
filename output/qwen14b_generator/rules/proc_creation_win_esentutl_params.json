@@ -1,0 +1,14 @@
+[
+  {
+    "output": "esentutl /p \"C:\\Lab\\input\\sample.log\" \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added quotes and benign file paths to avoid matching the suspicious 'esentutl /p' command."
+  },
+  {
+    "output": "esentutl /p C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the target file with a benign lab placeholder to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "esentutl /p C:\\Lab\\input\\sample.log C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed any additional parameters or flags that might be considered suspicious while keeping the command safe and benign."
+  }
+]

@@ -24,4 +24,6 @@
     "explanation": "This command adds extra spaces and quotes to the command line, which is a valid insertion technique."
   },
   {
-    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe
+    "output": "\"C:\\AtomicRedTeam\\atomics\\T1059.001\\bin\\SOAPHound.exe"
+  }
+]

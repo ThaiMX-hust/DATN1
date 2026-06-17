@@ -4,19 +4,19 @@
     "explanation": "Inserted quotes around the command line to test if the rule is sensitive to quoting. This is a safe mutation technique for testing detection resilience."
   },
   {
-    "output": "cmd.exe /c C:\\Program\ Files\\Google\\Chrome\\Application\\chrome.exe --load-extension=C:\\Temp\\test_ext",
+    "output": "cmd.exe /c \"\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Temp\\test_ext\"",
     "explanation": "Used escaped spaces and alternative path representation to test if the rule is sensitive to path normalization or spacing."
   },
   {
-    "output": "cmd.exe /c C:\\Program\ Files\\Google\\Chrome\\Application\\chrome.exe --load-extension=C:\\Temp\\test_ext",
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Temp\\test_ext",
     "explanation": "Reordered and normalized the path with escaped spaces to test detection resilience while preserving the original behavior."
   },
   {
-    "output": "cmd.exe /c C:\\Program\ Files\\Google\\Chrome\\Application\\chrome.exe --load-extension=C:\\Temp\\test_ext",
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Temp\\test_ext",
     "explanation": "Omitted unnecessary quotes and used escaped spaces to test if the rule is sensitive to spacing or quoting."
   },
   {
-    "output": "cmd.exe /c C:\\Program\ Files\\Google\\Chrome\\Application\\chrome.exe --load-extension=C:\\Temp\\test_ext",
+    "output": "cmd.exe /c \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --load-extension=C:\\Temp\\test_ext",
     "explanation": "Used path normalization and escaped spaces to test if the rule is sensitive to how paths are formatted."
   }
 ]

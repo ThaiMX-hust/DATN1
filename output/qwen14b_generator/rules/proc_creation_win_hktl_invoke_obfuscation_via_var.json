@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd /c \"echo Test && set VAR=Test && echo %VAR%\"",
+    "explanation": "Omission: Removed suspicious string patterns and command structures that trigger the Sigma rule's detection logic."
+  },
+  {
+    "output": "cmd /c \"set VAR=Test && echo %VAR%\"",
+    "explanation": "Omission: Removed the use of -f and other pattern elements that match the Sigma rule's suspicious indicators."
+  },
+  {
+    "output": "cmd /c \"echo Test && set VAR=Test && echo %VAR%\"",
+    "explanation": "Insertion: Added harmless echo commands and restructured the command to avoid matching the Sigma rule's suspicious patterns."
+  }
+]

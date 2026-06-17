@@ -1,0 +1,14 @@
+[
+  {
+    "output": "iexpress.exe /n /q /m C:\\Lab\\input\\sample.sed",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious ' /n ' pattern, which may be detected by the Sigma rule."
+  },
+  {
+    "output": "iexpress.exe /q /n /m C:\\Lab\\input\\sample.sed",
+    "explanation": "Substitution: The command substitutes the order of the flags to avoid the ' /n ' pattern, which may be detected by the Sigma rule."
+  },
+  {
+    "output": "iexpress.exe /m C:\\Lab\\input\\sample.sed /n /q",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious ' /n ' pattern, which may be detected by the Sigma rule."
+  }
+]

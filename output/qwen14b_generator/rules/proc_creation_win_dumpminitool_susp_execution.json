@@ -1,0 +1,14 @@
+[
+  {
+    "output": "DumpMinitool.exe -f C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a flag '-f' and a benign file path to avoid triggering the 'CommandLine|contains: '.txt'' condition."
+  },
+  {
+    "output": "DumpMinitool.exe --dumpType C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced suspicious command-line flags with '--dumpType' which is explicitly filtered by the rule."
+  },
+  {
+    "output": "DumpMinitool.exe C:\\Lab\\input\\sample.7z",
+    "explanation": "Omission: Removed command-line flags entirely, avoiding the 'cmd_has_flags' condition while using a benign file extension."
+  }
+]

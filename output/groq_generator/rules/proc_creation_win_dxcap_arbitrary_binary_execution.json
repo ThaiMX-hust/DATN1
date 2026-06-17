@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "DXCap.exe -c notepad.exe",
@@ -9,4 +8,3 @@
     "explanation": "No safe bypass command can be generated. The Sigma rule is based on the presence of the '-c' flag in the command line, which is essential for triggering the evasion behavior. Any mutation that preserves the '-c' flag will still be detected."
   }
 ]
-```

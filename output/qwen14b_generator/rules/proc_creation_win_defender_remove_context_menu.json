@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ContextMenuHandlers /v EPP /t REG_SZ /d \"\" /f",
+    "explanation": "Reordering: The command uses 'reg.exe' but modifies the registry key instead of deleting it, which may bypass the 'del' or 'Remove-Item' keyword match in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Remove-Item -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ContextMenuHandlers\\EPP' -Force -Recurse\"",
+    "explanation": "Substitution: Uses PowerShell's 'Remove-Item' but with a different registry path structure that may not match the exact string pattern in the Sigma rule."
+  },
+  {
+    "output": "reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ContextMenuHandlers /v EPP /t REG_SZ /d \"\" /f",
+    "explanation": "Insertion: Adds a registry entry instead of deleting it, which avoids the 'del' or 'Remove-Item' keyword match in the Sigma rule."
+  }
+]

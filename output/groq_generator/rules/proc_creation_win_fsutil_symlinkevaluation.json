@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "fsutil behavior set SymlinkEvaluation R2L:1",
@@ -13,7 +12,6 @@
     "explanation": "Used the original command with no mutation for comparison."
   },
   {
-    "output": "fsutil behavior set SymlinkEvaluation R2R:1",
     "output": "fsutil behavior set SymlinkEvaluation R2R:1 ",
     "explanation": "Added a trailing space to test insertion techniques while maintaining valid parsing."
   },
@@ -26,4 +24,3 @@
     "explanation": "No safe bypass command can be generated."
   }
 ]
-```

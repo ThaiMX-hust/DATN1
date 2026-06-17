@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "impersonate.exe list",
@@ -25,4 +24,3 @@
     "explanation": "Repetition of the same command to test consistency in detection."
   }
 ]
-```

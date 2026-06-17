@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd /C \"echo Test | powershell -Command \"",
+    "explanation": "Insertion: Added quotes and restructured command to avoid matching the suspicious 'input' keyword in the Sigma rule."
+  },
+  {
+    "output": "cmd /C echo Test | powershell -Command \"",
+    "explanation": "Omission: Removed quotes to change the structure of the command line, potentially avoiding the regex match."
+  },
+  {
+    "output": "cmd /C \"echo Test | powershell -Command -NoExit \"",
+    "explanation": "Substitution: Replaced 'input' with 'NoExit' to avoid triggering the Sigma rule's keyword match."
+  }
+]

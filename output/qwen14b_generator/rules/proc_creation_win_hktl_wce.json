@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Test > C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a harmless command to avoid triggering the 'exe -S' detection by altering the command line structure."
+  },
+  {
+    "output": "cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed quotes, which may not trigger the Sigma rule's specific string matching due to the absence of the '-S' switch in the command line."
+  },
+  {
+    "output": "cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command line is reordered to avoid the 'exe -S' detection by changing the structure of the command without altering its benign intent."
+  }
+]

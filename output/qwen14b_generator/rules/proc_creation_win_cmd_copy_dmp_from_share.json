@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c copy \\\\example.com\\logs\\crash.hdmp C:\\Temp\\test.hdmp",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid the suspicious string match by changing the format of the remote path."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c copy \\\\example.com\\logs\\crash.hdmp C:\\Temp\\test.hdmp /y",
+    "explanation": "Insertion: Added a harmless flag '/y' to the command line, which may not be detected by the Sigma rule as it focuses on specific strings and not flags."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c copy \\\\example.com\\logs\\crash.hdmp C:\\Temp\\test.hdmp > C:\\Lab\\out\\copy_result.txt",
+    "explanation": "Insertion: Appended a redirection to a benign output file, which may not trigger the Sigma rule as it does not focus on output redirection."
+  }
+]

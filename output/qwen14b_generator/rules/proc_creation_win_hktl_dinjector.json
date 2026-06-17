@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Start-Process cmd -ArgumentList '/c echo Test' -Verb RunAs\"",
+    "explanation": "Omission: Removed the suspicious flags '/am51' and '/password' which are the Sigma indicators, thus avoiding the rule match."
+  },
+  {
+    "output": "powershell -Command \"Start-Process cmd -ArgumentList '/c echo Test' -Verb RunAs\" -NoProfile",
+    "explanation": "Insertion: Added '-NoProfile' flag to modify the command line without altering the core behavior, potentially bypassing the Sigma string match."
+  },
+  {
+    "output": "powershell -Command \"Start-Process cmd -ArgumentList '/c echo Test' -Verb RunAs\" -ExecutionPolicy Bypass",
+    "explanation": "Substitution: Replaced the default execution policy with '-ExecutionPolicy Bypass' to modify the command line syntax without introducing suspicious indicators."
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Select Name, DistinguishedName | Out-File -FilePath C:\\temp\\computers.txt\"",
@@ -21,4 +20,3 @@
     "explanation": "This command uses the alternative PowerShell executable (pwsh) and includes all required elements for detection by the Sigma rule."
   }
 ]
-```

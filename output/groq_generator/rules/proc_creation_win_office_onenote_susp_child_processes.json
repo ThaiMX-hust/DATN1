@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Windows\\System32\\cmd.exe /c echo Bypass Test",
@@ -13,4 +12,3 @@
     "explanation": "This command simulates a benign child process of onenote.exe using rundll32.exe, which is included in the Sigma rule's detection list. The command is modified using quotes and full path to avoid triggering the rule."
   }
 ]
-```

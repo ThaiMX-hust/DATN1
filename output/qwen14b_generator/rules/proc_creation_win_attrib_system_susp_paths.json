@@ -1,0 +1,14 @@
+[
+  {
+    "output": "attrib.exe +s \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1564.001.txt\"",
+    "explanation": "Insertion of quotes around the path to avoid potential parsing issues while preserving the command structure, which may bypass string-based detection."
+  },
+  {
+    "output": "attrib.exe -s C:\\Users\\thaim\\AppData\\Local\\Temp\\T1564.001.txt",
+    "explanation": "Omission of the '+s' option and replacement with '-s' to change the command's intent, which may avoid matching the ' +s' string in the Sigma rule."
+  },
+  {
+    "output": "attrib.exe +s C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution of the suspicious path with a benign lab placeholder, which avoids the suspicious directory and file name patterns in the Sigma rule."
+  }
+]

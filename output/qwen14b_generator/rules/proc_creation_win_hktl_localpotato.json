@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\LocalPotato.exe\" -i \"C:\\Lab\\input\\sample.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering and substitution: Reordered arguments and replaced suspicious paths with lab placeholders to avoid matching the Sigma rule's path-based detection."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\LocalPotato.exe\" -i C:\\Lab\\input\\sample.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed quotes around paths to avoid triggering the Sigma rule's string-based detection."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\LocalPotato.exe\" -i C:\\Lab\\input\\sample.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Inserted harmless spaces and quotes to modify the command line structure while preserving the benign test intent and avoiding Sigma rule triggers."
+  }
+]

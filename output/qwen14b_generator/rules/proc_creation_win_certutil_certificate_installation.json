@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\certutil.exe -addstore -f -user ROOT C:\\Lab\\input\\sample.cer",
+    "explanation": "Reordering arguments and using a benign placeholder file path to avoid matching the 'root' keyword in the command line."
+  },
+  {
+    "output": "certutil.exe -addstore -f -user ROOT C:\\Lab\\input\\sample.cer",
+    "explanation": "Omission of quotes and using a benign placeholder file path to avoid matching the 'root' keyword in the command line."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\certutil.exe -addstore -f -user \"ROOT\" C:\\Lab\\input\\sample.cer",
+    "explanation": "Insertion of quotes around the 'ROOT' keyword to avoid matching the 'root' keyword in the command line."
+  }
+]

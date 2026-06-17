@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "C:\\Strawberry\\perl\\bin\\perl.exe -E 'print \"TEST-HOST\"'",
@@ -17,4 +16,3 @@
     "explanation": "The string is rewritten using Perl's q{} syntax for quoting, which is functionally equivalent but syntactically different. This is a safe mutation technique."
   }
 ]
-```

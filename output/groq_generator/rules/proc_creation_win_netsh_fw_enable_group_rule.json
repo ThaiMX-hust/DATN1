@@ -12,7 +12,7 @@
     "explanation": "This command reorders the arguments 'group=All' and 'new enable=Yes'. The netsh command accepts reordered arguments in many cases, and this variation still matches the Sigma rule's detection logic."
   },
   {
-    "output": "netsh advfirewall firewall set rule group=\\.\All new enable=Yes",
-    "explanation": "This command uses an alternative string representation for the group name by including a path-like prefix (\\.\). This is a safe test-only recoding technique that still executes the same command and matches the Sigma rule's detection logic."
+    "output": "netsh advfirewall firewall set rule group=\\.\\All new enable=Yes",
+    "explanation": "This command uses an alternative string representation for the group name by including a path-like prefix (\\.\\). This is a safe test-only recoding technique that still executes the same command and matches the Sigma rule's detection logic."
   }
 ]

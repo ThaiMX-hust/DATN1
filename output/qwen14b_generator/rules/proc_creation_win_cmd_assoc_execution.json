@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c assoc .hta=txtfile",
+    "explanation": "Reordering: The command line arguments are reordered, which may cause the Sigma rule's string match to miss the reordered command."
+  },
+  {
+    "output": "cmd.exe /c \"assoc .hta=txtfile\"",
+    "explanation": "Insertion: Quotes are added around the command, which may cause the Sigma rule's string match to miss the quoted command."
+  },
+  {
+    "output": "cmd /c assoc .hta=txtfile",
+    "explanation": "Substitution: The full path 'cmd.exe' is replaced with 'cmd', which may cause the Sigma rule's path match to miss the shorter command."
+  }
+]

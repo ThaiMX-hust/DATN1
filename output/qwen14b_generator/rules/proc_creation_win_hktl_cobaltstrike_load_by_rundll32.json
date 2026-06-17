@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32 \"2.dll, StartW\"",
+    "explanation": "Insertion: Added quotes around the parameter. The Sigma rule may miss this if it does not account for quoted strings."
+  },
+  {
+    "output": "rundll32 2.dll ,StartW",
+    "explanation": "Insertion: Added a space between the DLL name and the parameter. The Sigma rule may miss this if it does not account for additional whitespace."
+  },
+  {
+    "output": "rundll32 2.dll,StartW",
+    "explanation": "Omission: Removed the space between the DLL name and the parameter. The Sigma rule may miss this if it does not account for missing whitespace."
+  }
+]

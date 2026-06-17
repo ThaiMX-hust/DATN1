@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr -i \"test\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the '-s' flag to avoid the 'subfolder' search indicator, while keeping the '-i' flag for case-insensitive search, which may not trigger the Sigma rule's 's' flag check."
+  },
+  {
+    "output": "findstr -s \"test\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the '-i' flag to avoid the 'insensitive' search indicator, while keeping the '-s' flag for subfolder search, which may not trigger the Sigma rule's 'i' flag check."
+  },
+  {
+    "output": "findstr \"test\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed both '-s' and '-i' flags to avoid triggering the Sigma rule's detection of subfolder and insensitive search indicators."
+  }
+]

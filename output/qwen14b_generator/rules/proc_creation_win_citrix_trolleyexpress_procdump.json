@@ -1,0 +1,14 @@
+[
+  {
+    "output": "TrolleyExpress.exe -ma \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious numeric parameter that triggers the Sigma rule."
+  },
+  {
+    "output": "TrolleyExpress -ma \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: The .exe extension is omitted, which may avoid the Sigma rule's filename-based detection."
+  },
+  {
+    "output": "TrolleyExpress.exe -ma C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Quotes are removed, and the path is normalized, which may bypass the Sigma rule's string matching."
+  }
+]

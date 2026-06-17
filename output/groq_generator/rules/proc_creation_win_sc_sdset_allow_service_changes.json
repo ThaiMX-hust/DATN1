@@ -24,4 +24,6 @@
     "explanation": "No mutation applied; this is a duplicate of the original command for consistency."
   },
   {
-    "output": "sc.exe sdset VSS D:(D;;GA;;;NU)(D;;GA;;;WD)(D;;GA;;;AN)
+    "output": "sc.exe sdset VSS D:(D;;GA;;;NU)(D;;GA;;;WD)(D;;GA;;;AN)"
+  }
+]

@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\"",
@@ -33,4 +32,6 @@
     "explanation": "This command adds the -NoProfile parameter to avoid loading user profiles. It is a common optimization and still matches the Sigma rule."
   },
   {
-    "output": "powershell.exe -Command \"(New-
+    "output": "powershell.exe -Command \"(New-"
+  }
+]

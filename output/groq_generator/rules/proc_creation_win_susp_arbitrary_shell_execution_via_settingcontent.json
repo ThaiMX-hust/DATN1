@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "\"C:\\\\Windows\\\\explorer.exe\" \"C:\\\\Users\\\\Public\\\\SettingsShortcut.SettingContent-ms\"",
@@ -21,4 +20,3 @@
     "explanation": "Wrapped the command line in extra quotes for insertion testing, which is still parsed correctly and should trigger the rule."
   }
 ]
-```

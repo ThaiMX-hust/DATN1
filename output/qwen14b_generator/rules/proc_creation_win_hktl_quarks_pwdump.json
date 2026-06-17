@@ -1,0 +1,14 @@
+[
+  {
+    "output": "QuarksPwDump.exe -dhl \"C:\\Lab\\input\\sample.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added a benign file path and output argument to avoid matching the suspicious CommandLine fields directly."
+  },
+  {
+    "output": "QuarksPwDump.exe --dump-hash-local \"C:\\Lab\\input\\sample.txt\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced ' -dhl' with its long-form '--dump-hash-local' to avoid the exact string match in the Sigma rule."
+  },
+  {
+    "output": "QuarksPwDump.exe -o \"C:\\Lab\\out\\archive.7z\" --dump-hash-local \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: Changed the order of arguments to avoid the exact CommandLine string match in the Sigma rule."
+  }
+]

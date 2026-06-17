@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "msiexec.exe /i \"http://example.com/test.msi\"",
@@ -41,4 +40,3 @@
     "explanation": "Added a '/passive' flag to test if the Sigma rule is affected by different user interface modes."
   }
 ]
-```

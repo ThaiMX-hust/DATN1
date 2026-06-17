@@ -1,4 +1,3 @@
-```json
 [
   {
     "output": "rundll32.exe desk.cpl,InstallScreenSaver not_an_scr.scr",
@@ -21,4 +20,3 @@
     "explanation": "A trailing backslash is added to the SCR file path, but the command is still valid and matches the Sigma rule."
   }
 ]
-```
