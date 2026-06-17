@@ -1,0 +1,14 @@
+[
+  {
+    "output": "VMwareToolBoxCmd.exe -s set -f C:\\Lab\\input\\script.txt",
+    "explanation": "Reordering and substitution: Reordered flags and replaced 'script' with '-s set' to avoid the 'script' keyword match in the Sigma rule."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe -set -f C:\\Lab\\input\\script.txt",
+    "explanation": "Substitution: Replaced 'set' with '-set' and 'script' with '-f' to avoid the 'script' and 'set' keyword matches in the Sigma rule."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe -f C:\\Lab\\input\\script.txt -s set",
+    "explanation": "Reordering: Changed the order of flags to avoid the 'script' and 'set' keyword matches in the Sigma rule."
+  }
+]

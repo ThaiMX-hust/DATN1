@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie http://localhost/print/pipe/srvsvc",
+    "explanation": "Insertion: Added a space between 'http' and 'localhost' to avoid direct match of 'http' and 'spoolss' in the command line."
+  },
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie http://localhost/print/pipe/srvsvc /test",
+    "explanation": "Insertion: Added an extra argument '/test' which does not alter the core command but changes the structure to avoid direct keyword matching."
+  },
+  {
+    "output": "rundll32.exe C:\\windows\\system32\\davclnt.dll,DavSetCookie http://localhost/print/pipe/srvsvc -test",
+    "explanation": "Substitution: Replaced '/print/pipe/' with '-test' to avoid the suspicious path while maintaining the same executable family and intent."
+  }
+]

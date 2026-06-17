@@ -1,0 +1,14 @@
+[
+  {
+    "output": "iox.exe -l 127.0.0.1:8080 -r 192.168.1.100:80",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid matching the suspicious string patterns in the Sigma rule."
+  },
+  {
+    "output": "iox.exe -r 192.168.1.100:80 -l 127.0.0.1:8080",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid matching the suspicious string patterns in the Sigma rule."
+  },
+  {
+    "output": "iox.exe -l 127.0.0.1:8080 -r 192.168.1.100:80 --test",
+    "explanation": "Insertion: Added a harmless '--test' flag to the command line, which may prevent the Sigma rule from matching due to the altered structure."
+  }
+]

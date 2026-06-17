@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic process get name,executablepath",
+    "explanation": "Reordering: The arguments are reordered to avoid the suspicious 'call create' pattern, which may bypass the Sigma rule's filter on 'call' and 'create'."
+  },
+  {
+    "output": "wmic process get /format:csv name,executablepath",
+    "explanation": "Insertion: Adding a harmless format parameter does not alter the core functionality but may bypass the Sigma rule's detection based on the 'process' flag."
+  },
+  {
+    "output": "wmic process list brief",
+    "explanation": "Substitution: Using 'list' instead of 'get' with a different argument ('brief') changes the command structure while maintaining the same intent, possibly evading the Sigma rule's 'process' keyword match."
+  }
+]

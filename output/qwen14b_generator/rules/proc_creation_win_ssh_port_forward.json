@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ssh.exe -L 8080:localhost:80 -N",
+    "explanation": "Reordering: The command uses -L instead of -R, which changes the port forwarding direction and avoids the ' -R ' string match in the Sigma rule."
+  },
+  {
+    "output": "ssh.exe -L 8080:localhost:80 -N -o UserKnownHostsFile=C:\\Lab\\input\\known_hosts",
+    "explanation": "Insertion: Additional options with a benign path are added, which may obscure the original command structure and avoid triggering the ' -R ' string match."
+  },
+  {
+    "output": "ssh.exe -L 8080:localhost:80 -N -o ControlPath=C:\\Lab\\input\\control_%r",
+    "explanation": "Substitution: The use of -L instead of -R changes the port forwarding type, and adding a ControlPath with a lab path avoids the ' -R ' string match in the Sigma rule."
+  }
+]

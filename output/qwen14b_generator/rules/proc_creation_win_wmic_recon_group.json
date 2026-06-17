@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_group get name",
+    "explanation": "Reordering: The command reorders the arguments to avoid the 'group' keyword in the CommandLine field, which may prevent the Sigma rule from detecting it."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_group get name,description",
+    "explanation": "Insertion: Adding an extra parameter 'description' to the command line may alter the string matching logic of the Sigma rule."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_group get /format:csv",
+    "explanation": "Substitution: Using a format parameter instead of the 'group' keyword may change the CommandLine field in a way that avoids the Sigma rule's detection."
+  }
+]

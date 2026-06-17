@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,LaunchErcApp -queuereporting",
+    "explanation": "Reordering: The command line reorders the arguments to avoid matching the 'LaunchErcApp ' and '-queuereporting' strings in the CommandLine field, which may bypass the Sigma rule's filter."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,LaunchErcApp -responsepester",
+    "explanation": "Substitution: Replacing '-queuereporting' with '-responsepester' changes the command line to avoid the specific string match in the Sigma rule's filter."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,LaunchErcApp",
+    "explanation": "Omission: Removing the '-queuereporting' and '-responsepester' flags omits the specific strings that trigger the Sigma rule's filter, while still using 'rundll32.exe' as the executable."
+  }
+]

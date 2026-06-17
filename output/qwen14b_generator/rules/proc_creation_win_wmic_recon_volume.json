@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic volume get name,size,freeSpace /format:csv > C:\\Lab\\out\\disk_info.csv",
+    "explanation": "Omission: Removed the 'path win32_logicaldisk' substring from the command line, which may prevent the Sigma rule's CommandLine|contains check from matching."
+  },
+  {
+    "output": "wmic volume get name,size,freeSpace /format:csv | Find-Replace -Pattern 'win32' -With 'XXXXX' > C:\\Lab\\out\\disk_info.csv",
+    "explanation": "Recoding: Replaced 'win32' with 'XXXXX' in the command line using a hypothetical Find-Replace command, which may prevent the Sigma rule's CommandLine|contains check from matching."
+  },
+  {
+    "output": "wmic volume get name,size,freeSpace /format:csv | Out-File -FilePath C:\\Lab\\out\\disk_info.csv",
+    "explanation": "Substitution: Replaced the 'path win32_logicaldisk' substring with a PowerShell redirection command, which may prevent the Sigma rule's CommandLine|contains check from matching."
+  }
+]

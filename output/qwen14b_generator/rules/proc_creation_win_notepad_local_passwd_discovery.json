@@ -1,0 +1,14 @@
+[
+  {
+    "output": "notepad.exe \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed the 'password' keyword from the filename, avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "notepad.exe -f \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the default command-line syntax with an alternative flag format that doesn't include the 'password' keyword."
+  },
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\input\\sample.txt\" -Verb Open",
+    "explanation": "Reordering: Used a different command-line interface (PowerShell) with a different syntax to open the file, avoiding the Sigma rule's direct command-line string match."
+  }
+]

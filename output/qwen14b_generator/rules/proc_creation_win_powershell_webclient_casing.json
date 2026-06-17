@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Testing Normal Casing'\"",
+    "explanation": "Omission: Removed the suspicious encoded string to avoid triggering the Sigma rule's encoded string detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host 'This is a test'\"",
+    "explanation": "Reordering: The command line does not include any encoded or suspicious casing strings, thus avoiding the Sigma rule's detection."
+  },
+  {
+    "output": "pwsh.exe -Command \"Get-Process | Format-List\"",
+    "explanation": "Substitution: Replaced the suspicious encoded string with a benign command that does not include any casing anomalies."
+  }
+]

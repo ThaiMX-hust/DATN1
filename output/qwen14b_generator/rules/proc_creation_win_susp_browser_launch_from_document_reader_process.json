@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process \"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" -url \"http://example.com\" -safe-mode",
+    "explanation": "Insertion of quotes and additional flags to avoid matching the 'http' keyword in the command line, which may bypass the Sigma rule's CommandLine|contains: 'http' check."
+  },
+  {
+    "output": "C:\\Program Files\\Mozilla Firefox\\firefox.exe --safe-mode --url http://example.com",
+    "explanation": "Reordering of arguments and using long-form flags to avoid direct 'http' matching in the command line, which may bypass the Sigma rule's CommandLine|contains: 'http' check."
+  },
+  {
+    "output": "C:\\Program Files\\Mozilla Firefox\\firefox.exe --url http://example.com --safe-mode",
+    "explanation": "Omission of optional elements and reordering of arguments to avoid direct 'http' matching in the command line, which may bypass the Sigma rule's CommandLine|contains: 'http' check."
+  }
+]

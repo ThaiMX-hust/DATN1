@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes and a benign command to avoid the 'Add-WindowsCapability' string, which may bypass the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "pwsh -Command \"Write-Output 'Testing' > C:\\Lab\\out\\test.log\"",
+    "explanation": "Substitution of 'Add-WindowsCapability' with a harmless command and use of 'pwsh' instead of 'powershell.exe', which may bypass the Sigma rule's Image and CommandLine checks."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process notepad.exe -ArgumentList 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Reordering and substitution of the command to use a benign action (notepad.exe) instead of the suspicious 'Add-WindowsCapability' cmdlet, which may bypass the Sigma rule's CommandLine|contains check."
+  }
+]

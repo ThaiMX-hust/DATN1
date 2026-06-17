@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process -Path \"C:\\Windows\\System32\\SndVol.exe\" -ArgumentList \"--test\" -Verb runas",
+    "explanation": "Insertion of quotes and additional arguments may prevent the Sigma rule from matching the CommandLine field, as it does not contain the suspicious strings."
+  },
+  {
+    "output": "C:\\Windows\\System32\\SndVol.exe --test",
+    "explanation": "Omission of optional elements and substitution of command-line syntax may prevent the Sigma rule from detecting the command as suspicious."
+  },
+  {
+    "output": "C:\\Windows\\System32\\SndVol.exe -t",
+    "explanation": "Substitution of equivalent syntax (e.g., -t instead of --test) may prevent the Sigma rule from matching the CommandLine field."
+  }
+]

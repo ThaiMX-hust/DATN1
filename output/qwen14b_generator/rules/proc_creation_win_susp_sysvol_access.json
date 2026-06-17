@@ -1,0 +1,14 @@
+[
+  {
+    "output": "explorer.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the suspicious SYSVOL and policies paths, replacing them with a benign lab placeholder to avoid the Sigma rule's string match."
+  },
+  {
+    "output": "cmd.exe /c echo Testing > C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the SYSVOL path with a lab placeholder and used a different command structure that does not involve SYSVOL or policies."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path 'C:\\Lab\\input\\sample.log'\"",
+    "explanation": "Reordering: Used PowerShell to access a lab placeholder path, which avoids the SYSVOL and policies strings while maintaining a similar command-line intent."
+  }
+]

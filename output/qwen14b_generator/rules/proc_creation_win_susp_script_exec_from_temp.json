@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\System32\\WScript.exe C:\\Lab\\input\\test.vbs",
+    "explanation": "Reordering: The command line uses a benign lab placeholder path instead of the suspicious Temp folder, avoiding the Sigma rule's 'Windows\\Temp' or '%TEMP%' detection."
+  },
+  {
+    "output": "C:\\WINDOWS\\System32\\WScript.exe \"C:\\Lab\\input\\test.vbs\"",
+    "explanation": "Insertion: Added quotes around the path to ensure correct parsing while using a lab placeholder, avoiding the Sigma rule's 'Windows\\Temp' or '%TEMP%' detection."
+  },
+  {
+    "output": "C:\\Lab\\input\\wscript.exe C:\\Lab\\input\\test.vbs",
+    "explanation": "Substitution: Replaced the executable path with a lab placeholder and used a benign path, avoiding the Sigma rule's 'Windows\\Temp' or '%TEMP%' detection."
+  }
+]

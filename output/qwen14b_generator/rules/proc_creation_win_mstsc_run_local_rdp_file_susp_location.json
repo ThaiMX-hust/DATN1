@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mstsc.exe \"C:\\Lab\\input\\sample.rdp\"",
+    "explanation": "Insertion: Added quotes around the .rdp file path to ensure proper parsing, avoiding the suspicious path indicators in the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe -f \"C:\\Lab\\input\\sample.rdp\"",
+    "explanation": "Substitution: Used a long option (-f) for full screen mode instead of default behavior, which may change how the command line is parsed and avoid matching the suspicious path."
+  },
+  {
+    "output": "mstsc.exe \"C:\\Lab\\input\\sample.rdp\" -f",
+    "explanation": "Reordering: Changed the order of arguments to ensure the .rdp file path is not directly associated with suspicious path indicators in the Sigma rule."
+  }
+]

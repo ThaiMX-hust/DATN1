@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msdeploy.exe -verb:sync -source:RunCommand=\"cmd /c echo test\" -dest:runCommand",
+    "explanation": "Insertion: Added quotes around the command argument to bypass string matching without altering the command's intent."
+  },
+  {
+    "output": "msdeploy.exe -source:RunCommand -dest:runCommand -verb:sync",
+    "explanation": "Reordering: Changed the order of arguments to potentially avoid matching the Sigma rule's specific sequence."
+  },
+  {
+    "output": "msdeploy.exe -verb:sync -source:RunCommand -dest:runCommand",
+    "explanation": "Omission: Removed optional elements while preserving the benign test behavior, potentially avoiding the Sigma rule's detection."
+  }
+]

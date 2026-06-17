@@ -1,0 +1,14 @@
+[
+  {
+    "output": "splwow64.exe \"\"",
+    "explanation": "Insertion: Added quotes around empty parameters to simulate a command line with parameters, which may bypass the rule's check for no parameters."
+  },
+  {
+    "output": "splwow64.exe -h",
+    "explanation": "Substitution: Replaced the lack of parameters with a common help flag, which may bypass the rule's check for no parameters."
+  },
+  {
+    "output": "splwow64.exe --help",
+    "explanation": "Substitution: Replaced the lack of parameters with a long help flag, which may bypass the rule's check for no parameters."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Change /disable /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\"",
+    "explanation": "Reordering arguments; the Sigma rule matches based on the presence of '/Change', '/disable', and the task name, but reordering may avoid triggering the rule if the detection logic is sensitive to argument order."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"\\Microsoft\\Windows\\SystemRestore\\SR\" /disable",
+    "explanation": "Insertion of quotes; the Sigma rule may not account for quoted paths or parameters, leading to a potential mismatch in the command-line parsing."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"\\Lab\\input\\sample.txt\" /disable",
+    "explanation": "Substitution of the task name with a benign placeholder; the Sigma rule targets specific task names, but substituting with a non-sensitive placeholder may avoid triggering the rule."
+  }
+]

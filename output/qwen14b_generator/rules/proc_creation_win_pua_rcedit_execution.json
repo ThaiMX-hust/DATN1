@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rcedit-x64.exe --set-FileVersion \"C:\\Lab\\input\\sample.txt\" C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The command reorders the arguments so that the suspicious string 'OriginalFileName' is not present, potentially avoiding the Sigma rule's 'CommandLine|contains' check."
+  },
+  {
+    "output": "rcedit-x64.exe --set-FileVersion C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: The command omits the specific metadata fields (e.g., 'OriginalFileName') that are targeted by the Sigma rule, avoiding the 'CommandLine|contains' check."
+  },
+  {
+    "output": "rcedit-x64.exe --set-FileVersion C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z --no-verify",
+    "explanation": "Insertion: An additional harmless flag '--no-verify' is inserted, which does not affect the Sigma rule's detection but changes the command line structure to avoid matching the suspicious strings."
+  }
+]

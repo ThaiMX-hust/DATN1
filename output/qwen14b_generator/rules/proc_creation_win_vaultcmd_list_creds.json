@@ -1,0 +1,14 @@
+[
+  {
+    "output": "vaultcmd /listcreds:\"Lab Credentials\"",
+    "explanation": "Substitution: Replaced the suspicious keyword 'Web Credentials' or 'Windows Credentials' with a benign placeholder 'Lab Credentials' which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "vaultcmd /listcreds:Lab_Credentials /all",
+    "explanation": "Insertion: Added an underscore in 'Lab_Credentials' to alter the string format, potentially avoiding the Sigma rule's 'listcreds:' keyword match."
+  },
+  {
+    "output": "vaultcmd /all /listcreds:Lab_Credentials",
+    "explanation": "Reordering: Changed the argument order to place '/all' before '/listcreds:Lab_Credentials', which may avoid the Sigma rule's CommandLine|contains trigger."
+  }
+]

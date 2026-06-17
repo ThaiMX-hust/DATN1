@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nop -ExecutionPolicy RemoteSigned -c \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed the '-exec bypass' flag and replaced it with a safer '-ExecutionPolicy RemoteSigned' which is less suspicious but still valid for testing."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy RemoteSigned -c \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced '-exec bypass' with '-ExecutionPolicy RemoteSigned' to avoid the suspicious 'Bypass' keyword while maintaining a valid test command."
+  },
+  {
+    "output": "powershell.exe -c \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Completely removed the '-ExecutionPolicy' parameter to avoid triggering the Sigma rule, while still using a benign command for testing."
+  }
+]

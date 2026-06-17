@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: The command uses a full path without short names, avoiding the suspicious '~1\\' or '~2\\' patterns by using a lab placeholder."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Replaced the use of short names with a full path using PowerShell, which avoids the Sigma rule's pattern matching."
+  },
+  {
+    "output": "explorer.exe C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: The command uses a full path without any short name components, ensuring it doesn't trigger the Sigma rule's detection based on short name patterns."
+  }
+]

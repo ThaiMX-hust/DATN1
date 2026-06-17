@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ultravnc -connect 127.0.0.1 -id:1234 -autoreconnect 1",
+    "explanation": "Omission: Removed the suspicious string '-autoreconnect ' from the command line, which may prevent the Sigma rule from detecting it as it no longer contains the '-autoreconnect ' string."
+  },
+  {
+    "output": "ultravnc -connect 127.0.0.1 -id:1234 --autoreconnect 1",
+    "explanation": "Substitution: Replaced '-autoreconnect' with '--autoreconnect', which may not be detected by the Sigma rule as it checks for the exact '-autoreconnect' string."
+  },
+  {
+    "output": "ultravnc -connect 127.0.0.1 -id:1234 -autoreconnect 1 -dummyflag",
+    "explanation": "Insertion: Added a harmless flag '-dummyflag' to the command line, which may not be detected by the Sigma rule as it focuses on the specific '-autoreconnect ' string."
+  }
+]

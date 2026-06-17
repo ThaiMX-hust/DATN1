@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmstp.exe -s \"C:\\Lab\\input\\sample.inf\" -au",
+    "explanation": "Reordering and substitution: Reordered flags and replaced the suspicious INF file path with a benign lab placeholder to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "cmstp.exe /s \"C:\\Lab\\input\\sample.inf\" -au",
+    "explanation": "Substitution: Replaced the suspicious INF file path with a benign lab placeholder and used a different flag format to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "cmstp.exe /s \"C:\\Lab\\input\\sample.inf\"",
+    "explanation": "Omission: Removed the '-au' flag to avoid triggering the Sigma rule's command-line argument-based detection while maintaining a benign test intent."
+  }
+]

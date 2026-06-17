@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wscript.exe \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Replaced 'manage-bde.wsf' with a benign file path to avoid the Sigma string match."
+  },
+  {
+    "output": "cscript.exe //nologo \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Used a different script file and added //nologo to alter the command line structure, avoiding the Sigma keyword match."
+  },
+  {
+    "output": "cmd.exe /c echo Testing > \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Omission: Replaced the script execution with a harmless echo command to avoid triggering the Sigma rule's process creation detection."
+  }
+]

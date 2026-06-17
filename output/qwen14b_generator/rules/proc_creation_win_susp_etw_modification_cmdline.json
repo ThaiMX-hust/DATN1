@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c set COMPlus_ETWEnabled=0 && echo Test",
+    "explanation": "Omission: The command omits the actual ETW logging tamper action by replacing it with a benign echo command, which may avoid the Sigma string match."
+  },
+  {
+    "output": "cmd.exe /c set \"COMPlus_ETWFlags=0\" && echo Test",
+    "explanation": "Insertion: Quotes are added around the COMPlus_ETWFlags value, which may alter the parsing and avoid the Sigma string match."
+  },
+  {
+    "output": "cmd.exe /c set COMPlus_ETWEnabled=0 && echo Test >> C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: The output redirection is changed to a benign lab placeholder, which may avoid the Sigma string match while maintaining the same executable family and test intent."
+  }
+]

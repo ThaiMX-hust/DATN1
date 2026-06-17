@@ -1,0 +1,14 @@
+[
+  {
+    "output": "python.exe -c \"import sys; sys.argv = ['adidnsdump', '--help']; exec(open('C:\\Lab\\input\\sample.txt').read())\"",
+    "explanation": "Insertion: Inserted a command-line string with quotes and a help flag to avoid direct keyword match, possibly bypassing the 'adidnsdump' detection."
+  },
+  {
+    "output": "python.exe --help",
+    "explanation": "Omission: Removed the 'adidnsdump' keyword entirely by using a different command (help), which avoids the Sigma rule's 'CommandLine|contains' check."
+  },
+  {
+    "output": "python.exe -m venv C:\\Lab\\out\\venv",
+    "explanation": "Substitution: Replaced the 'adidnsdump' command with a benign action (venv creation), which avoids the Sigma rule's 'CommandLine|contains' check."
+  }
+]

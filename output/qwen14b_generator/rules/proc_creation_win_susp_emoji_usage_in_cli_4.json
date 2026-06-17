@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo This is a test command without emojis > C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Replaced emoji with plain text. The command avoids emojis by using a simple echo command with a text string, which would not trigger the Sigma rule's emoji detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced emoji-based commands with a standard PowerShell command. The command uses a benign PowerShell script to list files, avoiding any emoji usage that would trigger the Sigma rule."
+  },
+  {
+    "output": "notepad.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed any emoji-based elements entirely. The command simply opens a text file with Notepad, which is a standard action and does not involve emojis, thus avoiding detection by the Sigma rule."
+  }
+]

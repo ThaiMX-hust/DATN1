@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mstsc.exe \"C:\\Lab\\input\\sample.rdp\"",
+    "explanation": "Insertion: Added quotes around the .rdp file path to avoid triggering the 'CommandLine|endswith: .rdp' detection by ensuring the .rdp extension is not directly at the end of the command line."
+  },
+  {
+    "output": "mstsc.exe -v C:\\Lab\\input\\sample.rdp",
+    "explanation": "Substitution: Replaced the default command-line argument with a long option (-v) to obscure the .rdp file path and avoid the 'CommandLine|endswith: .rdp' detection."
+  },
+  {
+    "output": "mstsc.exe C:\\Lab\\input\\sample.rdp -f",
+    "explanation": "Reordering: Placed the -f flag after the .rdp file path to change the structure of the command line, potentially avoiding the 'CommandLine|endswith: .rdp' detection."
+  }
+]

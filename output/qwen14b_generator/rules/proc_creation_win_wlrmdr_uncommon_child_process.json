@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\WINDOWS\\system32\\wlrmdr.exe\" -s 3600 -f 0 -t _ -m _ -a 11 -u \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious target 'calc.exe' with a benign lab placeholder 'sample.txt' to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\wlrmdr.exe\" -s 3600 -f 0 -t _ -m _ -a 11 -u \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the suspicious target 'calc.exe' with a benign lab placeholder 'archive.7z' to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\wlrmdr.exe\" -s 3600 -f 0 -t _ -m _ -a 11 -u \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Replaced the suspicious target 'calc.exe' with a benign lab placeholder 'sample.log' to avoid triggering the Sigma rule."
+  }
+]

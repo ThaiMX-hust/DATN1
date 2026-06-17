@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wscript.exe C:\\Lab\\input\\sample.vbs",
+    "explanation": "Substitution: Replaced the suspicious 'gatherNetworkInfo.vbs' with a benign placeholder 'sample.vbs' in the path, which may avoid the Sigma rule's 'CommandLine|contains' trigger."
+  },
+  {
+    "output": "wscript.exe \"C:\\Lab\\input\\sample.vbs\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, while using a benign placeholder to avoid matching the Sigma rule's suspicious keyword."
+  },
+  {
+    "output": "cmd.exe /c wscript.exe \"C:\\Lab\\input\\sample.vbs\"",
+    "explanation": "Omission: Removed the command-line execution context by using a benign placeholder, which may avoid triggering the 'gatherNetworkInfo.vbs' keyword match in the Sigma rule."
+  }
+]

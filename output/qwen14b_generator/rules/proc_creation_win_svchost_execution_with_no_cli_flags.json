@@ -1,0 +1,14 @@
+[
+  {
+    "output": "svchost.exe -start service1",
+    "explanation": "Insertion: Added a command-line argument to the svchost.exe process, which may change the detection logic as the Sigma rule focuses on svchost.exe without CLI arguments."
+  },
+  {
+    "output": "svchost.exe -service service1",
+    "explanation": "Substitution: Replaced the default invocation with a different command-line syntax that includes a service parameter, potentially altering the detection logic."
+  },
+  {
+    "output": "start-process svchost.exe -ArgumentList \"-start service1\"",
+    "explanation": "Reordering: Used a PowerShell command to invoke svchost.exe with arguments, which may bypass the rule that focuses on direct svchost.exe execution without CLI arguments."
+  }
+]

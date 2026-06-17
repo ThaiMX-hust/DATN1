@@ -1,0 +1,14 @@
+[
+  {
+    "output": "anydesk.exe --install --start-with-win --silent",
+    "explanation": "The command line contains the exact suspicious indicators ('--install', '--start-with-win', '--silent') and would be detected by the Sigma rule."
+  },
+  {
+    "output": "anydesk.exe --install --silent --start-with-win",
+    "explanation": "Reordering arguments may not change the detection since the Sigma rule uses 'contains' and checks for all required strings regardless of order."
+  },
+  {
+    "output": "anydesk.exe --install --silent",
+    "explanation": "Omission of '--start-with-win' may avoid detection if the Sigma rule requires all three strings to be present, but this changes the tested behavior and is not a valid bypass."
+  }
+]

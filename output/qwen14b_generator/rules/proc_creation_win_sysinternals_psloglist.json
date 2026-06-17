@@ -1,0 +1,14 @@
+[
+  {
+    "output": "psloglist.exe -d -x -s -c -g -l C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a benign log file path to avoid triggering the suspicious 'security', 'application', or 'system' keywords in the command line."
+  },
+  {
+    "output": "psloglist.exe -d -x -s -g -l C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the '-c' flag to avoid triggering the 'clear event log after displaying' behavior while maintaining the core functionality of the tool."
+  },
+  {
+    "output": "psloglist.exe -d -x -s -g -l C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the target file path with a lab-specific placeholder to avoid triggering the Sigma rule's suspicious file or log behavior."
+  }
+]

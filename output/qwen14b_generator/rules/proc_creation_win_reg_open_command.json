@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command\" /ve /d \"cmd.exe /c echo Test\"",
+    "explanation": "Insertion: Added quotes and a benign command to the /d parameter, which may bypass the Sigma rule's string match for the suspicious payload."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command /v DelegateExecute /d \"cmd.exe /c echo Test\"",
+    "explanation": "Substitution: Replaced the /ve parameter with /v and added a benign command to the /d parameter, which may avoid triggering the Sigma rule's specific pattern."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command /ve /d \"echo Test\"",
+    "explanation": "Omission: Removed the /v DelegateExecute parameter and replaced the command with a harmless echo, which may avoid the Sigma rule's detection based on the presence of DelegateExecute."
+  }
+]

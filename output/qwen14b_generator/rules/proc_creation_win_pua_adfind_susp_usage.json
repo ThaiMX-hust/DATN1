@@ -1,0 +1,14 @@
+[
+  {
+    "output": "adfind -subnets -f -csv C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the suspicious 'dclist' keyword from the command line, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "adfind -subnets -f -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the default output format with a file path using -o, which may avoid triggering the Sigma rule's string match."
+  },
+  {
+    "output": "adfind -subnets -f -csv C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Added a benign file path with a .log extension, which may not be flagged by the Sigma rule as suspicious."
+  }
+]

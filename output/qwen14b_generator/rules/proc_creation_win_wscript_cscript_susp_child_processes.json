@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wscript.exe C:\\Lab\\input\\sample.vbs",
+    "explanation": "Omission: The command omits any suspicious child process execution, avoiding the Sigma rule's detection criteria by not invoking rundll32, regsvr32, or PowerShell."
+  },
+  {
+    "output": "wscript.exe \"C:\\Lab\\input\\sample.vbs\" /nologo",
+    "explanation": "Insertion: Adding a harmless flag (/nologo) may prevent the Sigma rule from matching based on CommandLine content, as it does not include suspicious keywords."
+  },
+  {
+    "output": "wscript.exe C:\\Lab\\input\\sample.vbs -safe",
+    "explanation": "Substitution: Replacing a suspicious argument with a benign one (-safe) may prevent the Sigma rule from matching based on CommandLine content, as it does not include suspicious keywords."
+  }
+]

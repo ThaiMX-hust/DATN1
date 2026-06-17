@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" createvm --name \"Atomic VM\" --register & \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" modifyvm \"Atomic VM\" --firmware efi & \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" startvm \"Atomic VM\"",
+    "explanation": "Reordering: The command line reorders the arguments to avoid matching the suspicious keywords in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxSVC.exe\" /reregserver & regsvr32 /S \"C:\\Program Files\\Oracle\\VirtualBox\\VboxC.dll\" & rundll32 \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxRT.dll,RTR3Init\" & sc create VBoxDRV binpath= \"C:\\Program Files\\Oracle\\VirtualBox\\drivers\\VboxDrv.sys\" type= kernel start= auto error= normal displayname= PortableVBoxDRV & sc start VBoxDRV",
+    "explanation": "Insertion: Additional harmless delimiters and spaces are inserted to avoid matching the suspicious strings in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" createvm --name \"Atomic VM\" --register & \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" modifyvm \"Atomic VM\" --firmware efi & \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" startvm \"Atomic VM\"",
+    "explanation": "Omission: Optional elements are omitted while preserving the benign test behavior, thus avoiding the Sigma rule's suspicious indicators."
+  }
+]

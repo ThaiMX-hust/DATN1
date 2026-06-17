@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /Create /SC ONCE /TN spawn /TR \"C:\\Lab\\input\\sample.txt\" /ST 20:10",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid matching the Sigma rule's suspicious path indicator."
+  },
+  {
+    "output": "schtasks /Create /TN \"CompMgmtBypass\" /TR \"compmgmt.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "Omission: The command still contains the suspicious schedule type 'ONLOGON' and privilege level 'HIGHEST', so it cannot be bypassed by omission."
+  },
+  {
+    "output": "schtasks /Create /TN \"EventViewerBypass\" /TR \"eventvwr.msc\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "Omission: The command still contains the suspicious schedule type 'ONLOGON' and privilege level 'HIGHEST', so it cannot be bypassed by omission."
+  }
+]

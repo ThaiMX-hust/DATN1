@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net use \\\\127.0.0.1\\share \"C:\\Lab\\input\\sample.txt\" /user:labuser",
+    "explanation": "Insertion: Added a dummy file path and username to the command line, which may prevent the Sigma rule from matching the 'use' and '\\\\' strings directly."
+  },
+  {
+    "output": "net use \\\\127.0.0.1\\share /user:labuser \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: Changed the order of the command-line arguments, which may prevent the Sigma rule from matching the 'use' and '\\\\' strings in the expected sequence."
+  },
+  {
+    "output": "net use \\\\127.0.0.1\\share /user:labuser C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed quotes around the file path, which may prevent the Sigma rule from detecting the command as suspicious due to the absence of explicit string delimiters."
+  }
+]

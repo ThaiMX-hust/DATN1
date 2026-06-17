@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe --no-warnings C:\\Lab\\input\\test.js",
+    "explanation": "Insertion: Added --no-warnings flag to bypass the filter without altering the suspicious path or command-line structure."
+  },
+  {
+    "output": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe C:\\Lab\\input\\test.js",
+    "explanation": "Omission: Removed any command-line arguments that might trigger the filter, keeping the same executable path."
+  },
+  {
+    "output": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe -e \"console.log('test');\"",
+    "explanation": "Substitution: Replaced the script file with an inline -e option, which avoids the filter's keyword while maintaining the same executable."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Temp\\cscript.exe C:\\Temp\\winrm.vbs quickconfig -format:pretty",
+    "explanation": "Insertion: Added escape characters to the path, which may prevent the Sigma rule from matching the 'format:pretty' string due to altered parsing."
+  },
+  {
+    "output": "C:\\Temp\\cscript.exe C:\\Temp\\winrm.vbs quickconfig -format \"pretty\"",
+    "explanation": "Substitution: Replaced the colon with a space and quotes, which may prevent the Sigma rule from matching the 'format:pretty' string due to altered syntax."
+  },
+  {
+    "output": "C:\\Temp\\cscript.exe C:\\Temp\\winrm.vbs quickconfig -format text",
+    "explanation": "Substitution: Replaced 'pretty' with 'text', which may prevent the Sigma rule from matching the 'format:pretty' string due to altered argument value."
+  }
+]

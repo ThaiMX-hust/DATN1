@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn\"",
+    "explanation": "Omission: Removed the suspicious command line content that triggers the Sigma rule by omitting the entire command."
+  },
+  {
+    "output": "pwsh.exe -Command \"Add-PSSnapin Microsoft.Exchange.Powershell.Snapin\"",
+    "explanation": "Reordering: Reordered the command line arguments to avoid triggering the Sigma rule's string match."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn\" -ExecutionPolicy Bypass",
+    "explanation": "Insertion: Inserted a harmless execution policy parameter that does not affect the Sigma rule's string matching."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "runonce.exe /r \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure proper parsing, which may prevent the CommandLine from matching the '/AlternateShellStartup' string."
+  },
+  {
+    "output": "runonce.exe /r C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed any additional parameters that might trigger the '/AlternateShellStartup' keyword, keeping the command simple and safe."
+  },
+  {
+    "output": "runonce.exe -r C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced '/r' with '-r' to use a different syntax equivalent, which may avoid triggering the Sigma rule's CommandLine match."
+  }
+]

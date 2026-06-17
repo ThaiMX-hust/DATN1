@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i:\"C:\\Lab\\input\\sample.txt\" scrobj.dll",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid the Sigma rule's path-based detection."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i:C:\\Lab\\input\\sample.log scrobj.dll",
+    "explanation": "Omission: Removed the quotes around the path, which may not trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /u /s /i:\"C:\\Lab\\input\\sample.7z\" scrobj.dll",
+    "explanation": "Reordering: Changed the order of the flags, which may not trigger the Sigma rule's flag-based detection."
+  }
+]

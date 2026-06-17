@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=echo TEST-LAB\"",
+    "explanation": "Substitution: Replaced 'TEST-HOST' with 'TEST-LAB' to avoid matching the Sigma rule's 'echo TEST-HOST' pattern."
+  },
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param IT_BrowseForFile=echo TEST-LAB",
+    "explanation": "Omission: Removed quotes around the parameter value, which may not trigger the Sigma rule's 'CommandLine|contains' check."
+  },
+  {
+    "output": "msdt.exe /id PCWDiagnostic /skip true /param IT_BrowseForFile=echo C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the command with a benign lab placeholder path to avoid the suspicious 'echo TEST-HOST' pattern."
+  }
+]

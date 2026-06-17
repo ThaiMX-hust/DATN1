@@ -1,0 +1,14 @@
+[
+  {
+    "output": "python -c \"print('Hello World')\"",
+    "explanation": "Omission: Removed the suspicious behavior by omitting the -c flag and replacing it with a harmless command."
+  },
+  {
+    "output": "python -c \"print('Hello World')\" --no-sandbox",
+    "explanation": "Insertion: Added a harmless flag after the -c flag to alter the command line structure without changing the behavior."
+  },
+  {
+    "output": "python -c \"print('Hello World')\" -v",
+    "explanation": "Substitution: Replaced the suspicious flag with a benign flag that does not trigger the Sigma rule."
+  }
+]

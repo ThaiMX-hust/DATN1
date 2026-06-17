@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\cloudflared.exe tunnel run -config C:\\Lab\\input\\config.json -credentials-file C:\\Lab\\input\\credentials.json",
+    "explanation": "Substitution: Replaced the suspicious binary name with a lab placeholder while retaining the same command-line structure and intent, potentially avoiding the 'cloudflared' string match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\cloudflared.exe -url https://example.com -config C:\\Lab\\input\\config.json",
+    "explanation": "Reordering: Changed the order of command-line arguments to avoid the 'tunnel' keyword, which may not be detected by the Sigma rule's string-based matching."
+  },
+  {
+    "output": "C:\\Lab\\tools\\cloudflared.exe -config C:\\Lab\\input\\config.json -credentials-contents \"sample content\" -token \"sampletoken\"",
+    "explanation": "Insertion: Added quotes and spaces to the command line without altering the core functionality, which may bypass the Sigma rule's pattern matching."
+  }
+]

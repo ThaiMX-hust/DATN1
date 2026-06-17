@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ntdsutil \"activate instance ntds\" \"ifm\" \"create full C:\\Lab\\out\\data\" \"quit\" \"quit\"",
+    "explanation": "Reordering and substitution: Replaced the suspicious path with a lab placeholder while keeping the command structure, which may avoid the 'create full' keyword match if the Sigma rule relies on exact path strings."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious 'ntds.dit' and 'system.hiv' with lab placeholders, avoiding the 'copy' command's suspicious path match while maintaining the same command-line structure."
+  },
+  {
+    "output": "powershell -Command \"Get-Content C:\\Lab\\input\\sample.log\"",
+    "explanation": "Omission: Removed the 'ntds.dit' keyword and replaced it with a benign file, avoiding the 'powershell' and 'ntds.dit' match while keeping the command-line intent safe."
+  }
+]

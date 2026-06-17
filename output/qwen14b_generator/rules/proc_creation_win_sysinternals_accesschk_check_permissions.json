@@ -1,0 +1,14 @@
+[
+  {
+    "output": "accesschk.exe -uwcqv \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to avoid triggering the 'uwcqv ' flag match, which may be parsed differently by the command-line parser."
+  },
+  {
+    "output": "accesschk.exe -uwcqv C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed spaces or delimiters that may be used to trigger the Sigma rule's 'uwcqv ' flag match, while keeping the same benign test intent."
+  },
+  {
+    "output": "accesschk.exe -uwcqv C:\\Lab\\input\\sample.txt -nobypass",
+    "explanation": "Substitution: Added a benign flag '-nobypass' that is not recognized by the tool, which may alter the command-line parsing and avoid matching the Sigma rule's 'uwcqv ' flag."
+  }
+]

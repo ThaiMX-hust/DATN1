@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -W Hidden -C \"$u='C:\\Lab\\input\\sample.txt';$i=New-Object -ComObject('WindowsInstaller.Installer');$i.UILevel=2;$i.InstallProduct($u)\"",
+    "explanation": "Substitution: Replaced remote URL with a local file path to avoid 'http' and '\\\\' indicators in the Sigma rule."
+  },
+  {
+    "output": "pwsh -W Hidden -Command \"$u='C:\\Lab\\input\\sample.log';$i=New-Object -ComObject('WindowsInstaller.Installer');$i.UILevel=2;$i.InstallProduct($u)\"",
+    "explanation": "Reordering: Used 'pwsh' instead of 'PowerShell.exe' and rephrased command syntax to avoid direct string matches in the Sigma rule."
+  },
+  {
+    "output": "powershell -W Hidden -C \"$i=New-Object -ComObject('WindowsInstaller.Installer');$i.UILevel=2;$i.InstallProduct('C:\\Lab\\input\\sample.7z')\"",
+    "explanation": "Omission: Removed the variable assignment and direct URL reference to avoid 'http' and '\\\\' in the command line."
+  }
+]

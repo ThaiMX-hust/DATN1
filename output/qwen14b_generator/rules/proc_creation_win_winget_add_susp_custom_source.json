@@ -1,0 +1,14 @@
+[
+  {
+    "output": "winget source add --name \"TestSource\" --url \"http://example.com\" --force",
+    "explanation": "Reordering and substitution: Reordered arguments and used long option (--force) instead of short, potentially avoiding string match on 'add' and 'source' together."
+  },
+  {
+    "output": "winget source add --name TestSource --url http://example.com --force",
+    "explanation": "Omission: Removed quotes around arguments, which may bypass string matching on quoted values in the Sigma rule."
+  },
+  {
+    "output": "winget source add --name TestSource --url http://example.com -f",
+    "explanation": "Substitution: Replaced --force with -f, which may avoid detection by the 'add' and 'source' string match."
+  }
+]

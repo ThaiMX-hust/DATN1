@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /delete /tn \"*\" /f",
+    "explanation": "Reordering: Reordered the arguments to avoid the suspicious ' /delete ' string match in the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /f /delete /tn \"*\"",
+    "explanation": "Reordering: Reordered the arguments to avoid the suspicious ' /delete ' string match in the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /delete /tn \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Substitution: Replaced the suspicious ' /tn \\*' with a benign placeholder to avoid the Sigma rule's ' /tn \\*' match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\WindowsAI /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f",
+    "explanation": "Omission: Removed the explicit path to reg.exe by relying on the system PATH environment variable, which may bypass the Image-based detection."
+  },
+  {
+    "output": "reg add HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\WindowsAI /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f /q",
+    "explanation": "Insertion: Added a silent flag (/q) to suppress output, which may not be detected by the rule if it focuses on command-line content rather than process output."
+  },
+  {
+    "output": "reg add HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\WindowsAI /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f /s",
+    "explanation": "Substitution: Replaced /f with /s (which is not valid for reg.exe), but this may be misinterpreted by the parser, potentially avoiding the rule's string match."
+  }
+]

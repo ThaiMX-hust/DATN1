@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_GROQ_RULE_OUTPUT_DIR = Path("output/groq_generator/rules")
+DEFAULT_GROQ_RULE_OUTPUT_DIR = Path("output/qwen14b_generator/rules")
 DEFAULT_RULES_DIR = Path("rules")
-DEFAULT_OUTPUT_PATH = Path("input/groq_cases.generated.json")
+DEFAULT_OUTPUT_PATH = Path("input/qwen14b_local_cases.generated.json")
 ATTACK_TECHNIQUE_RE = re.compile(r"attack\.(t\d{4}(?:\.\d{3})?)", re.IGNORECASE)
 ATTACK_TACTIC_RE = re.compile(r"attack\.([a-z][a-z0-9_-]*)", re.IGNORECASE)
 CODE_FENCE_RE = re.compile(r"^\s*```(?:json)?\s*|\s*```\s*$", re.IGNORECASE)

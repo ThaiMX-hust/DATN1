@@ -1,0 +1,14 @@
+[
+  {
+    "output": "winget source add --insecure http://example.com",
+    "explanation": "Insertion: Added '--insecure' flag before 'http://example.com' to bypass the check for insecure sources, which may not be detected by the Sigma rule if it does not account for this flag."
+  },
+  {
+    "output": "winget source add http://example.com --insecure",
+    "explanation": "Reordering: Reordered the '--insecure' flag after 'http://example.com' to test if the Sigma rule's pattern matching is order-dependent, potentially missing the command if the flag is placed differently."
+  },
+  {
+    "output": "winget source add http://example.com -i",
+    "explanation": "Substitution: Replaced '--insecure' with '-i' as a shorthand flag, which may not be recognized by the Sigma rule if it specifically looks for the full '--insecure' string."
+  }
+]

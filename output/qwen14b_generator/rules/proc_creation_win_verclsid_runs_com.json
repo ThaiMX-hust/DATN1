@@ -1,0 +1,14 @@
+[
+  {
+    "output": "verclsid.exe /S \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes around the file path to avoid triggering the '/C' keyword match, which may bypass the Sigma rule's CommandLine|contains|all check."
+  },
+  {
+    "output": "verclsid.exe /C \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution of '/S' with '/C' as both are valid command-line options for verclsid.exe, potentially altering the Sigma rule's detection based on the specific command-line argument."
+  },
+  {
+    "output": "verclsid.exe \"C:\\Lab\\input\\sample.7z\"",
+    "explanation": "Omission of the '/S' and '/C' flags, preserving the benign test intent while avoiding the Sigma rule's CommandLine|contains|all check for those specific keywords."
+  }
+]

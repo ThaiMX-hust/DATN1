@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe user32.dll,LockWorkStation",
+    "explanation": "Omission: Removed the parent process (cmd.exe) which is part of the Sigma rule's selection_call_parent, making the command line not match the rule's condition."
+  },
+  {
+    "output": "rundll32.exe user32.dll,LockWorkStation",
+    "explanation": "Reordering: The command line arguments are reordered, but the core suspicious function 'LockWorkStation' is still present, so it may not bypass the rule."
+  },
+  {
+    "output": "rundll32.exe user32.dll,LockWorkStation",
+    "explanation": "Insertion: Inserted harmless spaces or quotes around the command line arguments, but the core suspicious function 'LockWorkStation' is still present, so it may not bypass the rule."
+  }
+]

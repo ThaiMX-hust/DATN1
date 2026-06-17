@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All\"",
+    "explanation": "Reordering: The command reorders the parameters to potentially avoid matching the exact string sequence in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"Enable-WindowsOptionalFeature -FeatureName TelnetClient -Online -All\"",
+    "explanation": "Substitution: The command uses equivalent syntax by reordering the parameters, which may not trigger the same string match."
+  },
+  {
+    "output": "powershell -Command \"Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All -NoRestart\"",
+    "explanation": "Insertion: An additional safe parameter (-NoRestart) is inserted, which may not be detected by the Sigma rule's string matching."
+  }
+]

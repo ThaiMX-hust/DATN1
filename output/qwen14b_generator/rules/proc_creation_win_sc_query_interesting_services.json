@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe query termservice",
+    "explanation": "The command is identical to the Sigma rule's suspicious behavior and would not be bypassed."
+  },
+  {
+    "output": "sc query termservice",
+    "explanation": "Substitution: Replaced 'sc.exe' with 'sc' (short option), which may not trigger the 'Image|endswith: '\\sc.exe'' condition in the Sigma rule."
+  },
+  {
+    "output": "sc query termservice -nobanner",
+    "explanation": "Insertion: Added '-nobanner' flag, which may not affect the 'query' and 'termservice' keywords, but could alter the command line parsing slightly to avoid string matching."
+  }
+]

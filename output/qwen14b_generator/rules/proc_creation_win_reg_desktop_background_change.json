@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe add \"HKCU\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d \"C:\\Lab\\input\\sample.jpg\" /f",
+    "explanation": "Substitution: Replaced the suspicious file path with a benign lab placeholder to avoid triggering the Sigma rule's file path detection."
+  },
+  {
+    "output": "reg.exe add HKCU\\Control Panel\\Desktop /v Wallpaper /t REG_SZ /d \"C:\\Lab\\input\\sample.jpg\" /f",
+    "explanation": "Omission: Removed quotes around the registry key path, which may not be required by the parser and avoids triggering the Sigma rule's string match."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d \"C:\\Lab\\input\\sample.png\" /f",
+    "explanation": "Substitution: Changed the file extension from .jpg to .png, which may not be flagged by the Sigma rule and keeps the command line syntactically valid."
+  }
+]

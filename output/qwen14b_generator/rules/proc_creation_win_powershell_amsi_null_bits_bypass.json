@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell -Command \"if(0){Write-Host 'Test'} -f $(0 -as [char]) +\"",
+    "explanation": "Insertion: Added harmless code inside the if(0) block, which may prevent the Sigma rule from matching the suspicious string."
+  }
+]

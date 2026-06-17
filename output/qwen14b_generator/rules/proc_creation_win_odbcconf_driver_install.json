@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /A INSTALLDRIVER C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command line reorders the arguments so that the 'INSTALLDRIVER' keyword is not directly followed by a DLL file, potentially avoiding the 'INSTALLDRIVER ' and '.dll' string matches in the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe /A INSTALLDRIVER C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replacing the '.dll' extension with a benign '.log' extension avoids the '.dll' string match in the Sigma rule while maintaining the same executable family and test intent."
+  },
+  {
+    "output": "odbcconf.exe /A INSTALLDRIVER C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Inserting a benign path 'C:\\Lab\\out\\archive.7z' with a non-DLL extension ('.7z') avoids the '.dll' string match in the Sigma rule while keeping the command line syntactically valid and safe."
+  }
+]

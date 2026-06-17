@@ -1,0 +1,14 @@
+[
+  {
+    "output": "extrac32.exe /C \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to avoid triggering the suspicious string match in the Sigma rule."
+  },
+  {
+    "output": "extrac32.exe -C C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced '/C' with '-C' to maintain the same executable family and intent while avoiding the suspicious string match."
+  },
+  {
+    "output": "extrac32.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed optional flags to maintain a benign test behavior while avoiding the suspicious string match."
+  }
+]

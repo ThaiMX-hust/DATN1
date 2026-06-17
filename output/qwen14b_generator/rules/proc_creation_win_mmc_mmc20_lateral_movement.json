@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\mmc.exe -Embedding \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added a benign file path as an argument, which may prevent the CommandLine|contains: '-Embedding' from matching if the parser treats the quoted argument as a separate parameter."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\mmc.exe -Embedding -LabTest",
+    "explanation": "Substitution: Replaced the suspicious keyword with a benign test flag, which may prevent the CommandLine|contains: '-Embedding' from matching if the parser treats the new flag as unrelated."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\mmc.exe -Embedding -LabTest \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Insertion and Substitution: Combined insertion of a benign file path and substitution of a test flag, which may prevent the CommandLine|contains: '-Embedding' from matching if the parser treats the new parameters as unrelated."
+  }
+]

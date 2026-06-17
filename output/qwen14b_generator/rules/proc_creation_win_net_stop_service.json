@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net stop UltraViewService",
+    "explanation": "Omission: Removed the executable path to avoid matching the 'net.exe' or 'net1.exe' filename in the Sigma rule."
+  },
+  {
+    "output": "net stop \"UltraViewService\"",
+    "explanation": "Insertion: Added quotes around the service name, which may alter parsing and avoid matching the 'stop' keyword in the CommandLine field."
+  },
+  {
+    "output": "net stop \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the service name with a benign lab placeholder file path, which may avoid the 'stop' keyword match in the Sigma rule."
+  }
+]

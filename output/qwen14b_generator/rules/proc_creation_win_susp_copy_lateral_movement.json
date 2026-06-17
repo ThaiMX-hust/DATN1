@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c copy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The command uses a benign local file path instead of a remote or admin share, avoiding the Sigma rule's suspicious indicator."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path 'C:\\Lab\\input\\sample.txt' -Destination 'C:\\Lab\\out\\archive.7z'\"",
+    "explanation": "Substitution: Uses PowerShell's Copy-Item with local file paths instead of remote or admin share paths, avoiding the Sigma rule's suspicious indicator."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z > NUL",
+    "explanation": "Insertion: Redirects output to NUL to avoid command-line logging, but still uses local file paths to avoid the Sigma rule's suspicious indicator."
+  }
+]

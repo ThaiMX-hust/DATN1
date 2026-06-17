@@ -1,0 +1,14 @@
+[
+  {
+    "output": "winget source add --name \"LabSource\" --url \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a benign lab placeholder URL to avoid matching the suspicious 'add' command with a malicious URL."
+  },
+  {
+    "output": "winget -source add --name LabSource --url C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced 'source' with '-source' to alter the command-line parsing without changing the intended action."
+  },
+  {
+    "output": "winget --url C:\\Lab\\input\\sample.txt --name LabSource add source",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid the 'source add' sequence that triggers the Sigma rule."
+  }
+]

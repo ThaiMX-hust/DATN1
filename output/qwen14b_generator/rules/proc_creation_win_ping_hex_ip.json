@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ping 192.168.1.1",
+    "explanation": "Omission: Removed the hex encoded IP address (0x...) to avoid triggering the Sigma rule's '0x' detection."
+  },
+  {
+    "output": "ping -n 1 192.168.1.1",
+    "explanation": "Substitution: Replaced the hex encoded IP with a standard decimal IP address, avoiding the '0x' keyword used in the Sigma rule."
+  },
+  {
+    "output": "ping -n 1 127.0.0.1",
+    "explanation": "Substitution: Replaced the hex encoded IP with a standard loopback IP address, avoiding the '0x' keyword used in the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: The command omits the suspicious CommandLine elements, avoiding the Sigma filter match."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Quotes are added around the path, which may alter the parsing and avoid matching the Sigma filter."
+  },
+  {
+    "output": "rundll32.exe -localserver 22d8c27b-47a1-48d1-ad08-7da7abd79617",
+    "explanation": "Reordering: The command reorders the arguments, which may avoid the specific CommandLine endswith filter."
+  }
+]

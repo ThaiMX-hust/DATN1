@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a benign lab placeholder path to avoid the 'Sysnative' keyword while maintaining the same executable family (cmd.exe)."
+  },
+  {
+    "output": "cmd /c C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed optional elements (like quotes) and replaced the suspicious 'Sysnative' path with a benign lab placeholder to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "cmd -c C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious 'Sysnative' path with a benign lab placeholder and used an equivalent syntax (-c instead of /c) to avoid the Sigma rule."
+  }
+]

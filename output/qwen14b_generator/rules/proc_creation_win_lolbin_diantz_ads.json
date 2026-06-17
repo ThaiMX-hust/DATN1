@@ -1,0 +1,14 @@
+[
+  {
+    "output": "diantz.exe -c C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.cab",
+    "explanation": "Omission: Removed the alternate data stream indicator (e.g., `:ads`) which is the key Sigma indicator for detecting ADS usage."
+  },
+  {
+    "output": "diantz.exe -c \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.cab\"",
+    "explanation": "Insertion: Added quotes around paths to ensure correct parsing without triggering the ADS detection pattern in the Sigma rule."
+  },
+  {
+    "output": "diantz.exe -c C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.cab -q",
+    "explanation": "Substitution: Added a benign flag (-q) that does not alter the core behavior but may change how the command line is parsed, potentially avoiding the Sigma string match."
+  }
+]

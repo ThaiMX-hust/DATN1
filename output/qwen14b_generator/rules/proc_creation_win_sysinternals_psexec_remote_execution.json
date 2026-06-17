@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Users\\Public\\Temp\\PsExec.exe\" \\\\TEST-HOST -u testuser -p testpassword -accepteula whoami",
+    "explanation": "Reordering: Reordered the command-line arguments to potentially avoid matching the Sigma rule's string pattern."
+  },
+  {
+    "output": "\"C:\\Users\\Public\\Temp\\PsExec.exe\" -accepteula \\\\TEST-HOST -u testuser -p testpassword whoami",
+    "explanation": "Insertion: Inserted a space after -accepteula to potentially avoid matching the Sigma rule's string pattern."
+  },
+  {
+    "output": "\"C:\\Users\\Public\\Temp\\PsExec.exe\" -u testuser -p testpassword -accepteula \\\\TEST-HOST whoami",
+    "explanation": "Reordering: Reordered the command-line arguments to potentially avoid matching the Sigma rule's string pattern."
+  }
+]

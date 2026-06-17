@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN \"LabTask\" /TR \"C:\\Lab\\input\\sample.txt\" /SC ONCE /ST 1200",
+    "explanation": "Reordering and substitution: The command reorders the arguments and uses a benign task name 'LabTask' instead of a GUID, avoiding the suspicious pattern in the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /Create /TN LabTask /TR \"C:\\Lab\\input\\sample.txt\" /SC ONCE /ST 1200",
+    "explanation": "Omission: The command omits quotes around the task name, which may not trigger the Sigma rule's detection of GUID-like names enclosed in quotes."
+  },
+  {
+    "output": "schtasks.exe /Create /TN \"LabTask\" /TR \"C:\\Lab\\input\\sample.txt\" /SC ONCE /ST 1200",
+    "explanation": "Insertion: The command inserts a harmless task name 'LabTask' without any GUID-like structure, which may not match the Sigma rule's pattern."
+  }
+]

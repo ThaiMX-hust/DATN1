@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\autoit\\AutoIt3.exe /AutoIt3ExecuteScript C:\\Lab\\input\\script.au3",
+    "explanation": "Reordering: The command uses the same executable and action but reorders the arguments to avoid matching the suspicious string ' /AutoIt3ExecuteScript' in the CommandLine field."
+  },
+  {
+    "output": "C:\\Lab\\tools\\autoit\\AutoIt3.exe -script C:\\Lab\\input\\script.au3",
+    "explanation": "Substitution: Replaced the '/AutoIt3ExecuteScript' flag with a hypothetical alternative '-script' flag, which may not be recognized by the parser but avoids the Sigma string match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\autoit\\AutoIt3.exe \"C:\\Lab\\input\\script.au3\" /ErrorStdOut",
+    "explanation": "Insertion: Added quotes around the script path and included '/ErrorStdOut' to modify the command line structure, potentially avoiding the ' /AutoIt3ExecuteScript' string match."
+  }
+]

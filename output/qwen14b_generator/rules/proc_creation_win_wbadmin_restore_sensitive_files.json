@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wbadmin start recovery -backupTarget:C:\\Lab\\backup\\test -recoveryTarget:C:\\Lab\\out\\recovery -itemType:File -include:C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command reorders the arguments to avoid matching the suspicious 'recoveryTarget' and 'itemtype:File' strings in the Sigma rule."
+  },
+  {
+    "output": "wbadmin start recovery -backupTarget:C:\\Lab\\backup\\test -recoveryTarget:C:\\Lab\\out\\recovery -include:C:\\Lab\\input\\sample.txt -itemType:File",
+    "explanation": "Insertion: Inserting a space before '-itemType:File' to avoid matching the suspicious 'itemtype:File' string in the Sigma rule."
+  },
+  {
+    "output": "wbadmin start recovery -backupTarget:C:\\Lab\\backup\\test -recoveryTarget:C:\\Lab\\out\\recovery -include:C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Omitting the '-itemType:File' argument to avoid matching the suspicious 'itemtype:File' string in the Sigma rule."
+  }
+]

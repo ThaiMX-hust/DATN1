@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c notepad.exe\"",
+    "explanation": "Substitution: Replaced 'calc.exe' with 'notepad.exe' to avoid the suspicious command pattern while maintaining the same structure."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"ATOMIC-T1053.005\" /TR \"cmd /c start /min \"\" powershell.exe -Command Echo Test\" /sc daily /st 07:45",
+    "explanation": "Substitution: Replaced the suspicious PowerShell command with a benign 'Echo Test' to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c echo Test\"",
+    "explanation": "Omission: Simplified the command line by omitting complex operations, replacing them with a harmless 'echo Test' command."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "where /R C:\\Lab\\input\\ Bookmarks",
+    "explanation": "Reordering: The command line reorders the path to use a lab placeholder directory, which may avoid the Sigma rule's path-based detection."
+  },
+  {
+    "output": "where /R C:\\Lab\\input\\ places.sqlite",
+    "explanation": "Substitution: The command line replaces the original suspicious file name with a lab placeholder, which may avoid the Sigma rule's file-based detection."
+  },
+  {
+    "output": "where /R C:\\Lab\\input\\ /F Bookmarks",
+    "explanation": "Insertion: The command line inserts an additional parameter '/F' that is harmless and may be parsed differently, potentially avoiding the Sigma rule's string-based detection."
+  }
+]

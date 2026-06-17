@@ -1,14 +1,14 @@
 [
   {
-    "output": "C:\Tools\bcp.exe TestDB.dbo.TestTable -c -T out C:\Temp\test.txt",
+    "output": "C:\\Tools\bcp.exe TestDB.dbo.TestTable -c -T out C:\\Temp\test.txt",
     "explanation": "Reordering: The 'out' keyword is moved after the '-c -T' flags, which may bypass string-based detection if the Sigma rule relies on positional analysis."
   },
   {
-    "output": "C:\Tools\bcp.exe TestDB.dbo.TestTable -c -T \"out C:\\Temp\\test.txt\"",
+    "output": "C:\\Tools\bcp.exe TestDB.dbo.TestTable -c -T \"out C:\\Temp\\test.txt\"",
     "explanation": "Insertion: Quoting the 'out' argument with a space, which may prevent the 'out' keyword from being detected as a standalone command-line token."
   },
   {
-    "output": "C:\Tools\bcp.exe TestDB.dbo.TestTable -c -T --output C:\\Temp\\test.txt",
+    "output": "C:\\Tools\bcp.exe TestDB.dbo.TestTable -c -T --output C:\\Temp\\test.txt",
     "explanation": "Substitution: Replacing 'out' with '--output' (long option), which may bypass the Sigma rule if it only checks for the short form 'out' in the command line."
   }
 ]

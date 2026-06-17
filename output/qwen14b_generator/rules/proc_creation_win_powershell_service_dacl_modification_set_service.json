@@ -1,0 +1,14 @@
+[
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name TestService -SecurityDescriptorSddl 'D:(A;;0x12345678;WD)\"",
+    "explanation": "Insertion: Added quotes around the SecurityDescriptorSddl value to avoid direct string matching, potentially bypassing the Sigma rule's string-based detection."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name TestService -SecurityDescriptorSddl 'D:(A;;0x12345678;WD)' -Verbose\"",
+    "explanation": "Substitution: Added a non-sensitive flag (-Verbose) to the command line, which may alter the parsing or matching logic of the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name TestService -SecurityDescriptorSddl 'D:(A;;0x12345678;WD)' -OutVariable result\"",
+    "explanation": "Reordering: Introduced a new parameter (-OutVariable) that changes the structure of the command line, possibly avoiding the Sigma rule's pattern-based detection."
+  }
+]

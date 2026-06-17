@@ -1,0 +1,14 @@
+[
+  {
+    "output": "taskkill /IM ccSvcHst.exe /F",
+    "explanation": "Omission: Removed unnecessary whitespace around '/F' and '/IM' to reduce command-line noise, which may avoid matching the Sigma rule's specific string pattern."
+  },
+  {
+    "output": "taskkill /IM ccSvcHst.exe /F /NODELAY",
+    "explanation": "Insertion: Added '/NODELAY' flag, which is a harmless and valid parameter for taskkill, potentially altering the string match for the Sigma rule."
+  },
+  {
+    "output": "taskkill /IM ccSvcHst.exe /F --help",
+    "explanation": "Insertion: Added '--help' to invoke help, which changes the command's intent and may avoid the Sigma rule's string-based detection."
+  }
+]

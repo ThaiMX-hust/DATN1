@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ssh -L 3389:C:\\Lab\\input\\sample.txt 127.0.0.1",
+    "explanation": "Reordering: The port 3389 is moved to the end of the command line, which may avoid matching the Sigma rule's CommandLine|contains: ':3389' condition."
+  },
+  {
+    "output": "ssh -L 3389:C:\\Lab\\input\\sample.txt 127.0.0.1 -o UserKnownHostsFile=C:\\Lab\\input\\known_hosts",
+    "explanation": "Insertion: Additional options are inserted after the main command, which may obscure the ':3389' string from the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "ssh -L 3389:C:\\Lab\\input\\sample.txt 127.0.0.1 -o Port=3389",
+    "explanation": "Substitution: The port is specified using an option (-o Port=3389) instead of directly in the command line, which may avoid matching the Sigma rule's CommandLine|contains: ':3389' condition."
+  }
+]

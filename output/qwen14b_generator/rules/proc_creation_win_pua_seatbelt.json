@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\Seatbelt.exe\" -group=misc -outputfile=\"C:\\Lab\\out\\seatbelt_report.txt\"",
+    "explanation": "Reordering and substitution: The command reorders arguments and uses a benign output file path to avoid triggering the 'CommandLine|contains' rule for specific command-line parameters."
+  },
+  {
+    "output": "C:\\Lab\\tools\\Seatbelt.exe -group=remote -outputfile=C:\\Lab\\out\\seatbelt_data.7z",
+    "explanation": "Substitution and omission: The command omits the suspicious command-line parameters and uses a benign output file path to avoid matching the 'CommandLine|contains' rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\Seatbelt.exe -group=system -outputfile=\"C:\\Lab\\out\\seatbelt_archive.7z\"",
+    "explanation": "Substitution and encoding: The command uses a benign output file path and encodes the command-line arguments to avoid matching the 'CommandLine|contains' rule."
+  }
+]

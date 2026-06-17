@@ -1,0 +1,14 @@
+[
+  {
+    "output": "explorer.exe /select,C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the suspicious CommandLine indicator by avoiding the '\\DavWWWRoot\\' string."
+  },
+  {
+    "output": "explorer.exe /select,C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed the suspicious CommandLine indicator by avoiding the '\\DavWWWRoot\\' string."
+  },
+  {
+    "output": "explorer.exe /select,C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed the suspicious CommandLine indicator by avoiding the '\\DavWWWRoot\\' string."
+  }
+]

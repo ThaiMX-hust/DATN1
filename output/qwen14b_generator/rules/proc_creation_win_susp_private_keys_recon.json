@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c dir C:\\Lab\\input\\sample.txt /b /s .key | findstr /e .key",
+    "explanation": "Insertion: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious file extension filter."
+  },
+  {
+    "output": "cmd.exe /c dir C:\\Lab\\input\\sample.log /b /s .key | findstr /e .key",
+    "explanation": "Insertion: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious file extension filter."
+  },
+  {
+    "output": "cmd.exe /c dir C:\\Lab\\input\\sample.7z /b /s .key | findstr /e .key",
+    "explanation": "Insertion: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious file extension filter."
+  }
+]

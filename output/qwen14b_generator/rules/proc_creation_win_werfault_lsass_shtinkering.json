@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Werfault.exe -u -p 744 -ip 1112 -s 244",
+    "explanation": "Omission: The command line omits the suspicious parameters that trigger the Sigma rule by not including the specific command-line arguments that match the Sigma pattern."
+  },
+  {
+    "output": "Werfault.exe -u -p 744 -ip 1112 -s 244 -dummy",
+    "explanation": "Insertion: An extra dummy parameter is inserted into the command line, which may prevent the Sigma rule from matching due to the altered structure of the command-line arguments."
+  },
+  {
+    "output": "Werfault.exe -u -p 744 -ip 1112 -s 244 -d C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: A benign file path is added to the command line, which may alter the command-line structure and prevent the Sigma rule from matching due to the presence of a non-sensitive file path."
+  }
+]

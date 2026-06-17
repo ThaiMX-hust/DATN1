@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', '$env:TEMP\\Atomic-license.txt')\"",
+    "explanation": "Reordering: The command is restructured to use the -Command parameter, which may change the parsing and avoid the specific string match for 'powershell' followed by the WebClient and DownloadFile."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', 'C:\\Lab\\input\\sample.txt')\"",
+    "explanation": "Substitution: The target file path is replaced with a benign lab placeholder, which may avoid the suspicious indicator without altering the command's intent or behavior."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt', 'C:\\Lab\\out\\archive.7z')\"",
+    "explanation": "Substitution: The target file path is replaced with a different benign lab placeholder, which may avoid the suspicious indicator without altering the command's intent or behavior."
+  }
+]

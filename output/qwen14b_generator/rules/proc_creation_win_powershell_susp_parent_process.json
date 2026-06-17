@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c powershell.exe -nop -w hidden -command New-Item -ItemType File C:\\Lab\\input\\sample.txt",
+    "explanation": "Replaced the suspicious file path with a benign lab placeholder to avoid triggering the Sigma rule's file path detection."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c powershell -nop -w hidden -command New-Item -ItemType File C:\\Lab\\input\\sample.txt",
+    "explanation": "Omitted the '.exe' extension from 'powershell' to avoid matching the Sigma rule's 'Image|endswith' condition."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c powershell.exe -nop -w hidden -command \"New-Item -ItemType File C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Wrapped the command in quotes to ensure it is parsed correctly without altering the command's intent, potentially avoiding string-based detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /i \"C:\\Lab\\input\\sample.msi\" /quiet",
+    "explanation": "Reordering and substitution: Reordered the '/quiet' flag to be after the MSI path and replaced the suspicious path with a benign lab placeholder. The Sigma rule may miss it if it only checks for '/q' or '/quiet' without checking the full command line context."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe -i \"C:\\Lab\\input\\sample.msi\" /quiet",
+    "explanation": "Substitution: Replaced '/q' with '-i' as an equivalent syntax. The Sigma rule may miss it if it only checks for '/q' or '/quiet' without checking for alternative syntax like '-i' in the command line."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /i \"C:\\Lab\\input\\sample.msi\" -quiet",
+    "explanation": "Insertion: Added a space between '/i' and the MSI path, and replaced '/q' with '-quiet'. The Sigma rule may miss it if it only checks for '/q' or '/quiet' without checking for alternative syntax or spacing."
+  }
+]

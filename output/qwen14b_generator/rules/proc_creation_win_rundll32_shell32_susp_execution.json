@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,Control_RunDLL",
+    "explanation": "Reordering: The command line reorders the arguments so that the suspicious string 'Control_RunDLL' is not directly adjacent to 'shell32.dll', potentially evading the 'CommandLine|contains|all' check."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,Control_RunDLL -no-suspicious-flag",
+    "explanation": "Insertion: Adding a harmless flag '-no-suspicious-flag' after the main command may break the 'CommandLine|contains|all' check by altering the structure of the command line."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,Control_RunDLL /safe-mode",
+    "explanation": "Substitution: Replacing the suspicious command with a similar syntax using '/safe-mode' may prevent the 'CommandLine|contains|all' check from matching the original suspicious strings."
+  }
+]

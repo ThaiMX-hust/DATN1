@@ -1,0 +1,14 @@
+[
+  {
+    "output": "OpenWith.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure proper parsing, which may prevent the Sigma rule from matching the '/c' argument if it relies on unquoted paths."
+  },
+  {
+    "output": "OpenWith.exe -c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced '/c' with '-c' as an equivalent option, which may avoid the Sigma rule's detection if it specifically looks for '/c' in the command line."
+  },
+  {
+    "output": "OpenWith.exe \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed the '/c' argument entirely, which may bypass the Sigma rule if it relies on the presence of '/c' in the command line."
+  }
+]

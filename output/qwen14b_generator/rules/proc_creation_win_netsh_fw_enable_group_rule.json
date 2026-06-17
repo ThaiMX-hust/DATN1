@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh advfirewall firewall set rule group=\"Windows Management\" new enable=Yes",
+    "explanation": "Reordering arguments may bypass string matching if the Sigma rule relies on a specific argument order."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule group=Windows.Management new enable=Yes",
+    "explanation": "Substitution of equivalent syntax (e.g., replacing quotes with dots or hyphens) may avoid exact string matches."
+  },
+  {
+    "output": "netsh advfirewall firewall set rule group=\"Windows Management\" new enable=Yes",
+    "explanation": "Insertion of harmless delimiters or whitespace may prevent exact string matching in the Sigma rule."
+  }
+]

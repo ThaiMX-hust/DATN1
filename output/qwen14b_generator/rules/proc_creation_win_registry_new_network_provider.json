@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Copy-Item 'C:\\Lab\\input\\sample.txt' -Destination 'C:\\Windows\\System32'\"",
+    "explanation": "Omission: Removed the registry manipulation and network provider addition, keeping the same executable family (powershell.exe) and benign test intent (file copy). The Sigma rule's suspicious strings are not present."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item 'C:\\Lab\\input\\sample.txt' -Destination 'C:\\Windows\\System32' -Verbose\"",
+    "explanation": "Insertion: Added the -Verbose flag, which is a harmless delimiter. The Sigma rule's suspicious strings are not present."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item 'C:\\Lab\\input\\sample.txt' -Destination 'C:\\Windows\\System32' -ErrorAction SilentlyContinue\"",
+    "explanation": "Substitution: Replaced default behavior with -ErrorAction SilentlyContinue, which is a safe and equivalent syntax. The Sigma rule's suspicious strings are not present."
+  }
+]

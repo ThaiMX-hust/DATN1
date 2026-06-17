@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\ElectronApp\\app.exe --browser-subprocess-path \"C:\\Lab\\input\\safe_path.txt\"",
+    "explanation": "Insertion: Enclosed the suspicious argument in quotes to prevent the Sigma rule from matching the keyword '--browser-subprocess-path' directly in the command line."
+  },
+  {
+    "output": "C:\\Program Files\\ElectronApp\\app.exe --renderer-cmd-prefix \"C:\\Lab\\input\\safe_prefix.txt\"",
+    "explanation": "Insertion: Enclosed the suspicious argument in quotes to prevent the Sigma rule from matching the keyword '--renderer-cmd-prefix' directly in the command line."
+  },
+  {
+    "output": "C:\\Program Files\\ElectronApp\\app.exe --utility-cmd-prefix \"C:\\Lab\\input\\safe_utility.txt\"",
+    "explanation": "Insertion: Enclosed the suspicious argument in quotes to prevent the Sigma rule from matching the keyword '--utility-cmd-prefix' directly in the command line."
+  }
+]

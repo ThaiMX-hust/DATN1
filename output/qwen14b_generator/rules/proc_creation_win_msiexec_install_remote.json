@@ -1,0 +1,14 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /i \"C:\\Lab\\input\\sample.msi\" /q",
+    "explanation": "Reordering: The /q flag is moved after /i, which may prevent the Sigma rule from matching the '-q' keyword in the CommandLine field."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /i \"C:\\Lab\\input\\sample.msi\" -q",
+    "explanation": "Substitution: Replaced '/q' with '-q' to maintain the same behavior but change the syntax, which might avoid matching the Sigma rule's windash detection."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /i \"C:\\Lab\\input\\sample.msi\" /quiet",
+    "explanation": "Substitution: Replaced '/q' with '/quiet' to maintain the same behavior but change the syntax, which might avoid matching the Sigma rule's windash detection."
+  }
+]

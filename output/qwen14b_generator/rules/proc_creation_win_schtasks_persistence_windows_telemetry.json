@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /run /tn \"\\Application Experience\\Microsoft Compatibility Appraiser\"",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the 'run ' string, which may prevent the Sigma rule's CommandLine|contains|all from matching."
+  },
+  {
+    "output": "schtasks /run /tn \"\\Application Experience\\Microsoft Compatibility Appraiser\" /f",
+    "explanation": "Insertion: Adding the '/f' flag (force) does not change the core behavior but may alter the CommandLine string, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "schtasks /run /tn \"\\Application Experience\\Microsoft Compatibility Appraiser\" /v",
+    "explanation": "Substitution: Replacing the default behavior with '/v' (verbose) does not alter the task execution but may change the CommandLine string, possibly avoiding the Sigma rule's detection."
+  }
+]

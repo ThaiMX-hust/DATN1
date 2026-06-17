@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32 C:\\Lab\\input\\sample.txt,StartW",
+    "explanation": "Substitution: Replaced the suspicious DLL extension with a benign text file extension (.txt) using a placeholder path, which may not trigger the Sigma rule's uncommon extension check."
+  },
+  {
+    "output": "rundll32 -sta C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Added a benign log file path with a common extension (.log) and used the -sta flag, which may bypass the uncommon extension detection."
+  },
+  {
+    "output": "rundll32 C:\\Lab\\input\\archive.7z,StartW",
+    "explanation": "Substitution: Replaced the suspicious DLL extension with a common archive extension (.7z) using a placeholder path, which may not trigger the Sigma rule's uncommon extension check."
+  }
+]

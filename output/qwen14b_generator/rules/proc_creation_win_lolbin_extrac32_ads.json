@@ -1,0 +1,14 @@
+[
+  {
+    "output": "extrac32.exe \"C:\\Lab\\input\\sample.cab\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added quotes and a benign output path to avoid matching the suspicious ':[^\\\\]' regex by not including an alternate data stream reference."
+  },
+  {
+    "output": "extrac32.exe -i \"C:\\Lab\\input\\sample.cab\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the default argument with a long option '-i' to avoid the '.cab' string being directly adjacent to 'extrac32.exe' in the command line."
+  },
+  {
+    "output": "extrac32.exe -o \"C:\\Lab\\out\\archive.7z\" \"C:\\Lab\\input\\sample.cab\"",
+    "explanation": "Reordering: Changed the order of arguments to ensure the '.cab' file path does not immediately follow 'extrac32.exe', reducing the chance of triggering the Sigma rule's string match."
+  }
+]

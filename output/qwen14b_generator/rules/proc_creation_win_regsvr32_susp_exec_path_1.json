@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe /s \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious location indicators."
+  },
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe -s C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the '/s' flag with its equivalent '-s' syntax and used a benign lab placeholder to avoid matching the Sigma rule's suspicious location indicators."
+  },
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe /s C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious location indicators."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh.exe add helper \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Substitution: Replaced the suspicious DLL path with a benign lab placeholder to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "netsh.exe -c \"add helper C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Insertion: Added a command-line option (-c) and quotes to restructure the command, potentially altering how the Sigma rule's string matching interprets the command."
+  },
+  {
+    "output": "netsh.exe add helper C:\\Lab\\input\\sample.dll",
+    "explanation": "Omission: Removed quotes around the DLL path, which may not trigger the Sigma rule's exact string matching if it relies on quoted paths for detection."
+  }
+]

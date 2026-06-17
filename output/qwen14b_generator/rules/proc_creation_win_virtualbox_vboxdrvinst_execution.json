@@ -1,0 +1,14 @@
+[
+  {
+    "output": "VBoxDrvInst.exe /executeinf C:\\Lab\\input\\sample.inf",
+    "explanation": "Reordering: Reordered parameters to avoid matching the 'driver' keyword, which may bypass the Sigma rule's 'driver' and 'executeinf' keyword check."
+  },
+  {
+    "output": "VBoxDrvInst.exe -executeinf C:\\Lab\\input\\sample.inf",
+    "explanation": "Substitution: Replaced 'executeinf' with a long option format '-executeinf' to avoid matching the Sigma rule's 'executeinf' keyword check."
+  },
+  {
+    "output": "VBoxDrvInst.exe C:\\Lab\\input\\sample.inf",
+    "explanation": "Omission: Removed the 'executeinf' parameter, which may bypass the Sigma rule's 'executeinf' keyword check, though this changes the tested behavior."
+  }
+]

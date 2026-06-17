@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\Microsoft Visual Studio\\VSDiagnostics.exe start -launch:C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command-line arguments are reordered to place the 'start' command before the '-launch' parameter, which may avoid matching the Sigma rule's specific CommandLine pattern."
+  },
+  {
+    "output": "C:\\Program Files\\Microsoft Visual Studio\\VSDiagnostics.exe -launch:C:\\Lab\\input\\sample.txt start",
+    "explanation": "Reordering: The 'start' command is moved after the '-launch' parameter, altering the CommandLine structure to potentially evade the Sigma rule's detection."
+  },
+  {
+    "output": "C:\\Program Files\\Microsoft Visual Studio\\VSDiagnostics.exe start -launch:C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: The file extension is changed from '.txt' to '.log', which may not trigger the Sigma rule's detection if it relies on specific file types or paths."
+  }
+]

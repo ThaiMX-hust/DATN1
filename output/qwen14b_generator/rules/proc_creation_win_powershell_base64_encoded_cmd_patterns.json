@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed the encoded command pattern (-e, -enc) by using -Command with a direct script string, which avoids triggering the encoded command detection."
+  },
+  {
+    "output": "pwsh.exe -Command \"Write-Output 'Hello World'\"",
+    "explanation": "Substitution: Replaced the encoded command pattern with a direct script string using -Command, avoiding the encoded command detection without altering the executable family."
+  },
+  {
+    "output": "powershell.exe -NoProfile -Command \"Get-Date\"",
+    "explanation": "Insertion: Added -NoProfile flag to avoid loading profiles that might contain encoded commands, while keeping the command line safe and benign."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\windows\\System32\\comsvcs.dll, MiniDump 204 C:\\Lab\\input\\sample.txt full",
+    "explanation": "Reordering and substitution: Reordered the arguments and replaced the target dump file with a benign lab placeholder to avoid matching the suspicious file path indicator in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\windows\\System32\\comsvcs.dll, MiniDump 204 C:\\Lab\\input\\sample.log full",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid matching the suspicious file path indicator in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\windows\\System32\\comsvcs.dll, MiniDump 204 C:\\Lab\\out\\archive.7z full",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid matching the suspicious file path indicator in the Sigma rule."
+  }
+]

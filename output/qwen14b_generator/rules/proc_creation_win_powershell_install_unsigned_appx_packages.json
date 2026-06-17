@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-AppxPackage -AllowUnsigned C:\\Lab\\input\\sample.appx\"",
+    "explanation": "Reordering: The '-AllowUnsigned' flag is moved to the end of the command line, which may not be captured by the Sigma rule's fixed position check."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-AppxPackage C:\\Lab\\input\\sample.appx -AllowUnsigned\"",
+    "explanation": "Insertion: A space is inserted between the package path and the '-AllowUnsigned' flag, potentially evading string-based detection."
+  },
+  {
+    "output": "pwsh.exe -Command \"Add-AppxPackage -AllowUnsigned C:\\Lab\\input\\sample.appx\"",
+    "explanation": "Substitution: Using 'pwsh.exe' instead of 'powershell.exe' may bypass the Image path check in the Sigma rule."
+  }
+]

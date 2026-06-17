@@ -1,0 +1,14 @@
+[
+  {
+    "output": "SyncAppvPublishingServer.exe -n \"test\" -f C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes and a benign file path to avoid the suspicious string 'n; ' in the command line."
+  },
+  {
+    "output": "SyncAppvPublishingServer.exe -n test -f C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed quotes and used a simpler argument to avoid the suspicious string 'n; ' in the command line."
+  },
+  {
+    "output": "SyncAppvPublishingServer.exe -f C:\\Lab\\input\\sample.txt -n test",
+    "explanation": "Reordering: Changed the order of arguments to avoid the suspicious string 'n; ' in the command line."
+  }
+]

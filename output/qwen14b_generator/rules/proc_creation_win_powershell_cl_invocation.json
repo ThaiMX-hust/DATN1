@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"SyncInvoke whoami.exe\"",
+    "explanation": "Omission: Removed the script loading step which may not be necessary for the test, avoiding the suspicious path in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"SyncInvoke whoami.exe\" -NoProfile",
+    "explanation": "Insertion: Added the -NoProfile flag which is a harmless delimiter and may prevent the Sigma rule from matching based on the command line structure."
+  },
+  {
+    "output": "powershell.exe -Command \"SyncInvoke 'whoami.exe'\"",
+    "explanation": "Substitution: Replaced spaces with single quotes to avoid the 'SyncInvoke ' string match in the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net use * \\\\example.com\\sales /TRANSPORT:QUIC /SKIPCERTCHECK",
+    "explanation": "Omission: Removed the quotes around the executable path, which may bypass the Sigma rule's Image field match."
+  },
+  {
+    "output": "net1 sessions",
+    "explanation": "Insertion: Replaced the full path with the executable name, which may bypass the Sigma rule's Image field match."
+  },
+  {
+    "output": "net sessions",
+    "explanation": "Substitution: Replaced the full path with the executable name, which may bypass the Sigma rule's Image field match."
+  }
+]

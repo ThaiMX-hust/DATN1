@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -c \"New-Service -Name svcHighPriv -BinaryPathName 'C:\\Lab\\input\\sample.txt' -StartupType Manual\"",
+    "explanation": "Replaced the suspicious path with a benign lab placeholder using substitution, which may avoid the 'BinaryPathName' keyword match."
+  },
+  {
+    "output": "powershell.exe -c \"New-Service -BinaryPathName 'C:\\Lab\\input\\sample.txt' -Name svcHighPriv -StartupType Manual\"",
+    "explanation": "Reordered arguments to move '-BinaryPathName' after '-Name' using reordering, which may avoid the specific string match order."
+  },
+  {
+    "output": "powershell.exe -c \"New-Service -Name svcHighPriv -StartupType Manual -BinaryPathName 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Inserted a space before '-BinaryPathName' using insertion, which may avoid the specific string match."
+  }
+]

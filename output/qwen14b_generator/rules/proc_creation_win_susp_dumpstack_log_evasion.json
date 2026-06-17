@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Test content > C:\\Lab\\input\\stack_dump.log\"",
+    "explanation": "Reordering and substitution: Replaced the suspicious filename 'DumpStack.log' with a benign placeholder 'stack_dump.log' to avoid the Sigma rule's string match."
+  },
+  {
+    "output": "cmd.exe /c \"echo Test content > C:\\Lab\\input\\stack_dump.txt\"",
+    "explanation": "Substitution: Changed the file extension from '.log' to '.txt' to avoid the Sigma rule's filename pattern match."
+  },
+  {
+    "output": "cmd.exe /c \"echo Test content > C:\\Lab\\input\\stack_dump_001.log\"",
+    "explanation": "Insertion: Added a numeric suffix to the filename to avoid the exact string match of 'DumpStack.log' in the Sigma rule."
+  }
+]

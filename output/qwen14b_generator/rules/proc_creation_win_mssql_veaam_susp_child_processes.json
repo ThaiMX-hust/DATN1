@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\input\\sample.txt\" -ArgumentList \"-ex \"",
+    "explanation": "Insertion: Added quotes and space around '-ex' to avoid triggering the 'bypass' keyword match in the Sigma rule."
+  },
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\input\\sample.txt\" -ArgumentList \"cscript\" -Verb RunAs",
+    "explanation": "Substitution: Replaced the suspicious 'cscript' with a benign file path and used 'RunAs' to avoid the 'cscript' keyword match in the Sigma rule."
+  },
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\input\\sample.txt\" -ArgumentList \"copy C:\\Lab\\input\\sample.log C:\\Lab\\out\\archive.7z\" -Verb RunAs",
+    "explanation": "Reordering: Reordered the arguments to use a benign 'copy' command with lab files, avoiding the 'copy ' keyword match in the Sigma rule."
+  }
+]

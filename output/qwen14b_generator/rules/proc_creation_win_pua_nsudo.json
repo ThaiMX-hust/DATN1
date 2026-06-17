@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\NSudo.exe -U:S -ShowWindowMode:Hide C:\\Lab\\scripts\\test_script.bat",
+    "explanation": "Reordering: The '-U:S' flag is moved before '-ShowWindowMode:Hide' to potentially bypass the specific pattern match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\NSudo.exe -U=S -ShowWindowMode:Hide C:\\Lab\\scripts\\test_script.bat",
+    "explanation": "Substitution: Replaced '-U:S' with '-U=S' to test if the Sigma rule's pattern matching is sensitive to the use of '=' versus ' ' as the separator."
+  },
+  {
+    "output": "C:\\Lab\\tools\\NSudo.exe -ShowWindowMode:Hide -U:S C:\\Lab\\scripts\\test_script.bat",
+    "explanation": "Reordering: The '-ShowWindowMode:Hide' flag is moved before '-U:S' to test if the Sigma rule's pattern matching is sensitive to the order of flags."
+  }
+]

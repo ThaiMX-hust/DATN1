@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe \"C:\\Lab\\input\\sample.db\"",
+    "explanation": "Replaced the suspicious path with a benign lab placeholder using substitution, which may avoid the 'User Data' and 'Cookies' string matches."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe -header \"C:\\Lab\\input\\sample.db\"",
+    "explanation": "Inserted an additional flag (-header) using insertion, which may alter parsing and avoid the 'Cookies' string match."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\sqlite-tools-win32-x86-3380200\\sqlite3.exe \"C:\\Lab\\input\\sample.db\" -csv",
+    "explanation": "Reordered arguments using reordering, which may change how the command line is parsed and avoid the 'Cookies' string match."
+  }
+]

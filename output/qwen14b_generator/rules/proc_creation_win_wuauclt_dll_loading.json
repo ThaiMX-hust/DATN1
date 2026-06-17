@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wuauclt.exe /RunHandlerComServer /UpdateDeploymentProvider \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Reordered arguments and replaced the suspicious DLL path with a benign lab placeholder, which may bypass the Sigma rule's CommandLine contains checks."
+  },
+  {
+    "output": "wuauclt.exe -UpdateDeploymentProvider \"C:\\Lab\\input\\sample.txt\" -RunHandlerComServer",
+    "explanation": "Substitution: Replaced '/' with '-' for command-line options, which may bypass the Sigma rule's CommandLine contains checks."
+  },
+  {
+    "output": "wuauclt.exe /RunHandlerComServer",
+    "explanation": "Omission: Removed the /UpdateDeploymentProvider argument, which may bypass the Sigma rule's CommandLine contains checks."
+  }
+]

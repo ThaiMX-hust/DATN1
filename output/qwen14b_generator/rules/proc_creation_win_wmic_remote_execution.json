@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /node:127.0.0.1 /output:C:\\Lab\\out\\archive.7z process get name,executablepath",
+    "explanation": "Reordering: Reordered the command-line arguments to place the output destination before the suspicious '/node:' parameter, potentially avoiding the Sigma rule's detection of '/node:' in the CommandLine field."
+  },
+  {
+    "output": "wmic.exe /node:localhost /format:csv > C:\\Lab\\out\\wmic_output.csv",
+    "explanation": "Substitution: Replaced the default output method with a redirection to a file, which might alter how the CommandLine is parsed and could bypass the Sigma rule's detection of '/node:' in the CommandLine field."
+  },
+  {
+    "output": "wmic.exe /node:127.0.0.1 /output:C:\\Lab\\out\\archive.7z process get name,executablepath /format:csv",
+    "explanation": "Insertion: Added a harmless '/format:csv' parameter at the end of the command line, which may not be detected by the Sigma rule as it focuses on the '/node:' parameter and does not analyze additional formatting options."
+  }
+]

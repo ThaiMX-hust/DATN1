@@ -21,7 +21,7 @@ from summarize_rules_by_tactic import iter_rule_files, read_rule_metadata
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT_CSV = PROJECT_ROOT / "results" / "gemini" / "gemini_add - result.csv"
+DEFAULT_INPUT_CSV = PROJECT_ROOT / "results" / "gemini" / "gemini_fail_rerun - result.csv"
 DEFAULT_WORKBOOK = PROJECT_ROOT / "results" / "gemini" / "final_result.xlsx"
 DEFAULT_RULES_DIR = PROJECT_ROOT / "rules"
 DEFAULT_REPORT_DIR = PROJECT_ROOT / "output" / "final_result_imports"

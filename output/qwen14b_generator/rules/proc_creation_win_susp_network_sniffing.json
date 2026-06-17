@@ -1,0 +1,14 @@
+[
+  {
+    "output": "tshark -i \"C:\\Lab\\input\\sample.txt\" -w C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Added quotes around the interface path to avoid direct '-i' flag matching, potentially bypassing the Sigma rule's string match."
+  },
+  {
+    "output": "tshark -i C:\\Lab\\input\\sample.txt -w C:\\Lab\\out\\archive.7z -f \"tcp port 80\"",
+    "explanation": "Substitution: Added a filter flag '-f' with a benign filter to alter the command structure, possibly evading the Sigma rule's pattern matching."
+  },
+  {
+    "output": "tshark -w C:\\Lab\\out\\archive.7z -i C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Changed the order of '-i' and '-w' flags, which might not be detected by the Sigma rule if it only checks for '-i' without considering argument order."
+  }
+]

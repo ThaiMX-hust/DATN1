@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -DisableBehaviorMonitoring $false",
+    "explanation": "Omission: Removed the suspicious '$true' value to avoid triggering the '-DisableBehaviorMonitoring $true' match in the Sigma rule."
+  },
+  {
+    "output": "sc.exe config WinDefend start=auto",
+    "explanation": "Substitution: Changed 'disabled' to 'auto' to avoid triggering the 'start=disabled' match in the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -DisableRuntimeMonitoring $false",
+    "explanation": "Omission: Removed the suspicious '$true' value to avoid triggering the '-DisableRuntimeMonitoring $true' match in the Sigma rule."
+  }
+]

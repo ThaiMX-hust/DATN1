@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\System32\\WScript.exe C:\\Lab\\input\\script.vbs",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious extension in the CommandLine field, which may bypass the Sigma rule's string match."
+  },
+  {
+    "output": "C:\\WINDOWS\\System32\\WScript.exe -nologo C:\\Lab\\input\\script.vbs",
+    "explanation": "Insertion: Adding the '-nologo' flag to the command line may prevent the Sigma rule from detecting the script execution based on the CommandLine field."
+  },
+  {
+    "output": "C:\\WINDOWS\\System32\\WScript.exe C:\\Lab\\input\\script.vbs",
+    "explanation": "Substitution: Replacing the suspicious file path with a benign lab placeholder may prevent the Sigma rule from detecting the script execution based on the CommandLine field."
+  }
+]

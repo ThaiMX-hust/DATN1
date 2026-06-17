@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"perl --help\"",
+    "explanation": "Reordering: The suspicious command is moved away from the parent web server process, potentially avoiding the selection_webserver_* criteria."
+  },
+  {
+    "output": "cmd.exe /c \"python -h\"",
+    "explanation": "Substitution: Replacing 'python --help' with 'python -h' may avoid detection by the 'python --help' string match in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"wget --help\"",
+    "explanation": "Insertion: Adding quotes and a wrapper 'cmd.exe /c' may bypass the direct command line string match in the Sigma rule."
+  }
+]

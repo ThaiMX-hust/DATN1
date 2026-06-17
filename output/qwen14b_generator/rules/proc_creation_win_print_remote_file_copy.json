@@ -1,0 +1,14 @@
+[
+  {
+    "output": "print \"C:\\Lab\\input\\sample.txt\" /D \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added quotes around paths and used a benign lab placeholder, which may avoid the CommandLine|startswith: 'print' match."
+  },
+  {
+    "output": "print -D \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced '/D' with its long option '-D', which may avoid the CommandLine|contains: '/D' match."
+  },
+  {
+    "output": "print \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.7z\" /D",
+    "explanation": "Reordering: Changed the position of '/D' argument, which may avoid the CommandLine|contains: '/D' match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "REG.exe ADD HKCU\\Environment /v UserInitMprLogonScript /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid the Sigma rule's string match."
+  },
+  {
+    "output": "REG.exe ADD HKCU\\Environment /v UserInitMprLogonScript /t REG_SZ /d \"C:\\Lab\\input\\sample.log\" /f",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid the Sigma rule's string match."
+  },
+  {
+    "output": "REG.exe ADD HKCU\\Environment /v UserInitMprLogonScript /t REG_SZ /d \"C:\\Lab\\out\\archive.7z\" /f",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid the Sigma rule's string match."
+  }
+]

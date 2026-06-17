@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net localgroup \"Test Group\" user /add",
+    "explanation": "Insertion: Added quotes around the group name to avoid matching the suspicious Sigma indicator 'Group Policy Creator Owners' or 'Schema Admins' by altering the command structure."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-LocalGroupMember -Group 'Test Group' -Member user\"",
+    "explanation": "Substitution: Replaced the suspicious group names with a benign 'Test Group' to avoid matching the Sigma rule's selection_group criteria."
+  },
+  {
+    "output": "net localgroup TestGroup user /add",
+    "explanation": "Omission: Removed spaces and quotes to change the command structure, potentially avoiding the Sigma rule's string matching by altering the command line format."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\RUNDLL32.EXE -localserver {B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}",
+    "explanation": "Omission: Removed quotes around the executable path, which may avoid triggering the Sigma rule's exact path match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\RUNDLL32.EXE -sta {B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}",
+    "explanation": "Omission: Removed quotes around the executable path, which may avoid triggering the Sigma rule's exact path match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\RUNDLL32.EXE -localserver {B5F8350B-0548-48B1-A6EE-88BD00B4A5E7} -safe",
+    "explanation": "Insertion: Added a harmless flag '-safe' which may not be recognized by the Sigma rule, altering the command line structure without changing the core behavior."
+  }
+]

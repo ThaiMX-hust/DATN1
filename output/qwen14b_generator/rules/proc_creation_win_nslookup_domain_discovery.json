@@ -1,0 +1,14 @@
+[
+  {
+    "output": "nslookup -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.LabDomain",
+    "explanation": "Substitution: Replaced the domain placeholder with a benign lab domain name to avoid triggering the Sigma rule's string match."
+  },
+  {
+    "output": "nslookup -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.LabDomain -type=ALL",
+    "explanation": "Reordering: Reordered the command-line arguments to test if the Sigma rule's field match is sensitive to argument order."
+  },
+  {
+    "output": "nslookup -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.LabDomain | findstr /i \"LabDomain\"",
+    "explanation": "Insertion: Added a pipeline and filter to test if the Sigma rule's detection is based solely on the presence of the command without further processing."
+  }
+]

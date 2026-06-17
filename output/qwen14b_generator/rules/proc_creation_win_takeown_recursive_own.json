@@ -1,0 +1,14 @@
+[
+  {
+    "output": "takeown.exe /r /f \"C:\\Users\\thaim\\AppData\\Local\\Temp\\T1222.001_takeown_folder\"",
+    "explanation": "Reordering arguments; the Sigma rule matches on '/f ' and '/r' but reordering does not change the command's intent or the presence of the suspicious keywords."
+  },
+  {
+    "output": "takeown.exe /r /f C:\\Lab\\input\\sample_folder",
+    "explanation": "Substitution; replacing the target path with a benign lab placeholder while preserving the '/r' and '/f' flags, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "takeown.exe /r /f C:\\Lab\\input\\sample_folder /d n",
+    "explanation": "Insertion; adding an additional flag '/d n' which is not part of the Sigma rule's detection criteria, potentially altering the command's parsed behavior without affecting the core suspicious pattern."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"ipconfig && echo Test\"",
+    "explanation": "Reordering and insertion of quotes; the Sigma rule matches on 'echo' after a command, but this mutation separates the 'echo' into a standalone command."
+  },
+  {
+    "output": "cmd.exe /c \"ipconfig & echo Test\"",
+    "explanation": "Substitution of '&&' with '&'; the Sigma rule may not detect this due to the use of a different command separator."
+  },
+  {
+    "output": "cmd.exe /c ipconfig && echo Test",
+    "explanation": "Omission of quotes; the Sigma rule may not detect this if it relies on quoted command-line parsing."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mstsc.exe /v shadow:127.0.0.1",
+    "explanation": "Omission: Removed the 'noconsentprompt' flag, which is a suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe /v 127.0.0.1",
+    "explanation": "Reordering: Removed the 'shadow:' prefix, which is a suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe /v 127.0.0.1 /f",
+    "explanation": "Insertion: Added the '/f' flag, which is a harmless parameter and does not trigger the Sigma rule's suspicious indicators."
+  }
+]

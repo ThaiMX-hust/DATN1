@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\netsh.exe interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=127.0.0.1",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid matching the suspicious string sequence, which may bypass the Sigma rule's string-based detection."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\netsh.exe interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=127.0.0.1 -n",
+    "explanation": "Insertion: Inserted a harmless flag (-n) to alter the command-line structure without changing the actual behavior, potentially evading string-based matching."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\netsh.exe interface portproxy add v4tov4 listenport=1337 connectport=1337 connectaddress=127.0.0.1 --help",
+    "explanation": "Substitution: Replaced the actual command with a help request, which changes the command-line intent and may avoid triggering the Sigma rule."
+  }
+]

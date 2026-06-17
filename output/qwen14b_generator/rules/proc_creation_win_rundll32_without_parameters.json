@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe",
+    "explanation": "Omission: Removed the quotes around the executable path, which may bypass the Sigma rule's exact string match for the quoted path."
+  },
+  {
+    "output": "rundll32 -h",
+    "explanation": "Insertion: Added a harmless parameter (-h) which may alter the command line structure and avoid the Sigma rule's detection based on the absence of parameters."
+  },
+  {
+    "output": "cmd /c rundll32.exe",
+    "explanation": "Reordering: Wrapped the command in a 'cmd /c' invocation, which may change the way the command line is parsed and avoid the Sigma rule's direct match on 'rundll32.exe'."
+  }
+]

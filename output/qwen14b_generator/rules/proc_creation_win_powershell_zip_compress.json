@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Compress-Archive -Path 'C:\\Lab\\input\\sample.txt' -DestinationPath 'C:\\Lab\\out\\archive.7z' -Force\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious destination paths."
+  },
+  {
+    "output": "powershell.exe -Command \"Compress-Archive -DestinationPath 'C:\\Lab\\out\\archive.7z' -Path 'C:\\Lab\\input\\sample.txt' -Force\"",
+    "explanation": "Reordering: Changed the order of the -Path and -DestinationPath arguments, which may not be matched by the Sigma rule's fixed argument order."
+  },
+  {
+    "output": "powershell.exe -Command \"Compress-Archive -Path 'C:\\Lab\\input\\sample.txt' -DestinationPath 'C:\\Lab\\out\\archive.7z' -Force -Verbose\"",
+    "explanation": "Insertion: Added the -Verbose flag, which does not affect the Sigma rule's detection based on path and command structure."
+  }
+]

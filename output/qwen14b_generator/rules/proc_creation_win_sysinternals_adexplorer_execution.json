@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ADExplorer64.exe -snapshot \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure proper parsing, which may prevent the Sigma rule from matching the 'snapshot' keyword in the command line."
+  },
+  {
+    "output": "ADExplorer64.exe -snapshot C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed any unnecessary spaces or delimiters that could trigger the Sigma rule's detection based on the 'snapshot' keyword."
+  },
+  {
+    "output": "ADExplorer64.exe -s C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the '-snapshot' flag with a shorter equivalent '-s' flag, which may not be detected by the Sigma rule if it only checks for the full 'snapshot' keyword."
+  }
+]

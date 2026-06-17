@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\script.dll,Execute",
+    "explanation": "Omission: Removed the 'RegRead' and 'window.close' strings which are part of the Sigma rule's suspicious indicators, making the command line less likely to trigger the rule."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\script.dll Execute",
+    "explanation": "Insertion: Added a space between the DLL path and the 'Execute' argument, which may alter the parsing and avoid matching the Sigma rule's exact string pattern."
+  },
+  {
+    "output": "rundll32.exe -Execute C:\\Lab\\input\\script.dll",
+    "explanation": "Substitution: Reordered the arguments to place the 'Execute' flag before the DLL path, which might not match the Sigma rule's specific command line structure."
+  }
+]

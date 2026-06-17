@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sqlite3 C:\\Lab\\input\\sample.sqlite",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious 'cookies.sqlite' or 'places.sqlite' strings, which may not trigger the Sigma rule's CommandLine|contains filter."
+  },
+  {
+    "output": "sqlite3 \"C:\\Lab\\input\\sample.sqlite\"",
+    "explanation": "Insertion: Adding quotes around the path may bypass the rule if the Sigma detection relies on unquoted paths or specific string matching."
+  },
+  {
+    "output": "sqlite3 -header C:\\Lab\\input\\sample.sqlite",
+    "explanation": "Substitution: Adding a harmless flag (-header) may change the command line structure enough to avoid triggering the Sigma rule's string-based detection."
+  }
+]

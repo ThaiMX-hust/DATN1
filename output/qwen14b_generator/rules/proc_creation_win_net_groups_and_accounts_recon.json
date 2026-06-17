@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 group \"C:\\Lab\\input\\sample.txt\" /domain",
+    "explanation": "Reordering and substitution: Replaced the group name with a benign file path to avoid matching the suspicious group names in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 group /domain \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Reordering and substitution: Moved the /domain flag after the group name placeholder to avoid matching the suspicious group names in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 group /domain /do \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution and reordering: Replaced the group name with a benign file path and repositioned the /do flag to avoid matching the suspicious group names in the Sigma rule."
+  }
+]

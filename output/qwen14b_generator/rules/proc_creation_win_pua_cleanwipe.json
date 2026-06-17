@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\SepRemovalToolNative_x64.exe --help",
+    "explanation": "Omission: Removed the suspicious execution by replacing it with a help command, which may not trigger the Sigma rule's endswith condition."
+  },
+  {
+    "output": "C:\\Lab\\tools\\CATClean.exe --list",
+    "explanation": "Substitution: Replaced the '--uninstall' flag with '--list', which changes the command's intent and avoids the Sigma rule's contains condition."
+  },
+  {
+    "output": "C:\\Lab\\tools\\NetInstaller.exe -l",
+    "explanation": "Substitution: Replaced the '-r' flag with '-l' (list), which changes the command's intent and avoids the Sigma rule's contains condition."
+  }
+]

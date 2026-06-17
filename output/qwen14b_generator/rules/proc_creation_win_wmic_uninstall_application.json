@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /namespace:\\\\root\\cimv2 path Win32_Product where name=\"SampleApp\" call uninstall",
+    "explanation": "Reordering: The command reorders the arguments to avoid the 'uninstall' keyword being directly adjacent to 'call', which may bypass string-based detection."
+  },
+  {
+    "output": "wmic.exe /namespace:\\\\root\\cimv2 path Win32_Product where name=\"SampleApp\" call uninstall /nointeractive",
+    "explanation": "Insertion: Adding the '/nointeractive' flag inserts an extra parameter, which may alter the command line parsing and avoid matching the Sigma rule's 'uninstall' keyword detection."
+  },
+  {
+    "output": "wmic.exe /namespace:\\\\root\\cimv2 path Win32_Product where name=\"SampleApp\" call uninstall /output:C:\\Lab\\out\\uninstall.log",
+    "explanation": "Substitution: Adding an output file parameter changes the command line structure, potentially avoiding the Sigma rule's 'uninstall' keyword detection by altering the command line parsing."
+  }
+]

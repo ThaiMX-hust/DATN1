@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Users\\Public\\Temp\\PsExec.exe -i -s cmd -accepteula -d",
+    "explanation": "Insertion: Added the -d flag, which is a harmless delimiter and does not change the behavior, potentially avoiding the Sigma string match."
+  },
+  {
+    "output": "C:\\Users\\Public\\Temp\\PsExec.exe -s -i cmd -accepteula -n 1",
+    "explanation": "Reordering: Reordered the -s and -i flags, which may not be detected by the Sigma rule if it relies on specific flag order."
+  },
+  {
+    "output": "C:\\Users\\Public\\Temp\\PsExec.exe -i -s cmd -accepteula -w C:\\Lab\\input",
+    "explanation": "Substitution: Added a working directory parameter (-w) with a benign lab path, which may alter the command line parsing and avoid the Sigma string match."
+  }
+]

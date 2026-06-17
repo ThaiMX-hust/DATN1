@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net localgroup administrators \"T1136.001_Admin\" /add",
+    "explanation": "Reordering: The command reorders arguments to avoid the suspicious string 'localgroup ' in the initial position, potentially bypassing the Sigma rule's string match."
+  },
+  {
+    "output": "net localgroup \"administrators\" \"T1136.001_Admin\" /add",
+    "explanation": "Substitution: Quoting the group name 'administrators' to avoid the Sigma rule's detection of the string 'administrators' in the command line."
+  },
+  {
+    "output": "net localgroup administrators \"T1136.001_Admin\" /add",
+    "explanation": "Omission: The command omits the 'net' executable path by relying on the system PATH environment variable, which may not trigger the Sigma rule's detection of the full path."
+  }
+]

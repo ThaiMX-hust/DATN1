@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | Out-File C:\\Lab\\out\\output.txt\"",
+    "explanation": "Omission: Removed the Invoke-WebRequest cmdlet and direct IP access, replacing with a benign file operation that does not trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | Compress-Archive -DestinationPath C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the suspicious network activity with a file compression operation, avoiding the direct IP and Invoke-WebRequest detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | Set-Content C:\\Lab\\out\\output.txt\"",
+    "explanation": "Insertion: Used a basic file writing operation instead of network-related commands, ensuring no direct IP or Invoke-WebRequest usage."
+  }
+]

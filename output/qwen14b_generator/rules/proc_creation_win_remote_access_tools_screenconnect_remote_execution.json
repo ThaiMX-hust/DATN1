@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and replaced the suspicious path with a benign lab placeholder, which may avoid the CommandLine|contains: '\\TEMP\\ScreenConnect\\' match."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed quotes and replaced the suspicious path with a benign lab placeholder, which may avoid the CommandLine|contains: '\\TEMP\\ScreenConnect\\' match."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder, which may avoid the CommandLine|contains: '\\TEMP\\ScreenConnect\\' match."
+  }
+]

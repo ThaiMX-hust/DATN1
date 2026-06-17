@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /A INSTALLDRIVER C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the '.dll' extension from the target file, which may avoid the 'filter_main_dll_ext' check in the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe /A INSTALLDRIVER \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path, which may alter parsing and avoid the suspicious string match in the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe /A INSTALLDRIVER C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the '.dll' extension with '.log', which may avoid the 'filter_main_dll_ext' check in the Sigma rule."
+  }
+]

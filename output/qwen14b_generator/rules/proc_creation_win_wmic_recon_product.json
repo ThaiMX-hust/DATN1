@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path Win32_Product get Name,Version /format:csv",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious 'Product' keyword in the CommandLine field, which may bypass the Sigma rule's string match."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path Win32_Product get Name,Version /format:csv > C:\\Lab\\out\\wmic_output.csv",
+    "explanation": "Insertion: Adding a redirection to a lab placeholder file does not change the core command, but may bypass the Sigma rule if it only monitors the CommandLine without checking output destinations."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path Win32_Product get Name,Version /format:csv | findstr /i \"antivirus\"",
+    "explanation": "Substitution: Adding a pipeline to filter output may not be detected by the Sigma rule if it only monitors the original command line and not subsequent processing."
+  }
+]

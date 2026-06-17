@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"echo Test > C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a benign redirection to avoid matching the encoded 'LOAD' strings in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed quotes, which are not required by the command, thus avoiding the encoded 'LOAD' strings in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command structure remains unchanged, but the absence of encoded strings avoids the Sigma rule's detection."
+  }
+]

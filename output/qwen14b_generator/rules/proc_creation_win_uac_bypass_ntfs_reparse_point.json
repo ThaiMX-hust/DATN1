@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wusa.exe /quiet C:\\Lab\\input\\sample.msu",
+    "explanation": "Omission: Removed the suspicious path segment that triggers the Sigma rule's 'C:\\Users\\' and '\\AppData\\Local\\Temp\\' pattern match."
+  },
+  {
+    "output": "wusa.exe /quiet C:\\Lab\\input\\sample.msu",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid matching the Sigma rule's path indicators."
+  },
+  {
+    "output": "wusa.exe /quiet C:\\Lab\\input\\sample.msu",
+    "explanation": "Reordering: The command line structure remains unchanged but avoids the specific path strings that match the Sigma rule's suspicious indicators."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regedit.exe /i \"C:\\Lab\\input\\sample.reg\"",
+    "explanation": "Omission: Removed the suspicious ADS indicator by using a standard .reg file without an alternate data stream."
+  },
+  {
+    "output": "regedit.exe /i C:\\Lab\\input\\sample.reg",
+    "explanation": "Insertion: Added quotes around the file path to ensure proper parsing while avoiding the ADS indicator."
+  },
+  {
+    "output": "regedit.exe -i C:\\Lab\\input\\sample.reg",
+    "explanation": "Substitution: Replaced the suspicious '/i' with '-i' to avoid triggering the Sigma rule's string match."
+  }
+]

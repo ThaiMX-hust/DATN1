@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regasm \"C:\\Lab\\input\\sample.dll\" /silent",
+    "explanation": "Insertion: Added quotes and /silent flag to avoid triggering the suspicious location check by using a lab placeholder path."
+  },
+  {
+    "output": "regsvcs C:\\Lab\\input\\sample.dll",
+    "explanation": "Substitution: Replaced the suspicious directory with a lab placeholder path to avoid matching the Sigma rule's suspicious location."
+  },
+  {
+    "output": "regasm C:\\Lab\\input\\sample.dll",
+    "explanation": "Omission: Removed any optional elements that might trigger the Sigma rule's suspicious location check by using a lab placeholder path."
+  }
+]

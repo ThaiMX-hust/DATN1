@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\AdFind.exe\" -default -s base",
+    "explanation": "Omission: Removed password policy flags to avoid matching the 'selection_password' criteria in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\AdFind.exe\" -f (objectcategory=computer) -sc dclist",
+    "explanation": "Substitution: Replaced the '-sc admincountdmp' or '-sc exchaddresses' with '-sc dclist' to avoid matching the 'selection_enum_ad' or 'selection_enum_exchange' criteria in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\AdFind.exe\" -gcb -sc trustdmp -s base",
+    "explanation": "Insertion: Added '-s base' to modify the command line structure without changing the core intent, potentially avoiding specific string matches in the Sigma rule."
+  }
+]

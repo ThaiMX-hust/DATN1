@@ -1,0 +1,14 @@
+[
+  {
+    "output": "qemu-system-x86_64 -m 4M -netdev user -nographic",
+    "explanation": "Omission: Removed the 'restrict=off' and 'connect=' flags which are part of the Sigma rule's suspicious indicators, making the command less likely to trigger the rule."
+  },
+  {
+    "output": "qemu-system-x86_64 -m 4M -netdev user -nographic -cdrom C:\\Lab\\input\\sample.iso",
+    "explanation": "Insertion: Added a benign '-cdrom' flag with a lab placeholder to align with normal usage cases, potentially bypassing the Sigma rule's suspicious pattern matching."
+  },
+  {
+    "output": "qemu-system-x86_64 -m 4M -netdev user -nographic -object \"seccomp=filter,explicit=on\"",
+    "explanation": "Substitution: Replaced suspicious parameters with a benign alternative using quotes and a safe lab placeholder, which may not trigger the Sigma rule's string-based detection."
+  }
+]

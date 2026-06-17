@@ -1,0 +1,14 @@
+[
+  {
+    "output": "psexec.exe -u \"NT AUTHORITY\\SYSTEM\" -c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering and substitution: Reordered the user flag and replaced the command with a benign file path, which may avoid matching the suspicious command-line pattern."
+  },
+  {
+    "output": "psexec.exe -u NT -c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the full user string with a shorter version and used a benign file path, potentially avoiding the suspicious command-line pattern."
+  },
+  {
+    "output": "psexec.exe -u \"NT AUTHORITY\\SYSTEM\" -c \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Replaced the command with a benign log file path, which may avoid matching the suspicious command-line pattern."
+  }
+]

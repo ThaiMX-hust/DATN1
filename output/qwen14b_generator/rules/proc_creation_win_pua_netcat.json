@@ -1,0 +1,14 @@
+[
+  {
+    "output": "nc -lvp 1234 -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed the suspicious execution flag '-e' or '--exec' which is detected by the Sigma rule, but the command still uses a benign output file placeholder."
+  },
+  {
+    "output": "nc -l -v -p 1234 -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid the suspicious '-lvp' pattern, while still using a benign output file placeholder."
+  },
+  {
+    "output": "nc -lvp 1234 -o C:\\Lab\\out\\archive.7z --lua-exec \"echo test\"",
+    "explanation": "Insertion: Added a harmless Lua script execution command that does not trigger the Sigma rule's suspicious execution flags, while using a benign output file placeholder."
+  }
+]

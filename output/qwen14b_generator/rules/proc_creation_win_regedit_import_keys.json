@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regedit.exe /i C:\\Lab\\input\\sample.reg",
+    "explanation": "Omission: Removed the suspicious ' /s ' flag which is part of the Sigma rule's detection criteria."
+  },
+  {
+    "output": "regedit.exe /i \"C:\\Lab\\input\\sample.reg\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may not trigger the Sigma rule's string matching."
+  },
+  {
+    "output": "regedit.exe -i C:\\Lab\\input\\sample.reg",
+    "explanation": "Substitution: Replaced ' /i ' with ' -i ' to use a different syntax that may not match the Sigma rule's detection criteria."
+  }
+]

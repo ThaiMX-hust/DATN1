@@ -1,0 +1,14 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /z \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Substitution: Replaced the suspicious DLL path with a benign lab placeholder to avoid triggering the Sigma rule's '.dll' detection."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe -z \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Substitution: Replaced '/z' with its equivalent '-z' syntax, which may not be detected by the Sigma rule's ' -z ' pattern."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe /z \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the '.dll' extension with a benign '.txt' extension to avoid triggering the Sigma rule's '.dll' detection."
+  }
+]

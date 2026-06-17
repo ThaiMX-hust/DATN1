@@ -1,0 +1,14 @@
+[
+  {
+    "output": "psr.exe -start /output C:\\Lab\\out\\archive.7z /sc 1 /gui 0 /stopevent 12",
+    "explanation": "Substitution: Replaced '/start' with '-start' to match equivalent syntax, which may bypass the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "psr.exe /start /output C:\\Lab\\out\\archive.7z /sc 1 /gui 0 /stopevent 12",
+    "explanation": "Reordering: Changed the order of arguments, which may bypass the Sigma rule's CommandLine|contains check if the rule is sensitive to argument sequence."
+  },
+  {
+    "output": "psr.exe /start /output C:\\Lab\\out\\archive.7z /sc 1 /gui 0 /stopevent 12 /nogui",
+    "explanation": "Insertion: Added an extra argument '/nogui' that is harmless and may not be detected by the Sigma rule, which may miss it if the rule is not checking for additional arguments."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo e=Access&y=Guest&p=12345&c=67890&k=abcde > C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and redirection to a lab file, which may bypass the string match by changing the command's context and purpose."
+  },
+  {
+    "output": "cmd.exe /c echo e=Access&y=Guest&p=12345&c=67890&k=abcde | findstr /v \"e=Access\" > C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Used findstr to filter out the suspicious string, which may bypass the Sigma rule by altering the command's output."
+  },
+  {
+    "output": "cmd.exe /c echo e=Access&y=Guest&p=12345&c=67890&k=abcde >> C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Redirected output to a lab log file, which may bypass the Sigma rule by changing the command's intent and context."
+  }
+]

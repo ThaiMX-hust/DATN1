@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo TVqQAAMAAAAEAAAA > C:\\Lab\\input\\test.txt && type C:\\Lab\\input\\test.txt",
+    "explanation": "Insertion: The MZ header is stored in a file and then echoed, avoiding direct inclusion in the command line. The Sigma rule may miss this as the header is not directly in the command line."
+  },
+  {
+    "output": "cmd.exe /c powershell -Command \"Get-Content 'C:\\Lab\\input\\test.txt' | Set-Content 'C:\\Lab\\out\\output.txt'\"",
+    "explanation": "Substitution: The MZ header is read from a file and written to another, avoiding direct presence in the command line. The Sigma rule may miss this as the header is not directly in the command line."
+  },
+  {
+    "output": "cmd.exe /c findstr /c:\"TVqQAAMAAAAEAAAA\" C:\\Lab\\input\\test.txt > C:\\Lab\\out\\result.txt",
+    "explanation": "Omission: The command line does not contain the MZ header directly; instead, it searches for it in a file. The Sigma rule may miss this as the header is not directly in the command line."
+  }
+]

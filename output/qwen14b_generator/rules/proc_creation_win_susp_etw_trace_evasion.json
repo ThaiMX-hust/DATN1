@@ -1,0 +1,6 @@
+[
+  {
+    "output": "wevtutil.exe set-log TEST-HOST /e:false",
+    "explanation": "No mutation applied; the command is already benign and does not trigger the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt && start-process C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command reorders the arguments to ensure the suspicious behavior is not directly visible in the command line, potentially bypassing the Sigma rule's detection based on image path analysis."
+  },
+  {
+    "output": "cmd.exe /c start-process \"C:\\Lab\\input\\sample.txt\" -ArgumentList \"--test\" -WorkingDirectory \"C:\\Lab\\input\"",
+    "explanation": "Insertion: Quotes and additional parameters are inserted to modify the command line structure, which may prevent the Sigma rule from detecting the absence of an absolute path in the image field."
+  },
+  {
+    "output": "cmd.exe /c start-process C:\\Lab\\input\\sample.txt -WorkingDirectory C:\\Lab\\input",
+    "explanation": "Omission: The command omits optional elements that might be considered suspicious by the Sigma rule, while still maintaining the benign test behavior."
+  }
+]

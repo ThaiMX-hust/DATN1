@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"start-process C:\\Windows\\System32\\SystemSettingsAdminFlows.exe -ArgumentList 'TurnOnDeveloperFeatures'\"",
+    "explanation": "Insertion: Added a wrapper command (cmd.exe /c start-process) to change the command line parsing context, potentially avoiding direct string matches."
+  },
+  {
+    "output": "C:\\Windows\\System32\\SystemSettingsAdminFlows.exe --help",
+    "explanation": "Omission: Removed the suspicious flag 'TurnOnDeveloperFeatures' and replaced it with a benign action (--help), changing the tested behavior and avoiding the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\SystemSettingsAdminFlows.exe -ArgumentList 'DeveloperUnlock' -NoDeveloperMode",
+    "explanation": "Substitution: Replaced the suspicious flag with a non-matching flag and added a new flag that does not trigger the Sigma rule."
+  }
+]

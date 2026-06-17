@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ADExplorer64.exe -snapshot -o C:\\Lab\\out\\snapshot.7z",
+    "explanation": "Reordering: The command line reorders the arguments to place the output path before the '-snapshot' flag, potentially avoiding the 'snapshot' keyword match in the Sigma rule."
+  },
+  {
+    "output": "ADExplorer64.exe -o C:\\Lab\\out\\snapshot.7z -snapshot",
+    "explanation": "Insertion: A space is inserted between '-snapshot' and the next argument, which may alter the parsing context and avoid the 'snapshot' keyword match in the Sigma rule."
+  },
+  {
+    "output": "ADExplorer64.exe -snapshot -o C:\\Lab\\out\\snapshot.7z -v",
+    "explanation": "Substitution: An additional '-v' flag is added for verbosity, which does not change the core behavior but may alter the parsing context and avoid the 'snapshot' keyword match in the Sigma rule."
+  }
+]

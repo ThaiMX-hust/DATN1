@@ -1,0 +1,14 @@
+[
+  {
+    "output": "chisel.exe client -socks5 127.0.0.1:8080",
+    "explanation": "Reordering: Reordered the '-socks5' flag and the IP address to potentially avoid matching the Sigma rule's specific string pattern."
+  },
+  {
+    "output": "chisel.exe client -s 127.0.0.1:8080",
+    "explanation": "Substitution: Replaced '-socks5' with '-s' which may be a shorthand or alternative flag accepted by the tool, avoiding the Sigma rule's specific keyword match."
+  },
+  {
+    "output": "chisel.exe client -socks5 127.0.0.1:8080 -l 8081",
+    "explanation": "Insertion: Added an extra '-l 8081' parameter, which may not be detected by the Sigma rule if it does not check for additional flags beyond the specified ones."
+  }
+]

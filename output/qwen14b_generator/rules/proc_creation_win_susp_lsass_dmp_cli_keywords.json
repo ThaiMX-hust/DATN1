@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\5.0.17\\createdump.exe -u -f C:\\Lab\\input\\sample.dmp 788",
+    "explanation": "Substitution: Replaced the suspicious path 'dotnet-lsass.dmp' with a benign placeholder 'sample.dmp' to avoid matching the Sigma rule's 'lsass' and '.dmp' keywords."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\xordump.exe -out C:\\Lab\\input\\sample.t1003.001.dmp -x 0x41",
+    "explanation": "Substitution: Replaced the suspicious path 'lsass-xordump.t1003.001.dmp' with a benign placeholder 'sample.t1003.001.dmp' to avoid matching the Sigma rule's 'lsass' and '.dmp' keywords."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\nanodump.x64.exe -w \"C:\\Lab\\input\\sample.dmp\"",
+    "explanation": "Substitution: Replaced the suspicious path 'nanodump.dmp' with a benign placeholder 'sample.dmp' to avoid matching the Sigma rule's 'nanodump' and '.dmp' keywords."
+  }
+]

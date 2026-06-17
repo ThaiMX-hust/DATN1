@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\tools\\ScriptRunner.exe\" -appvscript \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering and substitution: Reordered the command-line arguments and used a benign lab placeholder file to avoid the suspicious ' -appvscript ' string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\ScriptRunner.exe -appvscript C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed optional elements while preserving the benign test behavior, using a lab placeholder file to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\ScriptRunner.exe -appvscript \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the suspicious target with a benign lab placeholder file, ensuring the command line remains syntactically correct and safe."
+  }
+]

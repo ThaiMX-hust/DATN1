@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /C start C:\\Lab\\input\\sample.txt /C \"timeout /t 3 >nul&&echo TestSVC > \\\\.\\\"TestSVC\"",
+    "explanation": "Reordering and substitution: Reordered arguments and replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's ParentImage and Image fields."
+  },
+  {
+    "output": "cmd.exe /C start C:\\Lab\\input\\sample.log /C \"timeout /t 3 >nul&&echo TestSVC > \\\\.\\\"TestSVC\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's ParentImage and Image fields."
+  },
+  {
+    "output": "cmd.exe /C start C:\\Lab\\input\\sample.7z /C \"timeout /t 3 >nul&&echo TestSVC > \\\\.\\\"TestSVC\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's ParentImage and Image fields."
+  }
+]

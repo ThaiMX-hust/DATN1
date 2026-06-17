@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh.exe interface portproxy add v4tov4 listenport=3389 listenaddress=192.0.2.10 connectport=3389 connectaddress=192.0.2.10 -f C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a benign file flag to the command line, which may prevent the Sigma rule from matching the CommandLine field as it no longer contains the suspicious keywords in sequence."
+  },
+  {
+    "output": "netsh.exe interface portproxy add v4tov4 listenport=3389 listenaddress=192.0.2.10 connectport=3389 connectaddress=192.0.2.10 --file C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious keyword with a non-matching flag, which may prevent the Sigma rule from detecting the command line as it alters the expected string pattern."
+  },
+  {
+    "output": "netsh.exe interface portproxy add v4tov4 listenport=3389 listenaddress=192.0.2.10 connectport=3389 connectaddress=192.0.2.10 -f C:\\Lab\\input\\sample.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Added multiple benign flags to the command line, which may prevent the Sigma rule from detecting the command line as it changes the structure of the CommandLine field."
+  }
+]

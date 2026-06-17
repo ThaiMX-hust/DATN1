@@ -1,0 +1,14 @@
+[
+  {
+    "output": "nircmd.exe runassystem \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to avoid triggering the 'runassystem' keyword match in the Sigma rule."
+  },
+  {
+    "output": "nircmd.exe runassystem C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed any additional parameters or flags that might be considered suspicious by the Sigma rule."
+  },
+  {
+    "output": "nircmd.exe -runassystem C:\\Lab\\input\\sample.7z",
+    "explanation": "Substitution: Replaced 'runassystem' with a long option '-runassystem' to bypass the keyword match in the Sigma rule."
+  }
+]

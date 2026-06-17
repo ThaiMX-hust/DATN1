@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mshta.exe \"javascript:a=(GetObject('script:C:\\Lab\\input\\sample.txt')).Exec();close();\"",
+    "explanation": "Substitution: Replaced the 'http://' URL with a local file path to avoid triggering the 'http://' keyword match in the Sigma rule."
+  },
+  {
+    "output": "mshta.exe -exec \"javascript:a=(GetObject('script:C:\\Lab\\input\\sample.txt')).Exec();close();\"",
+    "explanation": "Substitution: Used an alternative syntax with '-exec' to restructure the command line, potentially bypassing string-based detection."
+  },
+  {
+    "output": "mshta.exe javascript:a=(GetObject('script:C:\\Lab\\input\\sample.txt')).Exec();close()",
+    "explanation": "Omission: Removed spaces and quotes to alter the command structure, which may not trigger the Sigma rule's string-based detection."
+  }
+]

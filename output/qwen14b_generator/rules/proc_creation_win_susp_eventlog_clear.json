@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wevtutil clear-log System /q:true /e:true /l:4 /rt:false",
+    "explanation": "Insertion: Added quotes and escape characters to the command line, which may alter parsing and avoid matching the suspicious strings in the Sigma rule."
+  },
+  {
+    "output": "wevtutil cl System /q:true /e:true /l:4 /rt:false",
+    "explanation": "Substitution: Replaced 'clear-log' with its short version 'cl', which may not be detected by the Sigma rule if it's focused on the full command string."
+  },
+  {
+    "output": "wevtutil set-log System /q:true /e:true /l:4 /rt:false",
+    "explanation": "Substitution: Replaced 'clear-log' with 'set-log', which changes the intent of the command and may avoid matching the Sigma rule's suspicious indicators."
+  }
+]

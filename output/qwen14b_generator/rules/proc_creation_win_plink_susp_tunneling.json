@@ -1,0 +1,14 @@
+[
+  {
+    "output": "plink.exe -P 443 -L 127.0.0.1:3389:127.0.0.1:3389 user@192.168.1.100",
+    "explanation": "Reordering: Reordered arguments to avoid the ':127.0.0.1:3389' string, which may not be detected by the Sigma rule if the order is different."
+  },
+  {
+    "output": "plink.exe -L 127.0.0.1:3389:127.0.0.1:3389 -P 443 user@192.168.1.100",
+    "explanation": "Reordering: Reordered arguments to avoid the ':127.0.0.1:3389' string, which may not be detected by the Sigma rule if the order is different."
+  },
+  {
+    "output": "plink.exe -L 127.0.0.1:3389:127.0.0.1:3389 -P 443 user@192.168.1.100 -v",
+    "explanation": "Insertion: Added a verbose flag (-v) that does not affect the command's behavior but changes the command line structure, potentially avoiding the Sigma string match."
+  }
+]

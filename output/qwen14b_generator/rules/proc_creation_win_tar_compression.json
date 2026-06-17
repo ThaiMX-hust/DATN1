@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\tar.exe -cf C:\\Lab\\out\\archive.7z C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: Replaced 'test.tar' with 'archive.7z' and 'test.txt' with 'sample.txt' using benign lab placeholders, which may avoid the 'tar.exe' and '-c' detection strings."
+  },
+  {
+    "output": "C:\\Windows\\System32\\tar.exe -c -f C:\\Lab\\out\\archive.7z C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added explicit '-c' flag and restructured command line, which may evade detection based on specific '-c' or '-r' string matches."
+  },
+  {
+    "output": "C:\\Windows\\System32\\tar.exe -f C:\\Lab\\out\\archive.7z -c C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Changed the order of '-f' and '-c' flags, which may avoid detection based on positional command-line string matching."
+  }
+]

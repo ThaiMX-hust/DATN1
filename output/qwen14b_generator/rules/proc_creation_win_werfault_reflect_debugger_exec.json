@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\System32\\WerFault.exe\" -pr \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the command line argument to avoid direct string matching of ' -pr ' in the CommandLine field."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\System32\\WerFault.exe\" -pr C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed spaces around the ' -pr ' flag to avoid the Sigma rule's ' -pr ' string match."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\System32\\WerFault.exe\" -pr C:\\Lab\\input\\sample.txt -dummy",
+    "explanation": "Insertion: Added a dummy argument after the ' -pr ' flag to change the structure of the CommandLine field and avoid direct string matching."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Add-MpPreference -ExclusionPath 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may prevent the Sigma rule from matching the exact string ' -ExclusionPath '."
+  },
+  {
+    "output": "powershell -Command Add-MpPreference -ExclusionPath C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed quotes around the path, relying on the parser to handle the command correctly, which may avoid the Sigma rule's string match."
+  },
+  {
+    "output": "powershell -Command Add-MpPreference -ExclusionPath C:\\Lab\\input\\sample.txt -Verbose",
+    "explanation": "Reordering: Added the -Verbose flag at the end, which may alter the command structure and prevent the Sigma rule from matching the exact string pattern."
+  }
+]

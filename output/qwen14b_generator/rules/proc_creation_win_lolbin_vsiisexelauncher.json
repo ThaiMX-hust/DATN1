@@ -1,0 +1,14 @@
+[
+  {
+    "output": "VSIISExeLauncher.exe -p C:\\Lab\\input\\sample.txt -a C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced suspicious command-line arguments with benign lab placeholders to avoid matching the ' -p ' and ' -a ' Sigma indicators."
+  },
+  {
+    "output": "VSIISExeLauncher.exe -a C:\\Lab\\input\\sample.log -p C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Changed the order of the arguments, which may prevent the Sigma rule from matching the ' -p ' and ' -a ' sequence."
+  },
+  {
+    "output": "VSIISExeLauncher.exe -p \"C:\\Lab\\input\\sample.txt\" -a \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added quotes around the arguments, which may alter the parsing and prevent the Sigma rule from detecting the ' -p ' and ' -a ' strings."
+  }
+]

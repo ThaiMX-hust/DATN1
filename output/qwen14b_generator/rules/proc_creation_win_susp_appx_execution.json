@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a benign lab placeholder to avoid matching the suspicious CommandLine keywords while maintaining the same executable family."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Used long option (-Command) and a benign lab placeholder to avoid matching the suspicious CommandLine keywords while maintaining the same executable family."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\out\\archive.7z,Test",
+    "explanation": "Omission: Removed the suspicious CommandLine keywords by using a benign lab placeholder and a non-malicious DLL path, preserving the executable family but avoiding the Sigma rule trigger."
+  }
+]

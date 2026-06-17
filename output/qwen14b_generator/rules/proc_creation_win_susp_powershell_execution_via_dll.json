@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,Default.GetString",
+    "explanation": "Insertion: Added quotes and a space to modify the command-line parsing, potentially avoiding the 'Default.GetString' string match."
+  },
+  {
+    "output": "regsvr32.exe C:\\Lab\\input\\sample.dll /s",
+    "explanation": "Omission: Removed the 'Default.GetString' string from the command line by using a different DLL and adding the /s switch, which may not trigger the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,GetString",
+    "explanation": "Substitution: Replaced 'Default.GetString' with 'GetString' to avoid the specific string match in the Sigma rule."
+  }
+]

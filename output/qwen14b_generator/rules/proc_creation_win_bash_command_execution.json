@@ -1,14 +1,14 @@
 [
   {
-    "output": "C:\Users\thaim\AppData\Local\Microsoft\WindowsApps\bash.exe -c whoami",
+    "output": "C:\\Users\thaim\\AppData\\Local\\Microsoft\\WindowsApps\bash.exe -c whoami",
     "explanation": "Omission: Removed quotes around 'whoami' which may cause the Sigma rule's 'CommandLine|contains: ' -c '' to miss the command as it no longer contains quotes."
   },
   {
-    "output": "C:\Users\thaim\AppData\Local\Microsoft\WindowsApps\bash.exe -c whoami > C:\\Lab\\out\\output.txt",
+    "output": "C:\\Users\thaim\\AppData\\Local\\Microsoft\\WindowsApps\bash.exe -c whoami > C:\\Lab\\out\\output.txt",
     "explanation": "Insertion: Added a redirection to a lab placeholder file, which may not be detected by the Sigma rule as it focuses on the '-c' flag and does not check for redirections."
   },
   {
-    "output": "C:\Users\thaim\AppData\Local\Microsoft\WindowsApps\bash -c \"whoami\"",
+    "output": "C:\\Users\thaim\\AppData\\Local\\Microsoft\\WindowsApps\bash -c \"whoami\"",
     "explanation": "Substitution: Replaced 'bash.exe' with 'bash' (assuming it's in the PATH), which may not trigger the Sigma rule's 'Image|endswith' check if the path does not match the expected System32 or SysWOW64 locations."
   }
 ]

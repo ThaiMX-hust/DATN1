@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService\" /v ImagePath /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious Sigma string match by placing the target path before the suspicious registry path."
+  },
+  {
+    "output": "reg add HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService /v ImagePath /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Omission: The command omits quotes around the registry path, which may not trigger the Sigma rule's string matching."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\services\\TestService\" /v ImagePath /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Insertion: The command inserts a space before the registry path, which may not trigger the Sigma rule's string matching."
+  }
+]

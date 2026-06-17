@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 time \\\\localhost",
+    "explanation": "Insertion: Added escape characters to the command line, which may prevent the Sigma rule from matching the 'time' keyword directly."
+  },
+  {
+    "output": "net time \\\\localhost",
+    "explanation": "Omission: Removed the full path to the executable, which may avoid triggering the 'Image|endswith' condition in the Sigma rule."
+  },
+  {
+    "output": "w32tm /tz",
+    "explanation": "Reordering: The command is already in a form that may not be affected by reordering, but it is a direct match for the 'tz' keyword in the Sigma rule."
+  }
+]

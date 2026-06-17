@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s /u /i:\"C:\\Lab\\input\\sample.txt\" scrobj.dll",
+    "explanation": "Substitution: Replaced the suspicious .sct file with a benign .txt file, which may not trigger the Sigma rule's file extension check."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed the /u /i parameters, which may avoid triggering the Sigma rule's detection based on those specific command-line arguments."
+  },
+  {
+    "output": "C:\\Windows\\system32\\regsvr32.exe /s C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign .7z file, which may not match the Sigma rule's suspicious file types."
+  }
+]

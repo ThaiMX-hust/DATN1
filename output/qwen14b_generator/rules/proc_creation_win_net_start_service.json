@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1.exe start -h",
+    "explanation": "Insertion: Added '-h' flag to the command line, which may be parsed as a help request rather than a service name, potentially avoiding the 'start' keyword match in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1.exe startsesshijack",
+    "explanation": "Omission: Removed the space between 'start' and 'sesshijack', which may prevent the 'start ' pattern match in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1.exe -start sesshijack",
+    "explanation": "Substitution: Replaced 'start' with '-start' as a flag, which may change the parsing behavior and avoid the 'start ' pattern match in the Sigma rule."
+  }
+]

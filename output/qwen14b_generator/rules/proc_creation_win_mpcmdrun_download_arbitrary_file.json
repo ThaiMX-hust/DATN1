@@ -1,0 +1,14 @@
+[
+  {
+    "output": "MpCmdRun.exe -DownloadFile -url C:\\Lab\\input\\sample.txt -path C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the URL with a local lab file path to avoid triggering the 'url' keyword in the Sigma rule."
+  },
+  {
+    "output": "MpCmdRun.exe -url C:\\Lab\\input\\sample.txt -DownloadFile -path C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Changed the argument order to test if the Sigma rule's 'CommandLine|contains|all' is sensitive to argument sequence."
+  },
+  {
+    "output": "MpCmdRun.exe -DownloadFile -url \"C:\\Lab\\input\\sample.txt\" -path \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added quotes around the file paths to test if the Sigma rule's string matching is sensitive to formatting."
+  }
+]

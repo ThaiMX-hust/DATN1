@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\presentationhost.exe -u file://C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: Replaced URL protocol with 'file://' to avoid HTTP/HTTPS/FTP detection, using a benign lab file path."
+  },
+  {
+    "output": "C:\\Lab\\tools\\presentationhost.exe -u \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Used quotes around the file path to ensure correct parsing, avoiding URL protocol detection."
+  },
+  {
+    "output": "C:\\Lab\\tools\\presentationhost.exe -u C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed any URL protocol prefixes, using a local file path that does not trigger network protocol detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sdiagnhost.exe -args \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes and a benign file path to avoid matching the suspicious command-line patterns in the Sigma rule."
+  },
+  {
+    "output": "sdiagnhost.exe --help",
+    "explanation": "Omission of the child process invocation by using a help flag, which avoids triggering the suspicious behavior detected by the Sigma rule."
+  },
+  {
+    "output": "sdiagnhost.exe -i C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution of a suspicious executable with a benign file path, ensuring the command does not match the Sigma rule's suspicious image patterns."
+  }
+]

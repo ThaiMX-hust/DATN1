@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe Get-ADComputer -Filter * | Select Name | Out-File C:\\Lab\\out\\computers.txt",
+    "explanation": "Insertion: Added a harmless Select Name clause before Out-File, which may cause the Sigma rule's 'Select' keyword match to miss the command."
+  },
+  {
+    "output": "pwsh.exe Get-ADComputer -Filter * | Out-File C:\\Lab\\out\\computers.txt",
+    "explanation": "Omission: Removed the 'Select' clause, which may cause the Sigma rule's 'Select' keyword match to miss the command."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Out-File C:\\Lab\\out\\computers.txt\"",
+    "explanation": "Encoding: Enclosed the command in quotes with -Command, which may cause the Sigma rule's CommandLine contains match to miss the command."
+  }
+]

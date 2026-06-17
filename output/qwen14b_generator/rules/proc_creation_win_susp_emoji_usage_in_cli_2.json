@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo This is a test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes and redirection to a benign lab file, avoiding emoji usage while maintaining command-line syntax."
+  },
+  {
+    "output": "cmd.exe /c type C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed any emoji-containing elements, focusing on a harmless file operation."
+  },
+  {
+    "output": "cmd.exe /c dir C:\\Lab\\input\\",
+    "explanation": "Reordering: Changed the command structure to a directory listing, which does not involve emojis and is unrelated to the Sigma rule."
+  }
+]

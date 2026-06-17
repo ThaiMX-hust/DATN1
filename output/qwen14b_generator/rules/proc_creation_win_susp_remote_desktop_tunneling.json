@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ssh -L 3389:localhost:3389 -P 2222 user@remotehost",
+    "explanation": "Insertion: Added spaces around '-L' and '-P' to avoid direct string matching of the Sigma rule's suspicious keywords."
+  },
+  {
+    "output": "ssh -L3389:localhost:3389 -P2222 user@remotehost",
+    "explanation": "Omission: Removed spaces between flags and their values to avoid matching the Sigma rule's suspicious string patterns."
+  },
+  {
+    "output": "ssh -L 3389:localhost:3389 -p 2222 user@remotehost",
+    "explanation": "Substitution: Replaced '-P' with '-p' (equivalent syntax) to avoid direct match with the Sigma rule's suspicious keywords."
+  }
+]

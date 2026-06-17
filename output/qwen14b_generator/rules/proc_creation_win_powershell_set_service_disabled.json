@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-Service -Name 'TestService' -StartupType Manual\"",
+    "explanation": "Reordering: Reordered the command-line arguments to potentially evade string-based detection by changing the argument sequence."
+  },
+  {
+    "output": "powershell.exe -Command Set-Service -Name 'TestService' -StartupType Manual",
+    "explanation": "Omission: Removed quotes around the command to test if the Sigma rule relies on specific quoting patterns for detection."
+  },
+  {
+    "output": "powershell.exe -Command Set-Service -StartupType Manual -Name 'TestService'",
+    "explanation": "Reordering: Changed the order of the arguments to test if the Sigma rule relies on the order of command-line parameters for detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c mavinject.exe 1000 /INJECTRUNNING \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Substitution: Replaced the suspicious DLL path with a benign lab placeholder to avoid triggering the Sigma rule's 'INJECTRUNNING' keyword match."
+  },
+  {
+    "output": "cmd.exe /c \"mavinject.exe\" 1000 /INJECTRUNNING \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Insertion: Added quotes around the executable name to change the command-line parsing structure, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "cmd.exe /c mavinject.exe 1000 /INJECTRUNNING C:\\Lab\\input\\sample.dll",
+    "explanation": "Omission: Removed quotes around the DLL path, which may alter the parsing and avoid the Sigma rule's string match."
+  }
+]

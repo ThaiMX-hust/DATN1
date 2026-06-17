@@ -1,0 +1,14 @@
+[
+  {
+    "output": "pssuspend.exe -t 1234 -s 5000 -p C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a dummy file path to the command line, which may prevent the Sigma rule from matching the 'msmpeng.exe' keyword."
+  },
+  {
+    "output": "pssuspend64.exe -t 1234 -s 5000 -p C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the target process with a benign lab placeholder, which may prevent the Sigma rule from matching the 'msmpeng.exe' keyword."
+  },
+  {
+    "output": "pssuspend.exe -t 1234 -s 5000 -p C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Changed the order of command-line arguments to avoid the 'msmpeng.exe' keyword, which may prevent the Sigma rule from matching."
+  }
+]

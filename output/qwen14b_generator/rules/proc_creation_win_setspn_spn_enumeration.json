@@ -1,0 +1,14 @@
+[
+  {
+    "output": "setspn -T %USERDNSDOMAIN% -Q */*",
+    "explanation": "Omission: Removed the space after '-Q' to avoid the ' -q ' or ' /q ' Sigma pattern match."
+  },
+  {
+    "output": "setspn -T %USERDNSDOMAIN% -Q\" */*\"",
+    "explanation": "Insertion: Added quotes around the argument to avoid the ' -q ' or ' /q ' Sigma pattern match."
+  },
+  {
+    "output": "setspn -T %USERDNSDOMAIN% -Q */* -h 127.0.0.1",
+    "explanation": "Insertion: Added a harmless hostname argument to avoid the ' -q ' or ' /q ' Sigma pattern match."
+  }
+]

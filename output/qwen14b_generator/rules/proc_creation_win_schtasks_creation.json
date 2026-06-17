@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /Create /TN \"LabTask\" /TR \"C:\\Lab\\input\\sample.txt\" /SC daily /ST 20:10",
+    "explanation": "Substitution: Replaced the suspicious '/TR' argument with a benign lab placeholder file path to avoid matching the Sigma rule's 'cmd.exe' or other executable-based triggers."
+  },
+  {
+    "output": "schtasks /Create /TN \"LabTask\" /TR \"C:\\Lab\\input\\sample.log\" /SC ONCE /ST 20:10",
+    "explanation": "Substitution: Used a non-executable log file as the target instead of an executable, which may not trigger the Sigma rule's detection logic."
+  },
+  {
+    "output": "schtasks /Create /TN \"LabTask\" /TR \"C:\\Lab\\out\\archive.7z\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "Substitution: Replaced the executable path with a 7z archive file, which may not be flagged by the Sigma rule as a suspicious target."
+  }
+]

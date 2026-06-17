@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg export HKLM\\SYSTEM C:\\Lab\\out\\system_backup.reg",
+    "explanation": "Reordering and substitution: Reordered the command-line arguments and used a benign placeholder path to avoid the 'save' keyword and specific hive names, which may prevent matching the Sigma rule's 'export' and hive name patterns."
+  },
+  {
+    "output": "reg save HKLM\\SYSTEM C:\\Lab\\out\\system_hive /y",
+    "explanation": "Substitution and encoding: Replaced the suspicious hive name with a normalized path and used a placeholder output path, which may bypass the Sigma rule's detection of specific hive names and the 'save' command."
+  },
+  {
+    "output": "reg query HKLM\\SYSTEM > C:\\Lab\\out\\system_query.txt",
+    "explanation": "Omission and substitution: Replaced the 'export' or 'save' command with 'query', which does not trigger the Sigma rule's detection of hive dumping, and used a benign placeholder path."
+  }
+]

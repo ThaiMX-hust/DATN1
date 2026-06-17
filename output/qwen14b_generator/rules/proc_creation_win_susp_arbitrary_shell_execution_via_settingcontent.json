@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\explorer.exe C:\\Users\\Public\\SettingsShortcut.SettingContent-ms",
+    "explanation": "Omission: Removed quotes around the command line arguments, which may bypass the Sigma rule's string match if it relies on quoted strings."
+  },
+  {
+    "output": "C:\\Windows\\explorer.exe C:\\Users\\Public\\SettingsShortcut.SettingContent-ms -safe",
+    "explanation": "Insertion: Added a harmless flag '-safe' which may not be detected by the Sigma rule as it does not check for additional flags."
+  },
+  {
+    "output": "C:\\Windows\\explorer.exe C:\\Lab\\input\\SettingsShortcut.SettingContent-ms",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder, which may avoid the Sigma rule's path-based detection."
+  }
+]

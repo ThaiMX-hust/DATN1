@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /k tscon 1337 /dest:rdp-tcp#55",
+    "explanation": "Reordering: The command line is reordered to avoid the suspicious ' /dest:rdp-tcp#' string being directly adjacent to the executable, which may cause the Sigma rule to miss it."
+  },
+  {
+    "output": "cmd.exe /k tscon 1337 /dest:rdp-tcp#55",
+    "explanation": "Insertion: Inserting harmless spaces or escape characters around the suspicious string may prevent the Sigma rule from matching it."
+  },
+  {
+    "output": "cmd.exe /k tscon 1337 /dest:rdp-tcp#55",
+    "explanation": "Substitution: Replacing ' /dest:rdp-tcp#' with an equivalent syntax or harmless placeholder may prevent the Sigma rule from matching it."
+  }
+]

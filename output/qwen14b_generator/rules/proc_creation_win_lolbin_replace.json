@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\Lab\\input\\sample.txt\" C:\\Lab\\out\\archive.7z /A",
+    "explanation": "Reordering: The /A flag is moved to the end, which may avoid the CommandLine|contains|windash: '-a' detection if the parser is sensitive to flag position."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe -A \"C:\\Lab\\input\\sample.txt\" C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced '/A' with '-A' which is equivalent syntax, potentially avoiding the windash-based detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\replace.exe \"C:\\Lab\\input\\sample.txt\" C:\\Lab\\out\\archive.7z -A",
+    "explanation": "Reordering: The -A flag is moved to the end, which may avoid the CommandLine|contains|windash: '-a' detection if the parser is sensitive to flag position."
+  }
+]

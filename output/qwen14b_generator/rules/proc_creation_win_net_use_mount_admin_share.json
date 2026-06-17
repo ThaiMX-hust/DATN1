@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net use * \\\\127.0.0.1\\C$ /user:Administrator P@ssw0rd1",
+    "explanation": "Reordering: The command reorders the arguments to avoid the 'use' keyword, which may prevent the Sigma rule's 'use' string match."
+  },
+  {
+    "output": "net1 time \\\\localhost",
+    "explanation": "Substitution: Using 'net1' instead of 'net' with the same command intent avoids the 'net.exe' image match while maintaining the same action."
+  },
+  {
+    "output": "net share \\\\test\\share /delete",
+    "explanation": "Omission: The command omits optional parameters while preserving the core action, which may avoid the 'use' keyword match in the Sigma rule."
+  }
+]

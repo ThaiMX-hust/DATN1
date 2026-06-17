@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh firewall delete rule name=\"TestRule\"",
+    "explanation": "Insertion: Adding quotes around the rule name may prevent the Sigma rule from matching the 'delete ' string if the rule name contains spaces or special characters, altering the command-line parsing."
+  },
+  {
+    "output": "netsh firewall delete rule name=TestRule",
+    "explanation": "Omission: Removing the space after 'delete' may change the command-line parsing structure, potentially avoiding the Sigma rule's 'delete ' string match."
+  },
+  {
+    "output": "netsh firewall delete rule name=TestRule --help",
+    "explanation": "Insertion: Adding a non-functional flag like '--help' may alter the command-line parsing and avoid the Sigma rule's 'delete ' string match by changing the structure."
+  }
+]

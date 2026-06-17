@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-ATHRemoteFXvGPUDisablementCommand -ModuleName foo -ModulePath $PWD\"",
+    "explanation": "Insertion: Added -Command to explicitly define the script block, which may bypass the direct string match in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command {Invoke-ATHRemoteFXvGPUDisablementCommand -ModuleName foo -ModulePath $PWD}",
+    "explanation": "Substitution: Replaced & { ... } with -Command { ... }, which may alter the parsing and avoid the string match."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-ATHRemoteFXvGPUDisablementCommand -ModuleName foo -ModulePath C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced $PWD with a benign lab placeholder path, which may avoid triggering the Sigma rule's suspicious indicator."
+  }
+]

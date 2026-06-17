@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v TestValue /t REG_DWORD /d 1 /f",
+    "explanation": "Omission: Removed the suspicious registry value names and paths that trigger the Sigma rule, while keeping the same command-line structure and benign intent."
+  },
+  {
+    "output": "reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v TestValue /t REG_DWORD /d 1 /f /k",
+    "explanation": "Insertion: Added an invalid or harmless flag (/k) to the command line, which may cause the Sigma rule's pattern matching to miss the modified command."
+  },
+  {
+    "output": "reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v TestValue /t REG_DWORD /d 1 /f --help",
+    "explanation": "Insertion: Added a help flag (--help) to the command line, which may alter the command's execution path and avoid triggering the Sigma rule's detection logic."
+  }
+]

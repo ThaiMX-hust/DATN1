@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic /namespace:\\root\\cimv2 path Win32_NTEventlogFile get /value",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious function call in the Sigma rule's detection pattern."
+  },
+  {
+    "output": "wmic /namespace:\\root\\cimv2 path Win32_NTEventlogFile get Name,Description",
+    "explanation": "Omission: The command omits the function call that triggers the Sigma rule by only requesting property retrieval instead of performing an action."
+  },
+  {
+    "output": "wmic /namespace:\\root\\cimv2 path Win32_NTEventlogFile where Name='Application' get /value",
+    "explanation": "Insertion: The command inserts a 'where' clause to filter the target, which may prevent the Sigma rule from matching the full command line."
+  }
+]

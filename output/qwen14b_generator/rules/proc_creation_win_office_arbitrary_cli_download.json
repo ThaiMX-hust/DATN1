@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"C:\\Lab\\input\\sample.docx\"",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious 'http://' or 'https://' strings, which may be detected by the Sigma rule."
+  },
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"C:\\Lab\\input\\sample.docx\" -WorkingDirectory \"C:\\Lab\\out\"",
+    "explanation": "Insertion: Additional parameters are inserted to provide context without including suspicious URLs, which may be missed by the Sigma rule's string matching."
+  },
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"C:\\Lab\\input\\sample.docx\" -Verb Open",
+    "explanation": "Substitution: The use of the -Verb parameter substitutes the direct URL inclusion, which may not trigger the Sigma rule's detection based on command line content."
+  }
+]

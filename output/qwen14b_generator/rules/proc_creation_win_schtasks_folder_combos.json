@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask\" /tr \"C:\\Lab\\input\\sample.txt\" /sc once /st 1200",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious ' /create ' pattern in the CommandLine field, which may miss the Sigma rule's string match."
+  },
+  {
+    "output": "schtasks.exe /create /tn TestTask /tr C:\\Lab\\input\\sample.txt /sc once /st 1200",
+    "explanation": "Omission: The omission of quotes around the task name and path may avoid triggering the Sigma rule's detection based on the presence of specific strings in the CommandLine field."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask\" /tr \"C:\\Lab\\input\\sample.txt\" /sc once /st 1200",
+    "explanation": "Insertion: Adding quotes around the task name and path may change the parsing of the command line, potentially avoiding the Sigma rule's detection based on the structure of the CommandLine field."
+  }
+]

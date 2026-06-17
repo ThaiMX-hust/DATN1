@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sqldumper.exe -h 127.0.0.1 -p 1433 -u sa -P password -d TestDB -o C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed the suspicious hex strings ('0x0110' or '0x01100:40') from the command line while retaining the use of sqldumper.exe for a benign test purpose."
+  },
+  {
+    "output": "sqldumper.exe -h 127.0.0.1 -p 1433 -u sa -P password -d TestDB -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Changed the output file path to a lab-specific placeholder, avoiding the use of suspicious hex strings while preserving the command-line structure."
+  },
+  {
+    "output": "sqldumper.exe -h 127.0.0.1 -p 1433 -u sa -P password -d TestDB -o C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added harmless delimiters and modified the output path to avoid matching the suspicious hex strings in the Sigma rule."
+  }
+]

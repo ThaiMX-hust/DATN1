@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe \"C:\\windows\\system32\\davclnt.dll,DavSetCookie\" example.com http://example.com/sales",
+    "explanation": "Insertion of quotes around the DLL path to avoid direct string matching of the suspicious command-line argument."
+  },
+  {
+    "output": "rundll32.exe -dll \"C:\\windows\\system32\\davclnt.dll,DavSetCookie\" example.com http://example.com/sales",
+    "explanation": "Substitution of the command-line argument format to use a hypothetical flag, altering the structure to avoid direct string matching."
+  },
+  {
+    "output": "rundll32.exe example.com http://example.com/sales \"C:\\windows\\system32\\davclnt.dll,DavSetCookie\"",
+    "explanation": "Reordering of command-line arguments to place the DLL path at the end, potentially avoiding the specific string match in the Sigma rule."
+  }
+]

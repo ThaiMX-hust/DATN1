@@ -1,0 +1,14 @@
+[
+  {
+    "output": "python.exe -c \"import pty; pty.spawn(['cmd.exe'])\"",
+    "explanation": "Insertion: Added quotes and space to modify the command line structure, potentially avoiding string matching in the Sigma rule."
+  },
+  {
+    "output": "python.exe -c 'import pty; pty.spawn([\"cmd.exe\"])'",
+    "explanation": "Substitution: Replaced single quotes with double quotes and vice versa, which may change how the command line is parsed and matched."
+  },
+  {
+    "output": "python.exe -c import pty; pty.spawn(['cmd.exe'])",
+    "explanation": "Omission: Removed quotes around the command string, which may alter the parsing and avoid matching the Sigma rule's string patterns."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"/l C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the executable path and used -ArgumentList with a benign file path to avoid the '.dll' keyword match."
+  },
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"/l C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Replaced the '.dll' extension with a benign '.log' extension to avoid the suspicious keyword match."
+  },
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"/l C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: Used a benign 7z archive file path instead of a DLL file to avoid the suspicious keyword match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c dir /a:h C:\\Lab\\input\\sample.txt & dir /a:h C:\\Lab\\input\\sample.log",
+    "explanation": "Reordering and substitution: Replaced the suspicious paths with benign lab placeholders and reordered the command to avoid matching the Sigma rule's 'dir /s c:\\' pattern."
+  },
+  {
+    "output": "cmd.exe /c net user & dir C:\\Lab\\input\\sample.txt & cmdkey.exe /list & net localgroup \"Users\" & net localgroup",
+    "explanation": "Omission and substitution: Removed the suspicious 'dir c:\\Users\\' part and substituted with a benign lab placeholder to avoid matching the Sigma rule's 'dir /s c:\\' pattern."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.exe /c dir /a:h C:\\Lab\\input\\sample.txt & dir /a:h C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion and substitution: Replaced the executable with a benign lab placeholder and inserted harmless delimiters to avoid matching the Sigma rule's 'cmd.exe /c dir /a:h' pattern."
+  }
+]

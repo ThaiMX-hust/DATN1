@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic service call startservice name=\"sampleService\"",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid the suspicious 'service' and 'call' keywords being adjacent, which may bypass the Sigma rule's string matching."
+  },
+  {
+    "output": "wmic service call startservice name=\"sampleService\" /format:table",
+    "explanation": "Insertion: Added a harmless /format:table parameter to the command line, which may prevent the Sigma rule from detecting the suspicious 'startservice' keyword due to additional content."
+  },
+  {
+    "output": "wmic service call startservice name=\"sampleService\" /user:lab /password:lab123",
+    "explanation": "Substitution: Added benign user and password parameters that are not related to the suspicious behavior, which may cause the Sigma rule to miss the 'startservice' keyword due to additional non-suspicious content."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic process call terminate /nointeractive /node:localhost /user:Administrator /password:Password123 /name:Notepad",
+    "explanation": "Reordering: Reordered arguments to avoid the 'terminate' keyword being directly adjacent to 'call', potentially evading string-based detection."
+  },
+  {
+    "output": "wmic process call terminate /nointeractive /node:localhost /user:Administrator /password:Password123 /name:Notepad /format:csv",
+    "explanation": "Insertion: Added a harmless '/format:csv' argument to modify the command line structure, possibly bypassing keyword-based matching."
+  },
+  {
+    "output": "wmic process call terminate /nointeractive /node:localhost /user:Administrator /password:Password123 /name:Notepad /output:C:\\Lab\\out\\results.txt",
+    "explanation": "Substitution: Replaced the default output with a lab-safe path to avoid triggering alerts related to suspicious output destinations."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"C:\\Users\\thaim\\Desktop\\evil_batchfdp.bat\"",
+    "explanation": "Omission: Removed the Unicode character 'â€®' which is a suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"C:\\Users\\thaim\\Downloads\\evil_batchfdp.bat\"",
+    "explanation": "Omission: Removed the Unicode character 'â€®' which is a suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious file path with a benign lab placeholder to avoid triggering the Sigma rule."
+  }
+]

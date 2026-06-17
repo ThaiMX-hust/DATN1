@@ -1,0 +1,14 @@
+[
+  {
+    "output": "php -r \"echo 'Hello, World!';\"",
+    "explanation": "Insertion: Adding quotes around the script argument may bypass string-based detection if the Sigma rule relies on unquoted patterns."
+  },
+  {
+    "output": "php -r echo 'Hello, World!'",
+    "explanation": "Omission: Removing quotes may be parsed correctly by the command-line parser, avoiding the need for explicit quotes that could be flagged by the rule."
+  },
+  {
+    "output": "php -r 'echo \"Hello, World!\";'",
+    "explanation": "Encoding: Escaping quotes within the script argument may prevent the Sigma rule from detecting the '-r' flag with a direct string match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Test /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious 'add' keyword in the expected position, which may prevent the Sigma rule from detecting the command."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Test /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Substitution: The command uses a benign test file path (C:\\Lab\\input\\sample.txt) instead of a suspicious one, preserving the syntax but changing the target to a safe placeholder."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Test /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Insertion: The command inserts a space between 'add' and the registry path, which may be parsed correctly but could avoid matching the Sigma rule's exact string pattern."
+  }
+]

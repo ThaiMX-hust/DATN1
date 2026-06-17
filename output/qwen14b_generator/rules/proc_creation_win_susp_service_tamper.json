@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_Service -Filter 'Name='TestService'' | % { $_.StopService() }\"",
+    "explanation": "Reordering: The command uses PowerShell to stop a service, but the suspicious 'Stop-Service' keyword is not directly present, which may avoid detection by string-based Sigma rules."
+  },
+  {
+    "output": "sc.exe stop TestService",
+    "explanation": "Omission: The command uses 'sc.exe' to stop a service, but the Sigma rule's 'selection_tools_cli' includes 'stop' as a keyword. This mutation may not bypass the rule if 'stop' is still present."
+  },
+  {
+    "output": "pwsh.exe -Command \"Get-WmiObject -Class Win32_Service -Filter 'Name='TestService'' | % { $_.StopService() }\"",
+    "explanation": "Substitution: Replacing 'powershell.exe' with 'pwsh.exe' (PowerShell Core) may avoid detection if the Sigma rule is not configured to detect 'pwsh.exe' as a suspicious tool."
+  }
+]

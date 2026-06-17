@@ -1,0 +1,14 @@
+[
+  {
+    "output": "query.exe session > C:\\Lab\\out\\sessions.txt",
+    "explanation": "Reordering: The suspicious 'session >' pattern is moved to a file output in a lab directory, which may not trigger the Sigma rule's string match if it focuses on command-line arguments rather than file redirection."
+  },
+  {
+    "output": "query.exe -session > C:\\Lab\\out\\sessions.txt",
+    "explanation": "Substitution: Replaced 'session' with '-session' as a long-form flag equivalent, which may not match the Sigma rule's 'session >' pattern if it relies on positional arguments."
+  },
+  {
+    "output": "query.exe session | findstr /v \"suspicious\" > C:\\Lab\\out\\sessions.txt",
+    "explanation": "Insertion: Added a pipeline with 'findstr' to filter output, which may not trigger the Sigma rule if it focuses on direct redirection rather than processed output."
+  }
+]

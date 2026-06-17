@@ -1,0 +1,14 @@
+[
+  {
+    "output": "procdump -ma C:\\Lab\\input\\sample.txt -accepteula",
+    "explanation": "Omission: Removed the suspicious 'OriginalFileName' by not specifying the full path to the executable, which may avoid the Sigma rule's 'OriginalFileName' check."
+  },
+  {
+    "output": "procdump -ma C:\\Lab\\input\\sample.txt -accepteula -log C:\\Lab\\out\\log.txt",
+    "explanation": "Insertion: Added a harmless '-log' argument with a benign path, which may alter the command line parsing and avoid matching the Sigma rule's 'CommandLine' checks."
+  },
+  {
+    "output": "procdump -mp C:\\Lab\\input\\sample.log -accepteula",
+    "explanation": "Substitution: Replaced the '-ma' flag with '-mp' (Mini Plus dump), which may avoid the Sigma rule's 'CommandLine' check for ' -ma ' while maintaining the same executable family and test intent."
+  }
+]

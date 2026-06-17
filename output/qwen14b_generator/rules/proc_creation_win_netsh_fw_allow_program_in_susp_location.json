@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh advfirewall firewall add allowedprogram program=\"C:\\Lab\\input\\sample.txt\" name=\"Test\"",
+    "explanation": "Reordering: Reordered the command-line arguments to place the program path before the 'name' parameter, which may bypass the Sigma rule's string matching if it relies on a specific argument order."
+  },
+  {
+    "output": "netsh advfirewall firewall add allowedprogram program=C:\\Lab\\input\\sample.txt name=Test",
+    "explanation": "Omission: Removed the 'action=allow' clause, which may bypass the Sigma rule's string matching if it relies on the presence of that specific keyword."
+  },
+  {
+    "output": "netsh advfirewall firewall add allowedprogram program=C:\\Lab\\input\\sample.txt name=Test",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder, which may bypass the Sigma rule's path-based detection if it relies on specific directory names."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the suspicious CommandLine containing '\\exported\\' or '\\onenoteofflinecache_files\\' while keeping the benign test intent."
+  },
+  {
+    "output": "cscript.exe //nologo C:\\Lab\\input\\sample.vbs",
+    "explanation": "Substitution: Replaced the suspicious CommandLine with a benign script that does not involve malicious embedded scripts."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and command parameters to avoid matching the suspicious CommandLine patterns while maintaining safe behavior."
+  }
+]

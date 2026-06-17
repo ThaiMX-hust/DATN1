@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nologo -windowstyle minimized -file \"C:\\Lab\\input\\sample_script.ps1\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure proper parsing, which may prevent the Sigma rule from matching the ' -file ' keyword due to the surrounding quotes."
+  },
+  {
+    "output": "pwsh.exe -nologo -windowstyle minimized -file C:\\Lab\\input\\sample_script.ps1",
+    "explanation": "Substitution: Replaced 'powershell.exe' with 'pwsh.exe' (PowerShell Core), which may not trigger the Sigma rule's parent image check if it is configured to only match Windows PowerShell."
+  },
+  {
+    "output": "powershell.exe -nologo -windowstyle minimized -file C:\\Lab\\input\\sample_script.ps1",
+    "explanation": "Omission: Removed the ' -file ' keyword and used direct path input, which may avoid the Sigma rule's CommandLine|contains check for the specific keyword."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wevtutil qe Microsoft-Windows-PowerShell -f \"<QueryList><Query Id=\"1\" Path=\"Microsoft-Windows-PowerShell\"><Select Path=\"Microsoft-Windows-PowerShell\">Event[System[EventID=4624]]</Select></Query></QueryList>\"",
+    "explanation": "Reordering and encoding the query to avoid direct string matches on 'qe' and '462?' by using XML-encoded query syntax, which may not trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "Get-WinEvent -FilterXPath \"//Event[System[EventID=4624]]\" -LogName \"Microsoft-Windows-PowerShell\"",
+    "explanation": "Reordering and using XPath syntax instead of direct string matching for 'Get-WinEvent' and '462?', which may avoid detection by the Sigma rule's string-based pattern matching."
+  },
+  {
+    "output": "wmic ntevent get /format:csv",
+    "explanation": "Omission of specific parameters and use of a benign format option ('/format:csv') to avoid triggering the Sigma rule's detection of suspicious event log querying behavior."
+  }
+]

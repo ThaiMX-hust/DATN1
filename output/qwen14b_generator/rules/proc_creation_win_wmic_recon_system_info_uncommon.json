@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_logicaldisk get Name,Size,FreeSpace /format:csv",
+    "explanation": "Reordering arguments to avoid direct string match on 'LOGICALDISK get Name,Size,FreeSpace' using /format:csv instead of default output format."
+  },
+  {
+    "output": "wmic.exe -namespace \\root\\cimv2 -path win32_logicaldisk get Name,Size,FreeSpace",
+    "explanation": "Substitution of syntax using short/long options (-namespace instead of /namespace) to avoid matching the Sigma rule's command-line string."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_logicaldisk get Name,Size,FreeSpace /format:table",
+    "explanation": "Insertion of /format:table to alter the command-line structure, potentially avoiding the Sigma rule's string-based detection."
+  }
+]

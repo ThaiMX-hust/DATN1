@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wusa.exe /extract:\"C:\\Lab\\input\\sample.cab\" \"C:\\Lab\\out\\extracted\"",
+    "explanation": "Insertion: Added quotes around paths to avoid direct string matching of suspicious paths, which may bypass the Sigma rule's path-based detection."
+  },
+  {
+    "output": "wusa.exe -extract \"C:\\Lab\\input\\sample.cab\" \"C:\\Lab\\out\\extracted\"",
+    "explanation": "Substitution: Replaced '/extract' with '-extract' (equivalent syntax), which may not match the Sigma rule's '/extract:' string detection."
+  },
+  {
+    "output": "wusa.exe /extract \"C:\\Lab\\input\\sample.cab\" C:\\Lab\\out\\extracted",
+    "explanation": "Omission: Removed the trailing quote after the destination path, which may not trigger the Sigma rule's '/extract:' string match if it relies on exact syntax."
+  }
+]

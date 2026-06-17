@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\tcm.tmp -decode C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2.txt C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2_decoded.exe",
+    "explanation": "Omission: Removed the 'DllRegisterServer' string from the command line, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\tcm.tmp -encode C:\\Windows\\System32\\calc.exe C:\\Users\\thaim\\AppData\\Local\\Temp\\T1140_calc2.txt",
+    "explanation": "Omission: Removed the 'DllRegisterServer' string from the command line, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Roaming\\notepad.exe /B",
+    "explanation": "Reordering: Reordered the arguments, which may prevent the Sigma rule from matching if the 'DllRegisterServer' string is not present."
+  }
+]

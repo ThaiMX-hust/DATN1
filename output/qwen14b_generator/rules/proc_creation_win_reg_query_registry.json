@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg query \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\" /s",
+    "explanation": "Insertion: Added '/s' flag to the command line, which may change the parsing behavior and avoid matching the 'query' keyword in the Sigma rule."
+  },
+  {
+    "output": "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run /v TestKey",
+    "explanation": "Substitution: Added '/v TestKey' to the command line, which may alter the command's intent and avoid matching the suspicious registry paths in the Sigma rule."
+  },
+  {
+    "output": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ShellServiceObjectDelayLoad\" /reg:32",
+    "explanation": "Reordering: Added '/reg:32' flag to the command line, which may change the command's execution context and avoid matching the suspicious registry paths in the Sigma rule."
+  }
+]

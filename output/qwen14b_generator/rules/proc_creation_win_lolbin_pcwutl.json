@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe \"pcwutl.dll,LaunchApplication\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes around the dll,LaunchApplication parameter to prevent the Sigma rule from matching the 'pcwutl' and 'LaunchApplication' strings in the CommandLine field."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the suspicious target with a benign lab placeholder, preserving the same executable family and test intent while avoiding the Sigma rule's suspicious indicator."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious target with a different benign lab placeholder, preserving the same executable family and test intent while avoiding the Sigma rule's suspicious indicator."
+  }
+]

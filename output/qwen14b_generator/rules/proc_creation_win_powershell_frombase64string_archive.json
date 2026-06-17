@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('H4sIAAAAAA==')) | Out-File C:\\Lab\\out\\test.txt\"",
+    "explanation": "Insertion: Added an output redirection to a benign file, which may prevent the Sigma rule from matching the full command line as it now includes a harmless file operation."
+  },
+  {
+    "output": "powershell -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('H4sIAAAAAA==')) | Set-Content C:\\Lab\\out\\test.txt\"",
+    "explanation": "Substitution: Replaced 'Out-File' with 'Set-Content', which is a functionally equivalent command, potentially avoiding the Sigma rule's string matching."
+  },
+  {
+    "output": "powershell -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('H4sIAAAAAA==')) | Tee-Object -FilePath C:\\Lab\\out\\test.txt\"",
+    "explanation": "Reordering: Used 'Tee-Object' with a file path to both display and save the output, which may not trigger the Sigma rule's detection logic as it introduces a new command structure."
+  }
+]

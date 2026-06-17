@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sdbinst.exe -c C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Adding a space after -c and using a benign placeholder file path to avoid the suspicious extension match."
+  },
+  {
+    "output": "sdbinst.exe -f C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Using a benign file extension (.log) instead of .sdb to avoid the suspicious extension match."
+  },
+  {
+    "output": "sdbinst.exe -t C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Using the -t flag with a benign file path and extension to avoid the suspicious extension match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Import-Module -Name 'C:\\Lab\\input\\sampleModule.psm1'\"",
+    "explanation": "Reordering and substitution: The command uses a benign module path instead of the suspicious DLL, avoiding the 'Microsoft.ActiveDirectory.Management.dll' match through substitution."
+  },
+  {
+    "output": "pwsh.exe -Command \"Import-Module -Name 'C:\\Lab\\input\\sampleModule.psm1'\"",
+    "explanation": "Substitution: Replacing the suspicious DLL with a benign module path and using pwsh.exe instead of the default PowerShell path to avoid matching the Sigma rule's suspicious strings."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module -Name 'C:\\Lab\\input\\sampleModule.psm1' -Verbose\"",
+    "explanation": "Insertion: Adding the -Verbose flag as an insertion mutation to the command line without altering the core behavior, which may bypass the Sigma rule's string matching."
+  }
+]

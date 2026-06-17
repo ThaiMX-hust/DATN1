@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mpiexec.exe -n 1 --allow-run-as-admin C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added '--allow-run-as-admin' flag after '-n 1' to change the command line structure, potentially avoiding the ' /n 1 ' or ' -n 1 ' string match in the Sigma rule."
+  },
+  {
+    "output": "mpiexec.exe -n 1 -host localhost C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Reordered the '-n 1' flag with '-host localhost' to change the command line structure, possibly avoiding the ' /n 1 ' or ' -n 1 ' string match in the Sigma rule."
+  },
+  {
+    "output": "mpiexec.exe -n 1 -env PATH=C:\\Lab\\input C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the default argument with '-env PATH=C:\\Lab\\input' to alter the command line structure, which may avoid the ' /n 1 ' or ' -n 1 ' string match in the Sigma rule."
+  }
+]

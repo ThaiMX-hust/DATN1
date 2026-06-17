@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr /e .docx C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: The command uses a benign file path and reorders arguments to avoid matching the suspicious keywords in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\findstr.exe /e .docx C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion and substitution: A benign path is used, and the command is modified with quotes and path normalization to avoid triggering the Sigma rule's suspicious keywords."
+  },
+  {
+    "output": "findstr /e .docx C:\\Lab\\input\\sample.txt | findstr /e .txt",
+    "explanation": "Insertion and reordering: Additional safe command elements are inserted, and the command is restructured to avoid matching the Sigma rule's suspicious keywords."
+  }
+]

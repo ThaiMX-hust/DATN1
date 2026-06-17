@@ -1,0 +1,14 @@
+[
+  {
+    "output": "runxcmd.exe /exec=notepad.exe /account=local",
+    "explanation": "Omission: Removed the suspicious 'system' or 'ti' account values, which may avoid the Sigma rule's account check."
+  },
+  {
+    "output": "runxcmd.exe /exec=notepad.exe /account=localuser",
+    "explanation": "Substitution: Replaced 'system' or 'ti' with a non-suspicious account name, which may avoid the Sigma rule's account check."
+  },
+  {
+    "output": "runxcmd.exe /exec=notepad.exe /account=local /nogui",
+    "explanation": "Insertion: Added a harmless flag '/nogui' that does not affect the command's behavior but may alter the Sigma rule's string match."
+  }
+]

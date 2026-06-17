@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a harmless command-line prefix to avoid matching the suspicious parent process indicator."
+  },
+  {
+    "output": "start-process -Path \"C:\\Lab\\input\\sample.txt\" -Verb Open",
+    "explanation": "Substitution: Replaced the executable family with a PowerShell command that uses a benign placeholder file, avoiding the suspicious process creation pattern."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the executable family and directly executed a benign placeholder file, avoiding the suspicious parent process detection."
+  }
+]

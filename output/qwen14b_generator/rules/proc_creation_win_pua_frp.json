@@ -1,0 +1,14 @@
+[
+  {
+    "output": "frpc -c C:\\Lab\\input\\sample.ini",
+    "explanation": "Substitution: Replaced the suspicious 'frpc.ini' with a benign placeholder 'sample.ini' in the command line, which may avoid the 'CommandLine|contains' detection."
+  },
+  {
+    "output": "frpc -c \"C:\\Lab\\input\\sample.ini\" -log-file \"C:\\Lab\\out\\log.txt\"",
+    "explanation": "Insertion: Added quotes and an additional harmless argument, which may alter the parsing and avoid the 'CommandLine|contains' detection."
+  },
+  {
+    "output": "frpc -c C:\\Lab\\input\\sample.ini -log-file C:\\Lab\\out\\log.txt",
+    "explanation": "Reordering: Added an additional harmless argument after the configuration file path, which may change the command line structure and avoid the 'CommandLine|contains' detection."
+  }
+]

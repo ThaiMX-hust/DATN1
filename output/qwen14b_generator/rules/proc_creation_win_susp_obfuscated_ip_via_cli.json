@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ping 192.168.1.1",
+    "explanation": "Omission: Removed obfuscated IP format (e.g., 0x, octal) to avoid triggering the Sigma rule's detection of encoded/obfuscated IPs."
+  },
+  {
+    "output": "ping -n 1 192.168.1.1",
+    "explanation": "Insertion: Added a flag (-n) and a space to alter the command structure without changing the target IP, potentially evading string-based detection."
+  },
+  {
+    "output": "ping C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the IP with a benign local file path, which avoids the Sigma rule's focus on IP obfuscation while maintaining a similar command-line structure."
+  }
+]

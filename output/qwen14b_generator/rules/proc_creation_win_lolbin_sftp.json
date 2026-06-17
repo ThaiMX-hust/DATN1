@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sftp.exe -D \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the path to ensure it is parsed correctly, which may prevent the Sigma rule from matching the '-D' flag with a suspicious path."
+  },
+  {
+    "output": "sftp.exe -D C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced a potentially suspicious path with a benign lab placeholder, which may avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "sftp.exe -D C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Used a non-executable file type (7z archive) instead of an executable path, which may not trigger the Sigma rule's suspicious behavior detection."
+  }
+]

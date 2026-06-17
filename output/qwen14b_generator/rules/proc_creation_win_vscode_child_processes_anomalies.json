@@ -1,0 +1,14 @@
+[
+  {
+    "output": "code.exe --run \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes and a benign lab placeholder to avoid triggering the suspicious CommandLine|contains fields."
+  },
+  {
+    "output": "code.exe --run C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission of quotes and use of a benign lab placeholder to avoid triggering the suspicious CommandLine|contains fields."
+  },
+  {
+    "output": "code.exe --run C:\\Lab\\input\\sample.txt -n",
+    "explanation": "Reordering and adding a harmless flag to avoid triggering the suspicious CommandLine|contains fields."
+  }
+]

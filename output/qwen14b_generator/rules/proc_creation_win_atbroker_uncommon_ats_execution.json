@@ -1,14 +1,14 @@
 [
   {
-    "output": "C:\Windows\System32\AtBroker.exe \"start\" C:\\Windows\\Temp\\payload.exe",
+    "output": "C:\\Windows\\System32\\AtBroker.exe \"start\" C:\\Windows\\Temp\\payload.exe",
     "explanation": "Insertion of quotes around 'start' to test if the Sigma rule's CommandLine|contains: 'start' is sensitive to quoted arguments."
   },
   {
-    "output": "C:\Windows\System32\AtBroker.exe -start C:\\Windows\\Temp\\payload.exe",
+    "output": "C:\\Windows\\System32\\AtBroker.exe -start C:\\Windows\\Temp\\payload.exe",
     "explanation": "Substitution of '/start' with '-start' to test if the Sigma rule's CommandLine|contains: 'start' is sensitive to different flag syntax."
   },
   {
-    "output": "C:\Windows\System32\AtBroker.exe start C:\\Lab\\input\\sample.txt",
+    "output": "C:\\Windows\\System32\\AtBroker.exe start C:\\Lab\\input\\sample.txt",
     "explanation": "Omission of the suspicious path by replacing it with a benign lab placeholder to test if the Sigma rule's suspicious path is the main trigger."
   }
 ]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "livekd.exe -m \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may prevent the Sigma rule from detecting the '-m' flag as suspicious if the rule relies on direct string matching without proper escaping."
+  },
+  {
+    "output": "livekd.exe -m C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder, maintaining the same executable and intent while avoiding the use of a path that may trigger the Sigma rule."
+  },
+  {
+    "output": "livekd.exe -m C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Changed the target path to a different benign lab placeholder, which may not match the Sigma rule's suspicious pattern if it is based on specific file extensions or paths."
+  }
+]

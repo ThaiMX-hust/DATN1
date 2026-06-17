@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net view /all /domain | findstr /v \"sensitive\"",
+    "explanation": "Insertion of a pipeline and filter command to avoid matching the 'view' keyword directly, potentially bypassing the Sigma rule's CommandLine|contains: 'view' check."
+  },
+  {
+    "output": "net view /all /domain > C:\\Lab\\out\\netview.txt",
+    "explanation": "Reordering and substitution of output redirection to avoid direct 'view' keyword in the command line, which may not trigger the Sigma rule's detection."
+  },
+  {
+    "output": "cmd /c net view /all /domain",
+    "explanation": "Wrapping the command in a 'cmd /c' invocation may alter the parsed CommandLine field, potentially avoiding the Sigma rule's match on the 'view' keyword."
+  }
+]

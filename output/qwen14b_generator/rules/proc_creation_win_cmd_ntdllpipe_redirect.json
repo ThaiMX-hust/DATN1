@@ -1,14 +1,14 @@
 [
   {
-    "output": "type C:\\Lab\\input\\sample.txt > \\\\.\\"pipe\\testpipe",
+    "output": "type C:\\Lab\\input\\sample.txt > \\\\.\\pipe\\testpipe",
     "explanation": "Substitution: Replaced the suspicious ntdll.dll file with a benign lab placeholder sample.txt, which avoids matching the Sigma rule's suspicious file path and pipe creation."
   },
   {
-    "output": "type C:\\Lab\\input\\sample.log | findstr /v \"\" > \\\\.\\"pipe\\testpipe",
+    "output": "type C:\\Lab\\input\\sample.log | findstr /v \" > \\\\.\\pipe\\testpipe",
     "explanation": "Insertion: Added a harmless findstr command to the pipeline, which may alter the command structure and avoid matching the Sigma rule's exact command line pattern."
   },
   {
-    "output": "type C:\\Lab\\input\\sample.txt > \\\\.\\"pipe\\testpipe 2>&1",
+    "output": "type C:\\Lab\\input\\sample.txt > \\\\.\\pipe\\testpipe 2>&1",
     "explanation": "Reordering: Added a standard redirection (2>&1) to the command line, which may change how the command is parsed and avoid matching the Sigma rule's exact string."
   }
 ]

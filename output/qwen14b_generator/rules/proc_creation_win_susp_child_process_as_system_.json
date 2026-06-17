@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"\\",
+    "explanation": "Insertion: Added quotes around the path to ensure correct parsing, which may avoid matching the suspicious ParentUser or User fields in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed any potential flags or parameters that might trigger the ParentUser or User field checks in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the original suspicious path with a benign lab placeholder to avoid triggering the ParentUser or User field checks in the Sigma rule."
+  }
+]

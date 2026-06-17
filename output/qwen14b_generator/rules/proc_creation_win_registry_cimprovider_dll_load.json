@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path C:\\Lab\\input\\sample.dll",
+    "explanation": "Substitution: Replaced the suspicious DLL path with a benign lab placeholder to avoid triggering the Sigma rule's 'dll' keyword match."
+  },
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the '.dll' extension with a benign '.txt' extension to avoid triggering the Sigma rule's 'dll' keyword match."
+  },
+  {
+    "output": "C:\\Windows\\SysWow64\\Register-CimProvider.exe -Path C:\\Lab\\input\\sample -Type dll",
+    "explanation": "Insertion: Added a '-Type dll' argument to the command line, which may not be parsed by the Sigma rule, thus avoiding the 'dll' keyword match."
+  }
+]

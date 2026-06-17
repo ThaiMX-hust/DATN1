@@ -1,0 +1,14 @@
+[
+  {
+    "output": "tasklist -m | findstr /C:\"rdpcorets.dll\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious Sigma indicator by using findstr instead of directly including the module name in the tasklist command."
+  },
+  {
+    "output": "tasklist -m | find \"rdpcorets.dll\"",
+    "explanation": "Substitution: Replaced /C with find to achieve the same result, potentially avoiding the Sigma rule's detection based on the 'contains' keyword."
+  },
+  {
+    "output": "tasklist -m | findstr rdpcorets.dll",
+    "explanation": "Omission: Removed the /C flag, which may still function correctly in some environments and could avoid the Sigma rule's detection based on the 'contains' keyword."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\tar.exe -cf C:\\Lab\\out\\archive.tar C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: Replaced the suspicious folder path with a benign lab placeholder, and modified the archive name to avoid triggering the Sigma rule's folder and file pattern matches."
+  },
+  {
+    "output": "C:\\Windows\\System32\tar.exe -cf C:\\Lab\\out\\archive.tar C:\\Lab\\input\\sample.txt C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Added an additional benign file to the command line, which may help avoid the Sigma rule's suspicion of greedy compression by altering the pattern of file inclusion."
+  },
+  {
+    "output": "C:\\Windows\\System32\tar.exe -cf C:\\Lab\\out\\archive.tar C:\\Lab\\input\\sample.txt -v",
+    "explanation": "Substitution: Added a verbose flag (-v) to the command line, which may change how the command is parsed and could potentially avoid triggering the Sigma rule's pattern matching."
+  }
+]

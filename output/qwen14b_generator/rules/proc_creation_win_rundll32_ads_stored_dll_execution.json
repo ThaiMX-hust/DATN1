@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32 \"C:\\Lab\\input\\sample.txt:ADSDLL.dll\",DllMain",
+    "explanation": "Insertion: Added quotes around the file path to avoid triggering the regex match for the ADS path format."
+  },
+  {
+    "output": "rundll32 C:\\Lab\\input\\sample.txt:ADSDLL.dll,DllMain",
+    "explanation": "Omission: Removed quotes around the file path, which may not trigger the regex match depending on the parser's handling of spaces and special characters."
+  },
+  {
+    "output": "rundll32 C:\\Lab\\input\\sample.txt:ADSDLL.dll DllMain",
+    "explanation": "Reordering: Reordered the arguments to avoid matching the regex pattern that expects a specific format with a comma."
+  }
+]

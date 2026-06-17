@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\input\\sample.txt -pid 11728 -debug",
+    "explanation": "Omission: Removed the suspicious executable path and replaced it with a benign lab placeholder to avoid the 'CreateRemoteThread' detection without changing the command structure."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.log -debug",
+    "explanation": "Substitution: Replaced the executable name with a benign log file to avoid matching the 'CreateThread' or 'RtlCreateUserThread' keywords in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\out\\archive.7z -debug",
+    "explanation": "Insertion: Inserted a harmless archive file path in place of the executable to avoid the 'CreateRemoteThread' or 'CreateThread' detection while maintaining the command format."
+  }
+]

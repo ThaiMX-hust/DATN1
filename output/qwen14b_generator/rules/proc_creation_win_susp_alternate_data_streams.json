@@ -1,0 +1,14 @@
+[
+  {
+    "output": "type C:\\Lab\\input\\sample.txt:ads > C:\\Lab\\out\\output.txt",
+    "explanation": "Insertion: Added a colon and ADS identifier after the file path, which may not be detected if the rule only checks for 'txt:' without the ADS identifier."
+  },
+  {
+    "output": "type C:\\Lab\\input\\sample.txt > C:\\Lab\\out\\output.txt",
+    "explanation": "Omission: Removed the ADS identifier, which may not trigger the rule if it only looks for 'txt:' with an ADS component."
+  },
+  {
+    "output": "type \"C:\\Lab\\input\\sample.txt:ads\" > \"C:\\Lab\\out\\output.txt\"",
+    "explanation": "Insertion: Added quotes and ADS identifier, which may not be detected if the rule is not sensitive to quoted paths or ADS components."
+  }
+]

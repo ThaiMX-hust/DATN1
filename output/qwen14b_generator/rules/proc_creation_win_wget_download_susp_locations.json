@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wget.exe --output-document=C:\\Lab\\out\\archive.7z http://192.168.1.100/sample.txt",
+    "explanation": "Reordering: The command reorders the arguments to avoid matching the suspicious 'wget.exe' path and 'http' pattern by using a benign lab placeholder and a safe output path."
+  },
+  {
+    "output": "wget.exe -O C:\\Lab\\out\\archive.7z http://192.168.1.100/sample.txt",
+    "explanation": "Substitution: Replaced '--output-document' with '-O' to avoid matching the suspicious flag while using a safe lab path as the output destination."
+  },
+  {
+    "output": "wget.exe http://192.168.1.100/sample.txt -O C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The command reorders the arguments to place the output flag after the URL, which may help avoid detection by the Sigma rule's pattern matching."
+  }
+]

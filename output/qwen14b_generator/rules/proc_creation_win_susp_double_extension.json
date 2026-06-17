@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe",
+    "explanation": "Reordering: The command line uses the same executable but reorders the path to avoid matching the suspicious extension pattern in the Sigma rule."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx",
+    "explanation": "Omission: The .exe extension is omitted, which avoids triggering the Sigma rule's double extension detection while maintaining the same benign test intent."
+  },
+  {
+    "output": "C:\\Users\\thaim\\AppData\\Local\\Temp\\T1036.007_masquerading.docx.exe -safe",
+    "explanation": "Insertion: A harmless flag '-safe' is added, which may not be parsed as part of the file path, thus avoiding the Sigma rule's double extension detection."
+  }
+]

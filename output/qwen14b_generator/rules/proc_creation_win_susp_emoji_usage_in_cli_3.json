@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo Testing command line without emojis > C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: The command line does not include any emojis, thus avoiding the Sigma rule's detection based on emoji usage."
+  },
+  {
+    "output": "cmd.exe /c type C:\\Lab\\input\\sample.txt | findstr \"Test\" > C:\\Lab\\out\\result.txt",
+    "explanation": "Substitution: The command line uses standard text and avoids emojis, making it safe and not triggering the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c dir C:\\Lab\\input\\ > C:\\Lab\\out\\directory_list.txt",
+    "explanation": "Insertion: The command line uses a standard directory listing command without any emojis, thus bypassing the Sigma rule's detection criteria."
+  }
+]

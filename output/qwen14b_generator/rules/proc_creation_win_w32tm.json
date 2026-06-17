@@ -1,0 +1,14 @@
+[
+  {
+    "output": "W32tm /stripchart /computer:localhost /period:5 /dataonly /samples:2",
+    "explanation": "No mutation technique applied; the command line matches the Sigma rule as-is."
+  },
+  {
+    "output": "W32tm /stripchart /computer:localhost /period:5 /dataonly /samples:2",
+    "explanation": "No mutation technique applied; the command line matches the Sigma rule as-is."
+  },
+  {
+    "output": "W32tm /stripchart /computer:localhost /period:5 /dataonly /samples:2",
+    "explanation": "No mutation technique applied; the command line matches the Sigma rule as-is."
+  }
+]

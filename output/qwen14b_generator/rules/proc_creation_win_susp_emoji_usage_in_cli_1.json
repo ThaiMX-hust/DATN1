@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo TestCommand > C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes and redirection to avoid emoji usage while maintaining benign test behavior."
+  },
+  {
+    "output": "cmd.exe /c type C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed any command elements that could trigger emoji detection, keeping the command safe and valid."
+  },
+  {
+    "output": "cmd.exe /c findstr \"TestCommand\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced echo with findstr to maintain the same test intent without using emojis."
+  }
+]

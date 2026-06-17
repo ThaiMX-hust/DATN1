@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic /namespace:\\root\\default path StdRegProv call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\LabTest\"",
+    "explanation": "Reordering: Reordered the command-line arguments to potentially avoid detection by the Sigma rule's string matching."
+  },
+  {
+    "output": "wmic /NameSpace:\\root\\default Class StdRegProv Call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\LabTest\"",
+    "explanation": "Substitution: Replaced 'path' with 'Class' to test if the Sigma rule's detection is based on specific keyword matching."
+  },
+  {
+    "output": "wmic /namespace:\\root\\default StdRegProv call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\LabTest\"",
+    "explanation": "Omission: Removed the 'path' keyword to test if the Sigma rule's detection is based on the presence of specific command-line elements."
+  }
+]

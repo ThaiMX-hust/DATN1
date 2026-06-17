@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Change /TN \"TestTask\" /TR \"C:\\Lab\\input\\sample.txt\" /ST 12:00",
+    "explanation": "Reordering and substitution: The command reorders the arguments and replaces the suspicious path with a lab placeholder, avoiding the Sigma rule's suspicious location detection."
+  },
+  {
+    "output": "schtasks.exe /Change /TN TestTask /TR C:\\Lab\\input\\sample.txt /ST 12:00",
+    "explanation": "Omission: The command omits quotes around the task name and uses a lab placeholder path, which may not trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "schtasks.exe /Change /TN \"TestTask\" /TR \"C:\\Lab\\input\\sample.txt\" /ST 12:00 /F",
+    "explanation": "Insertion: The command inserts the /F flag, which is a valid argument, and uses a lab placeholder path to avoid matching the suspicious locations in the Sigma rule."
+  }
+]

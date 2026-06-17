@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask\" /xml C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the '.xml' extension with a benign '.txt' extension to avoid triggering the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe -create -tn \"TestTask\" -xml C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Used long option '-xml' instead of '/xml' and replaced the '.xml' extension with a benign '.log' extension to avoid triggering the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask\" /xml C:\\Lab\\input\\sample.7z",
+    "explanation": "Substitution: Replaced the '.xml' extension with a benign '.7z' extension to avoid triggering the suspicious indicator in the Sigma rule."
+  }
+]

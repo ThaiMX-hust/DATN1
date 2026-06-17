@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes around the path to ensure proper parsing, which may prevent the Sigma rule from matching the 'binPath' keyword directly."
+  },
+  {
+    "output": "sc.exe create TestService binPath= C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission of quotes around the path, assuming the command-line parser can still interpret the path correctly, potentially avoiding the 'binPath' keyword match."
+  },
+  {
+    "output": "sc.exe create TestService binPath= C:\\Lab\\input\\sample.txt /DisplayName: \"Test Service\"",
+    "explanation": "Reordering arguments by adding a non-suspicious parameter (/DisplayName) after 'binPath', which may alter the parsing order and avoid the Sigma rule's detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Acl C:\\Lab\\input\\sample.txt | Set-Acl -Path C:\\Lab\\input\\sample.txt -AclObject $ACL\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the specific string 'Set-Acl ' followed by '-AclObject ' and '-Path ' in sequence, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -Path C:\\Lab\\input\\sample.txt -AclObject (Get-Acl C:\\Lab\\input\\sample.txt)\"",
+    "explanation": "Insertion: Adding parentheses and using Get-Acl inline changes the structure of the command line, which may avoid the string-based detection of the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(Get-Acl C:\\Lab\\input\\sample.txt).SetAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule 'Administrators','FullControl','Allow')); Set-Acl -Path C:\\Lab\\input\\sample.txt -AclObject (Get-Acl C:\\Lab\\input\\sample.txt)\"",
+    "explanation": "Substitution: Replacing explicit commandlet strings with method calls and inline objects may avoid the specific command-line string matching used by the Sigma rule."
+  }
+]

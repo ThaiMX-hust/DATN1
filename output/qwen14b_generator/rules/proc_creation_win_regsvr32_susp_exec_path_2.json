@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\syswow64\regsvr32.exe /s \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Substitution: Replaced the suspicious DLL path with a benign lab placeholder to avoid matching the Sigma rule's suspicious location patterns."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\regsvr32.exe /s C:\\Lab\\input\\sample.dll",
+    "explanation": "Encoding: Used double backslashes to normalize the path, which may not trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "C:\\Windows\\syswow64\regsvr32.exe /s C:\\Lab\\input\\sample.dll",
+    "explanation": "Omission: Removed any optional elements while keeping the command syntactically correct and using a benign lab placeholder to avoid matching the Sigma rule's suspicious location patterns."
+  }
+]

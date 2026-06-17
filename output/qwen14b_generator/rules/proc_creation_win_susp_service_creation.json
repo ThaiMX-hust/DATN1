@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-Service -Name TestService -BinaryPathName 'C:\\Lab\\input\\sample.txt' -StartupType Manual\"",
+    "explanation": "Reordering and substitution: Reordered the parameters and substituted the suspicious binary path with a benign lab placeholder, which may avoid matching the suspicious path indicators in the Sigma rule."
+  },
+  {
+    "output": "sc create TestService binPath= \"C:\\Lab\\input\\sample.log\" type= share start= auto",
+    "explanation": "Substitution: Replaced the suspicious binary path with a benign lab placeholder, which may avoid matching the suspicious path indicators in the Sigma rule."
+  },
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\Lab\\out\\archive.7z\" start= auto type=Own",
+    "explanation": "Substitution: Replaced the suspicious binary path with a benign lab placeholder, which may avoid matching the suspicious path indicators in the Sigma rule."
+  }
+]

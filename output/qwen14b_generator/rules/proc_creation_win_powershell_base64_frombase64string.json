@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SGVsbG8gV29ybGQ='))\"",
+    "explanation": "Insertion: Added quotes and escaped characters to prevent direct match of 'FromBase64String' in the command line, which may bypass the Sigma rule's string detection."
+  },
+  {
+    "output": "powershell -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SGVsbG8gV29ybGQ='))\" -NoProfile",
+    "explanation": "Reordering: Added the '-NoProfile' flag after the main command, which may alter the parsing context and avoid the Sigma rule's detection based on command line structure."
+  },
+  {
+    "output": "powershell -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SGVsbG8gV29ybGQ='))\" -ExecutionPolicy Bypass",
+    "explanation": "Substitution: Added '-ExecutionPolicy Bypass' to modify the command line parameters without altering the core behavior, which may avoid the Sigma rule's detection of the 'FromBase64String' string."
+  }
+]

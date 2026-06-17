@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe /s query HKLM\\SOFTWARE",
+    "explanation": "Insertion: Adding the '/s' flag and escaping backslashes may alter the parsing context, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "reg.exe query HKLM\\SOFTWARE /v",
+    "explanation": "Substitution: Adding the '/v' parameter changes the command's structure without altering its benign intent, possibly evading the Sigma rule's pattern match."
+  },
+  {
+    "output": "reg.exe query SOFTWARE\\HKLM",
+    "explanation": "Reordering: Changing the path format may not trigger the Sigma rule's specific string matching on the original path structure."
+  }
+]

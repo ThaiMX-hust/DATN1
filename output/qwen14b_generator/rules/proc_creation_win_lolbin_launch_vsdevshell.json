@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"& { . 'C:\\Lab\\input\\sample.ps1'; Launch-VsDevShell }\"",
+    "explanation": "Insertion: The command uses a placeholder script path and quotes to avoid direct string matching of 'Launch-VsDevShell.ps1', potentially bypassing the Sigma rule's string match."
+  },
+  {
+    "output": "powershell -ExecutionPolicy Bypass -File 'C:\\Lab\\input\\sample.ps1' -VsWherePath 'C:\\Lab\\input\\vswhere.exe' -VsInstallationPath 'C:\\Lab\\input\\vsinst.exe'",
+    "explanation": "Substitution: The command uses equivalent flags and benign paths to simulate the original behavior without including the exact suspicious script name."
+  },
+  {
+    "output": "powershell -Command \"& { . 'C:\\Lab\\input\\sample.ps1'; . 'C:\\Lab\\input\\devshell.ps1' }\"",
+    "explanation": "Reordering: The command reorders the execution flow to avoid direct invocation of 'Launch-VsDevShell.ps1', possibly evading the Sigma rule's detection."
+  }
+]

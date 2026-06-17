@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path 'C:\\Lab\\input\\sample.txt' -Recurse | Get-Content | WriteAllBytes -Path 'C:\\Lab\\out\\archive.7z'\"",
+    "explanation": "Insertion: Added quotes and explicit path to avoid triggering the 'LNK' file detection by modifying the command structure."
+  },
+  {
+    "output": "pwsh.exe -Command 'Get-ChildItem -Path C:\\Lab\\input\\sample.txt -Recurse | Get-Content | WriteAllBytes -Path C:\\Lab\\out\\archive.7z'",
+    "explanation": "Substitution: Replaced 'Get-ChildItem ' with 'Get-ChildItem -Path ' to avoid the 'dir ' or 'gci ' keywords in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content -Path 'C:\\Lab\\input\\sample.txt' | WriteAllBytes -Path 'C:\\Lab\\out\\archive.7z'\"",
+    "explanation": "Omission: Removed the 'Get-ChildItem -Recurse' part to avoid the '-Recurse' keyword and '*lnk' file type detection."
+  }
+]

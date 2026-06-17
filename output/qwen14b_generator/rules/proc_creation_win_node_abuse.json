@@ -1,0 +1,14 @@
+[
+  {
+    "output": "node.exe -e \"console.log('Hello, World!');\"",
+    "explanation": "Insertion: Added quotes around the script to avoid the ' -e ' pattern match, making the Sigma rule's string detection less likely to trigger."
+  },
+  {
+    "output": "node.exe --eval \"console.log('Hello, World!');\"",
+    "explanation": "Substitution: Replaced ' -e ' with '--eval' which is a long option equivalent, potentially bypassing the ' -e ' string match in the Sigma rule."
+  },
+  {
+    "output": "node.exe --eval \"console.log('Hello, World!');\" --no-warnings",
+    "explanation": "Reordering: Added an additional flag at the end of the command line, which may obscure the detection of the ' --eval ' pattern by altering the structure of the command line."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic /namespace:\\\\root\\subscription path __EventConsumer where name='TestConsumer' create /nogc",
+    "explanation": "Omission: Removed the 'ActiveScriptEventConsumer' string, which may avoid the Sigma rule's 'ActiveScriptEventConsumer' keyword match."
+  },
+  {
+    "output": "wmic /namespace:\\\\root\\subscription path __EventConsumer create name=\"TestConsumer\" /nogc",
+    "explanation": "Reordering: Changed the argument order, which may avoid the Sigma rule's 'CREATE' keyword match in the command line."
+  },
+  {
+    "output": "wmic /namespace:\\\\root\\subscription path __EventConsumer create name=\"TestConsumer\" /nogc",
+    "explanation": "Substitution: Replaced 'CREATE' with 'create' (lowercase), which may avoid the Sigma rule's 'CREATE' keyword match in the command line."
+  }
+]

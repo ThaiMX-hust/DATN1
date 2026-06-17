@@ -1,0 +1,14 @@
+[
+  {
+    "output": "findstr /s /m \"eyJ0eXAiOi\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Adding quotes around the suspicious string may prevent the Sigma rule from matching the command line as it would not directly contain the string without quotes."
+  },
+  {
+    "output": "findstr /s /m eyJ0eXAiOi C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removing quotes around the suspicious string may not trigger the Sigma rule if it only matches the string with quotes."
+  },
+  {
+    "output": "findstr /s /m \"eyJ0eXAiOi\" C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Changing the target file path to a benign lab placeholder may not affect the Sigma rule's detection as it focuses on the string content rather than the file path."
+  }
+]

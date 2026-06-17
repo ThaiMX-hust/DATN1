@@ -1,0 +1,14 @@
+[
+  {
+    "output": "curl.exe -sSL \"https://example.com/test.txt\" -o \"C:\\Temp\test.txt\"",
+    "explanation": "Substitution: Replaced the suspicious domain with a benign placeholder, which may avoid the Sigma domain match."
+  },
+  {
+    "output": "curl.exe -sSL https://attachment.outlook.live.net/owa/test.txt -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: Changed the output path to a lab placeholder, which may avoid the Sigma file path match."
+  },
+  {
+    "output": "curl.exe -sSL \"https://attachment.outlook.live.net/owa/test.txt\" -o \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the output path with a lab placeholder, which may avoid the Sigma file path match."
+  }
+]

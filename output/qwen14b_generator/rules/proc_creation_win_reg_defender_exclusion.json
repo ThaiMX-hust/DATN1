@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /t REG_DWORD /v \"TestExclusion\" /d 0",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid matching the suspicious string sequence in the Sigma rule."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Microsoft Antimalware\\Exclusions\\Paths\" /t REG_DWORD /v \"TestExclusion\" /d 0",
+    "explanation": "Substitution: Replaced the Windows Defender key with the Microsoft Antimalware key, which may not trigger the same rule."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /t REG_DWORD /v \"TestExclusion\" /d 1",
+    "explanation": "Substitution: Changed the value data from 0 to 1, which may not match the Sigma rule's requirement for the value to be 0."
+  }
+]

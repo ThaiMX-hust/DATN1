@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nop -Command Write-Host JScript executed me!; exit",
+    "explanation": "Omission: Removed the quotes around the executable path, which may not trigger the Sigma rule's exact string match."
+  },
+  {
+    "output": "powershell.exe -nop -Command \"Write-Host JScript executed me!; exit\"",
+    "explanation": "Insertion: Added escape characters inside the quotes, which may alter the parsing and avoid the Sigma rule's string match."
+  },
+  {
+    "output": "pwsh.exe -nop -Command Write-Host JScript executed me!; exit",
+    "explanation": "Substitution: Replaced 'powershell.exe' with 'pwsh.exe' (PowerShell Core), which may not be flagged by the Sigma rule."
+  }
+]

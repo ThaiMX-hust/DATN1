@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wuauclt.exe /?",
+    "explanation": "Insertion: Adding the help flag (/?) provides a valid command-line argument that changes the behavior from empty cmdline to a legitimate query, potentially avoiding the Sigma rule's empty cmdline detection."
+  },
+  {
+    "output": "wuauclt.exe -help",
+    "explanation": "Substitution: Replacing the default flag with an equivalent syntax (-help) provides a valid command-line argument that changes the behavior from empty cmdline to a legitimate query, potentially avoiding the Sigma rule's empty cmdline detection."
+  },
+  {
+    "output": "wuauclt.exe -?",
+    "explanation": "Reordering: Using a different flag syntax (-?) provides a valid command-line argument that changes the behavior from empty cmdline to a legitimate query, potentially avoiding the Sigma rule's empty cmdline detection."
+  }
+]

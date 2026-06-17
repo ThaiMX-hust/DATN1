@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"[System.Reflection.Assembly]::LoadFrom('C:\\Lab\\input\\sample.dll')\"",
+    "explanation": "Omission: Removed the suspicious X509Enrollment.CBinaryConverter string by using a different method for loading an assembly."
+  },
+  {
+    "output": "cmd /c \"C:\\Lab\\out\\archive.7z\" -oC:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious command line with a benign 7z operation that does not involve X509Enrollment."
+  },
+  {
+    "output": "C:\\Lab\\tools\\testapp.exe -i C:\\Lab\\input\\sample.log -o C:\\Lab\\out\\output.txt",
+    "explanation": "Reordering: Changed the command-line argument order to avoid triggering the X509Enrollment string match."
+  }
+]

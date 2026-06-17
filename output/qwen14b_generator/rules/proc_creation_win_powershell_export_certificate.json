@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Export-Certificate -Cert Cert:\\CurrentUser\\My\\1234567890abcdef1234567890abcdef -FilePath C:\\Lab\\input\\sample.cer\"",
+    "explanation": "Omission: The command omits the suspicious behavior by not including the full script or malicious intent, thus avoiding the Sigma rule's detection based on 'Export-Certificate'."
+  },
+  {
+    "output": "powershell.exe -Command \"Export-PfxCertificate -Cert Cert:\\CurrentUser\\My\\1234567890abcdef1234567890abcdef -FilePath C:\\Lab\\input\\sample.pfx -Password (ConvertTo-SecureString -String 'test' -Force -AsPlainText)\"",
+    "explanation": "Reordering: The command reorders arguments to ensure the benign test intent is preserved, making it less likely to trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-Certificate -FilePath C:\\Lab\\input\\sample.cer\"",
+    "explanation": "Insertion: The command inserts a harmless delimiter and uses a benign test intent, which may not trigger the Sigma rule's detection based on 'Export-Certificate' as it's part of a pipeline."
+  }
+]

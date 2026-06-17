@@ -1,0 +1,14 @@
+[
+  {
+    "output": "unregmp2.exe /HideWMP",
+    "explanation": "Omission: The command line omits the suspicious argument by removing it, which may prevent the Sigma rule from detecting the command based on the 'CommandLine|contains|windash: ' /HideWMP'' condition."
+  },
+  {
+    "output": "unregmp2.exe \" /HideWMP\"",
+    "explanation": "Insertion: Quotes are added around the argument, which may change how the command line is parsed and could prevent the Sigma rule from matching the 'CommandLine|contains|windash: ' /HideWMP'' condition."
+  },
+  {
+    "output": "unregmp2.exe -HideWMP",
+    "explanation": "Substitution: The argument is changed from '/HideWMP' to '-HideWMP', which may not be recognized by the target program but could avoid the Sigma rule's 'CommandLine|contains|windash: ' /HideWMP'' condition."
+  }
+]

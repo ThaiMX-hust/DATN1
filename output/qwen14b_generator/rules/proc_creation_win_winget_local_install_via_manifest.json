@@ -1,0 +1,14 @@
+[
+  {
+    "output": "winget.exe install -m \"C:\\Lab\\input\\sample.yaml\"",
+    "explanation": "Reordering and substitution: Replaced 'C:\\Temp\\test.yaml' with a benign lab placeholder 'C:\\Lab\\input\\sample.yaml' using substitution and quotes for safe mutation."
+  },
+  {
+    "output": "winget.exe install --manifest C:\\Lab\\input\\sample.yaml",
+    "explanation": "Substitution: Replaced 'C:\\Temp\\test.yaml' with a benign lab placeholder 'C:\\Lab\\input\\sample.yaml' to avoid triggering the suspicious path indicator."
+  },
+  {
+    "output": "winget.exe install -m C:\\Lab\\input\\sample.yaml",
+    "explanation": "Substitution: Replaced 'C:\\Temp\\test.yaml' with a benign lab placeholder 'C:\\Lab\\input\\sample.yaml' to maintain the same command structure while avoiding the suspicious path."
+  }
+]

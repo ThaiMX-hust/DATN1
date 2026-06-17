@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process \"C:\\Lab\\input\\anydesk_simulator.exe\" -v 8.0.8",
+    "explanation": "Reordering and substitution: Reordered arguments and replaced the version number with a non-matching one to avoid triggering the version-based detection."
+  },
+  {
+    "output": "cmd /c \"C:\\Lab\\input\\anydesk_simulator.exe\" -v 8.0.8",
+    "explanation": "Insertion: Added a wrapper command (cmd /c) and modified the version parameter to avoid matching the suspicious version strings."
+  },
+  {
+    "output": "start-process \"C:\\Lab\\input\\anydesk_simulator.exe\" -v 8.0.8 --no-verify",
+    "explanation": "Insertion: Added a hypothetical flag (--no-verify) to simulate a different behavior and avoid matching the suspicious version strings."
+  }
+]

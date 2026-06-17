@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WerFaultSecure.exe /h /pid 1234 /tid 5678 /encfile C:\\Lab\\input\\sample.txt /cancel /type 268310",
+    "explanation": "Insertion: Added quotes and spaces to bypass string matching by altering the command line structure without changing the intent."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WerFaultSecure.exe /h /pid 1234 /tid 5678 /encfile \"C:\\Lab\\input\\sample.txt\" /cancel /type 268310",
+    "explanation": "Encoding: Used quotes to encode the path, which may prevent the Sigma rule from matching the exact string pattern."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WerFaultSecure.exe /h /pid 1234 /tid 5678 /encfile C:\\Lab\\input\\sample.txt /cancel /type 268310",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder while maintaining the structure of the command line."
+  }
+]

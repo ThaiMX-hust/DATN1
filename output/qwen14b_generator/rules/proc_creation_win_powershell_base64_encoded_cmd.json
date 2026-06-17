@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -e SQBFAFgA",
+    "explanation": "Omission: Removed the 'd' in '-encodedcommand' to use the shorter '-e' equivalent, which may not trigger the Sigma rule's specific string match for 'encodedcommand'."
+  },
+  {
+    "output": "pwsh.exe -e SQBFAFgA",
+    "explanation": "Substitution: Replaced 'powershell.exe' with 'pwsh.exe' (PowerShell Core), which may not be flagged by the Sigma rule if it's not explicitly checking for 'powershell.exe'."
+  },
+  {
+    "output": "cmd.exe /c powershell.exe -e SQBFAFgA",
+    "explanation": "Insertion: Wrapped the command in 'cmd.exe /c' to change the execution context, which may bypass the Sigma rule's direct process creation detection if it's not monitoring command-line wrappers."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /A REGSVR C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes and a benign file path to avoid matching the suspicious DLL extension pattern."
+  },
+  {
+    "output": "odbcconf.exe -A REGSVR C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced '/A' with '-A' to alter the command-line syntax while preserving the action and using a benign file."
+  },
+  {
+    "output": "odbcconf.exe REGSVR C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed the '/A' flag, which is not required for the action, and used a benign file path to avoid the DLL extension match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cscript.exe \"winrm invoke Create wmicimv2/Win32_Process -r:http://192.0.2.10\"",
+    "explanation": "Insertion: Added quotes around the command line to bypass string-based detection without altering the command's intent."
+  },
+  {
+    "output": "cscript.exe -nologo winrm invoke Create wmicimv2/Win32_Process -r:http://192.0.2.10",
+    "explanation": "Substitution: Added -nologo flag, which is a common benign option for cscript.exe and may not be detected by the Sigma rule."
+  },
+  {
+    "output": "cscript.exe winrm invoke Create wmicimv2/Win32_Process -r:http://192.0.2.10 -bstrsafe",
+    "explanation": "Insertion: Added -bstrsafe flag, which is a harmless and commonly used option that may not trigger the Sigma rule's string-based detection."
+  }
+]

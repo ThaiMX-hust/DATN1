@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"[Type]::GetTypeFromCLSID('0002DF01-0000-0000-C000-000000000046')\"",
+    "explanation": "Insertion: Added quotes and escaped characters to avoid direct string matching, potentially bypassing the Sigma rule's string detection."
+  },
+  {
+    "output": "powershell -Command [Type]::GetTypeFromCLSID('F6D90F16-9C73-11D3-B32E-00C04F990BB4')",
+    "explanation": "Omission: Removed unnecessary characters and formatting to simplify the command line, which may not trigger the Sigma rule's pattern match."
+  },
+  {
+    "output": "powershell -Command \"[System.Type]::GetTypeFromCLSID('88d96a0a-f192-11d4-a65f-0040963251e5')\"",
+    "explanation": "Substitution: Replaced 'Type' with 'System.Type' for equivalent syntax, which may not be detected by the Sigma rule's string-based matching."
+  }
+]

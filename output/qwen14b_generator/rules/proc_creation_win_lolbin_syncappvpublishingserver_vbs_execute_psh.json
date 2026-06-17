@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c C:\\windows\\system32\\SyncAppvPublishingServer.vbs \"\\n;Start-Process calc\"",
+    "explanation": "Insertion: Adding an extra backslash before the 'n' to escape the newline character, which may prevent the Sigma rule from matching the ';' as a standalone indicator."
+  },
+  {
+    "output": "cmd.exe /c C:\\windows\\system32\\SyncAppvPublishingServer.vbs \"\\n;echo Hello\"",
+    "explanation": "Substitution: Replacing 'calc' with 'echo Hello' to change the action while retaining the structure, potentially avoiding the rule's detection based on the specific command."
+  },
+  {
+    "output": "cmd.exe /c C:\\windows\\system32\\SyncAppvPublishingServer.vbs \"\\n;Start-Process notepad\"",
+    "explanation": "Reordering: Changing the command to 'notepad' instead of 'calc' to alter the action, which may not trigger the Sigma rule's specific detection criteria."
+  }
+]

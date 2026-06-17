@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c Rundll32.exe apphelp.dll,ShimFlushCache",
+    "explanation": "Insertion: Added quotes around the command to change the parsing structure, potentially avoiding the Sigma string match."
+  },
+  {
+    "output": "Rundll32.exe apphelp.dll,ShimFlushCache",
+    "explanation": "Omission: Removed the 'cmd.exe /c' prefix, which may change how the command is interpreted by the Sigma rule."
+  },
+  {
+    "output": "Rundll32.exe apphelp.dll,ShimFlushCache",
+    "explanation": "Reordering: The command structure remains the same, but reordering arguments may not be applicable here as the target program does not accept reordered parameters."
+  }
+]

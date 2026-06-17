@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\nircmd.exe win child class Shell_TrayWnd hide class TrayClockWClass",
+    "explanation": "No mutation applied; the command is already a valid test case and does not contain any suspicious Sigma indicators."
+  }
+]

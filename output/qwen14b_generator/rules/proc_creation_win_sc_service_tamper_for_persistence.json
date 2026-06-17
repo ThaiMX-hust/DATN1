@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c sc create TestService binPath= \"C:\\Lab\\input\\sample.txt\" type= share start= auto",
+    "explanation": "Omission: Removed the 'config' and 'description' commands which are part of the suspicious behavior in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c sc create TestService binPath= \"C:\\Lab\\input\\sample.txt\" type= share start= auto",
+    "explanation": "Reordering: The command line reorders arguments to avoid the suspicious 'sc config' and 'sc description' parts that trigger the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c sc create TestService binPath= \"C:\\Lab\\input\\sample.txt\" type= share start= auto",
+    "explanation": "Substitution: Replaced the 'sc config' and 'sc description' commands with 'sc create' to avoid the Sigma rule's suspicious indicators."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Output 'TEST-HOST '\"",
+    "explanation": "Omission: Removed the suspicious Unicode character (U+202E) to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Output 'TEST-HOST ' -NoProfile\"",
+    "explanation": "Insertion: Added a harmless flag (-NoProfile) to the command line, which does not affect the presence of the suspicious character but may be parsed differently."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Output 'TEST-HOST ' -ExecutionPolicy Bypass\"",
+    "explanation": "Substitution: Added a common and safe execution policy flag to the command line, which may be parsed differently and avoid the Sigma rule's string match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-Content -Path 'C:\\Lab\\input\\sample.txt' -Value 'Write-Host \"Stream Data Executed\"' -Stream 'streamCommand'; $streamcommand = Get-Content -Path 'C:\\Lab\\input\\sample.txt' -Stream 'streamcommand'; Invoke-Expression $streamcommand\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious path indicators."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-Content -Path 'C:\\Lab\\input\\sample.txt' -Value 'Write-Host \"Stream Data Executed\"' -Stream 'streamCommand'; $streamcommand = Get-Content -Path 'C:\\Lab\\input\\sample.txt' -Stream 'streamcommand'; Invoke-Expression $streamcommand\" -EncodedCommand",
+    "explanation": "Encoding: Used encoded command-line arguments to obscure the command from direct string matching by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-Content -Path 'C:\\Lab\\input\\sample.txt' -Value 'Write-Host \"Stream Data Executed\"' -Stream 'streamCommand'; $streamcommand = Get-Content -Path 'C:\\Lab\\input\\sample.txt' -Stream 'streamcommand'; Invoke-Expression $streamcommand\" -NoProfile",
+    "explanation": "Omission: Removed optional elements (like loading profiles) while preserving the benign test behavior, making it less likely to trigger the Sigma rule."
+  }
+]

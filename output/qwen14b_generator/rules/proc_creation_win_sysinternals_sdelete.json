@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid triggering the ' -h', ' -c', ' -z', or ' /\\?' filters by ensuring no suspicious flags are present."
+  },
+  {
+    "output": "C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe -accepteula C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1485.txt",
+    "explanation": "Omission: Removed quotes around the executable path to avoid triggering any potential string matching in the Sigma rule."
+  },
+  {
+    "output": "\"C:\\AtomicRedTeam\\ExternalPayloads\\Sdelete\\sdelete.exe\" -accepteula C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the target file path with a benign lab placeholder to avoid the suspicious file overwrite behavior while maintaining the same executable family and intent."
+  }
+]

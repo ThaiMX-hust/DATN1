@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sysprep.exe /oobe /generalize /reboot C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the '\\AppData\\' path from the command line, which avoids the Sigma rule's 'CommandLine|contains: \\AppData\\' detection."
+  },
+  {
+    "output": "sysprep.exe /oobe /generalize /reboot C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the '\\AppData\\' path with a benign lab placeholder, which avoids the Sigma rule's 'CommandLine|contains: \\AppData\\' detection."
+  },
+  {
+    "output": "sysprep.exe /oobe /generalize /reboot \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Insertion: Added quotes around the path, which may alter parsing and avoid the Sigma rule's 'CommandLine|contains: \\AppData\\' detection."
+  }
+]

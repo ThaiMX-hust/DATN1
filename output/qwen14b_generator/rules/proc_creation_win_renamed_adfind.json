@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" -f (objectcategory=computer)",
+    "explanation": "Substitution: Replaced the suspicious executable 'AdFind.exe' with a benign placeholder 'sample.exe' to avoid triggering the 'OriginalFileName' detection while maintaining the same command structure."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" -f (objectcategory=group)",
+    "explanation": "Substitution: Replaced the suspicious executable 'AdFind.exe' with a benign placeholder 'sample.exe' to avoid triggering the 'OriginalFileName' detection while maintaining the same command structure."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" -f (objectcategory=organizationalUnit)",
+    "explanation": "Substitution: Replaced the suspicious executable 'AdFind.exe' with a benign placeholder 'sample.exe' to avoid triggering the 'OriginalFileName' detection while maintaining the same command structure."
+  }
+]

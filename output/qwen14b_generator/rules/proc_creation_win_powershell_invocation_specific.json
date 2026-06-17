@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed suspicious parameters and command execution to avoid triggering the Sigma rule's detection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Output 'Hello, World!'\"",
+    "explanation": "Substitution: Replaced the suspicious command with a benign output command that does not match any of the Sigma rule's suspicious patterns."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Date\"",
+    "explanation": "Reordering: Simplified the command line to a basic PowerShell command that does not include any of the suspicious keywords or patterns identified by the Sigma rule."
+  }
+]

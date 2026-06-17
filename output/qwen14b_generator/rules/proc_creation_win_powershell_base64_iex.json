@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt | ForEach-Object { $_.Name } | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString | Out-File C:\\Lab\\out\\output.txt\"",
+    "explanation": "Insertion: Added benign command-line elements that do not involve base64 encoded IEX, thus avoiding the Sigma string/field match."
+  },
+  {
+    "output": "powershell -Command \"Get-ChildItem C:\\Lab\\input\\sample.log | Select-Object Name | Sort-Object | Export-Clixml C:\\Lab\\out\\data.xml\"",
+    "explanation": "Substitution: Replaced suspicious IEX behavior with a benign command that does not involve base64 encoded IEX, thus avoiding the Sigma string/field match."
+  },
+  {
+    "output": "powershell -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt | Where-Object { $_.Length -gt 100 } | Export-CSV C:\\Lab\\out\\results.csv\"",
+    "explanation": "Omission: Removed any command that would trigger the base64 encoded IEX detection, ensuring the Sigma rule does not match."
+  }
+]

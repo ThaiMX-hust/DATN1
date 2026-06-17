@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"C:\\Lab\\input\\sample.docx\"",
+    "explanation": "Reordering and substitution: The command uses a lab placeholder file and reorders the arguments to avoid matching the suspicious 'Trusted Location' path strings in the Sigma rule."
+  },
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"C:\\Lab\\input\\sample.docx\" -WorkingDirectory \"C:\\Lab\\out\"",
+    "explanation": "Insertion and reordering: The command inserts a working directory and reorders the arguments to avoid matching the suspicious 'Trusted Location' path strings in the Sigma rule."
+  },
+  {
+    "output": "start-process \"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE\" -ArgumentList \"C:\\Lab\\input\\sample.docx\" -Verb open",
+    "explanation": "Substitution: The command uses a different verb ('open') and a lab placeholder file to avoid matching the suspicious 'Trusted Location' path strings in the Sigma rule."
+  }
+]

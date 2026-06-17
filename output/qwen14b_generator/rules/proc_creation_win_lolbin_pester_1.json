@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Help -Name Pester -Detailed\"",
+    "explanation": "Omission: Removed the suspicious keyword 'Pester' by using a different command that still tests help functionality without triggering the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"Get-Help -Name Pester -Detailed\"",
+    "explanation": "Substitution: Replaced 'powershell.exe' with 'pwsh.exe' (PowerShell Core) while keeping the same help command, which may not match the Sigma rule's image path check."
+  },
+  {
+    "output": "cmd.exe /c \"echo Pester; echo Get-Help > C:\\Lab\\out\\test.txt\"",
+    "explanation": "Insertion: Added harmless commands and redirection to a lab placeholder file, which may bypass the Sigma rule's 'pester' and ';' detection by altering the command line structure."
+  }
+]

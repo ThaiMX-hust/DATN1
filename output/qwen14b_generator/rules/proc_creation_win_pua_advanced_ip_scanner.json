@@ -1,0 +1,14 @@
+[
+  {
+    "output": "advanced_ip_scanner_console.exe /portable /lng=eng",
+    "explanation": "Reordering: The command line arguments are reordered, which may prevent the Sigma rule from matching the '/portable' and '/lng' keywords in the expected sequence."
+  },
+  {
+    "output": "advanced_ip_scanner_console.exe /lng=eng /portable",
+    "explanation": "Reordering: The command line arguments are reordered, which may prevent the Sigma rule from matching the '/portable' and '/lng' keywords in the expected sequence."
+  },
+  {
+    "output": "advanced_ip_scanner_console.exe /lng=eng /portable /silent",
+    "explanation": "Insertion: An additional '/silent' argument is inserted, which may prevent the Sigma rule from matching the exact '/portable' and '/lng' keywords without modification."
+  }
+]

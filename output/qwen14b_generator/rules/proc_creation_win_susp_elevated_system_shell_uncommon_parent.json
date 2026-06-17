@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\input\\sample.ps1 -Command echo TEST-HOST",
+    "explanation": "Substitution: Replaced the suspicious Image path with a benign lab placeholder to avoid triggering the 'selection_shell' and 'filter_main_generic' conditions."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo TEST-HOST",
+    "explanation": "Reordering: Changed the command structure to use 'cmd.exe' instead of 'powershell.exe' to avoid the 'selection_shell' condition while maintaining the same test intent."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.bat /c echo TEST-HOST",
+    "explanation": "Insertion: Used a batch file as the executable to bypass the 'selection_shell' condition by not directly invoking 'powershell.exe' or 'cmd.exe' in the Image field."
+  }
+]

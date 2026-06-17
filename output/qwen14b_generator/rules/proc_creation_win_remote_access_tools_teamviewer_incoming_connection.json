@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\TeamViewer\\TeamViewer_Desktop.exe --IPCport 5939 --Module 1",
+    "explanation": "Reordering: The command line arguments are reordered, but the same executable and parameters are used, which may avoid string matching in the Sigma rule."
+  },
+  {
+    "output": "C:\\Program Files\\TeamViewer\\TeamViewer_Desktop.exe --Module 1 --IPCport 5939",
+    "explanation": "Reordering: The arguments are reordered, which may prevent the Sigma rule from matching the CommandLine field as it appears in the original command."
+  },
+  {
+    "output": "C:\\Program Files\\TeamViewer\\TeamViewer_Desktop.exe --IPCport 5939 -Module 1",
+    "explanation": "Substitution: Replacing '--Module' with '-Module' (short option), which may bypass the Sigma rule's string matching."
+  }
+]

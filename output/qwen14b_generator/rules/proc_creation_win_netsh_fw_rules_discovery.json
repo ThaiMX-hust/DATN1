@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh advfirewall firewall show rule name=all | findstr /v \"Firewall\"",
+    "explanation": "Omission: The command filters out lines containing 'Firewall' which may avoid triggering the Sigma rule's 'show firewall' keyword match."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name=all | more",
+    "explanation": "Insertion: Adding a pipe to 'more' may change the command line parsing context, potentially avoiding the Sigma rule's 'show firewall' keyword match."
+  },
+  {
+    "output": "netsh advfirewall firewall show rule name=all > C:\\Lab\\out\\firewall.txt",
+    "explanation": "Substitution: Redirecting output to a file may alter the command line's structure, potentially avoiding the Sigma rule's 'show firewall' keyword match."
+  }
+]

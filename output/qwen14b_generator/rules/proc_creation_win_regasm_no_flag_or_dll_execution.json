@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regasm.exe /?",
+    "explanation": "Insertion: Adding the /? flag to trigger help, which may avoid the rule's detection of command-line flags or files."
+  },
+  {
+    "output": "regasm.exe \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Substitution: Using a benign lab placeholder path with quotes to ensure proper parsing, which may avoid the rule's detection of missing files."
+  },
+  {
+    "output": "regasm.exe -help",
+    "explanation": "Substitution: Replacing the /? flag with -help (equivalent syntax) to trigger help, which may avoid the rule's detection of command-line flags or files."
+  }
+]

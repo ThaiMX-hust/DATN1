@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"[System.IO.Compression.GZipStream]::Decompress([System.IO.File]::ReadAllBytes('C:\\Lab\\input\\sample.gz'), [System.IO.Compression.CompressionMode]::Decompress) | Out-File 'C:\\Lab\\out\\decompress.txt'\"",
+    "explanation": "Reordering: The arguments are reordered to avoid the direct string match of 'GZipStream' and '::Decompress' in the command line, which may bypass the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powershell -Command \"[System.IO.Compression.GZipStream]::Decompress([System.IO.File]::ReadAllBytes('C:\\Lab\\input\\sample.gz'), [System.IO.Compression.CompressionMode]::Decompress) | Set-Content 'C:\\Lab\\out\\decompress.txt'\"",
+    "explanation": "Substitution: Replaced 'Out-File' with 'Set-Content' as an equivalent command, which may not trigger the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powershell -Command \"[System.IO.Compression.GZipStream]::Decompress([System.IO.File]::ReadAllBytes('C:\\Lab\\input\\sample.gz'), [System.IO.Compression.CompressionMode]::Decompress) | Tee-Object -FilePath 'C:\\Lab\\out\\decompress.txt' -PassThru\"",
+    "explanation": "Insertion: Added 'Tee-Object' with harmless parameters to the command line, which may alter the string match and bypass the Sigma rule's detection."
+  }
+]

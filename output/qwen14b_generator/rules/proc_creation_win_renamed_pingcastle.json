@@ -1,0 +1,14 @@
+[
+  {
+    "output": "pingcastle.exe --scanner aclcheck --scanner antivirus --scanner computerversion --scanner foreignusers --scanner laps_bitlocker --scanner localadmin --scanner nullsession --scanner nullsession-trust --scanner oxidbindings --scanner remote --scanner share --scanner smb --scanner smb3querynetwork --scanner spooler --scanner startup --scanner zerologon --no-enum-limit --healthcheck --level Full --server C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: The command uses the same executable and parameters but reorders the arguments and replaces the server path with a benign lab placeholder, potentially evading string-based detection."
+  },
+  {
+    "output": "pingcastle.exe --server C:\\Lab\\input\\sample.txt --level Full --healthcheck --no-enum-limit --scanner aclcheck --scanner antivirus --scanner computerversion --scanner foreignusers --scanner laps_bitlocker --scanner localadmin --scanner nullsession --scanner nullsession-trust --scanner oxidbindings --scanner remote --scanner share --scanner smb --scanner smb3querynetwork --scanner spooler --scanner startup --scanner zerologon",
+    "explanation": "Reordering: The command reorders the arguments to change the sequence of the CommandLine field, which may not match the Sigma rule's pattern-based detection."
+  },
+  {
+    "output": "pingcastle.exe --scanner aclcheck --scanner antivirus --scanner computerversion --scanner foreignusers --scanner laps_bitlocker --scanner localadmin --scanner nullsession --scanner nullsession-trust --scanner oxidbindings --scanner remote --scanner share --scanner smb --scanner smb3querynetwork --scanner spooler --scanner startup --scanner zerologon --no-enum-limit --healthcheck --level Full --server C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: The command inserts a space after --server, which may not be detected by the Sigma rule's pattern matching, as it relies on exact string matches."
+  }
+]

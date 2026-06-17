@@ -1,0 +1,14 @@
+[
+  {
+    "output": "tpmvscmgr.exe -create -vsc \"C:\\Lab\\input\\vsc_template.xml\"",
+    "explanation": "Reordering and substitution: Reordered the '-create' flag and used quotes to encapsulate the path, which may avoid direct string matching on 'create' in the command line."
+  },
+  {
+    "output": "tpmvscmgr.exe -vsc \"C:\\Lab\\input\\vsc_template.xml\" -create",
+    "explanation": "Reordering: Changed the order of the '-create' flag and the '-vsc' argument, which might evade the 'create' keyword detection if the parser prioritizes argument parsing over command-line scanning."
+  },
+  {
+    "output": "tpmvscmgr.exe -vsc \"C:\\Lab\\input\\vsc_template.xml\" -action create",
+    "explanation": "Substitution: Replaced the direct 'create' keyword with '-action create' to avoid matching the 'create' string in the command line, potentially bypassing the Sigma rule's 'create' detection."
+  }
+]

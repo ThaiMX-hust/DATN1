@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c copy \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added quotes and used a benign placeholder path to avoid matching the suspicious system directory strings in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c copy \"C:\\Lab\\input\\sample.log\" \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the system directory path with a benign lab placeholder to avoid triggering the Sigma rule's suspicious path detection."
+  },
+  {
+    "output": "cmd.exe /c copy \"C:\\Lab\\input\\sample.txt\" \"C:\\Lab\\out\\archive.7z\" /Y",
+    "explanation": "Omission: Removed any additional parameters or commands that might trigger the Sigma rule's detection of suspicious behavior."
+  }
+]

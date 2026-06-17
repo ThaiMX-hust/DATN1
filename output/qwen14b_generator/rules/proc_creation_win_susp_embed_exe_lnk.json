@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process \"C:\\Windows\\System32\\cmd.exe\" -ArgumentList \"C:\\Lab\\input\\sample.lnk\"",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious 'powershell' keyword and '.lnk' file reference, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.lnk\"",
+    "explanation": "Substitution: Replaced 'start-process' with 'cmd.exe /c' and used a lab placeholder '.lnk' file to avoid the suspicious 'powershell' keyword and maintain benign behavior."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the '.lnk' file with a benign '.txt' file and used 'cmd.exe /c' to avoid the suspicious 'powershell' keyword and '.lnk' file reference."
+  }
+]

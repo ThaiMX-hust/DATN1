@@ -1,0 +1,14 @@
+[
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe -y \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Substitution: Replaced the suspicious DLL path with a benign lab placeholder and used '-y' instead of '/y' to avoid the Sigma string match."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe -y C:\\Lab\\input\\sample.dll",
+    "explanation": "Omission: Removed quotes around the DLL path to avoid the Sigma string match while keeping the same executable and benign test intent."
+  },
+  {
+    "output": "c:\\windows\\system32\\msiexec.exe -y \"C:\\Lab\\input\\sample.7z\" -l",
+    "explanation": "Insertion: Added an extra harmless argument '-l' and replaced the DLL with a 7z archive to avoid the Sigma string match."
+  }
+]

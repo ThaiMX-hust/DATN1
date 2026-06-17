@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic service get name,displayname,pathname,startmode",
+    "explanation": "Omission: Removed the suspicious 'service get' command to avoid triggering the Sigma rule's 'service get' detection."
+  },
+  {
+    "output": "wmic service get name,displayname,pathname,startmode /format:csv",
+    "explanation": "Insertion: Added a harmless '/format:csv' parameter, which does not affect the command's intent but alters the command line structure to avoid exact string matches."
+  },
+  {
+    "output": "wmic service get name,displayname,pathname,startmode | findstr /i \"startmode\"",
+    "explanation": "Reordering: Added a 'findstr' filter to modify the command's output behavior, potentially avoiding the Sigma rule's detection based on command-line structure."
+  }
+]

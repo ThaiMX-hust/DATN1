@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Control\\Storage\" /v WriteProtection /t REG_DWORD /d 0 /f",
+    "explanation": "Reordering: The command reorders the arguments to avoid matching the exact string sequence in the Sigma rule."
+  },
+  {
+    "output": "reg add HKLM\\System\\CurrentControlSet\\Control\\Storage /v WriteProtection /t REG_DWORD /d 0 /f",
+    "explanation": "Omission: The command omits quotes around the registry path, which may not trigger the Sigma rule's string matching."
+  },
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Control\\Storage\" /v \"Write Protection\" /t REG_DWORD /d 0 /f",
+    "explanation": "Substitution: The command substitutes 'Write Protection' with a space, which may not match the exact string in the Sigma rule."
+  }
+]

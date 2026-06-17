@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wusa.exe /extract:C:\\Lab\\out\\archive.7z \"C:\\Lab\\input\\sample.msu\"",
+    "explanation": "Reordering and substitution: The command uses a benign lab placeholder (sample.msu) and specifies an extraction path, which may avoid matching the suspicious parent process paths by changing the context of the execution."
+  },
+  {
+    "output": "wusa.exe /quiet \"C:\\Lab\\input\\sample.msu\"",
+    "explanation": "Insertion: Adding the /quiet flag and using a lab placeholder (sample.msu) may alter the command structure, potentially avoiding the parent process path checks by modifying the command line syntax."
+  },
+  {
+    "output": "wusa.exe -extract C:\\Lab\\out\\archive.7z C:\\Lab\\input\\sample.msu",
+    "explanation": "Substitution: Replacing /extract with -extract (equivalent syntax) and using a lab placeholder (sample.msu) may change the command-line parsing, potentially avoiding detection by the Sigma rule's string/field matching."
+  }
+]

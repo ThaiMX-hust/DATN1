@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\input\\psexec.exe -accepteula \\\\localhost -w c:\\ -c C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The 'accepteula' flag is still present but the command's intent is changed to a benign test file, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "C:\\Lab\\input\\sdelete.exe -accepteula C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the suspicious target with a benign placeholder while retaining the flag, which may not match the Sigma rule's suspicious path or action."
+  },
+  {
+    "output": "C:\\Lab\\input\\psexec.exe -i -s cmd -accepteula",
+    "explanation": "Omission: Removed the remote execution target, which changes the command's behavior and may not match the Sigma rule's suspicious execution context."
+  }
+]

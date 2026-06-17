@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Lab\\input\\test.txt\" /sc once /st 12:00",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Windows\\Temp\\' with a benign lab placeholder 'C:\\Lab\\input\\' to avoid the Sigma rule's path-based detection."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Lab\\input\\test.txt\" /sc once /st 12:00 /f",
+    "explanation": "Insertion: Added the '/f' flag to force task creation without changing the core behavior, which may bypass the rule if it focuses on command line length or specific argument order."
+  },
+  {
+    "output": "schtasks.exe /create /sc once /tn \"TestTask1\" /tr \"C:\\Lab\\input\\test.txt\" /st 12:00",
+    "explanation": "Reordering: Changed the argument order to test if the Sigma rule is sensitive to the sequence of command-line parameters."
+  }
+]

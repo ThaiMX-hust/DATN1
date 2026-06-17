@@ -1,0 +1,14 @@
+[
+  {
+    "output": "whoami -all",
+    "explanation": "Substitution: Replaced the '/' with a '-' in the flag, which may bypass the Sigma rule's detection of ' -all' in the command line."
+  },
+  {
+    "output": "whoami /al",
+    "explanation": "Substitution: Changed the '/all' flag to '/al', which is a different flag and may not trigger the Sigma rule's detection of ' -all'."
+  },
+  {
+    "output": "whoami /all | findstr /v \"sensitive\"",
+    "explanation": "Insertion: Added a pipeline to filter output, which may alter the command line structure and avoid matching the Sigma rule's ' -all' detection."
+  }
+]

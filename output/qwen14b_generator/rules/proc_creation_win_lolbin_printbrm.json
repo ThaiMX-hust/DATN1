@@ -1,0 +1,14 @@
+[
+  {
+    "output": "PrintBrm.exe -f C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the '.zip' extension from the target file, which may prevent the Sigma rule's 'CommandLine|contains|all' from matching both ' -f' and '.zip' keywords."
+  },
+  {
+    "output": "PrintBrm.exe -f \"C:\\Lab\\input\\sample.txt\" -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Added an output flag '-o' with a non-zip file extension '.7z' to change the file type, potentially avoiding the '.zip' keyword match in the Sigma rule."
+  },
+  {
+    "output": "PrintBrm.exe -f C:\\Lab\\input\\sample.txt -v",
+    "explanation": "Substitution: Added a verbose flag '-v' which does not alter the suspicious elements but may change the command line structure, possibly evading the Sigma rule's string matching."
+  }
+]

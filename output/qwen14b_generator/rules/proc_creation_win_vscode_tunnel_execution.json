@@ -1,0 +1,14 @@
+[
+  {
+    "output": "code --accept-server-license-terms tunnel --port 8080",
+    "explanation": "Reordering: The arguments are reordered to avoid the suspicious 'tunnel' keyword being directly adjacent to the executable name, potentially bypassing string-based detection."
+  },
+  {
+    "output": "code --accept-server-license-terms tunnel -p 8080",
+    "explanation": "Substitution: The '--port' argument is replaced with '-p' to alter the command line structure, which may avoid matching the Sigma rule's 'tunnel' keyword detection."
+  },
+  {
+    "output": "code --accept-server-license-terms tunnel --port 8080 --no-sandbox",
+    "explanation": "Insertion: Additional harmless flags are inserted to modify the command line structure, which could prevent the Sigma rule from matching based on the exact command line string."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\windows\\system32\\cmd.exe /C echo Uuup! > \\\\.\\pipe\\HighPriv",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious 'echo' and '>'."
+  },
+  {
+    "output": "C:\\windows\\system32\\cmd.exe /C \"echo Uuup! > \\\\.\\pipe\\HighPriv\"",
+    "explanation": "Insertion: Quotes are inserted around the command to ensure proper parsing while avoiding the suspicious pattern."
+  },
+  {
+    "output": "C:\\windows\\system32\\cmd.exe /C echo Uuup! > \\\\.\\pipe\\TestPipe",
+    "explanation": "Substitution: The named pipe name is changed to 'TestPipe' to avoid the suspicious 'HighPriv' string."
+  }
+]

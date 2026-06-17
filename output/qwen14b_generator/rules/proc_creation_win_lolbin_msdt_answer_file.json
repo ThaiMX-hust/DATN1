@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msdt.exe -af C:\\Lab\\input\\sample.xml",
+    "explanation": "Omission: Removed the parent process filter by not invoking pcwrun.exe, which may prevent the Sigma rule from detecting the command as it relies on the parent process being pcwrun.exe."
+  },
+  {
+    "output": "msdt.exe /af \"C:\\Lab\\input\\sample.xml\"",
+    "explanation": "Insertion: Added quotes around the path, which may alter the parsing and avoid matching the Sigma rule's CommandLine contains pattern."
+  },
+  {
+    "output": "msdt.exe -af C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced .xml with .txt, which may avoid the Sigma rule's detection as it looks for .xml files specifically."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"[Reflection.Assembly]::Load([System.Convert]::FromBase64String('WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA'))\"",
+    "explanation": "Insertion: Added base64 decoding via [System.Convert]::FromBase64String, which may bypass string-based detection by altering the command structure."
+  },
+  {
+    "output": "powershell -Command \"[reflection.assembly]::Load([System.Text.Encoding]::UTF8.GetBytes('WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA')))\"",
+    "explanation": "Recoding: Replaced base64 string with a UTF8 byte array, which may avoid direct string matching in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"[System.Reflection.Assembly]::Load([System.Convert]::FromBase64String('WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA'))\"",
+    "explanation": "Substitution: Used the fully qualified type name [System.Reflection.Assembly] instead of the abbreviated form, which may avoid partial string matches."
+  }
+]

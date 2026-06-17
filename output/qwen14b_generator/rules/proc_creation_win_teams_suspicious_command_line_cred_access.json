@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Insertion: Added quotes and a benign lab placeholder path to avoid matching the suspicious Teams file paths."
+  },
+  {
+    "output": "cmd.exe /c type C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder while using a different executable (cmd.exe) to avoid the rule's process filter."
+  },
+  {
+    "output": "explorer.exe C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Used a different executable (explorer.exe) and a benign lab placeholder path to avoid the suspicious Teams file paths and process filter."
+  }
+]

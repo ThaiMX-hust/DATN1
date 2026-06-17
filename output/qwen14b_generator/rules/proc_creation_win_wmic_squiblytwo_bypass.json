@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c wmic.exe /namespace:\\\\root\\cimv2 path Win32_Process call Create \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: The command reorders arguments to avoid the suspicious 'format:' and 'http' strings in the CommandLine field, which may bypass the Sigma rule's string match."
+  },
+  {
+    "output": "cmd.exe /c wmic.exe /namespace:\\\\root\\cimv2 path Win32_Process call Create \"C:\\Lab\\input\\sample.txt\" /output:C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Additional harmless parameters are inserted, which may not trigger the Sigma rule's detection based on the CommandLine field."
+  },
+  {
+    "output": "cmd.exe /c wmic.exe /namespace:\\\\root\\cimv2 path Win32_Process call Create \"C:\\Lab\\input\\sample.txt\" /log:C:\\Lab\\out\\log.txt",
+    "explanation": "Substitution: Replacing the original command with a benign test action that still uses wmic.exe but avoids the suspicious indicators in the Sigma rule."
+  }
+]

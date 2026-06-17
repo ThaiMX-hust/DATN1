@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\FVE\" /v EnableBDEWithNoTPM /t REG_DWORD /d 1 /f",
+    "explanation": "Reordering: The command line reorders the arguments to avoid matching the Sigma rule's specific sequence of keywords."
+  },
+  {
+    "output": "cmd.exe /c reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\FVE\" /v UseTPM /t REG_DWORD /d 2 /f",
+    "explanation": "Insertion: Adding quotes and spaces around the command line to change the parsing structure and avoid matching the Sigma rule's string patterns."
+  },
+  {
+    "output": "cmd.exe /c reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\FVE\" /v UseTPMKey /t REG_DWORD /d 2 /f",
+    "explanation": "Substitution: Replacing the command with an equivalent syntax that still performs the same action but avoids the exact keyword matches in the Sigma rule."
+  }
+]

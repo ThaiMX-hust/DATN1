@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\System32\\cmd.exe\" /k echo Test",
+    "explanation": "Insertion: Added quotes and 'echo Test' to modify the command line structure without altering the core execution intent, potentially evading string-based detection."
+  },
+  {
+    "output": "cmd.exe /c C:\\Windows\\System32\\cmd.exe /k echo Test",
+    "explanation": "Omission: Removed quotes to change the command line syntax structure, which might avoid matching the Sigma rule's string-based detection."
+  },
+  {
+    "output": "cmd.exe /c C:\\Windows\\System32\\cmd.exe /k echo Test",
+    "explanation": "Reordering: Reordered the command line arguments to change the structure, which might avoid matching the Sigma rule's string-based detection."
+  }
+]

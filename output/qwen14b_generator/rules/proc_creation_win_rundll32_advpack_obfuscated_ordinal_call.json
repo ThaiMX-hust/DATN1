@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.txt,RegisterOCX",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious ordinal call pattern, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.log,RegisterOCX",
+    "explanation": "Substitution: Replacing the suspicious 'advpack' with a benign lab placeholder file path avoids the Sigma rule's keyword match."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\out\\archive.7z,RegisterOCX",
+    "explanation": "Insertion: Adding a benign file path with a non-malicious extension may bypass the Sigma rule's detection by avoiding the expected obfuscated ordinal call pattern."
+  }
+]

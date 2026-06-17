@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --disable-gpu-sandbox --flag-switches-begin --flag-switches-end --do-not-de-elevate",
+    "explanation": "Omission: Removed the suspicious command launcher argument to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --disable-gpu-sandbox --flag-switches-begin --flag-switches-end --do-not-de-elevate -no-sandbox",
+    "explanation": "Insertion: Added a harmless flag '-no-sandbox' which does not affect the command's behavior but changes the command line structure to avoid matching the Sigma rule."
+  },
+  {
+    "output": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --disable-gpu-sandbox --flag-switches-begin --flag-switches-end --do-not-de-elevate --disable-features=Electron",
+    "explanation": "Substitution: Added a feature disable flag that is unrelated to the suspicious behavior but changes the command line structure to avoid matching the Sigma rule."
+  }
+]

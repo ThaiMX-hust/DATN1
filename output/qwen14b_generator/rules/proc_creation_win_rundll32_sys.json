@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious .sys file with a benign lab placeholder to avoid triggering the Sigma rule's .sys file check."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing while using a benign lab placeholder, avoiding the .sys file check."
+  },
+  {
+    "output": "rundll32.exe -help",
+    "explanation": "Omission: Removed the file argument entirely, changing the command's behavior to a help request, which avoids the Sigma rule's .sys file check."
+  }
+]

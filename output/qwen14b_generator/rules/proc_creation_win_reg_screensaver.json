@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v ScreenSaveActive /t REG_SZ /d 1 /f",
+    "explanation": "Omission: The command omits the suspicious keyword 'force' which may be used in the Sigma rule's detection logic."
+  },
+  {
+    "output": "reg.exe add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v ScreenSaverIsSecure /t REG_SZ /d 0 /f",
+    "explanation": "Omission: The command omits the suspicious keyword 'force' which may be used in the Sigma rule's detection logic."
+  },
+  {
+    "output": "reg.exe add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v ScreenSaveTimeout /t REG_SZ /d 60 /f",
+    "explanation": "Omission: The command omits the suspicious keyword 'force' which may be used in the Sigma rule's detection logic."
+  }
+]

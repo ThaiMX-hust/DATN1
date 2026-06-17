@@ -1,0 +1,14 @@
+[
+  {
+    "output": "REG QUERY \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography\" /v MachineGuid",
+    "explanation": "Insertion: Added quotes around the registry path to avoid the 'contains' check in the Sigma rule."
+  },
+  {
+    "output": "REG QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography /v MachineGuid",
+    "explanation": "Omission: Removed the quotes around the registry path, which may not be required by the parser and avoids the 'contains' check."
+  },
+  {
+    "output": "REG QUERY HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography /v MachineGuid | findstr /c:\"MachineGuid\"",
+    "explanation": "Reordering: Added a pipeline to filter the output, which may alter the command line structure and avoid the 'contains' check."
+  }
+]

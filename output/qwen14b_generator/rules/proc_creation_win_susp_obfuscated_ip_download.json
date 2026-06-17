@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Invoke-WebRequest -Uri \"http://127.0.0.1\" -OutFile \"C:\\Lab\\out\\testfile.txt\"",
+    "explanation": "Reordering: The command uses a standard IP address instead of obfuscated formats, avoiding the suspicious indicators in the Sigma rule."
+  },
+  {
+    "output": "curl -o \"C:\\Lab\\out\\testfile.txt\" http://127.0.0.1",
+    "explanation": "Substitution: Replaced 'Invoke-WebRequest' with 'curl' and used a standard IP address, avoiding the suspicious indicators in the Sigma rule."
+  },
+  {
+    "output": "wget -O \"C:\\Lab\\out\\testfile.txt\" http://127.0.0.1",
+    "explanation": "Insertion: Used a standard IP address and 'wget' instead of obfuscated formats, avoiding the suspicious indicators in the Sigma rule."
+  }
+]

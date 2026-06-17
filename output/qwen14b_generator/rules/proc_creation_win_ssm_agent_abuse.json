@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\amazon-ssm-agent.exe -register -code dummy -id test -region us-east-1",
+    "explanation": "Reordering: Reordered the command-line arguments to avoid the suspicious string match on '-register ' and '-code ' by removing spaces after the flags, which may bypass the Sigma rule's string matching."
+  },
+  {
+    "output": "C:\\Lab\\tools\\amazon-ssm-agent.exe -register -code=dummy -id=test -region=us-east-1",
+    "explanation": "Substitution: Replaced spaces with equals signs to change the syntax, which may avoid the Sigma rule's string matching on '-code ' and '-id '."
+  },
+  {
+    "output": "C:\\Lab\\tools\\amazon-ssm-agent.exe -register -code dummy -id test -region us-east-1 -verbose",
+    "explanation": "Insertion: Added an extra '-verbose' flag to the command line, which may not be detected by the Sigma rule as it focuses on the specific flags and their associated strings."
+  }
+]

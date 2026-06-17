@@ -1,0 +1,14 @@
+[
+  {
+    "output": "taskkill /F /IM RaccineSettings.exe",
+    "explanation": "Omission: Removed the suspicious 'Raccine' keyword from the command line, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "reg.exe delete \"HKCU\\Software\\Raccine Tray\" /f",
+    "explanation": "Reordering: Changed the order of arguments, which may prevent the Sigma rule from matching the exact string sequence."
+  },
+  {
+    "output": "schtasks /DELETE /TN \"Raccine Rules Updater\" /F",
+    "explanation": "Substitution: Replaced the suspicious 'Raccine' keyword with a placeholder, which may prevent the Sigma rule from matching."
+  }
+]

@@ -1,14 +1,14 @@
 [
   {
-    "output": "C:\Windows\hh.exe \"C:\\Users\\Public\\help.chm\"",
+    "output": "C:\\Windows\\hh.exe \"C:\\Users\\Public\\help.chm\"",
     "explanation": "Insertion of escape characters; the Sigma rule may not account for properly escaped paths."
   },
   {
-    "output": "C:\Windows\hh.exe C:\\Users\\Public\\help.chm",
+    "output": "C:\\Windows\\hh.exe C:\\Users\\Public\\help.chm",
     "explanation": "Path normalization; the Sigma rule may not account for double backslashes in the command line."
   },
   {
-    "output": "C:\Windows\hh.exe C:\\Lab\\input\\sample.chm",
+    "output": "C:\\Windows\\hh.exe C:\\Lab\\input\\sample.chm",
     "explanation": "Substitution of a benign placeholder path; the Sigma rule may not account for non-sensitive paths."
   }
 ]

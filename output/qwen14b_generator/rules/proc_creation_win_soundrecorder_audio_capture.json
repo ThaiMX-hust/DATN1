@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\Windows NT\\Accessories\\SoundRecorder.exe /FILE C:\\Lab\\input\\sample.wav",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's suspicious path indicator."
+  },
+  {
+    "output": "C:\\Program Files\\Windows NT\\Accessories\\SoundRecorder.exe /FILE \"C:\\Lab\\input\\sample.wav\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure correct parsing while using a benign lab placeholder, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "C:\\Program Files\\Windows NT\\Accessories\\SoundRecorder.exe -FILE C:\\Lab\\input\\sample.wav",
+    "explanation": "Substitution: Replaced '/FILE' with '-FILE' to alter the command-line syntax, potentially avoiding the Sigma rule's detection based on the '/FILE' keyword."
+  }
+]

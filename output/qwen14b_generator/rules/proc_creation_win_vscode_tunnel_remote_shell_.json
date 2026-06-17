@@ -1,0 +1,14 @@
+[
+  {
+    "output": "code --user-data-dir=\"C:\\Lab\\input\\vscode\\userdata\" --extensions-dir=\"C:\\Lab\\input\\vscode\\extensions\"",
+    "explanation": "Insertion: Added quotes and spaces to the command-line arguments, which may prevent the Sigma rule from matching the 'vscode' keyword in the command line."
+  },
+  {
+    "output": "code --user-data-dir C:\\Lab\\input\\vscode\\userdata --extensions-dir C:\\Lab\\input\\vscode\\extensions",
+    "explanation": "Omission: Removed unnecessary characters or arguments that might trigger the Sigma rule's detection based on specific command-line syntax."
+  },
+  {
+    "output": "code --extensions-dir=\"C:\\Lab\\input\\vscode\\extensions\" --user-data-dir=\"C:\\Lab\\input\\vscode\\userdata\"",
+    "explanation": "Reordering: Changed the order of the command-line arguments, which may prevent the Sigma rule from detecting the specific sequence of parameters it is looking for."
+  }
+]

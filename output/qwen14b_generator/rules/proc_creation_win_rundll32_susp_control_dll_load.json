@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,TestFunction",
+    "explanation": "Substitution: Replaced the suspicious DLL name with a benign lab placeholder to avoid triggering the 'Shell32.dll' filter while maintaining the same executable family and test intent."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Lab\\input\\sample.dll\" TestFunction",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may not trigger the Sigma rule's string matching due to altered command-line structure."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll",
+    "explanation": "Omission: Removed the function parameter to avoid the 'Shell32.dll' filter while still using a benign DLL placeholder, altering the command-line structure to bypass the rule."
+  }
+]

@@ -1,1 +1,14 @@
-[{"output":"powershell -Command \"[String] $VerbosePreference\"","explanation":"Omission: Removed the obfuscated string concatenation and direct invocation patterns that trigger the Sigma rule."},{"output":"powershell -Command \"\$env:ComSpec[0,1,2]\"","explanation":"Reordering: Altered the structure of the command to avoid matching the specific regex patterns in the Sigma rule."},{"output":"powershell -Command \"\$PSHome[0] + \$PSHome[1]\"","explanation":"Insertion: Added spaces and modified the concatenation syntax to avoid triggering the Sigma rule's regex patterns."}]
+[
+  {
+    "output": "powershell -Command \"[String] $VerbosePreference\"",
+    "explanation": "Omission: Removed the obfuscated string concatenation and direct invocation patterns that trigger the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"$env:ComSpec[0,1,2]\"",
+    "explanation": "Reordering: Altered the structure of the command to avoid matching the specific regex patterns in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"$PSHome[0] + $PSHome[1]\"",
+    "explanation": "Insertion: Added spaces and modified the concatenation syntax to avoid triggering the Sigma rule's regex patterns."
+  }
+]

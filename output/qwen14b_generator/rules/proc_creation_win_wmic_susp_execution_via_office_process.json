@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic process call create \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious 'process create call' sequence, which may bypass the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "wmic /namespace:\\\\root\\cimv2 path win32_process call create \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Adding a namespace and path parameter to the command line may alter the parsing and avoid matching the suspicious 'process create call' sequence."
+  },
+  {
+    "output": "wmic process create \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removing the 'call' keyword from the command line while maintaining the same intent may bypass the Sigma rule's CommandLine|contains check for 'call'."
+  }
+]

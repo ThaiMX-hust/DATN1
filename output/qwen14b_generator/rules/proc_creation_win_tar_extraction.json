@@ -1,0 +1,14 @@
+[
+  {
+    "output": "tar.exe -xvf \"C:\\Lab\\input\\sample.tar\" -C \"C:\\Lab\\out\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's path indicators."
+  },
+  {
+    "output": "tar.exe -xvf C:\\Lab\\input\\sample.tar -C C:\\Lab\\out",
+    "explanation": "Insertion: Added quotes around paths to ensure correct parsing without altering the command's intent or matching the Sigma rule's string indicators."
+  },
+  {
+    "output": "tar.exe -xvf C:\\Lab\\input\\sample.tar -C C:\\Lab\\out -v",
+    "explanation": "Reordering: Added an extra verbose flag to the command line, which does not affect the core extraction behavior but may change the Sigma rule's string match."
+  }
+]

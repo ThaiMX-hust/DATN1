@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\input\\sample.txt\" -ArgumentList \"-hp\", \"a\", \"-m\"",
+    "explanation": "Reordering and substitution: Reordered arguments and replaced suspicious command-line elements with benign placeholders, which may avoid matching the ' -hp', ' a ', ' -m' pattern."
+  },
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\input\\sample.log\" -ArgumentList \"-decode\", \"-NoP\", \"-W Hidden\"",
+    "explanation": "Substitution: Replaced suspicious command-line elements with benign placeholders, which may avoid matching the ' -decode', ' -NoP', ' -W Hidden' pattern."
+  },
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\out\\archive.7z\" -ArgumentList \"-decode\", \"-NoP\", \"-W Hidden\"",
+    "explanation": "Substitution: Replaced suspicious command-line elements with benign placeholders, which may avoid matching the ' -decode', ' -NoP', ' -W Hidden' pattern."
+  }
+]

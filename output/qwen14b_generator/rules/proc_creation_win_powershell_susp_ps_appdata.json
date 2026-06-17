@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a benign command inside the -Command parameter, which may bypass the Sigma rule's detection of suspicious AppData references."
+  },
+  {
+    "output": "pwsh.exe -c \"Get-ChildItem C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Replaced 'powershell.exe' with 'pwsh.exe' and used '-c' instead of '/c ', which may avoid triggering the Sigma rule's detection of the '/c ' flag with AppData references."
+  },
+  {
+    "output": "powershell.exe Get-ChildItem C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed the '/c ' flag and used a direct command, which may avoid the Sigma rule's detection of the '/c ' flag combined with AppData references."
+  }
+]

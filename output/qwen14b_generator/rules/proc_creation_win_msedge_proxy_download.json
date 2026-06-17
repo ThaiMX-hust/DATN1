@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msedge_proxy.exe -download C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the URL scheme (http:// or https://) which is the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "msedge_proxy.exe -download \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure proper parsing, which may bypass the Sigma rule's detection of URLs."
+  },
+  {
+    "output": "msedge_proxy.exe -download C:\\Lab\\input\\sample.txt -quiet",
+    "explanation": "Substitution: Added a benign flag (-quiet) that does not alter the command's intent but may change how the command line is parsed, potentially evading the Sigma rule."
+  }
+]

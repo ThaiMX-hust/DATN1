@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Xwizard.EXE -RunWizard {12345678-1234-1234-1234-1234567890AB}",
+    "explanation": "Reordering: The command line reorders the arguments to potentially avoid string matching on the exact position of 'RunWizard' and the GUID."
+  },
+  {
+    "output": "Xwizard.EXE -RunWizard \"{12345678-1234-1234-1234-1234567890AB}\"",
+    "explanation": "Insertion: Adding quotes around the GUID argument might bypass string matching that does not account for quoted arguments."
+  },
+  {
+    "output": "Xwizard.EXE -RunWizard {12345678-1234-1234-1234-1234567890AB} -dummy",
+    "explanation": "Insertion: Adding an extra benign argument might alter the parsing context, potentially avoiding the Sigma rule's string match."
+  }
+]

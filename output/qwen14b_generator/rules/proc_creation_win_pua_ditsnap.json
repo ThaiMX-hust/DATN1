@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ditsnap.exe -i C:\\Lab\\input\\sample.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Added harmless input and output paths to avoid matching the suspicious command-line pattern while maintaining the same executable family."
+  },
+  {
+    "output": "ditsnap -i C:\\Lab\\input\\sample.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced 'ditsnap.exe' with 'ditsnap' to avoid the suspicious 'ditsnap.exe' string match while keeping the same executable family."
+  },
+  {
+    "output": "C:\\Lab\\tools\\ditsnap -i C:\\Lab\\input\\sample.txt -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Changed the path to a lab directory to avoid triggering the Sigma rule's suspicious path detection while keeping the same executable family."
+  }
+]

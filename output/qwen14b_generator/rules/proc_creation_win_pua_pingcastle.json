@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Tools\\PingCastle.exe --scanner aclcheck --no-enum-limit --level Full --healthcheck --server localhost",
+    "explanation": "Reordering and adding optional parameters. The Sigma rule matches on '--scanner aclcheck' and other flags, but reordering and adding benign parameters may not trigger the same detection."
+  },
+  {
+    "output": "C:\\Tools\\PingCastle.exe --scanner aclcheck --no-enum-limit --level Full --healthcheck --server 127.0.0.1",
+    "explanation": "Substitution of 'localhost' with '127.0.0.1'. This may avoid string-based detection if the rule relies on specific keywords or values."
+  },
+  {
+    "output": "C:\\Tools\\PingCastle.exe --scanner aclcheck --no-enum-limit --level Full --healthcheck --server C:\\Lab\\input\\server.txt",
+    "explanation": "Substitution of '--server ' with a local file path. This may bypass the rule if it relies on detecting remote server connections."
+  }
+]

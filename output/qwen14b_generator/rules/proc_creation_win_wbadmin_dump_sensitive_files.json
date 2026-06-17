@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wbadmin start backup -backupTarget:C:\\Lab\\out\\archive.7z -include:C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command reorders arguments to avoid matching the 'start backup' sequence, which may bypass the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "wbadmin start -backup -backupTarget:C:\\Lab\\out\\archive.7z -include:C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaces 'backup' with a hyphenated form and reorders arguments, potentially avoiding the Sigma rule's string matching."
+  },
+  {
+    "output": "wbadmin start backup -backupTarget:C:\\Lab\\out\\archive.7z -include:C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removes the suspicious path elements and replaces them with a benign placeholder, avoiding the Sigma rule's path-based detection."
+  }
+]

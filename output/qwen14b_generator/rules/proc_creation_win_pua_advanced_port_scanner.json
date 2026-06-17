@@ -1,0 +1,10 @@
+[
+  {
+    "output": "advanced_port_scanner_console.exe /portable /lng",
+    "explanation": "Omission: The command line omits the suspicious string by not including it, but this changes the tested behavior and is not a valid mutation."
+  },
+  {
+    "output": "advanced_port_scanner_console.exe /portable /lng",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

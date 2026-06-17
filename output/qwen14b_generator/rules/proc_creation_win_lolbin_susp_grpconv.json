@@ -1,0 +1,14 @@
+[
+  {
+    "output": "grpconv.exe -o \"C:\\Lab\\input\\sample.grp\" -d \"C:\\Lab\\out\\converted\\\"",
+    "explanation": "Insertion: Added quotes and a harmless delimiter to avoid direct string matching of the suspicious 'grpconv.exe -o' pattern."
+  },
+  {
+    "output": "grpconv -o C:\\Lab\\input\\sample.grp",
+    "explanation": "Substitution: Used short option '-o' instead of the full form, which may not trigger the same string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Lab\\tools\\grpconv.exe -o C:\\Lab\\input\\sample.grp",
+    "explanation": "Reordering: Modified the path to include a lab directory prefix, which may not be captured by the Sigma rule's string matching."
+  }
+]

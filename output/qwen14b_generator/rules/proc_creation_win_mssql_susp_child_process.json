@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command uses 'cmd.exe' but does not spawn a child process that would trigger the Sigma rule, thus avoiding the suspicious behavior match."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution: Uses PowerShell instead of cmd.exe, but the action is benign and does not involve launching a suspicious child process."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c type C:\\Lab\\input\\sample.txt > C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Adds harmless redirection to a lab file, ensuring the command does not involve launching a suspicious child process."
+  }
+]

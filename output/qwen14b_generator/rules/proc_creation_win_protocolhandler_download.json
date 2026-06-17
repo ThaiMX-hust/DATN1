@@ -1,0 +1,14 @@
+[
+  {
+    "output": "protocolhandler.exe -download C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the protocol (ftp/http/https) from the command line, which avoids the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "protocolhandler.exe -download \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path, which may change how the command line is parsed and avoid matching the Sigma rule's string-based detection."
+  },
+  {
+    "output": "protocolhandler.exe -d C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the '-download' flag with a shorter synonym '-d', which may avoid matching the Sigma rule's CommandLine|contains check."
+  }
+]

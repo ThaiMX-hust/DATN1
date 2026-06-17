@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask\" /tr \"C:\\Lab\\input\\sample.txt\" /sc once /st 00:00",
+    "explanation": "Omission: Removed the suspicious command-line elements (e.g., wscript, powershell) while keeping the task scheduling behavior, which may avoid the 'CommandLine|contains' match."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask\" /tr \"C:\\Lab\\input\\sample.log\" /sc once /st 00:00",
+    "explanation": "Substitution: Replaced the suspicious command-line action with a benign file path, which may avoid the 'CommandLine|contains' match."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask\" /tr \"C:\\Lab\\input\\sample.txt\" /sc once /st 00:00 /f",
+    "explanation": "Insertion: Added a force flag (/f) without altering the core behavior, which may avoid the 'CommandLine|contains' match by not including suspicious keywords."
+  }
+]

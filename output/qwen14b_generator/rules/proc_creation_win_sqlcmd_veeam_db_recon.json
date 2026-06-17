@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sqlcmd -S localhost -U sa -P password -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious 'From ' keyword while maintaining the same benign test intent."
+  },
+  {
+    "output": "sqlcmd -S localhost -U sa -P password -d VeeamBackup -Q \"SELECT * FROM [BackupRepositories]\" -o \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Square brackets are inserted around the table name to change the parsing and avoid the 'From ' keyword match."
+  },
+  {
+    "output": "sqlcmd -S localhost -U sa -P password -d VeeamBackup -Q \"SELECT * FROM BackupRepositories\" -o \"C:\\Lab\\out\\archive.7z\" -b",
+    "explanation": "Substitution: The '-b' flag is added to alter the command-line structure without changing the tested behavior, potentially avoiding the Sigma rule's string match."
+  }
+]

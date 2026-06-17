@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c powershell -Command \"Write-Host 'h^t^t^p'\"",
+    "explanation": "Insertion of quotes and escape characters to avoid direct string matching of 'h^t^t^p' by the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c powershell -Command \"Write-Host 'h\"t\"t\"p'\"",
+    "explanation": "Substitution of double quotes within the string to avoid matching the 'h\"t\"t\"p' pattern in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c powershell -Command \"Write-Host 'http'\"",
+    "explanation": "Omission of escape characters and quotes to replace the suspicious pattern with a benign string that does not trigger the Sigma rule."
+  }
+]

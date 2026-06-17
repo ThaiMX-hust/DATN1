@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\tacticalrmm.exe --api http://localhost --auth dummyauth --client-id 12345 --site-id 67890 --agent-type windows",
+    "explanation": "Substitution: Replaced the suspicious server URL with a localhost placeholder to avoid detection by the Sigma rule's 'api' parameter check."
+  },
+  {
+    "output": "C:\\Lab\\tools\\tacticalrmm.exe --api http://127.0.0.1 --auth dummyauth --client-id 12345 --site-id 67890 --agent-type windows",
+    "explanation": "Substitution: Replaced the suspicious server URL with a local IP placeholder to avoid detection by the Sigma rule's 'api' parameter check."
+  },
+  {
+    "output": "C:\\Lab\\tools\\tacticalrmm.exe --api http://127.0.0.1 --auth dummyauth --client-id 12345 --site-id 67890",
+    "explanation": "Omission: Removed the '--agent-type' flag while preserving the rest of the command, reducing the number of parameters matched by the Sigma rule."
+  }
+]

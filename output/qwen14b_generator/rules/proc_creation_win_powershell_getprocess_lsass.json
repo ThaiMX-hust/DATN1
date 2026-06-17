@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Process lsass | Out-Null\"",
+    "explanation": "Omission: Removed the output redirection to avoid triggering the Sigma rule's detection of 'Get-Process lsass' by not piping to a command that creates a minidump."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process -Name lsass | Out-Null\"",
+    "explanation": "Substitution: Replaced 'lsas' with 'lsass' to avoid the Sigma rule's detection of 'lsas' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Process | Where-Object { $_.ProcessName -eq 'lsass' } | Out-Null\"",
+    "explanation": "Reordering: Used a pipeline with a filter to avoid directly referencing 'lsass' in the command line, which may bypass the Sigma rule's string match."
+  }
+]

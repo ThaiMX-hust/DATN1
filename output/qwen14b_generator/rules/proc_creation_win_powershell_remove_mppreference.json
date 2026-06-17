@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Insertion: Replaced the suspicious path with a benign lab placeholder to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "powershell -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\Lab\\input\\sample.log' -AttackSurfaceReductionRules_Ids 123456\"",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder and replaced the suspicious ID with a dummy value to avoid triggering the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powershell -Command \"Remove-MpPreference -ControlledFolderAccessProtectedFolders 'C:\\Lab\\input\\sample.txt' -AttackSurfaceReductionRules_Actions 'Allow'\"",
+    "explanation": "Reordering: Reordered the arguments to change the command line structure, making it less likely to match the Sigma rule's pattern-based detection."
+  }
+]

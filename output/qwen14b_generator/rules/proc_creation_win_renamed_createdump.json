@@ -1,0 +1,14 @@
+[
+  {
+    "output": "createdump.exe -u -f C:\\Lab\\out\\sample.dmp 1234",
+    "explanation": "Insertion of spaces and quotes; the Sigma rule may miss the command if the flags are not explicitly checked for spacing."
+  },
+  {
+    "output": "createdump.exe --full --name C:\\Lab\\out\\sample.dmp 1234",
+    "explanation": "Substitution of short flags with long flags; the Sigma rule may not detect the command if it relies on short flag matching."
+  },
+  {
+    "output": "createdump.exe -f C:\\Lab\\out\\sample.dmp -u 1234",
+    "explanation": "Reordering of arguments; the Sigma rule may not detect the command if the order of flags is not strictly enforced."
+  }
+]

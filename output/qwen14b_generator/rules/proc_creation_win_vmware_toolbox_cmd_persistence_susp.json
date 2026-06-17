@@ -1,0 +1,14 @@
+[
+  {
+    "output": "VMwareToolBoxCmd.exe script set -path C:\\Lab\\input\\sample.txt -state running",
+    "explanation": "Reordering and substitution: Reordered the command-line arguments and used a benign lab placeholder path instead of suspicious directories, which may avoid matching the Sigma rule's suspicious path indicators."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe -script -set -path C:\\Lab\\input\\sample.log -state running",
+    "explanation": "Substitution: Replaced 'script' and 'set' with their long-form options (-script, -set) and used a benign lab placeholder path, potentially avoiding the Sigma rule's string-based detection."
+  },
+  {
+    "output": "VMwareToolBoxCmd.exe script set -path C:\\Lab\\out\\archive.7z -state running",
+    "explanation": "Substitution: Used a benign lab placeholder path and kept the original command structure but replaced the suspicious directories with a safe one, which may not trigger the Sigma rule's path-based detection."
+  }
+]

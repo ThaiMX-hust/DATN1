@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -f C:\\Lab\\input\\script.ps1",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Users\\Public' with a benign lab placeholder 'C:\\Lab\\input\\script.ps1' to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -file \"C:\\Lab\\input\\script.ps1\"",
+    "explanation": "Substitution and insertion: Replaced the suspicious path with a lab placeholder and used quotes to ensure correct parsing, avoiding the Sigma rule's path detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\\"",
+    "explanation": "Omission: Removed the '-f' parameter and replaced the suspicious path with a lab placeholder, changing the command's intent to a benign operation that does not trigger the Sigma rule."
+  }
+]

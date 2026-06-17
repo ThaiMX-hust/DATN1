@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic process list -format list",
+    "explanation": "Omission: Removed the XSL file path to avoid triggering the 'format' flag match, assuming the Sigma rule may not detect this omission."
+  },
+  {
+    "output": "wmic process list -format \"list\"",
+    "explanation": "Insertion: Added quotes around the format argument, which may be parsed differently and avoid the 'format' flag match."
+  },
+  {
+    "output": "wmic process list /format list",
+    "explanation": "Substitution: Replaced the dash with a slash for the format argument, which may not be detected by the Sigma rule's 'windash' matching."
+  }
+]

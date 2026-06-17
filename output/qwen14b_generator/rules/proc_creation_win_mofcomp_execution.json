@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\windows\\system32\\wbem\\mofcomp.exe C:\\Lab\\input\\sample.mof",
+    "explanation": "Reordering and substitution: The command uses a lab placeholder 'sample.mof' in the 'C:\\Lab\\input\\' directory, which avoids the suspicious path indicators like '%temp%' or 'C:\\Windows\\TEMP\\' while maintaining the same executable family and intent."
+  },
+  {
+    "output": "C:\\windows\\system32\\wbem\\mofcomp.exe C:\\Lab\\input\\sample.mof -nologo",
+    "explanation": "Insertion: Added a harmless flag '-nologo' to the command line, which may prevent the Sigma rule from matching based on the presence of additional benign arguments."
+  },
+  {
+    "output": "C:\\windows\\system32\\wbem\\mofcomp.exe C:\\Lab\\input\\sample.mof -v",
+    "explanation": "Substitution: Replaced the default behavior with a verbose flag '-v' to avoid triggering the rule based on the absence of suspicious command-line arguments."
+  }
+]

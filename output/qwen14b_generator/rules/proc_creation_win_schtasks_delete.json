@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /delete /tn \"C:\\Lab\\input\\sample_task\"",
+    "explanation": "Reordering and substitution: The command reorders the arguments and substitutes the suspicious task names with a benign lab placeholder, which may avoid matching the Sigma rule's specific task name patterns."
+  },
+  {
+    "output": "schtasks.exe /delete /tn C:\\Lab\\input\\sample_task /f",
+    "explanation": "Insertion: The command inserts the '/f' flag, which is a common option, and replaces the suspicious task names with a benign lab placeholder, potentially avoiding the Sigma rule's string matches."
+  },
+  {
+    "output": "schtasks.exe /delete /tn C:\\Lab\\input\\sample_task",
+    "explanation": "Substitution: The command replaces the suspicious task names with a benign lab placeholder, which may not trigger the Sigma rule's detection based on specific task name strings."
+  }
+]

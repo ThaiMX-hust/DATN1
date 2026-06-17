@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\rundll32.exe /?",
+    "explanation": "Insertion: Added a parameter (/?) to the command line, which changes the CommandLine field and may avoid the 'without any parameters' detection."
+  },
+  {
+    "output": "rundll32.exe",
+    "explanation": "Omission: Removed the full path to the executable, which may avoid the 'CommandLine|endswith' detection if the rule relies on the full path."
+  },
+  {
+    "output": "C:\\Lab\tools\rundll32.exe",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder, which may avoid the 'CommandLine|endswith' detection if the rule relies on the specific path."
+  }
+]

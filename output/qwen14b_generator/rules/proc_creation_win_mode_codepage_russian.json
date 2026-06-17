@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mode con cp select=1251",
+    "explanation": "No mutation technique applies; the command directly matches the Sigma rule's suspicious pattern."
+  },
+  {
+    "output": "mode con cp select=866",
+    "explanation": "No mutation technique applies; the command directly matches the Sigma rule's suspicious pattern."
+  },
+  {
+    "output": "mode con cp select=1251",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

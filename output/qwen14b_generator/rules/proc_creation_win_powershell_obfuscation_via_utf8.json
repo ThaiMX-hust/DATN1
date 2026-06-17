@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"& { $rtlo = [char]0x202E; $filepath = [System.IO.Path]::Combine($env:USERPROFILE, 'Lab'); $fileloc = Join-Path '$filepath' ('sample' + $rtlo + 'file.txt'); $payload = @'Sample content'@; Set-Content -Path $fileloc -Value $payload -Encoding Ascii -Force }\"",
+    "explanation": "Reordering and substitution: The command uses [char]0x202E but replaces the sensitive filename with a benign placeholder 'samplefile.txt' in the Lab directory, avoiding the suspicious filename pattern."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $rtlo = [char]0x202E; $filepath = [System.IO.Path]::Combine($env:USERPROFILE, 'Lab'); $fileloc = Join-Path '$filepath' ('sample' + $rtlo + 'file.txt'); $payload = @'Sample content'@; Set-Content -Path $fileloc -Value $payload -Encoding Ascii -Force }\"",
+    "explanation": "Reordering and substitution: The command uses [char]0x202E but replaces the sensitive filename with a benign placeholder 'samplefile.txt' in the Lab directory, avoiding the suspicious filename pattern."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $rtlo = [char]0x202E; $filepath = [System.IO.Path]::Combine($env:USERPROFILE, 'Lab'); $fileloc = Join-Path '$filepath' ('sample' + $rtlo + 'file.txt'); $payload = @'Sample content'@; Set-Content -Path $fileloc -Value $payload -Encoding Ascii -Force }\"",
+    "explanation": "Reordering and substitution: The command uses [char]0x202E but replaces the sensitive filename with a benign placeholder 'samplefile.txt' in the Lab directory, avoiding the suspicious filename pattern."
+  }
+]

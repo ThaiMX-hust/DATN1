@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe -f \"C:\\Lab\\input\\sample.rsp\"",
+    "explanation": "Substitution: Replaced the suspicious '.rsp' file with a benign lab placeholder to avoid the Sigma rule's '.rsp' detection while maintaining the same command-line structure and intent."
+  },
+  {
+    "output": "odbcconf.exe -f C:\\Lab\\input\\sample.rsp",
+    "explanation": "Omission: Removed quotes around the file path, which may not trigger the Sigma rule's ' -f ' pattern match if the parser still interprets the command correctly."
+  },
+  {
+    "output": "odbcconf -f \"C:\\Lab\\input\\sample.rsp\"",
+    "explanation": "Substitution: Removed the '.exe' extension from the executable name, which may bypass the Sigma rule's 'odbcconf.exe' detection if the parser still recognizes 'odbcconf' as the executable."
+  }
+]

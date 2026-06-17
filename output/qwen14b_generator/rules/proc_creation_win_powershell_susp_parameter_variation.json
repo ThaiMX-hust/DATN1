@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('C:\\Lab\\input\\sample.txt'); Get-DomainGPO\"",
+    "explanation": "Substitution: Replaced the URL with a benign local file path to avoid matching the suspicious substring in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('C:\\Lab\\input\\sample.log'); Get-DomainGPO\"",
+    "explanation": "Substitution: Replaced the URL with a benign local file path to avoid matching the suspicious substring in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"Get-DomainGPO\"",
+    "explanation": "Omission: Removed the suspicious command-line argument that triggers the Sigma rule while preserving the benign test intent."
+  }
+]

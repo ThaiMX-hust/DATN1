@@ -1,0 +1,14 @@
+[
+  {
+    "output": "start-process -FilePath \"C:\\Lab\\input\\sample.txt\" -ArgumentList \"--no-suspicious\" -WorkingDirectory \"C:\\Lab\\out\"",
+    "explanation": "Insertion of quotes and harmless arguments to avoid matching the suspicious 'userinit.exe' parent image or command line keywords."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.log\"",
+    "explanation": "Substitution of the executable family with 'powershell.exe' and use of a benign test file path to avoid triggering the 'userinit.exe' detection rule."
+  },
+  {
+    "output": "cmd.exe /c type C:\\Lab\\input\\sample.txt > C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering of command-line arguments and use of a benign test file path to avoid matching the suspicious 'userinit.exe' parent image or command line keywords."
+  }
+]

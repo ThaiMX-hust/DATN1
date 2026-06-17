@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net user admin /domain",
+    "explanation": "Omission: Removed the suspicious username 'administrator' by using a shorter equivalent 'admin' which may not trigger the Sigma rule's username checks."
+  },
+  {
+    "output": "net user \"admin\" /domain",
+    "explanation": "Insertion: Added double quotes around the username 'admin' which may bypass the Sigma rule's string matching for specific username patterns."
+  },
+  {
+    "output": "net user admin /active:yes /domain",
+    "explanation": "Substitution: Added an additional flag '/active:yes' which may alter the command line parsing and avoid the Sigma rule's 'user' keyword detection."
+  }
+]

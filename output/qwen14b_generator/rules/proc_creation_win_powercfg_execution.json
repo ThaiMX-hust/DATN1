@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powercfg -change -standby-timeout-ac 3000",
+    "explanation": "Omission: Removed the suspicious 'SCHEME_CURRENT', 'SUB_VIDEO', and 'VIDEOCONLOCK' strings from the command line, which may avoid triggering the Sigma rule's string-based detection."
+  },
+  {
+    "output": "powercfg -change -standby-timeout-ac 3000 -? -? -? -? -? -?",
+    "explanation": "Insertion: Added harmless delimiters and flags to the command line, which may alter the string matching behavior of the Sigma rule without changing the intended action."
+  }
+]

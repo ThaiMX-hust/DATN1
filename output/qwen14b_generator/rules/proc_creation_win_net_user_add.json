@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 -u \"T1136.001_Admin\" -p \"T1136_pass\"",
+    "explanation": "Substitution: Replaced 'user /add' with '-u' and '-p' to avoid the 'user' and 'add' keywords that trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 -u \"T1136.001_Admin\" -p \"T1136_pass\" -d \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added a dummy directory argument to the command line, which may change parsing behavior and avoid the Sigma string match."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 -u \"T1136.001_Admin\" -p \"T1136_pass\" -h 127.0.0.1",
+    "explanation": "Reordering: Added a harmless '-h' flag with a local IP address to change the argument order, potentially avoiding the Sigma keyword match."
+  }
+]

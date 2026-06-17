@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" --meshServiceName=TestService",
+    "explanation": "Insertion: Added quotes and a space to bypass the direct string match for 'meshagent' in the command line."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" --meshServiceName=TestService --dummyArg=123",
+    "explanation": "Insertion: Added a dummy argument to change the command line structure, potentially avoiding the 'meshServiceName' detection."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\sample.exe\" --meshServiceName=TestService --no-logs",
+    "explanation": "Substitution: Replaced a potential suspicious flag with a benign flag that does not trigger the Sigma rule."
+  }
+]

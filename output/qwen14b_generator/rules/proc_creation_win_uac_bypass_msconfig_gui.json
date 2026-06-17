@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Windows\\system32\\msconfig.exe\" -5",
+    "explanation": "Insertion: Added 'cmd.exe /c' wrapper to invoke the command, which may bypass string-based detection by altering the command line structure."
+  },
+  {
+    "output": "start-process -FilePath \"C:\\Windows\\system32\\msconfig.exe\" -ArgumentList \"-5\"",
+    "explanation": "Substitution: Replaced direct command line invocation with a PowerShell 'start-process' cmdlet, which may avoid direct string matching in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process 'C:\\Windows\\system32\\msconfig.exe' -ArgumentList '-5'\"",
+    "explanation": "Reordering: Encapsulated the command within a PowerShell invocation, potentially altering the parsing context and evading direct command line string matching."
+  }
+]

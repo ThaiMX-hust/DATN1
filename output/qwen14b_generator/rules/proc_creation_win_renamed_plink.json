@@ -1,0 +1,14 @@
+[
+  {
+    "output": "plink.exe -l forward -P 22 -R 8080:localhost:80 C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Reordered the arguments to avoid matching the suspicious ' -l forward' string in the command line."
+  },
+  {
+    "output": "plink.exe -P 22 -R 8080:localhost:80 -l forward C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Reordered the arguments to avoid matching the suspicious ' -l forward' string in the command line."
+  },
+  {
+    "output": "plink.exe -P 22 -R 8080:localhost:80 -l forward C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Inserted a space after '-l' to avoid matching the suspicious ' -l forward' string in the command line."
+  }
+]

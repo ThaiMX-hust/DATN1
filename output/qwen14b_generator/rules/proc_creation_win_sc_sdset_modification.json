@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed the 'sdset' command-line argument, which is the suspicious indicator in the Sigma rule."
+  },
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\Lab\\input\\sample.txt\" start= auto",
+    "explanation": "Insertion: Added a harmless 'start= auto' argument, which does not affect the Sigma rule's detection logic."
+  },
+  {
+    "output": "sc.exe create TestService binPath= \"C:\\Lab\\input\\sample.txt\" displayname= \"TestService\"",
+    "explanation": "Substitution: Replaced the 'sdset' command with a display name parameter, which avoids the Sigma rule's 'sdset' keyword match."
+  }
+]

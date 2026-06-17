@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe import \"C:\\Lab\\input\\test.reg\"",
+    "explanation": "Insertion: Added quotes around the path to ensure correct parsing, avoiding the suspicious path 'C:\\Users\\' by using a lab placeholder."
+  },
+  {
+    "output": "reg.exe -import C:\\Lab\\input\\test.reg",
+    "explanation": "Substitution: Replaced 'import' with '-import' to change the syntax while maintaining the same action, potentially avoiding the 'import' keyword match."
+  },
+  {
+    "output": "reg.exe import C:\\Lab\\input\\test.reg",
+    "explanation": "Omission: Removed any optional elements, but kept the same action and replaced the suspicious path with a lab placeholder to avoid triggering the Sigma rule."
+  }
+]

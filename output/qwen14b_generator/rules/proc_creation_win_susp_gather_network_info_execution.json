@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cscript.exe //nologo C:\\Lab\\input\\network_info.vbs",
+    "explanation": "Substitution: Replaced the suspicious filename 'gatherNetworkInfo.vbs' with a benign placeholder 'network_info.vbs' to avoid the Sigma string match."
+  },
+  {
+    "output": "wscript.exe //nologo C:\\Lab\\input\\network_info.vbs",
+    "explanation": "Substitution: Replaced the suspicious filename 'gatherNetworkInfo.vbs' with a benign placeholder 'network_info.vbs' to avoid the Sigma string match."
+  },
+  {
+    "output": "cscript.exe //nologo C:\\Lab\\input\\network_info.vbs //E:VBScript",
+    "explanation": "Insertion: Added an explicit script engine parameter to avoid ambiguity, while replacing the suspicious filename with a benign placeholder to avoid the Sigma string match."
+  }
+]

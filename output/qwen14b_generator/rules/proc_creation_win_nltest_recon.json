@@ -1,0 +1,14 @@
+[
+  {
+    "output": "nltest /domain_trusts /user:labuser",
+    "explanation": "Insertion: Adding a non-sensitive /user parameter may bypass the 'query' keyword detection if the rule relies on exact keyword matching."
+  },
+  {
+    "output": "nltest.exe /dclist:%%labdnsdomain%%",
+    "explanation": "Substitution: Replacing the suspicious %%userdnsdomain%% with a benign placeholder %%labdnsdomain%% may avoid the 'dclist:' keyword match if the rule is sensitive to the exact domain variable."
+  },
+  {
+    "output": "nltest /trusted_domains /show:all",
+    "explanation": "Reordering: Reordering the command-line arguments may bypass detection if the rule relies on specific argument order for triggering."
+  }
+]

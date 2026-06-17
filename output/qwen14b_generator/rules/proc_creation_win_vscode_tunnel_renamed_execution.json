@@ -1,0 +1,14 @@
+[
+  {
+    "output": "code.exe tunnel --accept-server-license-terms",
+    "explanation": "Omission: Removed the 'service' and 'tunnel-service.log' arguments, which may avoid triggering the 'selection_image_tunnel_service' condition."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms -l 127.0.0.1:8080",
+    "explanation": "Insertion: Added a harmless '-l 127.0.0.1:8080' argument, which may not be detected by the Sigma rule's string matching."
+  },
+  {
+    "output": "code.exe --accept-server-license-terms tunnel",
+    "explanation": "Reordering: Changed the order of arguments, which may avoid triggering the 'selection_image_tunnel_args' condition."
+  }
+]

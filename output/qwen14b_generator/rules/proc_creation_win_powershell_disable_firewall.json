@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-NetFirewallProfile -Name 'Public' -Enabled False\"",
+    "explanation": "Reordering arguments by placing the profile name before the -Enabled flag may bypass string matching in the Sigma rule."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-NetFirewallProfile -Name 'Domain' -Enabled False\"",
+    "explanation": "Using the alternate executable (pwsh.exe) and reordering arguments may avoid detection by the Sigma rule's string matching."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-NetFirewallProfile -Name 'Private' -Enabled False\"",
+    "explanation": "Changing the profile name from 'Public' to 'Private' may avoid the Sigma rule's keyword-based detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Add-MpPreference -ExclusionPath 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Insertion of quotes and spaces to avoid direct string matching, as the Sigma rule may not detect properly formatted command lines with proper syntax."
+  },
+  {
+    "output": "powershell -Command Add-MpPreference -ExclusionPath C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission of quotes to change the command line structure, which may avoid the string-based detection mechanism of the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"Set-MpPreference -ExclusionPath 'C:\\Lab\\input\\sample.log'\"",
+    "explanation": "Substitution of the 'Add-MpPreference' cmdlet with 'Set-MpPreference' while maintaining the same intent, which may bypass the specific string-based detection."
+  }
+]

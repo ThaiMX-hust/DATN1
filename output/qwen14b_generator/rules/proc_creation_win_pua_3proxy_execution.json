@@ -1,0 +1,14 @@
+[
+  {
+    "output": "3proxy.exe -i127.0.0.1 -p 8080 -d C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command line reorders the parameters to avoid matching the 'CommandLine|contains: '.exe -i127.0.0.1 -p' pattern by placing the directory argument before the port."
+  },
+  {
+    "output": "3proxy.exe -p 8080 -i127.0.0.1 -d C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: The command line reorders the parameters to avoid matching the 'CommandLine|contains: '.exe -i127.0.0.1 -p' pattern by placing the port argument before the IP address."
+  },
+  {
+    "output": "3proxy.exe -i127.0.0.1 -p 8080 -d C:\\Lab\\input\\sample.txt -v",
+    "explanation": "Insertion: An additional '-v' flag is inserted, which does not alter the core functionality but may change the command line structure enough to avoid the 'CommandLine|contains' match."
+  }
+]

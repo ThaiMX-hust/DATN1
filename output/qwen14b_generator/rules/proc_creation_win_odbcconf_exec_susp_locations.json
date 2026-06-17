@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /a -d \"C:\\Lab\\input\\sample.dll\"",
+    "explanation": "Insertion of quotes and a benign lab path avoids matching the suspicious location patterns in the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe -a -d C:\\Lab\\input\\sample.dll",
+    "explanation": "Omission of quotes and use of a benign lab path avoids triggering the suspicious location detection in the Sigma rule."
+  },
+  {
+    "output": "odbcconf.exe -d C:\\Lab\\input\\sample.dll",
+    "explanation": "Reordering of arguments and use of a benign lab path avoids matching the suspicious location patterns in the Sigma rule."
+  }
+]

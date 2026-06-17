@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -s cmd /c whoami",
+    "explanation": "No mutation applied; the command is already valid and does not trigger the Sigma rule."
+  },
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -s cmd /c echo Test",
+    "explanation": "Command substitution; replacing the actual command with a benign echo command to avoid triggering the rule."
+  },
+  {
+    "output": "C:\\Tools\\RemoteExecHelper.exe -s -i cmd /c whoami",
+    "explanation": "Reordering arguments; the order of flags may not be critical, and this could be parsed similarly without triggering the rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe /s /u /i:C:\\Lab\\input\\sample.sct scrobj.dll",
+    "explanation": "Substitution: Replaced the HTTP URL with a local file path to avoid triggering the 'http' protocol detection in the Sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe /s /u /i:C:\\Lab\\input\\sample.sct scrobj.dll",
+    "explanation": "Reordering: The command line arguments are reordered to ensure the suspicious protocol is not directly adjacent to the '/i' flag, potentially evading string-based detection."
+  },
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe /s /u /i:C:\\Lab\\input\\sample.sct scrobj.dll",
+    "explanation": "Insertion: Inserted a harmless delimiter or space in the command line to alter the string pattern matching without changing the actual behavior, potentially evading the Sigma rule."
+  }
+]

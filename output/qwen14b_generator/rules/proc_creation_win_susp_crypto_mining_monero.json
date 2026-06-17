@@ -1,0 +1,14 @@
+[
+  {
+    "output": "miner.exe --cpu-priority=1",
+    "explanation": "Omission: Removed the 'donate-level' parameter which is a common indicator in the Sigma rule."
+  },
+  {
+    "output": "miner.exe --nicehash --algo=rx/0",
+    "explanation": "Reordering: Changed the order of parameters to avoid matching the Sigma rule's string detection."
+  },
+  {
+    "output": "miner.exe -o stratum+tcp://example.com:1234",
+    "explanation": "Substitution: Replaced the actual mining pool URL with a benign placeholder to avoid triggering the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\input\\sample.xbap",
+    "explanation": "Omission: Removed the suspicious '.xbap' extension from the command line, which may prevent the Sigma rule from matching the CommandLine field."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.xbap -safe",
+    "explanation": "Insertion: Added a harmless flag '-safe' to the command line, which may prevent the Sigma rule from matching the CommandLine field."
+  },
+  {
+    "output": "C:\\Lab\\input\\sample.xbap -nologo",
+    "explanation": "Substitution: Replaced the suspicious '.xbap' extension with a benign file extension and added a harmless flag '-nologo', which may prevent the Sigma rule from matching the CommandLine field."
+  }
+]

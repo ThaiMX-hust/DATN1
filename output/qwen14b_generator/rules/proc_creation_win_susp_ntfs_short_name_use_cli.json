@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo Test > C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added harmless command and redirection to avoid NTFS short name pattern, which may not trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious short name with a full path and used PowerShell syntax, which may bypass the NTFS short name detection."
+  },
+  {
+    "output": "C:\\Lab\\tools\\myapp.exe -i C:\\Lab\\input\\sample.log -o C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Avoided using any NTFS short name patterns by using full paths and benign executable, which may not match the Sigma rule."
+  }
+]

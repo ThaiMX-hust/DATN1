@@ -1,14 +1,14 @@
 [
   {
-    "output": "C:\Users\thaim\AppData\Local\Microsoft\WindowsApps\bash.exe -c \"echo Hello World\"",
+    "output": "C:\\Users\thaim\\AppData\\Local\\Microsoft\\WindowsApps\bash.exe -c \"echo Hello World\"",
     "explanation": "Insertion: Added the '-c' flag to specify a command string, which may bypass the Sigma rule's detection of direct script execution by changing the command-line parsing behavior."
   },
   {
-    "output": "C:\Users\thaim\AppData\Local\Microsoft\WindowsApps\bash.exe -i",
+    "output": "C:\\Users\thaim\\AppData\\Local\\Microsoft\\WindowsApps\bash.exe -i",
     "explanation": "Substitution: Replaced the script path with the '-i' interactive flag, which changes the intent from executing a script to starting an interactive shell, potentially avoiding the rule's trigger."
   },
   {
-    "output": "C:\Users\thaim\AppData\Local\Microsoft\WindowsApps\bash.exe --help",
+    "output": "C:\\Users\thaim\\AppData\\Local\\Microsoft\\WindowsApps\bash.exe --help",
     "explanation": "Reordering: Used the '--help' flag to display help information instead of executing a script, which alters the command's purpose and may not match the Sigma rule's suspicious pattern."
   }
 ]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "plink -R 8080:localhost:80 user@remotehost",
+    "explanation": "Reordering: The command reorders arguments to avoid the ' -R ' string match, which may bypass the Sigma rule's detection based on string position."
+  },
+  {
+    "output": "plink -R8080:localhost:80 user@remotehost",
+    "explanation": "Omission: The space after ' -R ' is omitted, altering the string representation while maintaining the same functionality, potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "plink -R 8080:localhost:80 user@remotehost -v",
+    "explanation": "Insertion: Additional verbose flag is inserted, which does not affect the core command but may alter the string match detection by the Sigma rule."
+  }
+]

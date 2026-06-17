@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\MSPUB.exe -i C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the URL-based download command, replacing it with a local file input to avoid triggering the 'ftp://', 'http://', or 'https://' indicators."
+  },
+  {
+    "output": "C:\\Windows\\System32\\MSPUB.exe -f C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the URL-based download command with a local file path to avoid triggering the 'ftp://', 'http://', or 'https://' indicators."
+  },
+  {
+    "output": "C:\\Windows\\System32\\MSPUB.exe -d C:\\Lab\\out\\archive.7z -s C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a local source file path and a destination path to avoid triggering the 'ftp://', 'http://', or 'https://' indicators while maintaining the same executable family and test intent."
+  }
+]

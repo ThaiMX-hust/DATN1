@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru \"NT AUTHORITY\\SYSTEM\" /tr \"cmd.exe /c calc.exe\"",
+    "explanation": "Substitution: Replaced 'system' with 'NT AUTHORITY\\SYSTEM' to avoid the 'SYSTEM ' keyword match while preserving the same intent."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\" /f",
+    "explanation": "Insertion: Added '/f' flag to force task creation without altering the '/ru system' parameter, which may not trigger the same detection logic."
+  },
+  {
+    "output": "schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /tr \"cmd.exe /c calc.exe\" /ru system",
+    "explanation": "Reordering: Changed the order of '/ru system' to appear after '/tr' to potentially avoid keyword-based detection."
+  }
+]

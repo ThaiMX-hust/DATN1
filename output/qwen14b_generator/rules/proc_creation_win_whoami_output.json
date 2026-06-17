@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c whoami > C:\\Lab\\out\\test.txt",
+    "explanation": "Omission: Removed the '/FO CSV' flag and redirected output to a benign lab file, avoiding the Sigma CSV output format detection."
+  },
+  {
+    "output": "cmd.exe /c whoami | findstr /i \"user\" > C:\\Lab\\out\\test.txt",
+    "explanation": "Insertion: Added a pipeline and 'findstr' filter, altering the command structure to avoid direct '/FO CSV' flag usage and redirecting to a lab file."
+  },
+  {
+    "output": "cmd.exe /c whoami && echo Test > C:\\Lab\\out\\test.txt",
+    "explanation": "Reordering: Combined 'whoami' with a harmless echo command, changing the command-line structure to avoid matching the Sigma CSV output format."
+  }
+]

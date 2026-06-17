@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\Control\\WMI\\Autologger\\DefenderApiLogger\" /v Start /t REG_DWORD /d 0 /f",
+    "explanation": "Insertion: Added quotes around the registry path to avoid direct string matching of the suspicious path in the Sigma rule."
+  },
+  {
+    "output": "reg add HKLM\\Control\\WMI\\Autologger\\DefenderApiLogger /v Start /t REG_DWORD /d 0 /f",
+    "explanation": "Omission: Removed quotes around the registry path, which may not be required by the parser and avoids matching the Sigma path string."
+  },
+  {
+    "output": "reg add HKLM\\Control\\WMI\\Autologger\\DefenderApiLogger /v Start /t REG_DWORD /d 0 /f /quiet",
+    "explanation": "Substitution: Added a non-standard flag (/quiet) that does not alter the command's behavior but may not be matched by the Sigma rule's keyword-based detection."
+  }
+]

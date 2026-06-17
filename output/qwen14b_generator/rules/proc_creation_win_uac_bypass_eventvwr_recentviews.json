@@ -1,0 +1,14 @@
+[
+  {
+    "output": "eventvwr.exe /s \"C:\\Lab\\input\\sample.log\"",
+    "explanation": "Reordering: The command uses a different argument structure that avoids the suspicious path strings by using a lab placeholder and a safe switch."
+  },
+  {
+    "output": "eventvwr.exe -c \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious path with a lab placeholder and used a different command-line switch that is not associated with the Sigma rule."
+  },
+  {
+    "output": "eventvwr.exe /L \"C:\\Lab\\input\\sample.7z\"",
+    "explanation": "Insertion: Inserted a lab placeholder and used a different command-line switch that avoids matching the Sigma rule's suspicious strings."
+  }
+]

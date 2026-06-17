@@ -1,0 +1,14 @@
+[
+  {
+    "output": "secedit /configure /db C:\\Lab\\input\\mytemplate.db",
+    "explanation": "Replaces the suspicious path with a benign lab placeholder; the Sigma rule may miss it if it checks for specific paths or keywords."
+  },
+  {
+    "output": "secedit.exe /export /areas SECURITYPOLICY /cfg C:\\Lab\\out\\output_mysecpol.txt",
+    "explanation": "Replaces the suspicious path with a benign lab placeholder; the Sigma rule may miss it if it checks for specific paths or keywords."
+  },
+  {
+    "output": "secedit /configure /db mytemplate.db /quiet",
+    "explanation": "Adds an optional flag that may not be checked by the Sigma rule, potentially bypassing detection."
+  }
+]

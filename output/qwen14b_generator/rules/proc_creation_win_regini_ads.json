@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regini.exe \"C:\\Lab\\input\\sample.txt:sample\"",
+    "explanation": "Insertion of quotes and a harmless delimiter (colon) to avoid the suspicious pattern of ADS in the command line."
+  },
+  {
+    "output": "regini.exe -s \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution of the suspicious command-line argument with a safe, equivalent syntax that does not involve ADS."
+  },
+  {
+    "output": "regini.exe \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission of any suspicious argument or pattern by using a benign file path that does not involve ADS."
+  }
+]

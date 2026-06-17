@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /Create /RU \"NT AUTHORITY\\SYSTEM\" /TR \"C:\\Lab\\input\\sample.txt\" /TN \"TestTask\"",
+    "explanation": "Reordering and substitution: Reordered arguments and replaced the suspicious path with a benign lab placeholder, which may avoid the Sigma rule's path-based detection."
+  },
+  {
+    "output": "schtasks /Create /RU NT\\ AUTHORITY\\SYSTEM /TR C:\\Lab\\input\\sample.txt /TN TestTask",
+    "explanation": "Encoding: Used alternative string representation for the user and path, which may not trigger the Sigma rule's string matching."
+  },
+  {
+    "output": "schtasks /Create /RU \"NT AUTHORITY\\SYSTEM\" /TR \"C:\\Lab\\input\\sample.txt\" /TN \"TestTask\" /F",
+    "explanation": "Insertion: Added the /F flag, which may not affect the Sigma rule's detection but changes the command line structure, possibly avoiding string matches."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Replaced the SCR file with a benign lab placeholder, preserving the command structure while avoiding the suspicious SCR extension."
+  },
+  {
+    "output": "rundll32.exe -desk.cpl,InstallScreenSaver not_an_scr.scr",
+    "explanation": "Substitution: Used an alternative syntax with a hyphen, which may not trigger the Sigma rule's string match for 'InstallScreenSaver'."
+  },
+  {
+    "output": "rundll32.exe desk.cpl,InstallScreenSaver C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the SCR file with a benign lab placeholder, preserving the command structure while avoiding the suspicious SCR extension."
+  }
+]

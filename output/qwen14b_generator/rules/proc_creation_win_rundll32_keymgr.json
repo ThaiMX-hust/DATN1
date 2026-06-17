@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\rundll32.exe keymgr,KRShowKeyMgr",
+    "explanation": "Reordering: The command line is reordered to use a different syntax that may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "cmd /c \"C:\\WINDOWS\\system32\\rundll32.exe\" keymgr,KRShowKeyMgr",
+    "explanation": "Insertion: Wrapping the command in a CMD invocation with quotes may bypass the Sigma rule's direct string matching."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\rundll32.exe keymgr KRShowKeyMgr",
+    "explanation": "Substitution: Replacing the comma with a space may alter the parsing and avoid the Sigma rule's string match."
+  }
+]

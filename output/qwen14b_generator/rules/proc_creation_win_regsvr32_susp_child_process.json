@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regsvr32.exe /u /n /s /c \"cmd.exe /c echo Test\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added quotes and a harmless command in the CommandLine field, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "regsvr32.exe /u /n /s /c \"echo Test\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removed the 'cmd.exe /c' part of the command, which may avoid triggering the Sigma rule's Image field match."
+  },
+  {
+    "output": "regsvr32.exe /u /n /s /c \"echo Test\" C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the file path with a different benign placeholder, which may not match the Sigma rule's suspicious file indicators."
+  }
+]

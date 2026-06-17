@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo Testing homoglyph bypass with ASCII characters > C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion: Replaced Unicode homoglyphs with ASCII characters, which would not trigger the Sigma rule's Unicode homoglyph detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | Set-Content C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: Used PowerShell to perform file operations, avoiding direct use of Unicode characters that match the Sigma rule's suspicious indicators."
+  },
+  {
+    "output": "copy C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Used a basic command without any Unicode characters, ensuring no homoglyphs are present to avoid triggering the Sigma rule."
+  }
+]

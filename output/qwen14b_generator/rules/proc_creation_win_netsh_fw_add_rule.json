@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDPPORTLatest-TCP-In\" dir=in action=allow protocol=TCP localport=4489 -f C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Added a harmless file reference using a lab placeholder to bypass the 'firewall add' string match."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=RDPPORTLatest-TCP-In dir=in action=allow protocol=TCP localport=4489",
+    "explanation": "Omission: Removed the quotes around the rule name to bypass the 'add rule' string match."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=RDPPORTLatest-TCP-In dir=in action=allow protocol=TCP localport=4489 --help",
+    "explanation": "Insertion: Added a '--help' flag to alter the command line structure and avoid the 'add rule' string match."
+  }
+]

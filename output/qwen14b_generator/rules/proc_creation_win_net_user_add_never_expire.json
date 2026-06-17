@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net.exe user add testuser P@ssw0rd /expires:never",
+    "explanation": "Insertion: Added space before /expires:never to bypass the 'expires:never' string match."
+  },
+  {
+    "output": "net.exe user add testuser P@ssw0rd -expires:never",
+    "explanation": "Substitution: Replaced '/' with '-' in the flag to avoid the 'expires:never' string match."
+  },
+  {
+    "output": "net.exe user add testuser P@ssw0rd /expires:never /domain:lab",
+    "explanation": "Reordering: Added a benign /domain:lab flag to the command line, which may change the parsing order and avoid the 'expires:never' string match."
+  }
+]

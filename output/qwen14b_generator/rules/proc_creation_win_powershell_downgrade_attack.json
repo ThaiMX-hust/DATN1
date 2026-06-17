@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -version 2 -Command \"Get-Date\"",
+    "explanation": "Insertion: Adding quotes around the command argument may prevent the Sigma rule from matching the ' -version 2 ' string directly."
+  },
+  {
+    "output": "powershell.exe -v 2 -Command \"Get-Date\"",
+    "explanation": "Substitution: Replacing ' -version ' with ' -v ' may bypass the Sigma rule's specific string matches."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Date\" -v 2",
+    "explanation": "Reordering: Changing the order of arguments may avoid the Sigma rule's detection based on the position of the ' -version 2 ' string."
+  }
+]

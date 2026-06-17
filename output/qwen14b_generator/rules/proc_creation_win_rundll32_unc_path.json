@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.dll,SampleFunc",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the UNC path pattern, which may bypass the Sigma rule's 'CommandLine|contains: ' \\\\'' detection."
+  },
+  {
+    "output": "rundll32.exe \"C:\\\\Lab\\\\input\\\\sample.dll\" SampleFunc",
+    "explanation": "Insertion: Quotes and escape characters are inserted to modify the command line structure without changing the intent, potentially avoiding the Sigma rule's string matching."
+  },
+  {
+    "output": "rundll32.exe -f C:\\Lab\\input\\sample.dll -func SampleFunc",
+    "explanation": "Substitution: Equivalent syntax using flags or parameters is used to replace the original command structure, which may not trigger the Sigma rule's string-based detection."
+  }
+]

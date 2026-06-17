@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Import-Module 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Replaces the suspicious directory path with a benign lab placeholder, using substitution to avoid matching the Sigma rule's suspicious directory indicators."
+  },
+  {
+    "output": "powershell -Command \"Import-Module C:\\Lab\\input\\sample.log\"",
+    "explanation": "Replaces the suspicious directory path with a benign lab placeholder, using substitution to avoid matching the Sigma rule's suspicious directory indicators."
+  },
+  {
+    "output": "powershell -Command \"ipmo C:\\Lab\\input\\sample.7z\"",
+    "explanation": "Replaces the suspicious directory path with a benign lab placeholder and uses the 'ipmo' alias, employing substitution to avoid matching the Sigma rule's suspicious directory indicators."
+  }
+]

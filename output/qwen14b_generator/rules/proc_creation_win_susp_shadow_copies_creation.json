@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"(Get-WmiObject -List Win32_ShadowCopy).Create('C:\\Lab\\input\\sample.txt','ClientAccessible')\"",
+    "explanation": "Reordering and substitution: The command uses a benign file path (C:\\Lab\\input\\sample.txt) instead of a suspicious one, and reorders the arguments to avoid the 'shadow create' string match."
+  },
+  {
+    "output": "vssadmin.exe create shadow /for=C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: The command replaces the suspicious path 'C:' with a benign lab placeholder 'C:\\Lab\\input\\sample.log', avoiding the 'shadow create' string match."
+  },
+  {
+    "output": "powershell.exe -Command \"(Get-WmiObject -List Win32_ShadowCopy).Create('C:\\Lab\\out\\archive.7z','ClientAccessible')\"",
+    "explanation": "Substitution: The command uses a different benign file path (C:\\Lab\\out\\archive.7z) and reorders the arguments to avoid the 'shadow create' string match."
+  }
+]

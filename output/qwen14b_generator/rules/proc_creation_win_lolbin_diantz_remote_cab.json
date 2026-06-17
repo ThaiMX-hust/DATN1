@@ -1,0 +1,14 @@
+[
+  {
+    "output": "diantz.exe -o C:\\Lab\\out\\archive.cab -i http://example.com/file.txt",
+    "explanation": "Reordering: Reordered the arguments to place the output file path before the input URL, which may avoid the suspicious string match for ' \\\\ '."
+  },
+  {
+    "output": "diantz.exe -i http://example.com/file.txt -o C:\\Lab\\out\\archive.cab",
+    "explanation": "Omission: Removed any unnecessary elements while preserving the benign test behavior of downloading and compressing a file."
+  },
+  {
+    "output": "diantz.exe -i http://example.com/file.txt -o C:\\Lab\\out\\archive.cab -v",
+    "explanation": "Insertion: Added a verbose flag '-v' which is a harmless delimiter and may not affect the Sigma string/field match."
+  }
+]

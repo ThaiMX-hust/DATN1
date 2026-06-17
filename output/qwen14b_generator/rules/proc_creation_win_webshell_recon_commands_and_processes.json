@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ping.exe -n 1 127.0.0.1",
+    "explanation": "Omission: Removed the suspicious ' -n ' substring by using a single parameter, which may avoid triggering the Sigma rule's ' -n ' detection."
+  },
+  {
+    "output": "cmd.exe /c echo &cd&echo",
+    "explanation": "Insertion: Added ' /c ' before the command to change the parsing context, potentially avoiding the ' &cd&echo ' substring match."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced suspicious PowerShell encoded command patterns with a benign 'Get-ChildItem' command using '-Command' instead of '-enc' or '-EncodedCommand'."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "CScript //E:JScript C:\\Lab\\input\\test.js",
+    "explanation": "Reordering and substitution: Replaced the suspicious path with a lab placeholder and used long option syntax to avoid matching the 'Temp' directory and '.js' extension in the Sigma rule."
+  },
+  {
+    "output": "WScript \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious '.vbs' extension with a benign '.txt' extension and used quotes to avoid triggering the '.vbs' keyword match in the Sigma rule."
+  },
+  {
+    "output": "CScript //E:JScript C:\\Lab\\input\\script\\test.js",
+    "explanation": "Insertion: Added a directory structure in the path to avoid direct match of 'Temp' and used a lab placeholder to avoid triggering the Sigma rule's suspicious path and extension checks."
+  }
+]

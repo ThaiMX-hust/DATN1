@@ -1,14 +1,14 @@
 [
   {
     "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -c New-Service -Name svcHighPriv -BinaryPathName 'C:\\windows\\system32\\cmd.exe /C echo Uuup! > C:\\Lab\\out\\archive.7z' -StartupType Manual",
-    "explanation": "Substitution: Replaced the suspicious WebDAV path (\\\\.\pipe\\HighPriv) with a benign local file path (C:\\Lab\\out\\archive.7z), which avoids the Sigma rule's detection of WebDAV activity."
+    "explanation": "Substitution: Replaced the suspicious WebDAV path (\\\\.\\pipe\\HighPriv) with a benign local file path (C:\\Lab\\out\\archive.7z), which avoids the Sigma rule's detection of WebDAV activity."
   },
   {
     "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -c New-Service -Name svcHighPriv -BinaryPathName 'C:\\windows\\system32\\cmd.exe /C echo Uuup! > C:\\Lab\\input\\sample.txt' -StartupType Manual",
-    "explanation": "Substitution: Replaced the suspicious WebDAV path (\\\\.\pipe\HighPriv) with a benign local file path (C:\\Lab\\input\\sample.txt), which avoids the Sigma rule's detection of WebDAV activity."
+    "explanation": "Substitution: Replaced the suspicious WebDAV path (\\\\.\\pipe\\HighPriv) with a benign local file path (C:\\Lab\\input\\sample.txt), which avoids the Sigma rule's detection of WebDAV activity."
   },
   {
     "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -c New-Service -Name svcHighPriv -BinaryPathName 'C:\\windows\\system32\\cmd.exe /C echo Uuup! > C:\\Lab\\input\\sample.log' -StartupType Manual",
-    "explanation": "Substitution: Replaced the suspicious WebDAV path (\\\\.\pipe\HighPriv) with a benign local file path (C:\\Lab\\input\\sample.log), which avoids the Sigma rule's detection of WebDAV activity."
+    "explanation": "Substitution: Replaced the suspicious WebDAV path (\\\\.\\pipe\\HighPriv) with a benign local file path (C:\\Lab\\input\\sample.log), which avoids the Sigma rule's detection of WebDAV activity."
   }
 ]

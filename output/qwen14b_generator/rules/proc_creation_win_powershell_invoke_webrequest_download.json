@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe iwr -URI https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -Outfile C:\\Lab\\input\\Atomic-license.txt",
+    "explanation": "Replaced the suspicious output path with a benign lab placeholder (C:\\Lab\\input\\Atomic-license.txt) using substitution, which avoids matching the Sigma rule's suspicious location patterns."
+  },
+  {
+    "output": "powershell.exe iwr -URI https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -Outfile C:\\Lab\\out\\Atomic-license.7z",
+    "explanation": "Modified the output path to use a different benign lab placeholder (C:\\Lab\\out\\Atomic-license.7z) via substitution, which avoids the Sigma rule's suspicious location patterns."
+  },
+  {
+    "output": "powershell.exe iwr -URI https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt -Outfile C:\\Lab\\input\\Atomic-license.log",
+    "explanation": "Substituted the output path with a benign lab placeholder (C:\\Lab\\input\\Atomic-license.log) to avoid matching the Sigma rule's suspicious location patterns."
+  }
+]

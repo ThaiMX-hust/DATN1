@@ -1,0 +1,14 @@
+[
+  {
+    "output": "npc.exe -server=127.0.0.1 -vkey=labkey -password=labpass -config=npc C:\\Lab\\input\\config.json",
+    "explanation": "Insertion: Added a dummy config file path to avoid matching the ' -config=npc' string, potentially bypassing the Sigma rule's CommandLine check."
+  },
+  {
+    "output": "npc.exe -server=127.0.0.1 -vkey=labkey -password=labpass -config=C:\\Lab\\input\\config.json",
+    "explanation": "Substitution: Replaced ' -config=npc' with a benign config file path to avoid matching the Sigma rule's CommandLine check."
+  },
+  {
+    "output": "npc.exe -server=127.0.0.1 -vkey=labkey -password=labpass -config=C:\\Lab\\input\\config.json -log=C:\\Lab\\out\\log.txt",
+    "explanation": "Reordering: Added a new flag '-log' to the end of the command line, which may alter the parsing context and avoid matching the Sigma rule's CommandLine check."
+  }
+]

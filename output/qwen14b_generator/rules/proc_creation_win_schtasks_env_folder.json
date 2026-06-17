@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Lab\\input\\sample.txt\" /sc daily",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Perflogs\\' with a benign lab placeholder 'C:\\Lab\\input\\' to avoid the Sigma rule's folder-based detection."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"TestTask1\" /tr \"C:\\Lab\\input\\sample.txt\" /sc daily /f",
+    "explanation": "Insertion: Added the '/f' flag to force task creation without changing the target path, which may bypass rules that focus on command-line structure without modifying the core behavior."
+  },
+  {
+    "output": "schtasks.exe /create /sc daily /tn \"TestTask1\" /tr \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: Changed the order of arguments to test if Sigma rule's pattern matching is sensitive to argument sequence, which may not capture reordered but semantically identical commands."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Omission: Removed the suspicious download-related command-line strings to avoid triggering the Sigma rule's download detection."
+  },
+  {
+    "output": "pwsh.exe -Command \"Write-Output 'Test content' > C:\\Lab\\out\\test.txt\"",
+    "explanation": "Substitution: Replaced the download command with a benign output operation that does not involve file downloading."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process notepad.exe -ArgumentList 'C:\\Lab\\input\\sample.txt'\"",
+    "explanation": "Insertion: Used a different command-line structure that does not involve downloading files, thus avoiding the Sigma rule's detection."
+  }
+]

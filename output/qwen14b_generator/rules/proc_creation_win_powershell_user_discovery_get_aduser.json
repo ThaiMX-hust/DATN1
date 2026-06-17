@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe Get-ADUser -Filter * | Select Name, SamAccountName | Out-File C:\\Lab\\out\\users.txt",
+    "explanation": "Reordering: The command line reorders the arguments to avoid the suspicious string match on ' > ' or ' | Select ' by using explicit pipeline and output redirection."
+  },
+  {
+    "output": "pwsh.exe Get-ADUser -Filter * | Select Name, SamAccountName | Out-File C:\\Lab\\out\\users.txt",
+    "explanation": "Substitution: Replaced 'powershell.exe' with 'pwsh.exe' to avoid the 'Image|endswith' match while maintaining the same benign test intent."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -Filter * | Select Name, SamAccountName | Out-File C:\\Lab\\out\\users.txt\"",
+    "explanation": "Insertion: Added quotes and the '-Command' parameter to encapsulate the entire command, which may avoid string-based detection by altering the parsing structure."
+  }
+]

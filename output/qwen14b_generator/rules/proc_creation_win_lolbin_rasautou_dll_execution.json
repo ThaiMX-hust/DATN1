@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rasautou.exe -d C:\\Lab\\input\\sample.txt -p test",
+    "explanation": "Insertion: Added quotes or harmless delimiters to avoid matching ' -d ' and ' -p ' strings."
+  },
+  {
+    "output": "rasautou.exe -d C:\\Lab\\input\\sample.txt -p test",
+    "explanation": "Substitution: Replaced command-line arguments with benign placeholders that do not trigger the Sigma rule."
+  },
+  {
+    "output": "rasautou.exe -p test -d C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering: Changed the order of command-line arguments to avoid matching the suspicious pattern."
+  }
+]

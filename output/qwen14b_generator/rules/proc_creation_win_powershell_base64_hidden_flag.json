@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host 'This is a test'\"",
+    "explanation": "Omission: Removed the base64 encoded strings to avoid triggering the Sigma rule's detection of encoded PowerShell commands."
+  },
+  {
+    "output": "pwsh.exe -Command \"Get-ChildItem C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the base64 encoded strings with a benign command that uses a lab placeholder file path, avoiding the suspicious encoded strings."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand \"V2Vsb25lIEhvc3QgIlRoaXMgaXMgYSB0ZXN0IiI=",
+    "explanation": "Insertion: Used a harmless encoded command that does not match the suspicious base64 strings in the Sigma rule, thereby bypassing detection."
+  }
+]

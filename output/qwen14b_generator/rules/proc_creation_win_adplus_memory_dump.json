@@ -1,6 +1,6 @@
 [
   {
-    "output": "",
-    "explanation": "No safe bypass command can be generated."
+    "output": "dang cai",
+    "explanation": "No mutation technique applied; the command does not contain any elements that would trigger the Sigma rule."
   }
 ]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Internet Explorer\\Main /v IEHarden /t REG_DWORD /d 0 /f",
+    "explanation": "Omission: Removed the suspicious string 'IEHarden' by using the reg add command directly, which may avoid matching the Sigma rule's string-based detection."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Internet Explorer\\Main /v DEPOff /t REG_DWORD /d 1 /f",
+    "explanation": "Omission: Replaced the command-line syntax with reg add, avoiding the Sigma rule's string-based detection of 'DEPOff' and 'value 1'."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Internet Explorer\\Main /v DisableFirstRunCustomize /t REG_DWORD /d 2 /f",
+    "explanation": "Omission: Replaced the command-line syntax with reg add, avoiding the Sigma rule's string-based detection of 'DisableFirstRunCustomize' and 'value 2'."
+  }
+]

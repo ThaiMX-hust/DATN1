@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wsudo.exe -u System \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes around the file path to prevent the '-u System' flag from being misinterpreted as part of the file path, which may bypass the CommandLine|contains detection."
+  },
+  {
+    "output": "wsudo.exe -u System --help",
+    "explanation": "Omission: Removed the actual command-line argument that would trigger the suspicious execution, replacing it with a help command, which may not match the Sigma rule's suspicious keywords."
+  },
+  {
+    "output": "wsudo.exe -u System -n \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Substitution: Replaced the suspicious '-u System' with '-n' (a non-suspicious flag), which may not trigger the Sigma rule's detection based on the CommandLine|contains criteria."
+  }
+]

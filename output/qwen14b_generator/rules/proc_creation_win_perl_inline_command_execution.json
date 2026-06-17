@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Strawberry\\perl\bin\\perl.exe -E \"print 'TEST-HOST'\"",
+    "explanation": "Substitution: Replaced '-e' with '-E' which is an equivalent long option, potentially avoiding the '-e' string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Strawberry\\perl\bin\\perl.exe -e print 'TEST-HOST'",
+    "explanation": "Omission: Removed quotes around the argument, which may not trigger the same string match in the Sigma rule."
+  },
+  {
+    "output": "C:\\Strawberry\\perl\bin\\perl.exe -e \"print 'TEST-HOST'\" -v",
+    "explanation": "Insertion: Added a non-suspicious '-v' flag, which may not affect the Sigma rule's detection logic and could be parsed correctly."
+  }
+]

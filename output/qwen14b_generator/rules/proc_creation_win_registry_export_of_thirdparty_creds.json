@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg save HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run C:\\Lab\\out\\registry_backup.7z",
+    "explanation": "Reordering: The command uses 'save' but targets a benign registry path (Run key) instead of the suspicious third-party credential paths, avoiding the Sigma rule's path-based detection."
+  },
+  {
+    "output": "reg export HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellIconOverlayIdentifiers C:\\Lab\\out\\icon_overlay_export.reg",
+    "explanation": "Substitution: The command uses 'export' but targets a benign registry path (ShellIconOverlayIdentifiers) instead of the suspicious third-party credential paths, avoiding the Sigma rule's path-based detection."
+  },
+  {
+    "output": "reg save HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs C:\\Lab\\out\\recent_docs.7z",
+    "explanation": "Insertion: The command uses 'save' with a benign registry path (RecentDocs) and includes a safe output path, avoiding the Sigma rule's path-based detection."
+  }
+]

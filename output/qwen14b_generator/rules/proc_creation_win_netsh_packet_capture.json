@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh trace start capture=yes tracefile=\"C:\\Lab\\input\\sample.etl\" maxsize=10",
+    "explanation": "Substitution: Replaced the suspicious path with a benign lab placeholder to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "netsh -trace start capture=yes tracefile=C:\\Lab\\input\\sample.etl maxsize=10",
+    "explanation": "Insertion: Added a hyphen before 'trace' to alter the parsing of the command-line arguments, potentially avoiding the 'trace' keyword match."
+  },
+  {
+    "output": "netsh start trace capture=yes tracefile=C:\\Lab\\input\\sample.etl maxsize=10",
+    "explanation": "Reordering: Changed the order of 'start' and 'trace' to potentially avoid the Sigma rule's detection of the 'trace start' sequence."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic process call create \"cmd.exe /c echo test > C:\\Lab\\out\\test.txt\"",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Temp\\test.txt' with a benign lab placeholder 'C:\\Lab\\out\\test.txt' to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "wmic process call create \"cmd.exe /c echo test > C:\\Lab\\input\\test.txt\"",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Temp\\test.txt' with another benign lab placeholder 'C:\\Lab\\input\\test.txt' to avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "wmic process call create \"cmd.exe /c echo test > C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\Temp\\test.txt' with a benign lab placeholder 'C:\\Lab\\out\\archive.7z' to avoid triggering the Sigma rule's path-based detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regedit.exe -E \"C:\\Lab\\input\\sample.reg\"",
+    "explanation": "Insertion: Added quotes around the file path to ensure correct parsing, which may bypass the ' -E ' string match in the Sigma rule."
+  },
+  {
+    "output": "regedit.exe -E C:\\Lab\\input\\sample.reg",
+    "explanation": "Omission: Removed unnecessary spaces or delimiters that might trigger the ' -E ' string match in the Sigma rule."
+  },
+  {
+    "output": "regedit.exe -E C:\\Lab\\input\\sample.reg -?",
+    "explanation": "Reordering: Added an unrelated argument (-?) after the export command, which may not be detected by the Sigma rule's string match."
+  }
+]

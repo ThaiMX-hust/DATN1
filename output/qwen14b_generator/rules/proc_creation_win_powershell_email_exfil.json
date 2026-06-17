@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Recipient -ExpandProperty EmailAddresses | Select-Object SmtpAddress -hidetableheaders | Out-File C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering: Reordered arguments to avoid direct string matching of the suspicious keywords while maintaining the same benign test intent."
+  },
+  {
+    "output": "pwsh.exe -Command {Get-Recipient -ExpandProperty EmailAddresses | Select-Object SmtpAddress -hidetableheaders | Out-File C:\\Lab\\out\\archive.7z}",
+    "explanation": "Substitution: Replaced the executable with pwsh.exe and used curly braces for command syntax, which may avoid string matching of the suspicious keywords."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Recipient -ExpandProperty EmailAddresses | Select-Object SmtpAddress -hidetableheaders | Compress-Archive -Path C:\\Lab\\input\\sample.txt -DestinationPath C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Insertion: Added a benign compression operation using Compress-Archive, which may alter the command line structure and avoid direct string matching of the suspicious keywords."
+  }
+]

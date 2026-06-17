@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\WinRAR\\rar.exe a C:\\Lab\\out\\archive.7z C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: Replaced 'test.rar' with 'archive.7z' and 'test.txt' with 'sample.txt' using a different archive format (7z instead of rar), which may avoid the 'rar.exe' and 'a ' string matches."
+  },
+  {
+    "output": "C:\\Program Files\\WinRAR\\rar.exe a -r C:\\Lab\\out\\archive.rar C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Added the '-r' flag for recursive addition, which may not be flagged by the Sigma rule if it does not check for additional flags."
+  },
+  {
+    "output": "C:\\Program Files\\WinRAR\\rar.exe a C:\\Lab\\out\\archive.rar C:\\Lab\\input\\sample.txt C:\\Lab\\input\\sample.log",
+    "explanation": "Omission: Removed the 'test' prefix from the archive name and added an extra file, which may not trigger the Sigma rule if it does not check for specific file names or quantities."
+  }
+]

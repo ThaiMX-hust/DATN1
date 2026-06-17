@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Testing command'; Invoke-WebRequest -Uri 'http://example.com/test.txt' -OutFile 'C:\\Lab\\input\\test.txt'\"",
+    "explanation": "Insertion: Added benign test text before the command. The Sigma rule may miss it if it only checks for the presence of 'OutFile' and '.dll' without checking the full command line."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/test.txt' -OutFile 'C:\\Lab\\input\\test.txt'\"",
+    "explanation": "Omission: Removed the 'Write-Host' part which is not related to the suspicious behavior. The Sigma rule may miss it if it only checks for specific keywords like 'Download' or 'Invoke-WebRequest' in the command line."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/test.txt' -OutFile 'C:\\Lab\\input\\test.txt' -UseBasicParsing\"",
+    "explanation": "Substitution: Added '-UseBasicParsing' which is a valid parameter for 'Invoke-WebRequest'. The Sigma rule may miss it if it does not account for additional parameters that are not related to the suspicious behavior."
+  }
+]

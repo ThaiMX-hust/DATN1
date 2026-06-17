@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.udl,OpenDSLFile",
+    "explanation": "Reordering: The command line reorders the arguments so that the suspicious string 'OpenDSLFile' is not directly adjacent to 'oledb32.dll', potentially avoiding the Sigma rule's string match."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Lab\\input\\sample.udl\",OpenDSLFile",
+    "explanation": "Insertion: Quotes are added around the file path, which may alter the parsing of the command line and avoid matching the Sigma rule's string-based detection."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.udl,OpenDSLFileWithExtraText",
+    "explanation": "Substitution: The 'OpenDSLFile' keyword is replaced with a similar but non-matching string, potentially evading the Sigma rule's detection based on exact string matches."
+  }
+]

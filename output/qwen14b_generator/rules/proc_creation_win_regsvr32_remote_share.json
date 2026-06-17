@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regsvr32.exe C:\\Lab\\input\\test.dll",
+    "explanation": "Omission: Removed the remote share path (\\\\) to avoid triggering the Sigma rule's 'CommandLine|contains: ' \\\\'' detection."
+  },
+  {
+    "output": "regsvr32.exe \"C:\\\\Lab\\\\input\\\\test.dll\"",
+    "explanation": "Insertion: Added escaped quotes and backslashes to modify the command line structure without changing the target file path, potentially bypassing string-based detection."
+  },
+  {
+    "output": "regsvr32 C:\\Lab\\input\\test.dll",
+    "explanation": "Substitution: Replaced 'regsvr32.exe' with 'regsvr32' (shortened form) to avoid matching the 'Image|endswith: '\\\\regsvr32.exe'' condition."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.txt,TestFunction",
+    "explanation": "Insertion: Added a benign placeholder file path and function name to the command line, which may prevent the Sigma rule from matching the default 'rundll32.exe' without arguments."
+  },
+  {
+    "output": "regsvr32.exe /s C:\\Lab\\input\\sample.dll",
+    "explanation": "Substitution: Replaced the default invocation of 'regsvr32.exe' with a safe, non-malicious operation using a placeholder DLL file, which may avoid the Sigma rule's detection based on default command-line patterns."
+  },
+  {
+    "output": "WerFault.exe -log C:\\Lab\\out\\archive.7z",
+    "explanation": "Reordering: Added a safe argument to the command line that changes its behavior from the default, potentially evading the Sigma rule's detection based on the default invocation of 'WerFault.exe'."
+  }
+]

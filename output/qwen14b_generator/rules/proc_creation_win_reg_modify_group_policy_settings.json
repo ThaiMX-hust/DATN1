@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"C:\\Lab\\input\\sample.txt\" /v EnableSmartScreen /t REG_DWORD /d 0 /f",
+    "explanation": "Replaced the registry path with a benign lab placeholder file path using substitution, avoiding the suspicious registry key match."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v EnableSmartScreen /t REG_DWORD /d 0 /f /quiet",
+    "explanation": "Inserted a harmless flag '/quiet' using insertion, which may not trigger the Sigma rule's keyword match."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v NonGroupPolicyValue /t REG_DWORD /d 0 /f",
+    "explanation": "Substituted the suspicious registry value name with a non-matching benign name, avoiding the Sigma rule's value match."
+  }
+]

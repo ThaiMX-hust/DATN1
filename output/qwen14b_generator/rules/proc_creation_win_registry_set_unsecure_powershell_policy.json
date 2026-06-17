@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned\"",
+    "explanation": "Omission: Removed the registry path from the command line, which may avoid the Sigma string/field match."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force\"",
+    "explanation": "Insertion: Added the -Force flag, which may not be detected by the Sigma rule as it focuses on the registry path and execution policy values."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Verbose\"",
+    "explanation": "Substitution: Replaced the default behavior with a verbose option, which may not trigger the Sigma rule's detection criteria."
+  }
+]

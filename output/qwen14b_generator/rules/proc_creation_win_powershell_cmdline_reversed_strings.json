@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Process | Where-Object { $_.ProcessName -eq 'notepad' } | Format-List\"",
+    "explanation": "Insertion: Added quotes and a valid command that does not contain reversed strings. The Sigma rule may miss it because it does not include any reversed keywords."
+  },
+  {
+    "output": "pwsh.exe -Command \"Get-Service -Name 'Spooler' | Select-Object Status, StartType\"",
+    "explanation": "Substitution: Used 'pwsh.exe' instead of 'powershell.exe' and a valid command without reversed strings. The Sigma rule may miss it because it does not include any reversed keywords."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path 'C:\\Lab\\input\\' -Recurse | Where-Object { $_.Extension -eq '.txt' }\"",
+    "explanation": "Omission: Removed any reversed keywords and used a benign path. The Sigma rule may miss it because it does not include any reversed keywords."
+  }
+]

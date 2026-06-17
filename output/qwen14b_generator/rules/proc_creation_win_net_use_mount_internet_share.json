@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net use \\\\labserver\\share /user:labuser labpass",
+    "explanation": "Omission: Removed the 'http' keyword from the command line, which may prevent the Sigma rule's 'http' string match."
+  },
+  {
+    "output": "net use \\\\labserver\\share /user:labuser labpass /persistent:yes",
+    "explanation": "Insertion: Added a harmless '/persistent:yes' flag, which may obscure the 'http' keyword in the Sigma rule's 'CommandLine|contains' check."
+  },
+  {
+    "output": "net use \\\\labserver\\share /user:labuser labpass /yes",
+    "explanation": "Substitution: Replaced the 'http' keyword with a benign '/yes' flag, which may prevent the Sigma rule's 'http' string match."
+  }
+]

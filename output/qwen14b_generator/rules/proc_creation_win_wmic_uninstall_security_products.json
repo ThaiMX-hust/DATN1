@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic product where \"name='Test Product'\" call uninstall /nointeractive",
+    "explanation": "Omission: Removed the suspicious product name from the command line, which may avoid the Sigma rule's product name matching."
+  },
+  {
+    "output": "wmic product where name='Test Product' call uninstall /nointeractive",
+    "explanation": "Substitution: Replaced quotes with no quotes, which may avoid the Sigma rule's string matching if it relies on specific formatting."
+  },
+  {
+    "output": "wmic product where name='Test Product' call uninstall",
+    "explanation": "Omission: Removed the '/nointeractive' flag, which may avoid the Sigma rule's flag matching while keeping the core command structure."
+  }
+]

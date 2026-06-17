@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_csproduct get name,manufacturer /format:csv",
+    "explanation": "Reordering: The command reorders the arguments to avoid the 'csproduct' keyword in the CommandLine field, which may prevent the Sigma rule from matching."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_csproduct get name,manufacturer /format:csv",
+    "explanation": "Insertion: Adding whitespace and formatting options after 'wmic.exe' may obscure the 'csproduct' keyword in the CommandLine field, potentially evading the Sigma rule."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_csproduct get name,manufacturer /format:csv",
+    "explanation": "Substitution: Using equivalent syntax with /namespace and path parameters may avoid direct 'csproduct' detection while maintaining the same executable family and intent."
+  }
+]

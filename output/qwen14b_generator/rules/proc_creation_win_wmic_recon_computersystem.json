@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_computersystem get name,model,manufacturer /format:csv",
+    "explanation": "Reordering arguments; the Sigma rule may not detect reordered command-line parameters if the detection relies on a specific sequence."
+  },
+  {
+    "output": "wmic.exe -namespace \\root\\cimv2 -path win32_computersystem get name,model,manufacturer /format:csv",
+    "explanation": "Substitution; using alternative syntax for command-line options may bypass detection based on specific string matching."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_computersystem get name,model,manufacturer /format:csv > C:\\Lab\\out\\wmic_output.csv",
+    "explanation": "Insertion; adding a harmless redirection to a lab placeholder file may not trigger the Sigma rule if it focuses on the command-line string without checking output behavior."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msxsl.exe \"C:\\Lab\\input\\sample.xsl\" \"C:\\Lab\\out\\output.xml\"",
+    "explanation": "Omission: Removed the 'http' keyword from the command line, which may prevent the Sigma rule from matching the 'http' keyword in the CommandLine field."
+  },
+  {
+    "output": "msxsl.exe -s \"C:\\Lab\\input\\sample.xsl\" -o \"C:\\Lab\\out\\output.xml\"",
+    "explanation": "Substitution: Replaced the 'http' keyword with equivalent command-line options (-s and -o), which may prevent the Sigma rule from matching the 'http' keyword in the CommandLine field."
+  },
+  {
+    "output": "msxsl.exe \"C:\\Lab\\input\\sample.xsl\" \"C:\\Lab\\out\\output.xml\" -quiet",
+    "explanation": "Insertion: Added a harmless flag (-quiet) to the command line, which may prevent the Sigma rule from matching the 'http' keyword in the CommandLine field."
+  }
+]

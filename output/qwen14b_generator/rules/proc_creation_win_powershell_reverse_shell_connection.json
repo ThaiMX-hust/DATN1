@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.Net.Sockets.TcpClient]::new('127.0.0.1', 1234).GetStream().Write([System.Text.Encoding]::ASCII.GetBytes('Test')), [System.Text.Encoding]::ASCII.GetBytes('Test'))\"",
+    "explanation": "Insertion: Added quotes and escape characters to obfuscate the command-line string, which may bypass string-based detection."
+  },
+  {
+    "output": "pwsh.exe -Command \"[System.Net.Sockets.TcpClient]::new('127.0.0.1', 1234).GetStream().Write([System.Text.Encoding]::ASCII.GetBytes('Test')), [System.Text.Encoding]::ASCII.GetBytes('Test'))\"",
+    "explanation": "Substitution: Replaced 'powershell.exe' with 'pwsh.exe' (PowerShell Core), which may not be covered by the same detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Net.Sockets.TcpClient]::new('127.0.0.1', 1234).GetStream().Write([System.Text.Encoding]::ASCII.GetBytes('Test')), [System.Text.Encoding]::ASCII.GetBytes('Test'))\"",
+    "explanation": "Reordering: Reordered command-line arguments to change the parsing order, potentially avoiding pattern-based detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil.exe -addstore my C:\\Lab\\input\\sample.cer",
+    "explanation": "Replaces the suspicious path with a benign lab placeholder using path normalization (recoding), avoiding the Sigma rule's suspicious path detection."
+  },
+  {
+    "output": "nslookup.exe -q=txt example.com 8.8.8.8",
+    "explanation": "Omission of the full path to nslookup.exe, assuming it is in the system PATH, which may avoid the Sigma rule's ParentImage detection."
+  },
+  {
+    "output": "schtasks.exe /query /fo LIST /V",
+    "explanation": "Removes the full path to schtasks.exe, assuming it is in the system PATH, which may avoid the Sigma rule's ParentImage detection."
+  }
+]

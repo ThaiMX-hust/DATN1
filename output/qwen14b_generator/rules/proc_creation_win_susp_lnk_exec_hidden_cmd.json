@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c echo \"Test command\" > C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission of whitespace padding characters to avoid triggering the Sigma rule's detection of non-printable whitespace in the command line."
+  },
+  {
+    "output": "cmd.exe /c \"echo Test command\" > C:\\Lab\\out\\archive.7z",
+    "explanation": "Insertion of quotes to restructure the command line syntax, avoiding the use of non-printable whitespace characters that match the Sigma rule's suspicious indicators."
+  },
+  {
+    "output": "cmd.exe /c echo Test command > C:\\Lab\\out\\archive.7z",
+    "explanation": "Simplification of the command line by removing unnecessary elements, ensuring no whitespace padding characters are present to bypass the Sigma rule's detection criteria."
+  }
+]

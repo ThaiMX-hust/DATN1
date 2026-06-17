@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Runscripthelper.exe -s \"C:\\Lab\\input\\sample.txt\" -o \"C:\\Lab\\out\\output.log\"",
+    "explanation": "Insertion of quotes and harmless delimiters to avoid the 'surfacecheck' keyword, which may bypass the Sigma rule's CommandLine|contains check."
+  },
+  {
+    "output": "Runscripthelper.exe -s C:\\Lab\\input\\sample.txt -o C:\\Lab\\out\\output.log",
+    "explanation": "Omission of spaces and quotes to change the command-line structure, potentially avoiding the 'surfacecheck' keyword match."
+  },
+  {
+    "output": "Runscripthelper.exe -o \"C:\\Lab\\out\\output.log\" -s \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering of arguments to change the command-line structure, potentially avoiding the 'surfacecheck' keyword match."
+  }
+]

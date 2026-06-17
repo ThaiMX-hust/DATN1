@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Office\\16.0\\Outlook\\Security /v EnableUnsafeClientMailRules /t REG_DWORD /d 1 /f",
+    "explanation": "Reordering: The command uses a registry modification with a different syntax structure that may not trigger the Sigma string match."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Office\\16.0\\Outlook\\Security /d 1 /v EnableUnsafeClientMailRules /t REG_DWORD /f",
+    "explanation": "Substitution: The command uses equivalent syntax with different argument ordering, which may not be detected by the Sigma rule's string-based detection."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Office\\16.0\\Outlook\\Security /v EnableUnsafeClientMailRules /t REG_DWORD /d 1 /f",
+    "explanation": "Insertion: The command includes spaces or delimiters that may not be captured by the Sigma rule's string-based detection."
+  }
+]

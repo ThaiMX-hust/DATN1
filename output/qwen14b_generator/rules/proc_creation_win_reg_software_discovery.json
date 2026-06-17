@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion",
+    "explanation": "Reordering: Reordered the command-line arguments to potentially avoid the Sigma rule's string matching by altering the structure."
+  },
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion | findstr /i \"svcVersion\"",
+    "explanation": "Insertion: Added a pipeline and findstr command to filter output, which might avoid matching the suspicious string in the Sigma rule."
+  },
+  {
+    "output": "reg query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion > C:\\Lab\\out\\reg_output.txt",
+    "explanation": "Substitution: Redirected output to a lab-safe file path, which may not be detected by the Sigma rule as it focuses on the command line itself."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo Testing",
+    "explanation": "Omission: Removed the suspicious 'whoami' parameter while keeping the command line syntactically valid and benign."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"echo Testing\"",
+    "explanation": "Insertion: Added quotes around the command to avoid triggering the 'whoami' detection without altering the command's intent."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c dir C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the suspicious 'whoami' with a benign 'dir' command that still uses a lab placeholder file, avoiding the Sigma rule trigger."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "REG ADD \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v AtomicOperator$ /t REG_DWORD /d 0",
+    "explanation": "Reordering: The command line reorders the arguments, which may cause the Sigma rule's string matching to miss the reordered elements."
+  },
+  {
+    "output": "REG ADD \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v AtomicOperator$ /d 0 /t REG_DWORD",
+    "explanation": "Reordering: The command line reorders the arguments, which may cause the Sigma rule's string matching to miss the reordered elements."
+  },
+  {
+    "output": "REG ADD \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v AtomicOperator$ /d 0",
+    "explanation": "Omission: The command line omits the '/t REG_DWORD' parameter, which may cause the Sigma rule's string matching to miss the omitted element."
+  }
+]

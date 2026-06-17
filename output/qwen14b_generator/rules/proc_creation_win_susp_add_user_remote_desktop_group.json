@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net localgroup \"Remote Desktop Users\" TEST-HOST /add",
+    "explanation": "Reordering: The command-line arguments are reordered, but the suspicious pattern may still be detected by the Sigma rule."
+  },
+  {
+    "output": "net localgroup /add \"Remote Desktop Users\" TEST-HOST",
+    "explanation": "Reordering: The command-line arguments are reordered, but the suspicious pattern may still be detected by the Sigma rule."
+  },
+  {
+    "output": "net localgroup \"Remote Desktop Users\" TEST-HOST /add",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

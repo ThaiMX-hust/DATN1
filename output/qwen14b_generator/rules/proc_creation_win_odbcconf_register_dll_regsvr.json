@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /S {REGSVR \"C:\\Lab\\input\\sample.dll\"}",
+    "explanation": "Omission: Removed the '/A' flag, which may not be required for the 'REGSVR' action, potentially avoiding the 'REGSVR' keyword match."
+  },
+  {
+    "output": "odbcconf.exe /S /A {REGSVR \"C:\\Lab\\input\\sample.dll\"}",
+    "explanation": "Insertion: Added quotes around the DLL path, which may alter parsing and avoid the 'REGSVR' keyword match."
+  },
+  {
+    "output": "odbcconf.exe /A {REGSVR \"C:\\Lab\\input\\sample.dll\"}",
+    "explanation": "Reordering: Changed the order of flags, which may affect how the command line is parsed and avoid the 'REGSVR' keyword match."
+  }
+]

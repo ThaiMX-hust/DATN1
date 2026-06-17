@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c md \"C:\\Lab\\input\\hidden_dir::$index_allocation\" & echo test > \"C:\\Lab\\input\\hidden_dir::$index_allocation\\test.txt\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing while still using the '::$index_allocation' stream, which may be missed if the Sigma rule relies on exact string matching without proper escaping."
+  },
+  {
+    "output": "cmd.exe /c md C:\\Lab\\input\\hidden_dir::$index_allocation & echo test > C:\\Lab\\input\\hidden_dir::$index_allocation\\test.txt",
+    "explanation": "Omission: Removed quotes to test if the Sigma rule relies on quoted strings, which may not be enforced in all parsers, potentially bypassing the rule."
+  },
+  {
+    "output": "cmd.exe /c md C:\\Lab\\input\\hidden_dir & echo test > C:\\Lab\\input\\hidden_dir\\test.txt",
+    "explanation": "Substitution: Replaced the '::$index_allocation' stream with a normal directory to avoid triggering the Sigma rule, while maintaining the same command-line structure and intent."
+  }
+]

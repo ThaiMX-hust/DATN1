@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ruby -e \"puts 'Hello World'\" C:\\Lab\\input\\sample.txt",
+    "explanation": "Insertion: Adding a file path after the -e flag may bypass the rule by making the command line longer and less likely to trigger the ' -e' string match."
+  },
+  {
+    "output": "ruby -e puts 'Hello World' C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: Removing quotes around the string may bypass the rule by changing the syntax slightly while keeping the same benign test behavior."
+  },
+  {
+    "output": "ruby -e 'puts \"Hello World\"' C:\\Lab\\input\\sample.txt",
+    "explanation": "Encoding: Using escaped quotes inside the string may bypass the rule by changing the string representation without altering the tested behavior."
+  }
+]

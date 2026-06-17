@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 share \"\\test\\share\" /delete",
+    "explanation": "Insertion of quotes around the share name to avoid triggering the 'share' and '/delete' string match, using insertion mutation technique."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 share \"\\test\\share\" -delete",
+    "explanation": "Substitution of '/delete' with '-delete' to avoid the '/delete' string match, using substitution mutation technique."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\net1 -share \"\\test\\share\" /delete",
+    "explanation": "Reordering of arguments to avoid the 'share' keyword match, using reordering mutation technique."
+  }
+]

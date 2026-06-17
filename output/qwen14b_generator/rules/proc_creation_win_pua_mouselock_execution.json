@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"C:\\Lab\\input\\mouse_lock_sim.exe\" -s \"C:\\Lab\\out\\test_output.txt\"",
+    "explanation": "Reordering and substitution: Reordered the command-line arguments and used a benign placeholder executable and output path to avoid matching 'Mouse Lock_' in the command line."
+  },
+  {
+    "output": "start-process -Path \"C:\\Lab\\input\\mouse_lock_sim.exe\" -ArgumentList \"-s C:\\Lab\\out\\test_output.txt\" -Verb RunAs",
+    "explanation": "Recoding: Used a PowerShell command with alternative syntax and benign paths to avoid the suspicious 'Mouse Lock_' string."
+  },
+  {
+    "output": "C:\\Lab\\input\\mouse_lock_sim.exe -s C:\\Lab\\out\\test_output.txt",
+    "explanation": "Omission: Removed any additional parameters or flags that might trigger the 'Mouse Lock_' string while keeping the same executable family and test intent."
+  }
+]

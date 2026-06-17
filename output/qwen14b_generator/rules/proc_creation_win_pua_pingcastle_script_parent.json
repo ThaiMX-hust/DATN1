@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Tools\\PingCastle.exe --healthcheck --level Full",
+    "explanation": "Reordering: The command line arguments are reordered, which may change the parsing order and avoid matching the Sigma rule's CommandLine|contains criteria."
+  },
+  {
+    "output": "C:\\Tools\\PingCastle.exe --level Full --healthcheck",
+    "explanation": "Reordering: The command line arguments are reordered, which may change the parsing order and avoid matching the Sigma rule's CommandLine|contains criteria."
+  },
+  {
+    "output": "C:\\Tools\\PingCastle.exe --level Full --healthcheck --no-enum-limit",
+    "explanation": "Insertion: An additional non-sensitive flag is inserted, which may change the parsing and avoid matching the Sigma rule's CommandLine|contains criteria."
+  }
+]

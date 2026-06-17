@@ -1,0 +1,14 @@
+[
+  {
+    "output": "MpCmdRun.exe -RemoveDefinitions -All",
+    "explanation": "The command line contains the suspicious indicators ' -RemoveDefinitions' and ' -All' which would trigger the Sigma rule."
+  },
+  {
+    "output": "MpCmdRun.exe -All -RemoveDefinitions",
+    "explanation": "Reordering the arguments may change the parsing behavior, but the suspicious indicators are still present and may be detected by the Sigma rule."
+  },
+  {
+    "output": "MpCmdRun.exe -RemoveDefinitions -All -Test",
+    "explanation": "Adding an additional benign argument may not change the detection logic of the Sigma rule, as it still contains the suspicious indicators."
+  }
+]

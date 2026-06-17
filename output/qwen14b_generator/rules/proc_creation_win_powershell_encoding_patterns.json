@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host 'Hello World'\"",
+    "explanation": "Omission: Removed encoding methods and suspicious command-line elements to avoid triggering the Sigma rule's detection of encoded PowerShell patterns."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Date\"",
+    "explanation": "Reordering: Reordered command-line arguments to eliminate suspicious patterns while maintaining a benign test intent."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process notepad.exe\"",
+    "explanation": "Substitution: Replaced suspicious encoding methods with a harmless command that does not involve encoded strings or suspicious functions."
+  }
+]

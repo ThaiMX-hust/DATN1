@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Lab\\tools\\squirrel.exe --processStart \"C:\\Lab\\input\\sample.txt\" --log-level=info",
+    "explanation": "Insertion: Added a harmless log-level parameter and replaced the target with a lab placeholder to avoid triggering the 'processStart' keyword match."
+  },
+  {
+    "output": "C:\\Lab\\tools\\squirrel.exe --createShortcut \"C:\\Lab\\input\\sample.log\" --no-verify",
+    "explanation": "Substitution: Replaced the original suspicious command-line argument with a lab placeholder and added a benign flag to avoid matching the Sigma rule's 'createShortcut' trigger."
+  },
+  {
+    "output": "C:\\Lab\\tools\\squirrel.exe --help",
+    "explanation": "Omission: Removed all command-line arguments, reducing the likelihood of matching the Sigma rule's 'processStart' or 'createShortcut' triggers while keeping the same executable."
+  }
+]

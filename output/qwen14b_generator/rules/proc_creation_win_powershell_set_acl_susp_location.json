@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-Acl -AclObject (Get-Acl -Path 'C:\\Lab\\input\\sample.txt') -Path 'C:\\Lab\\out\\archive.7z'\"",
+    "explanation": "Reordering: The command reorders the parameters to avoid the suspicious 'Set-Acl' and 'C:\\Windows' strings in the Sigma rule's selection_paths."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Acl -AclObject (Get-Acl -Path 'C:\\Lab\\input\\sample.txt') -Path 'C:\\Lab\\out\\archive.7z'\"",
+    "explanation": "Substitution: Uses 'pwsh.exe' instead of 'powershell.exe' and replaces the suspicious path with a benign lab placeholder to avoid matching the Sigma rule's selection_img and selection_paths."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Acl -AclObject (Get-Acl -Path 'C:\\Lab\\input\\sample.txt') -Path 'C:\\Lab\\out\\archive.7z' -Verbose\"",
+    "explanation": "Insertion: Adds the '-Verbose' flag to the command line without altering the core behavior, which may not trigger the Sigma rule's string-based detection."
+  }
+]

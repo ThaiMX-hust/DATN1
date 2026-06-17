@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | Out-File C:\\Lab\\out\\output.txt\"",
+    "explanation": "Omission: Removed the web request and data exfiltration components while keeping the benign intent of reading and writing files."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | Compress-Archive -DestinationPath C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Substitution: Replaced the web request with a local archive operation, avoiding the suspicious web exfiltration pattern."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Lab\\input\\sample.txt | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString | Out-File C:\\Lab\\out\\encrypted.txt\"",
+    "explanation": "Insertion: Added encryption operations that do not involve web requests, thereby avoiding the Sigma rule's detection criteria."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Open Port 3389\" dir=in action=allow protocol=TCP localport=3389",
+    "explanation": "Reordering: The command reorders the arguments to avoid the 'portopening' keyword, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Open Port 3389\" dir=in action=allow protocol=TCP localport=3389",
+    "explanation": "Substitution: The command uses 'add rule' instead of 'add portopening' to avoid the suspicious keyword 'portopening' in the Sigma rule."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Open Port 3389\" dir=in action=allow protocol=TCP localport=3389",
+    "explanation": "Insertion: The command inserts quotes and spaces to change the parsing structure, potentially avoiding the Sigma rule's string match."
+  }
+]

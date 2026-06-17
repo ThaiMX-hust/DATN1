@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths\" /v TestValue /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Reordering: The command line uses the same registry key but reorders the arguments to avoid matching the suspicious string in the Sigma rule."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths /v TestValue /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Omission: The command line omits the quotes around the registry key path, which may not trigger the Sigma rule's string match."
+  },
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths /v TestValue /t REG_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Substitution: The command line uses the same registry key path but with equivalent syntax, which may not be detected by the Sigma rule if it relies on specific string formatting."
+  }
+]

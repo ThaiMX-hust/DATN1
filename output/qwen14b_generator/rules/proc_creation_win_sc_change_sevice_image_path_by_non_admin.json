@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc config \"ServiceName\" binPath= \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion of quotes around the path to avoid triggering the 'binPath' keyword match, as the Sigma rule may not detect quoted paths."
+  },
+  {
+    "output": "sc config ServiceName binPath= C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission of quotes around the path, relying on the program's ability to parse the path without quotes, potentially bypassing the Sigma rule's string matching."
+  },
+  {
+    "output": "sc config ServiceName binpath= C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution of 'binPath' with 'binpath' (lowercase) to avoid the keyword match in the Sigma rule, which may be case-sensitive or not."
+  }
+]

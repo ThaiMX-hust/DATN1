@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Recurse 'C:\\Lab\\input\\sample.txt' | Select-String '\"password\"'\"",
+    "explanation": "Substitution: Replaced the suspicious file path 'ConsoleHost_history.txt' with a benign placeholder 'sample.txt' to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Recurse 'C:\\Lab\\input\\sample.log' | Select-String '\"key\"'\"",
+    "explanation": "Substitution: Replaced the suspicious file path 'ConsoleHost_history.txt' with a benign placeholder 'sample.log' to avoid triggering the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Recurse 'C:\\Lab\\input\\archive.7z' | Select-String '\"pwd\"'\"",
+    "explanation": "Substitution: Replaced the suspicious file path 'ConsoleHost_history.txt' with a benign placeholder 'archive.7z' to avoid triggering the Sigma rule."
+  }
+]

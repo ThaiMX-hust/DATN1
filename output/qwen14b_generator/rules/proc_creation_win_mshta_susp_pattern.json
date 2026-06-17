@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mshta.exe \"C:\\Lab\\input\\sample.htm\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may prevent the Sigma rule from detecting the '.htm' extension in the command line."
+  },
+  {
+    "output": "mshta.exe C:\\Lab\\input\\sample.htm",
+    "explanation": "Omission: Removed quotes, relying on the command-line parser to handle the path, which may avoid triggering the Sigma rule's string match for '.htm'."
+  },
+  {
+    "output": "mshta.exe C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the '.htm' extension with '.txt', which may prevent the Sigma rule from detecting the suspicious file type in the command line."
+  }
+]

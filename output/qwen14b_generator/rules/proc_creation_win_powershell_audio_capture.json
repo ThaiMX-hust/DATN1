@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe & { $mic = Get-AudioDevice -Recording; Set-AudioDevice -ID $mic.ID; Start-Sleep -Seconds 5 }",
+    "explanation": "Reordering: Reordered the command-line arguments to separate the pipeline with a semicolon, which may not trigger the Sigma rule's string matching."
+  },
+  {
+    "output": "powershell.exe -Command & { $mic = Get-AudioDevice -Recording; Set-AudioDevice -ID $mic.ID; Start-Sleep -Seconds 5 }",
+    "explanation": "Insertion: Inserted the -Command parameter to explicitly define the script block, which may alter the parsing and avoid string matching."
+  }
+]

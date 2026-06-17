@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wt -p \"C:\\Lab\\input\\sample.txt\" -c \"C:\\Lab\\out\\archive.7z\"",
+    "explanation": "Reordering and substitution: Reordered arguments and used a benign placeholder path to avoid matching the suspicious parent image and command line patterns."
+  },
+  {
+    "output": "wt -p C:\\Lab\\input\\sample.txt -c C:\\Lab\\out\\archive.7z",
+    "explanation": "Omission: Removed optional elements and used benign paths to avoid matching the suspicious command line patterns."
+  },
+  {
+    "output": "wt -p C:\\Lab\\input\\sample.txt -c C:\\Lab\\out\\archive.7z -w 10",
+    "explanation": "Insertion: Added a harmless width parameter to the command line to avoid matching the suspicious command line patterns."
+  }
+]

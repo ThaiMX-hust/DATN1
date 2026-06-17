@@ -1,0 +1,14 @@
+[
+  {
+    "output": "code --tunnel service --log C:\\Lab\\out\\tunnel-service.log",
+    "explanation": "Omission: Removed the 'internal-run' argument, which is not required for the test and avoids the Sigma rule's 'internal-run' keyword match."
+  },
+  {
+    "output": "code --tunnel service --log C:\\Lab\\out\\tunnel-service.log --no-sandbox",
+    "explanation": "Insertion: Added a harmless '--no-sandbox' flag, which does not affect the command's intent but changes the command line structure to avoid matching the Sigma rule's exact string."
+  },
+  {
+    "output": "code --tunnel service --log C:\\Lab\\out\\tunnel-service.log --user-data-dir=C:\\Lab\\input\\user-data",
+    "explanation": "Substitution: Replaced the default user data directory with a lab placeholder, which changes the command line structure without altering the test intent, potentially avoiding the Sigma rule's match."
+  }
+]

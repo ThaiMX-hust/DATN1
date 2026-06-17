@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regini.exe \"C:\\Lab\\input\\sample.reg\"",
+    "explanation": "Insertion: Added quotes around the path to ensure proper parsing, which may prevent the Sigma rule's regex from matching the command line."
+  },
+  {
+    "output": "regini.exe C:\\Lab\\input\\sample.reg",
+    "explanation": "Omission: Removed any potential suspicious characters or formatting that might trigger the Sigma rule's detection logic."
+  },
+  {
+    "output": "regini -i \"C:\\Lab\\input\\sample.reg\"",
+    "explanation": "Substitution: Replaced the default command-line syntax with an equivalent one using a flag, which may avoid matching the Sigma rule's string-based detection."
+  }
+]

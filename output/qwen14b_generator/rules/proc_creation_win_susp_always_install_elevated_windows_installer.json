@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msiexec.exe /i \"C:\\Lab\\input\\sample.msi\" /quiet",
+    "explanation": "Reordering: The command line does not include the 'tmp' extension or 'System' integrity level, thus avoiding the Sigma rule's selection_image_1 and selection_image_2 criteria."
+  },
+  {
+    "output": "msiexec.exe /i C:\\Lab\\input\\sample.msi /quiet",
+    "explanation": "Omission: The command line omits the 'tmp' extension, which is a key part of the Sigma rule's selection_image_1 criteria."
+  },
+  {
+    "output": "msiexec.exe /i \"C:\\Lab\\input\\sample.msi\" /quiet /passive",
+    "explanation": "Insertion: Additional flags are inserted, but the command line still avoids the 'tmp' extension and 'System' integrity level, thus avoiding the Sigma rule's selection_image_1 and selection_image_2 criteria."
+  }
+]

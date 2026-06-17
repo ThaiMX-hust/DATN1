@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c wmic /node:localhost process call create \"notepad.exe\"",
+    "explanation": "Omission: Removed the suspicious command-line arguments to avoid triggering the 'process call create' detection, while maintaining the use of wmic.exe for process creation."
+  },
+  {
+    "output": "cmd.exe /c wmic /node:127.0.0.1 process call create \"calc.exe\"",
+    "explanation": "Substitution: Replaced the malicious payload with a benign command (calc.exe) while preserving the structure of the command line to test the rule's sensitivity."
+  },
+  {
+    "output": "cmd.exe /c wmic /node:localhost process call create \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: Replaced the suspicious command-line argument with a benign file path, ensuring the command line remains syntactically valid and avoids triggering the Sigma rule."
+  }
+]

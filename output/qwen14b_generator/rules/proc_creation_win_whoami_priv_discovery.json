@@ -1,0 +1,14 @@
+[
+  {
+    "output": "whoami -priv",
+    "explanation": "Reordering: The command line arguments are reordered, which may prevent the Sigma rule from matching the ' /priv' or ' -priv' string."
+  },
+  {
+    "output": "whoami -priv 2> C:\\Lab\\out\\error.log",
+    "explanation": "Insertion: Adding a harmless redirection to a lab output file may prevent the Sigma rule from matching the ' /priv' or ' -priv' string in the command line."
+  },
+  {
+    "output": "whoami -priv | findstr /c:\"Privilege\" > C:\\Lab\\out\\result.txt",
+    "explanation": "Insertion: Adding a pipeline to a benign lab command may prevent the Sigma rule from matching the ' /priv' or ' -priv' string in the command line."
+  }
+]

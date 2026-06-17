@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -Command \"Get-Content C:\\Lab\\input\\sample.txt | ConvertTo-SecureString -Key (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)\"",
+    "explanation": "Insertion: Added benign command-line context and a placeholder file path to avoid matching the encoded string patterns in the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"Write-Output 'This is a test'\"",
+    "explanation": "Omission: Removed any encoded or obfuscated content entirely, replacing it with a simple, non-malicious command that does not match the Sigma rule's suspicious patterns."
+  },
+  {
+    "output": "powershell -Command \"Get-ChildItem C:\\Lab\\input\\sample.log | Format-List\"",
+    "explanation": "Reordering: Reordered the command to focus on a benign file operation, ensuring no encoded strings or suspicious PowerShell patterns are present."
+  }
+]

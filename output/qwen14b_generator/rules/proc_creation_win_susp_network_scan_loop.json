@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c for /l %i in (1,1,254) do ping -n 1 -w 100 192.168.1.%i",
+    "explanation": "Omission: Removed the quotes around the command line to bypass the 'for ' string match."
+  },
+  {
+    "output": "cmd.exe /c for /l %%i in (1,1,254) do ping -n 1 -w 100 192.168.1.%%i",
+    "explanation": "Insertion: Added extra spaces and escape characters to modify the command line structure without changing its intent."
+  },
+  {
+    "output": "cmd.exe /c for /l %%i in (1,1,254) do ping -n 1 -w 100 192.168.1.%%i > C:\\Lab\\out\\results.txt",
+    "explanation": "Reordering: Added a harmless redirection to a lab placeholder file to avoid triggering the Sigma rule's string match."
+  }
+]

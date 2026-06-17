@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-MpPreference -DisableArchiveScanning $false\"",
+    "explanation": "Omission: Removed the suspicious value '$true' which is a Sigma indicator for disabling Defender features."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring 0\"",
+    "explanation": "Substitution: Replaced the suspicious value '1' with '0', which may not trigger the Sigma rule's value detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-MpPreference -DisableBehaviorMonitoring $false\"",
+    "explanation": "Insertion: Added quotes and a space around the parameter to potentially bypass string matching in the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "WScript.exe \"C:\\Lab\\input\\sample.vbs\"",
+    "explanation": "Reordering and substitution: Replaced the suspicious folder path with a benign lab placeholder, which may avoid the folder-based detection without changing the script interpreter execution behavior."
+  },
+  {
+    "output": "WScript.exe C:\\Lab\\input\\sample.vbs",
+    "explanation": "Omission: Removed quotes around the script path, which may avoid detection based on specific parsing patterns while still executing the script interpreter."
+  },
+  {
+    "output": "WScript.exe -ExecutionPolicy Bypass C:\\Lab\\input\\sample.vbs",
+    "explanation": "Insertion: Added a common flag that may be parsed differently by the Sigma rule, potentially avoiding detection based on flag content matching."
+  }
+]

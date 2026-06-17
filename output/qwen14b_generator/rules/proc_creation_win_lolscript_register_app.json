@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cscript \"C:\\Lab\\input\\sample.vbs\" -register",
+    "explanation": "Insertion: Added quotes around the script path to avoid triggering the Sigma rule's string match on the command line."
+  },
+  {
+    "output": "wscript C:\\Lab\\input\\sample.vbs -register",
+    "explanation": "Omission: Removed spaces in the command line to avoid triggering the Sigma rule's string match on the command line."
+  },
+  {
+    "output": "cscript -register C:\\Lab\\input\\sample.vbs",
+    "explanation": "Reordering: Changed the order of the command line arguments to avoid triggering the Sigma rule's string match on the command line."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"echo Get-Process | clip Get-Clipboard | iex\"",
+    "explanation": "Insertion: Added -Command flag and quotes to reformat the command line, potentially avoiding the 'Get-Clipboard' string match."
+  },
+  {
+    "output": "powershell.exe -Command {echo Get-Process | clip Get-Clipboard | iex}",
+    "explanation": "Substitution: Replaced & { with -Command { to reformat the command line, potentially avoiding the 'Get-Clipboard' string match."
+  },
+  {
+    "output": "powershell.exe -Command \"echo Get-Process | clip Get-Clipboard | iex\" -NoProfile",
+    "explanation": "Insertion: Added -NoProfile flag to the command line, potentially avoiding the 'Get-Clipboard' string match without changing the core behavior."
+  }
+]

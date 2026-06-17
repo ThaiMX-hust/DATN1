@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msdt.exe -cab \"C:\\Lab\\input\\sample.cab\"",
+    "explanation": "Insertion: Added quotes around the path to ensure correct parsing while using a benign lab placeholder, which may avoid triggering the Sigma rule's path-based detection."
+  },
+  {
+    "output": "msdt.exe -cab C:\\Lab\\input\\sample.cab",
+    "explanation": "Encoding: Used a normalized path with backslashes, which may bypass the Sigma rule's string matching if it's sensitive to path encoding."
+  },
+  {
+    "output": "msdt.exe -cab C:\\Lab\\input\\sample.txt",
+    "explanation": "Substitution: Replaced the .cab extension with .txt, changing the file type to avoid the Sigma rule's extension-based detection."
+  }
+]

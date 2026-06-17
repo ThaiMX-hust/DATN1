@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Substitution: Replaced the suspicious target path with a benign lab placeholder to avoid matching the 'ControlSet' and 'Services' strings in the Sigma rule."
+  },
+  {
+    "output": "reg add HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST /v ImagePath /t REG_EXPAND_SZ /d C:\\Lab\\input\\sample.txt /f",
+    "explanation": "Omission: Removed the '.exe' extension from 'reg.exe' to avoid matching the 'reg ' string in the Sigma rule."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\System\\CurrentControlSet\\Services\\TEST-HOST\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\Lab\\input\\sample.txt\" /f",
+    "explanation": "Insertion: Added quotes around the path and used a benign lab placeholder to avoid matching the 'ControlSet' and 'Services' strings in the Sigma rule."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\nslookup.exe -q=txt example.com 8.8.8.8",
+    "explanation": "Reordering: Reordered the command-line arguments to bypass the Sigma rule's CommandLine|contains check for ' -q=txt ' by altering spacing."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\nslookup.exe -querytype=txt example.com 8.8.8.8",
+    "explanation": "Substitution: Replaced ' -q=txt ' with ' -querytype=txt ' to avoid the Sigma rule's CommandLine|contains check for ' -q=txt '."
+  },
+  {
+    "output": "C:\\WINDOWS\\system32\\nslookup.exe -q=txt example.com 8.8.8.8 -type=txt",
+    "explanation": "Insertion: Added an extraneous '-type=txt' argument to the command line, which does not affect the nslookup behavior but may bypass the Sigma rule's CommandLine|contains check."
+  }
+]

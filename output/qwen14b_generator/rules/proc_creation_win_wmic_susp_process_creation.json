@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic process call create \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Reordering: The command reorders the arguments to avoid the suspicious 'process call create' string sequence, which may bypass the Sigma rule's string matching."
+  },
+  {
+    "output": "wmic process call create C:\\Lab\\input\\sample.txt",
+    "explanation": "Omission: The command omits quotes around the path, which may bypass the Sigma rule's string matching if it relies on quoted arguments as an indicator."
+  },
+  {
+    "output": "wmic process call create C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: The command replaces the suspicious target with a benign placeholder, maintaining the same executable family and intent while avoiding the Sigma rule's suspicious path indicators."
+  }
+]

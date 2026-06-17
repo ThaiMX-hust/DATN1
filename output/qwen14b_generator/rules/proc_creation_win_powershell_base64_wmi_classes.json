@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_ShadowCopy | ConvertTo-Json\"",
+    "explanation": "Insertion: Added quotes and ConvertTo-Json to alter the command structure, potentially avoiding the base64 string match."
+  },
+  {
+    "output": "pwsh.exe -Command Get-WmiObject -Class Win32_ScheduledJob",
+    "explanation": "Substitution: Replaced the executable path with 'pwsh.exe' and omitted the base64 encoded string, altering the command line structure."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_Process\"",
+    "explanation": "Omission: Removed the base64 encoded string and used a different WMI class, changing the command line to avoid the Sigma rule's detection."
+  }
+]

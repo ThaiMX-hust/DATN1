@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Program Files\\WinRAR\\rar.exe\" a C:\\Lab\\out\\archive.7z C:\\Lab\\input\\sample.txt",
+    "explanation": "Reordering and substitution: Changed the target file extension from .dmp to .txt and replaced the output archive extension from .rar to .7z. This avoids matching the suspicious extensions in the Sigma rule."
+  },
+  {
+    "output": "\"C:\\Program Files\\WinRAR\\rar.exe\" a C:\\Lab\\out\\archive.rar C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced the .dmp file with a .log file. This avoids the suspicious extension while keeping the same executable and action."
+  },
+  {
+    "output": "\"C:\\Program Files\\WinRAR\\rar.exe\" a C:\\Lab\\out\\archive.rar C:\\Lab\\input\\sample.txt C:\\Lab\\input\\sample.log",
+    "explanation": "Insertion: Added an additional benign file to the command line. This changes the structure without removing the benign intent, potentially avoiding the rule's pattern match."
+  }
+]

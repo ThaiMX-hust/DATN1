@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\WINDOWS\\system32\\mstsc.exe /v:THAIMX",
+    "explanation": "Omission: Removed quotes around the executable path, which may bypass the Sigma rule's detection of quoted command lines."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\mstsc.exe\" /v:THAIMX /f",
+    "explanation": "Insertion: Added an additional harmless flag '/f' which does not affect the detection logic but changes the command line structure."
+  },
+  {
+    "output": "mstsc.exe /v:THAIMX",
+    "explanation": "Omission: Removed the full path to the executable, relying on the system PATH environment variable, which may bypass the Sigma rule's detection of full paths."
+  }
+]

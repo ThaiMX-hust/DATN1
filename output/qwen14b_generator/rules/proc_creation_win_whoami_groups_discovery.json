@@ -1,0 +1,14 @@
+[
+  {
+    "output": "whoami.exe /groups",
+    "explanation": "The command uses the /groups flag which is directly matched by the Sigma rule's ' /groups' pattern."
+  },
+  {
+    "output": "whoami.exe -groups",
+    "explanation": "The command uses the -groups flag instead of /groups, which may not be matched by the Sigma rule's ' /groups' pattern."
+  },
+  {
+    "output": "whoami.exe /g",
+    "explanation": "The command uses the abbreviated /g flag instead of /groups, which may not be matched by the Sigma rule's ' /groups' pattern."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe,RunDll_ShellExecuteW C:\\Lab\\input\\sample.txt,open",
+    "explanation": "Insertion: Added a space and a benign placeholder path to avoid matching the 'RunDll_ShellExecuteW' string directly in the command line."
+  },
+  {
+    "output": "rundll32.exe,RunDll_ShellExecuteW \"C:\\Lab\\input\\sample.txt\" open",
+    "explanation": "Insertion: Added quotes and a space to reformat the command line, potentially altering the string matching behavior of the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe,RunDll_ShellExecuteW C:\\Lab\\input\\sample.txt,open,open",
+    "explanation": "Insertion: Added an extra argument to the command line, which may change the parsing and string matching behavior of the Sigma rule."
+  }
+]

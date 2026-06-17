@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\SecurityCenter2 Path Software Get Name /Format:List",
+    "explanation": "Reordering: The command reorders the arguments to avoid matching the 'AntiVirusProduct', 'AntiSpywareProduct', or 'FirewallProduct' strings in the CommandLine field."
+  },
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\SecurityCenter2 Path Software Get Name /Format:List /User:Administrator /Password:Passw0rd",
+    "explanation": "Insertion: Additional flags are inserted, but the core command remains unchanged. The Sigma rule may not capture this due to the added parameters."
+  },
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\SecurityCenter2 Path Software Get Name /Format:List /Output:C:\\Lab\\out\\software_list.txt",
+    "explanation": "Substitution: The command redirects output to a lab-safe file, which may not trigger the Sigma rule as it avoids the original suspicious behavior."
+  }
+]

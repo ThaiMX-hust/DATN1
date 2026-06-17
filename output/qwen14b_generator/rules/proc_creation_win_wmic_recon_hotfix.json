@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_quickfixengineering get HotFixID /format:csv",
+    "explanation": "Reordering: The command reorders the arguments to avoid the ' qfe' string match, potentially bypassing the Sigma rule's detection based on command-line content."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_quickfixengineering get HotFixID /format:csv",
+    "explanation": "Substitution: Replacing 'qfe' with the full path 'win32_quickfixengineering' achieves the same purpose without triggering the ' qfe' string match in the Sigma rule."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\cimv2 path win32_quickfixengineering get HotFixID /format:csv",
+    "explanation": "Insertion: Adding spaces and explicit namespace paths may alter the parsing context, making the ' qfe' string less likely to be matched by the Sigma rule's command-line content check."
+  }
+]

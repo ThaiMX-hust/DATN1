@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"C:\\Lab\\input\\sample.txt\" /sc once /ru \"NT AUTHORITY\\SYSTEM\" /f",
+    "explanation": "Reordering: Reordered the /sc and /ru parameters to avoid the suspicious ' ONLOGON ' or ' ONSTART ' strings in the CommandLine field, which may be missed by the Sigma rule."
+  },
+  {
+    "output": "schtasks /create /tn TestTask /tr \"C:\\Lab\\input\\sample.txt\" /sc once /ru \"NT AUTHORITY\\SYSTEM\" /f",
+    "explanation": "Omission: Removed quotes around the task name to avoid the suspicious ' ONLOGON ' or ' ONSTART ' strings in the CommandLine field, which may be missed by the Sigma rule."
+  },
+  {
+    "output": "schtasks /create /tn \"TestTask\" /tr \"C:\\Lab\\input\\sample.txt\" /sc once /ru \"NT AUTHORITY\\SYSTEM\" /f",
+    "explanation": "Insertion: Inserted a space after the /sc parameter to avoid the suspicious ' ONLOGON ' or ' ONSTART ' strings in the CommandLine field, which may be missed by the Sigma rule."
+  }
+]

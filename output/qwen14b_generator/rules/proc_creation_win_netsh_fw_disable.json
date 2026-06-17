@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh firewall set opmode disable",
+    "explanation": "Omission: The command is identical to the Sigma rule's example and cannot be mutated without changing the tested behavior."
+  },
+  {
+    "output": "netsh advfirewall set currentprofile state off",
+    "explanation": "Omission: The command is identical to the Sigma rule's example and cannot be mutated without changing the tested behavior."
+  },
+  {
+    "output": "",
+    "explanation": "No safe bypass command can be generated."
+  }
+]

@@ -1,0 +1,368 @@
+{
+  "dry_run": false,
+  "input_csv": "C:\\HUST\\DATN\\DATN1\\results\\gemini\\gemini_fail_rerun - result.csv",
+  "workbook": "C:\\HUST\\DATN\\DATN1\\results\\gemini\\final_result.xlsx",
+  "backup": "C:\\HUST\\DATN\\DATN1\\results\\gemini\\final_result.backup-20260617_104449.xlsx",
+  "rules_dir": "C:\\HUST\\DATN\\DATN1\\rules",
+  "csv_headers": [
+    "Technical",
+    "Rule_name",
+    "Title",
+    "Rule_id",
+    "Command_match_rule",
+    "Commandline_evasion",
+    "Excutable",
+    "Bypass target rule",
+    "Bypass all rule",
+    "Trigger rule"
+  ],
+  "llm_value": null,
+  "input_rows": 3437,
+  "assignment_rows": 6886,
+  "assignment_rows_by_sheet": {
+    "Collection": 106,
+    "Command and Control": 370,
+    "Credential Access": 292,
+    "Defense Evasion": 1508,
+    "Discovery": 1190,
+    "Execution": 2597,
+    "Exfiltration": 85,
+    "Impact": 3,
+    "Initial Access": 95,
+    "Lateral Movement": 134,
+    "Persistence": 313,
+    "Privilege Escalation": 193
+  },
+  "mapping_sources_by_input_row": {
+    "existing_workbook": 14,
+    "rule_tags": 3423
+  },
+  "appended_rows": 1500,
+  "appended_rows_by_sheet": {
+    "Collection": 25,
+    "Command and Control": 84,
+    "Credential Access": 91,
+    "Defense Evasion": 355,
+    "Discovery": 187,
+    "Execution": 609,
+    "Exfiltration": 12,
+    "Impact": 3,
+    "Initial Access": 9,
+    "Lateral Movement": 24,
+    "Persistence": 69,
+    "Privilege Escalation": 32
+  },
+  "skipped_unmapped_rows": 0,
+  "skipped_unmapped_examples": [],
+  "skipped_duplicate_rows": 5386,
+  "skipped_duplicate_examples": [
+    {
+      "input_row": 44,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 44,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 45,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 45,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 46,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 46,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 47,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 47,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 48,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 48,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 49,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 49,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 50,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 50,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 51,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 51,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 52,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 52,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 53,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 53,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 54,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 54,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 55,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 55,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 56,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 56,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 57,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 57,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 58,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 58,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 59,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 59,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 60,
+      "sheet": "Command and Control",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 60,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_cmd_http_appdata",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 63,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_webdav_lnk_execution",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 89,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_susp_lnk_exec_hidden_cmd",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 89,
+      "sheet": "Initial Access",
+      "rule_name": "proc_creation_win_susp_lnk_exec_hidden_cmd",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 90,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_susp_lnk_exec_hidden_cmd",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 90,
+      "sheet": "Initial Access",
+      "rule_name": "proc_creation_win_susp_lnk_exec_hidden_cmd",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 91,
+      "sheet": "Defense Evasion",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 91,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 92,
+      "sheet": "Defense Evasion",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 92,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 93,
+      "sheet": "Defense Evasion",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 93,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 94,
+      "sheet": "Defense Evasion",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 94,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 95,
+      "sheet": "Defense Evasion",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 95,
+      "sheet": "Execution",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    },
+    {
+      "input_row": 96,
+      "sheet": "Defense Evasion",
+      "rule_name": "proc_creation_win_wmic_susp_execution_via_office_process",
+      "reason": "duplicate sheet/rule/rule_id/commandline/llm"
+    }
+  ],
+  "table_updates": [
+    {
+      "sheet": "Privilege Escalation",
+      "table": "Bảng_1",
+      "old_ref": "A1:K659",
+      "new_ref": "A1:K691"
+    }
+  ]
+}

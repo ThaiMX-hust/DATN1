@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\davclnt.dll,DavSetCookie",
+    "explanation": "Substitution: Replaced the suspicious path 'C:\\windows\\system32\\davclnt.dll' with a benign lab placeholder 'C:\\Lab\\input\\davclnt.dll' to avoid the Sigma string match."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Lab\\input\\davclnt.dll,DavSetCookie\"",
+    "explanation": "Insertion: Added quotes around the path to ensure it is parsed correctly while still using the benign lab placeholder, which may bypass the Sigma rule's string match."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\davclnt.dll,DavSetCookie http://example.com",
+    "explanation": "Reordering: Added a dummy URL argument after the DLL path, which may not trigger the Sigma rule's regex for IP addresses and keeps the command line syntactically valid."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\Microsoft\\Windows\\Defender /Output:C:\\Lab\\out\\defender_output.txt",
+    "explanation": "Insertion: Added an output file path to redirect results, potentially avoiding detection by modifying the command line without changing the suspicious namespace."
+  },
+  {
+    "output": "wmic.exe -Namespace:\\\\root\\Microsoft\\Windows\\Defender",
+    "explanation": "Substitution: Replaced '/Namespace' with '-Namespace' to use an alternative syntax, which may not trigger the same Sigma rule match."
+  },
+  {
+    "output": "wmic.exe /Namespace:\\\\root\\Microsoft\\Windows\\Defender /Format:htable > C:\\Lab\\out\\defender_table.txt",
+    "explanation": "Reordering: Added a format option and output redirection to modify the command line structure, possibly evading the Sigma rule's CommandLine|contains check."
+  }
+]

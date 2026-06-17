@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" C:\\Lab\\input\\sample.png StartW",
+    "explanation": "Substitution: Replaced the suspicious image file path with a benign lab placeholder to avoid triggering the Sigma rule's image extension check."
+  },
+  {
+    "output": "\"C:\\WINDOWS\\system32\\rundll32.exe\" C:\\Lab\\input\\sample.txt StartW",
+    "explanation": "Substitution: Replaced the image file extension with a text file extension to avoid the Sigma rule's image extension check."
+  },
+  {
+    "output": "rundll32.exe C:\\Lab\\input\\sample.png StartW",
+    "explanation": "Omission: Removed the quotes around the executable path, which may be parsed correctly by the command-line parser and avoid triggering the Sigma rule's Image|endswith check."
+  }
+]

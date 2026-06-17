@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Process | Where-Object { $_.ProcessName -eq 'notepad' } | Export-Clixml -Path C:\\Lab\\out\\processes.xml\"",
+    "explanation": "Insertion: Added quotes and a benign command that does not use input stream redirection, avoiding the suspicious '<' character."
+  },
+  {
+    "output": "pwsh.exe -Command \"Get-Service | Where-Object { $_.Status -eq 'Running' } | Export-Clixml -Path C:\\Lab\\out\\services.xml\"",
+    "explanation": "Substitution: Replaced the executable with 'pwsh.exe' and used a benign command that does not involve input stream redirection."
+  },
+  {
+    "output": "powershell.exe -Command Get-Process | Export-Clixml -Path C:\\Lab\\out\\processes.xml",
+    "explanation": "Omission: Removed unnecessary parameters and used a simple command that does not involve input stream redirection, thus avoiding the Sigma rule trigger."
+  }
+]

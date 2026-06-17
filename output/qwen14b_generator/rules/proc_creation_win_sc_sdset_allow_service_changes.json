@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc sdset AtomicService \"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)\"",
+    "explanation": "Insertion: Added quotes around the SDDL string to ensure it is parsed correctly, which may prevent the Sigma rule from detecting the command as suspicious due to proper formatting."
+  },
+  {
+    "output": "sc sdset VSS \"D:(D;;GA;;;NU)(D;;GA;;;WD)(D;;GA;;;AN)S:(AU;FA;GA;;;WD)(AU;OIIOFA;GA;;;WD)\"",
+    "explanation": "Insertion: Added quotes around the SDDL string to ensure it is parsed correctly, which may prevent the Sigma rule from detecting the command as suspicious due to proper formatting."
+  },
+  {
+    "output": "sc.exe sdset scmanager \"D:(A;;KA;;;WD)\"",
+    "explanation": "Insertion: Added quotes around the SDDL string to ensure it is parsed correctly, which may prevent the Sigma rule from detecting the command as suspicious due to proper formatting."
+  }
+]

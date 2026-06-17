@@ -1,0 +1,14 @@
+[
+  {
+    "output": "vmtoolsd.exe -s \"C:\\Lab\\input\\sample.txt\"",
+    "explanation": "Insertion: Added quotes and a benign lab file path to avoid triggering the suspicious child process detection by modifying the command line structure."
+  },
+  {
+    "output": "vmtoolsd.exe -f C:\\Lab\\input\\sample.log",
+    "explanation": "Substitution: Replaced a suspicious argument with a benign lab file path to avoid triggering the rule while maintaining the same executable family and intent."
+  },
+  {
+    "output": "vmtoolsd.exe -h",
+    "explanation": "Omission: Removed any suspicious command-line arguments or paths to avoid triggering the Sigma rule, while still using the same executable family for testing."
+  }
+]

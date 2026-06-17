@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators' | Select-Object Name | Out-File C:\\Lab\\out\\groupmembers.txt\"",
+    "explanation": "Reordering and omission: The command reorders the arguments and omits the suspicious script content, replacing it with a benign output operation to a lab directory, which may avoid the suspicious string match."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators' | Export-Clixml -Path 'C:\\Lab\\out\\groupmembers.xml'\"",
+    "explanation": "Substitution: Replaced 'Write-Host' and script logic with 'Export-Clixml' to a lab path, which avoids the suspicious string while maintaining the same benign intent of retrieving group members."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators' | Format-List Name | Out-String | Set-Content 'C:\\Lab\\out\\groupmembers.txt'\"",
+    "explanation": "Insertion and substitution: Added 'Format-List' and 'Out-String' to reformat the output, and redirected to a lab file, which may avoid the suspicious string match while maintaining the same benign test behavior."
+  }
+]
