@@ -15,8 +15,8 @@ from openpyxl.styles import Font
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_WORKBOOK = PROJECT_ROOT / "results" / "gemini" / "final_result.xlsx"
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "output" / "final_result_stats"
+DEFAULT_WORKBOOK = PROJECT_ROOT / "results" / "qwen32b" / "qwen32b_res.xlsx"
+DEFAULT_OUTPUT_DIR = PROJECT_ROOT /  "final_result_stats"/ "qwen32b"
 
 SUMMARY_SHEETS = {"fill_summary", "summary"}
 TRUE_VALUES = {"true", "1", "1.0", "yes", "y"}

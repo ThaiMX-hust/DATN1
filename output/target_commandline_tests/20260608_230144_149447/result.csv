@@ -1,2 +1,0 @@
-﻿Technical	Rule_name	Title	Rule_id	Command_match_rule	Commandline_evasion	Excutable	Bypass target rule	Bypass all rule	Trigger rule
-t1218.002	proc_creation_win_control_panel_item	Control Panel Items	0ba863e6-def5-4e50-9cea-4dd8c7dc46a4		control.exe malicious.cpl	FALSE	FALSE	FALSE	
