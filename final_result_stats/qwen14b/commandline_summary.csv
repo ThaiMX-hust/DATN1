@@ -1,0 +1,16 @@
+﻿scope,tactic,commandline_total,commandline_executable_success,commandline_behavior,commandline_bypass_target_rule,commandline_bypass_all_rule
+overall,ALL,2226,1404,200,662,451
+tactic,Collection,68,45,3,20,17
+tactic,Reconnaissance,10,8,2,5,2
+tactic,Resource Development,18,6,0,1,1
+tactic,Initial Access,27,14,0,3,2
+tactic,Execution,630,414,57,229,151
+tactic,Persistence,184,127,8,55,19
+tactic,Privilege Escalation,139,98,9,46,23
+tactic,Defense Evasion,1050,670,93,311,189
+tactic,Discovery,228,150,25,46,40
+tactic,Lateral Movement,77,53,8,30,20
+tactic,Command and Control,198,97,15,49,34
+tactic,Credential Access,256,141,15,49,37
+tactic,Exfiltration,39,26,5,17,14
+tactic,Impact,42,33,6,12,11

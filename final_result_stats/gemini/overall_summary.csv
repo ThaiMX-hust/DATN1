@@ -1,0 +1,2 @@
+﻿scope,tactic,source_rows,commandline_total,commandline_executable_success,commandline_behavior,commandline_bypass_target_rule,commandline_bypass_all_rule,rule_total,rule_with_commandline,rule_with_executable_success,rule_with_behavior,rule_with_bypass_target_rule,rule_with_bypass_all_rule
+overall,ALL,15180,7249,4261,1545,3251,1656,781,745,605,400,571,425

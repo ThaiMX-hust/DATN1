@@ -1,0 +1,15 @@
+﻿scope,tactic,source_rows,commandline_total,commandline_executable_success,commandline_behavior,commandline_bypass_target_rule,commandline_bypass_all_rule,rule_total,rule_with_commandline,rule_with_executable_success,rule_with_behavior,rule_with_bypass_target_rule,rule_with_bypass_all_rule
+tactic,Collection,232,168,87,16,40,16,24,24,17,10,15,10
+tactic,Reconnaissance,20,19,11,5,8,5,4,3,2,1,2,1
+tactic,Resource Development,29,27,18,7,15,7,6,6,4,2,4,2
+tactic,Initial Access,198,67,32,3,29,4,9,8,5,2,5,3
+tactic,Execution,4795,2917,1698,585,1513,620,223,213,181,118,173,119
+tactic,Persistence,788,494,383,103,305,110,65,62,51,30,47,32
+tactic,Privilege Escalation,503,393,229,61,141,66,49,47,36,18,32,21
+tactic,Defense Evasion,4191,3133,2034,750,1511,806,368,348,292,206,278,222
+tactic,Discovery,2000,990,591,223,427,238,79,76,63,46,61,48
+tactic,Lateral Movement,307,208,127,58,88,59,27,26,21,9,19,10
+tactic,Command and Control,860,617,312,74,257,79,66,65,52,26,46,29
+tactic,Credential Access,959,750,452,196,337,205,89,89,68,49,64,52
+tactic,Exfiltration,187,136,96,36,64,39,13,12,10,5,9,5
+tactic,Impact,111,106,52,28,31,29,16,15,12,10,12,11

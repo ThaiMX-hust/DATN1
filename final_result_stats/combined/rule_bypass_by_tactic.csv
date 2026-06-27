@@ -1,0 +1,15 @@
+﻿tactic,rule_total,rule_with_behavior,behavior_rate,rule_with_bypass_target_rule,bypass_target_rate,rule_with_bypass_all_rule,bypass_all_rate
+Collection,24,10,41.67%,17,70.83%,12,50.00%
+Reconnaissance,4,2,50.00%,3,75.00%,2,50.00%
+Resource Development,6,3,50.00%,4,66.67%,4,66.67%
+Initial Access,9,2,22.22%,6,66.67%,4,44.44%
+Execution,223,134,60.09%,194,87.00%,157,70.40%
+Persistence,66,33,50.00%,54,81.82%,39,59.09%
+Privilege Escalation,49,20,40.82%,38,77.55%,27,55.10%
+Defense Evasion,368,228,61.96%,312,84.78%,261,70.92%
+Discovery,79,52,65.82%,66,83.54%,55,69.62%
+Lateral Movement,27,11,40.74%,22,81.48%,13,48.15%
+Command and Control,66,29,43.94%,49,74.24%,36,54.55%
+Credential Access,89,54,60.67%,71,79.78%,60,67.42%
+Exfiltration,13,6,46.15%,10,76.92%,8,61.54%
+Impact,16,11,68.75%,14,87.50%,12,75.00%

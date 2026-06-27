@@ -1,0 +1,16 @@
+﻿scope,tactic,rule_total,rule_with_commandline,rule_with_executable_success,rule_with_behavior,rule_with_bypass_target_rule,rule_with_bypass_all_rule
+overall,ALL,781,745,605,400,571,425
+tactic,Collection,24,24,17,10,15,10
+tactic,Reconnaissance,4,3,2,1,2,1
+tactic,Resource Development,6,6,4,2,4,2
+tactic,Initial Access,9,8,5,2,5,3
+tactic,Execution,223,213,181,118,173,119
+tactic,Persistence,65,62,51,30,47,32
+tactic,Privilege Escalation,49,47,36,18,32,21
+tactic,Defense Evasion,368,348,292,206,278,222
+tactic,Discovery,79,76,63,46,61,48
+tactic,Lateral Movement,27,26,21,9,19,10
+tactic,Command and Control,66,65,52,26,46,29
+tactic,Credential Access,89,89,68,49,64,52
+tactic,Exfiltration,13,12,10,5,9,5
+tactic,Impact,16,15,12,10,12,11

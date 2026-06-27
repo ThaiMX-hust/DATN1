@@ -1,4 +1,4 @@
-"""Summarize command-line and rule results from final_result.xlsx."""
+"""Merge final result workbooks and summarize the combined unique results."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import argparse
 import csv
 import json
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -15,10 +15,15 @@ from openpyxl.styles import Font
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_WORKBOOK = PROJECT_ROOT / "results" / "qwen32b" / "qwen32b_res.xlsx"
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT /  "final_result_stats"/ "qwen32b"
+DEFAULT_WORKBOOKS = [
+    PROJECT_ROOT / "results" / "results_final" / "gemini" / "gemini_res_final.xlsx",
+    PROJECT_ROOT / "results" / "results_final" / "qwen14b" / "qwen14b_res_final.xlsx",
+    PROJECT_ROOT / "results" / "results_final" / "qwen32b" / "qwen32b_res_final.xlsx",
+]
+DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "final_result_stats" / "combined"
+DEFAULT_MERGED_WORKBOOK = PROJECT_ROOT / "results" / "results_final" / "combined" / "combined_res_final.xlsx"
 
-SUMMARY_SHEETS = {"fill_summary", "summary"}
+SUMMARY_SHEETS = {"fill_summary", "summary", "thong_ke", "thong ke"}
 TRUE_VALUES = {"true", "1", "1.0", "yes", "y"}
 FALSE_VALUES = {"false", "0", "0.0", "no", "n"}
 
@@ -60,40 +65,63 @@ RULE_FIELDNAMES = [
     "rule_with_bypass_all_rule",
 ]
 
+MERGED_WORKBOOK_HEADERS = [
+    "Technical",
+    "Rule_name",
+    "Title",
+    "Rule_id",
+    "Command_match_rule",
+    "Commandline_evasion",
+    "Excutable",
+    "Bypass target rule",
+    "Bypass all rule",
+    "behavior",
+    "Trigger rule",
+    "Source_models",
+    "Source_rows",
+]
 
-@dataclass(frozen=True)
+
+@dataclass
 class ResultRecord:
-    """One workbook row that contains a command line."""
+    """One command-line row from one source workbook."""
 
+    source_model: str
+    source_workbook: str
     sheet: str
     rule_name: str
     rule_id: str
     commandline: str
-    llm: str
-    executable: bool
-    behavior: bool
-    bypass_target: bool
-    bypass_all: bool
+    technical: str = ""
+    title: str = ""
+    command_match_rule: str = ""
+    trigger_rule: str = ""
+    executable: bool = False
+    behavior: bool = False
+    bypass_target: bool = False
+    bypass_all: bool = False
+    source_rows: int = 1
+    source_models: set[str] = field(default_factory=set)
+    source_workbooks: set[str] = field(default_factory=set)
+
+    def __post_init__(self) -> None:
+        self.source_models.add(self.source_model)
+        self.source_workbooks.add(self.source_workbook)
+
+    @property
+    def tactic_key(self) -> tuple[str, str, str]:
+        """Return a duplicate key inside one tactic."""
+        return (self.sheet, self.rule_name, self.commandline)
+
+    @property
+    def overall_key(self) -> tuple[str, str]:
+        """Return the cross-model duplicate key for overall counts."""
+        return (self.rule_name, self.commandline)
 
     @property
     def rule_key(self) -> str:
         """Return the rule identity used for rule-level statistics."""
         return self.rule_name
-
-    @property
-    def commandline_key(self) -> tuple[str, str, str, str]:
-        """Return the commandline identity used for unique-mode statistics."""
-        return (self.rule_name, self.rule_id, self.commandline, self.llm)
-
-    @property
-    def sheet_commandline_key(self) -> tuple[str, str, str, str, str]:
-        """Return a sheet-aware commandline identity for row-mode overall stats."""
-        return (self.sheet, self.rule_name, self.rule_id, self.commandline, self.llm)
-
-
-def normalize_sheet_name(value: Any) -> str:
-    """Normalize a sheet name for skip checks."""
-    return str(value or "").strip().lower().replace(" ", "_")
 
 
 def cell_text(value: Any) -> str:
@@ -104,7 +132,12 @@ def cell_text(value: Any) -> str:
         return "true" if value else "false"
     if isinstance(value, float) and value.is_integer():
         return str(int(value))
-    return str(value).strip()
+    return str(value).strip().replace("\r\n", "\n")
+
+
+def normalize_sheet_name(value: Any) -> str:
+    """Normalize a sheet name for skip checks."""
+    return cell_text(value).lower().replace(" ", "_")
 
 
 def normalize_bool(value: Any) -> bool:
@@ -121,7 +154,7 @@ def normalize_bool(value: Any) -> bool:
 
 def header_map(headers: tuple[Any, ...]) -> dict[str, int]:
     """Return header text to zero-based tuple index."""
-    return {str(value).strip(): index for index, value in enumerate(headers) if value not in (None, "")}
+    return {cell_text(value): index for index, value in enumerate(headers) if cell_text(value)}
 
 
 def first_value(row: tuple[Any, ...], headers: dict[str, int], names: list[str]) -> Any:
@@ -136,9 +169,42 @@ def first_value(row: tuple[Any, ...], headers: dict[str, int], names: list[str])
     return None
 
 
-def read_workbook_records(workbook_path: Path) -> tuple[list[ResultRecord], dict[str, set[str]], Counter[str], list[dict[str, str]]]:
-    """Read tactic sheets from a workbook."""
+def source_model_from_path(workbook_path: Path) -> str:
+    """Return the model name for a workbook path."""
+    parent = workbook_path.parent.name
+    if parent and parent != "results_final":
+        return parent
+    return workbook_path.stem.replace("_res_final", "")
+
+
+def merge_text(existing: str, candidate: str) -> str:
+    """Keep the first non-empty text value."""
+    return existing or candidate
+
+
+def merge_records(existing: ResultRecord, incoming: ResultRecord) -> ResultRecord:
+    """Merge duplicate command-line records with OR for boolean results."""
+    existing.technical = merge_text(existing.technical, incoming.technical)
+    existing.title = merge_text(existing.title, incoming.title)
+    existing.rule_id = merge_text(existing.rule_id, incoming.rule_id)
+    existing.command_match_rule = merge_text(existing.command_match_rule, incoming.command_match_rule)
+    existing.trigger_rule = merge_text(existing.trigger_rule, incoming.trigger_rule)
+    existing.executable = existing.executable or incoming.executable
+    existing.bypass_target = existing.bypass_target or incoming.bypass_target
+    existing.bypass_all = existing.bypass_all or incoming.bypass_all
+    existing.behavior = existing.behavior or incoming.behavior
+    existing.source_rows += incoming.source_rows
+    existing.source_models.update(incoming.source_models)
+    existing.source_workbooks.update(incoming.source_workbooks)
+    return existing
+
+
+def read_workbook_records(
+    workbook_path: Path,
+) -> tuple[list[ResultRecord], dict[str, set[str]], Counter[str], list[dict[str, str]]]:
+    """Read tactic sheets from one source workbook."""
     workbook = load_workbook(workbook_path, read_only=True, data_only=True)
+    source_model = source_model_from_path(workbook_path)
     records: list[ResultRecord] = []
     rules_by_sheet: dict[str, set[str]] = {}
     source_rows_by_sheet: Counter[str] = Counter()
@@ -153,13 +219,21 @@ def read_workbook_records(workbook_path: Path) -> tuple[list[ResultRecord], dict
         try:
             headers = header_map(next(row_iter))
         except StopIteration:
-            skipped_sheets.append({"sheet": sheet_name, "reason": "empty sheet"})
+            skipped_sheets.append({"workbook": str(workbook_path), "sheet": sheet_name, "reason": "empty sheet"})
             continue
 
         required = {"Rule_name", "Excutable", "Bypass target rule", "Bypass all rule"}
         missing = sorted(required - set(headers))
+        if "Commandline_evasion" not in headers and "Command_match_rule" not in headers:
+            missing.append("Commandline_evasion or Command_match_rule")
         if missing:
-            skipped_sheets.append({"sheet": sheet_name, "reason": f"missing header(s): {', '.join(missing)}"})
+            skipped_sheets.append(
+                {
+                    "workbook": str(workbook_path),
+                    "sheet": sheet_name,
+                    "reason": f"missing header(s): {', '.join(missing)}",
+                }
+            )
             continue
 
         sheet_rules: set[str] = set()
@@ -181,11 +255,16 @@ def read_workbook_records(workbook_path: Path) -> tuple[list[ResultRecord], dict
             behavior = normalize_bool(first_value(row, headers, ["behavior", "Behavior"])) and bypass_all
             records.append(
                 ResultRecord(
+                    source_model=source_model,
+                    source_workbook=str(workbook_path),
                     sheet=sheet_name,
                     rule_name=rule_name,
                     rule_id=cell_text(first_value(row, headers, ["Rule_id"])),
                     commandline=commandline,
-                    llm=cell_text(first_value(row, headers, ["LLM"])),
+                    technical=cell_text(first_value(row, headers, ["Technical"])),
+                    title=cell_text(first_value(row, headers, ["Title"])),
+                    command_match_rule=cell_text(first_value(row, headers, ["Command_match_rule"])),
+                    trigger_rule=cell_text(first_value(row, headers, ["Trigger rule"])),
                     executable=normalize_bool(first_value(row, headers, ["Excutable", "Executable"])),
                     behavior=behavior,
                     bypass_target=normalize_bool(first_value(row, headers, ["Bypass target rule"])),
@@ -198,30 +277,22 @@ def read_workbook_records(workbook_path: Path) -> tuple[list[ResultRecord], dict
     return records, rules_by_sheet, source_rows_by_sheet, skipped_sheets
 
 
-def aggregate_records(records: list[ResultRecord], count_mode: str, overall: bool) -> list[ResultRecord]:
-    """Aggregate commandline records for unique mode, or return row records."""
-    if count_mode == "rows":
-        return records
-
-    grouped: dict[tuple[Any, ...], ResultRecord] = {}
+def deduplicate_records(records: list[ResultRecord], overall: bool) -> list[ResultRecord]:
+    """Deduplicate command-line records across source models."""
+    grouped: dict[tuple[str, ...], ResultRecord] = {}
     for record in records:
-        key = record.commandline_key if overall else record.sheet_commandline_key
+        key = record.overall_key if overall else record.tactic_key
         existing = grouped.get(key)
         if existing is None:
             grouped[key] = record
             continue
-        grouped[key] = ResultRecord(
-            sheet=existing.sheet,
-            rule_name=existing.rule_name,
-            rule_id=existing.rule_id,
-            commandline=existing.commandline,
-            llm=existing.llm,
-            executable=existing.executable or record.executable,
-            behavior=existing.behavior or record.behavior,
-            bypass_target=existing.bypass_target or record.bypass_target,
-            bypass_all=existing.bypass_all or record.bypass_all,
-        )
+        grouped[key] = merge_records(existing, record)
     return list(grouped.values())
+
+
+def ratio(numerator: int, denominator: int) -> float:
+    """Return a safe decimal ratio."""
+    return numerator / denominator if denominator else 0.0
 
 
 def summarize_scope(
@@ -230,11 +301,10 @@ def summarize_scope(
     records: list[ResultRecord],
     rule_total: int,
     source_rows: int,
-    count_mode: str,
     overall: bool,
 ) -> dict[str, Any]:
-    """Summarize one tactic sheet or the whole workbook."""
-    commandlines = aggregate_records(records, count_mode=count_mode, overall=overall)
+    """Summarize one tactic sheet or the whole merged dataset."""
+    commandlines = deduplicate_records(records, overall=overall)
     rules_with_commandline = {record.rule_key for record in commandlines}
     rules_with_executable = {record.rule_key for record in commandlines if record.executable}
     rules_with_behavior = {record.rule_key for record in commandlines if record.behavior}
@@ -263,9 +333,8 @@ def build_summary(
     records: list[ResultRecord],
     rules_by_sheet: dict[str, set[str]],
     source_rows_by_sheet: Counter[str],
-    count_mode: str,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Build per-tactic and overall summary rows."""
+    """Build per-tactic and overall merged summary rows."""
     per_sheet_rows: list[dict[str, Any]] = []
     for sheet_name in rules_by_sheet:
         sheet_records = [record for record in records if record.sheet == sheet_name]
@@ -276,7 +345,6 @@ def build_summary(
                 records=sheet_records,
                 rule_total=len(rules_by_sheet[sheet_name]),
                 source_rows=source_rows_by_sheet[sheet_name],
-                count_mode=count_mode,
                 overall=False,
             )
         )
@@ -288,7 +356,6 @@ def build_summary(
         records=records,
         rule_total=len(all_rules),
         source_rows=sum(source_rows_by_sheet.values()),
-        count_mode=count_mode,
         overall=True,
     )
     return per_sheet_rows, overall_row
@@ -332,6 +399,7 @@ def write_excel_summary(
     per_tactic_rows: list[dict[str, Any]],
     overall_row: dict[str, Any],
     skipped_sheets: list[dict[str, str]],
+    sources: list[dict[str, str]],
 ) -> None:
     """Write an XLSX report with separate summary tables."""
     workbook = Workbook()
@@ -342,7 +410,65 @@ def write_excel_summary(
     append_table(workbook, "By_Tactic", SUMMARY_FIELDNAMES, per_tactic_rows)
     append_table(workbook, "Commandline", COMMANDLINE_FIELDNAMES, commandline_rows(all_summary_rows))
     append_table(workbook, "Rule", RULE_FIELDNAMES, rule_rows(all_summary_rows))
-    append_table(workbook, "Skipped_Sheets", ["sheet", "reason"], skipped_sheets)
+    append_table(workbook, "Sources", ["model", "workbook"], sources)
+    append_table(workbook, "Skipped_Sheets", ["workbook", "sheet", "reason"], skipped_sheets)
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    workbook.save(path)
+
+
+def write_merged_workbook(path: Path, records: list[ResultRecord], rules_by_sheet: dict[str, set[str]]) -> None:
+    """Write a deduplicated merged workbook for audit."""
+    workbook = Workbook()
+    workbook.remove(workbook.active)
+
+    for tactic in rules_by_sheet:
+        worksheet = workbook.create_sheet(tactic)
+        worksheet.append(MERGED_WORKBOOK_HEADERS)
+        for cell in worksheet[1]:
+            cell.font = Font(bold=True)
+
+        records_for_sheet = sorted(
+            deduplicate_records([record for record in records if record.sheet == tactic], overall=False),
+            key=lambda record: (record.rule_name, record.commandline),
+        )
+        for record in records_for_sheet:
+            worksheet.append(
+                [
+                    record.technical,
+                    record.rule_name,
+                    record.title,
+                    record.rule_id,
+                    record.command_match_rule,
+                    record.commandline,
+                    record.executable,
+                    record.bypass_target,
+                    record.bypass_all,
+                    record.behavior,
+                    record.trigger_rule,
+                    "; ".join(sorted(record.source_models)),
+                    record.source_rows,
+                ]
+            )
+        worksheet.freeze_panes = "A2"
+        worksheet.auto_filter.ref = worksheet.dimensions
+        widths = {
+            "A": 13,
+            "B": 44,
+            "C": 42,
+            "D": 38,
+            "E": 50,
+            "F": 90,
+            "G": 13,
+            "H": 18,
+            "I": 16,
+            "J": 13,
+            "K": 62,
+            "L": 24,
+            "M": 12,
+        }
+        for column, width in widths.items():
+            worksheet.column_dimensions[column].width = width
 
     path.parent.mkdir(parents=True, exist_ok=True)
     workbook.save(path)
@@ -351,38 +477,52 @@ def write_excel_summary(
 def parse_args() -> argparse.Namespace:
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(
-        description="Summarize commandline and rule results from final_result.xlsx by tactic sheet."
+        description="Merge final result workbooks and summarize unique command lines across models."
     )
-    parser.add_argument("--workbook", type=Path, default=DEFAULT_WORKBOOK)
+    parser.add_argument(
+        "--workbook",
+        action="append",
+        dest="workbooks",
+        type=Path,
+        help="Workbook to merge. Repeat for multiple files. Defaults to the three final model workbooks.",
+    )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument(
-        "--count-mode",
-        choices=["unique", "rows"],
-        default="unique",
-        help=(
-            "unique: count unique Rule_name+Rule_id+Commandline+LLM records; "
-            "rows: count worksheet row appearances."
-        ),
+        "--merged-workbook",
+        type=Path,
+        default=DEFAULT_MERGED_WORKBOOK,
+        help="Deduplicated merged workbook path. Use an empty string to skip writing it.",
     )
     return parser.parse_args()
 
 
 def main() -> int:
-    """Run the final_result summarizer."""
+    """Run the merged final result summarizer."""
     args = parse_args()
-    workbook_path = args.workbook.resolve()
+    workbook_paths = [path.resolve() for path in args.workbooks] if args.workbooks else DEFAULT_WORKBOOKS
     output_dir = args.output_dir.resolve()
+    merged_workbook = args.merged_workbook
 
-    if not workbook_path.exists():
-        raise FileNotFoundError(f"workbook not found: {workbook_path}")
+    records: list[ResultRecord] = []
+    rules_by_sheet: dict[str, set[str]] = {}
+    source_rows_by_sheet: Counter[str] = Counter()
+    skipped_sheets: list[dict[str, str]] = []
+    sources: list[dict[str, str]] = []
 
-    records, rules_by_sheet, source_rows_by_sheet, skipped_sheets = read_workbook_records(workbook_path)
-    per_tactic_rows, overall_row = build_summary(
-        records,
-        rules_by_sheet,
-        source_rows_by_sheet,
-        count_mode=args.count_mode,
-    )
+    for workbook_path in workbook_paths:
+        workbook_path = workbook_path.resolve()
+        if not workbook_path.exists():
+            raise FileNotFoundError(f"workbook not found: {workbook_path}")
+
+        workbook_records, workbook_rules, workbook_source_rows, workbook_skipped = read_workbook_records(workbook_path)
+        records.extend(workbook_records)
+        for sheet_name, rules in workbook_rules.items():
+            rules_by_sheet.setdefault(sheet_name, set()).update(rules)
+        source_rows_by_sheet.update(workbook_source_rows)
+        skipped_sheets.extend(workbook_skipped)
+        sources.append({"model": source_model_from_path(workbook_path), "workbook": str(workbook_path)})
+
+    per_tactic_rows, overall_row = build_summary(records, rules_by_sheet, source_rows_by_sheet)
     summary_rows = [overall_row, *per_tactic_rows]
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -390,11 +530,28 @@ def main() -> int:
     write_csv(output_dir / "overall_summary.csv", SUMMARY_FIELDNAMES, [overall_row])
     write_csv(output_dir / "commandline_summary.csv", COMMANDLINE_FIELDNAMES, commandline_rows(summary_rows))
     write_csv(output_dir / "rule_summary.csv", RULE_FIELDNAMES, rule_rows(summary_rows))
-    write_excel_summary(output_dir / "final_result_statistics.xlsx", per_tactic_rows, overall_row, skipped_sheets)
+    write_excel_summary(
+        output_dir / "final_result_statistics.xlsx",
+        per_tactic_rows,
+        overall_row,
+        skipped_sheets,
+        sources,
+    )
+
+    merged_workbook_path = None
+    if str(merged_workbook):
+        merged_workbook_path = merged_workbook.resolve()
+        write_merged_workbook(merged_workbook_path, records, rules_by_sheet)
 
     payload = {
-        "workbook": str(workbook_path),
-        "count_mode": args.count_mode,
+        "workbooks": [str(path.resolve()) for path in workbook_paths],
+        "dedupe": {
+            "by_tactic": ["tactic", "Rule_name", "Commandline_evasion"],
+            "overall": ["Rule_name", "Commandline_evasion"],
+            "booleans": "OR across duplicate rows",
+            "behavior": "behavior AND Bypass all rule",
+        },
+        "merged_workbook": str(merged_workbook_path) if merged_workbook_path else None,
         "overall": overall_row,
         "by_tactic": per_tactic_rows,
         "skipped_sheets": skipped_sheets,
@@ -404,14 +561,16 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    print(f"Read {len(records)} commandline rows from {workbook_path}")
-    print(f"Count mode: {args.count_mode}")
+    print(f"Read {len(records)} commandline rows from {len(workbook_paths)} workbooks")
+    print("Dedupe overall key: Rule_name + Commandline_evasion")
     print(f"Tactic sheets: {len(per_tactic_rows)}")
     print(f"Overall commandlines: {overall_row['commandline_total']}")
     print(f"Overall behavior commandlines: {overall_row['commandline_behavior']}")
     print(f"Overall rules with commandline: {overall_row['rule_with_commandline']}")
     print(f"Overall rules with behavior: {overall_row['rule_with_behavior']}")
     print(f"Wrote reports to {output_dir}")
+    if merged_workbook_path:
+        print(f"Wrote merged workbook to {merged_workbook_path}")
     return 0
 
 

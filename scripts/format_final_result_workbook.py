@@ -19,7 +19,7 @@ DEFAULT_WORKBOOK = PROJECT_ROOT / "results" / "gemini" / "final_result.xlsx"
 
 SUMMARY_SHEET_NAMES = {"fill_summary", "summary"}
 TACTIC_REQUIRED_HEADERS = {"Rule_name", "Commandline_evasion", "Excutable", "Bypass target rule", "Bypass all rule"}
-BOOL_HEADERS = {"Excutable", "Bypass target rule", "Bypass all rule"}
+BOOL_HEADERS = {"Excutable", "Bypass target rule", "Bypass all rule", "behavior"}
 TRUE_VALUES = {"true", "1", "1.0", "yes", "y"}
 FALSE_VALUES = {"false", "0", "0.0", "no", "n"}
 
@@ -33,6 +33,7 @@ TACTIC_WIDTHS = {
     "Excutable": 13,
     "Bypass target rule": 18,
     "Bypass all rule": 16,
+    "behavior": 13,
     "Trigger rule": 62,
     "LLM": 9,
 }
