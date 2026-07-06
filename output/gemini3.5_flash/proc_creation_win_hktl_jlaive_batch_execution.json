@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c script.cmd && xcopy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Temp\\hidden.cmd.exe*",
+    "explanation": "Bypasses the 'ParentCommandLine|endswith: .bat' condition by using a .cmd extension for the parent script. It also evades the selection rules by avoiding the '.bat.exe' naming convention for the copied PowerShell binary."
+  },
+  {
+    "output": "cmd.exe /c \"script.bat \" && xcopy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Temp\\script.bat.exe*",
+    "explanation": "Bypasses the strict 'endswith: .bat' match on the ParentCommandLine by appending a trailing space and enclosing the script execution in quotes. The string now ends with '\"' or ' ', evading the Sigma parent_selection."
+  },
+  {
+    "output": "cmd.exe /c script.bat && copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Temp\\script.bat.exe",
+    "explanation": "Bypasses the selection criteria entirely by using the built-in 'copy' command instead of 'xcopy.exe' to duplicate the PowerShell executable, causing 'Image|endswith: \\xcopy.exe' to evaluate to false."
+  }
+]

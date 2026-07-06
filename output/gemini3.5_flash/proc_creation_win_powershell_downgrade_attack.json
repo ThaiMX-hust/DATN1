@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Version 2.0 -Command \"Write-Host 'Bypass'\"",
+    "explanation": "Bypasses the CommandLine condition. The rule explicitly looks for strings like ' -version 2 ' with a trailing space. Using '2.0' is natively accepted by the PowerShell CLI but avoids matching the hardcoded string list."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Temp\\updater.exe && C:\\Temp\\updater.exe -version 2",
+    "explanation": "Bypasses the Image condition. The rule requires the executed binary to end with '\\powershell.exe'. By copying the PowerShell binary to a different filename before execution, the Image condition fails to trigger."
+  },
+  {
+    "output": "powershell.exe -v 2-Command \"Write-Host 'Bypass'\"",
+    "explanation": "Bypasses the CommandLine condition by removing the trailing space after the '2'. Since the rule expects a space after the version number (e.g., ' -v 2 '), concatenating the next parameter directly or placing it at the very end of the command line string circumvents the pattern."
+  }
+]

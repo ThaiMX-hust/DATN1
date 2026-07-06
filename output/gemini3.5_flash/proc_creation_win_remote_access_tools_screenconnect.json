@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\ProgramData\\ScreenConnect.exe && C:\\ProgramData\\ScreenConnect.exe /c \"whoami\"",
+    "explanation": "This rule relies on specific metadata fields (Description, Product, and Company) which are typically extracted from the file's version information (PE header). An attacker can bypass this by renaming a completely different binary (like cmd.exe or a custom stager) to 'ScreenConnect.exe'. Since the execution is based on the file name and not the embedded metadata of the ScreenConnect binary, the rule will not trigger because the 'Product' and 'Company' fields of the renamed cmd.exe will still reflect 'Microsoft Corporation'."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"& { [Reflection.Assembly]::Load([System.IO.File]::ReadAllBytes('C:\\path\\to\\ScreenConnect.dll')); [ScreenConnect.Program]::Main(@()) }\"",
+    "explanation": "The rule monitors 'process_creation' and looks for specific metadata. By loading the ScreenConnect logic as a DLL or reflecting it into memory within a different process (like PowerShell or a surrogate host), the process metadata seen by the SIEM will belong to the host process (PowerShell) rather than the ScreenConnect software metadata, effectively evading the detection logic."
+  }
+]

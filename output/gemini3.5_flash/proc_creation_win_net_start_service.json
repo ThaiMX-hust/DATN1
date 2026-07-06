@@ -1,0 +1,18 @@
+[
+  {
+    "output": "sc.exe start \"Service_Name\"",
+    "explanation": "The rule specifically monitors 'net.exe' or 'net1.exe'. Using 'sc.exe' (Service Control Manager) achieves the exact same result\u2014starting a service\u2014but completely evades the image name and original filename filters defined in the 'selection_img' section."
+  },
+  {
+    "output": "net.exe start",
+    "explanation": "The 'selection_cli' section requires a space character after the 'start' keyword (e.g., ' start '). If a service name is not provided or if the command is truncated, it might not trigger. However, more effectively, trailing spaces or specific formatting can sometimes confuse simple string-matching logic depending on the SIEM's parser."
+  },
+  {
+    "output": "PowerShell.exe -Command \"Start-Service -Name 'Service_Name'\"",
+    "explanation": "This bypasses the rule by using a different execution engine (PowerShell) to interact with the Windows Service API. Since the rule is strictly looking for the execution of net.exe, PowerShell activity remains undetected by this specific logic."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\net.exe C:\\Windows\\Temp\\not_net.exe && C:\\Windows\\Temp\\not_net.exe start Service_Name",
+    "explanation": "By renaming the executable to 'not_net.exe', the 'Image|endswith' filter is bypassed. While the 'OriginalFileName' filter is designed to catch this, many environments do not log or index the 'OriginalFileName' field, allowing the renamed binary to execute without triggering the rule."
+  }
+]

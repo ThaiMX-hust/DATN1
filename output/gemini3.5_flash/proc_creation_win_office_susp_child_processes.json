@@ -1,0 +1,18 @@
+[
+  {
+    "output": "wmic process call create \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "This command utilizes Windows Management Instrumentation (WMI) to spawn a process. By calling the 'create' method via the WMI service, the resulting child process (calc.exe) will have 'wmiprvse.exe' as its parent instead of the Office application (e.g., WINWORD.EXE). This breaks the 'selection_parent' logic of the Sigma rule."
+  },
+  {
+    "output": "powershell -Command \"Start-Job -ScriptBlock { Start-Process 'C:\\Windows\\System32\\cmd.exe' }\"",
+    "explanation": "While 'powershell.exe' is a monitored child process, executing a command that uses 'Start-Job' can result in the actual malicious payload being executed under a different process context or session. Additionally, if an attacker uses a non-monitored living-off-the-land binary (LOLBin) to proxy execution, they can avoid the 'selection_child_processes' list entirely."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Users\\%username%\\Documents\\not_suspicious.exe && C:\\Users\\%username%\\Documents\\not_suspicious.exe",
+    "explanation": "The rule relies heavily on 'OriginalFileName' and 'Image|endswith' for specific known binaries like cmd.exe or powershell.exe. By copying a legitimate shell to a trusted directory (not listed in 'selection_child_susp_paths') and renaming it, the process creation event will not match the 'selection_child_processes' filters."
+  },
+  {
+    "output": "Schtasks /Create /SC ONCE /TN \"Update\" /TR \"C:\\Windows\\System32\\cmd.exe\" /ST 12:00 && Schtasks /Run /TN \"Update\"",
+    "explanation": "Using the Task Scheduler to execute a command causes 'taskeng.exe' or 'svchost.exe' (depending on OS version) to be the parent of the target process. Although 'schtasks.exe' itself is monitored by this rule, an attacker could use a DCOM object (like Schedule.Service) via VBA macro to create the task without spawning the 'schtasks.exe' binary, thus bypassing both parent and child selections."
+  }
+]

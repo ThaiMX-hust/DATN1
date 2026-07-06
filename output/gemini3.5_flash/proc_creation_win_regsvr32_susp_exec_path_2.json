@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cd C:\\PerfLogs\\ && regsvr32.exe payload.dll",
+    "explanation": "The rule inspects the command line string for absolute paths like ':\\PerfLogs\\'. By changing the directory first and executing the DLL via a relative path, the suspicious folder name is absent from the regsvr32 command line, evading 'selection_path_1'."
+  },
+  {
+    "output": "regsvr32.exe C:\\Users\\Public\\payload.dll",
+    "explanation": "To reduce noise, the rule specifically excludes 'C:\\Users\\' in the 'selection_exclude_known_dirs' condition. An attacker can bypass this specific rule by placing the payload in universally writable subdirectories like C:\\Users\\Public\\."
+  },
+  {
+    "output": "regsvr32.exe \"E:\\payload.dll\"",
+    "explanation": "The 'selection_path_2' condition is hardcoded to look for 'C:\\' and 'D:\\' drives. Executing the DLL from another mounted volume, removable media, or network drive (like E:\\ or Z:\\) will fail to trigger the detection."
+  }
+]

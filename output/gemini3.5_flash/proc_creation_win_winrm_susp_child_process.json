@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe process call create \"payload.exe\"",
+    "explanation": "The Sigma rule relies on a hardcoded blocklist of child processes under the 'Image|endswith' condition. Spawning 'wmic.exe' directly via WinRM bypasses this rule because 'wmic.exe' is not in the monitored list. Once executed, WMI can be used to spawn subsequent processes or execute further commands outside the immediate context of wsmprovhost.exe."
+  },
+  {
+    "output": "cscript.exe //E:jscript C:\\Windows\\Temp\\payload.txt",
+    "explanation": "Executing the Windows Script Host (cscript.exe or wscript.exe) directly from wsmprovhost.exe evades the detection logic, as these scripting engines are omitted from the rule's executable list. This allows an adversary to run malicious scripts without triggering the alert."
+  },
+  {
+    "output": "rundll32.exe pcwutl.dll,LaunchApplication C:\\Windows\\System32\\cmd.exe",
+    "explanation": "By using 'rundll32.exe' (which is not in the alert list) as an intermediary proxy execution binary, an attacker can launch a monitored shell like 'cmd.exe'. Because 'cmd.exe' is now a child of 'rundll32.exe' rather than 'wsmprovhost.exe', the ParentImage condition of the Sigma rule is broken, successfully bypassing the detection."
+  }
+]

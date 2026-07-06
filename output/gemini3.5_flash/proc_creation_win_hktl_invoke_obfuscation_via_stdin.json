@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"set A=in^voke & set B=environment & echo %A% | powershell -\"",
+    "explanation": "The Sigma rule relies on a regex that explicitly searches for the double ampersand '&&' operator used to chain 'set' commands, as well as the exact strings 'invoke', 'environment', or '${input'. This bypass works by using a single ampersand '&' (which also chains commands in cmd.exe but does not match the '&&' regex requirement) and by leveraging cmd.exe caret ('^') obfuscation to split the word 'in^voke', evading the hardcoded string matching."
+  },
+  {
+    "output": "cmd.exe /V:ON /C \"set a=in&& set b=voke&& set c=!a!!b!&& echo !c! | powershell -\"",
+    "explanation": "This bypass avoids triggering the '(environment|invoke|\\$\\{?input)' part of the regex by fragmenting the keyword 'invoke' into two separate variables ('in' and 'voke') and then reassembling them using delayed environment variable expansion (!a!!b!). Even though it uses the '&&' operator, the specific malicious keywords are not present in the command line sequence in a way the regex expects."
+  },
+  {
+    "output": "set a=1 & set invoke=payload & powershell -c \"Write-Host 'Test Execution'\"",
+    "explanation": "The detection rule's regular expression strictly looks for the logical AND operator ('&&') chaining the 'set' commands together. By using a single ampersand ('&') for standard sequential execution in cmd.exe, the command still achieves the same environmental variable setup but evades the regex pattern entirely."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"$invoke='payload'; Write-Host 'Test Execution'\"",
+    "explanation": "The rule specifically targets obfuscation staging that relies on cmd.exe's 'set' command to pass variables to PowerShell. By bypassing cmd.exe entirely and declaring the variables directly within the PowerShell session, the malicious activity is not detected by this specific rule."
+  }
+]

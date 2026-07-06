@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('V3JpdGUtSG9zdCAiSGVsbG8i')) | IEX\"",
+    "explanation": "The Sigma rule specifically looks for the simultaneous presence of 'ToInt/ToByte/etc' AND 'ToChar/ToString/String', OR the presence of 'join' combined with either 'char' or 'split'. This command bypasses those specific combinations by using Base64 decoding via [System.Convert]::FromBase64String and GetString, avoiding the 'char', 'join', or 'split' keywords that trigger selection_gen, and avoiding the combination of 'ToByte/ToInt' with 'ToString' required by selection_to."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -EncodedCommand V3JpdGUtSDBzdCAiQnlwYXNzZWQi",
+    "explanation": "The rule targets specific string manipulation patterns within the CommandLine field. By using the native -EncodedCommand (or -e, -enc) flag, the actual logic (including any chars, joins, or conversions) is abstracted into a Base64 blob. Since the rule does not check for the -EncodedCommand flag itself, but rather specific sub-strings, it fails to inspect the content of the encoded payload."
+  },
+  {
+    "output": "powershell.exe \"$a='ch'; $b='ar'; $c='jo'; $d='in'; IEX ($a+$b+$c+$d)\"",
+    "explanation": "This bypasses selection_gen_1 ('char' and 'join') by using string concatenation. The Sigma engine's 'contains|all' logic typically looks for the literal strings in the static command line. By breaking 'char' and 'join' into variables, the literal strings 'char' and 'join' never appear in the process creation event's CommandLine field."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand JwBhACwAYgAsAGMAJwAgAC0AcwBwAGwAaQB0ACAAJwAsACcACAAtAGoAbwBpAG4AIAAnACcA",
+    "explanation": "By utilizing PowerShell's -EncodedCommand parameter, the payload containing 'split' and 'join' is Base64 encoded. The raw command line logged by the OS during process creation will only contain the Base64 string, completely bypassing the plain-text keyword matching of the Sigma rule."
+  }
+]

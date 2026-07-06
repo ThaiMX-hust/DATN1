@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class Win32_Process -ComputerName 192.168.1.100\"",
+    "explanation": "Uses PowerShell's Get-WmiObject cmdlet instead of WMIC.exe. This achieves the same remote WMI query functionality but bypasses the Sigma rule which specifically looks for WMIC.exe in the Image/OriginalFileName fields."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-CimInstance -ClassName Win32_Process -CimSession 192.168.1.100\"",
+    "explanation": "Uses Get-CimInstance (CIM) instead of WMIC. This is the modern replacement for WMI cmdlets and provides the same remote querying capability without triggering the WMIC.exe detection."
+  },
+  {
+    "output": "wmic.exe /node:127.0.0.1\tprocess list",
+    "explanation": "Uses a tab character instead of a space after the localhost IP address (127.0.0.1). The filter only checks for '/node:127.0.0.1 ' with a trailing space, so using a tab character bypasses the localhost filter while still querying the local machine."
+  },
+  {
+    "output": "wmic.exe /node:127.0.1 process list",
+    "explanation": "Uses 127.0.1 instead of 127.0.0.1. While 127.0.1 is also a localhost address on many systems, it's not explicitly filtered by the rule which only checks for 127.0.0.1 and localhost."
+  },
+  {
+    "output": "wmic.exe /node:::1 process list",
+    "explanation": "Uses the IPv6 localhost address (::1) instead of IPv4. The filter only checks for IPv4 localhost addresses (127.0.0.1 and localhost), so this bypasses the false positive filter while still targeting the local system."
+  }
+]

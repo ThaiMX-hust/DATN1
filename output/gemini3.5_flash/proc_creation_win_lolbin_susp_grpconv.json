@@ -1,0 +1,14 @@
+[
+  {
+    "output": "grpconv.exe  -o",
+    "explanation": "By adding two or more spaces between the executable and the argument, the strict string match for 'grpconv.exe -o' or 'grpconv -o' fails, bypassing the rule."
+  },
+  {
+    "output": "grpconv.exe \"-o\"",
+    "explanation": "Enclosing the argument in quotation marks prevents the exact literal string match expected by the rule while remaining functionally identical in the Windows command line."
+  },
+  {
+    "output": "grpconv.exe -^o",
+    "explanation": "Using the CMD caret (^) escape character within the argument alters the command line string recorded by process creation logs, bypassing the exact 'contains' match without affecting execution."
+  }
+]

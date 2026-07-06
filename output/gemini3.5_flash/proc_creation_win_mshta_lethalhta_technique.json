@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\mshta.exe javascript:a=(new ActiveXObject('WScript.Shell')).Run('calc.exe');close();",
+    "explanation": "The original rule is too specific because it only looks for 'mshta.exe' spawned by 'svchost.exe' (typical of DCOM/WMI lateral movement). By executing 'mshta.exe' directly from a standard user shell (cmd.exe or powershell.exe) or another common process like 'explorer.exe', the ParentImage condition fails to match, bypassing the rule while still executing the HTA payload."
+  }
+]

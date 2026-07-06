@@ -1,0 +1,10 @@
+[
+  {
+    "output": "diskshadow.exe /s C:\\path\\to\\script.txt",
+    "explanation": "The Sigma rule specifically monitors for 'diskshadow.exe' spawning a specific list of child processes (like powershell.exe or certutil.exe). To bypass this, an attacker can use the 'exec' command within a diskshadow script to call a binary NOT included in the detection list, such as 'cmd.exe', 'bitsadmin.exe', or a renamed malicious executable. Since 'cmd.exe' is not in the 'Image|endswith' list, the execution triggers no alert despite the suspicious parent/child relationship."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Windows\\Temp\\not_ps.exe && diskshadow.exe /s C:\\path\\to\\script_calling_not_ps.txt",
+    "explanation": "This bypass leverages the rule's reliance on specific filenames. By copying a monitored binary (like PowerShell) to a temporary location and renaming it (e.g., 'not_ps.exe'), the 'Image|endswith' condition will fail to match when DiskShadow executes the renamed binary, even though the underlying functionality is the same."
+  }
+]

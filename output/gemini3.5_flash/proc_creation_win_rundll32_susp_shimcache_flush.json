@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Users\\Public\\not_rundll.exe && C:\\Users\\Public\\not_rundll.exe apphelp.dll,ShimFlushCache",
+    "explanation": "The rule looks for the process name 'rundll32' in the CommandLine field. By copying the rundll32.exe binary to a different name (e.g., not_rundll.exe) and executing it, the 'selection1a' and 'selection2a' conditions fail because the string 'rundll32' is no longer present in the command line or the image name."
+  },
+  {
+    "output": "rundll32 apphelp.dll,#+250",
+    "explanation": "The rule looks for a literal match of '#250'. Depending on how the environment handles command-line parsing, adding characters like a plus sign or leading zeros (e.g., '#000250') might bypass simple string-contains filters while still being correctly interpreted by rundll32 for ordinal execution."
+  }
+]

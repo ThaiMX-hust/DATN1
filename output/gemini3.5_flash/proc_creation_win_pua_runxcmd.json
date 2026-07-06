@@ -1,0 +1,18 @@
+[
+  {
+    "output": "RunXCmd.exe /account=\"system\" /exec=\"cmd.exe\"",
+    "explanation": "The rule looks for the exact string ' /account=system ' with spaces on both sides. By enclosing the account name in quotes, the space after 'system' is removed or shifted, failing the literal string match while remaining functionally identical for the application."
+  },
+  {
+    "output": "RunXCmd.exe /exec=calc.exe /account=system",
+    "explanation": "The rule's selection_account pattern ' /account=system ' expects a trailing space. If the command ends with the account parameter, there is no trailing space, which prevents the 'contains' logic from triggering."
+  },
+  {
+    "output": "RunXCmd.exe /account=ti\t/exec=cmd.exe",
+    "explanation": "The rule specifically looks for a standard ASCII space (0x20). Replacing the space between the arguments with a horizontal tab character (0x09) will bypass the string-based detection while the Windows command-line parser still treats it as a valid argument separator."
+  },
+  {
+    "output": "RunXCmd.exe /exec=notepad.exe /account:system",
+    "explanation": "Many CLI tools developed in C++/C# accept both '=' and ':' as key-value separators for arguments. The rule only monitors for '/account=', so using a colon instead may bypass the specific string match depending on the RunXCmd version's parser."
+  }
+]

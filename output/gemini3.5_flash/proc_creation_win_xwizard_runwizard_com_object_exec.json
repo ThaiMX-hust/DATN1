@@ -1,0 +1,14 @@
+[
+  {
+    "output": "xwizard.exe RunWizard {a1b2c3d4-e5f6-7890-abcd-ef1234567890}",
+    "explanation": "The rule uses a regex that strictly looks for the standard hyphenated GUID format (8-4-4-4-12). By simply removing the hyphens or using an alternative representation of the GUID that the underlying Windows COM engine might still resolve but the regex doesn't match, the detection is bypassed."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\xwizard.exe C:\\Users\\Public\\not_a_wizard.exe && C:\\Users\\Public\\not_a_wizard.exe RunWizard {53d4bb30-3f36-4e8a-b078-69d36c4a79ff}",
+    "explanation": "If the SIEM environment relies on 'Image' or 'process.executable' paths to apply specific regex rules rather than applying them globally to all process creations, renaming the binary can bypass the scope of the rule's application."
+  },
+  {
+    "output": "xwizard RunWizard \"{53d4bb30 - 3f36 - 4e8a - b078 - 69d36c4a79ff}\"",
+    "explanation": "The regex `\\{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\\}` is very rigid. Adding spaces inside the curly braces or around the hyphens may cause the regex to fail while the command line parser or the application logic might still successfully strip the whitespace and execute the COM object."
+  }
+]

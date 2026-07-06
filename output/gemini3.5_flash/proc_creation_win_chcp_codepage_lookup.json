@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"copy C:\\Windows\\System32\\chcp.com %TEMP%\\discovery.exe && %TEMP%\\discovery.exe\"",
+    "explanation": "The rule specifically looks for a process image ending in '\\chcp.com'. By copying the utility to a different name (e.g., discovery.exe) and executing it, the Image condition is bypassed while achieving the same discovery outcome."
+  },
+  {
+    "output": "powershell.exe -Command \"& {chcp}\"",
+    "explanation": "The rule requires the ParentImage to be 'cmd.exe'. Executing chcp from a different shell, such as PowerShell or a custom loader, bypasses the ParentImage selection criteria."
+  },
+  {
+    "output": "cmd.exe /c \"chcp 65001\"",
+    "explanation": "The rule's CommandLine condition uses 'endswith' for 'chcp' (with optional trailing spaces). Providing a specific codepage argument, like 65001 for UTF-8, ensures the command line does not end with the keyword 'chcp', thus evading the regex/string match."
+  },
+  {
+    "output": "cmd.exe /v /c \"set a=chcp&& !a!\"",
+    "explanation": "The rule looks for the string 'chcp' in the CommandLine. By using environment variable expansion or late binding in cmd, the literal string 'chcp' may not appear in the monitored command line field depending on the EDR's logging depth."
+  }
+]

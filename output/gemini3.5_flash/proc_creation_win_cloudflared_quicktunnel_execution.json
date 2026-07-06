@@ -1,0 +1,6 @@
+[
+  {
+    "output": "\"C:\\Program Files\\cloudflared.exe\" --url http://example.com",
+    "explanation": "The rule checks for specific image names and a list of known SHA256 hashes. By using a different installation path (e.g., \"C:\\Program Files\\cloudflared.exe\") and a version with a hash not in the rule\u2019s hash list, the image selection fails. The command line still contains \"--url\", but the image hash condition is not met, allowing the process to bypass the detection."
+  }
+]

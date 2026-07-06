@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil.exe \"-decode\" input.b64 output.exe",
+    "explanation": "Wrapping the flag in double quotes modifies the raw command-line string logged by the OS to contain '\"-decode\"'. This breaks the Sigma rule's literal string match for '-decode ' (which strictly expects a trailing space character immediately after the 'e'). The Windows command-line parser (CommandLineToArgvW) silently strips the quotes before certutil processes the arguments, allowing the command to execute successfully."
+  },
+  {
+    "output": "certutil.exe -decode\tinput.b64 output.exe",
+    "explanation": "Replacing the standard space character after the flag with a horizontal tab (\\t) bypasses the detection. The Sigma rule explicitly searches for the string '-decode ' (with a space). Windows treats both spaces and tabs as valid argument separators, meaning the command runs normally while evading the static log signature."
+  }
+]

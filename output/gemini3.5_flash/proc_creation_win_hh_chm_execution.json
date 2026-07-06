@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\hh.exe \"C:\\Users\\Public\\Downloads\\malicious_payload.txt\"",
+    "explanation": "The Sigma rule uses an 'all of selection_*' condition, requiring both the process name (hh.exe) and the presence of '.chm' in the command line. By renaming a CHM file to a different extension (like .txt) and executing it, the 'selection_cli' filter is bypassed because '.chm' is not present in the string."
+  },
+  {
+    "output": "copy C:\\Windows\\hh.exe C:\\Users\\Public\\calc.exe && C:\\Users\\Public\\calc.exe C:\\Users\\Public\\legit.chm",
+    "explanation": "The rule checks for Image ending in '\\hh.exe' or OriginalFileName 'HH.exe'. By copying the binary to a new name (calc.exe), the 'Image' check is bypassed. If the logging system does not capture 'OriginalFileName' (which requires Sysmon or specific audit settings), the 'selection_img' condition fails."
+  },
+  {
+    "output": "hh.exe \"C:\\Users\\Public\\legit.CH#\"",
+    "explanation": "The rule is specifically looking for the string '.chm'. Depending on how the Windows shell or the HH.exe parser handles wildcards or trailing characters, using an alternative extension or short-file name (8.3 format) that doesn't literally contain '.chm' might evade simple string-match detection."
+  }
+]

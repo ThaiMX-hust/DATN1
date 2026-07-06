@@ -1,0 +1,18 @@
+[
+  {
+    "output": "move C:\\Temp\\payload.exe C:\\Windows\\System32\\Tasks\\payload.exe",
+    "explanation": "The rule explicitly filters for 'copy', 'echo', 'type', or 'file createnew'. By using the 'move' command, the file is relocated to the protected directory without triggering the specific keyword selection."
+  },
+  {
+    "output": "powershell -Command \"[System.IO.File]::WriteAllText('C:\\Windows\\System32\\Tasks\\evil.ps1', 'payload')\"",
+    "explanation": "The rule relies on command-line string matching for legacy Windows commands. Using .NET methods within PowerShell to write or create files in the Tasks folder avoids the 'selection1' keywords entirely."
+  },
+  {
+    "output": "copy payload.dat \"C:\\Windows\\System32\\\\Tasks\\evil.exe\"",
+    "explanation": "Simple string obfuscation like adding extra backslashes can sometimes bypass basic 'contains' filters if the SIEM normalization doesn't collapse paths, though the rule's use of a leading space in selection2 is the primary weakness being exploited by changing the character sequence."
+  },
+  {
+    "output": "cmd.exe /c \"copy payload.exe C:\\Windows\\System32\\Tasks\\payload.exe\"",
+    "explanation": "The rule looks for ' C:\\Windows\\System32\\Tasks\\' (with a leading space). If an adversary provides the path without a leading space (e.g., as the first argument or immediately following a quote/operator), the rule fails to match."
+  }
+]

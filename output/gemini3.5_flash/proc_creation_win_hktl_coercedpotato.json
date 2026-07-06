@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\update_service.exe -e 1",
+    "explanation": "This simulated command represents an attacker recompiling the CoercedPotato tool. By renaming the executable to 'update_service.exe', modifying the source code to accept '-e' instead of '--exploitId', and recompiling (which inherently changes the IMPHASH), the attacker evades all three 'OR' conditions in the Sigma rule. This demonstrates the fragility of rules relying on static indicators like specific filenames, hardcoded arguments, and specific hashes."
+  }
+]

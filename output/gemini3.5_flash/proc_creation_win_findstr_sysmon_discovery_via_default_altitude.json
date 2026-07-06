@@ -1,0 +1,10 @@
+[
+  {
+    "output": "fltmc.exe | Select-String \"385201\"",
+    "explanation": "Bypasses the rule by substituting the target executable. By using PowerShell's built-in Select-String cmdlet, the process created is powershell.exe (or pwsh.exe) rather than find.exe or findstr.exe, which completely evades the 'selection_img' condition."
+  },
+  {
+    "output": "fltmc.exe | findstr /R \"38520[1]\"",
+    "explanation": "Bypasses the rule by modifying the command line argument using a regular expression. The rule explicitly checks for the literal string ' 385201'. By using the regex pattern '38520[1]', findstr will still match the target altitude in the output, but the command line string itself will not trigger the 'selection_cli' condition."
+  }
+]

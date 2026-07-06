@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\attrib.exe %TEMP%\\not_attrib.exe && %TEMP%\\not_attrib.exe +h C:\\path\\to\\malware.exe",
+    "explanation": "The rule relies on the process image name ending in '\\attrib.exe'. By copying the binary to a new location with a different name, the 'selection_img' condition is bypassed, even though the 'OriginalFileName' check exists in some EDRs, it is often not captured or indexed in all SIEM logs."
+  },
+  {
+    "output": "attrib.exe +sh C:\\path\\to\\malware.exe",
+    "explanation": "The rule specifically looks for ' +h ' with spaces. By combining flags (e.g., +sh or +rh), the literal string ' +h ' is not present in the command line, evading the 'selection_cli' contains filter."
+  },
+  {
+    "output": "$file = Get-Item 'C:\\path\\to\\malware.exe'; $file.Attributes = $file.Attributes -bor [System.IO.FileAttributes]::Hidden",
+    "explanation": "This bypasses the rule entirely by not using attrib.exe at all. It uses native PowerShell .NET methods to modify file attributes, which does not trigger a process creation event for attrib.exe."
+  },
+  {
+    "output": "attrib +h \"C:\\path\\to\\malware.exe\"",
+    "explanation": "In some environments, if the CLI search is strictly looking for ' +h ' (with a trailing space), placing the flag at the very end of the command or omitting the trailing space by immediate quotation marks can cause a mismatch depending on the regex engine's implementation of 'contains'."
+  }
+]

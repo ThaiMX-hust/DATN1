@@ -1,0 +1,18 @@
+[
+  {
+    "output": "attrib.exe +sh C:\\Users\\Public\\malicious.txt",
+    "explanation": "The rule explicitly filters for a specific set of extensions (.bat, .dll, .exe, .hta, .ps1, .vbe, .vbs). By changing the extension of the target file to something not in the list (like .txt) before running the command, and potentially renaming it back later, the 'selection_ext' condition is not met."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\attrib.exe C:\\Users\\Public\\not_attrib.exe && C:\\Users\\Public\\not_attrib.exe +s C:\\Users\\Public\\payload.exe",
+    "explanation": "The rule relies on 'Image' ending in '\\attrib.exe' or the 'OriginalFileName' being 'ATTRIB.EXE'. If the binary is renamed and the EDR/SIEM does not correctly map the 'OriginalFileName' metadata (which can sometimes be stripped or misread in basic process logs), the rule may fail to trigger."
+  },
+  {
+    "output": "attrib.exe +s \"C:\\Users\\Admin\\Documents\\payload.exe\"",
+    "explanation": "The rule targets specific suspicious paths like \\Users\\Public\\ or \\AppData\\Local\\. Executing the command on a file located in a common user directory not included in the 'selection_paths' list (like Documents or a custom root folder) bypasses the path filter."
+  },
+  {
+    "output": "attrib.exe +system C:\\Users\\Public\\payload.exe",
+    "explanation": "The rule looks for the specific CLI flag ' +s' (with a leading space). While '+s' is the common shorthand, some versions of attribute manipulation tools or alternative shells might allow different formatting or the full word 'system' if interpreted via a wrapper, though this is environment-dependent."
+  }
+]

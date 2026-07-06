@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c dir/s/b *.pem",
+    "explanation": "The Sigma rule's 'selection_cmd_cli' condition specifically looks for the string 'dir ' (with a trailing space). In the Windows command prompt, switches can be appended directly to the command without a space. 'dir/s' successfully searches subdirectories for '.pem' files but evades the space requirement."
+  },
+  {
+    "output": "powershell.exe -Command \"ls -Recurse -Filter *.key\"",
+    "explanation": "The rule's 'selection_pwsh_cli' condition specifically looks for the cmdlet 'Get-ChildItem '. By using a built-in PowerShell alias such as 'ls' or 'gci', the command effectively searches for the '.key' files while completely bypassing the detection logic."
+  },
+  {
+    "output": "powershell.exe -c \"Get-ChildItem -Path C:\\ -Recurse -Include *.$('p'+'em')\"",
+    "explanation": "This command bypasses the 'selection_ext' condition. Instead of passing the literal string '.pem' (which the rule checks for), it uses string concatenation to build the extension dynamically at runtime, keeping the target extension out of the command line logs."
+  }
+]

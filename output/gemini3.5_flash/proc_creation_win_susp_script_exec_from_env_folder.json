@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"cd C:\\Users\\Public && wscript.exe payload.vbs\"",
+    "explanation": "The Sigma rule attempts to detect executions from suspicious folders by checking if the absolute folder path is explicitly written in the CommandLine. By changing the directory (cd) into the suspicious folder first and executing the script using a relative path (just the filename), the absolute folder path string (e.g., :\\Users\\Public\\) is omitted from the script interpreter's command line, bypassing the selection_folders_* conditions."
+  },
+  {
+    "output": "cscript.exe %TEMP%\\payload.js",
+    "explanation": "The rule looks for exact literal string matches for temporary directories (like \\AppData\\Local\\Temp) in the CommandLine field. If an environment variable like %TEMP% or %PUBLIC% is leveraged directly in the command line, the unexpanded variable string is what gets logged by tools like Sysmon. Because the literal path string is missing from the log, the rule fails to trigger."
+  },
+  {
+    "output": "mshta.exe C:/Users/Public/payload.hta",
+    "explanation": "Windows processes often accept forward slashes in file paths interchangeably with backslashes. The rule's selection_folders_* strings specifically hardcode backslashes (e.g., ':\\Users\\Public\\'). Passing the path with forward slashes (C:/Users/Public/) completely breaks the literal string matching while still successfully executing the payload from the targeted directory."
+  }
+]

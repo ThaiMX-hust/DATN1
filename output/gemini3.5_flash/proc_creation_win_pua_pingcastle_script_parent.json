@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Ads\\PingCastle.exe C:\\Windows\\System32\\Taskmgr.exe /Y && C:\\Windows\\System32\\Taskmgr.exe --healthcheck --level Full",
+    "explanation": "This bypasses the rule by ensuring the parent process is a legitimate system binary (cmd.exe or taskmgr.exe) executed from a standard path like System32, rather than the suspicious paths or script extensions defined in 'selection_parent_ext' and 'selection_parent_path'. By renaming the executable, it also attempts to evade simple 'Image' path detection, though 'CommandLine' flags may still be present."
+  },
+  {
+    "output": "C:\\Program Files\\PingCastle\\PingCastle.exe --healthcheck --server dc01.internal",
+    "explanation": "The Sigma rule requires a 'logical AND' between a suspicious parent (path or extension) and the PingCastle execution. By running PingCastle from a standard, non-suspicious parent (like a manual shell in 'Program Files') or ensuring the parent process is not a script file (.ps1, .vbs, etc.) or located in a temporary directory, the 'selection_parent' conditions are not met, preventing the alert from firing."
+  }
+]

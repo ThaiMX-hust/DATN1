@@ -1,0 +1,10 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN \"BypassTask\" /TR \"powershell.exe -EncodedCommand aQBlAHgAZQB...\" /SC ONLOGON /RL HIGHEST /F",
+    "explanation": "This command uses schtasks.exe with the /Create flag but avoids the rule's detection by not including FromBase64String, encodedcommand, Get-ItemProperty/gp alias, or any registry hive references (HKCU:, HKLM:, registry::, HKEY_) in the command line. Consequently, selection_cli_encoding, selection_cli_get, and selection_cli_hive do not match, so the condition requiring all selection_* groups to match fails, bypassing the rule."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"TestTask\" /TR \"powershell.exe -WindowStyle Hidden -Command \\\"$val = [Microsoft.Win32.Registry]::CurrentUser.OpenSubKey('Software').GetValue('Payload'); IEX([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($val)))\\\"\" /SC MINUTE /MO 30",
+    "explanation": "This simulated command bypasses the rule by interacting with the registry via .NET framework classes ([Microsoft.Win32.Registry]::CurrentUser) rather than using the standard PowerShell cmdlets like 'Get-ItemProperty' or 'gp'. This successfully evades the 'selection_cli_get' condition. Additionally, because it uses the .NET class property 'CurrentUser', it completely avoids the specific hive strings defined in 'selection_cli_hive' ('HKCU:', 'HKLM:', 'HKEY_', 'registry::'). Because the Sigma rule requires all selection blocks to match ('condition: all of selection_*'), evading these two blocks prevents the rule from triggering, even though it still uses schtasks to execute a Base64 encoded payload."
+  }
+]

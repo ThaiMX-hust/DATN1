@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd /c \"echo Write-Host 'Test Execution' | clip & powershell -NoProfile -Command Add-Type -AssemblyName System.Windows.Forms; IEX([System.Windows.Forms.Clipboard]::GetText())\"",
+    "explanation": "The provided Sigma rule relies on rigid string matching, specifically requiring all four strings ('cmd', '&&', 'clipboard]::', and '-f') to be present in the command line. This simulated command bypasses the rule by replacing the logical AND operator '&&' with a single ampersand '&' for command chaining, and completely omitting the PowerShell format operator '-f' by executing the clipboard contents directly. Because '&&' and '-f' are missing, the 'contains|all' condition fails, and the activity goes undetected."
+  },
+  {
+    "output": "cmd /c \"echo Write-Host 'Test' | clip & powershell -Sta -NoProfile -Command Add-Type -AssemblyName PresentationCore; Invoke-Expression ([System.Windows.Clipboard]::GetText())\"",
+    "explanation": "This command achieves the same goal of placing a script in the clipboard and executing it, but bypasses the Sigma rule by avoiding the '&&' and '-f' strings. The detection rule requires 'cmd', '&&', 'clipboard]::', and '-f' to all be present in the command line. By substituting the '&&' operator with a single '&' (which executes the second command regardless of the first command's success) and avoiding PowerShell's '-f' format operator, the execution flow remains intact while successfully evading the specified rigid signature matching."
+  },
+  {
+    "output": "cmd /c \"echo Write-Host 'Bypass' | clip & powershell.exe -nop -c \\\"iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
+    "explanation": "Bypasses the rule by substituting the '&&' operator with a single '&' and omitting the '-f' (format) operator. The rule requires '&&', '-f', 'cmd', and 'clipboard]::' to all be present simultaneously."
+  },
+  {
+    "output": "powershell.exe -NoProfile -Command \"Set-Clipboard -Value 'Write-Host Executed'; Invoke-Expression (Get-Clipboard)\"",
+    "explanation": "Bypasses the rule by avoiding cmd.exe entirely. By using native PowerShell cmdlets (Set-Clipboard and Get-Clipboard), it avoids the required strings 'cmd', '&&', '-f', and the static class reference 'clipboard]::'."
+  },
+  {
+    "output": "cmd /r \"echo Write-Host 'Bypass' | clip && powershell.exe -nop -c \\\"$c='cl'+'ipboard]::'; iex([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
+    "explanation": "While this uses 'cmd /r' and '&&', it evades detection by obfuscating the 'clipboard]::' string through concatenation (which requires the rule to match the literal string), and dropping the '-f' operator."
+  }
+]

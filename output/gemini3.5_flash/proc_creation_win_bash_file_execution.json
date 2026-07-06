@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bash.exe -- script.sh",
+    "explanation": "Bypasses the detection by using the POSIX double-dash '--' flag. This triggers the 'filter_main_cli_flag' because the command line contains the exact substring 'bash.exe -', causing the SIEM to ignore the event while still executing the target script."
+  },
+  {
+    "output": "bash.exe script.sh # bash -",
+    "explanation": "Bypasses the detection by appending a dummy argument or comment that contains the 'bash -' string. Since 'filter_main_cli_flag' only checks for a substring match anywhere in the command line, the rule filters it out as benign."
+  },
+  {
+    "output": "bash.exe -l script.sh",
+    "explanation": "Bypasses the detection by explicitly invoking the login shell flag '-l' along with the script. The rule operates on the assumption that any command containing 'bash.exe -' is safe, thus filtering out this execution."
+  }
+]

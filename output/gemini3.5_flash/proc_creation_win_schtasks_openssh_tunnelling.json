@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /CREATE /SC ONLOGON /TN \"SSHD\" /TR \"C:\\Windows\\System32\\OpenSSH\\sshd.exe -D\" /F",
+    "explanation": "The command creates a scheduled task using schtasks.exe with '/CREATE' (uppercase, no leading space) to avoid the ' /create ' substring, and launches sshd.exe without the '-f' flag, thus evading both selection_cli_* conditions while still establishing an SSH daemon for persistence."
+  }
+]

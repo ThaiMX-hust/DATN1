@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Invoking PowerShell directly with a non-VSCode related command",
+    "explanation": "The command avoids triggering the detection by leveraging PowerShell execution without explicit VSCode references."
+  }
+]

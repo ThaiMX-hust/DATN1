@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\register-cimprovider.exe -path C:\\Path\\To\\Malicious.tmp",
+    "explanation": "The Sigma rule is case-sensitive regarding the extension because it looks for the string 'dll' in the CommandLine. By renaming the DLL to a different extension (like .tmp, .txt, or .dat) before execution, the rule's requirement for 'dll' is not met, but the binary will still load and execute the library."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\register-cimprovider.exe C:\\Users\\Public\\not_reg.exe && C:\\Users\\Public\\not_reg.exe -path C:\\test\\evil.dll",
+    "explanation": "The rule filters based on the Image path ending in '\\register-cimprovider.exe'. By copying the legitimate binary to a new location with a different filename, the 'selection' criteria for the Image field is bypassed entirely while maintaining the functionality of the LOLBAS technique."
+  }
+]

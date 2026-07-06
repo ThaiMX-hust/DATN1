@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Temp\\htran.exe -tran \"-c\" \"127.0.0.1\" -p 8080",
+    "explanation": "Uses the legitimate executable name htran.exe but splits the flag '-tran' across quotes or adds extra whitespace/characters so the simple 'contains' check for '.exe -tran ' does not match, evading the rule."
+  }
+]

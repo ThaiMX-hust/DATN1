@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\ManageEngine\\UEMS_Agent\\bin\\dctask64.exe C:\\Temp\\not_suspicious.exe && C:\\Temp\\not_suspicious.exe -executecmd64 \"whoami\"",
+    "explanation": "The rule uses 'selection_img' which looks for the specific process name '\\dctask64.exe'. By renaming the binary to anything else before execution, the 'Image|endswith' condition fails. Since the rule requires 'all of selection_*' (both the image/hash AND the command line arguments) to trigger, renaming the file effectively bypasses the detection even if the malicious flags like 'executecmd64' are present."
+  },
+  {
+    "output": "dctask64.exe -\"execute\"\"cmd64\" \"whoami\"",
+    "explanation": "The rule checks 'CommandLine|contains' for specific strings like ' executecmd64 '. Depending on how the underlying SIEM handles command-line parsing, using internal quotes (a common CMD/PowerShell evasion) can break string matching while the OS still parses the argument correctly, thus avoiding the 'selection_cli' match."
+  },
+  {
+    "output": "C:\\ManageEngine\\UEMS_Agent\\bin\\dctask64.exe -executecmd64:\"whoami\"",
+    "explanation": "The rule searches for ' executecmd64 ' (with spaces). If the attacker uses a colon or other non-space delimiters that the application accepts but the Sigma rule doesn't account for in its whitespace-heavy 'contains' list, the selection_cli criteria will not be met."
+  }
+]

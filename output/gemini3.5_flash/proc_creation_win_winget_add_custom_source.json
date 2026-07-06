@@ -1,0 +1,6 @@
+[
+  {
+    "output": "winget \"source\" \"add\" -n CustomRepo -a https://example.com",
+    "explanation": "Bypasses the detection by wrapping the arguments in double quotes. The Sigma rule explicitly looks for the strings 'source ' and 'add ' (with trailing spaces). The literal command line string '\"source\" \"add\"' does not contain 'source ' or 'add ' due to the quote characters breaking the string match, while the winget argument parser will still strip the quotes and execute the command correctly."
+  }
+]

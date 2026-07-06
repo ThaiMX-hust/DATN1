@@ -1,0 +1,26 @@
+[
+  {
+    "output": "net localgroup \"Administrators\" testuser /add",
+    "explanation": "The Sigma rule explicitly checks for the string ' administrators ' with spaces on both sides. By enclosing the group name in quotes, the process command line becomes '\"Administrators\"', breaking the space-padded string match required by the 'selection_group' condition."
+  },
+  {
+    "output": "powershell.exe Add-LocalGroupMember Administrators testuser",
+    "explanation": "The rule expects the explicit parameter ' -Group ' to be used in conjunction with 'Add-LocalGroupMember'. Because PowerShell supports positional parameters, omitting the explicit '-Group' flag entirely circumvents the 'selection_main' condition."
+  },
+  {
+    "output": "powershell.exe -Command \"([ADSI]'WinNT://./Administrators,group').Add('WinNT://./testuser,user')\"",
+    "explanation": "This technique utilizes the native .NET Active Directory Service Interfaces (ADSI) to manipulate local group membership directly via the API. Because it relies on neither 'net.exe' nor 'Add-LocalGroupMember', it completely bypasses the 'selection_main' condition."
+  },
+  {
+    "output": "net localgroup \"Administrators\" testuser /add",
+    "explanation": "The Sigma rule searches for the exact string ' administrators ' with leading and trailing spaces. By enclosing the group name in quotes, the command line lacks the trailing/leading space combinations expected by the selection_group filter, successfully evading detection."
+  },
+  {
+    "output": "Add-LocalGroupMember -Group \"Administrators\" -Member testuser",
+    "explanation": "Similar to the net command, this uses quotes around the group name to avoid matching the ' administrators ' string pattern which requires surrounding spaces."
+  },
+  {
+    "output": "([ADSI]\"WinNT://./Administrators,group\").Add(\"WinNT://./testuser,user\")",
+    "explanation": "This approach uses ADSI in PowerShell to modify the group directly via API. It bypasses the rule completely because it does not rely on net.exe or the Add-LocalGroupMember cmdlet, failing the selection_main criteria entirely."
+  }
+]

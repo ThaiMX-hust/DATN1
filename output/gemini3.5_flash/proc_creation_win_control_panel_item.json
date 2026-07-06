@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\control.exe \"C:\\Users\\Public\\Downloads\\malicious.cpl \"",
+    "explanation": "The rule uses a selection_cpl filter that looks for the command line ending strictly with '.cpl'. By appending a trailing space to the file path inside quotes, the 'endswith' condition fails to match, while Windows still parses and executes the control panel item correctly."
+  },
+  {
+    "output": "C:\\Windows\\System32\\control.exe C:\\Users\\Public\\Downloads\\payload.dll",
+    "explanation": "Control panel items (.cpl) are essentially DLLs. The rule specifically hunts for the '.cpl' extension. By renaming the malicious CPL file to '.dll' and calling it via control.exe, the selection_cpl logic is bypassed entirely because it does not account for alternative extensions that control.exe can still load."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\CPLs\" /v \"Exploit\" /t REG_SZ /d \"C:\\temp\\test.cpl\"",
+    "explanation": "The selection_reg_cli logic looks for the specific string 'CurrentVersion\\Control Panel\\CPLs'. This can be bypassed by using short names (8.3 naming convention) if enabled, or by using redundant slashes (e.g., 'Control Panel\\\\\\\\CPLs') which reg.exe accepts but the Sigma 'contains' string match may not catch depending on the parser's strictness."
+  }
+]

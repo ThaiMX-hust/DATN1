@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\psr.exe C:\\Users\\Public\\not_psr.exe && C:\\Users\\Public\\not_psr.exe /start /output C:\\Users\\Public\\capture.zip /sc 1 /maxsize 10",
+    "explanation": "The Sigma rule relies on the process image name ending with '\\Psr.exe'. By copying the legitimate binary to a different location with a different filename (e.g., 'not_psr.exe'), the process creation event will log the new name, successfully bypassing the 'selection.Image' filter."
+  },
+  {
+    "output": "psr.exe /sc 1 /output C:\\Users\\Public\\report.zip /maxsize 5 /gui 0",
+    "explanation": "The rule specifically looks for the presence of '/start' or '-start' in the command line. However, psr.exe can sometimes be initiated with other flags that trigger recording behavior or by omitting the explicit start flag if the environment is configured to auto-start, though this is less common for full headless bypass."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\update_service.exe",
+    "explanation": "The detection rule relies entirely on Portable Executable (PE) metadata fields (Description, Product, Company, OriginalFileName) typically extracted by telemetry providers like Sysmon (Event ID 1). An adversary can bypass this rule by using resource editing tools (such as Resource Hacker or CFF Explorer) to strip, obfuscate, or modify the Version Information section of the NetSupport binary. By removing strings like 'NetSupport Ltd' or 'PCICFGUI.EXE' and executing the modified binary under a benign name (e.g., update_service.exe), the process creation event will lack the exact metadata strings required to trigger the selection condition."
+  }
+]

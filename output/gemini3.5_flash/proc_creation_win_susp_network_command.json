@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Get-NetIPConfiguration -All",
+    "explanation": "Uses a native PowerShell cmdlet to retrieve IP configuration instead of the legacy 'ipconfig' utility. The Sigma rule relies on exact string matches for legacy commands, so modern PowerShell equivalents bypass it completely."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "set-alias -name \"fs\" -value \"C:\\Windows\\System32\\fsutil.exe\"; fs \"behavior\" \"set\" \"SymlinkEvaluation\" \"L2L:1\"",
+    "explanation": "This bypass uses a PowerShell alias to execute fsutil. Since the Sigma rule logic requires 'Image' to end with '\\fsutil.exe' AND the 'CommandLine' to contain the specific strings, an analyst looking only at process names might miss the execution, though technically the full path remains the same. More importantly, it demonstrates how command-line logging might be obscured depending on the audit level (e.g., if only the alias is logged in certain contexts)."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\fsutil.exe %TEMP%\\not_harmful.exe && %TEMP%\\not_harmful.exe behavior set SymlinkEvaluation L2L:1 R2R:1",
+    "explanation": "The Sigma rule relies on the process Image ending in '\\fsutil.exe'. By copying the binary to a different location with a different name, the 'selection_img' condition is neutralized because the new Image path (not_harmful.exe) does not match 'fsutil.exe', even though the 'OriginalFileName' field in PE metadata might still trigger it if that specific field is being collected and indexed."
+  },
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Control\\FileSystem\" /v \"SymlinkRemoteToLocalEvaluation\" /t REG_DWORD /d 1 /f",
+    "explanation": "This is a functional bypass that achieves the same goal as the command line tool. Instead of using the monitored 'fsutil.exe' utility, this command modifies the Windows Registry directly to enable symbolic link evaluation. The Sigma rule only monitors process execution for fsutil and does not account for direct registry manipulation."
+  }
+]

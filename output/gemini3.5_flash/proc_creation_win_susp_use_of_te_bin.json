@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy \"C:\\Program Files (x86)\\Windows Kits\\10\\Testing\\Core\\x64\\te.exe\" C:\\Temp\\update.exe && C:\\Temp\\update.exe malicious.wsc",
+    "explanation": "This command bypasses the rule by utilizing a common defense evasion technique: binary renaming. The rule strictly checks if the Image or ParentImage ends with '\\te.exe'. By copying the executable to a new name ('update.exe'), these checks are evaded. Furthermore, the 'OriginalFileName' condition looks for '\\te.exe' (with a backslash), but the PE metadata for OriginalFileName typically only contains the filename without slashes (e.g., 'te.exe'), meaning this fallback check is flawed and will also fail to detect the renamed binary."
+  }
+]

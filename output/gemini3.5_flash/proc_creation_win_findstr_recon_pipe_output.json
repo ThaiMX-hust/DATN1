@@ -1,0 +1,6 @@
+[
+  {
+    "output": "net user ^| findstr Administrator",
+    "explanation": "In some logging environments, using the escape character '^' before the pipe might cause the literal string match to fail if the parser doesn't normalize the command line before inspection."
+  }
+]

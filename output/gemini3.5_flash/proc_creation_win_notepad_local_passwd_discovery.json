@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c notepad.exe C:\\Users\\admin\\Documents\\passwords.txt",
+    "explanation": "Bypasses the rule by using cmd.exe as the parent process instead of explorer.exe. The Sigma rule specifically requires ParentImage to end with '\\explorer.exe', so launching notepad from command prompt evades this detection."
+  },
+  {
+    "output": "powershell.exe -Command \"notepad C:\\backup\\passwords.log\"",
+    "explanation": "Bypasses by using powershell.exe as parent instead of explorer.exe. Additionally, uses .log extension which is not in the detection list ('password*.txt', 'password*.csv', 'password*.doc', 'password*.xls')."
+  },
+  {
+    "output": "C:\\Windows\\System32\\notepad.exe \"C:\\Data\\passwords.csv\"",
+    "explanation": "Bypasses by using a different parent process (direct execution or via any process other than explorer.exe). The rule explicitly requires ParentImage|endswith: '\\explorer.exe'."
+  },
+  {
+    "output": "notepad.exe C:\\secure\\passwords.bak",
+    "explanation": "Bypasses by using .bak extension which is not in the detection list. The rule only monitors .txt, .csv, .doc, .xls extensions with password pattern."
+  }
+]

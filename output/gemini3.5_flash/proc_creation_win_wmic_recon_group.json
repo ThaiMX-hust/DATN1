@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe Get-LocalGroup",
+    "explanation": "Using PowerShell instead of wmic.exe avoids detection since the rule specifically targets wmic.exe with 'group' in the command line."
+  }
+]

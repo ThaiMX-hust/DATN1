@@ -1,0 +1,14 @@
+[
+  {
+    "output": "extrac32.exe /Y /L \"C:\\Windows\\Temp\" C:\\path\\to\\payload.cab C:\\Windows\\Temp\\legit.txt:stream.dll",
+    "explanation": "This command likely triggers the rule as it contains 'extrac32.exe', '.cab', and the regex ':[^\\\\]' (a colon not followed by a backslash), which is a common pattern for ADS."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\extrac32.exe C:\\Windows\\DirectShow\\not_extrac.exe && not_extrac.exe C:\\test\\data.cab C:\\test\\file.txt:ads",
+    "explanation": "Bypasses the rule by renaming the 'extrac32.exe' binary. The Sigma rule selection looks for the literal string 'extrac32.exe' in the CommandLine field; by executing a renamed copy, the 'selection' criteria is not met."
+  },
+  {
+    "output": "extrac32.exe /Y /L \"C:\\target\\path\\\" C:\\source\\files.cab file.txt:ads",
+    "explanation": "Depending on the regex engine's strictness, if the CommandLine is interpreted as 'extrac32.exe ... files.cab file.txt:ads', but the user provides a path that includes a backslash before the colon or manipulates the pathing logic (e.g., using a network share format or relative paths that don't match the specific regex ':[^\\\\]'), the rule may fail to trigger."
+  }
+]

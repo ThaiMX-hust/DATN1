@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c p^o^w^e^r^s^h^e^l^l.exe -nop -ep bypass -c \"Write-Host 'Bypass'\"",
+    "explanation": "Bypasses the rule by using caret (^) obfuscation on the word 'powershell'. The Sigma rule looks for the exact string 'powershell' in the command line, so this obfuscated execution via cmd.exe goes undetected while still running the payload."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nop -ep bypass -c \"Invoke-Expression 'payload'\"",
+    "explanation": "Bypasses the rule by having the LNK file target 'powershell.exe' directly instead of wrapping it inside 'cmd.exe'. The Sigma rule explicitly filters for an Image of 'C:\\Windows\\System32\\cmd.exe', so direct PowerShell invocation circumvents it."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c powershell.exe -nop -ep bypass -c \"Start-Process calc.exe\"",
+    "explanation": "Bypasses the rule by omitting the '.lnk' string from the command arguments. The rule requires both 'powershell' and '.lnk' to be present in the command line (often seen when an LNK file reads itself to extract an embedded payload). A standard LNK launching PowerShell without referencing its own filename will evade detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c pwsh.exe -nop -c \"Write-Host 'Bypass'\" -f payload.lnk",
+    "explanation": "Bypasses the rule by utilizing PowerShell Core ('pwsh.exe') instead of standard Windows PowerShell ('powershell.exe'). Even if '.lnk' is passed in the command line, the rule fails because it strictly expects the 'powershell' string."
+  }
+]

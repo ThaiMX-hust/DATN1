@@ -1,0 +1,14 @@
+[
+  {
+    "output": "whoami/groups",
+    "explanation": "The Sigma rule explicitly expects a space before the slash or dash (' /groups' or ' -groups'). Windows executable parsing allows arguments to immediately follow the executable name without a space. Running 'whoami/groups' executes successfully but fails the string match."
+  },
+  {
+    "output": "whoami \"/groups\"",
+    "explanation": "Enclosing the argument in double quotes changes the literal string logged by the process creation event to 'whoami \"/groups\"'. This breaks the exact string match for ' /groups' (space followed immediately by a slash) while still functioning correctly."
+  },
+  {
+    "output": "cmd.exe /c whoami /g^roups",
+    "explanation": "When executed through cmd.exe, the caret (^) acts as an escape character. The process creation log will capture the command line with the caret included ('/g^roups'), which bypasses the exact string match in the Sigma rule, but cmd.exe will strip it and execute the command normally."
+  }
+]

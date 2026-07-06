@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False",
+    "explanation": "The Sigma rule specifically targets the execution of 'netsh.exe' with specific command-line arguments. By using the native PowerShell 'NetSecurity' module, an attacker can disable all firewall profiles without triggering a process creation event for netsh.exe or matching its command-line patterns."
+  },
+  {
+    "output": "reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile\" /v EnableFirewall /t REG_DWORD /d 0 /f",
+    "explanation": "This command bypasses the rule by directly modifying the Windows Registry to disable the firewall. Since the rule is scoped to 'process_creation' logs for 'netsh.exe', it does not monitor 'reg.exe' or direct registry writes that achieve the same result."
+  },
+  {
+    "output": "netsh advfirewall set allprofiles state o^f^f",
+    "explanation": "This technique uses command-line obfuscation (character insertion) within the cmd.exe environment. While 'netsh' still executes correctly, the 'CommandLine|contains|all' filter for the string 'off' may fail depending on how the SIEM normalizes command-line strings, as the literal string contains carats."
+  }
+]

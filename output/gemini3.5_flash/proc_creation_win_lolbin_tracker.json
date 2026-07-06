@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Tracker.exe /ERRORREPORT:PROMPT /d malicious.dll /c calc.exe",
+    "explanation": "The rule contains a exclusion filter (filter_msbuild1) that ignores any command line containing '/ERRORREPORT:PROMPT'. By manually appending this flag to the malicious command, the execution triggers the filter and is excluded from the alert results."
+  }
+]

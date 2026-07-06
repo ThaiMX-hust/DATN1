@@ -1,0 +1,6 @@
+[
+  {
+    "output": "\"C:\\\\Program Files\\\\iox\\\\iox.exe\" -fwd -l 8080",
+    "explanation": "The command line does not contain the exact strings '.exe fwd -l ' or '.exe proxy -l ' that the Sigma rule looks for, so it bypasses the detection while still executing the IOX tool."
+  }
+]

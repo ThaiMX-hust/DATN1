@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\manage-bde.wsf C:\\Users\\Public\\m.txt && cscript.exe //e:jscript C:\\Users\\Public\\m.txt",
+    "explanation": "The rule relies on the string 'manage-bde.wsf' appearing in the command line or parent command line. By copying the script to a new location with a different file extension (e.g., .txt) and using the //e engine flag to force execution as a script, the filename-based detection is bypassed while the malicious logic still runs."
+  },
+  {
+    "output": "cmd.exe /c \"cd /d C:\\Windows\\System32\\ && cscript.exe //nologo manage-bde.wsf\"",
+    "explanation": "While this specific command might trigger if the full command line is logged, some SIEM implementations or sensors only capture the base process arguments. If an attacker uses environment variables or relative paths combined with working directory changes, simple 'contains' logic for the full filename can sometimes be evaded depending on how the log source normalizes the path."
+  }
+]

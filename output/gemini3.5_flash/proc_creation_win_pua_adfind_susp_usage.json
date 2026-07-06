@@ -1,0 +1,26 @@
+[
+  {
+    "output": "cmd.exe /c adfind.exe d^o^m^a^i^n^l^i^s^t",
+    "explanation": "This simulated command bypasses the detection because the Sigma rule relies on exact string matching (e.g., CommandLine|contains: 'domainlist'). By inserting the cmd.exe escape character '^' into the argument, the raw logged command line (such as in Windows Event ID 4688) will contain 'd^o^m^a^i^n^l^i^s^t' instead of 'domainlist', evading the string match. The command interpreter strips these carets before execution, so AdFind still processes the correct argument."
+  },
+  {
+    "output": "adfind.exe /dclist /s:example.com /b",
+    "explanation": "The rule checks for the literal string ' dclist ' (with surrounding spaces). By using the short option '/dclist' without spaces and adding other parameters, the command line no longer contains the exact substring, allowing it to bypass the detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"adfind.exe -f \"objectcategory=user\" -s -accepteula\"",
+    "explanation": "Uses a legitimate flag pattern not listed in the rule (e.g., -f \"objectcategory=user\") to enumerate users while avoiding the specific substrings the sigma rule matches."
+  },
+  {
+    "output": "adfind.exe -b \"DC=example,DC=com\" -f \"(objectClass=trustedDomain)\"",
+    "explanation": "Bypasses the 'trustdmp' and 'objectcategory=' checks by manually querying for the trustedDomain class using 'objectClass' instead of relying on AdFind's built-in shortcuts or the 'objectCategory' attribute."
+  },
+  {
+    "output": "adfind.exe -sc dclist",
+    "explanation": "Bypasses the ' dclist ' string match. The Sigma rule specifically looks for ' dclist ' with both leading and trailing spaces. By placing the argument at the very end of the command line, the trailing space is omitted, evading the condition."
+  },
+  {
+    "output": "adfind.exe -f \"(name=Domain Admins)\"",
+    "explanation": "Bypasses the 'name=\"Domain Admins\"' selection. The rule strictly matches the double quotes inside the string. Using standard LDAP parentheses without inner quotes achieves the same query but breaks the exact string match."
+  }
+]

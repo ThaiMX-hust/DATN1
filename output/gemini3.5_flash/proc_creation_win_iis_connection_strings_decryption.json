@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_regiis.exe -pdf \"connectionStrings\" C:\\inetpub\\wwwroot",
+    "explanation": "Uses the exact executable name and argument pattern the rule looks for, but changes the working directory/path context so the literal command-line still contains 'connectionStrings' and ' -pdf' while potentially evading simple Image/OriginalFileName matches that rely on a default path; an attacker can also copy aspnet_regiis.exe to a non-standard location or rename it and invoke it via .NET reflection or rundll32 to avoid the Image/endswith and OriginalFileName filters entirely."
+  },
+  {
+    "output": "rundll32.exe C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_regiis.exe,Control_RunDLL -pdf connectionStrings C:\\inetpub\\wwwroot",
+    "explanation": "Invokes the same decryption functionality via rundll32 so the Image is rundll32.exe (not aspnet_regiis.exe), bypassing the Image|endswith and OriginalFileName filters while still performing the decryption; the command-line may still contain the keywords, but the process ancestry and image name no longer match the rule."
+  },
+  {
+    "output": "powershell.exe -nop -exec bypass -c \"& { [System.Reflection.Assembly]::LoadFrom('C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_regiis.exe'); [YourNamespace.YourClass]::DecryptConnectionStrings('connectionStrings', 'C:\\inetpub\\wwwroot') }\"",
+    "explanation": "Uses PowerShell to load aspnet_regiis.exe as an assembly and invoke decryption routines directly, avoiding creation of an aspnet_regiis.exe process entirely; the command-line does not contain the literal ' -pdf' pattern, bypassing the CommandLine|contains|all condition."
+  }
+]

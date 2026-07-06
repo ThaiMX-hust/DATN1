@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"$com = 'X509Enrollment.' + 'CBinaryConverter'; $obj = New-Object -ComObject $com\"",
+    "explanation": "The Sigma rule relies on an exact string match for 'X509Enrollment.CBinaryConverter' within the process command line. By splitting the string and concatenating it during runtime execution, the exact signature never appears in the process creation logs (such as Windows Event ID 4688 or Sysmon Event ID 1), effectively bypassing the 'contains' condition."
+  },
+  {
+    "output": "powershell.exe -Command \"$clsid = '884e2002-217d-11da-b2a4-000' + 'e7bbb2b09'; $type = [type]::GetTypeFromCLSID($clsid); $obj = [Activator]::CreateInstance($type)\"",
+    "explanation": "This simulates a bypass for the second detection condition (the CLSID). By obfuscating the CLSID string using simple concatenation, the static signature '884e2002-217d-11da-b2a4-000e7bbb2b09' is not present in the logged command line, evading detection while still successfully instantiating the COM object."
+  }
+]

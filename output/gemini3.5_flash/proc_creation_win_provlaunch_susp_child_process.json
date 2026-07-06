@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Child Process: C:\\Windows\\System32\\wbem\\wmic.exe process call create \"C:\\ProgramData\\payload.exe\"",
+    "explanation": "This simulated execution bypasses the detection because 'wmic.exe' is not included in the hardcoded list of executables in the 'selection_child' block. Furthermore, the directory 'C:\\ProgramData\\' is not monitored by the 'Image|contains' directory blocklist. Defenders should be aware that rules relying on explicit blocklists can often be bypassed by using alternative Living-off-the-Land binaries (LOLBINs) or unmonitored execution paths."
+  }
+]

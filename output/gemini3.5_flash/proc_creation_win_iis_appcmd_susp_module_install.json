@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Import-Module WebAdministration; New-WebGlobalModule -Name 'MyModule' -Image 'C:\\Windows\\System32\\inetsrv\\MyModule.dll'\"",
+    "explanation": "The provided Sigma rule explicitly targets the 'appcmd.exe' binary and its specific command-line arguments. An adversary can bypass this detection by utilizing alternative, built-in management interfaces to install the IIS module. This simulated command uses the standard PowerShell WebAdministration module to achieve the installation, which completely evades the process creation filters looking for 'appcmd.exe'. Defenders should broaden detections to include PowerShell IIS module usage and direct file modifications to applicationHost.config."
+  },
+  {
+    "output": "cmd.exe /c echo ^<globalModules^>^<add name=\"MyModule\" image=\"C:\\Windows\\System32\\inetsrv\\MyModule.dll\" /^>^</globalModules^> >> C:\\Windows\\System32\\inetsrv\\config\\applicationHost.config",
+    "explanation": "Another bypass method involves completely ignoring administrative tools (like appcmd or PowerShell cmdlets) and directly modifying the IIS configuration file (applicationHost.config). Since the Sigma rule only monitors process command lines for appcmd.exe, directly appending or editing the XML configuration file will not trigger the alert. Robust detection should also include File Integrity Monitoring (FIM) on IIS configuration files."
+  }
+]

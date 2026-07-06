@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Temp\\update.exe -c \"cmd /c calc.exe\" -t schtask",
+    "explanation": "Renamed SharPersist binary to avoid Image|endswith and Product detection; reversed argument order (-c before -t) prevents the '-t schtask -c ' substring match; omitted '-m add' avoids the reg/service/schtask selection_cli_* patterns, thus bypassing the rule while still executing a persistence technique."
+  }
+]

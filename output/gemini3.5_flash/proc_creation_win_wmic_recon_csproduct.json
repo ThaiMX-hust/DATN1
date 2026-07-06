@@ -1,0 +1,10 @@
+[
+  {
+    "output": "wmic computersystem get model",
+    "explanation": "Retrieves the system model using wmic.exe but does not contain the 'csproduct' substring, thus bypassing the sigma rule."
+  },
+  {
+    "output": "powershell -NoProfile -Command \"(Get-CimInstance Win32_ComputerSystem).Model\"",
+    "explanation": "Uses PowerShell to obtain the hardware model without invoking wmic.exe, completely avoiding the rule's process creation detection."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"set x=del && %x% C:\\ProgramData\\*.dll\"",
+    "explanation": "This command uses cmd.exe to set an environment variable 'x' to 'del', then executes %x% which expands to 'del' at runtime. The logged CommandLine for cmd.exe contains '%x%' instead of the literal 'del ' substring, so the selection_del condition (which requires 'del ' in the CommandLine) is not met. The command still deletes all .dll files in C:\\ProgramData\\ using a wildcard, bypassing the Sigma rule as not all selection conditions are satisfied."
+  },
+  {
+    "output": "cmd.exe /c \"d^e^l C:\\ProgramData\\*.dll\"",
+    "explanation": "The ^ character in cmd.exe escapes the following character, so 'd^e^l' is interpreted as 'del' when executed. However, the logged CommandLine contains 'd^e^l' instead of the literal 'del ' substring, so the selection_del condition (which looks for 'del ' in the CommandLine) is not triggered. The command still performs greedy deletion of .dll files, bypassing the rule."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\ProgramData && del *.dll\"",
+    "explanation": "This command changes the current directory to C:\\ProgramData then runs 'del *.dll' with a relative wildcard (no backslash before the *). The Sigma rule's selection_extensions condition looks for substrings like '\\*.dll' (with a leading backslash), which are not present in the CommandLine. While selection_img and selection_del are satisfied, selection_extensions fails, so the overall rule condition is not met, bypassing detection."
+  }
+]

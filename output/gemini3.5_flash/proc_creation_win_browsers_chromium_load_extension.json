@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c copy \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" \"%TEMP%\\custom_browser.exe\" && \"%TEMP%\\custom_browser.exe\" --load-extension=\"C:\\path\\to\\custom_extension\"",
+    "explanation": "The Sigma rule explicitly checks if the process 'Image' ends with a hardcoded list of browser executable names (e.g., '\\chrome.exe'). By copying the legitimate Chromium binary to a new location and renaming it to something else (like 'custom_browser.exe'), the 'Image|endswith' condition evaluates to false, bypassing the detection entirely while still executing the '--load-extension=' parameter."
+  }
+]

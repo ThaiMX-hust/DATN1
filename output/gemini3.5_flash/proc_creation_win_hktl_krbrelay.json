@@ -1,0 +1,10 @@
+[
+  {
+    "output": "RenamedTool.exe -spn cifs/target.domain.local -clsid {12345678-1234-1234-1234-123456789012} -rbcd target$",
+    "explanation": "Bypass via PE metadata alteration and argument spacing. An adversary can compile the tool from source with a modified 'OriginalFileName' header and save it as 'RenamedTool.exe', bypassing the 'selection_img' checks. Additionally, if '-spn' is placed as the very first argument, it lacks a leading space in the raw command line string, which evades the strict ' -spn ' (with leading space) string match defined in 'selection_cli_1'."
+  },
+  {
+    "output": "KrbRelay.exe /spn cifs/target.domain.local /clsid {12345678-1234-1234-1234-123456789012} /rbcd target$",
+    "explanation": "Bypass via argument character substitution. If the command-line parsing library of the tool supports alternative switch characters (such as '/' instead of '-'), using them will completely bypass 'selection_cli_1' because the rule explicitly looks for hyphens (' -spn ', ' -clsid ', ' -rbcd ')."
+  }
+]

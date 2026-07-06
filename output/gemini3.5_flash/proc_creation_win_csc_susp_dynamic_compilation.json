@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe C:\\Windows\\Temp\\compiler.exe && C:\\Windows\\Temp\\compiler.exe /target:library /out:C:\\Windows\\Temp\\payload.dll C:\\Windows\\Temp\\payload.cs",
+    "explanation": "Bypass via Binary Renaming: The Sigma rule relies on the 'selection_img' condition, which strictly looks for an Image ending in '\\csc.exe'. By copying the executable to a new name (e.g., 'compiler.exe'), the process creation event fails this initial check, evading detection even when compiling in a monitored directory like '\\Windows\\Temp\\'."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /out:C:\\Windows\\Tasks\\update.exe C:\\Windows\\Tasks\\update.cs",
+    "explanation": "Bypass via Unmonitored Path: The rule uses hardcoded string matches to identify suspicious directories (selection_susp_location_*). Executing the compilation process from an unmonitored directory, such as 'C:\\Windows\\Tasks\\' or 'C:\\Intel\\', bypasses the location-based logic entirely."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe /out:C:\\Temp\\payload.exe C:\\Temp\\payload.cs",
+    "explanation": "Bypass via Path Granularity: The rule specifically monitors '\\Windows\\Temp\\' and '\\AppData\\Local\\Temp\\'. Dropping and compiling the payload in a non-standard or root-level temporary directory like 'C:\\Temp\\' avoids triggering the strict path matching conditions."
+  }
+]

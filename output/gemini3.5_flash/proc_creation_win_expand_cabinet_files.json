@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\expand.exe %TEMP%\\not_expand.exe && %TEMP%\\not_expand.exe -f:* C:\\path\\to\\malicious.cab C:\\Windows\\System32\\Drivers\\",
+    "explanation": "This bypasses the 'selection_cmd' logic by renaming the 'expand.exe' binary. The rule specifically looks for an Image path ending in '\\expand.exe'. By copying the utility to a temporary folder with a different name, the process creation event will log a different Image name, evading the primary detection filter."
+  },
+  {
+    "output": "expand.exe /f:* C:\\malicious.cab C:\\Users\\Administrator\\Documents\\",
+    "explanation": "This bypasses the folder-based detection logic. The rule monitors specific suspicious paths like Public, Perflogs, and Temp. By extracting the cabinet file to a standard user directory that is not explicitly blacklisted (like the Administrator's Documents or a custom application folder), the 'selection_folders' conditions are never met."
+  },
+  {
+    "output": "expand.exe /F:* C:\\malicious.cab C:\\Windows\\System32\\",
+    "explanation": "The rule uses 'windash' logic for the '-F:' flag, which generally covers both '-' and '/'. However, many SIEM implementations of this rule specifically look for the colon suffix. Depending on the parser, using '/F:*' (extract all) instead of specifying a specific file with '-F:filename' may avoid the string match for '-F:'."
+  }
+]

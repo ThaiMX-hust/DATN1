@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\devtoolslauncher.exe C:\\Users\\Public\\not_a_dev_tool.exe && C:\\Users\\Public\\not_a_dev_tool.exe LaunchForDeploy C:\\Windows\\System32\\calc.exe",
+    "explanation": "The rule uses 'Image|endswith' which specifically targets the filename 'devtoolslauncher.exe'. By copying the legitimate binary to a new location with a different name, the execution still functions as a LOLBAS (Living Off the Land Binary and Script) but bypasses the filename-based detection filter."
+  },
+  {
+    "output": "C:\\Windows\\System32\\devtoolslauncher.exe \"LaunchFor\"\"Deploy\" C:\\Windows\\System32\\calc.exe",
+    "explanation": "This bypass attempts to evade the 'CommandLine|contains' filter. Depending on how the SIEM or EDR normalizes strings, inserting escape characters like double quotes or carets (in CMD) within the 'LaunchForDeploy' string can break pattern matching while remaining syntactically valid for the Windows command parser."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "verclsid.exe \"/S\" \"/C\" {11111111-2222-3333-4444-555555555555}",
+    "explanation": "Windows command line parsing (CommandLineToArgvW) allows arguments to be wrapped in quotes. Passing \"/S\" and \"/C\" executes identically but evades the exact literal substring match of '/S' and '/C' expected by the rule."
+  },
+  {
+    "output": "verclsid.exe -S -C {11111111-2222-3333-4444-555555555555}",
+    "explanation": "Many Windows built-in utilities accept hyphens (-) interchangeably with forward slashes (/) for command-line switches. Providing -S and -C bypasses the rule since it explicitly hardcodes the forward slash."
+  },
+  {
+    "output": "verclsid.exe /s /c {11111111-2222-3333-4444-555555555555}",
+    "explanation": "Depending on the SIEM backend translation, if the case-insensitive modifier is not applied by default during Sigma conversion, using lowercase /s and /c will bypass the exact uppercase string match."
+  }
+]

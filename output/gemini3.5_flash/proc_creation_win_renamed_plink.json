@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\plink.exe -l forward -P 22 -R 127.0.0.1:8080:localhost:80",
+    "explanation": "The command uses the legitimate plink.exe binary (Image ends with \\plink.exe), which satisfies the filter condition and prevents the rule from triggering, even though the command line includes the malicious arguments that would otherwise match the selection criteria."
+  }
+]

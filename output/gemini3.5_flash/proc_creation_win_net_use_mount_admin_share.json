@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-SmbMapping -LocalPath 'Z:' -RemotePath '\\\\192.168.1.100\\C$'\"",
+    "explanation": "Bypasses the rule by using PowerShell's native New-SmbMapping cmdlet to mount the administrative share. The Sigma rule strictly matches on the executable name (net.exe or net1.exe) in the selection_img criteria. By using a completely different binary (powershell.exe), the condition is never met."
+  },
+  {
+    "output": "cmd.exe /c pushd \\\\192.168.1.100\\ADMIN$",
+    "explanation": "Bypasses the rule by utilizing the cmd.exe built-in command 'pushd'. When given a UNC path, pushd automatically maps a temporary network drive to that path. Since this action is handled internally by cmd.exe, it does not invoke net.exe, entirely evading the selection_img condition."
+  },
+  {
+    "output": "\"net use \\\\192.168.1.100\\C\"\n\"\n\u00a8",
+    "explanation": "Bypassestheruleviacommand\u2212lineobfuscation.Theselection\nc\n\t\u200b\n\nlicriterialooksforastringendingexactlywith\n\u2032\n' (using the regex/wildcard representation '\\\\\\$'). By wrapping the dollar sign in quotes, the command line actually ends with a quote character ('\"'), successfully evading the specific string matching logic while still being parsed correctly by the Windows command line."
+  }
+]

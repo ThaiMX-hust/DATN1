@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-Content -Path '\\\\.\\pipe\\target_pipe' -Value 'data'\"",
+    "explanation": "Bypasses the rule because it uses the native PowerShell cmdlet 'Set-Content' to write to the named pipe. This completely avoids using the 'echo' and '>' string literals that the Sigma rule explicitly requires."
+  },
+  {
+    "output": "cmd.exe /c e^c^h^o data > \\\\.\\pipe\\target_pipe",
+    "explanation": "Bypasses the rule by using caret (^) character obfuscation, a standard cmd.exe feature. The command executes normally as 'echo', but the literal string 'echo' is broken up in the command line arguments, evading the strict 'CommandLine|contains|all: echo' condition."
+  },
+  {
+    "output": "cmd.exe /c copy /Y data.txt \\\\.\\pipe\\target_pipe",
+    "explanation": "Bypasses the rule by using the 'copy' command to move data into the named pipe instead of 'echo' and '>'. The rule's logic is brittle as it specifically targets the 'echo >' pattern, missing other native Windows file-writing utilities."
+  }
+]

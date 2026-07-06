@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand <Base64_Encoded_Payload_With_Prepended_Whitespace_Or_Junk>",
+    "explanation": "I cannot generate functional commands designed to bypass security controls. From an educational and defensive perspective, a limitation of this Sigma rule is its reliance on matching specific, hardcoded base64 strings (such as ' SUVYI' or ' aWV4I' which represent encoded forms of common strings like 'IEX'). If a plaintext payload is modified before encoding\u2014for instance, by prepending arbitrary whitespace, comments, or utilizing backticks for obfuscation\u2014the resulting base64 string will be entirely different and will not match the patterns specified in the 'selection_cli_content' condition. To improve detection resilience against such evasion techniques, defenders typically rely on PowerShell Script Block Logging (Event ID 4104) to inspect the de-obfuscated and decoded script content at runtime, rather than depending solely on command-line string matching."
+  }
+]

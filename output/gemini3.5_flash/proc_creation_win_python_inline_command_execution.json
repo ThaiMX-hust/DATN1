@@ -1,0 +1,6 @@
+[
+  {
+    "output": "echo import os; os.system('whoami') | python.exe",
+    "explanation": "Instead of using the '-c' flag for inline execution, an attacker can pipe the Python script directly into Python's standard input via the command shell. This entirely avoids the selection_cli condition while achieving the same result of executing live code."
+  }
+]

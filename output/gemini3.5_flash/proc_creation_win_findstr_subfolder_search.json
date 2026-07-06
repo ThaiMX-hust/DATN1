@@ -1,0 +1,58 @@
+[
+  {
+    "output": "findstr.exe /s /i \"password\" C:\\*.txt",
+    "explanation": "The Sigma rule relies on the 'windash' modifier, which explicitly checks for arguments preceded by a standard dash (e.g., ' -s ' and ' -i '). Because findstr natively accepts forward slashes instead of dashes for all its command-line switches, substituting the dashes with forward slashes completely circumvents the selection_cli_search_* conditions."
+  },
+  {
+    "output": "findstr.exe -si \"password\" C:\\*.txt",
+    "explanation": "The rule treats each flag as a standalone entity surrounded by whitespace (e.g., ' -s ' and ' -i '). By collapsing multiple arguments into a single combined flag group ('-si'), the specific space-padded individual string matches fail to trigger, while the binary parses and executes the flags successfully."
+  },
+  {
+    "output": "cmd.exe /c \"findstr -s\"i \"password\" C:\\*.txt\"",
+    "explanation": "Injecting double quotes inside a command-line parameter breaks up static contiguous text searches during log processing. The internal parser of findstr strips out the quotation mark, recognizing and evaluating the functional operational constraints while bypassing the specific signature string check."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\findstr.exe C:\\Temp\\grep.exe && C:\\Temp\\grep.exe -s -i \"password\" C:\\*.txt",
+    "explanation": "This approach targets the 'selection_findstr' logic block. By copying the native executable into an arbitrary or temporary directory under a non-standard name, the 'Image|endswith' matching constraint is nullified, suppressing the evaluation of the dependent command-line criteria entirely."
+  },
+  {
+    "output": "findstr /si \"sensitive_data\" .",
+    "explanation": "The Sigma rule specifically looks for the strings ' -s ' and ' -i ' (or their forward-slash equivalents due to the windash modifier) with leading and trailing spaces. By combining the flags into a single switch (/si), the literal string matches fail, bypassing the detection."
+  },
+  {
+    "output": "findstr /s/i \"sensitive_data\" .",
+    "explanation": "Removing the space between the flags prevents the trailing space condition from matching ' -s ' and the leading space condition from matching ' -i ', successfully evading the rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\findstr.exe C:\\Windows\\Temp\\fstr.exe && C:\\Windows\\Temp\\fstr.exe /s /i \"sensitive_data\" .",
+    "explanation": "If the SIEM only relies on the CommandLine field and does not properly ingest or evaluate the OriginalFileName field from PE metadata, renaming the executable bypasses the 'CommandLine|contains: findstr' and 'Image|endswith: findstr.exe' conditions."
+  },
+  {
+    "output": "findstr \"sensitive_data\" . /s /i",
+    "explanation": "If the '/i' flag is placed at the absolute end of the command line with no trailing space, the strict match for ' -i ' (which includes a trailing space) will fail to trigger."
+  },
+  {
+    "output": "findstr /S /I \"password\" C:\\*.txt",
+    "explanation": "The Sigma rule specifically looks for the flags using a dash prefix (e.g., ' -s ' and ' -i ') as defined by the 'windash' modifier. By using the forward slash ('/') which is a standard alternative for Windows command-line arguments, the specific string match for ' -s ' and ' -i ' is bypassed while maintaining the same functionality."
+  },
+  {
+    "output": "findstr -si \"password\" C:\\*.txt",
+    "explanation": "The rule expects the flags to be separated by spaces (e.g., ' -s ' AND ' -i '). By concatenating the flags into a single argument string '-si', the rule's requirement for 'all of selection_cli_search_*' fails because the individual space-padded patterns are not present."
+  },
+  {
+    "output": "findstr /si \"password\" C:\\*.txt",
+    "explanation": "This combines both techniques: using the forward slash instead of the dash and concatenating the flags. This avoids all 'CommandLine|contains|windash' selection criteria defined in the rule."
+  },
+  {
+    "output": "findstr /s /i \"password\" C:\\*.txt",
+    "explanation": "The Sigma rule specifically looks for the 'windash' format (a space followed by a dash, e.g., ' -s ' and ' -i '). On Windows, findstr accepts arguments using forward slashes (/) instead of dashes. By using '/s' and '/i', the functionality remains identical for the attacker, but the specific pattern match for ' -s ' and ' -i ' is bypassed."
+  },
+  {
+    "output": "findstr -si \"password\" C:\\*.txt",
+    "explanation": "The rule looks for independent occurrences of ' -s ' and ' -i ' (with surrounding spaces). By concatenating the flags into a single argument block '-si', the command-line string no longer contains the discrete patterns ' -s ' and ' -i ', effectively evading the detection logic while performing the same recursive, case-insensitive search."
+  },
+  {
+    "output": "findstr /S /I \"password\" C:\\*.txt",
+    "explanation": "While 'contains' is often case-insensitive in many SIEMs, some environments or specific configurations might be strictly looking for lowercase ' -s '. Using uppercase forward-slash switches provides another layer of variation that deviates from the specific 'windash' selection criteria defined in the rule."
+  }
+]

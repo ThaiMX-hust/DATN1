@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil.exe -encode payload.bin encoded_payload.txt",
+    "explanation": "The Sigma rule relies on a hardcoded blocklist of specific file extensions (e.g., .bat, .doc, .tmp) in the 'selection_extension' field. By simply renaming the target file to use an unlisted extension like '.bin', '.ps1', '.dll', or '.txt' prior to encoding, the 'selection_extension' condition evaluates to false, successfully evading detection."
+  },
+  {
+    "output": "cmd.exe /c \"certutil.exe -encode payload.b^at encoded_payload.txt\"",
+    "explanation": "Depending on the underlying SIEM's command-line normalization capabilities, using Windows Command Prompt escape characters (like the caret '^') within the file extension can break the exact string match for '.bat'. The command executes successfully, but the logged command line might not match the literal '.bat' string."
+  }
+]

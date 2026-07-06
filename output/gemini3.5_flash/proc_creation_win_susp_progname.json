@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Temp\\system_update.ps1",
+    "explanation": "The Sigma rule relies on a hardcoded, specific list of known suspicious filenames (like 'payload.ps1', 'inject.ps1') and specific temporary file paths (like '\\Temp\\a.ps1'). By renaming the payload to a generic, unlisted name such as 'system_update.ps1' and using a slightly different path or unlisted temp file name, the command entirely evades the string-matching logic in 'selection_commandline' and 'selection_image'."
+  }
+]

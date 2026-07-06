@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\gpresult.exe %TEMP%\\not_gp.exe && %TEMP%\\not_gp.exe /r",
+    "explanation": "The Sigma rule specifically filters for processes where the Image path ends with '\\gpresult.exe'. By copying the binary to a different location and renaming it, the Image path requirement is no longer met, even though the functionality remains the same."
+  },
+  {
+    "output": "gpresult.exe /h report.html /f",
+    "explanation": "The rule triggers on the use of specific flags '/z' (super-verbose) or '/v' (verbose). Using the '/h' (HTML report) or '/r' (Summary report) flags still allows an attacker to discover Group Policy information while avoiding the specific command line arguments defined in the detection selection."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-GPOReport -All -ReportType Xml -Path C:\\temp\\gporeport.xml\"",
+    "explanation": "Instead of using the gpresult.exe utility, an attacker can use native PowerShell cmdlets like Get-GPOReport or Get-GPResultantSetOfPolicy to gather the same Resultant Set of Policy (RSoP) information, completely bypassing a rule focused solely on the gpresult.exe executable."
+  }
+]

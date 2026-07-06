@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Windows\\System32\\cmd.exe\" /c \"notepad.exe\"",
+    "explanation": "Uses a legitimate executable (notepad.exe) without 'tunnel' in the command line or arguments, avoiding all selection conditions and filters."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\svchost tunnel --accept-server-license-terms",
+    "explanation": "The Sigma rule heavily relies on the literal string '.exe tunnel' in the CommandLine field for the 'selection_image_only_tunnel' and 'selection_image_tunnel_args' filters. Because Windows allows executing binaries without explicitly typing the '.exe' extension, an attacker can simply omit it. The resulting command line string will lack the '.exe tunnel' pattern, bypassing the primary detection logic."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\update.exe tunnel --name C2_Node",
+    "explanation": "The 'selection_image_only_tunnel' filter uses the 'endswith' modifier, meaning the command line must end exactly with '.exe tunnel'. By appending any additional benign argument or flag to the end of the command (e.g., '--name C2_Node'), the command line no longer ends with the targeted string. Assuming the attacker has already accepted the license terms previously (omitting the '--accept-server-license-terms' flag to bypass 'selection_image_tunnel_args'), this execution will evade detection."
+  }
+]

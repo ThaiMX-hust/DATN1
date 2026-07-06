@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"whoami > C:\\temp\\output.txt & REM  route   ADD \"",
+    "explanation": "Bypasses the rule by intentionally including the exact exclusion strings (' route ' and ' ADD ') within a batch comment (REM) at the end of the command. The rule's filter condition (CommandLine|contains|all) catches these strings and falsely assumes it is benign routing activity, ignoring the malicious command execution."
+  },
+  {
+    "output": "C:\\Windows\\System32\\wscript.exe C:\\ProgramData\\launcher.vbs",
+    "explanation": "Bypasses the rule by executing an alternative living-off-the-land binary (LOLBin) like wscript.exe or cscript.exe instead of the monitored cmd.exe, powershell.exe, or pwsh.exe. This completely evades the 'selection_img' condition while still achieving arbitrary code execution from the abused parent process."
+  }
+]

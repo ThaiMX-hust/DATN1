@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic /NAMESPACE:\\\\root\\subscription PATH __EventFilter CREATE Name=\"MyFilter\", EventNamespace=\"root\\cimv2\", QueryLanguage=\"WQL\", Query=\"SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_LocalTime'\"",
+    "explanation": "The original Sigma rule specifically looks for 'ActiveScriptEventConsumer' and 'CREATE' in the same command line. A common bypass is to split the persistence setup into multiple steps. This command creates the Event Filter independently; a separate command would then create the Consumer or use a different Consumer type (like CommandLineEventConsumer) which this specific rule does not monitor."
+  },
+  {
+    "output": "wmic /NAMESPACE:\\\\root\\subscription PATH ActiveScriptEventConsumer CREATE Name=\"Bypass\", ScriptingEngine=\"VBScript\", ScriptText=\"MsgBox 'Hi'\"",
+    "explanation": "This command may bypass simple string-matching logic if the detection engine is case-sensitive and looking specifically for ' CREATE ' with spaces. By removing spaces or using different casing, some filters fail, though this specific rule uses a 'contains' logic which is usually case-insensitive. However, if the rule strictly enforces 'all' with exact string matches including the surrounding spaces in ' CREATE ', variations in whitespace can cause a bypass."
+  },
+  {
+    "output": "$cmd = \"ActiveScriptEventConsumer\"; $op = \"CREATE\"; iex \"wmic path $cmd $op Name=...\"",
+    "explanation": "Executing the creation via PowerShell or an indirect wrapper where the strings are concatenated at runtime prevents the 'ActiveScriptEventConsumer' and 'CREATE' strings from appearing together in the process creation event's CommandLine field, which is what this Sigma rule inspects."
+  }
+]

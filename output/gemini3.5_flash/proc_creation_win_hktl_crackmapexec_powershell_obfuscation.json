@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$a = 'j'; $b = 'o'; $c = 'i'; $d = 'n'; $e = 's'; $f = 'p'; $g = 'l'; $h = 'i'; $i = 't'; $cmd = $a+$b+$c+$d+' '+$e+$f+$g+$h+$i; Invoke-Expression ('Write-Host ' + $cmd)\"",
+    "explanation": "The original rule looks for the literal string 'join*split' (wildcard) or specific environment variable indexing like '$ShellId[1]+$ShellId[13]+'x''. By breaking the 'join' and 'split' strings into individual variables and concatenating them at runtime, the command line avoids the static pattern matching of the 'selection_cli' block while maintaining the same logical functionality."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand JABzID0gJ2pvaW4nOyAkcyArPSAnc3BsaXQnOyBXcml0ZS1Ib3N0ICRz",
+    "explanation": "The rule targets specific strings within the CommandLine field. By using Base64 encoding (-EncodedCommand), the actual logic (join/split) is hidden from simple command-line pattern matchers that do not perform pre-processing or decoding of PowerShell arguments."
+  },
+  {
+    "output": "powershell.exe -Command \"$p = $env:Public; $char1 = $p[13]; $char2 = $p[5]; $exec = $char1 + $char2 + 'y'; Invoke-Expression $exec\"",
+    "explanation": "The rule specifically looks for '( $env:Public[13]+$env:Public[5]+''x'')'. By simply changing the final character (e.g., using 'y' instead of 'x') or assigning $env:Public to a temporary variable before indexing, the signature-based detection fails because the specific string sequence is broken."
+  },
+  {
+    "output": "powershell.exe -Command \"$a = 'jo'; $b = 'in'; $c = 'spl'; $d = 'it'; Invoke-Expression ($a + $b + '-' + $c + $d)\"",
+    "explanation": "The original rule looks for the literal string 'join*split'. By breaking these keywords into variables and concatenating them at runtime, the static string match is evaded while maintaining the same logical execution."
+  },
+  {
+    "output": "powershell.exe -Command \"[char[]](https://www.google.com/search?q=106,111,105,110) -join ''\"",
+    "explanation": "This bypasses the selection_cli criteria by avoiding the specific obfuscation patterns used by CrackMapExec (like the $ShellId or $env:Public indexing) and instead uses character code arrays to reconstruct commands, which the rule does not account for."
+  }
+]

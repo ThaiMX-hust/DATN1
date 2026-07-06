@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Temp\\sysupdate.exe \"user:Administrator\" \"binary:C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "Bypasses 'selection_img' by renaming the executable (assuming OriginalFileName PE metadata is also modified or stripped). Bypasses 'selection_cli' by wrapping arguments in double quotes. The rule strictly looks for ' user:' and ' binary:' (with a leading space), but the executed command line string will contain ' \"user:' and ' \"binary:', failing the exact match condition."
+  },
+  {
+    "output": "C:\\Users\\Public\\updater.exe user=Administrator binary=C:\\Windows\\System32\\calc.exe",
+    "explanation": "Bypasses the rule by using a renamed executable and assuming the operator recompiled the SharpImpersonation tool's argument parser to accept '=' instead of ':'. Since the Sigma rule looks for the exact strings ' user:' and ' binary:', changing the delimiter to an equals sign completely evades the 'selection_cli' detection."
+  },
+  {
+    "output": "updater.exe pid:1337 binary:C:\\Windows\\System32\\cmd.exe technique:CreateProcessWithTokenW",
+    "explanation": "This command bypasses the Sigma rule by avoiding all detection conditions. First, renaming the executable (and recompiling to alter the OriginalFileName PE header) evades 'selection_img'. Second, using 'pid:' to target a process for impersonation instead of explicitly passing credentials avoids the ' user:' string, bypassing the first two 'selection_cli' conditions. Finally, specifying an alternative technique like 'CreateProcessWithTokenW' (or omitting the technique argument entirely to rely on defaults) evades the specific technique strings monitored in the third condition."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "replace.exe C:\\source\\payload.exe C:\\target\\directory /A",
+    "explanation": "The rule specifically inspects the command line parameters for the windash variation of the argument ('-a'). On Windows platforms, the native utilities recognize the forward slash ('/A') interchangeably with the dash for parameter indicators. Using a forward slash satisfies the application's argument requirements while avoiding the string match defined in the 'argument' block."
+  },
+  {
+    "output": "replace.exe C:\\source\\payload.exe C:\\target\\directory \"-a\"",
+    "explanation": "Enclosing the '-a' flag within double quotes can sometimes cause string-based detection logic relying strictly on token-separated flags or specific regex boundaries to miss the pattern, depending on how the underlying SIEM parser normalizes command line strings, while the native binary safely interprets the switch."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "netsh tr st capture=yes",
+    "explanation": "The provided Sigma rule strictly evaluates the command line for the exact presence of the strings 'trace' and 'start'. Because the netsh utility supports unambiguous command abbreviation, a threat actor can simply truncate the keywords (e.g., using 'tr' for 'trace' and 'st' for 'start'). This executes the exact same functionality while successfully bypassing the naive string-matching of the detection rule."
+  }
+]

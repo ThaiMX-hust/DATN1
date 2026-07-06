@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -c \"& ([string]::Join('', ([char]73, [char]69, [char]88))) 'Write-Host Educational_Test'\"",
+    "explanation": "This simulated command bypasses the Sigma rule by avoiding the specific environment variables ($PSHome, $env:ComSpec, $env:Public) and exact string manipulation patterns targeted by the detection's regular expressions. Instead of indexing into those specific paths to spell 'IEX', it constructs the 'IEX' string using raw ASCII character codes (73 for I, 69 for E, 88 for X), demonstrating the limitation of relying solely on framework-specific regex signatures."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil.exe \"-exportPFX\" LocalMachine C:\\temp\\cert.pfx",
+    "explanation": "The Sigma rule's CommandLine detection specifically looks for the string '-exportPFX ' (including the trailing space character) or '/exportPFX '. By wrapping the flag in double quotes, the exact string match fails because the space is no longer immediately adjacent to the characters. The Windows argument parser (CommandLineToArgvW) automatically strips these quotes before certutil.exe processes them, allowing the certificate export to succeed while bypassing the static signature."
+  },
+  {
+    "output": "certutil.exe -exportPFX\tCurrentUser\tC:\\temp\\cert.pfx",
+    "explanation": "The detection logic relies on a space character immediately following 'exportPFX'. By substituting the space with a horizontal tab character (\\t), the exact string match '-exportPFX ' is evaded. The Windows command line parser treats tabs as standard argument delimiters, so certutil will still parse the command and export the certificate correctly."
+  }
+]

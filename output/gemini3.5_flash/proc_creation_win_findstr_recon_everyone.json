@@ -1,0 +1,14 @@
+[
+  {
+    "output": "icacls \"C:\\Program Files\\*\" 2>nul | Select-String -Pattern \"Everyone\"",
+    "explanation": "Bypasses the rule by substituting findstr.exe with PowerShell's native Select-String cmdlet. Because the rule explicitly targets the find.exe and findstr.exe image names in 'selection_findstr_img', using alternative parsing tools evades detection entirely."
+  },
+  {
+    "output": "cacls \"C:\\Program Files\\*\" 2>nul | findstr Everyone",
+    "explanation": "Bypasses the rule through a combination of syntax variations. 'selection_findstr_cli' explicitly looks for 'Everyone' enclosed in either single or double quotes. By omitting the quotes around Everyone, that condition is bypassed. Furthermore, 'selection_special' requires the exact string 'icacls ', which is bypassed by using the older 'cacls' utility instead."
+  },
+  {
+    "output": "icacls \"C:\\Program Files\\*\" 2>nul | findstr \"BUILTIN\"",
+    "explanation": "Bypasses 'selection_findstr_cli' which specifically looks for the string '\"BUILTIN\\\"' or \"'BUILTIN\\'\" (including the trailing backslash). By simply searching for 'BUILTIN' without the backslash, the command executes successfully but evades the strict string matching in the Sigma rule."
+  }
+]

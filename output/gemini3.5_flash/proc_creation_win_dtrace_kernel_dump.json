@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\dtrace.exe",
+    "explanation": "This command leverages a common system path to evade detection."
+  }
+]

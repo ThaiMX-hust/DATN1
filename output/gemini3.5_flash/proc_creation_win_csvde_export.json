@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\csvde.exe C:\\Users\\Public\\Update.exe && C:\\Users\\Public\\Update.exe /f C:\\Users\\Public\\ad_export.csv",
+    "explanation": "The rule triggers when the process image ends with '\\csvde.exe' or the OriginalFileName is 'csvde.exe' AND the command line contains ' -f'. To bypass this, I used a forward slash '/f' instead of a hyphen ' -f' for the file parameter, as Windows utilities often accept both, but the Sigma rule specifically looks for the hyphenated version with a leading space. Additionally, renaming the binary avoids the 'Image' suffix check, though 'OriginalFileName' might still catch it if the EDR/SIEM populates that field."
+  },
+  {
+    "output": "csvde.exe -fC:\\Users\\Public\\export.csv -i -f C:\\Users\\Public\\real_export.csv",
+    "explanation": "The rule contains a negative filter: 'and not 1 of filter_import'. The 'filter_import' looks for ' -i' (import mode). By including ' -i' in a benign or malformed way within the command line, the logic 'not 1 of filter_import' evaluates to false, causing the entire detection condition to fail even if the export is actually occurring."
+  },
+  {
+    "output": "csvde.exe \"-f\" C:\\Users\\Public\\out.csv",
+    "explanation": "The rule looks for the literal string ' -f' (space followed by hyphen and f). By quoting the parameter as \"-f\", the literal string match for ' -f' may fail depending on how the SIEM engine handles quotes and whitespace tokenization."
+  }
+]

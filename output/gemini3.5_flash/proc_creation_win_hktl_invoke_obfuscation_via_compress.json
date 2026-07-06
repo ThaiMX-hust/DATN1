@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"$stream = [System.IO.Compression.DeflateStream]::new($ms, 0); $reader = [System.IO.StreamReader]::new($stream, [System.Text.Encoding]::UTF8); iex $reader.ReadToEnd()\"",
+    "explanation": "Bypass method 1: Structural Alteration. By utilizing PowerShell 5.0+ static method constructors (::new) instead of the 'New-Object' cmdlet, and switching the payload encoding from ASCII to UTF8, the command effectively avoids the exact strings required by the signature. This completely evades the 'CommandLine|contains|all' requirement for 'new-object' and 'text.encoding]::ascii'."
+  },
+  {
+    "output": "powershell.exe -Command \"$d = N`ew-Object System.IO.Compression.DeflateStream($s, 0); $r = N`ew-Object System.IO.StreamReader($d, [System.T`ext.Encoding]::ASCII); $r.ReadToEnd()\"",
+    "explanation": "Bypass method 2: Character Insertion. Utilizing PowerShell's escape character (the backtick) breaks up the static strings in the raw command line. Process creation logs (like Sysmon Event ID 1 or Windows Security 4688) capture the command line exactly as entered, including the backticks. Because this Sigma rule relies on exact string matching, the backticks break the 'new-object' and 'text.encoding]::ascii' signatures while still being parsed and executed successfully by the PowerShell engine."
+  },
+  {
+    "output": "powershell.exe -Command \"$m = New-Object IO.MemoryStream(,$b); $d = New-Object IO.Compression.DeflateStream($m, [IO.Compression.CompressionMode]::Decompress); $r = New-Object IO.StreamReader($d, [System.Text.Encoding]::GetEncoding('ASCII')); $r.ReadToEnd ( )\\\"",
+    "explanation": "The Sigma rule relies on exact, contiguous string matching. This simulated command bypasses the rule using several PowerShell obfuscation techniques: 1) Backtick () characters are inserted into 'New-Object' to break the literal string match. 2) The property '[text.encoding]::ascii' is replaced with its functional equivalent '[System.Text.Encoding]::GetEncoding('ASCII')'. 3) A space is introduced between 'ReadToEnd' and '(' to evade the 'readtoend(' condition. These modifications execute the same logic while completely avoiding the static signatures."
+  }
+]

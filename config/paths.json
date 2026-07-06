@@ -1,12 +1,12 @@
 {
   "base_dir": "..",
-  "input_config": "input/gemini_cases.generated.json",
-  "output_dir": "output/target_commandline_tests",
+  "input_config": "demo\\demo.generated.json",
+  "output_dir": "demo\\target_commandline_tests",
   "rules_dir": "rules",
   "zircolite": {
     "path": "C:\\Tools\\Zircolite\\zircolite.py",
     "python_exe":  "C:\\Tools\\Zircolite\\.venv\\Scripts\\python.exe",
-    "ruleset": "C:\\Tools\\Zircolite\\rules_sysmon.json",
+    "ruleset": "C:\\Tools\\Zircolite\\rules_patch_demo.json",
     "config": "C:\\Tools\\Zircolite\\config\\config.yaml"
   }
 }

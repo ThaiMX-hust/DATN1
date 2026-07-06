@@ -1,0 +1,10 @@
+[
+  {
+    "output": "DInjector.exe/am51 /password:secret",
+    "explanation": "Windows command-line parsing often allows arguments starting with a forward slash to be appended directly without a preceding space. By omitting the space before '/am51', the command bypasses the exact string match ' /am51' specified in the Sigma rule while still being executed correctly by the application."
+  },
+  {
+    "output": "DInjector.exe /am^51 /pass^word:secret",
+    "explanation": "Using cmd.exe caret (^) escape characters obfuscates the raw command line recorded in process creation logs (like Event ID 4688). The application receives the parameters normally, but the literal strings ' /am51' and ' /password' are broken up in the log, evading the detection logic."
+  }
+]

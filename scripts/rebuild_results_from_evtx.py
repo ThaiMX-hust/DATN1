@@ -51,7 +51,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--ruleset", help="Path to the Zircolite ruleset JSON.")
     parser.add_argument("--rules-dir", help="Local Sigma rules folder used to resolve target rule metadata.")
     parser.add_argument("--zircolite-config", help="Optional Zircolite config file.")
-    parser.add_argument("--zircolite-jsononly", action="store_true")
     parser.add_argument("--zircolite-timeout-seconds", type=int, default=180)
     parser.add_argument("--save-debug-artifacts", action="store_true")
     return parser
@@ -104,7 +103,6 @@ def config_from_args(args: argparse.Namespace) -> RunnerConfig:
             _configured_value(args.zircolite_config, path_config.zircolite_config),
             base_dir,
         ),
-        zircolite_jsononly=args.zircolite_jsononly,
         zircolite_timeout_seconds=args.zircolite_timeout_seconds,
         save_debug_artifacts=args.save_debug_artifacts,
     )

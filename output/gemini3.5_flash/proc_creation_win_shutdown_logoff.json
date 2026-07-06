@@ -1,0 +1,14 @@
+[
+  {
+    "output": "shutdown.exe -l",
+    "explanation": "Windows command line utilities frequently accept a hyphen (-) interchangeably with a forward slash (/) for arguments. The Sigma rule specifically looks for the exact string '/l', so executing 'shutdown.exe -l' will perform the logoff action while bypassing the string match."
+  },
+  {
+    "output": "logoff.exe",
+    "explanation": "The rule explicitly monitors for the execution of 'shutdown.exe'. By using an alternative built-in Windows utility designed specifically for this purpose, such as 'logoff.exe' (which calls the WTSLogoffSession API), an attacker or red teamer can achieve the same result without triggering the image-based detection."
+  },
+  {
+    "output": "shutdown.exe \"/l\"",
+    "explanation": "Depending on how the specific EDR or log source handles command line parsing and normalization before sending it to the SIEM, wrapping the argument in quotes or using escape characters (like carets: shutdown.exe /^l) might bypass simple string-matching rules that do not account for obfuscation."
+  }
+]

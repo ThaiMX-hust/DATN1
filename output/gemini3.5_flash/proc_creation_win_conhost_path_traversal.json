@@ -1,0 +1,6 @@
+[
+  {
+    "output": "conhost.exe \"conhost.exe\" \\..\\..\\..\\..\\windows\\system32\\calc.exe",
+    "explanation": "The detection rule specifically looks for the forward-slash sequence '/../../'. Because the Windows API normalizes both forward slashes ('/') and backslashes ('\\') in file paths, this literal string match can be bypassed by using backslashes ('\\..\\..\\') for the path traversal. This achieves the same indirect command execution while evading the Sigma rule's specific pattern."
+  }
+]

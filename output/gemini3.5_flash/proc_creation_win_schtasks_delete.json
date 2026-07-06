@@ -1,0 +1,10 @@
+[
+  {
+    "output": "Unregister-ScheduledTask -TaskName \"BitLocker Encrypt All Drives\" -TaskPath \"\\Microsoft\\Windows\\BitLocker\\\" -Confirm:$false",
+    "explanation": "The Sigma rule explicitly restricts detection to the process creation of the 'schtasks.exe' binary (Image|endswith: '\\schtasks.exe'). By utilizing native PowerShell cmdlets like Unregister-ScheduledTask, the attacker interacts directly with the Task Scheduler API under the PowerShell process, completely evading this specific process creation rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\schtasks.exe C:\\Windows\\Temp\\task_updater.exe && C:\\Windows\\Temp\\task_updater.exe /delete /tn \"\\Microsoft\\Windows\\BitLocker\\BitLocker Encrypt All Drives\" /f",
+    "explanation": "The detection logic rigidly relies on the executable name ending with 'schtasks.exe'. Copying the legitimate schtasks.exe binary to an alternative directory with a different filename allows the execution of the exact same command-line arguments while bypassing the 'Image' selection criteria."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "adfind.exe -sc  admincountdmp",
+    "explanation": "The Sigma rule searches for the exact string '-sc admincountdmp'. By adding two or more spaces between the switch and the argument, the exact 'contains' match fails, but the command parser still interprets the arguments correctly."
+  },
+  {
+    "output": "adfind.exe -sc \"admincountdmp\"",
+    "explanation": "Enclosing the argument in quotation marks alters the logged CommandLine string to include the quotes, which bypasses the rule's strict '-sc admincountdmp' string match. The C/C++ runtime used by Windows strips the quotes before passing the argument to AdFind."
+  },
+  {
+    "output": "adfind.exe -sc exch\"\"addresses",
+    "explanation": "Inserting an empty set of quotes into the middle of the keyword breaks the continuous string expected by the rule ('exchaddresses'). The Windows command-line parser typically strips these quotes, allowing AdFind to execute the command normally without triggering the SIEM alert."
+  }
+]

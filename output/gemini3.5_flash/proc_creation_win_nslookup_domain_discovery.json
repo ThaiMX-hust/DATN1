@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c nslookup -type=MX example.com",
+    "explanation": "This command uses cmd.exe to perform an MX record lookup for example.com, which is a common reconnaissance technique. The Sigma rule focuses on 'nslookup' with a specific target pattern, but this command bypasses it by using a different command-line tool (cmd.exe) to achieve the same goal."
+  },
+  {
+    "output": "C:\\Windows\\System32\\powershell.exe -Command \"[Net.Dns]::Resolve('example.com', 'MX')\"",
+    "explanation": "This PowerShell command performs an MX record lookup for example.com using PowerShell's built-in DNS resolution capabilities. It bypasses the Sigma rule by using PowerShell instead of the 'nslookup' command, which is the primary focus of the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\powershell.exe -Command \"Get-DnsServerResourceRecord -Type MX -ZoneName example.com\"",
+    "explanation": "This PowerShell command retrieves MX records for example.com from a DNS server. It bypasses the Sigma rule by using PowerShell's DNS resolution functions instead of the 'nslookup' command, which is the specific focus of the rule."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\System32\\\\nslookup.exe\" 192.168.1.1",
+    "explanation": "The command uses nslookup but does not contain the LDAP SRV query string '_ldap._tcp.dc._msdcs.', so it bypasses the rule that requires both substrings."
+  }
+]

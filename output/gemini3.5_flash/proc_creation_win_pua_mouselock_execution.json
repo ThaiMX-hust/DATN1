@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy \"C:\\Path\\To\\Mouse Lock_2.0.exe\" \"C:\\Windows\\Temp\\sys_util.exe\" && \"C:\\Windows\\Temp\\sys_util.exe\"",
+    "explanation": "The rule relies on three specific string matches: the 'Product' field, the 'Company' field, and the presence of 'Mouse Lock_' in the command line. By renaming the executable to a generic name like 'sys_util.exe' and executing it, the 'CommandLine' filter is bypassed. If the metadata fields (Product/Company) are stripped or if the binary is run in a way that the OS doesn't populate those specific PE header fields into the process creation event (e.g., via certain reflective loading techniques or simply renaming the file to avoid command-line string detection), the rule will not trigger."
+  }
+]

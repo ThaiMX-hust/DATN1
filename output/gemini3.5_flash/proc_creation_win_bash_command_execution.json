@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\bash.exe -c\"whoami\"",
+    "explanation": "The rule explicitly checks for the string ' -c ' (with spaces on both sides). By appending the command string directly to the flag without a trailing space, the command executes successfully in bash, but the 'CommandLine|contains' condition fails to trigger."
+  },
+  {
+    "output": "echo whoami | C:\\Windows\\System32\\bash.exe",
+    "explanation": "This command pipes the execution string directly into bash.exe's standard input. This entirely avoids the need for the '-c' flag, completely bypassing the selection_cli criteria."
+  }
+]

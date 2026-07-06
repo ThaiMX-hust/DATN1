@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mshta.exe javascript:a=new ActiveXObject(\"WScript.Shell\");a.Run(\"rundll32.exe shell32.dll,Control_RunDLL\",1,true);window.close()",
+    "explanation": "The Sigma rule specifically filters for common interpreters and management tools like cmd.exe, powershell.exe, or regsvr32.exe. By spawning rundll32.exe to execute a DLL export (or another binary not in the selection_child list like certutil.exe), the rule condition is not met while still achieving execution."
+  },
+  {
+    "output": "mshta.exe C:\\path\\to\\malicious.hta",
+    "explanation": "If the attacker uses an HTA that utilizes COM objects to inject code directly into a different legitimate process or uses a LOLBIN (Living Off the Land Binary) not listed in the 'selection_child' list (e.g., msiutil.exe, schtasks.exe), the rule will not trigger because the Image and OriginalFileName will not match the restricted list."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Users\\Public\\not_cmd.exe && mshta.exe javascript:a=new ActiveXObject(\"WScript.Shell\");a.Run(\"C:\\Users\\Public\\not_cmd.exe\");window.close()",
+    "explanation": "The rule checks for Image ending with '\\cmd.exe' and the OriginalFileName 'Cmd.Exe'. While OriginalFileName is harder to spoof, if the attacker uses a binary that lacks the OriginalFileName metadata or uses a tool not included in the hardcoded list (like a custom compiled executable), the rule is bypassed."
+  }
+]

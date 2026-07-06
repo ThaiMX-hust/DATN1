@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"spsv wuauserv\"",
+    "explanation": "Bypasses the rule by utilizing the built-in PowerShell alias 'spsv' instead of the full 'Stop-Service' cmdlet name. Since the Sigma rule strictly looks for the string 'Stop-Service ', using the alias entirely evades detection."
+  },
+  {
+    "output": "powershell.exe -Command \"St`op-Ser`vi`ce wuauserv\"",
+    "explanation": "Bypasses the rule using PowerShell backtick (`) character obfuscation. The backtick acts as an escape character in PowerShell, so the command executes normally, but the logged command line process execution will not match the continuous string 'Stop-Service '."
+  },
+  {
+    "output": "powershell.exe -Command \"&('Stop'+'-Service') wuauserv\"",
+    "explanation": "Bypasses the rule by using string concatenation and the call operator (&). The command is constructed in memory at runtime, meaning the exact continuous string 'Stop-Service ' does not appear in the static process creation command line logs."
+  }
+]

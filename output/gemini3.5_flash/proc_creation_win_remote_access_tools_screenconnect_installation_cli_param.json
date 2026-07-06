@@ -1,0 +1,10 @@
+[
+  {
+    "output": "ScreenConnect.ClientSetup.exe \"?p=12345&c=67890&k=abcdef&e=Access&y=Guest\"",
+    "explanation": "The Sigma rule relies on exact string matching including the ampersands ('&'). By reordering the parameters so that 'p' is the first parameter (making it '?p=' instead of '&p=') and 'y=Guest' is the last parameter (omitting the trailing '&'), the command line bypasses the 'contains|all' condition while still providing all necessary arguments to the ScreenConnect installer."
+  },
+  {
+    "output": "cmd.exe /c \"ScreenConnect.ClientSetup.exe ^\"?e=Ac^cess^&y=Gu^est^&p=1^&c=2^&k=3^\"\"",
+    "explanation": "Using command-line obfuscation with the Windows Command Prompt, the insertion of caret (^) escape characters directly breaks the exact string matches for 'e=Access&', 'y=Guest&', etc., inside the process execution logs, bypassing the static string detection while cmd.exe parses and strips the carets before execution."
+  }
+]

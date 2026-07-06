@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe OS get caption /format:list | Out-File -FilePath \"$env:TEMP\\sys_info.txt\"",
+    "explanation": "The original Sigma rule specifically monitors for redirection operators ('>') used within the Command Prompt environment (cmd.exe) targeting %TEMP% or %TMP%. By executing the reconnaissance command through PowerShell and using the 'Out-File' cmdlet or the 'Set-Content' cmdlet instead of the standard redirector, the 'selection_redirect' condition is not met."
+  },
+  {
+    "output": "sc.exe query > C:\\Users\\Public\\Documents\\services.txt",
+    "explanation": "The rule is strictly limited to files being redirected into the %TEMP% or %TMP% directories. By simply changing the output destination to any other writeable directory, such as C:\\Users\\Public\\ or the user's home directory, the 'selection_redirect' filter fails to trigger while the reconnaissance activity remains successful."
+  },
+  {
+    "output": "cmd.exe /c \"tree.com C:\\ >> %TEMP%\\tree_data.log\"",
+    "explanation": "The Sigma rule looks for ' > ' (a single greater-than sign with surrounding spaces). In many shell environments, using the append operator '>>' without the specific spacing expected by the string match (or using it without leading spaces) can bypass simple string-based 'contains' filters while still achieving the goal of exporting data to the temp folder."
+  }
+]

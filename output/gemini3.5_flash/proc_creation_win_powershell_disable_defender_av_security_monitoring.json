@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring 1",
+    "explanation": "The rule explicitly checks for the exact string '-DisableBehaviorMonitoring $true'. By using the integer '1' instead of the boolean variable '$true', the command functionally disables the monitoring but evades the string-matching detection."
+  },
+  {
+    "output": "net stop WinDefend",
+    "explanation": "The rule strictly monitors 'sc.exe' for stopping the WinDefend service. Using the built-in 'net.exe' utility accomplishes the same goal (stopping the service) but bypasses the selection_sc_binary process condition."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableB $true",
+    "explanation": "PowerShell supports parameter abbreviation. Truncating the parameter to '-DisableB' is still recognized by the cmdlet but completely bypasses the full string match required by the selection_pwsh_cli condition."
+  },
+  {
+    "output": "powershell.exe Set-MpPreference -DisableBehaviorMonitoring $true",
+    "explanation": "Using backticks () in PowerShell acts as an escape character. Inserting a backtick into the string breaks the continuous signature the SIEM is searching for without changing the command's execution."
+  }
+]

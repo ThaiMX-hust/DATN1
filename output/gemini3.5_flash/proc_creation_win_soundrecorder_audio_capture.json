@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\SoundRecorder.exe C:\\Users\\Public\\Music\\not_audio.exe && C:\\Users\\Public\\Music\\not_audio.exe /FILE C:\\Users\\Public\\Music\\capture.out",
+    "explanation": "The rule relies on the 'Image' field ending specifically with '\\SoundRecorder.exe'. By copying the legitimate binary to a different location and renaming it, the process creation event will log a different image path (e.g., 'not_audio.exe'), causing the 'selection' criteria to fail while the functionality remains the same."
+  },
+  {
+    "output": "SoundRecorder.exe \"/FILE\" C:\\Users\\Public\\Music\\capture.out",
+    "explanation": "Depending on the specific SIEM parser or EDR agent, some detections fail to normalize quotes. If the parser looks for the literal string '/FILE' and the command line is passed with internal quotes or extra spacing (e.g., / FILE), it may fail the 'contains' match while Windows still executes the argument correctly."
+  },
+  {
+    "output": "powershell -Command \"[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); $r = New-Object System.Windows.Forms.Recorder; ...\"",
+    "explanation": "The rule is strictly limited to the SoundRecorder.exe application. An attacker can bypass this entirely by using alternative methods to capture audio, such as PowerShell scripts utilizing the Windows Media API, specialized CLI tools like ffmpeg, or direct API calls via a custom compiled binary (e.g., waveInOpen), none of which involve the monitored executable."
+  }
+]

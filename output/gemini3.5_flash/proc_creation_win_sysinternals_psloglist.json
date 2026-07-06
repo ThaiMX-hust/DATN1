@@ -1,0 +1,46 @@
+[
+  {
+    "output": "\"C:\\Windows\\Sysinternals\\psloglist.exe\" -d \"C:\\Temp\\log.evtx\"",
+    "explanation": "The rule checks for OriginalFileName 'psloglist.exe' and Image ending with '\\psloglist.exe' or '\\psloglist64.exe'. By placing the executable in a different directory (e.g., Sysinternals) and using a full path, the Image field may not match the exact suffix pattern, potentially evading detection. The command still uses the '-d' flag to dump the log, maintaining malicious intent."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\cmd.exe\" /c \"powershell -NoProfile -WindowStyle Hidden -Command \\\"&{Start-Process -FilePath 'C:\\Windows\\Sysinternals\\psloglist64.exe' -ArgumentList '-x', 'application'}\\\"\"",
+    "explanation": "The rule looks for the Image field ending with '\\psloglist.exe' or '\\psloglist64.exe' and specific command line switches. By launching the tool via PowerShell and cmd.exe, the Image field may be recorded as cmd.exe or powershell.exe, bypassing the image name check. The command still passes the '-x' flag to dump the application log."
+  },
+  {
+    "output": "\"C:\\Windows\\Sysinternals\\psloglist.exe\" -s -c",
+    "explanation": "The rule requires all selection_* conditions to be true. By omitting the 'security', 'application', or 'system' keywords in the command line, the selection_cli_eventlog condition fails, causing the overall condition to evaluate to false and bypassing detection."
+  },
+  {
+    "output": "C:\\Tools\\mytool.exe -d 1 security",
+    "explanation": "Bypass by renaming psloglist.exe to a different name (mytool.exe). The rule checks for Image|endswith '\\psloglist.exe' or '\\psloglist64.exe' and OriginalFileName: 'psloglist.exe'. By renaming the binary, both conditions are evaded while still dumping the security log."
+  },
+  {
+    "output": "psloglist.exe -d 1 -i Security",
+    "explanation": "Bypass by using '-i' (interactive) instead of a space before the event log name. The rule looks for ' security' (with leading space). Using '-i Security' or other syntax variations may avoid the exact string matching while still dumping the event log."
+  },
+  {
+    "output": "psloglist64.exe security -d 1",
+    "explanation": "Bypass by placing the event log name before the flags (security -d 1 instead of -d 1 security). The detection uses CommandLine|contains which may not catch all variations in argument ordering."
+  },
+  {
+    "output": "psloglist.exe -accepteula security",
+    "explanation": "Bypass by using '-accepteula' flag which is commonly used to suppress the license dialog but isn't in the detection list. This still dumps the security log while avoiding the flagged indicators (-d, -x, -s, -c, -g)."
+  },
+  {
+    "output": "C:\\Windows\\psloglist.exe security",
+    "explanation": "Bypass by placing psloglist.exe in a different directory (like C:\\Windows\\) instead of its typical location. The rule checks for Image|endswith '\\psloglist.exe' which may not catch all path variations."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\psloglist.exe C:\\Windows\\Temp\\evtlogr.exe && C:\\Windows\\Temp\\evtlogr.exe -d 1 security",
+    "explanation": "Bypasses the Image|endswith check by renaming psloglist.exe to evtlogr.exe. The rule specifically looks for Image ending with '\\psloglist.exe' or '\\psloglist64.exe', so renaming the binary evades this detection. The command still performs the same malicious activity of dumping the security event log with the -d flag (dump entries from previous days)."
+  },
+  {
+    "output": "C:\\Windows\\System32\\psloglist.exe setup",
+    "explanation": "Bypasses the event log name check. The rule specifically looks for ' security', ' application', or ' system' in the CommandLine. Using 'setup' (another valid Windows event log) avoids this detection while still dumping event logs for credential harvesting or reconnaissance."
+  },
+  {
+    "output": "C:\\Windows\\System32\\psloglist64.exe -accepteula -nobanner security",
+    "explanation": "Bypasses the flag detection. The rule looks for specific flags: -d, -x, -s, -c, -g. Using other flags like -accepteula and -nobanner (common PsTools flags) avoids the detection while still executing the tool to dump the security event log."
+  }
+]

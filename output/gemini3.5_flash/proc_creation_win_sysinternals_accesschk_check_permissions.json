@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Temp\\MyAccessChk.exe -custom_flag",
+    "explanation": "Renames the executable and uses a non\u2011matching command\u2011line flag to avoid the image and CLI signatures."
+  }
+]

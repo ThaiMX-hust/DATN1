@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\chcp.com 936 ",
+    "explanation": "Adding a trailing space at the end of the command line breaks the 'endswith' modifier, as the CommandLine string now ends with a whitespace character instead of the number '6'."
+  }
+]

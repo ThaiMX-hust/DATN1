@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\svchost.exe",
+    "explanation": "The rule specifically targets a static list of suspicious parent processes (like cmd.exe, powershell.exe, etc.). An attacker can bypass this by using Process Injection or Parent PID (PPID) Spoofing to make 'msdt.exe' appear as a child of a legitimate system process like 'svchost.exe', 'explorer.exe', or 'services.exe', which are not included in the selection_parent list."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\msdt.exe C:\\Windows\\Temp\\not_msdt.exe && C:\\Windows\\Temp\\not_msdt.exe",
+    "explanation": "While the rule checks for OriginalFileName, some EDRs or logging configurations may not capture the PE metadata reliably. If the telemetry only provides the Image path, renaming the binary and executing it from a non-standard directory may evade simple path-based detections if the 'OriginalFileName' field is null or not indexed in the SIEM."
+  },
+  {
+    "output": "Start-ScheduledTask -TaskName \"LegitTask\"",
+    "explanation": "Instead of calling msdt.exe directly from a shell (which is caught by selection_parent), an attacker can create or hijack a scheduled task. When the task triggers, the parent process would be 'taskeng.exe' or 'svchost.exe' (depending on the OS version), effectively breaking the 'selection_parent' logic of this specific Sigma rule."
+  }
+]

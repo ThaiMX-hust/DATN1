@@ -1,0 +1,30 @@
+[
+  {
+    "output": "rundll32.exe ",
+    "explanation": "The Sigma rule uses an exact string match for 'rundll32.exe' or 'rundll32'. Adding a trailing space changes the logged CommandLine string, successfully bypassing the strict match while still executing the process without functional parameters."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe  ",
+    "explanation": "The Sigma rule matches the literal strings 'rundll32.exe' or 'rundll32' in the CommandLine field. By appending trailing spaces to the command line, the execution remains functional in Windows but may fail a strict string equality check if the SIEM does not normalize whitespace or use a regex/contains match for the specific empty parameter condition."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe ,",
+    "explanation": "Adding a single comma as a parameter is a common bypass. Rundll32 treats the comma as a separator for the DLL name and entry point; since no DLL is provided, it effectively does nothing or opens a help dialog, but the CommandLine now contains more than just the base executable name, potentially evading simple string-match detections for 'no parameters'."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Users\\Public\\not_rundll.exe && C:\\Users\\Public\\not_rundll.exe",
+    "explanation": "The rule specifically looks for 'rundll32' in the CommandLine. By copying the binary to a new name (masquerading), the CommandLine will reflect 'not_rundll.exe', completely bypassing any detection logic reliant on the original filename."
+  },
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe  ",
+    "explanation": "The Sigma rule matches the exact string 'rundll32.exe' or 'rundll32'. By adding trailing spaces or a double space between the executable and the (empty) argument list, the command line string literal may no longer match the strict equality check 'rundll32.exe', depending on how the SIEM parser handles whitespace."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Windows\\Temp\\not_rundll32.exe && C:\\Windows\\Temp\\not_rundll32.exe",
+    "explanation": "The rule targets the 'CommandLine' field for specific filenames. By copying the legitimate rundll32.exe binary to a new name, the execution occurs without parameters, but the CommandLine string ('not_rundll32.exe') does not contain the keywords 'rundll32' or 'rundll32.exe', thus evading the detection logic."
+  },
+  {
+    "output": "rundll32.exe #",
+    "explanation": "The rule triggers on an empty parameter list. By adding a dummy character or a comment-style character like a hash, the command line is no longer 'without parameters'. Many processes will ignore the extra argument if it doesn't map to a valid entry point, but it satisfies the requirement of having a non-null command line argument."
+  }
+]

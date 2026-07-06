@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Windows\\System32\\calc.exe\" -suspicious_flag",
+    "explanation": "By enclosing the executable path in double quotes, the CommandLine field will contain '\\calc.exe\" ' instead of the exact string '\\calc.exe '. This breaks the strict string match required by selection_1. Because it is executed from an allowed location (System32), filter_main_known_locations correctly evaluates and prevents selection_2 from triggering."
+  },
+  {
+    "output": "C:\\Windows\\System32\\calc.exe/parameter",
+    "explanation": "By substituting the space immediately following the executable with a forward slash (often accepted by Windows parsers for arguments), the CommandLine field no longer contains the space character required by selection_1 ('\\calc.exe '). The trusted execution path simultaneously bypasses selection_2."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\calc.exe C:\\Temp\\math.exe && C:\\Temp\\math.exe -suspicious_flag",
+    "explanation": "By copying and renaming the binary, the Image field no longer ends with '\\calc.exe', bypassing selection_2. The CommandLine field will also not contain '\\calc.exe ', thereby bypassing selection_1 entirely."
+  }
+]

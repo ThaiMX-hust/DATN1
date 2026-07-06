@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"$id = '0002DF01-0000-0000-C000-000000000046'; [Type]::GetType('System.Type').GetMethod('GetTypeFromCLSID', [type[]]@([Guid])).Invoke($null, @([Guid]$id))\"",
+    "explanation": "The rule explicitly matches the literal string '[Type]::GetTypeFromCLSID('. By utilizing .NET reflection to find and invoke the 'GetTypeFromCLSID' method dynamically via string parsing or method arrays, the static string pattern is broken while achieving the exact same functional outcome."
+  },
+  {
+    "output": "powershell.exe -Command \"$c = '0002DF01' + '-0000-0000-C000-000000000046'; $t = [Type]::GetTypeFromCLSID($c)\"",
+    "explanation": "The rule depends on finding the specific literal CLSID strings in the command line token using an 'all of selection_*' condition. Concatenating or obfuscating the CLSID string structure ensures that the literal static identifier does not appear directly within the process creation arguments, bypassing selection_2."
+  }
+]

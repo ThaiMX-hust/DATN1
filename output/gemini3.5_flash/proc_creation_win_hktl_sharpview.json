@@ -1,0 +1,30 @@
+[
+  {
+    "output": "cmd.exe /c \"copy SharpView.exe sv_update.exe & sv_update.exe G^et-Doma^inComputer\"",
+    "explanation": "Bypasses the 'Image|endswith' condition by renaming the executable. Bypasses the 'CommandLine|contains' string matches by using cmd.exe caret (^) escape characters. The Windows command line parser strips the carets before passing arguments to the program, but process creation logs (like Event ID 4688) capture the raw string with carets, evading the exact string match. (Note: Bypassing the 'OriginalFileName' condition requires the attacker to modify the binary's PE metadata prior to execution)."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::Load([IO.File]::ReadAllBytes('C:\\temp\\sv_mod.bin')).EntryPoint.Invoke($null, @(,[string[]]@('Get-Doma'+'inComputer')))\"",
+    "explanation": "Bypasses the 'Image' and 'OriginalFileName' process creation checks by loading the tool directly into the PowerShell process memory via .NET reflection, preventing a new process creation event for the tool itself. Bypasses the 'CommandLine' rule by dynamically concatenating the restricted argument strings at runtime, ensuring the flagged string 'Get-DomainComputer' never appears in the powershell.exe process creation logs."
+  },
+  {
+    "output": "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-Type -Path 'C:\\Windows\\Temp\\SharpView.dll'; [SharpView.Program]::GetDomainComputers()\"",
+    "explanation": "Executes SharpView functionality via PowerShell by loading the SharpView assembly and invoking a method, avoiding direct execution of SharpView.exe. This bypasses the Sigma rule's detection on OriginalFileName, Image path, and command-line strings containing SharpView-specific functions."
+  },
+  {
+    "output": "C:\\Windows\\System32\\Notepad.exe",
+    "explanation": "This command avoids detection by targeting a non-targeted process, bypassing the rule focused on SharpView execution specifics."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\update_service.exe Get-Domain",
+    "explanation": "This simulated command bypasses the rule by exploiting its reliance on fragile string-matching and excluded logic. First, the SharpView binary is recompiled to change its 'OriginalFileName' metadata and renamed (e.g., update_service.exe) to bypass the 'Image' and 'OriginalFileName' conditions. Second, it utilizes the 'Get-Domain' argument. In the provided Sigma rule, 'Get-Domain' (along with several others like 'Get-NetGroup' and 'Get-ADObject') is commented out in the 'CommandLine|contains' list, likely due to historical false positives. Therefore, the SIEM will not trigger an alert for this specific execution."
+  },
+  {
+    "output": "$assembly = [System.IO.File]::ReadAllBytes('C:\\Temp\\sv.bin'); [System.Reflection.Assembly]::Load($assembly).EntryPoint.Invoke($null, [object[]]@([string[]]@('Get-DomainComputer')))",
+    "explanation": "This PowerShell command bypasses the rule using reflective DLL/Assembly injection (in-memory execution). Because SharpView is a .NET assembly, it can be loaded directly into memory via PowerShell without executing a file named 'SharpView.exe'. Consequently, the 'Image' and 'OriginalFileName' fields will point to 'powershell.exe' rather than 'SharpView.exe'. While 'Get-DomainComputer' is in the command line list, passing it as an array string internally within the PowerShell script block can evade simple command-line logging depending on how the EDR/SIEM captures script block parameters versus standard process execution arguments."
+  },
+  {
+    "output": "svchost_update.exe /command:Retrieve-DC-Info",
+    "explanation": "This simulated command illustrates how signature-based rules can be bypassed conceptually. To achieve this evasion, an adversary would need to modify the SharpView source code and recompile it. By altering the PE header metadata to remove the 'OriginalFileName: SharpView.exe', renaming the binary to blend in (e.g., 'svchost_update.exe'), and changing the hardcoded command-line arguments in the source code (e.g., swapping 'Get-DomainController' for a custom string like 'Retrieve-DC-Info'), all three detection conditions (OriginalFileName, Image, and CommandLine strings) in the Sigma rule are evaded. This highlights the importance of complementing string-based signatures with behavioral analytics, such as detecting unusual LDAP queries originating from non-administrative processes."
+  }
+]

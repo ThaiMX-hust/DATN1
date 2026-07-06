@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -NoProfile -Command \"Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Cryptography' | Select-Object -ExpandProperty MachineGuid\"",
+    "explanation": "Uses PowerShell instead of reg.exe, so the detection rule that triggers on Image ending with \\reg.exe does not match."
+  },
+  {
+    "output": "cmd /c reg query \"HKLM\\SOFTWARE\\Microsoft\\Cryptography\"",
+    "explanation": "Queries the entire Cryptography key without the /v switch or specifying MachineGuid, thus the rule's condition requiring all three strings is not satisfied."
+  },
+  {
+    "output": "powershell -NoProfile -Command \"[Microsoft.Win32.Registry]::LocalMachine.OpenSubKey('SOFTWARE\\Microsoft\\Cryptography').GetValue('MachineGuid')\"",
+    "explanation": "Accesses the registry via .NET methods in PowerShell, avoiding the reg.exe process and the detection rule."
+  }
+]

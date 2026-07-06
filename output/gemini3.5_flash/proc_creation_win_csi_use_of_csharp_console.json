@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csi.exe %TEMP%\\not_csi.exe && cmd.exe /c %TEMP%\\not_csi.exe",
+    "explanation": "The original Sigma rule relies on three specific criteria for detection: the process name ending in '\\csi.exe', the parent process being a PowerShell variant, and the 'OriginalFileName' metadata. This bypass works by copying the executable to a new name ('not_csi.exe') to fail the 'Image' check and executing it via 'cmd.exe' instead of PowerShell to fail the 'ParentImage' check. While 'OriginalFileName' remains 'csi.exe', Sigma rules typically require all conditions in a selection block to be true (logical AND) unless specified otherwise; thus, failing the first two criteria evades the rule."
+  },
+  {
+    "output": "wmic process call create \"C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csi.exe\"",
+    "explanation": "This command uses Windows Management Instrumentation (WMI) to spawn the CSharp Interactive console. By using WMIC, the parent process of 'csi.exe' becomes 'wmiprvse.exe' instead of a PowerShell executable. Since the Sigma rule strictly monitors for parent processes like 'powershell.exe' or 'pwsh.exe', this execution flow bypasses the 'ParentImage' selection criteria entirely."
+  }
+]

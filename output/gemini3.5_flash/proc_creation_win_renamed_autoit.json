@@ -1,0 +1,6 @@
+[
+  {
+    "output": "updater.exe script.au3",
+    "explanation": "This execution bypasses the rule if the attacker uses a version of AutoIt (like AutoIt3_x64.exe or an obscure build) whose Imphash is not explicitly listed in 'selection_2', strips or alters the 'OriginalFileName' PE metadata to evade 'selection_3', and runs the script directly without using the '/AutoIt3ExecuteScript' or '/ErrorStdOut' flags to evade 'selection_1'. Since none of the selection conditions are met, the renamed executable ('updater.exe') runs undetected."
+  }
+]

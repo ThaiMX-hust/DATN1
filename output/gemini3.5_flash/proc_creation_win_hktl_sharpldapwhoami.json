@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\svchost.exe /method:ntlm /verbose",
+    "explanation": "The executable is renamed to svchost.exe, so Image does not end with SharpLdapWhoami.exe and PE metadata (OriginalFileName/Product) does not contain SharpLdapWhoami. The command line ends with /verbose, which is not one of the flagged strings, so none of the selection conditions match, bypassing the rule."
+  }
+]

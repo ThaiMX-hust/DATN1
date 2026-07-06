@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\spool\\tools\\PrintBrm.exe -fC:\\path\\to\\archive.zip -b",
+    "explanation": "The rule checks for a space followed by the flag (' -f') in the command line. By removing the space between the flag and its argument (e.g., '-fC:\\path\\...'), PrintBrm.exe still interprets the argument correctly, but the 'CommandLine|contains|all' filter fails to match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\spool\\tools\\PrintBrm.exe  -f  \\127.0.0.1\\share\\backup.tmp  -b",
+    "explanation": "The rule explicitly requires the string '.zip' to be present in the command line. Because PrintBrm.exe creates or extracts a cabinet file regardless of the file extension supplied to the '-f' parameter, an operator can change the extension to '.tmp' or '.cab' to bypass the 'selection' criteria."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\spool\\tools\\PrintBrm.exe C:\\Users\\Public\\not_print.exe && C:\\Users\\Public\\not_print.exe -f C:\\Users\\Public\\data.zip -b",
+    "explanation": "The rule relies on the 'Image' field ending with '\\PrintBrm.exe'. By copying the binary to a different location with a different name, the 'Image' condition is bypassed while maintaining the functionality of the LOLBIN."
+  },
+  {
+    "output": "PrintBrm.exe -f:C:\\Users\\Public\\data.zip",
+    "explanation": "The rule looks for ' -f' (space dash f). In Windows command-line parsing, some arguments can be joined with a colon or lack the preceding space. If the parser accepts '-f:' without a leading space, the 'contains|all' logic for ' -f' fails."
+  },
+  {
+    "output": "PrintBrm.exe -f C:\\Users\\Public\\data.7z",
+    "explanation": "The rule specifically looks for the '.zip' extension in the command line. PrintBrm typically creates cabinet/zip structures, but if the attacker specifies a different file extension (like .7z or .dat) for the output path, the rule will not trigger even though the file content remains a compressed archive."
+  }
+]

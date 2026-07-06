@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Get-WmiObject -Class Win32_Product -Filter \"Name like '%Crowdstrike%'\" | ForEach-Object { $_.Uninstall() }",
+    "explanation": "The Sigma rule specifically targets the use of the 'wmic' binary (selection_cli_1 and selection_cli_2). By using PowerShell's Get-WmiObject or the newer Get-CimInstance cmdlet to interact with WMI directly, an attacker can perform the same uninstallation action without triggering the command-line keyword filters for 'wmic'."
+  },
+  {
+    "output": "wmic product where \"name='Crowdstrike Sensor'\" call uninst^all",
+    "explanation": "The rule relies on string matching for 'uninstall'. In the Windows Command Prompt, using the caret symbol (^) is an escape character that is removed during command-line parsing but stays present in the raw CommandLine logs. Depending on how the SIEM processes the 'contains' logic, simple character escapes or case-folding variations can sometimes evade basic pattern matching."
+  },
+  {
+    "output": "wmic /node:127.0.0.1 product where \"name like '%%Crowdstrike%%'\" call uninstall",
+    "explanation": "The rule (selection_cli_1) looks for the specific string 'product where '. By inserting a space-disrupting global switch like '/node:127.0.0.1' or using double percent signs (%%) which are often used in batch scripts, the specific string 'product where ' might be altered or the product names might not match the 'selection_product' list if the SIEM is looking for exact casing or specific spacing."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\temp\\3proxy.exe C:\\temp\\svchost_proxy.exe && C:\\temp\\svchost_proxy.exe --interface 127.0.0.1 --port 8080",
+    "explanation": "This bypasses the 'selection_img' logic by renaming the executable from '3proxy.exe' to something else, and bypasses 'selection_params' by using long-form flags (--interface and --port) instead of the short-form '-i' and '-p' strings the rule looks for. The 'selection_pe' check is bypassed because it relies on PE metadata which is often not logged in standard process creation events, or can be modified via resource hackers."
+  }
+]

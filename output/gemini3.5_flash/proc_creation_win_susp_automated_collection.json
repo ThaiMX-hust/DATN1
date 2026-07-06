@@ -1,0 +1,26 @@
+[
+  {
+    "output": "for /r C:\\Users\\ %i in (*.doc*) do @echo %i",
+    "explanation": "The Sigma rule triggers when 'dir' is used with both '/b' and '/s' flags alongside common document extensions. This bypass uses a 'for /r' loop to recursively find files, achieving the same result as 'dir /s /b' without matching the specific command-line strings defined in 'selection_other_dir'."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path C:\\ -Include *.pdf,*.docx -Recurse -ErrorAction SilentlyContinue\"",
+    "explanation": "The rule is specifically looking for Windows Command Prompt built-ins (dir and findstr). By switching the execution context to PowerShell, an adversary can perform the same automated collection using 'Get-ChildItem', which does not match the 'selection_other_dir' or 'selection_other_findstr' logic."
+  },
+  {
+    "output": "findstr.exe /S \".docx\" C:\\Users\\*.*",
+    "explanation": "The 'selection_other_findstr' logic specifically looks for the flags '/e' or '/si'. An attacker can still perform a recursive search for document strings using the '/S' (case-sensitive) or '/i' (without /s) flags, thereby avoiding the specific flag combination that triggers the alert."
+  },
+  {
+    "output": "for /r %i in (*.doc, *.docx, *.pdf, *.txt) do @echo %i",
+    "explanation": "The original rule triggers if 'dir' is used with both '/b' and '/s' flags while looking for specific extensions. This command achieves the same recursive file listing using a 'for' loop, which avoids the 'dir' command and its specific flags entirely."
+  },
+  {
+    "output": "findstr /s /i /m \"secret\" *.pdf",
+    "explanation": "The rule specifically looks for the flags '/e' or '/si' used with FINDSTR.EXE. By using alternate flags like '/s' (search subdirectories) and '/i' (ignore case) without the specific combinations targeted by the rule, the activity remains functional but evades the detection logic."
+  },
+  {
+    "output": "powershell -Command \"Get-ChildItem -Path C:\\ -Include *.txt,*.pdf,*.docx -Recurse -ErrorAction SilentlyContinue\"",
+    "explanation": "The rule monitors Command Prompt behaviors (dir/findstr). Using PowerShell to perform the same automated collection of documents bypasses the specific CommandLine string matches for 'dir /b /s' and 'findstr' flags."
+  }
+]

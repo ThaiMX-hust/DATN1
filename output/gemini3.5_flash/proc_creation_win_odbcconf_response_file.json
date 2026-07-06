@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /f C:\\Windows\\Temp\\payload.txt",
+    "explanation": "The Sigma rule explicitly requires the string '.rsp' to be present in the command line (selection_rsp_ext). By simply renaming the response file to use a different extension such as '.txt', the rule is bypassed, yet odbcconf.exe will still successfully parse and execute the contents of the response file."
+  },
+  {
+    "output": "odbcconf.exe /fC:\\Windows\\Temp\\payload.rsp",
+    "explanation": "The rule uses the 'windash' modifier and checks for ' -f ' (selection_cli), expecting a space before and after the flag. Windows command line argument parsing often permits the omission of the space between the flag and its value. Executing the command without the trailing space bypasses the exact string match."
+  },
+  {
+    "output": "odbcconf.exe /a {REGSVR C:\\Windows\\Temp\\malicious.dll}",
+    "explanation": "While the rule specifically targets response files (-f), the ultimate goal of an attacker using odbcconf.exe is usually to load a DLL. The attacker can bypass the response file detection entirely by using the action flag (/a) to directly execute the DLL registration, completely evading both the '-f' and '.rsp' checks."
+  }
+]

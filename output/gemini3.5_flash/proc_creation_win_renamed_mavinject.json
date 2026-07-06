@@ -1,0 +1,6 @@
+[
+  {
+    "output": "1. Modify PE Resource metadata to change 'OriginalFileName' to something else (e.g., 'updater.exe')\n2. .\\renamed_mavinject.exe 4052 /INJECTRUNNING C:\\temp\\payload.dll",
+    "explanation": "This Sigma rule relies strictly on parsing the PE (Portable Executable) header's 'OriginalFileName' field to identify the binary. An attacker can bypass this detection by modifying or stripping the Version Information block of the copied mavinject executable before renaming and running it. Once the 'OriginalFileName' attribute is changed, the initial 'selection' condition fails, and the execution of the renamed injector goes undetected."
+  }
+]

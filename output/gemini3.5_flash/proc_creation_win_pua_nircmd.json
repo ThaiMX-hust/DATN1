@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Tools\\nircmd.exe C:\\Windows\\Temp\\sys_utility.exe && C:\\Windows\\Temp\\sys_utility.exe win min process itunes.exe",
+    "explanation": "The rule targets the filename 'NirCmd.exe' (via Image or OriginalFileName) and specific high-risk command-line switches like 'execmd', 'exec', or 'runinteractive'. By renaming the executable to 'sys_utility.exe' and using commands like 'win min' (to minimize a window) instead of the flagged execution verbs, the 'selection_org', 'selection_cmd', and 'combo_*' conditions are all avoided."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\n.exe \"e\"\"x\"\"e\"\"c\" \"h\"\"i\"\"d\"\"e\" notepad.exe",
+    "explanation": "This bypass relies on renaming the binary to 'n.exe' to evade the filename detection. Furthermore, if the SIEM or EDR does not perform command-line normalization, using internal quotes (e.g., \"e\"\"x\"\"e\"\"c\") can bypass simple string-matching logic for 'exec' and 'hide' keywords while still being interpreted correctly by the application."
+  }
+]

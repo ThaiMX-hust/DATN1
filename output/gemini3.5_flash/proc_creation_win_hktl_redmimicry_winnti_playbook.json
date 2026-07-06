@@ -1,0 +1,30 @@
+[
+  {
+    "output": "rundll32.exe C:\\Windows\\Temp\\renamed_payload.dll,DllMain",
+    "explanation": "Bypass by renaming the indicator: The Sigma rule specifically looks for the hardcoded strings 'gthread-3.6.dll' or 'sigcmm-2.4.dll' in the command line. Renaming the DLL before execution evades the CommandLine condition."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Windows\\Temp\\worker.exe && C:\\Windows\\Temp\\worker.exe gthread-3.6.dll,DllMain",
+    "explanation": "Bypass by renaming the executor: The rule explicitly checks if the executing process image ends with '\\rundll32.exe' or '\\cmd.exe'. Copying and running rundll32.exe under a different name bypasses the Image condition."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\Windows\\Temp && tmp.bat\"",
+    "explanation": "Bypass by path fragmentation: The rule checks for the exact contiguous string '\\Windows\\Temp\\tmp.bat'. By navigating to the directory first and executing the script locally, the exact target string is not present in the command line parameters."
+  },
+  {
+    "output": "cmd.exe /c C:\\Windows\\Temp\\t^m^p.bat",
+    "explanation": "Bypasses the CommandLine string match for '\\Windows\\Temp\\tmp.bat' by using standard CMD caret (^) obfuscation. This breaks the exact string signature while still executing the batch script normally."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Windows\\Temp\\run32.exe & C:\\Windows\\Temp\\run32.exe C:\\Temp\\gthread-3.6.dll,EntryPoint",
+    "explanation": "Bypasses the Image condition. The Sigma rule explicitly looks for process images ending in '\\rundll32.exe' or '\\cmd.exe'. Executing the payload via a renamed copy of the legitimate binary evades this check."
+  },
+  {
+    "output": "rundll32.exe C:\\Temp\\GTHREA~1.DLL,EntryPoint",
+    "explanation": "Bypasses the CommandLine condition for 'gthread-3.6.dll' by leveraging the Windows 8.3 short filename format. The OS correctly resolves and loads the DLL, but the raw command line log will not trigger the specific string match."
+  },
+  {
+    "output": "Tr\u00f2 chuy\u1ec7n v\u1edbi Gemini\nXin ch\u00e0o Th\u00e1i!\nH\u00f4m nay ch\u00fang ta n\u00ean th\u1eed g\u00ec?\nD\u00e0nh cho b\u1ea1n\n\ud83d\uddbc\ufe0f T\u1ea1o h\u00ecnh \u1ea3nh\n\ud83c\udfb8 T\u1ea1o nh\u1ea1c\nT\u1ea1o video\nVi\u1ebft b\u1ea5t c\u1ee9 th\u1ee9 g\u00ec\nGi\u00fap t\u00f4i h\u1ecdc",
+    "explanation": "Raw gemini-browser output saved because JSON parse failed: Response does not contain a complete bypass JSON array/object: Expecting value: line 1 column 1 (char 0)"
+  }
+]

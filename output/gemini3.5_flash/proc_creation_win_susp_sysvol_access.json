@@ -1,0 +1,14 @@
+[
+  {
+    "output": "type \\\\domain.local\\SYSVOL\\domain/policies/GPT.ini",
+    "explanation": "Windows file paths often accept forward slashes as directory separators. Because the Sigma rule strictly looks for the exact string '\\policies\\', substituting one or both backslashes with a forward slash (e.g., '/policies/') evades the literal string match while still executing successfully."
+  },
+  {
+    "output": "cmd.exe /c \"set P=\\poli && set C=cies\\ && call copy \\\\domain.local\\SYSVOL\\domain%P%%C%GPT.ini C:\\temp\\\"",
+    "explanation": "This technique utilizes environment variable concatenation. The rule looks for the contiguous string '\\policies\\'. By splitting the string into variables ('\\poli' and 'cies\\'), the process creation logs (Event ID 4688) capture the obfuscated command line, successfully bypassing the static detection logic."
+  },
+  {
+    "output": "copy \\\\domain.local\\SYSVOL\\domain\\POLICI~1\\GPT.ini C:\\temp\\",
+    "explanation": "This relies on Windows 8.3 short names (also known as DOS 8.3 naming convention). The directory 'policies' is often represented as 'POLICI~1' under this convention. Since the rule looks for '\\policies\\', using the short path alternative evades detection."
+  }
+]

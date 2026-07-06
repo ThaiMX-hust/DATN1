@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmstp.exe /s /ni /au C:\\Users\\Public\\payload.inf & start /b C:\\Windows\\System32\\calc.exe",
+    "explanation": "The Sigma rule focuses on child processes where the 'ParentImage' is cmstp.exe. By using the '&' operator or 'start' command in a shell-interpreted context, an attacker can launch a payload as a sibling process of cmstp.exe rather than a direct child, or use CMSTP to perform an action (like COM/UAC bypass) that triggers a separate execution chain not directly parented by the binary."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmstp.exe /s C:\\Users\\Public\\remote_access.inf",
+    "explanation": "If the INF file is configured to perform actions via COM objects or existing system services (e.g., using the ICMLuaUtil interface), the resulting execution may be parented by a service host (svchost.exe) or a system process rather than cmstp.exe, effectively evading the ParentImage detection logic."
+  }
+]

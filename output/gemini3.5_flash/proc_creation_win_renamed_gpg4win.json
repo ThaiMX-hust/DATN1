@@ -1,0 +1,6 @@
+[
+  {
+    "output": "rcedit.exe payload.exe --set-version-string \"OriginalFilename\" \"updater.exe\" && payload.exe --symmetric sensitive_data.txt",
+    "explanation": "The detection logic relies entirely on the 'OriginalFileName' metadata field within the executable's PE header remaining intact as 'gpg.exe'. An attacker can bypass this rule by modifying or stripping the OriginalFileName property (e.g., using a tool like rcedit or Resource Hacker) before renaming and executing the binary. Because the metadata no longer matches 'gpg.exe', the rule's selection criteria fails."
+  }
+]

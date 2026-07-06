@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c start remote.exe -arg1 -arg2",
+    "explanation": "Renames the executable to 'remote.exe' (avoiding 'meshagent' in filename) and omits '--meshServiceName' in the command line, bypassing both detection conditions."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"svchost.exe --m^eshServiceName\"",
+    "explanation": "The Sigma rule relies on an exact string match for '--meshServiceName'. By utilizing standard Windows command prompt caret (^) escape characters, the command line obfuscates the argument within Event ID 4688 logs, breaking the string match while still being correctly parsed by the OS. (Note: The attacker would also need to strip or modify the 'OriginalFileName' attribute in the PE metadata to completely evade the 'selection_meshagent' condition)."
+  },
+  {
+    "output": "C:\\Users\\Public\\Downloads\\meshagent.exe --meshServiceName",
+    "explanation": "The rule contains an overly broad whitelist filter ('Image|endswith: \\meshagent.exe'). It assumes any executable ending with that name is legitimate. An attacker can bypass this specific 'Renamed MeshAgent' rule by simply keeping the original filename but executing it from an unauthorized, suspicious directory."
+  }
+]

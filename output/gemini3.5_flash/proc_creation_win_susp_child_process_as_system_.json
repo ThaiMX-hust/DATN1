@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\rundll32.exe C:\\Windows\\Temp\\payload.dll,EntryPoint DavSetCookie",
+    "explanation": "The Sigma rule contains a permissive exclusion ('filter_rundll32') that ignores any process ending in '\\rundll32.exe' as long as the command line contains the exact string 'DavSetCookie'. An attacker can bypass this detection logic by renaming their malicious executable to 'rundll32.exe' (or executing a malicious DLL via the legitimate rundll32.exe) and appending 'DavSetCookie' as a dummy argument to the command line."
+  }
+]

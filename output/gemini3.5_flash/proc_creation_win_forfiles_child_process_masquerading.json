@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\forfiles.exe /p C:\\Windows\\System32 /m * /c \"cmd /c echo \\\"Hello from bypass\\\"\"",
+    "explanation": "Uses forfiles.exe from the default system directory, which triggers the filter_main_parent_not_sys exception, preventing the rule from firing even though a cmd.exe child process is spawned with a command line starting with '/c echo ...'."
+  }
+]

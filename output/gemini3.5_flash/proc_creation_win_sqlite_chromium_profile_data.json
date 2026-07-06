@@ -1,0 +1,10 @@
+[
+  {
+    "output": "sqlite3.exe C:\\temp\\copied_database.db \"SELECT * FROM urls;\"",
+    "explanation": "From a defensive analysis perspective, this Sigma rule relies on all three conditions (SQL binary, Chromium directory path, and specific database filename) matching simultaneously in a single process creation event. An adversary can bypass this by copying the target database (e.g., 'Login Data') to a new location and renaming it before querying. The subsequent sqlite.exe command line will lack the strings '\\User Data\\' and 'Login Data', causing the 'all of selection_*' condition to fail."
+  },
+  {
+    "output": "cmd.exe /c copy \"%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Login Data\" C:\\Public\\temp.db && db_query.exe C:\\Public\\temp.db \"SELECT action_url, username_value, password_value FROM logins\"",
+    "explanation": "This command demonstrates a bypass by breaking the strict string-matching conditions of the Sigma rule. By copying the target database out of the browser profile directory and renaming it, the subsequent query command line no longer contains the strings '\\User Data\\' (bypassing selection_chromium) or 'Login Data' (bypassing selection_data). Additionally, using a renamed or custom-compiled SQLite binary ('db_query.exe') without the 'SQLite' Product metadata evades selection_sql. Because the rule's condition requires 'all of selection_*' to trigger, modifying the file path, filename, or executing binary name successfully evades the detection logic."
+  }
+]

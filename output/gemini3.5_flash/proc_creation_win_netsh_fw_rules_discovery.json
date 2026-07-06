@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Get-NetFirewallRule | Select-Object DisplayName, Profile, Direction, Action",
+    "explanation": "This command bypasses the detection entirely because the Sigma rule explicitly targets the 'netsh.exe' image and original filename. By using PowerShell's built-in NetSecurity module to enumerate firewall configurations, the 'selection_img' criteria is completely evaded."
+  }
+]

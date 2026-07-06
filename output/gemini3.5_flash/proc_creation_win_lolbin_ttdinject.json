@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\TTDInject.exe C:\\Users\\Public\\NotMalicious.exe && C:\\Users\\Public\\NotMalicious.exe /ttd 1234 /out C:\\Logs",
+    "explanation": "The Sigma rule relies on the process 'Image' ending in 'ttdinject.exe' or the 'OriginalFileName' metadata field. By copying the binary to a new location with a different name, the 'Image' condition is bypassed. While some EDRs track 'OriginalFileName' via PE headers, many standard SIEM logs (like basic Windows Event ID 4688) do not consistently populate or filter based on 'OriginalFileName', allowing the renamed execution to go undetected by this specific rule."
+  }
+]

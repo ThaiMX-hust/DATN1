@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy \"C:\\Program Files\\SimpleHelp\\SimpleService.exe\" \"C:\\Windows\\Temp\\not_simple.exe\" && \"C:\\Windows\\Temp\\not_simple.exe\"",
+    "explanation": "The Sigma rule relies on specific file path patterns ('\\JWrapper-Remote Access\\') and a specific filename ('\\SimpleService.exe'). By copying the legitimate executable to a temporary directory and renaming it, the process execution will no longer match the 'Image|contains' or 'Image|endswith' conditions, effectively bypassing the detection while maintaining the tool's functionality."
+  },
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Services\\NotSimple\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\Users\\Public\\Svc.exe\" /f",
+    "explanation": "Adversaries can bypass path-based detection by installing the application as a service with a custom binary name and non-standard path. Since the rule looks for 'SimpleService.exe', any deviation in the filename or the specific JWrapper directory structure will prevent the rule from triggering."
+  }
+]

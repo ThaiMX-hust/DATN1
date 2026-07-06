@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-WebGlobalModule -Name 'SuspiciousModule' -Image 'C:\\Windows\\Temp\\module.dll'\"",
+    "explanation": "The provided Sigma rule relies on strict, explicit command-line string matching for 'appcmd.exe add module' or specific 'gacutil' flags. An adversary operating through a webshell (where the parent process is w3wp.exe) can bypass these specific signatures by using alternative administration methods, such as the built-in 'New-WebGlobalModule' cmdlet from the WebAdministration PowerShell module, which registers the IIS module without triggering the monitored command-line patterns."
+  }
+]

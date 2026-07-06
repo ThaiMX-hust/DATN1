@@ -1,0 +1,14 @@
+[
+  {
+    "output": "DXCap.exe -v -c notepad.exe",
+    "explanation": "The original rule looks for ' -c ' (with spaces on both sides). By placing another flag like '-v' (verbose) or any other character immediately before the '-c', or by using a forward slash '/c' (which DXCap often accepts as an alternative to the dash), the literal string ' -c ' is not matched, even though the functionality remains the same."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\DXCap.exe C:\\Users\\Public\\NotDXCap.exe && C:\\Users\\Public\\NotDXCap.exe -c calc.exe",
+    "explanation": "While the rule attempts to check the 'OriginalFileName', some SIEM environments or log sources (like basic Windows Event ID 4688 without verbose auditing) may rely primarily on the 'Image' path. Renaming the binary can bypass detections that do not strictly enforce the 'OriginalFileName' field check or where that metadata is stripped/missing."
+  },
+  {
+    "output": "DXCap.exe\t-c\tcalc.exe",
+    "explanation": "The rule specifically searches for a space character (ASCII 32) before and after the 'c'. Using a Tab character (ASCII 9) or multiple spaces between the binary name and the flag will satisfy the command-line parser of the OS but fail the specific string match ' -c '."
+  }
+]

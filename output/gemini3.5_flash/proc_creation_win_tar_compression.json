@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\tar.exe C:\\Users\\Public\\not_tar.exe && C:\\Users\\Public\\not_tar.exe --create --file=archive.tar C:\\SensitiveData",
+    "explanation": "The rule filters for processes ending in '\\tar.exe' or having the OriginalFileName 'bsdtar'. By copying the binary to a new name, the 'Image|endswith' check is bypassed. If the SIEM's EDR component does not populate 'OriginalFileName' for renamed binaries in real-time, the detection fails."
+  },
+  {
+    "output": "tar --create --file=backup.tar C:\\Users\\Public\\Logs",
+    "explanation": "The rule specifically looks for the short-form flags '-c', '-r', or '-u'. Tar supports long-form aliases such as '--create' (for -c) and '--update' (for -u). Since the 'selection_create' logic uses a 'contains' check for specific strings like '-c', using the full word '--create' avoids matching those specific character patterns."
+  },
+  {
+    "output": "tar -A -f existing.tar new_data.txt",
+    "explanation": "The rule monitors for creation (-c), appending (-r), or updating (-u). It misses the '-A' (or '--concatenate' / '--catenate') flag, which appends tar files to another tar file. An adversary can use this to aggregate staged data into a single archive without triggering the monitored flags."
+  },
+  {
+    "output": "tar.exe cf archive.tar C:\\Temp\\target_folder",
+    "explanation": "The Sigma rule checks for the explicit presence of the strings '-c', '-r', or '-u' in the command line parameters. However, tar.exe (based on bsdtar) supports legacy UNIX syntax where the leading dash can be omitted for the primary operation mode. By using 'cf' instead of '-c -f', the archive is created successfully while bypassing the string matching condition in the detection logic."
+  }
+]

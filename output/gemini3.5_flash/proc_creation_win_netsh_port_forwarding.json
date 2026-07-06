@@ -1,0 +1,6 @@
+[
+  {
+    "output": "netsh.exe -c interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=8080 connectaddress=10.0.0.5 connectport=80",
+    "explanation": "The rule looks for the exact tokens 'interface', 'portproxy', 'add', and 'v4tov4' separated by spaces and also checks for the substrings 'connectp', 'listena', and 'c=' in the command line. By using the long\u2011form parameter names (listenaddress, listenport, connectaddress, connectport) instead of the abbreviated forms (listena, connectp, c=), the command still creates the same port proxy rule but does not contain the required substrings, thus evading detection."
+  }
+]

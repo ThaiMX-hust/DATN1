@@ -1,0 +1,26 @@
+[
+  {
+    "output": "cscript.exe C:\\Windows\\System32\\gatherNetworkInfo.vbs",
+    "explanation": "The Sigma rule logic relies on 'selection and not filter'. The 'filter' condition explicitly excludes executions where the image process ends with '\\cscript.exe' or '\\wscript.exe'. By running the script using the standard cscript.exe host, the filter condition is met, causing the overall detection to fail and bypass the alert."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\gatherNetworkInfo.vbs %TEMP%\\gni_recon.vbs & cscript.exe %TEMP%\\gni_recon.vbs",
+    "explanation": "The rule's 'selection' condition strictly looks for the exact string 'gatherNetworkInfo.vbs' in the command line. By copying the file to a different location with a different name and executing the copy, the command line no longer contains the targeted string, bypassing the initial selection logic."
+  },
+  {
+    "output": "cmd.exe /c \"set str1=gather & set str2=NetworkInfo.vbs & call wscript.exe C:\\Windows\\System32\\%str1%%str2%\"",
+    "explanation": "This technique uses command-line obfuscation via environment variable expansion. The process creation event logged for cmd.exe will record the command line containing the variables '%str1%%str2%' rather than the resolved string 'gatherNetworkInfo.vbs', thus evading the CommandLine|contains string match."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\gatherNetworkInfo.vbs C:\\Users\\Public\\info.vbs && cscript.exe C:\\Users\\Public\\info.vbs",
+    "explanation": "The rule triggers when 'gatherNetworkInfo.vbs' is present in the command line AND the execution engine is NOT cscript.exe or wscript.exe. By copying the script to a new filename, the 'selection' criteria (CommandLine contains 'gatherNetworkInfo.vbs') is never met, even if executed by a non-standard engine."
+  },
+  {
+    "output": "cscript.exe C:\\Windows\\System32\\gatherNetworkInfo.vbs",
+    "explanation": "The rule specifically excludes (filters) instances where the Image ends with '\\cscript.exe' or '\\wscript.exe'. Therefore, executing the script using its intended default engines does not trigger this specific detection logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content C:\\Windows\\System32\\gatherNetworkInfo.vbs | Invoke-Expression\"",
+    "explanation": "This bypasses the rule by reading the content of the script and executing it in memory or through a different interpreter (PowerShell) without passing the string 'gatherNetworkInfo.vbs' as a command-line argument for the process execution itself."
+  }
+]

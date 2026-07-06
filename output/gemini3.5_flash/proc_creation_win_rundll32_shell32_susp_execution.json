@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe shell32.dll,Control_RunDLL C:\\ProgramData\\payload.dll",
+    "explanation": "Directory List Evasion: The Sigma rule relies on a hardcoded list of suspicious directories (AppData, Temp, Users\\Public). Executing the DLL from an unmonitored, commonly writable directory like C:\\ProgramData completely bypasses the selection_cli directory match."
+  },
+  {
+    "output": "rundll32.exe shell32,Control_RunDLL C:\\Users\\Public\\payload.dll",
+    "explanation": "Exact String Evasion (Extension Omission): The rule explicitly requires the command line to contain 'shell32.dll'. Because rundll32.exe can automatically resolve and append the .dll extension, passing just 'shell32' causes the 'CommandLine|contains|all' condition to fail."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,Control_RunDLL C:\\Users\\Default\\APPDAT~1\\Local\\payload.dll",
+    "explanation": "Path Obfuscation (8.3 Short Names): The rule checks for the literal string '\\AppData\\'. By utilizing Windows 8.3 short naming conventions (e.g., APPDAT~1 instead of AppData), the literal string match is evaded while still executing from the target directory."
+  }
+]

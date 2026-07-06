@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\pcwrun.exe C:\\Users\\Public\\not_pcw.exe && C:\\Users\\Public\\not_pcw.exe C:\\Windows\\System32\\calc.exe",
+    "explanation": "The Sigma rule relies on the 'ParentImage' field ending specifically with '\\pcwrun.exe'. By copying the legitimate pcwrun.exe binary to a different location with a different filename, the process spawned by it will report a 'ParentImage' that does not match the detection pattern, effectively bypassing the rule while still utilizing the binary's functionality."
+  },
+  {
+    "output": "C:\\Windows\\System32\\pcwrun.exe \"C:\\Windows\\System32\\cmd.exe /c start /B C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "This command uses pcwrun.exe to launch a shell which then immediately starts the target payload in the background. Depending on the speed of the SIEM's process tree correlation and whether it only inspects the direct parent, using an intermediate 'launcher' or 'shorthand' command can sometimes obscure the lineage enough to evade simple 'ParentImage' checks."
+  }
+]

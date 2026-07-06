@@ -1,0 +1,18 @@
+[
+  {
+    "output": "\"C:\\Windows\\System32\\rundll32.exe\" \"C:\\Windows\\System32\\msado15.dll,OpenDSLFile\" \"C:\\Users\\Public\\Downloads\\example.udl\"",
+    "explanation": "Uses a different DLL (msado15.dll) and a public download path, bypassing the specific 'oledb32.dll' and '\\Users\\*\\Downloads\\' filters while still executing rundll32 to open a UDL file."
+  },
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile \"C:\\Users\\admin\\Downloads\\test.udl\"",
+    "explanation": "The rule expects the command line to end exactly with the '.udl' string. By wrapping the target file path in double quotes, the command line ends with a quotation mark (\") instead of the literal string '.udl', which bypasses the 'CommandLine|endswith: .udl' condition while maintaining valid execution."
+  },
+  {
+    "output": "rundll32.exe oledb32.dll,OpenDSLFile C:\\ProgramData\\test.udl",
+    "explanation": "The rule specifically checks for the string '\\Users\\*\\Downloads\\' in the command line. Staging and executing the UDL file from an alternate directory, such as C:\\ProgramData\\, completely evades this path-based condition."
+  },
+  {
+    "output": "cmd.exe /c rundll32.exe oledb32.dll,OpenDSLFile C:\\Users\\user\\Downloads\\test.udl",
+    "explanation": "The rule strictly enforces that the parent process must be 'explorer.exe', which typically assumes the user is double-clicking the file in the GUI. Executing the exact same payload via a command shell (cmd.exe) changes the parent process, evading the 'selection_parent' requirement entirely."
+  }
+]

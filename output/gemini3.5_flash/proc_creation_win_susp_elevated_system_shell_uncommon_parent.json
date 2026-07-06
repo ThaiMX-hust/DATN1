@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\ProgramData\\malicious_staging\\loader.exe /c C:\\Windows\\System32\\cmd.exe",
+    "explanation": "The rule contains a broad exclusion (filter_main_generic) that ignores any process creation where the ParentImage contains ':\\ProgramData\\'. An attacker with SYSTEM privileges can drop a payload into the ProgramData directory and use it to spawn a command shell. The rule will filter out the event, allowing the shell spawn to bypass detection."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\installer_payload.exe -spawn C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "explanation": "Similar to the ProgramData bypass, the rule's filter_main_generic excludes any ParentImage containing ':\\Windows\\Temp\\'. Attackers commonly use Windows\\Temp for staging files. Executing a SYSTEM shell directly from a parent executable located in this directory will bypass the rule."
+  },
+  {
+    "output": "Process Hollowing / PPID Spoofing: CreateProcess(\"C:\\Windows\\System32\\cmd.exe\", ... , dwCreationFlags=EXTENDED_STARTUPINFO_PRESENT, ... spoofed Parent PID = svchost.exe)",
+    "explanation": "By utilizing Parent PID (PPID) spoofing, an attacker can launch cmd.exe or powershell.exe and assign a legitimate SYSTEM process (like C:\\Windows\\System32\\svchost.exe) as its parent. Because the spoofed parent path contains ':\\Windows\\System32\\', it matches the rule's exclusion filter and evades detection."
+  }
+]

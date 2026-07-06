@@ -1,0 +1,18 @@
+[
+  {
+    "output": "msiexec.exe /z \"C:\\path\\to\\payload.tmp\"",
+    "explanation": "The original rule looks for the '.dll' extension in the command line. By renaming the malicious DLL to a different extension like '.tmp', '.dat', or removing the extension entirely, the 'selection_dll' criteria is bypassed while msiexec still processes the file correctly."
+  },
+  {
+    "output": "msiexec.exe /z C:\\path\\to\\payload.dll",
+    "explanation": "The rule specifically looks for ' -z ' (with surrounding spaces or specific dash formatting). By using a forward slash '/z' instead of a dash '-z', the 'selection_flag' (windash) may fail to trigger depending on the SIEM's normalization of the 'windash' helper."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\msiexec.exe C:\\Users\\Public\\not_msiexec.exe && .\\not_msiexec.exe -z C:\\path\\to\\payload.dll",
+    "explanation": "If the environment does not support or properly log 'OriginalFileName', renaming the msiexec binary to something else will bypass the 'selection_img' check which relies on the image path ending in '\\msiexec.exe'."
+  },
+  {
+    "output": "msiexec.exe -zC:\\path\\to\\payload.dll",
+    "explanation": "The rule looks for ' -z ' (space-z-space). By removing the space between the flag and the argument (e.g., -zC:\\path...), the string matching for ' -z ' fails while the command remains functionally valid for msiexec."
+  }
+]

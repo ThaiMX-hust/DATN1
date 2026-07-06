@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -c \"iex (gc C:\\temp\\payload.ps1 -raw)\"",
+    "explanation": "Bypasses the 'selection_read' condition. The Sigma rule explicitly looks for 'cat ', 'get-content ', or 'type ', but misses the built-in and commonly used PowerShell alias 'gc'."
+  },
+  {
+    "output": "powershell.exe -c \"iex (Get-Content C:\\temp\\payload.ps1 -ra)\"",
+    "explanation": "Bypasses the 'selection_raw' condition. PowerShell allows for parameter abbreviation, meaning '-ra' or '-r' will perfectly execute as '-Raw', avoiding the rule's strict string match for ' -raw'."
+  },
+  {
+    "output": "powershell.exe -c \"[scriptblock]::Create((cat C:\\temp\\payload.ps1 -raw)).Invoke()\"",
+    "explanation": "Bypasses the 'selection_exec' condition. Instead of using the blacklisted commands like 'iex' or 'Invoke-Expression', it uses the .NET ScriptBlock class to instantiate and invoke the code block from the file."
+  },
+  {
+    "output": "powershell.exe -c \"& (cat C:\\temp\\payload.ps1 -raw)\"",
+    "explanation": "Bypasses the 'selection_exec' condition. The call operator '&' can be used to execute a script block or command, circumventing the string matches for 'iex' and 'icm'."
+  }
+]

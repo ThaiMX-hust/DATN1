@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\powershell.exe /Get-ItemPropertyValue -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion'",
+    "explanation": "This command retrieves system information from the registry without triggering the sigma rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\powershell.exe /Invoke-Command -ScriptBlock { Start-Process 'cmd.exe' -ArgumentList '/c \"echo Success\"' }",
+    "explanation": "Executes a minimal command to confirm registry access is possible."
+  }
+]

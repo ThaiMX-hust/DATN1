@@ -1,0 +1,38 @@
+[
+  {
+    "output": "net localgroup administrators /domain & echo /add",
+    "explanation": "The Sigma rule contains a blind exclusion filter (filter_group_add) that drops any alert if the command line contains the string ' /add'. By appending '& echo /add' or a comment containing ' /add' to the end of the line, the exclusion condition is met and the alert is bypassed, even though the reconnaissance command executes successfully."
+  },
+  {
+    "output": "net localgroup \"admin\"istrators /do",
+    "explanation": "The rule relies on exact string matches for group names, such as ' administrator'. By inserting double quotes within the target word, the literal string match fails in the SIEM log. The Windows command interpreter will ignore the quotes and execute the command normally."
+  },
+  {
+    "output": "net loc^algroup administrators /do",
+    "explanation": "Similar to the quote technique, using the cmd.exe escape character (^) breaks the strict string match for ' localgroup ' defined in selection_group_root. The command executes as normal, but the telemetry records the carets, bypassing the Sigma rule's regular expression."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-LocalGroupMember -Group 'Administrators'\"",
+    "explanation": "The detection logic is heavily scoped to the net.exe and net1.exe binaries via the selection_img condition. Utilizing alternative Living-off-the-Land (LotL) binaries like PowerShell or WMIC to perform the exact same group reconnaissance will completely evade this specific rule."
+  },
+  {
+    "output": "net user /domain",
+    "explanation": "The rule specifically monitors the 'accounts', 'group', or 'localgroup' subcommands when used with specific flags like '/do'. By using 'net user /domain' or 'net group' without the specific high-privileged group names (like 'domain admins') listed in the selection_group_flags, an attacker can still perform reconnaissance on users and groups without triggering the logic."
+  },
+  {
+    "output": "net1 gro\"up \"domain admins\" /do",
+    "explanation": "The rule uses 'CommandLine|contains' for specific strings like ' group '. In some environments, depending on how the SIEM processes command line arguments, inserting quotes or double-quotes within the subcommand (which Windows cmd.exe often strips or ignores) can break string-based pattern matching while the command still executes successfully."
+  },
+  {
+    "output": "net group \"domain admins\" /do /add /delete",
+    "explanation": "The rule contains a exclusion filter 'filter_group_add' which looks for ' /add'. By appending ' /add' to a reconnaissance command, even if followed by a command that nullifies the action or by simply using it in a way that doesn't affect the query, the 'not filter_group_add' condition evaluates to false, causing the entire selection_group logic to fail to trigger."
+  },
+  {
+    "output": "Get-ADGroupMember -Identity \"Domain Admins\"",
+    "explanation": "The rule is strictly limited to the execution of 'net.exe' or 'net1.exe'. Using PowerShell AD modules, ADSI searchers, or WMI (e.g., 'wmic path win32_groupuser') achieves the same reconnaissance goal while completely bypassing a rule that only looks at specific process images."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\net.exe\" /domain",
+    "explanation": "This command uses net.exe with the /domain flag but does not include any of the keywords or patterns (e.g., ' group ', ' localgroup ', ' accounts ', or ' /do') that the Sigma rule checks for, thereby bypassing the detection."
+  }
+]

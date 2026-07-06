@@ -1,0 +1,6 @@
+[
+  {
+    "output": "rundll32.exe payload.dll,#131096",
+    "explanation": "The Sigma rule attempts to detect ordinal wrap-around obfuscation by explicitly matching the first 16-bit overflow boundaries ('#655' and '#656'). This logic can be bypassed by using a larger multiple of the 16-bit limit (65536). For example, multiplying by 2 yields 131072. Adding an ordinal of 24 results in 131096. Executing '#131096' wraps around to ordinal 24 but evades the string matches defined in the 'selection_cli' section."
+  }
+]

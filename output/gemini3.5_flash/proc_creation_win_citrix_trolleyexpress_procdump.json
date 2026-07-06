@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Temp\\TrolleyExpress.exe  755",
+    "explanation": "Bypasses the 'selection' condition by adding double spaces between the executable name and the PID. The Sigma rule uses rigid string matching (CommandLine|contains: '\\TrolleyExpress.exe 7') and does not account for variable whitespace. To bypass the secondary 'renamed' condition, the attacker simply compiles the binary with stripped version info so 'OriginalFileName' is null, triggering 'filter_empty'."
+  },
+  {
+    "output": "C:\\Temp\\TrolleyExpress.exe \"755\"",
+    "explanation": "Wrapping the process ID in quotation marks bypasses the literal CommandLine string matches because the string becomes '\\TrolleyExpress.exe \"7' instead of '\\TrolleyExpress.exe 7'."
+  },
+  {
+    "output": "C:\\Temp\\TrolleyExpress.exe 1044",
+    "explanation": "The 'selection' condition rigidly assumes the LSASS process ID will fall between 700 and 999. If the LSASS PID is 1000 or greater (which frequently occurs in modern Windows environments), the command misses the detection entirely. Forging the PE's OriginalFileName to include 'CtxInstall' handles the 'renamed' branch."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\TrolleyExpress.exe -ma 755",
+    "explanation": "The rule checks for '\\TrolleyExpress.exe -ma ' (with a trailing space). If an attacker provides the '-ma' parameter at the end of the command line without a trailing space or formats it as '-ma755', the string match fails."
+  }
+]

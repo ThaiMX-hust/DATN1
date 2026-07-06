@@ -1,0 +1,6 @@
+[
+  {
+    "output": "renamed_tool.exe -process \"lsass.exe\" -m \"comsvcs\"",
+    "explanation": "The Sigma rule is fragile because it relies on exact string matches with specific padding spaces (e.g., ' -process lsass.exe ' and ' -m comsvcs ') and a hardcoded executable name ('\\xordump.exe'). By renaming the binary (evading the Image check) and using quotes around the arguments or altering the whitespace (evading the CommandLine check), the execution bypasses the defined selection criteria entirely."
+  }
+]

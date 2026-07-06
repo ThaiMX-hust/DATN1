@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c curl h^ttp://https://www.google.com/search?q=example.com",
+    "explanation": "The Sigma rule relies on exact string matches for highly specific obfuscation patterns ('h^t^t^p' and 'h\"t\"t\"p'). By changing the placement or reducing the number of escape characters (e.g., 'h^ttp' or 'ht^tp'), the command line still evades basic 'http' keyword filters in the Windows command shell, but completely bypasses this Sigma rule's rigid detection logic. This highlights the fragility of signature-based detection for obfuscation and the need for more robust deobfuscation or regex-based pattern matching in SIEM deployments."
+  }
+]

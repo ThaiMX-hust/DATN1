@@ -1,0 +1,42 @@
+[
+  {
+    "output": "Add-LocalGroupMember \"Remote Desktop Users\" user1",
+    "explanation": "Bypasses 'selection_main' by omitting the explicit ' -Group ' parameter string. PowerShell accepts the group name positionally, so the rule's strict requirement for ' -Group ' causes it to fail."
+  },
+  {
+    "output": "net localgroup \"Remo^te Desktop Users\" user1 /add",
+    "explanation": "Bypasses 'selection_group' by using the cmd.exe caret (^) escape character. The command executes successfully, but the process command line logged will contain 'Remo^te Desktop Users', avoiding the exact string match."
+  },
+  {
+    "output": "([ADSI]\"WinNT://./Remote Desktop Users,group\").Add(\"WinNT://./user1,user\")",
+    "explanation": "Bypasses 'selection_main' entirely. By using the Active Directory Service Interfaces (ADSI) via PowerShell, the user is added without invoking 'net.exe localgroup' or the 'Add-LocalGroupMember' cmdlet."
+  },
+  {
+    "output": "net localgroup \"Remote\"\" Desktop \"\"Users\" /add Student01",
+    "explanation": "Bypasses the 'selection_group' filter by using string concatenation/quoting tricks in the command line. The Sigma rule looks for the exact string 'Remote Desktop Users', but the Windows Command Prompt (cmd.exe) strips the internal quotes, allowing the command to execute while evading the simple pattern match."
+  },
+  {
+    "output": "Add-LocalGroupMember -Group \"S-1-5-32-555\" -Member \"Attacker\"",
+    "explanation": "The Sigma rule targets specific localized names (e.g., 'Remote Desktop Users'). By using the Well-Known SID for the Remote Desktop Users group (S-1-5-32-555) instead of the display name, the command fulfills the selection_main logic but fails the selection_group string check."
+  },
+  {
+    "output": "$g = 'Remote ' + 'Desktop ' + 'Users'; Add-LocalGroupMember -Group $g -Member 'Attacker'",
+    "explanation": "Bypasses the PowerShell detection by using variable concatenation. The Sigma rule relies on 'Add-LocalGroupMember' and '-Group' appearing in the same CommandLine field along with the group name; by moving the group name to a variable, the 'selection_group' string is not present in the process creation event's CommandLine."
+  },
+  {
+    "output": "powershell.exe -Command \"([ADSI]'WinNT://./Remote Desktop Users,group').Add('WinNT://./hacker,user')\"",
+    "explanation": "This command uses Active Directory Service Interfaces (ADSI) in PowerShell to add a user to the group. It completely avoids the 'net localgroup' and 'Add-LocalGroupMember' keywords, bypassing the 'selection_main' condition entirely."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-LocalGroupMember -SID 'S-1-5-32-555' -Member 'hacker'\"",
+    "explanation": "The rule looks for the '-Group' parameter and the literal group name. By targeting the '-SID' parameter and using the well-known SID for the Remote Desktop Users group (S-1-5-32-555), it bypasses both the 'selection_main' and 'selection_group' conditions."
+  },
+  {
+    "output": "powershell.exe -Command \"$g='Remote '+'Desktop Users'; Add-LocalGroupMember -Group $g -Member 'hacker'\"",
+    "explanation": "The rule relies on matching the contiguous string 'Remote Desktop Users'. By dynamically concatenating the string at runtime, the process creation command line log will not contain the exact target string, successfully evading the 'selection_group' condition."
+  },
+  {
+    "output": "cmd.exe /c net localgroup \"Remote Desktop Users\" hacker/add",
+    "explanation": "The Sigma rule explicitly checks for the string ' /add' (with a leading space). By appending the switch directly to the username without a space (which the Windows command line still parses correctly), the exact literal string match in 'selection_main' fails."
+  }
+]

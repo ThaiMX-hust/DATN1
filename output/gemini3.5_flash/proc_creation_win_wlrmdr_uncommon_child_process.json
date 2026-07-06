@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\wlrmdr.exe C:\\Users\\Public\\Update.exe && C:\\Users\\Public\\Update.exe -u \"powershell.exe\"",
+    "explanation": "The rule relies on the 'Image' ending with '\\wlrmdr.exe' or the 'OriginalFileName' being 'WLRMNDR.EXE'. By renaming the binary to 'Update.exe', the 'Image' check is bypassed. If the environment's telemetry does not capture or prioritize the 'OriginalFileName' field, the execution of the '-u' flag (which triggers ShellExecute) will not be flagged."
+  },
+  {
+    "output": "wlrmdr.exe -u\"calc.exe\"",
+    "explanation": "The 'selection_child_cli' logic uses a 'contains|all' check for the string '-u '. By removing the space between the flag and the argument, the specific string match for '-u ' (with a trailing space) fails, potentially bypassing simple string-matching logic while still being parsed correctly by the binary."
+  },
+  {
+    "output": "wlrmdr.exe -s 1 -f 1 -t 1 -m 1 -a 1",
+    "explanation": "The 'selection_child_cli' condition requires the presence of ALL flags listed in the 'windash' list (-s, -f, -t, -m, -a, AND -u). If an attacker uses a subset of these flags or finds another way to trigger the desired behavior without the '-u' flag specifically, the 'all of selection_child_*' condition returns false."
+  }
+]

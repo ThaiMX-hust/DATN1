@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell -NoProfile -Command \"Get-WmiObject -Class Win32_Service -Filter \\\"Name='spooler'\\\"\"",
+    "explanation": "Uses PowerShell to query service information without invoking wmic.exe, thus avoiding the Image/OriginalFileName match and the 'service' substring in the command line."
+  }
+]

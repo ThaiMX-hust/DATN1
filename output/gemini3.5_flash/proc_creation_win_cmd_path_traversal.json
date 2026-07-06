@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c \"..\\..\\Windows\\System32\\calc.exe\"",
+    "explanation": "The rule specifically looks for the forward-slash traversal pattern '/../../'. By using backslashes ('..\\..\\'), which are the native path delimiters for Windows, the command achieves the same path traversal result while failing to match the literal string defined in the selection_path_traversal filter."
+  },
+  {
+    "output": "cmd.exe /c \"./.././../Windows/System32/calc.exe\"",
+    "explanation": "The rule is strictly looking for the sequence '/../../'. By inserting a current-directory dot ('./') between the segments, the logical path remains the same but the specific character sequence is broken, bypassing the string-match detection."
+  }
+]

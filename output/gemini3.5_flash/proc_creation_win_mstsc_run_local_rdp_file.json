@@ -1,0 +1,10 @@
+[
+  {
+    "output": "mstsc.exe \"C:\\Users\\Public\\malicious.rdp\" /f",
+    "explanation": "The Sigma rule relies on the CommandLine ending exactly with '.rdp' or '.rdp\"'. By appending a valid command-line switch like '/f' (Full Screen) or '/public' at the end of the command, the string no longer ends with the targeted extensions, bypassing the 'selection_cli' condition."
+  },
+  {
+    "output": "mstsc.exe \"C:\\Temp\\hidden.rdp\" ",
+    "explanation": "Adding a trailing whitespace character at the very end of the command line string will cause the 'CommandLine|endswith' string-matching condition to evaluate to false, evading detection while still executing the file."
+  }
+]

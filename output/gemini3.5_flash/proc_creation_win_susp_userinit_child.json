@@ -1,0 +1,10 @@
+[
+  {
+    "output": "\"C:\\Windows\\System32\\cmd.exe\" /c \"REM \\netlogon\\ bypass && malicious_payload.exe\"",
+    "explanation": "The Sigma rule contains 'filter_main_netlogon' which excludes any execution where the CommandLine contains the string '\\netlogon\\'. By embedding '\\netlogon\\' into the command line arguments (e.g., as a REM comment or dummy argument), the child process launched by userinit.exe will be ignored by the rule."
+  },
+  {
+    "output": "C:\\Users\\Public\\Downloads\\explorer.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File payload.ps1",
+    "explanation": "The rule's 'filter_main_explorer' excludes executions where the Image path ends with '\\explorer.exe'. An attacker can bypass the detection by dropping a malicious binary (like PowerShell or a custom payload) to a writable directory, renaming it to 'explorer.exe', and having userinit.exe execute it."
+  }
+]

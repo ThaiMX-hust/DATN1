@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy \"Microsoft.NodejsTools.PressAnyKey.exe\" \"C:\\temp\\renamed_tool.exe\" && \"C:\\temp\\renamed_tool.exe\" cmd.exe",
+    "explanation": "This simulated command demonstrates a bypass because the Sigma rule relies entirely on the 'ParentImage' field ending with the exact string '\\Microsoft.NodejsTools.PressAnyKey.exe'. By simply renaming or copying the executable before running it, the ParentImage value changes, evading the detection condition. From a defensive perspective, to mitigate this common evasion technique, analysts should enhance the rule to check the 'OriginalFileName' field (if available via Sysmon Event ID 1), monitor for the specific Image Hashes of this binary, or detect the distinct command-line patterns used when it executes child processes."
+  }
+]

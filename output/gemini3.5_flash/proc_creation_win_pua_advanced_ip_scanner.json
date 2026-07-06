@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Users\\Public\\Downloads\\net_tool.exe /portable",
+    "explanation": "Bypasses the rule by relying on the attacker renaming the executable to avoid the '\\advanced_ip_scanner' Image path match (and assuming PE headers like OriginalFileName and Description have been stripped or modified). It bypasses the selection_cli condition by omitting the '/lng' argument, preventing the 'contains|all' logic from triggering."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\advanced_ip_scanner.exe",
+    "explanation": "If the SIEM only relies on process creation command-line logs and misses PE metadata, simply running the tool from a path that does not start with '\\advanced_ip_scanner' (e.g., placing it in C:\\Windows\\Temp\\) and running it without the '/portable' and '/lng' flags bypasses the defined logic. Note: The rule's Image match '\\advanced_ip_scanner' will catch this if the backslash matches the filename exactly, so renaming to 'adv_scanner.exe' is safer."
+  },
+  {
+    "output": "cmd.exe /c \"copy C:\\Tools\\advanced_ip_scanner.exe C:\\Temp\\audit.exe & C:\\Temp\\audit.exe\"",
+    "explanation": "Demonstrates bypassing the path-based Image detection by copying the executable to a new location with an innocuous name before execution. If the EDR/SIEM does not parse the OriginalFileName or Description PE headers correctly, this simple rename and execution without specific command-line flags evades detection."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\network_audit.exe",
+    "explanation": "Because the rule triggers if ANY condition is met ('1 of selection_*'), an attacker must evade all of them. This simulated command evades the rule assuming the attacker has renamed the binary to 'network_audit.exe' to bypass the 'Image' path condition, avoided using the '/portable' and '/lng' flags together, and modified the PE headers (OriginalFileName and Description) using a resource editing tool to remove static metadata signatures."
+  }
+]

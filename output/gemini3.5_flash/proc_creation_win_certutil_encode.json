@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil.exe /e^ncode input.txt output.txt",
+    "explanation": "Using CMD caret (^) escape characters obfuscates the command line. The Sigma rule looks exactly for the string '-encode' or '/encode'. The caret breaks the static string matching in the SIEM, but cmd.exe removes it before execution, successfully running the encode functionality."
+  },
+  {
+    "output": "certutil.exe -encodehex input.txt output.txt 1",
+    "explanation": "The rule explicitly checks for the '-encode' flag. However, certutil's '-encodehex' flag can also generate Base64 encoded files by specifying the formatting type '1' (CRYPT_STRING_BASE64) as the final argument, completely bypassing the specific '-encode' string match."
+  },
+  {
+    "output": "copy certutil.exe totallynotcertutil.exe & totallynotcertutil.exe -encode input.txt output.txt",
+    "explanation": "If the SIEM/EDR endpoint telemetry fails to capture or properly index the PE header 'OriginalFileName' field, simply renaming the binary bypasses the 'Image|endswith: \\certutil.exe' check while executing the exact same command."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\keymgr.dll C:\\Temp\\misc.dll & rundll32.exe C:\\Temp\\misc.dll,KRShowKeyMgr",
+    "explanation": "The Sigma rule explicitly checks for the string 'keymgr' within the command line. By copying the DLL to a different filename (misc.dll) and invoking it via rundll32, the required 'keymgr' string is removed from the execution arguments, thereby successfully bypassing the 'selection_cli' condition."
+  },
+  {
+    "output": "powershell -c \"$type = Add-Type -Name KeyMgr -PassThru -MemberDefinition '[DllImport(\\\"keymgr.dll\\\")] public static extern void KRShowKeyMgr(IntPtr h, IntPtr i, string c, int s);'; $type::KRShowKeyMgr(0,0,\\\"\\\",1)\"",
+    "explanation": "The rule's 'selection_img' condition is strictly bound to the rundll32.exe process. By utilizing PowerShell and P/Invoke to directly load keymgr.dll and call the KRShowKeyMgr export, the dialogue is spawned from powershell.exe. This completely evades the process name checks while achieving the exact same result."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /SC \"ONLOGON\" /RU \"SYSTEM\"",
+    "explanation": "The Sigma rule looks for specific strings with hardcoded leading and trailing spaces, such as ' ONLOGON ' and ' SYSTEM'. By wrapping the schedule type and user values in double quotes, the spaces are separated from the keywords (e.g., ' \"ONLOGON\" ' instead of ' ONLOGON '), successfully evading the literal string match in both selection_time and selection_privs."
+  },
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /RU SYSTEM /SC ONLOGON",
+    "explanation": "The rule expects a trailing space after the schedule type (e.g., ' ONLOGON '). By placing the schedule parameter (/SC ONLOGON) at the very end of the command line execution, there is no trailing space, causing the selection_time condition to fail."
+  },
+  {
+    "output": "schtasks /Create /TN \"TestTask\" /TR \"calc.exe\" /SC\\tONSTART\\t/RU\\tSYSTEM",
+    "explanation": "Command line parameters in Windows can be separated by tab characters instead of spaces. Since the Sigma rule strictly defines spaces in its detection logic (' ONSTART '), utilizing tabs will completely bypass the selection_time and selection_privs string matching."
+  }
+]

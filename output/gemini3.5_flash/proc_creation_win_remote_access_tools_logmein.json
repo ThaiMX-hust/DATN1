@@ -1,0 +1,6 @@
+[
+  {
+    "output": "Start-Process .\\modified_LMIGuardianSvc.exe",
+    "explanation": "The provided Sigma rule relies exclusively on matching specific PE (Portable Executable) metadata fields: Description, Product, and Company. An adversary can bypass this rule by using a resource editor or PE manipulation tool to strip, blank out, or alter the Version Information block of the LogMeIn binary prior to execution. Once the metadata is removed, the endpoint logging agent (e.g., Sysmon) will not extract the targeted strings, allowing the modified binary to execute without triggering this specific detection."
+  }
+]

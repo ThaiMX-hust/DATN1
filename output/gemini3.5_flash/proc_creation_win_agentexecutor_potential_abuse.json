@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Users\\Public\\AgentExecutor.exe && C:\\Users\\Public\\AgentExecutor.exe -Command \"Write-Output 'Bypassed'\"",
+    "explanation": "The rule relies on identifying the specific binary name 'AgentExecutor.exe' or its OriginalFileName metadata via process creation events. By copying a legitimate 'powershell.exe' (or any other shell) and renaming it to 'AgentExecutor.exe', the attacker creates a process that matches the 'Image' criteria but does not use the specific CLI flags like '-powershell' or '-remediationScript' that the rule expects for the Intune-specific LOLBIN exploit, thus potentially evading the combined logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -ExecutionPolicy Bypass -File C:\\Scripts\\malicious.ps1",
+    "explanation": "This bypass avoids using the AgentExecutor.exe proxy entirely. Since the detection is specifically scoped to the AgentExecutor LOLBIN abuse, performing the same action (executing PowerShell with a bypass policy) using the standard PowerShell binary bypasses this specific rule, though it may be caught by other general PowerShell logging rules."
+  },
+  {
+    "output": "AgentExecutor.exe -powershell C:\\path\\to\\script.ps1 C:\\out.txt C:\\err.txt C:\\timeout.txt 60000 C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\ 0 0",
+    "explanation": "This command is designed to be executed by a parent process other than 'Microsoft.Management.Services.IntuneWindowsAgent.exe' (e.g., cmd.exe) while attempting to obfuscate the command line. While this specific string contains '-powershell' and would normally trigger the rule, an attacker could attempt to use environment variable expansion or command-line shortening techniques if the SIEM normalization layer is weak, though the primary bypass for this specific Sigma logic is simply renaming the executable or using a different parent to blend into other excluded noise."
+  }
+]

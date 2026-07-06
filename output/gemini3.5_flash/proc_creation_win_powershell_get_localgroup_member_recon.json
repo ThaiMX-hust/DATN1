@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand QUdULUxvY2FsR3JvdXBtZW50IC1Hcm91cCAiRG9tYWluIEFkbWlucyI=",
+    "explanation": "The rule checks for the literal string 'Get-LocalGroupMember ' in the command line. By using the -EncodedCommand parameter, the actual command is base64\u2011encoded, so the plain text does not contain the keyword and the rule will not match."
+  }
+]

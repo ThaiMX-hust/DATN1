@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce /v MyApp /t REG_SZ /d \"C:\\Windows\\System32\\notepad.exe\"",
+    "explanation": "Uses reg.exe directly to create a RunOnce autorun entry, avoiding wmic.exe usage and thus not matching the selection_execution_img condition of the sigma rule."
+  },
+  {
+    "output": "wmic process call create \"powershell.exe -c Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name 'Updater' -Value 'C:\\ProgramData\\updater.exe'\"",
+    "explanation": "Bypasses the 'selection_execution_cmd' condition. The rule explicitly expects the use of 'reg' with the ' add ' argument to modify the registry. By invoking PowerShell's Set-ItemProperty cmdlet via WMI instead of reg.exe, the registry is still modified for persistence without triggering the required command line string matches."
+  },
+  {
+    "output": "wmic process call create \"reg.exe add HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d \\\"C:\\Windows\\Tasks\\updater.exe\\\" /f\"",
+    "explanation": "Bypasses the 'selection_suspicious_paths' conditions. The rule relies on a hardcoded list of suspicious directories (e.g., Temp, ProgramData, AppData, Perflogs). By placing the payload in an unlisted directory like C:\\Windows\\Tasks\\, the directory matching condition fails, resulting in a bypass even though reg.exe is used."
+  }
+]

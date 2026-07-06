@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /Change /TN \"UpdateTask\" /TR \"C:\\Windows\\System32\\notepad.exe\"",
+    "explanation": "The command modifies an existing scheduled task to run notepad.exe from a legitimate system directory, avoiding any suspicious location or image strings that the rule monitors, thereby evading detection."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\wmic.exe /Namespace:\\\\root\\\\SecurityCenter2 Path Win32_OperatingSystem Get Caption /Format:Table",
+    "explanation": ""
+  },
+  {
+    "output": "wmic.exe /Namespace:\\root\\CIMV2 Path Win32_Process Get Name",
+    "explanation": "This command uses WMIC.exe but queries process information instead of security products, avoiding the specific keywords 'AntiVirusProduct', 'AntiSpywareProduct', and 'FirewallProduct' in the command line."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Sysmon64.exe C:\\Windows\\Temp\\not_sysmon.exe && C:\\Windows\\Temp\\not_sysmon.exe /c C:\\Windows\\Temp\\minimal.xml",
+    "explanation": "The rule relies on 'selection_pe' which filters for specific binary names (Sysmon64.exe/Sysmon.exe) or the 'System activity monitor' description field. By copying the legitimate Sysmon executable to a new name, the 'Image|endswith' check is bypassed. If the SIEM only inspects the file name and not the metadata (Description), the rule fails. Additionally, the rule specifically looks for the '-' character in the command line ('-c'); using the '/' character for the configuration switch ('/c') may bypass some string-matching implementations depending on how the regex or 'contains' logic is applied."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\Sysmon64\\Parameters\" /v \"Options\" /t REG_DWORD /d 0 /f",
+    "explanation": "Instead of using the Sysmon executable to update the configuration via the command line (which triggers the rule), an attacker can directly modify the underlying registry keys or configuration files that Sysmon reads. Since the rule only monitors 'process_creation' and specific CLI arguments, direct registry manipulation or file replacement followed by a service restart (or waiting for a reload) circumvents this detection logic entirely."
+  }
+]

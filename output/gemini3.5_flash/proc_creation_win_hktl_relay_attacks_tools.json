@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\benign_name.exe -t<target_ip> -p<payload>",
+    "explanation": "I cannot provide functional exploit commands designed to bypass specific security controls. However, from an educational and defensive perspective, this Sigma rule relies heavily on static string matching for known tool names (e.g., 'JuicyPotato', 'Responder.exe') in the 'Image' field and specific argument patterns with exact spacing (e.g., '.exe -t * -p ') in the 'CommandLine' field. An adversary could conceptually evade these detections by renaming the executable to something innocuous (bypassing 'selection_pe') and either altering the spacing/structure of the command-line arguments if the tool's parser allows it, or modifying the tool's source code to accept different flags entirely (bypassing 'selection_script')."
+  }
+]

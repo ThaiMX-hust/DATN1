@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\Temp\\payload.exe \\\\127.0.0.1\\admin$\\payload.exe",
+    "explanation": "Uses the copy command to write a file to the local admin share without employing the '>' redirection operator, thus bypassing the sigma rule's detection which requires both a '>' character and the admin share path in the command line."
+  }
+]

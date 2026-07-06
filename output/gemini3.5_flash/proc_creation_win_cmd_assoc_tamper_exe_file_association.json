@@ -1,0 +1,14 @@
+[
+  {
+    "output": "assoc .txt=exefile",
+    "explanation": "The rule contains a specific filter designed to ignore the string '.exe=exefile'. By changing the file association of a different extension (like .txt) to 'exefile', the logic 'all of selection_*' is met (contains 'assoc ' and 'exefile') but the exclusion filter is not triggered, thus achieving the bypass while still hijacking a file handler."
+  },
+  {
+    "output": "cmd.exe /c \"assoc.exe .jpg=exefile\"",
+    "explanation": "The rule looks for the literal string 'assoc ' (with a space). Depending on the parser, using 'assoc.exe' or adding quotes around the command can sometimes evade simple string-based 'CommandLine|contains' detections while performing the same functional change."
+  },
+  {
+    "output": "reg add \"HKEY_CLASSES_ROOT\\.txt\" /t REG_SZ /d \"exefile\" /f",
+    "explanation": "The Sigma rule specifically targets the 'assoc' command-line utility by filtering for the process 'cmd.exe' and the string 'assoc'. A common bypass is to modify the registry directly using 'reg.exe' or PowerShell, which achieves the exact same persistence goal without triggering the 'assoc' keyword detection."
+  }
+]

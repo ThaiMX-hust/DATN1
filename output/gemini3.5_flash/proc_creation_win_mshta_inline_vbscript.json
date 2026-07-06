@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"$s = 'Wscript.Shell'; $o = New-Object -ComObject $s; $m = 'Run'; $o.$m.Invoke('calc.exe')\"",
+    "explanation": "This bypasses the rule by avoiding the literal string 'Wscript.Shell' and '.Run' appearing together in the command line. By splitting the strings into variables and using the Invoke method or string concatenation, the static pattern matcher fails to find all three required keywords simultaneously."
+  },
+  {
+    "output": "cmd.exe /c \"set a=Wscript.&& set b=Shell&& set c=Run&& call echo %a%%b%.%c%\"",
+    "explanation": "Uses environment variable fragmentation. The Sigma rule looks for the specific substrings 'Wscript.', '.Shell', and '.Run' in the command line. By breaking these into separate SET commands, the process creation log for the initial CMD execution does not contain the full strings in the expected format."
+  },
+  {
+    "output": "wscript.exe C:\\path\\to\\malicious_script.vbs",
+    "explanation": "The rule targets command-line arguments where the object creation is visible (common in one-liners or wrapped execution). By placing the 'Wscript.Shell' and '.Run' logic inside an external .vbs or .js file and executing it via wscript.exe, the command line itself only contains the script path, successfully evading the CommandLine string check."
+  }
+]

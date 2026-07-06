@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command \"[wmiclass]'Win32_Process'.Create('calc.exe')\"",
+    "explanation": "Uses PowerShell to invoke the WMI Win32_Process.Create method to launch calc.exe without executing wmic.exe, thereby bypassing the rule that detects wmic.exe image and command line containing 'process call create'."
+  }
+]

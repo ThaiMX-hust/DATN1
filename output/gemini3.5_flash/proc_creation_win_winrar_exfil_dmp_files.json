@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c ren C:\\temp\\lsass.dmp lsass.tmp && winrar.exe a C:\\temp\\archive.rar C:\\temp\\lsass.tmp",
+    "explanation": "By renaming the dump file to a non-monitored extension (.tmp) prior to compression, the command line executed by WinRAR no longer contains the explicit strings '.dmp', '.dump', or '.hdmp', successfully bypassing the 'selection_extension' condition."
+  },
+  {
+    "output": "rar.exe a archive.rar C:\\temp\\lsass.d*",
+    "explanation": "Using a wildcard in the file extension (.d*) prevents the command line from containing the exact monitored string (.dmp) while still instructing WinRAR to compress the target dump file."
+  },
+  {
+    "output": "echo C:\\temp\\lsass.dmp > C:\\temp\\list.txt && rar.exe a archive.rar @C:\\temp\\list.txt",
+    "explanation": "WinRAR supports reading input target files from a list file using the '@' prefix. Passing the target file paths via a text file keeps the '.dmp' string entirely out of the process command line arguments, evading the detection logic."
+  }
+]

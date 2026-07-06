@@ -1,0 +1,26 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\mavinject.exe 1234 /INJECTRUNNING C:\\path\\to\\malicious.dll",
+    "explanation": "The rule contains a filter that excludes the detection if the ParentImage is 'C:\\Windows\\System32\\AppVClient.exe'. By performing parent process ID (PPID) spoofing to make AppVClient.exe appear as the parent of mavinject.exe, the activity will be ignored by the SIEM logic."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\mavinject.exe C:\\Users\\Public\\not_mavinject.exe && C:\\Users\\Public\\not_mavinject.exe 1234 /INJECTRUNNING C:\\temp\\evil.dll",
+    "explanation": "If the SIEM implementation relies on 'Image' (the filename) rather than just the 'CommandLine', renaming the binary can bypass detections looking for the specific executable name 'mavinject.exe' in conjunction with the flag."
+  },
+  {
+    "output": "mavinject.exe 1234 /INJECTRUNNING\\tC:\\temp\\evil.dll",
+    "explanation": "The selection criteria looks for ' /INJECTRUNNING ' with literal spaces. Depending on the regex engine or string matching used by the SIEM, using a horizontal tab character (\\t) instead of a space between the flag and the path may fail the string comparison while still being parsed correctly by the Windows command line."
+  },
+  {
+    "output": "mavinject.exe 4321/INJECTRUNNING c:\\temp\\payload.dll",
+    "explanation": "Bypass via missing leading space. The Sigma rule explicitly looks for the string ' /INJECTRUNNING ' with a space before and after the flag. If the Windows command-line parser for mavinject accepts the arguments without a space between the PID and the flag, this strict string match will fail."
+  },
+  {
+    "output": "mavinject.exe 4321 -INJECTRUNNING c:\\temp\\payload.dll",
+    "explanation": "Bypass via alternate switch character. Many Windows utilities accept both the forward slash '/' and the hyphen '-' for command-line parameters. Using '-INJECTRUNNING' circumvents the exact string match for ' /INJECTRUNNING '."
+  },
+  {
+    "output": "Start-Process -FilePath \"C:\\Windows\\System32\\mavinject.exe\" -ArgumentList \"4321 /INJECTRUNNING c:\\temp\\payload.dll\" -ParentProcess (Get-Process -Name AppVClient -ErrorAction SilentlyContinue)",
+    "explanation": "Bypass via Parent Process ID (PPID) spoofing. The rule contains a filter that explicitly ignores executions where the ParentImage is 'C:\\Windows\\System32\\AppVClient.exe'. By utilizing PPID spoofing to make AppVClient.exe the parent of the malicious mavinject process, the detection condition 'not filter' evaluates to false, effectively blinding the rule."
+  }
+]

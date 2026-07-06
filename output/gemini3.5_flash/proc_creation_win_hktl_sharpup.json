@@ -1,0 +1,42 @@
+[
+  {
+    "output": "copy SharpUp.exe svchost.exe && .\\svchost.exe audit",
+    "explanation": "The rule checks for the specific filename '\\SharpUp.exe'. By renaming the executable to a common system process name like 'svchost.exe', the 'Image|endswith' condition is bypassed."
+  },
+  {
+    "output": "SharpUp_renamed.exe Get-UnquotedService",
+    "explanation": "The rule triggers on specific command-line arguments. If an attacker uses a modified version of the tool where the function names or command-line flags have been renamed (e.g., changing 'UnquotedServicePath' to 'Get-UnquotedService'), the 'CommandLine|contains' check will fail."
+  },
+  {
+    "output": "C:\\Temp\\NotSharp.exe",
+    "explanation": "If the binary metadata is stripped or modified using a resource editor to remove the 'Description: SharpUp' field, and the file is renamed, the rule will not match any of the selection criteria."
+  },
+  {
+    "output": "copy SharpUp.exe svchost_update.exe && .\\svchost_update.exe audit",
+    "explanation": "The rule checks for the specific filename '\\SharpUp.exe'. By renaming the executable to anything else and running it without the specific flagged command-line arguments (like 'audit' or simply no arguments), the first and third selection criteria are bypassed."
+  },
+  {
+    "output": "powershell -Command \"$data = [System.IO.File]::ReadAllBytes('SharpUp.exe'); [System.Reflection.Assembly]::Load($data).EntryPoint.Invoke($null, @(,[string[]]@()))\"",
+    "explanation": "This bypasses the rule by loading the executable reflectively in memory. There is no 'process_creation' event for SharpUp.exe specifically, no 'SharpUp' description in the process metadata of the host (powershell.exe), and no flagged strings in the command line."
+  },
+  {
+    "output": ".\\NotSharpUp.exe Hijackable Paths",
+    "explanation": "The rule uses 'contains' for command-line arguments but includes the specific PascalCase strings. Adding a space (e.g., 'Hijackable Paths' instead of 'HijackablePaths') or slightly altering the string if the tool's parser allows it can evade simple string matching, provided the Image and Description fields are also changed."
+  },
+  {
+    "output": "copy SharpUp.exe svchost_update.exe && svchost_update.exe audit",
+    "explanation": "The rule triggers on an executable named 'SharpUp.exe'. By renaming the binary to something innocuous, the 'Image|endswith' condition is bypassed."
+  },
+  {
+    "output": "svchost_update.exe -c Hijackable\"\"Paths",
+    "explanation": "The rule checks for specific command-line strings like 'HijackablePaths'. By using command-line obfuscation (empty double quotes), the string is broken up for the detection engine but parsed as a single argument by the application."
+  },
+  {
+    "output": "svchost_update.exe --all",
+    "explanation": "SharpUp allows running all checks via flags like '--all' or '-h'. If the attacker avoids the specific long-form keywords defined in the rule (e.g., 'UnquotedServicePath'), the 'CommandLine|contains' filter will not match."
+  },
+  {
+    "output": "[Reflection.Assembly]::Load([System.IO.File]::ReadAllBytes('C:\\temp\\SharpUp.bin')).EntryPoint.Invoke($null, @(,[string[]]@('UnquotedServicePath')))",
+    "explanation": "Executing the tool in-memory via PowerShell reflection avoids 'process_creation' logs entirely and does not result in an Image ending in .exe or a standard Command Line that the EDR/SIEM expects for this specific rule."
+  }
+]

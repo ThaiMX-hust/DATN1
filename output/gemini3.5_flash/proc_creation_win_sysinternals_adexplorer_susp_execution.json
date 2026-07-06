@@ -1,0 +1,34 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\advapi32.dll SomeFunction",
+    "explanation": "This command uses rundll32.exe with a non-ADExplorer executable and avoids the 'snapshot' flag, bypassing the rule's detection of ADExplorer with the '-snapshot' parameter."
+  },
+  {
+    "output": "C:\\Tools\\ADExplorer64.exe /snapshot \"C:\\Temp\\ad_dump.dat\"",
+    "explanation": "Uses /snapshot (forward slash) instead of -snapshot, and saves to \\Temp\\ which is not in the suspicious paths list (rule checks for \\Windows\\Temp\\ specifically)."
+  },
+  {
+    "output": "renamed_adexplorer.exe -snapshot \"C:\\Logs\\snapshot.dat\"",
+    "explanation": "Renames the executable to bypass the Image|endswith detection for ADE xp.exe, ADExplorer.exe, etc. Saves to \\Logs\\ which is not in the suspicious paths list."
+  },
+  {
+    "output": "cmd /c \"copy C:\\Tools\\ADExplorer64.exe C:\\Windows\\System32\\sysinfo.exe && C:\\Windows\\System32\\sysinfo.exe -snapshot C:\\PerfLogs\\ad.db\"",
+    "explanation": "Copies the executable to System32 with a different name (sysinfo.exe), bypassing the executable name detection. Saves to \\PerfLogs\\ which is not in the suspicious paths list."
+  },
+  {
+    "output": "C:\\Program Files\\Sysinternals\\adexplorer.exe -snapshot \"C:\\Windows\\Debug\\ad_snapshot.bin\"",
+    "explanation": "Uses lowercase 'adexplorer.exe' (may bypass case-sensitive matching) and saves to \\Windows\\Debug\\ which is not in the suspicious paths list."
+  },
+  {
+    "output": "powershell -Command \"& 'C:\\Tools\\ADExplorer64a.exe' -snapshot 'C:\\$env:TEMP\\output.dat'\"",
+    "explanation": "Uses environment variable $env:TEMP which resolves to a path not explicitly listed in the rule's suspicious paths (rule checks for literal \\AppData\\)."
+  },
+  {
+    "output": "ADExplorer64.exe -snapshot \"\" C:\\PerfLogs\\ad_snapshot.dat",
+    "explanation": "The Sigma rule requires all three selection blocks to match ('condition: all of selection_*'). By saving the snapshot to a directory that is not explicitly listed in 'selection_paths' (such as C:\\PerfLogs\\ instead of \\Windows\\Temp\\ or \\Users\\Public\\), the rule is successfully bypassed."
+  },
+  {
+    "output": "ADExplorer.exe -snapshot \"\" C:\\ProgramData\\snapshot.dat",
+    "explanation": "Similarly, C:\\ProgramData\\ is a common world-writable directory that attackers use, but it is missing from the rule's 'selection_paths' string list. Using this path fulfills the attacker's goal while evading this specific detection logic."
+  }
+]

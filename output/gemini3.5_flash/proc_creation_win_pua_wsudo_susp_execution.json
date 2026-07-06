@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Temp\\sysupdate.exe -u \"System\" cmd.exe",
+    "explanation": "To bypass this rule, an attacker must evade both the file metadata checks and the exact command-line string matches. Since the rule triggers if ANY condition is met ('1 of selection_*'), all checks must be bypassed simultaneously. First, the attacker can rename 'wsudo.exe' to something innocuous (like 'sysupdate.exe') and use a tool like Resource Hacker to strip or modify the PE metadata ('OriginalFileName' and 'Description'). Second, they can bypass the 'selection_cli' condition by altering the command-line formatting without breaking the tool's parser, such as wrapping the target user in quotes ('-u \"System\"') or adding extra spaces ('-u  System'). Because the Sigma rule relies on rigid substring matching, these slight modifications will successfully evade detection."
+  }
+]

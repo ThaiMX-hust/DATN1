@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c del %TEMP%\\*.tmp",
+    "explanation": "This command uses the 'del' command to delete files in the temporary directory, which is a direct match for the Sigma rule's detection criteria. The command is executed by cmd.exe, which is listed in the rule's selection_img and selection_del conditions."
+  }
+]

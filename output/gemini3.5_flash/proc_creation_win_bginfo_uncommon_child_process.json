@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Tools\\Bginfo.exe C:\\Windows\\Temp\\bg_update.exe && C:\\Windows\\Temp\\bg_update.exe C:\\Windows\\Temp\\config.bgi /popup /nolicprompt",
+    "explanation": "The Sigma rule strictly checks if the ParentImage ends with '\\bginfo.exe' or '\\bginfo64.exe'. By renaming the Bginfo binary to a different name (e.g., 'bg_update.exe') prior to execution, the resulting process creation telemetry will record the new filename. This completely bypasses the rule's selection criteria since it lacks checks for 'OriginalFileName' or file hashes."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\calc.exe C:\\Users\\Public\\bginfo.exe && C:\\Users\\Public\\bginfo.exe",
+    "explanation": "The Sigma rule relies on the ParentImage field ending in '\\bginfo.exe'. An attacker can bypass this by renaming a completely different legitimate binary (like calc.exe) to 'bginfo.exe'. When that renamed binary spawns a child process, it may trigger a false positive or be ignored during manual triage, but more importantly, if the rule is strictly looking for the behavior of the *original* Sysinternals BgInfo (which executes VBScript), this rename bypasses the logic of detecting proxy execution while technically meeting the string match, or it can be used to flood the SIEM with noise."
+  },
+  {
+    "output": "C:\\Sysinternals\\Bginfo64.exe /popup /i:config.bgi /timer:0",
+    "explanation": "This bypass targets the 'Process Creation' log source limitation. Instead of spawning a child process (which is what the rule triggers on), an attacker can use BgInfo to display information or perform actions within its own process memory space if the configuration file (.bgi) is crafted to perform actions that do not require spawning an external shell or system process like cmd.exe or powershell.exe."
+  },
+  {
+    "output": "reg add \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\bginfo.exe\" /v Debugger /t REG_SZ /d \"C:\\path\\to\\malware.exe\"",
+    "explanation": "By using Image File Execution Options (IFEO), an attacker can ensure that when bginfo.exe is called, a different executable runs instead. Depending on how the EDR/SIEM records the process tree, the 'ParentImage' of the resulting malware might be attributed to the shell that called bginfo, rather than bginfo itself being the parent of a spawned process, effectively side-stepping the specific parent-child relationship defined in the rule."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\Microsoft.NodejsTools.PressAnyKey.exe calc.exe",
+    "explanation": "This Sigma rule specifically looks for instances where the binary has been renamed. It triggers when the OriginalFileName matches 'Microsoft.NodejsTools.PressAnyKey.exe' but the actual executable name (Image) does not. An attacker can easily bypass this detection by copying the LOLBin to a writable directory (like C:\\Windows\\Temp\\) without changing its filename, and then executing their payload. Because the filename still ends with '\\Microsoft.NodejsTools.PressAnyKey.exe', it matches 'filter_main_legit_name' and is excluded from the alert, effectively bypassing this specific renamed-execution detection logic."
+  }
+]

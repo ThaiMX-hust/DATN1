@@ -1,0 +1,30 @@
+[
+  {
+    "output": "powershell.exe -Command \"Write-Host ([char]65 + [char]66)\"",
+    "explanation": "Bypasses the rule by using decimal notation (e.g., [char]65) instead of hexadecimal notation ([char]0x41). The Sigma rule strictly looks for the '0x' string."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([char] 0x41)\"",
+    "explanation": "Bypasses the rule by inserting a whitespace character between '[char]' and '0x'. The rule relies on a literal string match of '[char]0x' without accounting for spacing."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([Convert]::ToChar(0x41))\"",
+    "explanation": "Bypasses the rule by utilizing the .NET [Convert]::ToChar() method to perform the character casting, thereby completely avoiding the specific syntax targeted by the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([System.Char]0x41)\"",
+    "explanation": "Bypasses the rule by utilizing the fully qualified .NET class name [System.Char] instead of the [char] type accelerator, evading the exact '[char]0x' substring match."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([char] 0x41)\"",
+    "explanation": "Bypasses the rule by inserting a single whitespace character between the type accelerator and the hex value, which breaks the contiguous '[char]0x' pattern the rule expects."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([char]65)\"",
+    "explanation": "Bypasses the rule by supplying the character code in decimal format (65) rather than hexadecimal (0x41), entirely avoiding the '0x' string component."
+  },
+  {
+    "output": "powershell.exe -Command \"Write-Host ([Convert]::ToChar(0x41))\"",
+    "explanation": "Bypasses the rule by using the .NET Convert class method to cast the hexadecimal value to a character, avoiding the '[char]' cast operator syntax altogether."
+  }
+]

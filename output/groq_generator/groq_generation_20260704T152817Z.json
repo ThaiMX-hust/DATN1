@@ -1,0 +1,18 @@
+{
+  "created_at": "20260704T152817Z",
+  "model": "qwen/qwen3-32b",
+  "api_url": "https://api.groq.com/openai/v1/chat/completions",
+  "prompt_template": "C:\\HUST\\DATN\\DATN1\\src\\generator\\groq_prompt_template.txt",
+  "rules_dir": "rules",
+  "true_positive_dir": "data\\true_positive_test",
+  "rule_output_dir": "output\\groq_generator\\rules",
+  "max_outputs": 3,
+  "generated_case_count": 0,
+  "record_count": 1,
+  "generated_cases": [],
+  "records": [
+    {
+      "response_text": "[\n  {\n    \"output\": \"\\\"C:\\\\Tools\\\\bcp.exe\\\" TestDB.dbo.TestTable out \\\"C:\\\\Temp\\\\test.txt\\\" -c -T\",\n    \"explanation\": \"Inserted quotes around the executable and output file path to test if the Sigma rule is sensitive to quoted arguments.\"\n  },\n  {\n    \"output\": \"C:\\\\Tools\\\\bcp.exe TestDB.dbo.TestTable out C:\\\\Temp\\\\test.txt -c -T\",\n    \"explanation\": \"Used standard path formatting without any modification to test baseline detection.\"\n  },\n  {\n    \"output\": \"C:\\\\Tools\\\\bcp.exe TestDB.dbo.TestTable out C:\\\\Temp\\\\test.txt -c -T\",\n    \"explanation\": \"Reordered arguments is not applicable for bcp.exe in this context.\"\n  },\n  {\n    \"output\": \"C:\\\\Tools\\\\bcp.exe TestDB.dbo.TestTable out C:\\\\Temp\\\\test.txt -c -T\",\n    \"explanation\": \"Substitution of 'out' with equivalent syntax is not applicable here.\"\n  },\n  {\n    \"output\": \"C:\\\\Tools\\\\bcp.exe TestDB.dbo.TestTable out C:\\\\Temp\\\\test.txt -c -T\",\n    \"explanation\": \"Omission of optional elements does not affect detection in this case.\"\n  },\n  {\n    \"output\": \"C:\\\\Tools\\\\bcp.exe TestDB.dbo.TestTable out C:\\\\Temp\\\\test.txt -c -T\",\n    \"explanation\": \"Recoding or encoding of the command line does not bypass detection in this case.\"\n  }\n]"
+    }
+  ]
+}

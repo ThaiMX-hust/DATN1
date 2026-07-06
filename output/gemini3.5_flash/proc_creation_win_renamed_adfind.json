@@ -1,0 +1,26 @@
+[
+  {
+    "output": "I cannot provide specific executable commands designed to bypass security controls or evade SIEM rules.",
+    "explanation": "From a defensive perspective, this Sigma rule relies on known file metadata (OriginalFileName, IMPHASH) and specific command-line strings. An adversary might attempt to evade this by altering the executable's metadata to change the OriginalFileName, modifying its compilation structure to alter the IMPHASH, or utilizing entirely different Active Directory querying tools (such as native PowerShell cmdlets or custom .NET assemblies) instead of AdFind. To strengthen this detection, defenders should also monitor for anomalous LDAP queries at the network level and baseline normal Active Directory enumeration activities within the environment."
+  },
+  {
+    "output": "\"C:\\\\Tools\\\\AdFind2.exe\" -domainlist -subnets -f",
+    "explanation": "The command uses a renamed executable (AdFind2.exe) so the Image filter (endswith '\\AdFind.exe') is bypassed, while the CommandLine contains the required keywords to trigger selection_1."
+  },
+  {
+    "output": "C:\\Tools\\AdFind2.exe -d example.com -s -f",
+    "explanation": "Renames the executable to AdFind2.exe to bypass the filter that only blocks Image ending with \\AdFind.exe while still including command line arguments that match the selection criteria."
+  },
+  {
+    "output": "C:\\Temp\\svchost.exe d^o^m^a^i^n^l^i^s^t",
+    "explanation": "Assuming the binary has been modified to alter its ImpHash (evading selection_2) and the 'OriginalFileName' PE header has been stripped or modified (evading selection_3), an attacker only needs to bypass the static command-line strings in selection_1. Using cmd.exe caret escaping (e.g., inserting '^' characters) breaks the literal string match for 'domainlist', evading the detection logic while still passing the correct argument to the executable."
+  },
+  {
+    "output": "powershell -c \"& 'C:\\Temp\\update.exe' ('dom' + 'ainlist')\"",
+    "explanation": "Similar to the cmd.exe caret bypass, this demonstrates bypassing selection_1 using PowerShell string concatenation. If the binary's hash and PE metadata are altered, splitting the known malicious arguments prevents the SIEM from observing the exact strings defined in the Sigma rule's 'contains' list."
+  },
+  {
+    "output": "C:\\Temp\\AdFind.exe domainlist",
+    "explanation": "This execution bypasses this specific Sigma rule due to the 'filter' condition. The rule's condition is '1 of selection* and not filter', where the filter explicitly excludes any image ending in '\\AdFind.exe'. Because this rule is narrowly scoped to detect only *renamed* instances of the tool, executing it with its original name prevents this specific alert from firing. This highlights the architectural need to pair this rule with another that detects standard AdFind usage."
+  }
+]

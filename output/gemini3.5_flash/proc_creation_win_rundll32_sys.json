@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe \"C:\\temp\\dummy.sys\",EntryPoint",
+    "explanation": "By enclosing the file path in double quotes, the command line string becomes '.sys\",'. This simple obfuscation breaks the exact substring matching for '.sys,' and '.sys ' defined in the Sigma rule."
+  },
+  {
+    "output": "rundll32.exe C:\\temp\\dummy.sys.,EntryPoint",
+    "explanation": "Appending a trailing dot to the file extension takes advantage of Windows file path parsing, which generally ignores trailing periods. The command line will contain '.sys.,' which fails to match the rule's strict selectors."
+  },
+  {
+    "output": "cmd.exe /c rename dummy.sys dummy.dll & rundll32.exe dummy.dll,EntryPoint",
+    "explanation": "Rundll32 does not require the target file to have a specific extension to execute its exports. Renaming the .sys file to .dll, .txt, or .tmp completely removes the '.sys' string from the command line, bypassing the rule entirely."
+  }
+]

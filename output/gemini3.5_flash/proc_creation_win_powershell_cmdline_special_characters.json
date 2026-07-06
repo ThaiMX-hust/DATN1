@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\script.ps1",
+    "explanation": "The rule targets command-line arguments (CommandLine). By placing the malicious logic inside a .ps1 file and executing the file directly, the special characters never appear in the process creation command line, effectively bypassing the regex selection."
+  },
+  {
+    "output": "powershell.exe -Command \"& ( '{0}{1}{2}' -f 'I','EX','' ) ('Wri'+'te-H'+'ost ''Bypass''')\"",
+    "explanation": "This command uses the format operator and string concatenation for obfuscation. It contains 2 '{' characters and 2 '+' characters, which is well below the rule's strict trigger limits of 10 '{' characters and 14 '+' characters."
+  }
+]

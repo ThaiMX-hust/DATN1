@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\VBoxDrvInst.exe C:\\Users\\Public\\not_vbox.exe && C:\\Users\\Public\\not_vbox.exe driver executeinf 0 0 C:\\Path\\To\\Payload.inf",
+    "explanation": "The Sigma rule relies on the 'Image' field ending with '\\VBoxDrvInst.exe'. By renaming the binary to anything else (e.g., 'not_vbox.exe') and executing it from a different directory, the detection logic is bypassed because the filename no longer matches the specific string 'VBoxDrvInst.exe'."
+  },
+  {
+    "output": "VBoxDrvInst.exe \"driver\" \"execute\"\"inf\" 0 0 C:\\Path\\To\\Payload.inf",
+    "explanation": "The rule looks for the literal string 'executeinf' within the CommandLine. On Windows, command-line parsers often ignore empty quotes. By inserting double quotes into the middle of the parameter (e.g., 'execute\"\"inf'), the command still functions as intended by the binary, but the SIEM's string matching for 'executeinf' fails."
+  },
+  {
+    "output": "VBoxDrvInst.exe dr^i^v^er exe^cu^te^inf 0 0 C:\\Path\\To\\Payload.inf",
+    "explanation": "Using the caret (^) character in the Windows Command Prompt (cmd.exe) acts as an escape character. While the OS strips these before passing the arguments to the application, many SIEM logs capture the command line with the carets included, preventing the 'contains' match for the plain strings 'driver' and 'executeinf'."
+  }
+]

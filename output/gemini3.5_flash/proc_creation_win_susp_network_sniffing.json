@@ -1,0 +1,10 @@
+[
+  {
+    "output": "renamed_tshark.exe -i 1",
+    "explanation": "This rule relies heavily on static file names ('\\tshark.exe' and '\\windump.exe'). A trivial conceptual bypass involves renaming the executable file before running it. To improve detection, defenders should look for the 'OriginalFileName' field in the binary metadata, utilize known file hashes, or monitor for anomalous processes entering promiscuous mode."
+  },
+  {
+    "output": "pktmon start --capture --comp nics --trace",
+    "explanation": "This rule focuses strictly on specific third-party tools. It can be bypassed by using 'Living off the Land' (LotL) techniques, such as native Windows utilities like 'pktmon.exe' or 'netsh trace'. These built-in tools can perform network sniffing without triggering the specific Image paths defined in this Sigma logic."
+  }
+]

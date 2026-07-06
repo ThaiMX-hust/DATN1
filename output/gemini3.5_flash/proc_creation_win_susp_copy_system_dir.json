@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\cmd.exe C:\\Temp\\cmd.exe",
+    "explanation": "The rule only checks if the target path contains \\System32, \\SysWOW64, or \\WinSxS. By copying the file to a different directory (C:\\Temp) the target does not match the rule\u2019s target patterns, so the event will not be detected."
+  }
+]

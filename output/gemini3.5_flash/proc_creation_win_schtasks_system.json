@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN \"SystemTask1\" /TR \"cmd.exe\" /SC ONSTART /RU \"S-1-5-18\"",
+    "explanation": "The Sigma rule searches for the specific strings 'NT AUT' or ' SYSTEM ' within the command line. The Well-Known SID for the Local System account is 'S-1-5-18'. By supplying the SID instead of the account name, the task is created with SYSTEM privileges but bypasses the 'selection_user' string match."
+  },
+  {
+    "output": "powershell.exe -Command \"Register-ScheduledTask -TaskName 'SystemTask2' -Action (New-ScheduledTaskAction -Execute 'cmd.exe') -User 'NT AUTHORITY\\SYSTEM'\"",
+    "explanation": "The rule is tightly coupled to the 'schtasks.exe' binary via the 'selection_root' condition ('Image|endswith: \\schtasks.exe'). By using native PowerShell cmdlets to interact with the Task Scheduler API, no 'schtasks.exe' process is spawned, completely evading the rule's process creation checks."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"SystemTask3\" /tr \"cmd.exe\" /sc daily /ru SYSTEM",
+    "explanation": "The rule's 'selection_user' condition looks for the exact string ' SYSTEM ' (with both leading and trailing spaces). If the '/ru SYSTEM' argument is placed at the very end of the command line, there is no trailing space, causing this strict string matching condition to fail."
+  }
+]

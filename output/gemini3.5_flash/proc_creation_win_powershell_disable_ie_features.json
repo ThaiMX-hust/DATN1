@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Active Setup\\Installed Components\\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}\" /v IsInstalled /t REG_DWORD /d 0 /f",
+    "explanation": "The Sigma rule is heavily tailored towards PowerShell cmdlets that use the '-name' and '-value' parameter syntax. By using the native Windows 'reg.exe' utility to perform the exact same registry modification, the command line arguments change to '/v' and '/d', completely bypassing the rule's string matching conditions."
+  },
+  {
+    "output": "Set-ItemProperty -Path \"HKLM\\SOFTWARE\\Microsoft\\Internet Explorer\\Main\" -Name \"IEHarden\" -Value 0",
+    "explanation": "The Sigma rule looks for the exact string ' -name IEHarden ' (with spaces and no quotes). Wrapping the property name in quotes (e.g., -Name \"IEHarden\") breaks the exact string match expected by the rule's 'contains' condition, effectively bypassing the detection while executing the same action."
+  },
+  {
+    "output": "New-ItemProperty -Path \"HKCU\\Software\\Microsoft\\Internet Explorer\\Main\" -PropertyType DWord -Name \"DisableFirstRunCustomize\" -Value 2",
+    "explanation": "Similar to the IEHarden bypass, the rule expects ' -name DisableFirstRunCustomize ' and ' -value 2 '. Adding quotes around the parameter values alters the command line string just enough to evade the hardcoded spaces and unquoted strings in the Sigma rule's selection criteria."
+  }
+]

@@ -1,0 +1,6 @@
+2026-07-07 04:55:36 INFO     [+] Loading ruleset(s)
+2026-07-07 04:55:36 INFO         [>] Loaded JSON/Zircolite ruleset : [link=file:///C:/Tools/Zircolite/rules_patch_demo.json][cyan]C:\Tools\Zircolite\rules_patch_demo.json[/][/link]
+2026-07-07 04:55:36 INFO     [+] 1 rules loaded
+2026-07-07 04:55:36 INFO     [+] Event filter enabled: [cyan]1[/] channels, [cyan]1[/] eventIDs
+2026-07-07 04:55:36 INFO     [+] Checking prerequisites
+2026-07-07 04:55:36 ERROR    [red]    [-] Cannot find mapping file, you can get the default one here : https://github.com/wagga40/Zircolite/blob/master/config/config.yaml [/]

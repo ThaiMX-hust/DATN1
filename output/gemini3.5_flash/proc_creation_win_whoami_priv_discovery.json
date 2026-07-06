@@ -1,0 +1,14 @@
+[
+  {
+    "output": "whoami/priv",
+    "explanation": "In Windows, the forward slash can act as a parameter delimiter, meaning the command will execute successfully without a space between the executable and the argument. The Sigma rule strictly looks for the substring ' /priv' or ' -priv' with a leading space, so omitting the space bypasses the detection."
+  },
+  {
+    "output": "whoami \"/priv\"",
+    "explanation": "Enclosing the argument in quotation marks alters the logged command line string to 'whoami \"/priv\"'. The Windows parser strips the quotes and executes the command normally, but the exact string match for ' /priv' fails because a quotation mark is immediately after the space."
+  },
+  {
+    "output": "whoami /p^riv",
+    "explanation": "When executed directly in the command prompt, the caret (^) acts as an escape character. While cmd.exe evaluates and strips the caret before passing it to the program in some edge cases depending on how it's called, invoking it via certain script interpreters or using specific quote combinations can cause the literal caret to appear in the CommandLine log, breaking the ' /priv' string match."
+  }
+]

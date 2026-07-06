@@ -1,0 +1,26 @@
+[
+  {
+    "output": "cmd.exe /c p^sinject",
+    "explanation": "The Windows command interpreter ignores caret (^) characters. Injecting a caret into the command string breaks the exact 'contains' string match for 'psinject' while still being parsed correctly by the command line interface."
+  },
+  {
+    "output": "\"cmd.exe\" /c execute-assembly",
+    "explanation": "Wrapping the executable name in double quotes causes the command line string to start with a quote ('\"cmd.exe\"') rather than the unquoted strings ('cmd ' or 'cmd.exe') specified in the 'startswith' criteria of the rule."
+  },
+  {
+    "output": "%COMSPEC% /c make_token",
+    "explanation": "Using the %COMSPEC% environment variable to invoke the command prompt bypasses the 'startswith' logic, as the command line will begin with the variable name or its resolved path (which may be uppercase or formatted differently than the hardcoded lowercase paths in the rule)."
+  },
+  {
+    "output": "\"cmd.exe\" /c echo execute-assembly",
+    "explanation": "Bypasses the 'CommandLine|startswith' condition. By enclosing the executable in double quotes, the command line starts with '\"' instead of 'cmd ' or 'cmd.exe', preventing the initial prefix match."
+  },
+  {
+    "output": "cmd.exe /c echo m^ake_token",
+    "explanation": "Bypasses the 'CommandLine|contains' condition. The Windows Command Prompt uses the caret (^) as an escape character. The string 'm^ake_token' breaks the static signature for 'make_token' but is interpreted as 'make_token' by the shell."
+  },
+  {
+    "output": "C:\\Windows\\SysWOW64\\cmd.exe /c echo logonpasswords",
+    "explanation": "Bypasses the 'CommandLine|startswith' condition. The rule explicitly checks for 'c:\\windows\\system32\\cmd.exe' but misses the 32-bit command prompt path located in SysWOW64."
+  }
+]

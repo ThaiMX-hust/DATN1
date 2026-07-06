@@ -1,0 +1,10 @@
+[
+  {
+    "output": "wsl.exe -e /bin/bash -c \"cp /usr/bin/python3 /tmp/python3_rename && /tmp/python3_rename -c 'import os; os.system(\\\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\WindowsPowerShell\\\\\\\\v1.0\\\\\\\\powershell.exe -Command Write-Host Bypassed\\\")'\"",
+    "explanation": "The Sigma rule relies on the Image or ParentImage field ending in specific filenames (like powershell.exe) or being located in specific high-risk paths. By spawning a non-listed process (like a renamed python binary or a legitimate system tool not in the 'selection_children_images' list) inside the WSL environment to then call the target binary, or by moving the target binary to a path not covered by 'selection_children_paths' (e.g., C:\\ProgramData\\), the detection logic is evaded."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\ProgramData\\not_cmd.exe && wsl.exe -e C:\\ProgramData\\not_cmd.exe /c \"echo bypass\"",
+    "explanation": "The rule filters based on specific image names (cmd.exe, powershell.exe, etc.) and specific directory patterns. By copying a restricted binary to a directory not included in the 'selection_children_paths' list (like C:\\ProgramData\\) and renaming the executable, the 'endswith' and 'contains' conditions will fail to trigger even though a suspicious child process is spawning from wsl.exe."
+  }
+]

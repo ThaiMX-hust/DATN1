@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /create /tn \"TaskBypass\" /tr \"powershell.exe -ExecutionPolicy Bypass -Command Write-Host 'Bypassed'\" /sc once /st 00:00 /f && schtasks /run /tn \"TaskBypass\"",
+    "explanation": "Instead of a suspicious process (like w3wp.exe or tomcat) executing powershell.exe directly, it creates and runs a scheduled task. This causes the Task Scheduler service (svchost.exe) to become the parent process of powershell.exe. Since svchost.exe is not in the 'selection_parent' list, the correlation rule fails to trigger."
+  },
+  {
+    "output": "wmic process call create \"powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command ping 127.0.0.1\"",
+    "explanation": "Executing PowerShell via Windows Management Instrumentation (WMI) shifts the parent process to WmiPrvSE.exe. Because WmiPrvSE.exe is not explicitly defined in the 'selection_parent' list, the execution breaks the required logical condition ('condition: all of selection_*') and bypasses the alert."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\InstallUtil.exe /logfile= /LogToConsole=false /U C:\\Path\\To\\CustomPowerShellRunspace.dll",
+    "explanation": "This bypasses the 'selection_powershell' condition entirely by using unmanaged PowerShell (e.g., custom C# tooling loading System.Management.Automation.dll) executed via a LOLBin like InstallUtil. The Image, CommandLine, and OriginalFileName will reflect InstallUtil.exe rather than powershell.exe, rendering the parent check irrelevant."
+  }
+]

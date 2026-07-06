@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\auditpol.exe /set /category:\"Detailed Tracking\" /success:disable",
+    "explanation": "The rule uses 'all of selection_*', meaning it requires both the process name and a command line containing specific keywords ('disable', 'clear', 'remove', 'restore'). While the command disables auditing, the '/success:disable' parameter is often treated as a single string or value. If the parser is looking for the standalone word 'disable' as a subcommand, or if the attacker uses case variation or path obfuscation not covered by the 'contains' logic, it may bypass simple string matching."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\auditpol.exe C:\\Users\\Public\\ap.exe && C:\\Users\\Public\\ap.exe /set /subcategory:\"Process Creation\" /success:disable /failure:disable",
+    "explanation": "The rule relies on 'Image|endswith' or 'OriginalFileName'. By renaming the binary to 'ap.exe', the 'selection_img' check for '\\auditpol.exe' is bypassed. While 'OriginalFileName' is a stronger check, it is not always captured in every telemetry source (like basic Sysmon or Windows Event ID 4688 without verbose logging), allowing the execution to fly under the radar."
+  },
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Control\\Lsa\" /v \"AuditBaseObjects\" /t REG_DWORD /d 0 /f",
+    "explanation": "This is a functional bypass of the rule's intent. The rule specifically monitors the 'auditpol.exe' process. An attacker can achieve similar results (tampering with audit capabilities) by modifying the Registry directly or using PowerShell cmdlets like 'Set-AuditPolicy' (if available via modules), which avoids calling the 'auditpol.exe' binary entirely."
+  }
+]

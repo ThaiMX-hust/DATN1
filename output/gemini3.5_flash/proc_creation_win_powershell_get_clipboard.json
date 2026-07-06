@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-Clip`board\"",
+    "explanation": "Uses PowerShell backtick (`) as a character escape/line continuation marker within the string. While PowerShell executes the command normally, a simple string match for 'Get-Clipboard' in the CommandLine will fail."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX ('Get-' + 'Clipboard')\"",
+    "explanation": "Uses string concatenation combined with the Invoke-Expression (IEX) cmdlet. The rule looks for the literal string 'Get-Clipboard', which is not present in the command line during process creation."
+  },
+  {
+    "output": "powershell.exe -Command \"[powershell]::Create().AddCommand('Get-Clipboard').Invoke()\"",
+    "explanation": "Uses the PowerShell .NET API to invoke the cmdlet. This avoids placing the target string directly into a standard command-line format that simple filters often look for."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand R2V0LUNsaXBib2FyZA==",
+    "explanation": "Encodes the 'Get-Clipboard' command in Base64. The command line seen by the process creation log will contain the encoded string instead of the cleartext cmdlet name."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Alias gc-alt Get-Clipboard; gc-alt\"",
+    "explanation": "Defines a custom alias for the cmdlet within the session and then executes it. The command line only shows the alias creation and execution, not the direct call to 'Get-Clipboard'."
+  }
+]

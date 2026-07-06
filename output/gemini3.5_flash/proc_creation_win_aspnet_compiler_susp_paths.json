@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_compiler.exe C:\\Users\\%USERNAME%\\Documents\\not_suspicious.exe && C:\\Users\\%USERNAME%\\Documents\\not_suspicious.exe -v / -p C:\\Users\\Public\\MaliciousSite C:\\Windows\\Temp\\Compiled",
+    "explanation": "The rule relies on the 'Image' field ending with '\\aspnet_compiler.exe'. By copying the binary to a different location and renaming it, the process creation event will no longer match the 'Image|endswith' condition, effectively bypassing the detection even if suspicious paths are used in the command line."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_compiler.exe -v / -p C:\\Users\\MyUser\\Projects\\Site C:\\Users\\MyUser\\AppData\\Local\\Output",
+    "explanation": "The rule's 'CommandLine' check looks for specific suspicious strings like '\\Users\\Public\\' or '\\AppData\\Local\\Temp\\'. By using a non-blacklisted path (e.g., a standard user subdirectory like '\\Documents\\' or a custom project folder instead of '\\Temp\\'), the command line component of the detection logic is not triggered."
+  },
+  {
+    "output": "subst Z: C:\\Users\\Public\\Payload && C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_compiler.exe -v / -p Z:\\ C:\\Windows\\Temp\\Output",
+    "explanation": "This uses the 'subst' command to map a drive letter to a suspicious directory. The Sigma rule checks for the literal string '\\Users\\Public\\'. By referencing the path via the mapped drive 'Z:\\', the command line no longer contains the suspicious string patterns defined in the rule."
+  }
+]

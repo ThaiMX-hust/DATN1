@@ -1,0 +1,18 @@
+[
+  {
+    "output": "sc.exe create \"LegitService\" binPath= \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "The rule triggers when 'sc create' is used in conjunction with a 'susp_binpath' keyword (like powershell, cmd, or TEMP). This command uses a legitimate path (System32) and a non-flagged binary (calc.exe), effectively bypassing the specific string matches defined in the 'susp_binpath' selection."
+  },
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Services\\MaliciousService\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\Users\\Public\\malware.exe\" /f",
+    "explanation": "The Sigma rule specifically targets process creation events for 'sc.exe' and 'New-Service'. It does not monitor direct registry manipulation. By creating a service via the registry, the process-based detection logic is completely avoided."
+  },
+  {
+    "output": "sc.exe create \"Bypass\" binPath= \"C:\\ProgramData\\evil.exe\"",
+    "explanation": "The rule checks for specific suspicious directories like C:\\Windows\\TEMP and C:\\Users\\Public. C:\\ProgramData is a common location for malware persistence that is missing from the 'susp_binpath' filter in this specific rule version, allowing execution from a writable directory without triggering the alert."
+  },
+  {
+    "output": "$s = 'New-Se' + 'rvice'; &$s -Name 'Hidden' -BinaryPathName 'C:\\Users\\Public\\payload.exe'",
+    "explanation": "The rule looks for the literal string 'New-Service' and '-BinaryPathName' in the command line. By using PowerShell string concatenation and the call operator (&), the command line string is obfuscated, preventing the 'selection_posh' filter from finding the required keywords."
+  }
+]

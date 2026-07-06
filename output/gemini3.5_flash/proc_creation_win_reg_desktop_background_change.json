@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe add \"HKCU\\Control Panel\\Desktop\" /v \"Wallpaper\" /d \"C:\\ProgramData\\ransom.jpg\" /f",
+    "explanation": "The Sigma rule uses a strict 'all of selection_reg_*' condition, meaning it requires the presence of '/t REG_SZ' (from selection_cli_reg_2) or specific flags like '/v WallpaperStyle' with '/d 2' (from selection_cli_reg_3) to trigger. By omitting the optional '/t REG_SZ' type flag, the command successfully updates the registry value while failing the rule's specific 'all of' logic requirements."
+  },
+  {
+    "output": "reg add \"HKCU\\Control Panel\\Desktop\" /v Wallpaper /d \"C:\\Users\\Public\\bg.jpg\"",
+    "explanation": "This bypasses the rule because the rule specifically looks for the executable 'reg.exe' (selection_reg_img). In many environments, calling the internal command 'reg' via cmd.exe may bypass detections that are strictly looking for the full executable name or original file name in the process creation event, depending on how the telemetry is captured."
+  },
+  {
+    "output": "Set-ItemProperty -Path 'HKCU:\\Control Panel\\Desktop' -Name 'Wallpaper' -Value 'C:\\temp\\bg.png'",
+    "explanation": "The rule is strictly limited to the execution of 'reg.exe'. It does not account for PowerShell's 'Set-ItemProperty' or 'New-ItemProperty' cmdlets, which modify the same registry keys via the Windows API rather than the command-line utility, completely evading all 'selection_reg_*' filters."
+  }
+]

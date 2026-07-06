@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\OpenWith.exe C:\\Users\\Public\\NotOpenWith.exe && C:\\Users\\Public\\NotOpenWith.exe /c C:\\Windows\\System32\\calc.exe",
+    "explanation": "The rule relies on the 'Image' field ending specifically with '\\OpenWith.exe'. By copying the binary to a different location and renaming it, the process execution event will log a different image path (e.g., 'NotOpenWith.exe'), failing the 'selection' criteria while still executing the target binary via the '/c' flag."
+  },
+  {
+    "output": "OpenWith.exe -override /c C:\\Windows\\System32\\calc.exe",
+    "explanation": "If the underlying SIEM logic or the Sigma engine implementation treats command-line arguments as case-sensitive or strictly looks for the literal string '/c', using a hyphen '-' instead of a forward slash '/' (which Windows often treats interchangeably for arguments) might evade simple string-match detections."
+  }
+]

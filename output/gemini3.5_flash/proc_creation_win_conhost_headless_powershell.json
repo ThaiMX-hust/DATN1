@@ -1,0 +1,34 @@
+[
+  {
+    "output": "conhost.exe --headless \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\pwsh.exe -Command Write-Host 'Bypassed'\"",
+    "explanation": "The rule specifically looks for the string 'powershell' in the command line. By calling the PowerShell Core executable 'pwsh.exe' instead of the classic 'powershell.exe', the 'selection_cli' logic is not satisfied while achieving the same functional outcome."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Users\\Public\\not_ps.exe && conhost.exe --headless not_ps.exe -Command Get-Process",
+    "explanation": "The rule relies on the literal string 'powershell' being present in the command line. Renaming the PowerShell executable to a different name (e.g., 'not_ps.exe') and executing it via ConHost removes the keyword trigger, bypassing the 'CommandLine|contains|all' filter."
+  },
+  {
+    "output": "conhost.exe --headless \"p^o^w^e^r^s^h^e^l^l -ExecutionPolicy Bypass -File C:\\script.ps1\"",
+    "explanation": "Using Windows command-line escape characters (the caret '^') within the 'powershell' string can sometimes bypass simple string-matching detections in certain logging environments, as the literal string in the logs may contain the escape characters, failing a strict 'contains' match for 'powershell'."
+  },
+  {
+    "output": "conhost.exe --headless pwsh.exe -Command \"Write-Host 'Simulated Bypass'\"",
+    "explanation": "Bypasses the rule by using PowerShell Core (pwsh.exe) instead of Windows PowerShell. The rule strictly requires the string 'powershell' to be present in the command line, which fails to match here."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Temp\\sys.exe && conhost.exe --headless C:\\Temp\\sys.exe -Command \"Write-Host 'Simulated Bypass'\"",
+    "explanation": "Bypasses the rule by renaming the PowerShell executable to a different name prior to execution. Because the conhost command line references 'sys.exe' rather than 'powershell', the rigid string matching condition is evaded."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"Write-Host 'Doing bad things'\"",
+    "explanation": "The Sigma rule is strictly looking for the specific '--headless' flag within the command line arguments of a process spawned by conhost.exe. By using PowerShell's native '-WindowStyle Hidden' flag instead, the attacker achieves the same goal of hiding the window from the user while completely avoiding the 'selection_cli' string match required by the rule."
+  },
+  {
+    "output": "conhost.exe --headles\"\"s powershell.exe",
+    "explanation": "This bypass leverages command-line obfuscation. By inserting empty quotes within the '--headless' string, many Windows command parsers will still execute the command normally, but the security tool performing a simple string match for '--headless' will fail to find the exact pattern."
+  },
+  {
+    "output": "ren conhost.exe notconhost.exe && notconhost.exe --headless powershell",
+    "explanation": "The rule relies on the process name or OriginalFileName being 'conhost.exe'. If an attacker renames the conhost binary or uses a different parent process to launch PowerShell with the '--headless' flag (or simply doesn't use conhost as the wrapper), the 'selection_img' condition will not be met."
+  }
+]

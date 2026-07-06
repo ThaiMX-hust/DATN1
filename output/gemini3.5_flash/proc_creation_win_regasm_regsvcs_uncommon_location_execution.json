@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regasm.exe C:\\ProgramData\\payload.dll",
+    "explanation": "The Sigma rule relies on an explicit blocklist of directories in the 'selection_dir' condition. By placing and executing the target file from a directory omitted from this list, such as 'C:\\ProgramData\\', the command bypasses the detection logic because 'all of selection_*' is no longer satisfied."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regsvcs.exe C:\\Users\\TargetUser\\Desktop\\payload.dll",
+    "explanation": "The rule author explicitly commented out '\\Desktop\\' and '\\Downloads\\' in the 'selection_dir' list to likely reduce false positives. Executing the payload from a user's Desktop directory completely evades the directory string matching."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\regasm.exe %TEMP%\\payload.dll",
+    "explanation": "Depending on the specific SIEM and logging configuration (e.g., if command-line arguments are logged before environment variables are expanded), using the '%TEMP%' environment variable instead of the explicit '\\AppData\\Local\\Temp\\' string can bypass the literal string matching defined in the rule."
+  }
+]

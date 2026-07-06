@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\deviceenroller.exe -PhoneDeepLink",
+    "explanation": "The original Sigma rule uses a case-sensitive 'contains' match for '/PhoneDeepLink'. In many Windows environments, especially depending on how the SIEM or EDR parses the command line, using a hyphen (-) instead of a forward slash (/) can bypass filters looking specifically for the slash prefix while still being accepted by the application's argument parser."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\deviceenroller.exe C:\\Windows\\Temp\\not_an_enroller.exe && C:\\Windows\\Temp\\not_an_enroller.exe /PhoneDeepLink",
+    "explanation": "The rule relies on 'selection_img' which checks if the process image ends with '\\deviceenroller.exe' or has the OriginalFileName 'deviceenroller.exe'. If the security solution does not support OriginalFileName metadata (which is common in basic Sysmon or Windows Event Log setups) and the binary is renamed and executed from a different path, the 'selection_img' condition will fail, bypassing the rule."
+  },
+  {
+    "output": "deviceenroller.exe /Phone\"\"DeepLink",
+    "explanation": "By inserting empty quotes within the parameter string, the command line remains functional for the Windows shell and many argument parsers, but it can break simple string-based 'contains' detections in SIEMs that do not normalize the command line before analysis."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"& {Invoke-Expression (Get-Content $env:APPDATA\\script.ps1 -Raw)}\"",
+    "explanation": "Bypasses the rule by substituting the specific '/c ' flag with the equivalent '-Command' flag. Additionally, it uses the built-in '$env:APPDATA' variable to reference the Roaming directory, which prevents the literal '\\AppData\\' string from appearing in the process command line, evading both conditions in selection2."
+  },
+  {
+    "output": "powershell.exe -c \"& 'C:\\Users\\Default\\AppData\\\\Local\\\\payload.ps1'\\\"",
+    "explanation": "Bypasses the rule by using '-c' instead of the strictly matched '/c ' (with a trailing space). Furthermore, it utilizes the PowerShell backtick escape character within the directory name ('AppData') to break the contiguous '\\AppData\\' string signature without affecting how PowerShell resolves the path."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand SUVYIChHZXQtQ29udGVudCBDOlxVc2Vyc1xQdWJsaWNcQXBwRGF0YVxMb2NhbFxwYXlsb2FkLnBzMSk=",
+    "explanation": "Bypasses the rule by leveraging the '-EncodedCommand' parameter. The actual execution logic (IEX (Get-Content C:\\Users\\Public\\AppData\\Local\\payload.ps1)) is Base64 encoded. The resulting command line logged by the system contains no references to '/c ', '\\AppData\\', or 'Local\\', entirely evading selection2."
+  }
+]

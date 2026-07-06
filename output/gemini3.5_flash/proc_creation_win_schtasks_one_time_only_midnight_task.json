@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /Create /SC ONCE /ST 00:00 /TN \"UpdateTask\" /TR \"C:\\\\Windows\\\\Temp\\\\update.exe\" /F",
+    "explanation": "This command creates a scheduled task that runs once at 00:00 using schtasks.exe but does not contain any of the suspicious strings (wscript, vbscript, cscript, wmic, regsvr32, powershell, or \\AppData\\) in the command line, thus bypassing the sigma rule while still achieving persistence."
+  }
+]

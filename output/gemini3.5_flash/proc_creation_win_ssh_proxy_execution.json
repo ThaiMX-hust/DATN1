@@ -1,0 +1,10 @@
+[
+  {
+    "output": "ssh.exe -F C:\\Windows\\Temp\\custom_config.txt user@target_host",
+    "explanation": "This command circumvents the detection logic by externalizing the proxy directives into a configuration file. The Sigma rule's 'selection_cli_flags' condition strictly relies on identifying strings like 'ProxyCommand=' directly within the process command-line arguments. By placing 'ProxyCommand' or 'LocalCommand' inside 'custom_config.txt' and calling it via the '-F' flag, the execution strings do not appear in the command-line logs, evading the condition."
+  },
+  {
+    "output": "ssh.exe -o \"ProxyCommand = C:\\malicious.exe\" user@target_host",
+    "explanation": "This command bypasses the rule through syntax variation. The rule explicitly checks for the exact substring 'ProxyCommand=' (without spaces). By introducing spaces around the equals sign, the command line parser may still execute the directive correctly, but the static string matching in the SIEM will fail to trigger the 'selection_cli_flags' logic."
+  }
+]

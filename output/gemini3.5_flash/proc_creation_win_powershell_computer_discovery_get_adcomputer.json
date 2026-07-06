@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Export-Csv -Path C:\\temp\\ad_computers.csv\"",
+    "explanation": "This command bypasses the rule by using 'Export-Csv' to save the output to a file. The Sigma rule explicitly looks for ' > ', ' | Select ', 'Out-File', 'Set-Content', or 'Add-Content' to detect file writing, thus missing this execution."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADComputer -LDAPFilter '(objectClass=computer)' > C:\\temp\\computers.txt\"",
+    "explanation": "This command bypasses the rule by querying all computers using the '-LDAPFilter' parameter instead of the '-Filter *' parameter. Because the rule's selection_cli requires both 'Get-ADComputer ' and ' -Filter *' to be present in the command line, this variation remains undetected."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ADComputer -Filter * | Tee-Object -FilePath computers.txt\"",
+    "explanation": "This command bypasses the output file detection clause by utilizing the 'Tee-Object' cmdlet to write the results to a file, circumventing the hardcoded list of file-writing cmdlets and redirection operators in the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"G`et-ADCo`mputer -Filter * | Out-File computers.txt\"",
+    "explanation": "This command uses PowerShell backtick obfuscation within the cmdlet name. The Sigma rule relies on a direct string match for 'Get-ADComputer ', so injecting backticks breaks the string matching mechanism without affecting PowerShell's ability to execute the command."
+  }
+]

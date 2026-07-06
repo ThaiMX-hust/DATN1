@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Temp\\dump.exe -p 1234 -o C:\\Temp\\dump.txt",
+    "explanation": "Renamed copy of createdump.exe (dump.exe) avoids the Image endswith \\\\createdump.exe condition; the command line uses -p and -o flags not matched by selection_cli and does not contain .dmp, thus bypassing the rule."
+  }
+]

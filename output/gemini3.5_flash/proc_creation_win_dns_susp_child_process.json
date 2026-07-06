@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command \"whoami\"",
+    "explanation": "The original rule uses a wildcard pattern `*\\powershell.exe`. While this covers common short paths, in some SIEM environments, providing the full, absolute system path can occasionally evade simple string-match filters that expect only the filename or are improperly anchored. More importantly, it demonstrates the standard execution that the rule is intended to catch, serving as a baseline."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Windows\\Temp\\not_powershell.exe && C:\\Windows\\Temp\\not_powershell.exe -Command \"whoami\"",
+    "explanation": "This is a classic 'Binary Renaming' bypass. Since the Sigma rule filters specifically for the executable name `powershell.exe`, an attacker can copy the legitimate PowerShell binary to a new location with a different name (e.g., `not_powershell.exe`). When executed, the `process.executable` path will no longer match the `*\\powershell.exe` pattern, effectively bypassing the detection logic."
+  },
+  {
+    "output": "pwsh.exe -Command \"whoami\"",
+    "explanation": "This bypass targets the specific versioning of PowerShell. Modern 'PowerShell Core' (v6.x and v7.x) uses the executable name `pwsh.exe` instead of `powershell.exe`. If the Sigma rule is not updated to include `*\\pwsh.exe`, this command will execute PowerShell logic while remaining completely invisible to the provided filter."
+  }
+]

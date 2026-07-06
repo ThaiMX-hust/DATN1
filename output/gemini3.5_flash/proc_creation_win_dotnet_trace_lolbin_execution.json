@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\dotnet-trace.exe %TEMP%\\not_a_trace.exe && %TEMP%\\not_a_trace.exe collect -- calc.exe",
+    "explanation": "The rule relies on 'selection_img' which looks for the specific process name 'dotnet-trace.exe' or the OriginalFileName 'dotnet-trace.dll'. By renaming the executable to something else (e.g., 'not_a_trace.exe') and executing it, the 'Image|endswith' condition fails. While OriginalFileName is harder to spoof, many SIEM configurations or EDR sensors do not consistently capture or populate the OriginalFileName field for every process creation event, allowing the rename to bypass the filter."
+  },
+  {
+    "output": "dotnet-trace collect --\"\" calc.exe",
+    "explanation": "The rule searches for a specific string pattern '-- ' (dash-dash-space) in the command line. By using internal quoting or adding extra characters that the dotnet-trace parser ignores but breaks the literal string match for the SIGMA signature, such as '--\"\" ', the rule can be bypassed while the application still executes the intended child process."
+  }
+]

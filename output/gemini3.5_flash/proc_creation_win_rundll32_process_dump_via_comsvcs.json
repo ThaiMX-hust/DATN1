@@ -1,0 +1,10 @@
+[
+  {
+    "output": "rundll32.exe C:\\Temp\renamed_file.dll, MiniDump <PID> C:\\Temp\\dump.bin full",
+    "explanation": "This conceptual command bypasses the rule by avoiding the string 'comsvcs'. The Sigma rule's 'selection_cli_1' and 'selection_generic' conditions explicitly require the exact string 'comsvcs' to be present in the command line. By making a copy of comsvcs.dll with a different name (e.g., renamed_file.dll) and executing the copy, the string-matching detection logic is evaded while maintaining the memory dumping functionality."
+  },
+  {
+    "output": "Custom_Dumper.exe <PID> C:\\Temp\\dump.bin",
+    "explanation": "This represents a custom-compiled application (e.g., written in C/C++ or C#) that dynamically loads comsvcs.dll using API calls like LoadLibrary and GetProcAddress to call the MiniDumpW function directly. The Sigma rule heavily relies on detecting the execution of 'rundll32.exe' (selection_img). By not using rundll32.exe as the execution proxy, the core premise of the detection rule is bypassed."
+  }
+]

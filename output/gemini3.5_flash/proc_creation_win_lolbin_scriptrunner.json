@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\ScriptRunner.exe /appvscript C:\\Windows\\System32\\calc.exe",
+    "explanation": "The original Sigma rule uses a strict 'all of selection*' condition, meaning it requires BOTH the process name (ScriptRunner.exe) AND the specific command line argument ' -appvscript ' (with leading and trailing spaces). By using a forward slash '/appvscript' instead of a hyphen, or by omitting the spaces surrounding the flag, the 'selection_cli' criteria is not met, effectively bypassing the detection logic."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\ScriptRunner.exe C:\\Users\\Public\\not_scriptrunner.exe && C:\\Users\\Public\\not_scriptrunner.exe -appvscript C:\\Windows\\System32\\calc.exe",
+    "explanation": "The rule checks for 'Image' ending in '\\ScriptRunner.exe' and the 'OriginalFileName' metadata. While 'OriginalFileName' is harder to spoof, many log sources (especially basic EDR or Sysmon configurations) may not consistently capture or index the OriginalFileName field. Renaming the binary bypasses the 'selection_img' check if the environment's logging only validates the file path/name."
+  }
+]

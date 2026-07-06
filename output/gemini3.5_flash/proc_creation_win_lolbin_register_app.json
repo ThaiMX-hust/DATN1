@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\register_app.vbs %TEMP%\\legit_script.vbs && cscript //nologo %TEMP%\\legit_script.vbs -register YourMalicious.dll",
+    "explanation": "The Sigma rule specifically looks for the string '\\register_app.vbs' in the command line. By copying the script to a temporary directory and renaming it (e.g., to 'legit_script.vbs'), the execution will no longer trigger the 'contains' condition for the filename, even though the underlying script logic remains the same."
+  }
+]

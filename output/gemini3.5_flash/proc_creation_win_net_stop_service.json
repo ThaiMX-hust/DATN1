@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe stop \"ServiceName\"",
+    "explanation": "The Sigma rule is overly specific, targeting only the 'net.exe' and 'net1.exe' image names. An attacker can easily bypass this by using the built-in Windows Service Control command-line utility (sc.exe) to stop the service, which achieves the exact same objective without triggering the rule."
+  },
+  {
+    "output": "powershell.exe -Command Stop-Service -Name \"ServiceName\"",
+    "explanation": "Another functional bypass. The rule strictly monitors the 'net' utility. Using PowerShell's native 'Stop-Service' cmdlet stops the specified service via the Service Control Manager API without ever invoking net.exe, completely evading the detection logic."
+  },
+  {
+    "output": "net.exe\tstop\t\"ServiceName\"",
+    "explanation": "The rule's command line selection explicitly looks for the string ' stop ' (with a leading and trailing space). By substituting the spaces with Tab characters (which cmd.exe processes natively), the command executes successfully but the logged CommandLine string will contain tabs instead of spaces, evading the exact substring match."
+  }
+]

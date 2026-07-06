@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c \"set PAYLOAD=Write-Host 'Benign Educational Bypass' & set LAUNCH=powershell.exe -NoP -c \\\"{1}{0}\\\" -f 'st','Te' & %LAUNCH%\"",
+    "explanation": "This simulated command bypasses the Sigma rule by using a single ampersand ('& set') instead of the double ampersand combination ('&&set'). The rule strictly requires the literal string '&&set' in the 'CommandLine|contains|all' condition. By altering the command chaining operator slightly, the static string match is broken, highlighting the fragility of relying on exact character sequences for detection and the need for more resilient parsing or behavior-based rules."
+  },
+  {
+    "output": "cmd.exe /c \"set VAR=Invoke-Expression 'Write-Host Safe' &&set RUN=powershell.exe -c ('Te'+'st') && %RUN%\"",
+    "explanation": "This variant bypasses the rule by avoiding the PowerShell format operator ('-f') and its associated format string placeholders (like '{0}'). The rule requires the presence of '-f' and at least one placeholder. By using string concatenation ('+') instead of format strings for obfuscation, the payload achieves the same execution flow while evading the specific indicators the rule looks for."
+  }
+]

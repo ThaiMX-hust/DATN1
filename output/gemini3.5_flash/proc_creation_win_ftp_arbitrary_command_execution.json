@@ -1,0 +1,10 @@
+[
+  {
+    "output": "echo !calc.exe > script.txt && ftp -A < script.txt",
+    "explanation": "The rule specifically looks for the '-s' or '/s' flags used to pass a script file. However, FTP.EXE can also accept commands via standard input redirection ('<'). This command achieves the same result\u2014executing a sequence of commands from a file\u2014without triggering the command-line string match for the '-s' switch."
+  },
+  {
+    "output": "cmd.exe /c \"copy C:\\Windows\\System32\\ftp.exe %TEMP%\\updater.exe & echo !calc.exe | %TEMP%\\updater.exe -n\"",
+    "explanation": "The rule relies on two detection mechanisms: detecting the explicit '-s:' or '/s:' flag in the command line, or detecting child processes where the parent process is explicitly named '\\ftp.exe'. By copying the ftp.exe binary to a new name (e.g., updater.exe) and passing arbitrary execution commands through standard input (stdin) via a pipe instead of using the '-s:' script flag, the 'selection_child_cli' check fails. Additionally, because the executable was renamed, any child processes it spawns will have a ParentImage of '\\updater.exe' rather than '\\ftp.exe', bypassing the 'selection_parent' check."
+  }
+]

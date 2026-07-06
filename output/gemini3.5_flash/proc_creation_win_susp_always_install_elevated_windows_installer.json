@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c mkdir \"C:\\ProgramData\\Sophos\\\" && copy launcher.exe \"C:\\ProgramData\\Sophos\\updater.exe\" && \"C:\\ProgramData\\Sophos\\updater.exe\" (which then spawns msiexec.exe)",
+    "explanation": "The detection rule uses a broad path-based exclusion (filter_sophos) that ignores any activity where the ParentImage starts with 'C:\\ProgramData\\Sophos\\'. Because 'C:\\ProgramData\\' is typically writable by users, an attacker can create this folder structure, place a launcher executable inside it, and use that launcher to spawn the elevated msiexec.exe, effectively blinding the rule."
+  },
+  {
+    "output": "Start-Process msiexec.exe -ArgumentList \"/q /i payload.msi /V\" -NoNewWindow",
+    "explanation": "The rule contains a 'filter_repair' condition that excludes events if the CommandLine ends with '\\system32\\msiexec.exe /V'. While technically looking for a repair switch, an attacker might be able to manipulate the command line parameters of a malicious execution to end with the exact expected string or switch combination, causing the SIEM query to filter it out as a false positive."
+  },
+  {
+    "output": "Invoke-Cradle (or similar tool) launching msiexec.exe with PPID Spoofing targeting a running 'services.exe' or 'GoogleUpdate.exe'",
+    "explanation": "The rule heavily relies on the ParentImage field to exclude known good software (services.exe, Google Update, Avast, Avira). An attacker can use Parent Process ID (PPID) spoofing via native Windows APIs (like UpdateProcThreadAttribute) to make the malicious msiexec.exe appear as though it was spawned by a legitimate excluded process, evading detection."
+  }
+]

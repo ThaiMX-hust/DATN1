@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Test' | c^l^i^p.exe && powershell -c \\\"IEX ([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
+    "explanation": "This simulated command bypasses the rule by using the Windows command prompt caret (^) escape character to obfuscate the string 'clip' into 'c^l^i^p.exe'. The rule's regex '(?i)echo.*clip.*&&.*' rigidly expects the exact contiguous characters 'c-l-i-p' and fails to evaluate command-line escape characters."
+  },
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Test' | clip & powershell -c \\\"IEX ([System.Windows.Forms.Clipboard]::GetText())\\\"\"",
+    "explanation": "This bypasses the rule by substituting the logical AND operator (&&) with a single ampersand (&) for sequential command execution. Because the Sigma rule's regex hardcodes the '&&' string, changing the command separator causes the regular expression match to fail."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Clipboard -Value 'Write-Host test'; Invoke-Expression (Get-Clipboard)\"",
+    "explanation": "This approach entirely bypasses the 'echo' and 'clip.exe' paradigm by using native PowerShell cmdlets (Set-Clipboard). The Sigma rule specifically looks for the standard cmd.exe pipelining technique ('echo...clip'), making it blind to native PowerShell clipboard manipulation."
+  },
+  {
+    "output": "cmd.exe /c echo Write-Host 'Bypass Test' | clip & powershell -c IEX([Windows.Forms.Clipboard]::GetText())",
+    "explanation": "The Sigma rule regex explicitly looks for the double ampersand '&&' operator (echo.*clip.*&&). Using a single ampersand '&' in cmd.exe still allows sequential command execution (regardless of the first command's success or failure) but completely breaks the regex match."
+  }
+]

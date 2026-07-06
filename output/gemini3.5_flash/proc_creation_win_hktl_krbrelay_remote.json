@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Temp\\sysupdate.exe \"-clsid\" 9bf5fdf6-f947-4e34-929d-4e92a2a7a858 \"-target\" dc.domain.local \"-victim\" srv.domain.local \"-rbcd\" dc$",
+    "explanation": "This bypass works in two parts. First, the executable is renamed and its PE metadata (OriginalFileName) is stripped or altered to evade the 'selection_img' condition. Second, the command-line flags are enclosed in double quotes. Windows command-line parsers (like CommandLineParser in .NET/C++) will strip the quotes and parse the arguments correctly. However, the raw command line logged by EDRs/Sysmon will record '\"-clsid\"' and '\"-target\"' instead of ' -clsid ' and ' -target '. This entirely breaks the Sigma rule's 'selection_cli_required' and attack selection conditions, which hardcode leading and trailing spaces in their string matches."
+  }
+]

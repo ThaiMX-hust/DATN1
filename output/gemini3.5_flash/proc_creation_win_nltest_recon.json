@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic /namespace:\\root\\microsoftactivedirectory class Microsoft_DomainTrustStatus get /format:list",
+    "explanation": "Achieves the same goal of enumerating domain trusts but uses Windows Management Instrumentation (WMIC) instead of nltest.exe, completely evading the binary-specific conditions in the Sigma rule."
+  },
+  {
+    "output": "nltest /domain\"_\"trusts",
+    "explanation": "The Sigma rule relies on exact substring matches in the CommandLine field (e.g., 'domain_trusts'). By injecting quotation marks into the command line argument, the literal string match is broken, evading the detection logic. The Windows API (CommandLineToArgvW) or the application's internal parser will typically strip the unescaped quotes during execution, allowing the command to run successfully."
+  },
+  {
+    "output": "nltest /dcl\"i\"st:contoso.local",
+    "explanation": "Similar to the previous technique, inserting a quote inside the 'dclist:' string breaks the 'CommandLine|contains: dclist:' detection condition. The command functionally performs the domain controller discovery, but the raw command line logged by Event ID 4688 or Sysmon Event ID 1 will not trigger the Sigma rule."
+  }
+]

@@ -1,0 +1,109 @@
+You are an expert in Sigma rule analysis and command-line evasion analysis in a defensive cybersecurity context.
+
+Your task is to analyze a verified command-line evasion sample against a target Sigma rule.
+
+Only analyze based on the provided Sigma rule and evasion sample.
+Do not generate additional attack payloads.
+Do not extend the analysis beyond the behavior described by the rule.
+
+====================
+INPUT 1: SIGMA RULE
+====================
+{SIGMA_RULE}
+
+=========================
+INPUT 2: EVASION SAMPLE
+=========================
+{EVASION_SAMPLE}
+
+====================
+ANALYSIS REQUIREMENTS
+====================
+
+Analyze and answer the following points:
+
+1. Affected rule condition
+- Which selector is affected?
+- Which log field is affected? For example: CommandLine, Image, ParentImage, OriginalFileName.
+- Which specific condition no longer fits the evasion sample?
+- If the rule uses regex, contains, endswith, contains|all, or other modifiers, clearly identify which part is bypassed.
+
+2. Reason why the rule does not match
+- Why does the evasion sample not match the original rule?
+- Is the rule overly dependent on a specific string, parameter, argument order, whitespace, quote style, path, or syntax?
+- Directly compare the rule condition with the corresponding component in the evasion sample.
+
+3. Whether the evasion behavior is preserved
+- Does the evasion sample still preserve the behavior that the rule is intended to detect?
+- If yes, provide evidence from the command line.
+- If there is not enough information to conclude, explicitly state “not enough information”.
+- Do not over-infer beyond the provided data.
+
+4. Evasion technique
+Classify the evasion sample into one or more of the following categories if applicable:
+- Equivalent parameter substitution
+- Parameter reordering
+- Switch/option variant
+- Quote insertion or quote style change
+- Whitespace/tab insertion
+- Escape character insertion
+- Case variation
+- Path or filename variation
+- Equivalent API/cmdlet/behavior
+- Wrapper interpreter or parent-child gap
+- Selector/value coverage gap
+- Other
+
+For each identified technique, explain:
+- Which command-line component was changed
+- Why this change causes the rule to miss
+- Why the behavior is still equivalent
+
+5. Rule improvement suggestion
+- Which selector should be modified?
+- How should the detection condition be expanded?
+- Should a more flexible regex be used?
+- Should the condition be split into multiple smaller selectors?
+- What should be considered to avoid false positives?
+
+====================
+OUTPUT FORMAT
+====================
+
+Respond in English using the following structure:
+
+## 1. Affected Rule Condition
+
+- Affected selector:
+- Affected log field:
+- Original condition:
+- Component in the evasion sample:
+- Comment:
+
+## 2. Reason Why the Rule Does Not Match
+
+Briefly explain why the original rule does not match the evasion sample.
+
+## 3. Whether the Evasion Behavior Is Preserved
+
+- Conclusion: Yes / No / Not enough information
+- Evidence:
+- Explanation:
+
+## 4. Evasion Technique
+
+- Technique name:
+- Changed component:
+- Why the rule is bypassed:
+- Why the behavior is still equivalent:
+
+## 5. Rule Improvement Suggestion
+
+- Selector to improve:
+- Improvement direction:
+- Suggested matching strategy:
+- False positive considerations:
+
+## 6. Short Conclusion
+
+Summarize in 2–3 sentences.

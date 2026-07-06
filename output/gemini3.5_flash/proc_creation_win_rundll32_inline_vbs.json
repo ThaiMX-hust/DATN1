@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe %TEMP%\\updater.exe && %TEMP%\\updater.exe vbscript:\"Execute(RegRead('...')); window.close;\"",
+    "explanation": "This conceptual bypass illustrates the weakness of relying on command-line executable names for detection. By copying rundll32.exe to a new name (updater.exe) and executing it, the strict 'contains|all' check for the string 'rundll32.exe' in the CommandLine field fails. Defenders should enhance this rule by monitoring the 'OriginalFileName' property (e.g., in Sysmon Event ID 1) or examining the PE header, rather than relying solely on exact string matches in the command line."
+  }
+]

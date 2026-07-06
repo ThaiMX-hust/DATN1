@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net.exe \"use\"",
+    "explanation": "Bypasses the 'selection_cli' condition. The Sigma rule looks specifically for the exact string ' use ' (with spaces) or ending with ' use'. By wrapping the argument in double quotes, the command line becomes 'net.exe \"use\"', which does not match the space-delimited string logic while still executing successfully."
+  },
+  {
+    "output": "cmd.exe /c \"net.exe u^s^e\"",
+    "explanation": "Utilizes standard cmd.exe caret (^) obfuscation. The Process Creation log will capture the command line containing 'u^s^e', completely evading the 'selection_cli' string matches for 'use', while cmd.exe strips the carets before executing net.exe."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-SmbConnection\"",
+    "explanation": "Bypasses the 'selection_img' condition completely. This achieves the exact same operational objective (T1049 - System Network Connections Discovery) using PowerShell cmdlets instead of relying on the monitored net.exe or net1.exe binaries."
+  }
+]

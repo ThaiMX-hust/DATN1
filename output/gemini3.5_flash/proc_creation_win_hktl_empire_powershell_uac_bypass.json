@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -Command $payload=$((Get-ItemProperty \"HKCU:Software\\Microsoft\\Windows Update\").Update)",
+    "explanation": "This command bypasses the rule by utilizing PowerShell's syntax flexibility. By expanding aliases (-NoP to -NoProfile, -NonI to -NonInteractive, gp to Get-ItemProperty), changing the arbitrary variable name ($x to $payload), and adding quotes to the registry path, the logical execution remains identical but the strict string-matching ('contains') condition in the Sigma rule is defeated."
+  },
+  {
+    "output": "powershell.exe -NoP  -NonI  -w Hidden  -c $x=$((gp HKCU:\\Software\\Microsoft\\Windows Update).Update)",
+    "explanation": "This bypass simply adds an extra space between parameters and includes a backslash after the HKCU drive literal (HKCU:\\ instead of HKCU:). Since the Sigma rule looks for a highly specific, static string of characters with exact spacing, these trivial whitespace and syntax variations will evade detection."
+  }
+]

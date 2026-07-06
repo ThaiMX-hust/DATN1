@@ -1,0 +1,14 @@
+[
+  {
+    "output": "auditpol.exe /set /subcategory:\"Logon\" /success:disable /failure:disable",
+    "explanation": "The Sigma rule is specifically looking for flags used by the legacy NT Resource Kit version of auditpol (e.g., /logon:none). Modern Windows versions use a different syntax with '/set', '/subcategory', and ':disable', which performs the same action of impairing logging but does not trigger the specific string matches defined in this rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\auditpol.exe C:\\Users\\Public\\ap.exe && C:\\Users\\Public\\ap.exe /remove /all",
+    "explanation": "The rule relies on the specific command-line arguments associated with the old Resource Kit utility. By using the built-in modern auditpol.exe with the '/remove /all' flag, an attacker can clear all audit policies without using the '/logon:none' style strings monitored by the rule."
+  },
+  {
+    "output": "reg add \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\Audit\" /v \"ProcessCreationIncludeCmdLine_Enabled\" /t REG_DWORD /d 0 /f",
+    "explanation": "Instead of using the auditpol utility to modify policy, an attacker can directly modify the Registry or use Group Policy objects to disable auditing features. This bypasses the 'process_creation' detection entirely because it avoids the auditpol binary and its specific flags."
+  }
+]

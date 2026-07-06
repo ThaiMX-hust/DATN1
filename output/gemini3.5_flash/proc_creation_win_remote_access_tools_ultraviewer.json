@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Program Files (x86)\\UltraViewer\\UltraViewer_Desktop.exe C:\\Windows\\Temp\\not_ultra.exe && C:\\Windows\\Temp\\not_ultra.exe",
+    "explanation": "The Sigma rule relies on specific metadata fields: 'Product', 'Company', and 'OriginalFileName'. While OriginalFileName is harder to spoof because it's embedded in the resource section of the PE header, many SIEM parsers and EDRs fall back to the current process name or command line if the metadata isn't properly indexed or captured. Moving the executable and renaming it can bypass simple filename-based detections. Furthermore, if the monitoring tool only inspects the 'Image' path and not the PE header's 'OriginalFileName' property, this execution will not trigger the 'selection' criteria."
+  },
+  {
+    "output": "powershell -Command \"Start-Process -FilePath 'C:\\Path\\To\\UltraViewer_Desktop.exe' -WindowStyle Hidden\"",
+    "explanation": "This bypass targets the detection logic's reliance on specific process metadata. By launching the process through an intermediary like PowerShell or using a wrapper, some logging configurations might only capture the initial script execution or fail to correlate the metadata fields (Product/Company) if the event logging (e.g., Sysmon Event ID 1) is not configured to extract deep PE version information for every sub-process."
+  }
+]

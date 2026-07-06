@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Path\\To\\SepRemovalToolNative_x64.exe C:\\Windows\\Temp\\not_an_installer.exe && C:\\Windows\\Temp\\not_an_installer.exe",
+    "explanation": "Selection 1 relies solely on the 'Image' field ending with a specific filename. By renaming the executable to anything else before execution, the 'endswith' condition is invalidated."
+  },
+  {
+    "output": "CATClean.exe -uninstall",
+    "explanation": "Selection 2 looks for the double-dash prefix '--uninstall'. Many argument parsers accept a single dash '-uninstall' or a forward slash '/uninstall' as equivalent, which would bypass this specific string match."
+  },
+  {
+    "output": "NetInstaller.exe /r",
+    "explanation": "Selection 3 specifically filters for the '-r' flag. Using a forward slash '/r' often achieves the same functional result in Windows utilities while avoiding the literal string match defined in the rule."
+  },
+  {
+    "output": "WFPUnins.exe /enterprise /uninstal",
+    "explanation": "Selection 4 requires the exact string '/uninstall'. If the binary's CLI parser supports partial matches (e.g., '/uninstal'), the rule fails to trigger because it uses 'contains|all'."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "rundll32.exe setupa~1.dll,InstallHinfSection DefaultInstall 128 C:\\temp\\payload.inf",
+    "explanation": "Bypasses the rule by using the Windows 8.3 short file name representation for setupapi.dll. The Sigma rule explicitly checks if ParentCommandLine contains 'setupapi.dll', so using 'setupa~1.dll' evades the string match while executing identically."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\setupapi.dll %TEMP%\\alt_api.dll && rundll32.exe %TEMP%\\alt_api.dll,InstallHinfSection DefaultInstall 128 C:\\temp\\payload.inf",
+    "explanation": "Bypasses the rule by copying the target DLL to a new location with a different name. Since the detection relies on the static string 'setupapi.dll' being present in the ParentCommandLine, renaming the file prevents the condition from matching."
+  }
+]

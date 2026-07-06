@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\dnx.exe C:\\Users\\Public\\not_dnx.exe && C:\\Users\\Public\\not_dnx.exe .",
+    "explanation": "The Sigma rule relies on a specific filename check (Image|endswith: '\\dnx.exe'). By copying the legitimate dnx.exe binary to a different location and renaming it, the execution will no longer trigger the 'selection' criteria while still retaining the original functionality of the binary to execute arbitrary C# code."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "echo puts \"Test Execution\" | ruby.exe",
+    "explanation": "The detection rule strictly matches the string ' -e' in the command line to identify inline execution. By piping the Ruby commands directly into ruby.exe via standard input (stdin), the code executes in memory without ever placing the '-e' flag in the command line arguments, thereby bypassing the rule's logic."
+  },
+  {
+    "output": "ruby.exe\"-e\" \"puts 'Test Execution'\"",
+    "explanation": "The rule explicitly checks for the string ' -e' (with a leading space). By removing the space between the executable path/quotes and the flag (e.g., closing quotes of the executable immediately followed by -e), the command remains valid in Windows but evades the specific ' -e' string match."
+  }
+]

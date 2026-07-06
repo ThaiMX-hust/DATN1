@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cd C:\\Windows\\Temp && certutil.exe -encode payload.exe payload.b64",
+    "explanation": "The Sigma rule inspects the command line arguments of certutil.exe for explicit suspicious path strings. By changing the working directory first and using relative paths, the certutil command line execution becomes 'certutil.exe -encode payload.exe payload.b64', cleanly bypassing the path-based string matching in the 'selection_extension' condition."
+  },
+  {
+    "output": "certutil.exe -encode C:\\ProgramData\\payload.exe C:\\ProgramData\\payload.b64",
+    "explanation": "The rule relies on a hardcoded list of directories. An attacker can bypass this by placing and encoding the file in a directory that is commonly writable by standard users but is missing from the rule's coverage, such as C:\\ProgramData\\."
+  },
+  {
+    "output": "certutil.exe -encode \"C:\\Users\\Public\\\"payload.exe \"C:\\Users\\Public\\\"payload.b64",
+    "explanation": "By injecting quotes directly into the middle of the path string, the command line parser will still resolve the path correctly, but it breaks the exact string match for '\\Users\\Public\\' since the actual command line string will contain '\\Users\\Public\\\"'."
+  }
+]

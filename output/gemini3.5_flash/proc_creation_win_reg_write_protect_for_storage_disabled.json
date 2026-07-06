@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c reg add \"HKLM\\System\\CurrentControlSet\\Control\\StorageDevicePolicies\" /v W^riteProtect /t REG_DWORD /d 0 /f",
+    "explanation": "The Sigma rule expects the exact string 'Write Protection' (or 'WriteProtect') in the command line. By using the Command Prompt's caret escape character (^) to obfuscate the value name as 'W^riteProtect', the string is broken up in the process creation logs. This prevents the 'contains|all' condition from matching while still successfully disabling write protection."
+  },
+  {
+    "output": "powershell.exe -Command \"$regPath = 'HKLM:\\System\\CurrentControlSet\\Control\\St' + 'orageDevicePolicies'; Set-ItemProperty -Path $regPath -Name 'WriteProtect' -Value 0\"",
+    "explanation": "This PowerShell command bypasses the rule by splitting the keyword 'storage' during string concatenation. The process creation log for powershell.exe will record the split strings ('St' + 'orage...'), meaning the exact string 'storage' is never logged in the command line, effectively bypassing the rule's requirements."
+  }
+]

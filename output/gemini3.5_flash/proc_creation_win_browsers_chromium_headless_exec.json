@@ -1,0 +1,34 @@
+[
+  {
+    "output": "wmic path Win32_UserAccount where name='guest' set passwordexpires=false",
+    "explanation": "The Sigma rule specifically looks for the WMI alias 'useraccount'. By directly invoking the underlying WMI class 'Win32_UserAccount' instead of the alias, the command executes successfully while bypassing the 'useraccount' string requirement in the selection_cli condition."
+  },
+  {
+    "output": "wmic useraccount where name='guest' set passwordexpires=0",
+    "explanation": "WMI boolean properties natively accept '0' as an equivalent for 'false'. Substituting the string 'false' with its integer representation bypasses the exact string match requirement in the rule's command line detection."
+  },
+  {
+    "output": "Set-CimInstance -Query \"Select * from Win32_UserAccount where Name='guest'\" -Property @{PasswordExpires=$false}",
+    "explanation": "The rule is strictly scoped to the execution of the 'wmic.exe' binary. Using PowerShell's native CIM cmdlets (or WmiObject cmdlets) to perform the exact same administrative action completely circumvents the 'selection_img' condition."
+  },
+  {
+    "output": "net user guest /expires:never",
+    "explanation": "Achieves the identical operational goal of disabling password expiration, but utilizes the 'net.exe' utility instead of WMI. This alternative living-off-the-land technique avoids both the image name and the specific command line arguments monitored by this rule."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" \"C:\\temp\\svchost_browser.exe\" && \"C:\\temp\\svchost_browser.exe\" --headless https://example.com",
+    "explanation": "This command bypasses the Sigma rule by exploiting its reliance on specific file names. The rule's 'selection' condition strictly checks if the 'Image' path ends with predefined strings like '\\chrome.exe' or '\\msedge.exe'. By copying the browser executable and renaming it (e.g., to 'svchost_browser.exe'), the 'Image|endswith' condition evaluates to false, completely evading the detection despite the '--headless' flag being present. From a defensive perspective, this highlights why relying solely on file names is fragile; robust detections should incorporate 'OriginalFileName' (e.g., available in Sysmon Event ID 1), file hashes, or certificate signers to identify the underlying application regardless of its current filename on disk."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\msedge.exe %TEMP%\\not_a_browser.exe && %TEMP%\\not_a_browser.exe --headless",
+    "explanation": "The rule relies on an 'Image|endswith' filter for specific process names like 'msedge.exe'. By copying the browser executable to a new name, the 'Image' field no longer matches the defined list, allowing the '--headless' flag to be used without triggering the detection."
+  },
+  {
+    "output": "msedge.exe --headless=old",
+    "explanation": "Some older versions of Chromium-based browsers or specific EDR implementations might look for the exact string '--headless'. Using variations like '--headless=new' or '--headless=old' can sometimes evade simple string-match patterns while still triggering the functional headless mode."
+  },
+  {
+    "output": "set \"FLAG=--headless\" && msedge.exe %FLAG%",
+    "explanation": "If the detection engine is inspecting literal command-line strings from certain log sources without expanding environment variables, passing the flag via a variable can occasionally bypass basic pattern matching."
+  }
+]

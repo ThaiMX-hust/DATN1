@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\diantz.exe %TEMP%\\d.exe && %TEMP%\\d.exe C:\\path\\to\\input.txt C:\\path\\to\\target.txt:output.cab",
+    "explanation": "The Sigma rule specifically looks for the string 'diantz.exe' in the CommandLine field. By copying the binary to a different name (e.g., d.exe) and executing it from there, the 'diantz.exe' condition is no longer met, successfully bypassing the detection while maintaining the functional logic of writing to an Alternate Data Stream."
+  }
+]

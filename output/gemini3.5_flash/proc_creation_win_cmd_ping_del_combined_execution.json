@@ -1,0 +1,6 @@
+[
+  {
+    "output": "ping 127.0.0.1 -n 5 > NUL && del lockbit.exe",
+    "explanation": "This command simulates a rapid ping followed by deletion, mimicking the suspicious pattern described."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mpiexec.exe -n 2 C:\\Windows\\System32\\calc.exe",
+    "explanation": "The Sigma rule strictly filters for the specific flag combination ' -n 1 ' or ' /n 1 ' (including surrounding spaces). By changing the number of processes to 2, the logic of the 'selection_flags' is no longer met, yet the binary will still execute the target payload."
+  },
+  {
+    "output": "mpiexec.exe -n+1 C:\\Windows\\System32\\calc.exe",
+    "explanation": "The rule uses a string 'contains' match for ' -n 1 '. Many Windows command-line parsers accept variations in integer formatting. Using '-n+1' or '-n 01' typically fulfills the functional requirement of the tool while avoiding the specific string pattern defined in the rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\mpiexec.exe C:\\Users\\Public\\not_mpiexec.exe && C:\\Users\\Public\\not_mpiexec.exe -n 1 C:\\Windows\\System32\\calc.exe",
+    "explanation": "The rule relies on the 'Image' ending with '\\mpiexec.exe'. By renaming the binary to anything else, the 'selection_binary' condition fails. This bypass assumes the environment is not performing heavy IMPHASH logging, which is the second (optional) criteria in the binary selection."
+  }
+]

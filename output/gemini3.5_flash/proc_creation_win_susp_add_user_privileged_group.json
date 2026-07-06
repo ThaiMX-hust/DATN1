@@ -1,0 +1,6 @@
+[
+  {
+    "output": "net.exe localgroup \"Group Policy Creator Owners\" /add /domain /?",
+    "explanation": ""
+  }
+]

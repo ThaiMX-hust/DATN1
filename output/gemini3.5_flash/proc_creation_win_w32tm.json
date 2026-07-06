@@ -1,0 +1,10 @@
+[
+  {
+    "output": "w32tm /stripchart /computer:localhost /period:5 /samples:1",
+    "explanation": "This command bypasses the specific Sigma rule because the rule's detection logic requires the presence of the '/dataonly' flag. By omitting '/dataonly', the 'selection_cmd' condition (which uses a 'contains all' logic) fails to trigger, even though the command still functions as a delay mechanism."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\w32tm.exe C:\\Users\\Public\\t.exe && C:\\Users\\Public\\t.exe /stripchart /computer:localhost /period:5 /dataonly /samples:1",
+    "explanation": "The rule checks for an image ending in '\\w32tm.exe' or an OriginalFileName of 'w32time.dll'. While the OriginalFileName check is robust, some older EDR logs or basic SIEM configurations might not capture the OriginalFileName field. In such environments, renaming the binary to 't.exe' would bypass the 'selection_w32tm' Image name check."
+  }
+]

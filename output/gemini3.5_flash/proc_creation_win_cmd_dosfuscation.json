@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"s\"e\"t OBJ=calc.exe && %O%B%J%\"",
+    "explanation": "The Sigma rule looks for specific Dosfuscation patterns like carats (^), multiple semicolons, and specific substrings like 's^et'. It can be bypassed by using double quotes inside commands (e.g., \"s\"e\"t\") to break up string matching, or by utilizing environment variable expansion (e.g., %O%B%J%) which many basic command-line scanners do not normalize before inspection."
+  },
+  {
+    "output": "cmd /c \"set X=m& set Y=d& c%X%%Y% /c calc.exe\"",
+    "explanation": "This bypass avoids all flagged characters (carats, commas, semicolons) by splitting the string 'cmd' into environment variables and concatenating them. The rule's selection criteria are focused on static obfuscation sequences and do not account for dynamic variable construction."
+  },
+  {
+    "output": "cmd.exe /c \"FOR /F \"tokens=1\" %A IN ('echo set') DO %A MYVAR=value\"",
+    "explanation": "By using a FOR loop to echo and capture the 'set' command string dynamically, the literal string 'set' (or its obfuscated variations with carats) never appears in the command line in a way that matches the rule's selection patterns."
+  }
+]

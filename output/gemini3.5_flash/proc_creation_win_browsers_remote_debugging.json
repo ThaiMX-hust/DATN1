@@ -1,0 +1,14 @@
+[
+  {
+    "output": "chrome.exe \"--remote-debugging-port=9222\"",
+    "explanation": "The Sigma rule specifically looks for a literal space directly followed by the hyphens (' --remote-debugging-'). By wrapping the flag in double quotes, the parsed command line sequence becomes space-quote-hyphen-hyphen. This evades the exact substring match of the rule while still being interpreted correctly by the Chromium-based browser."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" C:\\Temp\\browser.exe && C:\\Temp\\browser.exe -start-debugger-server 9222",
+    "explanation": "The Firefox selection strictly relies on the Image field ending exactly with '\\firefox.exe'. By copying or renaming the executable to a different name (e.g., browser.exe) before execution, the Image condition fails to trigger, bypassing the rule entirely regardless of the command line arguments provided."
+  },
+  {
+    "output": "msedge.exe\t--remote-debugging-port=9222",
+    "explanation": "The rule expects a literal whitespace character (space) before the argument. By using a tab character (\\t) as the argument separator instead of a standard space, the exact string match ' --remote-debugging-' fails, but the Windows command line will still parse and execute the argument normally."
+  }
+]

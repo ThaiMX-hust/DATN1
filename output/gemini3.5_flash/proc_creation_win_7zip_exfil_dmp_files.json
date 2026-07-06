@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\7zip\\7z.exe %TEMP%\\not_sevenzip.exe && %TEMP%\\not_sevenzip.exe a archive.zip lsass_memory.bak",
+    "explanation": "The rule relies on two specific triggers: the process name/description and the file extension. This bypass avoids the first detection by renaming the executable (bypassing the 'Image' and 'OriginalFileName' check) and avoids the second by renaming the dump file to an alternative extension like '.bak' before compression, rendering the 'CommandLine|contains' check ineffective."
+  },
+  {
+    "output": "7z a archive.zip lsass.dm?\"\"",
+    "explanation": "This bypass uses wildcard characters or empty quotes within the command line argument. Many SIEM collectors or Sigma implementations treat the 'CommandLine|contains' strings literally. By using 'lsass.dm?\"\"', the effective file targeted is the .dmp file, but the string '.dmp' never explicitly appears in the command line logs."
+  },
+  {
+    "output": "type lsass.dmp | 7z a -si archive.zip",
+    "explanation": "This uses the 'stdin' feature of 7-Zip. By piping the content of the dump file into 7z using the '-si' (read from stdin) flag, the filename 'lsass.dmp' is associated with the 'type' command rather than the '7z' command line, effectively decoupling the suspicious extension from the compression utility in the process logs."
+  }
+]

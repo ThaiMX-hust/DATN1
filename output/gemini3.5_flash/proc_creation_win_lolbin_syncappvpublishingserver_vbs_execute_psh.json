@@ -1,0 +1,10 @@
+[
+  {
+    "output": "wscript.exe \"C:\\Windows\\System32\\SyncAppvPublishingServer.vbs\" \"\\\" & powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command 'WhoAmI'\"",
+    "explanation": "The original Sigma rule searches for a semicolon (;) within the command line, which is the standard delimiter used to break out of the script's intended arguments to execute arbitrary PowerShell. This bypass utilizes an ampersand (&) as a command separator instead of a semicolon. Depending on how the VBScript parses the input string and passes it to the shell, using '&' can achieve the same execution breakout while remaining invisible to a detection logic specifically hunting for ';'."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\SyncAppvPublishingServer.vbs C:\\Users\\Public\\Update.vbs && cscript C:\\Users\\Public\\Update.vbs \"n;powershell.exe -NoP -Command Write-Host 'Bypassed'\"",
+    "explanation": "This bypass targets the file path matching logic. The rule looks for the specific string '\\SyncAppvPublishingServer.vbs'. By copying the legitimate, signed script to a new location with a different name (e.g., Update.vbs) and executing it from there, the 'selection' criteria for the filename is never met, even if the semicolon is present in the command line."
+  }
+]

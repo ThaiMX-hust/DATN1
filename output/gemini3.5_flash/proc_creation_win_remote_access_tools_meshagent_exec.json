@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic.exe process call create \"cmd.exe /c whoami\"",
+    "explanation": "The Sigma rule restricts its detection to specific shell executables (cmd.exe, powershell.exe, pwsh.exe) spawned directly by meshagent.exe. By instructing MeshAgent to execute a Living off the Land Binary (LOLBin) like wmic.exe to proxy the command execution, the 'Image|endswith' condition fails and the rule is bypassed."
+  },
+  {
+    "output": "mshta.exe vbscript:Close(Execute(\"CreateObject(\"\"WScript.Shell\"\").Run \"\"powershell.exe -nop -ep bypass\"\"\"))",
+    "explanation": "Executing mshta.exe allows for arbitrary command execution. Since the direct child process of meshagent.exe is mshta.exe rather than a targeted shell, the parent-child relationship evaluated by the rule does not trigger the alert."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\renamed_cmd.exe /c ipconfig",
+    "explanation": "The rule relies strictly on string matching ('endswith') for the process image name. If an attacker copies cmd.exe or powershell.exe to a new file name (e.g., renamed_cmd.exe) prior to execution, the Image path will not match the hardcoded strings, evading detection unless the rule is updated to check the OriginalFileName field."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c \"ping -n 1 127.0.0.1 && copy C:\\Windows\\System32\\drivers\\etc\\hosts C:\\Temp\\hosts.bak\"",
+    "explanation": "Uses && instead of a single command line containing both keywords; the rule requires CommandLine to contain both 'ping' and 'copy ' in the same token list, and also looks for '-n' and '-y' switches with dash prefix. By separating the commands with && and omitting the '-y' switch, the detection conditions are not satisfied."
+  }
+]

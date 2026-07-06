@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c rd /s /q C:\\temp\\malicious_folder",
+    "explanation": "Uses the alias 'rd' instead of 'rmdir', which may not match the 'CommandLine|contains: \"rmdir\"' condition, thereby bypassing the rule while achieving the same directory removal."
+  }
+]

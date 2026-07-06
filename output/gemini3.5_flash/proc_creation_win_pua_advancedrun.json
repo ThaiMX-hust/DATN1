@@ -1,0 +1,22 @@
+[
+  {
+    "output": "modified_advrun.exe /Run C:\\Windows\\Temp\\settings.cfg",
+    "explanation": "Bypasses the 'OriginalFileName' condition by assuming the attacker has modified or stripped the PE header version information of the executable. Bypasses the command-line conditions by using AdvancedRun's built-in feature to load execution parameters from a configuration file (.cfg), avoiding the use of explicit flags like ' /EXEFilename ' and ' /RunAs ' in the command line."
+  },
+  {
+    "output": "AdvancedRun.exe\"/EXEFilename\" \"cmd.exe\" \"/Run\"",
+    "explanation": "Bypasses the command-line detection logic by omitting the spaces expected by the rule. The Sigma rule strictly looks for exact string matches with leading/trailing spaces (e.g., ' /EXEFilename '). By using quotes or removing spaces, the command line executes successfully but fails the string matching. This assumes the 'OriginalFileName' check is either unsupported by the specific log source or fails to trigger."
+  },
+  {
+    "output": "modified_advrun.exe /Run C:\\temp\\config.cfg",
+    "explanation": "The Sigma rule uses OR logic for its selections, meaning an attacker must bypass all three conditions. First, the attacker must modify the PE header (Version Info) of the executable to change the 'OriginalFileName' from 'AdvancedRun.exe' to something else, evading the first condition. Second, to evade the command-line detections which rely on exact spacing (e.g., ' /EXEFilename '), the attacker can use AdvancedRun's native feature to load a configuration file instead of passing individual arguments. This avoids triggering the remaining command-line string matches."
+  },
+  {
+    "output": "copy C:\\Tools\\AdvancedRun.exe C:\\Windows\\Temp\\svchost_updater.exe && C:\\Windows\\Temp\\svchost_updater.exe /EXEFilename \"C:\\Windows\\System32\\cmd.exe\" /RunAs 8 /Run",
+    "explanation": "The Sigma rule relies heavily on the 'OriginalFileName' attribute or specific combinations of command-line arguments. By renaming the executable to 'svchost_updater.exe', the 'OriginalFileName' check (which relies on PE metadata that can be stripped or modified) is bypassed if the EDR/SIEM logic prioritizes the filename on disk. Furthermore, by omitting '/WindowState 0' and '/CommandLine', the specific 'contains|all' logic for the third selection block is not triggered."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename \"C:\\Windows\\System32\\notepad.exe\" /RunAs 4 /WindowState 1 /Run",
+    "explanation": "This command bypasses the third detection logic by changing the '/WindowState' value from '0' (hidden) to '1' (normal) and utilizing a simplified argument set. Since the rule looks for a specific 'contains|all' pattern including '/CommandLine' and '/WindowState 0', varying these parameters prevents the rule from firing while still executing the utility."
+  }
+]

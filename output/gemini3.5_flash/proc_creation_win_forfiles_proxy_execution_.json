@@ -1,0 +1,10 @@
+[
+  {
+    "output": "forfiles /p c:\\windows\\system32 /m notepad.exe /C\"calc.exe\"",
+    "explanation": "The Sigma rule specifically looks for ' -c ' (with a leading and trailing space and a dash). By using a forward slash '/C' instead of a dash, and omitting the space between the flag and the command string, the 'CommandLine|contains' filter is bypassed while the command still executes successfully in Windows."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\forfiles.exe C:\\Users\\Public\\not_forfiles.exe && C:\\Users\\Public\\not_forfiles.exe /p c:\\windows\\system32 /m notepad.exe /c \"calc.exe\"",
+    "explanation": "The rule relies on the process image ending in '\\forfiles.exe' or the 'OriginalFileName' being 'forfiles.exe'. While OriginalFileName is harder to spoof, many SIEM configurations do not properly populate this field from PE headers. Renaming the binary bypasses the 'selection_img' check in environments where metadata is incomplete."
+  }
+]

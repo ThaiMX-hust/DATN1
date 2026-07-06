@@ -1,0 +1,77 @@
+
+███████╗██╗██████╗  ██████╗ ██████╗ ██╗     ██╗████████╗███████╗
+╚══███╔╝██║██╔══██╗██╔════╝██╔═══██╗██║     ██║╚══██╔══╝██╔════╝
+  ███╔╝ ██║██████╔╝██║     ██║   ██║██║     ██║   ██║   █████╗
+ ███╔╝  ██║██╔══██╗██║     ██║   ██║██║     ██║   ██║   ██╔══╝
+███████╗██║██║  ██║╚██████╗╚██████╔╝███████╗██║   ██║   ███████╗
+╚══════╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝   ╚══════╝
+-= Standalone Sigma Detection tool for EVTX/Auditd/Sysmon Linux =-
+                              v3.7.1
+
+[+] Loading ruleset(s)                                                         
+    [>] Loaded JSON/Zircolite ruleset :                                        
+C:\Tools\Zircolite\rules_patch_demo.json                                       
+[+] 1 rules loaded                                                             
+[+] Event filter enabled: 1 channels, 1 eventIDs                               
+[+] Checking prerequisites                                                     
+───────────────────────────────── Processing ──────────────────────────────────
+[+] Auto-detected log type: windows_evtx (evtx) - confidence: high             
+[+] Auto-detected timestamp field: SystemTime                                  
+[+] Analyzing workload...
+    [>] Files           4 (272.0 KB total, avg 68.0 KB)           
+    [>] System          7.0 GB RAM available, 8 CPUs              
+    [>] DB Mode         PER-FILE                                  
+                        Default mode - 4 files, 272.0 KB total    
+    [>] Parallel        ENABLED (4 workers)                       
+
+
+
+
+
+[+] Processed: 4 files │ 8 events │ 0.3s                                       
+────────────────────────────── Detection Results ──────────────────────────────
+
+┌────────────────┬────────────────────────┬──────────┬────────────────────────┐
+│    Severity    │ Rule                   │   Events │ ATT&CK                 │
+├────────────────┼────────────────────────┼──────────┼────────────────────────┤
+│     MEDIUM     │ Curl Web Request With  │        3 │                        │
+│                │ Potential Custom       │          │                        │
+│                │ User-Agent             │          │                        │
+└────────────────┴────────────────────────┴──────────┴────────────────────────┘
+
+Processed 4 files
+├── execution__execution_002.evtx — 2 events — 1 detection — 2 filtered
+├── execution__execution_001.evtx — 2 events — 1 detection — 2 filtered
+├── execution__execution_004.evtx — 2 events — 0 detections — 2 filtered
+└── execution__execution_003.evtx — 2 events — 1 detection — 2 filtered
+
+[+] Total events processed: 8 (8 events filtered out)                          
+─────────────────────────────────── Results ───────────────────────────────────
+
+┌──────────────────────────────── ✨ Summary ─────────────────────────────────┐
+│                                                                             │
+│    ⏱  Duration         0.6s                                                 │
+│    📁 Files            4                                                    │
+│    📊 Events           8 (8 filtered out — 50.0% match rate)                │
+│    ⚡ Throughput       14 events/s                                          │
+│    👥 Workers          4                                                    │
+│    💾 Peak Memory      61.96 MB                                             │
+│    🎯 Detections       3 MED                                                │
+│    📏 Coverage         3/1 rules matched (300.0%)                           │
+│                        ████████████████████████████████████████████████     │
+│    🔍 Matched          3 events across 3 rules                              │
+│    📋 Top Hits          MED Curl Web Request With Potential Custom          │
+│                        User-Agent (1)                                       │
+│                         MED Curl Web Request With Potential Custom          │
+│                        User-Agent (1)                                       │
+│                         MED Curl Web Request With Potential Custom          │
+│                        User-Agent (1)                                       │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────── 🗺  ATT&CK Coverage ─────────────────────────────┐
+│  Execution               ████████████████      0 techniques (3 hits)        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    → Output: 
+C:\Users\thaim\AppData\Local\Temp\sigma_rule_evaluator_zircolite_4747b21t\zirco
+lite_results.json

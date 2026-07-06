@@ -1,0 +1,14 @@
+[
+  {
+    "output": "netsh advfirewall firewall del rule name=\"Allow Port 80\"",
+    "explanation": "The original Sigma rule specifically looks for the string 'delete ' (with a trailing space). By using the abbreviated command 'del', the logic 'CommandLine|contains|all: - delete ' will fail to match, successfully bypassing the detection while performing the same action."
+  },
+  {
+    "output": "netsh.exe advfirewall firewall delete\trule name=\"All\"",
+    "explanation": "The rule searches for a literal space after the word 'delete'. By using a horizontal tab character (\\x09) instead of a standard space between 'delete' and the subsequent argument, the 'delete ' string match is broken, though the command remains functionally valid in the Windows shell."
+  },
+  {
+    "output": "Remove-NetFirewallRule -DisplayName \"Allow Inbound Traffic\"",
+    "explanation": "The Sigma rule is strictly limited to the execution of 'netsh.exe'. An attacker can bypass this entirely by using the PowerShell 'NetSecurity' module (e.g., Remove-NetFirewallRule), which achieves the same administrative goal without triggering the netsh-based detection."
+  }
+]

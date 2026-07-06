@@ -1,0 +1,18 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=\"MaliciousRule\" dir=in action=allow program=\"C:\\Users\\JohnDoe\\AppData\\Roaming\\malware.exe\"",
+    "explanation": "The Sigma rule monitors specific suspicious paths like \\Public\\, \\Temp\\, or \\Recycle.bin\\. It misses other user-writable directories frequently used by malware, such as the Roaming AppData folder (\\AppData\\Roaming\\). By placing the executable here, the rule's path selection is not triggered."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Bypass\" dir=in action=allow program=\"C:\\ProgramData\\evil.exe\"",
+    "explanation": "C:\\ProgramData\\ is a common writeable location for services and applications, but it is not included in the 'selection_paths' list of this specific Sigma rule, allowing the command to execute without detection."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\netsh.exe C:\\Users\\Public\\not_netsh.exe && C:\\Users\\Public\\not_netsh.exe advfirewall firewall add rule name=\"Test\" dir=in action=allow program=\"C:\\Temp\\payload.exe\"",
+    "explanation": "The rule relies on 'selection_img' (Image ending in netsh.exe or OriginalFileName). While OriginalFileName is a strong check, some EDR/SIEM configurations primarily log the process path. Renaming the binary and executing it might bypass signatures that don't robustly check PE metadata, though the path 'C:\\Temp\\' would still be a risk if the filename check passes."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"Hidden\" dir=in action=allow program=\"C:\\Progra~1\\CustomApp\\agent.exe\"",
+    "explanation": "Using 8.3 short names (Windows short paths) can sometimes bypass simple string-matching logic in SIEMs if the rule is looking for the full directory name, though it is less effective against modern pattern matching."
+  }
+]

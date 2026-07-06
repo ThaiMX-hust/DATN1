@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c p\uff4fwershell.exe -c \"Write-Host 'Test'\"",
+    "explanation": "The provided Sigma rule relies on a hardcoded list of specific Cyrillic and Greek homoglyphs. This detection can be bypassed by using homoglyphs from other Unicode blocks not included in the list, such as the Fullwidth Latin Small Letter O (U+FF4F). Because the rule strictly matches against explicitly defined Unicode values, an attacker can evade detection by substituting visually similar characters from alternative blocks (e.g., Fullwidth forms, Mathematical Alphanumeric Symbols), highlighting the limitations of static string-matching for obfuscation techniques."
+  },
+  {
+    "output": "powershell.exe -Command \"& { \\u0410\\u0412\\u0415\\u041a\\u041c\\u041d\\u041e\\u0420\\u0421\\u0422\\u0425\\u0405\\u0406\\u0408\\u04ae\\u04c0\\u050c\\u051a\\u051c\\u0391\\u0392\\u0395\\u0396\\u0397\\u0399\\u039a\\u039c\\u039d\\u039d\\u039f\\u03a1\\u03a4\\u03a5\\u03a7 }\"",
+    "explanation": "The rule detects Unicode homoglyph characters in the command line. Bypass is achieved by encoding the malicious-looking characters as Unicode escape sequences (\\uXXXX), which appear as plain ASCII text to the detector while still executing the same homoglyph characters when the command is processed."
+  }
+]

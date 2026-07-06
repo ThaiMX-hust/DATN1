@@ -1,0 +1,6 @@
+[
+  {
+    "output": "wmic process call create \"rundll32.exe advpack.dll,LaunchINFSection C:\\Windows\\Temp\\file.inf,DefaultInstall_SingleUser,1\"",
+    "explanation": "Uses rundll32 with a non-default DLL (advpack.dll) and an INF install technique that avoids the exact 'process call create' substring pattern while still executing code; if the rule requires all three tokens ('process', 'call', 'create') as contiguous words, reordering or quoting can bypass substring matching."
+  }
+]

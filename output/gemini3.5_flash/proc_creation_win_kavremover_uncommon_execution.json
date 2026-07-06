@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy kavremover_dropped_binary.exe C:\\Windows\\Temp\\not_kav.exe && C:\\Windows\\Temp\\not_kav.exe run run-cmd \"whoami\"",
+    "explanation": "The rule uses a 'selection' and a 'filter'. The bypass works by satisfying the 'selection' (containing ' run run-cmd ') while also ensuring the 'filter_main_legit_parents' condition is NOT met. However, since the rule logic is 'selection and not 1 of filter_main_*', any process that has the required command line but is NOT spawned by 'cleanapi.exe' or 'kavremover.exe' will trigger the rule. To truly bypass detection in a real-world SIEM, one could use environment variable expansion or command-line obfuscation that breaks the 'contains' string matching, such as: cmd /c \"set a=run-cmd && kavremover_binary.exe run %a% whoami\"."
+  },
+  {
+    "output": "kavremover_binary.exe \"run\"^ \"run-cmd\" \"net user\"",
+    "explanation": "This bypass utilizes Windows command-line escape characters (the caret symbol '^'). The Sigma rule looks for the literal string ' run run-cmd ' with spaces. By inserting an escape character between the characters or around the spaces, the functionality of the LOLBIN remains the same, but the pattern matcher in the SIEM fails to find the exact string ' run run-cmd '."
+  }
+]

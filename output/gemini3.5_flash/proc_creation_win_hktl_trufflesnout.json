@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\AD_Auditor.exe",
+    "explanation": "The rule relies heavily on static indicators: the file path/name ending in '\\TruffleSnout.exe' and the PE header 'OriginalFileName'. An adversary can bypass this detection by renaming the executable file on disk and using a tool like Resource Hacker to modify or strip the 'OriginalFileName' string from the executable's version information prior to running it."
+  },
+  {
+    "output": "execute-assembly /opt/TruffleSnout.exe",
+    "explanation": "This simulated command represents loading the .NET assembly directly into memory via a Command and Control (C2) framework. Because the Sigma rule specifically targets the 'process_creation' log category (e.g., Windows Security Event 4688 or Sysmon Event ID 1), executing the tool reflectively inside an already running process avoids triggering a new process creation event for the tool itself."
+  }
+]

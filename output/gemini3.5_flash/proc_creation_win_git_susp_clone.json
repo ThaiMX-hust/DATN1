@@ -1,0 +1,6 @@
+[
+  {
+    "output": "git clone https://github.com/user/CVE-2023-4567.git C:\\temp\\research",
+    "explanation": "The original rule is case-sensitive for the 'selection\\_keyword' section (unless the SIEM backend is configured for case-insensitivity by default). By changing the casing of the keyword (e.g., 'CVE-' to 'cve-'), the 'contains' match may fail. This specific command uses the lowercase 'cve' which would bypass a strict case-sensitive match for 'CVE-'."
+  }
+]

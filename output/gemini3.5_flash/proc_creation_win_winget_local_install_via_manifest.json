@@ -1,0 +1,10 @@
+[
+  {
+    "output": "winget \"add\" -m manifest.yaml",
+    "explanation": "The rule looks for the exact strings 'install' or ' add ' (with spaces). By using quotes around the 'add' alias (i.e., '\"add\"'), standard Windows command-line parsing strips the quotes during execution, but the logged command line avoids matching the spaced ' add ' string, bypassing the selection_install_flag condition."
+  },
+  {
+    "output": "winget install -m\"C:\\manifest.yaml\"",
+    "explanation": "The rule checks for '-m ' (with a trailing space) or '--manifest'. By attaching a quote directly to the '-m' switch without a trailing space, the command remains syntactically valid for standard argument parsers but evades the literal string match defined in the selection_manifest_flag condition."
+  }
+]

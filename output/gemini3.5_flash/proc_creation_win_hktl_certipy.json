@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Python310\\Scripts\\certipy.exe C:\\Windows\\Temp\\sys_audit.exe && C:\\Windows\\Temp\\sys_audit.exe find -u administrator -p Password123 -dc-ip 10.10.10.10",
+    "explanation": "The rule uses an 'OR' condition between 'selection_img' and 'all of selection_cli_*'. By renaming the binary to 'sys_audit.exe', the 'selection_img' triggers (Image path, OriginalFileName, and Description) are bypassed. Furthermore, while the command uses 'find', it avoids combining all required selection_cli flags and commands (such as -target or -username with specific spacing) in a way that satisfies the 'all of' logic for the CLI selections."
+  },
+  {
+    "output": "python3 -c \"import certipy; # ... call internal functions ...\"",
+    "explanation": "Certipy is primarily a Python-based tool. If run as a Python script or imported as a module rather than using the compiled Windows executable, the 'selection_img' metadata (OriginalFileName, Description) will reflect the Python interpreter rather than Certipy, and the command line arguments may be structured in a way that doesn't match the specific string patterns required by the 'selection_cli_*' logic."
+  }
+]

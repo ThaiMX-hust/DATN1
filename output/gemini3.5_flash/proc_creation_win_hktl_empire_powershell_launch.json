@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -sta -NoProfile -NonInteractive -WindowStyle Hidden -EncodedCommand JAB0AGUAcwB0AD0AMQA=",
+    "explanation": "The provided Sigma rule relies on exact string matching for specific sequences and abbreviations of PowerShell parameters (e.g., ' -NoP -sta -NonI -W Hidden -Enc '). This detection logic can be evaded by reordering the parameters or expanding them to their full names (e.g., using -NoProfile instead of -NoP, or -WindowStyle instead of -W). PowerShell will still interpret the command correctly, but the exact string match condition in the rule will fail, highlighting the fragility of strict sequence matching in SIEM rules."
+  }
+]

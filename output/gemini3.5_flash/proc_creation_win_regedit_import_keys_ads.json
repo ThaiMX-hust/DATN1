@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe import \"C:\\path\\to\\file.txt:hidden.reg\"",
+    "explanation": "The Sigma rule specifically monitors 'regedit.exe' (selection_img). By using 'reg.exe', which is the command-line alternative for registry manipulation, the rule is completely bypassed while achieving the same result of importing a registry key from an Alternate Data Stream (ADS)."
+  },
+  {
+    "output": "copy regedit.exe trusted.exe && trusted.exe /s \"C:\\temp\\file.txt:payload.reg\"",
+    "explanation": "The rule relies on the process name ending in '\\regedit.exe' or the OriginalFileName metadata. By copying the binary to a different filename, the 'Image|endswith' check fails. Additionally, using the '/s' (silent) switch instead of '/i' (import) avoids one of the specific command-line strings the rule looks for, although the regex for ADS might still trigger if the filename isn't changed."
+  },
+  {
+    "output": "regedit.exe -m \"C:\\path\\to\\file.txt:script.reg\"",
+    "explanation": "The rule triggers on the presence of ' /i ' or '.reg' in the command line. By using the undocumented or less common '-m' switch (which allows multiple instances but often triggers imports in specific contexts) or simply avoiding the '/i' flag entirely, you can evade the 'selection_cli' logic. Note that regedit performs an import by default on many systems when a file is passed as an argument even without '/i'."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Content -Path 'C:\\test\\file.txt' -Stream 'hidden.reg' | Out-File 'C:\\temp\\temp.reg'; regedit.exe /s 'C:\\temp\\temp.reg'; Remove-Item 'C:\\temp\\temp.reg'\"",
+    "explanation": "This bypass technique extracts the content of the Alternate Data Stream to a temporary standard file first. When regedit.exe is then called, the CommandLine no longer contains the colon (':') required by the regular expression ':[^ \\\\]', which is the rule's primary method for detecting ADS usage."
+  }
+]

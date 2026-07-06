@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\DefaultPack.exe C:\\Users\\Public\\NotDefault.exe && C:\\Users\\Public\\NotDefault.exe /P \"C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "The Sigma rule relies on a specific string match where the ParentImage ends with '\\DefaultPack.exe'. By copying the legitimate binary to a new location with a different filename (e.g., NotDefault.exe), the execution of child processes will trigger a ParentImage path that no longer satisfies the 'endswith' condition, effectively bypassing the detection."
+  },
+  {
+    "output": "DefaultPack.exe /P \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command Start-Job -ScriptBlock { Start-Process calc.exe }\"",
+    "explanation": "This bypass uses process re-parenting or indirect execution. While DefaultPack.exe launches PowerShell (which might be logged), the actual malicious payload (calc.exe) is launched as a child of the PowerShell job or a WMI process, distancing the final execution from the monitored ParentImage."
+  }
+]

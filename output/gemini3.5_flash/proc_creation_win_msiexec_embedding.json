@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\msiexec.exe /i C:\\path\\to\\legit.msi /q & start /b C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -ExecutionPolicy Bypass -File C:\\payload.ps1",
+    "explanation": "The rule specifically looks for a parent-child relationship where msiexec.exe is the parent and contains the '-Embedding' flag (used when msiexec is launched as a COM server). By using the shell concatenation operator '&' or 'start', the shell (cmd.exe) becomes the parent of the malicious process instead of msiexec.exe, even if msiexec was the initial process in the chain."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Users\\Public\\not_ps.exe && MsiExec.exe -Embedding 12345 /I C:\\fake.msi & C:\\Users\\Public\\not_ps.exe -Command \"Write-Host 'Bypassed'\"",
+    "explanation": "The rule filters based on the Image path ending in '\\powershell.exe', '\\pwsh.exe', or '\\cmd.exe'. By copying the executable to a different name (e.g., not_ps.exe), the 'selection' criteria for the Image field is no longer met, even if the ParentCommandLine contains the targeted strings."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"echo bypass > C:\\Program Files\\SplunkUniversalForwarder\\bin\\dummy.txt\"",
+    "explanation": "The rule contains an explicit exclusion for cmd.exe if the CommandLine contains the path to the Splunk Universal Forwarder. An attacker can craft a command line that includes this specific string as a dummy argument or file path to trigger the 'filter_splunk_ufw' logic, causing the SIEM to ignore the event."
+  }
+]

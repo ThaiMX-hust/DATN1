@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c mkdir C:\\Windows\\System32\\TempBypass & copy C:\\Windows\\System32\\stordiag.exe C:\\Windows\\System32\\TempBypass\\stordiag.exe & C:\\Windows\\System32\\TempBypass\\stordiag.exe",
+    "explanation": "The rule contains a logical flaw in its filter condition: 'ParentImage|startswith: c:\\windows\\system32\\'. An attacker can bypass this by copying stordiag.exe to a newly created or existing writable subdirectory within C:\\Windows\\System32\\ (such as Tasks, spool, or a temp folder). When executed from this subdirectory, the ParentImage path still starts with 'C:\\Windows\\System32\\', which matches the filter and prevents the alert from triggering, even though the executable was moved from its default location."
+  },
+  {
+    "output": "C:\\Windows\\System32\\stordiag.exe",
+    "explanation": "The rule explicitly filters out executions where the ParentImage is exactly in 'c:\\windows\\system32\\' or 'c:\\windows\\syswow64\\'. If an attacker can leverage the legitimate stordiag.exe directly from its native path without copying it to a new location, the detection rule completely ignores the activity due to the overly broad 'startswith' filter designed to reduce false positives."
+  }
+]

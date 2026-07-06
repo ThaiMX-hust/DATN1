@@ -1,0 +1,14 @@
+[
+  {
+    "output": "AdvancedRun.exe /RunConfig \"C:\\temp\\advrun_config.cfg\"",
+    "explanation": "Bypasses the rule entirely by utilizing a configuration file to pass execution parameters. The Sigma rule explicitly requires the presence of '/EXEFilename' or '/CommandLine' in the command line string. By loading the target executable and the 'RunAs' parameters via a config file, these specific strings never appear in the process creation logs."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename \"C:\\Windows\\System32\\cmd.exe\" \"/RunAs\" \"8\" /Run",
+    "explanation": "Evades detection by breaking the exact string matches defined in the 'selection_runas' condition. The rule explicitly looks for ' /RunAs 8 ' (with specific spacing) or a string ending in '/RunAs 8'. Wrapping the switch or the value in quotation marks prevents the literal string match from triggering while still allowing the utility to parse the arguments."
+  },
+  {
+    "output": "AdvancedRun.exe /EXEFilename \"cmd.exe\" /RunAs  8 /Run",
+    "explanation": "Evades detection by adding extra whitespace. The rule checks for the exact string ' /RunAs 8 '. Adding two spaces between '/RunAs' and '8' causes the exact substring match to fail, demonstrating the brittleness of static string matching in SIEM rules."
+  }
+]

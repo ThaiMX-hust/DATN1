@@ -1,0 +1,6 @@
+[
+  {
+    "output": "\"C:\\Program Files\\MyTool\\cloudflared.exe\" tunnel run --config C:\\temp\\myconfig.yml --token abcdef123456",
+    "explanation": "Uses the legitimate cloudflared filename (passes filter_main_known_names) but avoids detection by not including any of the specific keyword combinations required by selection_cleanup, selection_tunnel, or selection_accountless (e.g., omits the word 'cleanup', 'run' with required flags, or '-url'). The command line still starts a tunnel but uses alternative flags not listed, thereby bypassing the rule."
+  }
+]

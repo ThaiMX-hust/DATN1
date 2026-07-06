@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\InfDefaultInstall.exe %TEMP%\\not_suspicious.exe && %TEMP%\\not_suspicious.exe C:\\path\\to\\malicious.inf",
+    "explanation": "The Sigma rule specifically looks for the string 'InfDefaultInstall.exe' in the command line. By copying the binary to a new name (e.g., not_suspicious.exe) and executing it from the new location, the 'selection' criteria is bypassed because the process name in the command line no longer matches the hardcoded string."
+  },
+  {
+    "output": "InfDefaultInstall.exe \"C:\\path\\to\\malicious.INF\"",
+    "explanation": "Many SIEM parsers and Sigma implementations are case-sensitive unless explicitly told otherwise. While the rule looks for '.inf', using an uppercase extension like '.INF' may bypass simple string-matching logic depending on the underlying search engine's configuration."
+  },
+  {
+    "output": "InfDefaultInstall.exe C:\\path\\to\\malicious.inf.txt",
+    "explanation": "The rule searches for the presence of '.inf'. If an attacker uses a double extension or a file name where '.inf' is part of a larger string that the engine doesn't handle strictly, it might bypass logic designed to find the file extension. However, since the rule uses 'contains', this is less effective than renaming the executable itself."
+  }
+]

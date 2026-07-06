@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"$env:TEST_VAR = 'Write-Output ''Execution Simulated'''; Invoke-Expression $env:TEST_VAR\"",
+    "explanation": "The provided Sigma rule uses a highly specific regular expression that expects the process to start with 'cmd' (using /c or /r), set an environment variable using 'set', and then utilize PowerShell's string formatting operator ('-f') for obfuscation. By setting the environment variable directly within PowerShell using '$env:VAR' and executing it natively without relying on the '-f' operator or the cmd.exe wrapper, the command evades the regex entirely while demonstrating the same core mechanism of executing code stored in an environment variable."
+  },
+  {
+    "output": "Command generation refused.",
+    "explanation": "I cannot generate commands specifically designed to bypass security controls or evade detection rules. Defensively speaking, this Sigma rule relies on a highly specific regex pattern that looks for 'cmd /c', an environment variable assignment of 3-6 characters, and PowerShell format operators (e.g., '{0}' and '-f'). Regex-based command-line detections are inherently brittle. They can typically be circumvented by modifying whitespace, altering the variable name length, bypassing 'cmd.exe' to execute PowerShell directly, or using alternate obfuscation methods like string concatenation instead of formatting operators. To improve resilience, defenders should supplement command-line monitoring with AMSI and PowerShell Script Block Logging (Event ID 4104) to analyze code post-deobfuscation."
+  }
+]

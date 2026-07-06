@@ -1,0 +1,26 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe VBoxC.exe && .\\VBoxC.exe /c \"echo Malicious Activity\"",
+    "explanation": "The rule triggers on the string 'VBoxC.dll' within the CommandLine. By renaming a legitimate binary (like cmd.exe) to VBoxC.exe and executing it, the resulting process creation log contains the string 'VBoxC.exe', which might satisfy the 'contains' logic depending on the SIEM's parser, potentially creating a false positive or masking the actual malicious intent under the guise of the driver name."
+  },
+  {
+    "output": "VBoxManage.exe --nologo \"uuid_of_vm\" resume",
+    "explanation": "The rule specifically looks for the keywords 'startvm' and 'controlvm'. An attacker can use alternative VBoxManage commands like 'resume', 'adoptstate', or 'snapshot' to manipulate the state of a VM or bring it into an active state without using the high-signal strings defined in the detection logic."
+  },
+  {
+    "output": "set \"V=start\" && set \"M=vm\" && VBoxManage.exe %V%%M% \"MyVM\"",
+    "explanation": "This bypass targets the 'process_creation' log source. By using environment variable expansion or command-line obfuscation in a script, the initial process creation event for the shell might not explicitly show the concatenated string 'startvm' in a single token, which can sometimes evade simple string-match filters in legacy SIEM environments."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe\" %TEMP%\\sys.exe && %TEMP%\\sys.exe -nologo list vms",
+    "explanation": "The rule triggers on specific command-line arguments like 'startvm' or 'controlvm'. By renaming the VBoxManage executable to a generic name (sys.exe) and using arguments like 'list vms' or other management flags not explicitly listed in the detection patterns, an attacker can gather info or interact with VMs without hitting the 'startvm' keyword."
+  },
+  {
+    "output": "set \"v=start\" && set \"m=vm\" && call VBoxManage.exe %v%%m% \"Windows7_Gold\"",
+    "explanation": "This bypasses basic string matching in SIEMs that do not perform command-line de-obfuscation. By splitting the 'startvm' string into environment variables and concatenating them during execution, the literal string never appears in the 'CommandLine' field of the process creation event."
+  },
+  {
+    "output": "reg add \"HKLM\\System\\CurrentControlSet\\Services\\VBoxDrv\" /v ImagePath /t REG_EXPAND_SZ /d \"\\??\\C:\\Windows\\Temp\\not_vbox.sys\" /f",
+    "explanation": "Selection_1 looks for 'VBoxDrv.sys'. By renaming the driver file on disk to a non-suspicious name before service registration or driver loading, the 'CommandLine' attribute for the service installation (e.g., sc.exe) will contain the new name, evading the 'contains' check for the specific driver filename."
+  }
+]

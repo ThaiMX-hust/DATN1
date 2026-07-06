@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ren ngrok.exe tunneling.exe && tunneling.exe start --none",
+    "explanation": "Selection 3 is bypassed by renaming the executable to 'tunneling.exe' so it no longer ends with 'ngrok.exe'. Selection 4 is bypassed by avoiding the 'start --all' or 'authtoken' strings. Selection 1 is bypassed by not using common ports like 3389 or 445 in the command line."
+  },
+  {
+    "output": "ngrok.exe start --config ./config.yml",
+    "explanation": "Selection 2 specifically triggers when '--all', '--config', and '.yml' are ALL present in the command line. By omitting '--all' and explicitly naming a tunnel defined in the config, the 'all' condition of the logic is not met."
+  },
+  {
+    "output": "ngrok.exe tcp 22",
+    "explanation": "Bypasses Selection 1 by using an uncommon port (22 for SSH) instead of the monitored ports (139, 445, 3389, 5985, 5986). It also relies on the 'Image' filter in Selection 3 being configured for 'endswith', which can be circumvented via path manipulation or renaming in environments with loose logging."
+  }
+]

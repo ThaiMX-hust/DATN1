@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\regini.exe C:\\Users\\Public\\not_regini.exe && C:\\Users\\Public\\not_regini.exe -m \\\\RemoteMachine C:\\Temp\\reg_script.txt",
+    "explanation": "The original Sigma rule relies on two conditions: the process being 'regini.exe' (via Image path or OriginalFileName) AND a command line containing a colon followed by a non-space character (indicating an Alternate Data Stream). This bypass avoids the ADS trigger entirely by using the '-m' flag to target a remote machine or simply using a standard text file on disk, which achieves registry modification without triggering the specific regex ':[^ \\]'."
+  },
+  {
+    "output": "regini.exe \"C:\\path\\to\\folder\\ :script.txt\"",
+    "explanation": "The regex ':[^ \\]' is designed to catch 'filename:adsname'. By placing a space after the colon, the regex condition fails to match. Depending on how the OS parses the path, adding specific whitespace or quotes can sometimes break simple regex patterns while still being interpreted correctly by the underlying command-line parser."
+  },
+  {
+    "output": "reg.exe import C:\\path\\to\\registry_file.reg",
+    "explanation": "This is a functional bypass by substitution. Since the rule is specifically tuned to 'regini.exe', using alternative living-off-the-land binaries (LOLBins) like 'reg.exe', 'regedit.exe', or PowerShell's 'Set-ItemProperty' to modify the registry accomplishes the same goal while completely evading a rule indexed on the regini process image."
+  }
+]

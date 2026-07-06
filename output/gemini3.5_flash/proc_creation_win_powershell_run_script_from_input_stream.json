@@ -1,0 +1,14 @@
+[
+  {
+    "output": "type script.ps1 | powershell.exe -",
+    "explanation": "Bypasses the rule by using the pipe operator (|) to pass the script content into PowerShell's standard input instead of using the input redirection operator (<). This entirely avoids the '\\s-\\s*<' regular expression while achieving the same execution result."
+  },
+  {
+    "output": "powershell.exe \"-\" < script.ps1",
+    "explanation": "Bypasses the rule by wrapping the hyphen in quotation marks. The Sigma rule's regular expression '\\s-\\s*<' strictly looks for a whitespace character immediately followed by a literal hyphen. Adding quotes breaks this string pattern but is still parsed correctly by the command line interpreter."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Windows\\Temp\\ps.exe && C:\\Windows\\Temp\\ps.exe - < script.ps1",
+    "explanation": "Bypasses the rule by renaming the PowerShell executable. The rule's selection logic specifically looks for the 'Image' field ending in '\\powershell.exe' or '\\pwsh.exe'. Running a renamed binary avoids the image name condition entirely."
+  }
+]

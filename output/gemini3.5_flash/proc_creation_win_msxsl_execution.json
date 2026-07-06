@@ -1,0 +1,10 @@
+[
+  {
+    "output": "ren C:\\Windows\\Temp\\msxsl.exe m.exe && m.exe script.xml transform.xsl",
+    "explanation": "The Sigma rule specifically triggers on the 'Image' field ending with '\\msxsl.exe'. By renaming the binary to anything else (e.g., 'm.exe'), the process creation event will record the renamed image path, effectively bypassing the string-based detection."
+  },
+  {
+    "output": "copy C:\\Windows\\Temp\\msxsl.exe %AppData%\\not_suspicious.exe && %AppData%\\not_suspicious.exe customer.xml style.xsl",
+    "explanation": "Moving the utility to a different directory and renaming it prevents the 'selection' criteria from matching, as the filename no longer ends with the specific string defined in the rule."
+  }
+]

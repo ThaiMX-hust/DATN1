@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\QuickAssist.exe C:\\Temp\\SupportTool.exe && C:\\Temp\\SupportTool.exe",
+    "explanation": "The provided Sigma rule relies solely on the 'Image|endswith' modifier matching '\\QuickAssist.exe'. A trivial bypass involves copying or renaming the legitimate QuickAssist binary to a different filename. When the renamed executable is launched, the process creation log will reflect the new name (e.g., '\\SupportTool.exe'), causing the condition to fail. To make this detection robust, security teams should pivot to matching the 'OriginalFileName' field (which remains 'quickassist.exe' regardless of renaming), imphash, or specific command-line arguments."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Temp\\script.ps1 -Comment \" > \"",
+    "explanation": "Bypasses the rule by abusing the filter condition. The rule ignores any command line containing the string ' >'. By artificially appending this string (e.g., within a comment or dummy argument), the rule's filter is triggered and the execution goes undetected."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:/Windows/Temp/script.ps1",
+    "explanation": "Bypasses the rule by utilizing forward slashes instead of backslashes. PowerShell natively parses forward slashes in file paths, but the Sigma rule's 'CommandLine|contains' strings specifically look for backslashes (e.g., '\\Windows\\Temp')."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\Windows\\Temp && powershell.exe -ExecutionPolicy Bypass -File .\\script.ps1\"",
+    "explanation": "Bypasses the rule by utilizing relative paths. By changing the current working directory to the Temp folder before execution, the CommandLine for the spawned powershell.exe process will only contain the relative path ('.\\script.ps1'), completely avoiding the monitored absolute path strings."
+  }
+]

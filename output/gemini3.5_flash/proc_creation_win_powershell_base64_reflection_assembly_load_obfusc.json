@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6ACgAIgBMACIAKwAiAG8AYQBkACIAKQA=",
+    "explanation": "This is a baseline command that uses the specific Base64 encoded strings targeted by the Sigma rule. It demonstrates the exact pattern the rule is designed to catch: the obfuscated string ::(\"L\"+\"oad\") in UTF-16LE Base64."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::('L'+'o'+'ad').Invoke($data)\"",
+    "explanation": "This bypasses the rule by adding an additional concatenation point. The Sigma rule specifically looks for Base64 versions of 'L'+'oad', 'Lo'+'ad', and 'Loa'+'d'. By splitting the string into three parts ('L'+'o'+'ad'), the resulting Base64 string will not match any of the hardcoded signatures in the detection selection."
+  },
+  {
+    "output": "powershell.exe -Command \"[Reflection.Assembly]::(\\\"{1}{0}\\\" -f 'oad','L').Invoke($data)\"",
+    "explanation": "This bypasses the rule using PowerShell string formatting (-f operator). The rule relies on static string concatenation signatures within the Command Line. Using string formatting completely changes the byte sequence, ensuring the Base64 representation does not contain the prohibited patterns while achieving the same functional result of calling the Load method."
+  },
+  {
+    "output": "powershell.exe -Command \"$m = 'Load'; [Reflection.Assembly]::$m.Invoke($data)\"",
+    "explanation": "This bypasses the rule by using a variable for the method name instead of inline concatenation. The Sigma rule is strictly looking for the pattern '::' followed by the specific obfuscated concatenation symbols. Storing the string 'Load' in a variable and calling it via the variable name breaks the pattern matching logic of the rule."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand OgA6ACgAIgBMACIAKwAiAG8AIgArACIAYQBkACIAKQ==",
+    "explanation": "This command demonstrates a bypass by altering the string concatenation pattern. The Sigma rule uses hardcoded Base64 strings for specific 2-part splits of the word 'Load' (e.g., 'L'+'oad' or 'Lo'+'ad'). By changing the obfuscation to a 3-part split like ::(\"L\"+\"o\"+\"ad\"), the resulting UTF-16LE Base64 encoding becomes 'OgA6ACgAIgBMACIAKwAiAG8AIgArACIAYQBkACIAKQ==', which is not in the rule's static detection list, highlighting the fragility of signature-based obfuscation detection."
+  }
+]

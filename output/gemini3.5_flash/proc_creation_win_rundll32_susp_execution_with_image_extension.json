@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy calc.dll calc.dat && rundll32.exe calc.dat,DllMain",
+    "explanation": "The rule specifically looks for common image extensions (.jpg, .png, etc.) in the command line. By renaming the malicious DLL to a non-image extension like .dat, .txt, or simply removing the extension entirely, the execution bypasses the 'selection_cli' filter while still being processed correctly by rundll32."
+  },
+  {
+    "output": "rundll32.exe \"C:\\path\\to\\malicious_image.jpg \" ,DllMain",
+    "explanation": "Depending on the SIEM's parsing engine, adding an extra space or trailing character inside the quotes after the extension might fail the string 'contains' match for some rigid implementations, or more simply, using a long path that exceeds character limits in certain logging buffers."
+  },
+  {
+    "output": "cd C:\\test\\ && copy malicious.dll photo.jpg && rundll32.exe .\\photo.jpg,DllMain",
+    "explanation": "If the logging environment only captures the 'Process Name' and not the full 'CommandLine' for certain sub-processes, or if the rule is strictly looking for the literal strings provided, using environmental variables or relative paths sometimes masks the specific extension if the monitor is looking for absolute patterns (though this specific rule uses 'contains')."
+  },
+  {
+    "output": "rundll32.exe shell32.dll,Control_RunDLL C:\\Users\\Public\\malicious.png",
+    "explanation": "The rule triggers on the presence of the extension in the command line. However, if the attacker uses an alternative system DLL to load the 'image' as a parameter (like shell32.dll or setupapi.dll), they may find ways to obfuscate the command line string itself using environment variable expansion like %TEMP%\\file.png which might not be expanded before the Sigma rule evaluates it."
+  }
+]

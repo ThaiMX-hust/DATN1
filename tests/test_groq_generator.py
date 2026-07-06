@@ -18,9 +18,6 @@ from generator.groq_generator import (
     build_jobs,
     call_groq,
     format_true_positive_commands,
-    infer_mutation,
-    limit_model_items,
-    parse_model_json,
     parse_duration_seconds,
     request_payload,
     request_headers,
@@ -35,27 +32,6 @@ from generator.groq_generator import (
 class GroqGeneratorParsingTests(unittest.TestCase):
     def test_default_prompt_template_is_groq_specific(self) -> None:
         self.assertEqual(DEFAULT_PROMPT_TEMPLATE.name, "groq_prompt_template.txt")
-
-    def test_parse_json_code_fence(self) -> None:
-        text = """```json
-[
-  {"output": "cmd.exe /c whoami", "explanation": "quote insertion"}
-]
-```"""
-
-        parsed = parse_model_json(text)
-
-        self.assertEqual(parsed, [{"output": "cmd.exe /c whoami", "explanation": "quote insertion"}])
-
-    def test_parse_json_embedded_array(self) -> None:
-        text = 'Result:\n[{"output": "whoami", "explanation": "case substitution"}]\nDone'
-
-        parsed = parse_model_json(text)
-
-        self.assertEqual(parsed[0]["output"], "whoami")
-
-    def test_infer_mutation_prefers_caret(self) -> None:
-        self.assertEqual(infer_mutation("Used caret ^ insertion"), "caret_insertion")
 
     def test_render_prompt_requires_placeholders(self) -> None:
         rendered = render_prompt("rule={{SIGMA_RULE}} command={{TRUE_POSITIVE_TEST_COMMAND}}", "r", "c")
@@ -106,19 +82,6 @@ class GroqGeneratorParsingTests(unittest.TestCase):
         response = HTTPResponse(429, "Please try again in 940ms.", {})
 
         self.assertAlmostEqual(retry_after_seconds(response, fallback_seconds=10), 0.94)
-
-    def test_limit_model_items_caps_outputs(self) -> None:
-        items = [
-            {"output": "one", "explanation": "a"},
-            {"output": "two", "explanation": "b"},
-            {"output": "three", "explanation": "c"},
-            {"output": "four", "explanation": "d"},
-        ]
-
-        limited, skipped = limit_model_items(items, 3)
-
-        self.assertEqual([item["output"] for item in limited], ["one", "two", "three"])
-        self.assertEqual(skipped, 1)
 
     def test_call_groq_retries_after_rate_limit(self) -> None:
         ok_body = json.dumps({"choices": [{"message": {"content": "[]"}}]})

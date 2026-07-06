@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Temp\newtask.sys /create /sc once",
+    "explanation": "This command mimics the creation of a scheduled task with a temporary folder and one-time execution."
+  }
+]

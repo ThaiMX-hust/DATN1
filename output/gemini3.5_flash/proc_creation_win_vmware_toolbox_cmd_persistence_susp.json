@@ -1,0 +1,6 @@
+[
+  {
+    "output": "VMwareToolBoxCmd.exe script power set C:\\Users\\Public\\script.bat",
+    "explanation": "This command demonstrates a limitation in the rule's logic for educational purposes. The Sigma rule relies on a specific blocklist of paths defined in 'selection_susp_paths'. By placing the target script in a directory omitted from this list, such as 'C:\\Users\\Public\\' or 'C:\\ProgramData\\', the condition 'all of selection_*' fails to evaluate to true, bypassing the detection. Defensively, this highlights the fragility of path-based blocklists. Defenders should consider broadening path monitoring, utilizing threat intelligence for known bad paths, or baselining normal VMwareToolBoxCmd.exe behavior to detect anomalies."
+  }
+]

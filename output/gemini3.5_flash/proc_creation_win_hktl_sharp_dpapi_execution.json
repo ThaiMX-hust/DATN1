@@ -1,0 +1,10 @@
+[
+  {
+    "output": "CustomTool.exe \"backupkey\" \"/machine\"",
+    "explanation": "This simulated command demonstrates how fragile string-matching in detection rules can be evaded. The Sigma rule checks for the exact PE metadata ('OriginalFileName') or image name ('SharpDPAPI.exe'), which can be bypassed by recompiling the tool with modified metadata and a new filename. Furthermore, the rule looks for specific command-line arguments padded with spaces (e.g., ' backupkey ' and ' /machine'). By enclosing the arguments in double quotes, the literal space-padded strings are broken in the command line execution logs, preventing the 'selection_other_cli' and 'selection_other_options_flags' conditions from triggering. Defenders should consider using ETW (Event Tracing for Windows) or AMSI for deeper introspection rather than relying solely on command-line string matching."
+  },
+  {
+    "output": "LegitimateApp.exe \"backupkey\" \"/unprotect\"",
+    "explanation": "The Sigma rule heavily relies on exact string matching with specific spacing, such as ' backupkey ' and ' /unprotect'. By renaming the executable, altering the PE metadata (OriginalFileName), and enclosing the command-line arguments in quotes (or using different delimiter spacing), the command successfully evades both the image name condition and the command-line string conditions."
+  }
+]

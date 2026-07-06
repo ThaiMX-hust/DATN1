@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\fsutil.exe C:\\Windows\\Tasks\\not_fsutil.exe && C:\\Windows\\Tasks\\not_fsutil.exe fsinfo drives",
+    "explanation": "The rule uses 'all of selection_*' logic, explicitly requiring the process 'Image' or 'OriginalFileName' to match '\\fsutil.exe'. By copying the utility to a different path and renaming it, the process creation context no longer matches the 'selection_img' block, while the executable still performs the drive enumeration."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.IO.DriveInfo]::GetDrives()\"",
+    "explanation": "The detection rule targets attackers leveraging 'fsutil.exe' specifically to find connected drives. An operator can achieve the exact same operational discovery goal using native PowerShell .NET classes without spawning 'fsutil.exe' or passing the keyword 'drives' into a monitored CLI command, avoiding the rule entirely."
+  }
+]

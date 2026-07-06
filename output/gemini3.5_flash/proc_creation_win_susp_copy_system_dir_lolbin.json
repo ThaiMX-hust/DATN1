@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -NoP -c \"[System.IO.File]::Copy('C:\\Windows\\System32\\rundll32.exe', 'C:\\Temp\\rundll32.exe')\"",
+    "explanation": "Uses .NET System.IO.File class instead of copy-item cmdlet, which doesn't match the 'CommandLine|contains' patterns for 'copy-item', ' copy ', 'cpi ', or ' cp '"
+  }
+]

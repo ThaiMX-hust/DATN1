@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand TgBlAHcALQBPAGIAagBlAGMAdAAgAG4AYABFAHQALgBXAGABRQBiAEMAbABpAEUAbgBUAA==",
+    "explanation": "Bypasses the rule by injecting PowerShell backtick escape characters into the anomalous string (New-Object nEt.WEbCliEnT) before converting to base64. The backticks disrupt the continuous UTF-16LE byte sequence, meaning none of the specific Base64 encoded fragments listed in 'selection_encoded' will appear in the command line."
+  }
+]

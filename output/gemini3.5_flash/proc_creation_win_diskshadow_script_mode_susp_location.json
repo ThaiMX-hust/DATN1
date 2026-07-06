@@ -1,0 +1,10 @@
+[
+  {
+    "output": "mkdir C:\\Windows\\System32\\Drivers\\ms_scripts && copy C:\\Users\\Public\\malicious.txt C:\\Windows\\System32\\Drivers\\ms_scripts\\script.txt && diskshadow.exe /s C:\\Windows\\System32\\Drivers\\ms_scripts\\script.txt",
+    "explanation": "The Sigma rule uses a 'condition: all of selection_*', meaning the detection only triggers if the process is diskshadow.exe, the command line contains the '/s' flag, AND the path matches one of the specific suspicious directories (Temp, AppData, ProgramData, etc.). By moving the script to a directory not listed in the 'selection_paths' list\u2014such as a subfolder within System32 or a custom root directory\u2014the rule logic fails to meet all conditions and will not alert."
+  },
+  {
+    "output": "diskshadow.exe /S C:\\Users\\Public\\script.txt",
+    "explanation": "The rule explicitly filters for '-s ' (lowercase with a trailing space). Depending on the specific SIEM's string matching sensitivity and the normalization of the log, using the uppercase switch '/S' or omitting the trailing space (e.g., using '/s:script.txt' if the parser allows) may bypass a literal string match defined in 'selection_cli'."
+  }
+]

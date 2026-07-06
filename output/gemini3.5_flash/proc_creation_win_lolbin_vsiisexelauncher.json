@@ -1,0 +1,10 @@
+[
+  {
+    "output": "VSIISExeLauncher.exe -pC:\\Windows\\System32\\calc.exe -aarguments",
+    "explanation": "The rule searches for the presence of specific execution switches wrapped in spaces (' -p ' and ' -a '). By appending the executable path or arguments directly after the flag identifier token without spaces (e.g., '-pC:\\...'), the CLI parser inside VSIISExeLauncher.exe processes the command successfully while breaking the string match conditions specified in 'selection_cli'."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\Extensions\\Microsoft\\Web Tools\\Publish\\VSIISExeLauncher.exe\" C:\\Windows\\Tasks\\not_launcher.exe && C:\\Windows\\Tasks\\not_launcher.exe -p C:\\Windows\\System32\\calc.exe -a test",
+    "explanation": "The detection logic relies on an 'all of selection*' condition where 'selection_img' mandates that the process image ends with '\\VSIISExeLauncher.exe' or matches its original file name string. Copying the binary to a user-writable directory and executing it under a different name bypasses the image location and filename validation layer entirely."
+  }
+]

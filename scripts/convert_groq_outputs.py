@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_GROQ_RULE_OUTPUT_DIR = Path("output/qwen14b_generator/rules")
+DEFAULT_GROQ_RULE_OUTPUT_DIR = Path("output/groq_generator_test/rules")
 DEFAULT_RULES_DIR = Path("rules")
-DEFAULT_OUTPUT_PATH = Path("input/qwen14b_local_cases.generated.json")
+DEFAULT_OUTPUT_PATH = Path("input/qwen32b_test.generated.json")
 ATTACK_TECHNIQUE_RE = re.compile(r"attack\.(t\d{4}(?:\.\d{3})?)", re.IGNORECASE)
 ATTACK_TACTIC_RE = re.compile(r"attack\.([a-z][a-z0-9_-]*)", re.IGNORECASE)
 CODE_FENCE_RE = re.compile(r"^\s*```(?:json)?\s*|\s*```\s*$", re.IGNORECASE)
@@ -128,8 +128,31 @@ def safe_test_id_prefix(value: str) -> str:
     return cleaned.strip("_") or "unknown"
 
 
-def iter_groq_output_files(groq_output_dir: Path, include_rules: set[str]) -> list[Path]:
-    """Return sorted Groq output JSON files, optionally restricted by rule names."""
+def iter_groq_output_files(
+    groq_output_dir: Path, groq_output_files: list[Path], include_rules: set[str]
+) -> list[Path]:
+    """Return Groq output JSON files, optionally restricted by rule names."""
+    if groq_output_files:
+        files: list[Path] = []
+        seen_files: set[Path] = set()
+        for path in groq_output_files:
+            if not path.exists():
+                raise FileNotFoundError(f"Groq output file not found: {path}")
+            if not path.is_file():
+                raise ValueError(f"Groq output path is not a file: {path}")
+            if path.suffix.lower() != ".json":
+                raise ValueError(f"Groq output file must be a .json file: {path}")
+
+            resolved_path = path.resolve()
+            if resolved_path in seen_files:
+                continue
+            seen_files.add(resolved_path)
+            files.append(path)
+
+        if include_rules:
+            files = [path for path in files if rule_name_from_output_path(path) in include_rules]
+        return files
+
     if not groq_output_dir.exists():
         raise FileNotFoundError(f"Groq output directory not found: {groq_output_dir}")
 
@@ -142,6 +165,7 @@ def iter_groq_output_files(groq_output_dir: Path, include_rules: set[str]) -> li
 def build_cases(
     *,
     groq_output_dir: Path,
+    groq_output_files: list[Path],
     rules_dir: Path,
     include_rules: set[str],
     limit_files: int | None,
@@ -158,7 +182,7 @@ def build_cases(
     parse_errors: dict[str, str] = {}
     processed_files = 0
 
-    output_files = iter_groq_output_files(groq_output_dir, include_rules)
+    output_files = iter_groq_output_files(groq_output_dir, groq_output_files, include_rules)
     if limit_files is not None:
         output_files = output_files[:limit_files]
 
@@ -244,6 +268,12 @@ def build_parser() -> argparse.ArgumentParser:
         description="Convert output/groq_generator/rules JSON files into sigma_rule_evaluator cases."
     )
     parser.add_argument("--groq-output-dir", default=str(DEFAULT_GROQ_RULE_OUTPUT_DIR))
+    parser.add_argument(
+        "--groq-output-file",
+        action="append",
+        default=[],
+        help="Specific Groq output JSON file to convert. Can be repeated; when set, --groq-output-dir is ignored.",
+    )
     parser.add_argument("--rules-dir", default=str(DEFAULT_RULES_DIR))
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT_PATH))
     parser.add_argument("--rule", action="append", default=[], help="Rule stem to include. Can be repeated.")
@@ -266,6 +296,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         cases, summary = build_cases(
             groq_output_dir=Path(args.groq_output_dir),
+            groq_output_files=[Path(path) for path in args.groq_output_file],
             rules_dir=Path(args.rules_dir),
             include_rules={str(rule).strip() for rule in args.rule if str(rule).strip()},
             limit_files=args.limit_files,
@@ -280,7 +311,7 @@ def main(argv: list[str] | None = None) -> int:
             suffix = "..." if len(summary["missing_rules"]) > 10 else ""
             raise ValueError(f"missing Sigma rule file(s): {preview}{suffix}")
         if not cases:
-            raise ValueError("no cases were generated; check --groq-output-dir, --rules-dir, or --rule")
+            raise ValueError("no cases were generated; check --groq-output-file, --groq-output-dir, --rules-dir, or --rule")
 
         payload: Any = {"tests": cases} if args.wrap_tests else cases
         write_json(Path(args.output), payload, overwrite=args.overwrite)

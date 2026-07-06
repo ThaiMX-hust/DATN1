@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+    "explanation": "This is the original command used for testing the Sigma rule. It exports data from a table using 'bcp.exe' and matches the rule's detection criteria."
+  },
+  {
+    "output": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+    "explanation": "No safe bypass command can be generated without altering the behavior that the Sigma rule is designed to detect. Any mutation that avoids detection would also prevent the command from performing the intended data export."
+  }
+]

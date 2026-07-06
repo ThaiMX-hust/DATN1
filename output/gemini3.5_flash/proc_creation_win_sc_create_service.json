@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\sc.exe C:\\Windows\\Temp\\not_sc.exe && C:\\Windows\\Temp\\not_sc.exe create MyService binPath= \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "The rule relies on the 'Image' field ending with '\\sc.exe'. By copying the legitimate sc.exe binary to a different name (e.g., not_sc.exe) and executing it from there, the logic 'Image|endswith' is bypassed while the functionality remains the same."
+  },
+  {
+    "output": "New-Service -Name \"MyService\" -BinaryPathName \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "The rule specifically monitors process creation for 'sc.exe'. Using PowerShell's 'New-Service' cmdlet performs the same action via API calls rather than the sc.exe utility, completely avoiding the 'selection' criteria."
+  },
+  {
+    "output": "C:\\Windows\\System32\\sc.exe create MyService binpath= \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "The rule is case-sensitive regarding the 'CommandLine' filter in many SIEM implementations. While the rule looks for 'binPath', the Windows SC utility accepts 'binpath' (lowercase). Depending on the regex/string match sensitivity of the engine, this variation may bypass the 'contains|all' requirement."
+  }
+]

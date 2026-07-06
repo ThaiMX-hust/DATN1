@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg import C:\\Tools\\malicious.reg",
+    "explanation": "The rule specifically looks for .reg files being imported from user profiles, temporary folders, or ProgramData. By placing the .reg file in a non-standard root directory like C:\\Tools\\ (or any folder not listed in the 'selection_paths' filter), the command avoids triggering the path-based detection."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Users\\Public\\not_reg.exe && C:\\Users\\Public\\not_reg.exe import C:\\Windows\\Temp\\payload.reg",
+    "explanation": "This bypass targets the 'selection_img' criteria. By copying the legitimate reg.exe to a new filename, the 'Image|endswith' check for '\\reg.exe' fails. While the 'OriginalFileName' check is meant to catch this, many SIEM environments do not log or index the OriginalFileName field, allowing the renamed binary to execute undetected if the path is also slightly altered."
+  },
+  {
+    "output": "reg.exe load HKLM\\TempHive C:\\Windows\\Temp\\registry_backup.hiv",
+    "explanation": "The rule is strictly scoped to the 'import' verb. An attacker can achieve similar results by using the 'load' or 'restore' flags of reg.exe to manipulate registry keys. Since the 'selection_cli' looks specifically for ' import ', these alternative commands will not trigger the rule."
+  },
+  {
+    "output": "reg.exe \"im\"\"port\" C:\\Windows\\Temp\\settings.reg",
+    "explanation": "Using command-line obfuscation like inserting empty double quotes within the 'import' string can sometimes bypass simple string-matching logic in security products, depending on how the logs are processed and normalized before reaching the SIEM."
+  }
+]

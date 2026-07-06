@@ -1,0 +1,6 @@
+[
+  {
+    "output": "SOAPHound.exe --dnsdump",
+    "explanation": "This command uses only selection_1 arguments ('--dnsdump') without any selection_2 arguments ('-c', '--cachefilename', '-o', '--outputdirectory'). The Sigma rule requires ALL of selection_* to match (both selection_1 AND selection_2), so this bypasses the detection by triggering only one selection."
+  }
+]

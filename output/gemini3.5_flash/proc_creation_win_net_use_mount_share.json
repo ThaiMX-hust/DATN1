@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-SmbMapping -LocalPath 'Z:' -RemotePath '\\\\192.168.1.10\\share'\"",
+    "explanation": "Bypasses the rule by using the native PowerShell New-SmbMapping cmdlet instead of the net.exe utility to mount the network share. Since the executing process is powershell.exe, the 'selection_img' condition (which looks for net.exe or net1.exe) is not met."
+  },
+  {
+    "output": "pushd \\\\192.168.1.10\\share",
+    "explanation": "Bypasses the rule by utilizing the cmd.exe built-in command 'pushd'. This command automatically maps a network share to a temporary drive letter under the hood, completely avoiding the creation of a net.exe or net1.exe process."
+  },
+  {
+    "output": "net.exe use Z:\\\\192.168.1.10\\share",
+    "explanation": "Bypasses the strict command-line matching condition. The rule specifically searches for the string ' \\\\' (a space followed by two backslashes). By appending the UNC path directly to the mapped drive letter without a preceding space, the 'selection_cli' condition fails to trigger."
+  }
+]

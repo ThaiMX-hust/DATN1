@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Windows\\Temp\\sqlps.exe && C:\\Windows\\Temp\\sqlps.exe -Command \"Write-Host 'Bypassed'\"",
+    "explanation": "This bypass targets the 'OriginalFileName' and 'Image' path logic. By renaming a standard PowerShell executable to 'sqlps.exe' and running it from a non-standard directory, the 'Image' filter might trigger, but if the SIEM relies on the 'OriginalFileName' metadata field for the real 'sqlps.exe' (which is actually a SQL-specific shell), it will see the original filename as 'PowerShell.exe' instead, potentially evading the specific logic intended for the genuine SQL utility."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"Import-Module sqlps; Get-Service\"",
+    "explanation": "The rule specifically looks for the execution of the standalone 'sqlps.exe' binary. However, the functionality of sqlps is also available as a PowerShell module. By importing the 'sqlps' module directly into a standard PowerShell session, an attacker gains the same SQL-related capabilities without ever spawning the 'sqlps.exe' process, thereby failing to trigger the 'selection_image' or 'selection_parent' conditions."
+  },
+  {
+    "output": "New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sqlps.exe\" -Force; New-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sqlps.exe\" -Name \"Debugger\" -Value \"C:\\Windows\\System32\\cmd.exe /c echo bypass\" -PropertyType \"String\"",
+    "explanation": "This is a persistence/execution bypass technique. By setting an Image File Execution Option (IFEO) for sqlps.exe, any attempt to call the binary results in the execution of a different 'debugger' process. While the rule detects the image, an advanced EDR/SIEM might be blinded if the process metadata is mangled or if the sub-processes are attributed differently depending on how the log source interprets the IFEO 'Debugger' handoff."
+  }
+]

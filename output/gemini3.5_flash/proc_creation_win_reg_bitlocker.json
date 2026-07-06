@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\FVE\" -Name \"EnableBDEWithNoTPM\" -Value 1 -Force",
+    "explanation": "The Sigma rule explicitly targets the command line signature of the 'reg.exe' utility (looking for 'REG', 'ADD', '/v', '/f'). By using PowerShell's Set-ItemProperty cmdlet to modify the registry key, the goal is achieved while completely avoiding the specific string artifacts the rule relies upon."
+  },
+  {
+    "output": "r^e^g a^d^d \"HKLM\\SOFTWARE\\Policies\\Microsoft\\FVE\" /v EnableBDEWithNoTPM /t REG_DWORD /d 1 /f",
+    "explanation": "The Windows command interpreter (cmd.exe) allows the caret (^) character to be used for escaping. When executed, cmd.exe ignores the carets and successfully runs reg.exe. However, the process creation logs (e.g., Sysmon Event ID 1) will capture the command line with the carets included, bypassing the exact 'REG' and 'ADD' string matches defined in the rule."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\FVE\" /v \"EnableBDE\"^\"WithNoTPM\" /t REG_DWORD /d 1 /f",
+    "explanation": "By breaking up the specific registry value string ('EnableBDEWithNoTPM') with quotes and a caret, or by passing it via environment variables, the command executes successfully but the exact contiguous string match required by the rule's second selection criteria is evaded in the raw command line logs."
+  }
+]

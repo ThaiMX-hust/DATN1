@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -WindowStyle Hidden -EncodedCommand QgBpAFQAcwBBAGQATQBpAE4AIAAvAHQAcgBhAG4AcwBmAGUAcg==",
+    "explanation": "The Sigma rule relies on static string matching which can be bypassed in two ways. First, 'selection_hidden' looks for the exact string ' hidden ' (with spaces). Using '-WindowStyle Hidden' or '-w hidden' avoids this match. Second, 'selection_encoded' looks for pre-calculated Base64 values of strings like 'bitsadmin /transfer'. Because PowerShell is case-insensitive, encoding a mixed-case version such as 'BiTsAdMiN /transfer' completely changes the resulting Base64 string (to QgBpAFQAcwBB...), evading the detection while maintaining functionality."
+  }
+]

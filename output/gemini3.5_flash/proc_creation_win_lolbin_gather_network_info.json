@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cscript.exe C:\\Windows\\System32\\GATHER~1.VBS",
+    "explanation": "Bypasses the rule by utilizing the Windows 8.3 short filename feature. Since the rule looks for the exact string 'gatherNetworkInfo.vbs' in the command line, using the short name 'GATHER~1.VBS' evades the selection_cli condition while still executing the same file."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\gatherNetworkInfo.vbs %TEMP%\\network_check.vbs & cscript.exe %TEMP%\\network_check.vbs",
+    "explanation": "Bypasses the rule by copying the built-in script to a new directory with an entirely different file name before executing it. The cscript.exe process will run, but the command line will contain 'network_check.vbs' instead of 'gatherNetworkInfo.vbs', evading detection."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\gatherNetworkInfo.vbs C:\\Users\\Public\\discovery.txt && cscript.exe C:\\Users\\Public\\discovery.txt",
+    "explanation": "The rule specifically looks for the string 'gatherNetworkInfo.vbs' in the command line. By copying the VBScript to a new file with a different name or extension and executing it from that new location, the command line argument no longer matches the 'selection_cli' filter."
+  },
+  {
+    "output": "cscript //e:vbs C:\\Windows\\System32\\gatherNetworkInfo.vbs",
+    "explanation": "In some SIEM environments, 'contains' filters might be bypassed by using specific script engine flags or unusual path formatting (like short 8.3 filenames, e.g., GATHER~1.VBS) that prevent the literal string match depending on how the logs are parsed and normalized."
+  },
+  {
+    "output": "powershell -Command \"Get-Content C:\\Windows\\System32\\gatherNetworkInfo.vbs | IEX\"",
+    "explanation": "Instead of calling cscript.exe or wscript.exe (which triggers 'selection_img'), the attacker can read the content of the VBScript and execute the logic through a different interpreter like PowerShell, or use an alternative host to execute the script code, bypassing both the image and command line requirements."
+  }
+]

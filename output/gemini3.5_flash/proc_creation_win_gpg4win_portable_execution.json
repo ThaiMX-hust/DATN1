@@ -1,0 +1,10 @@
+[
+  {
+    "output": "mkdir \"C:\\Program Files (x86)\\GnuPG\\bin\" && copy portable_crypto.exe \"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" && \"C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe\" --symmetric --cipher-algo AES256 data.txt",
+    "explanation": "Bypass via filter exclusion abuse. The Sigma rule blindly trusts and excludes executions from specific paths like ':\\Program Files (x86)\\GnuPG\\bin\\'. An attacker can create this directory structure, drop their portable GPG executable there, and run it to evade the alert."
+  },
+  {
+    "output": "backup_tool.exe --symmetric data.txt",
+    "explanation": "Bypass via metadata stripping. The rule's selection relies on the filename (gpg.exe/gpg2.exe) or PE metadata (OriginalFileName: 'gpg.exe' or Description: 'GnuPG\u2019s OpenPGP tool'). An attacker can rename the binary and use a tool like Resource Hacker to remove or alter the PE headers, completely avoiding the initial selection criteria."
+  }
+]

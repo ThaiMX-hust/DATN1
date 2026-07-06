@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regsvr32.exe /s /u C:\\Windows\\Temp\\malicious_file.dll.txt",
+    "explanation": "The rule uses a 'contains' filter for common extensions like '.dll'. By appending '.dll' as a secondary extension or part of the filename (e.g., malicious_file.dll.txt), the CommandLine will contain the string '.dll', satisfying the exclusion filter and bypassing the detection even though the actual file being executed has a .txt extension."
+  },
+  {
+    "output": "regsvr32.exe /s \"C:\\Users\\Public\\Downloads\\payload.dll;not_an_ext\"",
+    "explanation": "Regsvr32 often ignores trailing characters or certain delimiters in the path. By including the '.dll' string followed by a semicolon or other characters, the rule's filter_main_legit_ext is satisfied, while the OS may still resolve and execute the intended file if it has an uncommon extension."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\regsvr32.exe C:\\Windows\\Temp\\not_regsvr.exe && C:\\Windows\\Temp\\not_regsvr.exe /s C:\\Tools\\calc.ext",
+    "explanation": "The rule relies on 'Image|endswith: \"\\regsvr32.exe\"' or 'OriginalFileName: \"REGSVR32.EXE\"'. If the EDR/SIEM does not correctly track the OriginalFileName for renamed binaries or if the attacker uses a copy of the binary, they can bypass the Image-based selection entirely while executing files with uncommon extensions."
+  }
+]

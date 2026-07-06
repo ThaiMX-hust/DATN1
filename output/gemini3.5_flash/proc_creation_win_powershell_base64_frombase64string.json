@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$method = 'From' + 'Base64String'; $payload = [Convert]::$method('d2hvYW1p'); [System.Text.Encoding]::UTF8.GetString($payload) | Invoke-Expression\"",
+    "explanation": "Bypasses the rule by using string concatenation for the method name. Since 'FromBase64String' is dynamically assembled at runtime from 'From' and 'Base64String', the literal string '::FromBase64String' is never present in the command line (either in plaintext or base64), evading the Sigma rule's static signature checks."
+  },
+  {
+    "output": "powershell.exe -Command \"[Convert]::FromBase64String('d2hvYW1p')\\\"",
+    "explanation": "Bypasses the rule using PowerShell backtick obfuscation. By inserting a backtick (the escape character in PowerShell) into the method name, PowerShell still properly interprets and executes 'FromBase64String'. However, the command line text becomes '::FromBase64String', which completely alters the Base64 offset and UTF-16 string structures the Sigma rule relies on."
+  },
+  {
+    "output": "powershell.exe -Command \"$b64 = 'd2hvYW1p'; [System.Text.Encoding]::UTF8.GetString([System.Convert]::('F'+'romBase64S'+'tring').Invoke($b64)) | iex\"",
+    "explanation": "Bypasses the rule by invoking the method dynamically as a string. Similar to the concatenation method, splitting the string and calling it via .Invoke() prevents the literal keyword '::FromBase64String' from appearing in the process creation logs."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Convert]::(\"FromBase64\" + \"String\").Invoke('aG9hbWk=')\"",
+    "explanation": "The rule explicitly checks for the base64-encoded representation of the static string '::FromBase64String' (specifically matching UTF-16 LE encoded substrings). By breaking up the method name string inside the PowerShell script using runtime string concatenation, the literal signature is completely absent from the command line token, preventing the base64 translation layer of the SIEM from triggering."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand \"KABbY2hhcl1dODMsW2NoYXJdOTMsW2NoYXJdNzgsW2NoYXJdODMsW2NoYXJdODQsW2NoYXJdNjksW2NoYXJdNzcsW2NoYXJdNDYsW2NoYXJdNjcsW2NoYXJdNzksW2NoYXJdNzgsW2NoYXJdODYsW2NoYXJdNjksW2NoYXJdODIsW2NoYXJdODQpIC1qbyAnJyB8ICUgeyBbU3lzdGVtLkNvbnZlcnRdOjpKdW5rTWV0aG9kKCkgfQ==",
+    "explanation": "Instead of passing the explicit method identifier anywhere in cleartext or standard encoded forms, an operator can reconstruct the type or use alternative techniques like casting integers to character arrays (e.g., [char]83 + [char]121...) or utilizing alternative decoding methods entirely, such as '[System.Text.Encoding]::ASCII.GetString()' paired with custom XOR schemas to bypass static keyword searches entirely."
+  }
+]

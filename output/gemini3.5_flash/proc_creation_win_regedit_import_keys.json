@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe import \"C:\\path\\to\\malicious.reg\"",
+    "explanation": "The Sigma rule specifically targets 'regedit.exe' (the GUI-based registry editor) by checking the Image and OriginalFileName fields. By using 'reg.exe' (the command-line registry tool) instead, an attacker can perform the exact same registry import while completely avoiding the process name detection logic of this specific rule."
+  },
+  {
+    "output": "copy regedit.exe NOT_REGEDIT.exe && .\\NOT_REGEDIT.exe /s malicious.reg",
+    "explanation": "The rule relies on the process name ending in '\\regedit.exe'. By copying the binary to a different name, the 'selection_img' condition fails. While the rule attempts to mitigate this using 'OriginalFileName', many environments do not have the high-level auditing (like Sysmon) enabled or correctly configured to capture 'OriginalFileName', allowing a simple rename to bypass standard process name monitoring."
+  },
+  {
+    "output": "regedit.exe /S malicious.reg",
+    "explanation": "In some SIEM implementations, the 'contains' logic for command line switches is case-sensitive unless explicitly normalized. The rule specifies lowercase ' /s '. Using an uppercase '/S' might bypass literal string matching in specific detection engines that do not automatically handle case-insensitivity."
+  }
+]

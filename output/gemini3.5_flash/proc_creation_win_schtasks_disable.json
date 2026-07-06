@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\schtasks.exe C:\\temp\\st.exe && C:\\temp\\st.exe /Change /TN \"\\Windows\\SystemRestore\\SR\" /disable",
+    "explanation": "The rule strictly looks for the process name ending in '\\schtasks.exe'. By copying the legitimate schtasks.exe binary to a different name and executing it, the 'Image|endswith' condition evaluates to false, bypassing the detection."
+  },
+  {
+    "output": "Disable-ScheduledTask -TaskPath \"\\Windows\\SystemRestore\\\" -TaskName \"SR\"",
+    "explanation": "The rule is completely reliant on process creation events for 'schtasks.exe'. An attacker can bypass this by using native PowerShell cmdlets (which load the ScheduledTasks module and interact via COM/WMI APIs) to achieve the exact same result without ever spawning schtasks.exe."
+  },
+  {
+    "output": "schtasks.exe /change /disable /tn \"\\Windows\\SystemRestore\\S\"^\"R\"",
+    "explanation": "Command line obfuscation using caret (^) insertion. Depending on how the EDR or SIEM parses and normalizes the command line string before matching, inserting escape characters into the target task name string might bypass the explicit 'CommandLine|contains' string matches."
+  }
+]

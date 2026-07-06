@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\Sysmon64.exe C:\\Windows\\Temp\\not_sysmon.exe && C:\\Windows\\Temp\\not_sysmon.exe -u",
+    "explanation": "The rule uses a strict 'all of selection_*' condition. It requires the 'Image' field to end with '\\Sysmon64.exe' or '\\Sysmon.exe'. By copying the binary to a new name (e.g., not_sysmon.exe) and executing the uninstall command from there, the 'selection_pe' criteria is not met, even though the 'selection_cli' (-u) and 'Description' might match."
+  },
+  {
+    "output": "reg.exe delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\SysmonLog /f",
+    "explanation": "The rule specifically monitors process creation events where the Sysmon binary is executed with the '-u' flag. It does not monitor direct service deletion or registry modification. Deleting the service via 'reg' or 'sc' effectively disables/uninstalls the driver and service without triggering this specific process-based detection."
+  },
+  {
+    "output": "Sysmon64.exe /u",
+    "explanation": "In some environments, using the forward slash '/' instead of the hyphen '-' for the uninstall switch may bypass simple 'contains' filters if the SIEM normalization is overly specific, although many engines treat them similarly."
+  }
+]

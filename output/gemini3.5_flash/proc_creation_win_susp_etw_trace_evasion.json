@@ -1,0 +1,26 @@
+[
+  {
+    "output": "wevtutil cl",
+    "explanation": "Uses 'wevtutil cl' to clear event logs without including '/Trace' or 'clear-log' substrings, avoiding all detection selections."
+  },
+  {
+    "output": "wevtutil disable-trace",
+    "explanation": "Executes 'wevtutil disable-trace' which does not match any of the command line patterns in the rule's selections."
+  },
+  {
+    "output": "wevtutil sl \"Microsoft-Windows-Sysmon/Operational\" /enabled:false",
+    "explanation": "The rule specifically looks for the short-hand flag '/e:false' in selection_disable_1 and selection_disable_2. By using the full parameter name '/enabled:false', the logic 'contains all: [/e:false]' is bypassed while achieving the same result of disabling the log."
+  },
+  {
+    "output": "logman update \"NT Kernel Logger\" -p {dd5ef90a-6398-47a4-ad34-4d35d06a4127} 0x40000001 0x05 -ets",
+    "explanation": "Selection_disable_3 looks for the double-dash provider flag '--p'. By using the single-dash version '-p', which is functionally identical in logman, the rule is bypassed because it explicitly requires the double-dash string."
+  },
+  {
+    "output": "$p = 'Set-Etw'; $t = 'TraceProvider'; Invoke-Expression ($p + $t + ' -Guid {GUID} -Property 0x11')",
+    "explanation": "The rule checks for the literal string 'Set-EtwTraceProvider'. In a PowerShell context, string concatenation or using aliases/wildcards (e.g., Set-Etw*) avoids the static string match while executing the same underlying command."
+  },
+  {
+    "output": "wevtutil CL \"System\"",
+    "explanation": "Selection_clear_1 and selection_clear_2 both require the presence of '/Trace'. If an attacker clears standard Event Logs (like System or Security) that are not part of an analytic 'Trace' session, these specific selections will not trigger, even though it is still an evasion activity."
+  }
+]

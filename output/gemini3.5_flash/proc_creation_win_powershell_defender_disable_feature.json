@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"S`e`t-MpPreference -DisableRealtimeMonitoring $true\"",
+    "explanation": "PowerShell allows the use of backticks (`) as escape characters within command strings. By inserting backticks into the cmdlet name, the command executes normally, but it bypasses the exact string match 'Set-MpPreference ' required by the 'selection_cli_cmdlet' block. This highlights why command-line string matching is often insufficient compared to Script Block Logging (EID 4104) or AMSI."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Alias -Name smp -Value Set-MpPreference; smp -DisableRealtimeMonitoring $true\"",
+    "explanation": "This technique bypasses the rule by creating a custom alias for the target cmdlet. Because the execution uses the alias 'smp', the string 'Set-MpPreference' is separated from the parameters, preventing the rule's combined conditions from triggering on a single command line."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-MpPreference -DisableRealtimeMonitoring 1\"",
+    "explanation": "The Sigma rule's 'selection_cli_value' block specifically looks for the string ' 1 ' (with both leading and trailing spaces). By placing the '1' at the very end of the command so there is no trailing space, or by removing unnecessary spaces, the condition fails to evaluate as true, demonstrating the brittleness of hardcoded whitespace in detection rules."
+  }
+]

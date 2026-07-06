@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Temp\\LegitUpdate.exe target_host=10.0.0.5 task_type=create",
+    "explanation": "Bypass via Recompilation: The rule relies heavily on static indicators, specifically the executable name, the PE metadata ('OriginalFileName: SharpMove.exe'), and hardcoded command-line strings like 'computername=' and 'action='. Because SharpMove is an open-source .NET tool, an adversary can easily recompile it, changing the assembly metadata and modifying the argument parser to accept alternative flags (e.g., 'target_host=' and 'task_type='). This completely evades both the image and command-line selections."
+  },
+  {
+    "output": "C:\\Temp\\renamed_utility.exe \"computername\"=\"10.0.0.5\" \"action\"=\"create\"",
+    "explanation": "Bypass via Obfuscation: To bypass the 'selection_img' condition, the attacker strips or modifies the OriginalFileName in the PE header and renames the file on disk. To bypass the 'selection_cli_*' condition without changing the tool's source code, an attacker can use quote insertion. The Sigma rule looks for the exact contiguous string 'action=create'. By passing '\"action\"=\"create\"', the literal string match fails in the SIEM, but the Windows command line or the tool's internal parser may strip the quotes and execute normally."
+  }
+]

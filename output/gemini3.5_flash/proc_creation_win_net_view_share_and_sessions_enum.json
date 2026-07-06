@@ -1,0 +1,10 @@
+[
+  {
+    "output": "net view \\127.0.0.1",
+    "explanation": "The Sigma rule explicitly filters out (ignores) executions where the command line contains '\\'. By providing a local or target IP UNC path (e.g., \\127.0.0.1 or \\localhost), the command still enumerates shares on the specified host, but it triggers the rule's filter condition, effectively bypassing the alert."
+  },
+  {
+    "output": "net v^i^e^w",
+    "explanation": "The detection rule relies on the exact string 'view' appearing in the command line (selection_cli). By using standard cmd.exe caret (^) obfuscation, the command string becomes 'v^i^e^w' in the process creation logs. This prevents the 'selection_cli' condition from matching while still executing the net view command successfully."
+  }
+]

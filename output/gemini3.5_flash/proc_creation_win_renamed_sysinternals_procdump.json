@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\procdump.exe -ma /accepteula C:\\temp\\memory.dmp",
+    "explanation": "Using the original procdump.exe binary (Image ends with \\procdump.exe) satisfies the filter_main_* condition, causing the rule's 'not 1 of filter_main_*' to be false, thus preventing detection even though OriginalFileName is procdump and command line contains dump and accepteula flags."
+  }
+]

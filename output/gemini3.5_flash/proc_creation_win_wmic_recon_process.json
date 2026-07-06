@@ -1,0 +1,6 @@
+[
+  {
+    "output": "wmic process call create \"notepad.exe\"",
+    "explanation": "The command line contains 'process' (triggering selection_cli) and also both 'call' and 'create' (matching filter_main_creation). Since the rule requires NOT 1 of filter_*, the presence of filter_main_creation negates the detection, allowing the command to bypass the rule while still using WMIC for process-related activity."
+  }
+]

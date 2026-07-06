@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Start-Process 'cmd.exe' -ArgumentList '/c \", [char]97+[char]115+[char]115+[char]111+[char]99, \" .txt=txtfile'\"",
+    "explanation": "The rule specifically looks for the string 'assoc' within the CommandLine field. By using PowerShell to launch cmd.exe and constructing the 'assoc' string through character code concatenation or string manipulation, the literal keyword 'assoc' may not appear in the process creation logs for cmd.exe depending on how the provider captures arguments."
+  },
+  {
+    "output": "reg add \"HKEY_CLASSES_ROOT\\.txt\" /t REG_SZ /d \"exefile\" /f",
+    "explanation": "The Sigma rule detects the use of the 'assoc' utility to change file associations. However, 'assoc' is merely a wrapper for registry modifications. By using the 'reg' command (or PowerShell's Set-ItemProperty) to modify the registry keys directly, the attacker achieves the same persistence goal while completely bypassing a rule that only monitors for the 'assoc' executable string."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Users\\Public\\not_cmd.exe && C:\\Users\\Public\\not_cmd.exe /c assoc .txt=exefile",
+    "explanation": "The rule uses 'selection_img' to filter for 'cmd.exe' or the OriginalFileName 'Cmd.Exe'. While OriginalFileName is harder to spoof, some SIEM environments or log sources (like older versions of Sysmon or basic Security Event Logs) might only rely on the Image path. Renaming the binary can bypass filters strictly looking for the executable name 'cmd.exe'."
+  }
+]

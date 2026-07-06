@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe \"Get-WmiObject -Class Win32_Product | Where-Object {$_.Name -like '*ApplicationName*'} | ForEach-Object {$_.Uninstall()}\"",
+    "explanation": "Uses PowerShell instead of WMIC.exe to uninstall applications. Since the image is PowerShell.exe (not WMIC.exe), the rule's image condition is bypassed."
+  },
+  {
+    "output": "wmic process call create \"cmd /c msiexec /x {GUID}\"",
+    "explanation": "Uses WMIC.exe to create a process that runs msiexec for uninstallation. The command line contains 'call' but lacks 'uninstall', failing the rule's CLI condition."
+  },
+  {
+    "output": "regsvr32 /s /u C:\\Path\\To\\Uninstall.dll",
+    "explanation": "Uses regsvr32 to unregister a DLL-based uninstaller. Avoids WMIC.exe entirely, bypassing both image and CLI conditions."
+  },
+  {
+    "output": "taskkill /f /im explorer.exe && timeout /t 5 && start explorer.exe",
+    "explanation": "Simulates a reboot-like scenario to trigger application removal via system restart. No WMIC usage occurs, evading detection."
+  }
+]

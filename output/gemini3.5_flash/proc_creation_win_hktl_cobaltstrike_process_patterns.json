@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /k whoami",
+    "explanation": "Bypasses selection_generic_1 and selection_conhost_2 by replacing the '/C' (terminate) flag with '/k' (remain). The rule explicitly looks for '/C', but '/k' or other variations like '/V:ON /C' achieve similar execution results while failing the string match."
+  }
+]

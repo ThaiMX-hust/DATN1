@@ -1,0 +1,6 @@
+[
+  {
+    "output": "rundll32.exe C:\\Windows\\Temp\\payload.dll,DllMain \"Shell32.dll\"",
+    "explanation": "The Sigma rule contains a logical flaw in its filter condition: it excludes any execution where the CommandLine contains the string 'Shell32.dll'. An attacker can easily bypass this rule by appending 'Shell32.dll' as a decoy argument or comment to their malicious rundll32.exe command line. Because the string is present, the SIEM will drop or ignore the alert, while rundll32.exe simply ignores the unused trailing argument."
+  }
+]

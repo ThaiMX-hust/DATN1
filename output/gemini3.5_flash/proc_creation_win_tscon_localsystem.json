@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\tscon.exe %TEMP%\\not_tscon.exe && %TEMP%\\not_tscon.exe 1 /dest:rdp-tcp#0",
+    "explanation": "The Sigma rule relies on the 'Image' field ending with '\\tscon.exe'. By copying the legitimate tscon.exe binary to a different location with a different name (e.g., not_tscon.exe), the execution will no longer match the file name pattern, effectively bypassing the path-based detection while maintaining the functionality needed for RDP session hijacking."
+  },
+  {
+    "output": "psexec -s -i cmd.exe /c \"path\\to\\custom_rdp_tool.exe\"",
+    "explanation": "The rule is specifically scoped to the binary 'tscon.exe'. An attacker can use alternative methods or custom-compiled tools that interact with the Remote Desktop Services API (like WTSConnectSession) directly. Since these tools do not use the tscon.exe image, they do not trigger the specific file-name selection criteria of this rule."
+  }
+]

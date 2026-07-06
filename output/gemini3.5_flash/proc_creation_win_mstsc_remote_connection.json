@@ -1,0 +1,6 @@
+[
+  {
+    "output": "mstsc.exe C:\\path\\to\\connection.rdp",
+    "explanation": "The Sigma rule specifically looks for the command line argument '/v:' (or '-v:' via the windash modifier) to identify the target server. An adversary can bypass the 'selection_cli' condition entirely by saving the remote connection settings, including the target host, into an .rdp file and passing that file as an argument to mstsc.exe instead of using the command-line flag."
+  }
+]

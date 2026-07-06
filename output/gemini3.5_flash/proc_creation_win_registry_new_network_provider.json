@@ -1,0 +1,6 @@
+[
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\MyProvider\" /v \"NetworkProvider\" /t REG_SZ /d \"malicious.dll\" /f",
+    "explanation": "Uses a different service path (MyProvider) that still contains the required substrings '\\System\\CurrentControlSet\\Services\\' and '\\NetworkProvider' but avoids the specific providers filtered out in the commented filter, thereby matching the sigma rule while appearing benign."
+  }
+]

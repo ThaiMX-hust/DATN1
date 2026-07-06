@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Users\\Public\\not_reg.exe && C:\\Users\\Public\\not_reg.exe export HKEY_CURRENT_USER\\Software\\SimonTatham\\PuTTY\\Sessions C:\\Users\\Public\\putty.reg",
+    "explanation": "The rule relies on the 'selection_img' filter which checks if the process image ends in '\\reg.exe' or has the OriginalFileName 'reg.exe'. By copying the binary to a new name, the 'Image' check is bypassed. If the EDR/SIEM does not perform deep inspection of the 'OriginalFileName' metadata field or if that metadata is stripped/altered, the execution avoids detection while using the same command-line logic."
+  },
+  {
+    "output": "reg  exp HKLM\\Software\\Sota\\FFFTP C:\\Users\\Public\\out.reg",
+    "explanation": "The rule specifically looks for the strings 'save' or 'export' in the command line. The 'reg.exe' utility accepts shortened versions of verbs. Using 'exp' instead of 'export' fulfills the functional requirement of the command but fails the 'selection_cli_save' string match."
+  },
+  {
+    "output": "reg export \"HKCU\\Software\\SimonTatham\\PuTTY\"\\Sessions C:\\temp\\p.reg",
+    "explanation": "The rule looks for specific path strings like '\\Software\\SimonTatham\\PuTTY\\Sessions'. By placing quotes strategically in the middle of the path string (e.g., around a parent folder), the functional path remains valid for the Windows registry, but the literal string match in the SIEM's command-line logs is broken."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ItemProperty -Path 'HKCU:\\Software\\SimonTatham\\PuTTY\\Sessions\\*'\"",
+    "explanation": "The rule is strictly scoped to the use of 'reg.exe'. It does not account for alternative living-off-the-land binaries (LoLBins) like PowerShell or even specialized .NET assemblies that can read the registry directly without spawning a process that matches the specific CLI patterns defined in this Sigma rule."
+  }
+]

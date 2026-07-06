@@ -1,0 +1,14 @@
+[
+  {
+    "output": "tscon 2 /dest:\"rdp-tcp#\"\"1\"",
+    "explanation": "The rule looks for a specific string pattern ' /dest:rdp-tcp#'. By adding quotes within the destination string or at the end, such as 'rdp-tcp#\"1\"', the command remains functional for Windows command parsing but fails to match the literal substring defined in the Sigma rule."
+  },
+  {
+    "output": "tscon 2 /dest:RDP-TCP#0",
+    "explanation": "Sigma rules using 'contains' without explicit case-sensitivity settings may be bypassed on certain SIEM platforms if they are configured to be case-sensitive. While Sigma is generally case-insensitive, using 'RDP-TCP#' instead of 'rdp-tcp#' is a common environmental bypass."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\tscon.exe C:\\Users\\Public\\t.exe && C:\\Users\\Public\\t.exe 2 /dest:rdp-tcp#5",
+    "explanation": "While this specific command still contains the flag, attackers often rename the binary to evade detection logic that looks for both the process name 'tscon.exe' and the command line. If the detection logic is strictly tied to the string including the space ' /dest:', removing the space or using alternative spacing (if the parser allows) can sometimes trigger a bypass."
+  }
+]

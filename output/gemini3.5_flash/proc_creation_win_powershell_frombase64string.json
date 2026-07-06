@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"[Convert]::FromBase64String ('SGVsbG8gV29ybGQ=')\"",
+    "explanation": "Adding a space between the method name 'FromBase64String' and the opening parenthesis bypasses the exact string match '::FromBase64String(' defined in the Sigma rule while remaining syntactically valid in PowerShell."
+  },
+  {
+    "output": "powershell.exe -Command \"$method = 'FromBase' + '64String'; [Convert]::$method('SGVsbG8gV29ybGQ=')\"",
+    "explanation": "By concatenating the method name dynamically as a string and invoking it via a variable, the static signature 'FromBase64String' never appears sequentially in the process command line."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAcwAgAGMAYQBsAGMALgBlAHgAZQA=",
+    "explanation": "Attackers can bypass the need for the FromBase64String function entirely by using PowerShell's native -EncodedCommand parameter, which automatically decodes and executes Base64 payloads."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.Convert]::FromBase64String ( 'ZWNobyAnVGVzdCc=' )\"",
+    "explanation": "The Sigma rule strictly matches the literal string '::FromBase64String('. By simply introducing a space character between the method name and the opening parenthesis, the PowerShell command executes successfully while evading the exact string match defined in the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"$method = 'FromBase64String'; [Convert]::$method('ZWNobyAnVGVzdCc=')\"",
+    "explanation": "This bypass technique assigns the target method name to a variable and invokes it dynamically. Since the literal sequence '::FromBase64String(' never appears continuously in the command line, it successfully circumvents the rule's static string matching logic."
+  }
+]

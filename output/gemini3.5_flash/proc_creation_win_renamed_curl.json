@@ -1,0 +1,6 @@
+[
+  {
+    "output": "ResourceHacker.exe -open C:\\Windows\\System32\\curl.exe -save C:\\Temp\\svchost.exe -action modify -res version.res -mask VERSIONINFO,1,1033",
+    "explanation": "The rule heavily relies on the PE metadata fields 'OriginalFileName' and 'Description'. An attacker can bypass this rule entirely by using a tool like Resource Hacker to strip or modify the Version Info (PE metadata) of the curl.exe binary before executing it under a different name. If the metadata no longer says 'curl.exe', the 'selection' criteria will never trigger."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "sdbinst.exe C:\\temp\\hidden.sdb_folder\\malicious_shim.bin",
+    "explanation": "The Sigma rule excludes any CommandLine containing the string '.sdb' (filter_main_legit_ext). By placing the malicious shim inside a directory that has '.sdb' in its name, the command line will contain '.sdb', effectively bypassing the detection while installing a file with a non-standard extension (.bin)."
+  },
+  {
+    "output": "sdbinst.exe C:\\temp\\malicious_shim.bin -c",
+    "explanation": "The rule explicitly filters out executions where the CommandLine ends with ' -c' (filter_main_legit_extensions). By appending the ' -c' flag to the end of the execution command, the malicious shim with an uncommon extension (.bin) evades detection."
+  }
+]

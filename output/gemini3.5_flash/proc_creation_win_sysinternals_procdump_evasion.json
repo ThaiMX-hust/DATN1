@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Copy-Item .\\procdump.exe -Destination .\\sysdiag.exe\"",
+    "explanation": "The Sigma rule's selection_1 relies strictly on the explicit strings 'copy procdump' or 'move procdump' typically associated with cmd.exe. Using PowerShell's Copy-Item cmdlet (or aliases like 'cp', 'cpi') achieves the file copy without invoking those specific strings."
+  },
+  {
+    "output": "cmd.exe /c ren procdump.exe pd.exe",
+    "explanation": "The detection logic monitors for 'copy' and 'move' commands. Using the built-in 'ren' (rename) command alters the binary's name on disk but evades selection_1 because the string 'ren ' is not monitored."
+  },
+  {
+    "output": "powershell.exe -Command \"Move-Item -Path .\\lsass.exe_220111_085234.dmp -Destination .\\app_crash.log\"",
+    "explanation": "Selection_3 attempts to catch the movement or copying of the default ProcDump output file by matching 'copy lsass.exe_' or 'move lsass.exe_'. Executing the operation via PowerShell's Move-Item bypasses the literal string match for 'move ' (which includes a trailing space in typical cmd usage)."
+  }
+]

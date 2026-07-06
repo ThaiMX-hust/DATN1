@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\runonce.exe C:\\Users\\Public\\not_runonce.exe && C:\\Users\\Public\\not_runonce.exe /AlternateShellStartup",
+    "explanation": "The rule uses a selection filter (selection_img) that looks for the process image ending specifically in '\\runonce.exe'. By copying the legitimate binary to a different location and renaming it, the image path no longer matches the rule's criteria, while the functionality remains the same."
+  },
+  {
+    "output": "runonce.exe /AlternateShellStartup ",
+    "explanation": "The rule defines a selection (selection_cli) where the CommandLine must end with '/r' OR contain '/AlternateShellStartup', AND the process must be runonce.exe. However, the condition requires 'all of selection_*'. By using /AlternateShellStartup but adding a trailing space or an additional dummy argument at the end of the command line, the 'endswith: /r' condition is not met, potentially failing the 'all of' logic depending on the SIEM's strictness with the 'selection_cli' list."
+  },
+  {
+    "output": "C:\\Windows\\System32\\runonce.exe /Config",
+    "explanation": "The rule is specifically tuned to detect '/AlternateShellStartup' or '/r' flags. Runonce.exe supports other flags or execution contexts (like /Config) that might trigger the desired behavior or bypass the specific string matches defined in selection_cli while still executing registry-defined tasks."
+  }
+]

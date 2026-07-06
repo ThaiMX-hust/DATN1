@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"$stream = [System.IO.Compression.GZipStream]::new([System.IO.MemoryStream]::new(), [System.IO.Compression.CompressionMode]::Decompress); $stream.Read($buf, 0, $buf.Length)\"",
+    "explanation": "The detection rule explicitly filters for the literal token string '::Decompress'. When instantiating a GZipStream object programmatically, the decompression flag can be defined using enum values (such as '[System.IO.Compression.CompressionMode]::Decompress'). However, calling the object's instance method '.Read()' or '.CopyTo()' executes the actual extraction process rather than using a static class method like '::Decompress', thus breaking the rule's sequential 'contains|all' logic."
+  },
+  {
+    "output": "powershell.exe -Command \"$gz = 'GZip' + 'Stream'; $dec = 'Decom' + 'press'; [Type]::GetType(\"System.IO.Compression.$gz\").GetConstructors()[0].Invoke(@($stream, [System.IO.Compression.CompressionMode]::$dec))\"",
+    "explanation": "The rule depends entirely on finding the cleartext literal strings 'GZipStream' and '::Decompress' inside the process command line parameters. Splitting these names into string fragments and concatenating them or leveraging .NET reflection dynamically prevents the rule signatures from matching while performing the exact same runtime decoding operations."
+  }
+]

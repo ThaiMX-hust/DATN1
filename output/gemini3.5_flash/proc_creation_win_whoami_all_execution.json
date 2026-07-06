@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c whoami /a^l^l",
+    "explanation": "The cmd.exe command interpreter processes and removes caret (^) escape characters before passing the arguments to the target executable. The Sigma rule checks for the explicit string ' -all' or ' /all' (via windash). Since the logged command line contains 'whoami /a^l^l', the string matching condition is bypassed while whoami.exe still executes successfully with the /all parameter."
+  },
+  {
+    "output": "powershell.exe -Command \"[Security.Principal.WindowsIdentity]::GetCurrent().Groups | ForEach-Object { $_.Translate([System.Security.Principal.NTAccount]) }\"",
+    "explanation": "This technique bypasses the rule by completely avoiding the execution of the 'whoami.exe' binary. The Sigma rule specifically targets the 'whoami.exe' Image and OriginalFileName. By using native Windows API calls via PowerShell (.NET classes) to enumerate the current user's privileges and groups, the detection logic is evaded while achieving the same reconnaissance goal."
+  }
+]

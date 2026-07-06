@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell -NoProfile -WindowHidden -Command \"$rtlo=[char]0x202e; $f='legit_'+$rtlo+'.exe'; Start-Process $f\"",
+    "explanation": "The RTLO Unicode character (U+202E) is generated at runtime via [char]0x202e, so it does not appear in the command line, evading the sigma rule that looks for the literal character."
+  }
+]

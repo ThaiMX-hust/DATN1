@@ -1,0 +1,10 @@
+[
+  {
+    "output": "type payload.txt | cmd.exe",
+    "explanation": "The Sigma rule specifically triggers when the command line contains the '<' redirection character alongside cmd.exe. By reading the file with 'type' and piping ('|') the content into cmd.exe, the same stdin execution behavior is achieved without triggering the 'CommandLine|contains: <' condition."
+  },
+  {
+    "output": "for /f \"tokens=*\" %i in (payload.txt) do cmd.exe /c %i",
+    "explanation": "This approach uses a batch FOR loop to read the file contents line-by-line and pass them to cmd.exe for execution. Because the '<' character is not used in the command line, the rule is successfully evaded while still executing the file's contents."
+  }
+]

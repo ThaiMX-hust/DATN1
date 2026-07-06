@@ -1,0 +1,22 @@
+[
+  {
+    "output": "setspn.exe -q",
+    "explanation": "This command is included to demonstrate the baseline that the rule is designed to catch. It matches both the executable selection and the command line requirement for ' -q '."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\setspn.exe C:\\Windows\\Temp\\not_dangerous.exe && C:\\Windows\\Temp\\not_dangerous.exe -q/t",
+    "explanation": "This bypasses the 'selection_pe' criteria if the SIEM only checks the 'Image' path/name and fails to properly inspect 'OriginalFileName' or 'Description' metadata. By renaming the file, the 'endswith: \\setspn.exe' condition is negated."
+  },
+  {
+    "output": "setspn.exe -query",
+    "explanation": "The rule specifically looks for ' -q ' or ' /q ' (with surrounding spaces). Using the full parameter name '-query' or '-q:' (if accepted by the binary version) avoids the specific string match ' -q ' while still performing the enumeration."
+  },
+  {
+    "output": "setspn.exe \"-q\"",
+    "explanation": "By wrapping the flag in quotes, the command line string becomes 'setspn.exe \"-q\"'. The Sigma rule looks for ' -q ' (space dash q space). The presence of the quote character breaks the literal string match even though the functional outcome is identical."
+  },
+  {
+    "output": "powershell.exe -Command \"Add-Type -AssemblyName System.DirectoryServices.AccountManagement; [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()\"",
+    "explanation": "This is a functional bypass. Instead of using the monitored setspn.exe utility, an attacker can use PowerShell or .NET classes to enumerate SPNs. Since the rule is strictly tied to the setspn.exe process and its specific CLI arguments, native API-based enumeration remains completely invisible to it."
+  }
+]

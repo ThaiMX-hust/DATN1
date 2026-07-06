@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c \"w^h^o^a^m^i\"",
+    "explanation": "This command bypasses the rule by utilizing standard CMD caret (^) obfuscation. The Sigma rule specifically targets a hardcoded list of Unicode characters (e.g., 0x22FF, 0x00A0) defined in 'selection_special_chars'. Because the caret is not included in this list, the 'condition: all of selection_*' requirement is not met, evading detection."
+  }
+]

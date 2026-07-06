@@ -1,0 +1,14 @@
+[
+  {
+    "output": "print.exe /D:C:\\Temp\\destination.exe C:\\Temp\\source.exe",
+    "explanation": "The rule explicitly excludes events where the CommandLine contains 'print.exe' via the 'filter_print' condition. By simply executing the binary with its '.exe' extension, the command matches the exclusion filter, and the alert is completely bypassed."
+  },
+  {
+    "output": "\"print\" /D:C:\\Temp\\destination.exe C:\\Temp\\source.exe",
+    "explanation": "The rule relies on 'CommandLine|startswith: print'. By wrapping the command in double quotes, the command line string begins with a quotation mark instead of the letter 'p'. This causes the selection criteria to fail, bypassing the rule while still executing successfully in the Windows command prompt."
+  },
+  {
+    "output": "print /D:C:\\Temp\\destination.txt C:\\Temp\\source.exe",
+    "explanation": "The rule specifically looks for the string '.exe' in the command line. An attacker can bypass this by copying the malicious file to a destination with a different extension (like .txt or .dat) and renaming it later, which prevents the '.exe' requirement in the selection condition from triggering."
+  }
+]

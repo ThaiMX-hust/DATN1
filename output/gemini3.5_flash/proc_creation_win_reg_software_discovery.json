@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe %TEMP%\\r.exe && %TEMP%\\r.exe query \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\" /v svcVersion",
+    "explanation": "This bypasses the rule by making a copy of the reg.exe executable and running it under a different name (r.exe). This causes the 'Image|endswith: \\reg.exe' condition to fail, completely evading the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ItemPropertyValue -Path 'HKLM:\\Software\\Microsoft\\Internet Explorer' -Name 'svcVersion'\"",
+    "explanation": "This bypasses the rule by utilizing PowerShell's native registry provider instead of invoking the reg.exe binary. Since reg.exe is not executed and the command line arguments differ, it fails both the Image and CommandLine matching conditions."
+  }
+]

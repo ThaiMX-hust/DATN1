@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cmstp.exe C:\\Users\\Public\\Downloads\\not_cmstp.exe && C:\\Users\\Public\\Downloads\\not_cmstp.exe /S /AU C:\\Users\\Public\\Downloads\\payload.inf",
+    "explanation": "The rule relies on 'Image' ending with '\\cmstp.exe' or the 'OriginalFileName' being 'CMSTP.EXE'. While renaming the binary handles the 'Image' filter, many EDRs and advanced SIEMs still track 'OriginalFileName' via PE metadata. To bypass the specific logic provided, an attacker might also try to use alternative flag delimiters if the parser is rigid, or leverage execution methods that don't trigger a standard 'process_creation' log with the expected 'CommandLine' strings, though the primary bypass here is breaking the 'selection_img' condition by moving/renaming the binary."
+  },
+  {
+    "output": "cmstp.exe /s /ni C:\\Path\\To\\Malicious.inf",
+    "explanation": "The rule uses 'all of selection*', meaning both selection_img AND selection_cli must be true. If an attacker uses a flags sequence not explicitly listed in the 'selection_cli' list\u2014for instance, if the logic only looked for /au and the attacker used only /ni (which is listed, but the rule requires 'CommandLine' to contain specific strings)\u2014the bypass depends on the completeness of the list. Here, providing a command that uses only one flag or uses techniques like environment variable expansion (e.g., cmd /c \"set a=/s && cmstp.exe %a% ...\") can sometimes evade simple string-match detectors."
+  },
+  {
+    "output": "cmstp.exe c:\\path\\to\\payload.inf",
+    "explanation": "This execution completely omits the silent ('/s') or no-install ('/ni') flags. While this reduces stealth by potentially generating a UI prompt for the user, it successfully bypasses the rule's 'selection_cli' condition, which strictly requires the presence of those specific arguments to trigger."
+  },
+  {
+    "output": "custom_cmstp.exe /s c:\\path\\to\\payload.inf",
+    "explanation": "If an adversary copies cmstp.exe, patches or removes the 'OriginalFileName' attribute within the binary's PE metadata, and renames the file on disk, the 'selection_img' condition will fail to match. This bypasses the entire rule, even if the flagged command-line arguments are used."
+  }
+]

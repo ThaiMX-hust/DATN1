@@ -1,0 +1,22 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe %TEMP%\\trusted_updater.exe && \"%ProgramFiles%\\Microsoft Office\\root\\Office16\\ONENOTE.EXE\" /hyperlink %TEMP%\\trusted_updater.exe",
+    "explanation": "The rule identifies suspicious child processes by checking 'Image' or 'OriginalFileName' against a blacklist of known LOLBins. By copying a legitimate binary like PowerShell to a temporary directory and renaming it (e.g., 'trusted_updater.exe'), the 'Image' path no longer matches the 'endswith' conditions, and the 'OriginalFileName' check only triggers if the monitoring system correctly extracts metadata from the new file location. Furthermore, placing the file in %TEMP% (C:\\Windows\\Temp) is only flagged if the image name matches the opt_img list; since we renamed it, it avoids that logic."
+  },
+  {
+    "output": "explorer.exe \"C:\\Users\\Public\\Documents\\payload.lnk\"",
+    "explanation": "The rule monitors explorer.exe as a child process only if the command line contains specific script extensions (.hta, .js, etc.). By launching a malicious .LNK (shortcut) file via Explorer, the command line does not contain the blacklisted strings, effectively bypassing the 'selection_opt_explorer' filter while still achieving execution."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe %TEMP%\\not_a_backdoor.exe && \"%ProgramFiles%\\Microsoft Office\\root\\Office16\\ONENOTE.EXE\" /hyperlink %TEMP%\\not_a_backdoor.exe",
+    "explanation": "The Sigma rule relies on specific binary names (OriginalFileName or Image path) and known sensitive directories. By copying a legitimate, signed binary like PowerShell to a custom directory not listed in 'selection_opt_paths' (such as a subfolder of the user's home directory that isn't AppData) and renaming it, the 'selection_opt_img' filter is bypassed because the Image path no longer ends with the blacklisted strings and the rule does not check the OriginalFileName of the renamed file if it doesn't match the hardcoded list."
+  },
+  {
+    "output": "\"%ProgramFiles%\\Microsoft Office\\root\\Office16\\ONENOTE.EXE\" /hyperlink \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "This is a simple path-based bypass. The rule lists several Lolbins and interpreters but does not include 'calc.exe'. While calc is benign, an attacker could use DLL Side-Loading or search order hijacking in a directory containing a renamed calc.exe to execute code, as long as the parent process is OneNote and the child process name/path isn't in the explicit selection list."
+  },
+  {
+    "output": "\"%ProgramFiles%\\Microsoft Office\\root\\Office16\\ONENOTE.EXE\" /hyperlink \"C:\\Windows\\System32\\explorer.exe\" \"C:\\path\\to\\payload.exe\"",
+    "explanation": "The rule specifically monitors 'explorer.exe' child processes only if the command line contains certain script extensions (.hta, .js, etc.). By launching a standard executable (.exe) through explorer.exe, the 'selection_opt_explorer' condition is not met, even though OneNote is the parent."
+  }
+]

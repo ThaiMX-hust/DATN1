@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c whoami",
+    "explanation": "The command inserts '/c' between the .exe and whoami, breaking the '.exe whoami' substring required by the rule, thus avoiding detection while still executing whoami."
+  }
+]

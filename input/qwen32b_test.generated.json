@@ -1,0 +1,50 @@
+[
+  {
+    "test_id": "execution_001",
+    "target_commandline": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "llm_generated"
+  },
+  {
+    "test_id": "execution_002",
+    "target_commandline": "curl.exe -H'User-Agent: EvilAgent' http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "quote_insertion"
+  },
+  {
+    "test_id": "execution_003",
+    "target_commandline": "curl.exe --header \"User-Agent: EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "llm_generated"
+  },
+  {
+    "test_id": "execution_004",
+    "target_commandline": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com\\",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "llm_generated"
+  },
+  {
+    "test_id": "execution_005",
+    "target_commandline": "curl.exe -H\"User-Agent: EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "omission"
+  },
+  {
+    "test_id": "execution_006",
+    "target_commandline": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "path_variation"
+  }
+]

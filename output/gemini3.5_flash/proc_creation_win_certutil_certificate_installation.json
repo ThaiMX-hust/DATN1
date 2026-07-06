@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"Import-Certificate -FilePath C:\\Temp\\cert.cer -CertStoreLocation Cert:\\LocalMachine\\Root\"",
+    "explanation": "The provided Sigma rule is highly specific and relies entirely on detecting the execution of the 'certutil.exe' binary alongside explicit command-line strings ('-addstore' and 'root'). This can be easily bypassed by using native PowerShell cmdlets such as 'Import-Certificate' to install the root certificate into the trust store, which completely evades the 'selection_img' and 'selection_cli_add' conditions while achieving the same system-level outcome."
+  }
+]

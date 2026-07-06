@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"reg add HKCU\\Software\\Classes\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32 /ve /t REG_SZ /d C:\\path\\to\\malicious.dll /f\"",
+    "explanation": "This bypass attempts to perform a COM hijacking or redirection by creating a user-specific CLSID entry for the CMSTP COM object. If the application or launcher doesn't strictly validate the path or uses a different mechanism to load the object, the ParentCommandLine check looking for the specific GUID spawned from DllHost might be avoided if the attacker can trigger the execution through a different parent process or by manipulating how the COM object is instantiated without triggering the specific DllHost pattern expected by the rule."
+  },
+  {
+    "output": "Rename-Item -Path \"C:\\Windows\\System32\\dllhost.exe\" -NewName \"C:\\Windows\\Temp\\not_dllhost.exe\"; & \"C:\\Windows\\Temp\\not_dllhost.exe\" /Processid:{3E5FC7F9-9A51-4367-9063-A120244FBEC7}",
+    "explanation": "The rule explicitly filters for ParentImage ending with '\\DllHost.exe'. By copying DllHost.exe to a different location and renaming it, the ParentImage condition in the Sigma rule will fail to match, even though the command line and GUID remain the same."
+  },
+  {
+    "output": "Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList \"cmstp.exe /au /s C:\\path\\to\\profile.inf\"",
+    "explanation": "This approach uses WMI to create a process, which can change the parent-child relationship. If the CMSTP execution is handled via a WMI provider or a service rather than being directly spawned by the DllHost process in the way the rule expects, the 'ParentImage|endswith' logic may not trigger, especially if the resulting elevated process is a grandchild or orphaned process."
+  }
+]

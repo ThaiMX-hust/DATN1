@@ -1,0 +1,18 @@
+[
+  {
+    "output": "1..254 | % { Test-Connection -ComputerName \"192.168.1.$_\" -Count 1 -Quiet }",
+    "explanation": "Bypasses the detection logic by utilizing PowerShell-native alternatives: the '%' alias instead of the 'foreach ' string, and the 'Test-Connection' cmdlet instead of the 'ping' utility."
+  },
+  {
+    "output": "cmd.exe /c \"f^o^r /L %i in (1,1,254) do p^i^n^g -n 1 192.168.1.%i\"",
+    "explanation": "Bypasses the rule using CMD caret (^) obfuscation. The strings 'f^o^r ' and 'p^i^n^g' will successfully execute in the command prompt but will not match the exact string requirements of the Sigma rule."
+  },
+  {
+    "output": "$ips = 1..254; $i=0; while($i -lt ips.length){ Resolve-DnsName \\\"192.168.1.($ips[$i])\"; $i++ }",
+    "explanation": "Bypasses the rule by using a 'while' loop instead of 'for' or 'foreach', and utilizing 'Resolve-DnsName' instead of 'nslookup'."
+  },
+  {
+    "output": "1..254 | % { Test-Connection -ComputerName 192.168.1.$_ -Count 1 }",
+    "explanation": "Bypasses the 'selection_loop' condition by using the PowerShell alias '%' instead of 'foreach ', and bypasses the 'selection_tools' condition by using the 'Test-Connection' cmdlet instead of 'ping'."
+  }
+]

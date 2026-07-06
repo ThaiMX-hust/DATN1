@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -EncodedCommand W0NvbnNvbGVdOjpPdXRwdXRFbmNvZGluZz1bVGV4dC5VVEY4RW5jb2RpbmddOjpVVEY4",
+    "explanation": "Base64 encoding the command string is the most common way to bypass 'CommandLine|contains' rules. The SIEM will see the encoded blob rather than the plaintext string defined in the detection selection."
+  }
+]

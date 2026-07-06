@@ -1,0 +1,6 @@
+[
+  {
+    "output": "VMwareToolBoxCmd.exe \"script\" \"set\" power C:\\Windows\\Temp\\persist.bat",
+    "explanation": "The Sigma rule checks for the exact strings ' script ' and ' set ' (with surrounding spaces) in the command line. By wrapping the arguments in double quotes, the command line becomes 'VMwareToolBoxCmd.exe \"script\" \"set\"...', which no longer contains the spaces adjacent to the keywords. This bypasses the selection_cli condition while still being correctly parsed by the Windows command line interpreter."
+  }
+]

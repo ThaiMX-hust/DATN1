@@ -1,0 +1,10 @@
+[
+  {
+    "output": "ren PurpleSharp.exe PsSim.exe && .\\PsSim.exe -t T1059.001 -m localhost",
+    "explanation": "The rule relies on string matching for the filename 'PurpleSharp' or the OriginalFileName 'PurpleSharp.exe'. By renaming the binary to 'PsSim.exe', the 'Image|contains' and 'CommandLine|contains' filters are bypassed. Since the binary is often compiled by the user or can be modified to change the PE metadata, the 'OriginalFileName' check is bypassed if the metadata is stripped or altered."
+  },
+  {
+    "output": "Copy-Item C:\\Tools\\PurpleSharp.exe C:\\Windows\\Temp\\not_a_tool.exe; Start-Process C:\\Windows\\Temp\\not_a_tool.exe -ArgumentList '/sc local'",
+    "explanation": "This command bypasses the detection by changing the file path and name, ensuring the command line does not contain the prohibited strings 'PurpleSharp' or 'xyz123456.exe'. As long as the 'OriginalFileName' header in the executable's resources is modified or missing, the rule will not trigger."
+  }
+]

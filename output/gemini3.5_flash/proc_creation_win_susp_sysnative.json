@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:/Windows/Sysnative/cmd.exe",
+    "explanation": "Bypasses the rule by using forward slashes instead of backslashes. Many Windows executables and APIs accept forward slashes in file paths, which avoids the explicit backslash string check."
+  }
+]

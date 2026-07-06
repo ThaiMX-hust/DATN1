@@ -1,0 +1,6 @@
+[
+  {
+    "output": "ren PingCastle.exe pc.exe && pc.exe --healthcheck --level 1 --server dc01.internal",
+    "explanation": "The rule triggers on specific file names ('PingCastle.exe'), original file names, product metadata, and specific hash values. By renaming the executable, the 'Image' and 'OriginalFileName' filters are bypassed. Using '--level 1' instead of '--level Full' avoids the command-line signature, while still allowing the tool to function. Additionally, recompiling the open-source tool or using a version not listed in the hash list would bypass the hash-based detection."
+  }
+]

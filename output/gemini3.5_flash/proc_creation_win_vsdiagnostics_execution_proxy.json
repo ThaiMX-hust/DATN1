@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\Remote Debugger\\x64\\VSDiagnostics.exe /start:123 /launch:\"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "The rule uses 'CommandLine|contains' looking specifically for the string 'start'. By using the flag '/start:123' (a valid parameter for session ID) or by simply using a different case if the SIEM is case-sensitive, the rule can be bypassed. More importantly, the rule checks for 'all of selection_*', meaning it requires both 'start' AND 'launch' to be present. If an attacker can trigger the execution through a configuration file or a different verb that doesn't use the exact 'start' string, it avoids detection."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\calc.exe VSDiagnostics.exe && .\\VSDiagnostics.exe",
+    "explanation": "The rule relies on the OriginalFileName or the Image path ending in VSDiagnostics.exe while also containing specific command line arguments. If an attacker renames a malicious binary to VSDiagnostics.exe but does not use the 'start' and 'launch' flags, or conversely, renames the legitimate VSDiagnostics.exe to something else, the 'selection_img' or 'selection_cli' logic may fail depending on how the EDR populates OriginalFileName."
+  },
+  {
+    "output": "VSDiagnostics.exe \"st\"+\"art\" /launch:calc.exe",
+    "explanation": "Using command-line obfuscation or environment variable expansion (e.g., %STR% where STR=start) to hide the literal string 'start' from simple pattern matching engines."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe C:\\Users\\Public\\Documents\\not_csc.exe && C:\\Users\\Public\\Documents\\not_csc.exe /target:library /out:exploit.dll exploit.cs",
+    "explanation": "The rule identifies 'csc.exe' by its filename or OriginalFileName. By copying the binary to a different name (e.g., not_csc.exe) and executing it, the 'selection_img' criteria may fail depending on how strictly the EDR/SIEM populates 'OriginalFileName' or if it only monitors specific paths. Furthermore, executing it from a standard command prompt (cmd.exe) avoids the 'selection_parent_generic' list."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"& { $code = '[DllImport(\\\"user32.dll\\\")] public static extern int MessageBox(int h, string m, string c, int type);'; csc.exe /target:library /out:test.dll test.cs }\"",
+    "explanation": "The rule targets PowerShell as a parent only if the command line contains '-Encoded' or 'FromBase64String'. By using a standard clear-text PowerShell command to invoke csc.exe, the 'selection_parent_powershell' logic is bypassed because the specific suspicious strings are absent."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\w3wp.exe -> (via Process Ghosting/Hollowing) -> csc.exe",
+    "explanation": "The rule explicitly excludes 'w3wp.exe' (IIS Worker Process) in 'filter_main_w3p'. An attacker using process injection or hollowing to make their malicious parent process appear as w3wp.exe would trigger the exclusion filter and bypass the detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"csc.exe /target:exe /out:payload.exe payload.cs\"",
+    "explanation": "The rule defines a specific set of 'suspicious' parents (Office apps, script hosts, and specific PowerShell flags). It does not include the standard Windows Command Processor (cmd.exe) as a suspicious parent, provided the command is not executed from a path defined in 'selection_parent_susp_location'."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\schtasks.exe /create /tn \\\"test\\\" /tr \\\"cmd.exe\\\" /f",
+    "explanation": "The command uses schtasks.exe to create a scheduled task but runs under the NT AUTHORITY\\SYSTEM account, which matches the filter_main_system_user rule (User contains 'AUTHORI'), causing the detection condition to evaluate to false and thus bypassing the rule."
+  }
+]

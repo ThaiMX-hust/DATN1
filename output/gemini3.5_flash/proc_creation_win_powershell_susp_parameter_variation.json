@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"Write-Host 'Testing Rule Scope'\"",
+    "explanation": "This command bypasses the specific Sigma rule provided because it uses the full parameter names. The rule's logic is explicitly designed to detect common shortened versions of parameters (e.g., '-win hidd', '-ep bypass'). It does not trigger on the standard, full-length parameters. This highlights that while the rule is effective against specific shorthand obfuscation, it requires complementary rules to detect full parameter usage in suspicious contexts or other obfuscation methods like character insertion."
+  }
+]

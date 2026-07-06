@@ -1,0 +1,26 @@
+[
+  {
+    "output": "C:\\ProgramData\\custom_parent.exe -launch C:\\Windows\\System32\\cmd.exe /c echo test",
+    "explanation": "Bypass via alternate writable directory: The rule's selection criteria strictly looks for a ParentImage containing ':\\Users\\Public\\'. An attacker can bypass this specific rule by placing and executing the parent process from another world-writable directory, such as C:\\ProgramData\\ or C:\\Windows\\Temp\\."
+  },
+  {
+    "output": "C:\\Users\\Public\\loader.exe -execute C:\\Users\\Public\\renamed_ps.exe -c \"Write-Host 'Execution'\"",
+    "explanation": "Bypass via binary renaming: The rule relies on checking if the child Image ends with specific strings (e.g., '\\powershell.exe') and if the CommandLine contains exact keywords. By copying the binary to a new name (e.g., renamed_ps.exe) and omitting the blacklisted keywords from the command line, the evasion succeeds. Defenders can mitigate this by monitoring the 'OriginalFileName' PE header field instead of just the image path."
+  },
+  {
+    "output": "C:\\Users\\Public\\trigger.exe -> (Creates Scheduled Task or uses WMI Win32_Process) -> C:\\Windows\\System32\\cmd.exe",
+    "explanation": "Bypass via indirect execution: The rule depends on a direct parent-to-child relationship (ParentImage spawning Image). If the executable in the Public folder uses indirect methods like WMI or Scheduled Tasks to launch the payload, the actual parent process logged will be WmiPrvSE.exe or svchost.exe, breaking the rule's logic."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Users\\Public\\not_a_shell.exe && C:\\Users\\Public\\YourMaliciousParent.exe",
+    "explanation": "The rule triggers when a process in \\Users\\Public\\ executes a known shell binary (like cmd.exe) or a command line containing specific keywords. By copying the legitimate shell binary to a new name (e.g., not_a_shell.exe), the 'Image|endswith' and 'CommandLine|contains' checks are bypassed because 'not_a_shell' does not match the hardcoded list of suspicious strings."
+  },
+  {
+    "output": "C:\\Users\\Public\\Parent.exe -arg \"powershell\"",
+    "explanation": "The rule uses 'all of selection_*', meaning the ParentImage must be in \\Users\\Public\\ AND the child process must match the suspicious list. If Parent.exe performs malicious actions directly (e.g., using Windows APIs for injection or network communication) without spawning a child process that matches the specific scripting/shell binaries listed, it bypasses the rule entirely."
+  },
+  {
+    "output": "C:\\Users\\Public\\Parent.exe",
+    "explanation": "Since the condition is 'all of selection_*', the rule requires a child process to be spawned. A parent process running in the Public folder that executes its payload via DLL hijacking, direct system calls, or loading a .NET assembly into its own memory space will not trigger the 'selection_child' criteria."
+  }
+]

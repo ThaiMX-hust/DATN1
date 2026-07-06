@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command \"Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Domain, Username, Model\"",
+    "explanation": "Uses PowerShell/CIM to retrieve the same computer system information without invoking wmic.exe, thus avoiding the rule's Image and CommandLine conditions."
+  }
+]

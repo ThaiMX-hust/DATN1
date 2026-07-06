@@ -1,0 +1,14 @@
+[
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport 5939 --Module 1 ",
+    "explanation": "Adding a single trailing whitespace at the end of the command line causes the 'endswith' condition in the Sigma rule to fail, allowing the execution to bypass detection."
+  },
+  {
+    "output": "TeamViewer_Desktop.exe --IPCport 5939 --Module 1 --ignoredFlag",
+    "explanation": "Appending an arbitrary or ignored argument to the command line ensures the string no longer terminates with '--Module 1', breaking the strict 'endswith' string matching logic."
+  },
+  {
+    "output": "tv_desktop.exe --IPCport 5939 --Module 1",
+    "explanation": "Renaming the 'TeamViewer_Desktop.exe' binary to an arbitrary name like 'tv_desktop.exe' bypasses the explicit 'Image' and 'CommandLine' string matches defined in the rule."
+  }
+]

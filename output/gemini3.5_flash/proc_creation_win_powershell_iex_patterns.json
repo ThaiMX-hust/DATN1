@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -c \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('d2hvYW1p'))|  iex\"",
+    "explanation": "Bypasses the rule by introducing non-standard whitespace. The Sigma rule relies on exact spacing patterns like ' | iex ' or ')|iex;'. Using a pipe with no preceding space and double spaces before 'iex' avoids the static string matches."
+  }
+]

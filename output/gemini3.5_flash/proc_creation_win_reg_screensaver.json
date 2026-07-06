@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg add \"HKCU\\Control Panel\\Desktop\" /v SCRNSAVE.EXE /t REG_SZ /d \"C:\\Windows\\System32\\calc.exe\" /f",
+    "explanation": "The Sigma rule specifically looks for the '.scr' extension within the command line (selection_option_4). However, Windows will execute any valid Portable Executable (PE) renamed or even simply pointed to by the SCRNSAVE.EXE value, regardless of the extension. By using '.exe' instead of '.scr', the command avoids the string match requirement."
+  },
+  {
+    "output": "New-ItemProperty -Path \"HKCU:\\Control Panel\\Desktop\" -Name \"SCRNSAVE.EXE\" -Value \"C:\\temp\\evil.scr\" -PropertyType String -Force",
+    "explanation": "The rule is strictly limited to the execution of 'reg.exe' (selection_reg). By using PowerShell's native registry cmdlets (New-ItemProperty or Set-ItemProperty), the malicious registry modification is performed without ever calling reg.exe, thereby bypassing the rule entirely."
+  },
+  {
+    "output": "reg add \"HKCU\\Control Panel\\Desktop\" /v \"SCRNSAVE.EXE\" /t REG_SZ /d \"C:\\path\\to\\payload.scr\"",
+    "explanation": "The rule requires the presence of the '/f' (force) flag in all selection options. If an adversary runs the command without '/f' and manually confirms the overwrite (or if the key does not yet exist), the 'selection_option' logic fails to trigger."
+  }
+]

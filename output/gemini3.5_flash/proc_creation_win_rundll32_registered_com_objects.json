@@ -1,0 +1,10 @@
+[
+  {
+    "output": "rundll32.exe \"-sta\" {9BA05972-F6A8-11CF-A442-00A0C90A8F39}",
+    "explanation": "The Sigma rule specifically looks for the exact strings '-sta ' or '-localserver ' (including the trailing space). By enclosing the flag in double quotes, the command line contains '\"-sta\"' instead, which breaks the exact string match because there is no space immediately following the 'a'. Windows command-line parsing strips the quotes and executes the COM object normally, effectively bypassing the static detection logic."
+  },
+  {
+    "output": "rundll32.exe /sta {9BA05972-F6A8-11CF-A442-00A0C90A8F39}",
+    "explanation": "Many Windows command-line utilities accept the forward slash '/' interchangeably with the hyphen '-' for switches. The rule explicitly checks for '-sta ' and '-localserver '. Using '/sta ' evades the exact substring match while still allowing rundll32.exe to process the argument."
+  }
+]

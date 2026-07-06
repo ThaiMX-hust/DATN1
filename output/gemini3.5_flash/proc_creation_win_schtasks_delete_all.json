@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe -delete -tn * -f",
+    "explanation": "Windows command-line tools frequently accept a hyphen (-) instead of a forward slash (/) for command line arguments. Using '-delete' and '-tn *' bypasses the strict string matching for ' /delete ' and '/tn \\*' specified in the rule."
+  },
+  {
+    "output": "schtasks.exe /delete /tn \"*\" /f",
+    "explanation": "Wrapping the asterisk wildcard in double quotes is parsed correctly by the schtasks utility, but it prevents the Sigma rule from triggering because it looks specifically for the unquoted string '/tn \\*'."
+  },
+  {
+    "output": "schtasks.exe/delete /tn * /f",
+    "explanation": "Removing the space immediately preceding the first switch is syntactically valid in the Windows command prompt, but it evades the rule's requirement for leading and trailing spaces around the ' /delete ' string."
+  }
+]

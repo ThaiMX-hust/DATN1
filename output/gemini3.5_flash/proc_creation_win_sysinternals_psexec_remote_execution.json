@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Tools\\psexec.exe /accepteula /u administrator /p P@ssw0rd123 \\\\localhost cmd.exe",
+    "explanation": "This command triggers the 'filter_main_localhost' condition. The rule explicitly excludes commands containing '\\\\localhost', so even though it contains all the required 'selection' strings (accepteula, -u, -p, and \\\\), the filter prevents the alert from firing."
+  },
+  {
+    "output": "psexec -accepteula -u:administrator -p:P@ssw0rd123 \\\\10.0.0.5 cmd.exe",
+    "explanation": "The rule looks for ' -u ' and ' -p ' (with spaces on both sides). By using the colon syntax (u: and p:) or removing the trailing space before the argument, the 'contains|all' logic fails to match the specific string pattern required by the detection selection."
+  }
+]

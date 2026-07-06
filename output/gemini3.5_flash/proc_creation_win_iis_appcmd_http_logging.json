@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\appcmd.exe set config \"Default Web Site\" /section:httpLogging /dontLog:1",
+    "explanation": "The Sigma rule performs a string match for 'dontLog:true'. However, the IIS AppCmd tool also accepts the integer value '1' as a boolean equivalent for 'true'. Using '1' achieves the same goal of disabling logging while evading the specific command-line string requirement."
+  },
+  {
+    "output": "Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter \"system.webServer/httpLogging\" -name \"dontLog\" -value $true\",\n\"object\": \"The rule is strictly limited to the execution of 'appcmd.exe'. An attacker can bypass this by using the WebAdministration PowerShell module to modify the same IIS configuration section, as it performs the action through a different process and command-line structure not covered by the selection_img criteria.\"\n}, {\n\"output\": \"reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\InetStp\\Components\" /v \"HTTPLogging\" /t REG_DWORD /d 0 /f",
+    "explanation": "By targeting the underlying configuration or service components via Registry modification or direct XML editing of the applicationHost.config file, an attacker can disable logging functionality without triggering process-based rules that look for specific management binaries like appcmd.exe."
+  }
+]

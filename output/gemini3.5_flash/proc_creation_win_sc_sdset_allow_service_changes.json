@@ -1,0 +1,14 @@
+[
+  {
+    "output": "sc.exe sdset \"TargetService\" D:(A;;CCLCSWRPWPDTLOCRRC;;;AU)",
+    "explanation": "The Sigma rule specifically alerts on 'Allow' (A;) ACEs paired with high-privilege or broad trustees like Interactive Users (IU), Service Users (SU), Administrators (BA), System (SY), or Everyone (WD). By targeting the 'Authenticated Users' (AU) trustee, which is not included in the 'selection_trustee' list, an attacker can still grant broad service access to any logged-in domain account while evading the specific string matches defined in the rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\sc.exe C:\\Windows\\Temp\\not_sc.exe && C:\\Windows\\Temp\\not_sc.exe sdset \"TargetService\" \"D:(A;;GA;;;SY)\"",
+    "explanation": "The rule relies on 'selection_sc' which filters for the process image ending in '\\sc.exe' or the OriginalFileName being 'sc.exe'. By copying the binary to a new name, the 'Image' check is bypassed. If the EDR/SIEM does not reliably populate or check 'OriginalFileName' for renamed binaries in this specific environment, the activity will not trigger the 'selection_sc' logic."
+  },
+  {
+    "output": "$sd = \"D:(A;;GA;;;SY)\"; [comobject]::new('Shell.Application').ShellExecute('sc.exe', \"sdset TargetService $sd\")",
+    "explanation": "This bypass attempts to evade simple command-line string correlation. While the final execution still involves sc.exe, using variables or alternative execution wrappers can sometimes obfuscate the command-line arguments (sdset and A;) from basic pattern-matching engines if they do not capture the full process tree or expanded arguments correctly."
+  }
+]

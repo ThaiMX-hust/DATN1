@@ -1,0 +1,6 @@
+[
+  {
+    "output": "sqlcmd -S MYSERVER -d MyDB -Q \"SELECT * FROM dbo.SecretTable\" -o C:\\temp\\export.txt -h -1 -s\",\" -W",
+    "explanation": "Uses sqlcmd to export data from MSSQL instead of bcp.exe, avoiding the rule's selection on bcp.exe image and command line containing ' out ' or ' queryout '."
+  }
+]

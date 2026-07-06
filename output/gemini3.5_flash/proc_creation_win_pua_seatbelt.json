@@ -1,0 +1,26 @@
+[
+  {
+    "output": "C:\\Tools\\Recon\\seatbelt.exe InterestingServices",
+    "explanation": "Renaming the executable from 'Seatbelt.exe' to 'seatbelt.exe' (lowercase) or any other variation bypasses the Image|endswith check which specifically looks for '\\Seatbelt.exe' with capital S. The command 'InterestingServices' is not in the detection list, so it avoids the CommandLine keyword filters."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\Seatbelt.exe -group=all",
+    "explanation": "Placing the executable in a different directory and using only the -group parameter without -outputfile= bypasses the 'all of selection_group_*' condition, which requires both group parameters AND -outputfile= to be present together. The condition requires ALL of selection_group_list AND selection_group_output to trigger."
+  },
+  {
+    "output": "rundll32.exe C:\\Data\\Seatbelt.dll,main FullDFIR",
+    "explanation": "Executing Seatbelt as a DLL loaded via rundll32 instead of as a direct executable. This bypasses the process creation detection as the parent process would be rundll32.exe, and the Image field would not contain 'Seatbelt.exe'. Many Sigma rules focused on process creation can be bypassed by using DLL execution techniques."
+  },
+  {
+    "output": "\"C:\\Program Files\\Seatbelt\\Seatbelt.exe\" -group=custom -someOtherParam",
+    "explanation": "Uses Seatbelt.exe but with a group argument not listed in the rule (\"-group=custom\") and no outputfile flag, so it does not match the selection_group_list or selection_group_output conditions."
+  },
+  {
+    "output": "custom_audit.exe -group=system",
+    "explanation": "To bypass this rule, an adversary would first recompile the Seatbelt tool or alter its PE metadata (OriginalFileName, Description) and rename the binary (e.g., custom_audit.exe) to evade the static indicators in 'selection_img'. For the command line execution, the rule's secondary fallback condition requires BOTH a group parameter (selection_group_list) AND an output file parameter (selection_group_output). By executing the tool without the ' -outputfile=' argument, the 'all of selection_group_*' condition evaluates to false, successfully bypassing the detection logic."
+  },
+  {
+    "output": "seatbelt_modified.exe DpapiMasterKeys",
+    "explanation": "If the binary is renamed and PE headers are stripped/modified to avoid the first three conditions of 'selection_img', the rule relies on specific command line strings with a leading space (e.g., ' DpapiMasterKeys'). An attacker could modify the tool's source code to accept different argument names (e.g., 'Get-DpapiMasterKeys') or use command line obfuscation techniques (like inserting quotes or carets if the shell allows, e.g., ' Dpapi\"\"MasterKeys') to break the exact string match expected by the rule."
+  }
+]

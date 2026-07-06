@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /RUN /TN \"Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser\"",
+    "explanation": "The Sigma rule triggers when the command line contains both the lowercase substring 'run ' and the path '\\Application Experience\\Microsoft Compatibility Appraiser'. By using the uppercase '/RUN' keyword, the 'run ' substring is avoided (assuming case-sensitive matching), preventing the rule from matching while still invoking schtasks.exe to run the Microsoft Compatibility Appraiser task."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy Certify.exe NOT_HACK_TOOL.exe && .\\NOT_HACK_TOOL.exe find /vulnerable /domain:internal.corp",
+    "explanation": "The rule uses a boolean OR/AND logic. To trigger, it needs (Image/Metadata match) OR (Commands AND Options). By renaming the executable and modifying the internal PE metadata (like Description), the 'selection_img' block is bypassed. Furthermore, the 'selection_cli_commands' block looks for '.exe ' followed by a command. By removing the space after the command or using different argument parsing, or simply ensuring the combination of 'all of selection_cli_*' isn't met (e.g., providing an option but not a recognized command string like '.exe find '), the rule can be evaded."
+  },
+  {
+    "output": "Certify.exe -find -vulnerable -domain:internal.corp",
+    "explanation": "The 'selection_cli_commands' specifically looks for commands preceded by '.exe ' and followed by a space (e.g., '.exe find '). If the tool is executed via a wrapper, renamed, or if the command line arguments are passed using alternative syntax that doesn't match the specific string literal patterns defined in the Sigma rule, the 'all of selection_cli_*' condition fails."
+  }
+]

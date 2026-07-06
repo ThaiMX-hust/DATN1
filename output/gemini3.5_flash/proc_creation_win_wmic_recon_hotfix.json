@@ -1,0 +1,10 @@
+[
+  {
+    "output": "wmic path win32_quickfixengineering get Caption, HotFixID, InstalledOn",
+    "explanation": "The 'qfe' keyword is merely a default WMIC alias for the 'Win32_QuickFixEngineering' WMI class. By querying the path directly, the attacker completely avoids the ' qfe' string in the command line, bypassing the 'selection_cli' condition while retrieving the exact same hotfix information."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-HotFix\"",
+    "explanation": "The Sigma rule is explicitly bound to the 'wmic.exe' executable (selection_img). An attacker can achieve the identical reconnaissance objective by using PowerShell's native Get-HotFix cmdlet (which queries the same underlying WMI class), bypassing the rule entirely."
+  }
+]

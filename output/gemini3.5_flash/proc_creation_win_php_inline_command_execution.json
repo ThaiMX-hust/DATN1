@@ -1,0 +1,18 @@
+[
+  {
+    "output": "php --run \"system('whoami');\"",
+    "explanation": "The original rule specifically looks for the short-form flag ' -r'. PHP also supports the long-form alias '--run', which achieves the exact same result (inline code execution) but avoids the string match defined in the 'selection_cli' section."
+  },
+  {
+    "output": "php -R \"system('whoami');\"",
+    "explanation": "The '-R' flag (run PHP code for every input line) can often execute code similarly to '-r' depending on the environment, bypassing a filter that is strictly looking for the lowercase 'r' flag."
+  },
+  {
+    "output": "copy php.exe notphp.exe && notphp.exe -r \"system('whoami');\"",
+    "explanation": "The rule relies on 'selection_img' matching 'php.exe'. By renaming the executable to something else (e.g., 'notphp.exe'), the first part of the 'all of selection_*' condition fails, even if the '-r' flag is used."
+  },
+  {
+    "output": "php\\t-r \"system('whoami');\"",
+    "explanation": "The rule looks for a literal space before the flag (' -r'). Using a horizontal tab character (\\t) between the executable and the flag can often bypass simple string-matching filters while still being parsed correctly by the command line."
+  }
+]

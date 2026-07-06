@@ -1,0 +1,22 @@
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\thaim\AppData\Local\Programs\Python\Python310\lib\logging\__init__.py", line 1101, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Users\thaim\AppData\Local\Programs\Python\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2502' in position 61: character maps to <undefined>
+Call stack:
+  File "C:\Tools\Zircolite\zircolite.py", line 1349, in <module>
+    main()
+  File "C:\Tools\Zircolite\zircolite.py", line 1282, in main
+    _run_processing(ctx, args, logger, memory_tracker)
+  File "C:\Tools\Zircolite\zircolite.py", line 1008, in _run_processing
+    zircolite_core, all_results = process_parallel_streaming(
+  File "C:\Tools\Zircolite\zircolite\processing.py", line 908, in process_parallel_streaming
+    results_list, stats = processor.process_files_parallel(
+  File "C:\Tools\Zircolite\zircolite\parallel.py", line 564, in process_files_parallel
+    self._log_summary(failed_files)
+  File "C:\Tools\Zircolite\zircolite\parallel.py", line 582, in _log_summary
+    self.logger.info(f"[+] Processed: {' │ '.join(summary_parts)}")
+Message: '[+] Processed: [cyan]4[/] files │ [magenta]8[/] events │ [yellow]0.3s[/]'
+Arguments: ()

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Users\\Public\\link.exe && \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\dumpbin.exe\" /EXPORTS C:\\Windows\\System32\\kernel32.dll",
+    "explanation": "The Sigma rule is designed to catch 'link.exe' being hijacked by tools like dumpbin.exe when executed from untrusted paths. However, the rule has a broad exclusion (filter_main_visual_studio) that trusts any process starting with the standard Visual Studio installation paths. By executing the legitimate 'dumpbin.exe' from its actual protected location in Program Files, an attacker can satisfy the 'ParentImage' filter. If an attacker places a malicious binary named 'link.exe' in the Current Working Directory (CWD) where dumpbin is invoked, dumpbin may still execute the local 'link.exe' due to search order behavior, while the SIEM ignores it because the parent process is the legitimate Visual Studio path."
+  },
+  {
+    "output": "C:\\Users\\Public\\link.exe /VERBOSE",
+    "explanation": "The rule's selection criteria specifically looks for 'LINK /' (case-insensitive usually, but literal in many engines) within the CommandLine field. This is because utilities like editbin.exe pass specific hardcoded flags. If an attacker renames their malicious payload to 'link.exe' and executes it with different flags or simply avoids the ' /' pattern (e.g., using a hyphen '-VERBOSE' or just executing without the space-slash delimiter), the 'selection' logic fails to trigger, bypassing the rule entirely."
+  }
+]

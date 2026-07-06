@@ -1,0 +1,14 @@
+[
+  {
+    "output": "explorer.exe ::{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+    "explanation": "Bypasses the rule by substituting the 'shell:mycomputerfolder' string with its corresponding Windows CLSID. Since the Sigma rule uses a strict 'contains' string match on the command line, it fails to detect this alternative method of opening the 'My Computer' directory."
+  },
+  {
+    "output": "wmic process call create \"explorer.exe shell:mycomputerfolder\"",
+    "explanation": "Bypasses the rule by changing the parent process. The Sigma rule explicitly looks for parent processes of cmd.exe, powershell.exe, or pwsh.exe. When spawned via WMI, the parent process of explorer.exe becomes WmiPrvSE.exe, successfully evading the ParentImage condition."
+  },
+  {
+    "output": "copy C:\\Windows\\explorer.exe %temp%\\file_manager.exe && %temp%\\file_manager.exe shell:mycomputerfolder",
+    "explanation": "Bypasses the rule by altering the Image name. The Sigma rule specifies that the Image must end with '\\explorer.exe'. Copying the executable to a new location with a different name breaks this specific image name condition."
+  }
+]

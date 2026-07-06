@@ -1,0 +1,42 @@
+[
+  {
+    "output": "wmic.exe path win32_logicaldisk where \"DeviceID='C:'\" get Size",
+    "explanation": "Uses wmic.exe with a WHERE clause to query win32_logicaldisk for a specific drive letter; avoids the literal substrings 'volume' and 'path win32_logicaldisk' (as a contiguous phrase) that the rule looks for, while still performing disk reconnaissance."
+  },
+  {
+    "output": "wmic.exe logicaldisk where \"DriveType=3\" get Name,Size,FreeSpace",
+    "explanation": "Queries logicaldisk (an alias for win32_logicaldisk) without the exact substring 'path win32_logicaldisk' and without the word 'volume', bypassing the rule's CLI content checks while still enumerating local disks and sizes."
+  },
+  {
+    "output": "wmic.exe volume get Name,Capacity,FreeSpace",
+    "explanation": "Uses the alias 'volume' (which the rule also flags) but avoids the exact substring 'path win32_logicaldisk'; if the rule requires both selection_img and selection_cli to match, this still triggers, but if the CLI list is treated as an exact/phrase match for 'path win32_logicaldisk', this can bypass while still performing volume reconnaissance."
+  },
+  {
+    "output": "wmic.exe /node:localhost /namespace:\\\\root\\cimv2 path win32_logicaldisk get Name",
+    "explanation": "Adds namespace and /node parameters to break up or alter the command-line string so that a simple substring match for 'path win32_logicaldisk' may fail (depending on implementation), while still executing the same WMI query for disk enumeration."
+  },
+  {
+    "output": "wmic.exe process call create \"cmd /c for /f %i in ('wmic logicaldisk get name') do @echo %i\"",
+    "explanation": "Indirectly runs wmic logicaldisk via a cmd for-loop spawned by wmic process call create; the parent command line may not contain the exact substrings 'volume' or 'path win32_logicaldisk' in a way that matches the rule, while still performing disk reconnaissance."
+  },
+  {
+    "output": "wmic.exe logicaldisk where \"drivetype=3\" get name,size,freespace",
+    "explanation": "Uses WMIC but avoids the literal keywords 'volume' and 'path win32_logicaldisk' by querying logicaldisk with a where clause, still retrieving disk/volume information while bypassing simple string-based detection."
+  },
+  {
+    "output": "wmic.exe partition get name,size",
+    "explanation": "Queries partition instead of volume/path win32_logicaldisk; still performs disk/volume reconnaissance without containing the blocked substrings."
+  },
+  {
+    "output": "wmic.exe logicaldisk list brief",
+    "explanation": "Uses 'list brief' against logicaldisk to enumerate local disks and free space without using the exact keywords 'volume' or 'path win32_logicaldisk'."
+  },
+  {
+    "output": "wmic.exe fsdir where \"drive='C:'\" get name,filesize",
+    "explanation": "Enumerates filesystem directory information on a volume indirectly via fsdir, avoiding the explicit volume/path win32_logicaldisk strings while still inferring volume usage."
+  },
+  {
+    "output": "wmic.exe volume where \"driveletter='C:'\" get name,capacity,freespace",
+    "explanation": "Uses the alias 'volume' as a WMIC noun (not as a substring in an arbitrary position) and relies on case/whitespace variations or alias-based semantics; if detection only looks for lowercase substrings in command line, this may still match, but it demonstrates using WMIC's built-in alias to retrieve the same data with slightly different syntax."
+  }
+]

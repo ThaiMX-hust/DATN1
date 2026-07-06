@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WorkFolders.exe C:\\Temp\\WF.exe && cd C:\\Temp && WF.exe",
+    "explanation": "The Sigma rule explicitly looks for a ParentImage ending in '\\WorkFolders.exe'. By copying or renaming the legitimate WorkFolders executable to another name (such as WF.exe) and executing it, the resulting telemetry will show a ParentImage of '\\WF.exe'. This completely bypasses the selection criteria of the rule while still allowing the WorkFolders component to execute the arbitrary control.exe payload in the current directory."
+  }
+]

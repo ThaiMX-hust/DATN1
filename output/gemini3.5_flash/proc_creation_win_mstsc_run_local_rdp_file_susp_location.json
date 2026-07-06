@@ -1,0 +1,14 @@
+[
+  {
+    "output": "mstsc.exe C:\\Windows\\Temp\\payload.rdp /f",
+    "explanation": "Bypasses the 'selection_extension' condition. The rule relies on the command line ending strictly with '.rdp' or '.rdp\"'. By appending a legitimate argument such as '/f' (fullscreen) or '/admin' at the end, the string matching fails while the executable still successfully runs the target file."
+  },
+  {
+    "output": "mstsc.exe \"C:\\Users\\Public\\connection.rdp\" ",
+    "explanation": "Bypasses the 'selection_extension' condition. Adding a trailing space at the very end of the command line is ignored by Windows command-line parsing but breaks the 'endswith' exact string match logic of the Sigma rule."
+  },
+  {
+    "output": "mstsc.exe %TEMP%\\rogue.rdp",
+    "explanation": "Bypasses the 'selection_paths' condition depending on the log source. If the underlying telemetry (e.g., Event ID 4688 without command line auditing enhancements) captures the raw command line prior to environment variable expansion, the literal string '%TEMP%' will not match the explicit path string ':\\Windows\\Temp\\'."
+  }
+]

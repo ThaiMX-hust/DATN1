@@ -1,0 +1,126 @@
+[
+  {
+    "output": "C:\\ProgramData\\secedit\\secedit.exe /export /configure",
+    "explanation": "This command simulates exporting and configuring SeCEdit, which can be used to bypass detection by altering process metadata or hiding changes."
+  },
+  {
+    "output": "1. Copy secedit.exe to a new location as hidden.exe. 2. Use a resource editor/script to strip or modify the 'OriginalFileName' attribute in the PE Version Info section. 3. Execute: hidden.exe /export /cfg config.inf",
+    "explanation": "The Sigma rule relies on 'selection_img' matching either the file path ending in '\\secedit.exe' or the PE metadata 'OriginalFileName' being 'SeCEdit'. By renaming the binary and patching the PE header to remove its original file name, the execution completely evades the primary selection condition of the rule."
+  },
+  {
+    "output": "Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SeCEdit\\RegValues' | Export-Csv -Path 'C:\\temp\\policy_export.csv'",
+    "explanation": "This bypass avoids secedit.exe entirely. Instead of triggering a process creation event for a monitored administrative tool, an attacker or administrator can use PowerShell to query the underlying Registry keys where security configurations and policies are actually stored, achieving the same credential access/discovery goals without triggering the rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\secedit.exe C:\\Users\\Public\\Update.exe && C:\\Users\\Public\\Update.exe /export /cfg C:\\Users\\Public\\out.inf",
+    "explanation": "The rule relies on the 'Image' ending in '\\secedit.exe' or the 'OriginalFileName' being 'SeCEdit'. While OriginalFileName is harder to spoof in some EDRs, many SIEM implementations only check the Image path or the process name. By copying the binary to a new name, the 'Image' check is bypassed. If the environment's logging doesn't capture or the SIEM doesn't evaluate the 'OriginalFileName' metadata field, the activity remains undetected."
+  },
+  {
+    "output": "secedit /EXPORT /CFG config.inf",
+    "explanation": "The rule uses 'contains|all' for flags like '/export' and '/cfg'. Depending on the specific SIEM's regex engine and the Sigma converter used, these matches may be case-sensitive. Using uppercase characters (e.g., /EXPORT) can bypass simple string-matching filters that expect lowercase input."
+  },
+  {
+    "output": "secedit.exe \"/export\" \"/cfg\" out.inf",
+    "explanation": "The rule looks for specific string literals. In some command-line parsing environments, adding unnecessary quotes or using alternative flag delimiters (like '-' instead of '/') if supported by the binary's parser can occasionally evade basic string-matching patterns in detection logic."
+  },
+  {
+    "output": "copy C:\\Windows\\Security\\Database\\secedit.sdb %TEMP%\\secedit_copy.sdb",
+    "explanation": "The provided Sigma rule relies exclusively on monitoring process creation events for the 'secedit.exe' binary and its specific command-line arguments. An adversary can bypass this execution-based detection by avoiding the utility entirely and directly accessing the underlying local security policy database file. Copying the file for offline parsing achieves the same discovery goal without triggering the 'selection_img' condition."
+  },
+  {
+    "output": "powershell.exe -Command \"[System.IO.File]::ReadAllBytes('C:\\Windows\\Security\\Database\\secedit.sdb') | Set-Content -Path 'C:\\temp\\policy.bak' -Encoding Byte\"",
+    "explanation": "This bypass uses PowerShell to read the security database directly into memory and write it to another location. By utilizing built-in .NET classes rather than invoking the 'secedit.exe' executable, the process creation log will show 'powershell.exe' instead of 'secedit.exe', cleanly circumventing the Image and OriginalFileName match criteria in the Sigma rule."
+  },
+  {
+    "output": "secedit.exe -export -cfg C:\\temp\\policy.inf",
+    "explanation": "The Sigma rule uses exact string matching for the command-line switches, specifically looking for the forward-slash character (e.g., '/export' and '/cfg'). Windows executables often accept a hyphen ('-') as an alternative parameter switch. Using '-export' and '-cfg' circumvents the strict string match in the rule while achieving the same execution result. Rule authors should account for alternative switch characters to prevent this common evasion technique."
+  },
+  {
+    "output": "cmd.exe /c \"secedit.exe /e^xport /c^fg C:\\temp\\policy.inf\"",
+    "explanation": "When executed through the Windows Command Prompt (cmd.exe), the caret character ('^') is used as an escape character and is stripped out before the arguments are passed to the child process. The rule checks for the exact contiguous strings '/export' and '/cfg' in the logged command line. If the logging source captures the parent cmd.exe command line before evaluation, the insertion of carets breaks the string match, bypassing the rule."
+  },
+  {
+    "output": "copy %windir%\\system32\\secedit.exe %temp%\\sysupdate.exe && %temp%\\sysupdate.exe -export -cfg %temp%\\policy.inf",
+    "explanation": "This simulated command highlights two potential bypass vectors for the provided Sigma rule. First, renaming the executable bypasses the 'Image|endswith' check (which can successfully evade detection entirely if the underlying log source, such as basic Event ID 4688, does not capture or map the 'OriginalFileName' field like Sysmon does). Second, it substitutes forward slashes with hyphens for the command-line arguments ('-export' and '-cfg'). Because the Sigma rule explicitly checks for the exact substrings '/export' and '/cfg', using hyphens evades the 'selection_flags_discovery' condition while still being parsed correctly by many native Windows utilities."
+  },
+  {
+    "output": "copy %windir%\\system32\\secedit.exe %temp%\\svecedit.exe && %temp%\\svecedit.exe /export /cfg %temp%\\secpol.inf",
+    "explanation": "Defense Evasion (Masquerading): This bypasses the rule if the SIEM backend relies solely on basic Windows Event ID 4688 logs. Without Sysmon or advanced auditing to provide the 'OriginalFileName' field, the 'Image|endswith: \\secedit.exe' condition will fail to match the renamed executable."
+  },
+  {
+    "output": "Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'secedit.exe /export /cfg C:\\Windows\\Temp\\policy.inf'",
+    "explanation": "Parent Process/Execution Context evasion: While this might still trigger the base Sigma rule if command line logging is fully enabled, launching it via WMI can bypass secondary correlation rules or EDR behaviors that expect secedit.exe to be spawned by cmd.exe or powershell.exe directly."
+  },
+  {
+    "output": "[Conceptual API Invocation] rundll32.exe secedit.dll, <Export-Function-Equivalent>",
+    "explanation": "API Execution: Adversaries can bypass process and command-line based detection rules entirely by avoiding the secedit.exe wrapper and interacting directly with the underlying system APIs (like secedit.dll) or using custom code to manipulate the security policy."
+  },
+  {
+    "output": "secedit.exe -export -cfg C:\\temp\\policy.inf",
+    "explanation": "Many Windows command-line utilities accept hyphens (-) in place of forward slashes (/) for their switches. By executing the command with '-export' and '-cfg', the strict string matching conditions for '/export' and '/cfg' in the Sigma rule are evaded while still successfully running the tool."
+  },
+  {
+    "output": "copy %windir%\\Security\\Database\\secedit.sdb C:\\temp\\exfil.sdb",
+    "explanation": "A functional bypass that avoids the rule entirely by not invoking secedit.exe. An adversary can directly copy the underlying security database file (secedit.sdb) to extract and analyze the host's security policies offline without triggering process creation alerts."
+  },
+  {
+    "output": "secedit.exe -export -cfg C:\\temp\\secpol.inf",
+    "explanation": "The Sigma rule strictly checks for the strings '/export' and '/cfg' or '/configure' and '/db'. Windows command-line utilities typically accept hyphens as parameter switches. Using '-export' and '-cfg' instead of forward slashes successfully executes the command while evading the rule's static string match."
+  },
+  {
+    "output": "cmd.exe /c \"set A=/ex && set B=port && call secedit.exe %A%%B% /cfg C:\\temp\\secpol.inf\"",
+    "explanation": "By utilizing environment variable concatenation within cmd.exe, the command line logged at process creation contains the variable names (e.g., '%A%%B%') rather than the full target string '/export', bypassing the static command line inspection."
+  },
+  {
+    "output": "secedit.exe -export -cfg C:\\temp\\secpolicy.inf",
+    "explanation": "Bypasses the detection rule by substituting the forward slash (/) with a hyphen (-) for command-line parameters. The Sigma rule explicitly looks for '/export' and '/cfg', so '-export' and '-cfg' will evade the string match while still being accepted by the Windows utility."
+  },
+  {
+    "output": "cmd.exe /c \"secedit.exe /e^xport /c^fg C:\\temp\\secpolicy.inf\"",
+    "explanation": "Utilizes cmd.exe caret (^) escape characters for command-line obfuscation. The command executes successfully as cmd.exe ignores the carets, but if the raw command line is logged exactly as typed, it will fail the exact string match for '/export' and '/cfg'."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\secedit.exe C:\\temp\\svchost.exe && C:\\temp\\svchost.exe /export /cfg C:\\temp\\secpolicy.inf",
+    "explanation": "Renames the executable to bypass the 'Image|endswith: \\secedit.exe' condition. This bypass is effective if the underlying log source (such as standard Windows Event ID 4688) does not capture or if the SIEM does not properly evaluate the 'OriginalFileName' field."
+  },
+  {
+    "output": "cmd.exe /c secedit.exe /e^xport /c^fg C:\\temp\\policy.inf",
+    "explanation": "Command-line obfuscation using caret (^) escape characters. The cmd.exe interpreter ignores the carets and executes the command successfully, but the raw process creation log (e.g., Event ID 4688) will record the arguments as '/e^xport' and '/c^fg'. This breaks the exact substring match required by the 'CommandLine|contains|all' condition."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\secedit.exe %TEMP%\\update.exe && %TEMP%\\update.exe /export /cfg C:\\temp\\policy.inf",
+    "explanation": "Binary renaming bypass. The Sigma rule relies on checking 'Image|endswith: \\secedit.exe' or 'OriginalFileName: SeCEdit'. If the environment relies on basic process logging that does not capture or parse the PE header's OriginalFileName field (like standard Event ID 4688 without Sysmon), executing a renamed copy will bypass the detection."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\secedit.exe C:\\Users\\Public\\UpdateTool.exe && C:\\Users\\Public\\UpdateTool.exe /export /cfg C:\\Users\\Public\\policy.inf",
+    "explanation": "The rule relies on 'selection_img' which checks for a process ending in '\\secedit.exe' or having the 'OriginalFileName' of 'SeCEdit'. By copying the binary to a new name (UpdateTool.exe), the 'Image' check is bypassed. If the EDR/SIEM does not populate 'OriginalFileName' for the copied binary, the entire detection logic fails."
+  },
+  {
+    "output": "secedit.exe -export -cfg C:\\temp\\out.inf",
+    "explanation": "The rule specifically looks for flags starting with a forward slash ('/export' and '/cfg'). Windows commands often accept hyphens as alternative argument delimiters. Using '-export' and '-cfg' satisfies the functional requirements of the command while evading string-literal detection for the forward-slash variants."
+  },
+  {
+    "output": "cmd.exe /c \"copy C:\\Windows\\System32\\secedit.exe %TEMP%\\not_secedit.exe && %TEMP%\\not_secedit.exe /export /cfg C:\\temp\\policy.inf\"",
+    "explanation": "The rule relies on 'selection_img' which checks if the Image ends with '\\secedit.exe' or if the OriginalFileName is 'SeCEdit'. By copying the binary to a new name, the 'Image' check is bypassed. If the EDR/SIEM does not properly extract or check the 'OriginalFileName' metadata from the PE header of the copied file, the rule will not trigger."
+  },
+  {
+    "output": "secedit.exe /EXPORT /CFG C:\\temp\\policy.inf",
+    "explanation": "While many SIEMs handle case-insensitivity, the Sigma rule uses specific lowercase strings '/export' and '/cfg' with a 'contains|all' modifier. Depending on the specific SIEM backend implementation and whether it forces lowercase before matching, using uppercase switches can occasionally bypass literal string matchers."
+  },
+  {
+    "output": "secedit.exe \"/export\" \"/cfg\" C:\\temp\\policy.inf",
+    "explanation": "Injecting quotes or other cmd.exe escape characters (like ^) within the parameters can sometimes break simple string-based command line filters that do not normalize the command line string before analysis."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\secedit.exe C:\\Users\\Public\\sec_tool.exe && C:\\Users\\Public\\sec_tool.exe /export /cfg C:\\Users\\Public\\out.inf",
+    "explanation": "The Sigma rule relies on the 'Image' field ending in '\\secedit.exe' or the 'OriginalFileName' being 'SeCEdit'. By copying the binary to a new name (sec_tool.exe), the 'Image' check is bypassed. If the underlying telemetry (like Sysmon or Windows Event 4688) does not capture or populate the 'OriginalFileName' field, the detection fails entirely."
+  },
+  {
+    "output": "secedit.exe \"/EXPORT\" \"/CFG\" C:\\Users\\Public\\config.inf",
+    "explanation": "The rule uses case-sensitive 'contains|all' checks for lowercase flags like '/export' and '/cfg' in some SIEM implementations. By using uppercase flags, the rule may be bypassed depending on how the specific SIEM engine processes the 'contains' modifier."
+  },
+  {
+    "output": "secedit /export /cfg:C:\\Users\\Public\\config.inf",
+    "explanation": "In certain regex-based or strict string-matching environments, the rule expects a space between the flag and the value. Concatenating the flag and value with a colon (where supported by the CLI) can sometimes evade simple string-match logic."
+  }
+]

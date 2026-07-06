@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-LocalUser\"",
+    "explanation": "The Sigma rule focuses on legacy binaries like net.exe, cmd.exe, wmic.exe, and whoami.exe. It completely misses modern PowerShell cmdlets used for local account discovery."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-CimInstance -ClassName Win32_UserAccount\"",
+    "explanation": "The rule monitors for WMI usage specifically via the wmic.exe binary (selection_other_wmi). Querying the exact same WMI class via PowerShell bypasses this process creation signature."
+  },
+  {
+    "output": "wmic useraccount list brief",
+    "explanation": "The selection_other_wmi condition requires BOTH 'useraccount' and 'get' to be in the command line. Using the 'list' verb instead of 'get' successfully enumerates the accounts while bypassing the logic."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ChildItem C:\\Users\\\"",
+    "explanation": "The selection_cmd condition looks for directory listings of C:\\Users\\ but strictly ties it to cmd.exe with the '/c' and 'dir' arguments. Using PowerShell to list the directory evades this entirely."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\cmd.exe\" /c \"type C:\\Windows\\System32\\config\\SAM\"",
+    "explanation": "Uses cmd.exe with a command line that does not contain the 'dir' pattern required by the rule, thus evading the selection_cmd filter while still accessing local account data."
+  }
+]

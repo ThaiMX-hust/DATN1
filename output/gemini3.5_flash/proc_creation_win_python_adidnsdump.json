@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Python39\\python.exe C:\\Temp\\runner.exe && C:\\Temp\\runner.exe -m adidnsdump -u DOMAIN\\User -p Password ldap://10.10.10.10",
+    "explanation": "By renaming or copying the python.exe binary to a different name (e.g., runner.exe), the command bypasses the 'Image|endswith: \\python.exe' condition of the Sigma rule."
+  },
+  {
+    "output": "python.exe my_dns_enum.py -u DOMAIN\\User -p Password ldap://10.10.10.10",
+    "explanation": "By renaming the adidnsdump script or execution folder to an arbitrary name (e.g., my_dns_enum.py), the command bypasses the 'CommandLine|contains: adidnsdump' condition."
+  }
+]

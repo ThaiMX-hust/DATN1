@@ -1,0 +1,10 @@
+[
+  {
+    "output": "pc_renamed.exe --scanner \"aclcheck\"",
+    "explanation": "The rule heavily relies on exact string matching for command-line arguments and specific PE metadata. By modifying the binary's PE header to alter or strip the 'OriginalFileName' attribute, the first selection condition is evaded. Furthermore, wrapping argument values in quotes (e.g., '--scanner \"aclcheck\"' instead of '--scanner aclcheck') breaks the exact substring matches defined in the Sigma rule, while the Windows command line parser still correctly interprets the argument."
+  },
+  {
+    "output": "C:\\Users\\Public\\PingCastle.exe --scanner aclcheck",
+    "explanation": "Since this specific rule is designed solely to detect renamed executions, an attacker can bypass it by retaining the original filename ('PingCastle.exe') and simply executing it from a staging directory. The 'filter_main_img' condition unconditionally excludes any execution where the image path ends with '\\PingCastle.exe', causing the rule to ignore the activity entirely."
+  }
+]

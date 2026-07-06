@@ -1,0 +1,28 @@
+```json
+[
+  {
+    "output": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
+    "explanation": "Original command line used for testing."
+  },
+  {
+    "output": "curl.exe -H'User-Agent: EvilAgent' http://example.com",
+    "explanation": "Used single quotes instead of double quotes to bypass detection based on quote patterns."
+  },
+  {
+    "output": "curl.exe --header \"User-Agent: EvilAgent\" http://example.com",
+    "explanation": "Replaced short option -H with its long form --header, which is functionally equivalent."
+  },
+  {
+    "output": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com\\",
+    "explanation": "Added an escaped backslash at the end of the URL to test if trailing characters are ignored."
+  },
+  {
+    "output": "curl.exe -H\"User-Agent: EvilAgent\" http://example.com",
+    "explanation": "Removed space between -H and the header string to bypass space-based detection."
+  },
+  {
+    "output": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
+    "explanation": "Used environment variable expansion for the URL (e.g., http://example.com resolved from a variable)."
+  }
+]
+```

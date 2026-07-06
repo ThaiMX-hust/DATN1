@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"$bytes = 105,102; $res = ''; $bytes | % { $res += [Convert]::ToChar($_ -bxor 5) }; Invoke-Expression $res\"",
+    "explanation": "The Sigma rule's condition is 'all of selection_*', meaning all three definition blocks (img, cli_xor, cli_other) must match to trigger an alert. This command bypasses the rule by successfully evading 'selection_cli_other' entirely. It avoids the targeted iterators ('ForEach', 'for') by using the pipeline alias '%'. It avoids string joiners ('-join', '::Join') by utilizing string concatenation ('+='). Finally, it avoids the explicit cast '[char]' by using the .NET class method '[Convert]::ToChar()'. Because 'selection_cli_other' evaluates to false, the entire rule fails to trigger despite the presence of 'powershell.exe' and 'bxor'."
+  },
+  {
+    "output": "powershell.exe -Command \"$k=42; $arr=100,101; $res=''; $arr | % { res+=[string](_ -bxor $k) }; Write-Host $res\"",
+    "explanation": "This benign simulated command demonstrates a logical bypass of the detection rule. The Sigma rule's condition requires ALL selection blocks to match (selection_img AND selection_cli_xor AND selection_cli_other). While this command invokes PowerShell and uses the '-bxor' operator, it intentionally avoids every string defined in 'selection_cli_other'. It bypasses the loop detection by using the '%' alias instead of 'ForEach' or 'for', and it bypasses the string assembly detection by using the '+=' assignment operator instead of '-join' or casting with '[char]'. Because the third condition fails, the alert will not trigger."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand JABzAGMAcgBpAHAAdAAgAD0AIAAiAC4ALgAuACIAOwAgACQAZABlAGMAbwBkAGUAZAAgAD0AIAAkAHMAYwByAGkAcAB0ACAAfAAgACUAIAB7ACAAWwBjAGgAYQByAF0AKAAkAF8AIAAtAGIAeABvAHIAIAAyADUANQApACAAfQA7ACAASQBFAFgAIAAtAGoAbwBpAG4AIAAkAGQAZQBjAG8AZABlAGQA",
+    "explanation": "The Sigma rule checks the raw process 'CommandLine' field for plaintext keywords like 'bxor' and 'join'. By utilizing PowerShell's built-in '-EncodedCommand' parameter, the entire command (which translates to: $script = \"...\"; $decoded = $script | % { [char]($_ -bxor 255) }; IEX -join $decoded) is passed as a Base64 string. The keywords never appear in the process creation logs, causing the rule to miss the execution."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\ProgramData\\xor_payload.ps1",
+    "explanation": "This bypass drops the XOR decoding logic into a disk-backed script file (.ps1) and executes it using the '-File' parameter. Because the Sigma rule strictly monitors the command-line arguments of the process creation event (Event ID 4688 / Sysmon Event ID 1) rather than the contents of the script being executed or Script Block Logging (Event ID 4104), the keywords are hidden from the process command line."
+  },
+  {
+    "output": "cmd.exe /c echo $payload ^| %% { $_ -bxor 0x42 } ^| Out-String ^| IEX | powershell.exe -NoProfile -",
+    "explanation": "Piping commands directly into PowerShell's standard input (stdin) prevents the malicious command from being registered in the PowerShell process's command-line arguments. The command line recorded by the SIEM for the PowerShell process will simply be 'powershell.exe -NoProfile -', which entirely evades the string matching logic of the Sigma rule."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "code.exe --install-extension path/to/malicious\\_ext.vsix",
+    "explanation": "Instead of spawning a suspicious child process directly via a task or terminal, an attacker can install a malicious extension. The extension runs within the Extension Host process context, which may not trigger this specific rule as the rule focuses on direct child processes like calc.exe or powershell.exe with specific flags."
+  }
+]

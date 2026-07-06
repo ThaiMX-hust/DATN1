@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Program Files\\Amazon\\SSM\\amazon-ssm-agent.exe -register -code \"ABC-123\" -id \"i-0123456789abcdef0\" -r \"us-east-1\"",
+    "explanation": "The Sigma rule uses a 'contains|all' modifier, which requires every specific string to be present in the command line. By substituting the full '-region ' flag with the supported shorthand '-r', the 'selection' criteria is no longer met, effectively bypassing the detection while still executing the registration command."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Amazon\\SSM\\amazon-ssm-agent.exe\" C:\\Windows\\Temp\\not-ssm.exe && C:\\Windows\\Temp\\not-ssm.exe -register -code \"ABC-123\" -id \"i-0123456789abcdef0\" -region \"us-east-1\"",
+    "explanation": "The rule filters based on the process image name ending in '\\amazon-ssm-agent.exe'. By copying the binary to a different location and renaming it, the process creation event will log a different executable name (e.g., 'not-ssm.exe'), causing the rule to ignore the activity regardless of the command line arguments used."
+  }
+]

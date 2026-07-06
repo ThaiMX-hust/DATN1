@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /Create /SC ONLOGON /TN 123e4567-e89b-12d3-a456-426614174000 /TR \"C:\\Windows\\System32\\cmd.exe\" /F",
+    "explanation": "The command creates a scheduled task with a GUID-like name but without braces or quotes, evading the detection patterns that look for /TN '{' or '/TN {' and closing braces."
+  }
+]

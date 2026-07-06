@@ -1,0 +1,18 @@
+[
+  {
+    "output": "taskkill /IM Raccine* /F",
+    "explanation": "The rule selection1 looks for the specific string 'RaccineSettings.exe'. By using a wildcard (Raccine*) or only targeting the main Raccine.exe process, the specific condition for 'RaccineSettings.exe' is never met, allowing the process to be killed without triggering the alert."
+  },
+  {
+    "output": "reg delete \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"Raccine\" /f",
+    "explanation": "The rule selection2 specifically looks for the string 'Raccine Tray'. If the attacker deletes the registry key associated with the Raccine service or the main 'Raccine' run key rather than the 'Tray' component specifically, or uses a shortened name if applicable, the rule is bypassed."
+  },
+  {
+    "output": "schtasks /DELETE /TN \"Raccine Rules*\" /F",
+    "explanation": "The rule selection3 looks for the exact string 'Raccine Rules Updater'. By using a wildcard character (*) in the task name, the command still successfully deletes the task on the command line, but the literal string match for the full name fails."
+  },
+  {
+    "output": "powershell.exe -Command \"Stop-Process -Name RaccineSettings -Force\"",
+    "explanation": "The rule is designed to catch 'taskkill' specifically in selection1. By using PowerShell's Stop-Process cmdlet, the attacker achieves the same goal of terminating the Raccine process without triggering the 'taskkill' keyword requirement."
+  }
+]

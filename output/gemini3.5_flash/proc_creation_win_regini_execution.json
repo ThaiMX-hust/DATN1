@@ -1,0 +1,14 @@
+[
+  {
+    "output": "regini.exe script.txt :\\",
+    "explanation": "The Sigma rule contains a filter that excludes command lines matching the regex ':[^ \\]'. This regex looks for a colon immediately followed by any character that is NOT a space or a backslash. By appending a colon followed by a backslash (e.g., ':\\') or a colon followed by a space (e.g., ': ') to the command line, the execution triggers the 'filter' logic, causing the 'selection and not filter' condition to evaluate to false, thus bypassing the detection."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\regini.exe C:\\Users\\Public\\not_regini.exe && C:\\Users\\Public\\not_regini.exe script.txt",
+    "explanation": "While the rule checks for 'OriginalFileName', some logging configurations (like basic Windows Event ID 4688 without verbose auditing) may only capture the 'Image' path. By renaming the binary, the 'Image|endswith' check is bypassed. If the SIEM is not receiving or correctly parsing the 'OriginalFileName' field from the PE header, this simple masquerading technique will avoid detection."
+  },
+  {
+    "output": "reg.exe add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Example\" /v \"Value\" /t REG_SZ /d \"Data\"",
+    "explanation": "The rule is specifically scoped to the use of 'regini.exe'. An attacker can bypass the detection entirely by using alternative native Windows tools like 'reg.exe' or PowerShell cmdlets (e.g., Set-ItemProperty) to achieve the same registry modification goal without triggering the regini-specific alert."
+  }
+]

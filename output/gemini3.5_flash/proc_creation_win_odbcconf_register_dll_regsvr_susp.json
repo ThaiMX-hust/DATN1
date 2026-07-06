@@ -1,0 +1,10 @@
+[
+  {
+    "output": "odbcconf.exe /a {REGSVR \"C:\\Temp\\malicious.dll\"}",
+    "explanation": "The rule explicitly excludes any command line containing the string '.dll' (via the filter_main_dll_ext condition) to reduce false positives from legitimate DLL registrations. An attacker can bypass this specific rule simply by using a payload that retains the standard '.dll' extension, which will trigger the filter and prevent the alert."
+  },
+  {
+    "output": "odbcconf.exe /a {REGSVR \"C:\\fake.dll.dir\\payload.bin\"}",
+    "explanation": "The filter condition uses a broad 'contains' match for '.dll'. It does not verify that '.dll' is at the end of the file name. By creating a directory with '.dll' in its name, the command line will contain the string, triggering the exclusion filter and bypassing the rule even if the actual payload file uses an evasive extension."
+  }
+]

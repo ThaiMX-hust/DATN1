@@ -1,0 +1,10 @@
+[
+  {
+    "output": "tasklist | findstr /R \"ls[a]ss\"",
+    "explanation": "By utilizing the /R switch for regular expressions in findstr, the pattern 'ls[a]ss' will match the 'lsass' process in the output. Because the literal string 'lsass' is never passed in the command line, it evades the 'CommandLine|contains: lsass' logic of the Sigma rule."
+  },
+  {
+    "output": "tasklist | findstr /I /R \"l.ass.exe\"",
+    "explanation": "This bypass uses the regular expression wildcard '.' to match any character. The pattern 'l.ass.exe' matches 'lsass.exe' in the tasklist output, but the string 'lsass' is absent from the process creation logs, successfully bypassing the keyword detection."
+  }
+]

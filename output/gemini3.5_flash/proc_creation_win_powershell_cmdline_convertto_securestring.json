@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-Alias -Name 'C2SS' -Value 'ConvertTo-SecureString'; C2SS -String 'P@ssword123' -AsPlainText -Force\"",
+    "explanation": "This bypasses the rule by using a PowerShell alias. The rule specifically looks for the string 'ConvertTo-SecureString' in the command line. By creating a temporary alias (C2SS) and calling that instead, the actual cmdlet name never appears in the process creation command line arguments."
+  },
+  {
+    "output": "pwsh.exe -Command \"$cmd = 'ConvertTo-' + 'SecureString'; Invoke-Expression (Get-Command $cmd).Name\"",
+    "explanation": "This uses string concatenation and Invoke-Expression (IEX) to hide the cmdlet name from static command-line analysis. Since the string 'ConvertTo-SecureString' is not present in its entirety in the command line, the selection_cli criteria fails to trigger."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand Q29udmVydFRvLVNlY3VyZVN0cmluZyAtU3RyaW5nICdQYXNzd29yZCcgLUFzUGxhaW5UZXh0IC1Gb3JjZQ==",
+    "explanation": "Using the -EncodedCommand flag allows the execution of Base64-encoded logic. The command line captured by process creation logs will show the Base64 string rather than the plaintext 'ConvertTo-SecureString', effectively bypassing simple string-match detections."
+  },
+  {
+    "output": "powershell.exe -Command \"ConvertTo-SecureString -String 'MySecret' -AsPlainText -Force\\\"",
+    "explanation": "PowerShell ignores backtick characters () used inside cmdlet names. This obfuscation technique successfully bypasses the static string match 'CommandLine|contains: ConvertTo-SecureString' in the Sigma rule while still executing the cmdlet. To prevent this evasion, defenders should utilize PowerShell Script Block Logging (Event ID 4104), which logs the de-obfuscated code prior to execution, rather than relying solely on Process Creation (Event ID 4688/Sysmon 1) command-line parameters."
+  },
+  {
+    "output": "powershell.exe -Command \"$a='ConvertTo-'; $b='SecureString'; $c=$a+$b; &$c -String 'MySecret' -AsPlainText -Force\"",
+    "explanation": "This command uses string concatenation and the call operator (&) to dynamically build and execute the cmdlet. Because the string is broken into pieces, the exact phrase 'ConvertTo-SecureString' never appears in the command line arguments, completely bypassing the Sigma rule's 'selection_cli' criteria. This highlights the fragility of relying on exact command-line string matches for detection."
+  }
+]

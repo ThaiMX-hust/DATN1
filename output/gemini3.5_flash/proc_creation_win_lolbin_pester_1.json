@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Pester.bat \"calc.exe; Get-Process\"",
+    "explanation": "The rule explicitly checks for 'Get-Help', 'help', or '\\?' in the command line alongside 'Pester' and a semicolon. By replacing the standard PoC's trailing command with another valid and innocuous PowerShell cmdlet like 'Get-Process' or 'Get-Date', the injected command (calc.exe) still executes, but both the powershell_module and cmd_execution detection logics are bypassed."
+  },
+  {
+    "output": "p^ester.bat \"calc.exe; h^elp\"",
+    "explanation": "Using the CMD caret escape character (^) obfuscates the 'pester' and 'help' strings in the process command line logging. This breaks the static string matching in the 'contains' conditions of the Sigma rule without disrupting the execution flow in cmd.exe."
+  },
+  {
+    "output": "Pester.bat \"calc.exe; Write-Output 1\"",
+    "explanation": "Similar to the first bypass, replacing 'Get-Help' with 'Write-Output' avoids triggering the 'get_help' condition entirely. The payload executes via the semicolon injection, but the strict string requirements of the rule are never met."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\setres.exe C:\\temp\\renamed_utility.exe && cd C:\\temp && renamed_utility.exe",
+    "explanation": "This command bypasses the detection by exploiting the rule's reliance on the parent process's file name. The Sigma rule specifies 'ParentImage|endswith: \"\\setres.exe\"'. By copying 'setres.exe' to an alternate name like 'renamed_utility.exe' and executing it from a directory containing a malicious 'choice.exe' payload, the resulting ParentImage logged by the system will be 'C:\\temp\\renamed_utility.exe'. This fails the 'selection' criteria, completely evading the alert. To mitigate this, defenders should monitor for the 'OriginalFileName' property (which remains 'setres.exe' regardless of renaming) or track the execution of 'choice' binaries lacking Microsoft signatures."
+  }
+]

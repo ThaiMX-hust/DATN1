@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ren NSudo.exe not_suspicious.exe && .\\not_suspicious.exe -U:S -P:E whoami",
+    "explanation": "The Sigma rule uses 'all of selection_*' (AND logic). By renaming the executable to something other than 'NSudo.exe', the 'selection_img' criteria (which checks Image path and OriginalFileName) can be bypassed if the file's metadata is stripped or if the EDR/SIEM only relies on the Image path and the binary doesn't have the original filename resource populated. Since the rule requires BOTH the image name AND the command line flags to trigger, changing the name breaks the 'selection_img' requirement."
+  },
+  {
+    "output": "NSudo.exe -u:s -p:e whoami",
+    "explanation": "The 'selection_cli' patterns are case-sensitive in many SIEM implementations unless explicitly defined otherwise. The rule specifically looks for uppercase flags like '-U:S'. Using lowercase '-u:s' may bypass simple string-matching filters while remaining functionally identical for the application."
+  },
+  {
+    "output": "NSudo.exe \"-U:S\" \"-P:E\" whoami",
+    "explanation": "The rule looks for specific strings including a trailing space (e.g., '-U:S '). By wrapping the arguments in quotes or adding extra whitespace/tabs between the flags and the command, the literal string match for '-U:S ' (flag + space) might fail depending on how the regex or contains logic is handled by the security tool."
+  }
+]

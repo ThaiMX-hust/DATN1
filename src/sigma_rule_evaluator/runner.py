@@ -266,7 +266,6 @@ def run_target_batch(config: RunnerConfig) -> int:
         "ruleset": str(config.ruleset) if config.ruleset else None,
         "rules_dir": str(config.rules_dir) if config.rules_dir else None,
         "base_dir": str(config.base_dir),
-        "zircolite_jsononly": config.zircolite_jsononly,
         "save_debug_artifacts": config.save_debug_artifacts,
         "resume_from_batch": str(config.resume_from_batch) if config.resume_from_batch else None,
         "resume_after_evtx": (

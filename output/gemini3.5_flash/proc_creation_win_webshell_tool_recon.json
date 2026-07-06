@@ -1,0 +1,22 @@
+[
+  {
+    "output": "python.exe -h",
+    "explanation": "The Sigma rule relies on exact substring matching for 'python -h'. By explicitly including the file extension (python.exe), the exact string 'python -h' is no longer present in the command line, bypassing the detection."
+  },
+  {
+    "output": "python  -h",
+    "explanation": "The rule expects exactly one space between the command and the argument. Adding double or multiple spaces (e.g., 'python  -h') breaks the strict string 'contains' condition."
+  },
+  {
+    "output": "python -V",
+    "explanation": "An attacker can verify the presence of the tool by checking its version (-V) rather than invoking the help menu (-h or --help). The rule currently only flags help-related arguments."
+  },
+  {
+    "output": "cmd.exe /c \"p^y^t^h^o^n -h\"",
+    "explanation": "In Windows environments, using caret (^) escape characters obfuscates the command string. Cmd.exe interprets and strips the carets to run Python, but the logged command line will not trigger the static string match."
+  },
+  {
+    "output": "wget.exe --help",
+    "explanation": "Similar to the Python bypass, appending the .exe extension to the executable name prevents the exact substring 'wget --help' from matching."
+  }
+]

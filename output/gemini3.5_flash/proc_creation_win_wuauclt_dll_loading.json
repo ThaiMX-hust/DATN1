@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\wuauclt.exe /UpdateDeploymentProvider \"C:\\path\\to\\malicious.dll\" /RunHandlerComServer",
+    "explanation": "The rule uses a broad 'contains' filter for ' /UpdateDeploymentProvider UpdateDeploymentProvider.dll '. By providing the full path to a malicious DLL or renaming the DLL, the specific string 'UpdateDeploymentProvider.dll' is missing from the command line, while the required 'UpdateDeploymentProvider' and 'RunHandlerComServer' flags remain present to trigger the execution logic."
+  },
+  {
+    "output": "C:\\Windows\\System32\\wuauclt.exe /UpdateDeploymentProvider .\\UpdateDeploymentProvider.dll /RunHandlerComServer",
+    "explanation": "The filter explicitly looks for 'UpdateDeploymentProvider.dll' preceded by a space. Adding a relative path indicator like '.\\' or using multiple spaces/tabs between the flag and the DLL name breaks the string match in many SIEM implementations while remaining syntactically valid for the binary."
+  },
+  {
+    "output": "C:\\Windows\\System32\\wuauclt.exe /UpdateDeploymentProvider wuaueng.dll /RunHandlerComServer /Payload:C:\\evil.dll",
+    "explanation": "The rule contains an exclusion filter (filter_main_wuaueng) that ignores the command if ' wuaueng.dll ' is present. An attacker can include this string in the command line (e.g., as a dummy argument or by naming their payload similarly) to trigger the whitelist filter and suppress the alert."
+  }
+]

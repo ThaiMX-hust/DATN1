@@ -1,0 +1,22 @@
+[
+  {
+    "output": "C:\\Tools\\npctest.exe -server=192.168.1.100:8080 -vkey=secret123 -password=admin123",
+    "explanation": "Bypasses by renaming the executable from 'npc.exe' to 'npctest.exe', which fails the Image|endswith: '\\npc.exe' selection. All other detection criteria are also avoided since the executable name doesn't match."
+  },
+  {
+    "output": "C:\\Windows\\System32\\npc.exe server=10.0.0.1 vkey=mykey pass=mypass",
+    "explanation": "Bypasses by removing the dash prefix from parameters. The detection requires '-server=', '-vkey=', and '-password=' with dashes, but this command uses parameter names without dashes, avoiding the selection_cli_1 criteria."
+  },
+  {
+    "output": "C:\\ProgramData\\npc.exe -config=custom.conf -server=192.168.1.1 -vkey=testkey",
+    "explanation": "Bypasses by using a different config file name ('custom.conf' instead of 'npc'), which fails the selection_cli_2 condition that requires '-config=npc'."
+  },
+  {
+    "output": "C:\\temp\\npc.exe -server=10.0.0.1:443 -vkey=key123 -password=pass123 -config=myconfig.ini",
+    "explanation": "Bypasses by using a non-standard config file extension (.ini instead of just 'npc'), avoiding the exact '-config=npc' string match in selection_cli_2."
+  },
+  {
+    "output": "C:\\Users\\Public\\Downloads\\npc.exe -s=192.168.1.1 -v=secret -p=password",
+    "explanation": "Bypasses by using abbreviated parameter names (-s, -v, -p) instead of the full parameter names (-server=, -vkey=, -password=), which avoids matching the selection_cli_1 criteria."
+  }
+]

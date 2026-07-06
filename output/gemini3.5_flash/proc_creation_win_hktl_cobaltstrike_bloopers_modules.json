@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"I^nvoke-UserH^unter\"",
+    "explanation": "Bypass using Windows Command Prompt escape characters. The Sigma rule relies on exact string matching for specific tool names. Inserting caret (^) characters breaks the 'contains' string match in process creation logs, but the CMD interpreter ignores the carets during execution, parsing the original command."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-UserHunter\"",
+    "explanation": "Bypass by changing the execution host. The rule specifically targets operator mistakes made in 'cmd.exe' (via the selection_img condition). Executing the command directly via PowerShell or another shell bypasses the image filter entirely."
+  },
+  {
+    "output": "cmd.exe /c \"set a=Invoke-&set b=UserHunter&call powershell -c %a%%b%\"",
+    "explanation": "Bypass using environment variable concatenation. The command is split into multiple variables and recombined at execution time. The raw command line logged for cmd.exe will show the separated strings rather than the complete 'Invoke-UserHunter' signature, evading the detection logic."
+  }
+]

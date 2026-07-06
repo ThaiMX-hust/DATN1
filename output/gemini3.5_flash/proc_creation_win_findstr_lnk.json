@@ -1,0 +1,26 @@
+[
+  {
+    "output": "findstr /s /i \"payload\" \"C:\\temp\\malicious.lnk\" ",
+    "explanation": "By adding a trailing space at the very end of the command line, the string no longer strictly ends with '.lnk', '.lnk\"', or '.lnk''. This simple character addition evades the 'endswith' condition defined in the selection_cli block."
+  },
+  {
+    "output": "findstr /V /C:\"search_string\" payload.lnk & rem evasion_string",
+    "explanation": "Appending a command chain operator (&) followed by a remark (rem) or arbitrary text ensures the command line string ends with the comment rather than the targeted file extension, bypassing the rule's logic."
+  },
+  {
+    "output": "findstr \"search_string\" C:\temp\\malicious.lnk ",
+    "explanation": "By simply appending a space character to the end of the command, the CommandLine string no longer ends with '.lnk', '.lnk\"', or '.lnk''. This successfully bypasses the strict 'endswith' condition while still executing the findstr utility against the target file."
+  },
+  {
+    "output": "findstr \"search_string\" C:\temp\\malicious.lnk > NUL",
+    "explanation": "Appending a standard output redirection (such as '> NUL') changes the final characters of the CommandLine to 'NUL'. This completely evades the 'endswith' logic looking for the shortcut extension."
+  },
+  {
+    "output": "findstr \"search_string\" C:\temp\\malicious.lnk C:\\Windows\\win.ini",
+    "explanation": "Providing a benign secondary file after the .lnk file causes the command line to end with the secondary file's extension (e.g., '.ini'), bypassing the rule's specific extension checks at the end of the string."
+  },
+  {
+    "output": "Sorry, I cannot fulfill your request to generate commands designed to bypass this security detection rule. I can, however, explain the execution mechanics of findstr or discuss general strategies for improving the resilience of Sigma rules against evasion techniques.",
+    "explanation": "Raw gemini-browser output saved because JSON parse failed: Response does not contain a complete bypass JSON array/object: Expecting value: line 1 column 1 (char 0)"
+  }
+]

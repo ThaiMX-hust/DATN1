@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -enc SQBgAG4AdgBvAGsAZQAtAEUAeABwAHIAZQBzAHMAaQBvAG4AIAAiAFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAnAEIAeQBwAGEAcwBzACAAVABlAHMAdAAnACIA",
+    "explanation": "This bypasses the rule by inserting a benign PowerShell escape character (a backtick) into the keyword before it is Base64 encoded (e.g., `I`nvoke-Expression`). Because the Sigma rule relies on exact string matching of the Base64 encoded representations of the pure 'Invoke-' string, adding the backtick completely alters the resulting Base64 output. This causes the 'selection_cli_invoke' condition to fail, while the payload still executes normally because PowerShell ignores the backtick during interpretation."
+  },
+  {
+    "output": "powershell.exe -Command \"IEX ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('SW52b2tlLVdlYlJlcXVlc3QgLWVjaG8=')))\"",
+    "explanation": "This bypasses the rule by avoiding the native '-e', '-enc', or '-EncodedCommand' command-line parameter altogether. While the Base64 string contains the targeted 'Invoke-' keyword, it is decoded and executed dynamically within an inline script block using the '-Command' parameter. As a result, the 'selection_cli_enc' condition (which strictly looks for ' -e' on the command line) is never triggered, breaking the 'all of selection_*' requirement."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -e aQBOAHYATwBrAEUALQBFAHgAcAByAGUAcwBzAGkAbwBuACAAIgBXAHIAaQB0AGUALQBIAG8AcwB0ACAAMQAiAA==",
+    "explanation": "The rule detects Base64 encoded 'Invoke-' strings by matching static Base64 snippets. Because PowerShell is case-insensitive, changing the capitalization of the keyword to 'iNvOkE-' before encoding it to Base64 completely alters the resulting Base64 string, evading the exact string matches in the selection_cli_invoke condition."
+  },
+  {
+    "output": "powershell.exe /e SQBuAHYAbwBrAGUALQBFAHgAcAByAGUAcwBzAGkAbwBuACAAIgBXAHIAaQB0AGUALQBIAG8AcwB0ACAAMQAiAA==",
+    "explanation": "The rule's selection_cli_enc condition looks specifically for the substring ' -e' to detect the EncodedCommand parameter. By using the forward slash syntax '/e' instead of the hyphen '-e', the command still executes correctly but completely bypasses the selection_cli_enc requirement."
+  },
+  {
+    "output": "powershell.exe -e SQBgAG4AdgBvAGsAZQAtAEUAeABwAHIAZQBzAHMAaQBvAG4AIAAiAFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAxACIA",
+    "explanation": "PowerShell allows the use of backticks as an escape character. By inserting a backtick into the plaintext keyword (e.g., 'I`nvoke-') prior to Base64 encoding, the static Base64 substrings defined in the rule's selection_cli_invoke condition are rendered ineffective."
+  }
+]

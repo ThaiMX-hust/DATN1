@@ -1,0 +1,10 @@
+[
+  {
+    "output": "mkdir C:\\Temp\\AppData\\ && copy AnyDesk.exe C:\\Temp\\AppData\\AnyDesk.exe && C:\\Temp\\AppData\\AnyDesk.exe",
+    "explanation": "The Sigma rule's 'filter' condition uses a loose 'contains' string match for '\\AppData\\' to exclude expected execution paths. An attacker can bypass this by creating a folder literally named 'AppData' inside a non-standard or world-writable directory (e.g., C:\\Temp\\AppData\\), dropping the AnyDesk binary there, and executing it. The path will match the filter string, causing the rule to incorrectly suppress the alert."
+  },
+  {
+    "output": "copy AnyDesk.exe C:\\Users\\Public\\Update.exe && ResourceHacker.exe -open C:\\Users\\Public\\Update.exe -save C:\\Users\\Public\\Update.exe -action delete -mask versioninfo,, && C:\\Users\\Public\\Update.exe",
+    "explanation": "The rule's 'selection' logic relies on identifying the tool via its original filename ('endswith: \\AnyDesk.exe') or its PE metadata fields (Description, Product, Company). By renaming the executable and wiping its Version Info resources (which contain the metadata fields), the binary will no longer match any of the initial selection criteria, evading detection entirely."
+  }
+]

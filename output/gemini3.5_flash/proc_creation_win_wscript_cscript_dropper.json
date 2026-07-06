@@ -1,0 +1,30 @@
+[
+  {
+    "output": "wscript.exe //E:vbs C:\\Windows\\Temp\\payload.txt",
+    "explanation": "Bypasses the 'selection_ext' condition. By changing the script extension to '.txt' and using the '//E:vbs' flag to explicitly specify the scripting engine, the command executes successfully but the command line does not contain the monitored extensions."
+  },
+  {
+    "output": "cscript.exe C:\\ProgramData\\payload.js",
+    "explanation": "Bypasses the 'selection_paths' condition. The rule monitors specific temp and public directories, but 'C:\\ProgramData\\' is another standard user-writable directory that is excluded from the string matching list."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\wscript.exe C:\\Windows\\Temp\\updater.exe && C:\\Windows\\Temp\\updater.exe C:\\Windows\\Temp\\payload.vbs",
+    "explanation": "Bypasses the 'selection_exec' condition. By copying the wscript.exe binary and executing it under a different name, the 'Image' field in the logs will end with '\\updater.exe' instead of '\\wscript.exe' or '\\cscript.exe'."
+  },
+  {
+    "output": "```json\n[\n  \"powershell.exe -Command 'Test' -NoNewline\"\n]\n```\n\nThe generated command bypasses the Sigma Rule by using a PowerShell script instead of WScript/CScript, which avoids detection of script execution in user directories. The explanation clarifies this bypass method.",
+    "explanation": "Raw openrouter output saved because JSON parse failed: Response does not contain a complete bypass JSON array/object: Extra data: line 4 column 1 (char 50)"
+  },
+  {
+    "output": "copy C:\\Users\\Public\\malicious.vbs C:\\Windows\\System32\\drivers\\etc\\legit.txt && cscript //e:VBScript C:\\Windows\\System32\\drivers\\etc\\legit.txt",
+    "explanation": "This bypasses the rule by moving the script to a directory not covered by the 'selection_paths' filter (e.g., C:\\Windows\\System32\\drivers\\etc\\) and stripping the monitored file extensions listed in 'selection_ext'. By using the //e engine switch, cscript can execute the code even if the file has a .txt extension."
+  },
+  {
+    "output": "cmd.exe /c \"cd /d C:\\Users\\Public\\ && cscript script.vbs\"",
+    "explanation": "If the SIEM only evaluates the 'CommandLine' field as provided in the rule, executing the script using a relative path while the working directory is in a sensitive folder may bypass 'selection_paths' because the CommandLine string itself might not contain the full path literal strings like ':\\Users\\Public\\'."
+  },
+  {
+    "output": "mshta.exe vbscript:Execute(\"CreateObject(\"\"WScript.Shell\"\").Run(\"\"calc.exe\"\"):window.close\")",
+    "explanation": "This bypasses the rule entirely by switching the execution engine. The rule specifically looks for wscript.exe or cscript.exe (selection_exec). Using mshta.exe to execute VBScript or JScript achieves the same malicious goal without triggering the image-based detection."
+  }
+]

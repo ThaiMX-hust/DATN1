@@ -1,0 +1,6 @@
+[
+  {
+    "output": "MpCmdRun.exe /RemoveDefinitions /All",
+    "explanation": "The Sigma rule's 'selection_cli' explicitly looks for the exact strings ' -RemoveDefinitions' and ' -All' (including the spaces and hyphens). MpCmdRun.exe natively accepts forward slashes ('/') in place of hyphens for its parameters. By executing the command with forward slashes, the tool successfully runs the definition removal, but bypasses the specific string-matching logic of the SIEM rule. To improve detection, the rule should be updated to look for both '-' and '/' argument prefixes, or use regular expressions to account for varying command-line syntax and potential quote obfuscation."
+  }
+]

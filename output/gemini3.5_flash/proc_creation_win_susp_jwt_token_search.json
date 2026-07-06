@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Select-String -Path $env:APPDATA\\* -Pattern ('eyJ0'+'eXAiOi')\"",
+    "explanation": "This PowerShell command bypasses the exact string match by dynamically concatenating the target string at runtime. Because the process creation log (e.g., Event ID 4688 or Sysmon Event ID 1) records the command line exactly as typed with the quotes and plus sign, the literal strings 'eyJ0eXAiOi' or 'eyJ0eX' do not appear, successfully evading the Sigma rule's basic CommandLine|contains condition."
+  },
+  {
+    "output": "cmd.exe /c findstr /S /M /I \"eyJ^0eX\" %LOCALAPPDATA%\\*.log",
+    "explanation": "This command utilizes the Windows command prompt caret (^) escape character to obfuscate the target search string. The command interpreter strips the caret before passing the string to findstr, allowing the actual search for 'eyJ0eX' to execute. However, the raw command line logged by the operating system retains the caret, bypassing the strict string matching logic of the Sigma rule."
+  }
+]

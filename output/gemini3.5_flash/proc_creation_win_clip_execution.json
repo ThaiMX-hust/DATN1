@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Clipboard]::SetText((Get-Content secret.txt))\"",
+    "explanation": "This bypasses the rule by using PowerShell's access to the .NET Framework (System.Windows.Forms) to manipulate the clipboard directly. Since the Sigma rule specifically looks for the execution of the 'clip.exe' binary or its original filename, it fails to detect clipboard operations performed via native scripting languages or API calls."
+  }
+]

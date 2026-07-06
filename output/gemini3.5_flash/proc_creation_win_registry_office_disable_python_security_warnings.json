@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v \"PythonFunctionWarnings\" /t REG_DWORD /d 00000000 /f",
+    "explanation": "The Sigma rule checks for the literal string ' 0' in the command line. By using '00000000' (the full 32-bit representation of zero for a DWORD), the functional requirement of disabling the warning is met while avoiding the specific pattern match ' 0'."
+  },
+  {
+    "output": "$path = 'HKCU:\\Software\\Microsoft\\Office\\16.0\\Excel\\Security'; Set-ItemProperty -Path $path -Name 'PythonFunctionWarnings' -Value 0",
+    "explanation": "The rule targets process creation events with specific command-line arguments. Using PowerShell's 'Set-ItemProperty' cmdlet avoids the specific 'CommandLine' string patterns typically associated with reg.exe or simple command-line registry manipulation tools."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /v \"PythonFunctionWarnings\" /t REG_DWORD /d 0x0 /f",
+    "explanation": "The rule looks for the character '0' preceded by a space. Using the hexadecimal notation '0x0' disables the security warning but bypasses the ' 0' string filter."
+  },
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Microsoft\\Office\\16.0\\Excel\\Security\" /f /v PythonFunctionWarnings /d \"0\"",
+    "explanation": "By quoting the zero ('\"0\"') or changing the order of arguments, an attacker might bypass naive regex or string matching that expects a space before the zero (' 0'), depending on how the SIEM engine handles quote normalization."
+  }
+]

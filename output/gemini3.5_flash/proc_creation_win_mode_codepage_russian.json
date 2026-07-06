@@ -1,0 +1,6 @@
+[
+  {
+    "output": "chcp 1251",
+    "explanation": "Changes the console code page to Russian (1251) using chcp.exe instead of mode.com, thus avoiding the rule's detection of mode.com with specific command line patterns."
+  }
+]

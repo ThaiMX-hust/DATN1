@@ -1,0 +1,6 @@
+[
+  {
+    "output": "RegAsm.exe /nologo",
+    "explanation": "Supplying a benign flag such as '/nologo' changes the trailing characters of the command line. This evades the strict suffix matching of the rule while allowing the process to spawn, which can then be suspended and injected into."
+  }
+]

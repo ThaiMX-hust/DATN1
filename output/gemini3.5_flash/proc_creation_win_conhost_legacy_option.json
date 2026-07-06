@@ -1,0 +1,14 @@
+[
+  {
+    "output": "conh^ost.exe 0xffffffff -For^ceV1",
+    "explanation": "Windows command prompt ignores carets (^) when parsing commands, allowing the executable to run as intended. However, the exact strings 'conhost.exe' and '-ForceV1' are broken up in the raw command line logs, bypassing the 'contains|all' exact string matching in the Sigma rule."
+  },
+  {
+    "output": "conhost 0xffffffff -ForceV1",
+    "explanation": "The Windows PE loader will automatically resolve and append the '.exe' extension. By deliberately omitting '.exe' from the execution command, the specific string 'conhost.exe' is not present in the process creation logs, evading the rule's detection criteria."
+  },
+  {
+    "output": "\"c:\\windows\\system32\\con\"\"host.exe\" 0xffffffff -ForceV\"1\"",
+    "explanation": "Using double quotes to break up the executable name and arguments is successfully parsed by Windows, but it disrupts the static string matching utilized by the SIEM, causing the 'contains|all' condition to fail."
+  }
+]

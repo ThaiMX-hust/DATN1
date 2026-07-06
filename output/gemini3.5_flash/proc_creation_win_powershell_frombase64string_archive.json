@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"$b64 = 'H4sI' + 'A...'; $bytes = [System.Convert]::(\"FromBase64\"+\"String\").Invoke($b64); $ms = New-Object System.IO.MemoryStream(, $bytes)\"",
+    "explanation": "The rule searches for the presence of 'FromBase64String' and 'H4sI' as cleartext literal tokens within the process creation arguments. By breaking both strings into fragments and using string concatenation or runtime expression evaluation, the final command line string records no explicit match for either signature while executing perfectly at runtime."
+  },
+  {
+    "output": "powershell.exe -Command \"$bytes = [System.Convert]::FromBase64String('h4sI...'); $ms = New-Object System.IO.MemoryStream(, $bytes)\"",
+    "explanation": "The rule specifies a case-sensitive or standard string search for 'H4sI', which is the standard Base64 header for Gzip files indicating a specific compression configuration (specifically magic bytes 0x1f 0x8b and an operating system flag). Base64 strings can vary slightly in capitalization based on subsequent optional header bytes (like the OS marker or modification time fields) within the Gzip structure. Altering the compression parameters to output 'h4sI' or a different valid header variation breaks the strict string detection pattern while remaining valid Gzip data."
+  }
+]

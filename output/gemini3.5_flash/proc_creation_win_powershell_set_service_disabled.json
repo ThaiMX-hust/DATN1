@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell -ExecutionPolicy Bypass -Command \"sc.exe config 'TermService' start= disabled\"",
+    "explanation": "The Sigma rule specifically monitors for the PowerShell cmdlet 'Set-Service' and the parameter '-StartupType'. By using the native Windows utility 'sc.exe' (Service Control) instead of the PowerShell cmdlet, the command achieves the same result of disabling a service while avoiding the specific string matches defined in selection_cli."
+  },
+  {
+    "output": "powershell -Command \"Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\wuauserv' -Name 'Start' -Value 4\"",
+    "explanation": "This bypasses the rule by modifying the registry directly rather than using service management cmdlets. Setting the 'Start' DWORD to 4 in the service's registry key is functionally equivalent to setting the StartupType to 'Disabled', but it does not trigger the 'Set-Service' or '-StartupType' command line filters."
+  },
+  {
+    "output": "powershell -Command \"Invoke-Expression ('Set-Ser' + 'vice ' + '-Servicename wuauserv -StartupT' + 'ype Dis' + 'abled')\"",
+    "explanation": "This uses string concatenation and Invoke-Expression (IEX) to reconstruct the command at runtime. Since the Sigma rule relies on 'contains|all' for static strings in the process creation command line, breaking these strings into substrings prevents the pattern matcher from finding the required tokens in a single scan."
+  },
+  {
+    "output": "pwsh.exe -Command \"Set-Service -Name 'Spooler' -StartupType 'Disabled'\"",
+    "explanation": "The rule explicitly filters for 'powershell.exe' or an OriginalFileName of 'PowerShell.EXE' (PowerShell 5.1). Using PowerShell Core (pwsh.exe) may bypass the selection_img filter depending on how the environment's telemetry identifies the process, as the OriginalFileName for PowerShell Core is different."
+  }
+]

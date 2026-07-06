@@ -1,0 +1,28 @@
+{
+  "created_at": "20260704T153200Z",
+  "model": "qwen/qwen3-32b",
+  "api_url": "https://api.groq.com/openai/v1/chat/completions",
+  "prompt_template": "C:\\HUST\\DATN\\DATN1\\src\\generator\\groq_prompt_template.txt",
+  "rules_dir": "rules",
+  "true_positive_dir": "data\\true_positive_test",
+  "rule_output_dir": "output\\groq_generator_test\\rules",
+  "max_outputs": 3,
+  "generated_case_count": 0,
+  "record_count": 1,
+  "generated_cases": [],
+  "records": [
+    {
+      "rule": "proc_creation_win_bcp_export_data",
+      "rule_path": "rules\\proc_creation_win_bcp_export_data.yml",
+      "technique_id": "t1048",
+      "source_true_positive_command": "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T",
+      "source_true_positive_commands": [
+        "C:\\Tools\\bcp.exe TestDB.dbo.TestTable out C:\\Temp\\test.txt -c -T"
+      ],
+      "source_true_positive_index": null,
+      "source_true_positive_count": 1,
+      "model": "qwen/qwen3-32b",
+      "response_text": "[\n  {\n    \"output\": \"C:\\\\Tools\\\\bcp.exe TestDB.dbo.TestTable out C:\\\\Temp\\\\test.txt -c -T\",\n    \"explanation\": \"This is the original command used for testing the Sigma rule. It exports data from a table using 'bcp.exe' and matches the rule's detection criteria.\"\n  },\n  {\n    \"output\": \"C:\\\\Tools\\\\bcp.exe TestDB.dbo.TestTable out C:\\\\Temp\\\\test.txt -c -T\",\n    \"explanation\": \"No safe bypass command can be generated without altering the behavior that the Sigma rule is designed to detect. Any mutation that avoids detection would also prevent the command from performing the intended data export.\"\n  }\n]"
+    }
+  ]
+}

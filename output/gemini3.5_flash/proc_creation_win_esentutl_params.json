@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\esentutl.exe %temp%\\not_suspicious.exe && %temp%\\not_suspicious.exe /p /d ntds.dit",
+    "explanation": "The rule is strictly looking for the string 'esentutl' in the CommandLine. By copying the binary to a new location with a different name, the command execution will no longer trigger the 'contains all: esentutl' logic, even though the underlying functionality (the Esentutl engine) is still being used to process the NTDS file."
+  },
+  {
+    "output": "esentutl.exe \"/p\" /d ntds.dit",
+    "explanation": "Depending on how the specific SIEM engine processes the 'contains' logic and space delimiters, using quotes around the switch (e.g., \"/p\") or adding multiple spaces between the binary name and the switch (e.g., 'esentutl          /p') can sometimes evade simple string-matching signatures that expect a single space or a specific sequence."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'wmic.exe process call create \"calc.exe\"', 0, 0;",
+    "explanation": "The Sigma rule relies on a hardcoded, finite list of executable names in its 'Image|endswith' condition. It can be bypassed by using SQL Server OLE Automation procedures (sp_OACreate) or CLR assemblies to directly spawn a Living-off-the-Land Binary (LOLBin) that is not on the list, such as 'wmic.exe', 'certutil.exe', or 'mshta.exe'. Because 'wmic.exe' is not in the blocklist, the execution evades detection."
+  },
+  {
+    "output": "DECLARE @myshell INT; EXEC sp_OACreate 'WScript.Shell', @myshell OUTPUT; EXEC sp_OAMethod @myshell, 'Run', NULL, 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -c \"Copy-Item C:\\Windows\\System32\\cmd.exe -Destination C:\\Temp\\sql_update.exe\"', 0, 0; -- followed by executing sql_update.exe",
+    "explanation": "If an attacker manages to rename an alerting binary (like cmd.exe or powershell.exe) to an innocuous name (like sql_update.exe) before execution, the 'Image|endswith' check will fail to trigger. While the initial copy action might require executing a process, if the renamed binary is dropped via a non-alerting method, executing it directly as a child of sqlservr.exe will bypass the rule."
+  },
+  {
+    "output": "cscript.exe C:\\Windows\\Temp\\payload.vbs",
+    "explanation": "This Sigma rule relies on a blacklist approach, targeting specific known binaries like cmd.exe, powershell.exe, and rundll32.exe. An attacker can bypass this detection by spawning native Windows binaries (LOLBins) that are not explicitly listed in the 'Image|endswith' condition, such as cscript.exe, wscript.exe, wmic.exe, or mshta.exe. If an attacker leverages SQL Server features like OLE Automation (sp_OACreate) or custom CLR assemblies to execute these alternative binaries directly (without spawning cmd.exe first), the child process creation will evade this specific rule."
+  }
+]

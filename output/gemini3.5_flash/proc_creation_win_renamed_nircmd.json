@@ -1,0 +1,6 @@
+[
+  {
+    "output": "rh.exe -open nircmd.exe -save fake_svchost.exe -action delete -mask VERSIONINFO,1,1033 && fake_svchost.exe",
+    "explanation": "The rule depends heavily on the 'OriginalFileName' PE metadata field matching 'NirCmd.exe'. An attacker can bypass this rule by using a resource editing tool (like Resource Hacker) to strip or modify the VERSIONINFO resource section from the executable prior to running it. Once the OriginalFileName metadata is deleted, the renamed binary can execute without triggering the rule's primary selection criteria."
+  }
+]

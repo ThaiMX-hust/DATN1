@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WerFaultSecure.exe %TEMP%\\not_werfault.exe && %TEMP%\\not_werfault.exe /h /pid 1234 /tid 5678 /encfile C:\\temp\\log.txt /cancel /type 268310",
+    "explanation": "The Sigma rule is strictly keyed to the specific file path 'C:\\Windows\\System32\\WerFaultSecure.exe'. By copying the legitimate binary to a different location (like the Temp folder) and renaming it, the 'Image' field in the process creation log will no longer match the rule's requirement, effectively bypassing the detection while maintaining the functionality of the EDR-Freeze technique."
+  },
+  {
+    "output": "WerFaultSecure.exe /h /pid 1234 /tid 5678 /encfile C:\\temp\\log.txt /cancel /type 0x41816",
+    "explanation": "The rule looks for the literal string ' 268310' (decimal representation) within the command line. An attacker can bypass this by passing the same flag in hexadecimal format (0x41816) or by adding leading zeros/padding (e.g., ' 000268310'), which most Windows parsers will accept but the 'contains|all' string match in the Sigma rule will miss."
+  }
+]

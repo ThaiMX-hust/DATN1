@@ -1,0 +1,18 @@
+[
+  {
+    "output": "reg.exe add \"HKEY_CURRENT_USER\\Software\\Sysinternals\\PsExec\" /v EulaAccepted /t REG_DWORD /d 1 /f && psexec.exe -s cmd.exe",
+    "explanation": "The Sigma rule triggers specifically on the presence of the ' -accepteula' string in the command line. By pre-configuring the EULA acceptance in the Windows Registry for the specific Sysinternals tool (e.g., PsExec), the tool will execute without requiring the command line flag, thereby bypassing the detection."
+  },
+  {
+    "output": "psexec.exe /accepteula -s cmd.exe",
+    "explanation": "Many Sysinternals tools accept the flag using a forward slash '/' instead of a hyphen '-'. Since the Sigma rule specifically searches for ' -accepteula' (with a leading space and hyphen), using '/accepteula' bypasses the string match."
+  },
+  {
+    "output": "psexec.exe  -accepteula -s cmd.exe",
+    "explanation": "The rule searches for ' -accepteula' (one space). Adding an additional space ('  -accepteula') can bypass simple string-based 'contains' filters depending on how the SIEM or EDR normalizes whitespace, as the exact sequence is no longer a match."
+  },
+  {
+    "output": "copy psexec.exe ps.exe && ps.exe -accepteula",
+    "explanation": "While this specific rule only looks for the flag, combining a rename of the binary with other bypasses (like the slash variant) makes identification harder for analysts who might be filtering for both the tool name and the flag simultaneously."
+  }
+]

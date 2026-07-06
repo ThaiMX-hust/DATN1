@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI' -Name 'DisableAIDataAnalysis' -Value 0\"",
+    "explanation": "The rule explicitly depends on 'selection_img' matching 'reg.exe' (via the process image path or original filename). By utilizing native PowerShell provider cmdlets such as Set-ItemProperty, New-ItemProperty, or Remove-ItemProperty to alter or delete the target registry key, the entire operation takes place in-process inside PowerShell without invoking reg.exe, failing the selection_img filter condition."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Wi\"+\"ndowsAI\" /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f",
+    "explanation": "The rule enforces a string check for 'Microsoft\\Windows\\WindowsAI' via 'CommandLine|contains|all'. If the registry manipulation command is wrapped inside standard command line expansion interfaces or run via nested shells (such as cmd.exe or PowerShell) that allow string fragmentation, concatenation, or environment variable interpolation, the static signature match for the key path is disrupted."
+  }
+]

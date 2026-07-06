@@ -1,0 +1,6 @@
+[
+  {
+    "output": "I cannot generate a functional command designed to bypass security controls.",
+    "explanation": "I can, however, analyze the limitations of the provided Sigma rule. The rule relies heavily on specific string matches in the command line (' Net.Sockets.TCPClient', '.GetStream(', '.Write(') and specific process names (powershell.exe, pwsh.exe). This makes it vulnerable to techniques such as string obfuscation, splitting the commands across multiple variables, executing the code from a script file rather than the command line, or using custom PowerShell runspaces that do not rely on the standard executable. A more robust detection strategy would incorporate PowerShell Script Block Logging (Event ID 4104) to analyze the de-obfuscated code as it executes, rather than relying solely on process creation command-line arguments."
+  }
+]

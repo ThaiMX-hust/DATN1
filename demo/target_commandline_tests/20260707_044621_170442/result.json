@@ -1,0 +1,102 @@
+{
+  "batch": {
+    "batch_id": "20260707_044621_170442",
+    "created_at": "2026-07-07T04:46:21.171473+07:00",
+    "config": "C:\\HUST\\DATN\\DATN1\\demo\\match.generated.json",
+    "path_config": "C:\\HUST\\DATN\\DATN1\\config\\paths.json",
+    "selected_count": 1,
+    "execute_count": 1,
+    "restored_count": 0,
+    "execute": true,
+    "timeout_seconds": 2,
+    "sysmon_log_name": "Microsoft-Windows-Sysmon/Operational",
+    "sysmon_event_id": 1,
+    "process_tree_quiescence_seconds": 5.0,
+    "process_tree_max_wait_seconds": 60.0,
+    "zircolite_path": "C:\\Tools\\Zircolite\\zircolite.py",
+    "ruleset": "C:\\Tools\\Zircolite\\rules_demo.json",
+    "rules_dir": "C:\\HUST\\DATN\\DATN1\\rules",
+    "base_dir": "C:\\HUST\\DATN\\DATN1",
+    "save_debug_artifacts": false,
+    "resume_from_batch": null,
+    "resume_after_evtx": null,
+    "resume_after_test_id": null,
+    "resume_skipped_count": 0,
+    "resume_ignored_evtx_count": 0
+  },
+  "counts": {
+    "matched_target_rule": 1
+  },
+  "techniques": [
+    {
+      "technique_id": "execution",
+      "case_count": 1,
+      "evtx_count": 1,
+      "zircolite": {
+        "ran": true,
+        "exit_code": 0,
+        "status": "OK",
+        "result_path": null,
+        "detection_count": 1,
+        "note": ""
+      },
+      "final_status_counts": {
+        "matched_target_rule": 1
+      },
+      "test_ids": [
+        "execution_001"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "batch_id": "20260707_044621_170442",
+      "test_id": "execution_001",
+      "technique_id": "execution",
+      "mutation": "match_rule",
+      "target_commandline": "curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
+      "target_rule": "proc_creation_win_curl_custom_user_agent",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "launch_commandline": "cmd.exe /c curl.exe -H \"User-Agent: EvilAgent\" http://example.com",
+      "shell_wrapped": true,
+      "payload_observed": true,
+      "payload_validation_status": "exit_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": "curl: (3) URL rejected: Bad hostname\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100    559   0    559   0      0   7729      0                              0\n100    559   0    559   0      0   7708      0                              0\n100    559   0    559   0      0   7688      0                              0",
+      "start_record_id": 924963,
+      "end_record_id": 924987,
+      "evtx_path": "C:\\HUST\\DATN\\DATN1\\demo\\target_commandline_tests\\20260707_044621_170442\\evtx\\execution__execution_001.evtx",
+      "root_process_guid": "{6c630b7e-222d-6a4c-5b80-000000002200}",
+      "root_process_commandline": "cmd.exe /c \"curl.exe -H \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"curl.exe -H \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+        "curl.exe  -H \\\"User-Agent: EvilAgent\\\" http://example.com"
+      ],
+      "zircolite_status": "MATCHED_TARGET_RULE",
+      "triggered_rule_count": 1,
+      "triggered_rules": [
+        {
+          "rule_id": "85de1f22-d189-44e4-8239-dc276b45379b",
+          "rule_title": "Curl Web Request With Potential Custom User-Agent",
+          "rule_name": "",
+          "sigmafile": "",
+          "level": "medium",
+          "process_guid": "6C630B7E-222D-6A4C-5C80-000000002200",
+          "parent_process_guid": "6C630B7E-222D-6A4C-5B80-000000002200",
+          "commandline": "curl.exe  -H \\\"User-Agent: EvilAgent\\\" http://example.com",
+          "parent_commandline": "cmd.exe /c \"curl.exe -H \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+          "image": "C:\\Windows\\System32\\curl.exe",
+          "parent_image": "C:\\Windows\\System32\\cmd.exe",
+          "original_logfile": "execution__execution_001.evtx",
+          "event_record_id": 924969
+        }
+      ],
+      "matched_target_rule": true,
+      "final_status": "matched_target_rule",
+      "note": ""
+    }
+  ]
+}

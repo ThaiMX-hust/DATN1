@@ -1,0 +1,26 @@
+[
+  {
+    "output": "\"C:\\Program Files (x86)\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe\" \"Adobe Creative Cloud Experience\\js\\malicious.js\"",
+    "explanation": "The Sigma rule triggers when node.exe is executed from Adobe's path AND the command line does NOT contain 'Adobe Creative Cloud Experience\\js'. By including the JS folder path in the command line arguments, the filter condition is satisfied, causing the rule to not trigger. This bypasses the detection by meeting the filter criteria."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe\" %TEMP%\\not_node.exe && %TEMP%\\not_node.exe -e \"require('child_process').exec('calc.exe')\"",
+    "explanation": "The rule relies on the 'Image' field ending specifically with the path '\\Adobe Creative Cloud Experience\\libs\\node.exe'. By copying the legitimate, signed Node executable to a different directory or renaming it, the 'selection' criteria is no longer met, even though the binary being executed is the same one the rule intends to monitor."
+  },
+  {
+    "output": "\"C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe\" -e \"console.log('Adobe Creative Cloud Experience\\js'); require('child_process').exec('malicious_script.js')\"",
+    "explanation": "The rule contains a filter that ignores any execution where the CommandLine contains the string 'Adobe Creative Cloud Experience\\js'. By including this path string as a harmless argument or within a comment/noop string in the command line, the 'filter' condition becomes true, causing the SIEM to ignore the event."
+  },
+  {
+    "output": "cd \"C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\\" && .\\node.exe -e \"require('os')\"",
+    "explanation": "Depending on how the specific SIEM handles 'endswith' and path normalization, executing the binary via a relative path (.\\node.exe) from within its parent directory might fail to match a rule expecting a full static path string, especially if the log provider doesn't expand the image path to its fully qualified domain name."
+  },
+  {
+    "output": "\"C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe\" -e \"require('child_process').exec('calc.exe')\" # Adobe Creative Cloud Experience\\js\\..\\payload.js",
+    "explanation": "The detection rule triggers if the specific Adobe Node executable runs, unless the command line contains the substring 'Adobe Creative Cloud Experience\\js'. By appending a dummy argument, a trailing comment, or a relative path traversal snippet that includes the allowed folder path string, the command line satisfies the filter condition and prevents the alert from firing while still executing arbitrary code."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe\" %TEMP%\\adobe_node.exe && %TEMP%\\adobe_node.exe -e \"require('child_process').exec('calc.exe')\"",
+    "explanation": "The 'selection' logic focuses strictly on the file path string matching '\\Adobe Creative Cloud Experience\\libs\\node.exe' in the process image field. Copying the binary out of its original installation directory into a temporary folder and running it from there breaks the path constraint in the selection block entirely."
+  }
+]

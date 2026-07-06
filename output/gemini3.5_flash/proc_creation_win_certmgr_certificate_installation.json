@@ -1,0 +1,14 @@
+[
+  {
+    "output": "CertMgr.exe -add CertificateFileName.cer /s /r localMachine root /all",
+    "explanation": "The Sigma rule's 'selection_cli' condition strictly looks for the exact substring '/add'. Windows command-line utilities often accept a hyphen instead of a forward slash for arguments. Using '-add' instead of '/add' achieves the exact same functionality but breaks the string matching logic of the rule."
+  },
+  {
+    "output": "certutil.exe -addstore root CertificateFileName.cer",
+    "explanation": "The rule's 'selection_img' condition is narrowly scoped to detect only the 'CertMgr.exe' binary. By utilizing 'certutil.exe', another built-in Windows certificate management tool, an adversary can install a root certificate while completely bypassing the image name filter."
+  },
+  {
+    "output": "powershell -Command \"Import-Certificate -FilePath '.\\CertificateFileName.cer' -CertStoreLocation 'Cert:\\LocalMachine\\Root'\"",
+    "explanation": "Similar to the certutil bypass, using the native PowerShell cmdlet 'Import-Certificate' avoids the 'CertMgr.exe' execution altogether, evading both the 'selection_img' and 'selection_cli' detection conditions."
+  }
+]

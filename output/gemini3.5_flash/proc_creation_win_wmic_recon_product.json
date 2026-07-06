@@ -1,0 +1,6 @@
+[
+  {
+    "output": "wmic os get caption",
+    "explanation": "Uses WMIC.exe but does not include the substring 'Product' in the command line, thus the rule's selection_cli condition is not satisfied and the rule does not fire."
+  }
+]

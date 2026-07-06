@@ -1,0 +1,10 @@
+[
+  {
+    "output": "explorer.exe,/root,C:\\Windows\\System32\\calc.exe",
+    "explanation": "The detection rule explicitly looks for the string ' /root,' containing a leading space. By omitting the space and separating the executable and arguments with a comma, explorer.exe still processes the command and launches the payload, but the literal string match in the Sigma rule fails."
+  },
+  {
+    "output": "explorer.exe \"/root,C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "Enclosing the argument in double quotes changes the character immediately preceding the forward slash from a space to a quote. Since the rule specifically checks for ' /root,' (with a space), this variation bypasses the string matching condition while still executing successfully."
+  }
+]

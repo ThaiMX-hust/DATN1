@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"BypassTask\" /tr \"C:\\Users\\John\\Documents\\malicious.bat\"",
+    "explanation": "Uses a legitimate user-specific path (Documents) not listed in the detection criteria, avoiding suspicious folders and environment variables."
+  }
+]

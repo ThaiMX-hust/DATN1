@@ -1,0 +1,14 @@
+[
+  {
+    "output": "net user \"Admin\"istrator /active:yes",
+    "explanation": "Windows command-line parsing allows quotes to be placed arbitrarily within arguments. The executable will still process the username as 'Administrator', but this breaks the strict string matching in selection_username, which explicitly expects complete strings like ' Administrator ' or ' \"Administrator\" '."
+  },
+  {
+    "output": "net user Administrator/active:yes",
+    "explanation": "The Sigma rule's selection_username explicitly expects a leading and trailing space around the username (e.g., ' Administrator '). By appending a command switch directly after the username without a trailing space, the exact string match fails."
+  },
+  {
+    "output": "powershell.exe -Command \"Enable-LocalUser -Name 'Administrator'\"",
+    "explanation": "The Sigma rule's selection_img is narrowly scoped to net.exe and net1.exe. Achieving the same goal using native alternative tools, such as PowerShell's LocalAccounts module or WMI, completely evades the process creation filter."
+  }
+]

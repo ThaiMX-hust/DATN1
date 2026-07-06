@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"New-NetFirewallRule -DisplayName 'MaliciousRule' -Direction Inbound -Action Allow -Protocol TCP -LocalPort 443\"",
+    "explanation": "The Sigma rule specifically targets the 'netsh.exe' executable and the presence of 'firewall' and 'add' in the command line. By using the 'New-NetFirewallRule' cmdlet in PowerShell, an attacker can achieve the same result (adding a firewall rule) without triggering a rule that looks for netsh-specific syntax."
+  },
+  {
+    "output": "netsh.exe advfirewall firewall set rule group='remote desktop' new enable=Yes",
+    "explanation": "The rule requires the command line to contain ' add '. By using the 'set' command to enable a pre-existing but disabled rule (like Remote Desktop or File and Printer Sharing), the attacker bypasses the 'add' keyword requirement while still opening a port."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=Dropbox dir=in action=allow \"program=C:\\Users\\Public\\malware.exe\" enable=yes profile=Any",
+    "explanation": "The rule contains an optional filter for Dropbox installation strings. While the filter in this specific Sigma rule checks for the Dropbox program path, variations in how SIEMs handle 'filter_optional' logic can sometimes be exploited by mimicking the 'name=Dropbox' attribute to blend in with expected noise."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\netsh.exe C:\\Users\\Public\\not_netsh.exe && C:\\Users\\Public\\not_netsh.exe advfirewall firewall add rule name='Allow In' dir=in action=allow protocol=TCP localport=8080",
+    "explanation": "If the detection relies heavily on 'Image|endswith' and does not effectively validate the 'OriginalFileName' field (or if the log source doesn't populate it), renaming the binary can bypass simple path-based detection."
+  }
+]

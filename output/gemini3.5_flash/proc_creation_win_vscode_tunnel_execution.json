@@ -1,0 +1,30 @@
+[
+  {
+    "output": "code.exe tunnel ",
+    "explanation": "Adding a trailing space after 'tunnel' prevents the CommandLine from ending with '.exe tunnel' exactly, bypassing selection_only_tunnel while still executing the tunnel command."
+  },
+  {
+    "output": "code.exe tunnel --another-arg",
+    "explanation": "Appending additional arguments after 'tunnel' changes the ending pattern, bypassing the endswith detection while the tunnel functionality still executes."
+  },
+  {
+    "output": "powershell -Command \"& 'C:\\Program Files\\Microsoft VS Code\\code.exe' tunnel --accept-server-license-terms\"",
+    "explanation": "Invoking via PowerShell with the executable in quotes and using PowerShell's -Command parameter alters the logged CommandLine format, potentially evading direct pattern matching."
+  },
+  {
+    "output": "code.exe tunnel --accept-server-license-terms ",
+    "explanation": "Adding a trailing space after the license terms flag breaks the contains|all pattern match for the exact string '.exe tunnel'."
+  },
+  {
+    "output": "cmd /c \"code.exe tunnel --accept-server-license-terms\"",
+    "explanation": "Wrapping the tunnel command inside cmd /c with quotes changes the CommandLine structure, potentially bypassing parent command line detection and exact string matching."
+  },
+  {
+    "output": "\"C:\\Program Files\\Microsoft VS Code\\code.exe\"  tunnel --accept-server-license-terms",
+    "explanation": "The Sigma rule relies on exact string matching for '.exe tunnel'. By enclosing the executable path in quotes and inserting multiple spaces between the executable extension and the 'tunnel' keyword, the contiguous string match fails. This bypasses both 'selection_only_tunnel' and 'selection_tunnel_args' while still executing the tunnel normally."
+  },
+  {
+    "output": "code.cmd tunnel --accept-server-license-terms",
+    "explanation": "Visual Studio Code also provides a batch script wrapper (code.cmd). Executing the tunnel via this wrapper does not contain '.exe' in the process command line, evading the '.exe tunnel' string requirement entirely."
+  }
+]

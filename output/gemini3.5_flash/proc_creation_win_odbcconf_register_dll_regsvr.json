@@ -1,0 +1,6 @@
+[
+  {
+    "output": "odbcconf.exe /a {REGSVR C:\\Temp\\malicious.txt}",
+    "explanation": "This command bypasses the Sigma rule because the rule strictly looks for the '.dll' string in the command line. By renaming the payload file to have a different extension (like .txt) before executing, the odbcconf utility will still successfully load and execute the library, but the detection condition will not be met."
+  }
+]

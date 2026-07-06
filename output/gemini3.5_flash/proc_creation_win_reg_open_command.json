@@ -1,0 +1,6 @@
+[
+  {
+    "output": "reg add HKCU\\Software\\Classes\\ms-settings\\shell\\opencommand /value=test /validdataentropy=512 /expandtostring",
+    "explanation": "This command attempts to add a suspicious registry key that mimics legitimate settings, potentially evading detection."
+  }
+]

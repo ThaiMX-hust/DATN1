@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cscript.exe C:\\Windows\\System32\\moved_cscript.exe && C:\\Windows\\System32\\moved_cscript.exe //nologo C:\\Windows\\System32\\winrm.vbs get wmicimv2/Win32_Process?Handle=4 -format:pretty",
+    "explanation": "The Sigma rule triggers only if the executable (Image) is NOT located in C:\\Windows\\System32\\ or C:\\Windows\\SysWOW64\\. By copying the scripting engine (cscript.exe) to a new name within the same protected System32 directory, the 'image_from_system_folder' condition remains true, which negates the overall 'and not' logic of the detection rule."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cscript.exe //nologo C:\\Windows\\System32\\winrm.vbs get wmicimv2/Win32_Process -format:\"xml\"",
+    "explanation": "The rule specifically looks for 'format:pretty' or 'format:text' to detect the XSL transformation trigger. By using a different format argument like 'xml' or 'table' while still providing a malicious XSL via environment variables or side-loading (if applicable to the specific exploit version), the command avoids the string-matching patterns defined in 'contains_format_pretty_arg'."
+  }
+]

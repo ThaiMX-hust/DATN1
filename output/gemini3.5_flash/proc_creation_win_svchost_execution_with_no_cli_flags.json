@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\svchost.exe -k netsvcs",
+    "explanation": "Bypasses the rule by appending standard service host arguments to the command line. The Sigma rule's selection specifically looks for a CommandLine ending exactly with 'svchost.exe'. By adding standard arguments (like -k netsvcs or -k LocalService), the ending changes, evading the logic while still providing a valid, stealthy target for process hollowing or memory injection."
+  },
+  {
+    "output": "\"C:\\Windows\\System32\\svchost.exe\" ",
+    "explanation": "Bypasses the rule by adding a single trailing space to the execution string. Because the rule relies on an exact 'endswith: svchost.exe' or 'endswith: \\svchost.exe' string match, appending a trailing whitespace character causes the evaluation to fail while the Windows OS still executes the binary normally."
+  }
+]

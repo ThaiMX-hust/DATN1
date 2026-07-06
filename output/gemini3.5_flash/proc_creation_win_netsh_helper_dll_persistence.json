@@ -1,0 +1,18 @@
+[
+  {
+    "output": "netsh.exe \"a\"\"d\"\"d\" \"h\"\"e\"\"l\"\"p\"\"e\"\"r\" C:\\path\\to\\evil.dll",
+    "explanation": "The Sigma rule uses a simple string 'contains' match for 'add' and 'helper'. By using double quotes within the command line arguments, the attacker can break the literal string pattern while the Windows command line parser still interprets the command correctly, effectively bypassing basic pattern-based detection."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\netsh.exe C:\\Windows\\Temp\\not_netsh.exe && C:\\Windows\\Temp\\not_netsh.exe add helper C:\\path\\to\\evil.dll",
+    "explanation": "The rule filters specifically for 'OriginalFileName' or an 'Image' ending in '\\netsh.exe'. By copying the binary to a new name, the 'Image' check is bypassed. If the logging system does not reliably capture or check the 'OriginalFileName' metadata field for the renamed binary, the selection_img criteria will fail."
+  },
+  {
+    "output": "netsh add\thelper C:\\path\\to\\evil.dll",
+    "explanation": "If the SIEM's 'contains' implementation or the rule's logic is strictly looking for space-delimited strings, using a horizontal tab character (0x09) instead of a space between 'add' and 'helper' may evade some detection filters while still being valid syntax for the netsh parser."
+  },
+  {
+    "output": "reg add \"HKLM\\Software\\Microsoft\\NetSh\" /v \"malicious_helper\" /t REG_SZ /d \"C:\\path\\to\\evil.dll\"",
+    "explanation": "This bypasses the process creation rule entirely by performing the underlying action manually. Netsh helpers are registered in the registry. By modifying the registry directly via 'reg.exe' instead of using 'netsh.exe', the activity does not trigger a rule looking for netsh process execution with specific CLI flags."
+  }
+]

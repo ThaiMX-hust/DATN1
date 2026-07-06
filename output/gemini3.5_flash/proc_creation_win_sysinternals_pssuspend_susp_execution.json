@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ren pssuspend64.exe not_suspicious.exe && .\\not_suspicious.exe -r msmpeng.exe",
+    "explanation": "The rule uses a logical 'AND' (all of selection_*) between the file identity and the command line content. By renaming the 'pssuspend64.exe' binary to anything else, the 'selection_img' criteria (which looks for OriginalFileName or specific Image paths) fails, allowing the execution to proceed undetected even if 'msmpeng.exe' is in the command line."
+  },
+  {
+    "output": "pssuspend64.exe \"msm\"+\"peng.exe\"",
+    "explanation": "Depending on the SIEM's parsing engine, using string concatenation or environment variables within a shell (like PowerShell or CMD) to break up the string 'msmpeng.exe' can bypass simple 'contains' filters while still being interpreted correctly by the underlying utility."
+  },
+  {
+    "output": "pssuspend64.exe 4512",
+    "explanation": "The rule specifically looks for the string 'msmpeng.exe' in the command line. A user can bypass this by identifying the Process ID (PID) of the target service and passing the PID to pssuspend instead of the executable name."
+  }
+]

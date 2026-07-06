@@ -1,0 +1,34 @@
+[
+  {
+    "output": "cmd.exe /c w^hoami&echo [S]",
+    "explanation": "The Windows command line processor (cmd.exe) supports the caret (^) as an escape character. Inserting a caret within the command name (e.g., 'w^hoami') executes normally but breaks the literal string match for '&whoami&echo' defined in the Sigma rule."
+  },
+  {
+    "output": "cmd.exe /c \"&wh^oami&ec^ho\"",
+    "explanation": "Bypasses the exact string match '&whoami&echo' by injecting cmd.exe caret (^) escape characters. The command still executes 'whoami' and 'echo' but evades the specific CommandLine|contains signature."
+  },
+  {
+    "output": "cmd.exe /c \"& ipconfig & echo\"",
+    "explanation": "Bypasses the rule by introducing whitespaces between the ampersands and the commands. The rule strictly looks for '&ipconfig&echo' without spaces, so '& ipconfig & echo' will execute identically but fail to trigger the rule."
+  },
+  {
+    "output": "cmd.exe /c \"&dir&&echo [E]\"",
+    "explanation": "Bypasses the rule by utilizing the logical AND operator (&&) instead of the single command separator (&). The rule specifically targets the single ampersand sequence '&dir&echo'."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\w3wp.exe -s \"&whoami&echo\"",
+    "explanation": "The rule checks for specific substrings in the command line. By using a different argument format (e.g., prefixing with a dash or changing the order) the substrings are not matched, bypassing the detection."
+  },
+  {
+    "output": "C:\\Windows\\System32\\inetsrv\\w3wp.exe -command \"&ipconfig&echo\"",
+    "explanation": "Changing the command line to use a different switch (-command) prevents the rule from matching the exact 'CommandLine|contains' patterns."
+  },
+  {
+    "output": "cmd.exe /c \"whoami & echo [E]\"",
+    "explanation": "The Sigma rule relies on exact string matching with no spaces (e.g., '&whoami&echo'). By simply inserting standard whitespace around the ampersand operators, the command executes normally in the Windows command shell but completely bypasses the literal string detection."
+  },
+  {
+    "output": "cmd.exe /c \"&wh^oami&echo\"",
+    "explanation": "This technique utilizes the caret (^) character, which acts as an escape character in cmd.exe. The shell interprets and runs 'whoami', but the command line logged by Windows Event Tracing will contain 'wh^oami'. This breaks the strict '&whoami&echo' substring match while maintaining the command's functionality, highlighting the need for de-obfuscation or regex in SIEM rules."
+  }
+]

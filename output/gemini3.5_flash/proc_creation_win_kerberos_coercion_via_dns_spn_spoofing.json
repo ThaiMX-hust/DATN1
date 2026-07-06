@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"$b64 = '1UWhR' + 'CAAAAAAAYBAAAA'; $data = [System.Convert]::FromBase64String($b64); [System.Text.Encoding]::UTF8.GetString($data)\"",
+    "explanation": "The rule relies on a direct string check for the literal Base64 fragments 'UWhRCA' and 'BAAAA' on the command line interface. Breaking up the static Base64 payload string inside an interpreter like PowerShell via simple string concatenation ('UWhR' + 'CA...') avoids presenting the complete static signature sequence to the process creation log."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand \"MQBVAFcAaABSAEMAdwBBAEEAQQBBAEEAQQBBADIAMgBBAEEAWQBCAEEAQQBBAEEAQQAgAC0AYwAgAGMAbwBlAHIAYwBlAC4AZQB4AGU=",
+    "explanation": "Executing the attack binary or passing the target argument using PowerShell's native '-EncodedCommand' flag wraps the entire command string in a UTF-16LE Base64 envelope. The process creation log records only the outermost PowerShell Base64 payload, concealing the nested 'UWhRCA' and 'BAAAA' substrings entirely from superficial command-line text inspection."
+  },
+  {
+    "output": "powershell.exe -Command \"$part1 = 'UWh' + 'RCA'; $part2 = 'BAA' + 'AA'; Write-Output 'Simulated execution of payload'\"",
+    "explanation": "Educational Example: The provided Sigma rule relies on static string matching for the exact contiguous sequences 'UWhRCA' and 'BAAAA'. This detection can be bypassed using simple obfuscation techniques like string concatenation in PowerShell. The process creation log will record the concatenated command, preventing the rule from matching the full signatures."
+  },
+  {
+    "output": "cmd.exe /c \"set P1=UWhRCA && set P2=BAAAA && echo Simulated payload execution using %P1% %P2%\"",
+    "explanation": "Educational Example: Attackers often use environment variables to split up known malicious signatures. While this specific command still contains the strings in the process creation event, an attacker could set these variables in a parent process or earlier in a script, meaning the final execution command line might only contain the variable names, evading the detection rule."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -File C:\\temp\\marshaled_cred_payload.ps1",
+    "explanation": "Educational Example: The most reliable way to bypass rules focused exclusively on `CommandLine` is to remove the suspicious parameters from the command line entirely. If the base64-encoded signature is embedded within a script file (or loaded reflectively into memory), the SIEM will only log the process creation of the script host, completely missing the signature."
+  }
+]

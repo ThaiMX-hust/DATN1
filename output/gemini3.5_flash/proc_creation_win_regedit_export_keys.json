@@ -1,0 +1,14 @@
+[
+  {
+    "output": "reg.exe export HKCU\\Software C:\\temp\\export.reg",
+    "explanation": "The provided Sigma rule relies exclusively on the 'selection_img' condition matching 'regedit.exe' or its OriginalFileName. An attacker or administrator can bypass this rule entirely by using the built-in 'reg.exe' command-line utility, which performs the same registry export function without triggering the executable name condition."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Item -Path 'HKCU:\\Software' | Export-Clixml -Path 'C:\\temp\\export.xml'\"",
+    "explanation": "This bypasses the rule by using native PowerShell cmdlets to interact with the Registry provider. Since the Sigma rule explicitly looks for 'regedit.exe' and the ' -E ' command-line argument, using PowerShell evades both detection mechanisms while successfully extracting registry data."
+  },
+  {
+    "output": "regedit.exe /e\"C:\\temp\\export.reg\" \"HKEY_CURRENT_USER\\Software\"",
+    "explanation": "The rule looks for the exact string ' -E ' (with spaces) in the command line using windash. Depending on the specific SIEM's tokenizer and command-line parsing, removing the space between the flag and the file path argument (e.g., '/e\"path\"' instead of '/e \"path\"') might successfully evade the 'selection_cli' string match condition."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "output": "<PE_Resource_Editor> --modify-metadata --target GoToOpener.exe --field \"Company\" --value \"Unknown\" && GoToOpener.exe",
+    "explanation": "The provided Sigma rule relies exclusively on PE (Portable Executable) metadata fields (Description, Product, Company) logged during process creation. An adversary can easily bypass this rule by using a resource editing tool to alter or strip the VERSIONINFO block of the executable prior to running it. Because the rule checks for specific strings rather than behavioral patterns (like network connections to LogMeIn infrastructure) or file hashes, modifying the metadata prevents the process creation event from matching the detection criteria."
+  }
+]

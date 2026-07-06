@@ -1,0 +1,6 @@
+[
+  {
+    "output": "reg import C:\\Windows\\Temp\\persist.reg",
+    "explanation": "The command imports a .reg file that creates the UserInitMprLogonScript registry value. Since the command line does not contain the literal string 'UserInitMprLogonScript', it evades the sigma rule's detection while achieving the same persistence effect."
+  }
+]

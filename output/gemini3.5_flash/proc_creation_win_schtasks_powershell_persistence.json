@@ -1,0 +1,18 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -WindowStyle Hidden -ep Bypass -noni -Command \"Get-Variable -Name PSVersionTable\"",
+    "explanation": "The command uses PowerShell with hidden window style and bypass execution policy but does not end with the exact strings '-windowstyle hidden', '-w hidden', '-ep bypass', or '-noni' (different case and additional arguments), thus evading the Sigma rule while still achieving persistence via Get-Variable technique."
+  },
+  {
+    "output": "powershell.exe -windowstyle hidden ",
+    "explanation": "The Sigma rule specifically relies on the 'endswith' modifier for the CommandLine field. By simply appending a trailing space at the end of the execution command, the string no longer strictly ends with ' -windowstyle hidden', successfully bypassing the rule."
+  },
+  {
+    "output": "powershell.exe -w hidden -NoProfile",
+    "explanation": "Because the rule checks the absolute end of the command line string, appending an innocuous and valid PowerShell parameter (such as '-NoProfile' or '-NoLogo') after the hidden window flags will break the 'endswith' logic while still executing silently."
+  },
+  {
+    "output": "powershell.exe -WindowStyle Hidden",
+    "explanation": "Depending on the SIEM backend implementation, if the translation of the Sigma rule is strictly case-sensitive and does not append case-insensitivity flags to the backend query, using capitalized parameters like '-WindowStyle Hidden' might bypass the lowercase strings defined in the rule."
+  }
+]

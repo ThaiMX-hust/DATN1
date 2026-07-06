@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\proxy_service.exe -c C:\\Windows\\Temp\\config.conf",
+    "explanation": "This command bypasses 'selection_img' by renaming the binary from frpc.exe to proxy_service.exe. It bypasses 'selection_cli' by renaming the configuration file from frpc.ini to config.conf. It bypasses 'selection_hashes' assuming the use of an FRP version other than 0.44.0 or a custom-compiled binary to alter the file hash."
+  }
+]

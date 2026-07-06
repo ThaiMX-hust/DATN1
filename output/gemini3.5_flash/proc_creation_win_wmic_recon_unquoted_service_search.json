@@ -1,0 +1,6 @@
+[
+  {
+    "output": "wmic.exe /node:\"localhost\" /namespace:\\\\root\\\\cimv2 path Win32_Service get Name,DisplayName,PathName,StartMode /format:csv",
+    "explanation": "Uses WMIC with different spacing and output format to avoid the exact 'service get' and 'name,displayname,pathname,startmode' string pattern the rule looks for, while still enumerating unquoted service paths."
+  }
+]

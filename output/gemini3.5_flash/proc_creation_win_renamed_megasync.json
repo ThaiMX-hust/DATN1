@@ -1,0 +1,10 @@
+[
+  {
+    "output": "ResourceHacker.exe -open megasync.exe -save svchost.exe -action modify -res custom_version.res -mask VERSIONINFO,1,1033 && svchost.exe",
+    "explanation": "The Sigma rule relies entirely on the Portable Executable (PE) metadata field 'OriginalFileName' remaining untouched. An attacker can use resource-editing tools to overwrite the binary's version info, stripping or altering the 'OriginalFileName' attribute before renaming the executable. When the modified binary runs, the SIEM/Sysmon logs will reflect the altered metadata, causing the 'selection' condition to fail."
+  },
+  {
+    "output": "copy megasync.exe C:\\Users\\Public\\megasync.exe && C:\\Users\\Public\\megasync.exe",
+    "explanation": "The rule is strictly scoped to detect 'renamed' instances and explicitly excludes any execution where the Image path ends with '\\megasync.exe'. An attacker can bypass this specific rule by keeping the original filename but executing it from an anomalous, deceptive, or world-writable directory (like Public or Temp) to achieve their exfiltration goals without triggering the rename-specific logic."
+  }
+]

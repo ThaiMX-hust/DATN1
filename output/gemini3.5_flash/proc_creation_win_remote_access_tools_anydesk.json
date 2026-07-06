@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy AnyDesk.exe C:\\ProgramData\\win_update.exe\n// Note: The binary's PE resource metadata (Description, Product, Company) must also be stripped or modified using a tool like Resource Hacker prior to execution.",
+    "explanation": "The Sigma rule relies on an OR condition across the file name and internal PE (Portable Executable) metadata. To bypass this process creation rule, an adversary must alter both: renaming the executable evades the 'Image|endswith' check, and modifying the embedded version information prevents logging agents (like Sysmon) from parsing the targeted 'AnyDesk' keywords in the Description, Product, or Company fields."
+  },
+  {
+    "output": "Invoke-ProcessHollowing -Executable \"C:\\Windows\\System32\\svchost.exe\" -Payload \"C:\\temp\\AnyDesk.exe\"",
+    "explanation": "Executing the AnyDesk payload via process hollowing or PE injection into a legitimate host process (like svchost.exe) bypasses the rule. The process creation logs will reflect the image name and metadata of the benign host process rather than the AnyDesk binary."
+  }
+]

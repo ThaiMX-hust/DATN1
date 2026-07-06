@@ -1,0 +1,14 @@
+[
+  {
+    "output": "SyncAppvPublishingServer.exe \"n;\"  -ExecutionPolicy Bypass -File C:\\path\\to\\script.ps1",
+    "explanation": "The original Sigma rule strictly looks for the pattern '\"n; ' (including a trailing space after the semicolon). By removing the space after the semicolon or using a different whitespace character like a tab, the specific string match '\"n; ' fails while the application may still parse and execute the command logic."
+  },
+  {
+    "output": "SyncAppvPublishingServer.exe \"n;`nStop-Process -Name 'lsass'\"",
+    "explanation": "This bypass uses a newline character (represented as `n in PowerShell context or a literal newline in a script) immediately after the semicolon. Since the detection is hardcoded to look for a space (' '), any command that substitutes that space with a newline or carriage return will evade the selection_cli criteria."
+  },
+  {
+    "output": "SyncAppvPublishingServer.exe \"n;Start-Process calc.exe\"",
+    "explanation": "The rule is vulnerable to simple spacing variations. By concatenating the arbitrary command directly to the semicolon (e.g., 'n;Command' instead of 'n; Command'), the string '\"n; ' is not present in the command line, causing the 'all of selection_*' condition to fail."
+  }
+]

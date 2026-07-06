@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\msdt.exe C:\\Temp\\diagnostic_tool.exe && C:\\Temp\\diagnostic_tool.exe -cab C:\\Temp\\Suspicious.diagcab",
+    "explanation": "This technique attempts to bypass the selection_img criteria. If the underlying log source (like a basic Event ID 4688) does not capture or report the OriginalFileName field and only relies on the Image path, renaming the executable to something that does not end in '\\msdt.exe' will evade the rule entirely."
+  }
+]

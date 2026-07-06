@@ -1,0 +1,6 @@
+[
+  {
+    "output": "C:\\Windows\\Temp\\worker.exe /c whoami",
+    "explanation": "If an attacker uses native web server scripting (e.g., ASP.NET System.IO.File.Copy or PHP copy()) to duplicate cmd.exe or powershell.exe into a new file named 'worker.exe' before execution, the spawned process will not match the 'Image|endswith' conditions, completely bypassing the rule."
+  }
+]

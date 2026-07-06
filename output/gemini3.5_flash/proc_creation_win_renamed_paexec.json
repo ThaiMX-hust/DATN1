@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Users\\Public\\paexec.exe \\\\192.168.1.50 -u Administrator -p Password123 cmd.exe",
+    "explanation": "The Sigma rule attempts to detect renamed versions of PAExec by matching PE metadata and ImpHashes. However, it explicitly excludes any execution where the image path ends with '\\paexec.exe' (via 'filter_main_known_location'). An attacker can bypass this specific 'renamed execution' rule by simply keeping the original filename 'paexec.exe', even if executing it maliciously from an unauthorized directory like C:\\Users\\Public\\. The exclusion condition prevents the alert from triggering."
+  },
+  {
+    "output": "C:\\Windows\\PAExec-UpdateTask.exe \\\\192.168.1.50 -s powershell.exe",
+    "explanation": "Another bypass leverages the second exclusion in the rule: 'Image|startswith: C:\\Windows\\PAExec-'. This filter is intended to suppress false positives from PAExec's normal behavior of copying itself to the Windows directory with a dynamic name when using the '-s' flag. An attacker can manually rename their PAExec binary to match this exact pattern (e.g., PAExec-UpdateTask.exe) and execute it directly from C:\\Windows\\. Because it matches the starts-with filter, the rule ignores it."
+  }
+]

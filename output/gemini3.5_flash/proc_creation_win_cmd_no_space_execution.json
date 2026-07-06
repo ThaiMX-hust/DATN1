@@ -1,0 +1,6 @@
+[
+  {
+    "output": "cmd.exe /c^ whoami",
+    "explanation": "Windows command line allows the use of the caret (^) as an escape character. Inserting it between the flag and the command (e.g., /c^ ) breaks the 'cmd.exe /c ' string match used in the filter_generic, while the shell still interprets the command correctly."
+  }
+]

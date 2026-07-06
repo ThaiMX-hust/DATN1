@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\wusa.exe /quiet \"C:\\Users\\Public\\Downloads\\update.msu\"",
+    "explanation": "The first selection of the Sigma rule strictly monitors for a command line starting with '\"C:\\Windows\\system32\\wusa.exe\"  /quiet C:\\Users\\' and ending with '\\AppData\\Local\\Temp\\update.msu'. By changing the directory of the MSU file to a location outside of the user's AppData\\Local\\Temp folder (e.g., Public\\Downloads), or by altering the spacing/quoting in a way that doesn't match the 'startswith' string exactly, the rule is bypassed while still executing the MSU via wusa.exe."
+  },
+  {
+    "output": "C:\\Windows\\system32\\dism.exe /online /quiet /add-package /packagepath:\"C:\\Windows\\Temp\\pe386\"",
+    "explanation": "The second selection relies on a specific ParentCommandLine pattern including a hardcoded package path ('C:\\Windows\\system32\\pe386'). By moving the payload to a different directory like 'C:\\Windows\\Temp\\pe386', the ParentCommandLine selection fails to match. Additionally, the rule looks for 'dismhost.exe {' in the child process command line; using alternative DISM execution methods or renaming the target directory to avoid the 'AppData\\Local\\Temp' string in the resulting dismhost path will evade detection."
+  }
+]

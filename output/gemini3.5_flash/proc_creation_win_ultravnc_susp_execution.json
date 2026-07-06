@@ -1,0 +1,6 @@
+[
+  {
+    "output": "vncviewer.exe -id:1234 -connect 192.168.1.100 -autoreconnect",
+    "explanation": "The Sigma rule explicitly matches the string '-autoreconnect ' with a trailing space. By placing the -autoreconnect parameter at the very end of the command line, there is no trailing space, bypassing the 'contains' condition. Detection engineers should remove trailing spaces from string literals in rules to prevent simple command-line reordering bypasses."
+  }
+]

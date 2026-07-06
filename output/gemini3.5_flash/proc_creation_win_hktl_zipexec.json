@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"Expand-Archive -Path 'C:\\Temp\\payload.zip' -DestinationPath 'C:\\Temp\\extracted' -Force; Start-Process 'C:\\Temp\\extracted\\binary.exe'\"",
+    "explanation": "The original Sigma rule specifically targets the use of the Windows Shell 'ZipFolder' COM object interface via command line arguments (specifically the '/generic:Microsoft_Windows_Shell_ZipFolder' string). By using PowerShell's built-in 'Expand-Archive' cmdlet or the .NET 'System.IO.Compression' namespace to extract a password-protected ZIP, the attacker completely avoids the targeted command-line strings while achieving the same execution goal."
+  },
+  {
+    "output": "copy payload.zip payload.txt && certutil -decodehex payload.txt payload.exe",
+    "explanation": "The rule relies on detecting specific command-line flags associated with ZipExec's method of operation. An attacker can bypass this by manually staging the file through different utilities (like Certutil or custom loaders) that do not invoke the Microsoft Windows Shell ZipFolder handler via the command line, thus failing to trigger any of the 'contains|all' conditions."
+  }
+]

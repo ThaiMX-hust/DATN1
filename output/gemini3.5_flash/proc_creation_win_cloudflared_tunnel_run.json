@@ -1,0 +1,38 @@
+[
+  {
+    "output": "cloudflared.exe tunnel run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "The Sigma rule explicitly checks for the flags with a trailing space, such as '-token ' or '-config '. By using an equals sign to assign the value (e.g., '--token=' or '-config='), the exact string match fails and the second detection condition is bypassed."
+  },
+  {
+    "output": "cloudflared.exe \"tunnel\" \"run\" --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "The rule requires the exact sub-strings ' tunnel ' and ' run ' with leading and trailing spaces. By wrapping the arguments in quotes, the raw command line logged by Windows process creation events will contain '\"tunnel\"' and '\"run\"', disrupting the space-padded string match requirement of the first condition."
+  },
+  {
+    "output": "cloudflared.exe --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... tunnel run",
+    "explanation": "The rule expects the string ' run ' with a trailing space. By placing the 'run' keyword at the absolute end of the command line string with no trailing arguments or whitespace, the matching condition for ' run ' evaluates to false."
+  },
+  {
+    "output": "cmd.exe /c \"set TUNNEL_TOKEN=eyJhbGci... && cloudflared.exe tunnel run\"",
+    "explanation": "Cloudflared supports reading credentials directly from environment variables (like TUNNEL_TOKEN) rather than requiring them on the command line. By setting the token in the environment and running cloudflared without the flagged arguments, the second selection block is completely bypassed."
+  },
+  {
+    "output": "cloudflared.exe tunnel run --token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "explanation": "The Sigma rule explicitly searches for the command line argument '-token ' with a trailing space. By using an equals sign ('=') to provide the token value instead of a space, the raw command line will contain '-token=' which bypasses the exact string match condition."
+  },
+  {
+    "output": "cloudflared.exe \"tunnel\" \"run\" --credentials-file C:\\Users\\Public\\cert.json",
+    "explanation": "The detection logic requires the exact strings ' tunnel ' and ' run ' including the leading and trailing spaces. By wrapping the subcommands in double quotes, the Windows command line parser still passes them correctly to the executable, but the raw command line string logged by Windows Event Tracing will contain '\"tunnel\"' and '\"run\"', effectively evading the padded space checks."
+  },
+  {
+    "output": "copy cloudflared.exe cf.exe && cf.exe --token=eyJhIjoi...n0= tunnel run",
+    "explanation": "The rule is easily bypassed because it relies on the 'CommandLine' containing specific keywords but does not validate the process executable name or hash. By renaming the 'cloudflared.exe' binary to something innocuous (like 'cf.exe' or 'svchost.exe'), the core 'cloudflared' string isn't present in a way that triggers many default detections. Furthermore, the rule looks for ' tunnel ' and ' run ' with spaces. While these are necessary for the tunnel to start, an attacker can use environment variables, shortened parameter names (if supported by the binary version), or command-line obfuscation (like carets '^' in CMD) to break simple string matching."
+  },
+  {
+    "output": "cloudflared.exe ^t^u^n^n^e^l ^r^u^n --token eyJhIjoi...n0=",
+    "explanation": "This command uses Windows Command Prompt (CMD) escape characters (^) between letters. The OS ignores these when executing, so the command runs perfectly, but the SIGMA rule's string matching ' tunnel ' and ' run ' will fail to find the literal strings because they are interrupted by the escape characters."
+  },
+  {
+    "output": "set A=tunnel&& set B=run&& cloudflared.exe %A% %B% --token <TOKEN>",
+    "explanation": "By assigning the required keywords 'tunnel' and 'run' to environment variables and then calling them, the 'CommandLine' field in many process creation logs will record the variable references or the resulting execution in a way that might bypass static string-based detection rules that look for the explicit presence of both keywords in a single string sequence."
+  }
+]

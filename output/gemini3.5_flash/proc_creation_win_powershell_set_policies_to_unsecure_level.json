@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -ex Bypass -File script.ps1",
+    "explanation": "PowerShell allows parameter truncation as long as it remains unambiguous. By using '-ex' instead of '-ep', '-exec', or '-executionpolicy', the command executes successfully but entirely evades the 'selection_option' string matches defined in the Sigma rule."
+  }
+]

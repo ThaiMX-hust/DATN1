@@ -1,0 +1,50 @@
+[
+  {
+    "output": "cloudflared tunnel cleanup --connector-id ABC123",
+    "explanation": "The rule specifically looks for '-config ' or '-connector-id ' (with a single dash). Using '--connector-id' (double dash) bypasses the pattern match while still executing the cleanup command."
+  },
+  {
+    "output": "cloudflared tunnel cleanup --config C:\\temp\\config.yml",
+    "explanation": "Similar to the above, using '--config' with double dash instead of '-config ' bypasses the detection rule. The rule checks for the single dash variant specifically."
+  },
+  {
+    "output": "cloudflared tunnel cleanup --connector-id=\"ABC-123-DEF\"",
+    "explanation": "Using the long-form --connector-id with equals sign formatting changes the string pattern enough to avoid the single dash detection while maintaining functional equivalence."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup -config=C:\\tunnel.yml",
+    "explanation": "The Sigma rule explicitly checks for the string '-config ' or '-connector-id ' with a trailing space. By using an equals sign to assign the value (e.g., '-config='), the exact string match fails and the detection is bypassed."
+  },
+  {
+    "output": "cloudflared.exe -config C:\\tunnel.yml \"tunnel\" \"cleanup\"",
+    "explanation": "The rule requires the exact sub-strings ' tunnel ' and 'cleanup ' (note the spaces). By wrapping the arguments in quotes, the raw command line logged by Windows process creation events will contain '\"tunnel\"' and '\"cleanup\"', disrupting the space-padded string match requirement."
+  },
+  {
+    "output": "cloudflared.exe -config C:\\tunnel.yml tunnel cleanup",
+    "explanation": "The rule expects the string 'cleanup ' with a trailing space. By placing the 'cleanup' keyword at the absolute end of the command line string with no trailing arguments or whitespace, the matching condition for 'cleanup ' evaluates to false."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup --config C:\\tunnel.yml",
+    "explanation": "The rule specifies a single dash for '-config '. While cloudflared accepts both single and double dashes for its flags, utilizing the double-dash syntax ('--config') breaks the specific string match configured in the rule."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup -config=C:\\Windows\\Temp\\config.yml",
+    "explanation": "The Sigma rule explicitly checks for the strings '-config ' or '-connector-id ' with a trailing space. By using the '=' character to specify the argument value (a common feature in Go-based binaries like cloudflared) instead of a space, the command executes successfully but evades the exact string match."
+  },
+  {
+    "output": "cloudflared.exe \"tunnel\" \"cleanup\" -config C:\\Windows\\Temp\\config.yml",
+    "explanation": "The rule attempts to prevent false positives by looking for space-padded strings like ' tunnel ' and 'cleanup '. Wrapping the arguments in double quotes allows the command to run on Windows, but alters the command-line string to ' \"tunnel\" \"cleanup\" ', bypassing the required space-padded pattern matches."
+  },
+  {
+    "output": "cloudflared.exe tunnel --config=C:\\temp\\config.yaml cleanup-connections",
+    "explanation": "The rule explicitly looks for the string 'cleanup ' (with a trailing space). By using 'cleanup-connections' or omitting the space between the flag and the next argument (or using an equals sign if the CLI parser allows), the specific string match is avoided while the tool may still perform the cleanup action."
+  },
+  {
+    "output": "cloudflared.exe tunnel cleanup --connector-id=12345",
+    "explanation": "The Sigma rule checks for 'cleanup ' with a trailing space. In many CLI environments, if 'cleanup' is the final argument or followed by a different delimiter that the regex/string match doesn't account for, it avoids the 'all' condition requiring that specific substring."
+  },
+  {
+    "output": "copy cloudflared.exe cf.exe && cf.exe tunnel cleanup --config C:\\config.yaml",
+    "explanation": "While this rule focuses on CommandLine content rather than the executable name, attackers often rename the binary to evade simple filename filters. If the SIEM logic is modified to look for the specific binary path, renaming bypasses that secondary layer."
+  }
+]

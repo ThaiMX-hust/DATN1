@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\runscripthelper.exe SurfaceCheck C:\\path\\to\\script.ps1 C:\\Windows\\Temp",
+    "explanation": "The Sigma rule is case-sensitive regarding the 'CommandLine' field because it specifically looks for the lowercase string 'surfacecheck'. By using 'SurfaceCheck' (PascalCase) or any other variation like 'SURFACECHECK', the command functionality remains the same on Windows while failing to trigger the string match in many SIEM implementations."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\runscripthelper.exe C:\\Windows\\Temp\\not_suspicious.exe && C:\\Windows\\Temp\\not_suspicious.exe surfacecheck C:\\path\\to\\script.ps1 C:\\Windows\\Temp",
+    "explanation": "The rule filters by the process image name ending in '\\Runscripthelper.exe'. By renaming the binary to something else before execution, the 'Image' condition of the Sigma rule is bypassed entirely, even if the 'surfacecheck' flag is used."
+  },
+  {
+    "output": "runscripthelper.exe \"surface\"\"check\" C:\\path\\to\\script.ps1 C:\\Windows\\Temp",
+    "explanation": "Using command-line obfuscation such as inserting empty quotes (\"\") between characters in the 'surfacecheck' argument can bypass simple string-matching detections while still being interpreted correctly by the binary's argument parser."
+  }
+]

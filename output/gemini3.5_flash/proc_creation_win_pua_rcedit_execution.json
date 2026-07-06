@@ -1,0 +1,30 @@
+[
+  {
+    "output": "custom_editor.exe payload.exe --set-version-string OriginalFileName \"svchost.exe\"",
+    "explanation": "The Sigma rule's 'selection_img' condition relies on static indicators: the executable name ending in 'rcedit-x64.exe' or 'rcedit-x86.exe', or the PE metadata 'Description' or 'Product' containing rcedit-specific strings. Because rcedit is an open-source tool, an attacker can trivially recompile it from source (or use a hex editor on the compiled binary) to remove or alter the 'Product' and 'Description' fields, and then rename the binary (e.g., to 'custom_editor.exe'). This causes 'selection_img' to fail. Since the rule's condition requires 'all of selection_*', the detection is completely bypassed."
+  },
+  {
+    "output": "rcedit-x64.exe payload.exe --set-version-string \"Original\"\"FileName\" \"svchost.exe\"",
+    "explanation": "This leverages command-line obfuscation. By inserting empty double quotes into the attribute string, the raw command line logged by Sysmon or the EDR will contain '\"Original\"\"FileName\"'. The Sigma rule's 'selection_attributes' condition uses a direct string match for 'OriginalFileName'. The literal match fails due to the inserted quotes, bypassing the 'selection_attributes' requirement. Meanwhile, the Windows command-line parser (CommandLineToArgvW) often strips these inline quotes during execution, allowing the underlying tool to still process the intended attribute."
+  },
+  {
+    "output": "ren rcedit-x64.exe not_rcedit.exe && .\\not_rcedit.exe target.exe --set-version-string \"OriginalFileName\" \"lsass.exe\"",
+    "explanation": "The rule uses 'all of selection_*', meaning it requires the 'selection_img' criteria to be met. By renaming the rcedit executable to something that doesn't end in 'rcedit-x64.exe' or 'rcedit-x86.exe', and ensuring the binary's internal metadata (Description/Product) is not indexed or is altered, the image-based detection is bypassed."
+  },
+  {
+    "output": "copy rcedit-x64.exe r.exe && .\\r.exe target.exe --set-version-string \"Original\"\"FileName\" \"svchost.exe\"",
+    "explanation": "This bypasses the rule by renaming the file to 'r.exe' (avoiding selection_img) and potentially evading simple command-line string matching for 'OriginalFileName' if the shell or tool parses quotes within the argument string, though the primary bypass is the failure of the 'selection_img' condition."
+  },
+  {
+    "output": "powershell -Command \"Move-Item rcedit-x64.exe legal_tool.exe; .\\legal_tool.exe binary.exe --set-version-string 'CompanyName' 'Microsoft'\"",
+    "explanation": "The detection logic relies on specific filenames and metadata strings. Renaming the tool to 'legal_tool.exe' breaks the 'selection_img' requirement. Since the rule requires ALL selection blocks to be true (condition: all of selection_*), changing the filename is sufficient for a bypass."
+  },
+  {
+    "output": "C:\\Windows\\Temp\\rcedit.exe --icon C:\\Temp\\payload.ico C:\\Temp\\malware.exe",
+    "explanation": "The command uses rcedit to set an icon (--icon) rather than any '--set-*' flag, avoiding the selection_flags match. Additionally, the binary is named rcedit.exe (without the -x64/-x86 suffix) so it does not satisfy the selection_img condition based on Image ending with \\rcedit-x64.exe or \\rcedit-x86.exe, and assuming its Description/Product fields do not match the rule's strings, the rule will not trigger."
+  },
+  {
+    "output": "resedit.exe --set-company-name \"MaliciousCorp\" target.exe",
+    "explanation": "Uses 'resedit' instead of 'rcedit' to avoid triggering the rule's process name detection. 'resedit' is not monitored by this specific Sigma rule."
+  }
+]

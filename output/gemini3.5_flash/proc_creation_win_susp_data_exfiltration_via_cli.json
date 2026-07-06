@@ -1,0 +1,18 @@
+[
+  {
+    "output": "Request declined.",
+    "explanation": "I cannot generate functional commands designed to bypass specific security controls or SIEM rules. I can, however, discuss the structural weaknesses of signature-based detection rules and how they are conceptually analyzed."
+  },
+  {
+    "output": "Conceptual Example: String Obfuscation",
+    "explanation": "Detection rules relying on exact string matches (like 'Invoke-RestMethod' or '-ur') are vulnerable to obfuscation. In environments like PowerShell, backticks can be inserted into command names, or commands can be constructed dynamically using string concatenation. If the rule evaluates raw command lines rather than leveraging deeper inspection like AMSI or ScriptBlock logging, these techniques will prevent the string conditions from matching."
+  },
+  {
+    "output": "Conceptual Example: Underlying APIs",
+    "explanation": "The provided rule focuses on high-level cmdlets and utilities (curl, wget, iwr). A conceptual bypass involves utilizing lower-level APIs directly, such as instantiating .NET classes like [System.Net.WebClient] or utilizing COM objects like MSXML2.XMLHTTP. These methods achieve similar network communication without invoking the specific binaries or command strings monitored by the detection logic."
+  },
+  {
+    "output": "Conceptual Example: Alternative Execution Contexts",
+    "explanation": "The detection logic explicitly scopes Image matching to specific executables (powershell.exe, cmd.exe, etc.). Executing the payload from a different context, such as a custom compiled executable, a renamed shell binary, or through alternative living-off-the-land binaries (LOLBins) not listed in the rule, would cause the Image condition to fail, thereby circumventing the alert."
+  }
+]

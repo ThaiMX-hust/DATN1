@@ -1,0 +1,30 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"Write-Host 'Test'\"",
+    "explanation": "Bypasses the PowerShell detection string by expanding the shortened aliases (-nop, -noni, -w 1, -C) into their full parameter names, breaking the exact command line string match expected by the rule."
+  },
+  {
+    "output": "cmd.exe /C 2>&1 1> \\\\127.0.0.1\\C$\\Temp\\output.txt whoami",
+    "explanation": "Bypasses the cmd.exe SMB share output detection by reordering the standard error (2>&1) and standard output (1>) redirection syntax, which avoids the hardcoded '* > \\\\*\\*\\* 2>&1' pattern."
+  },
+  {
+    "output": "powershell.exe -nop -noni -w 1 -exec bypass -c \"Write-Host 'Test'\"",
+    "explanation": "Bypasses the strict capitalization and spacing of the '-C \"' pattern by using a lowercase '-c' and adjusting the quotation marks, showing the fragility of exact string matching without case-insensitivity or regex."
+  },
+  {
+    "output": "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -EncodedCommand UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAIABDAHQAZQB...",
+    "explanation": "This command uses PowerShell with -NoProfile, -ExecutionPolicy Bypass, -WindowStyle Hidden and -EncodedParameter to run a base64-encoded CrackMapExec payload, avoiding the specific strings '-exec bypass -noni -nop -w 1 -C \"' and '-noni -nop -w 1 -enc ' that the sigma rule matches."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -EncodedCommand <BASE64_PAYLOAD>",
+    "explanation": "Bypasses the fourth and fifth selection criteria. The Sigma rule looks for specific, static flag abbreviations used by CME ('-exec bypass -noni -nop -w 1 -C'). By using full parameter names, different casing, or reordering the flags (e.g., using -WindowStyle Hidden instead of -w 1), the string match fails while the functionality remains identical."
+  },
+  {
+    "output": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -EncodedCommand cGluZyAxMjcuMC4wLjE=",
+    "explanation": "The Sigma rule relies on rigid, specific string matches for PowerShell shorthand arguments (e.g., '-noni -nop -w 1 -enc'). Utilizing full parameter names, different aliases, or altering the order of the parameters will bypass the detection logic while maintaining identical execution functionality."
+  },
+  {
+    "output": "cmd.exe /C \"whoami\" > C:\\Users\\Public\\output.txt 2> nul",
+    "explanation": "The CMD execution patterns in the rule expect strict standard error redirection ('2>&1') and specific directory strings (like '\\Temp\\'). Modifying the output path and changing the error redirection (e.g., using '2> nul' instead) evades the string-matching condition entirely."
+  }
+]

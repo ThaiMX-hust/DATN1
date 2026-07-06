@@ -1,0 +1,10 @@
+[
+  {
+    "output": "schtasks.exe /Create /TN EvilTask /TR \"C:\\Windows\\System32\\calc.exe\" /SC WEEKLY /D MON /ST 08:00",
+    "explanation": "Parent process is cmd.exe (not powershell/pwsh), so ParentImage condition fails; also the command line does not contain 'powershell.exe -NonI' and uses a schedule (/SC WEEKLY) not listed in the rule, avoiding detection."
+  },
+  {
+    "output": "schtasks.exe /Create /TN \"WinUpdateTask\" /TR \"powershell -NoProfile -NonInteractive -WindowStyle Hidden -Command \\\"Write-Host 'Test'\\\"\" /SC ONLOGON",
+    "explanation": "The Sigma rule is highly brittle as it looks for the default string configurations of PowerSploit/Empire. Specifically, it requires the exact matches for '/TN Updater /TR' and 'powershell.exe -NonI'. By slightly altering the scheduled task name to 'WinUpdateTask' instead of 'Updater', and using alternative but equivalent PowerShell switches like '-NonInteractive' instead of '-NonI' (or simply dropping '.exe' from powershell), the execution completely evades the 'CommandLine|contains|all' condition."
+  }
+]

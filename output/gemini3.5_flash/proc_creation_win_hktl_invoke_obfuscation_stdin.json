@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | powershell.exe -noprofile -command -\"",
+    "explanation": "Bypasses the rule by omitting both the '-noexit' flag and the '$input' variable. It uses the '-' argument after '-command' to instruct PowerShell to read and execute from STDIN, achieving the same execution pattern without triggering the regex's specific keyword checks."
+  },
+  {
+    "output": "powershell.exe -c \"echo 'Write-Host Bypass' | powershell.exe -noexit -\"",
+    "explanation": "Bypasses the rule by avoiding the use of 'cmd.exe' entirely. The Sigma rule explicitly looks for a command line starting with 'cmd' followed by '/c' or '/r'. By using an outer PowerShell process to pipe the string into the STDIN of an inner PowerShell process, the regex fails to match."
+  },
+  {
+    "output": "cmd.exe /c \"echo Write-Host 'Bypass' | pwsh.exe -noexit -\"",
+    "explanation": "Bypasses the rule by executing PowerShell Core ('pwsh.exe') instead of standard Windows PowerShell ('powershell.exe'). The regex strictly looks for the literal string 'powershell', meaning the newer cross-platform binary will evade detection."
+  }
+]

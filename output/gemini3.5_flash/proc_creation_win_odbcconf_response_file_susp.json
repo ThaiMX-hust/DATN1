@@ -1,0 +1,14 @@
+[
+  {
+    "output": "odbcconf.exe /F \"C:\temp\\payload.rsp\"",
+    "explanation": "The Sigma rule contains a filter (filter_main_rsp_ext) that excludes any execution where the command line contains '.rsp'. An attacker can easily bypass this detection by simply giving their malicious response file the standard '.rsp' extension."
+  },
+  {
+    "output": "odbcconf.exe /a {REGSVR \"C:\temp\\payload.dll\"}",
+    "explanation": "The rule specifically targets the '-f' (or '/f') flag used to load response files (selection_cli). An attacker can bypass this specific rule by using the '/a' (Action) flag instead to directly execute a DLL via REGSVR, evading the '-f' string match entirely."
+  },
+  {
+    "output": "odbcconf.exe /F\"C:\temp\\payload.txt\"",
+    "explanation": "The rule looks for the exact string ' -f ' (with leading and trailing spaces, accounting for windash). If the command line parser allows the path to be appended directly to the flag without a trailing space, it will evade the 'selection_cli' condition."
+  }
+]

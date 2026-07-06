@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\net.exe C:\\Windows\\Tasks\\not_net.exe && C:\\Windows\\Tasks\\not_net.exe time",
+    "explanation": "The detection logic relies on an 'Image|endswith' check for '\\net.exe' or '\\net1.exe' combined with the command line argument 'time'. Copying the net.exe binary to an alternative directory and renaming it disrupts the 'selection_time' image match while leaving the functional capability intact."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-Date\"",
+    "explanation": "The rule explicitly targets legacy native administrative binaries ('net.exe', 'net1.exe', 'w32tm.exe') commonly used for quick tactical time checks. Using native PowerShell cmdlets like 'Get-Date' or API calls inside a script discovers system time and time zone details seamlessly without triggering any of the defined utility signatures."
+  }
+]

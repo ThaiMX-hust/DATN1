@@ -1,0 +1,10 @@
+[
+  {
+    "output": "reg.exe add \"HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Outlook\\Security\" /v EnableUnsafeClientMailRules /t REG_DWORD /d 1 /f",
+    "explanation": "The Sigma rule specifically looks for the string '\\Outlook\\Security\\EnableUnsafeClientMailRules' in the command line. By using the 'reg.exe' utility with the full registry path instead of the exact string format expected (or by slightly altering the path format if the rule was even more specific), an attacker can achieve the same goal. Furthermore, the rule targets process creation; if the registry key is modified via a PowerShell cmdlet like 'Set-ItemProperty', a script, or a different hex-encoded command, it may not trigger a string-based match on the command line."
+  },
+  {
+    "output": "set \"p1=EnableUnsafe\" && set \"p2=ClientMailRules\" && reg add \"HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Outlook\\Security\" /v %p1%%p2% /t REG_DWORD /d 1 /f",
+    "explanation": "This command uses environment variable expansion to obfuscate the registry value name. Since the Sigma rule performs a literal 'contains' check on the command line, it will fail to find the full string 'EnableUnsafeClientMailRules' because it is split into two variables during execution, bypassing the static string detection."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "output": "cscript.exe //E:vbs C:\\Users\\Public\\update.log",
+    "explanation": "The Sigma rule checks for a specific, hardcoded list of extensions (e.g., .txt, .csv, .dat). By using an unlisted extension like '.log' and utilizing the '//E:vbs' switch to explicitly tell cscript how to parse the file, the execution bypasses the rule's extension matching logic."
+  },
+  {
+    "output": "wscript.exe //E:jscript C:\\Windows\\Temp\\hidden_script",
+    "explanation": "The detection relies on finding a literal string match for specific file extensions. By removing the file extension entirely from the payload file and forcing execution via the '//E:jscript' flag, the command line avoids triggering any of the 'selection_extension' string matches."
+  },
+  {
+    "output": "wscript.exe \"C:\\Users\\Public\\payload.vbs\"",
+    "explanation": "Uses wscript.exe with a .vbs extension, which is not in the rule's selection_extension list, so the rule does not match."
+  },
+  {
+    "output": "copy script.vbs script.vbs.txt && cscript //e:vbs script.vbs.txt",
+    "explanation": "This command directly triggers the rule because it uses 'cscript.exe' with a '.txt' extension in the command line, which matches both selection criteria of the Sigma rule."
+  },
+  {
+    "output": "cscript //e:vbscript \"C:\\Users\\Public\\Downloads\\payload\"",
+    "explanation": "This bypasses the rule by removing the file extension entirely. The Sigma rule specifically looks for a list of common non-script extensions (e.g., .txt, .jpg). By using a file with no extension and explicitly defining the engine with the '//e' flag, the command executes the script while evading the 'selection_extension' logic."
+  },
+  {
+    "output": "cscript //e:vbs \"C:\\Windows\\Temp\\not_an_extension.vbs \"",
+    "explanation": "By adding a trailing space or using alternative path separators that the 'contains' logic might not account for depending on the SIEM implementation, or simply using an extension not in the hardcoded list (like .log or .tmp), the rule is bypassed."
+  }
+]

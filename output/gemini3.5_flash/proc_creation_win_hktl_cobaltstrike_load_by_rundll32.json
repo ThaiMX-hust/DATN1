@@ -1,0 +1,14 @@
+[
+  {
+    "output": "rundll32.exe C:\\temp\\payload.txt,StartW",
+    "explanation": "Bypasses the rule by using a different file extension. The Sigma rule specifically looks for 'CommandLine|contains: .dll', but rundll32.exe can successfully load a valid PE file regardless of its extension (e.g., .txt, .bin, .dat)."
+  },
+  {
+    "output": "rundll32.exe C:\\temp\\payload.dll,StartW ",
+    "explanation": "Bypasses the rule by appending a trailing space to the command line. The Sigma rule strictly checks if the command 'endswith: ,StartW' or 'endswith:  StartW'. Adding a space or a dummy argument at the end breaks the 'endswith' logic."
+  },
+  {
+    "output": "rundll32.exe \"C:\\temp\\payload.dll\", StartW",
+    "explanation": "Bypasses the rule by adding a space after the comma. The rule looks exactly for ' StartW' or ',StartW' at the end of the command line. By structuring it as ', StartW' (with a space after the comma), it evades the exact string match."
+  }
+]

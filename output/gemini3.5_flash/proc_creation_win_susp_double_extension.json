@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy malware.exe invoice.pdf.vbs && cscript.exe invoice.pdf.vbs",
+    "explanation": "The Sigma rule specifically monitors for .exe and .js double extensions. By using a different executable script extension like .vbs (VBScript), .jse, .wsf, or .com, the attacker achieves the same deceptive effect (cloaking an executable as a PDF) while remaining outside the specific string matches defined in the rule's selection criteria."
+  },
+  {
+    "output": "move malware.exe \"report.pdf .exe\" && .\\\"report.pdf .exe\"",
+    "explanation": "The rule looks for exactly six spaces ('      .exe') or specific patterns like underlines and Braille blanks. By using a single space, two spaces, or a different number of spaces between the extensions, the 'endswith' and 'contains' logic will fail to trigger because it is looking for rigid, specific string patterns."
+  },
+  {
+    "output": "ren malware.exe invoice.pdf.scr && .\\invoice.pdf.scr",
+    "explanation": "The .scr (Screensaver) extension is a functional equivalent to .exe on Windows and is frequently used in phishing. Since .scr is not included in the rule's list of monitored extensions (which focuses on .exe and .js), this execution would bypass the detection."
+  }
+]

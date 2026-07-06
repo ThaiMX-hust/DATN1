@@ -1,0 +1,18 @@
+[
+  {
+    "output": "curl.exe --user-agent \"EvilAgent\" http://example.com",
+    "explanation": "Substitution technique: Replaced the short header option '-H' combined with the 'User-Agent:' literal payload with curl's long alternative '--user-agent'. This avoids the 'selection_header' conditions requiring both the exact regex pattern '\\s-H\\s' and the specific string 'User-Agent:'."
+  },
+  {
+    "output": "curl.exe -A \"EvilAgent\" http://example.com",
+    "explanation": "Substitution technique: Replaced the generic '-H' flag and 'User-Agent:' prefix with curl's native dedicated short option '-A' for setting user agents. This evades both sub-filters in 'selection_header' while preserving identical HTTP request context during execution."
+  },
+  {
+    "output": "curl.exe --header \"User-Agent: EvilAgent\" http://example.com",
+    "explanation": "Substitution technique: Replaced the shorthand custom header option '-H' with its verbose alias '--header'. This explicitly causes the strict case-sensitive regular expression match '\\s-H\\s' inside the 'selection_header' filter to fail."
+  },
+  {
+    "output": "curl.exe \"-H  \" \"User-Agent: EvilAgent\" http://example.com",
+    "explanation": "Insertion technique: Multiple internal spaces were inserted within the quotes or right after the parameter (e.g., executing through cmd shell variations like `curl.exe -H\t\"User-Agent: EvilAgent\"` using tab delimiters). Alternatively, placing extra spaces causes the rigid regex `\\s-H\\s` to miss variations that do not match a single standard trailing space character precisely."
+  }
+]

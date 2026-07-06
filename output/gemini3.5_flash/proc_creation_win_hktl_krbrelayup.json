@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy KrbRelayUp.exe not_suspicious.exe && .\not_suspicious.exe relay -Dom example.local -Comp DESKTOP-ALICE",
+    "explanation": "The rule relies on two detection vectors: the file name/OriginalFileName and specific command-line arguments. By renaming the executable, 'selection_img' is bypassed. By truncating the argument names (e.g., using '-Dom' instead of '-Domain' and '-Comp' instead of '-ComputerName'), 'selection_cli_1' is bypassed because the rule strictly looks for the full strings including spaces, such as ' -Domain '."
+  },
+  {
+    "output": "set arg1=krbscm && set arg2=-sc && .\not_suspicious.exe %arg1% %arg2%",
+    "explanation": "This bypasses 'selection_cli_2' by ensuring the command line logged by the EDR/SIEM might not contain the literal strings in a single continuous string if the environment variables are expanded at runtime or if the tool is invoked via a wrapper that obfuscates the literal 'krbscm' string from the process creation event."
+  },
+  {
+    "output": "UpdateService.exe \"relay\" \"-Domain\" contoso.local \"-ComputerName\" target-host$",
+    "explanation": "This simulated command bypasses the rule by addressing its brittle exact-match conditions. First, renaming the executable (and recompiling to change OriginalFileName) evades 'selection_img'. Second, wrapping the parameters in double quotes prevents the command line from matching the space-padded strings in 'selection_cli_1' (such as ' relay ' or ' -Domain '), evading the command line detections while still being parsed correctly by Windows."
+  }
+]

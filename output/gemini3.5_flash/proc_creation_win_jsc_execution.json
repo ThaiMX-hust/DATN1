@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\jsc.exe %TEMP%\\not_jsc.exe && %TEMP%\\not_jsc.exe /out:%TEMP%\\payload.exe C:\\path\\to\\script.js",
+    "explanation": "The original Sigma rule relies on the process image name ending in '\\jsc.exe' or the 'OriginalFileName' field in the PE header metadata. While renaming the file bypasses the 'Image' selection, modern EDRs often populate 'OriginalFileName' from the version resource. To bypass this specific detection in environments where 'OriginalFileName' is not captured or where the rule is strictly applied to the file system path, renaming the binary is the primary method."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe /target:exe /out:payload.exe C:\\path\\to\\source.cs",
+    "explanation": "Instead of using the JScript compiler (jsc.exe), an attacker can use the C# compiler (csc.exe) which is often present in the same .NET directories. This achieves the same goal of 'on-the-fly' compilation to bypass application whitelisting while completely avoiding the specific detection logic targeted at jsc.exe."
+  }
+]

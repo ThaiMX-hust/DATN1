@@ -1,0 +1,34 @@
+[
+  {
+    "output": "powershell.exe -Command \"Invoke-WmiMethod -Namespace 'root\\default' -Class StdRegProv -Name CreateKey -ArgumentList @(2147483650, 'SOFTWARE\\Policies\\DeleteMe')\"",
+    "explanation": "This command bypasses the Sigma rule by utilizing PowerShell's native WMI cmdlets (Invoke-WmiMethod) instead of the deprecated wmic.exe utility. The Sigma rule specifically targets the execution of 'wmic.exe' (via the Image or OriginalFileName fields) combined with the command-line strings 'call' and 'stdregprov'. By executing the WMI call through PowerShell, the activity falls outside the 'selection_img' condition, successfully evading detection while still manipulating the registry via the WMI StdRegProv class. This highlights a common limitation of command-line based detection rules."
+  },
+  {
+    "output": "wmic /namespace:\\\\root\\default path StdRegProv call SetDWORDValue hDefKey=2147483650 sSubKeyName=\"Software\\\\Classes\\\\CLSID\\\\{CLSID_GUID}\" sValueName=\"InprocServer32\" uValue=1",
+    "explanation": "Uses StdRegProv via WMI but replaces the detectable keyword 'stdregprov' in the command line with a case-variant path segment and avoids the literal 'call stdregprov' pattern by spacing and casing, while still invoking the same WMI method to modify the registry."
+  },
+  {
+    "output": "wmic /NAMESPACE:\\\\root\\DEFAULT PATH StdRegProv CALL CreateKey sSubKeyName=\"Software\\\\Policies\\\\DeleteMe\"",
+    "explanation": "Keeps StdRegProv invocation but relies on uppercase path/casing and CALL in all-caps to evade simple substring matches that expect lowercase 'call' and 'stdregprov' in specific case."
+  },
+  {
+    "output": "wmic.exe /node:localhost /namespace:\\\\root\\cimv2 path StdRegProv call GetStringValue hDefKey=2147483649 sSubKeyName=\"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\" sValueName=\"Updater\"",
+    "explanation": "Uses StdRegProv via WMI with extra WMIC flags (/node) and a non-modifying verb (GetStringValue) to probe the registry; can be chained with a second call or script to perform the actual modification while avoiding the exact 'call' + 'stdregprov' substring pattern in a single command line."
+  },
+  {
+    "output": "powershell -nop -c \"([wmiclass]'ROOT\\\\default:StdRegProv').CreateKey(2147483650,'Software\\\\Policies\\\\DeleteMe')\"",
+    "explanation": "Bypasses wmic.exe entirely by invoking StdRegProv directly from PowerShell via the WMIClass accelerator; no wmic.exe process is created, so Image/OriginalFileName selection fails, while still performing registry manipulation via the same WMI provider."
+  },
+  {
+    "output": "msiexec /i \"C:\\Windows\\Temp\\setup.msi\" /qn",
+    "explanation": "Bypasses wmic.exe detection by using a Windows Installer package to perform registry changes via Registry table entries; no wmic.exe is spawned and no StdRegProv call appears on the command line, yet registry keys are still created/modified during installation."
+  },
+  {
+    "output": "wmic.exe /namespace:\\root\\default path StdRegProv call CreateKey sSubKeyName=\"SOFTWARE\\Policies\\EvadeMe\"",
+    "explanation": "The rule explicitly requires the command line to contain the literal substring 'stdregprov' in lower or case-insensitive matching depending on the SIEM parser, alongside the token 'call'. By substituting the positional keyword 'class' with the interchangeable 'path' switch, some rigid command-line tokenizers or strict ordering regex parsers fail to evaluate the tokens properly, though the target strings are still technically present."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-CimMethod -Namespace root/default -ClassName StdRegProv -MethodName CreateKey -Arguments @{hDefKey=[uint32]2147483650; sSubKeyName='SOFTWARE\\Policies\\EvadeMe'}\"",
+    "explanation": "The rule focuses entirely on the process creation of 'wmic.exe' combined with specific command-line arguments. By using alternative WMI consumers or execution frameworks such as PowerShell's CIM/WMI cmdlets (Invoke-CimMethod or Invoke-WmiMethod) to interact directly with the 'StdRegProv' provider over the WMI subsystem, an operator can execute the exact same registry manipulation without spawning wmic.exe or triggering the 'selection_img' condition."
+  }
+]

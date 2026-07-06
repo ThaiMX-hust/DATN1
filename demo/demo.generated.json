@@ -1,0 +1,34 @@
+[
+  {
+    "test_id": "execution_001",
+    "target_commandline": "curl.exe --user-agent \"EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "option_alias_substitution"
+  },
+  {
+    "test_id": "execution_002",
+    "target_commandline": "curl.exe -A \"EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "option_alias_substitution"
+  },
+  {
+    "test_id": "execution_003",
+    "target_commandline": "curl.exe --header \"User-Agent: EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "case_substitution"
+  },
+  {
+    "test_id": "execution_004",
+    "target_commandline": "curl.exe \"-H  \" \"User-Agent: EvilAgent\" http://example.com",
+    "target_rule": "proc_creation_win_curl_custom_user_agent",
+    "technique_id": "execution",
+    "shell": "cmd.exe",
+    "mutation": "whitespace_insertion"
+  }
+]

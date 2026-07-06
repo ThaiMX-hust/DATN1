@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\wuauclt.exe ",
+    "explanation": "Adding a trailing space causes the CommandLine string to end with a space instead of 'Wuauclt' or 'Wuauclt.exe'. This simple evasion breaks the 'endswith' logic in the Sigma rule while still running the executable with effectively no parameters."
+  },
+  {
+    "output": "C:\\Windows\\System32\\wuauclt.exe \"\"",
+    "explanation": "Passing an empty string via double quotes acts as a null argument. The process still executes without any functional flags, but the command line ends with a quote character, successfully bypassing the detection criteria."
+  }
+]

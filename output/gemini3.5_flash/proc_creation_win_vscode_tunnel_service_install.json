@@ -1,0 +1,18 @@
+[
+  {
+    "output": "code tunnel --service install",
+    "explanation": "The command lacks the 'internal-run' and 'tunnel-service.log' substrings that the sigma rule requires in the CommandLine field. Since the rule's selection condition uses an AND (all) match, the absence of any of those strings prevents the rule from triggering, thus bypassing detection."
+  },
+  {
+    "output": "code.exe tunnel service install --log-file C:\\Users\\Public\\t_svc.txt",
+    "explanation": "The Sigma rule is overly specific, requiring the presence of four specific strings: 'tunnel', 'service', 'internal-run', and 'tunnel-service.log'. By manually installing the service or using flags that change the default logging path (avoiding 'tunnel-service.log') and avoiding the 'internal-run' flag which is often appended by the service manager during execution, the selection logic fails to meet the 'contains|all' condition."
+  },
+  {
+    "output": "sc.exe create vscodetunnel binPath= \"C:\\path\\to\\code.exe tunnel service internal-run\"",
+    "explanation": "By using the native Windows Service Control Manager (sc.exe) to create the service manually, the attacker can omit the '--log-file' parameter entirely or name it something benign. Since the Sigma rule requires 'tunnel-service.log' to be present in the command line of the process creation event, this manual creation bypasses the detection."
+  },
+  {
+    "output": "copy code.exe not_code.exe && not_code.exe tunnel service internal-run --log-file bypass.log",
+    "explanation": "While this rule focuses on the CommandLine rather than the Image name, it still relies on a specific log file string. Changing the log file name to 'bypass.log' ensures the 'tunnel-service.log' string is never seen by the SIEM, breaking the 'all' condition."
+  }
+]

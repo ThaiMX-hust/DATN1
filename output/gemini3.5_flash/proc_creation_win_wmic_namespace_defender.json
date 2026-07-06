@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic /namespace:\"\\\\root\\Microsoft\\Windows\\Defender\" path MSFT_MpPreference call Add ExclusionPath=\"C:\\Malware\"",
+    "explanation": "The rule explicitly checks for the command line containing the exact string '/Namespace:\\root\\Microsoft\\Windows\\Defender'. By wrapping the namespace path in double quotes, the command remains perfectly valid for WMIC execution, but the exact string match fails, successfully bypassing the selection_cli condition."
+  },
+  {
+    "output": "powershell.exe -Command \"Invoke-CimMethod -Namespace 'root\\Microsoft\\Windows\\Defender' -ClassName MSFT_MpPreference -MethodName Add -Arguments @{ExclusionPath='C:\\Malware'}\"",
+    "explanation": "The rule is strictly scoped to the 'wmic.exe' binary via the selection_img condition (OriginalFileName or Image). An attacker can bypass this rule entirely by using PowerShell's built-in WMI/CIM cmdlets to interact with the exact same Defender namespace, achieving the same tampering objective without spawning wmic.exe."
+  },
+  {
+    "output": "wmic.exe /namespace:\"\\\\root\\Microsoft\\Windows\\Defender\" path MSFT_MpPreference call Add ExclusionPath=\"C:\\temp\"",
+    "explanation": "The Sigma rule relies on a strict contiguous string match for '/Namespace:\\\\root\\Microsoft\\Windows\\Defender' in the command line. By wrapping the namespace path in double quotes, which is valid syntax for the wmic parser, the command line string becomes '/namespace:\"\\\\root...' and fails to trigger the 'contains' condition, effectively bypassing the rule."
+  }
+]

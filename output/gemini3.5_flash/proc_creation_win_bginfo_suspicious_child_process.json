@@ -1,0 +1,14 @@
+[
+  {
+    "output": "\"C:\\Windows\\System32\\bginfo.exe\" config.bgi /popup /nolicprompt",
+    "explanation": "The rule relies on a static blocklist of specific executables (like cmd.exe or powershell.exe) and specific paths. If the VBScript embedded in the .bgi file spawns a built-in executable that is not on the list (such as C:\\Windows\\System32\\rundll32.exe, regsvr32.exe, or certutil.exe) or executes a custom binary from an unmonitored directory (like C:\\ProgramData\\), the rule's conditions will not be met and it will be bypassed."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Windows\\rundll32_alt.exe && bginfo.exe C:\\path\\to\\config.bgi /popup /nolicprompt",
+    "explanation": "The Sigma rule specifically monitors for a predefined list of child process names (calc, cmd, powershell, etc.) or execution from suspicious paths. By copying a legitimate binary like rundll32.exe to a non-suspicious directory (e.g., C:\\Windows\\) and renaming it, an attacker can use BgInfo to spawn this 'trusted' renamed binary to execute malicious DLLs, thereby evading the 'Image|endswith' and 'Image|contains' filters."
+  },
+  {
+    "output": "bginfo.exe C:\\path\\to\\config.bgi /popup /nolicprompt (where config.bgi executes C:\\Windows\\System32\\bitsadmin.exe)",
+    "explanation": "The rule lacks a catch-all for child processes, focusing only on common shells and editors. An attacker can use BgInfo to spawn other LOLBAS (Living Off the Land Binaries and Scripts) like bitsadmin.exe, certutil.exe, or regsvr32.exe located in System32. Since these binaries are not in the 'selection_child' list and reside in a trusted path, the alert will not trigger."
+  }
+]

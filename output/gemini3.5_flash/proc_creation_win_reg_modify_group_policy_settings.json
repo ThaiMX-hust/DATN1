@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' -Name 'EnableSmartScreen' -Value 0\"",
+    "explanation": "This bypasses the rule because the Sigma logic explicitly looks for the execution of 'reg.exe' (selection_reg). By modifying the registry key using PowerShell's built-in Set-ItemProperty cmdlet, the process name is 'powershell.exe', causing the rule's 'all of' condition to fail."
+  },
+  {
+    "output": "reg.exe add \"HKLM\\S^OFTWARE\\Policies\\Microsoft\\Windows\\System\" /v GroupPolicyRefreshTime /t REG_DWORD /d 10 /f",
+    "explanation": "This bypasses the rule by utilizing command-line obfuscation with the caret (^) character, which is ignored by the Windows command interpreter. The rule checks for the exact string '\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' (selection_path). The insertion of the caret breaks this string matching, evading detection while still successfully modifying the registry."
+  }
+]

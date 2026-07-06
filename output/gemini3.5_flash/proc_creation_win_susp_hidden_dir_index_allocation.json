@@ -1,0 +1,14 @@
+[
+  {
+    "output": "cmd /c \"mkdir \\\\?\\C:\\hidden_dir.\\ \"",
+    "explanation": "This command bypasses the specific string match for '::$index_allocation' by using a trailing dot and the Win32 Namespace prefix ('\\\\?\\'). This creates a 'Reserved Name' folder that is inaccessible via standard Windows Explorer and many CLI tools, achieving a similar hidden/restricted directory effect without triggering the NTFS stream-based detection pattern."
+  },
+  {
+    "output": "set \"VAR=::$index_\" && cmd /c \"mkdir mydir%VAR%allocation\"",
+    "explanation": "This bypass leverages environment variable expansion. Since the Sigma rule looks for the literal string '::$index_allocation' in the process command line, splitting the string into variables prevents the static pattern match while still resulting in the creation of the NTFS stream directory when executed."
+  },
+  {
+    "output": "powershell -Command \"New-Item -Path 'C:\\path\\to\\dir' -ItemType Directory -Target '::$INDEX_ALLOCATION'\"",
+    "explanation": "The Sigma rule is case-sensitive or generally targets the standard lowercase/mixed-case string. Using '::$INDEX_ALLOCATION' (all caps) may bypass simple string-matching filters in SIEMs or EDRs that are not configured for case-insensitive regex, while NTFS remains case-insensitive and will process the stream correctly."
+  }
+]

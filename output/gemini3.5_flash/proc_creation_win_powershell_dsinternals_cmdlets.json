@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ADDBAccount\"",
+    "explanation": "PowerShell evaluates the backtick (`) as an escape character. During execution, the backticks are stripped and the underlying cmdlet executes normally. Because the Sigma rule relies on static string matching against the raw command-line arguments (e.g., Sysmon Event ID 1 or Security Event ID 4688), it will fail to match 'Get-ADDBAccount'. To detect this behavior, defenders must rely on PowerShell Script Block Logging (Event ID 4104), which logs the de-obfuscated code."
+  },
+  {
+    "output": "powershell.exe -Command \"& ('Ge'+'t-ADDBAc'+'count')\"",
+    "explanation": "This technique utilizes string concatenation and the call operator (&). The command-line event log only records the literal, fragmented strings, successfully bypassing the exact substring matches defined in the Sigma rule. PowerShell dynamically reconstructs the string into the target cmdlet at runtime. Robust detection requires AMSI (Antimalware Scan Interface) and Script Block Logging to inspect the dynamically evaluated content."
+  }
+]

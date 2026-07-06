@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks /create /tn \"Test\" /tr \"cmd.exe\" /sc once /st 12:00 /ru \"%USERNAME%\" /f",
+    "explanation": "This command creates an interactive scheduled task using schtasks.exe instead of at.exe, avoiding the rule's detection of 'at.exe' with the string 'interactive' in the command line."
+  }
+]

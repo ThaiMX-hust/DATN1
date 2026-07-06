@@ -1,0 +1,14 @@
+[
+  {
+    "output": "notepad.exe",
+    "explanation": ""
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\fsutil.exe C:\\temp\\updater.exe\n// Modify the PE Version Info resource of updater.exe to change 'OriginalFileName' from 'fsutil.exe' to 'updater.exe'\nC:\\temp\\updater.exe usn deletejournal /D C:",
+    "explanation": "The Sigma rule's 'selection_img' logic relies strictly on the Image path ending in '\\fsutil.exe' or the PE header's 'OriginalFileName' being 'fsutil.exe'. By copying the binary to a new location, renaming it, and modifying its embedded PE version resources (using a tool like Resource Hacker or specialized scripts), the execution event will fail to trigger the image selection condition, successfully bypassing the detection."
+  },
+  {
+    "output": "powershell.exe -ExecutionPolicy Bypass -Command \"# Call Win32 API DeviceIoControl with dwIoControlCode 0x000900f4 (FSCTL_DELETE_USN_JOURNAL) directly on the volume handle to delete the journal\"",
+    "explanation": "This rule exhibits a tool-centric detection flaw. It monitors the 'fsutil.exe' utility rather than the underlying behavior (USN journal manipulation). An attacker can completely bypass this rule by utilizing PowerShell, C#, or a custom payload to interact directly with the Windows Win32 API (specifically calling DeviceIoControl with the FSCTL_DELETE_USN_JOURNAL control code). This achieves the exact same objective without ever spawning the monitored fsutil.exe process."
+  }
+]

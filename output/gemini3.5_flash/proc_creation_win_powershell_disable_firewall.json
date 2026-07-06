@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-NetFirewallProfile -Profile Public -Enabled $false\"",
+    "explanation": "The Sigma rule strictly looks for the string ' False' with a leading space. By using the standard PowerShell boolean variable '$false', the command executes correctly but evades the specific exact string match required by the 'selection_args' condition."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-NetFirewallProfile -Profile Domain -Enabled:0\"",
+    "explanation": "PowerShell allows parameters to be assigned using a colon instead of a space, and accepts '0' as a boolean false. This alters the command line structure to omit the expected spaces and the word 'False', successfully bypassing the ' -Enabled ' and ' False' string checks."
+  },
+  {
+    "output": "powershell.exe -Command \"Set-NetFirewallP`rofile -Profile Private -Ena`bled False\"",
+    "explanation": "PowerShell ignores backtick (`) characters used for escaping within command names and parameters. Inserting backticks breaks the continuous string matching for 'Set-NetFirewallProfile ' and ' -Enabled ' expected by the SIEM, while the command still resolves and executes normally."
+  }
+]

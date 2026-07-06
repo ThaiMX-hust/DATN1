@@ -1,0 +1,6 @@
+[
+  {
+    "output": "meshagent.exe",
+    "explanation": "The Sigma rule strictly relies on detecting the '--meshServiceName' argument, which is typically used when installing MeshAgent as a persistent Windows service. An attacker can easily bypass this detection by dropping the 'meshagent.msh' configuration file in the same directory and executing the binary without any command-line arguments. Alternatively, they could use other legitimate flags like '-connect' for interactive sessions, completely evading the string match."
+  }
+]

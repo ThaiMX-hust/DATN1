@@ -1,0 +1,26 @@
+[
+  {
+    "output": "reg.exe add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\ExampleService\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\Windows\\Temp\\backdoor\" /f",
+    "explanation": "This command bypasses the 'selection_reg_ext' filter by omitting the file extension. Windows can often execute files without an explicit extension if the binary header is valid, or the attacker can rename the payload to have no extension, thus failing to match the list of monitored extensions like .exe or .dll."
+  },
+  {
+    "output": "powershell -Command \"Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\ExampleService' -Name 'ImagePath' -Value 'C:\\Windows\\Temp\\payload.exe'\"",
+    "explanation": "The rule specifically looks for 'reg add' or 'sc config' process creation events. By using PowerShell cmdlets like Set-ItemProperty to modify the registry directly, the command line does not contain the strings 'reg ' or 'add ', bypassing the 'selection_reg_img' logic entirely."
+  },
+  {
+    "output": "sc.exe config \"ExampleService\" binPath= \"\\\"C:\\Windows\\Temp\\payload.exe\\\"\"",
+    "explanation": "The rule checks for 'binpath=' (lowercase/case-insensitive contains). In some environments, depending on the parser, adding whitespace or specific quoting between the key and the value (e.g., 'binPath =') or using internal Windows APIs to modify the service configuration avoids the 'sc' process creation pattern defined in the rule."
+  },
+  {
+    "output": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\ExampleService\" /v ImagePath /t REG_EXPAND_SZ /d \"C:\\Windows\\Temp\\payload.txt\" /f",
+    "explanation": "The rule's 'selection_reg_ext' block looks for specific executable extensions like .exe or .bat. By naming the payload with a non-monitored extension (e.g., .txt) and ensuring the system still executes it (e.g., via a renamed binary or file association), the 'selection_reg_ext' condition is not met, causing the 'all of selection_reg_*' condition to fail."
+  },
+  {
+    "output": "sc.exe config \"ExampleService\" binPath= \"C:\\Windows\\System32\\calc.exe\"",
+    "explanation": "The rule for 'sc' commands (selection_sc) specifically looks for the string 'sc ' (with a trailing space). By using the full executable name 'sc.exe', the string match 'sc ' fails, bypassing the pattern match while still executing the service configuration change."
+  },
+  {
+    "output": "powershell -Command \"Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\ExampleService' -Name 'ImagePath' -Value 'C:\\Windows\\Temp\\payload.exe'\"",
+    "explanation": "The rule heavily relies on command-line patterns for 'sc' and 'reg' binaries. By using PowerShell cmdlets like Set-ItemProperty to modify the registry keys directly, none of the CommandLine strings (sc, reg, binpath=, etc.) are triggered."
+  }
+]

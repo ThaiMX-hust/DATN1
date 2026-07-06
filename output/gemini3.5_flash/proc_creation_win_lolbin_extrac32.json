@@ -1,0 +1,14 @@
+[
+  {
+    "output": "extrac32.exe /E /A \\\\127.0.0.1\\share\\archive.cab C:\\path\\to\\extract\\",
+    "explanation": "The rule uses 'all of selection_*' logic, requiring the command line to contain at least one of the specific options: '/C', '/Y', or ' \\\\' (a space followed by two backslashes). By using alternate supported flags like '/E' (extract) and '/A' (all cabinets), and ensuring the UNC path is not preceded by a space (e.g., placing it directly after another parameter or using local drive paths if files are staged via alternative means), the 'selection_options' condition fails to match, bypassing the rule."
+  },
+  {
+    "output": "extrac32.exe /C \\\\127.0.0.1\\share\\archive.zip C:\\path\\to\\extract\\file.txt",
+    "explanation": "The rule explicitly requires the presence of '.cab' in the command line via 'selection_archive'. If the target cabinet file is renamed to use a different extension (such as '.zip', '.tmp', or no extension at all), the 'selection_archive' condition is broken, preventing the rule from triggering while extrac32 still attempts to process the file."
+  },
+  {
+    "output": "extrac32.exe /c C:\\path\\to\\source.cab C:\\path\\to\\destination.txt",
+    "explanation": "The original rule uses 'all of selection_*' as its condition, meaning a process creation event must trigger selection_lolbas, selection_archive, AND selection_options to fire an alert. The selection_options block requires the command line to contain either '/C' (uppercase), '/Y' (uppercase), or a UNC path (' \\\\'). Because Windows command-line arguments are case-insensitive, executing the utility with a lowercase '/c' satisfies the application logic but fails to match the strict uppercase string literal in the Sigma detection logic, effectively avoiding the alert while performing the copy/extract operation."
+  }
+]

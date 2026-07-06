@@ -1,0 +1,6 @@
+[
+  {
+    "output": "anydesk.exe --in\"sta\"ll C:\\ProgramData\\AnyDesk --st\"art-with-wi\"n --sil\"en\"t",
+    "explanation": "Windows command-line parsing (CommandLineToArgvW) automatically removes double quotes when processing arguments for the application. AnyDesk will still receive the expected '--install', '--start-with-win', and '--silent' flags and install silently. However, the raw process creation logs (like Sysmon Event ID 1 or Windows Event ID 4688) will record the command line with the quotes included. Since this Sigma rule relies on static string matching ('contains|all') for the exact unquoted strings, the quotes break the signature and successfully bypass the detection."
+  }
+]

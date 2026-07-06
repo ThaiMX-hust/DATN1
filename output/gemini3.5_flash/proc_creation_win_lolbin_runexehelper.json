@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\runexehelper.exe . . . && copy C:\\Windows\\System32\\calc.exe C:\\Users\\Public\\not_calc.exe && C:\\Users\\Public\\not_calc.exe",
+    "explanation": "The Sigma rule is overly reliant on the ParentImage field, specifically looking for 'runexehelper.exe' as the direct parent of a new process. To bypass this, an attacker can use 'runexehelper.exe' to execute a shell command or a script that performs a secondary action, such as copying a binary to a new location and executing it. Depending on how the OS handles process chaining or if 'runexehelper' finishes its execution quickly, the telemetry might link the new process to the shell (cmd/powershell) rather than 'runexehelper' itself, or the attacker can use 'start' to decouple the process tree."
+  },
+  {
+    "output": "ren C:\\Windows\\System32\\runexehelper.exe C:\\Users\\Public\\legit_tool.exe && C:\\Users\\Public\\legit_tool.exe some_payload.exe",
+    "explanation": "The rule filters specifically for the filename 'runexehelper.exe' in the ParentImage path. If an attacker has sufficient privileges to move or rename the binary (or copies it to a writable directory with a different name), the detection logic will fail because the 'endswith' condition will no longer match the process name 'legit_tool.exe', even though the underlying code being executed is the same LOLBin."
+  }
+]

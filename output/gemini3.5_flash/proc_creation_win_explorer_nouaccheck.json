@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks /create /tn \"TestUACBypass\" /tr \"explorer.exe /NOUACCHECK\" /sc once /st 12:00",
+    "explanation": "The Sigma rule contains a 'filter_dc_logon' exclusion that ignores alerts if the ParentImage is 'C:\\Windows\\System32\\svchost.exe'. Since Windows Scheduled Tasks are executed by the Task Scheduler service hosted within svchost.exe, scheduling the command to run via 'schtasks' will result in svchost.exe being the parent process. This intentionally matches the exclusion filter and successfully bypasses the detection logic."
+  }
+]

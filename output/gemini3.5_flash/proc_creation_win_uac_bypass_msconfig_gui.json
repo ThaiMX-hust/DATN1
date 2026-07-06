@@ -1,0 +1,14 @@
+[
+  {
+    "output": "C:\\Windows\\system32\\msconfig.exe  -5",
+    "explanation": "The rule looks for an exact string match for '\"C:\\Windows\\system32\\msconfig.exe\" -5'. By adding an extra space between the executable path and the argument, or by omitting the quotes around the path if the shell allows it, the command remains functional but fails the specific string comparison defined in the rule."
+  },
+  {
+    "output": "copy C:\\Windows\\system32\\msconfig.exe C:\\Users\\Public\\m.exe && C:\\Users\\Public\\m.exe -5",
+    "explanation": "The rule relies on the specific CommandLine string containing the path to msconfig.exe in the system32 directory. Copying the binary to a different location with a different name and executing it with the -5 flag preserves the functionality of the GUI hack while bypassing the CommandLine pattern match."
+  },
+  {
+    "output": "cmd.exe /c \"set a=C:\\Windows\\system32\\msconfig.exe && %a% -5\"",
+    "explanation": "Using environment variable expansion or other forms of command-line obfuscation can prevent simple static string matching. The SIEM may only see the variable assignment or the expanded command depending on the log source's normalization, often missing the exact sequence expected by the rule."
+  }
+]

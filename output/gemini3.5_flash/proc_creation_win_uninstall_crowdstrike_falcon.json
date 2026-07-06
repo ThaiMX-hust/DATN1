@@ -1,0 +1,14 @@
+[
+  {
+    "output": "msiexec.exe /x {250468E9-26A2-4D90-951E-3796677949E0} /qn",
+    "explanation": "The Sigma rule specifically looks for the execution of '\\WindowsSensor.exe' with '/uninstall' and '/quiet'. An attacker can bypass this by using the Windows Installer (msiexec.exe) to uninstall the software via its Product Code (GUID) and the silent flag '/qn'. Since 'WindowsSensor.exe' is not present in the command line, the rule will not trigger."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\drivers\\CrowdStrike\\WindowsSensor.exe %temp%\\not_a_sensor.exe && %temp%\\not_a_sensor.exe /uninstall /quiet",
+    "explanation": "The rule uses a specific string match for the executable filename '\\WindowsSensor.exe'. By renaming the binary or copying it to a different location with a different name (e.g., 'not_a_sensor.exe'), the 'CommandLine|contains|all' logic fails to find the required string."
+  },
+  {
+    "output": "WindowsSensor.exe /uninstall /passive",
+    "explanation": "The rule is strictly configured to alert only when '/quiet' is present in the command line. Using an alternative flag like '/passive' or '/norestart' may still achieve the desired uninstallation effect without matching the exact string required by the 'selection' criteria."
+  }
+]

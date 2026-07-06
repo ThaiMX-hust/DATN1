@@ -1,0 +1,18 @@
+[
+  {
+    "output": "wevtutil.exe query-events \"Security\" /q:\"*[System[(EventID=4624)]]\"",
+    "explanation": "The Sigma rule for wevtutil requires 'all of selection_wevtutil_*', meaning it looks for the image 'wevtutil.exe' AND the CLI flags ' qe ' or ' query-events ' (with spaces). By using the full 'query-events' but omitting the trailing space before the log name, or by using the shorthand 'qe' without the surrounding spaces required by the rule's 'contains' logic, the detection is avoided."
+  },
+  {
+    "output": "Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624}",
+    "explanation": "The rule looks for the string 'Get-WinEvent ' with a trailing space. If the command is executed within a script or immediately followed by a newline, or if a FilterHashtable is used without the specific EID string patterns defined in 'selection_logs_eid' (like '-InstanceId 462?'), it fails the 'all of selection_logs_*' condition."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\wevtutil.exe C:\\Users\\Public\\tutil.exe && C:\\Users\\Public\\tutil.exe qe Security",
+    "explanation": "The rule relies on 'Image|endswith' or 'OriginalFileName'. While OriginalFileName is harder to spoof, many SIEM configurations do not properly populate OriginalFileName for all process events. By renaming the binary, the 'selection_wevtutil_img' check may fail depending on the specific telemetry available."
+  },
+  {
+    "output": "powershell -Command \"[ScriptBlock]::Create('Get-' + 'WinEvent Security').Invoke()\"",
+    "explanation": "This bypasses the string-based 'CommandLine|contains' check for 'Get-WinEvent ' by using string concatenation and dynamic execution, preventing the static pattern from matching the command line log."
+  }
+]

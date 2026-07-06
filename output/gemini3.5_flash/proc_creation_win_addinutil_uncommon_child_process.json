@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\conhost.exe /Y && AddInUtil.exe <path_to_malicious_addin>",
+    "explanation": "The Sigma rule explicitly filters out 'conhost.exe' as a legitimate child process to avoid noise. An attacker can rename a malicious payload or a shell (like cmd.exe) to 'conhost.exe' and execute it via AddInUtil.exe. Since the rule only checks if the Image path ends with '\\conhost.exe', the renamed binary will trigger the filter and bypass the detection."
+  },
+  {
+    "output": "AddInUtil.exe <path_to_malicious_addin> (where the addin performs a process injection or uses a COM object to start a process)",
+    "explanation": "The rule detects direct child processes of AddInUtil.exe. If the malicious Add-In loaded by AddInUtil.exe uses techniques like 'Parent PID Spoofing' to assign a different parent to the spawned process (e.g., explorer.exe), or if it uses a secondary execution vector like WMI or Scheduled Tasks, the resulting process will not have AddInUtil.exe as its ParentImage, thus bypassing the rule."
+  }
+]

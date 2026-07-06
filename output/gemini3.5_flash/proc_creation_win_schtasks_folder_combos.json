@@ -1,0 +1,6 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"UpdateTask\" /tr \"C:\\Temp\\malware.exe\" /sc onlogon /ru SYSTEM",
+    "explanation": "This command creates a scheduled task using schtasks.exe with /create but does not contain any of the suspicious command-line strings (powershell, pwsh, cmd) nor references to ProgramData folders, causing selection_command to fail and the rule not to trigger."
+  }
+]

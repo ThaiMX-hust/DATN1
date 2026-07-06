@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"whoami.exe | Out-File C:\\temp\\whoami.txt\"",
+    "explanation": "Bypasses the 'whoami*>' redirection check by utilizing the PowerShell pipeline and Out-File cmdlet. The logged command line for the whoami.exe process will not contain the '>' character."
+  },
+  {
+    "output": "whoami.exe /FO  CSV",
+    "explanation": "Bypasses the exact string match of ' /FO CSV' and ' -FO CSV' defined in selection_main_cli by inserting an extra space between the flag and the argument. Windows parses the command correctly, but the Sigma exact string match fails."
+  },
+  {
+    "output": "cmd.exe /c \"for /f %i in ('whoami.exe') do echo %i > out.txt\"",
+    "explanation": "Executes whoami.exe within a cmd FOR loop. The process creation event for whoami.exe will simply be 'whoami.exe', hiding the redirection operator and any file output logic from the whoami process execution log."
+  },
+  {
+    "output": "powershell.exe -Command \"whoami.exe /FO LIST | Set-Content out.txt\"",
+    "explanation": "Bypasses the specific '/FO CSV' detection by requesting the 'LIST' output format instead. It also evades the '>' operator detection (selection_special) by piping to PowerShell's Set-Content cmdlet."
+  }
+]

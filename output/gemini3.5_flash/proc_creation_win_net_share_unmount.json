@@ -1,0 +1,6 @@
+[
+  {
+    "output": "rm -rf net.exe",
+    "explanation": "Bypasses detection by directly removing the share file, avoiding the removal event trigger."
+  }
+]

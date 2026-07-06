@@ -1,0 +1,30 @@
+[
+  {
+    "output": "ping 2130706433",
+    "explanation": "Bypasses the rule by using the standard decimal integer representation of an IP address (e.g., 2130706433 for 127.0.0.1) instead of hexadecimal, effectively avoiding the '0x' string in the command line while still obfuscating the standard IPv4 dot-decimal format."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\ping.exe C:\\Windows\\Temp\\p.exe && C:\\Windows\\Temp\\p.exe 0x7f000001",
+    "explanation": "Bypasses the rule by copying and renaming the ping executable. The Sigma rule explicitly checks if the Image field ends with '\\ping.exe'. Executing the renamed binary fails the Image condition, even if the '0x' hex format is used."
+  },
+  {
+    "output": "ping 0177.0000.0000.0001",
+    "explanation": "Bypasses the rule by using the octal format for the IP address. The Windows ping utility resolves octal addresses, but since it uses '0' as a prefix rather than '0x', the command line condition in the Sigma rule is not triggered."
+  },
+  {
+    "output": "ping 2130706433",
+    "explanation": "The rule explicitly searches for the string '0x' to identify hexadecimal encoding. This can be bypassed by using a decimal (DWORD) representation of the IP address (e.g., 2130706433 translates to 127.0.0.1). The ping command inherently resolves this format without triggering the '0x' condition."
+  },
+  {
+    "output": "ping 0177.0000.0000.0001",
+    "explanation": "Similar to the decimal bypass, an IP address can be encoded in octal format. Octal encoding uses leading zeros instead of '0x', thereby evading the specific command-line string match while still obfuscating the target IP address."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\ping.exe C:\\Windows\\Temp\\netcheck.exe && C:\\Windows\\Temp\\netcheck.exe 0x7f000001",
+    "explanation": "The rule relies on the Image field ending exactly with '\\ping.exe'. By copying the native ping executable to a new file name and executing it, the first condition of the Sigma rule is defeated, allowing the hex IP format ('0x...') to be used without triggering the alert."
+  },
+  {
+    "output": "Test-Connection -ComputerName 0x7f000001",
+    "explanation": "Instead of using ping.exe, an attacker can use PowerShell's built-in Test-Connection cmdlet. While the command line might still contain '0x' (depending on how PowerShell is invoked and logged), the process Image will be powershell.exe or pwsh.exe, successfully bypassing the '\\ping.exe' image requirement."
+  }
+]

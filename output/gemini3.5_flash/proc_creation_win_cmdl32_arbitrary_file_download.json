@@ -1,0 +1,22 @@
+[
+  {
+    "output": "bash.exe -- script.sh",
+    "explanation": "Bypasses the detection by using the POSIX double-dash '--' flag. This triggers the 'filter_main_cli_flag' because the command line contains the exact substring 'bash.exe -', causing the SIEM to ignore the event while still executing the target script."
+  },
+  {
+    "output": "bash.exe script.sh # bash -",
+    "explanation": "Bypasses the detection by appending a dummy argument or comment that contains the 'bash -' string. Since 'filter_main_cli_flag' only checks for a substring match anywhere in the command line, the rule filters it out as benign."
+  },
+  {
+    "output": "bash.exe -l script.sh",
+    "explanation": "Bypasses the detection by explicitly invoking the login shell flag '-l' along with the script. The rule operates on the assumption that any command containing 'bash.exe -' is safe, thus filtering out this execution."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\cmdl32.exe C:\\Users\\Public\\not_an_exploit.exe && C:\\Users\\Public\\not_an_exploit.exe /vpn /lan C:\\path\\to\\config.txt",
+    "explanation": "The Sigma rule relies on 'selection_img' which checks for the process ending in '\\cmdl32.exe' or having the 'OriginalFileName' of 'CMDL32.EXE'. By renaming the binary to something else, the 'Image|endswith' check is bypassed. While 'OriginalFileName' is a stronger check, it is not always captured by all logging configurations (like basic WinEvent 4688 without verbose process auditing), allowing the execution to slip through if the SIEM only sees the renamed process name."
+  },
+  {
+    "output": "cmdl32.exe -vpn -lan C:\\path\\to\\config.txt",
+    "explanation": "The rule explicitly looks for the forward slash character ('/vpn' and '/lan'). In many Windows command-line utilities, arguments can also be passed using a hyphen ('-') instead of a forward slash. If cmdl32.exe accepts hyphens for these flags, the 'CommandLine|contains|all' check for the literal strings '/vpn' and '/lan' will fail to trigger the detection."
+  }
+]

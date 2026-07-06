@@ -1,0 +1,6 @@
+[
+  {
+    "output": "DumpMinitool.exe 712 C:\temp\\dump.dmp \"F\"ull",
+    "explanation": "The Sigma rule strictly checks the CommandLine field for the exact strings ' Full', ' Mini', or ' WithHeap'. By inserting inline double quotes (e.g., '\"F\"ull'), the Windows C runtime (CommandLineToArgvW) will strip the quotes during execution and correctly interpret the argument as 'Full'. However, the raw process creation log (such as Sysmon Event ID 1 or Security Event 4688) will record the literal command line with the quotes included. This discrepancy causes the logged string to bypass the literal string match defined in the 'selection_cli' condition of the Sigma rule."
+  }
+]

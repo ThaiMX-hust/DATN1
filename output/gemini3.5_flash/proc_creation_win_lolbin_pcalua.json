@@ -1,0 +1,14 @@
+[
+  {
+    "output": "pcalua.exe /a C:\\Windows\\System32\\calc.exe",
+    "explanation": "The original Sigma rule specifically looks for the ' -a' flag (with a leading space). By using a forward slash '/a' instead of a hyphen, the command still executes the target binary because pcalua.exe accepts both slash and hyphen as argument delimiters, but it effectively evades a filter strictly monitoring for the hyphenated version."
+  },
+  {
+    "output": "pcalua.exe \"-a\" C:\\Windows\\System32\\calc.exe",
+    "explanation": "Depending on how the SIEM parses the command line, wrapping the flag in double quotes may prevent a simple string-match on ' -a' from triggering, while the Windows command processor still interprets the argument correctly for execution."
+  },
+  {
+    "output": "pcalua.exe -aC:\\Windows\\System32\\calc.exe",
+    "explanation": "The Sigma rule description mentions it looks for ' -a' (space then hyphen then a). By removing the space between the flag and the target path, the command remains functional for pcalua.exe but may fail to match detection patterns that assume a space exists after the flag or a specific 'space-hyphen-char' sequence."
+  }
+]

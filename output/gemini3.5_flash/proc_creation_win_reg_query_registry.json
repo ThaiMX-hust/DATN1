@@ -1,0 +1,22 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'\"",
+    "explanation": "Bypasses the rule entirely by using PowerShell's native cmdlets to query the registry instead of launching 'reg.exe', thereby evading the 'selection_img' condition."
+  },
+  {
+    "output": "cmd.exe /c \"reg.exe q^u^e^r^y HKLM\\System\\CurrentControlSet\\Services\"",
+    "explanation": "Utilizes caret (^) obfuscation within the Windows command shell. The Sigma rule looks for the exact string 'query' in the command line. The carets disrupt the string match in raw logs while still executing normally."
+  },
+  {
+    "output": "cmd.exe /c \"set KEY=currentcontrolset\\services && call reg.exe query HKLM\\System\\%KEY%\"",
+    "explanation": "Evades the 'selection_key' condition by storing the monitored registry path in an environment variable. The raw command line execution logged by the system will show the variable name instead of the prohibited string."
+  },
+  {
+    "output": "powershell.exe -Command \"Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run'\"",
+    "explanation": "This command bypasses the rule by using PowerShell instead of 'reg.exe'. The Sigma rule explicitly requires the image or original file name to be 'reg.exe' (selection_img). This demonstrates the fragility of relying on specific process names for detection, highlighting the need for telemetry that captures actual registry read operations, such as Sysmon Event ID 12/13 or ETW."
+  },
+  {
+    "output": "reg.exe qu^ery \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"",
+    "explanation": "This command utilizes standard cmd.exe caret (^) obfuscation. The command interpreter strips the caret before execution, allowing the registry query to run successfully. However, the raw command line logged by the system (and sent to the SIEM) will contain 'qu^ery', which fails the strict 'CommandLine|contains: 'query'' check in the rule's 'selection_flag' condition."
+  }
+]

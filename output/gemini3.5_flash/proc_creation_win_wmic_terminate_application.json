@@ -1,0 +1,6 @@
+[
+  {
+    "output": "wmic process where name=\"notepad.exe\" delete",
+    "explanation": "The command uses WMIC to delete a process without invoking the 'call' and 'terminate' keywords, thus evading the rule's detection pattern."
+  }
+]

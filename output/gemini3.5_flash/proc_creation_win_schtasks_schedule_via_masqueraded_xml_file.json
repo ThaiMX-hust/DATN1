@@ -1,0 +1,14 @@
+[
+  {
+    "output": "schtasks.exe /create /tn \"MyScheduledTask.xml\" /xml C:\\Users\\Public\\hidden_payload.tmp",
+    "explanation": "The rule attempts to reduce false positives by using the 'filter_main_extension_xml' condition, which excludes any command line containing the string '.xml'. By injecting '.xml' into the task name parameter (/tn) while still using a masqueraded file extension (.tmp) for the actual XML payload, the command satisfies the exclusion criteria and successfully bypasses the detection."
+  },
+  {
+    "output": "schtasks.exe /create /tn \"SuspiciousTask\" /xml \"C:\\temp\\masqueraded_payload.txt\" /f /tr \"dummy.xml\"",
+    "explanation": "This command bypasses the detection rule by exploiting the overly broad 'filter_main_extension_xml' condition. The rule excludes any event where the command line contains the string '.xml'. By including '.xml' elsewhere in the command line (such as in a dummy task run parameter or comment), the filter is satisfied and the alert is suppressed, even though the actual XML file being loaded ('masqueraded_payload.txt') does not have an .xml extension."
+  },
+  {
+    "output": "schtasks.exe -create -tn \"SuspiciousTask2\" -xml \"C:\\public\\payload.bin\" -f   # ignored_comment.xml",
+    "explanation": "Similar to the previous example, this bypasses the rule by appending a comment or trailing characters containing '.xml' to the command line execution. Because the rule logic relies on a simple string match ('CommandLine|contains: \".xml\"') rather than evaluating the specific argument passed to the '/xml' flag, the presence of the string anywhere in the command line will cause a false negative."
+  }
+]

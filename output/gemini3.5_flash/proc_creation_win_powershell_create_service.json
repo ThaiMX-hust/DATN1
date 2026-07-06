@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -Command \"New-Service -Name 'TestService' -bin 'C:\\Windows\\System32\\cmd.exe'\"",
+    "explanation": "PowerShell allows parameter truncation. By supplying '-bin' instead of the full '-BinaryPathName', the command functions identically but evades the exact string match required by the Sigma rule."
+  },
+  {
+    "output": "powershell.exe -Command \"N`ew-Service -BinaryPathName 'C:\\Windows\\System32\\cmd.exe' -Name 'TestService'\"",
+    "explanation": "PowerShell treats the backtick (`) as an escape character and ignores it if it doesn't precede a recognized escape sequence. Inserting a backtick into 'New-Service' breaks the string signature while allowing the cmdlet to execute."
+  },
+  {
+    "output": "powershell.exe -Command \"$cmd = 'New-Se'+'rvice'; & $cmd -Name 'TestService' -BinaryPathName 'C:\\Windows\\System32\\cmd.exe'\"",
+    "explanation": "By concatenating the cmdlet string and invoking it via the call operator (&), the exact string 'New-Service' never appears in its complete form in the command line arguments."
+  }
+]

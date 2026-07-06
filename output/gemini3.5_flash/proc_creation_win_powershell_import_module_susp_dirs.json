@@ -1,0 +1,18 @@
+[
+  {
+    "output": "powershell.exe -Command \"Import-Module $Env:TMP\\suspicious_module.psm1\"",
+    "explanation": "The Sigma rule explicitly checks for the string '$Env:Temp'. Using the alternative environment variable '$Env:TMP', which resolves to the same temporary directory, evades the strict string matching of the rule."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module $Env:Temp\\\\suspicious_module.psm1\\\"",
+    "explanation": "PowerShell ignores backticks () used as escape characters. Inserting a backtick into the cmdlet name breaks the 'Import-Module' string literal that the detection rule relies on."
+  },
+  {
+    "output": "powershell.exe -Command \"Import-Module ('{0}\\suspicious_module.psm1' -f $Env:Temp)\"",
+    "explanation": "By utilizing PowerShell format strings, the exact string pattern '$Env:Temp\\' is broken up in the command line arguments, preventing the 'contains' condition from triggering."
+  },
+  {
+    "output": "powershell.exe -Command \"&('Im'+'port-Module') \\\"$Env:Temp\\suspicious_module.psm1\\\"\"",
+    "explanation": "Concatenating the cmdlet name as a string and invoking it with the call operator (&) prevents the literal string 'Import-Module' from appearing next to the path in the process creation logs."
+  }
+]

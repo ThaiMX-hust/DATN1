@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Windows\\System32\\renamed_cmd.exe C:\\Windows\\System32\\sethc.exe",
+    "explanation": "Bypass by filename evasion. The Sigma rule relies on a hardcoded list of executables (like cmd.exe or powershell.exe) in the 'Image|endswith' condition. If an attacker copies and renames cmd.exe to 'renamed_cmd.exe' and sets it as the debugger in the Image File Execution Options (IFEO) registry key, the execution will not match the Image condition, thereby bypassing the alert."
+  },
+  {
+    "output": "C:\\Windows\\System32\\cmd.exe \"C:\\Windows\\System32\\sethc.exe \"",
+    "explanation": "Bypass using a custom binary acting as a proxy. If a completely different LOLBin or custom executable not listed in the rule (e.g., forfiles.exe, pcalua.exe, or a custom compiled payload) is used as the debugger, the 'Image|endswith' condition will fail. Note: The output command represents the process creation event logged when winlogon.exe executes the renamed debugger."
+  }
+]

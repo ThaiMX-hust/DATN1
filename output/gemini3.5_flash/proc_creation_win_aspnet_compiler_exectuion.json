@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_compiler.exe C:\\Users\\Public\\not_a_compiler.exe && C:\\Users\\Public\\not_a_compiler.exe -v / -p C:\\path\\to\\malicious\\code C:\\Windows\\Temp",
+    "explanation": "The Sigma rule relies on a specific file path and filename ('\\aspnet_compiler.exe'). By copying the binary to a different directory (e.g., C:\\Users\\Public\\) and renaming it, the 'Image|endswith' and 'Image|contains' conditions are bypassed while maintaining the binary's functionality to compile and execute code."
+  },
+  {
+    "output": "New-Item -ItemType HardLink -Path \"C:\\Users\\Public\\linked_compiler.exe\" -Target \"C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_compiler.exe\"; .\\linked_compiler.exe -v / -p C:\\payload C:\\Windows\\Temp",
+    "explanation": "Creating a hard link to the original binary allows the attacker to execute the tool under a different name and path. Since the EDR/SIEM sees the process image as 'linked_compiler.exe' outside of the monitored .NET framework folders, it fails to trigger the 'selection' criteria."
+  }
+]

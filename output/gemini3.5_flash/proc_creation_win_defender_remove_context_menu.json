@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -Command \"rm 'HKCR\\*\\shellex\\ContextMenuHandlers\\EPP'\"",
+    "explanation": "The provided Sigma rule relies on brittle command-line string matching for the action, specifically looking for 'del', 'Remove-Item', or 'ri '. This logic can be easily bypassed by using other valid PowerShell aliases such as 'rm' or 'rd'. Additionally, the rule could be bypassed by concatenating the registry path string in memory or using direct API calls (e.g., via C# or WMI) rather than command-line arguments. To improve the resilience of this detection, defenders should monitor actual registry deletion events (e.g., Sysmon Event ID 12 or Windows Security Event ID 4657) targeting the specified key, rather than relying solely on process creation logs."
+  }
+]

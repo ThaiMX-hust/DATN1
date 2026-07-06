@@ -1,0 +1,14 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\ilasm.exe C:\\Users\\Public\\not_ilasm.exe && C:\\Users\\Public\\not_ilasm.exe /output:malicious.dll malicious.il",
+    "explanation": "The Sigma rule relies on 'selection_img' which checks if the 'Image' ends with '\\ilasm.exe' or if the 'OriginalFileName' is 'ilasm.exe'. While renaming the file (not_ilasm.exe) bypasses the path check, this specific command is a partial bypass attempt that still triggers the 'OriginalFileName' check if the EDR/SIEM correctly populates that metadata field from the PE header. However, in environments with poor metadata enrichment, simple renaming is a common bypass."
+  },
+  {
+    "output": "ilasm /resource:config.res /quiet malicious.il",
+    "explanation": "The rule uses 'condition: all of selection_*', meaning both the process name AND the command line arguments (' /dll' or ' /exe') must be present. By omitting these specific flags, ilasm defaults to producing an .exe file (if no other extension is specified) or simply processes the IL without the monitored strings, thus failing the 'selection_cli' requirement while still performing compilation."
+  },
+  {
+    "output": "ilasm -dll -output=test.dll source.il",
+    "explanation": "The Sigma rule is case-sensitive or literal regarding the leading space in the strings ' /dll' and ' /exe'. By using a hyphen ('-dll') instead of a forward slash (' /dll'), or by removing the space preceding the slash in some shells, the 'contains' logic for the specific string ' /dll' will fail to match."
+  }
+]

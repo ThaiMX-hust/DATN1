@@ -1,0 +1,22 @@
+[
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDP-In\" dir=in action=allow protocol=TCP localport=0x0D3D",
+    "explanation": "The rule looks for the literal string '3389'. By representing the port number in hexadecimal (0x0D3D), the functionality remains the same but the pattern matching on the command line string is bypassed."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDP-In\" dir=in action=allow protocol=TCP localport=\"338\"\"9\"",
+    "explanation": "Injecting double quotes within the numeric value is often ignored by the Windows command-line parser but prevents static string matching for '3389'."
+  },
+  {
+    "output": "netsh advfirewall firewall add rule name=\"RDP-In\" dir=in action=allow protocol=TCP localport=3380-3390",
+    "explanation": "Specifying a port range that includes 3389 avoids the specific '3389' string match while still achieving the goal of opening the RDP port."
+  },
+  {
+    "output": "netsh.exe advf\"irewall\" fire\"wall\" add rule name=\"Allow RDP\" dir=in action=allow protocol=6 localport=3389",
+    "explanation": "While this specific Sigma rule focuses on the command line containing 'firewall', using protocol numbers (6 for TCP) or string obfuscation on the 'firewall' keyword can sometimes evade rules that aren't robust against varied syntax."
+  },
+  {
+    "output": "New-NetFirewallRule -DisplayName \"Allow RDP\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Allow",
+    "explanation": "The rule is strictly limited to the execution of 'netsh.exe'. Using PowerShell's NetSecurity module (New-NetFirewallRule) achieves the exact same result but bypasses the process name and command-line selections entirely."
+  }
+]

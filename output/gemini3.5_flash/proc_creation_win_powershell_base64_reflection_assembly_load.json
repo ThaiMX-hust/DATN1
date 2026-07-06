@@ -1,0 +1,30 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6ACAATABvAGEAZAAo",
+    "explanation": "By adding a single space character after the scope resolution operator (i.e., '[Reflection.Assembly]:: Load('), the underlying UTF-16LE byte array is altered. This completely changes the resulting Base64 string, bypassing the rule's static string matches while remaining valid PowerShell syntax."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand WwBTAHkAcwB0AGUAbQAuAFIAZQBmAGwAZQBjAHQAaQBvAG4ALgBBAHMAcwBlAG0AYgBsAHkAXQA6ADoATABvAGEAZAAo",
+    "explanation": "Using the fully qualified namespace '[System.Reflection.Assembly]::Load(' instead of the implicit shorthand generates a completely different Base64 encoded payload that is not covered by the rule's hardcoded selection list."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AGAAUwB5AHMAdABlAG0ALgBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AC4ATABvAGEAZAAo",
+    "explanation": "Inserting a backtick as an escape character within the method call (e.g., '[Reflection.Assembly]::`Load(') creates another variation in the Base64 encoded string that PowerShell interprets normally but the static rule fails to detect."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand <Base64_of_\"[System.Reflection.Assembly]::Load(\">",
+    "explanation": "Bypass via explicit namespace invocation. The Sigma rule relies on statically matching the Base64 equivalents of '[Reflection.Assembly]::Load('. By prepending 'System.' to the class name (i.e., '[System.Reflection.Assembly]::Load('), the generated Base64 string changes completely. This evades the strict static string matching while remaining functionally identical in PowerShell."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand <Base64_of_\"[Reflection.Assembly]:: Load(\">",
+    "explanation": "Bypass via whitespace or syntax obfuscation. Inserting a single space before the 'Load' method (or using backticks like \\\"Load\"`) shifts the byte alignment and entirely changes the resulting Base64 string. The PowerShell interpreter ignores the extra whitespace or backticks during execution, bypassing the rule and demonstrating the limitations of command-line string matching versus deeper inspection like AMSI or Script Block Logging (Event ID 4104)."
+  },
+  {
+    "output": "powershell.exe -EncodedCommand IAAoAFsAcgBlAGYAbABlAGMAdABpAG8AbgAuAGEAcwBzAGUAbQBiAGwAeQBdADoAOgBMAG8AYQBkAC4ASQBuAHYAbwBrAGUAKAAkAGIAeQB0AGUAcwApACkAcwA=",
+    "explanation": "The original Sigma rule looks for specific Base64 patterns of the string '[Reflection.Assembly]::Load('. This bypass works by inserting a space character at the beginning of the command before encoding it to Base64. This shifts the byte alignment, resulting in a completely different Base64 string that does not contain any of the blacklisted patterns, even though the executed PowerShell logic remains the same."
+  },
+  {
+    "output": "$a = '[Ref' + 'lection.Assembly]'; $m = 'Lo' + 'ad'; Invoke-Expression \"([$a]::$m($data))\"",
+    "explanation": "This bypass uses string concatenation to break up the monitored keywords. Since the Sigma rule only inspects the command line for static Base64 signatures of the full method call, reconstructing the call dynamically at runtime evades the pattern match entirely."
+  }
+]

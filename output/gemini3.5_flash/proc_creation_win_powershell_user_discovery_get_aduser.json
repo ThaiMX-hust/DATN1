@@ -1,0 +1,10 @@
+[
+  {
+    "output": "powershell.exe -Command \"Get-ADUser -f * | Export-Csv C:\\temp\\users.csv\"",
+    "explanation": "This command bypasses the Sigma rule by utilizing two evasion techniques against the rigid string matching. First, it uses the shortened parameter alias '-f' instead of the full '-Filter', which breaks the first 'CommandLine|contains|all' condition. Second, it uses the 'Export-Csv' cmdlet to write the data to a file, which is missing from the list of explicitly monitored output methods (' > ', 'Out-File', 'Set-Content', etc.) in the second 'CommandLine|contains' condition."
+  },
+  {
+    "output": "pwsh.exe -c \"Get-ADUser -Filter {Enabled -eq $true} | Out-String | Out-File users.txt\"",
+    "explanation": "This command bypasses the rule because the filter parameter does not use the exact string ' -Filter *' (it filters for enabled users instead, a common alternative to dumping all users). By missing the specific ' -Filter *' string, the 'CommandLine|contains|all' condition evaluates to false, even though the output is being redirected using a caught method ('Out-File')."
+  }
+]

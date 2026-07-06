@@ -1,0 +1,14 @@
+[
+  {
+    "output": "impersonate.exe \"exec\" cmd.exe",
+    "explanation": "The Sigma rule explicitly matches the command line arguments with leading and trailing spaces (e.g., ' exec '). Wrapping the argument in quotes circumvents this exact string match while still being parsed correctly by the Windows command line, bypassing the 'selection_commandline_opt' condition."
+  },
+  {
+    "output": "ren impersonate.exe sysupdate.exe && sysupdate.exe exec cmd.exe",
+    "explanation": "The detection logic requires all of the 'selection_commandline_*' conditions to be true. By simply renaming the executable from 'impersonate.exe' to something else, the 'selection_commandline_exe' condition evaluates to false, effectively bypassing the rule as long as the file hash has also been slightly modified to avoid the static hash detection."
+  },
+  {
+    "output": "C:\\Temp\\sysupdate.exe list",
+    "explanation": "The rule is brittle because it relies on the exact executable name 'impersonate.exe' (selection_commandline_exe) and specific file hashes (selection_hash). By renaming the executable to 'sysupdate.exe' and slightly modifying the binary (e.g., recompiling or packing it to change the MD5/SHA256/IMPHASH), the detection is completely bypassed. Additionally, the rule looks for arguments with surrounding spaces like ' list '; running it at the end of a command prompt without a trailing space might also evade the selection_commandline_opt condition."
+  }
+]

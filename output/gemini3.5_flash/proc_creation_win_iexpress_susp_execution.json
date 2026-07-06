@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy \"C:\\Windows\\System32\\iexpress.exe\" \"C:\\Users\\Public\\Documents\\not_iexpress.exe\" && \"C:\\Users\\Public\\Documents\\not_iexpress.exe\" /n /q /m \"C:\\Users\\Public\\Documents\\config.sed\"",
+    "explanation": "This bypasses the 'selection_img' and 'selection_paths' criteria. By renaming the 'iexpress.exe' binary to something else, the 'Image|endswith' and 'OriginalFileName' checks may fail depending on how the EDR tracks the original file name after a move. More importantly, it places the SED file in 'C:\\Users\\Public\\Documents\\', which is a suspicious directory but is not explicitly listed in the 'selection_paths' filter."
+  },
+  {
+    "output": "iexpress.exe /n/q/m C:\\Windows\\config.sed",
+    "explanation": "This targets the 'selection_cli' and 'selection_paths' criteria. The rule looks for ' /n ' (with spaces). By removing the spaces between the switches (which IExpress often accepts), the string match fails. Additionally, it uses 'C:\\Windows\\' as the path for the SED file, which is a protected directory but is not included in the specific list of 'suspicious' paths defined in the rule."
+  }
+]

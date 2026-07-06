@@ -1,0 +1,10 @@
+[
+  {
+    "output": "C:\\Users\\Public\\Downloads\\net_audit.exe",
+    "explanation": "Because this Sigma rule relies heavily on PE metadata (OriginalFileName and Description) and the binary's image path, command-line obfuscation alone is insufficient if the EDR/SIEM logs process metadata (e.g., via Sysmon Event ID 1). To bypass the rule, an attacker must first modify the binary using a resource editor (like Resource Hacker) to strip or change the 'OriginalFileName' and 'Description' fields. Next, they rename the executable to bypass the '\\advanced_port_scanner' Image path check, and finally execute it without the exact combination of the '/portable' and '/lng' command-line arguments."
+  },
+  {
+    "output": "C:\\Temp\\custom_scanner.exe /scan",
+    "explanation": "To bypass this rule, the execution must avoid triggering both the image metadata and command-line selections. The attacker can use a resource editor (like Resource Hacker) to strip or modify the 'OriginalFileName' and 'Description' fields in the PE header of the Advanced Port Scanner binary. Then, they rename the executable to something benign (e.g., 'custom_scanner.exe') to bypass the 'Image' path detection. Finally, the attacker executes the binary without using the specific combination of '/portable' and '/lng' command-line arguments."
+  }
+]

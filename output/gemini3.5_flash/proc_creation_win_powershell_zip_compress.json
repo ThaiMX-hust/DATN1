@@ -1,0 +1,6 @@
+[
+  {
+    "output": "powershell.exe -NoProfile -WindowStyle Hidden -Command \"Compress-Archive -Path C:\\SensitiveData\\* -DestinationPath C:\\Users\\Public\\Documents\\archive.zip\"",
+    "explanation": "The command uses a destination path (C:\\Users\\Public\\Documents) that is not matched by the rule's patterns, thereby bypassing the detection."
+  }
+]

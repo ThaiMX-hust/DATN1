@@ -1,0 +1,10 @@
+[
+  {
+    "output": "Get-ADDomainTrust -Filter *",
+    "explanation": "This rule strictly monitors for the execution of the specific 'nltest.exe' binary. By utilizing alternative built-in tools or PowerShell modules like ActiveDirectory to perform the same Active Directory discovery actions, the execution of nltest is completely avoided, rendering this specific file-name-based Sigma rule ineffective."
+  },
+  {
+    "output": "copy C:\\Windows\\System32\\nltest.exe C:\\Temp\\svchost.exe\n// Modify the PE header resource 'OriginalFileName' from 'nltestrk.exe' to 'svchost.exe' using a hex editor\nC:\\Temp\\svchost.exe /domain_trusts",
+    "explanation": "The rule relies on brittle static indicators: the file path ending in '\\nltest.exe' and the PE header 'OriginalFileName' matching 'nltestrk.exe'. By copying the binary to a new name and patching the OriginalFileName resource string, both conditions of the Sigma rule are bypassed while retaining the original binary's functionality."
+  }
+]

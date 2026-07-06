@@ -1,0 +1,6 @@
+[
+  {
+    "output": "dllhost.exe ",
+    "explanation": "Adding a trailing space (or multiple spaces) to the command line string breaks the exact string match logic, successfully bypassing the detection."
+  }
+]

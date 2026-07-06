@@ -1,0 +1,6 @@
+[
+  {
+    "output": "copy \"C:\\Program Files\\WinRAR\\rar.exe\" C:\\Temp\\archiver.exe && C:\\Temp\\archiver.exe a C:\\Temp\\archive.rar C:\\SensitiveData\\*",
+    "explanation": "The Sigma rule relies on a brittle condition that explicitly checks if the executing process name ends with '\\rar.exe'. An attacker can bypass this by simply renaming or copying the rar.exe binary to a different name (e.g., 'archiver.exe') before executing it. Since the rule uses an AND condition for both the Image name and CommandLine, bypassing the Image check neutralizes the detection entirely."
+  }
+]

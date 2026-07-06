@@ -1,0 +1,14 @@
+[
+  {
+    "output": "wmic LOGICALDISK where \"Name='C:'\" get Name,Size,FreeSpace /format:csv",
+    "explanation": "Uses WMIC with a WHERE clause and /format:csv so the exact substring 'LOGICALDISK get Name,Size,FreeSpace' does not appear verbatim in the command line, bypassing the contains-based detection while still retrieving disk information."
+  },
+  {
+    "output": "wmic os get Caption /value && wmic os get OSArchitecture /value && wmic os get Version /value",
+    "explanation": "Splits the OS query into separate calls and uses /value output; the combined command line no longer contains the literal substring 'os get Caption,OSArchitecture,Version', evading the rule while collecting the same data."
+  },
+  {
+    "output": "for /f \"tokens=*\" %a in ('wmic logicaldisk get name^,size^,freespace ^| findstr [A-Z]') do @echo %a",
+    "explanation": "Invokes WMIC indirectly via a FOR /F loop and pipes output through FINDSTR; the command line contains wmic.exe but avoids the exact phrases the rule looks for, achieving system discovery without matching the selection_commands patterns."
+  }
+]

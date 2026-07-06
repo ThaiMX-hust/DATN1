@@ -1,0 +1,10 @@
+[
+  {
+    "output": "copy C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csi.exe C:\\Users\\Public\\not_csi.exe && C:\\Users\\Public\\not_csi.exe script.csx",
+    "explanation": "The Sigma rule relies on the 'selection_img' field which checks if the process image path ends with '\\csi.exe' or '\\rcsi.exe'. By renaming the binary to something else (e.g., 'not_csi.exe'), the 'selection_img' condition will fail. While the rule also checks 'OriginalFileName', many default Windows event logs (like standard Security Event ID 4688) do not always populate the OriginalFileName field unless advanced process auditing or Sysmon is configured, potentially allowing a bypass in environments with standard logging."
+  },
+  {
+    "output": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csi.exe",
+    "explanation": "The rule uses a 'selection_cli' check for the 'Company' field being 'Microsoft Corporation'. In many SIEM implementations, the 'Company' metadata is not captured in standard process creation events (like EID 4688) and is typically a feature of Sysmon (Event ID 1). If the environment only logs standard process creation without metadata enrichment, the 'condition: all of selection*' will never be met because the 'Company' field will be null or missing from the log."
+  }
+]

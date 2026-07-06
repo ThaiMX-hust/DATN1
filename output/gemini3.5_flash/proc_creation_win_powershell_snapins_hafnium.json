@@ -1,0 +1,14 @@
+[
+  {
+    "output": "powershell.exe -EncodedCommand QQBkAGQALQBQAFMAUwBuAGEAcABpAG4AIABNAGkAYwByAG8AcwBvAGYAdAAuAEUAeABjAGgAYQBuAGcAZQAuAE0AYQBuAGEAZwBlAG0AZQBuAHQALgBQAG8AdwBlAHIAUwBoAGUAbABsAC4AUwBuAGEAcABJAG4A",
+    "explanation": "Using the -EncodedCommand parameter allows the execution of a Base64 encoded payload (which decodes to 'Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn'). Because the Sigma rule inspects the CommandLine field strictly for plaintext strings, the encoded payload completely bypasses both string-matching selections."
+  },
+  {
+    "output": "powershell.exe -Command \"$snap = 'Add-PS' + 'Snapin'; &$snap *Exchange*\"",
+    "explanation": "The rule uses 'all of selection_*' logic, requiring the exact literal token 'Add-PSSnapin' to be found on the command line. By breaking up the cmdlet string using string concatenation and invoking it dynamically via the call operator (&), the static string pattern in 'selection_cli' is broken while achieving the same functional execution."
+  },
+  {
+    "output": "powershell.exe -Command \"$module = 'Microsoft.Exchange.Management.Power' + 'Shell.SnapIn'; Add-PSSnapin $module\"",
+    "explanation": "The detection rule enforces an explicit string match on the Exchange snap-in assembly names (e.g., 'Microsoft.Exchange.Management.PowerShell.SnapIn') within the process execution arguments. Obfuscating or concatenating the snap-in name string inside the PowerShell script breaks the static 'selection_module' filter matching logic."
+  }
+]
